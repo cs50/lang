@@ -1,0 +1,59 @@
+Let's get greedy. In greedy, our job is to play the role of a greedy cashier. The user will tell us how much change we owe them, and then our job is to calculate the minimum number of coins that we can use to make that amount of change. 
+
+Let's start with an example. Say the user requires $0.32 back. We could do this by giving them 32 pennies, one cent each. Or I could also use five coins-- by giving them three dimes, $0.10 each, and two pennies, $0.02 each. But could we use even fewer coins to make that? 
+
+The whole tactic in greedy-- to be a greedy cashier-- is to use the largest coin possible. So whenever we have quarters we'll use them. And then once those run out, we'll use dimes, $0.10 each. Then nickels, 5 cents each, and then down to pennies, one cent each. By using the largest coin possible whenever we can, we ensure that we use the fewest number of coins possible to make the change. 
+
+So let's walk this through. The user needs $0.32. So we ask ourselves, can we use a quarter? Well, yes we can. So now we only know them $0.07, and we used one coin. 
+
+Can we use another quarter? Well, no. $0.07 is less than $0.25, so we proceed to the next largest coin available. Dimes are $0.10, and again, we can't use dimes. Because dimes are worth $0.10, which is more than the amount of change owed. 
+
+We go to nickels. And, yes indeed, $0.05 is less than $0.10-- so we can use a nickel. So now we only owe the user $0.02, and we've so far used two coins. We can't use another nickel. So then we proceed to the last coin at our disposal, which are the pennies. 
+
+And can we use penny? Well, yes-- and we end up using two pennies for a total of four coins. 
+
+Once you're finished, the program will look like this. Once the user runs the greedy program, they'll be prompted to give the amount of change in dollars that they're owed. And then your program will output the minimum amount of coins that the greedy cashier would use to make that amount of change. 
+
+So now let's break this down into our subtasks. First we're going to prompt our user for an amount of change. And, as with any user input, we want to make sure that we validate that input and ensure that we can use that input for the rest of our program. Then we're going to always use the largest point possible and keep track of the coins used. And finally, print the final number of coins that we used. 
+
+So let's talk about prompting. The amount must make cents, and this is in dollars. And so for dollars, we're going to use the float variable type. Now whenever you ask a user for input, you want to make sure that it's valid. And so here we like to take advantage of the do-while loop construct. 
+
+A do-while loop will execute the body of the loop at least once. So this comes in handy. We know that we need to prompt the user at least once for a float. Now if that float is valid. That's great. We move on. But if not, the loop will ensure that we get a proper float by repeating continuously until the user gives us a valid value. 
+
+Now for the do-while loop condition, we need to consider what it means to have an invalid float. So for the context of this problem, probably it makes sense just to accept positive values. 
+
+So moving on-- we've obtained a value in dollars from the user. But we're dealing with coins, which are entirely in cents. $1 is equivalent to 100 cents. So a good thing to do is to convert those values into cents. 
+
+Now when converting from a float to an integer, so dollars to cents, we want to make sure that we're careful about floating-point imprecision. So that means that-- say my dollar value-- my float value-- was an even $2, there still may be some stray numbers in there. So we want to make sure that not only do we multiply by 100 to get the cents, but we also round it off. 
+
+So now we have the amount of change owed to the user. We originally obtained it in dollars, and now we've converted it to cents. So now we can proceed with the heart of the greedy algorithm, which is always using the largest coin possible. While we're doing this, it's essential that we also keep track of how many coins are going to be returned to the user as well as the remaining change owed to the user. 
+
+The program will look something like this. After you get the amount of dollars and convert that to cents, then you'll enter a loop. While quarters can be used-- that is to say while the amount of change owed to the user is greater than or equal to $0.25, you'll use a quarter. 
+
+Now what does using a quarter entail? Well, one-- you'll increase the coin count to be returned to the user. And second you'll decrease the current amount of change owed back to the user by $0.25. 
+
+After repeating that until quarters can no longer be used, proceed to the next largest coin-- in this case dimes, $0.10. So you'll enter that loop until you can no longer use dimes. Then proceed to the next largest coin, nickels. After nickels can no longer be used, use the remaining amount in pennies. And finally, print the number of coins used. 
+
+Another way that you can approach the greedy problem is to use the modulo approach. Modulo is an operator that returns the remainder of the division between two numbers. Say I had 50 mod 5. Well, 5 is a factor of 50, so the remainder will be 0. 50 mod 10-- well, 10 is also a factor of 50, so the remainder is also 0. 50 mod 50-- well, any number mod itself isn't going to have any remainder. 
+
+What about 50 mod 49? Well, 49 only goes into 50 once. So the remainder is going to be 1. 53 mod 50 is going to give you a remainder of 3. 
+
+So how can we use modulo and perhaps some division to implement our greedy algorithm? Well, we still want to stay true to the heart of the greedy algorithm-- that is using the largest coin possible. 
+
+So let's ask ourselves if we can use any quarters to return $0.32 to the user. Well, 32 mod 25 gives us a remainder of $0.07. So that tells us that we can definitely use one quarter with $0.07 remaining. 
+
+Can we then use any dimes? Well, no-- because $0.07 mod $0.10 gives us a remainder of 7. 10 doesn't go into 7 at all. 
+
+Then can we use nickels? Well $0.07 mod 5 cents gives us two remaining. And lastly, can we use any pennies? 2 mod 1 gives us 0, which is ultimately what we want because then that means that we've returned to the user all of the change owed. 
+
+So now you have two possible ways of implementing the greedy algorithm-- one with loops and one with a combination of modulo and division. So finally, we just need to print the final number of coins. 
+
+If I wanted to tell you that I had 3 pets and this value was hardcoded, then I could just use a simple print test statement. But our value is actually stored in a variable. So how do you print the values stored in variables? 
+
+For this we take advantage of placeholders. Say I had already declared an initialized integer n. Then later on if I wanted to print that value, then I would write the string. And instead of that value I would use a placeholder for that integer-- %i. Then after the string, I have a comma, followed by the variable that I want to print. And later on, when it prints, it'll print the value of n. 
+
+I could also use a placeholder for a float, for instance. If I wanted to tell you how much cash I have in my pocket, then I could say I have %f dollars. And later on when it prints, then n will take the place of that place holder. I could also, for instance, use several placeholders for several variables. So as long as I list them in order, then I can tell you how many dogs and cats I have. 
+
+Now we know how to prompt the user for an amount of change, ensure that that input is valid, and then we have two possible ways of implementing the greedy algorithm of always using the largest coin possible. Because we've kept track of how many coins we're using, we can then print that value at the end, telling the user how many coins they're getting back. 
+
+My name is the Amayla, and this is CS50. 

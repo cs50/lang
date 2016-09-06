@@ -1,0 +1,455 @@
+DAVID MALAN: Okay, velkommen tilbage. Før vi dykker ned i cloud computing, Jeg troede, jeg ville holde pause et øjeblik hvis der er nogen udestående spørgsmål eller emner, der kom op under frokost der kan nu være af interesse. PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: OK. Åh, OK. PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Nej, selvfølgelig. OK, godt forhåbentlig alle dine opstå problemer i de næste par timer og i morgen især. Men lad os tage et kig, så ved hvor den sidste diskussion om opsætning en hjemmeside fører mere generelt når det kommer til cloud computing, opsætning af en server-arkitektur, den slags beslutninger at ingeniører og udviklere og ledere nødt til at gøre, når det kommer til at gøre mere end blot tilmelding til en $ 10 per måned webhost når du rent faktisk ønsker at bygge ud din egen infrastruktur. Og vi vil prøve at binde dette tilbage, for eksempel til Dropbox m.fl. Ligesom dem. 
+
+Så lad os begynde at overveje hvilke problemer opstår som forretning får god og der opstår gode problemer. Det i meget enkle tilfælde af at have lidt selskab, der har en web-server, du måtte have, lad os sige, en server, vi bare tegne, der ligner dette. Og i disse dage, mest servers-- og lad os se faktisk sætte et billede til dette bare så at det er en lidt mindre tågede. 
+
+Så Dell rack server-- tilbage i dag, der var mainframe computere der indtog hele rum. Disse dage, hvis du var at få en server, det ser måske lidt noget som dette. Servere måles i hvad kaldes rack enheder eller jernbanevirksomhederne. Og en jernbanevirksomhed er 1,5 inches, som er en industristandard. Så det ligner en to RUC-server. Så det er 3 inches høj. Og de er generelt 19 inches lang, hvilket betyder alt dette slags ting er standardiseret. 
+
+Så hvis du kigger i et data center-- ikke bare på én server, men lad os tage et kig på Googles datacenter og se, om vi se et flot billede i Google Billeder. Dette er meget bedre belyst end du ville typisk finde, og meget sexier leder som følge heraf. Men dette er, hvad der ligner et par hundrede servere om det samme størrelse, faktisk, i rack efter rack efter rack efter rack i et datacenter. 
+
+Noget som denne-- dette kan meget vel være Googles, da jeg googled Googles. Men det kunne være repræsentativ mere generelt et datacenter, hvor mange virksomheder typisk co-placeret. Og co-beliggende betyder generelt at du går til et sted som Equinix eller andre leverandører, der har store pakhuse, der har masser af magt, masser af køling, forhåbentlig masser af sikkerhed, og individuelle bure omslutter racks af servere, og du enten leje stativerne eller du bringer stativerne i. 
+
+Og enkelte virksomheder, nystartede især, vil have en vis form for biometri at komme ind i deres bur, eller en nøgle, eller et nøglekort. Du åbner døren. Og inderside i der er blot en firkantet optagelser fodaftryk at du betaler for, inde i som du kan sætte noget, du ønsker. 
+
+Og du typisk betaler for strømmen. Og du betaler for fodspor. Og så skal du betale dig selv for serverne at du bringer ind i dette rum. Og hvad du så har den mulighed for at gøre, er at betale nogen for din internetudbyder forbindelse. Du kan betale et vilkårligt antal leverandører, som alle typisk kommer ind i denne datacenter. 
+
+Men den virkelige interessante spørgsmål er, hvad der faktisk går i disse stativer? De kan altså meget godt ligne det, vi lige har set. Men de udfører forskellige funktioner og måske nødt til at gøre forskellige ting. Og lad os faktisk motivere denne diskussion med spørgsmålet om, hvad problemet begynder at opstå, hvis du er en succes? 
+
+Så du har fået en hjemmeside at du har bygget. Og måske er det sælger widgets eller sådan noget. Og du har gjort meget godt med salg af widgets online. Og du begynder at opleve nogle symptomer, din hjemmeside. Hvad der kunne være nogle af de tekniske symptomer at brugere rapporterer som business vokser og blomstrer og din hjemmeside er nyder godt af det? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, præcis. Så du måske har en afmatning af din hjemmeside. Og hvorfor kan det ske? Tja, hvis vi antager, for af hensyn til diskussion lige nu, at du er på en af disse kommercielle værter som vi talte om før frokost, at du betale nogle flere dollars til per måned, og du har allerede betalt for de årlige udgifter til dit domæne nævne, at web-vært er sandsynligvis overselling deres ressourcer til en vis grad. Så du kan have et brugernavn og adgangskode på deres server. Men så måske flere andre, eller flere dusin andre, eller måske endda flere hundrede andre, brugere. 
+
+Og hjemmesider lever fysisk på samme server. Hvorfor er dette muligt? Well disse dage, servere som dette typisk har flere harddiske, måske så mange som seks eller flere harddiske, der hver især kan være så meget som 4 terabyte disse dage. Så du kan have 24 terabytes af plads på blot en lille server som denne. 
+
+Og selv hvis du stjæler nogle af rummet for redundans, som sikkerhedskopi, det er stadig en hel del plads. Og helt sikkert, en typisk hjemmeside behøver ikke så meget plads. Bare registrere brugere og lagring af logfiler over ordrer tager ikke så meget plads. Så du kan partitionere det helt lidt og give hver bruger bare en lille bid af det. 
+
+I mellemtiden har en computer som dette disse dage typisk har flere CPUs-- ikke blot en, måske to, måske fire, måske 16, eller endnu mere. Og hver af disse CPU'er har noget, der hedder en kerne, som er lidt ligesom en hjerne inde i en hjerne. Så i virkeligheden de fleste alle her med moderne laptops har sandsynligvis en dual core eller quad core CPU-- og sandsynligvis kun en CPU inde i en bærbar computer i disse dage. Men stationære computere og rack-computere som dette kan have en hel flere CPU'er, og til gengæld kerner. 
+
+Og helt ærligt, selv i vores Mac'er og pc'er i i dag, behøver du ikke virkelig har brug for dual kerner eller quad kerner til at tjekke din e-mail. Hvis der er nogen flaskehals, når det kommer til at bruge en computer, du mennesket er formentlig den langsomste ting om den pågældende computer. Og du kommer ikke til at være i stand til tjekke din e-mail hurtigere, hvis du har fire gange så mange CPU'er eller kerner. 
+
+Men det samme er slags sand af en server. En enkelt hjemmeside måske ikke nødvendigvis brug for mere end én CPU eller en kerne, en lille hjerne inde gøre alle af tænkning og behandling. Så producenter har tilsvarende begyndte at skære op disse ressourcer så måske din hjemmeside får en kerne, din hjemmeside får en kerne, eller måske vi deler en sådan kerne. Vi er også deler diskplads. Og vi også deler RAM, eller Random Access Memory fra før, hvoraf der er også en endelig mængde. 
+
+Og det er nøglen. Ligegyldigt hvor dyrt computeren var, der er stadig et endeligt mængde ressourcer i det. Og så mere og mere du forsøge at forbruge disse ressourcer, de langsommere ting kan blive. Men hvorfor? Hvorfor skulle tingene langsomt ned som en symptom på en server bliver overbelastet? Hvad sker der? 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Ja, præcis. Jeg foreslog tidligere, at RAM er en type hukommelse. Det er flygtige, hvorved det er hvor apps og data er lagres, når de bliver brugt. Og så derfor er der kun et endeligt antal af ting, du kan tilsyneladende gøre på en gang. Og det er også hurtigere, hvilket er en god ting. Men det er også dyrere, hvilket er en dårlig ting. Og det er også derfor til stede i lavere mængder end diskplads, harddisk rum, som har tendens til at være billigere. 
+
+Med andre ord, du kan have 4 terabytes diskplads på din computer. Men du har måske 4 gigabyte, eller 64 gigabyte, i størrelsesorden, en faktor 1000 mindre, RAM i din computer. Så hvad gør en computer gøre? Nå, antage, at du har 64 gigabyte RAM i en server som denne, som ville være ganske almindeligt, hvis ikke lav disse dage. Men formoder du har så mange brugere gør så mange ting at du slags slags brug 65 gigabyte hukommelse at håndtere alt dette samtidig brug? 
+
+Nå, du kunne bare sige, undskyld, nogle antallet af brugere kan bare ikke få adgang til webstedet. Og det er foranstaltningen sidste udvej, helt sikkert. Eller du som operativsystemet systemet, ligesom Windows eller Mac OS eller Linux eller Solaris eller noget række andre OSE'er på den pågældende server, kunne bare beslutte, ved du hvad? Jeg har kun 64 gigabyte RAM. Jeg slags brug 65. Så ved du hvad? Jeg har tænkt mig at tage en gigabyte værd af dataene i RAM der var mindst nylig adgang og bare flytte det til disken midlertidigt, bogstaveligt kopiere det fra den hurtige hukommelse til den langsommere hukommelse så jeg så kan klare at 65. gigabyte behov for hukommelse, gøre nogle beregninger på det. Så når jeg er færdig at gøre det, Jeg vil bare flytte det til disk, flytte den anden RAM jeg midlertidigt sætte på disken tilbage ind i selve hardwaren så jeg er lidt multitasking. 
+
+Så jeg slags sætte ting midlertidigt i dette langsommere rum så jeg skabe illusionen håndtere alle. Men der er en afmatning. Hvorfor? Nå, inde i disse hårde diske i disse dage er hvad? Snarere, hvad der gør en hård kørsel forskellig fra RAM så godt du ved nu? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: OK, sandt. PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Så meget sandt. Og det er en bivirkning eller funktion af det faktum, at RAM er faktisk hurtigere. Og derfor, du ønsker at bruge det til nuværende brug. Og en disk er langsommere. Men det er permanent, eller flygtig. Så du bruger det til langtidsopbevaring. Men i form af implementering, hvis jeg ser op hvad der kaldes en DIMM, Dual Inline Memory Modul, dette er hvad et stykke af RAM typisk kan se ud. 
+
+Så inde i vores Mac-- der er en fejl. Inde i vores Mac'er og pc'er, vores desktop computere ville have pinde af hukommelse, som du ville kalde dem, eller DIMM eller SIMM tilbage på dagen, hukommelse at se sådan ud. Vores bærbare computere sandsynligvis have ting, som er en tredje størrelse eller halv størrelse. De er lidt mindre, men den samme idea-- lille stykker af grønne silicium wafer eller plast, har små sorte chips på dem med masser tråde forbinder alt. Du har måske en hel masse disse indersiden af ​​din computer. Men takeaway her er det er helt elektronisk. Der er bare elektroner flyder på denne enhed. Derimod hvis vi ser på indersiden af ​​en harddisk og træk et billede her, ville du i stedet se noget som dette, som ikke har elektricitet gå igennem det i sidste ende. Men hvad også springer ud på dig om denne ting? PUBLIKUM: [uhørligt] DAVID MALAN: Ja, der er tilsyneladende bevægelige dele. Det er lidt ligesom en gammel rekord afspiller eller phonograph afspiller. Og det temmelig meget er. Det er lidt mere avanceret end at-- mens en grammofon afspiller brugt riller i posten, dette faktisk bruger bittesmå magnetiske partikler at vi kan ikke helt se. Men hvis lidt magnetisk partikel ser sådan ud, er det betragtes som en 1. Og hvis det ser sådan ud, nord-syd i stedet for syd-nord, det kunne være en 0. Og vi vil se i morgen, hvordan vi kan bygge fra den for et mere interessante ting. 
+
+Men noget, der er fik til fysisk at bevæge er helt sikkert kommer til at gå langsommere end lysets hastighed, som i teorien er, hvad en elektron kan flyde ved, dog realistisk ikke helt. Så mekanisk enheder: meget langsommere. Men de er billigere. Og du kan passe så meget flere data inde i dem. Så det faktum, at der findes i verden noget kaldes virtuel hukommelse, anvendelse af en harddisk som denne som om det var RAM transparent for brugeren, blot ved flytning af data fra RAM til harddisken, derefter flytte den tilbage, når du har brug for det igen, skaber afmatning. Fordi du bogstaveligt talt nødt til at kopiere den fra et sted til et andet. Og de ting du kopierer det til og fra er faktisk langsommere end RAM hvor du ønsker det skal være. 
+
+Den alternative løsning her-- Hvis du ikke kan lide at bremse, og din virtuelle hukommelse er slags blive henledt, hvad er en anden løsning på dette problem? 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Nå, forøge den virtuelle hukommelse ville lade os gøre dette på en endnu større målestok. Vi kunne håndtere 66 gigabyte værd af hukommelse behov, eller 67 gigabyte. Men formoder jeg kan ikke lide denne langsomme ned, i virkeligheden Jeg vil slå virtuelle hukommelse, hvis det er endda muligt, hvad der ellers kunne jeg kaste på dette problem at løse det, hvor jeg vil håndtere flere brugere og flere hukommelse krav end jeg fysisk har i øjeblikket? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Desværre nej. Så CPU'en og kernerne de er i er en begrænset ressource. Og der er ingen analog i denne sammenhæng. Godt spørgsmål, selv om. Så bare for at være klar, også hvis indersiden af ​​denne computer er, lad os sige, en pind af RAM, der ser ligesom denne-- og så vi vil kalde denne RAM. Og herovre er harddisken. Og jeg vil bare trække dette billedligt som en lille cirkel. Der er 0 og 1'er i begge these-- data, vil vi generalisere det som. 
+
+Og i det væsentlige, at en bruger er kører et program som, lad os sige, en hjemmeside, der kræver dette meget RAM per bruger, hvad jeg foreslår, ved hjælp af denne ting kaldes virtuel hukommelse, er bare midlertidigt flytte at over her, så nu er jeg kan flytte en andens hukommelse krav derovre. Og så når det er gjort, Jeg kan kopiere denne tilbage over og dette gælder her, bevæger derved hvad jeg ønskede derinde et andet sted helt. 
+
+Så der er bare en masse switcheroo, er takeaway her. Så hvis du ikke kan lide det, og du ikke ønsker at sætte noget på harddisken, hvad er lidt den indlysende business persons løsning på problemet, eller ingeniørens løsning, for den sags skyld også? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, jeg mener bogstaveligt smide penge efter problemet. Og faktisk, det er den perfekte segue til nogle af de højere niveau diskussioner af cloud computing. Fordi en masse af det er motiveret af finansielle beslutninger, ikke engang nødvendigvis teknologiske. Hvis 64 gigs RAM er for lidt, ja, hvorfor ikke få 128 gigabyte RAM? Hvorfor ikke få 256 gigabyte RAM? Tja, hvorfor ikke? 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Tja, det koster flere penge, sikker. Og hvis du allerede har reservedele harddiskplads, effektivt, eller ækvivalent, harddiskplads er så meget billigere du kan lige så godt bruge det. Så igen, der er denne handel det vi så endnu tidligere denne morgen, hvor der er virkelig ikke nødvendigvis en rigtige svar, der er bare en bedre eller dårligere svar baseret på, hvad du rent faktisk bekymrer sig om. 
+
+Så der er også teknologiske realiteter. Jeg kan ikke købe en computer, til min viden, med en billion gigabyte RAM lige nu. Det bare fysisk findes ikke. Så der er nogle øvre grænse. Men hvis du nogensinde har endda handlet for en forbruger Mac eller pc, også, generelt er der denne kurve funktioner hvor der kan være en god, en bedre, og en bedste computer. 
+
+Og de marginale afkast på din dollar køb den bedste computer versus bedre computer måske ikke nær så høj som at bruge lidt flere penge og få det bedre computer over god computer. Med andre ord, du betaler en præmie for at få toppen af ​​linjen. 
+
+Og hvad vi vil se i diskussion af cloud computing er, at hvad der er meget almindeligt disse dage, og hvilke virksomheder som Google tidligt populariseret, var ikke betaler for og bygning virkelig fancy, dyrt souped op computere med masser og masser af alt, men snarere at købe eller bygge temmelig beskedne computere men masser af dem, og bruge noget, der er generelt kaldet horisontal skalering i stedet af lodret skalering. 
+
+Så lodret skalering ville betyde få mere RAM, mere disk, mere af det hele, og slags investere lodret i din hardware så du bare at få det bedste af det bedste af det bedste, men du betale for det. Vandret skalering slags få nederste materialelag ting, den gode model, eller endog værre model, men få masser af dem. Men så snart du får masser af them-- for eksempel i dette tilfælde webservere, hvis denne server eller en webside vært er utilstrækkelig, så bare intuitivt, den løsning på dette problem med belastning eller overbelastning på dine servere enten få en større server eller, hvad jeg foreslår her i stedet af skalering vertikalt så at sige, ville være, ved du hvad? Bare få en anden en af ​​disse. Eller måske endda få en tredje. Men nu har vi skabt en ingeniør problem i kraft af denne forretning eller finansiel beslutning. Hvad er ingeniør problem nu? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, hvordan gør du forbinde dem og-- ked? 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Right, fordi jeg stadig have-- hvis jeg genindføre mig ind i dette billede, hvis dette er min laptop eller andet sted på internettet, som nu er mellem mig og virksomheden, vi taler om, nu er jeg nødt til at finde ud af, at der server sender jeg denne bruger? Og hvis der er andre brugere, ligesom dette, og så er dette en herovre, og måske det er bruger A, dette er bruger B, er dette bruger C, og dette er server 1, 2, og 3-- nu en intuitiv svaret kunne her være lige, Vi sender bruger A til en og B-2 og C til 3. Og vi kan håndtere 3 gange så mange brugere. 
+
+Men det er en forsimpling. Hvordan afgør, hvem de skal sende hvor? Så lad os prøve at argumentere igennem dette. Så formoder, at computere A, B, og C er kunder, og servere 1, 2, og 3 er horisontalt skaleret servere. Så de er en slags identiske. De er alle kører den samme software. Og de kan alle gøre det samme. Men årsagen til at vi har tre af dem er så at vi kan håndtere tre gange så mange mennesker på én gang. 
+
+Så vi ved fra vores diskussion før frokost at der er hardware i mellem de bærbare computere og servere. Men vi vil bare slags generalisere at nu da internettet eller skyen. Men vi ved, at i mit hjem, der er sikkert et hjem router. I nærheden af ​​serverne, er der sandsynligvis en router, DNS-server, DHCP. Der kan være alt Vi ønsker i denne historie. 
+
+Så hvordan gør vi begynder at beslutte, når bruger A går til something.com, hvilken server til at dirigere brugeren til? Hvordan kan vi begynde at fortælle denne historie? PUBLIKUM: Load balancing? DAVID MALAN: Load balancing. Hvad mener du med det? 
+
+PUBLIKUM: Vender tilbage hvor de mest brug er og som man har de fleste tilgængelige ressourcer. DAVID MALAN: OK, så lad mig indføre en ny type hardware at vi endnu ikke har diskuteret, hvilke er netop det, en load balancer. Også dette kunne bare være en server. Det kunne se ud nøjagtig som den, vi oplevede for et øjeblik siden. En load balancer er virkelig blot et stykke software at du kører på et stykke hardware. 
+
+Eller du kan betale en sælger, ligesom Citrix eller andre, Cisco eller andre. Du kan betale for deres egen hardware, der er en hardware load balancer. Men det betyder bare de præ-installeret load balancing software på deres hardware og solgte det til jer alle sammen. Så vi vil bare tegne den som en rektangel til vores formål. 
+
+Hvor nu implementerer jeg en load balancer? Med andre ord, når brugeren A ønsker at besøge min hjemmeside, deres anmodning eller anden måde eller andet, sandsynligvis ved hjælp af de routere, vi talte om tidligere, vil til sidst nå denne load balancer, som derefter nødt til at en routing-lignende beslutning. Men det er routing for sortering af et højere formål nu. Det handler ikke kun om at få fra punkt A til punkt B. Det handler om at beslutte, hvilken punkt B er den bedste blandt them-- 1, 2 eller 3 i dette tilfælde. 
+
+Så hvordan kan jeg beslutte, om at gå til 1, til 2, 3? Hvad kan denne sorte boks, så at tale, gøre på indersiden? Også dette er et andet eksempel i datalogi af abstraktion. Jeg har bogstaveligt talt trukket en load balancer som en sort boks med sort blæk, inde hvoraf er nogle interessante logik, eller magic selv, hvoraf nødt til at blive en decision-- 1, 2 eller 3. Og indgangen er bare A. 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Jeg er ked af? PUBLIKUM: [uhørligt] DAVID MALAN: Okay, hvordan kan vi kategorisere de typer af transaktioner her? 
+
+PUBLIKUM: Visning af en webside versus forespørge en database. DAVID MALAN: OK, det er godt. Så måske denne bruger A ønsker at se en webside. Og måske er det endda statisk indhold, noget, der ændrer sjældent, om nogensinde. Og det virker som en temmelig simpel operation. Så måske vil vi bare vilkårligt, men rimeligt, siger, server 1, hans formål i livet er at bare tjene op statisk indhold, filer, der sjældent, om nogensinde, forandring. Måske er det billederne på siden. Måske er det teksten på siden eller anden sådan slags uinteressante ting, intet transaktionsbeslutning, intet dynamisk. 
+
+Hvis derimod bruger A kontrollerer ud af hans eller hendes indkøbskurv, kræver en database, til et sted at gemme og husk, at transaktionen, godt måske denne anmodning skal gå til server 2. Så det er godt. Så vi kan indlæse balance baseret af typen af ​​anmodninger. Hvor ellers kan vi gøre dette? Hvad other-- 
+
+PUBLIKUM: Baseret på serverens udnyttelse og kapacitet. DAVID MALAN: Right, OK. Så du nævnte, at tidligere, Kareem. Så hvad nu hvis vi giver nogle input på [uhørligt] blandt servere 1, 2, og 3 til dette load balancer, så de er bare hele tiden at informere den load balancer, hvad deres status er? Ligesom, hey, load balancer, Jeg er på 50% udnyttelse. Med andre ord, jeg har halvt så mange brugere som jeg faktisk kan håndtere lige nu. Hey, load balancer, jeg er ved 100% udnyttelse. Hey, load balancer, 0% udnyttelse. Den load balancer, hvis det er konstrueret på en måde, kan tage i disse bemærkninger som input, kan det så beslutte, ooh, nummer 2 er på 100%. Lad mig sende ingen fremtidige anmodninger til ham bortset brugerne allerede er tilsluttet. Denne fyr er på 0%. Lad os sende en masse trafik til ham. Denne fyr sagde, at han er på 50%. Lad os sende nogle trafik til ham. 
+
+Så det ville være en ingrediens, der vi kunne tage belastningen i betragtning. Og det kommer til at ændre sig over tid. Så afgørelserne vil ændre sig. Så det er en rigtig god teknik, en, der er almindeligt anvendt. Hvad andet kunne vi gøre? Og lad os faktisk bare opsummere her. Så de beslutninger her kunne være efter type af trafik, vil jeg kalde det. Det kan være baseret på belastning. Lad os se, om vi ikke kan komme med et par andre. 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Location. Så det er en god en. Så Beliggende- hvordan du måske udnytte disse oplysninger? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Åh, det er godt. Og om hvor mange millisekunder ville det falde med baseret på hvad vi så dette morgen, ville du sige? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Nå, baseret på spor- ruter vi så tidligere, som er lige et groft mål for noget, mindst hvor lang tid det tager for data for at komme fra A til B føles noget lokale var, hvad, ligesom 74 millisekunder, give eller tage? Og så noget 100 plus, 200 plus var sandsynligvis i udlandet. Og så baseret på det alene, synes det rimeligt at antage, at for en bruger i USA at få adgang til et europæisk server kan tage to eller tre gange så længe, ​​selv i millisekunder, end det kan tage, hvis det server var placeret her geografisk, eller omvendt. Så når jeg foreslog tidligere, at specielt når du krydser at 200 millisekunder tærskel, give eller tage, mennesker gør begynder at lægge mærke. Og spor rute er lige under forudsætning af rå, uinteressante data. Når du har en hjemmeside, skal du få brugeren downloader billeder eller film filer, masser af tekst, efterfølgende anmodninger. Vi så da vi besøgte, hvad der var det, Facebook eller Amazon tidligere, der er en hel masse ting der skal downloades. Så det kommer til at tilføje op. Så multi-sekunder måske ikke være urimeligt. Så godt, geografi er én ingrediens. Så i virkeligheden virksomheder som Akamai, hvis du har hørt om dem, eller andre har længe taget geografi i betragtning. Og det viser sig, at i kraft af en IP-adresse, min laptop IP-adresse, du kan udlede, med en vis sandsynlighed, hvor du er i verden. Og i virkeligheden er der tredjepartstjenester dig kan betale hvem vedligeholde databaser af IP-adresser og geografiske områder at med høj tillid vil være sandt, når spurgt, hvor i verden er denne IP-adresse? 
+
+Og så i virkeligheden, hvad andre virksomheder bruger dette? Hvis du har Hulu eller Netflix, hvis det du nogensinde har været på rejse i udlandet, og du forsøger at se noget på Hulu, og du er ikke i USA, du kan se en meddelelse siger, ikke i USA. Beklager, du kan ikke se dette indhold. 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Virkelig? Men ja, så faktisk det er et perfekt program af noget meget teknisk til et reelt problem. Hvis du skulle VPN fra Europa eller Asien eller hvor som helst i verden til din virksomheds hovedkvarter i New York eller hvor du er, er du vil skabe udseendet til eksterne hjemmesider, du er faktisk i New York, selvom du er fysisk ganske langt væk. 
+
+Nu er du brugeren kommer til at ved, du er tydeligvis væk. Men du også kommer til at føle det, fordi af disse yderligere millisekunder. Det ekstra afstand og kryptering, der sker i VPN vil forsinke tingene. Så det kan eller ikke være en stor oplevelse. Men Hulu og Netflix kommer til at se du som sidder et eller andet sted i New York, som du tydeligt har forstået. Sikke en perfekt løsning på det. 
+
+Okay, så geografi er en beslutning. Hvad kan vi bruge til at beslutte, hvordan at dirigere trafik fra A, B og C til 1, 2, og 3, igen, at sætte engineering hat på? Alt dette lyder meget kompliceret. Uh, jeg ved ikke engang, hvor at begynde at implementere dem. Giv mig noget, der er enklere. Hvad er den nemmeste måde at træffe denne beslutning? 
+
+PUBLIKUM: Er serveren tilgængelig? 
+
+DAVID MALAN: Er serveren tilgængelig? Så ikke dårligt. Det er godt. Det er en slags nuancering af belastning. Så lad os holde det i belastningen kategori. Hvis du er til rådighed, jeg er bare kommer til at sende dataene der. Men det kan give bagslag hurtigt. For hvis jeg bruger den logik, og hvis jeg altid spørge en, er du på, er du på, er du på, hvis svaret er altid ja, Jeg har tænkt mig at sende 100% af trafikken til ham, 0% for alle andre. Og på et tidspunkt, vi kommer til at ramme at afmatningen eller website utilgængelig. Så hvad er lidt bedre end det, men stadig temmelig simpel og ikke nær så klog som at tage alle disse yderligere oplysninger i betragtning? 
+
+PUBLIKUM: Omkostninger per server. DAVID MALAN: Omkostninger per server. OK, så lad mig kaste, at i belastningen kategori, også. For hvad du finder i et selskab, too-- at hvis du opgradere dine servere over tid eller købe mere, du måske ikke være i stand til at få præcis de samme versioner af hardware. Fordi det falder ud af dato. Du kan ikke købe det længere. Priserne ændrer sig. 
+
+Så du kan have forskellige servere i din klynge, så at sige. Det er helt fint. Men næste års hardware kunne være dobbelt så hurtigt, dobbelt så stand som årets. Så vi kan kaste det i lasten kategori. Denne feedback loop mellem 1, 2, og 3 i load balancer kunne sikkert fortælle det, hey, jeg er på 50% kapacitet. Men ved den måde, jeg også har dobbelt så mange kerner. Brug disse oplysninger. Selv simpler-- og dette vil at være et tema i datalogi. I tvivlstilfælde, eller hvis du ønsker en enkel løsning, der generelt fungerer godt over tid, skal du ikke vælge den samme server hele tiden, men choose-- 
+
+PUBLIKUM: En tilfældig en? DAVID MALAN: --a tilfældig server. Ja, skal du vælge det ene eller det andet. Så tilfældighed er faktisk denne meget kraftige ingrediens i datalogi, og i teknik mere generelt, især når du ønsker at lave en simpel beslutning hurtigt uden at komplicere det med alle af disse meget klog, men også meget kloge, løsninger, der kræver desto mere engineering, alle jo flere overvejelser, når virkelig, hvorfor jeg ikke lige slags flip en mønt eller en tresidet mønt i dette tilfælde og beslutte, om at gå 1, 2, 3? 
+
+Det kunne give bagslag probalistisk, men meget gerne odds af spejlvende hoveder igen og igen og igen og igen og igen og igen er muligt i reality-- super, super usandsynlig. Så over tid, odds er blot at sende brugere tilfældigt til 1, 2, og 3 vil arbejde ud helt fint. Og dette er en teknik almindeligt kendt som round robin. 
+
+Eller faktisk, det er ikke round robin. Dette ville være den tilfældige tilgang. Og hvis du ønsker at være endnu lidt enklere end det, round robin ville være, første person går til 1, andet person til 2, tredje person til 3, fjerde person til 1. Og deri ligger round robin. Du skal bare slags gå rundt i en cyklus. 
+
+Nu skal du være smart om det. Du bør ikke blindt sende brugeren server nummer et, hvis det, der er tilfældet? Hvis det er ved max kapacitet, eller det er bare ikke længere reagerer. Så ideelt du vil have nogle form for feedback loop. Ellers du bare sende alle af dine brugere til en blindgyde. Men der kan tages i betragtning, også. 
+
+Så ikke under vurdere værdien af bare tilfældighed, hvilket er ganske ofte en løsning på den slags problemer. Og vi vil skrive ned round robin. Så hvordan nogle virksomheder gennemfører round robin eller tilfældighed eller nogen af ​​disse afgørelser? Nå desværre, de gøre ting som dette. Lad mig trække op anden hurtig screenshot. 
+
+Faktisk, lad os gøre to. Jeg ved ikke, hvorfor vi er at få alle disse retter. Det er meget mærkeligt. Okay, hvad jeg virkelig ønsker, er et screenshot. Det er underligt. Okay, så jeg kan spoof dette. Jeg ved ikke, hvor meget længere Jeg ønsker at holde rulning. 
+
+Så meget almindeligt, vil du finde dig selv på en adresse som www.2.acme.com, måske www.3 eller 4 eller 5. Og hold øje for dette. Du behøver ikke se det så ofte. Men når du gør det, den slags har en tendens til være større, ældre, stodgier virksomheder at teknologisk ikke rigtig synes at vide, hvad de laver. Og du ser dette på tech virksomheder nogle gange, de ældre. 
+
+Så hvad laver de? Hvordan er de at gennemføre load balancing, synes det? Hvis du finder dig selv som bruger skrive www.something.com, og pludselig du er på www.2.something.com, hvad har deres belastning balancer sandsynligvis gjort? PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, så det load balancer er formentlig træffer en beslutning baseret på en af disse beslutningsprocessen processes-- er virkelig ligegyldigt hvilken. Men meget ligesom jeg har henledt numre på tavlen her, serverne er ikke bare kaldet 1, 2, og 3. De er sandsynligvis kaldt www1, www2, www3. Og det viser sig, at indersiden af en HTTP-anmodning er denne funktion. Og jeg har tænkt mig at simulere dette som følger. 
+
+Jeg har tænkt mig at åbne op, at samme Fanen udvikler netværk som før bare så vi kan se hvad der foregår på under kølerhjelmen. Jeg har tænkt mig at rydde skærmen. Og jeg har tænkt mig at gå til, lad os sige, http://harvard.edu. Nu uanset forretningsmæssige årsager, Harvard har besluttet, ligesom mange, mange andre hjemmesider, at standardisere sin hjemmeside på www.harvard.edu for både teknisk og marketing årsager. Det er bare sådan i mode at have www. 
+
+Så serveren på Harvard har en eller anden måde omdirigere brugeren, som jeg altid siger, fra en URL til den anden. Hvordan kan det fungere? Nå, lad mig gå videre og tryk på Enter. Og bemærk webadressen faktisk hurtigt ændret til www.harvard.edu. Lad mig rulle tilbage i denne historie og klik på denne debug diagnostiske oplysninger, hvis du vil. Lad mig se på min anmodning. 
+
+Så her er jeg anmodning. Og mærke til det er i overensstemmelse med den slags af anmode jeg lavet af Facebook før. Men bemærk svaret. Hvad er anderledes i svaret denne gang? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, så det er ikke en 200 OK. Det er ikke en 404 ikke fundet. Det er en 301 flyttet permanent, hvilket er lidt af en sjov måde at sige, Harvard har forhøjet og flyttede andre steder for at www.harvard.edu. De 301 betyder, at en dette er en omdirigering. Og hvor skal brugeren tilsyneladende blive omdirigeret? Der er en ekstra tidbit af oplysninger inde at kuvert. Og hver af disse linjer vil nu begynde at kalde en HTTP header. Header er blot en central værdi pair-- noget kolon noget. Det er et stykke information. Hvor skal det nye placering tilsyneladende være? Bemærk den sidste linje blandt alle disse overskrifter. 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, så der er yderligere information. Den første linje, som jeg har fremhævet siger 301 flyttet permanent. Nå, hvor har det flyttet? Den sidste line-- og de ikke skal være i denne rækkefølge. Det kan være tilfældigt. Placering kolon betyder, hey browser, gå til denne URL i stedet. 
+
+Så browsere forstår HTTP omdirigeringer. Og det er en meget, meget almindelig måde hoppende brugeren fra et sted til et andet. For eksempel, hvis du nogensinde har prøvet at besøge et websted, som du ikke er logget ind, kan du pludselig finde dig selv på en ny webadresse helt være bedt om at logge ind. 
+
+Hvordan kan det fungere? Serveren er sandsynligvis sende en 301. Der er også andre numre, ligesom 302, noget anderledes i betydning, at sende dig til en anden URL. Og så serveren, når du har logget ind, vil sende dig tilbage til hvor du faktisk hensigten. 
+
+Så hvad, så er dårligt manipuleret hjemmesider gør? Når du besøger www.acme.com, og de bare tilfældigvis har navngivet deres servere www1, www2, www3, og så videre, de er meget simply-- som er fair, men meget slags foolishly-- omdirigere dig til en faktisk forskelligt navngivne server. Og det fungerer helt fint. Det er rart og nemt. 
+
+Vi har set, hvordan det ville være gjort under kølerhjelmen i den virtuelle kuvert. Men hvorfor er det velsagtens en dårlig teknik beslutning? Og hvorfor er jeg slags nedladende mod denne særlige teknik nærme sig? Argumentere, hvorfor det er dårligt. Ben? PUBLIKUM: [uhørligt] DAVID MALAN: Hver server skulle har et eksemplar af hjemmesiden. Jeg er OK med det. Og i virkeligheden, det er hvad jeg er formode for hele denne historie, for hvis vi wanted-- godt faktisk, undtagen for Dan tidligere forslag, hvor, hvis du har forskellige servere laver forskellige ting, så måske de kunne faktisk være funktionelt gøre forskellige ting. 
+
+Men selv da, på et tidspunkt, din Databasen vil blive overbelastet. Din statiske aktiver server vil blive overbelastet. Så på et tidspunkt, er vi tilbage på denne historie, hvor vi brug flere kopier af den samme ting. Så jeg er OK med det. PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ok, så nogle sider kunne være uforholdsmæssigt populære. Og så fiksere på én adresse er ikke nødvendigvis det bedste. [Uhørligt]? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Hvad mener du med det? PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, præcis. Så du ikke ønsker at nødvendigvis have-- du helt sikkert ikke ønsker at have dine brugere manuelt at skrive i www1 eller www2. Fra et branding perspektiv, det bare ser lidt latterligt. Hvis du bare vil en slags ren, elegant erfaring, have den slags tilfældigt nummererede URL'er er virkelig ikke godt. Fordi så brugerne er helt sikkert kommer til at kopiere og indsætte dem i e-mails eller onlinemeddelelser. 
+
+Nu de er formerings. Nu er du slags forvirrende dit mindre teknisk publikum, der mener din web-adresse er www2.something.com. Der er ingen tvingende semantik til det. Det sker bare at være en underliggende tekniske detaljer, at du har nummereret dine servere på denne måde. 
+
+Og værre endnu, hvad nu hvis, for eksempel, måske omkring juletid, hvor virksomhed er virkelig boomer, du har fået www1 gennem www99, men i januar og februar og videre, deaktivere du halvdelen af ​​dem så du kun har www1 gennem www50? Hvad er konsekvenserne nu for at meget rimelig forretningsmæssig beslutning? PUBLIKUM: [uhørligt] DAVID MALAN: Du skal styre alle dem, der stadig. PUBLIKUM: [uhørligt] DAVID MALAN: Præcis. Det er lidt af fangsten der. Hvis dine kunder er i vane med bookmarking ting, e-maile dem, bare gemme URL'en eller andet sted, eller hvis det er bare i deres auto fuldføre i deres browser, så de er ikke rigtig med vilje at skrive det, det er bare sker, de kunne, i 11 måneder ud af året effektivt, når en blindgyde. Og kun de mest snu af brugere kommer til at indse, måske jeg skulle manuelt fjerne dette nummer. Jeg mener, det er bare ikke kommer til at ske med mange brugere, så dårligt for erhvervslivet, dårlig teknik implementering klogt. 
+
+Så heldigvis er det ikke engang nødvendigt. Det viser sig, at det, load balancers kan gøre er stedet for at sige, når A gør en request-- hey A, gå til en. Med andre ord, i stedet sende, at omdirigering således at trin et i dette proces er farten her, han derefter fortalte at gå andre steder. Og så trin tre er, han går et andet sted. 
+
+Man kan i stedet fortsætte med at route, at fortsætte med at bruge dette udtryk, alle af en data gennem load balancer, så han aldrig kontakter 1, 2, eller 3 direkte. Alle trafik betyder få "dirigeres" af load balancer selv. Og så nu er vi slags bevidst sløring linjerne blandt disse forskellige enheder. En load balancer kan route data. Det er bare en funktion, som det har. 
+
+Så en load balancer, også, det er et stykke software, virkelig. Og en router er et stykke software. Og du kan absolut have to stykker software inde af én fysisk computer, så en belastning balancer kan gøre disse mange ting. 
+
+Så der er en anden vej at gøre dette, som faktisk går tilbage til en slags første principper af DNS, som vi talte om før pausen. DNS var Domain Name System. Husk, at du kan bede en DNS-server, hvad er IP-adresse google.com, facebook.com? 
+
+Og vi kan faktisk gøre dette. Et værktøj vi ikke bruge tidligere er en, der er lige så tilgængelige, kaldet nslookup, for navneserver opslag. Og jeg bare at skrive facebook.com. Og jeg kan se, at Facebook IP adresse er tilsyneladende dette. Lad mig gå videre og kopiere at gå til en browser, og gå til http: // og at IP-adresse og tryk på Enter. Og ganske rigtigt, det ser ud til at virke. 
+
+arbejder nu baglæns, hvad var indersiden af ​​virtuelle kuvert at Facebook reagerede med, når Jeg besøgte at IP-adresse direkte? Fordi varsel, hvor er jeg nu? Hvor er jeg nu, adressen? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: På sikker version, og på www.facebook.com. Så det er ikke bare den sikre IP-adresse. Facebook har taget det på sig selv at sige, det er latterligt. Vi kommer ikke til at holde dig på dette grimme leder webadresse, der er numerisk. Vi vil sende dig en HTTP omdirigere via samme overskrift at vi så before-- placering colon noget. 
+
+Og så betyder det blot, at under hætten er stadig denne IP-adresse. Hver computer på internettet har en IP-adresse, ser det ud til. Men du behøver ikke nødvendigvis at udsætte det for brugeren. Og meget gerne tilbage i dag, er der var 1-800-COLLECT, 1-800-C-O-L-L-E-C-T, i USA, var en måde at gøre indsamle opkald via en meget let mindeværdig telefon nummer, eller 1-800-madras til at købe en seng, og lignende huskesymboler at du selv se på telefonen slags slags stadig, at breve kort til tal. 
+
+Nu, hvorfor er det? Tja, det er meget nemmere at huske 1-800-madras eller 1-800-COLLECT stedet af 1-800 noget noget noget noget noget noget noget, hvor hver af disse er et ciffer. Ligeledes lærte verden hurtigt, at vi ikke skal har folk huske IP-adresser. Det ville være dumt. Vi kommer til at bruge navne i stedet. Og det er derfor DNS blev født. 
+
+Okay, så med det sagt, hvad angår af load balancing, lad os prøve yahoo.com. Tja, det er interessant. Yahoo synes at vende tilbage tre IP'er. Så udlede dette, Hvis du kunne, hvad der er en anden måde, at vi kunne gennemføre denne opfattelse af load balancing måske uden selv at bruge en fysisk enhed, har denne nye fysiske enhed? 
+
+Med andre ord, kan jeg tage væk finansieringen du har for load balancer og fortælle dig at bruge nogle af de eksisterende stykke hardware til at gennemføre denne begrebet load balancing? Og spoiler er, ja, men hvad, eller hvordan? Hvad er Yahoo måske gør her? Kareem? OK, Chris? PUBLIKUM: [uhørligt] DAVID MALAN: Ja, alle tre af disse arbejder. Så tilfældighed, round robin, Beliggende- du kan bare udnytte en eksisterende brik i puslespillet at vi talte om tidligere af DNS systemet og blot sige, når den første brugeren af ​​dagen anmoder yahoo.com, give dem den første IP-adresse, som den sluttede i 45 deroppe. Og næste gang en bruger anmoder IP-adresse yahoo.com fra et sted i verden, give dem den anden IP, derefter den tredje IP, derefter første IP, derefter det andet. Eller være smart om det og gøre det grafisk. Eller det tilfældigt og ikke bare gøre Det round robin på denne måde. 
+
+Og i dette tilfælde, så Vi behøver ikke engang at indføre denne sort kasse ind i vores billede. Vi har ikke brug for en ny enhed. Vi er simpelthen fortæller computere at gå til serverne direkte, effektivt, men ikke ved hjælp af deres navn. De har brug for aldrig at kende navnet. De er bare at vide, at yahoo.com Kort ethvert af disse IP-adresser. 
+
+Så det sender nøjagtig samme anmodning. Men på ydersiden af konvolutten, det simpelthen sætter IP, at det var informeret om. Og på denne måde, kunne også vi indlæse balance anmodningerne ved blot at sende konvolutten til en anderledes en af ​​Yahoos egne servere? 
+
+Og hvis vi holder grave, vil vi se sandsynligvis andre virksomheder med mere. CNN har to offentligt eksponeret. Selvom faktisk, hvis vi gør det igen og igen-- cnn.com-- du kan se de er ved at ændre rækkefølge, faktisk. Så hvad mekanisme er CNN bruger, tilsyneladende? 
+
+PUBLIKUM: Tilfældig. DAVID MALAN: Tja, det kunne være tilfældig, selv om det synes at cykle frem og tilbage. Så det er nok round robin, hvor de er bare skifte rækkefølge, så at jeg formentlig vil tage den første. Min computer vil tage første hver gang. Så det er load balancing. Og det giver os mulighed for, i sidste ende, at kortlægge data, eller kort anmodninger, tværs af flere servere. Så hvad slags nu stadig er problemer? Det føles som om vi bare virkelig løst et godt problem. Vi fik brugere til forskellige servere. Men-- Åh, og Chris, gjorde du har et spørgsmål før? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Totally afhænger af. Så hvad sker der her? Og vi kan faktisk se dette. Så lad os prøve Yahoos. Faktisk, lad os gå til Facebook. Fordi vi ved, at man arbejder. Så jeg har tænkt mig at kopiere at IP-adressen igen. Jeg har tænkt mig at lukke alle disse faner. Jeg har tænkt mig at gå åbent at særligt netværk fanen hernede. Og jeg har tænkt mig at besøge kun http: //. Og nu vil jeg trykke Enter. Og lad os se, hvad der skete. 
+
+Hvis jeg ser på denne anmodning, varsel at my-- Facebook er et dårligt eksempel. Fordi de har en super fancy teknik der skjuler, at detaljer fra os. Lad mig bruge Yahoo instead-- http: // pågældende IP. Lad os åbne vores netværk fane, bevare log. Og her går vi, Enter. Det er sjovt. OK, så her er den berømte 404-meddelelse. Hvad er sjovt her er, at de sandsynligvis aldrig vil være tilbage. Fordi der er nok ikke noget galt per se. De har netop bevidst besluttede ikke at støtte det numeriske form af deres adresse. 
+
+Så det vi faktisk ser i fanen Netværk, hvis jeg trækker det op her, er, som jeg siger, det berømte 404, hvor hvis jeg ser på de svar overskrifter, dette er hvad jeg fik her-- 404 Ikke fundet. Så lad os prøve en anden. Lad os se, om CNN samarbejder med os. Jeg vil få fat i en af ​​CNN IP-adresser, fjerne denne, http, dah, dah, dah, dah. Så som svar på Chris ' spørgsmål, at man arbejdede. 
+
+Og lad os gå til respons overskrifter. Faktisk nej, okay, jeg er kæmper for at finde en fungerende eksempel. Så CNN har besluttet, vil vi bare lade dig uanset på hvilket adresse, du rent faktisk besøger, branding spørgsmål til side. Men hvad ville ikke være tilfældet, hvis vi kunne se det i Facebooks tilfælde, er vi ville få en 301 Flyttet Permanent, mest sandsynligt, inden i hvilken er placering: https: //www.facebook.com. Og odds er www.facebook.com er en alias for nøjagtig samme server vi bare gik til. 
+
+Så det er lidt bagslag. Vi bogstaveligt besøger serveren. Serveren derefter fortæller os, gå væk. Gå til denne anden adresse. Men vi bare så tilfældigvis gå tilbage til den samme server. Men formentlig vi nu ophold på det server uden denne frem og tilbage. Fordi nu er vi ved hjælp af navngivne version af hjemmesiden, ikke det numeriske. Godt spørgsmål. 
+
+OK, så hvis vi nu assume-- vi har løst load balancing. Vi har nu en mekanisme, uanset om det er via DNS, uanset om det er via denne sorte boks, hvorvidt det er at bruge nogen af ​​disse teknikker. Vi kan tage en brugers anmodning og regne ud hvilken server, 1, 2 eller 3, at sende ham eller hende. 
+
+Hvad begynder at bryde om vores hjemmeside? Med andre ord har vi bygget en virksomhed, var tidligere på én enkelt server. Nu, virksomhed kører tværs af flere servere. Hvilke typer af antagelser, hvilke former for design beslutninger, kan nu bryde? 
+
+Det er mindre indlysende. Men lad os se, om vi ikke kan sætte vores fingeren på nogle af det problem, vi har skabt for os selv. Igen, det er lidt som at holde ned lækagen i slangen. Og nu nogle nye spørgsmål har dukkede op herovre. 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: OK, så vi er nødt til at holde voksende vores plads på harddisken. Jeg er OK med at lige nu. Fordi jeg tror, ​​jeg kan vandret skala. Ligesom hvis jeg kører lavt, vil jeg bare få en fjerde server, måske en femte server, og derefter øge vores kapacitet med yderligere 30% eller 50% eller whatnot. Så jeg er OK med det, i hvert fald for nu. PUBLIKUM: [uhørligt] DAVID MALAN: OK, så det er en god pointe. Så formoder serverne er ikke identiske. Og kundeservice eller e-mail ækvivalent er at få nogle besked fra en bruger siger, er dette ikke fungerer rigtigt. Det er meget muligt, nogle gange, at måske en eller flere servere handler lidt skævt, men ikke de andre, der kan helt sikkert gøre det sværere at jagte problemet. Du har måske til at se flere steder. 
+
+Det er manifestation af anden slags fejl, som er, at du sandsynligvis skal har designet din infrastruktur, så at alt er virkelig identiske. Men det gør afslører et nyt problem at vi ikke havde før. Hvad ellers? PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, der er mere kompleksitet. Der er fysisk flere ledninger. Der er en anden enhed. Faktisk har jeg indført en fundamental koncept og et grundlæggende problem her kendt som et enkelt punkt af svigt, som, selv hvis du aldrig har hørt sætningen, kan du sikkert nu arbejde baglæns og finde ud af det. Hvad betyder det, at jeg har en enkelt fejlpunkt i min arkitektur? Og ved arkitektur, jeg bare betyde topologien af ​​det. 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, hvad nu hvis belastningen balancer går ned? Jeg har indsat denne midterste mand, hvis formål i livet er at løse et problem. Men jeg har introduceret et nyt problem. En ny lækage er sprunget i slangen. Fordi nu hvis load balancer dør eller pauser eller misfunctions, nu mister jeg adgang til alle tre af mine servere. Og før, jeg ikke har denne mellemmand. Og så dette er et nyt problem, velsagtens. Vi kommer tilbage til hvordan vi kan løse det. 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Det ville være en tilgang. Ja, og så det kommer til at være ganske rottens hul vi begynder at gå ned. Men lad os vende tilbage til at på bare et øjeblik. Hvilke andre problemer har vi skabt? 
+
+Så Dan nævnte database før. Og selv hvis du ikke er alt for bekendt teknisk, en database er blot en server, hvor ændring af data lagres typisk, måske en ordre nogen har placeret, din brugerprofil, dit navn, din e-mailadresse, ting, der kunne indlæses eller ændret sig over tid. 
+
+Tidligere min database var på den samme server som min webserver. Fordi jeg havde bare en webhotel. Alt var alle i samme sted. Hvor skal jeg sætte min database nu, på server 1, 2 eller 3? 
+
+PUBLIKUM: 4. 
+
+DAVID MALAN: 4, OK, alle ret, så lad os gå der. Så jeg har tænkt mig at sætte min database-- og lad os begynde mærkning disse www, www, www. Og jeg har tænkt mig at sige, dette er nummer fire. Og jeg vil sige db til databasen. OK, jeg kan lide dette. Hvad linje skal jeg formentlig tegning her? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, så koden, som vi vil diskutere i morgen, formentlig er den samme på alle tre servere. Men det må nu forbinde ikke til en database kører lokalt, men andre steder. Og det er fint. Vi kan bare give databasen en navn, som vi har, eller et tal. Og at alt fungerer fint. Men hvad har vi gjort? Vi har vandret skaleret ved at have tre servere i stedet for én, der er god. Fordi nu kan vi håndtere tre gange så meget belastning. 
+
+Og endnu bedre, hvis en eller to af disse servere går ned, min virksomhed kan fortsætte med at fungere. Fordi jeg stadig har en, selv om jeg er slags halter performance-wise. Men hvad nyt problem har jeg indført ved at bevæge databasen til denne separat server i stedet for den 1., 2. og 3? 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Ja, så nu har jeg anden single point of failure. Hvis min database dør, eller skal opgraderes, eller hvad, nu sikker, min hjemmeside er online. Og jeg kan tjene statisk, uforanderlig indhold. Men jeg kan ikke lade brugerne logge ind eller ændring noget eller bestille noget, værre endnu. For hvis 4 er offline, derefter 1, 2, og 3 virkelig kan ikke tale med den definition. 
+
+OK så ja, og så det er derfor, Jeg tøver med at trække dette. Så lad os komme tilbage til. Jeg mener ikke at holde skubber dig væk. Men billedet er meget hurtigt vil få stressende. Fordi du har brug for at starte har to af alting. Faktisk, hvis du nogensinde har set film Kontakt et par år siden med Jodie Foster-- nej? 
+
+OK, så for de to af os, der har set Kontakt, der er en sammenhæng der, hvor de væsentlige købt to af noget snarere end en, om end til to gange prisen. Så det var en slags legende kommentere på filmen. Det er lidt relateret til dette. Vi kunne absolut gøre det. Og du har bare koste os dobbelt så mange penge. Men vi vil vende tilbage til. 
+
+Så vi har løst dette. Så ved du hvad? Det er ligesom en glidebane. Jeg ønsker ikke at beskæftige sig med at have at have en kopi database. Det er for mange penge. Du ved hvad? Jeg vil gerne have min database ligesom i version én hvor hver server har sin egen lokale database. Så jeg vil blot trækker db på hver af disse. 
+
+Så nu hver webserver er identisk i det omfang da det har den samme kode, den samme statiske aktiver, samme billeder og tekst og så videre. Og hver har sin egen database. Jeg fast enkelt punkt af svigt problem. Nu har jeg en database. Ligegyldigt hvor to eller en af ​​disse ting dør, er der altid én venstre. Men hvad nyt problem har jeg oprettet at Dan løsning undgås? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, jeg nødt til at synkronisere dem, ikke? Fordi enten jeg har brug for at synkronisere hvem kommer where-- med andre ord, hvis Alice besøger min site, der skete, og hun at komme tilfældigt eller rund robined eller hvad, til server nummer et, derefter jeg altid sende hende til server 1. Hvorfor? Fordi hvis jeg sender hende til server 2, går det at ligne hun ikke eksisterer der. 
+
+Jeg har ikke tænkt mig at have hende ordre historie. Jeg har ikke tænkt mig at have hende profil der. Og der bare føles det er indbydende problemer. Og når Bob besøger, jeg nødt til at sende ham altid til den samme server, 2 eller alt efter en, og Charlie til en tredje én, og konsekvent. Dette er ikke urimeligt, selv om. Dette kaldes partitionering din database. Og i virkeligheden var dette hvad Facebook gjorde tidligt. 
+
+Hvis du har fulgt historien om Facebook, det startede her på campus som www.thefacebook.com. Så det udviklet sig engang Mark startede breder sig til andre campusser at være harvard.thefacebook.com og mit.thefacebook.com, og sandsynligvis bu.thefacebook.com og lignende. Og det var fordi tidligt, tror jeg ikke du kunne have venner på tværs campusser. Men det er fint. Fordi nogen fra Harvard fik sendt til denne server. Nogen fra BU fik sendt til denne server. Nogen fra MIT blev smidt til denne server-- i teorien. Jeg ved ikke helt, alle de underliggende implementeringsdetaljer. Men han formentlig partitioneret folk ved deres campus, hvor deres netværk var. 
+
+Så det er godt indtil det punkt hvor du har brug for to servere til Harvard, eller tre servere til Harvard. Og så er enkelhed slags bryder ned. Men det er en rimelig fremgangsmåde. Lad os altid sende Alice til det samme sted, altid sende Bob til det samme sted. Men hvad sker der, hvis Alices server går offline? Bob og Charlie kan stadig købe ting og logge ind på webstedet. Men Alice kan ikke. Så du har mistet en tredjedel af din brugerbase. Måske det er bedre end 100%? Men måske det ville være rart, hvis vi kunne støtter stadig 100% af vores brugere selv når en tredjedel af vores servere går offline. 
+
+Så vi kunne synkronisere hvad? Ikke brugerne, per se, men den database på tværs af alle disse servere. Så nu vi slags brug for nogle form for sammenkobling her, så selve serverne kan sync-- ikke urimeligt. Og i virkeligheden findes denne teknologi. I en verden af ​​databaser, der er begrebet master-slave-databaser, eller primær-sekundær, hvor blandt funktionerne er ikke kun at lagre data og svare med data, men også bare til konstant synkronisere med hinanden. Så hver gang du skriver eller gemme noget til denne database, det straks bliver "replikeret" til de andre databaser samt. 
+
+Og helst du læse fra den, det er ligegyldigt hvor du er. For hvis i teorien de har alle synkroniseret, er du vil få den samme visning af data. Så det lyder perfekt. Der er nødt til at være en fangst. Hvad kan fangsten være? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID Malan: Ja, så tre gange så meget ting kunne gå galt. Det er en realitet. Det kan alle være den samme i ånden. Men nogen har brug for at konfigurere disse. Der er en højere sandsynlighed for, at noget kommer til at gå galt. Bare kombinatorisk du har flere ting udsat for fejl. Hvad er dårlig potentielt? PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, så synkronisering kan være dårligt. Selv som du måske ved fra sikkerhedskopier og sådan, hvis du bare blindt gør backups, hvad nu hvis noget gør gå galt på én database? Du sletter noget, du ikke bør. Du har straks gentaget dette problem alle andre steder. Så Victoria var talking-- backups ville være en god ting her. Og så vender vi tilbage til. Og for at være klar, vi taler ikke om sikkerhedskopier her sig selv. Vi taler om sand replikation eller synkronisering tværs servere. De er alle levende. De er ikke beregnet til at bruges til sikkerhedskopiering. 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Hvad er det? PUBLIKUM: Higher-- DAVID MALAN: Højere omkostninger. Vi har tredoblet prisen for sikker, selv om det mindste hvad angår af hardwaren. Fordi en database er blot et stykke software. Og en web-server er et stykke software. Det er nok gratis, hvis vi bruger vilkårligt antal open source ting. Men hvis vi bruger noget som Oracle, vi betaler Oracle flere penge per licenser eller Microsoft for adgang. Der må være en anden fangst her. Det kan ikke være denne enkle. 
+
+Så for at din pointe, jeg tror, ​​det var Kareem, til geografi earlier-- eller nej, Roman, var det, for geography-- antage at vi være smart om dette, og vi sætter en af ​​vores servere, og til gengæld vores databaser, i USA, og en anden i Europa, en anden i Sydamerika, en anden i Afrika, en anden i Asien, hvor som helst vi måske ønsker hele verden. Vi ved allerede, fra vores spor ruter, punkt A og punkt B, hvis de er længere fra hinanden, kommer til at tage længere tid. 
+
+Og hvis nogle af jer har brugt værktøjer, som Facebook eller Twitter eller nogen af ​​disse websteder disse dage, at er under konstant forandring på grund af brugerens oprettede data, nogle gange, hvis du hit Genindlæs eller åbne den samme side i en anden browser, kan du se forskellige versioner, næsten. Du kan se en persons status opdatere her, men ikke her, og så skal du genindlæse, og så er det vises, og du genindlæse igen, og det forsvinder. Med andre ord, holde øje med dette, i det mindste hvis du bruger sociale netværkssamarbejde især. 
+
+Igen, bare fordi data ændrer sig så hurtigt, nogle gange servere får ud af sync. Og måske er det en super lille vindue. Men 200 millisekunder, måske endnu mere end at-- det er kommer til at tage nogle ikke-nul beløb af tid for disse databaser til synkronisering. Og vi er ikke bare taler om en anmodning. Hvis en virksomhed har tusindvis af brugere bruger det samtidigt, de kunne buffer. Med andre ord, kan der være en kø eller en vente linje før alle disse database forespørgsler kan få synkroniseret. Så måske er det faktisk et par sekunder. 
+
+Og ja det er sandt, jeg tror endda til denne dag med Facebook, hvorved når de synkroniserer fra Østkysten til vestkysten, den har en ikke-triviel formering forsinkelse, så at sige, at du lige slags nødt til at tolerere. Og så er det ikke så meget en fejl, som det er en realitet at dine brugere ikke kan se de korrekte data i mindst et par sekunder. 
+
+Jeg ser dette på Twitter en masse faktisk, hvor nogle gange jeg vil tweet i et vindue, åbne et andet til så se det for at bekræfte, at det faktisk gik op, og det er ikke der endnu. Og jeg er nødt til at slags genindlæse, genindlæse, reload-- Åh, der er det. Og det er ikke fordi det ikke blev gemt. Det er netop ikke formeret til andre servere. 
+
+Så denne afvejning, too-- gør du virkelig ønsker at udsætte dig selv for risikoen at hvis brugeren går til deres rækkefølge historie, er det faktisk ikke der endnu? Jeg ser dette på visse banker. Det altid irriterer mig, når, godt, for en, du kan kun gå ligesom seks måneder tilbage i dine kontoudtog i nogle banker, selv om de i teorien burde kunne have alt online. De bare tage ting offline tider. Nogle gange, too-- hvad hjemmeside er det? Der er en-- åh, det er GoDaddy, tror jeg. GoDaddy, når du tjekker købe et domænenavn eller noget, de vil ofte give dig et link til din kvittering. Og hvis du klikker dette link til højre væk, er det ofte ikke virker. Det bare siger, blindgyde, ikke noget her. 
+
+Og det er også på grund af disse udbredelsesforsinkelser. Fordi uanset årsagen, de tager en lille smule tid til rent faktisk at generere det. Så dette er lidt ligesom du vil trække dit hår ud på et tidspunkt. Fordi alt du forsøger at gøre, er at løse et simpelt problem. Og vi holde skabe nye problemer for os selv. Så lad os se om vi kan slags fortryde dette. 
+
+Det viser sig at kombinere databaser på alle dine web-servere er egentlig ikke den bedste praksis. Generelt hvad en ingeniør ville gøre, eller systemer arkitekt, ville være at have forskellige niveauer af servere. Og bare for plads skyld, vil jeg trække deres database op her. 
+
+Vi kunne have database og server nummer fire her der gør har forbindelser til hver af disse servere her. Så det kunne være vores forside ende tier, som folk ville sige. Og det ville være vores back-end tier. Og det betyder blot, at disse står brugeren. Og databaserne ikke står brugeren. Ingen bruger kan direkte adgang til databasen. 
+
+Så lad os nu måske gå ned ruten Victoria foreslået. Dette er et single point of failure. Det gør mig utilpas. Så hvad er der måske mest oplagte løsning? PUBLIKUM: [uhørligt] DAVID MALAN: Beklager, sige det igen. PUBLIKUM: [uhørligt] DAVID MALAN: Non-produktion server. Hvad mener du? 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Åh, OK, så backups. OK, så vi kunne gøre det, helt sikkert. Og faktisk det er meget almindeligt gjort. Dette kan være database nummer fem. Men det er kun forbundet til nummer fire. Og man kan kalde det en hot spare. Disse to databaser kunne konfigureres til bare konstant synkronisere hinanden. Og så hvis denne maskine dør, for uanset dum reason-- harddisken dør, nogen snubler lidt den snor, noget software er fejlbehæftet og maskinen hænger eller crashes-- du kunne have en menneskelig bogstaveligt tag denne ene fra væggen og i stedet sætte denne ene i. Og så inden for, lad os sige, en par minutter, måske en halv time, du er online igen. 
+
+Det er ikke stor, men det er heller ikke forfærdeligt. Og du behøver ikke at bekymre sig om eventuelle synkroniseringsproblemer. Fordi alt er der allerede. Fordi du havde en perfekt backup klar til at gå. 
+
+Du kunne være lidt amatør om dette, som nogle mennesker ofte gør, hvor man kunne have database nummer fire her, database nummer fem her, der taler med hinanden. Men du har også denne slags arrangement-- og det bevidst ser rodet, fordi det is-- hvor alle frontend servere kan tale med alle de back end-servere. Og så hvis denne database ikke reagere, disse frontend servere har at have programmering kode i dem, der siger, hvis du ikke får en forbindelse til denne database, den primære starter straks taler med den sekundære. 
+
+Men det nu skubber kompleksitet til koden. Og nu dine udviklere, din software udviklere, nødt til at vide om dette. Og du slags binde den kode, du skriver til din faktiske bagenden gennemførelsen detaljer, hvilket gør det sværere, især i en større selskab eller en større hjemmeside, hvor du ikke nødvendigvis ønsker programmører at have at vide, hvordan databasen ingeniører gør deres job. Du vil måske beholde disse roller slags funktionelt distinkt så at der er dette lag af abstraktion mellem de to. 
+
+Så hvordan kan vi løse dette? Nå, vi slags løst dette problem en gang før. Hvorfor vi ikke sætte en af disse ting her, hvor den taler til gengæld til nummer fire og fem, alle af forenden webservere tale med denne mellemmand, og mellemmand til gengæld ruter deres data? Faktisk hvad der kunne være en godt navn for denne ting? 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: OK, database manager. Men hvad kunne et begreb, at vi kunne genbruge til denne enhed? Vi balancering. Ja, så faktisk er jeg ikke være fair her. Så en load balancer ville indebære, at vi skifte frem og tilbage her, der behøver faktisk ikke være tilfældet. Så der er et par måder, vi kunne gøre dette. 
+
+Hvis dette er i virkeligheden en load balancer, den historie er nøjagtig den samme som før. Nogle af anmodningerne går til fire. Nogle af dem gå til 5. Og det er godt. Fordi nu kan vi håndtere dobbelt så meget gennemløb. Men denne forbindelse her er super vigtigt. De skal forblive konstant synkroniseret og forhåbentlig er ikke geografisk for langt fra hinanden, så at synkroniseringen er væsentlige øjeblikkelig. Ellers kan vi har et problem. 
+
+Så det er ikke dårligt. Men igen, vi har indført et nyt problem. Hvilket problem har jeg lige genskabt? Single point of failure. Så hvad er løsningen på dette? Så som Victorias fond til at bruge penge, vi kan tage denne fyr ud og gøre dette. Og jeg bare til flytte her plads nok. Og det kommer til at være lidt rodet. Jeg har tænkt mig at holde tegning linjer. Antag, at alle disse linjer går ind i både? 
+
+En meget almindelig teknik her ville være at bruge en teknik kaldet hjerteslag hvorved hver af disse enheder, venstre og højre load balancers, eller hvad vi vil kalde dem, konstant siger, jeg er i live, Jeg er i live, jeg er i live, jeg er i live. En af dem som standard fungerer som den primære. Så al trafik bliver ført gennem den ene til venstre, for eksempel, som standard, vilkårligt. 
+
+Men så snart fyr på højre ikke hører fra venstre fyr længere, den ene til højre er programmeret til automatisk, for eksempel, overtage IP-adressen den ene til venstre, og derfor bliver den primære, og måske sende en e-mail eller en tekstbesked til de mennesker til at sige, hey, venstre primære er offline. Jeg vil blive den primære for nu. Så vicepræsident bliver præsident, så at sige. Og nogen skal gå redde præsidenten, hvis du ønsker. Fordi nu har vi en midlertidig single point of failure. 
+
+Så som kompliceret eller stressende som dette kan synes at begynde at være, dette er, hvordan du løser disse problemer. Du gør smide penge på det. Du smider hardware på det. Men desværre du tilføje kompleksitet for det. Men resultatet i sidste ende er, at du har en langt mere, i teorien, robust arkitektur. Det er stadig ikke perfekt. For selv når vi have-- vi måske ikke har et single point of failure. Vi har nu dobbelt fejlkilder. Men hvis to ting går galt, som absolut kunne, vi stadig kommer til at være offline. 
+
+Og så meget almindelig i industrien er at beskrive din up tid i form af niere. Og slags målet at stræbe efter at er 99,999% af tiden dit websted er online. Eller endnu bedre, tilføje en nogle flere niere til det. Desværre er disse niere er meget dyre. Og lad os rent faktisk gør det ud. Så hvis jeg åbner min store lommeregner igen, 365 dage i et år, 24 timer på en dag, 60 minutter i en time, og 60 sekunder i et minut, det er, hvor mange sekunder der er i et år, hvis jeg gjorde det korrekt. Så hvis vi gange dette ved 0,99999, det er hvor meget tid, vi ønsker at stræbe efter. Så det betyder, at vi bør være op dette mange sekunder i løbet af året. Så hvis jeg nu trække oprindelige værdi, eller rettere denne nye værdi fra first-- 316 sekunder, hvilket naturligvis er fem minutter. 
+
+Så hvis dit websted eller din virksomhed er hævder "fem niere", hvor du er op 99,99% af tiden, det betyder at du bedre har været smart nok og hurtig nok og skyl nok med ressourcer at dine servere er kun offline fem minutter ud af året. Det er et dyrt og hård ting at stræbe efter. 
+
+Så det er en afvejning, også. 99,999% af tiden er temmelig darn hårdt og dyrt. Fem minutes-- du næsten ikke kan få til serveren til fysisk at erstatte noget, der er gået galt. Og det er derfor, vi begynder ledninger ting sammen mere komplicerede Apriori således, at computerne kan slags reparere sig selv. Ja. 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Problemet kunne være i flere afdelinger. Og i fact-- 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Absolut, absolut. Og som billedet er bliver mere kompliceret, det kunne være webservere. Det kunne være strømmen til bygningen. Det kunne være noget fysisk, ligesom kablerne fik flosset eller smidt ud. Det kunne være databasen svarer ikke. Det kunne de opdateret deres drift systemet og noget hænger. Så der er så mange andre bevægelige dele. Og så en masse af den mekaniske der har at gå bag dette er egentlig bare handle offs, ligesom hvordan meget tid, hvor mange penge er det faktisk værd, og hvad er truslerne du er virkelig bekymret? For eksempel i kurser, jeg underviser på Harvard, vi bruger en masse af cloud computing, som vi begynder at tage et kig på nu, i virkeligheden, hvor vi bruger Amazon Web Services. Bare fordi det er den en vi startede med. Men der er stadig mere i disse dage fra Google og Microsoft og andre. Og vi bevidst vælger at sætte alle af vores kurser 'virtuelle maskiner, som de kaldes, i tror jeg det er vestlige Virginia datacenter. De fleste af vores elever tilfældigvis fra USA, selvom der er sikkert nogle internationalt. 
+
+Men virkeligheden er det bare enklere og det er billigere for os at sætte alle vores æg i Virginia kurven, selvom jeg ved, hvis noget går galt i Virginia, som har lejlighedsvis happened-- ligesom hvis der er en orkan eller nogle vejr begivenhed som, at hvis der er nogle elnet udstedelsen eller like-- alle af vores kurser data kan gå offline for nogle antal minutter eller timer eller endnu længere. 
+
+Men mængden af ​​kompleksitet der ville være påkrævet, og mængden af ​​penge, der ville være påkrævet, at betjene alt parallelt i Europa eller i Californien bare ikke giver så meget mening. Så det er en rationel handel off, men en smertefuld en når du er faktisk har denne nedetid. 
+
+Nå, lad os overgang lige nu til nogle af cloud-baserede løsninger til nogle af disse problemer. Alt, hvad vi har været diskuterer hidtil er slags problemer, der har været med os i nogen tid, uanset om du har din egen servere i din virksomhed, uanset om du går til en co-location placere ligesom et datacenter og dele plads med en anden, eller dag i skyen. 
+
+Og hvad er rart om skyen er, at alle af disse ting, jeg er tegning som fysiske genstande kan nu betragtes som slags virtuelle objekter i skyen, der er simuleret med software. Med andre ord, den computere i dag, servere i dag, ligesom Dell billedet Jeg viste tidligere, er så hurtigt, har så meget RAM, så meget CPU, så meget disk plads, som folk har skrevet software til næsten partition én server op i illusionen om det være to servere, eller 200 servere, så at hver af os kunder har illusionen af ​​at have ikke bare en konto på nogle web vært, men vores egen maskine, at vi er leje fra en anden. 
+
+Men det er en virtuel maskine i idet den ene Dell server, den igen kan blive delt op i to eller 200 eller flere virtuelle maskiner, som alle giver nogen administrativ adgang, men på en måde, hvor ingen af ​​os ved eller kan få adgang til andre virtuelle maskiner på samme hardware. Så for at male et billede i dagens lysbilleder, Jeg har det skudt her fra en hjemmeside kaldet Docker. 
+
+Så det er lidt mere detaljer end vi faktisk har brug for. Men hvis du ser dette som din infrastructure-- så bare den hardware dine egne, dine servere, stativerne, data center, og alle at-- du ville typisk kører en host operativsystemet. Så noget like-- det kunne være Windows. Det ville ikke være Mac OS. Fordi det er ikke rigtig virksomhed i disse dage. Så det ville være Linux eller Solaris eller Unix eller BSD eller FreeBSD eller en række andre operativsystemer der er enten gratis eller kommerciel. 
+
+Og så skal du køre en program, særligt program, kaldet en hypervisor, eller virtuel maskine monitor, VMM. Og disse er produkter, hvis du er velkendt, ligesom VMware eller VirtualBox eller Virtual PC eller andre. Og hvad disse programmer gør er præcis denne funktion jeg beskrev tidligere. Det skaber en illusion at en fysisk maskine kan være flere virtuelle maskiner. 
+
+Og så disse farverige kasser op toppen er maler et billede af følgende. Denne hypervisor, dette stykke software, kalder det VMware, der kører på en anden operativsystem, kalder det Linux, er at skabe den illusion, at denne fysiske computer er faktisk en, to, tre virtuelle computere. Så jeg har nu købt, som ejer af denne hardware, én fysisk computer. Og nu er jeg leje det til tre kunder. 
+
+Og disse tre kunder tror de har en dedikeret virtuel maskine. Og det er ikke agn og switch. Det er mere afsløring, der du bruger en virtuel maskine. Men teknologisk, vi alle har fuld administrativ kontrol over hver af disse gæst operativsystemer, som kunne være et vilkårligt antal operativsystemer. 
+
+Jeg kan installere noget jeg vil. Jeg kan opgradere det, som jeg vil. Og jeg behøver ikke engang at vide eller bekymrer sig om andre driftsindtægter på den pågældende computer, de andre virtuelle maskiner, medmindre ejeren af ​​alt dette grå ting er at være lidt grådige og overselling hans eller hendes ressourcer. 
+
+Så hvis du tager en fysisk maskine og sælge det til ikke 200 men 400 kunder, på et tidspunkt vi kommer til at rejse ind i dem, samme problemer med ydeevnen som før. Fordi du kun har en begrænset mængde disk og RAM og så videre. Og en virtuel maskine er bare et program, der er foregiver at være en fuldt udbygget computer. Så du får hvad du betaler for her. 
+
+Så finder du online du kan betale en velrenommeret selskab måske $ 100 om måneden for din egen virtuelle maskine, eller din egen virtual private server, som er et andet ord for det. Eller du kan finde nogle flyve ved nat, hvor du betaler $ 5,99 om måneden for din egen virtuelle maskine. Men odds er du ikke har næsten så meget ydelse til rådighed for dig, fordi de har været overselling det så, end du ville med den højere tier for service eller bedre leverandør. 
+
+Så hvad betyder det egentlig for os? Så lad mig gå til denne. Jeg har tænkt mig at gå til aws.amazon.com. Bare fordi de har en dejlig menu med valgmuligheder. Men de samme lektioner gælder for en hel masse andre cloud-leverandører. Desværre er det ofte mere markedsføring taler end noget. Og dette holder forandring. Så du går til en hjemmeside som denne. Og det er virkelig ikke fortælle dig meget af noget. 
+
+Og selv jeg, som jeg ser på dette, gør ikke virkelig vide, hvad nogen af ​​disse ting nødvendigvis gøre indtil jeg dykke i. Men lad os starte på venstre, Compute. Og jeg har tænkt mig at klikke på dette. Og nu Amazon har helt ærligt en overvældende antal tjenester disse dage. Men Amazon EC2 er måske den enkleste. 
+
+Amazon EC2 vil skabe for os præcis det billede, vi så et øjeblik siden. Det er, hvordan de gør en masse deres penge i skyen. Tilsyneladende Netflix og andre er i skyen med dem. Dette er alle typisk fluffy markedsføring tale. Så hvad jeg vil gøre, er at gå til Pricing-- eller rettere lad os gå til forekomster først bare for at male et billede af dette. 
+
+Så dette vil variere fra leverandør. Og vi behøver ikke at få alt for dybt ind ukrudt her for hvordan det hele fungerer. Men den måde Amazon, for eksempel, lejer du en virtuel maskine eller en server i skyen er de got disse slags sjove navne, lignende t2.nano, hvilket betyder små, eller t2.large, hvilket betyder store. Hver af dem giver dig enten en eller to virtuelle CPU'er. 
+
+Hvorfor er det en virtuel CPU? Tja, måske den fysiske maskine har 64 eller flere faktiske CPU'er. Men igen, ved hjælp af software, de skaber illusionen at denne ene maskine kan være divvied op til flere brugere. Så vi kan tænke på dette som har én Intel CPU eller to. CPU credits pr hour-- jeg ville nødt til at læse det med småt , hvad dette egentlig betyder. Det betyder, hvor meget af maskinen du kan bruge timen vis-a-vis andre kunder på denne hardware. 
+
+Her er, hvor meget RAM eller hukommelse, du get-- enten en halv gigabyte, eller 500 megabyte, eller 1 gigabyte, eller 2. Og derefter lagring refererer blot til hvilken slags diske, de giver dig. Der er forskellige opbevaring teknologier, som de tilbyder. Men mere interessant end dette så måske prissætningen. 
+
+Så hvis du er CTO eller en ingeniør, der ikke gør ønsker at køre en server i dit kontor, uanset årsagen, og det er alt for kompliceret eller dyrt at købe servere og co-lokalisere dem og betale husleje i nogle fysiske bur plads somewhere-- du blot ønsker at sidde på din bærbare computer sent om natten, indtaste dine kreditkortoplysninger, og leje servere i cloud-- godt, vi kan gøre det her. Jeg har tænkt mig at gå ned at-- Linux er et populært operativsystem. Og lad os bare få en fornemmelse af ting. Whoops-- for stor. 
+
+Så lad os se på deres mindste virtuel maskine, som synes at have, til vores formål, en CPU og 500 megabyte RAM. Det er temmelig lille. Men helt ærligt, webservere ikke nødt til at gøre så meget. Du har bedre specs i din bærbare computer. Men du behøver ikke dem, specs disse dage for ting. Du kommer til at betale $ ,0065 per time. 
+
+Så lad os se. Hvis der er 24 timer på en dag, og vi betaler så meget i timen, det vil koste dig $ 0,15 til leje, at bestemt server i skyen. Og det er kun for en dag. Hvis vi gør det 365-- $ 57 til leje det pågældende server. Så det lyder super billigt. 
+
+Det er også super lav ydelse. Så vi, til kurser jeg underviser her, har tendens at bruge Jeg tror t2.smalls eller t2.mediums. Og vi har måske et par hundrede brugere, et par tusinde brugere, alt. Det er ret beskedent. Så lad os se, hvad det ville koste. Så hvis jeg gør dette cost gange 24 time gange 365, denne her er $ 225. Og for kurserne Jeg underviser, vi generelt køre to af alting, for redundans og også for ydeevne. Så vi kan bruge, derfor $ 500 for serverne at vi måske har brug for om året. 
+
+Nu, hvis du har brug for mere performance-- lad os tage et kig på hukommelsen. Vi har talt om hukommelse ganske lidt. Og hvis du har brug for mere memory-- og 64 gigabyte er antallet jeg holdt mentioning-- det er næsten $ 1 pr time. Og du kan ret hurtigt se, hvor dette goes-- så 24 timer gange 365. Så nu er det $ 8000 om året for en smuk anstændigt server. 
+
+Så på et tidspunkt, der er dette vendepunktet hvor nu vi kunne tilbringe $ 6000 formentlig og købe en maskine som der og afskrive sin koste over måske to, tre år, at maskinens levetid. Men hvad der kan skubbe dig i begunstiger eller unåde af leje en maskine i skyen som denne? Igen, dette er sammenlignelige, sandsynligvis, til en af ​​disse Dell-servere vi så afbilledet lidt siden. 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, det er en kæmpe upside. Fordi vi ikke køber maskine, har vi ikke at Unbox det. Vi behøver ikke at løfte den. Vi behøver ikke at sætte den ind i vores rack. Vi behøver ikke at sætte den i. Vi behøver ikke at betale den elektriske regningen. 
+
+Vi behøver ikke at vende luftkonditionering på. Når en harddisk dør, har vi ikke at køre i midt i natten at ordne det. Vi behøver ikke at oprette overvågning. Vi har ikke at-- listen fortsætter og på af alle de fysiske ting du behøver ikke at gøre på grund af "skyen". 
+
+Og for at være klar, cloud computing er dette meget overused sigt. Det er virkelig bare betyder betale nogen andet at køre servere for dig, eller leje plads på andres servere. Så udtrykket "cloud computing" er nyt. Ideen er årtier gammel. Så det er temmelig overbevisende. 
+
+Og hvad mere får du? Nå, du får også mulighed for at gøre alt på en bærbar computer derhjemme. Med andre ord, alle de billeder Jeg var bare drawing-- og det var ikke så længe siden, at selv Jeg kravlede rundt på en server gulv tilslutte kablerne i for hver af de linjer, du ser, og opgradering af operativsystemet systemer, og skiftende drev omkring. Der er en masse kropslighed til alt dette. 
+
+Men hvad er smukt om virtuel maskiner, som navnet antyder slags, nu er der web-baseret grænseflader hvorved hvis du vil have det, der svarer af en linje fra denne server til en anden, så skriv, type, type, klik og træk, klik på Send, og voila, du har det kablede op virtuelt. Fordi det hele foregår i software. Og grunden til at det er gjort i software er igen fordi vi har så meget RAM og så meget CPU til rådighed for os i disse dage, selv om alle at ting tager tid, den er langsommere til at køre tingene i software end hardware, lige som det er langsommere til at bruge en mekanisk enhed som en harddisk end RAM, noget rent elektronisk. Vi har så mange ressourcer til rådighed for os. Vi mennesker er en slags invariantly langsom. Og så nu maskinerne kan gøre så meget mere per tidsenhed. Vi har disse evner at gøre tingene virtuelt. 
+
+Og jeg vil sige til kurser Jeg underviser for eksempel her, vi har om måske et dusin eller så alt virtuelle maskiner ligesom der kører på et givet tid gør frontend ting, gør bagenden ting. Vi har alle vores lager. Så nogle videoer, herunder ting som dette, at vi skyder, Vi ender med at sætte ind i skyen. Amazon har tjenester kaldet Amazon S3, deres enkle opbevaring service, der er ligesom diskplads i skyen. De har noget Kaldet CloudFront, som er en CDN service, indhold Delivery Network service, som betyder, at de tager alle dine filer og for dig automagisk kopiere det jorden rundt. 
+
+Så de gør det ikke forebyggende. Men den første gang nogen i Indien anmoder om din fil, de vil potentielt cache det lokalt. Første gang i Kina, første gang i Brasilien det sker, de vil begynde caching det lokalt. Og du behøver ikke at gøre noget af det. Og så er det så utroligt overbevisende i disse dage til at flytte tingene ind i skyen. Fordi du har denne evne bogstaveligt for ikke at have mennesker gør nær så meget arbejde. Og du bogstaveligt talt ikke har brug for så mange mennesker gør disse job anymore-- "ops" eller operationelle roller, længere. Du har virkelig bare brug for udviklere og færre ingeniører der bare kan gøre tingene virtuelt. Faktisk bare for at give dig en følelse af dette, lad mig gå til prisfastsættelse for ét andet produkt her. Lad os se noget lignende CDN S3. Så dette er hovedsagelig en virtuel harddisk i skyen. Og hvis vi rulle ned for at pricing-- så det er ,007 $ per gigabyte. Og that's-- hvordan gør vi det? Jeg tror, ​​det er om måneden. 
+
+Så hvis det er pr month-- eller per dag? Dan, er det om dagen? Dette er per måned, OK. Så hvis dette er pr month-- undskyld, det er $ 0,03 per måned. Der er 12 måneder ud af året. Så hvor meget data kan du gemmer i skyen? En gigabyte er ikke stor, men jeg ved det ikke, ligesom en terabyte, så ligesom 1.000 af dem. Det er ikke så meget. Det er $ 368 til at gemme en terabyte af data i Amazons sky. Så hvad er nogle af de afvejninger, så? Det kan ikke alle være god. Intet vi har talt om i dag, er slags uden en fangst eller en omkostning. Så hvad er dårligt om at flytte alt i skyen? PUBLIKUM: Sikkerhed. DAVID MALAN: OK, hvad mener du? PUBLIKUM: [uhørligt] DAVID MALAN: Yeah, højre. Og vil du virkelig ønsker nogle tilfældige ingeniører på Amazon, at du aldrig vil mødes med fysisk adgang til disse computere, og hvis de virkelig ønskede, virtuel adgang? Og selv om i teori software-- godt, kryptering kan absolut beskytte dig mod dette. Så hvis hvad du er lagring på dine servere er encrypted-- mindre bekymrende. 
+
+Men så snart et menneske har fysisk adgang til en maskine, kryptering til side, alle spil slags slukket. Du har måske kender fra gårsdagens at pc'er især, selv hvis du havde disse ting kaldet "BIOS passwords," var, da dit skrivebord startet op, ville du blive bedt med en adgangskode, har intet at gøre med Windows, kan du typisk bare åbne chassis maskine, finde bittesmå ben, og bruge noget, der hedder en jumper og bare slutte disse to ledninger til omkring et sekund, derved færdiggøre et kredsløb. Og det ville fjerne adgangskoden. 
+
+Så når du har fysisk adgang til en enhed, kan du gøre sådan noget. Du kan fjerne harddisken. Du kan få adgang til det på den måde. Og så dette er grunden til, tilfældet med Dropbox, for eksempel, det er lidt bekymrende, at ikke kun de have data, selv om det er krypteret, de har også nøglen. Andre bekymringer? 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Ja, det er meget true-- den Googles, æblerne, de Microsofts af verden. Og i virkeligheden, hvor længe har du havde din iPhone til? Ja, give eller tage. PUBLIKUM: [uhørligt] DAVID MALAN: Jeg er ked af? Du er blandt dem, der har en iPhone, ikke? PUBLIKUM: Ja. DAVID MALAN: Hvor længe har du haft din iPhone? PUBLIKUM: [uhørligt] DAVID MALAN: OK, så Apple bogstaveligt kender hvor du har været hver time af dag for de sidste fem år. 
+
+PUBLIKUM: [uhørligt] DAVID MALAN: Hvilket er en vidunderlig funktion. PUBLIKUM: [uhørligt] DAVID MALAN: Ja, men trade off for sikker. PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Ja, det er meget nemt at. PUBLIKUM: [uhørligt] DAVID MALAN: Andre ulemper? PUBLIKUM: [uhørligt] DAVID MALAN: Absolutely-- teknologisk, økonomisk, er det temmelig overbevisende til slags vinde disse stordriftsfordele og flytte alt ind den såkaldte sky. Men du sandsynligvis ønsker at gå med nogle af de største fisk, Amazonerne, at Googles, den Microsofts-- Rackspace er temmelig big-- og et par andre, og ikke nødvendigvis flyve om natten folk for hvem det er meget let at gøre denne form for teknik i dag. Og det er, som du kan betale $ 5,99 per måned til. Men du vil helt sikkert får hvad du betaler for. 
+
+Når du siger [uhørligt], det er når ting som disse fem niere kommer op, hvorved selv om teknologisk vi kan ikke rigtig garantere 99.999, vi vil bare bygge i en slags af straf til kontrakten således at hvis der sker, i det mindste der er nogle omkostninger for os, sælgeren. Og det er, hvad du typisk ville være at få dem til at acceptere. 
+
+PUBLIKUM: [uhørligt] 
+
+DAVID MALAN: Og en slags velsignelse er, at selv når vi går ned, for eksempel, eller endda visse selskaber, virkeligheden er Amazon, for eksempel, har så mange darn kunder, kendte kunder, opererer ud af visse datacentre at når noget virkelig går galt, ligesom force majeure og vejr og sådan, hvis der er nogen form for blå himmel, det er, at du er i meget godt selskab. Din hjemmeside kan være offline. Men så er ligesom halvdelen af den populære internet. Og så det er velsagtens lidt mere spiselig for dine kunder hvis det er mere af en internet ting end en acme.com ting. Men det er lidt af en snyde. 
+
+Så med hensyn til andre ting at se på, bare så vi ikke udelukke andre, hvis du går til Azure, de har både Linux og Windows stuff der er sammenlignelig med Amazons. Hvis du går til Google Compute Engine, de har noget lignende så godt. Og bare for at afrunde disse cloud tilbud, Jeg vil gøre omtale af en anden ting. Dette er et populært websted det er repræsentativt af en klasse af teknologier. Dem vi bare talte om, Amazon, ville være IAAS, Infrastruktur som en tjeneste, hvor du form for fysisk hardware som en service. Der er SAAS. Faktisk, lad mig notere disse ned. 
+
+IAAS-- Infrastruktur Som en service, SAAS, og PAAS, som er bemærkelsesværdigt forvirrende akronymer , der beskriver tre forskellige typer af ting. Og de akronymer selv ikke rigtig noget. Dette er alt af skyen ting vi har netop talt om, det lavere niveau stuff, den virtualisering af hardware og opbevaring i den såkaldte sky, uanset om det er Amazon, Microsoft, Google, eller andet. 
+
+Software som en service-- alle os slags bruge dette. Hvis du bruger Google Apps for Gmail eller kalender, nogen af ​​disse webbaseret applikationer, der for 10 år siden vi ville have dobbelt klikket ikoner på vores desktop, software som en service er nu virkelig webapplikation. Og platform som en tjeneste slags afhænger af. 
+
+Og et eksempel jeg vil give dig her i forbindelse med cloud computing-- der er et selskab, der er helt populære i disse dage, Heroku. Og de er en service, en platform, hvis du vil, der kører på toppen af Amazons infrastruktur. Og de bare gør det endnu nemmere for udviklere og ingeniører at få web-baserede applikationer online. 
+
+Det er en smerte, i første omgang, at bruge Amazon Web Services og andre ting. Fordi du rent faktisk har at kende og forstå om databaser og web-servere og load balancers og alle de ting Jeg har lige talt om. Fordi alle Amazon har gjort, er ikke skjult disse design udfordringer. De har lige virtualiserede dem og flytte dem ind i en browser, i software i stedet for hardware. 
+
+Men virksomheder som Heroku og andre PaaS udbydere, Platform as a Service, de bruger disse barebone fundamentals at vi bare talte om, og de bygger lettere at bruge software på toppen af ​​det så hvis du ønsker at få en web-baseret ansøgning online i disse dage, du helt sikkert nødt til at vide, hvordan man programmerer. Du skal vide, Java eller Python eller PHP eller Ruby eller en masse andre sprog. 
+
+Men du har også brug for et sted at sætte det. Og vi talte tidligere om at få en web-hosting firma. Det er slags lignende midten af ​​2000'erne tilgang til at få noget online. I dag kan du i stedet betale nogen som Heroku et par dollars om måneden. Og væsentlige, når du har gjort nogle indledende konfiguration, at opdatere din hjemmeside, du bare skrive en kommando i et vindue. Og uanset hvad kode du har skrevet her på din bærbare computer med det samme distribueres til et vilkårligt antal af servere i skyen. 
+
+Og Heroku tager sig af alle af kompleksitet. De tal hele databasen ting, hele load balancing, alle de hovedpiner, som vi har lige skrevet på tavlen, og skjule alt dette for dig. Og til gengæld, du bare betale dem lidt mere. Så du har disse infrastrukturer som en tjeneste, platforme som en service, og derefter software som en service. Det er, igen, denne abstraktion eller lagdeling. 
+
+Eventuelle spørgsmål om skyen eller bygge sin egen infrastruktur? Okay, der var en masse. Skal vi ikke gå videre og tage vores 15 minutters pause her. Vi kommer tilbage med et par nye koncepter og lidt af hands-on mulighed før aftenen er slut. 

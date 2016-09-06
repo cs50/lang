@@ -1,0 +1,463 @@
+DAVID MALAN: Welcome back, everyone. So yesterday, you'll recall that we focused on these topics here. So we had four overarching topics-- privacy, security, and society; internet technologies; cloud computing; and ultimately, web development. Did anyone have the bandwidth or the time to watch a little John Oliver last night? It's actually pretty amusing, if not a little frightening. Any questions on anything we did yesterday? Any clarifications? Any questions that you want to make sure we touch on today in some form? So clean slate. 
+
+So what's on the agenda for today? So I thought we'd begin today with a look at what's generally known as computational thinking-- at the risk of oversimplifying, thinking like a computer, perhaps thinking like an engineer, and trying to start to organize your thoughts or to give you a better sense of what's involved in actually commanding a computer to do something by way of programming. And we'll keep it at a pretty high level, pretty much English, but try to use of familiar examples to formalize how you would go about solving problems. 
+
+And we will revisit some CS topics, like abstraction, which came up a couple of times yesterday, algorithms, and then representation. And that's where we'll begin today in just a moment. Then we'll take a look at programming. We'll take a look at some fundamental constructs with which you might be familiar and might even find quite intuitive. 
+
+We'll look, in fact, at a sample programming environment that's very accessible, very playful, and indeed targeted for ages 12 and up. We will spend a few minutes there and then take things to a lower level and actually talk about some of the algorithms and data structures, so to speak, that programmers typically use to solve problems far more efficiently than you might be able to do without them altogether. Then after lunch, we'll take a look at technology stacks, which is just a fancy way of saying collections of technologies that you might use to solve some problem. And we'll talk about the alphabet soup of languages that exist today-- Java and Python and C++ and PHP and Ruby and all sorts of other things. 
+
+We'll take a look briefly at design patterns. Programmers, over time, have adopted methodologies that tend to help them solve problems more readily. When you start to see yourself writing the same kind of code again and again, people formalize those repetitions and ascribe names to them and then use them and promote them, ultimately. And we'll talk a little bit about mobile strategies, like what does it mean to actually make a mobile app or a mobile website. Do you do it for Android? Do you do it for iOS? Do you do it for both of those? And what are the trade-offs? And then finally, we'll take a look web programming, which is a collective term really describing any time you write software that's meant to run on the web, whether on phones or desktops or laptops. We'll take a brief look at databases and the design therein, if only because almost any interesting web-based application these days has some kind of database. Otherwise, it would just be static content. And a database allows you to make changes over time, whether yourself or from users. And we'll consider how you would go about designing that database and the kind of jargon that might come up in an engineer's discussion at a white board when actually implementing an app for the first time. 
+
+We'll talk briefly about APIs, useful services that you can use to stand on the shoulders of others, whether companies or individuals, and solve your own problems more quickly. And then we'll dabble perhaps a bit with JavaScript, a programming language that's used both in browsers these days, but also in servers. And perhaps, we'll revisit, time permitting, some of the hands-on web stuff we did yesterday and integrate the two together before we adjourn. 
+
+So with that-- what's ahead-- is there anything missing that you would like to make sure we insert and touch on at some point. If it's springs to mind, bring it up before long. But why don't we begin with a look at computational thinking. 
+
+And let me propose that computational thinking is, again, sort of the high level description of what a computer scientist might do. And indeed, let's start with three ingredients that might go into computational thinking. This is just one way of describing it. We could certainly define this in any number of ways. 
+
+But let me propose, for the sake of today, that the world's problems, all of the world's problems, when approached by a computer scientist could be viewed as what we'll call inputs, which need to get fed into what we'll call algorithms, which then yield outputs. In other words, the entire world of problem-solving I claim can be distilled into these three ingredients. So what do I mean by inputs? Inputs is just what you're handed in order to solve. 
+
+For instance, here's an old school problem. If I have a phone book here and I want to look something into it, this is my input. I have 1,000 or so pages in a phone book. This is the input to my problem. And I want to find something like Mike Smith, so a friend whose name and number is hopefully in this address book. 
+
+This is before the days of cell phones, so I can't just search for it. So I have to do it old school and actually search these inputs for some answer. And that answer is just going to be called the output. So the input is the phone book. The algorithm is whatever set of steps I use to find Mike Smith. And the output is, hopefully, Mike Smith's phone number. And this then would be just representative of most any problem to with you are handed inputs and want to produce outputs. 
+
+So before we consider the process by which we can solve that problem, finding Mike Smith and something like that, let's consider the first and the last-- inputs and outputs. Physically, of course, the input here is a whole bunch of paper glued together in the form of a phone book. But computers, of course-- laptops and desktops and even phones these days-- those are electronic devices. 
+
+And at the end of the day, what's the only input to a computer? Well, it's something like this power cord here. I plug it into the wall, and I get a flow of electrons, which allows me to run the machine. Or maybe those electrons are created by way of my battery. But at the end of the day, that's the only thing going into my laptop. And so much interesting stuff is ultimately coming out, whether by way of the printer or the screen or audially or the like. 
+
+So if all we have as our fundamental input to a computer is electricity, so just electrons going in and or out, and so how can we use that input to actually represent information? In other words, how do we get from a simple flow of electricity to representing actual numbers or actual letters or actual images on the screen or actual movies or e-mails or any number of these higher level concepts, if you will, that at the end of the day somehow have to be stored in this electronic mechanical device using only those simple ingredients-- electrons coming in and out? 
+
+So it would seem that, in the simplest form, the only kind of states I have in my world, so to speak-- conditions in my world-- is either I have electrons flowing, electricity flowing, or I do not-- so on, off. And let's formalize on and off, as a computer scientist might, with just 1 and 0. Let's just describe some arbitrary but consistent number to it. 1 means on, 0 means off. Or you might also view this as true means on and false means. You could also do black and white or red and blue. You just need two descriptors. And a computer scientists would generally just use 0 and 1. 
+
+So if that's the case, my only alphabet is consisting of 0's and 1's, how could I possibly get to even the number 2 in a computer, let alone the number 3 or a letter of the alphabet or an image or a movie? How do we sort of bootstrap ourselves from this basic principle of 0's and 1's and actually represent something more interesting? 
+
+Well, let's put that question on hold for just a moment and consider something hopefully familiar, even if you haven't really thought about it in any detail for 10, 20, 30, 40, 50 more years. This is what? How would you pronounce that? Not a trick question. A number, but what is it? 1, 2, 3, or 123. And I liked how you said 1, 2, 3, because that's one way of viewing it. 1, 2, 3, it's a sequence of three symbols. It's pictures that we now have words for. And if you sort of read them all together, a typical human in English would say 123. And that's sort of a higher level concept, feels like a reasonably big number. 
+
+But how did we get there? Well, it might be a while since you've thought about it like this, but back in my day, I kind of learned this as the 1's column, the 10's column, and the 100's column. So as Lakisa says, it is 1, 2, 3, but it's also 123. But how do we get from the former to the latter? 
+
+Well, you would typically do in the 100's column, I have a 1. So that's like saying 100 times 1. And then in 10's column, I have 2. So that's like saying 10 times 2. In the 1's column, I have 3. So that's like saying 1 times 3. 
+
+And if I add these things together, this, of course, is 100 plus the 10 plus 3. And oh, that's why I get this higher level notion of 123. It's just basic math, whereby these symbols have weights to them, if you will, placeholder or column values. And once I multiply everything out, I get this number. 
+
+So how many of you know how to speak binary-- 0's and 1's-- like a computer? OK, perfect, no one, or none of you think you do. But I would claim you actually know this already. We just need to sort of tweak our mental model a little bit. But the process is exactly the same. 
+
+Let me leave this one up there and instead pull this down for a moment. In the world of computers, we only have 0's and 1's. And so the thing that's going to change is what? Well, in my human world, the decimal system, dec meaning 10, I have how many digits at my disposal? 10, right? 0 through 9, of course. 
+
+And that's why we have the 10's place and the 100's place. Where is that coming from? Well, this is 10 to the power of 0. This is 10 to the power of 1, 10 to the power of 2, and so forth. You just keep multiplying your columns by 10, starting off with just 1 in the rightmost one here. 
+
+So in the world of computers, if you only have binary-- bi meaning 2-- or 0's and 1's, we just really need to change the base of that math. So in other words, now we'll just have the 1's column and the-- where is this going-- the 2's column, the 4's column, and maybe beyond. Why is that? Well, this is 2 the 0-th power. This is 2 the 1. This is 2 to the 2, and so on. 
+
+So whereas here, we have 1, 10's, 100's, 1,000's, 10,000's, 100,000's, 1 millions, and so forth, here we have 1, 2, 4, 8, 16, 32, 64. You just keep multiplying by 2, instead of keep multiplying by 10. So now, if the goal at hand is to represent numbers using only 0's and 1's, let's consider how we get there. 
+
+This, of course, is the pattern 0 0 0, but what number conceptually does it represent? Well, 4 times 0 plus 2 times 0 plus 1 times 0, let's add those together. 4 times 0 is, of course, 0, plus 2 times 0 is, of course, 0 plus 1 times 0 is, of course, 0. So ah, this represents the number we humans know as 0. 
+
+Well, now, let's very quickly fast forward. If I'm instead not representing 0 0 0, but let's do 1 0 1, that might be how Lakisa, earlier, would just pronounce it 1 0 1. But now, how do we take it to the higher level the number we humans might know? So what is this number? It's 5, the number we know as 5. 
+
+Well, why is that? Well, we can really sort of walk through it methodically 4 times 1, 2 times 0, 1 times 1. Add those together, so this is 4 plus 0 plus 1. And that's, indeed, 5. So it's getting a little tedious now doing the arithmetic again and again. But the process is exactly the same. 
+
+The only thing that has changed in our world is that our columns are 1, 2, 4, 8, 16, and so forth, instead of 1, 10, 100, 1,000. And that's just because our alphabet has shrunk from 0 through 9 to just 0 to 1. 
+
+So as a little quiz here, how would you represent the number 7 in binary? 0? Well, 0, you mean 0 0 0? Say it again , Karina. Perfect. Why is that? It's effectively 4 plus 2 plus 1. So good. 
+
+How do we represent a little another-- how about number 2? Close, but backwards. So what is this? Is 4 plus 1, so that's 5 again. 
+
+So what's-- I'm sorry, Karina? 0 1 0. 0 1 0 would be 2, because again, even if it sort of doesn't jump out at you, just do the math. 4 times 0, 0, 2 times 1 is 2, 1 times 0 is 0. So this is the number we know as 2. 
+
+How about the number 8? Hm? Good. So we kind of need another placeholder. We need 1 0 0 0. And that's true of our sort of old school decimal system. How do you represent the number 1,000? 
+
+Well, you would seem to be kind of in a tough spot, if ask you to represent the number 1,000, because even if you give yourself like 9 of these, 9 of these, 0 of these, which is the biggest number you have, you didn't quite get to 1,000. So if you 1,000, you just need another position, so that you can do 1 0 0 0, ergo the number 1,000. 
+
+So now, let's map this sort of conceptual discussion back to hardware, where again, the input was just this little power cable, electricity coming in and flowing out. And so for that to be mapped from here to there, well, what do we really need? Well, you can think of being inside of a computer, a whole bunch of light bulbs, if you will. They're really called transistors. And transistors are just switches that can either be on or off. So you can think of a transistor that's on is allowing electricity to flow and a transistor that's off as stopping electricity from flowing. And rather than take over the lights here, why don't I do this sort of new school style. So this might be a 1, a flashlight being on, only barely though. And this might be a 0, and now it's off. 
+
+So using this physical device, I can now represent the binary system. I just need two states. It doesn't matter what color it is or what it is. All that matters is that I have one state on and another state off. So using my phone here, how do I represent the number we know as 0? Or put equivalently, what number am I representing now? 0, because the device is off. 
+
+And if I do this? And now, how do I represent the number 2? Can I borrow your phone here, as we did yesterday? So let's see, so if I want to represent the number 2, is this the number 2? No. What number am I accidentally representing here? This is actually the number 3. 
+
+So which one do I want to turn off? The black phone or-- well, if they're-- black phone or the white phone? The white phone. So if I turn this off and we line it up over here, we have a 1 in the 2's place and a 0 in the 1's place. And so I'm now representing the number 2. And this, Of course, would be the number 3, because now both of these lights are on. 
+
+And I'll stop here, but it stands to reason if I want to represent the number 4 or 8 or higher, I'm going to need more phones. But that's all that's going on. So if you've ever heard that inside of a-- thank you-- computer is millions of transistors, that's just millions of tiny little switches. And they're not light bulbs that turn on and off, but they do either allow electricity to flow somewhere or stop it. And so there's your two states-- on or off, on or off. 
+
+So we would seem now to have this ability to represent this concept that we'd like in actual hardware. But all we have now is the ability to represent numbers it would seem. So how do we go about representing letters of the alphabet, which feels like the next sort of feature you would want to add to a modern computer once you have numbers? 
+
+And indeed, if you think about it, historically, computers were introduced really to serve as calculators numerically. But of course, these days, they do much more. Even when they boot up, you typically see one or more words. So how do you represent words, if all you have is, again, electricity at the end of the day, or equivalently 0's and 1's? 
+
+Yeah. Yeah, I mean, we kind of did this yesterday in some form, where at some point, I think I arbitrarily said that, if we want to represent the letter A, we could just call that a 1. It was in the context of cryptography, where we just needed some kind of code, some kind of mapping. 
+
+So maybe A will be represented as a 1, and B will be represented as a 2, and Z will be represented as a 26, for instance. And then the only caveat is that if I'm going to encode letters in my emails or in my text messages as numbers, you all have to agree to use the same set of conventions. And indeed, the world has done exactly that. 
+
+There is a system in the world called ASCII, American Standard Code for Information Interchange, which is simply a decision some years ago that the humans made that decided that A is going to equal, not 1, 2, and 26, and so forth-- it's a little different-- but 65, 66, 67. And I'll pull up a chart in just a moment. But it's arbitrary. But it doesn't matter that it's arbitrary. The world has to just be consistent. 
+
+Now, more recently, there's something fancier called Unicode, because the world's kind of realized, after inventing computers, that there's more than well 256 symbols in the world that we might want to represent, especially when you introduce Asian languages and other symbologies that need more expressiveness than you can fit in the earliest version of this code, which was called ASCII. So Unicode actually allows you to use more 0's and 2. In particular, you keep hearing the word bytes in society and even just yesterday. And a byte is what again? 
+
+What's a byte? It's just 8 bits. So what does that really mean? Well, that means, earlier, when we were talking about binary and I was using arbitrarily three bits when we were talking about binary-- the 1's place, the 2's place, and the 4's place-- well, a byte just means that you're talking not in units of three but four, five, six, seven eight, which gives us 8's place, 16's, 32's, 64's, and 128's. 
+
+In other words, a bit isn't all that useful a unit of measure, because it's just like one tiny little piece of information, on or off. So some years ago, the world just decided it's slightly more convenient to talk in terms of bytes, eight things at a time. And so thus was born the notion of a byte. And so we have eight bits here. 
+
+And it turns out, too, for similar reasons, the world decided years ago that to represent an ASCII letter, you're going to use units of 8 bits. So even if you don't need that many, you're always going to use 8 bits to represent a letter of the alphabet. And this is convenient, because then if you receive a message that has a 0 0 0 1 1 1 1 0 followed by another 1 1 1 0 1 0 0 1, so if you receive 16 bits, the world can just assume that the first 8 are one letter and the second 8 are another letter. 
+
+Doesn't matter how many there are. It just matters that we're all consistent when we're interpreting these bits. And this was just random. That means something, but I didn't really think about what it means. 
+
+So it's a small white lie. Originally, ASCII actually used only 7 bits. And the eighth bit is called extended ASCII. But the point is, ultimately, the same. The world generally standardized on 8 bits. 
+
+So this would seem to be a little limiting, because I can only represent capital A, capital B through capital Z. But indeed not, if I go to-- there's a bunch of resources online, for instance, asciitable.com, this is going to be a little overwhelming at first. But I'll point out what's important here. 
+
+This just happens to be-- and I'll walk-- let's see, if I go over here. Here is, in the decimal column, the number 65. And on the right hand column letter character, Chr, is the letter A. And you can ignore, for now, everything in the middle. This is hexadecimal, octal, and an HTML code. To this site is just trying to throw a lot of information at you at once. But all we care about is the decimal column and the character column. 
+
+So by this logic, what is the number that the world has decided represents a lowercase a? Yeah, 97. And just to confuse potentially slightly, what number has the world decided would represent the number 1? Right, because we-- 49, it seems here, down in the bottom left. 
+
+Now, what do I mean by that? So it turns out that in computer systems, there is generally a fundamental difference between a number and a character. A number is the thing we learned growing up when we were super young in grade school. It's things you count with. But a character is just a shape, a glyph, so to speak, on the screen. 
+
+Now, we humans sort of see something that looks like this. And we say, oh, that is the number 2. But no, that's just a symbol that looks like what we know as the number 2. And so there's this fundamental distinction between actual numbers and characters. This is a number. But generally, in the context of a computer, if you instead see something like this quoted-- and you don't always have to see it quoted, but for the sake of discussion-- if you see quotes around the number, this is now a character. So this number 2 underneath the hood inside of a computer would be represented with a pattern of bits that represent the number 50 according to the chart online. 
+
+However, if a computer just sees this, this would be represented with the pattern of bit 0 0 0 0 0 0 1 0. Whereas, this character would actually be represented as-- and now, I got to think a little harder-- so this character would be represented with 0 0 1-- what do I need here? 0 0 1 1 0 0 1 0. How did I do this? Well this is the number 50, if you multiply it out using these columns, this is the number 2, and so that's why there is this dichotomy. 
+
+And this is just a teaser now for features that exist in programming languages that we'll touch on briefly later today. In programming languages, you have generally, but not always, things call different data types. In other words, a programmer-- when he or she is writing, a programmer gets to decide in what format to store his or her data. You can either store data as raw numbers, like the number 2. Or you can store them as strings, or sequences of characters that you would generally express with quotes in your programming language. 
+
+You can have things called-- I'll oversimplify and call them real numbers-- so numbers that aren't integers like the number 2, but numbers like 4.56. So real numbers can also have decimal points, so that's a different fundamental piece of data in a computer. And then you can even have other data types still. So that's just a teaser really of the simplest of design decisions that a programmer might make underneath the hood. 
+
+So any questions just yet? So let's try to make this a little more real. This hardware is not so much in use anymore. But most everyone in this room probably grew up with and still uses hard drives in some way. 
+
+Even though most of our laptops no longer have devices that operate like this, instead laptops today generally have solid state drives with no moving parts. And that tends to be more expensive, unfortunately, but a little bit faster and a-- well, often, a lot faster, which is one of the reasons. And also it doesn't generate as much heat. It can be smaller, so it's generally a net positive. 
+
+But this allows us to map a little more concretely what we're talking about at the 0's and 1's level now to a physical device. It's one thing for me to talk about 0's and 1's in terms of my phone or abstractly in terms of switches being on and off. But what about hard drives? In your laptops, if you have an older one, or in your desktop computer, or certainly in servers today, where you have hard drives that have a terabyte of space, 4 terabytes of space, well what does that mean? 
+
+A hard drive with 1 terabyte of space means there's 1 trillion bytes inside of it somehow, or equivalently 8 trillion bits inside. 1 terabyte would be 8 terabits or 1 trillion bits, which means if you have a hard drive, you have somehow or other a trillion 0's and 1's inside of it. And if we just take a look at an arbitrary picture of a hard drive representative, this is what a hard drive might typically look like inside. 
+
+It, too, is kind of like an old phonograph player but generally with multiple records inside, so to speak-- multiple platters, as they're called, metal circular disks, and then a little reading head, much like an old record player. And that reading head moves back and forth and somehow reads the bits. And what's on these platters, even though we humans can't see them, either in reality or in this picture, there's tiny little magnetic particles. And even if you've long forgotten how electricity works, a magnetic particle that's charged generally has a north end and a south end-- so north and south. And so the world just decided some time ago that, if a magnetic protocol essentially is aligned like this, north-south, let's call that a 1. If it's instead south-north, let's just call that a 0. And so if you have at your disposal a trillion tiny little magnetic particles-- and hopefully, the hardware ingenuity in order to flip those around as you see fit-- if you want to represent a whole bunch of 0's, you just need 8 magnetic particles all aligned like this. And if you want to represent eight 1's, you just need 8 magnetic particles aligned back to back to back like this. 
+
+What do I mean by the magnetic particles? Frankly, all these years later, the thing that still comes to my mind is this guy, if you grew up with this thing. This is a little-- for those unfamiliar-- a little childhood toy that has this hairless man here that has all these tiny little black magnetic particles that come with it. And using that red stick, which is just a magnet, you can sort of give him a mustache or eyebrows or hair or anything on him. So in fact, if we zoom in, for instance, this is the kind of game you can play with Wooly Willy. 
+
+And this is only to say, these are much larger magnetic particles than are actually on a hard drive, and far fewer magnetic particles. But let's actually see then if you do have tiny magnetic particles in a hard drive, how you can actually use those to represent data. 
+
+[VIDEO PLAYBACK] 
+
+-The hard drive is where your PC stores most of its permanent data. To do that, the data travels from RAM along with software signals that tell the hard drive how to store that data. The hard drive circuits translate those signals into voltage fluctuations. These, in turn, control the hard drive's moving parts-- some of the few moving parts left in the modern computer. 
+
+Some of the signals control a motor, which spins metal-coated platters. Your data is actually stored on these platters. Other signals move the read/write heads to read or write data on the platters. This machinery is so precise that a human hair couldn't even pass between the heads and spinning platters. Yet, it all works at terrific speeds. [END PLAYBACK] And you can see at the tail end of the video, there are generally multiple platters. And so that reading head isn't just reading the top. It's kind of like three or four or more reading heads that move like this, reading data simultaneously. 
+
+So there's a lot of complexity and sort of timing that's involved in a hard drive. And the thing is spinning really darn fast, so there's a lot of complexity. But let's zoom in a little deeper and see where are these magnetic particles and how are we're getting at them. 
+
+[VIDEO PLAYBACK] 
+
+-Let's look at what we just saw in slow motion. When a brief pulse of electricity is sent to the read/write head, it flips on a tiny electromagnetic for a fraction of a second. The magnet creates a field, which changes the polarity of a tiny, tiny portion of the metal particles which coat each platter's surface. A pattern series of these tiny charged up areas on the disk represents a single bit of data in the binary number system used by computers. 
+
+Now, if the current is sent one way through the read/write head, the area is polarized in one direction. If the current is sent in the opposite direction, the polarization is reversed. How do you get data off the hard disk? Just reverse the process. So it's the particles on the disk that get the current in the read/write head moving. Put together millions of these magnetized segments, and you've got a file. 
+
+Now, the pieces of a single file may be scattered all over a drive's platters, kind of like the mess of papers on your desk. So a special extra file keeps track of where everything is. Don't you wish you had something like that? 
+
+[END PLAYBACK] 
+
+So being alluded to there, perhaps, is that topic from yesterday of deletion. When you delete a file, yesterday we said that a computer actually does what, when you drag something to the Recycle bin or trash bin? It just forgets it. But the 0's and 1's, the magnetic particles that look like red and blue things here, or my arm here, are still there on the hard drive. 
+
+And so there exists software-- Norton Utilities and Yesteryear and other more modern software-- that just will scan a whole hard drive looking at all those 0's and 1's, because it turns out that most file formats-- Word documents, Excel files, images, video files-- all have certain patterns that are common among them. Every video file might be of a different video, but the first several bits are usually the same. Or the last several bits are usually the same. 
+
+And so with high probability, you can look for those patterns. And even if the file has been forgotten, you can say with high probability, but this looks like a Word document, lets recover it and un-forget it, if you will. And so that's how you can recover data that's either been accidentally deleted or deleted or deliberately deleted for whatever purposes. 
+
+By contrast, secure deletion does what in the context of a picture like this? Exactly, makes them all random. So it sort of moves some of them down, some of them up, leaves some of them unchanged, and generally makes random noise out of it, or just maybe makes all of them 0's or all of them 1's. And that too can generally scrub your data away. 
+
+So let's return now to the issue of computational thinking, whereby we have the formula inputs. And algorithms gives you outputs ultimately. We focus now on inputs and outputs, because now, I claim we have a way of representing inputs and outputs. We're just going to use binary. 
+
+And no matter what we want to represent today, whether it's a number or a letter or thousands thereof in a phone book or images or movies, at the end of the day, it's all 0's and 1's. And I claim that, even though this is a super simple world with just 0's and 1's, we can build ourselves up. And we've seen one example of that with letters thus far. 
+
+So let's focus now on this middle ingredient, an algorithm. And let's return to this example of Mike Smith. So in this phone book, which admittedly, we don't use so much anymore, there's a problem to be solved. We want to find someone like Mike Smith. 
+
+And what might I do to find Mike? Well, I could just open up this book, start at the first page, and realize, oh, I'm in the A section. Mike's not there. I need the S section for Smith. So just keep turning one page at a time. Let me pretend that this is all white pages and not yellow pages, because we're not going to find Mike in the yellow pages anyway. But I'm in the white pages. And now, I'm in the B section. I still haven't found him. So I keep turning one page at a time. 
+
+This is an algorithm. It's a set of instructions for solving some problem. In other words, look at page, if Mike's not on it, turn page, and repeats again and again and again, ideally looking down as you're doing it. So is this algorithm, this process, correct? 
+
+Sorry. No, I hear some nos. OK, but it is-- yeah, it's certainly tedious. Like, we'll be here all day if I keep looking for Mike at this speed. But let me claim it's correct. It's stupid, but it's correct. 
+
+At the end of the day, long as it might take, I will find Mike if he's in there and I'm paying attention. And I eventually reach his page. And if I get too far, if I get to the T section, then I can slightly optimize and just say, hm, all done. I don't even need to waste time going to the Z's. But this is a very linear approach, if you will, a very sort of left-to-right approach, a straight line. And its correct but slow. 
+
+So I remember from grade school, sort of an optimization from a first grader, where I learned how to count not by ones but by twos-- so 2, 4, 6. It's A, lot harder to do, but in theory, it's faster-- 8, 10, 12, 14, and so forth. How about that algorithm? Is it more efficient? Is it faster? 
+
+AUDIENCE: It's efficient. 
+
+DAVID MALAN: Yeah, so it's def-- it's literally twice as fast, assuming I don't get tripped up with my fingers. It's twice as fast, because I'm turning through two pages at once instead of one, but it's potentially in correct, because why? 
+
+AUDIENCE: You're skipping some. DAVID MALAN: Right, what if Mike happens to be sandwiched-- maybe when I'm later in the phone book, Mike happens to be sandwiched between these two pages, and I just blindly skip over it. So we need a little fix there. Once I hit the T section, I can't just confidently say, we didn't find Mike Smith. I probably have to double back. Or in fact, once I reach someone named S-N, instead of S-M for Smith, immediately, I could double back, because maybe he was on the previous page. 
+
+But I don't have to double back far. In theory, if I do it at the right time, I just go back one page. So it's adding only one extra step. So I've gone twice as fast, but it cost me one extra page. But that feels like a net win. 
+
+But this is not how most people in this room would solve this problem. What would a typical person, maybe a few years ago do, to find Mike Smith? Yeah, didn't find Mike. What do I do? So get a little closer, but I do know-- what is true about a phone book? AUDIENCE: It's sequential. DAVID MALAN: It's sequential. It's alphabetical. And so if I'm in the M section, Mike is clearly to the right, I can literally tear the problem in half-- it's usually easier than that-- tear the problem in half and throw it away, so that now, I have a problem that's no longer 1,000 pages-- that was hard, because I think I actually tore the phone book this time-- not 1,000 pages, but 500. 
+
+So the problem is literally half as big. And that's pretty compelling, because with my previous algorithms, version 1 and 2, I was only making the problem one page smaller, two pages smaller at a time. Whereas now, I made it 500 pages smaller all at once. 
+
+OK, so now, Karim proposes that I go to the right half. So I'm going to go roughly to the middle, give or take. And if I did this mathematically, I could go right to the middle. And now, I realize, oh, I'm in the T section. I actually did go too far. 
+
+But I can, again, tear the problem in half, throw it away. And my bytes not as big. It's only, what, 256 pages or 250 pages, give or take right now. But it's still way more than one page or two pages. 
+
+And so now, I go roughly to the middle. Oh, I didn't go quite far enough now. So I repeat, repeat, repeat, repeat, until I'm hopefully left with just one page. 
+
+So that invites the question, if I started with roughly 1,000 pages, how many steps did it take me with version 1 of my algorithm? Well, if Mike is in the S section, in the worst case, that's pretty close to the end of the alphabet. So if the phone book has 1,000 pages, I'll find Mike within 1,000 pages, give or take. Maybe it's like 800 or so, but it's pretty close to 1,000. 
+
+Whereas, in the second algorithm, how many page turns maximally might I require to find Mike Smith? There's 1,000 pages, but I'm doing them two at a time. Right, so max like 500ish, because if I go through the whole phone book, at which point, I can stop. But I can shave off a few by just stopping at the T section. But it's at worst case 500 pages. 
+
+So how many times can I divide a 1,00o-page phone book in half again and again and again-- from 1,000 to 500 to 250 to 125? How long before I hit one page? Yeah, it's about 10. Depending on rounding and such, it's about 10 pages total need to be turned or phone books need to be torn. 
+
+So that's pretty powerful. We started with a 1,000-page problem in all three of these stories. But in the first algorithm, it took me, worst case, 1,000 page turns to find Mike. Second algorithm, 500 pages to find Mike. Third algorithm, 10 pages to find Mike. And it's even more powerful when you think about sort of an opposite scenario. Suppose that the phone company next year maybe merges two towns together, and the phone book is suddenly this thick, instead of this that, so 2,000 pages instead of 1,000. Well, my first algorithm looking for Mike Smith in a 2,000-page phone book, worse case, it's going to take how many page turns next year? 
+
+Phone book is 2,000 pages, so-- well, not one more. If the phone book is twice as thick in the first algorithm, first algorithm, 2,000, right? In the worst case, Mike is really close to the end of the book, so it's 2,000 page turns. Second algorithm going by twos, like 1,000 pages. 
+
+But how about in my third and most recent algorithm? If the phone company doubles the number of pages from 1,000 to 2,000, how many more times need I tear that book in half to find Mike? 
+
+AUDIENCE: Just one. 
+
+DAVID MALAN: Just one more, because with one page tear, I can literally divide and conquer, if you will, that problem in half taking a massive bite out of it. And so this is an example of efficiency and arguably an algorithm with which all of us are sort of intuitively familiar. But it's just as correct as my other algorithms with that tweak for the second algorithm, but it's so much more efficient. 
+
+And in fact, what a computer scientist, or in turn a programmer, would typically do when writing code is try to figure out, all right, I don't want my program just to be correct, I also want it to be efficient and solve problems well. Imagine in the real world today, like Google indexes, searches like billions of pages, imagine if they used the first algorithm to find cats among a billion pages-- looking at the first page in their database, the second, the third, just looking for a cat, looking for a cat. That's pretty darn slow it would seem. They could instead use something called binary search, which is no coincidence-- bi meaning two, we keep dividing something in 2, in half-- they could use binary search and maybe find cats even faster, or whatever it is you're searching for. 
+
+And frankly, there's even fancier algorithms that do much more than just dividing things in half in order to find information quickly. And we'll talk a little bit about those after lunch today. So let me just try to represent this. We don't need to go into any math or actual numbers. We can talk about this in the abstract. 
+
+But let me just propose, if you were having a discussion now with the engineers proposing this algorithm and you're trying to make a calculated decision, because maybe the engineer says to you, you know what, I can implement a linear search in like two minutes. It's that easy. Binary search is not that fancy, but it's going to take me like 10 minutes, so 5 times as long. 
+
+There's a trade here, even in terms of deciding what software to write. Do you write the simpler algorithm, which will just take you two minutes? Or do you spend more time, 10 minutes, writing the fancier algorithm? How do you decide that kind of question? Or you could make it a little more real. I tell my boss it's going to take me either one week or 10 weeks to implement the software in this way, how do you decide which algorithm to green-light? Karim? 
+
+AUDIENCE: The audience, I guess. 
+
+DAVID MALAN: The audience. What do you mean by the audience? 
+
+AUDIENCE: If it's going to be used by users who [INAUDIBLE] by users [INAUDIBLE]. But if it's something you're just doing for yourself to facilitate a problem, [INAUDIBLE] quicker. DAVID MALAN: Yeah, it's quick and dirty is a good way to describe it. In fact, if you're describing much of my time in grad school, whereby often times, I wrote bad code consciously so-- at least, that's how I rationalized it-- consciously so, because even though I was writing code that was relatively slow to execute, I was able to write the code itself pretty fast, spending just minutes or hours not days. And it turned out, I occasionally needed to sleep. So even if my code required 8 hours to run, well that's fine, I'll just go to sleep while it runs. 
+
+So at the time, I thought this was very clever, even though I apparently worked through my PhD very slowly. But the converse of that is that, if I were writing software for other people who mattered more than me, well, having them wait 8 hours to get back their search results is not all that compelling. And so spending more time up front to write software that is more efficient, more like our third algorithm, probably benefits the users over time. So it really depends over time how those costs add up. If you're going to be writing software to use it once, probably might as well do quick and dirty, as they say. Just throw it together. It's code that embarrasses you, it's so bad, but it gets the job done correctly, even though it's not efficient. Conversely, you spend more time on something, get it just right. And then amortized over time, that upfront cost of time is probably worthwhile, if you keep optimizing for the common case. 
+
+And indeed, that's a theme in programming, or computer science more generally, trying to optimize not for the uncommon case but the common case-- what operation is going to happen again and again? If you're going to have billions of users searching on your website, you should probably spend the extra weeks up front writing better software, so that all of your users benefit. Now, let's try to capture this a little pictorially, but not so much numerically. 
+
+So here's just an old school chart. And let me say that this is time. And it doesn't matter what-- actually, no, not time. Let's put that on the other axis. Let's say that this is the time, and this is size of problem. 
+
+And a computer scientist might generally call this just n. n is like our go-to variable, where n is a number, n number, and it's the number of whatever inputs you have. So in this case, n is the number of pages. So it might be 1,000 in the case we just told. 
+
+So time can be any unit of measure. Maybe, it's second. Maybe, it's days. Maybe, it's like page turns. Doesn't matter. Whatever you want to count in, that will be time or cost equivalently. 
+
+So with that very first algorithm, if I, for instance, had a 1,000-page phone book, I'm going to draw a dot there, because if it's 1,000 pages, it took roughly 1,000 page turns, give or take. And then if I had a 2,000-page phone book, and I'm going to draw a second dot here, because for 2,000 pages, it's like 2,000 seconds or page turns or whatever. And so when I said earlier, it's kind of a linear relationship, that was deliberate, because I wanted later on-- right now-- to draw a line. It's kind of a straight line relationship. The slope is 1/1, if you will. 
+
+Meanwhile, the second algorithm said, if you've got 1,000 pages and you were using the second algorithm, where I counted by 2's, turning two pages at a time, should I draw a dot below or above my original dot? 
+
+AUDIENCE: Below. 
+
+DAVID MALAN: Below, because as we saw, it takes less time, half as much time. So the dot should be half as high as the other. And same deal over here, this dot should probably be roughly there. And so my second algorithm, similarly, has a linear relationship with time. And we can draw it as such. 
+
+So now, the third and final algorithm is a little harder to draw. But intuitively, if I've got 1,000 pages with my third algorithm, it should only take me like 10 steps. And if I've got 2,000 pages with my third algorithm, it should take me not 10 steps, but 11, just one more. So we're only barely going to see this. 
+
+And it turns out, if I zoom in on this, I'm going to exaggerate for effect, the shape of that line, ultimately, is not a straight line-- because, indeed if it were, it would look more like the others-- it's actually a curved line that, if we zoom in, is going to look much more like this. It-- well, OK, ignore this part. That was my pen going of angle. It's a curved line that is always increasing, always, always, always increasing, but only just barely. 
+
+And so over time, you have a relationship that's more like this. It almost looks straight. But it's ever so slowly increasing. But for almost all points along your x-axis, horizontal axis, it's lower than those other lines. 
+
+So this might be a relationship n, whereby if you have n pages, takes you n seconds. This might be a relationship n/2. You have n pages, it takes you n/2 seconds, half as many. And this is a logarithmic relationship, which if you recall, log base 2 of n captures this kind of growth, so to speak. So this is the sort of holy grail among the three of these here, because it's just so much more efficient, but arguably more complex to implement. Any questions? 
+
+Well let me do this, let me open up a text window just so we can try to formalize something here. So let me go ahead now and implement this algorithm for finding Mike Smith in code, if you will, pseudocode code. I'm not going to use Java or C++. I'm just going to use sort of English-like syntax, which we would generally call pseudocode code. Here, I have a blank window. And I'm saying step 1 of the very first algorithm is pick up phone book. Step 2 is open book to first page. Step 3 will be look at page for Mike Smith. If on page, call Mike. else turn page and go to step 3. Done, let's say. 
+
+And so it's not quite perfect, which we'll see in a moment. But let's consider what concepts I've introduced here. So steps 1 and 2 and 3 are pretty much verbs. They're statements, actions-- do this. And so in a programming language, we would generally call them statements or functions or procedures, call them any number of things. But they're just actions-- do this. 
+
+Step 4 is fundamentally different, because it's kind of asking a question. It's saying we're kind of at a fork in the road. If Mike is on the page, call him, so turn left, if you will. And if not, go back to some other page-- or rather, sorry, go back to some other step, which induces some kind of looping construct. And we do it again and again and again. 
+
+And actually, you know what? Yeah. else if at end of book stop. So we need kind of a third condition, because you can't keep turning the page ad nauseum, because eventually, I'll hit the end of the book. And a bug in a program might be not anticipating that scenario. And then I just realized, oh, wait a minute, I need a third scenario. If I'm out of pages, I should really just stop. Otherwise, it's undefined. What's going to happen if I keep saying turn the page and go back, this is when computers freeze or crash, when you hit some unanticipated situation like that. 
+
+Now, what about Mike Smith's third algorithm-- pick up the phone book, open book to first-- to no, not first page this time, to middle-- oh, well, that'd be the second algorithm. Let's just skip to the third. 
+
+AUDIENCE: Oh, I'm sorry. 
+
+DAVID MALAN: That's fine. Let's just skip to the third-- open to middle and now look for Mike Smith. if on page, call Mike. And then what do we want to say here? else what? We can express this in any number of ways. There's no right answer. OK, if not again, but we need to be-- OK, we do want to divide in two, but do we want to go left or go right? How do we express that notion? Well, in Mike's case, yes, that's fair. But OK, so that's actually a good point. That's fine. We'll keep going with this logic. So-- 
+
+AUDIENCE: Less than half. DAVID MALAN: Yeah. So else if page is, we'll say, less than Smith, to the left of Smith, then-- let's see, is this going to complicate? else if page comes before Smith, tear in half, throw away which half? 
+
+AUDIENCE: I thought that was [INAUDIBLE]. 
+
+DAVID MALAN: I'm hearing both answers. 
+
+AUDIENCE: Left. DAVID MALAN: OK, throw away left half, as Lakisa said earlier, the left half, then I kind of want to just go to-- I go to the right. Or equivalently, and I made a little bit of a mess of the beginning here, I effectively want to go to step 2 again, where open to the middle-- or open-- yeah, let's just say, pages to middle. And this fixes it. It's no longer a book. It's just half of a book, so open pages to middle. 
+
+else-- were almost there. Step 6, else if page comes after Smith, tear in half, throw away right half, then go to step 2. else quit, a fourth scenario if we have no pages left to turn. So we could clean this up. And we should clean this up. This is very pseudocode code, if you will, very high level description. But it does generally capture the idea. 
+
+And, again, in this scenario, we have the notion of a condition, a branch, a fork in the road, making a decision-- if this, go this way, else if, go this way, else if, go that way. And this is a very common programming technique to decide which direction to go, so to speak. And we also have some kind of looping structure, where we're doing something again and again. 
+
+Now, it turns out, much as in this example, being super precise is important. But we've also seen something that we keep calling abstraction. What does it mean to pick up phone book? We're just kind of taking for granted in this room that that has some semantic meaning. All of us just kind of know, oh, well, pick up the phone book. What does that really mean? Well, that really means extend hand, lean over, extend fingers, pinch book between fingers, stand up, pull hand towards you. And we could be really pedantic about this, really being super precise as to what I'm doing. But all of those steps collectively are what it means to pick up a phone book. 
+
+And so earlier, when I said, each of these first two statements can be thought of as a proceed or a function, really it represents what we keep calling an abstraction. It's like a high level conceptual description of a problem that actually involves quite a few steps. And so this, too, is a recurring topic in programming, whereby I might write a program using syntax like this-- pick_up_phone_book(). And then syntactically, I'm going to steal something from most programming languages. 
+
+Now, step 1 looks even more like a function, as a programmer would call it. It looks like code that someone has given a name to and given to me to use somehow-- in other words, what the line I've highlighted represents functionality that maybe I didn't even implement myself. Someone older, wiser than me already figured out how you express the notion of picking up a phone book. And it's like the five steps I just rattled off, off the top of my head. 
+
+But he or she already implemented this, gave those several steps a name, pick_up_phone_book. And the parentheses is just what most programmers do at the end of statements like this. I now can stand on his or her shoulders and never again, think about what it means to pick up a phone book. I can just say, pick up the phone book. And that's exactly what all of us humans did here. 
+
+When we were probably 1 year old, 2 years old, someone had to teach us what it meant to pick up a phone book. And ever since then, we've abstracted away from those very uninteresting mechanical steps. And we just have an intuitive understanding of what it means to pick up a phone book. 
+
+And you can extrapolate now to more complicated things-- construct a building. Like, to some people, that actually has meaning. To contractors, to architects, that has some meaning. And they would know what to do, if I said, go construct a building. 
+
+But most of us in the room couldn't deal with that level of abstraction. You need to tell us like go get the shovel and go get the concrete and nail the pieces of wood together and whatever else is involved in building a building. And that's because we have not yet been programmed to understand what it means to construct a building. We don't have that abstraction. We don't have that functionality. 
+
+And so what you'll see in programming languages, in general, especially more modern languages, like Java, PHP, Ruby, and Python, they're much more mature than older languages, like C and C++ and yet others. And so they come with more functionality built in. More code has been written by people in the past that we can now call or summon or use, as I'm hinting at with this highlighted line here. And so even though we're not talking about programming languages per se, just pseudocode code, all of the ideas are still in that discussion. And it turns out precision is super important, as is abstraction. And let's try to communicate that as follows. 
+
+I accidentally might have spoiled this by flashing a slide on the screen prematurely. But let me ask for a brave volunteer, if you don't mind coming up. You'd be in front of the camera, if you're OK with that. Would anyone like to come up and give instructions to your colleagues here? Just have to come over here and stand over here and say some words. 
+
+Victoria is smiling the most and avoiding my eyes the most. Would you be willing to come on up? OK. And if everyone else at your seats could take out a piece of scrap paper, if you will. Lined paper is fine. Come around this way. Or some of the paper that you were given yesterday, just any blank sheet of paper, if you could. And if you don't have any, just ask your neighbor if you could. 
+
+So for the moment, for this example, Victoria is going to play the role of a programmer, an engineer, who needs to program you all, as the computers, to do something. And we'll see what assumptions you decide to make. We'll see how precise she chooses to be. And if this demonstration goes pedagogically well, lots of mistakes will be made, that we'll then use that as an opportunity for discussion. But the challenge for you should be to avoid those mistakes, be a good programmer. And so the challenge at hand, if you'd liked to walk over here, is in front of Victoria on the screen here-- and hopefully, none of you remember this when I flashed on the screen. And do not turn around at all, because there is another screen in this room that I can turn off. So don't turn around. 
+
+In front of Victoria is that same scream. And her job now is to tell you all on your piece of paper what to draw. And we will see, based on verbal instructions alone, computer code, if you will, how accurate your drawings are-- your implementations are. Make sense? 
+
+AUDIENCE: Yeah. DAVID MALAN: OK, execute. 
+
+AUDIENCE: Draw a square. 
+
+[LAUGHTER] 
+
+DAVID MALAN: And no questions may be asked. Can only do what you're told. Oh, and if you have today's slides open in a tab, don't look at your tab. OK? 
+
+AUDIENCE: OK, draw a circle. A slope-- can I say slope? DAVID MALAN: Up to you. AUDIENCE: A slope. And a triangle. 
+
+DAVID MALAN: All right. And stay here for just a moment. And I'm going to come around in just a moment. And no need to put your names on it. Let me come around and collect your drawings, if you don't mind tearing them out. 
+
+Here is what we got back. I'll project it on the screen. I see a square, a circle, a slope, and a triangle. So that was one answer there. And let's-- whoops. Thank you. Here's another assortment, and one behind it. 
+
+So they all seem to capture the spirit. Thank you. There's another, and here's another one. The slope interpretation is a little different, little curvy. And the closest, either because of the wonderful specificity with which you've described, or maybe you kind of saw it before, this is indeed what Victoria was actually describing. 
+
+But now, those of you who didn't get it quite right, let's offer some objections here. So Victoria first said draw a square. And now, we can assume for the sake of today that everyone knows how to draw a square. But that's not wholly clear, right? How else could you have drawn a square, or where might be some of the ambiguities here for the computer? AUDIENCE: Location and size. DAVID MALAN: Location, right? All of you had a paper of some shape, generally rectangles, but slightly different sizes. But you certainly could have drawn, if you wanted, a huge square, maybe a tiny square. Maybe, it was rotated. I don't think we saw that. But it could have been more diamond like but still, nonetheless, mathematically a square. So that was arguably ambiguous. 
+
+Then she said, draw a circle. Some of you did draw it next to it, which isn't unreasonable, because humans tend to think or read right to left in most languages, so not a bad guess. But that circle could have been inside the square, could have been around the square, could have been elsewhere on the sheet, so arguably ambiguous. 
+
+Slope might have been maybe taking the most liberties verbally with what that means. And some of you interpreted it as a squiggly line or a straight line or the like. And then triangle, too, could have been oriented in any number of ways. So in short, even with something that you glance and you're like, wow, so simple, a child could draw this, well not really, unless you're super, super persuasive and tell the computer exactly what to do. So if we could, if you have another sheet of paper, let's try this once more. And I'm going to give Victoria one other example on the screen here. And again, don't turn around and don't look at your slides. And I'll give her a moment to think about how to describe this. Don't let them see the fear in your eyes. 
+
+[LAUGHTER] 
+
+And again, this time leverage some of those takeaways and try to get almost everyone at least the right answer. 
+
+AUDIENCE: OK, take a piece of paper, look in the middle of that piece of paper. In the middle of that piece of paper, draw a cube. 
+
+[LAUGHTER] DAVID MALAN: What have we learned? We were so close. OK, repeat if you could, for everyone. 
+
+AUDIENCE: In the middle of the piece of paper, draw an object, which looks like a cube. 
+
+DAVID MALAN: OK, that's all you get to work with. Allow me to be analytical and not so much critical, but to make the claim that Victoria definitely seems to be thinking in very high level abstractions, which is not unreasonable. Because otherwise, we'd all be pretty dysfunctional, if we had to be ever so precise with everything we do in the world. 
+
+But saying go to the middle-- I thought we were on such a good track there, like go to the very middle of the page, and then draw a cube. So she's thinking in abstractions, because she's still viewing what's on the screen as indeed a cube. But there's so many opportunities for interpretation there. And in fact, there's so many other ways you could express that, which I'll propose in a moment. So here we have one incarnation of the picture-- whoops-- one incarnation of the picture, so a little three dimensionality to it, which is nice. 
+
+Here's another one, where you have the same, though it's kind of an open cube. Some folks took it a little more flat, two dimensional. And that's fine. So there, indeed in the center of the paper. This one I think you'll like, because if we go here, this is what she was describing. So now, let me propose how else we might describe this situation. 
+
+Back in the day, one of the most more common ways to learn programming was to write code, writes lines of instructions, that controlled a little turtle on the screen. Logo and other variants of this was the name of the language. And the turtle lived in a world. 
+
+So suppose this rectangular space is his world. And you would start by assuming-- I don't really know how to draw turtle, so let's do it like this. And then he's got a shell and then maybe some feet. So you might have this little character on the screen. 
+
+And the object of this programming language was to compel the turtle to go up, down, left, right and to put his pen down or pick his pen up, so he could actually draw on the screen in this very flat rectangular world. So where I thought you might be going, and where you should consider diving down to mentally when describing instructions more generally, I would claim, is put your pen down in the middle-- and we'll get rid of the turtle, because I can't really keep drawing him very well. 
+
+And now, how else could I say draw a cube? Well, we could say something like draw a diagonal line northeast, for instance, or at a 45-degree angle upward. And that might have gotten me here. And I'm pretty far from a cube. But now, I could say something like turn 90 degrees to the left and draw a line of equal length northwest. And I could continue with similar directions. And it's not going to be easy. And frankly, we probably would have been here for five minutes. But maybe we would have gotten to something that, at the end of the day, ends up being a cube, but we dived inside of that abstraction to do it at such a low level that you can't really see what you're doing until the whole thing is actually there on the page. And so this is a general principle, again, of programming-- this idea of abstraction. It's so wonderfully powerful, because again, she just said, draw a cube, which all of us pretty much would grok very quickly. We would just understand, OK, draw a cube. We might not know the orientation, so we could be a little more precise, but we can generally picture or know what a cube is. And that's useful, because if every time you sat down as a programmer at your keyboard to write code, if you had to think at such a low level, none of us would ever get anything done. And certainly, none of us would enjoy the process of writing code. It would be like writing in 0's and 1's, which frankly wasn't all that long ago humans were writing code in 0's and 1's. And we very quickly came up with these higher level languages-- C++ and Java and others. 
+
+So let's try this once more just to flip the tables, so that all of us have the chance to think in rather the same way. Could we get one more volunteer this time to come up to the board and draw, not recite? Yeah, OK. Ben, come on up. And, Ben, in this case, once you face the board, don't look left, don't look right. Only do what your colleagues here tell you. And for everyone else in the room, you now are the programmer. He's the computer. And the picture I've chosen here in advance is this one here. They're just-- they're thinking of a funny joke is all. 
+
+So would does someone like to volunteer the first instruction or statement that should command Ben's pen? And we'll do this collectively, maybe one instruction from each person. I'm sorry? 
+
+AUDIENCE: Draw a circle. DAVID MALAN: Draw a circle is the first thing I heard. 
+
+AUDIENCE: Up top. 
+
+DAVID MALAN: Up top. OK, we can let you delete, undo. And now, someone else. Dan, would you be comfy offering the next instruction? 
+
+AUDIENCE: Sure, draw the center of the bottom of the circle, with a small-- a little small space from that, draw a straight line down to three quarters of the way down the board a slight angle to your left. 
+
+DAVID MALAN: Good. 
+
+AUDIENCE: Slight angle. 
+
+DAVID MALAN: Undo, Control-Z. OK. Andrew, you want to offer up the next instruction? 
+
+AUDIENCE: Sure. From the bottom of that line, a further slight angle-- whoops-- maybe about a third of the length [INAUDIBLE], slight angle downward and like a third of the length of [INAUDIBLE]. So yeah, from that point, draw a line a third of the length of the previous line further to the left. 
+
+DAVID MALAN: That OK? Straight line, that's OK? OK, Olivier, you want to offer up the next? 
+
+AUDIENCE: [INAUDIBLE] from the bottom of the circle, [INAUDIBLE]. Draw on the right hand side of [INAUDIBLE] centimeters. 
+
+[LAUGHTER] 
+
+DAVID MALAN: I think you're going to have to convert that's inches here. 
+
+AUDIENCE: Stop. 
+
+[LAUGHTER] 
+
+DAVID MALAN: OK. [? Ara, ?] you want to offer up the next? 
+
+AUDIENCE: Draw a [INAUDIBLE] the upper [INAUDIBLE] the same. [INAUDIBLE] circle, draw to the [INAUDIBLE] and draw [INAUDIBLE]. 
+
+DAVID MALAN: OK, no more undo. Let's do one or two more instructions. Chris, you want to offer one? 
+
+AUDIENCE: At the bottom of the circle, [INAUDIBLE] draw an equal line slopping downward to the left [INAUDIBLE]. 
+
+DAVID MALAN: OK. Andrew? We did-- Karim? 
+
+AUDIENCE: Starting from the right line, the end of the left line, the bottom, you're going to go right about the same length as that line you're on, drawing to the right [INAUDIBLE]. [INAUDIBLE] degrees, so [INAUDIBLE] degrees on the right side. 
+
+DAVID MALAN: All right. Let's pause. Don't turn around yet. Let's pause, and let's try one other attempt before we reveal to Ben what he's been drawing. Can you shuffle Ben to the right-- or actually, no, let's just give you another board, even better. So would someone now like to take more of the approach that Victoria took earlier on, where we speak in a higher level abstraction and in just a sentence or two describe to Ben what to draw without getting into the weeds, so to speak, at this a lower level? Victoria. [LAUGHTER] AUDIENCE: Draw a figure of the walking man. And his legs and arms have to be the right side. 
+
+DAVID MALAN: OK, that's all you get. All right. Why don't we reveal to Ben what he did. So a round of applause. That was the hardest perhaps. 
+
+So even though we're talking in fairly silly terms about just drawing pictures, hopefully you can really appreciate the degree of expressiveness that might be necessary in order to tell a computer what to do. And in fact, the fact that Ben was able to draw this so quickly is sort of testament to using a language, maybe a higher level version of English, that allows him to just use words, or hear words from Victoria, that allow him these abstractions-- just draw a figure walking to the right-- that sort of has some semantic meaning to it that isn't nearly as obvious when you're just saying, put your pen down, draw to the right, draw to the left. 
+
+And so this, too, is very common in programming. This would be said to be like a very low level language, programming in 0's and 1's if you will. And this would be a higher level language programming in Java, or something like that. A bit of an oversimplification, but that's the sort of like emotional feeling that you feel when using one kind of thing or another. A bit of frustration here by the need for such precision, but the opportunity to be a little looser with the interpretation here. But of course, bugs can arise as a result. 
+
+If you'd like at home-- we won't do this one in class-- but if you'd like to bring this one home, I thought we would dive into this. So if you'd like to play this game with your significant other or kids or the like, you might enjoy that as well. 
+
+So let's go ahead and look at one last thing here for computational thinking. And that brings us to John Oliver, not for the clip you might have seen last night, but to a somewhat recent issue. A few months back, Volkswagen took quite a bit of flak for what reason, if you know? What did they get in trouble for? 
+
+Yeah, so emissions-- they were trying to beat emissions tests by essentially having their cars pollute the environment less when their cars were being tested and pollute the environment more when the cars were not being tested. And what's increasingly interesting in the world, as you may have inferred from discussions of like-- what is it-- CarPlay, Apple's software for cars and the fact that many of us increasingly have touch screens in our cars, there's a frightening amount of software in people's cars today, which frankly opens a whole can of worms when it comes to security and physical risk. But for today, let's focus on just what's involved in writing software that might have gamed the system. 
+
+For the definition of the problem, for those unfamiliar, let's take a look at John Oliver. And for those familiar with the problem, let's look at it in a fun lens via John Oliver as well. So let me hit play on this, I think, three-minute introduction. Damn it. [VIDEO PLAYBACK] -Cars-- DAVID MALAN: Obviously, on YouTube, it's-- - --the smartest characters in the Fast and Furious movies. This week, German automaker Volkswagen found itself in the middle of a scandal of potentially criminal proportions. 
+
+-Volkswagen is bracing for billions in fines, possible criminal charges for its executives, as the company apologizes for rigging 11 million cars to help it beat emissions tests. 
+
+-Certain diesel models were designed with sophisticated software that used information, including the position of the steering wheel and vehicle speed, to determine the car was undergoing emissions testing. Under that circumstance, the engine would reduce toxic emissions. But the car was rigged to bypass that when it was being driven. Emissions increased 10 to 40 times above acceptable EPA levels. 
+
+-Wow, 10 to 40 times greater than the EPA allows. That is the worst thing Volkswagen has ever done, is something you might say if you'd never heard of World War II. But maybe the surest sign of how much trouble Volkswagen is in, is that people at the very top have stepped down. The CEO resigned on Wednesday after scrambling to do damage control, saying he was endlessly sorry, which sounded great until it turned out he was only 10% sorry but had rigged his mouth to artificially inflate his sorriness. And meanwhile, Volkswagen's US chief had an apology of his own. 
+
+-Let's be clear about this, our company was dishonest. And in my German words, we have totally screwed up. 
+
+-Yeah, but totally screwed up are not German works. And the German language has many beautiful phrases to describe situations just like this, such as [GERMAN], which means roughly, the sadness that comes from business related lies, or [GERMAN], which translates as shaming ones father involving clouds of gasoline. It's a beautiful language. It just sails off the tongue. And by the way, while that man's apology may have sounded sincere, it's worth noting he was speaking at an official launch party for the 2016 Volkswagen Passat, meaning that shortly after saying sorry, he said this. 
+
+-Thank you very much for coming. Enjoy the evening. Up next is Lenny Kravitz. 
+
+[MUSIC PLAYING] 
+
+-OK, OK, ending your apology with up next Lenny Kravitz does not scream sober contrition. It screams, we asked Bon Jovi, and he said no. Volkswagen's brand has been badly damaged. And frankly, their new ad campaign is not exactly helping. 
+
+--[GERMAN], we at Volkswagen would like to apologize for deceiving you with our vehicles. 
+
+[END PLAYBACK] DAVID MALAN: So this was a roundabout way of-- sorry-- this was a roundabout way of introducing a fundamental problem in software, which is that you need to detect certain conditions. And so the question at hand here is, how does a car potentially, as implemented in software by these programmers, detect that it's actually being tested? So to be super clear, what they were doing was, in environments where the programmers figured the car was being tested, they somehow made the car emit less emissions, fewer emissions, so less toxic fumes and such. But when it's normally driving on the road, it would just emit as much pollution as it wanted. 
+
+So how could we write the pseudocode for this algorithm? How could we write the pseudocode for the software running in the car? I mean, in a nutshell, it boils down to something like this. if being tested, emit less. else emits more. But that's a little too high level, right? 
+
+Let's try to dive in as to what this abstraction of being tested means. In other words, even if you know nothing about cars, what sort of questions might you ask in order to determine if you're being tested, if you're the car? What characteristics might be present if a car is being tested? 
+
+AUDIENCE: Testing equipment. 
+
+DAVID MALAN: Testing equipment. So if testing equipment nearby, then emit less. So I could imagine implementing that with some kind of cameras or detecting what's around you. And let me propose, that just feels too complicated to actually have additional hardware just for that purpose. 
+
+AUDIENCE: If you're in park, if your hood is open. 
+
+DAVID MALAN: In park or hood open, so that's good. 
+
+AUDIENCE: And car running. 
+
+DAVID MALAN: So that's a little more concrete-- and car running. So this would be the conjunction of a few different conditions, if you will. So if the car is in park, and even though this is a very mechanical thing typically, I could imagine writing software, especially because there's often a light there these days, I could imagine there being software that can query the shifter or what not, are you in park, are you in drive, are you in reverse. And I can get back an answer that's either yes or no to those kinds of questions. 
+
+And so I could also probably answer a question like, is the hood open. Maybe, there's some kind of sensor that either gives me back a 1 or 0, true or false, the hood is open. And then car running, I could detect that somehow via what mechanism? Like, the car is running, I could detect that it's on, could I detect somehow that the car is moving? 
+
+AUDIENCE: RPMs. 
+
+DAVID MALAN: Yeah, so there's always that needle that tells you how many rotations per minute the wheels are experiencing. And so I could look at that. And if it's not 0, that probably means the car is moving. But we have to be a little careful there, because-- let's simplify this-- if we just said, if car running, we don't want to just emit less, we want if the car is running and it's being tested. 
+
+So there are a few other ingredients that folks have hypothesized the software is doing, because absent the actual source code, you can only sort of infer from the physical effects of the car as to what might be going on underneath the hood in software. So if car running and maybe, say, rear wheels not moving, might this be indicative of some kind of test? What am I hinting at here? Yeah, maybe, it's on one of those roller things, where like the wheels are turning in the front or in the back, depending on whether it's front wheel or rear wheel drive, so half of the wheels are moving, but the other two aren't, which is a weird situation in the real world. If you're driving on the road, that shouldn't happen. But if you're in a warehouse on some kind of roller system, that might indeed happen. 
+
+I think folks also proposed that maybe, if the car is running and steering wheel not moving, that too might be a signal, because that's reasonable for like a straightaway on a road. But even then, the human is probably moving it a little bit or certainly over a few seconds. Or the course of a minute, odds are it's not going to be fixated in exactly the same position. 
+
+So in other words, we can take substraction, are you being tested, and break down that functionality into these component ingredients. And that's truly what Volkswagen's engineers somehow did. They wrote software consciously to detect if the car is being tested, therefore emit less, else emit in the usual way. 
+
+And the problem here, too, is that software is not something you can really see unless you have the so-called source code. So there's two different types of code-- at least two different types of code in the world. There's something called source code, which is not unlike what we've been writing, source code. 
+
+This is source code written in a language called pseudocode, which is just something English-like. There's no formal definition of it. But C, and Java, C++, those are all formal languages that, when you write in them, what you have is a text file containing source code. 
+
+But there is also something in the world called machine code. And machine code, unfortunately, is just 0's and 1's. So machine code is what machines understand, of course. Source code is what humans understand. 
+
+And generally, but not always, there is a program that a programmer uses that takes source code and turns it into machine code. And that program is generally called a compiler. So your input is source code, your output is machine code, and the compiler is a piece of software that does that process. So this actually maps nicely to our inputs, algorithms, outputs. 
+
+But this is a very specific incarnation of that, which is to say that, even if you own one of Volkswagen's cars that is guilty of this, it's not like you can just open the hood or open the user's manual or look at the source code, because by the time it reaches your car in your driveway, it's already been converted into 0's and 1's. And it's very hard, not impossible, but very hard to glean much of anything from just looking at the underlying 0's and 1's. So you can figure it out, ultimately, if you understand how a machine operates-- Intel inside-- if you understand the Intel architecture, but it's very time consuming. And even there, you might not be able to see everything that the code can actually do. 
+
+Any questions about this or this kind of process more generally? And actually, we can tie this discussion to yesterday's discussion of Apple. This, too, is why the FBI can't just go and look in the suspect's phone and find the lines of code, for instance, that enable the passcode or enable that 80-millisecond delay. Because by the time it's on the fellow's iPhone, it's already been converted to 0's and 1's. 
+
+Well, let's pause here for our look at computational thinking. Why don't we take a 15 minute break. And when we return, we'll take a look at programming itself and start to map some of these high level concepts to an actual, if playful, programming language. 

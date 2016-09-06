@@ -1,0 +1,7995 @@
+1
+00:00:00,000 --> 00:00:00,030
+
+2
+00:00:00,030 --> 00:00:00,460
+>> DAVID MALAN: Selvä.
+
+3
+00:00:00,460 --> 00:00:01,094
+Olemme palanneet.
+
+4
+00:00:01,094 --> 00:00:04,260
+Joten tässä segmentissä ohjelmointia mitä
+Ajattelin olimme tehdä, on sekoitus asioita.
+
+5
+00:00:04,260 --> 00:00:06,340
+Yksi, tehdä hieman
+jotain käytännön,
+
+6
+00:00:06,340 --> 00:00:08,690
+vaikkakin käyttäen leikkisämpää
+ohjelmointi environment--
+
+7
+00:00:08,690 --> 00:00:11,620
+joka on havainnollinen ja
+täsmälleen erilaisia ​​ideoita
+
+8
+00:00:11,620 --> 00:00:14,220
+olemme puhuneet,
+mutta hieman enemmän muodollisesti.
+
+9
+00:00:14,220 --> 00:00:18,200
+Kaksi, tarkastelemme joitakin
+teknisemmät tapoja
+
+10
+00:00:18,200 --> 00:00:21,520
+että ohjelmoija todella ratkaista
+ongelmat kuten etsimällä ongelma
+
+11
+00:00:21,520 --> 00:00:24,530
+että me katsoimme ennen ja
+Myös enemmän pohjimmiltaan
+
+12
+00:00:24,530 --> 00:00:26,020
+mielenkiintoinen ongelma lajittelu.
+
+13
+00:00:26,020 --> 00:00:28,840
+>> Me vain olettaa alusta asti
+että puhelinluettelo on lajiteltu,
+
+14
+00:00:28,840 --> 00:00:31,980
+mutta se ei yksin oikeastaan ​​eräänlainen
+kova ongelma monilla eri tavoilla
+
+15
+00:00:31,980 --> 00:00:32,479
+ratkaista se.
+
+16
+00:00:32,479 --> 00:00:34,366
+Joten käytämme näitä
+luokan ongelmia
+
+17
+00:00:34,366 --> 00:00:36,740
+edustaja asioita,
+voitaisiin ratkaista yleisesti.
+
+18
+00:00:36,740 --> 00:00:38,980
+Ja sitten jutellaan
+noin melko yksityiskohtaisesti, mitä
+
+19
+00:00:38,980 --> 00:00:42,360
+kutsutaan data structures--
+harrastaja tavoilla, kuten liittyvät luettelot
+
+20
+00:00:42,360 --> 00:00:46,290
+ja hash taulukoita ja puut
+ohjelmoija olisi todella
+
+21
+00:00:46,290 --> 00:00:48,890
+käyttää ja yleensä käyttää
+taululle maalata
+
+22
+00:00:48,890 --> 00:00:51,840
+kuva siitä, mitä hän
+visioi toteuttamiseksi
+
+23
+00:00:51,840 --> 00:00:52,980
+jotkut pala ohjelmisto.
+
+24
+00:00:52,980 --> 00:00:55,130
+>> Joten tehdä käytännön osaan ensin.
+
+25
+00:00:55,130 --> 00:01:00,090
+Joten vain saada kädet likainen kanssa
+ympäristö nimeltään scratch.mit.edu.
+
+26
+00:01:00,090 --> 00:01:02,636
+Tämä on työkalu, jota käytämme
+meidän perustutkintoa luokassa.
+
+27
+00:01:02,636 --> 00:01:04,510
+Vaikka se on suunniteltu
+12-vuotiaille ja ylöspäin,
+
+28
+00:01:04,510 --> 00:01:07,570
+käytämme sitä ylös
+osa sitä melkoisesti
+
+29
+00:01:07,570 --> 00:01:10,020
+koska se on mukava, hauska
+graafinen tapa oppia
+
+30
+00:01:10,020 --> 00:01:12,160
+vähän jotain ohjelmointia.
+
+31
+00:01:12,160 --> 00:01:17,600
+Joten pään että URL, jossa
+pitäisi nähdä sivun aivan kuten tämä,
+
+32
+00:01:17,600 --> 00:01:23,330
+ja mennä eteenpäin ja valitse
+Liity Scratch ylhäällä oikealla
+
+33
+00:01:23,330 --> 00:01:28,300
+ja valitse käyttäjänimi ja
+salasanan ja lopulta saada itse
+
+34
+00:01:28,300 --> 00:01:29,970
+account-- scratch.mit.edu.
+
+35
+00:01:29,970 --> 00:01:32,165
+
+36
+00:01:32,165 --> 00:01:34,665
+Ajattelin käyttää tätä
+mahdollisuus ensin näyttää tämän.
+
+37
+00:01:34,665 --> 00:01:39,120
+Kysymys tuli tauolla
+mitä koodi todella näyttää.
+
+38
+00:01:39,120 --> 00:01:41,315
+Ja puhuimme
+tauolla noin C,
+
+39
+00:01:41,315 --> 00:01:45,060
+in particular-- erityisemmin
+alemman tason vanhempi kielellä.
+
+40
+00:01:45,060 --> 00:01:47,750
+Ja tein nopean
+Google-haku löytää C-koodia
+
+41
+00:01:47,750 --> 00:01:51,574
+binary search, algoritmi, että me
+käytettiin hakemaan että puhelinluettelosta aikaisemmin.
+
+42
+00:01:51,574 --> 00:01:54,240
+Tässä nimenomaisessa esimerkissä, tietenkin,
+ei etsi puhelinluettelosta.
+
+43
+00:01:54,240 --> 00:01:57,840
+Se vain etsii koko joukko
+numerot tietokoneen muistiin.
+
+44
+00:01:57,840 --> 00:02:01,000
+Mutta jos haluat vain saada visuaalinen
+tunteen siitä, mitä todellinen ohjelmointi
+
+45
+00:02:01,000 --> 00:02:05,370
+kieli näyttää, se näyttää
+vähän jotain tällaista.
+
+46
+00:02:05,370 --> 00:02:09,759
+Joten se on noin 20-plus,
+30 tai niin riviä koodia,
+
+47
+00:02:09,759 --> 00:02:12,640
+mutta keskustelun me
+oli ottaa yli break
+
+48
+00:02:12,640 --> 00:02:16,000
+oli miten tämä todella
+saa morphed nollia ja ykkösiä
+
+49
+00:02:16,000 --> 00:02:19,200
+ja jos et voi vain palata että
+käsitellä ja menevät nollia ja ykkösiä
+
+50
+00:02:19,200 --> 00:02:20,210
+takaisin koodin.
+
+51
+00:02:20,210 --> 00:02:22,620
+>> Valitettavasti prosessi
+on niin transformatiivinen
+
+52
+00:02:22,620 --> 00:02:24,890
+että se on paljon helpommin sanottu kuin tehty.
+
+53
+00:02:24,890 --> 00:02:29,400
+Menin eteenpäin ja lopulta kävi
+että ohjelma, Binary Search,
+
+54
+00:02:29,400 --> 00:02:32,700
+osaksi nollia ja ykkösiä Poiketen
+ohjelma nimeltä kääntäjä että minä
+
+55
+00:02:32,700 --> 00:02:34,400
+sattuu olemaan täällä juuri Macin.
+
+56
+00:02:34,400 --> 00:02:37,850
+Ja jos tarkastellaan näyttöä
+täällä, keskittyen erityisesti
+
+57
+00:02:37,850 --> 00:02:43,520
+Näiden keskellä kuusi saraketta vain,
+näet vain nollia ja ykkösiä.
+
+58
+00:02:43,520 --> 00:02:48,290
+Ja ne ovat nollia ja ykkösiä, jotka
+säveltää juuri sen etsimistä ohjelmassa.
+
+59
+00:02:48,290 --> 00:02:53,720
+>> Ja niin kukin kimpale viisi bittiä,
+jokainen tavu nollia ja ykkösiä täällä,
+
+60
+00:02:53,720 --> 00:02:57,310
+muodostavat noin opetus
+tyypillisesti sisällä tietokoneen.
+
+61
+00:02:57,310 --> 00:03:00,730
+Ja itse asiassa, jos olet kuullut
+markkinointi iskulause "Intel inside" - että,
+
+62
+00:03:00,730 --> 00:03:04,610
+tietenkin vain tarkoittaa olet
+Intel CPU tai aivojen tietokoneen sisällä.
+
+63
+00:03:04,610 --> 00:03:08,000
+Ja mitä se tarkoittaa olla CPU on
+että olet käskykannan,
+
+64
+00:03:08,000 --> 00:03:08,840
+niin sanoakseni.
+
+65
+00:03:08,840 --> 00:03:11,620
+>> Jokainen CPU maailmassa, monet
+ne tehdään Intel näinä päivinä,
+
+66
+00:03:11,620 --> 00:03:13,690
+ymmärtää rajallinen
+useita ohjeita.
+
+67
+00:03:13,690 --> 00:03:18,690
+Ja ne ohjeet ovat niin alhaisella tasolla
+kuten lisätä nämä kaksi lukua yhteen,
+
+68
+00:03:18,690 --> 00:03:22,560
+moninkertaistaa nämä kaksi lukua yhteen,
+Siirrä tämä pala tiedot tästä
+
+69
+00:03:22,560 --> 00:03:27,340
+tänne muistissa, tallenna tämä
+tietoa täältä tänne muistiin,
+
+70
+00:03:27,340 --> 00:03:32,200
+ja niin forth-- niin hyvin, hyvin
+matalan tason, lähes elektroniset tiedot.
+
+71
+00:03:32,200 --> 00:03:34,780
+Mutta näitä matemaattisia
+toiminnot yhdistettynä
+
+72
+00:03:34,780 --> 00:03:37,410
+mitä me aiemmin todettiin,
+tietojen esittämisessä
+
+73
+00:03:37,410 --> 00:03:40,450
+kuten nollia ja ykkösiä, voi
+voit rakentaa kaiken
+
+74
+00:03:40,450 --> 00:03:44,180
+että tietokone voi tehdä tänään, onko
+se sanallisesti, graafinen, musiikki,
+
+75
+00:03:44,180 --> 00:03:45,580
+tai muuten.
+
+76
+00:03:45,580 --> 00:03:49,450
+>> Joten tämä on erittäin helppo saada
+hävisi rikkaruohot nopeasti.
+
+77
+00:03:49,450 --> 00:03:52,150
+Ja siellä on paljon
+syntaktisia haasteet
+
+78
+00:03:52,150 --> 00:03:56,630
+jolloin jos teet yksinkertaisin,
+tyhmin kirjoitusvirheitä yksikään ohjelman
+
+79
+00:03:56,630 --> 00:03:57,860
+toimii mitään.
+
+80
+00:03:57,860 --> 00:04:00,366
+Ja niin sen sijaan käytetään
+kieli kuten C tänä aamuna,
+
+81
+00:04:00,366 --> 00:04:02,240
+Luulin, että se olisi
+hauskempaa itse tehdä
+
+82
+00:04:02,240 --> 00:04:04,840
+jotain enemmän visuaalinen, joka
+kun taas suunniteltu lapsille
+
+83
+00:04:04,840 --> 00:04:08,079
+on todella täydellinen ilmentymä
+todellinen ohjelmointi
+
+84
+00:04:08,079 --> 00:04:10,370
+language-- sattuu
+käytä kuvia tekstin sijaan
+
+85
+00:04:10,370 --> 00:04:11,710
+edustamaan näitä ajatuksia.
+
+86
+00:04:11,710 --> 00:04:15,470
+>> Joten kun olet todellakin on
+tili scratch.mit.edu,
+
+87
+00:04:15,470 --> 00:04:21,070
+klikkaa Luo-painiketta
+ylhäällä vasemmalla puolella sivustolla.
+
+88
+00:04:21,070 --> 00:04:24,620
+Ja sinun pitäisi nähdä ympäristön, kuten
+yksi Olen tulleet tietokoneen näytöllä
+
+89
+00:04:24,620 --> 00:04:26,310
+tässä.
+
+90
+00:04:26,310 --> 00:04:29,350
+Ja me kuluttaa vain vähän
+vähän aikaa pelaa täällä.
+
+91
+00:04:29,350 --> 00:04:34,080
+Katsotaan jos emme voi kaikki ratkaista joitakin
+ongelmat yhdessä seuraavasti.
+
+92
+00:04:34,080 --> 00:04:39,420
+>> Joten mitä näet tässä
+environment-- ja oikeastaan ​​vain antaa
+
+93
+00:04:39,420 --> 00:04:40,050
+minulle tauko.
+
+94
+00:04:40,050 --> 00:04:42,680
+Onko kukaan ei ole täällä?
+
+95
+00:04:42,680 --> 00:04:45,070
+Ei täällä?
+
+96
+00:04:45,070 --> 00:04:45,800
+OK.
+
+97
+00:04:45,800 --> 00:04:49,030
+Joten haluaisin huomauttaa muutamia
+piirteitä tässä ympäristössä.
+
+98
+00:04:49,030 --> 00:04:55,024
+>> Joten vasemmassa yläkulmassa näytön, me
+on Scratch lavalla, niin sanotusti.
+
+99
+00:04:55,024 --> 00:04:57,440
+Scratch ei ole vain nimi
+Tämän ohjelmointikieli;
+
+100
+00:04:57,440 --> 00:05:00,356
+se on myös nimi kissa, joka
+näet oletuksena siellä oranssi.
+
+101
+00:05:00,356 --> 00:05:02,160
+Hän on lavalla, niin
+aivan kuten kuvailin
+
+102
+00:05:02,160 --> 00:05:05,770
+kilpikonna aikaisemmin ollessa
+suorakulmainen valkoinen lauta ympäristössä.
+
+103
+00:05:05,770 --> 00:05:09,800
+Tämä kissan maailma rajoittuu kokonaan
+kyseiseen suorakulmio ylös siellä.
+
+104
+00:05:09,800 --> 00:05:12,210
+>> Samaan aikaan, oikealla
+laidalta täällä, se on
+
+105
+00:05:12,210 --> 00:05:15,610
+vain skriptejä alue,
+pöydältä jos haluatte.
+
+106
+00:05:15,610 --> 00:05:18,590
+Tämä on, jos aiomme kirjoittaa
+ohjelmiemme vain hetken.
+
+107
+00:05:18,590 --> 00:05:22,935
+Ja rakennuspalikoita, että me
+käyttää kirjoittamaan tämän program-- palapeli
+
+108
+00:05:22,935 --> 00:05:25,310
+kappaletta, jos will-- ovat
+ne täällä keskellä,
+
+109
+00:05:25,310 --> 00:05:27,500
+ja ne luokitellaan
+by toiminnallisuutta.
+
+110
+00:05:27,500 --> 00:05:31,000
+Niinpä esimerkiksi, aion mennä eteenpäin
+ja osoittaa ainakin yksi näistä.
+
+111
+00:05:31,000 --> 00:05:33,690
+Aion mennä eteenpäin ja valitse
+Control luokka ylös.
+
+112
+00:05:33,690 --> 00:05:35,720
+>> Nämä ovat siis luokkien ylös.
+
+113
+00:05:35,720 --> 00:05:39,410
+Aion napsauttamalla Control luokka.
+
+114
+00:05:39,410 --> 00:05:44,020
+Pikemminkin, aion klikkaa Tapahtumat
+tyylinen aivan ensimmäinen ylös.
+
+115
+00:05:44,020 --> 00:05:47,790
+Ja jos haluat seurata pitkin edes
+kun teemme niin, olet aivan tervetullut.
+
+116
+00:05:47,790 --> 00:05:52,180
+Aion napsauttamalla ja vetämällä tätä
+Ensimmäinen, "kun vihreä lippu napsautetaan."
+
+117
+00:05:52,180 --> 00:05:58,410
+Ja sitten aion pudottaa se vain
+karkeasti yläreunassa minun tyhjä laatat.
+
+118
+00:05:58,410 --> 00:06:01,450
+>> Ja mikä mukavaa noin Scratch
+on, että tämä palapelin pala, kun
+
+119
+00:06:01,450 --> 00:06:04,560
+lukittu muihin palapeli
+kappaletta, tulee tekemään kirjaimellisesti
+
+120
+00:06:04,560 --> 00:06:06,460
+mitä nämä palapelin palaset sanoa tehdä.
+
+121
+00:06:06,460 --> 00:06:09,710
+Niinpä esimerkiksi, Scratch on oikeassa
+Nyt keskellä hänen maailmassa.
+
+122
+00:06:09,710 --> 00:06:14,660
+Aion mennä eteenpäin ja valitse
+nyt, sanokaamme, Motion luokka,
+
+123
+00:06:14,660 --> 00:06:18,000
+Jos haluat tehdä
+same-- Motion luokka.
+
+124
+00:06:18,000 --> 00:06:20,430
+Ja nyt huomaan on koko
+nippu palapelin palaset täällä
+
+125
+00:06:20,430 --> 00:06:23,370
+että taas sellainen mitä he sanovat.
+
+126
+00:06:23,370 --> 00:06:28,110
+Ja aion mennä eteenpäin ja vetää ja
+pudota liikkua lohko oikea täällä.
+
+127
+00:06:28,110 --> 00:06:31,860
+>> Ja huomaa, että heti kun saat
+lähellä pohjaan "Vihreä lippu
+
+128
+00:06:31,860 --> 00:06:34,580
+napsautetaan "-painiketta, ilmoitus
+miten valkoinen viiva,
+
+129
+00:06:34,580 --> 00:06:36,950
+kuin se olisi melkein
+magneettinen, se haluaa mennä sinne.
+
+130
+00:06:36,950 --> 00:06:43,070
+Vain antaa mennä, ja se napsahtaa
+yhteen ja muodot täsmää.
+
+131
+00:06:43,070 --> 00:06:46,620
+Ja nyt voit ehkä melkein
+arvata minne olemme menossa tämän.
+
+132
+00:06:46,620 --> 00:06:51,570
+>> Jos tarkastellaan Scratch vaiheessa
+tänne ja katsoa päälle,
+
+133
+00:06:51,570 --> 00:06:55,142
+näet punaista valoa, joka on
+stop-merkin, ja vihreä lippu.
+
+134
+00:06:55,142 --> 00:06:57,100
+Ja aion mennä eteenpäin
+ja katsella minun screen--
+
+135
+00:06:57,100 --> 00:06:58,460
+vain hetken, jos voisi.
+
+136
+00:06:58,460 --> 00:07:01,960
+Aion napsauttaa
+Vihreä lippu juuri nyt,
+
+137
+00:07:01,960 --> 00:07:07,850
+ja hän muutti mikä näyttää olevan 10 askelta
+tai 10 pikseliä, 10 pistettä, ruudulla.
+
+138
+00:07:07,850 --> 00:07:13,390
+>> Ja niin ei se jännittävää,
+mutta haluan ehdottaa
+
+139
+00:07:13,390 --> 00:07:17,440
+edes opettaa tätä, vain
+käyttäen omaa oman intuition-- let
+
+140
+00:07:17,440 --> 00:07:22,560
+me ehdotamme, että te selvittää, miten
+tehdä Scratch kävellä oikeassa lavalta.
+
+141
+00:07:22,560 --> 00:07:28,700
+Onko hänet tieltä oikealle puolelle
+näytön aina oikealle.
+
+142
+00:07:28,700 --> 00:07:32,200
+Annan teille hetken
+tai niin painimaan sen kanssa.
+
+143
+00:07:32,200 --> 00:07:37,681
+Haluat ehkä katsoa
+at muihin lohkoja.
+
+144
+00:07:37,681 --> 00:07:38,180
+Selvä.
+
+145
+00:07:38,180 --> 00:07:41,290
+Joten vain kertaus, kun meillä on
+vihreä lippu napsautetaan täällä
+
+146
+00:07:41,290 --> 00:07:44,850
+ja siirrä 10 askelta on
+Ainoa ohje, joka kerta kun
+
+147
+00:07:44,850 --> 00:07:46,720
+napsauttamalla vihreää lippua, mitä tapahtuu?
+
+148
+00:07:46,720 --> 00:07:50,070
+No, joka on käynnissä oma ohjelma.
+
+149
+00:07:50,070 --> 00:07:52,450
+Joten en voisi tehdä tätä
+ehkä 10 kertaa käsin,
+
+150
+00:07:52,450 --> 00:07:55,130
+mutta tämä tuntuu hieman
+bittinen hackish, niin sanotusti,
+
+151
+00:07:55,130 --> 00:07:57,480
+jolloin En ole oikeastaan
+ongelman ratkaisemiseksi.
+
+152
+00:07:57,480 --> 00:08:00,530
+Olen vain yrittää uudestaan ​​ja
+uudestaan ​​ja uudestaan ​​ja uudestaan
+
+153
+00:08:00,530 --> 00:08:03,180
+kunnes tavallaan vahingossa
+saavuttaa direktiivin
+
+154
+00:08:03,180 --> 00:08:05,560
+että minä esitetyt saavuttaa aiemmin.
+
+155
+00:08:05,560 --> 00:08:08,200
+>> Mutta me tiedämme meidän
+pseudokoodi aiemmin, että on olemassa
+
+156
+00:08:08,200 --> 00:08:11,870
+tätä käsitettä ohjelmointiin silmukka,
+tehdä jotain uudestaan ​​ja uudestaan.
+
+157
+00:08:11,870 --> 00:08:14,888
+Ja niin minä näin, että kasan teitä
+saavutti mitä palapelin pala?
+
+158
+00:08:14,888 --> 00:08:17,870
+
+159
+00:08:17,870 --> 00:08:18,730
+Toista kunnes.
+
+160
+00:08:18,730 --> 00:08:21,400
+Jotta voisimme tehdä jotakin
+kuten toista kunnes.
+
+161
+00:08:21,400 --> 00:08:23,760
+Ja mitä sinä toista kunnes tarkalleen?
+
+162
+00:08:23,760 --> 00:08:27,720
+
+163
+00:08:27,720 --> 00:08:28,540
+>> OK.
+
+164
+00:08:28,540 --> 00:08:31,974
+Ja anna minun mennä yksi, joka on
+yksinkertaisempia vain hetken.
+
+165
+00:08:31,974 --> 00:08:33,140
+Anna minun mennä eteenpäin ja tehdä tätä.
+
+166
+00:08:33,140 --> 00:08:35,559
+Huomaa, että, kuten ehkä olla
+löydetty hallinnassa,
+
+167
+00:08:35,559 --> 00:08:38,409
+on tämä toista lohko, joka
+ei näytä se, että suuri.
+
+168
+00:08:38,409 --> 00:08:41,039
+Ei ole paljon tilaa
+näiden kahden keltaiset viivat.
+
+169
+00:08:41,039 --> 00:08:43,539
+Mutta jotkut teistä saattaa olla
+huomannut, jos vetää ja pudottaa,
+
+170
+00:08:43,539 --> 00:08:45,150
+huomaa, miten se kasvaa täyttää muodon.
+
+171
+00:08:45,150 --> 00:08:46,274
+>> Ja voit jopa ahtaa enemmän.
+
+172
+00:08:46,274 --> 00:08:48,670
+Se täytyy vain pitää kasvaa, jos
+vedät ja viet sen yli.
+
+173
+00:08:48,670 --> 00:08:51,110
+Ja en tiedä mitä
+paras täällä, joten anna
+
+174
+00:08:51,110 --> 00:08:54,760
+minulle ainakin toista viisi kertaa, ja
+Esimerkiksi ja palaa lavalle
+
+175
+00:08:54,760 --> 00:08:56,720
+ja klikkaa vihreää lippua.
+
+176
+00:08:56,720 --> 00:08:59,110
+Ja nyt huomaa se ei ole aivan siellä.
+
+177
+00:08:59,110 --> 00:09:02,400
+>> Nyt jotkut teistä ehdotti, kuten
+Victoria vain ei, toista 10 kertaa.
+
+178
+00:09:02,400 --> 00:09:05,140
+Ja että yleensä tekee
+saada hänet koko matkan,
+
+179
+00:09:05,140 --> 00:09:10,510
+mutta eikö siellä olla vakaampi
+tapa kuin mielivaltaisesti kuvauksen,
+
+180
+00:09:10,510 --> 00:09:12,640
+kuinka moni liikkuu tehdä?
+
+181
+00:09:12,640 --> 00:09:17,680
+Mikä voisi olla parempi lohko
+kuin toista 10 kertaa olla?
+
+182
+00:09:17,680 --> 00:09:20,380
+>> Niin, miksi ei tehdä jotain ikuisesti?
+
+183
+00:09:20,380 --> 00:09:24,390
+Nyt haluan siirtää tätä palapelin pala
+sisällä siellä ja päästä eroon tästä.
+
+184
+00:09:24,390 --> 00:09:28,300
+Huomaa nyt missä Scratch
+alkaa, hän menee reunaan.
+
+185
+00:09:28,300 --> 00:09:30,700
+Ja onneksi MIT,
+joka tekee Scratch, vain
+
+186
+00:09:30,700 --> 00:09:33,190
+varmistaa, että hän ei koskaan
+häviää kokonaan.
+
+187
+00:09:33,190 --> 00:09:35,360
+Voit aina napata häntäänsä.
+
+188
+00:09:35,360 --> 00:09:37,680
+>> Ja juuri intuitiivisesti,
+miksi hän pitää liikkua?
+
+189
+00:09:37,680 --> 00:09:38,892
+Mitä täällä tapahtuu?
+
+190
+00:09:38,892 --> 00:09:41,440
+
+191
+00:09:41,440 --> 00:09:43,824
+Hän näyttää pysähtyneen, mutta
+sitten jos olen poimia ja vedä
+
+192
+00:09:43,824 --> 00:09:45,240
+Hän pitää haluavat mennä sinne.
+
+193
+00:09:45,240 --> 00:09:46,123
+Miksi niin?
+
+194
+00:09:46,123 --> 00:09:51,610
+
+195
+00:09:51,610 --> 00:09:54,360
+Todella, tietokone on kirjaimellisesti
+aikoo tehdä mitä kerrot sitä tekemään.
+
+196
+00:09:54,360 --> 00:09:58,380
+Joten jos kertonut sitä aikaisemmin tekemään
+Seuraavat asia ikuisesti, siirtää 10 askelmaa,
+
+197
+00:09:58,380 --> 00:10:01,860
+se tulee pitää käynnissä ja menemällä
+kunnes osuin punainen stop sign
+
+198
+00:10:01,860 --> 00:10:04,620
+ja lopettaa ohjelman kokonaan.
+
+199
+00:10:04,620 --> 00:10:06,610
+>> Joten vaikka et ole
+Tätä miten voisi I
+
+200
+00:10:06,610 --> 00:10:09,510
+tehdä Scratch liikkua nopeammin
+ruudun poikki?
+
+201
+00:10:09,510 --> 00:10:12,060
+
+202
+00:10:12,060 --> 00:10:13,280
+Useampia vaiheita, eikö?
+
+203
+00:10:13,280 --> 00:10:15,710
+Joten sen sijaan tehdä 10
+kerrallaan, miksi emme
+
+204
+00:10:15,710 --> 00:10:20,100
+mennä eteenpäin ja muuttaa sitä to--
+mitä sinä propose-- 50?
+
+205
+00:10:20,100 --> 00:10:24,410
+Joten nyt aion napsauttamalla vihreää
+lippu, ja todellakin, hän menee todella nopeasti.
+
+206
+00:10:24,410 --> 00:10:27,180
+>> Ja tämä tietenkin on vain
+ilmentymä animaatio.
+
+207
+00:10:27,180 --> 00:10:28,060
+Mikä on animaatio?
+
+208
+00:10:28,060 --> 00:10:33,090
+Se on vain näyttämällä ihmiselle
+läjän pysäytyskuvia todella,
+
+209
+00:10:33,090 --> 00:10:34,160
+todella, todella nopeasti.
+
+210
+00:10:34,160 --> 00:10:36,500
+Ja niin jos me vain kertoa
+hänet muuttamaan useampia vaiheita,
+
+211
+00:10:36,500 --> 00:10:39,750
+me vain, että niiden vaikutuksesta olla
+Muutos missä hän on ruudulla
+
+212
+00:10:39,750 --> 00:10:42,900
+kaikki nopeammin aikayksikköä kohti.
+
+213
+00:10:42,900 --> 00:10:46,454
+>> Nyt seuraava haaste, että olen ehdottanut
+oli saada hänet kimpoavat reunan.
+
+214
+00:10:46,454 --> 00:10:49,120
+Ja tietämättä mitä palapeli
+kappaletta exist-- koska se on hieno
+
+215
+00:10:49,120 --> 00:10:53,030
+jos et päästä
+vaiheessa challenge-- mitä
+
+216
+00:10:53,030 --> 00:10:54,280
+haluat tehdä intuitiivisesti?
+
+217
+00:10:54,280 --> 00:10:58,030
+Miten meillä hänet toipua ja
+eteenpäin, vasemman ja oikean?
+
+218
+00:10:58,030 --> 00:11:02,630
+
+219
+00:11:02,630 --> 00:11:03,810
+>> Joo.
+
+220
+00:11:03,810 --> 00:11:05,680
+Joten tarvitsemme jonkinlaista
+kunnossa, ja me
+
+221
+00:11:05,680 --> 00:11:09,710
+näyttävät conditionals, niin
+puhua, alle Control luokkaan.
+
+222
+00:11:09,710 --> 00:11:14,110
+Mikä näistä lohkojen
+me luultavasti halua?
+
+223
+00:11:14,110 --> 00:11:15,200
+Niin, ehkä "jos, niin."
+
+224
+00:11:15,200 --> 00:11:18,780
+Niin huomaa, että joukossa keltaisiin laatikoihin
+Meillä on täällä, on tämä "jos"
+
+225
+00:11:18,780 --> 00:11:23,920
+tai tämä "jos, muuten" block että tulee
+antaa meille mahdollisuuden tehdä päätös tehdä tähän
+
+226
+00:11:23,920 --> 00:11:25,000
+tai tehdä niin.
+
+227
+00:11:25,000 --> 00:11:27,380
+Ja voit jopa pesä niistä
+tehdä useita asioita.
+
+228
+00:11:27,380 --> 00:11:34,910
+Tai jos olet ei mennyt tässä vielä,
+mennä eteenpäin, että Sensing luokka
+
+229
+00:11:34,910 --> 00:11:39,612
+and-- katsotaanpa jos se on täällä.
+
+230
+00:11:39,612 --> 00:11:43,050
+
+231
+00:11:43,050 --> 00:11:52,050
+>> Joten mikä lohko voisi olla hyödyllistä tässä
+havaita, jos hän lavalta?
+
+232
+00:11:52,050 --> 00:11:56,740
+Niin, huomata, että jotkut näistä lohkoista
+voidaan parametroida, niin sanotusti.
+
+233
+00:11:56,740 --> 00:12:00,706
+Ne voidaan lajitella räätälöityjä, ei
+toisin kuin HTML eilen attribuutteja,
+
+234
+00:12:00,706 --> 00:12:03,330
+jos nämä määritteet millaisia
+muokata käyttäytymistä tunnisteen.
+
+235
+00:12:03,330 --> 00:12:08,880
+Samoin täällä, voin napata tämän koskettavan
+lohko ja muutos ja kysyä,
+
+236
+00:12:08,880 --> 00:12:11,500
+sinä koskettaa hiirtä
+osoitin kuten osoitin
+
+237
+00:12:11,500 --> 00:12:13,250
+tai olet koskettaa reunaan?
+
+238
+00:12:13,250 --> 00:12:15,210
+>> Joten anna minun mennä ja tehdä tämän.
+
+239
+00:12:15,210 --> 00:12:18,130
+Aion loitontaa hetkeksi.
+
+240
+00:12:18,130 --> 00:12:21,320
+Saanen tarttua tähän palapelin pala
+täällä, tämä palapelin pala tätä,
+
+241
+00:12:21,320 --> 00:12:24,570
+ja aion irrallaan
+niitä vain hetken.
+
+242
+00:12:24,570 --> 00:12:27,620
+Aion siirtää tätä,
+vaihtaa tämän koskettava reunaan,
+
+243
+00:12:27,620 --> 00:12:38,590
+ja aion liikettä tähän.
+
+244
+00:12:38,590 --> 00:12:40,490
+Joten tässä on joitakin ainesosia.
+
+245
+00:12:40,490 --> 00:12:42,570
+Mielestäni olen saanut kaiken haluan.
+
+246
+00:12:42,570 --> 00:12:47,710
+>> Onko joku ehdottaa, miten I
+voi yhdistää nämä ehkä ylhäältä alas
+
+247
+00:12:47,710 --> 00:12:52,020
+jotta ongelman ratkaisemiseksi ottaa
+Scratch siirtyä oikealle vasemmalta oikealle
+
+248
+00:12:52,020 --> 00:12:57,020
+vasemmalta oikealle vasemmalle, jokaisen
+aikaa vain terhakka pois seinästä?
+
+249
+00:12:57,020 --> 00:12:58,050
+Mitä haluat tehdä?
+
+250
+00:12:58,050 --> 00:13:01,097
+Joka lohko pitäisi yhteyden
+"Kun vihreä lippu napsautetaan ensin"?
+
+251
+00:13:01,097 --> 00:13:04,060
+
+252
+00:13:04,060 --> 00:13:06,200
+>> OK, joten aloitamme kanssa "ikuisesti."
+
+253
+00:13:06,200 --> 00:13:07,170
+Mikä menee sisälle seuraavaksi?
+
+254
+00:13:07,170 --> 00:13:10,290
+Joku muu.
+
+255
+00:13:10,290 --> 00:13:11,850
+OK, liikkuvat vaiheet.
+
+256
+00:13:11,850 --> 00:13:12,350
+Selvä.
+
+257
+00:13:12,350 --> 00:13:14,470
+Mitä sitten?
+
+258
+00:13:14,470 --> 00:13:15,120
+Joten sitten, jos.
+
+259
+00:13:15,120 --> 00:13:17,720
+Ja huomaa, vaikka se näyttää
+alumiinifoliota yhdessä tiiviisti,
+
+260
+00:13:17,720 --> 00:13:19,500
+se vain kasvaa täyttämään.
+
+261
+00:13:19,500 --> 00:13:21,500
+Se vain hypätä missä haluan sen.
+
+262
+00:13:21,500 --> 00:13:25,920
+>> Ja mitä laitan välillä
+if ja sitten?
+
+263
+00:13:25,920 --> 00:13:27,180
+Luultavasti "jos koskettaa reuna."
+
+264
+00:13:27,180 --> 00:13:31,800
+Ja ilmoitus, jälleen kerran, se on liian iso
+sitä, mutta se kasvaa täyttämään.
+
+265
+00:13:31,800 --> 00:13:35,002
+Ja käännä 15 astetta?
+
+266
+00:13:35,002 --> 00:13:35,710
+Kuinka monta astetta?
+
+267
+00:13:35,710 --> 00:13:38,800
+
+268
+00:13:38,800 --> 00:13:41,196
+Niin, 180 pyörittää
+me kaikki päin.
+
+269
+00:13:41,196 --> 00:13:42,570
+Katsotaanpa, jos sain tätä oikeutta.
+
+270
+00:13:42,570 --> 00:13:43,930
+Saanen loitontaa.
+
+271
+00:13:43,930 --> 00:13:45,130
+>> Saanen vedä Scratch ylös.
+
+272
+00:13:45,130 --> 00:13:50,030
+Hän on hieman vääristynyt
+nyt, mutta se käy hyvin.
+
+273
+00:13:50,030 --> 00:13:52,231
+Miten voin palauttaa hänet helposti?
+
+274
+00:13:52,231 --> 00:13:59,879
+
+275
+00:13:59,879 --> 00:14:01,045
+Aion huijata hieman.
+
+276
+00:14:01,045 --> 00:14:04,074
+
+277
+00:14:04,074 --> 00:14:05,990
+Joten olen lisäämällä toisen
+lohko, vain olla selvä.
+
+278
+00:14:05,990 --> 00:14:08,424
+Haluan hänen kohtaan 90 astetta
+oikealle oletuksena,
+
+279
+00:14:08,424 --> 00:14:10,840
+joten olen juuri menossa kertoa hänelle
+tehdä niin ohjelmallisesti.
+
+280
+00:14:10,840 --> 00:14:11,632
+Ja tässä mennään.
+
+281
+00:14:11,632 --> 00:14:14,740
+
+282
+00:14:14,740 --> 00:14:15,740
+Olemme ilmeisesti tehneet sen.
+
+283
+00:14:15,740 --> 00:14:19,980
+Se on vähän outo, koska
+Hän kävelee ylösalaisin.
+
+284
+00:14:19,980 --> 00:14:21,250
+Kutsun että vika.
+
+285
+00:14:21,250 --> 00:14:22,120
+Se on virhe.
+
+286
+00:14:22,120 --> 00:14:27,320
+Bugi on virhe ohjelmassa, joka on
+looginen virhe, että minä, ihmisen, tehty.
+
+287
+00:14:27,320 --> 00:14:28,985
+Miksi hän menee ylösalaisin?
+
+288
+00:14:28,985 --> 00:14:33,560
+
+289
+00:14:33,560 --> 00:14:35,250
+Oliko MIT tyriä tai tein?
+
+290
+00:14:35,250 --> 00:14:38,840
+
+291
+00:14:38,840 --> 00:14:42,550
+>> Niin, tarkoitan, se ei ole MIT: n
+vika. He antoivat minulle palapelin pala
+
+292
+00:14:42,550 --> 00:14:44,970
+joka sanoo puolestaan ​​jotkut useita astetta.
+
+293
+00:14:44,970 --> 00:14:47,672
+Ja Victoria ehdotuksen,
+Olen kääntämällä 180 astetta,
+
+294
+00:14:47,672 --> 00:14:48,880
+mikä on oikea intuitio.
+
+295
+00:14:48,880 --> 00:14:53,700
+Mutta kääntämällä 180 astetta kirjaimellisesti
+tarkoittaa kääntämällä 180 astetta,
+
+296
+00:14:53,700 --> 00:14:55,860
+ja se ei oikeastaan
+mitä haluan, ilmeisesti.
+
+297
+00:14:55,860 --> 00:14:58,026
+Koska ainakin hän on
+Tämän kaksiulotteinen maailmassa,
+
+298
+00:14:58,026 --> 00:15:00,740
+niin käännekohta todella tapahtuu
+kääntää hänet ylösalaisin.
+
+299
+00:15:00,740 --> 00:15:04,030
+>> Luultavasti halua käyttää mitä lohko
+sen sijaan, sen perusteella, mitä näet tässä?
+
+300
+00:15:04,030 --> 00:15:11,890
+
+301
+00:15:11,890 --> 00:15:14,790
+Kuinka me voimme korjata tämän?
+
+302
+00:15:14,790 --> 00:15:18,380
+Niin, jotta voisimme viitata
+vastakkaiseen suuntaan.
+
+303
+00:15:18,380 --> 00:15:22,300
+Ja itse asiassa jopa siinä
+ei tule tarpeeksi,
+
+304
+00:15:22,300 --> 00:15:26,410
+koska voimme vain kovaa koodia
+toteamaan vasemmalle tai oikealle.
+
+305
+00:15:26,410 --> 00:15:27,920
+>> Tiedät mitä voisimme tehdä?
+
+306
+00:15:27,920 --> 00:15:30,160
+Se näyttää että meillä on
+mukavuutta lohko täällä.
+
+307
+00:15:30,160 --> 00:15:32,987
+Jos minä zoomata, katso
+jotain haluamme täällä?
+
+308
+00:15:32,987 --> 00:15:36,120
+
+309
+00:15:36,120 --> 00:15:40,020
+Joten se näyttää MIT on
+abstraktio rakennettu täällä.
+
+310
+00:15:40,020 --> 00:15:45,440
+Tämä lohko näyttää olevan vastaavia
+johon muut lohkot, monikko?
+
+311
+00:15:45,440 --> 00:15:49,510
+>> Tämä yhden korttelin näyttää olevan vastaavia
+Tämän koko trio lohkojen
+
+312
+00:15:49,510 --> 00:15:50,880
+että meillä on täällä.
+
+313
+00:15:50,880 --> 00:15:54,670
+Joten se kääntyy pois voin yksinkertaistaa minun
+Ohjelma hankkiutumalla eroon kaikista, jotka
+
+314
+00:15:54,670 --> 00:15:58,270
+ja vain laittaa tämän tänne.
+
+315
+00:15:58,270 --> 00:16:01,620
+Ja nyt hän on vielä vähän
+buginen, ja se sopii nyt.
+
+316
+00:16:01,620 --> 00:16:03,370
+Jätämme sen olla.
+
+317
+00:16:03,370 --> 00:16:06,000
+Mutta ohjelma on vielä
+yksinkertaisempi, ja tämäkin
+
+318
+00:16:06,000 --> 00:16:09,060
+olisi edustava
+of tavoite programming--
+
+319
+00:16:09,060 --> 00:16:13,430
+on mieluiten tehdä koodin
+yksinkertainen, mahdollisimman kompakti,
+
+320
+00:16:13,430 --> 00:16:15,650
+kun vielä niin
+luettavissa kuin mahdollista.
+
+321
+00:16:15,650 --> 00:16:20,310
+Et halua tehdä niin ytimekäs
+että on vaikea ymmärtää.
+
+322
+00:16:20,310 --> 00:16:22,826
+>> Mutta huomaa olen korvattu
+kolme lohkoa yhdellä,
+
+323
+00:16:22,826 --> 00:16:24,200
+ja se on todennäköisesti hyvä asia.
+
+324
+00:16:24,200 --> 00:16:27,280
+Olen otetun pois käsite
+tarkastaa, onko olet
+
+325
+00:16:27,280 --> 00:16:29,120
+reunalla vain yhden korttelin.
+
+326
+00:16:29,120 --> 00:16:31,520
+Nyt voimme olla hauskaa tätä, itse asiassa.
+
+327
+00:16:31,520 --> 00:16:35,790
+Tämä ei lisää niinkään
+henkinen arvo mutta leikkisä arvo.
+
+328
+00:16:35,790 --> 00:16:39,730
+Aion mennä eteenpäin
+ja napata tämä ääni täällä.
+
+329
+00:16:39,730 --> 00:16:42,900
+
+330
+00:16:42,900 --> 00:16:46,420
+Joten anna minun mennä eteenpäin, ja haluan
+lopettaa ohjelman hetkeksi.
+
+331
+00:16:46,420 --> 00:16:52,070
+Aion kirjata seuraavat,
+päästämällä mikrofoni.
+
+332
+00:16:52,070 --> 00:16:53,181
+>> Nyt sitä mennään.
+
+333
+00:16:53,181 --> 00:16:53,680
+Auts.
+
+334
+00:16:53,680 --> 00:16:58,710
+
+335
+00:16:58,710 --> 00:17:01,140
+Yritetään tätä uudelleen.
+
+336
+00:17:01,140 --> 00:17:02,279
+Nyt sitä mennään.
+
+337
+00:17:02,279 --> 00:17:03,570
+OK, Nauhoitin väärin.
+
+338
+00:17:03,570 --> 00:17:04,580
+Nyt sitä mennään.
+
+339
+00:17:04,580 --> 00:17:05,080
+Auts.
+
+340
+00:17:05,080 --> 00:17:07,910
+
+341
+00:17:07,910 --> 00:17:08,800
+Auts.
+
+342
+00:17:08,800 --> 00:17:09,300
+Selvä.
+
+343
+00:17:09,300 --> 00:17:10,791
+Nyt minun täytyy päästä eroon siitä.
+
+344
+00:17:10,791 --> 00:17:11,290
+Selvä.
+
+345
+00:17:11,290 --> 00:17:13,950
+>> Joten nyt olen
+tallennus vain "Auts."
+
+346
+00:17:13,950 --> 00:17:18,040
+Joten nyt aion mennä
+eteenpäin ja kutsuvat tätä "Auts."
+
+347
+00:17:18,040 --> 00:17:20,270
+Aion palata
+minun skriptejä, ja nyt
+
+348
+00:17:20,270 --> 00:17:25,460
+ilmoitus on tämä lohko sitä kutsutaan
+toistaa äänen "miau" tai toistaa äänen "Auts."
+
+349
+00:17:25,460 --> 00:17:28,920
+Aion vetää tämän, ja jos
+minun pitäisi laittaa tämä koominen vaikutus?
+
+350
+00:17:28,920 --> 00:17:31,740
+
+351
+00:17:31,740 --> 00:17:37,860
+Niin, nyt se on eräänlainen
+buginen, koska nyt tämä block--
+
+352
+00:17:37,860 --> 00:17:42,050
+huomaa kuinka tämä "jos reunalla,
+bounce "on sellainen itsenäinen.
+
+353
+00:17:42,050 --> 00:17:43,704
+Joten minun täytyy korjata.
+
+354
+00:17:43,704 --> 00:17:44,870
+Anna minun mennä eteenpäin ja tehdä tätä.
+
+355
+00:17:44,870 --> 00:17:48,630
+Saanen päästä eroon tästä ja palata
+meidän alkuperäinen, enemmän tarkoituksellinen
+
+356
+00:17:48,630 --> 00:17:49,870
+toiminnallisuus.
+
+357
+00:17:49,870 --> 00:18:01,080
+Eli "jos koskettaa reuna, sitten" Haluan
+kääntyä, kun Victoria ehdotettu,
+
+358
+00:18:01,080 --> 00:18:02,480
+180 astetta.
+
+359
+00:18:02,480 --> 00:18:05,497
+Ja tehdä Haluan pelata
+ääni "Auts" siellä?
+
+360
+00:18:05,497 --> 00:18:11,800
+
+361
+00:18:11,800 --> 00:18:15,580
+>> Joo, huomaa se ulkona
+että keltainen lohko.
+
+362
+00:18:15,580 --> 00:18:17,680
+Joten tämäkin olisi
+bug, mutta olen huomannut sen.
+
+363
+00:18:17,680 --> 00:18:21,290
+Joten aion vetää sen ylös tänne,
+ja ilmoitus nyt se sisällä "jos".
+
+364
+00:18:21,290 --> 00:18:24,250
+Joten "jos" on tämmöinen
+samankaltaisten varsimaisten blot
+
+365
+00:18:24,250 --> 00:18:26,260
+joka on vain menee
+do mitä sisällä siitä.
+
+366
+00:18:26,260 --> 00:18:30,216
+Joten nyt jos minä loitontaa at
+riski annoying--
+
+367
+00:18:30,216 --> 00:18:32,860
+
+368
+00:18:32,860 --> 00:18:36,470
+>> COMPUTER: Auts, auts, auts.
+
+369
+00:18:36,470 --> 00:18:39,910
+>> DAVID MALAN: Ja
+vain loputtomiin.
+
+370
+00:18:39,910 --> 00:18:44,160
+Nyt vain nopeuttaa asioita
+täällä, anna minun mennä eteenpäin ja avata,
+
+371
+00:18:44,160 --> 00:18:50,460
+Katsotaanpa say-- anna minun mennä joitakin
+oman tavaraa luokassa.
+
+372
+00:18:50,460 --> 00:18:53,000
+
+373
+00:18:53,000 --> 00:19:00,220
+Ja anna minun avata, sanokaamme, tämä
+yksi tehty yksi opetuksemme stipendiaatit
+
+374
+00:19:00,220 --> 00:19:01,500
+pari vuotta sitten.
+
+375
+00:19:01,500 --> 00:19:04,732
+Joten jotkut teistä saattavat muistaa
+tämä peli menneiden,
+
+376
+00:19:04,732 --> 00:19:05,940
+ja se on todella merkittävä.
+
+377
+00:19:05,940 --> 00:19:08,190
+Vaikka olemme tehneet
+Yksinkertaisin ohjelmien juuri nyt,
+
+378
+00:19:08,190 --> 00:19:09,980
+Tarkastellaan mitä tämä
+todella näyttää.
+
+379
+00:19:09,980 --> 00:19:10,650
+Saanen osuma pelata.
+
+380
+00:19:10,650 --> 00:19:14,210
+
+381
+00:19:14,210 --> 00:19:18,980
+>> Joten tässä pelissä meillä on
+sammakko, ja nuolinäppäimillä keys--
+
+382
+00:19:18,980 --> 00:19:23,340
+hän ottaa isompi vaiheet kuin I remember--
+Minulla on valvoa tämän sammakko.
+
+383
+00:19:23,340 --> 00:19:29,630
+Ja tavoitteena on saada koko kiireinen
+road törmäämättä autoja.
+
+384
+00:19:29,630 --> 00:19:34,735
+Ja lähdetään see-- jos menen tänne, minä
+on odotettava lokin vierittää.
+
+385
+00:19:34,735 --> 00:19:38,130
+
+386
+00:19:38,130 --> 00:19:39,274
+Tämä tuntuu vika.
+
+387
+00:19:39,274 --> 00:19:42,240
+
+388
+00:19:42,240 --> 00:19:43,495
+Tämä on eräänlainen bug.
+
+389
+00:19:43,495 --> 00:19:45,980
+
+390
+00:19:45,980 --> 00:19:46,480
+Selvä.
+
+391
+00:19:46,480 --> 00:19:51,550
+Olen täällä,
+siellä, ja sitten pidät
+
+392
+00:19:51,550 --> 00:19:54,100
+menossa kunnes saat kaikki
+sammakot on lumpeenlehdet.
+
+393
+00:19:54,100 --> 00:19:55,920
+Nyt tämä voisi näyttää
+kaikki monimutkaisempi,
+
+394
+00:19:55,920 --> 00:19:57,840
+mutta yritetään rikkoa
+tämän alas henkisesti
+
+395
+00:19:57,840 --> 00:20:00,040
+ja suullisesti osaksi rakennuspalikkapeli.
+
+396
+00:20:00,040 --> 00:20:03,910
+Joten on luultavasti palapeli
+pala, emme ole nähneet vielä
+
+397
+00:20:03,910 --> 00:20:07,440
+mutta joka on vastaaminen näppäilyjä,
+asioita osuin näppäimistöllä.
+
+398
+00:20:07,440 --> 00:20:11,660
+>> Joten on luultavasti jonkinlainen
+lohko, joka sanoo, jos avain on yhtä suuri kuin ylös,
+
+399
+00:20:11,660 --> 00:20:15,965
+sitten tehdä jotain Scratch--
+ehkä siirtää sen 10 askelta tällä tavalla.
+
+400
+00:20:15,965 --> 00:20:20,240
+Jos alas -näppäintä painetaan, siirrä 10 askelta
+Näin tai vasen-näppäintä, siirrä 10 askelta
+
+401
+00:20:20,240 --> 00:20:21,710
+Tällä tavoin 10 vaiheet, jotka.
+
+402
+00:20:21,710 --> 00:20:23,644
+Olen selvästi kääntyi kissan osaksi sammakko.
+
+403
+00:20:23,644 --> 00:20:26,060
+Niin, että vain jos
+puku, kuten Scratch puhelut it-- me
+
+404
+00:20:26,060 --> 00:20:28,440
+vain tuotu kuva sammakko.
+
+405
+00:20:28,440 --> 00:20:29,570
+>> Mutta mitä muuta tapahtuu?
+
+406
+00:20:29,570 --> 00:20:32,794
+Mitä muita riviä koodia,
+mitä muut palapelin palat
+
+407
+00:20:32,794 --> 00:20:35,460
+teki Blake, opetuksemme mies,
+käyttää tätä ohjelmaa, ilmeisesti?
+
+408
+00:20:35,460 --> 00:20:38,320
+
+409
+00:20:38,320 --> 00:20:42,730
+Mikä tekee kaiken move--
+mitä ohjelmointi rakentaa?
+
+410
+00:20:42,730 --> 00:20:44,950
+>> Motion, sure-- joten
+liikkua lohko, varmasti.
+
+411
+00:20:44,950 --> 00:20:49,330
+Ja mikä tuo siirto lohko
+sisällä, todennäköisin?
+
+412
+00:20:49,330 --> 00:20:52,850
+Joo, jonkinlainen silmukan, ehkä
+ikuisesti lohko, ehkä toista block--
+
+413
+00:20:52,850 --> 00:20:54,070
+toista, kunnes lohko.
+
+414
+00:20:54,070 --> 00:20:57,330
+Ja juuri se tekee tukkien ja
+lilja tyynyt ja kaikkea muuta liikkua
+
+415
+00:20:57,330 --> 00:20:57,990
+edestakaisin.
+
+416
+00:20:57,990 --> 00:21:00,270
+Se on vain tapahtuu loputtomasti.
+
+417
+00:21:00,270 --> 00:21:03,180
+>> Miksi jotkut autot
+liikkuu nopeammin kuin toiset?
+
+418
+00:21:03,180 --> 00:21:06,607
+Mikä on erilainen noista ohjelmista?
+
+419
+00:21:06,607 --> 00:21:09,690
+Joo, todennäköisesti joitakin niistä ovat ryhtyneet
+useampia vaiheita kerralla ja joitakin niistä
+
+420
+00:21:09,690 --> 00:21:10,690
+vähemmän vaiheita kerralla.
+
+421
+00:21:10,690 --> 00:21:14,670
+Ja visuaalinen vaikutus
+on nopea verrattuna hidasta.
+
+422
+00:21:14,670 --> 00:21:16,030
+>> Mitä luulet tapahtuneen?
+
+423
+00:21:16,030 --> 00:21:19,700
+Kun sain sammakko koko matkan
+kadun ja joen
+
+424
+00:21:19,700 --> 00:21:23,560
+päälle lumpeenlehti, jotain
+huomionarvoista tapahtui.
+
+425
+00:21:23,560 --> 00:21:26,540
+Mitä tapahtui, kun tein sen?
+
+426
+00:21:26,540 --> 00:21:27,210
+Se pysähtyi.
+
+427
+00:21:27,210 --> 00:21:29,680
+Tämä sammakko pysähtyi, ja
+Sain toisen sammakko.
+
+428
+00:21:29,680 --> 00:21:33,155
+Joten mitä konstruktio on oltava
+käytetyt siellä, mitä ominaisuus?
+
+429
+00:21:33,155 --> 00:21:36,020
+
+430
+00:21:36,020 --> 00:21:38,660
+>> Niin, siellä on jonkinlainen
+"Jos" kunnossa ylös sielläkin.
+
+431
+00:21:38,660 --> 00:21:41,909
+Ja se osoittautuu out-- emme nähneet this--
+mutta on muiden lohkojen siellä, että
+
+432
+00:21:41,909 --> 00:21:45,300
+voi sanoa, jos olet koskematta
+toinen asia ruudulla,
+
+433
+00:21:45,300 --> 00:21:47,720
+jos olet koskettaa lumpeenlehti, "sitten."
+
+434
+00:21:47,720 --> 00:21:50,810
+Ja sitten silloin me
+tehdä toinen sammakko näkyviin.
+
+435
+00:21:50,810 --> 00:21:54,969
+Joten vaikka tämä peli on varmasti
+hyvin päivätty, vaikka ensi silmäyksellä
+
+436
+00:21:54,969 --> 00:21:58,010
+siellä on niin paljon meneillään on-- ja Blake
+ei piiska tähän asti kahdessa minuutissa,
+
+437
+00:21:58,010 --> 00:22:00,390
+se luultavasti vei hänet usean
+tuntia luoda tämän pelin
+
+438
+00:22:00,390 --> 00:22:03,850
+perustuu hänen muistiin tai videoita
+menneen n version.
+
+439
+00:22:03,850 --> 00:22:07,940
+Mutta kaikki nämä pienet asiat
+käynnissä ruudulla erillään
+
+440
+00:22:07,940 --> 00:22:11,550
+pohjimmiltaan nämä hyvin yksinkertainen
+constructs-- liikkeitä tai lausunnot
+
+441
+00:22:11,550 --> 00:22:15,519
+kuten olemme keskustelleet, silmukat ja
+olosuhteet, ja se siitä.
+
+442
+00:22:15,519 --> 00:22:17,060
+On muutamia muita harrastaja ominaisuuksia.
+
+443
+00:22:17,060 --> 00:22:19,130
+Jotkut niistä ovat puhtaasti
+esteettiset tai akustinen,
+
+444
+00:22:19,130 --> 00:22:20,964
+kuten äänet olen juuri pelataan.
+
+445
+00:22:20,964 --> 00:22:23,380
+Mutta suurin osa, sinun
+ovat tällä kielellä, Scratch,
+
+446
+00:22:23,380 --> 00:22:25,350
+kaikki perustavaa laatua
+rakennuspalikoita, jotka olet
+
+447
+00:22:25,350 --> 00:22:29,280
+on C, Java, JavaScript,
+PHP, Ruby, Python,
+
+448
+00:22:29,280 --> 00:22:32,960
+ja useita muita kieliä.
+
+449
+00:22:32,960 --> 00:22:36,720
+Kysyttävää Scratch?
+
+450
+00:22:36,720 --> 00:22:37,220
+Selvä.
+
+451
+00:22:37,220 --> 00:22:40,303
+Joten emme sukeltaa syvemmälle Scratch,
+vaikka olet tervetullut tänä viikonloppuna,
+
+452
+00:22:40,303 --> 00:22:42,860
+varsinkin jos sinulla on lapsia tai
+veljen ja veljen ja tällainen,
+
+453
+00:22:42,860 --> 00:22:44,220
+esitellä niitä Scratch.
+
+454
+00:22:44,220 --> 00:22:47,960
+Se on oikeastaan ​​ihanan leikkisä
+ympäristön, koska sen kirjoittajat sanovat,
+
+455
+00:22:47,960 --> 00:22:49,120
+erittäin korkeat katot.
+
+456
+00:22:49,120 --> 00:22:51,670
+Vaikka aloitimme
+hyvin matalan tason yksityiskohdat,
+
+457
+00:22:51,670 --> 00:22:54,890
+voit todella tehdä melko vähän
+sen kanssa, ja tämä on ehkä
+
+458
+00:22:54,890 --> 00:22:57,360
+osoitus juuri näin.
+
+459
+00:22:57,360 --> 00:23:02,920
+>> Mutta katsotaan nyt siirtymistä lisää
+hienostunut ongelmia, jos haluatte,
+
+460
+00:23:02,920 --> 00:23:05,870
+tunnetaan nimellä "etsiminen" ja
+"Lajittelu" yleisemmin.
+
+461
+00:23:05,870 --> 00:23:09,500
+Meillä oli tämä puhelinluettelo earlier-- tässä
+toinen vain discussion--
+
+462
+00:23:09,500 --> 00:23:13,460
+että pystyimme etsimään
+tehokkaammin koska
+
+463
+00:23:13,460 --> 00:23:15,270
+merkittävän olettamus.
+
+464
+00:23:15,270 --> 00:23:17,655
+Ja vain olla selvä, mitä
+Oletuksena oli, I tehdä
+
+465
+00:23:17,655 --> 00:23:19,280
+etsiessään kautta puhelinluettelo?
+
+466
+00:23:19,280 --> 00:23:23,342
+
+467
+00:23:23,342 --> 00:23:25,300
+Mike Smith oli
+puhelinluettelosta, vaikka en
+
+468
+00:23:25,300 --> 00:23:27,410
+pystyisi käsittelemään
+skenaariossa ilman häntä
+
+469
+00:23:27,410 --> 00:23:30,720
+siellä jos vain katkaista kesken.
+
+470
+00:23:30,720 --> 00:23:31,806
+Kirja on aakkosellinen.
+
+471
+00:23:31,806 --> 00:23:33,930
+Ja se on hyvin antelias
+olettamus, koska se
+
+472
+00:23:33,930 --> 00:23:36,580
+tarkoittaa someone-- Olen sellainen
+leikkaus nurkkaan,
+
+473
+00:23:36,580 --> 00:23:40,580
+kuten olen nopeammin, koska joku
+muuten teki paljon työtä minulle.
+
+474
+00:23:40,580 --> 00:23:43,120
+>> Mutta mitä jos puhelin
+kirja oli lajittelematta?
+
+475
+00:23:43,120 --> 00:23:47,050
+Ehkä Verizon sai laiska, vain heitti
+kaikkien nimet ja numerot siellä
+
+476
+00:23:47,050 --> 00:23:50,120
+Ehkä siinä järjestyksessä, jossa ne
+rekisteröitynyt puhelinpalvelua.
+
+477
+00:23:50,120 --> 00:23:54,570
+Ja kuinka paljon aikaa se vie minut
+löytää joku Mike Smith?
+
+478
+00:23:54,570 --> 00:23:58,160
+1000 sivu puhelin book-- montako
+sivuilla minun täytyy käydä läpi?
+
+479
+00:23:58,160 --> 00:23:58,905
+>> Ne kaikki.
+
+480
+00:23:58,905 --> 00:24:00,030
+Olet tavallaan poissa onnea.
+
+481
+00:24:00,030 --> 00:24:03,420
+Kirjaimellisesti täytyy katsoa jokaisen
+sivu, jos puhelinluettelo on aivan
+
+482
+00:24:03,420 --> 00:24:04,450
+satunnaisesti lajitellaan.
+
+483
+00:24:04,450 --> 00:24:06,910
+Saatat saada onnekas ja löytää Mike
+on aivan ensimmäisellä sivulla, koska hän
+
+484
+00:24:06,910 --> 00:24:08,826
+oli ensimmäinen asiakas
+tilata puhelinpalvelusta.
+
+485
+00:24:08,826 --> 00:24:10,760
+Mutta hän olisi ollut viimeinen, too.
+
+486
+00:24:10,760 --> 00:24:12,500
+>> Joten satunnaisessa järjestyksessä ei ole hyvä.
+
+487
+00:24:12,500 --> 00:24:16,750
+Joten kai meidän täytyy lajitella
+puhelinluettelo tai yleensä lajitella data
+
+488
+00:24:16,750 --> 00:24:18,520
+että meille on annettu.
+
+489
+00:24:18,520 --> 00:24:19,440
+Miten voimme tehdä?
+
+490
+00:24:19,440 --> 00:24:21,360
+>> No, haluan vain yrittää
+yksinkertainen esimerkki tästä.
+
+491
+00:24:21,360 --> 00:24:24,290
+Anna minun mennä eteenpäin ja nakata
+Muutama numerot taululle.
+
+492
+00:24:24,290 --> 00:24:35,480
+Oletetaan numerot olemme ovat
+sanokaamme, neljä, kaksi, yksi, ja kolme.
+
+493
+00:24:35,480 --> 00:24:38,390
+Ja Ben, lajitella nämä numerot meille.
+
+494
+00:24:38,390 --> 00:24:39,017
+>> Okei hyvä.
+
+495
+00:24:39,017 --> 00:24:39,850
+Miten teit tuon?
+
+496
+00:24:39,850 --> 00:24:42,731
+
+497
+00:24:42,731 --> 00:24:43,230
+Selvä.
+
+498
+00:24:43,230 --> 00:24:44,710
+Joten aloittaa pienin
+arvo ja korkein,
+
+499
+00:24:44,710 --> 00:24:46,084
+ja se on todella hyvä intuitio.
+
+500
+00:24:46,084 --> 00:24:48,080
+Ja ymmärtää, että me
+ihmiset ovat oikeastaan ​​aika
+
+501
+00:24:48,080 --> 00:24:49,913
+Hyvä ratkaisemaan ongelmia
+näin ainakin
+
+502
+00:24:49,913 --> 00:24:51,810
+kun data on suhteellisen pieni.
+
+503
+00:24:51,810 --> 00:24:54,860
+Heti kun alkaa olla satoja
+numeroita, tuhansia numeroita,
+
+504
+00:24:54,860 --> 00:24:58,440
+miljoonia numeroita, Ben luultavasti
+voinut tehdä sitä aivan niin nopeasti,
+
+505
+00:24:58,440 --> 00:25:00,620
+olettaen, että oli
+aukkoja numerot.
+
+506
+00:25:00,620 --> 00:25:03,450
+Melko helppo laskea miljoona
+muuten vain aikaa vievää.
+
+507
+00:25:03,450 --> 00:25:07,150
+>> Joten algoritmi se kuulostaa
+kuten Ben käytetty juuri nyt
+
+508
+00:25:07,150 --> 00:25:08,930
+oli etsiä pienin määrä.
+
+509
+00:25:08,930 --> 00:25:12,900
+Joten vaikka me ihmiset voivat ottaa
+on paljon tietoa visuaalisesti,
+
+510
+00:25:12,900 --> 00:25:14,830
+tietokone on todella
+hieman suppeampi.
+
+511
+00:25:14,830 --> 00:25:17,560
+Tietokone voi vain
+katso yksi tavu kerrallaan
+
+512
+00:25:17,560 --> 00:25:20,770
+tai ehkä neljä tavua klo time--
+näinä päivinä ehkä 8 tavua klo time--
+
+513
+00:25:20,770 --> 00:25:24,450
+mutta hyvin pieni määrä
+tavujen tiettynä ajankohtana.
+
+514
+00:25:24,450 --> 00:25:28,480
+>> Joten koska meillä on todellakin
+neljä erillistä arvoa here--
+
+515
+00:25:28,480 --> 00:25:32,440
+ja voit ajatella Ben olevan
+blinders jos hän olisi tietokoneen tällaisia
+
+516
+00:25:32,440 --> 00:25:36,450
+että hän ei voi nähdä mitään muuta
+kuin yhden numeron yhdellä time--
+
+517
+00:25:36,450 --> 00:25:39,720
+niin me yleensä olettaa, kuten
+Englanti, me luetaan oikealta vasemmalle.
+
+518
+00:25:39,720 --> 00:25:42,870
+Joten ensimmäinen numero Ben luultavasti näytti
+at oli neljä ja sitten nopeasti
+
+519
+00:25:42,870 --> 00:25:44,770
+ymmärtäneet, että on aika iso
+number-- anna minun pitää näköinen.
+
+520
+00:25:44,770 --> 00:25:45,357
+>> On kaksi.
+
+521
+00:25:45,357 --> 00:25:45,940
+Odota hetki.
+
+522
+00:25:45,940 --> 00:25:47,070
+Kaksi on pienempi kuin neljä.
+
+523
+00:25:47,070 --> 00:25:47,986
+Aion muistaa.
+
+524
+00:25:47,986 --> 00:25:49,070
+Kaksi on nyt pienin.
+
+525
+00:25:49,070 --> 00:25:50,417
+Nyt one-- se on vielä parempi.
+
+526
+00:25:50,417 --> 00:25:51,250
+Se on vielä pienempi.
+
+527
+00:25:51,250 --> 00:25:54,000
+Aion unohtaa kaksi
+ja vain muistaa yksi nyt.
+
+528
+00:25:54,000 --> 00:25:56,550
+>> Ja hän voisi lopettaa näköinen?
+
+529
+00:25:56,550 --> 00:25:58,360
+No, hän voisi perustuva
+Tämän tiedon
+
+530
+00:25:58,360 --> 00:26:00,477
+mutta parasta haku
+loput luettelosta.
+
+531
+00:26:00,477 --> 00:26:02,060
+Sillä mitä jos nolla olivat listassa?
+
+532
+00:26:02,060 --> 00:26:03,643
+Mitä jos kielteisen olivat listassa?
+
+533
+00:26:03,643 --> 00:26:07,720
+Hän vain tietää, että hänen vastauksensa
+on oikein, jos hän on tyhjentävästi
+
+534
+00:26:07,720 --> 00:26:08,729
+tarkastetaan koko listan.
+
+535
+00:26:08,729 --> 00:26:10,020
+Joten katsomme loput tästä.
+
+536
+00:26:10,020 --> 00:26:11,394
+Three-- joka oli ajanhukkaa.
+
+537
+00:26:11,394 --> 00:26:13,540
+Sai epäonninen, mutta olin
+silti oikein tehdä niin.
+
+538
+00:26:13,540 --> 00:26:17,857
+Ja niin nyt hän oletettavasti
+valitaan pienin määrä
+
+539
+00:26:17,857 --> 00:26:20,440
+ja vain laittaa sen alussa
+luettelon, koska minä teen täällä.
+
+540
+00:26:20,440 --> 00:26:23,480
+Nyt mitä teit seuraavaksi, vaikka
+et ajattele sitä melkein
+
+541
+00:26:23,480 --> 00:26:25,962
+tässä suhteessa?
+
+542
+00:26:25,962 --> 00:26:27,670
+Toista prosessi,
+joten jonkinlainen silmukan.
+
+543
+00:26:27,670 --> 00:26:28,920
+Siellä on tuttu idea.
+
+544
+00:26:28,920 --> 00:26:30,860
+Joten tässä on neljä.
+
+545
+00:26:30,860 --> 00:26:32,110
+Se on tällä hetkellä pienin.
+
+546
+00:26:32,110 --> 00:26:33,220
+Se on ehdokas.
+
+547
+00:26:33,220 --> 00:26:33,900
+Ei enää.
+
+548
+00:26:33,900 --> 00:26:34,770
+Nyt olen nähnyt kaksi.
+
+549
+00:26:34,770 --> 00:26:36,630
+Se on seuraavaksi pienin elementti.
+
+550
+00:26:36,630 --> 00:26:40,800
+Three-- se ei ole pienempi, joten
+Nyt Ben voi nyppiä pois kaksi.
+
+551
+00:26:40,800 --> 00:26:44,510
+>> Ja nyt toista prosessi, ja
+tietenkin kolmesta saa vedetty ulos seuraavaksi.
+
+552
+00:26:44,510 --> 00:26:45,420
+Toista prosessi.
+
+553
+00:26:45,420 --> 00:26:46,990
+Neljä saa vedetty ulos.
+
+554
+00:26:46,990 --> 00:26:50,140
+Ja nyt olemme poissa numerot,
+joten lista on lajiteltava.
+
+555
+00:26:50,140 --> 00:26:51,960
+>> Ja todellakin, tämä on muodollinen algoritmi.
+
+556
+00:26:51,960 --> 00:26:56,610
+Tietokone tiedemies olisi
+kutsuvat tätä "valinta lajitella,"
+
+557
+00:26:56,610 --> 00:27:00,880
+Ajatuksena on lajitella
+luetella iteratively-- uudelleen
+
+558
+00:27:00,880 --> 00:27:03,807
+ja uudestaan ​​ja uudestaan ​​valitsemalla
+pienin määrä.
+
+559
+00:27:03,807 --> 00:27:06,140
+Ja mikä on mukavaa siitä on
+se on vain niin hiton intuitiivinen.
+
+560
+00:27:06,140 --> 00:27:07,470
+Se on niin yksinkertaista.
+
+561
+00:27:07,470 --> 00:27:11,100
+Ja voit toistaa saman
+toiminta uudelleen ja uudelleen.
+
+562
+00:27:11,100 --> 00:27:12,150
+Se on yksinkertaista.
+
+563
+00:27:12,150 --> 00:27:17,170
+>> Tässä tapauksessa se oli nopea, mutta
+kuinka kauan se todella kestää?
+
+564
+00:27:17,170 --> 00:27:19,880
+Tehdään se näyttää ja
+tuntuu hieman tylsiä.
+
+565
+00:27:19,880 --> 00:27:24,150
+Joten yksi, kaksi, kolme, neljä, viisi kuudesta,
+seitsemän, kahdeksan, yhdeksän, 10, 11, 12, 13, 14,
+
+566
+00:27:24,150 --> 00:27:26,160
+15, 16-- mielivaltaisen määrän.
+
+567
+00:27:26,160 --> 00:27:28,780
+Halusin lisää tästä
+aika kuin vain neljä.
+
+568
+00:27:28,780 --> 00:27:30,780
+Joten jos minulla koko
+kasan numeroita now-- se
+
+569
+00:27:30,780 --> 00:27:32,420
+ei edes väliä
+mitä he are-- katsotaanpa
+
+570
+00:27:32,420 --> 00:27:34,380
+miettiä, mitä tämä
+algoritmi todella on.
+
+571
+00:27:34,380 --> 00:27:35,857
+>> Oletetaan on numeroita siellä.
+
+572
+00:27:35,857 --> 00:27:38,190
+Jälleen, ei ole väliä mitä
+ne ovat, mutta ne ovat satunnaisia.
+
+573
+00:27:38,190 --> 00:27:39,679
+Haen Ben algoritmi.
+
+574
+00:27:39,679 --> 00:27:41,220
+Minun täytyy valita pienin määrä.
+
+575
+00:27:41,220 --> 00:27:41,761
+Mitä teen?
+
+576
+00:27:41,761 --> 00:27:44,240
+Ja aion fyysisesti
+tee se tällä kertaa toimimaan sitä.
+
+577
+00:27:44,240 --> 00:27:46,099
+Katse, etsii,
+etsivät, etsivät, etsivät.
+
+578
+00:27:46,099 --> 00:27:48,140
+Vain aika saan
+loppuun listan voi
+
+579
+00:27:48,140 --> 00:27:51,230
+Ymmärrän pienin
+Määrä oli kaksi tällä kertaa.
+
+580
+00:27:51,230 --> 00:27:52,720
+Yksi ei luettelossa.
+
+581
+00:27:52,720 --> 00:27:54,400
+Joten laitoin alas kaksi.
+
+582
+00:27:54,400 --> 00:27:55,590
+>> Mitä teen seuraavaksi?
+
+583
+00:27:55,590 --> 00:27:58,600
+Näköinen, etsivät, etsivät, etsivät.
+
+584
+00:27:58,600 --> 00:28:02,250
+Nyt olen löytänyt numero seitsemän, koska
+siellä on aukkoja näissä numbers--
+
+585
+00:28:02,250 --> 00:28:03,300
+mutta vain mielivaltainen.
+
+586
+00:28:03,300 --> 00:28:03,800
+Selvä.
+
+587
+00:28:03,800 --> 00:28:06,030
+Nyt voin laittaa alas seitsemän.
+
+588
+00:28:06,030 --> 00:28:08,860
+Katsoo looking, etsivät.
+
+589
+00:28:08,860 --> 00:28:11,030
+>> Nyt olen olettaen
+Tietenkin, että Ben ei
+
+590
+00:28:11,030 --> 00:28:14,780
+on ylimääräistä RAM, extra
+muistin, koska tietenkin,
+
+591
+00:28:14,780 --> 00:28:16,080
+Etsin sama määrä.
+
+592
+00:28:16,080 --> 00:28:18,246
+Varmasti olen voinut muistaa
+kaikki nämä luvut,
+
+593
+00:28:18,246 --> 00:28:19,930
+ja se on aivan totta.
+
+594
+00:28:19,930 --> 00:28:22,610
+Mutta jos Ben muistaa kaikki
+numeroista hän on nähnyt,
+
+595
+00:28:22,610 --> 00:28:24,430
+hän ei ole oikeastaan ​​tehnyt
+olennaisesta kehityksestä
+
+596
+00:28:24,430 --> 00:28:26,170
+koska hän on jo
+kyky hakea
+
+597
+00:28:26,170 --> 00:28:27,540
+läpi numerot taululle.
+
+598
+00:28:27,540 --> 00:28:29,373
+Muistaa kaikki
+numeroita ei auta,
+
+599
+00:28:29,373 --> 00:28:32,490
+koska hän voi silti kuin tietokone
+vain katsoa, ​​olemme sanoneet, yksi numero
+
+600
+00:28:32,490 --> 00:28:33,080
+kerrallaan.
+
+601
+00:28:33,080 --> 00:28:35,760
+Joten ei ole sellainen huijata
+siellä, että voit hyödyntää.
+
+602
+00:28:35,760 --> 00:28:39,170
+>> Joten todellisuudessa, koska olen
+jatkaa etsimistä luettelosta
+
+603
+00:28:39,170 --> 00:28:44,200
+Olen kirjaimellisesti täytyy vain pitää käynnissä
+edestakaisin sen läpi, nyppiminen pois
+
+604
+00:28:44,200 --> 00:28:45,710
+seuraavaksi pienin numero.
+
+605
+00:28:45,710 --> 00:28:48,810
+Ja koska voit sellaista päätellä
+minun typerä liikkeitä,
+
+606
+00:28:48,810 --> 00:28:50,860
+Tämä vain saa hyvin
+ikävä hyvin nopeasti,
+
+607
+00:28:50,860 --> 00:28:54,850
+ja minä näyttävät olevan menossa takaisin ja
+edestakaisin, edestakaisin melko vähän.
+
+608
+00:28:54,850 --> 00:29:03,220
+Nyt on oikeudenmukainen, minun ei tarvitse mennä
+aivan niin, no, sanotaan see-- olla oikeudenmukainen,
+
+609
+00:29:03,220 --> 00:29:06,310
+Minun ei tarvitse kävellä melko
+niin monta vaihetta joka kerta.
+
+610
+00:29:06,310 --> 00:29:09,200
+Koska, tietenkin, kuten minä
+Valitse numerot luettelosta,
+
+611
+00:29:09,200 --> 00:29:11,860
+jäljellä lista lyhenee.
+
+612
+00:29:11,860 --> 00:29:14,240
+>> Ja niin Ajatellaanpa
+kuinka monta askelta Olen oikeastaan
+
+613
+00:29:14,240 --> 00:29:16,010
+traipsing läpi joka kerta.
+
+614
+00:29:16,010 --> 00:29:18,950
+Aivan ensimmäinen tilanne
+meillä oli 16 numeroa,
+
+615
+00:29:18,950 --> 00:29:22,210
+ja niin maximally-- sanotaan vain
+Tätä varten discussion--
+
+616
+00:29:22,210 --> 00:29:25,640
+Jouduin katsoa läpi 16
+numerot löytää pienin.
+
+617
+00:29:25,640 --> 00:29:28,420
+Mutta kun minä temmattu
+pienin määrä, miten
+
+618
+00:29:28,420 --> 00:29:30,590
+pitkä oli jäljellä lista, tietenkin?
+
+619
+00:29:30,590 --> 00:29:31,420
+Vain 15.
+
+620
+00:29:31,420 --> 00:29:34,670
+Joten kuinka monta numeroa teki Ben tai Minulla
+käydä läpi toisella kerralla?
+
+621
+00:29:34,670 --> 00:29:36,832
+15, vain mennä ja löytää pienin.
+
+622
+00:29:36,832 --> 00:29:39,540
+Mutta nyt, tietenkin, lista on,
+Myös pienempi kuin se oli ennen.
+
+623
+00:29:39,540 --> 00:29:42,540
+Joten kuinka monta askelta tein
+on otettava seuraavan kerran?
+
+624
+00:29:42,540 --> 00:29:49,970
+14 ja sitten 13 ja sitten 12, plus piste,
+piste, piste, kunnes olen jäänyt vain yksi.
+
+625
+00:29:49,970 --> 00:29:53,146
+Joten nyt tietojenkäsittelytieteessä olisi
+kysyä, hyvin, mitä se kaikki samanarvoisia?
+
+626
+00:29:53,146 --> 00:29:55,770
+Se todellakin on yhtä konkreettisia
+numero että voisimme varmasti
+
+627
+00:29:55,770 --> 00:30:00,490
+do aritmeettisesti, mutta haluamme puhua
+tehokkuudesta algoritmien
+
+628
+00:30:00,490 --> 00:30:04,940
+hieman formulaically,
+riippumatta siitä, miten kauan luettelo on.
+
+629
+00:30:04,940 --> 00:30:06,240
+>> Ja niin tiedät mitä?
+
+630
+00:30:06,240 --> 00:30:09,860
+Tämä on 16, mutta kuten aiemmin sanoin,
+Haluan vain soittaa koko ongelman
+
+631
+00:30:09,860 --> 00:30:10,970
+n, jossa n on jokin numero.
+
+632
+00:30:10,970 --> 00:30:13,220
+Ehkä se on 16, ehkä se
+kolme, ehkä se miljoona.
+
+633
+00:30:13,220 --> 00:30:13,761
+Minä en tiedä.
+
+634
+00:30:13,761 --> 00:30:14,390
+En välitä.
+
+635
+00:30:14,390 --> 00:30:16,520
+Mitä todella haluan on
+kaava, joka voin
+
+636
+00:30:16,520 --> 00:30:19,420
+käyttää vertaamaan tätä algoritmia
+toisia algoritmeja
+
+637
+00:30:19,420 --> 00:30:22,350
+että joku saattaa vaatia
+ovat parempia tai huonompia.
+
+638
+00:30:22,350 --> 00:30:25,430
+>> Joten se kääntyy pois, ja minä vain
+tietävät tämän alkaen alakoulussa,
+
+639
+00:30:25,430 --> 00:30:34,790
+että tämä todella toimii samaan
+asia kuin n yli n plus yksi yli kaksi.
+
+640
+00:30:34,790 --> 00:30:40,020
+Ja tämä tapahtuu yhtä, ja
+Tietenkin n potenssiin plus n yli kaksi.
+
+641
+00:30:40,020 --> 00:30:43,250
+Joten jos halusin kaava
+kuinka monta askelta
+
+642
+00:30:43,250 --> 00:30:46,330
+olivat mukana tarkastellaan kaikkia
+Näiden numeroiden uudestaan ​​ja uudestaan
+
+643
+00:30:46,330 --> 00:30:52,681
+ja uudestaan ​​ja uudestaan, sanoisin
+se n potenssiin plus n yli kaksi.
+
+644
+00:30:52,681 --> 00:30:53,430
+Mutta tiedätkö mitä?
+
+645
+00:30:53,430 --> 00:30:54,500
+Tämä vain näyttää sotkuinen.
+
+646
+00:30:54,500 --> 00:30:56,470
+Olen vain todella haluavat
+yleinen käsitys asioista.
+
+647
+00:30:56,470 --> 00:30:58,810
+Ja ehkä muistatte
+lukion että
+
+648
+00:30:58,810 --> 00:31:00,660
+on käsite huipputasolla aikavälillä.
+
+649
+00:31:00,660 --> 00:31:05,300
+Mitkä näistä ehdoista, n
+potenssiin, n, tai puoli,
+
+650
+00:31:05,300 --> 00:31:07,550
+on eniten vaikutusta ajan myötä?
+
+651
+00:31:07,550 --> 00:31:11,920
+Isompi n saa, joka
+Näiden asioiden eniten?
+
+652
+00:31:11,920 --> 00:31:15,560
+>> Toisin sanoen, jos kytken
+miljoonasta, n potenssiin
+
+653
+00:31:15,560 --> 00:31:17,900
+tulee olemaan todennäköisesti
+hallitseva tekijä,
+
+654
+00:31:17,900 --> 00:31:21,670
+koska miljoona kertaa
+itsessään on paljon suurempi
+
+655
+00:31:21,670 --> 00:31:23,682
+kuin plus yksi ylimääräinen miljoona.
+
+656
+00:31:23,682 --> 00:31:24,390
+Joten tiedätkö mitä?
+
+657
+00:31:24,390 --> 00:31:27,305
+Tämä on niin hiton iso
+numero, jos neliön useita.
+
+658
+00:31:27,305 --> 00:31:28,430
+Tämä ei ole niin väliä.
+
+659
+00:31:28,430 --> 00:31:30,596
+Olemme juuri menossa ristikkokappaleenkanssa
+pois ja unohtaa sen.
+
+660
+00:31:30,596 --> 00:31:34,250
+Ja niin tietojenkäsittelytieteessä sanoisi
+että tehokkuus tämän algoritmin
+
+661
+00:31:34,250 --> 00:31:37,850
+on suuruusluokkaa n squared--
+Siis todella approksimaatio.
+
+662
+00:31:37,850 --> 00:31:40,810
+Se on tavallaan karkeasti n neliö.
+
+663
+00:31:40,810 --> 00:31:44,130
+Ajan, isompi
+ja isompi n saa, tämä
+
+664
+00:31:44,130 --> 00:31:47,610
+on hyvä arvio siitä, mitä
+tehokkuus tai tehottomuus
+
+665
+00:31:47,610 --> 00:31:49,400
+Tämän algoritmin todella on.
+
+666
+00:31:49,400 --> 00:31:52,040
+Ja minä johtaa se, tietenkin,
+alkaen todella tekee matematiikka.
+
+667
+00:31:52,040 --> 00:31:54,040
+Mutta nyt olen vain heiluttaa
+käteni, koska olen juuri
+
+668
+00:31:54,040 --> 00:31:55,790
+haluavat yleinen käsitys tämän algoritmin.
+
+669
+00:31:55,790 --> 00:31:58,850
+>> Joten käyttäen samaa logiikkaa, sillä välin,
+Tarkastellaan toista algoritmia
+
+670
+00:31:58,850 --> 00:32:01,162
+me jo tutustunut at-- lineaarista hakua.
+
+671
+00:32:01,162 --> 00:32:02,870
+Kun hain
+puhelimen book--
+
+672
+00:32:02,870 --> 00:32:05,980
+ei lajittelu, etsimistä
+puhelimitse book--
+
+673
+00:32:05,980 --> 00:32:09,197
+me sanoivat, että se oli
+1000 vaiheita, tai 500 vaiheet.
+
+674
+00:32:09,197 --> 00:32:10,280
+Mutta nyt yleistää että.
+
+675
+00:32:10,280 --> 00:32:12,860
+Jos on n sivuja
+puhelinluettelosta, mitä
+
+676
+00:32:12,860 --> 00:32:17,250
+käyntiaika tai
+tehokkuutta lineaarinen haku?
+
+677
+00:32:17,250 --> 00:32:19,750
+Se on suuruusluokkaa
+kuinka monta askelta löytää
+
+678
+00:32:19,750 --> 00:32:24,210
+Mike Smith käyttäen lineaarista haku,
+Ensimmäinen algoritmi, tai jopa toinen?
+
+679
+00:32:24,210 --> 00:32:27,240
+
+680
+00:32:27,240 --> 00:32:31,710
+>> Pahimmassa tapauksessa Mike
+on lopussa kirjan.
+
+681
+00:32:31,710 --> 00:32:35,590
+Joten jos puhelinluettelo on 1000 sivua,
+sanoimme viime kerralla, pahimmassa tapauksessa,
+
+682
+00:32:35,590 --> 00:32:38,380
+se saattaa kestää suunnilleen kuinka
+monta sivua löytää Mike?
+
+683
+00:32:38,380 --> 00:32:38,990
+Like 1000.
+
+684
+00:32:38,990 --> 00:32:39,830
+Se on yläraja.
+
+685
+00:32:39,830 --> 00:32:41,790
+Se on pahin mahdollinen tilanne.
+
+686
+00:32:41,790 --> 00:32:44,410
+Mutta jälleen kerran, me luopumassa
+numeroista kuten 1000 nyt.
+
+687
+00:32:44,410 --> 00:32:45,730
+Se on vain n.
+
+688
+00:32:45,730 --> 00:32:47,470
+>> Mikä siis looginen johtopäätös?
+
+689
+00:32:47,470 --> 00:32:50,210
+Löytäminen Mike puhelimessa
+kirja, joka on n sivut
+
+690
+00:32:50,210 --> 00:32:55,280
+voi kestää, aivan pahimmassa tapauksessa,
+kuinka monta askelta määräyksestä n?
+
+691
+00:32:55,280 --> 00:32:58,110
+Ja todellakin tietokone
+tiedemies sanoisi
+
+692
+00:32:58,110 --> 00:33:02,340
+että ajoaika, tai
+suorituskykyä tai tehokkuutta
+
+693
+00:33:02,340 --> 00:33:07,470
+tai tehottomuus, algoritmin kuten
+lineaarinen haku on suuruusluokkaa n.
+
+694
+00:33:07,470 --> 00:33:10,010
+Ja voimme soveltaa samoja
+logiikka rajan jotain
+
+695
+00:33:10,010 --> 00:33:13,170
+kuten tein toiseen
+algoritmi meillä oli puhelinluettelosta,
+
+696
+00:33:13,170 --> 00:33:16,040
+jossa menimme kaksi sivua kerrallaan.
+
+697
+00:33:16,040 --> 00:33:20,120
+>> Joten 1000 sivu puhelinluettelo saattaisi
+vie meidät 500 sivun kierrosta, plus yksi
+
+698
+00:33:20,120 --> 00:33:21,910
+jos taittaa hieman.
+
+699
+00:33:21,910 --> 00:33:26,590
+Joten jos puhelinluettelo on n sivuja, mutta
+teemme kaksi sivua kerrallaan,
+
+700
+00:33:26,590 --> 00:33:28,900
+se suunnilleen mitä?
+
+701
+00:33:28,900 --> 00:33:33,190
+N yli kaksi, niin että on kuin n yli kaksi.
+
+702
+00:33:33,190 --> 00:33:38,490
+Mutta tein vaatia
+hetki sitten, että n yli two--
+
+703
+00:33:38,490 --> 00:33:41,060
+se on eräänlainen sama kuin juuri n.
+
+704
+00:33:41,060 --> 00:33:44,050
+Se on vain vakio tekijä,
+tietotekniikan tutkijoita sanoisi.
+
+705
+00:33:44,050 --> 00:33:45,970
+Katsotaan vain keskittyä
+muuttujat, really--
+
+706
+00:33:45,970 --> 00:33:47,780
+suurin muuttujat yhtälössä.
+
+707
+00:33:47,780 --> 00:33:52,530
+>> Joten lineaarista hakua, onko tehty yksi
+sivu kerrallaan tai kaksi sivua kerrallaan,
+
+708
+00:33:52,530 --> 00:33:54,810
+on eräänlainen pohjimmiltaan sama.
+
+709
+00:33:54,810 --> 00:33:56,880
+Se on edelleen suuruusluokkaa n.
+
+710
+00:33:56,880 --> 00:34:01,930
+Mutta minä väitti minun kuva aikaisemmin
+että kolmas algoritmi ei ollut
+
+711
+00:34:01,930 --> 00:34:02,480
+lineaarinen.
+
+712
+00:34:02,480 --> 00:34:03,605
+Se ei suoraviivaisesti.
+
+713
+00:34:03,605 --> 00:34:08,659
+Se oli, että kaareva viiva, ja
+matemaattisessa muodossa oli mitä?
+
+714
+00:34:08,659 --> 00:34:11,812
+Loki n- niin log pohja kaksi n.
+
+715
+00:34:11,812 --> 00:34:14,520
+Ja meidän ei tarvitse mennä liian
+paljon yksityiskohtia logaritmit tänään,
+
+716
+00:34:14,520 --> 00:34:17,394
+mutta useimmat tietotekniikan tutkijoita ei olisi
+edes kertoa mikä pohja on.
+
+717
+00:34:17,394 --> 00:34:20,639
+Koska se kaikki on vain
+vakio tekijät, niin sanotusti,
+
+718
+00:34:20,639 --> 00:34:22,659
+vain vähäisiä numeerinen eroja.
+
+719
+00:34:22,659 --> 00:34:31,179
+Ja niin tämä olisi hyvin yleinen
+tietä erityisen muodollisia tietokone
+
+720
+00:34:31,179 --> 00:34:33,949
+tutkijat hallituksen tai
+ohjelmoijat valkoinen lauta
+
+721
+00:34:33,949 --> 00:34:36,889
+oikeastaan ​​väittäen joka
+algoritmi he käyttäisivät
+
+722
+00:34:36,889 --> 00:34:39,500
+tai mitä tehokkuus
+niiden algoritmi on.
+
+723
+00:34:39,500 --> 00:34:42,960
+>> Ja tämä ei ole välttämättä jotain
+keskustelette kovin yksityiskohtaisesti,
+
+724
+00:34:42,960 --> 00:34:47,889
+mutta hyvä ohjelmoija on joku
+joka on vankka, muodollinen tausta.
+
+725
+00:34:47,889 --> 00:34:50,120
+Hän pystyy puhumaan
+teitä tässä sellainen tapa
+
+726
+00:34:50,120 --> 00:34:53,350
+ja todella tehdä
+laadulliset argumentit
+
+727
+00:34:53,350 --> 00:34:56,870
+miksi yksi algoritmin tai
+yksi pala ohjelmisto
+
+728
+00:34:56,870 --> 00:35:00,165
+on parempi jollakin tavalla toiseen.
+
+729
+00:35:00,165 --> 00:35:02,540
+Koska te voisi varmasti
+vain ajaa yhden henkilön ohjelma
+
+730
+00:35:02,540 --> 00:35:04,980
+ja laskea, kuinka monta sekuntia
+se vie lajitella joitakin numeroita,
+
+731
+00:35:04,980 --> 00:35:06,710
+ja voit käyttää joitakin
+toisen henkilön ohjelma
+
+732
+00:35:06,710 --> 00:35:08,418
+ja laskea, kuinka monta
+sekuntia kuluu.
+
+733
+00:35:08,418 --> 00:35:12,840
+Mutta tämä on enemmän yleisesti, että
+voit analysoida algoritmeja,
+
+734
+00:35:12,840 --> 00:35:15,520
+jos haluatte, juuri
+paperi- tai vain suullisesti.
+
+735
+00:35:15,520 --> 00:35:18,430
+Ilman edes juoksevaa sitä ilman
+edes yrittää näyte tuloa,
+
+736
+00:35:18,430 --> 00:35:20,180
+voit vain syystä sen läpi.
+
+737
+00:35:20,180 --> 00:35:24,670
+Ja niin on palkata kehittäjä tai jos
+ottaa häntä tavallaan väittävät teille
+
+738
+00:35:24,670 --> 00:35:28,460
+miksi niiden algoritmi, salaiset
+kastike etsimiseen miljardeja
+
+739
+00:35:28,460 --> 00:35:30,580
+web-sivuja
+Yhtiö on parempi, nämä
+
+740
+00:35:30,580 --> 00:35:33,302
+ovat erilaisia ​​argumentteja he
+Ihanteellista olisi voitava tehdä.
+
+741
+00:35:33,302 --> 00:35:35,010
+Tai ainakin nämä ovat
+erilaisia ​​asioita
+
+742
+00:35:35,010 --> 00:35:40,211
+jotka tulevat esille keskustelussa, osoitteessa
+ainakin hyvin muodollinen keskustelu.
+
+743
+00:35:40,211 --> 00:35:40,710
+Selvä.
+
+744
+00:35:40,710 --> 00:35:44,400
+Joten Ben ehdotettu jotain
+nimeltään valinta lajitella.
+
+745
+00:35:44,400 --> 00:35:48,200
+Mutta aion ehdottaa, että on olemassa
+muita tapoja tehdä tämä, too.
+
+746
+00:35:48,200 --> 00:35:50,400
+Mitä En todellakaan pidä
+Benistä algoritmi
+
+747
+00:35:50,400 --> 00:35:54,400
+on, että hän piti kävely, tai
+ottaa minut kävelemään, edestakaisin
+
+748
+00:35:54,400 --> 00:35:56,930
+ja edestakaisin ja edestakaisin.
+
+749
+00:35:56,930 --> 00:36:04,130
+Mitä jos sen sijaan tekisin
+jotain nämä numerot tähän
+
+750
+00:36:04,130 --> 00:36:08,200
+ja minä vain käsitellä kutakin
+numero puolestaan ​​kuin olen antanut sille?
+
+751
+00:36:08,200 --> 00:36:10,780
+>> Toisin sanoen, tässä
+listallani numeroita.
+
+752
+00:36:10,780 --> 00:36:12,944
+Neljä, yksi, kolme, kaksi.
+
+753
+00:36:12,944 --> 00:36:14,360
+Ja aion tehdä seuraavaa.
+
+754
+00:36:14,360 --> 00:36:17,230
+Aion lisätä numeroita
+jos ne kuuluvat melko
+
+755
+00:36:17,230 --> 00:36:18,980
+kuin valitsemalla ne yksi kerrallaan.
+
+756
+00:36:18,980 --> 00:36:20,820
+Toisin sanoen, tässä on numero neljä.
+
+757
+00:36:20,820 --> 00:36:22,430
+>> Tässä on alkuperäinen lista.
+
+758
+00:36:22,430 --> 00:36:25,290
+Ja aion säilyttää
+pohjimmiltaan uusi lista täällä.
+
+759
+00:36:25,290 --> 00:36:26,710
+Joten tämä on vanha lista.
+
+760
+00:36:26,710 --> 00:36:28,560
+Tämä on uusi lista.
+
+761
+00:36:28,560 --> 00:36:30,220
+Näen numero neljä ensimmäistä.
+
+762
+00:36:30,220 --> 00:36:34,500
+Oma uusi lista on aluksi tyhjä,
+joten se on triviaalisti tapauksessa
+
+763
+00:36:34,500 --> 00:36:36,410
+että neljä on nyt valikoituja lista.
+
+764
+00:36:36,410 --> 00:36:39,560
+Olen vain ottaen määrä olen antanut,
+ja olen laskemisesta sitä minun uusi lista.
+
+765
+00:36:39,560 --> 00:36:41,460
+>> Onko tämä uusi luettelo lajitellaan?
+
+766
+00:36:41,460 --> 00:36:41,990
+Joo.
+
+767
+00:36:41,990 --> 00:36:45,090
+Se tyhmä, koska siellä on vain yksi
+elementti, mutta se on ehdottomasti lajitellaan.
+
+768
+00:36:45,090 --> 00:36:46,390
+Ei mitään pois paikaltaan.
+
+769
+00:36:46,390 --> 00:36:49,290
+Se on enemmän mielenkiintoista, tämä algoritmi,
+kun siirrytään seuraavaan vaiheeseen.
+
+770
+00:36:49,290 --> 00:36:50,550
+>> Nyt minulla on yksi.
+
+771
+00:36:50,550 --> 00:36:55,430
+Joten tietenkin kuuluu tällä
+alkuun tai loppuun tämän uuden luettelon?
+
+772
+00:36:55,430 --> 00:36:56,360
+Alku.
+
+773
+00:36:56,360 --> 00:36:58,530
+Joten minun täytyy tehdä töitä nyt.
+
+774
+00:36:58,530 --> 00:37:01,410
+Olen ottanut joitakin
+vapauksia minun merkki
+
+775
+00:37:01,410 --> 00:37:03,120
+vain hieman piirtämällä asioita
+jossa olen halua niitä,
+
+776
+00:37:03,120 --> 00:37:05,320
+mutta se ei oikeastaan
+tarkka tietokoneessa.
+
+777
+00:37:05,320 --> 00:37:08,530
+Tietokone, kuten tiedämme, on
+RAM tai Random Access Memory,
+
+778
+00:37:08,530 --> 00:37:12,411
+ja se on yksi tavu ja
+toinen tavu ja toinen tavu.
+
+779
+00:37:12,411 --> 00:37:14,910
+Ja jos sinulla on gigatavu
+RAM, olet miljardi tavua,
+
+780
+00:37:14,910 --> 00:37:16,680
+mutta ne ovat fyysisesti yhdessä paikassa.
+
+781
+00:37:16,680 --> 00:37:19,540
+Et voi vain siirtää tavaraa ympäri
+piirtämällä taululle
+
+782
+00:37:19,540 --> 00:37:20,750
+missä vain haluat.
+
+783
+00:37:20,750 --> 00:37:24,090
+Joten jos uusi lista on
+neljällä paikkakunnalla muistiin,
+
+784
+00:37:24,090 --> 00:37:27,480
+valitettavasti neljä on
+jo väärässä paikassa.
+
+785
+00:37:27,480 --> 00:37:30,410
+>> Joten lisätä ykkönen
+En voi vain vetää sitä täällä.
+
+786
+00:37:30,410 --> 00:37:31,901
+Tämä muistipaikka ei ole olemassa.
+
+787
+00:37:31,901 --> 00:37:35,150
+Se olisi huijausta, ja olen ollut
+huijaaminen kuvallisesti muutaman minuutin
+
+788
+00:37:35,150 --> 00:37:35,800
+tässä.
+
+789
+00:37:35,800 --> 00:37:40,950
+Siis todella, jos haluan esittää yhden täällä,
+Minun täytyy tilapäisesti kopioida neljä
+
+790
+00:37:40,950 --> 00:37:43,030
+ja sitten laittaa yksi siellä.
+
+791
+00:37:43,030 --> 00:37:45,500
+>> Se on hyvä, pitää paikkansa,
+se on teknisesti mahdollista,
+
+792
+00:37:45,500 --> 00:37:48,410
+mutta ymmärtää, että on ylimääräistä työtä.
+
+793
+00:37:48,410 --> 00:37:50,460
+En vain laittaa numeron paikallaan.
+
+794
+00:37:50,460 --> 00:37:53,026
+I oli ensin siirtää
+numero, sitten laittaa se paikalleen,
+
+795
+00:37:53,026 --> 00:37:54,650
+joten olen sellainen kaksinkertaisti työmäärän.
+
+796
+00:37:54,650 --> 00:37:55,660
+Niin pitää tämä mielessä.
+
+797
+00:37:55,660 --> 00:37:57,120
+>> Mutta olen nyt tehnyt tätä elementtiä.
+
+798
+00:37:57,120 --> 00:37:59,056
+Nyt haluan napata numero kolme.
+
+799
+00:37:59,056 --> 00:38:00,430
+Jos tietenkin se kuuluu?
+
+800
+00:38:00,430 --> 00:38:01,480
+Välissä.
+
+801
+00:38:01,480 --> 00:38:03,650
+En voi huijata enää
+ja vain laittaa sen sinne,
+
+802
+00:38:03,650 --> 00:38:06,770
+koska, jälleen, tämä muisti
+on fyysinen sijainti.
+
+803
+00:38:06,770 --> 00:38:10,900
+Joten minun täytyy kopioida neljä
+ja laita kolme tänne.
+
+804
+00:38:10,900 --> 00:38:11,550
+Ei iso juttu.
+
+805
+00:38:11,550 --> 00:38:14,610
+Se on vain yksi ylimääräinen vaihe
+again-- tuntuu erittäin edullinen.
+
+806
+00:38:14,610 --> 00:38:16,445
+>> Mutta nyt siirtyä kaksi.
+
+807
+00:38:16,445 --> 00:38:17,820
+Kaksi, tietenkin, kuuluu tässä.
+
+808
+00:38:17,820 --> 00:38:20,990
+Nyt alkaa nähdä, miten
+työ voi kasaantuvat.
+
+809
+00:38:20,990 --> 00:38:23,520
+Nyt mitä minun täytyy tehdä?
+
+810
+00:38:23,520 --> 00:38:28,570
+Joo, minun täytyy siirtää neljä,
+Sitten täytyy kopioida kolme,
+
+811
+00:38:28,570 --> 00:38:31,200
+ja nyt voin lisätä kaksi.
+
+812
+00:38:31,200 --> 00:38:34,460
+Ja saalis tähän
+algoritmi, kiinnostavaa kyllä,
+
+813
+00:38:34,460 --> 00:38:41,050
+on että kai meillä on enemmän äärimmäisiä
+Tapauksessa, jossa se on sanokaamme kahdeksan, seitsemän,
+
+814
+00:38:41,050 --> 00:38:45,150
+kuusi, viisi, neljä, kolme, kaksi, yksi.
+
+815
+00:38:45,150 --> 00:38:49,450
+Tämä on monissa yhteyksissä,
+pahimmassa tapauksessa,
+
+816
+00:38:49,450 --> 00:38:51,570
+koska hiton asia
+on kirjaimellisesti taaksepäin.
+
+817
+00:38:51,570 --> 00:38:53,670
+>> Se ei oikeastaan
+vaikuttaa Ben algoritmi,
+
+818
+00:38:53,670 --> 00:38:55,940
+koska Ben valikoimassa
+sort hän aikoo pitää
+
+819
+00:38:55,940 --> 00:38:58,359
+menee edestakaisin läpi listan.
+
+820
+00:38:58,359 --> 00:39:01,150
+Ja koska hän oli aina etsimässä
+läpi koko jäljellä lista,
+
+821
+00:39:01,150 --> 00:39:02,858
+sillä ei ole väliä
+jossa elementit ovat.
+
+822
+00:39:02,858 --> 00:39:05,630
+Mutta tässä tapauksessa minun upotetun
+approach-- Kokeillaan tätä.
+
+823
+00:39:05,630 --> 00:39:08,616
+>> Joten yksi, kaksi, kolme, neljä,
+viisi, kuusi, seitsemän, kahdeksan.
+
+824
+00:39:08,616 --> 00:39:11,630
+Yksi kaksi kolme neljä,
+viisi, kuusi, seitsemän, kahdeksan.
+
+825
+00:39:11,630 --> 00:39:14,320
+Aion ottaa kahdeksan,
+ja mistä voin laittaa sen?
+
+826
+00:39:14,320 --> 00:39:17,260
+No, alussa listallani,
+koska tämä uusi luettelo lajitellaan.
+
+827
+00:39:17,260 --> 00:39:18,760
+Ja kuljen sen.
+
+828
+00:39:18,760 --> 00:39:20,551
+>> Mihin laitan seitsemän?
+
+829
+00:39:20,551 --> 00:39:21,050
+Hitsi.
+
+830
+00:39:21,050 --> 00:39:23,174
+Se tarvitsee mennä sinne, niin
+Minun täytyy tehdä joitakin kopiointia.
+
+831
+00:39:23,174 --> 00:39:26,820
+
+832
+00:39:26,820 --> 00:39:28,480
+Ja nyt seitsemän menee täällä.
+
+833
+00:39:28,480 --> 00:39:29,860
+Nyt olen siirtyä kuuteen.
+
+834
+00:39:29,860 --> 00:39:30,980
+Nyt on entistä enemmän työtä.
+
+835
+00:39:30,980 --> 00:39:32,570
+>> Kahdeksan on mennä tänne.
+
+836
+00:39:32,570 --> 00:39:33,920
+Seitsemän on mennä tänne.
+
+837
+00:39:33,920 --> 00:39:35,450
+Nyt kuusi voi mennä täällä.
+
+838
+00:39:35,450 --> 00:39:37,950
+Nyt nappaan viisi.
+
+839
+00:39:37,950 --> 00:39:40,560
+Nyt kahdeksan on mentävä
+täällä, seitsemän on mennä tänne,
+
+840
+00:39:40,560 --> 00:39:43,650
+kuusi on mennä tänne, ja
+nyt viisi ja toista.
+
+841
+00:39:43,650 --> 00:39:46,610
+Ja olen melko paljon
+siirtämällä sitä jatkuvasti.
+
+842
+00:39:46,610 --> 00:39:52,950
+>> Joten lopussa, tämä algorithm-- me will
+kutsuvat sitä paikoilleen sort-- todellisuudessa
+
+843
+00:39:52,950 --> 00:39:55,020
+on paljon työtä, too.
+
+844
+00:39:55,020 --> 00:39:56,970
+Se on vain erilainen
+tällaista työtä kuin Ben.
+
+845
+00:39:56,970 --> 00:40:00,090
+Ben työ oli minulle menossa
+edestakaisin koko ajan,
+
+846
+00:40:00,090 --> 00:40:03,510
+valitaan seuraavaksi pienin
+elementti uudestaan ​​ja uudestaan.
+
+847
+00:40:03,510 --> 00:40:06,660
+Joten se oli tämän hyvin visuaalinen tällaista työtä.
+
+848
+00:40:06,660 --> 00:40:10,600
+>> Tämä toinen algoritmi, joka on edelleen
+correct-- se saa työn done--
+
+849
+00:40:10,600 --> 00:40:12,800
+vain muuttaa työmäärä.
+
+850
+00:40:12,800 --> 00:40:15,420
+Näyttää siltä, ​​aluksi olet
+säästö, koska olet vain
+
+851
+00:40:15,420 --> 00:40:19,190
+käsittelevät kunkin elementin
+edessä ilman kävelyä kaikki
+
+852
+00:40:19,190 --> 00:40:20,930
+läpi listan kuten Ben oli.
+
+853
+00:40:20,930 --> 00:40:25,300
+Mutta ongelma on, erityisesti näissä
+hullu silloin kun se kaikki taaksepäin,
+
+854
+00:40:25,300 --> 00:40:27,830
+olet juuri sellainen
+lykätään kovaa työtä
+
+855
+00:40:27,830 --> 00:40:30,360
+kunnes olet korjata virheitä.
+
+856
+00:40:30,360 --> 00:40:33,919
+>> Ja joten jos voit kuvitella tämän
+kahdeksan ja seitsemän ja kuusi ja viisi
+
+857
+00:40:33,919 --> 00:40:36,710
+ja myöhemmin neljä ja kolme ja kaksi
+liikkuvat läpi listan,
+
+858
+00:40:36,710 --> 00:40:39,060
+Olemme juuri muuttaneet
+tyyppistä työtä teemme.
+
+859
+00:40:39,060 --> 00:40:42,340
+Sen sijasta, että se on
+alkaa minun iteraation
+
+860
+00:40:42,340 --> 00:40:45,250
+Teen vain sitä on
+lopussa jokaisen iteraation.
+
+861
+00:40:45,250 --> 00:40:50,550
+Joten käy ilmi, että tämä algoritmi,
+Myös yleensä kutsutaan lisäyslajittelun,
+
+862
+00:40:50,550 --> 00:40:52,190
+on myös suuruusluokkaa n neliö.
+
+863
+00:40:52,190 --> 00:40:56,480
+Se on oikeastaan ​​ole parempi,
+mitään parempaa ollenkaan.
+
+864
+00:40:56,480 --> 00:41:00,810
+>> Kuitenkin on olemassa kolmas lähestymistapa
+Haluan kannustaa pohtimaan,
+
+865
+00:41:00,810 --> 00:41:02,970
+joka on tässä.
+
+866
+00:41:02,970 --> 00:41:07,850
+Joten kai listalta, yksinkertaisuuden
+jälleen, on neljä, yksi, kolme,
+
+867
+00:41:07,850 --> 00:41:11,080
+two-- vain neljä numeroa.
+
+868
+00:41:11,080 --> 00:41:13,300
+Ben oli hyvä intuitio,
+hyvä ihmisen intuitio
+
+869
+00:41:13,300 --> 00:41:16,340
+ennen, jolla korjasimme koko
+luetella eventually-- lisäyslajittelun.
+
+870
+00:41:16,340 --> 00:41:18,020
+Olen houkutteli meidät pitkin.
+
+871
+00:41:18,020 --> 00:41:22,530
+Mutta Tarkastellaan
+Yksinkertaisin tapa korjata tämä lista.
+
+872
+00:41:22,530 --> 00:41:24,110
+>> Tämä luettelo ei ole lajiteltu.
+
+873
+00:41:24,110 --> 00:41:26,130
+Miksi?
+
+874
+00:41:26,130 --> 00:41:31,920
+Englanti, miksi
+se ei ole oikeastaan ​​lajitella.
+
+875
+00:41:31,920 --> 00:41:33,400
+Mitä se tarkoittaa ei lajitella?
+
+876
+00:41:33,400 --> 00:41:34,220
+>> Opiskelija: Se eivät ole järjestyksessä.
+
+877
+00:41:34,220 --> 00:41:34,990
+>> DAVID MALAN: Ei peräkkäinen.
+
+878
+00:41:34,990 --> 00:41:35,822
+Anna minulle esimerkki.
+
+879
+00:41:35,822 --> 00:41:37,180
+>> OPISKELIJA: Laita ne järjestyksessä.
+
+880
+00:41:37,180 --> 00:41:37,440
+>> DAVID MALAN: OK.
+
+881
+00:41:37,440 --> 00:41:38,790
+Anna minulle tarkempi esimerkki.
+
+882
+00:41:38,790 --> 00:41:39,832
+>> OPISKELIJA: Nouseva järjestys.
+
+883
+00:41:39,832 --> 00:41:41,206
+DAVID MALAN: Ei nousevassa järjestyksessä.
+
+884
+00:41:41,206 --> 00:41:42,100
+Oltava täsmällisempi.
+
+885
+00:41:42,100 --> 00:41:45,190
+En tiedä mitä tarkoitat nouseva.
+
+886
+00:41:45,190 --> 00:41:47,150
+Mikä on vialla?
+
+887
+00:41:47,150 --> 00:41:49,930
+>> OPISKELIJA: Pienin
+numeroita ei ole ensimmäinen avaruudessa.
+
+888
+00:41:49,930 --> 00:41:51,140
+>> DAVID MALAN: Pienin numero n
+ei ensimmäiseen tilaan.
+
+889
+00:41:51,140 --> 00:41:52,120
+Tarkemmin.
+
+890
+00:41:52,120 --> 00:41:55,000
+Olen alkanut tarttua.
+
+891
+00:41:55,000 --> 00:41:59,470
+Luotamme, mutta
+mitä epäkunnossa täällä?
+
+892
+00:41:59,470 --> 00:42:00,707
+>> OPISKELIJA: numerojärjestyksessä.
+
+893
+00:42:00,707 --> 00:42:02,040
+DAVID MALAN: numerojärjestyksessä.
+
+894
+00:42:02,040 --> 00:42:04,248
+Kaikkien sellainen pitäminen
+se here-- erittäin korkealla tasolla.
+
+895
+00:42:04,248 --> 00:42:07,450
+Vain kirjaimellisesti kertoa minulle, mitä
+väärä kuin viisi vuotta vanha voimin.
+
+896
+00:42:07,450 --> 00:42:08,310
+>> OPISKELIJA: Plus yksi.
+
+897
+00:42:08,310 --> 00:42:08,750
+>> DAVID MALAN: Mikä tämä on?
+
+898
+00:42:08,750 --> 00:42:09,610
+>> OPISKELIJA: Plus yksi.
+
+899
+00:42:09,610 --> 00:42:11,235
+>> DAVID MALAN: Mitä tarkoitat plus yksi?
+
+900
+00:42:11,235 --> 00:42:12,754
+
+901
+00:42:12,754 --> 00:42:14,170
+Anna minulle toinen viiden-vuotias.
+
+902
+00:42:14,170 --> 00:42:16,840
+
+903
+00:42:16,840 --> 00:42:18,330
+Mikä hätänä, äiti?
+
+904
+00:42:18,330 --> 00:42:19,940
+Mikä hätänä, isä?
+
+905
+00:42:19,940 --> 00:42:22,808
+Mitä tarkoitat tämä ei lajitella?
+
+906
+00:42:22,808 --> 00:42:24,370
+>> Opiskelija: Se ei ole oikea paikka.
+
+907
+00:42:24,370 --> 00:42:25,580
+>> DAVID MALAN: Mikä
+ei oikeassa paikassa?
+
+908
+00:42:25,580 --> 00:42:26,174
+>> OPISKELIJAN: Neljä.
+
+909
+00:42:26,174 --> 00:42:27,090
+DAVID MALAN: OK, hyvä.
+
+910
+00:42:27,090 --> 00:42:29,110
+Eli neljä ei ole, jos se olisi.
+
+911
+00:42:29,110 --> 00:42:30,590
+Erityisesti on tämä oikeus?
+
+912
+00:42:30,590 --> 00:42:33,000
+Neljä ja yksi, ensimmäinen
+kaksi numeroa näen.
+
+913
+00:42:33,000 --> 00:42:34,930
+Onko tämä oikein?
+
+914
+00:42:34,930 --> 00:42:36,427
+Ei, he epäkunnossa, eikö?
+
+915
+00:42:36,427 --> 00:42:38,135
+Itse asiassa, ajatella nyt
+noin tietokoneen, too.
+
+916
+00:42:38,135 --> 00:42:40,824
+Se voi vain katsoa ehkä yksi,
+ehkä kaksi asiaa once--
+
+917
+00:42:40,824 --> 00:42:43,240
+ja oikeastaan ​​vain yksi asia
+kerrallaan, mutta se voi ainakin
+
+918
+00:42:43,240 --> 00:42:45,790
+katsokaa yksi asia sitten
+Seuraava asia aivan sen vieressä.
+
+919
+00:42:45,790 --> 00:42:47,380
+>> Niinpä nämä kunnossa?
+
+920
+00:42:47,380 --> 00:42:48,032
+Ei tietenkään.
+
+921
+00:42:48,032 --> 00:42:48,740
+Joten tiedätkö mitä?
+
+922
+00:42:48,740 --> 00:42:51,020
+Miksi emme ota vauva
+vaiheet ongelman korjaamiseen
+
+923
+00:42:51,020 --> 00:42:53,410
+sen sijaan tehdä näistä fancy
+algoritmeja kuten Ben, jossa
+
+924
+00:42:53,410 --> 00:42:56,440
+Hän tavallaan vahvistaa sen
+läpiohjaus luettelossa
+
+925
+00:42:56,440 --> 00:42:59,670
+sen sijaan tehdä mitä tein, jossa
+Olen juuri sellainen kiinteiden sitä mennään?
+
+926
+00:42:59,670 --> 00:43:03,650
+Toivotaan vain kirjaimellisesti murtamaan
+käsitteeseen order-- numerojärjestyksessä,
+
+927
+00:43:03,650 --> 00:43:06,990
+kutsua sitä mitä want--
+näihin pareittain vertailuissa.
+
+928
+00:43:06,990 --> 00:43:07,590
+>> Neljä ja yksi.
+
+929
+00:43:07,590 --> 00:43:09,970
+Onko tämä oikea järjestys?
+
+930
+00:43:09,970 --> 00:43:11,310
+Joten korjata sen.
+
+931
+00:43:11,310 --> 00:43:14,700
+Yksi ja neljä, ja sitten
+me vain kopioi.
+
+932
+00:43:14,700 --> 00:43:15,560
+Selvä, hyvä.
+
+933
+00:43:15,560 --> 00:43:17,022
+Korjasin yhdestä neljään.
+
+934
+00:43:17,022 --> 00:43:18,320
+Kolme ja kaksi?
+
+935
+00:43:18,320 --> 00:43:18,820
+Ei.
+
+936
+00:43:18,820 --> 00:43:21,690
+Anna minun sanani vastaavat sormiani.
+
+937
+00:43:21,690 --> 00:43:23,695
+Neljä ja kolme?
+
+938
+00:43:23,695 --> 00:43:27,930
+>> Se ei ole kunnossa, joten aion
+tehdä yksi, kolme, neljä, kaksi.
+
+939
+00:43:27,930 --> 00:43:28,680
+Okei hyvä.
+
+940
+00:43:28,680 --> 00:43:32,310
+Nyt neljä ja kaksi?
+
+941
+00:43:32,310 --> 00:43:33,370
+Meidän täytyy korjata tämäkin.
+
+942
+00:43:33,370 --> 00:43:36,700
+Joten yksi, kolme, kaksi, neljä.
+
+943
+00:43:36,700 --> 00:43:39,820
+Joten on se lajitellaan?
+
+944
+00:43:39,820 --> 00:43:43,170
+Ei, mutta on se lähempänä lajitellaan?
+
+945
+00:43:43,170 --> 00:43:48,930
+>> On, koska olemme kiinteä tätä
+virhe, korjasimme tätä virhettä,
+
+946
+00:43:48,930 --> 00:43:50,370
+ja korjasimme tämän virheen.
+
+947
+00:43:50,370 --> 00:43:52,420
+Joten me kiinteä kolme virhettä luultavasti.
+
+948
+00:43:52,420 --> 00:43:58,100
+Silti ei oikeastaan ​​katsoa lajiteltua, mutta
+on objektiivisesti lähempänä lajitellut
+
+949
+00:43:58,100 --> 00:44:00,080
+koska korjasimme joitakin näistä virheistä.
+
+950
+00:44:00,080 --> 00:44:02,047
+>> Nyt mitä teen seuraavaksi?
+
+951
+00:44:02,047 --> 00:44:03,630
+Olen sellainen lopussa luettelosta.
+
+952
+00:44:03,630 --> 00:44:05,680
+Olen näytti kiinteät
+kaikki virheet, mutta ei.
+
+953
+00:44:05,680 --> 00:44:08,510
+Koska tässä tapauksessa, joitakin numeroita
+saattanut kuplina ylös lähemmäksi
+
+954
+00:44:08,510 --> 00:44:10,410
+muihin numerot
+ovat edelleen epäkunnossa.
+
+955
+00:44:10,410 --> 00:44:12,951
+Joten tehdä sen uudestaan, ja minä
+tee se paikalleen tällä kertaa.
+
+956
+00:44:12,951 --> 00:44:14,170
+Yksi ja kolme?
+
+957
+00:44:14,170 --> 00:44:14,720
+Se on okei.
+
+958
+00:44:14,720 --> 00:44:16,070
+Kolme ja kaksi?
+
+959
+00:44:16,070 --> 00:44:17,560
+Tietenkään ei, joten tehdään muuttaa.
+
+960
+00:44:17,560 --> 00:44:19,160
+Joten kaksi, kolme.
+
+961
+00:44:19,160 --> 00:44:21,340
+Kolme ja neljä?
+
+962
+00:44:21,340 --> 00:44:24,370
+Ja nyt Haluan vain olla
+Erityisen pikkutarkka täällä.
+
+963
+00:44:24,370 --> 00:44:26,350
+Onko se lajitellaan?
+
+964
+00:44:26,350 --> 00:44:29,280
+Te ihmiset tietävät se lajitellaan.
+
+965
+00:44:29,280 --> 00:44:30,400
+>> Minun pitäisi yrittää uudelleen.
+
+966
+00:44:30,400 --> 00:44:31,900
+Joten Olivia ehdottaa yritän uudelleen.
+
+967
+00:44:31,900 --> 00:44:32,530
+Miksi?
+
+968
+00:44:32,530 --> 00:44:35,810
+Koska tietokone ei ole
+ylellisyyttä meidän ihmisten silmissä
+
+969
+00:44:35,810 --> 00:44:38,080
+vain vilkaisi back-- OK, olen valmis.
+
+970
+00:44:38,080 --> 00:44:41,610
+Miten tietokone määrittää
+että luettelossa on nyt lajitellaan?
+
+971
+00:44:41,610 --> 00:44:44,590
+Mekaanisesti.
+
+972
+00:44:44,590 --> 00:44:47,650
+>> Minun pitäisi mennä läpi
+kerran, ja vain jos I
+
+973
+00:44:47,650 --> 00:44:51,190
+eivät tee / löydät virheitä voin
+sitten tehdä kuin tietokone, juu,
+
+974
+00:44:51,190 --> 00:44:51,980
+olemme hyvä mennä.
+
+975
+00:44:51,980 --> 00:44:54,850
+Joten yksi ja kaksi, kaksi ja
+kolme, kolme ja neljä.
+
+976
+00:44:54,850 --> 00:44:58,030
+Nyt voin lopullisesti sanoa, tämä on
+lajiteltu, koska en tehnyt mitään muutoksia.
+
+977
+00:44:58,030 --> 00:45:01,940
+Nyt olisi vika ja vain
+typerää jos en, tietokone,
+
+978
+00:45:01,940 --> 00:45:05,640
+pyysi näitä samoja kysymyksiä uudestaan
+odottaa erilaisia ​​vastauksia.
+
+979
+00:45:05,640 --> 00:45:07,110
+Ei pitäisi tapahtua.
+
+980
+00:45:07,110 --> 00:45:08,600
+>> Ja niin nyt luettelo on järjestetty.
+
+981
+00:45:08,600 --> 00:45:12,630
+Valitettavasti ajoaika
+Tämä algoritmi on myös N potenssiin.
+
+982
+00:45:12,630 --> 00:45:13,130
+Miksi?
+
+983
+00:45:13,130 --> 00:45:19,520
+Koska olet n numerot, ja
+pahimmassa tapauksessa sinun täytyy siirtää n numerot
+
+984
+00:45:19,520 --> 00:45:23,637
+n kertaa, koska sinun täytyy pitää käynnissä
+takaisin tarkistaa ja mahdollisesti korjata
+
+985
+00:45:23,637 --> 00:45:24,220
+näitä numeroita.
+
+986
+00:45:24,220 --> 00:45:26,280
+Ja voimme tehdä enemmän
+muodollinen analyysi, too.
+
+987
+00:45:26,280 --> 00:45:29,530
+>> Tämä kaikki on siis sanoa olemme ottaneet
+kolmea eri lähestymistapaa, yksi
+
+988
+00:45:29,530 --> 00:45:32,210
+niistä välittömästi intuitiivinen
+suoralta kädeltä Ben
+
+989
+00:45:32,210 --> 00:45:35,170
+minun lisätään ehdotettu
+lajitella tähän yhteen
+
+990
+00:45:35,170 --> 00:45:38,540
+jossa tällainen unohtaa
+metsän puilta aluksi.
+
+991
+00:45:38,540 --> 00:45:41,760
+Mutta sitten jos ottaa askel taaksepäin,
+voila, olemme korjanneet lajittelu käsite.
+
+992
+00:45:41,760 --> 00:45:43,824
+Joten tämä on, uskalla sanoa,
+alemmalla tasolla ehkä
+
+993
+00:45:43,824 --> 00:45:45,740
+kuin joidenkin muiden
+algoritmeja, mutta katsotaan
+
+994
+00:45:45,740 --> 00:45:48,550
+katso jos emme voi visualisoida
+nämä Poiketen tämän.
+
+995
+00:45:48,550 --> 00:45:51,450
+>> Joten tämä on kivoja
+ohjelmisto, että joku
+
+996
+00:45:51,450 --> 00:45:56,110
+kirjoitti käyttämällä värikkäitä baareja se
+aikoo tehdä seuraavat meille.
+
+997
+00:45:56,110 --> 00:45:57,736
+Kukin näistä baareja on luku.
+
+998
+00:45:57,736 --> 00:46:00,026
+Taller baarissa, isompi
+numero, pienempi bar,
+
+999
+00:46:00,026 --> 00:46:00,990
+pienempi numero.
+
+1000
+00:46:00,990 --> 00:46:05,880
+Joten mieluiten haluamme mukavaa pyramidi
+jos se alkaa pieni ja saa iso,
+
+1001
+00:46:05,880 --> 00:46:08,330
+ja se merkitsisi, että
+nämä palkit lajitellaan.
+
+1002
+00:46:08,330 --> 00:46:11,200
+Joten aion mennä eteenpäin ja valita,
+Esimerkiksi Ben algoritmin
+
+1003
+00:46:11,200 --> 00:46:13,990
+first-- valinta lajitella.
+
+1004
+00:46:13,990 --> 00:46:16,220
+>> Ja huomaa, mitä se tekee.
+
+1005
+00:46:16,220 --> 00:46:18,670
+Tapa he ovat valinneet
+visualisoida tämä algoritmi
+
+1006
+00:46:18,670 --> 00:46:22,090
+on että, aivan kuten olin
+kävelevän listalta,
+
+1007
+00:46:22,090 --> 00:46:24,710
+tämä ohjelma on kävely
+kautta listan numeroita,
+
+1008
+00:46:24,710 --> 00:46:28,160
+korostaen vaaleanpunainen kussakin
+numero että se etsii.
+
+1009
+00:46:28,160 --> 00:46:32,360
+Ja mitä tulee tapahtumaan juuri nyt?
+
+1010
+00:46:32,360 --> 00:46:35,154
+>> Pienin määrä, joka
+I tai Ben löytyi yllättäen
+
+1011
+00:46:35,154 --> 00:46:36,820
+saa siirtää listan alkuun.
+
+1012
+00:46:36,820 --> 00:46:40,037
+Ja varoitusajalla he tekivät häätää
+määrä, joka oli siellä,
+
+1013
+00:46:40,037 --> 00:46:41,120
+ja se on täysin kunnossa.
+
+1014
+00:46:41,120 --> 00:46:42,600
+En saanut tuohon taso.
+
+1015
+00:46:42,600 --> 00:46:44,308
+Mutta meidän täytyy laittaa
+että määrä jonnekin,
+
+1016
+00:46:44,308 --> 00:46:47,775
+niin me juuri muuttanut sen
+avoin paikka, joka luotiin.
+
+1017
+00:46:47,775 --> 00:46:49,900
+Joten aion nopeuttaa tätä
+up, koska muuten
+
+1018
+00:46:49,900 --> 00:46:51,871
+tulee erittäin ikävä nopeasti.
+
+1019
+00:46:51,871 --> 00:46:55,800
+
+1020
+00:46:55,800 --> 00:46:58,600
+Animaatio speed-- siellä mennään.
+
+1021
+00:46:58,600 --> 00:47:01,850
+Joten nyt samaa periaatetta
+Olin hakemassa, mutta
+
+1022
+00:47:01,850 --> 00:47:06,540
+voi alkaa tuntea algoritmin, jos
+tulee, tai nähdä hieman selvemmin.
+
+1023
+00:47:06,540 --> 00:47:13,190
+Ja tämä algoritmi on se vaikutus,
+valitsemalla seuraavaksi pienin elementti,
+
+1024
+00:47:13,190 --> 00:47:16,422
+joten aiot alkaa
+nähdä sen ylösajo vasemmalla.
+
+1025
+00:47:16,422 --> 00:47:19,130
+Ja jokaisen iteraation, kuten minä
+Ehdotettu, se hieman vähemmän työtä.
+
+1026
+00:47:19,130 --> 00:47:21,921
+Sen ei tarvitse mennä koko matkan
+takaisin vasemmalle listan loppuun,
+
+1027
+00:47:21,921 --> 00:47:23,900
+koska se on jo
+tuntee ne lajitellaan.
+
+1028
+00:47:23,900 --> 00:47:28,129
+Joten se tavallaan tuntuu se
+kiihtyy, vaikka jokainen askel on
+
+1029
+00:47:28,129 --> 00:47:29,420
+ottaen saman verran aikaa.
+
+1030
+00:47:29,420 --> 00:47:31,600
+On vain vähemmän vaiheita jäljellä.
+
+1031
+00:47:31,600 --> 00:47:35,240
+Nyt voit sellaista tuntea
+algoritmi siivota sen lopussa,
+
+1032
+00:47:35,240 --> 00:47:37,040
+ja todellakin nyt se lajitellaan.
+
+1033
+00:47:37,040 --> 00:47:41,620
+>> Joten lisäyslajittelun on kaikki tehty.
+
+1034
+00:47:41,620 --> 00:47:43,600
+Minun täytyy uudelleen satunnaisiksi array.
+
+1035
+00:47:43,600 --> 00:47:45,940
+Ja huomaa voin vain
+pitää randomizing se,
+
+1036
+00:47:45,940 --> 00:47:50,630
+ja saamme approksimaatio
+samaa lähestymistapaa, lisäyslajittelun.
+
+1037
+00:47:50,630 --> 00:47:55,050
+Anna minun hidastaa tänne.
+
+1038
+00:47:55,050 --> 00:47:56,915
+Aloitetaan että yli.
+
+1039
+00:47:56,915 --> 00:47:57,414
+Stop.
+
+1040
+00:47:57,414 --> 00:48:00,662
+
+1041
+00:48:00,662 --> 00:48:02,410
+>> Jätetään neljä.
+
+1042
+00:48:02,410 --> 00:48:03,200
+Siellä mennään.
+
+1043
+00:48:03,200 --> 00:48:04,190
+Satunnaista ne array.
+
+1044
+00:48:04,190 --> 00:48:05,555
+Ja tässä me jää tänne lisäyslajittelun.
+
+1045
+00:48:05,555 --> 00:48:10,260
+
+1046
+00:48:10,260 --> 00:48:12,800
+Pelata.
+
+1047
+00:48:12,800 --> 00:48:17,280
+Huomaa, että se käsittelee jokaisen
+elementti se kohtaa heti,
+
+1048
+00:48:17,280 --> 00:48:20,282
+mutta jos se kuuluu
+väärässä paikassa ilmoitus
+
+1049
+00:48:20,282 --> 00:48:21,740
+kaiken työn, joka on tapahduttava.
+
+1050
+00:48:21,740 --> 00:48:24,700
+Meidän täytyy pitää siirtymässä enemmän
+ja enemmän elementtejä tehdä tilaa
+
+1051
+00:48:24,700 --> 00:48:27,340
+että yksi haluamme käyttöön.
+
+1052
+00:48:27,340 --> 00:48:30,740
+>> Olemme siis keskittyy
+vasen listan loppuun vain.
+
+1053
+00:48:30,740 --> 00:48:34,460
+Huomaatko emme ole edes tutkinut at-- me
+eivät ole korostettu vaaleanpunainen mitään
+
+1054
+00:48:34,460 --> 00:48:35,610
+oikealle.
+
+1055
+00:48:35,610 --> 00:48:38,180
+Olemme juuri tekemisissä
+ongelmat kuten mennään,
+
+1056
+00:48:38,180 --> 00:48:40,430
+mutta Luomme paljon
+työskentelevät itse edelleen.
+
+1057
+00:48:40,430 --> 00:48:44,410
+Ja niin jos me nopeuttaa yhteyden muodostumista
+nyt mennä loppuun,
+
+1058
+00:48:44,410 --> 00:48:46,210
+sillä on erilainen tuntea sen todellakin.
+
+1059
+00:48:46,210 --> 00:48:50,150
+Se on vain keskittymällä vasemmalla päähän, mutta
+tekee hieman enemmän työtä kuin needed--
+
+1060
+00:48:50,150 --> 00:48:53,230
+Tällainen tasoitus asioita
+yli, Korjausten,
+
+1061
+00:48:53,230 --> 00:48:58,350
+mutta käsittelevät lopulta kanssa
+kukin elementti yksi kerrallaan
+
+1062
+00:48:58,350 --> 00:49:07,740
+kunnes saamme tyylillisesti hyvin, me
+kaikki tiedämme, miten tämä tulee päättymään,
+
+1063
+00:49:07,740 --> 00:49:09,700
+niin se on vähän underwhelming ehkä.
+
+1064
+00:49:09,700 --> 00:49:12,830
+>> Mutta alalta end--
+spoiler-- tulee lajitella.
+
+1065
+00:49:12,830 --> 00:49:15,300
+Joten katsokaamme yksi viimeinen.
+
+1066
+00:49:15,300 --> 00:49:16,840
+Emme voi hypätä nyt.
+
+1067
+00:49:16,840 --> 00:49:18,000
+Olemme melkein perillä.
+
+1068
+00:49:18,000 --> 00:49:19,980
+Kaksi mennä, yksi mennä.
+
+1069
+00:49:19,980 --> 00:49:22,680
+Ja voila.
+
+1070
+00:49:22,680 --> 00:49:23,450
+Erinomainen.
+
+1071
+00:49:23,450 --> 00:49:27,220
+>> Joten nyt Tehdäänpä yksi viimeinen,
+uudelleen randomizing kanssa kuplalajittelu.
+
+1072
+00:49:27,220 --> 00:49:31,690
+Ja huomaa täällä, varsinkin jos olen hidas se
+alas, tämä ei pidä swooping kautta.
+
+1073
+00:49:31,690 --> 00:49:36,830
+Mutta huomaa vain tekee pareittain
+comparisons-- tavallaan paikallisia ratkaisuja.
+
+1074
+00:49:36,830 --> 00:49:39,050
+Mutta heti kun saamme
+loppuun luettelon vaaleanpunainen,
+
+1075
+00:49:39,050 --> 00:49:40,690
+mitä täytyy tapahtua uudelleen?
+
+1076
+00:49:40,690 --> 00:49:44,539
+
+1077
+00:49:44,539 --> 00:49:46,830
+Joo, se täytyy
+aloittaa alusta, koska se vain
+
+1078
+00:49:46,830 --> 00:49:49,870
+kiinteä pairwise virheitä.
+
+1079
+00:49:49,870 --> 00:49:53,120
+Ja joka olisi saattanut paljastanut vielä toiset.
+
+1080
+00:49:53,120 --> 00:49:58,950
+Jos siis nopeuttaa sitä, luultavasti
+nähdä, että paljon kuten nimikin kertoo,
+
+1081
+00:49:58,950 --> 00:50:01,870
+pienempi elements-- tai pikemminkin
+suuremmat elements-- alkavat
+
+1082
+00:50:01,870 --> 00:50:03,740
+kupla ylös, jos haluatte.
+
+1083
+00:50:03,740 --> 00:50:07,380
+Ja pienemmät elementit ovat
+alkaa kupla alas vasemmalle.
+
+1084
+00:50:07,380 --> 00:50:10,780
+Ja todellakin, se on eräänlainen
+visuaalinen vaikutus samoin.
+
+1085
+00:50:10,780 --> 00:50:17,150
+Ja niin tämä päätyvät viimeistely
+hyvin samalla tavalla, too.
+
+1086
+00:50:17,150 --> 00:50:19,160
+>> Meillä ei tarvitse asua
+tämän erityisen yksi.
+
+1087
+00:50:19,160 --> 00:50:21,010
+Saanen avata tämän nytkin.
+
+1088
+00:50:21,010 --> 00:50:24,040
+On muutamia muita lajittelualgoritmeja
+maailmassa, joista muutamat
+
+1089
+00:50:24,040 --> 00:50:25,580
+ovat kiinni täällä.
+
+1090
+00:50:25,580 --> 00:50:29,960
+Ja erityisesti opiskelijoille, jotka eivät ole
+välttämättä visuaalinen tai matemaattisten,
+
+1091
+00:50:29,960 --> 00:50:31,930
+kuten teimme aikaisemmin, voimme
+myös tehdä tämän audially
+
+1092
+00:50:31,930 --> 00:50:34,210
+jos me liittää äänen tähän.
+
+1093
+00:50:34,210 --> 00:50:36,990
+Ja vain huvin vuoksi, tässä on
+muutama eri algoritmeja,
+
+1094
+00:50:36,990 --> 00:50:40,950
+ja yksi niistä erityisesti olet
+huomaamaan kutsutaan "lomituslajittelu."
+
+1095
+00:50:40,950 --> 00:50:43,250
+>> Se on itse asiassa olennaisesti
+parempi algoritmi,
+
+1096
+00:50:43,250 --> 00:50:45,860
+niin että lomituslajittelu, yksi
+ne olet tulleet,
+
+1097
+00:50:45,860 --> 00:50:49,170
+ei ole järjestyksessä n potenssiin.
+
+1098
+00:50:49,170 --> 00:50:57,280
+Se on suuruusluokkaa n kertaa päiväkirjaa
+n, joka on itse asiassa pienempi ja siten
+
+1099
+00:50:57,280 --> 00:50:58,940
+nopeammin kuin muut kolme.
+
+1100
+00:50:58,940 --> 00:51:00,670
+Ja siellä on pari muuta
+typerä ne, jotka näemme.
+
+1101
+00:51:00,670 --> 00:51:01,933
+>> Joten tässä sitä mennään hieman ääntä.
+
+1102
+00:51:01,933 --> 00:51:06,620
+
+1103
+00:51:06,620 --> 00:51:10,490
+Tämä on lisäyslajittelun, niin jälleen
+se vain käsittelee elementtejä
+
+1104
+00:51:10,490 --> 00:51:13,420
+kuin ne tulevat.
+
+1105
+00:51:13,420 --> 00:51:17,180
+Tämä on kuplalajittelu, joten se on
+harkitsee niitä paria kerrallaan.
+
+1106
+00:51:17,180 --> 00:51:22,030
+
+1107
+00:51:22,030 --> 00:51:24,490
+Ja vielä, suurin elementit
+ovat kuplivaa ylös.
+
+1108
+00:51:24,490 --> 00:51:38,098
+
+1109
+00:51:38,098 --> 00:51:41,710
+>> Seuraavaksi valinta lajitella.
+
+1110
+00:51:41,710 --> 00:51:45,420
+Tämä on Ben algoritmi, jossa
+jälleen hän valitsemalla iteratiivisesti
+
+1111
+00:51:45,420 --> 00:51:46,843
+seuraavaksi pienin elementti.
+
+1112
+00:51:46,843 --> 00:51:49,801
+
+1113
+00:51:49,801 --> 00:51:53,900
+Ja taas, nyt voit todella kuulla, että
+se nopeuttaa mutta vain siltä osin
+
+1114
+00:51:53,900 --> 00:51:58,230
+koska se tekee vähemmän ja vähemmän
+työskennellä jokaisen iteraation.
+
+1115
+00:51:58,230 --> 00:52:04,170
+Tämä on nopeampaa yksi, lomituslajittelu,
+joka lajittelee klustereita numeroiden
+
+1116
+00:52:04,170 --> 00:52:05,971
+yhteen ja sitten yhdistämällä ne.
+
+1117
+00:52:05,971 --> 00:52:07,720
+Joten look-- vasemmalla
+puolet on jo järjestetty.
+
+1118
+00:52:07,720 --> 00:52:14,165
+>> Nyt se lajittelun oikea puoli, ja
+Nyt se tulee yhdistää ne yhdeksi.
+
+1119
+00:52:14,165 --> 00:52:19,160
+Tämä on jotain nimeltä "Gnome sort."
+
+1120
+00:52:19,160 --> 00:52:23,460
+Ja voit sellaista nähdä, että
+se menee edestakaisin,
+
+1121
+00:52:23,460 --> 00:52:27,950
+vahvistamisesta työ vähän täällä ja
+siellä ennen edetään uutta työtä.
+
+1122
+00:52:27,950 --> 00:52:32,900
+
+1123
+00:52:32,900 --> 00:52:33,692
+Ja siinä se.
+
+1124
+00:52:33,692 --> 00:52:36,400
+On toinenkin lajitella, mikä on
+oikeastaan ​​vain tutkintoa varten,
+
+1125
+00:52:36,400 --> 00:52:40,980
+nimeltään "tyhmä lajitella", joka vie
+tietosi, lajittelee sen satunnaisesti,
+
+1126
+00:52:40,980 --> 00:52:43,350
+ja sitten tarkistaa, onko se lajitellaan.
+
+1127
+00:52:43,350 --> 00:52:47,880
+Ja jos se ei ole, se uudelleen lajittelee ne
+satunnaisesti, jos niitä on lajiteltu,
+
+1128
+00:52:47,880 --> 00:52:49,440
+ja jos ei toistaa.
+
+1129
+00:52:49,440 --> 00:52:52,660
+Ja teoriassa, toden- näköisesti
+tämä täydentää,
+
+1130
+00:52:52,660 --> 00:52:54,140
+mutta sen jälkeen melko vähän aikaa.
+
+1131
+00:52:54,140 --> 00:52:56,930
+Se ei ole kaikkein
+tehokas algoritmien.
+
+1132
+00:52:56,930 --> 00:53:02,550
+Joten kysyttävää näistä
+Erityisesti algoritmeja tai jotain
+
+1133
+00:53:02,550 --> 00:53:04,720
+liittyvä sielläkin?
+
+1134
+00:53:04,720 --> 00:53:09,430
+>> No, nyt kammata toisistaan ​​mitä kaikki
+nämä linjat ovat, että olen piirtänyt
+
+1135
+00:53:09,430 --> 00:53:15,090
+ja mitä olen olettaen tietokone
+voi tehdä alla huppu.
+
+1136
+00:53:15,090 --> 00:53:18,650
+Väittäisin, että kaikki nämä luvut
+Pidän drawing-- he tarvitsevat
+
+1137
+00:53:18,650 --> 00:53:21,330
+tallennettu jonnekin muistiin.
+
+1138
+00:53:21,330 --> 00:53:24,130
+Me päästä eroon tästä kaveri nytkin.
+
+1139
+00:53:24,130 --> 00:53:30,110
+>> Joten pala muistia on
+computer-- joten RAM DIMM on
+
+1140
+00:53:30,110 --> 00:53:35,480
+mitä etsimme eilen, dual
+Inline Memory module-- näyttää tältä.
+
+1141
+00:53:35,480 --> 00:53:39,370
+Ja jokainen näistä pieni musta pelimerkkejä
+on joitakin tavujen lukumäärä, tyypillisesti.
+
+1142
+00:53:39,370 --> 00:53:44,380
+Ja sitten kulta nastat ovat kuin
+johtoja, jotka kytkevät sen tietokoneeseen,
+
+1143
+00:53:44,380 --> 00:53:47,521
+ja vihreä piin hallitus on aivan
+mitä pitää kaiken kaikki yhdessä.
+
+1144
+00:53:47,521 --> 00:53:48,770
+Mitä tämä oikeastaan ​​tarkoittaa?
+
+1145
+00:53:48,770 --> 00:53:53,180
+Jos olen sellainen piirtää tämä sama kuva,
+Oletetaan yksinkertaisuuden
+
+1146
+00:53:53,180 --> 00:53:55,280
+että tämä DIMM, dual
+inline muistimoduuli,
+
+1147
+00:53:55,280 --> 00:54:00,530
+on yksi gigatavu RAM-muistia, yksi gigatavu
+muistin, joka on se, kuinka monta tavua yhteensä?
+
+1148
+00:54:00,530 --> 00:54:02,100
+Yksi gigatavu on, kuinka monta tavua?
+
+1149
+00:54:02,100 --> 00:54:04,860
+
+1150
+00:54:04,860 --> 00:54:06,030
+Enemmän kuin se.
+
+1151
+00:54:06,030 --> 00:54:09,960
+1124 on kiloa, 1000.
+
+1152
+00:54:09,960 --> 00:54:11,730
+Mega on milj.
+
+1153
+00:54:11,730 --> 00:54:14,570
+Giga on miljardi.
+
+1154
+00:54:14,570 --> 00:54:15,070
+>> Olenko valehtelee?
+
+1155
+00:54:15,070 --> 00:54:16,670
+Voimmeko edes lukea etiketti?
+
+1156
+00:54:16,670 --> 00:54:19,920
+Tämä on itse asiassa 128
+gigatavua, joten se on enemmän.
+
+1157
+00:54:19,920 --> 00:54:22,130
+Mutta me teeskennellä tämän
+on vain yksi gigatavu.
+
+1158
+00:54:22,130 --> 00:54:25,640
+Joten se tarkoittaa, että on miljardi
+tavua muistia käytettävissä minulle
+
+1159
+00:54:25,640 --> 00:54:29,770
+tai 8 miljardia bittiä, mutta aiomme
+puhuttava tavujen nyt,
+
+1160
+00:54:29,770 --> 00:54:30,750
+siirtyä eteenpäin.
+
+1161
+00:54:30,750 --> 00:54:36,330
+>> Joten mitä se tarkoittaa on tämä on
+yksi tavu, tämä on toinen tavu,
+
+1162
+00:54:36,330 --> 00:54:38,680
+tämä on toinen tavu,
+ja jos me halusimme
+
+1163
+00:54:38,680 --> 00:54:43,280
+se on erityistä meidän täytyisi
+piirtää miljardi vähän neliöitä.
+
+1164
+00:54:43,280 --> 00:54:44,320
+Mutta mitä se tarkoittaa?
+
+1165
+00:54:44,320 --> 00:54:46,420
+No, haluan vain zoomata
+in tässä kuvassa.
+
+1166
+00:54:46,420 --> 00:54:50,900
+Jos minulla jotain, joka näyttää
+näin nyt, se on neljä tavua.
+
+1167
+00:54:50,900 --> 00:54:53,710
+>> Ja niin voisin laittaa neljä numerot tähän.
+
+1168
+00:54:53,710 --> 00:54:54,990
+Yksi kaksi kolme neljä.
+
+1169
+00:54:54,990 --> 00:55:00,170
+Tai voisin laittaa neljä kirjaimia tai symboleja.
+
+1170
+00:55:00,170 --> 00:55:02,620
+"Hei!" voisi mennä oikeassa,
+koska kunkin kirjaimet,
+
+1171
+00:55:02,620 --> 00:55:04,370
+keskustelimme aiemmin,
+voisi edustaa
+
+1172
+00:55:04,370 --> 00:55:06,650
+kahdeksan bittiä tai ASCII tai tavu.
+
+1173
+00:55:06,650 --> 00:55:09,370
+Eli toisin sanoen, voit
+laittaa 8000000000 asioita sisällä
+
+1174
+00:55:09,370 --> 00:55:11,137
+Tämän yhden tikku muistia.
+
+1175
+00:55:11,137 --> 00:55:14,345
+Nyt mitä tarkoittaa laittaa asiat takaisin
+takaisin takaisin muistiin näin?
+
+1176
+00:55:14,345 --> 00:55:17,330
+Tämä on mitä ohjelmoija
+kutsuisin "array."
+
+1177
+00:55:17,330 --> 00:55:21,250
+Tietokoneohjelmaan, et usko
+perusteena oleviin laitteisto, sinänsä.
+
+1178
+00:55:21,250 --> 00:55:24,427
+Sinä vain ajatella itse olevan
+pääsy miljardi tavua yhteensä,
+
+1179
+00:55:24,427 --> 00:55:26,010
+ja voit mitä haluat sen kanssa.
+
+1180
+00:55:26,010 --> 00:55:27,880
+Mutta mukavuussyistä
+tämä on usein hyödyllistä
+
+1181
+00:55:27,880 --> 00:55:31,202
+pitää muistin oikea
+vierekkäin, kuten tämä.
+
+1182
+00:55:31,202 --> 00:55:33,660
+Jos siis zoomata this--
+koska me todellakaan aio
+
+1183
+00:55:33,660 --> 00:55:39,310
+piirtää miljardiin hieman squares--
+Oletetaan, että tämä hallitus edustaa
+
+1184
+00:55:39,310 --> 00:55:40,610
+että tikku muistin nyt.
+
+1185
+00:55:40,610 --> 00:55:43,800
+Ja minä vain vetää peräti minun
+merkki päätyy antamaan minut tänne.
+
+1186
+00:55:43,800 --> 00:55:46,420
+
+1187
+00:55:46,420 --> 00:55:52,300
+Joten nyt meillä on stick
+muistia taululle
+
+1188
+00:55:52,300 --> 00:55:56,400
+että sai yhden, kaksi, kolme, neljä, viisi,
+kuusi, yksi, kaksi, kolme, neljä, viisi, kuusi,
+
+1189
+00:55:56,400 --> 00:56:01,130
+seven-- joten 42 tavua
+muisti ruudulla koko.
+
+1190
+00:56:01,130 --> 00:56:01,630
+Kiitos.
+
+1191
+00:56:01,630 --> 00:56:02,838
+Kyllä, tein aritmeettinen oikeassa.
+
+1192
+00:56:02,838 --> 00:56:05,120
+Joten 42 tavua muistia täällä.
+
+1193
+00:56:05,120 --> 00:56:06,660
+Mitä tämä oikeastaan ​​tarkoittaa?
+
+1194
+00:56:06,660 --> 00:56:09,830
+No, tietokoneohjelmoija
+itse asiassa yleensä
+
+1195
+00:56:09,830 --> 00:56:12,450
+ajatella tämän muistiin osoitteellinen.
+
+1196
+00:56:12,450 --> 00:56:16,630
+Toisin sanoen, jokainen näistä
+paikoista muistissa, laitteisto,
+
+1197
+00:56:16,630 --> 00:56:18,030
+on ainutlaatuinen osoite.
+
+1198
+00:56:18,030 --> 00:56:22,020
+>> Se ei ole niin monimutkainen kuin One Brattle
+Square, Cambridge, Mass., 02138.
+
+1199
+00:56:22,020 --> 00:56:23,830
+Sen sijaan, se on vain numero.
+
+1200
+00:56:23,830 --> 00:56:27,930
+Tämä on tavun numero nolla, tämä on
+yksi, tämä on kaksi, tämä on kolme,
+
+1201
+00:56:27,930 --> 00:56:30,327
+ja tämä on 41.
+
+1202
+00:56:30,327 --> 00:56:30,910
+Odota hetki.
+
+1203
+00:56:30,910 --> 00:56:32,510
+Vaikka olen sanonut 42 hetki sitten.
+
+1204
+00:56:32,510 --> 00:56:35,050
+
+1205
+00:56:35,050 --> 00:56:37,772
+Olen alkoi laskea nollaan,
+niin se on todella oikea.
+
+1206
+00:56:37,772 --> 00:56:40,980
+Nyt meidän ei tarvitse itse piirtää
+ruudukkona, ja jos piirtää sen grid
+
+1207
+00:56:40,980 --> 00:56:43,520
+Mielestäni asiat todella
+saada hieman harhaanjohtava.
+
+1208
+00:56:43,520 --> 00:56:46,650
+Mikä ohjelmoija olisi,
+hänen tai hänen omassa mielessään,
+
+1209
+00:56:46,650 --> 00:56:50,310
+yleensä ajatella tämän
+muisti on aivan kuten nauha,
+
+1210
+00:56:50,310 --> 00:56:53,340
+kuin pala maalarinteippiä
+että vain jatkuu ja jatkuu ikuisesti
+
+1211
+00:56:53,340 --> 00:56:54,980
+tai kunnes muisti loppuu.
+
+1212
+00:56:54,980 --> 00:56:59,200
+Joten yleisempää tapa kiinnittää
+ja vain ajatella muistia
+
+1213
+00:56:59,200 --> 00:57:03,710
+olisi, että tämä on tavu nolla, yksi,
+kaksi, kolme, ja sitten piste, piste, dot.
+
+1214
+00:57:03,710 --> 00:57:07,650
+Ja teillä on 42 tällaista tavua yhteensä, vaikka
+vaikka fyysisesti se saattaisi
+
+1215
+00:57:07,650 --> 00:57:09,480
+olla jotain enemmän kuin tämä.
+
+1216
+00:57:09,480 --> 00:57:12,850
+>> Joten jos nyt ajatella oman
+muistia kuin tämä, kuten nauha,
+
+1217
+00:57:12,850 --> 00:57:17,640
+tämä on mitä ohjelmoija uudelleen
+kutsuisi joukko muisti.
+
+1218
+00:57:17,640 --> 00:57:20,660
+Ja kun haluat todella tallentaa
+jotain tietokoneen muistin,
+
+1219
+00:57:20,660 --> 00:57:23,290
+te yleensä tehdä tallentaa asioita
+back-to-back to back-to-back.
+
+1220
+00:57:23,290 --> 00:57:25,010
+Siksi olemme puhuneet numeroita.
+
+1221
+00:57:25,010 --> 00:57:30,880
+Ja kun halusin ratkaista ongelmia
+kuten neljä, yksi, kolme, kaksi,
+
+1222
+00:57:30,880 --> 00:57:33,820
+vaikka olin vain piirustus
+vain numeroita neljä, yksi, kolme,
+
+1223
+00:57:33,820 --> 00:57:39,490
+kaksi pöydällä, tietokone olisi
+todella on tämä setup muistiin.
+
+1224
+00:57:39,490 --> 00:57:43,347
+>> Ja mikä olisi vieressä
+kaksi tietokoneen muistiin?
+
+1225
+00:57:43,347 --> 00:57:44,680
+No, ei ole vastausta tähän.
+
+1226
+00:57:44,680 --> 00:57:45,770
+Emme oikeastaan ​​tiedä.
+
+1227
+00:57:45,770 --> 00:57:48,200
+Ja niin kauan kuin
+tietokone ei tarvitse sitä,
+
+1228
+00:57:48,200 --> 00:57:51,440
+sen ei tarvitse välittää, mitä on seuraavaksi
+numeroiden se välitä.
+
+1229
+00:57:51,440 --> 00:57:55,130
+Ja kun sanoin aiemmin, että tietokone
+voi vain katsoa yhden osoitteen kerrallaan,
+
+1230
+00:57:55,130 --> 00:57:56,170
+tämä on tavallaan miksi.
+
+1231
+00:57:56,170 --> 00:57:59,490
+>> Ei toisin kirjaa
+soitin ja lukupää
+
+1232
+00:57:59,490 --> 00:58:03,030
+vain pysty katsomaan tiettyyn
+ura fyysisessä vanhan koulun ennätys
+
+1233
+00:58:03,030 --> 00:58:06,500
+kerrallaan, vastaavasti
+voi tietokone kiitos
+
+1234
+00:58:06,500 --> 00:58:09,810
+sen CPU ja sen
+Intel käskykanta,
+
+1235
+00:58:09,810 --> 00:58:12,480
+keskuudessa jonka opetus
+luetaan muistista
+
+1236
+00:58:12,480 --> 00:58:15,590
+tai tallentaa memory--
+tietokone voi vain katsoa
+
+1237
+00:58:15,590 --> 00:58:19,210
+on yhdessä paikassa time--
+joskus niiden yhdistelmää,
+
+1238
+00:58:19,210 --> 00:58:21,770
+mutta oikeastaan ​​vain yhdessä paikassa kerrallaan.
+
+1239
+00:58:21,770 --> 00:58:24,770
+Joten kun teimme
+Näiden eri algoritmeja,
+
+1240
+00:58:24,770 --> 00:58:28,110
+En vain kirjallisesti on
+vacuum-- neljä, yksi, kolme, kaksi.
+
+1241
+00:58:28,110 --> 00:58:30,849
+Nuo luvut kuuluvat oikeastaan
+jossain fyysisen muistin.
+
+1242
+00:58:30,849 --> 00:58:32,890
+Joten on pikku
+transistoreita tai jonkinlainen
+
+1243
+00:58:32,890 --> 00:58:35,840
+Elektroniikan alla
+huppu tallentamiseen näitä arvoja.
+
+1244
+00:58:35,840 --> 00:58:40,460
+>> Ja yhteensä, kuinka monta bittiä
+mukana nyt, vain olla selvä?
+
+1245
+00:58:40,460 --> 00:58:45,580
+Joten tämä on neljä tavua, tai
+Nyt se on 32 bittiä yhteensä.
+
+1246
+00:58:45,580 --> 00:58:49,280
+Joten on todella 32 nollia ja
+ne säveltäminen nämä neljä asiaa.
+
+1247
+00:58:49,280 --> 00:58:52,070
+On vieläkin täällä, mutta
+taas emme välitä siitä.
+
+1248
+00:58:52,070 --> 00:58:55,120
+>> Nyt Katsotaanpa pyytää toista
+kysymys käyttämällä muistia,
+
+1249
+00:58:55,120 --> 00:58:57,519
+sillä, että lopussa
+Päivän on varianssi.
+
+1250
+00:58:57,519 --> 00:59:00,310
+Ei ole väliä mitä voisimme tehdä
+tietokoneen, lopussa päivän
+
+1251
+00:59:00,310 --> 00:59:02,560
+laitteisto on edelleen
+Sama alla huppu.
+
+1252
+00:59:02,560 --> 00:59:04,670
+Kuinka voisin tallentaa sanan täällä?
+
+1253
+00:59:04,670 --> 00:59:09,710
+No, sana tietokoneella kuten
+"Hei!" tallennettaisiin juuri tällainen.
+
+1254
+00:59:09,710 --> 00:59:12,300
+Ja jos halusi pidemmän
+sana, voit yksinkertaisesti
+
+1255
+00:59:12,300 --> 00:59:19,120
+korvata, että ja sanoa jotain
+kuten "hei" ja tallentaa, että täällä.
+
+1256
+00:59:19,120 --> 00:59:23,930
+>> Ja niin tässäkin tämä contiguousness
+on itse asiassa etu,
+
+1257
+00:59:23,930 --> 00:59:26,530
+koska tietokone voi vain
+luetaan oikealta vasemmalle.
+
+1258
+00:59:26,530 --> 00:59:28,680
+Mutta tässä on kysymys.
+
+1259
+00:59:28,680 --> 00:59:33,480
+Yhteydessä tämän sanan,
+h-e-l-l-o, huutomerkki,
+
+1260
+00:59:33,480 --> 00:59:38,740
+miten voisi tietokone tiedä missä
+sana alkaa ja missä sana loppuu?
+
+1261
+00:59:38,740 --> 00:59:41,690
+
+1262
+00:59:41,690 --> 00:59:43,800
+Yhteydessä numeroita,
+miten tietokone
+
+1263
+00:59:43,800 --> 00:59:48,396
+tiedä kuinka kauan sekvenssi
+numerot on tai missä se alkaa?
+
+1264
+00:59:48,396 --> 00:59:50,270
+No, se kääntyy out--
+ja emme mene liikaa
+
+1265
+00:59:50,270 --> 00:59:54,970
+tähän tasoon detail--
+tietokoneet liikkua tavaraa ympäri muistissa
+
+1266
+00:59:54,970 --> 00:59:57,800
+kirjaimellisesti Poiketen näistä osoitteista.
+
+1267
+00:59:57,800 --> 01:00:02,080
+Joten tietokoneessa, jos olet
+kirjoittaa koodia tallentaa asioita
+
+1268
+01:00:02,080 --> 01:00:05,800
+kuten sanoja, mitä olet
+todella tekee on kirjoittaa
+
+1269
+01:00:05,800 --> 01:00:11,320
+ilmaisuja muistaa missä
+tietokoneen muistiin nämä sanat ovat.
+
+1270
+01:00:11,320 --> 01:00:14,370
+Joten anna minun tehdä hyvin,
+hyvin yksinkertainen esimerkki.
+
+1271
+01:00:14,370 --> 01:00:18,260
+>> Aion mennä eteenpäin ja
+avata yksinkertaisen tekstin ohjelma,
+
+1272
+01:00:18,260 --> 01:00:20,330
+ja aion luoda
+tiedoston nimeltä hello.c.
+
+1273
+01:00:20,330 --> 01:00:22,849
+Suurin osa tiedoista me
+aio mennä hyvin yksityiskohtaisesti,
+
+1274
+01:00:22,849 --> 01:00:25,140
+mutta aion kirjoittaa
+ohjelman että samaa kieltä,
+
+1275
+01:00:25,140 --> 01:00:31,140
+C. Tämä on paljon enemmän uhkaava,
+Väitän, kuin Scratch,
+
+1276
+01:00:31,140 --> 01:00:32,490
+mutta se on hyvin samanlainen hengessä.
+
+1277
+01:00:32,490 --> 01:00:34,364
+Itse asiassa nämä kihara
+braces-- voit eräänlainen
+
+1278
+01:00:34,364 --> 01:00:37,820
+ajatella, mitä tein kuin tämä.
+
+1279
+01:00:37,820 --> 01:00:39,240
+>> Tehdään tämä, todella.
+
+1280
+01:00:39,240 --> 01:00:45,100
+Kun vihreä lippu napsautetaan,
+toimi seuraavasti.
+
+1281
+01:00:45,100 --> 01:00:50,210
+Haluan tulostaa "hei."
+
+1282
+01:00:50,210 --> 01:00:51,500
+Joten tämä on nyt pseudokoodit.
+
+1283
+01:00:51,500 --> 01:00:53,000
+Olen sellainen hämärtää linjat.
+
+1284
+01:00:53,000 --> 01:00:56,750
+C, tällä kielellä puhun
+noin, tämä linja tulosta hei
+
+1285
+01:00:56,750 --> 01:01:01,940
+todella tulee "printf" kanssa
+Joissakin suluissa ja puolipisteellä.
+
+1286
+01:01:01,940 --> 01:01:03,480
+>> Mutta se on täsmälleen sama ajatus.
+
+1287
+01:01:03,480 --> 01:01:06,730
+Ja tämä erittäin käyttäjäystävällinen
+"Kun vihreä lippu napsautetaan" tulee
+
+1288
+01:01:06,730 --> 01:01:10,182
+paljon enemmän mystistä "int main mitätön."
+
+1289
+01:01:10,182 --> 01:01:12,890
+Ja tämä ei oikeastaan ​​kartoitus,
+joten olen juuri menossa sivuuttaa sitä.
+
+1290
+01:01:12,890 --> 01:01:17,210
+Mutta aaltosulkumerkkien ovat kuin
+kaareva palapelin palaset näin.
+
+1291
+01:01:17,210 --> 01:01:18,700
+>> Joten voit sellaista arvata.
+
+1292
+01:01:18,700 --> 01:01:22,357
+Vaikka et ole koskaan ohjelmoitu aiemmin,
+Mitä tämä ohjelma todennäköisesti tehdä?
+
+1293
+01:01:22,357 --> 01:01:25,560
+
+1294
+01:01:25,560 --> 01:01:28,000
+Luultavasti tulostaa hei
+huutomerkillä.
+
+1295
+01:01:28,000 --> 01:01:29,150
+>> Joten kokeilla.
+
+1296
+01:01:29,150 --> 01:01:30,800
+Aion tallentaa sitä.
+
+1297
+01:01:30,800 --> 01:01:34,000
+Ja tämä on, jälleen, hyvin
+vanhan koulun ympäristössä.
+
+1298
+01:01:34,000 --> 01:01:35,420
+En voi klikata, en voi vetää.
+
+1299
+01:01:35,420 --> 01:01:36,910
+Minun täytyy kirjoittaa komentoja.
+
+1300
+01:01:36,910 --> 01:01:41,320
+Joten haluan ajaa minun ohjelma, niin
+En voisi tehdä tämän, kuten hello.c.
+
+1301
+01:01:41,320 --> 01:01:42,292
+Se tiedosto juoksin.
+
+1302
+01:01:42,292 --> 01:01:43,500
+Mutta hetkinen, olen puuttuu askel.
+
+1303
+01:01:43,500 --> 01:01:46,470
+Mitä sanomme on välttämätön
+vaihe kieli kuten C?
+
+1304
+01:01:46,470 --> 01:01:49,470
+Olen juuri kirjoittanut lähde
+koodi, mutta mitä tarvitsen?
+
+1305
+01:01:49,470 --> 01:01:50,670
+Joo, Tarvitsen kääntäjä.
+
+1306
+01:01:50,670 --> 01:01:57,670
+Joten minun Mac täällä, olen
+ohjelma nimeltä GCC, GNU C-kääntäjä,
+
+1307
+01:01:57,670 --> 01:02:03,990
+jossa voin tehdä this-- puolestaan
+minun lähdekoodia, me kutsumme sitä,
+
+1308
+01:02:03,990 --> 01:02:04,930
+konekielelle.
+
+1309
+01:02:04,930 --> 01:02:10,180
+>> Ja näen, että
+jälleen, seuraavasti, nämä
+
+1310
+01:02:10,180 --> 01:02:14,090
+ovat nollia ja ykkösiä minä vain
+luotu minun lähdekoodia,
+
+1311
+01:02:14,090 --> 01:02:15,730
+kaikki nollia ja ykkösiä.
+
+1312
+01:02:15,730 --> 01:02:17,770
+Ja jos haluan juosta
+Minun program-- se tapahtuu
+
+1313
+01:02:17,770 --> 01:02:23,010
+kutsua a.out varten
+historiallinen reasons-- "hei."
+
+1314
+01:02:23,010 --> 01:02:24,070
+Voin käyttää sitä uudelleen.
+
+1315
+01:02:24,070 --> 01:02:25,690
+Hei hei hei.
+
+1316
+01:02:25,690 --> 01:02:27,430
+Ja se näyttää toimivan.
+
+1317
+01:02:27,430 --> 01:02:31,000
+>> Mutta se tarkoittaa jossain omassa
+tietokoneen muistiin ovat sanoja
+
+1318
+01:02:31,000 --> 01:02:35,279
+h-e-l-l-o, huutomerkki.
+
+1319
+01:02:35,279 --> 01:02:38,070
+Ja se osoittautuu, aivan kuin syrjään,
+mitä tietokone tyypillisesti
+
+1320
+01:02:38,070 --> 01:02:40,550
+niin että se tietää minne
+asiat alkavat ja end-- sen
+
+1321
+01:02:40,550 --> 01:02:42,460
+menossa laittaa erityinen symboli täällä.
+
+1322
+01:02:42,460 --> 01:02:46,064
+Ja sopimus on laittaa
+numero nolla lopussa sanan
+
+1323
+01:02:46,064 --> 01:02:48,230
+jotta tiedät missä se
+tosiasiallisesti päättyy, niin että te
+
+1324
+01:02:48,230 --> 01:02:52,750
+eivät pidä tulostamalla enemmän ja enemmän
+merkkejä kuin todellisuudessa tarkoitus.
+
+1325
+01:02:52,750 --> 01:02:55,400
+>> Mutta takeaway täällä, vaikka
+vaikka tämä on melko mystistä,
+
+1326
+01:02:55,400 --> 01:02:58,140
+on se, että se on viime kädessä
+suhteellisen yksinkertainen.
+
+1327
+01:02:58,140 --> 01:03:04,550
+Sait eräänlainen nauha, tyhjä
+tila, johon voit kirjoittaa kirjaimia.
+
+1328
+01:03:04,550 --> 01:03:07,150
+Sinun on vain oltava
+erityinen tunnusmerkki, kuten mielivaltaisesti
+
+1329
+01:03:07,150 --> 01:03:10,316
+numero nolla, laittaa lopussa
+sanasi niin, että tietokone tietää,
+
+1330
+01:03:10,316 --> 01:03:13,410
+oh, minun pitäisi lopettaa tulostuksen jälkeen
+Näen huutomerkki.
+
+1331
+01:03:13,410 --> 01:03:16,090
+Koska seuraava asia siellä
+on ASCII-arvo on nolla,
+
+1332
+01:03:16,090 --> 01:03:19,125
+tai null luonne
+joku voisi kutsua sitä.
+
+1333
+01:03:19,125 --> 01:03:21,500
+Mutta on sellainen ongelma
+täällä, ja nyt palata
+
+1334
+01:03:21,500 --> 01:03:23,320
+numeroihin hetkeksi.
+
+1335
+01:03:23,320 --> 01:03:28,720
+Oletetaan, että minä, itse asiassa,
+on joukko numeroita,
+
+1336
+01:03:28,720 --> 01:03:30,730
+ja olettaa, että
+Ohjelma Kirjoitan on
+
+1337
+01:03:30,730 --> 01:03:34,680
+kuten asteen kirja opettajalle
+ja opettajat luokkahuoneessa.
+
+1338
+01:03:34,680 --> 01:03:38,720
+Ja tämä ohjelma antaa hänelle
+kirjoittamaan oppilaiden tulokset
+
+1339
+01:03:38,720 --> 01:03:39,960
+on tietokilpailuja.
+
+1340
+01:03:39,960 --> 01:03:43,750
+Ja olettaa, että opiskelija saa
+100 heidän ensimmäinen tietokilpailu, ehkä
+
+1341
+01:03:43,750 --> 01:03:49,920
+kuten 80 seuraava, sitten
+75, sitten 90 neljäntenä tietokilpailu.
+
+1342
+01:03:49,920 --> 01:03:54,150
+>> Joten tässä vaiheessa tarinan,
+array on kooltaan neljä.
+
+1343
+01:03:54,150 --> 01:03:58,470
+On ehdottomasti enemmän muistia
+tietokone, mutta array, niin sanotusti,
+
+1344
+01:03:58,470 --> 01:04:00,350
+on koko neljä.
+
+1345
+01:04:00,350 --> 01:04:06,060
+Oletetaan nyt, että opettaja haluaa
+määrittää viidennen tietokilpailu luokkaan.
+
+1346
+01:04:06,060 --> 01:04:08,510
+No, yksi niistä asioista hän
+tai hän joutuu tekemään
+
+1347
+01:04:08,510 --> 01:04:10,650
+on nyt tallentaa ylimääräinen arvo tähän.
+
+1348
+01:04:10,650 --> 01:04:15,490
+Mutta jos jono opettajan on
+luotu tähän ohjelmaan on kooltaan,
+
+1349
+01:04:15,490 --> 01:04:22,440
+yksi ongelma joukko on se, että
+et voi vain pitää lisäämällä muistia.
+
+1350
+01:04:22,440 --> 01:04:26,470
+Sillä mitä jos toinen osa
+Ohjelma on sana "hei" oikeassa?
+
+1351
+01:04:26,470 --> 01:04:29,650
+>> Toisin sanoen, minun muisti voi olla
+käytetty mitään ohjelmaa.
+
+1352
+01:04:29,650 --> 01:04:33,250
+Jos etukäteen olen kirjoittanut, hei,
+Haluan syöttää neljä tietokilpailu tulokset,
+
+1353
+01:04:33,250 --> 01:04:34,784
+he pääsivät tänne ja tänne.
+
+1354
+01:04:34,784 --> 01:04:37,700
+Ja jos yhtäkkiä muuttaa mieltään
+myöhemmin ja sanoa haluan viidesosa tietokilpailu
+
+1355
+01:04:37,700 --> 01:04:40,872
+pisteet, et voi vain
+laittaa sen mihin tahansa,
+
+1356
+01:04:40,872 --> 01:04:42,580
+sillä mitä jos tämä
+muisti on käytössä
+
+1357
+01:04:42,580 --> 01:04:45,990
+jotain else-- jokin muu ohjelma
+tai jokin muu piirre ohjelmassa
+
+1358
+01:04:45,990 --> 01:04:46,910
+että näytät?
+
+1359
+01:04:46,910 --> 01:04:50,650
+Joten sinun täytyy ajatella etukäteen
+miten haluat tallentaa tiedot,
+
+1360
+01:04:50,650 --> 01:04:54,480
+koska nyt olet maalannut
+itse digitaaliseksi nurkkaan.
+
+1361
+01:04:54,480 --> 01:04:57,280
+>> Joten opettaja voisi sen sijaan
+sanoa kirjoitettaessa ohjelma
+
+1362
+01:04:57,280 --> 01:04:59,360
+tallentaa hänen
+laadut, tiedätkö mitä?
+
+1363
+01:04:59,360 --> 01:05:04,180
+Aion pyytää,
+kirjoitettaessa minun ohjelma,
+
+1364
+01:05:04,180 --> 01:05:12,070
+että haluan nolla, yksi, kaksi, kolme,
+neljä, viisi, kuusi, kahdeksan laadut yhteensä.
+
+1365
+01:05:12,070 --> 01:05:15,320
+Joten yksi, kaksi, kolme, neljä,
+viisi, kuusi, seitsemän, kahdeksan.
+
+1366
+01:05:15,320 --> 01:05:18,612
+Opettaja voi hieman yli kohdentaa
+muisti kirjoittaessaan hänen ohjelma
+
+1367
+01:05:18,612 --> 01:05:19,570
+ja sanoa, tiedätkö mitä?
+
+1368
+01:05:19,570 --> 01:05:22,236
+En koskaan antaa enemmän
+kuin kahdeksan tietokilpailuja lukukauden.
+
+1369
+01:05:22,236 --> 01:05:23,130
+Se on vain hullu.
+
+1370
+01:05:23,130 --> 01:05:24,470
+En koskaan jakaa sitä.
+
+1371
+01:05:24,470 --> 01:05:28,270
+Niin että tällä tavalla hän on
+joustavuutta tallentaa opiskelijan tulokset,
+
+1372
+01:05:28,270 --> 01:05:33,010
+kuten 75, 90, ja ehkä yksi ylimääräinen jossa
+opiskelija sai lisäoppitunteihin, 105.
+
+1373
+01:05:33,010 --> 01:05:36,130
+>> Mutta jos opettaja ei koskaan
+käyttää näitä kolmea tiloja,
+
+1374
+01:05:36,130 --> 01:05:38,860
+siellä intuitiivinen takeaway täällä.
+
+1375
+01:05:38,860 --> 01:05:41,410
+Hän on vain tuhlaa tilaa.
+
+1376
+01:05:41,410 --> 01:05:44,790
+Eli toisin sanoen, on tämä
+yhteinen kompromissi ohjelmointi
+
+1377
+01:05:44,790 --> 01:05:48,241
+jossa voit joko jakaa
+juuri niin paljon muistia kuin haluat,
+
+1378
+01:05:48,241 --> 01:05:51,490
+ylösalaisin on se, että olet Super
+efficient-- et tuhlailevaksi
+
+1379
+01:05:51,490 --> 01:05:54,640
+at all-- mutta haittapuoli, joka
+on mitä jos muutat mielesi, kun
+
+1380
+01:05:54,640 --> 01:05:58,780
+sillä ohjelmalla, jolla haluat tallentaa
+enemmän tietoa kuin alun perin tarkoitettu.
+
+1381
+01:05:58,780 --> 01:06:03,030
+>> Joten ehkä ratkaisu on, niin,
+kirjoita ohjelmat siten
+
+1382
+01:06:03,030 --> 01:06:05,605
+että ne käyttävät enemmän muistia
+kuin he todella tarvitsevat.
+
+1383
+01:06:05,605 --> 01:06:07,730
+Näin et tule
+törmätä että ongelma,
+
+1384
+01:06:07,730 --> 01:06:09,730
+mutta olet tuhlailevaksi.
+
+1385
+01:06:09,730 --> 01:06:12,960
+Ja mitä enemmän muistia ohjelma käyttää,
+kuten olemme keskustelleet eilen, sitä vähemmän
+
+1386
+01:06:12,960 --> 01:06:15,410
+muistin, joka on saatavilla
+muita ohjelmia,
+
+1387
+01:06:15,410 --> 01:06:18,790
+ennemmin tietokone saattaa hidastua
+alas, koska virtuaalimuistin.
+
+1388
+01:06:18,790 --> 01:06:22,670
+Ja niin ihanteellinen ratkaisu voisi olla mitä?
+
+1389
+01:06:22,670 --> 01:06:24,610
+>> Under-allokoinnin näyttää huono.
+
+1390
+01:06:24,610 --> 01:06:27,030
+Yli-allokoinnin näyttää huono.
+
+1391
+01:06:27,030 --> 01:06:31,120
+Joten mikä voisi olla parempi ratkaisu?
+
+1392
+01:06:31,120 --> 01:06:32,390
+Uudelleen kohdentamiseen.
+
+1393
+01:06:32,390 --> 01:06:33,590
+Olla dynaamisempi.
+
+1394
+01:06:33,590 --> 01:06:37,520
+Älä pakota itseäsi valita
+priori alussa, mitä haluat.
+
+1395
+01:06:37,520 --> 01:06:41,370
+Ja eivät varmasti yli kohdentaa,
+ettette olla epätaloudellista.
+
+1396
+01:06:41,370 --> 01:06:45,770
+>> Ja niin tämän tavoitteen saavuttamiseksi, me
+täytyy heittää tämän tietorakenne,
+
+1397
+01:06:45,770 --> 01:06:48,100
+niin sanotusti pois.
+
+1398
+01:06:48,100 --> 01:06:51,080
+Ja niin mitä ohjelmoija
+tyypillisesti käyttää
+
+1399
+01:06:51,080 --> 01:06:55,940
+ei jotain kutsutaan ole
+array mutta linkitetty lista.
+
+1400
+01:06:55,940 --> 01:07:00,860
+Toisin sanoen, hän tulee
+alkaa ajatella niiden muistia
+
+1401
+01:07:00,860 --> 01:07:05,280
+olevan sellainen muoto, että ne
+voi piirtää seuraavalla tavalla.
+
+1402
+01:07:05,280 --> 01:07:08,520
+Jos haluan tallentaa yksi numero
+program-- joten se on syyskuu,
+
+1403
+01:07:08,520 --> 01:07:12,600
+Olen antanut oppilaitani tietokilpailu; Haluan
+tallentaa opiskelijan ensimmäinen tietokilpailu,
+
+1404
+01:07:12,600 --> 01:07:16,220
+ja he saivat 100 it-- I
+Aion kysyä tietokoneeseen,
+
+1405
+01:07:16,220 --> 01:07:19,540
+Poiketen ohjelman olen
+kirjoitettu, yhden palan muistia.
+
+1406
+01:07:19,540 --> 01:07:22,570
+Ja aion tallentaa
+numero 100, ja se on siinä.
+
+1407
+01:07:22,570 --> 01:07:24,820
+>> Sitten muutamaa viikkoa myöhemmin
+kun saan toisen tietokilpailu,
+
+1408
+01:07:24,820 --> 01:07:27,890
+ja on aika kirjoittaa
+että 90%, aion
+
+1409
+01:07:27,890 --> 01:07:32,129
+kysyä tietokone, hei, tietokone,
+voin olla toinen möhkäle muistia?
+
+1410
+01:07:32,129 --> 01:07:34,170
+Se tulee antaa minulle tämän
+tyhjä murikka muistia.
+
+1411
+01:07:34,170 --> 01:07:39,370
+Aion laittaa numero 90,
+mutta minun ohjelma jotenkin tai other--
+
+1412
+01:07:39,370 --> 01:07:42,100
+emmekä välitä
+syntaksi this-- tarvitsen
+
+1413
+01:07:42,100 --> 01:07:44,430
+jotenkin ketjuttaa nämä asiat yhdessä.
+
+1414
+01:07:44,430 --> 01:07:47,430
+Ja minä ketjun ne yhdessä
+mikä näyttää nuoli täällä.
+
+1415
+01:07:47,430 --> 01:07:50,050
+>> Kolmas tietokilpailu, joka tulee,
+Aion sanoa, hei, tietokone,
+
+1416
+01:07:50,050 --> 01:07:51,680
+antaa minulle toisen palan muistia.
+
+1417
+01:07:51,680 --> 01:07:54,660
+Ja aion laittaa alas
+mitä se oli, kuten 75,
+
+1418
+01:07:54,660 --> 01:07:56,920
+ja minun täytyy ketju tähän
+yhdessä nyt jotenkin.
+
+1419
+01:07:56,920 --> 01:08:00,290
+Neljäs tietokilpailu tulee pitkin, ja ehkä
+se loppupuolella lukukauden.
+
+1420
+01:08:00,290 --> 01:08:03,140
+Ja tässä vaiheessa minun ohjelma
+ehkä käyttää muistia
+
+1421
+01:08:03,140 --> 01:08:05,540
+koko paikka, koko fyysisesti.
+
+1422
+01:08:05,540 --> 01:08:08,170
+Ja niin huvin, olen
+menossa tehdä tämän esiin
+
+1423
+01:08:08,170 --> 01:08:11,260
+quiz-- Unohdan mitä se oli; minä
+ajattelevat ehkä 80 tai something--
+
+1424
+01:08:11,260 --> 01:08:12,500
+tapa tänne.
+
+1425
+01:08:12,500 --> 01:08:15,920
+>> Mutta se on hienoa, koska kuvallisesti
+Aion vetää tätä linjaa.
+
+1426
+01:08:15,920 --> 01:08:19,063
+Toisin sanoen, todellisuudessa,
+tietokoneen laitteiston,
+
+1427
+01:08:19,063 --> 01:08:20,979
+ensimmäinen pisteet saattaisi
+päätyvät tänne, koska se on
+
+1428
+01:08:20,979 --> 01:08:22,529
+heti alussa lukukauden.
+
+1429
+01:08:22,529 --> 01:08:25,810
+Seuraava saattavat päätyä tähän
+koska vähän aikaa on kulunut
+
+1430
+01:08:25,810 --> 01:08:27,210
+ja ohjelma pitää käynnissä.
+
+1431
+01:08:27,210 --> 01:08:30,060
+Seuraava tilanne, joka oli
+75, saattaa olla täällä.
+
+1432
+01:08:30,060 --> 01:08:33,420
+Ja viimeinen pisteet voisi olla
+80, joka on täällä.
+
+1433
+01:08:33,420 --> 01:08:38,729
+>> Joten todellisuudessa, fyysisesti, tämä saattaa olla
+mitä tietokoneen muistiin näyttää.
+
+1434
+01:08:38,729 --> 01:08:41,569
+Mutta tämä ei ole mielekäs henkinen
+paradigman ohjelmoija.
+
+1435
+01:08:41,569 --> 01:08:44,649
+Miksi välität missä
+pahus tietosi päätyy?
+
+1436
+01:08:44,649 --> 01:08:46,200
+Haluat vain tallentaa tietoja.
+
+1437
+01:08:46,200 --> 01:08:49,390
+>> Tämä on ikään kuin meidän keskustelua
+aikaisemmin piirustus kuution.
+
+1438
+01:08:49,390 --> 01:08:52,200
+Miksi välität mitä
+kulma on kuution
+
+1439
+01:08:52,200 --> 01:08:53,740
+ja miten sinun täytyy kääntyä vetää sitä?
+
+1440
+01:08:53,740 --> 01:08:54,950
+Haluat vain kuutio.
+
+1441
+01:08:54,950 --> 01:08:57,359
+Samoin täällä,
+haluavat vain asteen kirja.
+
+1442
+01:08:57,359 --> 01:08:59,559
+Haluat vain ajatella
+tämä luettelo numeroita.
+
+1443
+01:08:59,559 --> 01:09:01,350
+Kuka välittää kuinka se
+toteuttaa laitteistossa?
+
+1444
+01:09:01,350 --> 01:09:05,180
+>> Joten ottoon nyt
+tämä kuva täällä.
+
+1445
+01:09:05,180 --> 01:09:07,580
+Tämä on linkitetty lista, kuten
+ohjelmoija kutsuisi sitä,
+
+1446
+01:09:07,580 --> 01:09:10,640
+jos olet
+lista, tietenkin numeroita.
+
+1447
+01:09:10,640 --> 01:09:14,990
+Mutta se liittyy kuvallisesti
+Poiketen näistä nuolet,
+
+1448
+01:09:14,990 --> 01:09:18,510
+ja kaikki nämä nuolet are-- alla
+huppu, jos olet kiinnostunut,
+
+1449
+01:09:18,510 --> 01:09:23,210
+muistuttaa, että meidän fyysisessä laitteistossa on
+osoitteet nolla, yksi, kaksi, kolme, neljä.
+
+1450
+01:09:23,210 --> 01:09:28,465
+Kaikki nämä nuolet ovat on kuin kartta
+tai ohjeet, joissa jos 90 is-- nyt
+
+1451
+01:09:28,465 --> 01:09:29,090
+Sain laskea.
+
+1452
+01:09:29,090 --> 01:09:31,750
+>> Nolla, yksi, kaksi, kolme,
+neljä, viisi, kuusi, seitsemän.
+
+1453
+01:09:31,750 --> 01:09:35,640
+Näyttää siltä, ​​että 90 on
+muistipaikan numero seitsemän.
+
+1454
+01:09:35,640 --> 01:09:38,460
+Kaikki nämä nuolet ovat on
+kuin pieni arvottomaksi
+
+1455
+01:09:38,460 --> 01:09:42,439
+joka on antaa ajo-ohjeita
+ohjelma, joka kertoo seurata tätä karttaa
+
+1456
+01:09:42,439 --> 01:09:43,880
+päästä sijainti seitsemään.
+
+1457
+01:09:43,880 --> 01:09:46,680
+Ja siellä löydät
+Opiskelijan toinen tietokilpailu pisteet.
+
+1458
+01:09:46,680 --> 01:09:52,100
+Samaan aikaan 75-- jos jatkan tätä,
+Tämä on seitsemän, kahdeksan, yhdeksän, 10, 11, 12,
+
+1459
+01:09:52,100 --> 01:09:54,240
+13, 14, 15.
+
+1460
+01:09:54,240 --> 01:09:59,080
+>> Tämä toinen nuoli juuri edustaa
+kartan muistipaikka 15.
+
+1461
+01:09:59,080 --> 01:10:02,550
+Mutta jälleen kerran, ohjelmoija yleensä tekee
+välitä tämän tason yksityiskohtia.
+
+1462
+01:10:02,550 --> 01:10:05,530
+Ja melkein joka ohjelmointi
+kieli tänään, ohjelmoija
+
+1463
+01:10:05,530 --> 01:10:10,490
+ei edes tiedä missä muistissa
+nämä luvut todellisuudessa ovat.
+
+1464
+01:10:10,490 --> 01:10:14,830
+Kaikki hänellä on välitä on
+että ne ovat jotenkin liittyvät toisiinsa
+
+1465
+01:10:14,830 --> 01:10:18,390
+tietorakenteeseen näin.
+
+1466
+01:10:18,390 --> 01:10:21,580
+>> Mutta näyttää siltä ei
+saada liian tekninen.
+
+1467
+01:10:21,580 --> 01:10:27,430
+Mutta juuri siksi me voimme kenties
+varaa olla tämän keskustelun täällä,
+
+1468
+01:10:27,430 --> 01:10:33,630
+Oletetaan, että palaamme
+tämä kysymys array.
+
+1469
+01:10:33,630 --> 01:10:35,780
+Katsotaan me pahoillani menossa täällä.
+
+1470
+01:10:35,780 --> 01:10:42,950
+Tämä on 100, 90, 75, ja 80.
+
+1471
+01:10:42,950 --> 01:10:44,980
+>> Saanen lyhyesti tehdä tätä väitettä.
+
+1472
+01:10:44,980 --> 01:10:48,980
+Tämä on joukko, ja uudelleen,
+keskeisiä ominaisuus array
+
+1473
+01:10:48,980 --> 01:10:52,400
+on, että kaikki tiedot on takaisin
+takaisin takaisin memory-- kirjaimellisesti
+
+1474
+01:10:52,400 --> 01:10:56,830
+yksi tavu tai ehkä neljä tavua,
+jotkut kiinteä määrä tavuja pois.
+
+1475
+01:10:56,830 --> 01:11:00,710
+Vuonna linkitetty lista, jonka voisimme tehdä
+näin, alla huppu, joka
+
+1476
+01:11:00,710 --> 01:11:02,000
+tietää missä että tavaraa on?
+
+1477
+01:11:02,000 --> 01:11:03,630
+Se ei edes tarvitse virrata kuin tämä.
+
+1478
+01:11:03,630 --> 01:11:06,050
+Osa tiedoista voi olla
+takaisin vasemmalle ylös.
+
+1479
+01:11:06,050 --> 01:11:07,530
+Et edes tiedä.
+
+1480
+01:11:07,530 --> 01:11:15,430
+>> Ja niin jossa joukko, olet
+ominaisuutta kutsutaan random access.
+
+1481
+01:11:15,430 --> 01:11:20,570
+Ja mitä random access välineet on
+että tietokone voi hypätä heti
+
+1482
+01:11:20,570 --> 01:11:22,730
+minne tahansa jono.
+
+1483
+01:11:22,730 --> 01:11:23,580
+Miksi?
+
+1484
+01:11:23,580 --> 01:11:26,000
+Koska tietokone tietää
+että ensimmäinen paikka on
+
+1485
+01:11:26,000 --> 01:11:29,540
+nolla, yksi, kaksi ja kolme.
+
+1486
+01:11:29,540 --> 01:11:33,890
+>> Ja joten jos haluat mennä
+Tämän elementin seuraavaan elementtiin,
+
+1487
+01:11:33,890 --> 01:11:36,099
+kirjaimellisesti, että
+Tietokoneen mieli, lisää vain yksi.
+
+1488
+01:11:36,099 --> 01:11:39,140
+Jos haluat mennä kolmanteen elementtiin,
+vain lisätä one-- seuraavaan elementtiin, vain
+
+1489
+01:11:39,140 --> 01:11:40,290
+lisätä yhden.
+
+1490
+01:11:40,290 --> 01:11:42,980
+Kuitenkin tässä versiossa
+tarina, olettaa
+
+1491
+01:11:42,980 --> 01:11:46,080
+tietokone on parhaillaan
+at tai käsittelevät numero 100.
+
+1492
+01:11:46,080 --> 01:11:49,770
+Miten päästä seuraavalle
+arvosana asteen kirja?
+
+1493
+01:11:49,770 --> 01:11:52,560
+>> Sinun täytyy ottaa seitsemän
+vaiheita, joka on mielivaltainen.
+
+1494
+01:11:52,560 --> 01:11:58,120
+Päästä seuraavaan, sinun täytyy
+ottaa toisen kahdeksan askeleen päästä 15.
+
+1495
+01:11:58,120 --> 01:12:02,250
+Toisin sanoen, se ei ole
+jatkuva kuilu numerot,
+
+1496
+01:12:02,250 --> 01:12:04,857
+ja niin se vain vie
+tietokone enemmän aikaa on piste.
+
+1497
+01:12:04,857 --> 01:12:06,940
+Tietokone on etsiä
+kautta muistille
+
+1498
+01:12:06,940 --> 01:12:08,990
+löytää mitä etsit.
+
+1499
+01:12:08,990 --> 01:12:14,260
+>> Joten kun taas matriisin taipumus olla
+nopea data structure-- koska olet
+
+1500
+01:12:14,260 --> 01:12:17,610
+voi kirjaimellisesti vain tehdä yksinkertainen aritmeettinen
+ja minne haluat lisäämällä yksi,
+
+1501
+01:12:17,610 --> 01:12:21,300
+for instance-- linkitettynä listana,
+te uhrata että ominaisuus.
+
+1502
+01:12:21,300 --> 01:12:24,020
+Et voi vain mennä ensimmäisestä
+ja toinen-kolmas ja neljäs.
+
+1503
+01:12:24,020 --> 01:12:25,240
+Sinun täytyy seurata karttaa.
+
+1504
+01:12:25,240 --> 01:12:28,160
+Sinun täytyy ottaa useampia vaiheita
+päästä niihin arvoihin, jotka
+
+1505
+01:12:28,160 --> 01:12:30,230
+näyttäisi olevan lisäämällä kustannuksia.
+
+1506
+01:12:30,230 --> 01:12:35,910
+Niinpä me ne maksavat, mutta mikä oli
+ominaisuus, joka Dan pyrki täällä?
+
+1507
+01:12:35,910 --> 01:12:38,110
+Mitä linkitetty lista
+ilmeisesti jotta voisimme tehdä,
+
+1508
+01:12:38,110 --> 01:12:40,240
+joka oli alkuperä
+tässä tarina?
+
+1509
+01:12:40,240 --> 01:12:43,250
+
+1510
+01:12:43,250 --> 01:12:43,830
+>> Täsmälleen.
+
+1511
+01:12:43,830 --> 01:12:46,220
+Dynaaminen kokoa sitä.
+
+1512
+01:12:46,220 --> 01:12:48,040
+Voimme lisätä tähän luetteloon.
+
+1513
+01:12:48,040 --> 01:12:51,430
+Voimme jopa kutistua listalle niin
+että me vain käyttää niin paljon muistia
+
+1514
+01:12:51,430 --> 01:12:55,560
+koska me todella haluavat ja niin
+emme ole koskaan liikaa kohdentamisessa.
+
+1515
+01:12:55,560 --> 01:12:58,470
+>> Nyt vain olla todella kinastelemme-nirso,
+siellä on piilotettu kustannuksia.
+
+1516
+01:12:58,470 --> 01:13:01,980
+Joten kannattaa ei anna minun vakuuttaa
+teille, että tämä on vakuuttava kompromissi.
+
+1517
+01:13:01,980 --> 01:13:04,190
+On toinenkin piilokustannuksia täällä.
+
+1518
+01:13:04,190 --> 01:13:06,550
+Hyöty, tehtävä selväksi,
+että saamme dynamiikkaa.
+
+1519
+01:13:06,550 --> 01:13:10,359
+Jos en halua toista elementtiä, voin vain
+piirtää sen ja laittaa numero siellä.
+
+1520
+01:13:10,359 --> 01:13:12,150
+Ja sitten voin linkittää sen
+kuvalla täällä,
+
+1521
+01:13:12,150 --> 01:13:14,970
+kun taas tänne, uudelleen, jos olen
+maalattu itse nurkkaan,
+
+1522
+01:13:14,970 --> 01:13:19,410
+jos jotain muuta on jo käytössä
+muisti täällä, olen pois onnea.
+
+1523
+01:13:19,410 --> 01:13:21,700
+Olen maalannut itseni nurkkaan.
+
+1524
+01:13:21,700 --> 01:13:24,390
+>> Mutta mikä on piilotettu
+maksaa tässä kuvassa?
+
+1525
+01:13:24,390 --> 01:13:27,690
+Se ei ole vain määrästä
+aika, joka kuluu
+
+1526
+01:13:27,690 --> 01:13:29,870
+lähteä täältä täältä,
+joka on seitsemän vaihetta, niin
+
+1527
+01:13:29,870 --> 01:13:32,820
+kahdeksan vaihetta, jotka on enemmän kuin yksi.
+
+1528
+01:13:32,820 --> 01:13:34,830
+Mikä toinen piilokustannuksia?
+
+1529
+01:13:34,830 --> 01:13:35,440
+Ei vain kerran.
+
+1530
+01:13:35,440 --> 01:13:44,790
+
+1531
+01:13:44,790 --> 01:13:49,940
+Lisätietoja on
+saavuttamiseksi tarpeen tätä kuvaa.
+
+1532
+01:13:49,940 --> 01:13:53,210
+>> Niin, että kartta, niitä pieniä vieraskirjatekstit
+paperi, koska pidän heidät määritellään.
+
+1533
+01:13:53,210 --> 01:13:55,650
+Nämä arrows-- ne eivät ole ilmaisia.
+
+1534
+01:13:55,650 --> 01:13:57,660
+Computer-- tiedät
+mitä tietokoneessa on.
+
+1535
+01:13:57,660 --> 01:13:58,790
+Se on nollia ja ykkösiä.
+
+1536
+01:13:58,790 --> 01:14:03,170
+Jos haluat edustaa nuoli tai
+kartta tai useita, tarvitaan jonkin verran muistia.
+
+1537
+01:14:03,170 --> 01:14:05,950
+Joten muut hinta te
+maksaa linkitettynä listana,
+
+1538
+01:14:05,950 --> 01:14:09,070
+yhteinen tietotekniikassa
+resurssi, on myös tilaa.
+
+1539
+01:14:09,070 --> 01:14:11,710
+>> Ja todellakin niin, niin yleisesti,
+joukossa kompromissit
+
+1540
+01:14:11,710 --> 01:14:15,580
+suunnittelussa ohjelmistotuotannossa
+järjestelmiin on aikaa ja space--
+
+1541
+01:14:15,580 --> 01:14:18,596
+ovat kaksi ainekset, kaksi
+oman kalleimpia ainesosia.
+
+1542
+01:14:18,596 --> 01:14:21,220
+Tämä maksaa minulle enemmän aikaa
+koska minun täytyy seurata tätä karttaa,
+
+1543
+01:14:21,220 --> 01:14:25,730
+mutta se on myös maksaa minulle enemmän tilaa
+koska minun täytyy pitää tämä kartan ympärillä.
+
+1544
+01:14:25,730 --> 01:14:28,730
+Joten toivon, sillä olemme tavallaan
+keskusteltu yli eilen ja tänään,
+
+1545
+01:14:28,730 --> 01:14:31,720
+on, että hyödyt
+ovat suuremmat kuin kustannukset.
+
+1546
+01:14:31,720 --> 01:14:33,870
+>> Mutta ei ole selvää ratkaisua.
+
+1547
+01:14:33,870 --> 01:14:35,870
+Ehkä se on better--
+a la nopea ja likainen,
+
+1548
+01:14:35,870 --> 01:14:38,660
+kuten Kareem ehdotettu earlier--
+heittää muisti ongelmaa.
+
+1549
+01:14:38,660 --> 01:14:42,520
+Just ostaa lisää muistia, ajatella vähemmän
+ankarasti ongelman ratkaisemiseksi,
+
+1550
+01:14:42,520 --> 01:14:44,595
+ja ratkaista sen helpommin.
+
+1551
+01:14:44,595 --> 01:14:46,720
+Ja todellakin aiemmin, kun
+puhuimme kompromissit,
+
+1552
+01:14:46,720 --> 01:14:49,190
+se ei ollut tilaa
+tietokone ja aikaa.
+
+1553
+01:14:49,190 --> 01:14:51,810
+Se oli kehittäjä aika, joka
+on vielä toinen resurssi.
+
+1554
+01:14:51,810 --> 01:14:54,829
+>> Joten jälleen, se on tämä tasapainoilua
+yrittää päättää, mitä näistä asioista
+
+1555
+01:14:54,829 --> 01:14:55,870
+olet valmis maksamaan?
+
+1556
+01:14:55,870 --> 01:14:57,380
+Joka on edullisin?
+
+1557
+01:14:57,380 --> 01:15:01,040
+Joka tuottaa parempia tuloksia?
+
+1558
+01:15:01,040 --> 01:15:01,540
+Joo?
+
+1559
+01:15:01,540 --> 01:15:11,310
+
+1560
+01:15:11,310 --> 01:15:12,580
+>> Todellakin.
+
+1561
+01:15:12,580 --> 01:15:15,970
+Tässä tapauksessa, jos olet
+edustaa numeroita maps--
+
+1562
+01:15:15,970 --> 01:15:18,820
+näitä kutsutaan monilla kielillä
+"Viitteitä" tai "osoitteita" -
+
+1563
+01:15:18,820 --> 01:15:20,390
+se kaksinkertainen tilaa.
+
+1564
+01:15:20,390 --> 01:15:24,390
+Se ei tarvitse olla niin huono kuin kaksinkertainen, jos
+nyt me vain tallentaminen.
+
+1565
+01:15:24,390 --> 01:15:27,410
+Oletetaan, että olimme tallentamiseen
+potilastietoja on hospital--
+
+1566
+01:15:27,410 --> 01:15:30,870
+joten Pierson nimet, puhelinnumerot,
+sosiaaliturvatunnuksia, lääkäri
+
+1567
+01:15:30,870 --> 01:15:31,540
+historia.
+
+1568
+01:15:31,540 --> 01:15:34,160
+Tämä laatikko voi olla paljon,
+paljon suurempi, jolloin
+
+1569
+01:15:34,160 --> 01:15:38,000
+pikku osoitin, osoite
+seuraava element-- se ei ole iso juttu.
+
+1570
+01:15:38,000 --> 01:15:40,620
+Se on niin hapsut
+maksaa sillä ei ole väliä.
+
+1571
+01:15:40,620 --> 01:15:43,210
+Mutta tässä tapauksessa, joo, se kaksinkertaistamista.
+
+1572
+01:15:43,210 --> 01:15:45,290
+Hyvä kysymys.
+
+1573
+01:15:45,290 --> 01:15:47,900
+>> Puhutaanpa kertaa
+hieman konkreettisemmin.
+
+1574
+01:15:47,900 --> 01:15:50,380
+Mikä käyntiaika
+etsiä tästä luettelosta?
+
+1575
+01:15:50,380 --> 01:15:53,640
+Oletetaan Halusin etsiä
+läpi kaikki opiskelijoiden laadut,
+
+1576
+01:15:53,640 --> 01:15:55,980
+ja siellä on n laadut
+tässä tietorakenteessa.
+
+1577
+01:15:55,980 --> 01:15:58,830
+Tässäkin voimme lainata
+sanastoa aiemmin.
+
+1578
+01:15:58,830 --> 01:16:00,890
+Tämä on lineaarinen tietorakenne.
+
+1579
+01:16:00,890 --> 01:16:04,570
+>> Big O n on mitä tarvitaan, jotta saat
+loppuun tämän datarakenteen,
+
+1580
+01:16:04,570 --> 01:16:08,410
+whereas-- ja emme ole nähneet
+Tämän before-- array antaa sinulle
+
+1581
+01:16:08,410 --> 01:16:13,555
+mitä kutsutaan vakio aikaa, mikä tarkoittaa,
+yhdessä vaiheessa tai kahdessa vaiheessa tai 10 steps--
+
+1582
+01:16:13,555 --> 01:16:14,180
+ei ole väliä.
+
+1583
+01:16:14,180 --> 01:16:15,440
+Se on kiinteä määrä.
+
+1584
+01:16:15,440 --> 01:16:17,440
+Sillä ei ole mitään tekemistä sen kanssa
+koko jono.
+
+1585
+01:16:17,440 --> 01:16:20,130
+Ja syy siihen,
+uudelleen, on random access.
+
+1586
+01:16:20,130 --> 01:16:23,180
+Tietokone voi vain välittömästi
+hypätä toiseen paikkaan,
+
+1587
+01:16:23,180 --> 01:16:27,770
+koska ne ovat kaikki samanlaisia
+etäisyyden kaikki muu.
+
+1588
+01:16:27,770 --> 01:16:29,112
+Ei ole ajattelua mukana.
+
+1589
+01:16:29,112 --> 01:16:31,900
+
+1590
+01:16:31,900 --> 01:16:32,400
+Selvä.
+
+1591
+01:16:32,400 --> 01:16:39,230
+Joten jos voin, haluan yrittää
+maalata kaksi viimeistä kuvaa.
+
+1592
+01:16:39,230 --> 01:16:42,830
+Hyvin yleinen yksi tunnettu hajautustaulua.
+
+1593
+01:16:42,830 --> 01:16:51,120
+Joten motivoida tähän keskusteluun,
+haluan miettiä, miten tämä tehdään.
+
+1594
+01:16:51,120 --> 01:16:52,610
+>> Miten tästä?
+
+1595
+01:16:52,610 --> 01:16:55,160
+Oletetaan, että ongelma
+haluamme ratkaista nyt
+
+1596
+01:16:55,160 --> 01:16:58,360
+toteuttaa joka dictionary--
+niin koko joukko Englanti sanat
+
+1597
+01:16:58,360 --> 01:16:59,330
+tai miten vaan.
+
+1598
+01:16:59,330 --> 01:17:02,724
+Ja tavoitteena on pystyä vastaamaan
+kysymyksiä lomake on tämä sana?
+
+1599
+01:17:02,724 --> 01:17:04,640
+Joten haluat toteuttaa
+oikeinkirjoituksen tarkistus, vain
+
+1600
+01:17:04,640 --> 01:17:07,220
+kuten fyysinen sanakirja
+että voit katsoa asioita ylös.
+
+1601
+01:17:07,220 --> 01:17:10,490
+Kai oli tehdä tämä jono.
+
+1602
+01:17:10,490 --> 01:17:12,590
+Voisin tehdä tätä.
+
+1603
+01:17:12,590 --> 01:17:20,756
+>> Ja olettaa sanat ovat omena
+ja banaani ja fenkoli.
+
+1604
+01:17:20,756 --> 01:17:23,330
+
+1605
+01:17:23,330 --> 01:17:26,465
+Enkä voi ajatella hedelmiä
+jotka alkavat d, joten olemme vain
+
+1606
+01:17:26,465 --> 01:17:27,590
+menossa on kolme hedelmää.
+
+1607
+01:17:27,590 --> 01:17:31,510
+Joten tämä on joukko, ja olemme
+tallentaa kaikki nämä sanat
+
+1608
+01:17:31,510 --> 01:17:34,200
+Tässä sanakirjassa taulukkona.
+
+1609
+01:17:34,200 --> 01:17:39,350
+Kysymys onkin, miten muuten
+voisi tallentaa tämän tiedon?
+
+1610
+01:17:39,350 --> 01:17:43,160
+>> No, minä tavallaan pettää täällä, koska
+kukin näistä sanan kirjainten
+
+1611
+01:17:43,160 --> 01:17:44,490
+on todella yksilöllinen tavu.
+
+1612
+01:17:44,490 --> 01:17:46,740
+Joten jos halusin olla
+NIT-nirso, minun pitäisi oikeastaan
+
+1613
+01:17:46,740 --> 01:17:49,600
+voidaan jakaa tämä ylös paljon
+pienempiä paloina muistia,
+
+1614
+01:17:49,600 --> 01:17:51,289
+ja voisimme tehdä juuri näin.
+
+1615
+01:17:51,289 --> 01:17:53,580
+Mutta emme aio törmätä
+sama ongelma kuin ennen.
+
+1616
+01:17:53,580 --> 01:17:56,674
+Mitä jos, kuten Merriam Webster tai Oxford
+tekee joka year-- he lisätä sanoja
+
+1617
+01:17:56,674 --> 01:17:59,340
+että dictionary-- emme
+välttämättä halua maalata itse
+
+1618
+01:17:59,340 --> 01:18:00,780
+nurkkaan jossa joukko?
+
+1619
+01:18:00,780 --> 01:18:05,710
+>> Joten sen sijaan, ehkä älykkäämpi lähestymistapa
+on laittaa omena omassa solmussa tai laatikko,
+
+1620
+01:18:05,710 --> 01:18:11,190
+kuten me sanoisimme, banaani, ja
+niin tässä meillä on fenkoli.
+
+1621
+01:18:11,190 --> 01:18:14,990
+
+1622
+01:18:14,990 --> 01:18:16,790
+Ja me merkkijono nämä asiat yhdessä.
+
+1623
+01:18:16,790 --> 01:18:19,980
+Joten tämä on jono, ja
+tämä on linkitetty lista.
+
+1624
+01:18:19,980 --> 01:18:23,300
+Jos et voi täysin nähdä, se vain
+sanoo "array", ja tämä sanoo "lista."
+
+1625
+01:18:23,300 --> 01:18:25,780
+>> Joten meillä on sama
+tarkka asioita kuin ennen,
+
+1626
+01:18:25,780 --> 01:18:28,600
+jolloin meillä on nyt
+dynamiikkaa meidän linkitetty lista.
+
+1627
+01:18:28,600 --> 01:18:31,090
+Meillä on kuitenkin melko hidasta sanakirja.
+
+1628
+01:18:31,090 --> 01:18:32,870
+Oletetaan Haluan etsiä sanan.
+
+1629
+01:18:32,870 --> 01:18:35,430
+Saattaa kestää minua ison O n
+vaiheita, koska sana voisi
+
+1630
+01:18:35,430 --> 01:18:37,840
+on aina lopussa
+luettelosta, kuten melonia.
+
+1631
+01:18:37,840 --> 01:18:40,600
+Ja käy ilmi, että
+ohjelmointi, sort
+
+1632
+01:18:40,600 --> 01:18:42,700
+Graalin malja tietojen
+rakenteet, on jotain
+
+1633
+01:18:42,700 --> 01:18:46,620
+joka antaa sinulle jatkuvaa
+aikaa kuin array
+
+1634
+01:18:46,620 --> 01:18:50,870
+mutta silti antaa sinulle dynamiikkaa.
+
+1635
+01:18:50,870 --> 01:18:52,940
+>> Joten voimme olla molempien maailmojen parhaat puolet?
+
+1636
+01:18:52,940 --> 01:18:55,570
+Ja todellakin, siellä on jotain
+nimeltään tiiviste
+
+1637
+01:18:55,570 --> 01:18:59,320
+jonka avulla voit tehdä juuri
+että, vaikkakin noin.
+
+1638
+01:18:59,320 --> 01:19:03,140
+Hash-taulukko on hienompaa
+tietorakenne että me
+
+1639
+01:19:03,140 --> 01:19:06,340
+voi ajatella kuin
+yhdistelmä array--
+
+1640
+01:19:06,340 --> 01:19:12,390
+ja aion tehdä sitä
+tämän kaltaisia ​​osia ja linkitettyjen listojen
+
+1641
+01:19:12,390 --> 01:19:17,310
+että minä piirtää näin tänne.
+
+1642
+01:19:17,310 --> 01:19:19,760
+>> Ja miten tämä asia
+teokset on seuraava.
+
+1643
+01:19:19,760 --> 01:19:23,310
+
+1644
+01:19:23,310 --> 01:19:29,540
+Jos tämä now-- hash table--
+on kolmas datarakenne,
+
+1645
+01:19:29,540 --> 01:19:32,590
+ja haluan tallentaa
+sanoja tässä, en
+
+1646
+01:19:32,590 --> 01:19:35,440
+haluavat vain tallentaa kaikki
+sanat takaisin takaisin takaisin takaisin.
+
+1647
+01:19:35,440 --> 01:19:37,430
+Haluan hyödyntää joitakin
+tieto
+
+1648
+01:19:37,430 --> 01:19:40,330
+sanoista, jonka avulla
+minua saamaan sen, missä se on nopeampi.
+
+1649
+01:19:40,330 --> 01:19:43,666
+>> Joten annetaan sanat omena
+ja banaani ja fenkoli,
+
+1650
+01:19:43,666 --> 01:19:45,040
+Olen tietoisesti valinnut nuo sanat.
+
+1651
+01:19:45,040 --> 01:19:45,340
+Miksi?
+
+1652
+01:19:45,340 --> 01:19:47,631
+Mikä on tavallaan pohjimmiltaan
+Eri noin kolme?
+
+1653
+01:19:47,631 --> 01:19:49,950
+
+1654
+01:19:49,950 --> 01:19:51,484
+Mikä on selvää?
+
+1655
+01:19:51,484 --> 01:19:52,900
+Ne alkavat eri kirjaimilla.
+
+1656
+01:19:52,900 --> 01:19:53,900
+>> Joten tiedätkö mitä?
+
+1657
+01:19:53,900 --> 01:19:57,120
+Sen sijaan laittaa kaikki minun sanat
+sama ämpäri, niin sanotusti,
+
+1658
+01:19:57,120 --> 01:20:00,390
+kuten yksi iso lista, miksi ei
+En edes yrittää optimointi
+
+1659
+01:20:00,390 --> 01:20:04,180
+ja tehdä minun luettelot 1/26 niin kauan.
+
+1660
+01:20:04,180 --> 01:20:07,440
+Pakottava optimointi
+ehkä miksi ei
+
+1661
+01:20:07,440 --> 01:20:10,650
+I-- lisättäessä sana
+tähän tietorakenne,
+
+1662
+01:20:10,650 --> 01:20:14,300
+tietokoneen muistiin, miksi
+älä Laitoin kaikki "a" sanoja täällä,
+
+1663
+01:20:14,300 --> 01:20:17,270
+kaikki "b" sanoja täällä,
+ja kaikki "c" sanoja täällä?
+
+1664
+01:20:17,270 --> 01:20:24,610
+Joten tämä päätyy laskemisesta omena
+täällä, banaani täällä, fenkoli täällä,
+
+1665
+01:20:24,610 --> 01:20:25,730
+ja niin edelleen.
+
+1666
+01:20:25,730 --> 01:20:31,700
+>> Ja jos olen ylimääräinen
+Sana like-- mitä toinen?
+
+1667
+01:20:31,700 --> 01:20:36,640
+Apple, banaani, päärynä.
+
+1668
+01:20:36,640 --> 01:20:39,370
+Jokainen ajatella hedelmän
+joka alkaa a, b tai c?
+
+1669
+01:20:39,370 --> 01:20:40,570
+Blueberry-- täydellinen.
+
+1670
+01:20:40,570 --> 01:20:43,990
+Tämä on menossa päätyä tänne.
+
+1671
+01:20:43,990 --> 01:20:47,530
+Ja niin me näyttää olevan
+marginaalisesti parempi ratkaisu,
+
+1672
+01:20:47,530 --> 01:20:50,820
+koska nyt jos haluan
+etsiä omena, minä
+
+1673
+01:20:50,820 --> 01:20:53,200
+first-- En syvenny
+minun tietorakennetta.
+
+1674
+01:20:53,200 --> 01:20:54,850
+En sukeltaa minun tietokoneen muistiin.
+
+1675
+01:20:54,850 --> 01:20:56,530
+En ensin katsoa ensimmäinen kirjain.
+
+1676
+01:20:56,530 --> 01:20:58,610
+>> Ja tämä on mitä tietokone
+tiedemies sanoisi.
+
+1677
+01:20:58,610 --> 01:21:00,760
+Sinä hash osaksi tietorakennetta.
+
+1678
+01:21:00,760 --> 01:21:04,100
+Otat syöte, joka
+Tässä tapauksessa on sana kuin omena.
+
+1679
+01:21:04,100 --> 01:21:07,150
+Sinä analysoida sitä, katsomalla
+ensimmäinen kirjain tässä tapauksessa,
+
+1680
+01:21:07,150 --> 01:21:08,340
+Näin hajautus se.
+
+1681
+01:21:08,340 --> 01:21:10,950
+Hajautusta on yleinen termi, jolla
+otat jotain syötteenä
+
+1682
+01:21:10,950 --> 01:21:12,116
+ja te tuottaa noin tuotos.
+
+1683
+01:21:12,116 --> 01:21:15,090
+Ja lähtö kyseisessä
+asia on sijainti
+
+1684
+01:21:15,090 --> 01:21:18,150
+haluat etsiä, ensimmäinen
+sijainti, toisessa paikassa, kolmas.
+
+1685
+01:21:18,150 --> 01:21:22,160
+Joten tulo on omena,
+lähtö on ensimmäinen.
+
+1686
+01:21:22,160 --> 01:21:25,054
+Syöte on banaani, The
+tuotos olisi toinen.
+
+1687
+01:21:25,054 --> 01:21:27,220
+Panos on cantaloupe,
+tuotos olisi kolmas.
+
+1688
+01:21:27,220 --> 01:21:30,320
+Syöte on mustikka, The
+tuotos on jälleen oltava toinen.
+
+1689
+01:21:30,320 --> 01:21:34,010
+Ja se mitä auttaa pitämään
+pikakuvakkeet kautta muistin
+
+1690
+01:21:34,010 --> 01:21:39,050
+saadakseen sanoihin
+tai tietoja tehokkaammin.
+
+1691
+01:21:39,050 --> 01:21:43,330
+>> Nyt tämä supistetaan aikamme potentiaalisesti
+peräti yksi 26,
+
+1692
+01:21:43,330 --> 01:21:45,850
+koska jos oletetaan, että olet
+niin monta "a" sanoja kuin "z"
+
+1693
+01:21:45,850 --> 01:21:48,080
+sanoja kuin "q" sanoja, jotka
+ei oikeastaan ​​realistic--
+
+1694
+01:21:48,080 --> 01:21:50,830
+olet menossa on vinossa yli
+tietyt kirjaimet alphabet--
+
+1695
+01:21:50,830 --> 01:21:53,204
+mutta tämä olisi vähitellen
+lähestymistapa, joka ei salli
+
+1696
+01:21:53,204 --> 01:21:55,930
+voit saada sanoja paljon nopeammin.
+
+1697
+01:21:55,930 --> 01:21:59,660
+Ja todellisuudessa, hienostunut
+ohjelman Googles maailman,
+
+1698
+01:21:59,660 --> 01:22:02,180
+Facebooks on world--
+he käyttäisivät hajautustaulua
+
+1699
+01:22:02,180 --> 01:22:03,740
+sillä paljon eri tarkoituksiin.
+
+1700
+01:22:03,740 --> 01:22:06,590
+Mutta he eivät olisi niin naiivi kuin
+ja katsokaa ensimmäinen kirjain
+
+1701
+01:22:06,590 --> 01:22:09,700
+omena tai banaani tai
+päärynä tai cantaloupe,
+
+1702
+01:22:09,700 --> 01:22:13,420
+koska kuten näette nämä
+luettelot voi silti saada pitkä.
+
+1703
+01:22:13,420 --> 01:22:17,130
+>> Ja niin tämä saattaa silti olla eräänlainen
+of linear-- joten tavallaan hitaasti,
+
+1704
+01:22:17,130 --> 01:22:19,980
+kuten isolla O n
+että keskustelimme aiemmin.
+
+1705
+01:22:19,980 --> 01:22:25,290
+Joten mitä todella hyvä hash taulukon
+do-- sillä on paljon suurempi joukko.
+
+1706
+01:22:25,290 --> 01:22:28,574
+Ja se käyttää paljon
+hienostunut hajautusfunktio,
+
+1707
+01:22:28,574 --> 01:22:30,240
+niin että se ei katsokaa "a."
+
+1708
+01:22:30,240 --> 01:22:35,480
+Ehkä se katsoo "a-p-p-l-e" ja
+jotenkin muuntaa ne viisi kirjainta
+
+1709
+01:22:35,480 --> 01:22:38,400
+osaksi paikka, jossa
+omena tulisi säilyttää.
+
+1710
+01:22:38,400 --> 01:22:42,660
+Olemme vain sinisilmäisesti käyttämällä kirjain "a"
+yksin, koska se on mukava ja yksinkertainen.
+
+1711
+01:22:42,660 --> 01:22:44,600
+>> Mutta tiiviste, vuonna
+Lopulta voit ajatella
+
+1712
+01:22:44,600 --> 01:22:47,270
+of yhdistelmänä
+joukko, joista jokainen
+
+1713
+01:22:47,270 --> 01:22:51,700
+on linkitetty lista, että ihannetapauksessa
+tulisi olla mahdollisimman lyhyt.
+
+1714
+01:22:51,700 --> 01:22:54,364
+Ja tämä ei ole ilmeinen ratkaisu.
+
+1715
+01:22:54,364 --> 01:22:57,280
+Itse asiassa suuri osa hienosäätöä
+joka jatkuu alla huppu, kun
+
+1716
+01:22:57,280 --> 01:22:59,654
+täytäntöön tällaisia
+hienostunut tietorakenteet
+
+1717
+01:22:59,654 --> 01:23:01,640
+on mikä on oikea
+pituus array?
+
+1718
+01:23:01,640 --> 01:23:03,250
+Mikä on oikea hajautusfunktio?
+
+1719
+01:23:03,250 --> 01:23:04,830
+Miten tallentaa asioita muistiin?
+
+1720
+01:23:04,830 --> 01:23:07,249
+>> Mutta ymmärtää, kuinka nopeasti
+tällaista keskustelua
+
+1721
+01:23:07,249 --> 01:23:10,540
+kiristynyt, joko niin pitkälle, että se on eräänlainen
+Yli päänsä tässä vaiheessa, mikä
+
+1722
+01:23:10,540 --> 01:23:11,360
+on hyvin.
+
+1723
+01:23:11,360 --> 01:23:18,820
+Mutta aloitimme, recall, jossa todella
+jotain matalan tason ja elektroninen.
+
+1724
+01:23:18,820 --> 01:23:20,819
+Ja niin tämä taas on tämä
+teema abstraktio,
+
+1725
+01:23:20,819 --> 01:23:23,610
+jossa kun alkaa itsestään
+myönnetty, OK, minulla it-- siellä
+
+1726
+01:23:23,610 --> 01:23:26,680
+fyysistä muistia, Selvä, joka
+fyysinen sijainti on osoite,
+
+1727
+01:23:26,680 --> 01:23:29,910
+OK, sain sen, voin edustaa
+nämä osoitteet arrows--
+
+1728
+01:23:29,910 --> 01:23:34,650
+voit nopeasti alkaa olla
+kehittyneempiä keskustelut
+
+1729
+01:23:34,650 --> 01:23:38,360
+lopulta näyttävät antaa meille
+ratkaisemaan ongelmia, kuten hakuja
+
+1730
+01:23:38,360 --> 01:23:41,620
+ja lajittelu tehokkaammin.
+
+1731
+01:23:41,620 --> 01:23:44,190
+Ja varma, too--
+koska mielestäni tämä
+
+1732
+01:23:44,190 --> 01:23:48,700
+on syvin olemme menneet jonkin verran
+Näiden CS aiheiden proper-- olemme
+
+1733
+01:23:48,700 --> 01:23:51,880
+tehdään päivässä ja puoli tässä
+kohta mitä voisi yleensä tehdä yli
+
+1734
+01:23:51,880 --> 01:23:55,520
+aikana kahdeksan viikkoa lukukauden.
+
+1735
+01:23:55,520 --> 01:23:59,670
+>> Kysyttävää näistä?
+
+1736
+01:23:59,670 --> 01:24:01,100
+Ei?
+
+1737
+01:24:01,100 --> 01:24:01,940
+Selvä.
+
+1738
+01:24:01,940 --> 01:24:05,610
+No, miksi emme keskeytä siellä,
+Aloita lounas muutaman minuuttia etuajassa,
+
+1739
+01:24:05,610 --> 01:24:07,052
+Jatka vain noin tunnin?
+
+1740
+01:24:07,052 --> 01:24:08,760
+Ja minä viipyä
+hieman kysymyksiä.
+
+1741
+01:24:08,760 --> 01:24:11,343
+Sitten aion mennä
+kestää muutaman puhelut, jos se on OK.
+
+1742
+01:24:11,343 --> 01:24:15,000
+Tulen päälle musiikkia tällä välin
+mutta lounas pitäisi olla nurkan takana.
+
+1743
+01:24:15,000 --> 01:24:17,862
+

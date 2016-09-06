@@ -1,0 +1,367 @@
+DAVID J. MALAN: So we are back. So the high-level topic at the moment now is technology stacks, which isn't a particularly technical term, it's more of a catch all for any number of combinations of technologies that you might use to solve problems. And perhaps the most fitting way to start would be to look at languages since I keep rattling off a whole bunch and most everyone in the room has probably heard of at least one. 
+
+And so why don't we try to distinguish what-- distinguish these languages and talk briefly about when you would choose one over the other, how they're sort of fundamentally different, and especially when you're chatting with engineers, or trying to decide whom to hire, or what implementation proposal to greenlight, how you would actually make those kinds of decisions. 
+
+So let's just rattle some things off. Of the languages people have heard about, what comes to mind? C. OK. OK, C++. What's that? 
+
+AUDIENCE: Python. 
+
+DAVID J. MALAN: Python. Excellent. What else? Visual Basic. I heard Java. Visual Basic-- a.k.a. VB. Java. .NET, which is more of a catch all for what's usually C# as the language in question. And let me mention that. So we'll come back to that. I'm sorry? Sorry? 
+
+AUDIENCE: SQL. DAVID J. MALAN: Scratch? AUDIENCE: SQL. DAVID J. MALAN: Oh, SQL. OK. SQL. So we'll come back to that-- actually, it's good-- after the break as well. What else? 
+
+AUDIENCE: Oracle. 
+
+DAVID J. MALAN: So Oracle, not a language. Actually they would use SQL as well. So let's put that after the break as well. And sorry, something over here? AUDIENCE: Mathematica. DAVID J. MALAN: Mathematica? OK, sure. And MATLAB is kind of on there sometimes. 
+
+AUDIENCE: R. 
+
+DAVID J. MALAN: R. Let's go over here. Fortran. Sure. Older school. Fortran. COBOL. I'll toss out BASIC. BASIC. Any-- 
+
+AUDIENCE: MATLAB? DAVID J. MALAN: MATLAB. Oh, beat you to it. Anything? I can think of a couple of others. I can think of a few others. And what was the last? 
+
+AUDIENCE: ASP. 
+
+DAVID J. MALAN: ASP? Yeah. Active server pages. That generally would fall under other languages, sometimes C#, so let's leave that off. But we'll come back to that for frameworks and such. Anything else? PHP is popular. Ruby is another. JavaScript, not to be confused with Java, is another. That's kind of a lot. 
+
+So it can be certainly overwhelming, as if the list isn't already, just to begin to know where you begin. And so fortunately, let's approach this from a few angles. First, let's try to categorize at least some of these languages into two broad buckets, reminiscent of the conversation we had before break, where we talked about compiling, and source code, and machine code, because that's not how all languages work. So we'll pluck out a few examples of-- or counter-examples-- to that model. 
+
+And then, why don't we talk about the applications that these languages are generally used for. And frankly, even though this is a pretty long list, it's only a subset of this list that you would typically draw from these days to solve problems. Certain languages are newer than others. Certain languages are more popular than others. So it's not like you have such an overwhelming task before you when deciding among these various languages. 
+
+So let's do this. We had earlier, source code, and then we had machine code. Whoops. Writing the wrong word. Machine code. And we had some process in the middle called-- yeah, the compiler. So the compiler. 
+
+And what the machine code actually runs on in the end is going to be your actual CPU. In other words, by machine code, I mean the lowest level instructions that a CPU actually understands. Addition, subtraction, move, save, and operations like that. And so this is the model for what's generally known as compiled languages. Perhaps not surprisingly. 
+
+So this is the model for compiled languages. But it turns out there's another class of languages called interpreted languages-- interpreted languages-- that are slightly different. You write in source code, run them through an interpreter, and that interpreter is what runs on the CPU. In other words, what you don't emit is what, apparently? Machine code. The zeros and ones that the CPU itself ultimately understands. 
+
+So in this first version and languages like C, like we saw, you write in source code that's a little arcane, but at least it's kind of English-like and it's at least readable once you get used to it. You run it through a compiler and out you get, ultimately, zeros and ones. 
+
+That an oversimplification. There are some other steps in there. In fact, if you've ever heard the term "assembly language," that's one step before the zeros and ones. That a little more readable, but still pretty arcane. And so there's intermediate steps that are, in fact, going on here. But the output, ultimately, is these zeros and ones. 
+
+But in the interpreted world, where you have languages that are interpreted languages, you actually skip that step. In other words, when you write a program, you just immediately run it. You don't compile it and then run it, as I did before. You just write it and run it. And if you want to make a quick change, you make a quick change and rerun it. So there is no middle step here. 
+
+Now, for the program I wrote earlier, which was this "Hello World" program, you might reasonably wonder-- or might reasonably state-- that was not that time consuming to compile my program. It seems to have done it just like that. And there's graphical versions of compilers. I'm using a very arcane version, but you could hit a play button and that would actually do the compilation for you. I've compiled the program and then again, to run it, I just do this. And it outputs at left there, "Hello!" That doesn't seem all that onerous. But when your programs are more than just one, two, three, four, five lines long, it can take far more seconds to compile. Sometimes even minutes or quite a bit of time to compile. After all, some of the world's biggest products are things like operating systems, Microsoft Word, Microsoft Excel, which might be hundreds of thousands or even millions of lines of code long, and those don't just immediately execute. 
+
+Moreover, on the web, it's become fashionable to use simply interpreted languages, in part because you can make a change as the developer and then just immediately reload the browser page and immediately see the result. And so HTML, while not a programming language, is a language that's interpreted. And we saw that same effect yesterday. You just reload the page after making a change in Cloud9 and-- voila-- you see a new result. 
+
+So what's the difference here? In HTML, recall, we had open HTML, open head, open title, close title, close head, open body, and so forth. We had all of these tags that we pretty much said, tell the browser what to do. Hey browser, here comes an HTML page. Hey browser, here comes the title. Hey browser, here comes some text that should be bold. And then you tell the opposite. Hey browser, that's it for the bold face text. Hey browser, that's it for the body. And so forth. 
+
+And so what is a browser? A browser is just an interpreter. It is a program that someone like Microsoft or Google has written, whose purpose in life is to read a language, known as HTML, and interpret it. Top to bottom, left to right. And any time the browser sees open bracket, title, close bracket, it should interpret that as meaning, oh, that means I should put these words way up here at the top of the browser. 
+
+So it just does what the HTML code says. But there's no zeros and ones. There's no compilation. You didn't do it. The browser didn't do it. It's just not involved. 
+
+So in the spirit of these ongoing topics, today and yesterday, that seems to be a wonderful feature. You save your code and then just run it or interpret it. There's no intermediate steps. Surely there's a cost? Can't all be upsides. So what might that cost be? 
+
+AUDIENCE: Space. 
+
+DAVID J. MALAN: Space. So, sure. In the compiled world, you have not only the original source code, you are also creating and then presumably saving the machine code-- the zeros and ones-- and that's got to take up some amount of space. Absolutely. So it's costing you more space. Yeah? 
+
+AUDIENCE: Browsers might interpret differently. 
+
+DAVID J. MALAN: Browsers might interpret it differently. That is true. But I'm not sure I'm comfortable claiming that's because it's interpreted. That's more just because it's an implementation of a language that itself has ambiguities. So let's not quite confirm that one, but good hunch. What else might be the price paid? Andrew? 
+
+AUDIENCE: You're combining two steps, so you therefore have increasing complexity as well. 
+
+DAVID J. MALAN: The complex-- the increase in complexity where? For whom? 
+
+AUDIENCE: So, in the interpreter step, you're combining the interpreter and compiler for just leading up to-- 
+
+DAVID J. MALAN: Ah, OK. Ironically, it's probably a little simpler to implement the interpreter, even though it would seem to yield upsides of this convenience. So possibly true. But it kind of depends, I would say, on the language and on how they went about implementing it. There can be a lot more complexity, actually, in the compiler, just because you have to go from something so high-level to something so low-level. But a good thought. 
+
+So put another way, a compiled program, when turned into these zeros and ones, ends up in the language that the CPU speaks, whereas in this side of the world, the program you've written, the code you've written, never actually gets converted into the actual language the computer speaks. The zeros and ones. It stays in the original, more human friendly, more readable language. So what might be the implication there, if you don't actually bother converting your program to the very language that the underlying computer speaks? 
+
+AUDIENCE: Might not understand something? 
+
+DAVID J. MALAN: Might not understand something. And that may claim-- if it didn't understand something, that's a bug or lack of feature in the interpreter. So that would be more of a mistake than a cost. 
+
+AUDIENCE: You have access to the source code? DAVID J. MALAN: There's a good one. So a downside here is you would seem to have access. You, the end user, might seem to have access to the source code. And that's not always true. But it is true in the case of JavaScript, which we'll look at after the break today, which is an interpreted programming language that you write in source code. 
+
+But that source code gets transferred from your server to the browser and runs in the human's browser. So here she could just open the window, like I've been doing in Chrome, and look at it, as we ourselves glanced at yesterday with Google. It might look a little incomprehensible but it is there. So that's absolutely one price paid. AUDIENCE: Performance hit? DAVID J. MALAN: Yeah. And that's the other biggie. There's a performance hit. Because you have this middle man, which itself is a program, between you and the CPU, as opposed to just feeding these raw zeros and ones into the CPU, there's a performance hit that you take with an interpreted language. Such that, arbitrarily, a program that might take one second to run on a computer or one minute to run on a computer here, might take 10 seconds or 10 minutes to run on a computer here. It's generally not going to be that much of a difference-- factor of 10-- because there's optimizations you can do. But it's almost always slower. Now, the flip side to that concern is that, well computers, every 12 to 18 months-- according to Moore's law, so to speak-- are just getting faster and faster. I have more and more disk space. I have more and more RAM. Who really cares? 
+
+And that's kind of a reasonable argument. Indeed, one of the reasons why we can tolerate slower interpreted languages is because we humans don't really notice. The computers have gotten just so darn fast. Whereas back in the day, especially when hardware was much more constrained, you had less of everything, it was much more expensive so everything cost more, well then you really wanted to squeeze out as much performance as you could. But that required writing at a lower-level, if you will, with a compiled language. 
+
+So you do take this performance hit. But generally, the upsides seem to be worth it these days. Well, except for the intellectual property issue. That sort of readability of the code, we'll come back to when we look at JavaScript. 
+
+So let's try to categorize at least a few of these. So among the compiled languages, we would have C, C++, kinda, sorta, Java, although it's a bit of an exception, for reasons I'll show you in just a moment. C# would be on this list. We'll look at more at just the more modern languages. All right. And that seems like plenty there. Whereas on this side of the fence, we might have JavaScript, and Python, and PHP, and Ruby. And is that enough for the more recent ones? That feels like plenty for now. OK. And then dot dot dot, since the list is endless. 
+
+And in fact, if we want to just get a sense of this-- Wikipedia, compiled languages. I'm guessing we can get a far more exhaustive list. So here we go. So here is a much more exhaustive list. And I was hoping someone would guess D as a language because that too exists, but they stopped at D it would seem. Although there might actually be an E. 
+
+Oh, actually, this should be on the list these days. Swift is actually a language that Apple invented that is now used, increasingly so, in iPhone development. But we'll come back to that with our discussion of mobile in just a little bit as well. So Swift as well. 
+
+And then if we go to interpreted language-- interpreted language-- then here's an even longer list as well. So if you just google and look on Wikipedia for these, you'll see all sorts of languages. But the purpose is, for today really, just boils down to maybe this issue of intellectual property and readability by the end user and to performance, is another biggie as well. 
+
+So among these languages, let me see if we can give you just some sample of languages. We don't want to go through all the languages endlessly. Have you ever wondered what a certain language looks like? We did see a moment ago. Why don't we take a couple of feature requests. Who would like to see what other language looks like? Yeah. 
+
+AUDIENCE: Java. 
+
+DAVID J. MALAN: Java. All right. So let's go to Java. And just to give you a sample-- we could write all these out, but it would be faster just to look at someone else's sample code. All right. So is this a good example? Whoops. OK. So here is the Java version of the program I wrote earlier, "Hello World." 
+
+So Java, you'll often see the keyword "class." Then you'll see some name after that. You'll see curly braces like we saw before, and sometimes they go on the same line, sometimes other lines, it's kind of a personal decision. You'll see keywords like "public," "static," "void." But we did see "main." "Main" is generally the name of the default function or the default chunk of code that gets run in a program. 
+
+"String." What did we mean by string earlier? I used it kind of casually. A string is what? A word. It's like a sequence of characters. Individual characters, back to back to back, usually in an array, as we've discussed. And in fact, see this syntax here, the two square brackets? That means, hey computer, here comes an array of strings. The square bracket notation is commonly used to denote that. And then you can probably take a guess-- what does this highlighted chunk of code probably do? 
+
+AUDIENCE: The output? 
+
+DAVID J. MALAN: Yeah. It prints something to the screen. So "system" is a sort of a reference to your computer. "Out" means your computer's output or the screen. So "system.out.print ln" probably means? "ln." Print line which programmers like to apparently spell some words out in their entirety and take shortcuts with other words. But "ln" is line, so print line. So it prints out "Hello World!" followed by a new line. 
+
+So that's it. But Java is what they'll call object-oriented. And indeed, just to give a couple of other definitions there that you might see, in general, there are many different types of languages, but the most common are procedural or imperative languages. There are functional languages, which doesn't mean that others are nonfunctional. And then there's object-oriented languages. And this is perhaps the best categorization of most languages that you would ever choose for sort of a typical commercial project. 
+
+This would be too much of, I think, of a rat's hole to go down, to try to explain the various differences. But the languages we've seen thus far-- C is a procedural or an imperative language. More recently invented languages tend to be, sorry, object-oriented, which means they have other features to them. Can I explain it in this way? Let's not even go down there. 
+
+Object-oriented means you can implement-- you can model the real world a little more effectively. Humanity, over time, has figured out, wow, it would be nice if my language had this feature or that feature. And that's why we have so many languages in the world. Reasonable people, smart people, agree or disagree and invariably sort of come together on developing new languages all together. 
+
+Case in point. Apple invented Swift in hopes of presumably lowering the bar to iPhone development, because the previous language-- called Objective-C, which could also be on our list here-- was much more arcane and much harder to wrap one's mind around. And as programming is becoming arguably more accessible and more broadly adopted by people even less technical, the goal-- it's a very valiant goal to try to lower the barrier to entry by making the languages themselves easier to get started with, but no less powerful necessarily. 
+
+And one other language. Why don't we take a look at something like Python, which is very much in vogue these days. Python. Sample program. Let's see. "Hello World" languages. Let's do this. "Hello World." Let's see if this gives us a nice example. OK. So this is actually kind of fun. So if you ever google "Hello World," which happens to be one of the first programs ever written in a modern language, just as a proof of concept, you can see all sorts of implementations of this. 
+
+Some of these languages I've not even heard of. But you can see-- let's go to Basic, the one I learned years ago, in part. This was a fun language because you had to, as the programmer, number all of your lines. Not unlike what I was doing when I was writing pseudocode on the yellow document earlier for binary search, for searching a phone book. 
+
+And so, if you wanted to go to another line, you would literally type, go to 10, or go to 20. And if you're writing lines, the convention was to do, this is line 10, this is line 20, this is line 30, 40, with nothing in between, thereby giving yourself some room if you decide, wait a minute, I should have added some more code somewhere. You still had sort of nine chances to squeeze that in between your program before you had to manually renumber everything. 
+
+So this is kind of what I mean when I say the world has come up with a new features. Somewhere along the way someone realized, boy this is stupid. This is just creating work for the programmer. So he or she just kind of built a new layer on top of that so that you don't have to worry about what line numbers your code is actually on. 
+
+So when might you choose one language or another? Well, which of these languages do you tend to hear about the most in your own world these days? Let's drop down Objective-C too. 
+
+AUDIENCE: C#. DAVID J. MALAN: C#. So let me color. Do we have our other color somewhere? So C#. And what do you know about C#? Anything spring to mind? 
+
+AUDIENCE: It's a programming language. DAVID J. MALAN: It's a programming language. OK. That is true. So we're talking about C#. C# tends to be used in Windows environments, so if you're writing Microsoft software for Windows, C# is very commonly used, whether it's for desktop software, or even phone software on Windows phones, if you've had those, or on the web even too. And in fact, maybe Kareem mentioned ASP earlier? So there's also these things called frameworks, which we can introduce by extension. Frameworks, like ASP. Stands for active server pages. And this is code and a way of programming that generally makes it easier to write web based applications. In other words, it would be super, super annoying to write a website in the language C that we've seen before, because you would have to use print+F, you would have to use that keyword "main" and the curly braces. A lot of arcane syntax and approach to implement something that is fairly complex. A web page. 
+
+And so other languages have evolved to make that kind of thing easier. And in turn, people have come up with frameworks, sort of tools that you can use that make it even easier to write web pages. So for instance, to make this much more concrete, let me open up just a text file for a moment. 
+
+And you might recall yesterday that we said something like, this is a web page. HTML. Close HTML. Let me skip the head and just do the body here. Suppose that I wanted to write not "Hello World," but "Hello David," where David is the name of the currently logged in user. What something like ASP will do, or JSP-- which is Java server pages-- or any number of other frameworks is they're not languages, per se. They're just like additional software that you would install into your environment that just make it easier to program. 
+
+So for instance, rather than have to do something like "hello, printf("David")" or something that's kind of co-mingling-- the kind of code we've seen before-- you would do something much simpler, like "name %." And so these frameworks, like ASP-- and I don't remember if I'm getting the syntax just right for ASP. JSP is a little-- is this right? 
+
+So with ASP, this is sort of a special syntax that some developers have decided this might help people out. And I can express more succinctly placeholders, for instance. Like put a value here, where this value name is not N-A-M-E, it's some value stored in there. So "name," in this context, we would call a variable. Algebra has variables like x, and y, and z. Programmers use variables that are more descriptive than x, y, and z, typically. So "name" would literally be some kind of memory container for something like D-A-V-I-D, for my name, or whoever else is logged into the website. 
+
+And so this is the kind of convenience you get with certain environments. So C# and something like ASP would very commonly be used in a Windows world, whether for its desktop software or web server, especially if your servers are in turn running Microsoft Windows and Microsoft IIS-- or Internet Information Server, if I get the acronym right-- which is Microsoft's web server. 
+
+So what other languages are folks familiar with, or have you heard of more often than not? 
+
+AUDIENCE: I know that Python's kind of a popular [INAUDIBLE]. DAVID J. MALAN: Very popular. So Python here is used very often in scientific applications or data science, where you have a lot of data that you want to analyze and you want to use a programming language for it. R might commonly be used for that as well, in a statistical context. But Python has so many features built in. So many additional libraries, as people say. 
+
+Libraries are just collections of code that other people wrote that you can use so that you don't have to reinvent those wheels. And so Python is very commonly used in data science applications. But it's also very commonly used in web applications. You can implement a dynamic website using Python. 
+
+And by dynamic website, I mean not just static content like we created yesterday, by just hard coding in the Latin text and other such things, but rather the ability to log in, the ability to buy something, the ability to check out with your shopping carts, or the like. All of that requires dynamism and you need some language like one of these. 
+
+AUDIENCE: So does Python have its own extension, similar to like [INAUDIBLE] DAVID J. MALAN: It does. So in the world of Python, Django is a very popular framework for Python. WSGI is another mechanism that's sort of different from this but similar in spirit. It's an add-on that allows you to run Python code on a server. There's other-- yeah. So these we'll call frameworks. And it's a little bit of an abuse. This is more of a web server technology. But we'll keep it simple and put it in this column nonetheless. 
+
+OK. WSGI. WSGI. Another thing-- and actually, let me move that to its own column, because I would yell at myself for putting them in the same bucket. Let's put this into server features, let's say. That's not a technical term. 
+
+So here we might be WSGI. There's CGI, which is an older technique for serving up languages like Perl or PHP, or some others. Again, I've mentioned these terms not so much to sort of ingrain them, but so that if you see them it's something you simply google to read more. There's no real juice to some of these things. 
+
+But let's go back to the languages. We talked about C#, Python. What else might you use for web programming these days? Let's focus on that still. 
+
+AUDIENCE: PHP. DAVID J. MALAN: PHP. And let's come back to that one. So PHP is very commonly used. PHP tends to get a bad rap. It started off as a language implemented by folks who maybe weren't necessarily the best language designers. And so you can read all sorts of articles online about how bad PHP is. And unfortunately, this is a manifestation, in part, of just the religious debates that erupt among programmers. And this is something worth keeping in mind, from a business perspective, that it's very easy for technical people to get all worked up with their opinions on certain things. And it doesn't necessarily mean that the one yelling the loudest or with the strongest, angriest opinion is right. A lot of times, it really just doesn't matter. 
+
+And so people are just arguing whatever their own biases or comfort zones are. And so you should keep that in mind when making a decision, that just because someone says this is the right language for the job, that might be true, but it also just might be it is the right language within their own skill set or comfort zone. Which is not bad, but you should realize that there might be some context there. There are some objectively wrong statements, like C is the wrong language to use these days for implementing websites almost always. But it's not unreasonable to say that any of these are wrong that we've circled thus far. 
+
+PHP has gone through many versions. So languages tend to have version numbers associated with them. PHP is up to, I think, version 7 now, so it's been around for quite some time. And as languages get newer, they often get new features. But you have to be mindful of this because if your website has been implemented in version 7 of PHP but you're trying to run your website, or maybe you've outsourced the development of your code to someone else and they mail it to you or send it to you and they say, here, put this on your web server, if your web server is a few years outdated-- whether it's your own server or a web host-- it might not actually run. So these are the kinds of things that someone needs to be mindful of when upgrading a site or implementing it for the first time. 
+
+I heard JavaScript earlier. So JavaScript is an interesting one in that it is generally client side, as we'll see after the break, which means it runs in the user's browser. But you can also run JavaScript these days using something called Node.js, where Node.js is a mechanism for running JavaScript code server side, instead of using Python, or PHP, or other such languages. 
+
+JavaScript is particularly well suited for chat applications and real time applications, whereas PHP is not a great language for implementing something like a chat server, where users stay connected to it constantly. PHP is more of a visit me once, get back a result, and then click another link some seconds or minutes from now. Whereas Node.js and JavaScript can be used more for persistent connections. Other languages that you suspect are commonly used for web stuff? 
+
+AUDIENCE: Would jQuery be a framework? 
+
+DAVID J. MALAN: Good question. Neither. I would call jQuery a library, where again a library is just a bunch of code that someone else has written that generally solves some problems that makes it, hopefully, easier for you to do your job. And let me do one example of this in the context of the web. 
+
+In the context of the web there's this language, JavaScript, that we'll see later, whereby you might say something like this-- "document.getElementById." And what did I call it yesterday? First, I think, was the unique ID I gave to an element that looked like this. "p id="first">" and then we had like "lorem ipsum," et cetera. So if I were writing a program in JavaScript to somehow manipulate, change the web pages that we were playing with yesterday, I would use this highlighted line of code to get that particular snippet of HTML from my page, that particular node, as we'll call it. 
+
+However, in jQuery, instead of writing this, which is raw JavaScript code-- just out of the box, that's how you write it-- you would instead just say, "#first." That's equivalent. And so based only on this very arcane example, what perhaps is the argument for using jQuery? Why would a developer use a library like jQuery, based on this isolated example, perhaps? 
+
+AUDIENCE: Less code. 
+
+DAVID J. MALAN: Yeah. It's less code. It's just faster to type. The counterpoint is that it looks scarier. You can't really read it left to right. In fact, because it's mostly punctuation now instead of actual words, I can kind of infer that "document.getElementById" gets an element from the document by its ID. I really can use no such mnemonics from this thing here. 
+
+So it's a trade off. There's a sophistication that comes often with using libraries, especially like jQuery. But the reality is jQuery has kind of become a de facto standard, so that almost anyone these days who writes JavaScript code uses jQuery or something like it, and no longer writes such a verbose expressions as this, because again, humanity has learned, wow, that was sort of a missed opportunity to make our lives easier. So humans make their lives easier. Good question. 
+
+Other languages to consider. I would say among this list Ruby is quite popular. And so in the world of Ruby, there's a framework called Rails, which is very popular. So Ruby on Rails is a commonly used expression. Also in this world, let me circle Java for web stuff, where in the world of Java you might have JSP, or Java Servlets, which is a common technology. And this is just again ways of using that language in a server environment. 
+
+So what does this mean? If you've got a physical server, you would literally download the web server software and install it in such a way that you have support for one of these frameworks, with which you could, in turn, use one or more of these languages. And in reality, if you sign up for like a web host or some of the cloud services we talked about yesterday, often the stuff just comes with the machine's configuration for you. You don't need to set this up manually. But if you did, this is where the role of system administrator, so to speak, comes into play. He or she would actually do this kind of stuff for you, or the so-called webmaster would often do this for you. All right. Any questions on some of these here? Or any opportunities at all to ask about languages? Frameworks? Then let me introduce just one other library that's also very common these days. This list could go on infinitely. 
+
+And this library is kind of starting to fall out of favor. It's been around. It was popularized by Twitter for some time. And now lots of websites, lots of developers use it. But new things are coming out and coming along. But let me just give you a sense of what it means to use a library. So again, JavaScript is a very popular language. CSS, or Cascading Style Sheets, we talked about yesterday. That, too, is omnipresent. No one makes a web page today without using HTML and CSS minimally. But it's not always easy to do certain things. 
+
+And so let me go to getbootstrap.com. Whoops. That's not how we spell. Getbootstrap.com, which is going to lead me to the landing page for this library. So they generously call themselves a framework, which is kind of sort of fair, but I would still call it more of a library than a framework. But these are just arguable semantics. Let me go to their CSS tab and let me go to something like this. 
+
+So recall what our forms looked like yesterday on Cloud9? It was pretty ugly. Old school buttons. I think the button was gray by default. And everything was really formatted quite messily. So if you want your web forms to look a little nicer-- let me zoom in here. 
+
+And by nicer I really just mean very nitpicky aesthetics. So notice how the email box there has a rounded rectangular corners to it. So it's a little cleaner there. Notice that the word email is there until I start typing and then it goes away. So that's a nice little feature. Notice how the thing is kind of glowing nicely, which some of this you get for free from your browser, but some of this is also libraries, code that other people have written that give you this. 
+
+Something like this gives me my password. This button is a little sexier than the default. Very much in vogue right now. Ever since iOS 7 or so, the world has gotten very flat, whereas the world before had lots of drop shadows, lots of reflections on icons. Much like in the clothing world, there's fashion trends that come and go. Now everything is flat on your phone. 
+
+In fact, buttons on your iPhone are now just blue links. There's not often even circular buttons. So these are just things that go in and out of vogue, and so this is how you might make a more modern looking web form. Buttons. So Bootstrap has lots of pretty buttons. So if you want blue buttons, green buttons, blue, orange, red. Bootstrap makes it easier to do these things. These are the kinds of things that you could absolutely have done yesterday with CSS and with HTML, but it's just a pain in the neck. And so instead, what Bootstrap would have you do is something like this. 
+
+If you want a button-- turns out this is an HTML tag we didn't use yesterday-- and you want it to look like this green button, you literally just give it a class, which we did talk about yesterday, of "btn btn-success." 
+
+Why those words? Twitter, the authors of Bootstrap, came up with those words. They could have called them anything they want. But what you are getting now is someone else at Twitter, in this case, has figured out how do you make a button look nice and clean and green. They packaged up that functionality in a CSS class, called "btn" and "btn-success," so that any of us can now use it without even thinking about it. So they have abstracted away the notion of a green button so we don't have to care about implementing it ourselves. We can actually focus on implementing things of interest to us. 
+
+If we scroll down here. Error messages on the screen. Sometimes you want a little message to appear on the top of the browser. Any of us could do this with some effort, after yesterday's lesson, but why would you bother? That's such an uninteresting aesthetic detail. Let's stand on the shoulders of Bootstrap and let them give us things like this, where we literally, to get a red box, just have to do a paragraph tag with a class of-- sorry. "bg-danger" would give us this reddish box instead. Now let's go to the more interesting things. If I go back to the top of this page and go to Components, now the world gets more interesting. For instance, very common is drop down menus like this. This would be an absolute pain to implement. And it wasn't that long ago that we programmers would have to implement these kinds of menus from scratch. 
+
+But it's such a common paradigm that libraries like Bootstrap just give you the ability to make a drop down menu far, far more easily. There's no one way to do it, but if I read the documentation I would see that, OK, I should use this HTML if I want a drop down menu that behaves like that. 
+
+Similarly, let's go to button drop down. So this is even fancier. If I want this to look like a button but that little triangle means I should click on it and get this menu, this is using a language called JavaScript. And we could all implement this in JavaScript. But again, this is a wheel you don't want to reinvent. You just want to take it off the shelf library for this. 
+
+Let's go to something like progress bars. So something like this is kind of cool. If you've ever seen a progress bar moving across the screen, implementing that often is just a spinning icon. In fact, just as an aside, let me go to Ajax-- what is it? Ajax info? Whoops. Ajaxinfo. Let me remember the address. There we go. 
+
+So if you've ever seen some animation while the page is loading, or thinking, or saving, or creating something, you might see such animations as these. So let's look at something like this one here, and let's choose a foreground color of green, which feels kind of friendly. Can I click this? Come one. OK. We'll just go with red because that's what we're getting. So here we have it. 
+
+So if you've ever seen this on a screen, whereby suddenly it appears and then suddenly disappears, what is it that's implementing that? Well, this is just a GIF. G-I-F. And this is an animated file, which just means it's like an old school comic book. There's just a bunch of different frames that are going [STUTTERING] and just repeating. And it's creating the illusion of movement. 
+
+So as soon as a page is done loading or doing something, what does a programmer do? Well, he or she just hides this image. So all a progress bar is is kind of like a movie you're watching. You're sort of oblivious to the fact that it's not actually doing anything, it's just moving. 
+
+And then, when it's done progressing, they just hide it or turn it off. And that's all the magic that's going on there. Bootstrap gives you something a little fancier, whereby you can actually see a percentage as it goes, but it too is just sort of a simple animation. 
+
+Let's look at some final more complex examples here. Something like a modal. Does anyone know what a modal is? A modal window is generally one that is supposed to take control of the foreground and prevent you from doing anything else. It sort of forces the user's attention to the middle of the screen, locking them out, typically, of everything else. 
+
+So if I launch this demo, the screen will generally become gray. Well, how do we make it gray? Well, we probably just changed the background color like we did yesterday or something like that. Maybe it's an overlay that semi-transparent. And now notice you can do fancy things like this. So if you ever click on a button and want a little pop out to appear, you can do that. And so who cares about all-- yeah? 
+
+AUDIENCE: So with Bootstrap, to get it incorporated, is it as simple as like yesterday we did the CSS styles page? DAVID J. MALAN: Indeed. Really good question. Let me go to Getting Started. And yes. All you have to do in order to use Bootstrap is essentially copy and paste these three long lines of code into the top of your own web page-- the head of your page-- and you're up and running. And there's different ways of doing it, but this would be the simplest. 
+
+So what's helpful about all of this? Well, if you're not so much the implementer of a website but you're trying to design it, or you want to provide someone with wire frame diagrams, so to speak, or just artist's renditions of what you want to do, I, to this day, will often go to a site like Bootstrap, where if I want to implement something-- like recently on campus we wanted to implement a web based tool for navigating Harvard's course catalog, making it easier for students to browse through courses and add courses to shopping list, so to speak, to kind of decide what they wanted to take. 
+
+I was trying to imagine for myself, what ingredients would we want to use to build this? What would the user interface be like? And just looking through a site like this or other such library sites, you can gain inspiration, because wow, I can use this widget, and this widget, and this widget. And then really what the programmer starts to do, especially in these days in this more modern world of web programming, is programming is increasingly about wiring things together. Sort of taking this off the shelf, this off the shelf, this off the shelf, and you being the smart one to connect all of those dots, but ultimately build something by again standing on the shoulders of others, so that you don't spend a month implementing a stupid drop down menu, which is actually hard to do if you want it to work on Chrome, and IE, and Firefox, and any number of other browsers. This is why there is this rich commercial and open source software industry as well. 
+
+AUDIENCE: So does Bootstrap get updated and you have to then update your links? 
+
+DAVID J. MALAN: It does. Well, yes, it does. Bootstrap is currently at version 3.3.6. And generally what you would do-- this is actually worth mentioning. There's what's generally known as a semantic versioning system in the world. Not everyone does this. 
+
+But if you've seen version numbers that are of the form x.y.z-- so for instance, the first version of a program might be 1.0.0. Or if it's very, very beta, or even alpha status, which means use at your own risk, it's not really ready for prime time, you might even start 0.0.1 or some such designation. But if software starts at version 1.0, or equivalently 1.0.0, typically, what's common these days-- though not omnipresent-- is if a company or an individual programmer fixes some bug in some piece of software that really was a bug, whose correction should not impact you at all-- it doesn't change the program's behavior, it just fixes something that was not working properly-- you would typically update the z value there. Which means someone like Kareem could simply go into his website, blindly change the version number from 1.0.0 to 1.0.1, save it, ship it, and in theory, not have to worry that he's just broken his website because of some lack of functionality, because something else broke. 
+
+Meanwhile, if I the programmer or some company were to make some significant change that adds functionality, I might update us to 1.1.0 because I'm actually changing the behavior of the library. I'm giving you maybe more functionality. Finally, if I were to actually fundamentally change the software so much that it will break many users websites or applications, then I'm obliged, in this model, to upgrade the major version number too, which is a breaking change. In other words, I might have discontinued support for those drop down menu. So if you upgrade to 2.0, half your website might stop working. And this is sort of a signal to the community as to what's involved in making an upgrade. A good opportunity to raise. Other questions? All right. Well let's take a look at one final topic in this segment of programming of technology stacks, namely related to mobile. 
+
+So in the world of cell phones today you have-- and iPads, and surfaces, and all those kinds of devices-- you have a lot of choices when it comes to implementing an application or a website for your customer's mobile devices. So just to state the obvious, perhaps these days, what are the platforms to develop for in the mobile space? What devices might you want to support with your app or website? 
+
+AUDIENCE: Apple. DAVID J. MALAN: OK. So Apple devices. So that means iPhone, and that means iPad, and maybe even iPod. What else? Olivier? 
+
+AUDIENCE: Android. 
+
+DAVID J. MALAN: Android. OK. So Android phones, Android tablets, the Android market is even messier because-- and even Apple is becoming messy. Whereas once upon a time iPhone was a certain size, and iPad was a certain size, and iPod was a certain size, now we have iPad Minis, and the thin ones, and the iPhone 6 Plus and 6. It's becoming a mess. It's becoming the Android world. 
+
+And I say this with sort of rolling my eyes because from a developer's perspective, it is a pain in the neck when you don't have Steve Jobs' vision of absolute control over all of these specifications. Apple still does because they're the ones building the hardware. But it's a nice thing, if I'm a software developer, to just know that my iPhone is always going to be this big because that means I always know how much screen real estate I have. So if I want to put an icon in the top left-hand corner, it's going to be in the exact same place on every single customer's device. 
+
+But in the world of iPhone 6s and iPhone 6 Pluses and in the world of Android phones, it's all over the map. And so it makes it harder to program things, especially user interfaces, because now you have to start arranging your user interfaces relatively, not absolutely. And the same has been true on browsers, and desktops, and laptops for years because you, of course, have different screen sizes. 
+
+What else? You might have surfaces, like from Microsoft. You might have-- AUDIENCE: Windows phone. DAVID J. MALAN: What's that? AUDIENCE: Windows phone. DAVID J. MALAN: Yes. So windows phones can still be found. Kind of sort of BlackBerrys, but they keep trying. And then bunches of other devices. So for the most part, let's say these are the ones to care about at the moment. Certainly the Apple stuff, certainly the Android stuff, and among Windows, like surface tablets seem to be catching on pretty well. 
+
+And so among those devices, if you want to roll out, let's say, a mobile presence for your company, what kinds of design decisions do you have to make? Well, we already said in the Apple world, there is at least two languages that are typically used. One was called what? 
+
+AUDIENCE: Objective-C. 
+
+DAVID J. MALAN: Yeah. So Objective-C, which is the older one. It's also the language that many Mac applications are still written in. Then the other newer one was? AUDIENCE: Swift. DAVID J. MALAN: Swift. And those are the kind of two to know to impress folks. Then in the Android world, what language does Android use? 
+
+AUDIENCE: C#? 
+
+AUDIENCE: Java. 
+
+DAVID J. MALAN: Java is the language of "du jour." In the Windows world, sure, we'll say C# in that case. So already this is kind of annoying, because what's the takeaway for a business owner or someone who just wants to roll out a mobile presence? Like, damn it? Like, if I want to support a fairly broad user base, I have to write, it would seem, three separate applications. One in one of these languages, one in Java, one in C#. And even if I want the functionality to be identical, it doesn't matter. I still need to use different languages because Apple, and Microsoft, and Google all support different environments. And this has been a challenge for years. Back in the day, when people used to buy software at a computer store in shrink wrapped boxes, you would either have to reach for the Mac shelf, or for-- maybe this very small Mac shelf-- or the larger Windows shelf and buy some software. And very often, there wasn't even anything for you on the Mac shelf. Why? Well, companies decided if 90% of the world, 95% of the world has PCs, why bother even implementing things on Mac OS? 
+
+As an aside-- a total digression-- why is it that Mac seems so impervious to viruses, and worms, and security threats? Is Apple better at this? Better at keeping computers secure? 
+
+AUDIENCE: Smaller audience? 
+
+DAVID J. MALAN: That's probably the bigger bit to it. So the many users of Macs have long claimed, oh, use a Mac, you'll be immune to viruses, and worms, and all of these things that have long plagued PCs. That might be because Apple has better programmers and they write better software, or the operating system was better designed. Maybe, but probably not. 
+
+It's probably that when you're a 12-year-old, or a 30 something sort of sitting at home writing malicious software to take over the world, you're going to go after the much larger target audience. The 95% of the world who might be running Windows or some variants thereof. So there's a little bit on both sides. But to their credit, Apple, to my knowledge, hasn't really touted themselves as being more secure, since you're just inviting drama if you make that claim, I would think. 
+
+All right. Without getting too far down that, how do we solve this? Do you have to buy or do you have to pay three different people to develop your apps? Do you pick one over the other? What should guide your thinking here do you think? Kareem? Nope. Someone else. 
+
+AUDIENCE: Just come with the hardware. DAVID J. MALAN: Come with the hardware? What do you mean? 
+
+AUDIENCE: For the environment. [INAUDIBLE] DAVID J. MALAN: So that is true. But your customers, meanwhile, might have iPhones, they might have Android phones, they might have tablets made by Microsoft. So how do you have a mobile strategy for all of these different users? It would seem that if it costs, let's say $1,000 to make an iPhone application, it's going to cost you $2,000 to make an iPhone application and an Android application, or $3,000 to also support Windows devices as well. That's probably quite an understatement, and it might not even be a linear relationship like that. 
+
+AUDIENCE: If you want to have an app or not, you can have responsive website. DAVID J. MALAN: Good. AUDIENCE: Or you can have a native app. DAVID J. MALAN: Yeah. So in all this context here, we've been talking about what people would call native applications. That is applications that are written in the native language of that device. So native Objective-C or Swift code, or in Java, or in C#. Which means when you download, let's say Snapchat, a popular application, or when you download Facebook for a phone, you are downloading either the version written for your iPhone, or written for your Android phone, or written for your surface. 
+
+But there is an alternative. As Olivier was alluding to, you can actually use HTML 5 instead, using what's called a web application, whereby you simply implement your mobile presence and any functionality. What do I mean by mobile presence? Like your website that has your contact information, a list of all your products, maybe it has a shopping cart, maybe you sell things through it. Whatever your application is, you implement it, not in Objective-C, or Swift, or Java, or C#, but in HTML 5, which was the language we looked at yesterday, with JavaScript and CSS. 
+
+And what's nice about those three is that to run them, you need just what piece of software? AUDIENCE: A web browser. DAVID J. MALAN: A web browser. And the best I know, all of these devices come with web browsers, so the user hasn't have to install something special. So you can just tell your audience, your customers, go to acme.com in your browser and you'll just have a web based experience that still fills the screen, but you don't have to worry about all of these costs and all of this complexity. But surely there is going to be a catch here, right? Especially if I point out that a couple years ago, the very first version of Facebook's mobile application was mostly an HTML 5 application. And they have, more recently, reimplemented it in their other applications. 
+
+So why would you not immediately want to say, well, obviously we're going to do this? What might the hidden costs be? 
+
+AUDIENCE: Performance. DAVID J. MALAN: Performance? How do you mean? 
+
+AUDIENCE: The native app has more performance. 
+
+DAVID J. MALAN: So that is true, for a couple of reasons. We can oversimplify the answer. And recall our discussion of interpreted versus compiled languages. This is HTML 5 and with it, just to be clear, JavaScript-- commonly written JS-- and CSS are all interpreted languages, even though only JavaScript is a programming language. 
+
+And so versus these, which some of these are compiled, at least these three-- Objective-C, Java and C#-- these, in theory, should just be faster. But there's another reality for-- 
+
+AUDIENCE: Functionalities? 
+
+DAVID J. MALAN: What's that? 
+
+AUDIENCE: Functionalities. 
+
+DAVID J. MALAN: Functionality? How so? AUDIENCE: Use the camera off your phone or something. You can use those with the browser. DAVID J. MALAN: Exactly. They're sec-- AUDIENCE: [INAUDIBLE] DAVID J. MALAN: That's another good one. There's features that come with mobile phones today that are not, by design, for security reasons, accessible to web browsers. Because it would be kind of a creepy thing if just when you visit google.com, or cnn.com, or any website.com, that that website has the power to turn on your camera, take a picture of you, and then use it. But you wouldn't want a random website that you visit for the very first time to have that capability. 
+
+And so what phone manufacturers typically do is they just deny access to that kind of information to a browser, which means you can't implement the camera. You can't implement push notifications, the beeps that you get on your screen with short messages. And in fact, even GPS is only kind of sort of available to web browsers. If you've ever, on a laptop or on a mobile device, pulled up something like maybe cnn.com, but also local news stations tend to do this, you're prompted often with a message-- foxnews.com wants to know your location. Approve or deny. 
+
+Well, the browser is trying to access your GPS information from your phone. But thankfully Microsoft, and Apple, and Google have decided that feels like it's a useful situation, we want Google Maps and other tools to work, but we don't want to creep people out by just enabling any website to do this. So let's sort of meet halfway and prompt the user. But that's not necessarily the case with all hardware, like the camera and with push notifications and the like, so you might have to sacrifice certain features. But performance too. It's becoming less noticeable nowadays, perhaps as LTE catches on and faster internet speeds on phones, but you can kind of feel the difference. Like a web based application just feels slower, typically, than a native application, partly because a web based application by definition is on the internet. It's talking to the servers on the web. And if your network connection is slow, even scrolling might be slow. 
+
+But a native application, you have already pre-downloaded-- probably when you were at home from the app store, or you at least pre-downloaded it in its entirety earlier, whatever your connection speed-- and so now you have all of the bits that you generally need. Except maybe some data that comes from a server. 
+
+So these are trade-offs here. There's kind of a middle compromise, in fact. And I think you-- 
+
+AUDIENCE: Use the data offline. In the native apps, you can [INAUDIBLE] DAVID J. MALAN: Absolutely. So there's the offline issue, which is really annoying if you can't play some game or use some software just because you're in a basement somewhere or in an elevator. A native application is resilient with higher probability against that, assuming you have all the data you need locally. 
+
+So there is a third option here. And let's draw the spectrum as native app here and web app here. And what's in the middle is something called-- and I think you might have used the word before, maybe? Hybrid application. And as the word implies, it's something in the middle. It's kind of a web application and it's kind of a native application. 
+
+And what does this mean? It turns out there are frameworks-- to use a term from earlier-- software that other people have written for every one of these platforms. These and yet other devices. In fact, let me go to PhoneGap, which is one such framework that I believe Adobe owns now. Let me go to Getting Started. Let's see. See if I can see a list of tools. Hardware. Getting Started. PhoneGap hardware. 
+
+Let's see. PhoneGap hardware access. Let me see if we can find a little chart that they used to have. This is on another site. Is this useful? No. That's gonna waste our time there. PhoneGap hardware. Devices. Device API. Nope, they've moved it. 
+
+PhoneGap. Let's go one last look at this and see if I can show you. Getting Started. Install PhoneGap. Install mobile app. Come on. They've reorganized everything. All right. Oh, all right. Well, here we go. This isn't all that enlightening, but this is what I was kind of looking for. 
+
+So PhoneGap is a framework that you can download for free that gives you some starter code, essentially. So some code that they have written that doesn't do much of anything. But what it gives you essentially is the equivalent of an application that just puts a big rectangle on the user's screen. It does not put a URL bar, like a browser, doesn't put an address. It just puts a big rectangle. And you configure this big rectangle, underneath the hood, to actually go to acme.com, or maybe m.acme.com, for mobile.acme.com, but the user doesn't know they're at that address. All they see is the contents of the web page. 
+
+But what's nice about this being a hybrid app is that what PhoneGap and other companies are giving you is they're giving you a little bit of code in Objective-C or Swift, or a little bit of code in Java, or a little bit of code in C#, and essentially, all you have to provide is minimally the address of your web based application. And then you bundle this all together and you have it either access your site via the internet, or you even cache a local copy inside the application, and then you save your application in iPhone format, Android phone format, surface format, or any number of other devices. 
+
+You upload each of those versions to the Google Play Store, to the App Store, to the Windows Store, and so forth. And now, you can have all of your audiences download truly a native app, albeit most of the code was written by someone else, but the contents of that native app all come from, typically, your own website. So you continue writing your website in HTML, JavaScript, and CSS. 
+
+So why blur these lines? Why have a hybrid application that's kind of native, but also kind of web based? What's the whole point of adding this complexity? I mean, even still, just from glancing through this page, the Getting Started guide feels like it's got a whole lot of steps for me to do before I can-- AUDIENCE: Reusability? DAVID J. MALAN: Reusability? What do you mean? 
+
+AUDIENCE: Of the source code. So the same code would run on all the different platforms. DAVID J. MALAN: Yeah. AUDIENCE: [INAUDIBLE] DAVID J. MALAN: Perfect. If time is tight and if you don't have that many developers-- maybe you have one developer and he or she certainly doesn't know all of these environments-- certainly not well, and certainly can't program in all three simultaneously and ship three products in the time allowed for one, you can have him or her build everything in HTML and JavaScript and CSS, and then learn a tiny little bit about native apps, just enough to download a framework like this, to then upload your product to all of the various app stores so that you now have a native application. 
+
+So that seems like a win-win, but again, to be clear, what are the potential costs or the gotchas? 
+
+AUDIENCE: Performance? DAVID J. MALAN: Yeah. Performance. It's hard to describe verbally. So if you just take on faith a mobile application, a web application will typically perform more slowly. It might not look quite right, because in iPhone, and in Android phones, and Windows devices, there's always a sort of default look and feel to all of the buttons and the menus. 
+
+And companies in the web, can try to approximate those aesthetics with libraries like Bootstrap, but the user-- an astute user-- is going to know that something's not quite right here. And that's fine, maybe that's not a big deal. But the performance issue absolutely is a big deal. Native applications will tend to just be much more responsive and therefore better. And so, what then might be the best of both worlds? If you're especially a small company or a small group, you don't have the resources to develop an app in parallel on all three platforms, and frankly, feels like that's a bad idea anyway because if you roll it out and on all three simultaneously realize, we should have added some features or done something differently, now you have to fix it in three places, not one. What's maybe the optimal strategy here overall, if resources and time are tight? 
+
+AUDIENCE: Just do it on iOS. 
+
+DAVID J. MALAN: That's not unreasonable. iPhones, at least in the US, are super popular. Android still seems to have dominant market share, globally, overall. So you are not necessarily representative of the entirety of the globe this week. But that's absolutely one decision. I mean, on campus here I think some atrocious number or percentage of undergraduates have iPhones and not Android phones. But abroad, it's kind of the opposite. So you decide based on your audience. How do you know what your audience has? 
+
+Well, we learned a trick yesterday. You could ask them. If you have a captive audience you can send them a survey form. Or you could just do what? 
+
+AUDIENCE: Google Analytics? 
+
+DAVID J. MALAN: What's that? 
+
+AUDIENCE: Google Analytics. DAVID J. MALAN: Google Analytics. Yeah. Or even more sort of technically, just look at your own web servers logs. Because what happens every time a browser, whether laptop, desktop or phone visit your website? They send that HTTP header that shows you what browser and OS they're using. So you can infer, with high probability, what your demographic is using that way and then adjust. 
+
+So suppose that's unacceptable. That's sort of bad for business if Android users can't buy our widgets. 
+
+AUDIENCE: Whether you're gonna charge or not? DAVID J. MALAN: Whether you're going to charge? So OK, you get what you pay for. 
+
+AUDIENCE: Whether your app is gonna be free or whether it's gonna-- 
+
+DAVID J. MALAN: OK. So maybe you could recoup costs that way, or--? 
+
+AUDIENCE: I read a study once that said more Apple users pay for apps versus-- DAVID J. MALAN: That's true because they're already paying more for their devices. So not unreasonable an assumption. 
+
+AUDIENCE: [INAUDIBLE] DAVID J. MALAN: OK. So if they're more willing to pay, then to hell with the Android users. They're not going to pay us anything anyway. We might as well focus our priorities, at least for the first few months or a year, on iOS. Totally reasonable. What's a more inclusive strategy than that? Maybe-- what's that? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID J. MALAN: A more expensive-- so maybe invest more in-- go ahead. AUDIENCE: Yeah. Just a mobile website. 
+
+DAVID J. MALAN: So do a mobile website and not even worry about this complexity. Or maybe a reasonable strategy, which even Facebook took, is start with a hybrid application because it's not that much harder to do this than this. You just have to read some documentation and figure out how to upload things to the App Store. So maybe you start with this, so that on day one, you can support all of your users. And then, just like Facebook and other companies have done, when you have the resources, you have the people, why don't you re-implement just the iOS application. You still have something for everyone, even though it's an inferior experience perhaps, with the hybrid application. But you can gradually roll out and replace your short term measures of the hybrid apps with your more native applications. 
+
+AUDIENCE: But with a hybrid app you will have access to mobile features? 
+
+DAVID J. MALAN: Not necessarily. So maybe you make a conscious decision early on, you can only upload photos on the native iPhone application for Facebook, but not on the Android application, initially, for instance. And that's a bit of a white lie because web applications have more restrictions than hybrid applications it turns out, and if we read the documentation for PhoneGap and things like it, people have come up with ways to give web based applications access to the camera, so long as you're using a hybrid application. 
+
+How does that work? Because the hybrid application, by definition, has a bit of code in Objective-C, and Swift, and Java, or in C#, it can access the hardware. Not necessarily everything, but it might very well be the case that you have enough access to get the camera, even for Android platforms, for instance, in that contrived example. 
+
+Any other questions? All right. Why don't we take our 15 minute break here. We'll resume at three with a final look at web programming, databases, and Javascript. 

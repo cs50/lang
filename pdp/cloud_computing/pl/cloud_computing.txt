@@ -1,0 +1,455 @@
+DAVID MALAN: Dobra, witamy z powrotem. Zanim zagłębimy się w chmurze, Myślałam, że zatrzyma się na chwilę czy są jakieś nierozstrzygnięte kwestie lub tematy, które pojawiły się w czasie lunchu które mogą teraz być interesujące. PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: OK. Oh, OK. PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Nie, oczywiście. OK, mam nadzieję, że również wszystkie swoje Problemy pojawiają się w ciągu najbliższych kilku godzin a jutro szczególnie. Ale rzućmy okiem, a następnie, w którym ostatnia dyskusja na temat konfigurowania Prowadzi stronę internetową, bardziej ogólnie jeśli chodzi o cloud computing, utworzenie architekturę serwera, rodzaje decyzji że inżynierowie i programistów i menedżerów trzeba zrobić, jeśli chodzi by robić coś więcej niż tylko logując się do 10 $ miesięcznie hostingowego kiedy rzeczywiście chcą zbudować własną infrastrukturę. I spróbujemy powiązać to z powrotem, Na przykład, aby synchronizatora i inni tak jak oni. 
+
+Zacznijmy więc do rozważenia jakie problemy pojawiają się w biznesie dostaje dobre i dobre problemy. Tak więc w bardzo najprostszym przypadku posiadania niektóre firmy, która posiada serwer WWW, Może masz, powiedzmy, że serwer musimy po prostu wyciągnąć, że wygląda następująco. I te dni, większość servers-- I spójrzmy prawdzie faktycznie umieścić obraz tego tak że jest to nieco mniej chaotyczny. 
+
+Więc rack Dell server-- z powrotem w dzień, nie były komputery mainframe która objęła całe pokoje. Te dni, jeśli były aby uzyskać serwer go, może wyglądać trochę coś takiego. Serwery są mierzone w co nazywane są jednostkami stojaku lub RU. I jeden RU jest 1,5 cala, który jest standardem przemysłowym. Tak to wygląda serwerze dwa RU. Więc to 3 cale. I są na ogół 19 cali szerokości, co oznacza, że ​​wszystkie tego rodzaju rzeczy jest znormalizowana. 
+
+Więc jeśli spojrzeć w center-- danych nie tylko na jednym serwerze, ale niech spojrzeć na Google centrum danych i sprawdzić, czy mamy zobacz ładne zdjęcie w Google Images. Jest to o wiele lepiej niż ty świeci typowo znaleźć, a wiele seksownego patrząc w wyniku. Ale to, co wygląda jak para Sto wszystkie serwery o tej samej wielkości, Właściwie w szafie rack po po rack po szafie w centrum danych. 
+
+Coś w tym może również this-- być Google, bo google Google. Ale może to być reprezentatywne bardziej ogólnie centrum danych, w którym wielu firmy zwykle, kolokowane. I kolokacji oznacza ogólnie że idziesz do miejsca jak Equinix lub innych dostawców, którzy mają duże magazyny, które mają dużo mocy, wiele chłodzenia, miejmy nadzieję wiele zabezpieczeń, a poszczególne klatki załączając stojaki Serwery i albo wynająć stojaki lub przynieść stojaki w. 
+
+A pojedyncze przedsiębiorstwa, firmach, zwłaszcza, będzie mieć jakieś biometrycznych aby dostać się do ich klatki, lub klucza, lub klucz karty. Otwierasz drzwi. A w środku jest tylko kwadrat Powierzchnia ślad że płacisz za, wewnątrz które można umieścić cokolwiek chcesz. 
+
+I zazwyczaj zapłacić za zasilanie. I płacisz ślady. A potem płacisz Sam dla serwerów że jesteś wprowadzenie w tej przestrzeni. I co wtedy mają Opcja zrobić, to zapłacić komuś dla połączeń usług internetowych. Można zapłacić dowolną liczbę sprzedawców, z których wszyscy zazwyczaj wchodzą w tym centrum danych. 
+
+Ale prawdziwe interesujące pytanie, co tak naprawdę idzie w tych szafach? Mogą one bardzo dobrze wyglądać, co właśnie zobaczył. Ale oni wykonywać różne funkcje a może trzeba zrobić różne rzeczy. I spójrzmy prawdzie w rzeczywistości motywuje tę dyskusję z pytaniem, jaki problem rozpoczyna się pojawić, jeśli się uda? 
+
+Więc masz swoją stronę WWW które zostały zbudowane. A może to sprzedaje widżetów czy coś takiego. I już robi się bardzo dobrze ze sprzedażą widgetów internetowych. I zaczynasz doświadczać Niektóre objawy, swojej stronie internetowej. Jakie mogą być jednymi z objawy techniczne że użytkownicy zgłaszają w biznesie rośnie i kwitnie a strona jest korzystają z tego? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, dokładnie. Więc może masz Spowolnienie swojej stronie. I dlaczego może tak się stało? Dobrze, jeśli założymy, na W trosce o dyskusji teraz, że jesteś na jednym z tych komercyjnych hosty że rozmawialiśmy przed obiadem, że płacisz pewną liczbę dolarów się za miesiąc, a już zapłacone dla rocznego kosztu domenie Imię, które hostingowego jest chyba overselling swoje zasoby do pewnego stopnia. Więc może masz nazwy użytkownika i hasła na swoim serwerze. Ale tak może kilka innych, lub kilka kilkanaście innych, a może nawet kilka sto innych, użytkowników. 
+
+I stron internetowych żyć fizycznie w tym samym serwerze. Dlaczego jest to możliwe? Także w tych dniach, serwery jak to zwykle mają wiele dysków twardych, może aż sześć lub więcej dysków twardych, z których każdy może być znacznie jako 4 terabajtów te dni. Więc może masz 24 terabajtów przestrzeni tylko w jednym małym serwerem takiego. 
+
+I nawet jeśli ukraść trochę tej przestrzeni dla redundancji dla celów archiwizacji, jest jeszcze sporo miejsca. I z pewnością, typowa strona nie trzeba, że ​​wiele miejsca. Wystarczy rejestracji użytkowników i przechowywania dzienników zleceń nie zajmuje aż tak dużo miejsca. Więc można go podzielić na partycje dość nieco i dać każdemu użytkownikowi tylko mały kawałek tego. 
+
+Tymczasem komputer jak to w dzisiejszych czasach zazwyczaj ma wiele CPUs-- nie tylko jeden, może dwa, może cztery, może 16, lub nawet więcej. I każdy z tych procesorów ma coś, co nazywa rdzeń, który jest trochę jak mózg wewnątrz mózgu. Więc w rzeczywistości większość z każdego tutaj Nowoczesne laptopy prawdopodobnie podwójnym rdzeniem lub quad core CPU-- i prawdopodobnie tylko jeden procesor wewnątrz laptopa w tych dniach. Ale komputery stacjonarne i komputery typu rack Może to mieć sporo więcej procesorów, co z kolei rdzenie. 
+
+I szczerze mówiąc, nawet w naszych komputerach Mac i PC z dzisiaj, naprawdę nie trzeba podwójne rdzenie lub rdzeni quad, aby sprawdzić pocztę. Jeśli istnieje jakakolwiek gardłem, gdy chodzi przy użyciu komputera Ci ludzkie są prawdopodobnie najwolniej rzeczą w tym komputerze. I nie będziemy w stanie sprawdzić pocztę szybciej, jeśli ciebie cztery razy więcej procesorów lub rdzeni. 
+
+Ale to samo rodzaj true serwera. Jedna strona może nie koniecznie więcej niż jeden CPU lub jeden rdzeń, jeden mały mózg wewnątrz robi wszystkie myślenia i przetwarzania. Tak więc producenci mają podobny zaczął kroić się te zasoby tak, że może twoja strona ma jeden Rdzeń, Twoja strona ma jeden rdzeń, czy może jesteśmy dzieląc jeden taki rdzeń. Jesteśmy również dzielenie przestrzeni dyskowej. I my również dzielenie RAM, lub Random Access Memory sprzed którego, istnieje również ograniczona ilość. 
+
+I to jest klucz. Bez względu na to, jak drogie komputer był, jest jeszcze skończona kwota środków w nim. I tak coraz więcej starają się spożywać te zasoby, wolniejsze rzeczy mogą się stać. Ale dlaczego? Dlaczego rzeczy, które spowalniają jako Objawem przeciążenia serwera? Co się dzieje? 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Tak, dokładnie. I zaproponował wcześniej, że RAM typu pamięci. Jest to zmienna, której to gdzie aplikacje i dane są przechowywane, gdy jesteś one wykorzystywane. A więc dlatego nie ma tylko skończoną liczbą rzeczy można zrobić pozornie naraz. I to jest również szybsze, co jest dobrą rzeczą. Ale jest to również droższe, co jest złe. I to również dlatego obecny w niższej ilości niż miejsca na dysku, dysk twardy Przestrzeń, która wydaje się być tańszy. 
+
+Innymi słowy, może mieć 4 terabajtów miejsca na dysku w komputerze. Ale może masz 4 GB lub 64 GB, z rzędu, czynnika 1000 mniej pamięci RAM w komputerze. Więc co komputer zrobić? Dobrze, załóżmy, że mam 64 gigabajtów RAM w serwerze jak ta, która byłoby dość powszechne, gdyby nie niska te dni. Ale załóżmy, że masz tak wiele użytkownicy robią tak wiele rzeczy to ty rodzaj sortowania potrzebuje 65 GB pamięci do obsługi wszystkich, że jednoczesne wykorzystanie? 
+
+Cóż, można tylko powiedzieć, Niestety, niektóre liczby użytkowników Po prostu nie może uzyskać dostępu do witryny. I to jest miarą w ostateczności, oczywiście. Albo, jak operacyjnej System, jak w systemie Windows lub Mac OS lub Linux lub Solaris lub dowolna Wiele innych systemów operacyjnych na tym serwerze, może po prostu zdecydować, wiesz co? Mam tylko 64 gigabajtów pamięci RAM. I niby potrzebują 65. Więc wiesz co? Mam zamiar wziąć 1 gigabajt Warto danych w pamięci RAM To był najdawniej obejrzano i po prostu przenieść go na dysku tymczasowo dosłownie skopiować go z szybkim Pamięć do wolniejszej pamięci tak, że mogę sobie z tym poradzić, a następnie 65-szy gigabajt zapotrzebowanie na pamięć, zrobić kilka obliczeń na nim. Wtedy kiedy skończę to robić, Ja po prostu przenieść, że na dysku, przenieść tę drugą RAM tymczasowo umieścić na dysku z powrotem do rzeczywistego sprzętu tak, jestem rodzajem pracy wielozadaniowej. 
+
+Więc jestem rodzaj oddanie rzeczy chwilowo w tej przestrzeni wolniej więc stworzyć iluzję obsługiwać wszystkich. Ale jest spowolnienie. Czemu? Cóż, w środku z nich trudno Dyski te dni jest co? Raczej, co sprawia, że ​​trudno jazdy różni się od pamięci RAM najlepiej jak wiemy teraz? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: OK, to prawda. PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak bardzo prawdziwe. I to jest efekt uboczny lub funkcji z faktu, że pamięć RAM jest istotnie szybciej. I dlatego chcesz używać go do chwili obecnej. A dysk jest wolniejszy. Ale to stałe lub nielotne. Więc go używać do długotrwałego przechowywania. Jednak jeśli chodzi o wdrożenie, jeśli spojrzeć w górę co nazywa DIMM Dual Inline Memory Moduł ten właśnie kawałek RAM Może zazwyczaj wyglądają. 
+
+Więc wewnątrz naszej Mac--, że to błąd. Wewnątrz naszych komputerach Mac i PC, nasi stacjonarnych komputery musiałby laski pamięci, jak można je nazwać, lub DIMM lub SIMM powrotem w ciągu dnia, z pamięcią które wyglądać następująco. Nasze laptopy prawdopodobnie rzeczy Są jedną trzecią wielkości lub o połowę mniejszy. Są trochę mniejsze, ale to samo idea-- mało kawałki zielonej krzemu opłatek lub tworzywa sztucznego, które ma małe czarne żetony na nich z dużą przewodów łączących wszystko. Można mieć całą masę one wewnątrz komputera. Ale tu jest wynos to całkowicie elektroniczny. Jest tylko elektrony płynie w tym urządzeniu. Z drugiej strony, jeśli spojrzymy na wewnątrz dysku twardego i podciągnąć obrazek Tutaj zamiast tego zobaczyć coś takiego, która ma elektryczności przechodząc przez niego ostatecznie. Ale co skacze również, na ciebie o tej sprawie? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Tak, tam Najwyraźniej ruchomych części. To trochę jak stary rekord player lub odtwarzacz gramofon. I to jest dość dużo. To trochę bardziej elegancki niż that-- podczas gdy gracz gramofonu używanego rowki w rekordzie, faktycznie wykorzystuje malutkie cząstki magnetyczne że nie możemy zupełnie zobaczyć. Ale jeśli trochę cząstki magnetyczne wygląda to tak, to jest uważany za 1. A jeśli wygląda to tak, Północ-Południe zamiast południowo-północnej, Może to być 0. I zobaczymy jutro, jak możemy budować od tego, do bardziej interesujących rzeczy. 
+
+Ale wszystko to mam fizycznie przenieść jest z pewnością pójdzie wolniej niż prędkość światła, co w teorii jest to, co elektron może przepływać co, choć nie całkiem realistycznie. urządzeniach: Więc mechaniczne znacznie wolniej. Ale są one tańsze. I można zmieścić tyle więcej danych w ich wnętrzu. Tak więc fakt, że istnieje w świecie coś nazywa pamięci wirtualnej, używania dysku twardego takiego jakby to było RAM niewidoczny dla użytkownika, po prostu przenosząc dane z pamięci RAM na dysku twardym, następnie przesuwając ją z powrotem, gdy trzeba to znowu tworzy spowolnienie. Ponieważ dosłownie musiał skopiować go z jednego miejsca do drugiego. A co ty skopiowanie go do od faktycznie wolniej niż RAM gdzie chcesz go mieć. 
+
+Alternatywnym rozwiązaniem here-- jeśli się nie podoba, że ​​spowolnienie, i twoja pamięć wirtualna jest rodzaj jest przeciążony, co inne rozwiązanie tego problemu? 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: No, zwiększenie pamięci wirtualnej pozwolili nam to zrobić na jeszcze większą skalę. Możemy obsłużyć 66 GB o wartości potrzeb pamięci lub 67 gigabajtów. Ale załóżmy, że mi się nie podoba to spowolnienie, w rzeczywistości Chcę wyłączyć wirtualny Pamięć jeśli to w ogóle możliwe, co jeszcze mógłbym rzucić na ten problem rozwiązać go, gdzie chcę, aby obsłużyć większą liczbę użytkowników i inne wymagania dotyczące pamięci niż ja fizycznie mają w tej chwili? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Niestety nie. Więc procesor i rdzenie są one w to zasób ograniczony. I nie ma w tym kontekście analogowy. Dobre pytanie, choć. Więc po prostu być jasne, też, jeśli wewnątrz tego komputera, powiedzmy, kij pamięci RAM, który wygląda jak this-- i tak będziemy nazywać ten RAM. A tutaj jest dysk twardy. A ja po prostu zwraca na to obrazowo jako mały okrąg. Są to 0 i 1 jest w obie Dane these-- będziemy uogólnić go jako. 
+
+I zasadniczo, jeśli użytkownik uruchomienie aplikacji takich jak, powiedzmy, na stronie internetowej, że wymaga to dużo pamięci RAM dla każdego użytkownika, co mi proponuje, w drodze tej rzeczy nazywa pamięci wirtualnej, jest po prostu tymczasowo przenieść że tutaj tak, że teraz ja można przenieść pamięć czyjejś Wymagania tam. A potem, kiedy to się stało, mogę skopiować z powrotem na tę a to idzie tu, przemieszczając co chciałem tam gdzieś indziej całkowicie. 
+
+Więc nie ma po prostu dużo Switcheroo, jest tutaj na wynos. Więc jeśli się nie podoba, a ty nie chcesz umieścić coś na dysku twardym, co jest swego rodzaju oczywistości Business Solution osoby problemu lub Inżyniera Rozwiązanie, o to chodzi, też? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, mam na myśli dosłownie wyrzucać pieniądze na problem. I rzeczywiście, jest to idealne segue do nieco wyższego poziomu dyskusje na temat cloud computing. Ponieważ wiele z nich jest motywowane decyzjami finansowymi, nawet niekoniecznie technologiczny. Jeśli 64 gigabajtów pamięci RAM jest zbyt mała, dobrze, dlaczego nie dostać 128 gigabajtów pamięci RAM? Dlaczego nie dostać 256 gigabajtów pamięci RAM? A dlaczego nie? 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Dobrze, to kosztuje więcej pieniędzy, na pewno. A jeśli masz już zamienna miejsca na dysku twardym, skutecznie, lub równoważnie, miejsca na dysku twardym jest tak znacznie tańsze równie dobrze można go używać. Więc jeszcze raz, jest to kompromis, który widzieliśmy już wcześniej o tym rano, gdzie nie jest naprawdę koniecznie prawidłowa odpowiedź, nie tylko lepsze lub gorsze odpowiedź w oparciu o to, co rzeczywiście zależy. 
+
+Tak jest też realia technologiczne. Nie mogę kupić komputer, zgodnie z moją wiedzą, z bilion gigabajtów RAM już teraz. To po prostu fizycznie nie istnieje. Więc jest jakaś górna granica. Ale jeśli kiedykolwiek jeszcze zakupy dla konsumentów Mac lub PC, Także ogólnie nie ma Ta krzywa funkcji tam, gdzie może być dobry, lepszy, a najlepiej komputerowego. 
+
+A krańcowym powraca na kupno dolara najlepszy komputer kontra lepszy komputer może nie być aż tak wysokie jak spędza nieco więcej pieniędzy i coraz lepiej komputer na dobrym komputerze. Innymi słowy, jesteś zapłacić premii, aby uzyskać górnej linii. 
+
+A co zobaczymy w omówienie chmurze że to, co jest bardzo powszechne w tych dni, a co firmy takie jak Google spopularyzowana na początku, nie płacąc w budynku i bardzo fantazyjne, drogie nabierający komputery z losy i losy wszystkiego, ale raczej dość kupowania lub budowy niewielkie komputery, ale wiele z nich, i za pomocą czegoś, co jest ogólnie nazywa skalowanie poziome zamiast pionowego skalowania. 
+
+Więc pionowego skalowania oznaczałoby uzyskać więcej RAM, bardziej twardy, więcej wszystkiego, oraz rodzaj inwestowania pionowo w sprzęcie tak, jesteś po prostu uzyskiwanie najlepsi z najlepszych z najlepszych, ale płacisz za to. skalowanie poziome jest rodzajem uzyskać dolne rzeczy tier, dobry model lub nawet gorszy model ale się ich mnóstwo. Ale tak szybko, jak można uzyskać wiele them-- na przykład, w tym przypadku, serwery www, jeśli tego jednego serwera lub jeden hostingowego jest niewystarczająca, a potem po prostu intuicyjnie, The Rozwiązaniem tego problemu obciążeniu lub przeciążenie na serwerach jest albo uzyskać większy serwer lub, co mi proponuje tutaj zamiast skalowanie w pionie tak powiem, byłoby, wiesz co? Wystarczy dostać drugą jednego z nich. A może nawet dostać jedną trzecią. Ale teraz stworzyliśmy problem związany z inżynierii od charakteru tej działalności lub decyzji finansowej. Co znajduje się obecnie problemem inżynierii? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, w jaki sposób je połączysz and-- przykro? 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Prawo, bo wciąż have-- gdybym przywrócić mnie do tego obrazu, jeśli to jest mój laptop gdzieś w internecie, który jest obecnie pomiędzy ja i firma mówimy, Teraz muszę się dowiedzieć, do którego Serwer mogę wysłać tego konkretnego użytkownika? A jeśli nie ma innych użytkowników, podobnie jak tego, a wtedy ten tutaj, a może to użytkownik A ta jest użytkownik B, to jest łatwy C, i to serwer 1, 2 i 3-- teraz intuicyjny odpowiedź może być tylko tutaj, wyślemy użytkownikowi do 1 i B 2 i C 3. I możemy obsłużyć 3 razy, jak wielu użytkowników. 
+
+Ale to nadmierne uproszczenie. Jak zdecydować, komu wysłać gdzie? Więc spróbujmy rozumieć przez to. Więc załóżmy, że komputery A, B i C są klienci, i serwerów 1, 2 i 3 przedstawiają poziomo skalowane serwery. Więc oni rodzaj identyczne. Oni wszystko działa z tego samego oprogramowania. I wszystkie one mogą zrobić to samo. Ale powodem mamy trzy z nich jest na tyle że możemy obsłużyć trzy razy tyle ludzi naraz. 
+
+Więc wiemy z Dyskusja przed obiadem że istnieje pomiędzy nimi sprzętu laptopy i serwery. Ale będziemy właśnie rodzaj uogólnienia że teraz jak internet lub w chmurze. Ale wiemy, że w moim domu, nie ma chyba router do domu. Blisko serwerów, nie ma chyba router, serwer DNS, DHCP. Nie może być cokolwiek chcemy w tej historii. 
+
+Jak więc zacząć decydować, gdy użytkownik A trafia do something.com, który serwer do trasy użytkownikowi? Jak możemy zacząć opowiedzieć tę historię? PUBLICZNOŚCI: Równoważenie obciążenia? DAVID MALAN: Równoważenie obciążenia. Co przez to rozumiesz? 
+
+PUBLICZNOŚCI: Wracając gdzie najbardziej jest wykorzystanie a który ma większość dostępnych zasobów. DAVID MALAN: OK, więc niech mnie wprowadzić nowy typ sprzętu że nie zostały jeszcze omówione, które jest dokładnie tym, równoważenia obciążenia. To też może być tylko serwer. To może wyglądać dokładnie tak, jak jeden widzieliśmy przed chwilą. Równoważenia obciążenia jest naprawdę tylko kawałek oprogramowania które można uruchomić na kawałek sprzętu. 
+
+Można też zapłacić dostawcy, jak Citrix lub inne, Cisco i innych. Można płacić za własnego sprzętu, który jest równoważenia obciążenia sprzętu. Ale to po prostu oznacza, że preinstalowany równoważenie obciążenia oprogramowanie na swoim sprzęcie i sprzedał go do was wszystkich razem. Więc po prostu wyciągnąć go jako prostokąt dla naszych celów. 
+
+Jak teraz mogę wdrożyć równoważenia obciążenia? Innymi słowy, gdy użytkownik A chce odwiedzenia mojej strony, że ich wniosek jakoś lub inne, prawdopodobnie w wyniku tych routery rozmawialiśmy o wcześniej, będzie w końcu osiągnąć Ten równoważenia obciążenia, który następnie musi podjąć decyzję o routingu podobny. Ale to routingu dla sortowania wyższego celu już teraz. Nie chodzi tylko o uzyskanie z punktu A do punktu B. Chodzi o podejmowaniu decyzji, które Punkt B jest najlepszy spośród them-- 1, 2 lub 3, w tym przypadku. 
+
+Więc jak mam zdecydować, czy aby przejść do 1, 2, do 3? Co to może czarna skrzynka, że ​​tak mówią, że robi w środku? To też inny przykład, w informatyka abstrakcji. Mam dosłownie wyciągnąć równoważenia obciążenia jako czarna skrzynka w czarnym tuszem, wewnątrz z których pewne interesujące logiki lub nawet magiczne, z którego musi pochodzić decision-- 1, 2 lub 3. I wejście jest po prostu A. 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Przepraszam? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Dobra, jak możemy sklasyfikować rodzaje transakcji tutaj? 
+
+PUBLICZNOŚCI: wyświetlenie strony internetowej w porównaniu zapytań do bazy danych. DAVID MALAN: OK, to dobrze. Więc może temu użytkownikowi chce zobaczyć stronę internetową. A może to nawet zawartości statycznej, coś, co zmienia się rzadko, jeśli w ogóle. I to wydaje się dość prosta operacja. Może więc musimy po prostu arbitralnie, ale rozsądnie, powiedzmy, Serwer 1, a jego celem w życiu jest po prostu służyć zawartość statyczną, Pliki, które rzadko, jeśli w ogóle, zmiana. Może to obrazy na stronie. Może to tekst na stronie lub inne tego rodzaju rzeczy nieciekawe, Nic transakcyjny, nic dynamiczne. 
+
+Natomiast jeśli użytkownik A jest sprawdzenie z jego lub jej koszyk, że wymaga bazy danych, gdzieś do przechowywania I pamiętaj, że transakcję, dobrze Może, że wniosek powinien udać się do serwera 2. Więc to jest dobre. Więc możemy załadować równowagi w oparciu od typu żądania. W jaki inny sposób możemy to zrobić? Co innego-- 
+
+PUBLICZNOŚCI: Na podstawie serwera Wykorzystanie i pojemności. DAVID MALAN: Tak, OK. Więc wspomnieć, że wcześniej, Kareem. Więc co, jeśli mamy zapewnić pewne wejście w dniu [INAUDIBLE] pomiędzy serwerami 1, 2, i 3 do niniejszego równoważenia obciążenia, tak aby oni po prostu nieustannie informując równoważenia obciążenia jaki jest ich stan? Jak, hej, równoważenia obciążenia, Jestem na 50% wykorzystania. Innymi słowy, mam pół jak wielu użytkowników jak mogę właściwie obsłużyć teraz. Hej, równoważenia obciążenia, jestem przy 100% wykorzystaniu. Hej, równoważenia obciążenia, 0% wykorzystania. Równoważenia obciążenia, jeśli jest to zaprojektowane w taki sposób, aby może w tych komentarzach jako dane wejściowe, to może wtedy zdecydować, ooh, numer 2 jest na 100%. Pozwól mi wysyłać żadnych przyszłych żądań do niego Inne niż użytkownicy już połączone. Ten facet jest na poziomie 0%. Załóżmy, wysyłać dużo ruchu do niego. Ten facet powiedział, że jest na poziomie 50%. Załóżmy, wysłać kilka ruchu do niego. 
+
+Tak że byłoby składnik, który możemy wziąć pod uwagę obciążenie. A to będzie się zmieniać w czasie. Tak więc decyzje ulegnie zmianie. Więc to jest bardzo dobra technika, jeden, który jest powszechnie używany. Co jeszcze możemy zrobić? I spójrzmy prawdzie w rzeczywistości po prostu podsumować tutaj. Tak więc decyzje mogą być tutaj ze względu na rodzaj ruchu, ja to nazwać. To może być, zależnie od potrzeb. Zobaczmy, czy nie możemy wymyślić kilka innych. 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Lokalizacja. Więc to jest dobry. Więc jak można miejscowość-- wykorzystać te informacje? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Och, to dobrze. I o ile milisekund to zmniejszy się o na podstawie tego, co widzieliśmy w tym Rano, można by powiedzieć? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Cóż, w oparciu na trasach śladowych widzieliśmy wcześniej, który jest po prostu szorstka miarą czegoś, przynajmniej jak długo to trwa dla danych, aby dostać z punktu A do B czuje się jak coś lokalnego było, co, jak 74 milisekund, lub dać? A potem wszystko 100 plus 200 plus to zapewne za granicą. I tak na podstawie tego samego, zasadne wydaje się zakładać, że użytkownik w USA dostępu do serwera europejskiego może trwać dwa lub trzy razy tak długo, nawet w milisekundach niż mogłoby to potrwać, jeżeli Serwer znajdowały się tutaj geograficznie, lub odwrotnie. Kiedy więc zaproponowałem wcześniej, że szczególnie po przekroczeniu że 200 milisekund Próg, plus minus, ludzie zaczynają zauważać. A trasa jest tylko ślad zakładając, surowe, nieciekawe dane. Jeżeli masz stronę internetową, trzeba uzyskać użytkownikowi pobieranie zdjęć lub film Pliki, dużo tekstu, kolejne żądania. Widzieliśmy kiedy byliśmy, co było Opisz Facebook i Amazon wcześniej, jest tam dużo rzeczy które muszą być pobrane. Tak, że będzie sumować. Więc może multi-sekunda nie być nieuzasadnione. Tak dobrze, geografia jest jeden składnik. Tak jak w firmach rzeczywistości Akamai, jeśli nie słyszałem o nich, lub inni już dawno podjęta geografii pod uwagę. I okazuje się, że z natury adres IP, adres IP mojego laptopa, można wywnioskować, z pewnym prawdopodobieństwem, gdzie jesteś na świecie. A w rzeczywistości jest Świadczenie usług przez podmioty trzecie You może zapłacić którzy utrzymują bazy danych adresów IP i geografii że przy wysokiej ufności będzie prawdziwe, gdy zapytałem, gdzie na świecie to jest adres IP? 
+
+I tak w rzeczywistości, co Inne firmy korzystają z tego? Jeśli masz Hulu czy Netflix, o ile kiedykolwiek podróżował za granicę, i próbujesz oglądać coś na Hulu, i nie jesteś w Stanach Zjednoczonych, Może pojawić się komunikat mówiąc, nie w USA. Niestety, nie można wyświetlić zawartość. 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Och, naprawdę? Ale tak, tak właściwie to doskonała aplikacja coś bardzo techniczny do rzeczywistego problemu. Jeśli było VPN Europie lub Azji lub gdziekolwiek w świecie firmowej siedziba w Nowym Jorku lub gdziekolwiek jesteś, jesteś zamierza utworzyć występ do zewnętrznych stron internetowych, które jesteś rzeczywiście w Nowym Jorku, nawet jeśli jesteś fizycznie dość daleko. 
+
+Teraz użytkownik zamiar Oczywiście wiem, że jesteś z dala. Ale ty też będziesz czuć, bo z tych dodatkowych milisekund. Ta dodatkowa odległość i szyfrowanie, co dzieje się w sieci VPN zamierza spowolnić. Więc to może lub nie może być wspaniałym doświadczeniem. Ale Hulu i Netflix zamiar zobaczyć Ty jako siedzi gdzieś w Nowym Jorku, jak już jasno wywnioskować. Co to idealne rozwiązanie do tego. 
+
+W porządku, więc geografii jest jedna decyzja. Co jeszcze możemy użyć, aby zdecydować, jak dla ruchu trasę z A, B i C 1, 2 i 3, ponownie wprowadzenie kapelusz inżynierska? To wszystko brzmi bardzo skomplikowane. Uh, ja nawet nie wiem, gdzie aby rozpocząć realizację tych. Daj mi coś, co jest prostsze. Co znajduje się w najprostszy sposób aby tę decyzję? 
+
+PUBLICZNOŚCI: Czy serwer dostępne? 
+
+DAVID MALAN: Czy serwer dostępne? Tak więc nie jest źle. Dobre. To swego rodzaju nuancing obciążenia. Więc trzymajmy że w kategorii obciążenia. Jeśli jesteś dostępny, jestem po prostu zamierza wysłać dane tam. Ale to może obrócić się szybko. Bo jeśli mogę użyć tej logiki, a jeśli zawsze poprosić 1, jesteś dalej, jesteś stronie, jesteś stronie, jeśli odpowiedź jest zawsze tak, Mam zamiar wysłać do 100% ruchu niego, od 0% do każdego innego. I w pewnym momencie, mamy zamiar uderzyć że spowolnienie lub witryna jest niedostępna. Więc co jest nieco lepszy niż że ale nadal całkiem proste i nie aż tak mądry jak przy wszystkich Te dodatkowe dane pod uwagę? 
+
+PUBLICZNOŚCI: Koszt serwera. DAVID MALAN: Koszt serwera. OK, więc pozwól, że wrzucić w kategorii obciążenia też. Bo to, co znajdziesz w firma, too-- że jeśli uaktualnić swoje serwery w czasie lub kupić więcej, może nie być w stanie uzyskać dokładnie te same wersje sprzętu. Ponieważ wypada nieaktualne. Nie można go już kupić. Ceny zmieniają. 
+
+Więc może mieć odmienne serwerów w klastrze, że tak powiem. To całkowicie w porządku. Ale przyszłoroczny sprzętu może być dwa razy tak szybko, dwukrotnie w stanie jak w tym roku. Więc możemy rzucać, że do kategorii obciążenia. To sprzężenie zwrotne między 1, 2 i 3 w równoważenia obciążenia z pewnością może powiedzieć to, hej, jestem na 50% pojemności. Ale swoją drogą, ja też mają dwa razy więcej rdzeni. Za pomocą tych informacji. Nawet simpler-- i to się dzieje być tematem w informatyce. W razie jakichkolwiek wątpliwości, lub gdy chcesz to proste Rozwiązanie, które generalnie działa dobrze w miarę upływu czasu, nie wybieraj takie same Serwer cały czas, ale choose-- 
+
+PUBLICZNOŚCI: Losowy jeden? DAVID MALAN: --a serwer losowo. Tak, można wybrać jedną lub drugą stronę. Więc losowość jest rzeczywiście Ten bardzo silny składnik w informatyce, oraz w mechanice więcej Ogólnie rzecz biorąc, zwłaszcza, gdy chcesz szybko zrobić prosty decyzję bez komplikowania go ze wszystkim z nich bardzo mądry, ale także Bardzo sprytne rozwiązania, które wymagają tym bardziej, technika, wszystko Tym bardziej myśl, gdy tak naprawdę, dlaczego nie mogę po prostu rodzaj monetą lub trzy jednostronne monetę w tym przypadku, i zdecydować, czy iść 1, 2, 3? 
+
+To może rykoszetem probabilistycznie, ale podobnie jak kurs z głowami i ponownie przerzucanie znowu i znowu i znowu i znowu jest możliwe reality-- super, super mało prawdopodobne. Tak więc w czasie, kursy są tylko wysyłanie losowo użytkowników 1, 2 i 3 ma wyszło perfekcyjnie. I jest techniką ogólnie znane jako round robin. 
+
+A tak naprawdę, to nie jest round robin. Byłoby to metoda losowa. A jeśli chcesz być nawet trochę prostsze niż to, round robin byłoby najpierw osoba idzie 1, druga osoba do 2, trzecia osoba 3, czwarta osoba 1. I na tym polega round robin. Po prostu rodzaj obejść w cyklu. 
+
+Teraz powinno być inteligentne o nim. Nie należy ślepo wysyłać użytkownikowi numer jeden jeśli to, co jest w przypadku serwera? Jeśli jest w pojemności max lub to jest po prostu nie reaguje. Więc idealnie chcesz niektóre rodzaj pętli sprzężenia zwrotnego. W przeciwnym wypadku, po prostu wysłać do wszystkich swoich użytkowników w ślepy zaułek. Ale mogą być brane pod uwagę także. 
+
+Więc nie pod docenić wartość tylko losowości, który jest dość często rozwiązanie tego typu problemów. I będziemy zapisywać karuzeli. Więc w jaki sposób niektóre firmy wdrożenia round robin lub przypadkowość lub każdy z tych decyzji? No niestety, robić takie rzeczy. Pozwól mi podciągnąć kolejny szybki zrzut ekranu. 
+
+Faktycznie, zróbmy dwa. Nie wiem, dlaczego jesteśmy uzyskanie wszystkich tych potraw. To bardzo dziwne. W porządku, co naprawdę chcą zrzut ekranu. To dziwne. No dobrze, więc mogę sfałszować ten. Nie wiem, jak dużo dalej Chcę zachować przewijanie. 
+
+Więc bardzo często będziesz się znaleźć pod adresem jak www.2.acme.com, Może www.3 albo 4 albo 5. I mieć oko na to. Nie widać go tak często. Ale gdy to zrobisz, to niby ma tendencję do być większe, starsze, stodgier firmy że tak naprawdę nie technologicznie wydaje się wiedzieć, co robią. I widać to na technologii firm Zdarza się, że te starsze. 
+
+Więc co oni robią? Jak ich realizacji równoważenie obciążenia, wydaje? Jeśli okaże się, jak wpisując użytkownik www.something.com, i nagle jesteś w www.2.something.com, co ma swoje obciążenie Wyważarka pewnie zrobić? PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, tak równoważenia obciążenia jest przypuszczalnie podejmowania decyzji w oparciu o jeden z to co processes-- decyzji nie ma większego znaczenia, które. Ale podobnie jak mam ciągnieniu Liczby na pokładzie tutaj, serwery są nie tylko nazwie 1, 2 i 3. Pewnie nazywa www1, www2, www3. I okazuje się, że we wnętrzu żądanie HTTP jest ta funkcja. A ja zamierzam symulacji to w następujący sposób. 
+
+Mam zamiar otworzyć w tym samym karta sieciowa deweloper jak poprzednio tylko dzięki czemu możemy zobaczyć, co się dzieje się pod wyciągiem. Zamierzam wyczyścić ekran. I zamierzam iść do, powiedzmy, powiedzieć, http://harvard.edu. Teraz cokolwiek powodów biznesowych, Harvard zdecydowała, jak wielu, wielu innych stron internetowych, znormalizowanie strona na www.harvard.edu zarówno techniczne oraz powodów marketingowych. To tylko rodzaj w vogue mieć www. 
+
+Więc serwer Harvardu ma jakoś przekierować użytkownika, jak ja powtarzam, od Adres jeden do drugiego. Jak to działa? Cóż, pozwól mi iść do przodu i naciśnij Enter. I rzeczywiście szybko zauważysz URL zmieniona www.harvard.edu. Pozwól mi przejść z powrotem w tym historia i kliknij na ten debugowania informacje diagnostyczne, jeśli będzie. Pozwól mi spojrzeć na moją prośbę. 
+
+Więc oto wniosek zrobiłem. I zauważył, że to zgodne z rodzajem od żądania zrobiłem Facebooka wcześniej. Ale zwróć uwagę na reakcję. Czym różni się odpowiedź tym razem? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, tak, to nie jest 200 OK. To nie jest 404 Not Found. Jest to 301 Przeniesiono na stałe, które niby zabawny sposób mówienia, Harvard podniósł i ruszył gdzie indziej www.harvard.edu. 301 oznacza, że to jest przekierowanie. I gdzie należy użytkownik podobno zostać przekierowany? Jest dodatkowy smakołyk informacji wewnątrz tej koperty. I każdy z tych linii będzie teraz zacząć dzwonić nagłówek HTTP. Nagłówek jest tylko wartość klucza pair-- coś grubego coś. Jest to fragment informacji. Gdzie należy nowy Lokalizacja podobno być? Zwróć uwagę na ostatnią linię Wśród tych wszystkich nagłówków. 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, więc nie Dodatkowe informacje. Pierwsza linia, która mam podświetlone mówi 301 Przeniesiono na stałe. No, gdzie został przeniesiony? Ostatnim line-- i nie muszą być w tym celu. Może to być przypadkowe. Lokalizacja okrężnicy oznacza, hej Przeglądarka, przejdź pod ten adres URL zamiast. 
+
+Więc przeglądarek zrozumieć przekierowań HTTP. I to jest bardzo, bardzo powszechnym sposobem odbijania użytkownik z jednego miejsca do drugiego. Na przykład, jeśli kiedykolwiek próbowałeś do odwiedzenia strony internetowej, która nie jesteś zalogować się, może nagle znaleźć samodzielnie na nowy adres URL w ogóle jest poproszony o zalogowanie się. 
+
+Jak to działa? Serwer jest prawdopodobnie wysłanie 301. Jest też inne numery, jak 302, nieco różni się znaczeniowo, które wysyłają do innego adresu URL. A potem serwer, Po zalogowaniu się, wyśle ​​cię z powrotem do miejsca, gdzie faktycznie przeznaczone. 
+
+Więc co, wtedy są słabo zaprojektowane strony internetowe robią? Gdy użytkownik odwiedza www.acme.com, a oni po prostu stało nazwali swoje serwery www1, www2, www3, i tak dalej, są one bardzo simply-- co jest sprawiedliwe, ale bardzo rodzaj foolishly-- przekierowanie do Wydatek faktycznie inaczej nazwany serwer. I to działa perfekcyjnie. To miłe i łatwe. 
+
+Widzieliśmy, jak to będzie odbywa się pod maską w wirtualnej obwiedni. Ale dlaczego to jest dyskusyjna zła decyzja inżynierii? A dlaczego jestem rodzaj protekcjonalny ku tym szczególnym inżynierii podejście? Argumentować, dlaczego to jest złe. Ben? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Każdy serwer musiałby posiada duplikat na stronie internetowej. Jestem OK z tym. A w rzeczywistości, to co ja zakładając dla całej tej historii, ponieważ jeśli mamy wanted-- dobrze faktycznie, z wyjątkiem Dana wcześniej Sugestia, gdzie jeśli masz inna Serwery robi różne rzeczy, a potem Może mogliby być rzeczywiście Funkcjonalnie robi różne rzeczy. 
+
+Ale nawet wtedy, w pewnym momencie, twój Baza danych będzie się przeciążony. Serwer aktywa statyczne dostanie przeciążony. Więc w pewnym momencie, że jesteśmy z powrotem w tej historii, gdzie Potrzebują wiele kopii tego samego. Więc jestem OK z tym. PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: OK, więc niektóre strony może być nieproporcjonalnie popularne. I tak mocowaniu na jednym adresem niekoniecznie jest najlepszym rozwiązaniem. [NIESŁYSZALNY]? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Co masz na myśli? PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, dokładnie. Więc nie chcą Na pewno muszą have-- nie chce mieć swoich użytkowników Ręczne wpisywanie www1 lub www2. Z punktu widzenia marki, to po prostu wygląda trochę śmiesznie. Jeśli chcesz po prostu swego rodzaju czyste, eleganckie doświadczenie, posiadające ten rodzaj losowo numerowane URL naprawdę nie jest dobre. Bo wtedy użytkownicy są z pewnością zamiar skopiować i wkleić je w wiadomości e-mail lub wiadomości błyskawicznych. 
+
+Teraz oni rozmnożeniowego. Teraz jesteś w rodzaju mylące swój mniejsza publiczność techniczne, kto myśli Twój adres internetowy jest www2.something.com. Nie ma żadnych istotnych semantyki do tego. To po prostu zdarza się być bazowego szczegół techniczny, który masz ponumerowane serwerów w ten sposób. 
+
+A co gorsza, co jeśli, na przykład, może w okresie Bożego Narodzenia, kiedy firma jest bardzo dynamicznie rozwijającym się, masz www1 przez www99, ale w styczniu i lutym naprzód, wyłącz połowa osób tak masz tylko www1 przez www50? Co znajduje się sugestia, że ​​teraz bardzo rozsądna decyzja biznesowa? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Trzeba zarządzać wszystkim z tych, którzy jeszcze. PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Dokładnie. Że niby tam połowu. Jeśli klienci mają w zwyczaju rzeczy zakładki, wysyłając je, po prostu zapisując gdzieś URL lub jeśli to tylko w ich auto wypełnić w przeglądarce są więc nie do końca świadomie, wpisując je, to jest po prostu dzieje, mogą one, przez 11 miesięcy w roku skutecznie dotrzeć w ślepy zaułek. I tylko najbardziej przebiegły z użytkowników ma zamiar zrealizować, Może powinienem ręcznie usunąć ten numer. To znaczy, że po prostu nie zdarzy z wieloma użytkownikami, tak złe dla biznesu, złe wdrożenie inżynierii mądry. 
+
+Więc na szczęście, to nie jest nawet konieczne. Okazuje się, że to, co równoważenia obciążenia może zrobić to zamiast mówić, gdy A sprawia request-- hej A, przejdź do 1. Innymi słowy zamiast wysłania że przekierowanie takie, że pierwszy krok w tym Proces jest udać się tutaj, jest on wtedy powiedział, aby przejść gdzie indziej. I tak krok trzeci jest, idzie gdzie indziej. 
+
+Można zamiast tego nadal drogą, do nadal używać tego określenia, wszystko danych posiada w przez równoważenia obciążenia, tak że nigdy styki 1, 2, lub 3 bezpośrednio. Cały ruch robi się "kierowane" przez równoważenia obciążenia się. A więc teraz jesteśmy rodzajem świadomie zacierając granice Wśród tych różnych urządzeń. Równoważenia obciążenia mogą danych trasy. To jest po prostu funkcją, że ma. 
+
+Więc równoważenia obciążenia, też, że to kawałek oprogramowania, naprawdę. A router jest kawałek oprogramowania. A może masz absolutną dwa kawałki oprogramowanie wewnętrzne jednego fizycznego komputera więc obciążenia Wyważarka może zrobić tych kilka rzeczy. 
+
+Więc jest jeszcze jedna droga w tym celu, które w rzeczywistości wraca do rodzaju pierwszych zasad DNS, który rozmawialiśmy o Przed przerwą. DNS Domain Name System. Pamiętaj, że możesz zapytać serwer DNS, co jest adres IP google.com, facebook.com? 
+
+A my w rzeczywistości może to zrobić. Narzędzie nie używaliśmy wcześniej jest taki, który jest tak samo dostępne, nazywa nslookup dla odnośnika serwera nazw. A ja po prostu będzie wpisać facebook.com. I widzę, że Facebook jest IP Adres jest to widocznie. Pozwólcie mi iść do przodu i skopiuj , przejdź do przeglądarki, i przejdź do http: // i że Adres IP i naciśnij Enter. I rzeczywiście, wydaje się działać. 
+
+Teraz działa wstecz, co było wewnątrz wirtualnej obwiedni że Facebook zareagował, gdy Odwiedziłem ten adres IP bezpośrednio? Ponieważ informacja, gdzie jestem teraz? Gdzie jestem teraz adres? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Na bezpiecznej wersji, a na www.facebook.com. Więc to nie jest nawet tylko bezpieczny adres IP. Facebook wziął go na siebie powiedzieć, to jest śmieszne. My nie zamierzamy utrzymać się na tym brzydkie patrząc URL to numeryczny. Jedziemy do wysłania HTTP przekierowanie w drodze tego samego nagłówka że widzieliśmy before-- Lokalizacja coś grubego. 
+
+A więc to oznacza, że ​​pod spodem okap jest wciąż ten adres IP. Każdy komputer w Internecie ma adres IP, wydawałoby się. Ale nie muszą narazić, że dla użytkownika. I podobnie jak w dawnych czasach, istnieje był 1-800-Collect, 1-800-C-O-L-L-E-C-T, w Stanach Zjednoczonych, był sposobem na zbieranie wzywa przez telefon bardzo łatwo niezapomniany Numer telefonu lub 1-800-MATERAC kupić łóżko, i podobne mnemoniki że nawet zobaczyć na telefon rodzaj sortowania Mimo to, że listy map z numerami. 
+
+Teraz, dlaczego tak jest? Cóż, jest to o wiele łatwiejsze do zapamiętania 1-800-materac lub 1-800-COLLECT zamiast od 1-800 coś coś coś coś, coś, coś coś, gdzie każda z nich jest cyfrą. Podobnie, świat dowiedział się szybko, że nie powinniśmy ludzie mają zapamiętywać adresy IP. To byłoby głupie. Idziemy zamiast używać nazw. I dlatego DNS urodził. 
+
+W porządku, więc z tym powiedział, w kategoriach równoważenia obciążenia, spróbujmy yahoo.com. Dobrze, że to interesujące. Yahoo wydaje się być powrót trzy adresy IP. Tak więc z tego wywnioskować, jeśli można, co jest Innym sposobem, który moglibyśmy wdrożyć Pojęcie to równoważenie obciążenia Może nawet bez użycia fizycznej Urządzenie to nowe urządzenie fizyczne? 
+
+Innymi słowy, mogę zabrać finansowania masz do równoważenia obciążenia i powiedzieć, aby korzystać z niektórych istniejących kawałek sprzętu do wdrożenia Pojęcie to równoważenie obciążenia? A spoiler, Tak, ale co i jak? Co to jest Yahoo może tu robi? Kareem? OK, Chris? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Tak, wszystko Trzy z tych prac. Więc przypadkowości, round robin, miejscowość-- można po prostu wykorzystać istniejący element układanki że rozmawialiśmy o tym wcześniej z DNS System i po prostu powiedzieć, kiedy pierwsza Użytkownik dzień żąda yahoo.com, dać im pierwszy adres IP, jak ten kończący się 45 tam. I następnym razem, gdy użytkownik zażąda adres IP yahoo.com gdzieś w świecie, dać im drugą IP następnie trzeci IP, a następnie Pierwszy IP, a następnie druga. Albo być mądry o tym i zrobić to w formie graficznej. Albo zrób to losowo, a nie po prostu zrobić go round robin w ten sposób. 
+
+I w tym przypadku, a następnie nawet nie trzeba wprowadzić ten czarny pole do naszego obrazu. Nie potrzebujemy nowego urządzenia. Jesteśmy po prostu powiedzieć komputerów aby przejść do serwerów bezpośrednio faktycznie, nie w drodze ich nazwy. Nigdy nie trzeba znać nazwę. Oni po prostu powiedziano nam, że yahoo.com Mapy któregokolwiek z tych adresów IP. 
+
+Więc wysyła dokładnie ten sam wniosek. Lecz na zewnątrz koperta, po prostu stawia IP, że został poinformowany. I tak też, mogą ładujemy zrównoważyć prośby po prostu wysyłając kopertę inna własnych serwerach Yahoo? 
+
+A jeśli będziemy kopać, zobaczymy prawdopodobnie inne firmy posiadające więcej. CNN dwa publicznie ujawnione. Choć rzeczywiście, gdybyśmy to zrobić ponownie i again-- cnn.com-- widać oni rozkaz zmienia rzeczywistości. Więc jaki jest mechanizm CNN użyciu, widocznie? 
+
+PUBLICZNOŚCI: Random. DAVID MALAN: Dobrze, to może być dowolna, chociaż Wydaje się, że jazda na rowerze tam iz powrotem. Więc to chyba round robin, gdzie oni po prostu przełączenie porządku, tak że będę zapewne podjąć pierwsze. Mój komputer zajmie pierwszy każdym razem. Więc to jest równoważenie obciążenia. A to pozwala nam ostatecznie do mapowania danych lub żądania map, na wielu serwerach. Więc jakie rodzaje Teraz problemy nadal istnieją? To tak jakby po prostu naprawdę rozwiązany dobrą problem. Mamy użytkowników na różnych serwerach. Ale-- oh, a Chris robił masz pytanie przed? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Całkowicie zależy. Więc co tu się dzieje? I rzeczywiście możemy zobaczyć. Więc spróbujmy Yahoo. Faktycznie, chodźmy do Facebook. Ponieważ wiemy, że ktoś pracuje. Więc idę do skopiowania że adres IP ponownie. Mam zamiar zamknąć wszystkie te karty. Zamierzam udać, że otwarta Specjalna zakładka tu sieciowego. A ja zamierzam odwiedzić tylko http: //. A teraz mam zamiar naciśnij Enter. I zobaczmy, co się stało. 
+
+Jeśli patrzę na tego wniosku, zawiadomienia że my-- Facebook jest zły przykład. Ponieważ mają bardzo wyszukane techniki który ukrywa tego szczegółu od nas. Pozwól mi użyć Yahoo instead-- http: // tego dochodzenia. Otwórzmy naszą sieć Zakładka, zachowania dziennik. I tu idziemy, Enter. Zabawne. OK, więc tutaj jest słynny 404 wiadomości. Co zabawne jest to, że oni Prawdopodobnie nigdy nie będzie z powrotem. Bo nie ma chyba nie coś złego per se. Mają po prostu świadomie nie zdecydowała się wspierać postać numeryczną ich adresem. 
+
+Więc co my właściwie widząc w karta sieciowa, jeśli ciągnąć tego tutaj, jest, jak mówię, słynny 404, gdzie jeśli spojrzeć na nagłówki odpowiedzi, to co mam here-- 404 Not Found. Więc spróbujmy jednym innym. Zobaczmy, czy CNN współpracuje z nami. Wezmę jeden z adresów IP CNN, wyczyść to, HTTP, da, da, da, da. Więc w odpowiedzi na Chrisa Pytanie, która zadziałała. 
+
+I chodźmy do nagłówków odpowiedzi. Właściwie nie, wszystko w porządku, jestem trudności ze znalezieniem pracy przykład. Więc CNN zdecydowała, po prostu zostawić cię bez względu na adres faktycznie odwiedzić, Problemy brandingu bok. Ale to, co nie będzie działo, jeśli mogliśmy zobaczyć go w przypadku Facebooka, jest to dostanie 301 Przeniesiony Trwale, najprawdopodobniej, wewnątrz którego jest Lokalizacja: https: //www.facebook.com. A kursy są www.facebook.com jest alias dokładnie w tym samym serwerze po prostu poszedłem do. 
+
+Więc to trochę efekt przeciwny do zamierzonego. Jesteśmy dosłownie odwiedzenie serwer. Serwer następnie mówi nam odejść. Przejdź na inny adres. Ale tak się składa, wracając do tego samego serwera. Ale zapewne teraz pozostać na tym Serwer bez tego tam iz powrotem. Bo teraz używamy nazwany wersja strony, a nie numerycznej. Dobre pytanie. 
+
+OK, więc jeśli teraz assume-- my Rozwiązaliśmy równoważenie obciążenia. Mamy teraz mechanizm, czy to poprzez DNS czy to za pośrednictwem tej czarnej skrzynki, czy to przy użyciu jednego z tych technik. Możemy żądanie użytkownika i dowiedzieć się, który serwer, 1, 2, lub 3, wysłać mu. 
+
+Co zaczyna się łamać o naszej stronie? Innymi słowy, mamy Zbudowaliśmy firmę, która poprzednio na jednym serwerze. Teraz, gdy firma działa na wielu serwerach. Jakie założenia, jakie rodzaje decyzji projektowych, Teraz może być złamanie? 
+
+Jest to mniej widoczne. Ale zobaczmy, czy nie możemy umieścić nasze palec na niektóre problemu mamy stworzone dla siebie. Ponownie, jest to coś w rodzaju gospodarstwa w dół nieszczelności węża. A teraz jakaś nowa sprawa które pojawiło się tutaj. 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: OK, więc musimy stale rosnąć nasze miejsca na dysku twardym. Jestem OK z tym teraz. Bo myślę, że mogę poziomo skalę. Podobnie jak w przypadku biegnę niska, ja po prostu czwarty serwer, może serwer piąty a następnie zwiększyć naszą zdolność przez kolejne 30% lub 50% lub etażerka. Więc jestem OK z tym, przynajmniej na razie. PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: OK, więc to dobry punkt. Więc załóżmy, serwery nie są identyczne. I obsługa klienta lub równowartość email jest uzyskiwanie niektóre wiadomość od użytkownika mówiąc, to nie działa dobrze. Jest bardzo możliwe, czasami, że być może jeden lub więcej serwerów zachowuje się nieco krzywo, ale nie inni, co może z pewnością utrudnić ścigać problem. Być może trzeba szukać wielu miejscach. 
+
+To jest przejawem innego rodzaju błąd, czyli, że prawdopodobnie powinny Zaprojektowaliśmy więc infrastrukturę że wszystko jest naprawdę identyczne. Ale to ma się pojawić nowy problem że nie mieliśmy wcześniej. Co jeszcze? PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, tam bardziej złożony. Jest fizycznie więcej przewodów. Nie ma innego urządzenia. W rzeczywistości, mam wprowadziła podstawową Pojęcie i podstawowym problemem znany jako pojedynczy punkt awarii, które nawet jeśli nigdy nie słyszałeś wyrażenie, prawdopodobnie można Teraz działa wstecz i zrozumieć. Co to znaczy, że mam jeden punkt awarii w moim architektury? I architektury, po prostu oznacza topologię niego. 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, co zrobić, jeśli równoważenia obciążenia idzie w dół? Mam wstawione tej środku człowieka, którego celem w życiu jest, aby rozwiązać problem. Ale wprowadziliśmy nowy problem. Nowy przeciek jest tłumiona w wężu. Bo teraz, gdy równoważenia obciążenia umiera lub przerw lub misfunctions, Teraz tracę dostęp do wszystkie trzy z moich serwerów. A wcześniej, ja nie mają tego pośrednika. A więc jest to nowy problem, prawdopodobnie. Będziemy wracać do jak możemy to naprawić. 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: To byłoby jedno podejście. Tak, więc to będzie dość Otwór szczura zaczniemy iść w dół. Ale wróćmy do które za chwilę. Jakie inne problemy stworzyliśmy? 
+
+Więc Dan wspomniano wcześniej bazę danych. A nawet jeśli nie jesteś zbyt dobrze technicznie, baza danych jest tylko serwer, na którym zmiany danych jest zwykle przechowywany Może ktoś zamówienie zostało umieszczone, Twój profil użytkownika, imię i nazwisko, Twój adres e-mail, rzeczy, które mogłyby być wprowadzane lub zmieniane w miarę upływu czasu. 
+
+Wcześniej moja baza była na tym samym serwerze co mój serwer WWW. Ponieważ miałem tylko jedną hosting konta. Wszystko było w tym samym miejscu. Gdzie kładę bazę Teraz, serwer 1, 2 lub 3? 
+
+PUBLICZNOŚCI: 4. 
+
+DAVID MALAN: 4, OK, wszystko Dobrze, więc chodźmy tam. Więc mam zamiar umieścić moje database-- i niech rozpocząć znakowanie te www, www, www. A ja powiem, to jest numer cztery. I powiem dB dla bazy danych. OK, mi się podoba. Co miałbym linii przypuszczalnie być tu rysunek? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, więc kod, jak omówimy jutro prawdopodobnie jest taka sama Na wszystkich trzech serwerów. Ale to nie musi teraz połączyć się z Baza działa lokalnie, ale gdzie indziej. I to jest w porządku. Możemy po prostu dać bazy danych Nazwa, jak mamy lub liczbą. I to wszystko działa w porządku. Ale co zrobiliśmy? Mamy poziomo skalowane poprzez trzy serwery zamiast jednego, które jest dobry. Bo teraz możemy obsłużyć trzy razy tyle obciążenia. 
+
+A jeszcze lepiej, jeśli jeden lub dwa z tych serwerów idzie w dół, moja firma może nadal działać. Ponieważ mam jeszcze jeden, nawet jeśli jestem rodzaj kulejąc wzdłuż Performance-mądry. Ale co ja mam nowy problem wprowadzony przez przesuwanie bazy do tego oddzielnego serwera a nie na 1, 2 i 3? 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Tak, więc teraz mam kolejny pojedynczy punkt awarii. Jeśli moja baza umiera lub musi zostać zmodernizowane, czy cokolwiek, teraz pewność, moja strona jest w Internecie. I mogę służyć statyczne, niezmienną treść. Ale nie mogę pozwolić użytkownikom zalogować się lub zmiany coś lub zamówić coś, co gorsza. Bo jeśli 4 jest offline a następnie 1, 2 i 3 Naprawdę nie mogę mówić do niego z definicji. 
+
+OK, więc tak, i tak to dlaczego Jestem wahając się wyciągnąć tego. Więc wróćmy do tego. Nie chcę, aby przeć cię. Ale obraz jest bardzo Szybko dostanie stresujące. Bo trzeba zacząć posiadający dwa wszystkiego. W rzeczywistości, jeśli kiedykolwiek widział Film kontakt kilka lat temu z Jodie Foster-- nie? 
+
+OK, więc na dwoje my, którzy widzieliśmy nas, tam, gdzie ich związek zasadniczo kupił dwa czegoś zamiast jednego, aczkolwiek dwa razy w cenie. Więc to był rodzaj zabawny komentarz w filmie. To trochę podobne do tego. Możemy absolutnie zrobić. I właśnie koszt nam dwa razy tyle pieniędzy. Ale wrócimy do tego. 
+
+Więc mamy rozwiązać ten. Więc wiesz co? To jest jak równi pochyłej. Nie chcę do czynienia z posiadaniem mieć duplikat bazy danych. To zbyt wiele pieniędzy. Wiesz co? Chcę mieć mojej bazy danych podobnie jak w jednej wersji gdzie każdy serwer ma własnej lokalnej bazy danych. Więc jestem po prostu będzie wyciągnąć db na każdej z nich. 
+
+Więc teraz każdy serwer www są identyczne, o ile gdyż ma ten sam kod, tak samo Aktywa statyczne, te same zdjęcia i tekst i tak dalej. I każdy z nich ma swoją własną bazę danych. I ustalony jeden punkt problem awarii. Teraz mam bazę danych. Bez względu na dwa lub jeden z tych rzeczy umierają, tam zawsze jeden. Ale co mają nowy problem stworzyłem Takie rozwiązanie Dana uniknąć? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, trzeba je synchronizować, prawda? Bo albo muszę synchronizować kto będzie where-- innymi słowy, jeśli Alice z moją miejsce, a ona się dostać losowo lub okrągłe robined lub cokolwiek, na numer jeden serwer, potem muszę zawsze wysłać ją do serwera 1. Czemu? Bo jeśli wyślę ją do serwera 2, to będzie wyglądać jak ona nie istnieje. 
+
+Nie będę mieć swoją historię zamówień. Nie zamierzam mieć swój profil tam. A to po prostu czuje się jak to zapraszając problemy. A kiedy Bob odwiedza, ja trzeba wysłać go zawsze do tego samego serwera, 2 lub cokolwiek jeden, a Charlie trzeciemu jeden, i konsekwentnie. To nie jest nieuzasadnione, choć. To się nazywa partycjonowania bazy danych. A w rzeczywistości to właśnie Facebook nie na początku. 
+
+Jeśli po historię Facebook, zaczęło się tutaj w kampusie jak www.thefacebook.com. Potem rozwinął raz Mark rozpoczął rozprzestrzeniania się innych uczelniach być harvard.thefacebook.com i mit.thefacebook.com i prawdopodobnie bu.thefacebook.com, i tym podobne. A to dlatego, na początku, nie sądzę można mieć przyjaciół na całym kampusach. Ale to jest w porządku. Bo każdemu z Harvardu został wysłany do tego serwera. Każdy z BU został wyrzucony z tym serwerem. Każdy z MIT został wyrzucony do tej server-- w teorii. Nie bardzo wiemy wszystko podstawowe szczegóły realizacji. Ale zapewne podzielona przez ludzi ich kampusu, gdzie ich sieć była. 
+
+Więc to dobrze aż do momentu, gdzie trzeba dwa serwery na Harvardzie, lub trzy serwery do Harvardu. A potem, że prostota rodzaj zepsuje. Ale to rozsądne podejście. Miejmy zawsze wysyłać Alice w tym samym miejscu, Bob zawsze wysłać do tego samego miejsca. Ale co się stanie, jeśli Alice serwer idzie w trybie offline? Bob i Charlie wciąż mogą kupić rzeczy i zalogować się do serwisu. Ale Alice nie może. Więc straciliśmy jedną trzecią swojej bazy użytkowników. Może to lepiej, niż 100%? Ale może to byłoby miło, gdyby się dało nadal wspierać 100% naszych użytkowników nawet wtedy, gdy trzecia naszych Serwery przechodzi w tryb offline. 
+
+Więc możemy synchronizować co? Użytkownikom nie per se, ale Baza danych we wszystkich tych serwerów. Więc teraz my niby potrzebują niektóre rodzaj wzajemnych tutaj tak, że same serwery Nie można sync-- nieuzasadnione. W rzeczywistości, ta technologia nie istnieje. W świecie baz danych, nie pojęcie bazy danych master-niewolników pierwotnej lub wtórnej, gdzie wśród cech Nie tylko do przechowywania danych odpowiedzi z danymi, ale także po prostu stale zsynchronizowane ze sobą. Więc za każdym razem piszesz lub zapisać coś do tej bazy danych, natychmiast dostaje "powtórzone" do innych baz danych, jak również. 
+
+I za każdym razem czytać z niego, to nie ma znaczenia, gdzie jesteś. Bo jeśli w teorii oni wszyscy synchronizowane, jesteś dostanie ten sam widok danych. Tak to brzmi idealnie. Tam musi być jakiś haczyk. Co może być haczyk? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID Malan: Tak, i trzy razy jak wiele rzeczy może pójść źle. To rzeczywistość. To może być takie same w duchu. Ale ktoś musi skonfigurować nich. Istnieje większe prawdopodobieństwo, że coś się nie udać. Wystarczy kombinatoryczny masz więcej rzeczy podatne na błędy. Co jeszcze jest źle potencjalnie? PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, tak, synchronizacja może być złe. Nawet jak można wiedzieć z kopii zapasowych i takich, jeśli tylko są ślepo podejmowania kopie zapasowe, co jeśli coś udać się na jednej bazie danych? coś, czego nie należy usuwać. Musisz natychmiast replikowane Problem, że wszędzie indziej. Więc Victoria była talking-- kopii zapasowych byłoby dobrą rzeczą tutaj. I tak będziemy wracać do tego. I żeby było jasne, mówimy Nie chodzi o tworzenie kopii zapasowych tutaj per se. Mówimy o prawdziwej replikacji lub synchronizacji między serwerami. Oni wszyscy żyją. Nie są one przeznaczone do być wykorzystywane do tworzenia kopii zapasowych. 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Co to jest? PUBLICZNOŚCI: Higher-- DAVID MALAN: Wyższy koszt. Mamy trzykrotnie koszt Oczywiście, mimo, przynajmniej w zakresie od sprzętu. Ponieważ baza danych jest tylko kawałek oprogramowania. A serwer WWW jest kawałek oprogramowania. To chyba za darmo, jeśli używamy dowolna liczba otwartych rzeczy źródłowych. Ale jeśli używamy coś takiego jak Oracle, płacimy więcej pieniędzy na Oracle licencje lub Microsoft dostępu. Musi być jakiś inny haczyk tutaj. To nie może być tak proste. 
+
+Tak więc do punktu, myślę, że to było Kareem na geografii earlier-- lub nie, Roman, był to dla geography-- przypuśćmy że mamy być mądry o tym, a my umieszczenie jednego z naszych serwerów, a to z kolei nasze bazy danych, w Stanach Zjednoczonych, a druga w Europie, w innym Ameryka Południowa, inny w Afryce, drugi w Azji, gdziekolwiek chcieć całym świecie. Wiemy już z naszego śladu Trasy, że punktem A i punktem B, jeśli są dalej od siebie, zamiar zająć więcej czasu. 
+
+A jeśli niektórzy z was używany narzędzia, takie jak Facebook czy Twitter lub któregokolwiek z tych miejsc, które w tych dniach ciągle się zmieniają, ponieważ użytkownika utworzone dane, czasami, jeśli ciebie przeładować lub otworzyć tę samą stronę w innej przeglądarce, zobaczysz różne wersje, prawie. Można zobaczyć czyjegoś statusu aktualizować tutaj, ale nie tutaj, a następnie ponownie załadować, a następnie go pojawia się i ponownie przeładować, i znika. Innymi słowy, miej oko na to, co najmniej jeśli używasz społecznej Szczególnie sieci. 
+
+Ponownie, po prostu dlatego, że Dane zmienia się tak szybko, Czasami serwery rozumiem zsynchronizowany. A może jest to bardzo małe okno. Ale 200 milisekund, może nawet więcej niż to that-- zajmie trochę niezerową kwotę czasu na te bazy danych do synchronizacji. A my nie jesteśmy po prostu mówić o jednym żądaniu. Jeśli firma ma tysiące użytkownicy korzystali równocześnie, mogą buforować. Innymi słowy, moc być kolejki lub linię oczekiwania Zanim wszystkie te bazy Zapytania można uzyskać zsynchronizowane. Więc może to faktycznie kilka sekund. 
+
+I rzeczywiście to prawda, myślę nawet, do tej pory, przy czym z Facebook podczas synchronizacji z East Coast do West Coast, Ma nietrywialne opóźnienie propagacji, że tak powiem, że po prostu rodzaj trzeba tolerować. A więc to nie jest tak dużo to błąd, ponieważ jest to rzeczywistość że użytkownicy mogą nie zobaczyć poprawne dane dla co najmniej kilka sekund. 
+
+Widzę to na Twitterze dużo w rzeczywistości, gdzie czasem będę ćwierkać w jednym oknie, aby otworzyć kolejny Zobaczysz go, aby potwierdzić, że rzeczywiście poszły w górę, a to nie jest tam jeszcze. I muszę trochę odświeżyć, przeładować, reload-- och, tak jest. I to nie dlatego, że nie został zapisany. To po prostu nie jest propagowana do innych serwerów. 
+
+Więc to kompromis, too-- Czy naprawdę chcą narażać się na ryzyko że jeśli użytkownik przejdzie do ich kolejności historia, nie jest to faktycznie tam jeszcze? Widzę to w niektórych bankach. Zawsze mnie denerwuje, kiedy, no, na przykład, można przejść tylko jak sześć miesięcy wstecz w twoich wyciągów bankowych w niektórych bankach, chociaż teoretycznie powinny mógł mieć wszystko w Internecie. Oni po prostu zabrać rzeczy czasami w trybie offline. Czasami too-- co strona to jest? Jest jedno- och, to GoDaddy, myślę. GoDaddy, podczas wymeldowania Kupując domenę lub coś, oni często daje link do otrzymania. A jeśli klikniesz linkujące prawo precz, to często nie działa. To po prostu mówi, ślepy zaułek, tu nic. 
+
+A to ze względu na zbyt te opóźnienia propagacji. Bo z jakiegoś powodu, biorą trochę czasu faktycznie generują tego. Więc to jest coś jak chcesz ciągnąć włosy w pewnym momencie. Ponieważ wszystko, co próbujesz zrobić to rozwiązać prosty problem. A my wciąż tworzyć nowe problemy dla siebie. Zobaczmy więc, jeśli mamy może trochę cofnąć. 
+
+Okazuje się, że połączenie bazy danych na temat wszystkich serwerów internetowych naprawdę nie jest najlepsza praktyka. Generalnie, co inżynier zrobi lub systemy architekt, byłoby mieć różne poziomy serwerów. I właśnie przez wzgląd kosmicznego, będę czerpią swoją bazę tutaj. 
+
+Możemy mieć bazę danych i Numer cztery serwera tutaj które ma połączenia każdy z tych serwerów tutaj. Więc to może być nasza przednia zakończyć tier, jak ludzie mówią. I to byłby nasz back-end tier. A to po prostu oznacza, że tych twarzy użytkownika. I bazach danych nie ma twarzy użytkownika. Żaden użytkownik może bezpośrednio dostęp do bazy danych. 
+
+Więc teraz może zejść Proponowana trasa Victoria. Jest to pojedynczy punkt awarii. To sprawia, że ​​niewygodne. Więc co jest chyba Najbardziej oczywistym rozwiązaniem? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Przepraszam, że ponownie. PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: serwer nieprodukcyjnych. Co masz na myśli? 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Oh, OK, więc kopii zapasowych. OK, więc możemy to zrobić, oczywiście. I właściwie to jest bardzo często stosowana. Może to być numer w bazie pięć. Ale to tylko połączony z numerem czwartym. I można to nazwać hot spare. Te dwie bazy danych może być skonfigurowany po prostu stale synchronizować wzajemnie. I tak, jeśli ta maszyna umiera na co głupie reason-- dysku twardym umiera, ktoś fauluje Przewód, niektóre oprogramowanie jest wadliwa i zawiesza maszyny lub crashes-- można mieć człowieka dosłownie odłącz jedną ze ściany a zamiast tego podłączyć ten w. A potem w ciągu, powiedzmy, A Kilka minut, może pół godziny, jesteś z powrotem w Internecie. 
+
+To nie jest wielki, ale nie jest to też straszne. I nie trzeba się martwić o wszelkich problemów z synchronizacją. Ponieważ wszystko już tam jest. Ponieważ trzeba było idealne backup gotowe. 
+
+Można być trochę hodowcy o tym, jak niektórzy ludzie często robią, gdzie może mieć numer cztery bazy tutaj Numer w bazie pięciu tutaj które są ze sobą rozmawiać. Ale trzeba również w tym rodzaj arrangement-- i to celowo wygląda niechlujnie, bo is-- spełnione wszystkie serwery klasy czołowy mówić do wszystkich tylnych serwerów końcowych. A więc jeśli baza danych nie odpowiedzi, te przednie serwery końcowym mieć programowania Kod w nich, który mówi, jeśli nie dostać Podłączenie do tej bazy danych, podstawowym natychmiast zaczyna rozmowy z wtórnym. 
+
+Ale to teraz wypycha Złożoność do kodu. A teraz swoich twórców, oprogramowanie deweloperzy, muszą o tym wiedzieć. A ty niby związania kod piszesz do rzeczywistej back-end Szczegóły realizacji, co utrudnia, zwłaszcza większy firma lub większy www, gdzie nie koniecznie programiści chcą mieć wiedzieć, jak bazy danych inżynierowie wykonują swoją pracę. Może chcesz zachować te role rodzaj funkcjonalnie odrębne tak że jest to warstwa abstrakcji między nimi. 
+
+Więc jak możemy rozwiązać ten problem? Cóż, my niby rozwiązany Ten problem kiedyś. Dlaczego nie umieścić jeden z te rzeczy tutaj, gdzie to mówi z kolei numer cztery i pięć, wszystkie serwery front-end web rozmawiać z tym pośrednikiem, a pośrednictwo w trasach kolei swoje dane? W rzeczywistości, co może być dobra nazwa dla tej rzeczy? 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: OK, menedżer bazy danych. Ale co to termin, który może być możemy ponownie użyć tego urządzenia? Jesteśmy bilansowania. Tak, tak, faktycznie, jestem Nie będąc tutaj fair. Więc równoważenia obciążenia Oznaczałoby to, że jesteśmy przełączanie tam iz powrotem tutaj które nie muszą być w rzeczywistości sprawa. Więc jest kilka sposobów możemy to zrobić. 
+
+Jeśli tak jest w istocie równoważenia obciążenia, poziom historia jest dokładnie taka sama jak poprzednio. Niektóre z wniosków przejść do 4. Niektóre z nich trafiają do 5. I to jest dobre. Bo teraz możemy obsłużyć dwa razy więcej niż przepustowość. Ale ta gra tutaj jest bardzo ważne. Muszą utrzymywać się stale zsynchronizowane i mam nadzieję, nie są geograficznie zbyt daleko od siebie tak, że synchronizacja jest zasadniczo natychmiastowy. W przeciwnym razie możemy mieć problem. 
+
+Więc to nie jest źle. Ale znowu, mamy wprowadzono nowy problem. Jaki problem ja po prostu odtworzone? Pojedynczego punktu awarii. Więc co to jest rozwiązanie na to? Tak Victorii lubi wydawać pieniądze, możemy przyjąć tego faceta na zewnątrz i to zrobić. A ja po prostu się przenieść tu wystarczająco dużo miejsca. I to będzie trochę niechlujnie. Idę do utrzymania linii rysunkowych. Załóżmy, że wszystkie te linie pójść do obu? 
+
+Bardzo popularna technika tutaj byłoby w użyciu techniki zwanej serca przy czym każde z tych urządzeń, lewy i prawy równoważenia obciążenia, lub cokolwiek chcemy je połączyć, ciągle mówiąc, jestem żywy, Żyję, żyję, żyję. Jednym z nich jest domyślnie działa jako pierwszy. Tak więc cały ruch jest kierowany przez jeden na lewo, na przykład domyślnie arbitralnie. 
+
+Ale jak tylko facet po prawej stronie nie usłyszeć od lewej faceta już, jeden na prawo jest zaprogramowana automatycznie, na przykład przejęcia adresu IP z jednym z lewej strony, a tym samym stać się podstawowym i może wysłać e-mail lub wiadomości tekstowej do ludzi, aby powiedzieć, hej, lewo podstawowy jest niedostępny. stanę się podstawowym teraz. Więc wiceprezes staje prezydentem, że tak powiem. I ktoś musi iść zapisać prezydent, jeśli chcesz. Bo teraz mamy tymczasowy pojedynczy punkt awarii. 
+
+Więc tak skomplikowane i stresujące, jak Może to wydawać się rozpocząć mecz, to jak można rozwiązać te problemy. Robisz wyrzucać pieniądze na to. Rzucasz sprzętu na niego. Ale niestety dodaj złożoności dla niego. Ale wynik jest w końcu, że masz dużo więcej, w teorii, solidna architektura. To wciąż nie jest doskonały. Bo nawet kiedy have-- moglibyśmy Nie ma pojedynczego punktu awarii. Teraz mamy podwójne punkty awarii. Ale jeśli dwie rzeczy się nie udać, które absolutnie mógł, my wciąż będzie nieaktywny. 
+
+I tak bardzo powszechne w Przemysł jest opisanie Twój Czas w kategoriach dziewiątek. I rodzaj bramki dążyć do jest 99,999% czasu witryna jest online. Albo jeszcze lepiej, dodać Jeszcze kilka dziewiątek do tego. Niestety, te Dziewiątki są bardzo drogie. I spójrzmy prawdzie w rzeczywistości to zrobić na zewnątrz. Więc jeśli mogę otworzyć mój wielki kalkulator znowu 365 dni w roku, 24 godziny na dobę, 60 minut w ciągu godziny, a 60 sekund na minutę, to ile sekund istnieją w ciągu roku, czy zrobiłem to poprawnie. Więc jeśli my razy w tym przez .99999, to ile czasu chcemy dążyć do. To znaczy, powinniśmy się to wiele sekund w ciągu roku. Więc jeśli teraz odjąć Wartość oryginalny, czy raczej Ta nowa wartość z first-- 316 sekund, co oczywiście jest o pięć minut. 
+
+Więc jeśli strona lub Twoja firma jest twierdząc, "pięć dziewiątek", w którym jesteś ty do 99,99% czasu, to znaczy, że lepiej były na tyle sprytny i szybki tyle i tyle równo z zasobów że serwery są tylko w trybie offline Pięć minut od roku. Jest to kosztowne i ciężko coś pragną. 
+
+Więc jest to kompromis, too. 99,999% czasu jest dość cholernie trudne i kosztowne. Pięć minutes-- ledwo można uzyskać do serwera fizycznego zastąpienia coś, co poszło nie tak. I dlatego zaczynamy okablowanie rzeczy razem bardziej skomplikowane apriori, tak aby komputery może rodzaj rozwiązać sami. Tak. 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Problem może być w dowolnej liczbie miejsc. A w fact-- 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Absolutnie, absolutnie. A ponieważ obraz jest coraz bardziej skomplikowane Może to być serwery WWW. To może być zasilanie do budynku. Może to być coś fizycznego, jak kable został przetarty lub wyrzucony. To może być baza nie odpowiada. To mogły być one aktualizowane ich eksploatacji System i coś wisi. Więc nie jest tak wiele innych części ruchomych. I tak dużo inżynierii że musi iść za tym jest naprawdę handlu off, podobnie jak tyle czasu, ile pieniędzy jest w rzeczywistości warto, i jakie są zagrożenia jesteś naprawdę martwi? Na przykład, w Kursy uczę na Harvardzie, używamy dużo chmurze, która zaczniemy przyjrzeniu się teraz W rzeczywistości, gdy używamy Amazon Web Services. Tylko dlatego, że jest to jeden zaczęliśmy. Ale jest coraz więcej tych dni Google i Microsoft i innych. I świadomie wybrać, aby umieścić wszystkie maszyn wirtualnych Nasze kursy " jak są one nazywane, w myślę to Zachodnia Virginia centrum danych. Większość naszych studentów stało się z USA, choć nie są z pewnością niektóre międzynarodowym. 
+
+Ale w rzeczywistości jest to po prostu prostsze i jest to tańsze dla nas umieścić wszystkie nasze jaja Virginia w koszu, choć wiem, czy coś idzie źle w Wirginii, jak ma niekiedy happened-- jak czy jest jakiś huragan lub niektórych pogoda Impreza tak, jeżeli jest pewne Moc Wydanie siatki lub like-- wszystko Dane z naszych kursów 'może przejść do trybu offline dla pewnej liczby minut lub godzin lub nawet dłużej. 
+
+Jednak ilość złożoności które są wymagane, a ilość pieniędzy, które wymaga, aby wszystko działa równolegle w Europie czy w Kalifornii po prostu nie ma tyle sensu. Więc jest to racjonalne handlu off, ale bolesna gdy jesteś w rzeczywistości posiadania tego przestoje. 
+
+No cóż, teraz do przejścia niektóre z rozwiązań opartych na chmurze W niektórych z tych problemów. Wszystko byliśmy Omawiając dotychczasowe jest rodzaju problemy, które mają był z nami przez jakiś czas, czy masz własny serwery w firmie, czy iść do kolokacji umieścić jak centrum danych i udziału Przestrzeń z kimś innym, lub obecnie w chmurze. 
+
+I co jest miłe o chmura jest, że wszystkie z tych rzeczy jestem rysunek jako obiekty fizyczne Teraz można traktować jako rodzaju wirtualnych przedmiotów w chmurze, które są symulowane z oprogramowaniem. Innymi słowy, obecnie komputery Serwery dzisiaj, jak na zdjęciu Dell Pokazałem wcześniej, są tak szybkie, mają tak dużo RAM, CPU tyle, tyle twardy Przestrzeń, że ludzie pisali Oprogramowanie do praktycznie partycji jeden serwer się do iluzji nim są dwa serwery, lub 200 serwerów, więc że każdy z nas klienci ma złudzenie posiadania nie tylko konto na jakimś internecie gospodarzem, ale nasze własne urządzenie, które jesteśmy wynajmę od kogoś innego. 
+
+Ale jest to maszyna wirtualna w O ile na jednym serwerze Dell, ponownie może być podzielony na górę dwa lub 200 lub więcej maszyn wirtualnych, z których wszystkie dać komuś administracyjnej dostępu, ale w sposób, w którym żaden z nas wie lub może uzyskać dostęp do innych wirtualnych Maszyny na tym samym sprzęcie. Tak więc namalować obraz w dzisiejszych slajdów, Mam ten strzał tutaj ze strony internetowej nazywa dokowanym. 
+
+Więc to jest trochę bardziej szczegółowo niż faktycznie potrzeba. Ale jeśli uznać to za Twój infrastructure-- więc po prostu sprzęt własną rękę, serwery, stojaki, dane Centrum, i wszystko, co będzie that-- zazwyczaj uruchomić system operacyjny hosta. Więc coś like-- może to być Windows. Nie byłoby w systemie Mac OS. Bo tak naprawdę nie jest Przedsiębiorstwo w tych dniach. Więc byłoby Linux lub Solaris lub Unix i BSD albo FreeBSD lub dowolną liczbą innych systemów operacyjnych które są albo za darmo lub handlowe. 
+
+A następnie uruchomić Program, specjalny program, nazywany hypervisor lub Monitor maszyny wirtualnej, VMM. A są to produkty, jeśli jesteś znajome, jak VMware lub VirtualBox lub Virtual PC lub inne. A co te programy zrobić to dokładnie, że funkcja opisałem wcześniej. To stwarza iluzję że jednej fizycznej maszynie może być wiele maszyn wirtualnych. 
+
+A więc te kolorowe pudełka up górze jest malowanie obrazu z poniższych czynności. Ten hypervisor, ten kawałek oprogramowania, nazwać VMware, działa na jakiś inny System operacyjny Linux nazwać, stwarza iluzję, że Ten komputer fizyczny jest właściwie Raz, dwa, trzy komputery wirtualne. Więc już teraz kupić, jako właściciel Ten sprzęt, jeden komputer fizyczny. A teraz jestem wynajmu go do trzech klientów. 
+
+I te trzy klienci wszyscy myślą mają specjalną maszynę wirtualną. I to nie jest przynęta i zamiana. To bardziej, że ujawnienie używasz maszynę wirtualną. Ale technicznie, wszyscy mają pełną kontrolę administracyjną nad każdym z tych gości systemów operacyjnych, które mogłyby dowolną liczbę systemów operacyjnych. 
+
+mogę zainstalować co zechcę. mogę uaktualnić go tak, jak chcę. I nawet nie muszą wiedzieć, czy troszczyć się o innych operacyjnych Systemy na tym komputerze, pozostałe maszyny wirtualne, chyba że właściciel całej tej szarości rzeczy jest że trochę chciwi i jest overselling swoich zasobów. 
+
+Więc jeśli bierzesz jedną maszyna fizyczna i sprzedają je do nie 200, ale 400 klienci, w pewnym momencie mamy zamiar zadziałać na te Te same problemy z wydajnością, jak wcześniej. Ponieważ masz tylko skończony Ilość twardego i pamięci RAM, i tak dalej. A maszyna wirtualna jest tylko program, który jest udając pełnoprawny komputer. Więc masz za co płacisz tutaj. 
+
+Więc można znaleźć w Internecie można zapłacić renomowanej firmy może 100 $ miesięcznie dla własnej maszyny wirtualnej lub własny wirtualny serwer prywatny, które to inne określenie tego. Albo może się okazać trochę latać noc, gdzie płacisz $ 5,99 miesięcznie dla własnej maszynie wirtualnej. Ale szanse są nie masz prawie tyle wydajność dostępne, bo już go overselling tak, niż byłoby z wyższym Poziom usług lub lepsza sprzedawca. 
+
+Więc co to właściwie oznacza dla nas? Więc pozwól mi odejść do tego. Mam zamiar iść do aws.amazon.com. Tylko dlatego, że mają ładne menu opcji. Ale te same wnioski stosuje się do cała masa innych dostawców cloud. Niestety, jest to często bardziej marketing mówić niż cokolwiek innego. I to wciąż się zmienia. Więc idź do strony jak ta. I to naprawdę nie robi powiedzieć wiele o niczym. 
+
+I nawet ja, jak patrzę na to, nie rób naprawdę wiedzą, co każdy z tych rzeczy muszą zrobić, dopóki nie przejdziesz. Ale zacznijmy po lewej, obliczyć. A ja jadę do kliknięcia tego. A teraz Amazon ma szczerze Przeważająca liczba usług te dni. Ale Amazon EC2 jest chyba najprostsze. 
+
+Amazon EC2 stworzy dla nas dokładnie obraz widzieliśmy przed chwilą. To, w jaki sposób zarabiać dużo ich pieniądze w chmurze. Widocznie Netflix i inni są w obłoku z nich. Wszystko to jest zwykle puszyste mówić marketingu. Więc to, co chcę zrobić, to udać się do Pricing-- czy raczej chodźmy do instancji Pierwszy po prostu namalować obraz tego. 
+
+Więc to zależy od danego dostawcy. I nie trzeba się zbyt głęboko w tutaj o tym, jak to wszystko działa chwasty. Jednak sposób Amazon np wynajmuje ci maszyny wirtualnej lub serwera w chmurze to oni mają Ten rodzaj dziwnych nazw, jak t2.nano, co oznacza niewielki, lub t2.large, co oznacza duże. Każdy z nich daje albo jeden lub dwa procesory wirtualne. 
+
+Dlaczego jest to wirtualny procesor? Dobrze, maszyna fizyczna może mają 64 lub więcej aktualnych procesorów. Ale znowu, za pomocą oprogramowania, tworzą iluzję że jedna maszyna może być divvied do wielu użytkowników. Tak więc możemy myśleć o tym, jak posiadające jeden procesor Intel lub dwa. kredyty CPU za hour-- bym trzeba przeczytać drobnym drukiem , co to właściwie znaczy. Oznacza to, ile maszyny można korzystać za godzinę vis-a-vis innych klientów na temat tego sprzętu. 
+
+Oto ile pamięci RAM lub pamięci cię get-- albo pół gigabajta lub 500 megabajtów lub 1 gigabajt lub dwa. A potem po prostu odnosi się do przechowywania jakie dyski dają ci. Jest inna przechowywanie technologie, które oferują. Ale bardziej interesujące niż to to może być cena. 
+
+Więc jeśli jesteś CTO lub inżynier, który nie robi Aby uruchomić serwer w telefonie biuro, niezależnie od przyczyny, i jest to zbyt skomplikowane czy kosztowne serwery i kupić je zlokalizować i współpracy płacić czynsz w jakiejś fizycznej przestrzeni klatki somewhere-- chcesz po prostu usiąść na laptopie późno w nocy, wpisać dane karty kredytowej, a serwery wynajęcia w cloud-- dobrze, możemy to zrobić tutaj. Mam zamiar zejść to-- Linux Jest to popularny system operacyjny. I niech po prostu zorientować się rzeczy. Whoops-- zbyt duże. 
+
+Warto więc spojrzeć na ich najmniejsze maszyna wirtualna, która wydaje się mieć, Dla naszych celów, jeden CPU i 500 MB pamięci RAM. To dość mała. Ale szczerze mówiąc, nie serwery WWW trzeba zrobić wszystko, co dużo. Masz lepsze widowisko w swoim laptopie. Ale nie trzeba tych specyfikacje te dni dla rzeczy. Będziesz płacić 0,0065 $ za godzinę. 
+
+Więc zobaczmy. Jeżeli istnieją 24 godziny w ciągu dnia, a płacimy tyle za godzinę, będzie cię to kosztować $ 0,15 do wynajęcia, które szczególności Serwer w chmurze. A to tylko na jeden dzień. Jeśli robimy to 365-- $ 57 do wynajem tego serwera. Tak to brzmi super tanie. 
+
+To także bardzo niska wydajność. Tak więc, na kursach uczę tutaj tendencję używać myślę t2.smalls lub t2.mediums. A może mamy kilkaset użytkowników, kilka tysięcy użytkowników, całkowite. To dość skromne. Zobaczmy więc, co to będzie kosztować. Więc jeśli mogę to zrobić 24 razy kosztów godzin 365 razy, w tym jeden na $ 225. I na kursy Uczę, na ogół uruchomić dwa wszystkiego, na redundancja, a także pod kątem wydajności. Więc możemy wydać, dlatego $ 500 dla serwerów że możemy potrzebować rocznie. 
+
+Teraz, jeśli potrzebujesz więcej performance-- rzućmy okiem na pamięć. Rozmawialiśmy o pamięci całkiem sporo. A jeśli potrzebujemy więcej memory-- i 64 gigabajtów jest liczbą Ciągle mentioning-- to prawie 1 $ za godzinę. I można zobaczyć, gdzie dość szybko Ten goes-- więc 24 godziny 365 razy. Więc teraz to 8000 $ rocznie na całkiem przyzwoitym serwerze. 
+
+Więc w pewnym momencie, nie ma Ten punkt przegięcia gdzie teraz mogliśmy spędzić $ +6.000 Prawdopodobnie i kupić maszynę tak i amortyzować jego koszt ponad może dwa, trzy lata, żywotność urządzenia. Ale co może wcisnąć się w faworyzują lub niełaski wynajmu maszyna w chmurze jak to? Ponownie, jest porównywalna, prawdopodobnie do jednego z tych serwerów Dell widzieliśmy na zdjęciu nieco wcześniej. 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, to jest ogromny góry. Ponieważ nie kupujesz Maszyna, nie trzeba go unbox. Nie trzeba go podnieść. Nie musimy podłączyć go do naszej szafy. Nie trzeba go podłączyć. Nie trzeba płacić rachunek elektrycznych. 
+
+Nie musimy się obracać klimatyzacja dalej. Gdy umiera twardy, nie mamy jechać w w środku nocy naprawić to. Nie mamy założyć monitoring. Nie mamy to-- lista jest długa i wszystkich rzeczy fizycznych nie trzeba robić ze względu na "chmurze". 
+
+I żeby było jasne, cloud computing Jest to bardzo nadużywany termin. To tak naprawdę oznacza płacenie komuś else uruchomić serwery dla ciebie, lub wynajmu miejsca na Serwery cudzego. Tak więc termin "cloud computing" jest nowy. Pomysł jest od kilkudziesięciu lat. Więc to dość przekonujące. 
+
+A co jeszcze można dostać? Cóż, można również uzyskać zdolność do robić wszystko na laptopie w domu. Innymi słowy, wszystkie zdjęcia właśnie drawing-- i to nie było tak dawno temu, że nawet Byłem pełzają na podłodze serwerze zatykanie przewodów w za Każdy z wierszy, które można zobaczyć, i modernizacji operacyjne Systemy i zmieniające dyski wokół. Istnieje wiele fizyczność, aby to wszystko. 
+
+Ale to, co jest piękne o wirtualne maszyny, jak sama nazwa sugeruje, rodzaj, teraz jest oparty na sieci Web przy czym interfejsy jeśli chcesz równowartość linii z tego serwera do drugiego, po prostu, typ, rodzaj, kliknij i przeciągnij, kliknij przycisk Prześlij, i voila, masz to przewodowe się wirtualnie. Bo to wszystko zrobić w oprogramowaniu. A powodem jest to zrobione w oprogramowanie jest ponownie bo mamy tak dużo RAM i tak dużo CPU dostępne dla nas w tych dniach, mimo wszystko te rzeczy potrzeba czasu, jest wolniejszy uruchomić rzeczy oprogramowania niż sprzętu, tak jak to jest wolniejszy w użyciu mechanicznego urządzenie jako dysk twardy niż RAM, czymś czysto elektroniczna. Mamy tak wiele zasobów dla nas dostępne. My, ludzie są rodzajem niezmienniczo powolny. A więc teraz maszyny mogą zrobić o wiele więcej w jednostce czasu. Mamy te umiejętności robić rzeczy wirtualnie. 
+
+I powiem kursów Uczę na przykład tutaj Może mamy o kilkanaście więc w sumie maszyn wirtualnych jak to działa w danym Czas robi przedni koniec rzeczy, robi back-end rzeczy. Mamy wszystko naszego magazynu. Tak więc każdy film, w tym rzeczy podobnie jak to, że kręcimy, skończymy wprowadzenie w chmurze. Amazon ma usługi o nazwie Amazon S3, Ich prosta obsługa bagażu, które jest niczym przestrzeni dyskowej w chmurze. Mają coś nazywa CloudFront, które Jest to usługa CDN, Content Dostarczanie usługi sieciowe, które Oznacza biorą wszystkie pliki i Ci automagicznie replikować go dookoła świata. 
+
+Więc nie rób tego zapobiegawczo. Ale pierwszym razem, gdy ktoś w Indiach żąda plik, oni potencjalnie buforować lokalnie. Po raz pierwszy w Chinach, Po raz pierwszy w Brazylii, co się dzieje, zaczną buforowanie go lokalnie. I nie trzeba robić żadnej z tych rzeczy. I tak to jest tak niewiarygodnie zmuszając tych dni, aby przenieść rzeczy w chmurze. Ponieważ masz tę zdolność dosłownie nie mają ludzie robią prawie tyle praca. I dosłownie nie potrzebują tak wiele ludzie robią te prace anymore-- "ops", czyli role operacyjne, już. Naprawdę wystarczy programiści i inżynierowie mniej którzy mogą po prostu robić rzeczy wirtualnie. W rzeczywistości, po prostu w wyniku czego otrzymano Ci poczucie tego, pozwól mi odejść jak ceny jedna tutaj. Zobaczmy, coś jak CDN S3. Jest to więc w istocie wirtualny dysk w chmurze. A jeśli przewiń do pricing-- więc jest to 0,007 $ za gigabajt. I that's-- w jaki sposób to zrobić? Myślę, że za miesiąc. 
+
+Więc, czy to za miesiąc-- czy za dnia? Dan, to jest na dzień? To jest miesięcznie, OK. Więc jeśli to jest za miesiąc-- Niestety, jest to 0,03 $ miesięcznie. Jest 12 miesięcy w roku. Więc ile dane mogą przechowywanie w chmurze? Gigabajt nie jest ogromny, ale Nie wiem, jak 1 terabajta, tak jak 1000 osób. To nie jest aż tak dużo. To $ 368 przechować terabajt danych w chmurze Amazon. Więc jakie są niektóre z kompromisów, a potem? To nie wszystko może być dobrze. Nic nie mówiliśmy o dzisiaj jest jakby bez połowu lub kosztów. Więc co jest złe o przeprowadzce wszystko w chmurze? PUBLICZNOŚCI: Bezpieczeństwo. DAVID MALAN: OK, co masz na myśli? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Tak, racja. I czy naprawdę chcesz niektórzy inżynierowie losowe w Amazon, że nigdy nie spotkać konieczności fizyczny dostęp do tych komputerów, a jeśli tak naprawdę chciał, wirtualny dostęp? I choć w Teoria software-- dobrze, Szyfrowanie może absolutnie zabezpieczyć się przed tym. Więc jeśli to, co masz przechowywanie danych na serwerach jest encrypted-- mniejszy problem. 
+
+Ale jak tylko człowiek ma fizyczne dostępu do maszyny, szyfrowanie na bok, wszystkie zakłady są rodzajem bólu. Możecie wiemy z przeszłości komputerów, które szczególnie Nawet jeśli miał te rzeczy zwane "haseł BIOS" były przy pulpicie włączył, chcesz zostać poproszony o hasło, które nie ma nic wspólnego z Okna, można zazwyczaj wystarczy otworzyć podwozia Maszyna, znaleźć malutkie szpilki, i korzystać z czegoś, co nazywa skoczek i po prostu podłączyć te dwa przewody na około sekundę, wypełniając w ten sposób obwód. I to by wyeliminować hasło. 
+
+Więc kiedy masz fizyczny dostęp do Urządzenie można robić takie rzeczy. Można wyjąć dysk twardy. Możesz uzyskać dostęp do niego w ten sposób. I tak to jest, dlaczego w przypadek Dropbox, na przykład, że to trochę niepokojące, że nie tylko oni mieć dane, mimo że zaszyfrowany, mają też klucz. Inne obawy? 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Tak, to jest bardzo true-- na Googles, jabłka, z Microsoftu świata. I rzeczywiście, jak długo miałeś telefonu iPhone za? Tak, mniej więcej. PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Przepraszam? Jesteś wśród tych, którzy iPhone ma, prawda? PUBLICZNOŚCI: Tak. DAVID MALAN: Jak długo miałeś swój iPhone? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: OK, więc Jabłko dosłownie wie gdzie byłaś co godzinę dzień, w ciągu ostatnich pięciu lat. 
+
+PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Który jest wspaniała cecha. PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Tak, ale kompromis na pewno. PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: Tak, to bardzo łatwo. PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Inne wady? PUBLICZNOŚCI: [INAUDIBLE] DAVID MALAN: Absolutely-- technologicznie, ekonomicznie, to całkiem przekonujące, aby rodzaj uzyskanie tych korzyści skali i przenieść wszystko do tak zwana chmura. Ale pewnie nie chcą przejść z jednych z największych ryby, Amazonki, The Googles, The Microsofts-- Rackspace jest dość big-- i kilka innych, a nie muszą latać nocą ludzi dla których jest to bardzo proste do zrobienia Ten rodzaj techniki obecnie. I to komu można zapłacić 5,99 $ miesięcznie. Ale będziesz na pewno za co płacisz. 
+
+Kiedy mówisz [INAUDIBLE], to kiedy rzeczy, jak tych pięciu dziewiątek wymyślić, dzięki czemu nawet jeśli technicznie tak naprawdę nie możemy zagwarantować, 99.999, będziemy tylko budować w jakiejś kary do umowy tak, że jeśli to się zdarza, przynajmniej istnieje jakiś koszt nas, sprzedawca. A to co byś zwykle trafiać im zgodzić. 
+
+PUBLICZNOŚCI: [INAUDIBLE] 
+
+DAVID MALAN: A jeden rodzaj błogosławieństwa jest to, że nawet wtedy, gdy idziemy w dół, na Przykładowo, a nawet niektóre firmy, rzeczywistość jest Amazon, na przykład, ma tyle darn klienci, dobrze znanych klientów, działającego z niektórych centrach danych że jeśli coś pójdzie nie tak bardzo, jak losowych i pogody i takie, czy istnieje jakikolwiek rodzaj srebra podszewki, to nic, że jesteś w bardzo dobrym towarzystwie. Twoja strona może być nieaktywny. Ale tak jest jak połowa popularny internetowy. A więc jest to prawdopodobnie nieco łatwiejszym do klientów jeśli jest to bardziej z internetem rzeczą niż rzeczy acme.com. Ale to trochę oszustwo. 
+
+Więc jeśli chodzi o inne rzeczy do obejrzenia, tak, że nie wyklucza innych, jeśli pójdziesz do Microsoft Azure, że mieć zarówno Linux i Windows rzeczy to jest porównywalne do Amazona. Jeśli pójdziesz do Google Compute Engine mają coś podobnego, jak również. I tylko dopełniają Te oferty Chmura, Zrobię wzmianki o jeszcze jednej rzeczy. Jest to popularna strona to przedstawiciel klasy technologii. Te właśnie rozmawiałem o, Amazon, byłoby IAA, Infrastruktura jako usługa, gdzie rodzaj sprzętu fizycznego jako usługa. Jest SAAS. Właściwie, pozwól mi zanotować je w dół. 
+
+IAAS-- Infrastruktura As a Service, SaaS i PASS, które są niezwykle mylące akronimy które opisują trzy różne typy rzeczy. A same skróty tak naprawdę nie ma znaczenia. To wszystko w chmurze rzeczy mamy właśnie na myśli, rzeczy niższy poziom, tym wirtualizacji sprzętu i składowania w tak zwaną chmurą, czy to Amazon, Microsoft, Google, lub inne. 
+
+Oprogramowanie jako usługa-- każdy z nas rodzaj to wykorzystać. Jeśli korzystasz z Google Apps Gmail lub kalendarza, każda z nich opiera internetowych aplikacje, które 10 lat temu musiałby podwójnym kliknięciu ikony na pulpicie, oprogramowanie jako usługa Teraz jest naprawdę aplikacja internetowa. I jako platforma Usługa rodzaj zależy. 
+
+I jeden przykład dam wam tutaj W kontekście chmury computing-- jest jedna firma, która jest dość popularne w dzisiejszych czasach, Heroku. A są to usługa, platforma, jeśli chcesz, który działa na szczycie infrastruktury Amazon. A oni po prostu jeszcze łatwiejsze dla programistów i inżynierów aby uzyskać aplikacji internetowych opartych na Internecie. 
+
+Jest to ból początkowo użyć Amazon Web Services i innych rzeczy. Bo rzeczywiście poznać i zrozumieć temat baz danych i serwerów internetowych i równoważenia obciążenia i wszystkie rzeczy Po prostu rozmawialiśmy. Ponieważ wszystkie Amazon zrobił nie jest ukryte tych wyzwań projektowych. Oni po prostu ich wirtualizacji i przenieść je w przeglądarce, do oprogramowania, a nie sprzętu. 
+
+Ale takie firmy jak Heroku i inne dostawcy PaaS, Platform as a Service, używają tych podstaw barebone że po prostu mówił o, i budują łatwiej korzystać z oprogramowania na wierzchu tak, że jeśli chcesz się dostać na podstawie internetowych wniosek online w tych dniach, na pewno trzeba wiedzieć, jak programować. Musisz wiedzieć, Java czy Python lub PHP lub Ruby lub kilka innych języków. 
+
+Ale trzeba również miejsce, aby go umieścić. Rozmawialiśmy wcześniej o uzyskanie firmą hostingową. To rodzaj podobnych połowie 2000 roku podejście do otrzymania czegoś w Internecie. Obecnie można zamiast zapłacić komuś jak Heroku kilka dolarów miesięcznie. A przede wszystkim, jak już zrobić jakąś wstępną konfigurację, aktualizować swoją stronę, ty wystarczy wpisać komendę w oknie. I niezależnie od kodu napisałeś tutaj od razu na swoim laptopie zostaje rozdzielone do dowolnej liczby serwerów w chmurze. 
+
+I Heroku dba wszystkie złożoności. Wszystkie one figurować w bazie danych rzeczy, wszystkie równoważenie obciążenia, wszystkich bólów głowy, które według naszych tylko napisane na tablicy, i ukryć to wszystko dla Ciebie. A w zamian, po prostu płacić im nieco więcej. Więc masz tych infrastruktur jak usługi, platformy jako usługa, a następnie oprogramowanie jako usługa. To znowu tę lub warstwy abstrakcji. 
+
+Wszelkie pytania dotyczące chmurze lub budowania własnej infrastruktury? Dobrze, że było dużo. Dlaczego nie możemy iść do przodu i podjąć tutaj nasze 15 minut przerwy. Wrócimy z kilkoma nowymi koncepcjami i trochę praktycznych okazja Przed wieczorem jest skończona. 

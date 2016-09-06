@@ -1,0 +1,7995 @@
+1
+00:00:00,000 --> 00:00:00,030
+
+2
+00:00:00,030 --> 00:00:00,460
+>> David Malan: Alle reg.
+
+3
+00:00:00,460 --> 00:00:01,094
+Ons is terug.
+
+4
+00:00:01,094 --> 00:00:04,260
+So in hierdie segment oor programmering wat
+Ek het gedink ons ​​wil doen, is 'n mengsel van dinge.
+
+5
+00:00:04,260 --> 00:00:06,340
+Een, doen 'n bietjie
+van iets hands-on,
+
+6
+00:00:06,340 --> 00:00:08,690
+hoewel die gebruik van 'n meer speelse
+programmering environment--
+
+7
+00:00:08,690 --> 00:00:11,620
+een wat demonstratiewe van
+presies die soort van idees
+
+8
+00:00:11,620 --> 00:00:14,220
+Ons het gepraat oor,
+maar 'n bietjie meer formeel.
+
+9
+00:00:14,220 --> 00:00:18,200
+Twee, kyk na 'n paar van
+die meer tegniese maniere
+
+10
+00:00:18,200 --> 00:00:21,520
+wat 'n programmeerder eintlik sou los
+probleme soos die soek probleem
+
+11
+00:00:21,520 --> 00:00:24,530
+dat ons kyk na voor en
+ook 'n meer fundamenteel
+
+12
+00:00:24,530 --> 00:00:26,020
+interessante probleem van sortering.
+
+13
+00:00:26,020 --> 00:00:28,840
+>> Ons het net aanvaar van die kry gaan
+dat telefoon boek gesorteer is
+
+14
+00:00:28,840 --> 00:00:31,980
+maar dit alleen is eintlik soort van 'n
+hard probleem met baie verskillende maniere
+
+15
+00:00:31,980 --> 00:00:32,479
+om dit op te los.
+
+16
+00:00:32,479 --> 00:00:34,366
+So sal ons dit gebruik as
+'n klas van probleme
+
+17
+00:00:34,366 --> 00:00:36,740
+verteenwoordiger van die dinge wat
+kan opgelos word in die algemeen.
+
+18
+00:00:36,740 --> 00:00:38,980
+En dan sal ons praat
+oor in detail wat
+
+19
+00:00:38,980 --> 00:00:42,360
+geroep data structures--
+liefhebber maniere soos geskakelde lyste
+
+20
+00:00:42,360 --> 00:00:46,290
+en hash tabelle en bome wat
+'n programmeerder sou eintlik
+
+21
+00:00:46,290 --> 00:00:48,890
+gebruik en oor die algemeen gebruik
+op 'n witbord te verf
+
+22
+00:00:48,890 --> 00:00:51,840
+'n beeld van wat hy of sy
+vooruitsig vir die implementering
+
+23
+00:00:51,840 --> 00:00:52,980
+'n stuk van sagteware.
+
+24
+00:00:52,980 --> 00:00:55,130
+>> So laat ons doen die praktiese gedeelte eerste.
+
+25
+00:00:55,130 --> 00:01:00,090
+Dus net jou hande vuil met 'n
+omgewing genoem scratch.mit.edu.
+
+26
+00:01:00,090 --> 00:01:02,636
+Dit is 'n instrument wat ons gebruik
+in ons voorgraadse klas.
+
+27
+00:01:02,636 --> 00:01:04,510
+Selfs al is dit ontwerp
+vir ouderdomme 12 en ouer,
+
+28
+00:01:04,510 --> 00:01:07,570
+Ons gebruik dit vir die up
+deel van daardie nogal 'n bietjie
+
+29
+00:01:07,570 --> 00:01:10,020
+want dit is 'n lekker, pret
+grafiese manier van leer
+
+30
+00:01:10,020 --> 00:01:12,160
+'n ietsie oor programmering.
+
+31
+00:01:12,160 --> 00:01:17,600
+So kop tot daardie URL, waar jy
+moet 'n bladsy te sien hou hiervan
+
+32
+00:01:17,600 --> 00:01:23,330
+en gaan voort en klik
+Sluit Scratch op regs bo
+
+33
+00:01:23,330 --> 00:01:28,300
+en kies 'n gebruikersnaam en 'n
+wagwoord en uiteindelik kry jouself
+
+34
+00:01:28,300 --> 00:01:29,970
+'n account-- scratch.mit.edu.
+
+35
+00:01:29,970 --> 00:01:32,165
+
+36
+00:01:32,165 --> 00:01:34,665
+Ek het gedink ek wil dit gebruik as 'n
+geleentheid eerste om dit te wys.
+
+37
+00:01:34,665 --> 00:01:39,120
+'N Vraag vorendag gekom tydens die pouse
+oor wat-kode lyk eintlik soos.
+
+38
+00:01:39,120 --> 00:01:41,315
+En ons was in gesprek
+gedurende die pouse oor C,
+
+39
+00:01:41,315 --> 00:01:45,060
+in particular-- veral 'n
+laer vlak in 'n ouer taal.
+
+40
+00:01:45,060 --> 00:01:47,750
+En ek het net 'n vinnige
+Google soek om C-kode te vind
+
+41
+00:01:47,750 --> 00:01:51,574
+vir binêre soek, die algoritme wat ons
+gebruik om vroeër soek wat telefoon boek.
+
+42
+00:01:51,574 --> 00:01:54,240
+Hierdie spesifieke voorbeeld, natuurlik,
+nie 'n telefoon boek soek.
+
+43
+00:01:54,240 --> 00:01:57,840
+Dit soek net 'n hele klomp van die
+getalle in die rekenaar se geheue.
+
+44
+00:01:57,840 --> 00:02:01,000
+Maar as jy wil net 'n visuele
+gevoel van wat 'n werklike ontwikkeling
+
+45
+00:02:01,000 --> 00:02:05,370
+taal lyk, lyk dit
+'n bietjie iets.
+
+46
+00:02:05,370 --> 00:02:09,759
+Dit is dus sowat 20-plus,
+30 of so reëls van die kode,
+
+47
+00:02:09,759 --> 00:02:12,640
+maar die gesprek het ons
+is met meer as break
+
+48
+00:02:12,640 --> 00:02:16,000
+was oor hoe dit werklik
+kry Morphed in nulle en ene
+
+49
+00:02:16,000 --> 00:02:19,200
+en as jy kan nie net terug te keer dat
+verwerk en gaan van nulle en ene
+
+50
+00:02:19,200 --> 00:02:20,210
+terug na-kode.
+
+51
+00:02:20,210 --> 00:02:22,620
+>> Ongelukkig is die proses
+so transformerende
+
+52
+00:02:22,620 --> 00:02:24,890
+dat dit 'n baie makliker gesê as gedaan.
+
+53
+00:02:24,890 --> 00:02:29,400
+Ek het voortgegaan en eintlik draai
+die program, binêre soek,
+
+54
+00:02:29,400 --> 00:02:32,700
+in nulle en ene by wyse van 'n
+program genaamd samesteller dat ek
+
+55
+00:02:32,700 --> 00:02:34,400
+gebeur hier reg op my Mac.
+
+56
+00:02:34,400 --> 00:02:37,850
+En as jy kyk na die skerm
+hier, met die fokus spesifiek
+
+57
+00:02:37,850 --> 00:02:43,520
+op hierdie middel ses kolomme net,
+jy net nulle en ene sien.
+
+58
+00:02:43,520 --> 00:02:48,290
+En dit is die nulle en ene wat
+komponeer presies wat soek program.
+
+59
+00:02:48,290 --> 00:02:53,720
+>> En so elke stuk van vyf stukkies,
+elke byte van nulle en ene hier,
+
+60
+00:02:53,720 --> 00:02:57,310
+verteenwoordig 'n opdrag
+tipies binnekant van 'n rekenaar.
+
+61
+00:02:57,310 --> 00:03:00,730
+En in werklikheid, as jy het gehoor die
+bemarking slagspreuk "Intel binne" - wat,
+
+62
+00:03:00,730 --> 00:03:04,610
+natuurlik, beteken net jy het 'n
+Intel CPU of brein in die rekenaar.
+
+63
+00:03:04,610 --> 00:03:08,000
+En wat dit beteken om 'n CPU is
+dat jy 'n stel instruksies,
+
+64
+00:03:08,000 --> 00:03:08,840
+By wyse van spreke.
+
+65
+00:03:08,840 --> 00:03:11,620
+>> Elke SVE in die wêreld, baie van
+hulle het deur Intel deesdae,
+
+66
+00:03:11,620 --> 00:03:13,690
+verstaan ​​'n eindige
+aantal instruksies.
+
+67
+00:03:13,690 --> 00:03:18,690
+En diegene instruksies is so laag vlak
+as voeg hierdie twee getalle bymekaar,
+
+68
+00:03:18,690 --> 00:03:22,560
+vermenigvuldig die twee getalle bymekaar,
+beweeg hierdie stukkie data van hier af
+
+69
+00:03:22,560 --> 00:03:27,340
+hier in die geheue, behalwe hierdie
+inligting van hier tot hier in die geheue,
+
+70
+00:03:27,340 --> 00:03:32,200
+en so forth-- so baie, baie
+lae-vlak, amper elektroniese besonderhede.
+
+71
+00:03:32,200 --> 00:03:34,780
+Maar met dié wiskundige
+bedrywighede gekoppel
+
+72
+00:03:34,780 --> 00:03:37,410
+met wat ons vroeër bespreek,
+die voorstelling van data
+
+73
+00:03:37,410 --> 00:03:40,450
+as nulle en ene, kan
+julle op te bou alles
+
+74
+00:03:40,450 --> 00:03:44,180
+dat 'n rekenaar vandag kan doen, of
+dis tekstuele, grafiese, musikale,
+
+75
+00:03:44,180 --> 00:03:45,580
+of andersins.
+
+76
+00:03:45,580 --> 00:03:49,450
+>> So dit is baie maklik om te kry
+verlore in die onkruid van vinnig.
+
+77
+00:03:49,450 --> 00:03:52,150
+En daar is 'n baie
+sintaktiese uitdagings
+
+78
+00:03:52,150 --> 00:03:56,630
+waardeur as jy die eenvoudigste maak,
+domste van typos geeneen van die program
+
+79
+00:03:56,630 --> 00:03:57,860
+sal hoegenaamd werk.
+
+80
+00:03:57,860 --> 00:04:00,366
+En so in plaas van die gebruik van 'n
+taal soos C vanoggend,
+
+81
+00:04:00,366 --> 00:04:02,240
+Ek het gedink dit sou wees
+meer pret om werklik te doen
+
+82
+00:04:02,240 --> 00:04:04,840
+iets meer visuele, wat
+terwyl ontwerp vir kinders
+
+83
+00:04:04,840 --> 00:04:08,079
+is eintlik 'n volmaakte openbaring
+van 'n werklike ontwikkeling
+
+84
+00:04:08,079 --> 00:04:10,370
+language-- net gebeur met
+gebruik prente in plaas van teks
+
+85
+00:04:10,370 --> 00:04:11,710
+om daardie idees verteenwoordig.
+
+86
+00:04:11,710 --> 00:04:15,470
+>> So as jy inderdaad 'n
+rekening op scratch.mit.edu,
+
+87
+00:04:15,470 --> 00:04:21,070
+Klik op die knoppie Skep
+op top links van die webwerf.
+
+88
+00:04:21,070 --> 00:04:24,620
+En jy moet 'n omgewing soos te sien
+die een wat ek nou gaan kyk op my skerm
+
+89
+00:04:24,620 --> 00:04:26,310
+hier.
+
+90
+00:04:26,310 --> 00:04:29,350
+En ons sal net 'n bietjie te spandeer
+bietjie tyd hier speel.
+
+91
+00:04:29,350 --> 00:04:34,080
+Kom ons kyk of ons kan nie al 'n paar op te los
+probleme saam op die volgende manier.
+
+92
+00:04:34,080 --> 00:04:39,420
+>> So, wat jy sal sien in hierdie
+environment-- en eintlik net laat
+
+93
+00:04:39,420 --> 00:04:40,050
+my breek.
+
+94
+00:04:40,050 --> 00:04:42,680
+Is daar iemand hier?
+
+95
+00:04:42,680 --> 00:04:45,070
+Nie hier nie?
+
+96
+00:04:45,070 --> 00:04:45,800
+OK.
+
+97
+00:04:45,800 --> 00:04:49,030
+So laat my daarop wys 'n paar
+kenmerke van hierdie omgewing.
+
+98
+00:04:49,030 --> 00:04:55,024
+>> So op die links bo aan die skerm, ons
+het stadium Scratch se, so te sê.
+
+99
+00:04:55,024 --> 00:04:57,440
+Scratch is nie net die naam
+van hierdie programmeertaal;
+
+100
+00:04:57,440 --> 00:05:00,356
+dit is ook die naam van die kat wat
+jy sien by verstek daar in oranje.
+
+101
+00:05:00,356 --> 00:05:02,160
+Hy is op 'n stadium, sodat
+baie soos ek beskryf
+
+102
+00:05:02,160 --> 00:05:05,770
+die skilpad vroeër as in 'n
+vierkantige wit bord omgewing.
+
+103
+00:05:05,770 --> 00:05:09,800
+wêreld hierdie kat se geheel en al beperk
+om daardie reghoek op die top van daar.
+
+104
+00:05:09,800 --> 00:05:12,210
+>> Intussen het op die regte
+kant hier, dis
+
+105
+00:05:12,210 --> 00:05:15,610
+net 'n skrifte gebied, 'n
+skoon lei as jy wil.
+
+106
+00:05:15,610 --> 00:05:18,590
+Dit is hier waar ons gaan skryf
+ons programme in net 'n oomblik.
+
+107
+00:05:18,590 --> 00:05:22,935
+En die boustene wat ons sal
+gebruik om te skryf hierdie program-- die legkaart
+
+108
+00:05:22,935 --> 00:05:25,310
+stukke, as jy will-- is
+diegene reg hier in die middel,
+
+109
+00:05:25,310 --> 00:05:27,500
+en hulle gekategoriseer
+deur funksionaliteit.
+
+110
+00:05:27,500 --> 00:05:31,000
+So, byvoorbeeld, ek gaan om voort te gaan
+en demonstreer ten minste een van hierdie.
+
+111
+00:05:31,000 --> 00:05:33,690
+Ek gaan om voort te gaan en klik
+die kategorie beheer op die top.
+
+112
+00:05:33,690 --> 00:05:35,720
+>> So dit is die kategorieë op die top.
+
+113
+00:05:35,720 --> 00:05:39,410
+Ek gaan op die kategorie beheer.
+
+114
+00:05:39,410 --> 00:05:44,020
+Inteendeel, ek gaan die gebeure op
+kategorie, die heel eerste een op die top.
+
+115
+00:05:44,020 --> 00:05:47,790
+En as jy wil om te volg saam selfs
+as ons dit doen, is jy heel welkom om.
+
+116
+00:05:47,790 --> 00:05:52,180
+Ek gaan kliek en sleep dit
+eerste een, "wanneer groen vlag gebruik."
+
+117
+00:05:52,180 --> 00:05:58,410
+En dan gaan ek dit net drop
+rofweg aan die bokant van my leeg leie.
+
+118
+00:05:58,410 --> 00:06:01,450
+>> En wat is lekker oor Scratch
+is dat hierdie legkaart stuk, wanneer
+
+119
+00:06:01,450 --> 00:06:04,560
+gevries met ander legkaart
+stukke, gaan letterlik doen
+
+120
+00:06:04,560 --> 00:06:06,460
+wat die stukke van die legkaart te sê om te doen.
+
+121
+00:06:06,460 --> 00:06:09,710
+So, byvoorbeeld, Scratch is reg
+nou in die middel van sy wêreld.
+
+122
+00:06:09,710 --> 00:06:14,660
+Ek gaan om voort te gaan en kies
+nou, kom ons sê, die kategorie Beweging,
+
+123
+00:06:14,660 --> 00:06:18,000
+As jy wil die doen
+same-- Motion kategorie.
+
+124
+00:06:18,000 --> 00:06:20,430
+En nou sien ek het 'n hele
+n klomp van die legkaart stukke hier
+
+125
+00:06:20,430 --> 00:06:23,370
+dat, weer, soort te doen wat hulle sê.
+
+126
+00:06:23,370 --> 00:06:28,110
+En ek gaan om voort te gaan en sleep en
+drop die skuif blok reg hier.
+
+127
+00:06:28,110 --> 00:06:31,860
+>> En agterkom dat sodra jy
+naby aan die onderkant van die "groen vlag
+
+128
+00:06:31,860 --> 00:06:34,580
+gekliek "knoppie, kennisgewing
+hoe 'n wit streep verskyn,
+
+129
+00:06:34,580 --> 00:06:36,950
+asof dit byna
+magnetiese, dit wil daarheen gaan.
+
+130
+00:06:36,950 --> 00:06:43,070
+Net laat gaan, en dit sal snap
+saam en die vorms sal pas.
+
+131
+00:06:43,070 --> 00:06:46,620
+En nou kan jy dalk amper
+raai waar ons gaan met hierdie.
+
+132
+00:06:46,620 --> 00:06:51,570
+>> As jy kyk na die Scratch stadium
+hier en kyk na die top van dit,
+
+133
+00:06:51,570 --> 00:06:55,142
+jy sal 'n rooi lig sien, 'n
+stopteken, en 'n groen vlag.
+
+134
+00:06:55,142 --> 00:06:57,100
+En ek gaan om voort te gaan
+en kyk my screen--
+
+135
+00:06:57,100 --> 00:06:58,460
+vir net 'n oomblik, as jy kon.
+
+136
+00:06:58,460 --> 00:07:01,960
+Ek gaan die klik
+groen vlag op die oomblik,
+
+137
+00:07:01,960 --> 00:07:07,850
+en Hy het wat lyk na 10 stappe wees
+of 10 pixels, 10 punte, wat op die skerm.
+
+138
+00:07:07,850 --> 00:07:13,390
+>> En so nie dat opwindende,
+maar laat my stel
+
+139
+00:07:13,390 --> 00:07:17,440
+sonder dit selfs onderrig, net
+gebruik van die eie jou eie intuition-- laat
+
+140
+00:07:17,440 --> 00:07:22,560
+my voorstel dat jy uitvind hoe om
+maak Scratch loop reg van die verhoog af.
+
+141
+00:07:22,560 --> 00:07:28,700
+Het hom plek maak vir die regte kant van
+die skerm, al die pad na regs.
+
+142
+00:07:28,700 --> 00:07:32,200
+Kom ek gee jou 'n oomblik
+of so stoei met dit.
+
+143
+00:07:32,200 --> 00:07:37,681
+Jy wil dalk 'n blik te neem
+by ander kategorieë van blokke.
+
+144
+00:07:37,681 --> 00:07:38,180
+Alles reg.
+
+145
+00:07:38,180 --> 00:07:41,290
+So net om saam te vat, wanneer ons
+die groen vlag gekliek hier
+
+146
+00:07:41,290 --> 00:07:44,850
+en beweeg 10 stappe is die
+net onderrig, elke keer as ek
+
+147
+00:07:44,850 --> 00:07:46,720
+Klik op die groen vlag, wat gebeur?
+
+148
+00:07:46,720 --> 00:07:50,070
+Wel, dit is die bestuur van my program.
+
+149
+00:07:50,070 --> 00:07:52,450
+So kan ek dit doen
+Miskien 10 keer met die hand,
+
+150
+00:07:52,450 --> 00:07:55,130
+maar dit voel 'n bietjie
+bietjie hackish, om so te praat,
+
+151
+00:07:55,130 --> 00:07:57,480
+waardeur ek is nie regtig
+die oplossing van die probleem.
+
+152
+00:07:57,480 --> 00:08:00,530
+Ek is net weer probeer en
+weer en weer en weer
+
+153
+00:08:00,530 --> 00:08:03,180
+totdat ek soort van ongeluk
+bereik die richtlijn
+
+154
+00:08:03,180 --> 00:08:05,560
+dat ek uiteengesit om vroeër te bereik.
+
+155
+00:08:05,560 --> 00:08:08,200
+>> Maar ons weet van ons
+pseudokode vroeër gesê daar is
+
+156
+00:08:08,200 --> 00:08:11,870
+hierdie idee in programmering van herhaling,
+om iets te doen oor en oor.
+
+157
+00:08:11,870 --> 00:08:14,888
+En so het ek gesien dat 'n klomp van julle
+bereik vir wat legkaart stuk?
+
+158
+00:08:14,888 --> 00:08:17,870
+
+159
+00:08:17,870 --> 00:08:18,730
+Herhaal totdat.
+
+160
+00:08:18,730 --> 00:08:21,400
+So kan ons iets doen
+soos herhaal totdat.
+
+161
+00:08:21,400 --> 00:08:23,760
+En wat het jy te herhaal totdat presies?
+
+162
+00:08:23,760 --> 00:08:27,720
+
+163
+00:08:27,720 --> 00:08:28,540
+>> OK.
+
+164
+00:08:28,540 --> 00:08:31,974
+Dat ek kan gaan met een wat
+ietwat eenvoudiger vir net 'n oomblik.
+
+165
+00:08:31,974 --> 00:08:33,140
+Laat my gaan voort en doen dit.
+
+166
+00:08:33,140 --> 00:08:35,559
+Let daarop dat, as jy kan hê
+onder beheer ontdek,
+
+167
+00:08:35,559 --> 00:08:38,409
+Daar is hierdie herhaling blok, wat
+lyk nie soos dit is dat 'n groot.
+
+168
+00:08:38,409 --> 00:08:41,039
+Daar is nie veel ruimte in
+tussen die twee geel strepe.
+
+169
+00:08:41,039 --> 00:08:43,539
+Maar as 'n paar van wat jy mag hê
+opgemerk, as jy sleep,
+
+170
+00:08:43,539 --> 00:08:45,150
+sien hoe dit groei tot die vorm in te vul.
+
+171
+00:08:45,150 --> 00:08:46,274
+>> En jy kan selfs meer gedrang.
+
+172
+00:08:46,274 --> 00:08:48,670
+Dit sal net aanhou groei as
+jy sleep en Beweeg oor dit.
+
+173
+00:08:48,670 --> 00:08:51,110
+En ek weet nie wat is
+beste hier, so laat
+
+174
+00:08:51,110 --> 00:08:54,760
+my ten minste herhaal vyf keer, vir
+Byvoorbeeld, en gaan dan terug na die verhoog
+
+175
+00:08:54,760 --> 00:08:56,720
+en kliek op die groen vlag.
+
+176
+00:08:56,720 --> 00:08:59,110
+En nou sien dis nogal daar nie.
+
+177
+00:08:59,110 --> 00:09:02,400
+>> Nou sommige van julle voorgestel, soos
+Victoria het net herhaal 10 keer.
+
+178
+00:09:02,400 --> 00:09:05,140
+En wat oor die algemeen nie
+kry hom al die pad,
+
+179
+00:09:05,140 --> 00:09:10,510
+Maar sou daar nie 'n meer robuuste wees
+manier as arbitrêr uitzoeken
+
+180
+00:09:10,510 --> 00:09:12,640
+hoeveel beweeg te maak?
+
+181
+00:09:12,640 --> 00:09:17,680
+Wat kan 'n beter blok wees
+as herhaal 10 keer wees?
+
+182
+00:09:17,680 --> 00:09:20,380
+>> Ja, so hoekom nie iets vir ewig doen?
+
+183
+00:09:20,380 --> 00:09:24,390
+Laat My dan nou beweeg hierdie legkaart stuk
+binnekant daar en ontslae te raak van hierdie een.
+
+184
+00:09:24,390 --> 00:09:28,300
+Let nou op maak nie saak waar Scratch
+begin, gaan hy na die rand.
+
+185
+00:09:28,300 --> 00:09:30,700
+En gelukkig MIT,
+wat maak nuuts af, net
+
+186
+00:09:30,700 --> 00:09:33,190
+maak seker dat hy nooit
+verdwyn heeltemal.
+
+187
+00:09:33,190 --> 00:09:35,360
+Jy kan altyd gryp sy stert.
+
+188
+00:09:35,360 --> 00:09:37,680
+>> En net intuïtief,
+waarom hy bly beweeg?
+
+189
+00:09:37,680 --> 00:09:38,892
+Wat is hier aan die gang?
+
+190
+00:09:38,892 --> 00:09:41,440
+
+191
+00:09:41,440 --> 00:09:43,824
+Dit lyk of hy het gestop, maar
+dan as ek haal en sleep
+
+192
+00:09:43,824 --> 00:09:45,240
+Hy hou wil daar gaan.
+
+193
+00:09:45,240 --> 00:09:46,123
+Hoekom is dit?
+
+194
+00:09:46,123 --> 00:09:51,610
+
+195
+00:09:51,610 --> 00:09:54,360
+Voorwaar, 'n rekenaar is letterlik
+gaan om te doen wat jy dit vertel om te doen.
+
+196
+00:09:54,360 --> 00:09:58,380
+So as jy dit het vroeër doen die
+volgende ding vir ewig, beweeg 10 stappe,
+
+197
+00:09:58,380 --> 00:10:01,860
+dit gaan om voort te gaan en gaan
+totdat ek druk die rooi stopteken
+
+198
+00:10:01,860 --> 00:10:04,620
+en stop die program geheel en al.
+
+199
+00:10:04,620 --> 00:10:06,610
+>> So selfs as jy nie
+dit te doen, hoe kon ek
+
+200
+00:10:06,610 --> 00:10:09,510
+maak Scratch skuif vinniger
+oor die skerm?
+
+201
+00:10:09,510 --> 00:10:12,060
+
+202
+00:10:12,060 --> 00:10:13,280
+Meer stappe, of hoe?
+
+203
+00:10:13,280 --> 00:10:15,710
+So in plaas van om 10
+op 'n tyd, hoekom het ons nie
+
+204
+00:10:15,710 --> 00:10:20,100
+gaan voort en verander dit aan-
+wat sou jy propose-- 50?
+
+205
+00:10:20,100 --> 00:10:24,410
+So nou gaan ek op die groen
+vlag, en inderdaad, hy gaan baie vinnig.
+
+206
+00:10:24,410 --> 00:10:27,180
+>> En dit, natuurlik, is net
+'n manifestasie van animasie.
+
+207
+00:10:27,180 --> 00:10:28,060
+Wat is animasie?
+
+208
+00:10:28,060 --> 00:10:33,090
+Dit is net wat jy die menslike n
+hele klomp van nog beelde regtig,
+
+209
+00:10:33,090 --> 00:10:34,160
+baie, baie vinnig.
+
+210
+00:10:34,160 --> 00:10:36,500
+En so as ons net vertel
+hom meer stappe te beweeg,
+
+211
+00:10:36,500 --> 00:10:39,750
+ons is maar net om die effek wees om
+verandering waar hy is op die skerm
+
+212
+00:10:39,750 --> 00:10:42,900
+al die vinniger per eenheid van tyd.
+
+213
+00:10:42,900 --> 00:10:46,454
+>> Nou is die volgende uitdaging wat ek voorgestel
+was om hom weerkaats die rand.
+
+214
+00:10:46,454 --> 00:10:49,120
+En sonder om te weet wat legkaart
+stukke exist-- want dit is goed
+
+215
+00:10:49,120 --> 00:10:53,030
+As jy nie aan die kom
+stadium van die challenge-- wat
+
+216
+00:10:53,030 --> 00:10:54,280
+wil jy intuïtief te doen?
+
+217
+00:10:54,280 --> 00:10:58,030
+Hoe sou ons hom terug te bons en
+uitgegaan tussen die links en regs?
+
+218
+00:10:58,030 --> 00:11:02,630
+
+219
+00:11:02,630 --> 00:11:03,810
+>> Ja.
+
+220
+00:11:03,810 --> 00:11:05,680
+So ons moet 'n soort
+van toestand, en ons
+
+221
+00:11:05,680 --> 00:11:09,710
+lyk conditionals het, om so te
+praat, onder die kategorie beheer.
+
+222
+00:11:09,710 --> 00:11:14,110
+Watter een van hierdie blokke
+ons waarskynlik wil hê?
+
+223
+00:11:14,110 --> 00:11:15,200
+Ja, miskien "As, dan."
+
+224
+00:11:15,200 --> 00:11:18,780
+So sien dat onder die geel blokkies
+Ons het hier, daar is hierdie "as"
+
+225
+00:11:18,780 --> 00:11:23,920
+of hierdie "As, anders" blok wat
+ons in staat stel om 'n besluit om dit te doen maak
+
+226
+00:11:23,920 --> 00:11:25,000
+of om dit te doen.
+
+227
+00:11:25,000 --> 00:11:27,380
+En jy kan selfs nes hulle
+om verskeie dinge te doen.
+
+228
+00:11:27,380 --> 00:11:34,910
+Of as jy nie hier nog gegaan het,
+gaan voort om die kategorie Sensing
+
+229
+00:11:34,910 --> 00:11:39,612
+and-- laat ons sien of dit hier.
+
+230
+00:11:39,612 --> 00:11:43,050
+
+231
+00:11:43,050 --> 00:11:52,050
+>> So, wat blok kan hier nuttig wees
+op te spoor as hy van die verhoog af?
+
+232
+00:11:52,050 --> 00:11:56,740
+Ja, sien dat sommige van hierdie blokke
+kan parametrized, om so te praat.
+
+233
+00:11:56,740 --> 00:12:00,706
+Hulle kan soort aangepas, nie
+In teenstelling met HTML gister met eienskappe,
+
+234
+00:12:00,706 --> 00:12:03,330
+waar daardie kenmerke soort
+pas die gedrag van 'n tag.
+
+235
+00:12:03,330 --> 00:12:08,880
+Net so hier, kan ek gryp hierdie roerende
+blok en verandering en vra die vraag,
+
+236
+00:12:08,880 --> 00:12:11,500
+jy die muis te raak
+wyser soos die wyser
+
+237
+00:12:11,500 --> 00:12:13,250
+of jy raak die rand?
+
+238
+00:12:13,250 --> 00:12:15,210
+>> So laat my gaan in en dit te doen.
+
+239
+00:12:15,210 --> 00:12:18,130
+Ek gaan om uit te zoomen vir 'n oomblik.
+
+240
+00:12:18,130 --> 00:12:21,320
+Laat my gryp hierdie legkaart stuk
+hier, hierdie legkaart stuk hierdie,
+
+241
+00:12:21,320 --> 00:12:24,570
+en ek gaan mengelmoes
+hulle vir net 'n oomblik.
+
+242
+00:12:24,570 --> 00:12:27,620
+Ek gaan hierdie skuif,
+verander hierdie te raak rand,
+
+243
+00:12:27,620 --> 00:12:38,590
+en ek gaan mosie dit te doen.
+
+244
+00:12:38,590 --> 00:12:40,490
+So hier is 'n paar bestanddele.
+
+245
+00:12:40,490 --> 00:12:42,570
+Ek dink ek het alles wat ek wil kry.
+
+246
+00:12:42,570 --> 00:12:47,710
+>> Sou iemand graag voorstel hoe ek
+kan konnekteer hierdie dalk bo na onder
+
+247
+00:12:47,710 --> 00:12:52,020
+ten einde die probleem van 'los
+Kras skuif na regs na links na regs om
+
+248
+00:12:52,020 --> 00:12:57,020
+links na regs na links, elke
+tyd net weerkaats die muur?
+
+249
+00:12:57,020 --> 00:12:58,050
+Wat wil ek doen?
+
+250
+00:12:58,050 --> 00:13:01,097
+Watter blok moet ek toegang tot die
+"Toe groen vlag gekliek eerste"?
+
+251
+00:13:01,097 --> 00:13:04,060
+
+252
+00:13:04,060 --> 00:13:06,200
+>> OK, so laat ons begin met die "vir ewig."
+
+253
+00:13:06,200 --> 00:13:07,170
+Wat gaan binne die volgende?
+
+254
+00:13:07,170 --> 00:13:10,290
+Iemand anders.
+
+255
+00:13:10,290 --> 00:13:11,850
+OK, beweeg stappe.
+
+256
+00:13:11,850 --> 00:13:12,350
+Alles reg.
+
+257
+00:13:12,350 --> 00:13:14,470
+Wat dan?
+
+258
+00:13:14,470 --> 00:13:15,120
+So dan die as.
+
+259
+00:13:15,120 --> 00:13:17,720
+En sien, selfs al is dit lyk
+saam landgebonde styf,
+
+260
+00:13:17,720 --> 00:13:19,500
+dit sal net groei in te vul.
+
+261
+00:13:19,500 --> 00:13:21,500
+Dit sal net spring in waar ek dit wil hê.
+
+262
+00:13:21,500 --> 00:13:25,920
+>> En wat doen Ek sit tussen
+die as en die destydse?
+
+263
+00:13:25,920 --> 00:13:27,180
+Waarskynlik "As raak rand."
+
+264
+00:13:27,180 --> 00:13:31,800
+En kennis, weer, dit is te groot
+want dit, maar dit sal groei in te vul.
+
+265
+00:13:31,800 --> 00:13:35,002
+En dan draai 15 grade?
+
+266
+00:13:35,002 --> 00:13:35,710
+Hoeveel grade?
+
+267
+00:13:35,710 --> 00:13:38,800
+
+268
+00:13:38,800 --> 00:13:41,196
+Ja, so 180 sal draai
+my al die pad rond.
+
+269
+00:13:41,196 --> 00:13:42,570
+So laat ons sien of ek dit reg.
+
+270
+00:13:42,570 --> 00:13:43,930
+Laat my zoom uit.
+
+271
+00:13:43,930 --> 00:13:45,130
+>> Laat my sleep Scratch up.
+
+272
+00:13:45,130 --> 00:13:50,030
+So hy is 'n bietjie verdraai
+nou, maar dit is goed.
+
+273
+00:13:50,030 --> 00:13:52,231
+Hoe kan ek maklik herstel hom?
+
+274
+00:13:52,231 --> 00:13:59,879
+
+275
+00:13:59,879 --> 00:14:01,045
+Ek gaan 'n bietjie oneerlik.
+
+276
+00:14:01,045 --> 00:14:04,074
+
+277
+00:14:04,074 --> 00:14:05,990
+Dus is ek die toevoeging van 'n ander
+blok, net om duidelik te wees.
+
+278
+00:14:05,990 --> 00:14:08,424
+Ek wil hê hy moet 90 grade wys
+om die reg by verstek,
+
+279
+00:14:08,424 --> 00:14:10,840
+so ek gaan net om hom te vertel
+om dit programmaties doen.
+
+280
+00:14:10,840 --> 00:14:11,632
+En hier gaan ons.
+
+281
+00:14:11,632 --> 00:14:14,740
+
+282
+00:14:14,740 --> 00:14:15,740
+Ons lyk dit te doen.
+
+283
+00:14:15,740 --> 00:14:19,980
+Dit is 'n bietjie vreemd, want
+hy loop onderstebo.
+
+284
+00:14:19,980 --> 00:14:21,250
+Kom ons noem dit 'n fout.
+
+285
+00:14:21,250 --> 00:14:22,120
+Dit is 'n fout.
+
+286
+00:14:22,120 --> 00:14:27,320
+'N fout is 'n fout in 'n program, 'n
+logiese fout wat ek, die mens, gemaak.
+
+287
+00:14:27,320 --> 00:14:28,985
+Hoekom gaan hy onderstebo?
+
+288
+00:14:28,985 --> 00:14:33,560
+
+289
+00:14:33,560 --> 00:14:35,250
+Het MIT skroef of het ek?
+
+290
+00:14:35,250 --> 00:14:38,840
+
+291
+00:14:38,840 --> 00:14:42,550
+>> Ja, ek bedoel, dit is nie MIT se
+skuld. Hulle het my 'n legkaart stuk
+
+292
+00:14:42,550 --> 00:14:44,970
+wat sê draai 'n paar aantal grade.
+
+293
+00:14:44,970 --> 00:14:47,672
+En op voorstel Victoria se
+Ek draai 180 grade,
+
+294
+00:14:47,672 --> 00:14:48,880
+wat is die regte aanvoeling.
+
+295
+00:14:48,880 --> 00:14:53,700
+Maar draai 180 grade letterlik
+beteken draai 180 grade,
+
+296
+00:14:53,700 --> 00:14:55,860
+en dit is nie regtig
+wat ek wil, blykbaar.
+
+297
+00:14:55,860 --> 00:14:58,026
+Want ten minste is hy in
+hierdie twee-dimensionele wêreld,
+
+298
+00:14:58,026 --> 00:15:00,740
+so draai is regtig aan die gang
+om hom onderstebo draai.
+
+299
+00:15:00,740 --> 00:15:04,030
+>> Ek wil seker in watter blok gebruik
+In plaas daarvan, op grond van wat jy hier sien?
+
+300
+00:15:04,030 --> 00:15:11,890
+
+301
+00:15:11,890 --> 00:15:14,790
+Hoe kan ons dit regmaak?
+
+302
+00:15:14,790 --> 00:15:18,380
+Ja, so ons kon wys
+in die teenoorgestelde rigting.
+
+303
+00:15:18,380 --> 00:15:22,300
+En eintlik selfs dit is
+gaan nie genoeg wees,
+
+304
+00:15:22,300 --> 00:15:26,410
+want ons kan net hard-kode
+om te wys links of regs.
+
+305
+00:15:26,410 --> 00:15:27,920
+>> Jy weet wat ons kan doen?
+
+306
+00:15:27,920 --> 00:15:30,160
+Dit lyk of ons 'n
+gerief blok hier.
+
+307
+00:15:30,160 --> 00:15:32,987
+As ek in zoom, sien
+iets wat ons hier graag?
+
+308
+00:15:32,987 --> 00:15:36,120
+
+309
+00:15:36,120 --> 00:15:40,020
+So dit lyk soos MIT het 'n
+onttrekking gebou in hier.
+
+310
+00:15:40,020 --> 00:15:45,440
+Hierdie blok lyk soortgelyk te wees
+waaraan ander blokke, meervoud?
+
+311
+00:15:45,440 --> 00:15:49,510
+>> Hierdie een blok lyk soortgelyk te wees
+om hierdie hele trio van blokke
+
+312
+00:15:49,510 --> 00:15:50,880
+dat ons hier.
+
+313
+00:15:50,880 --> 00:15:54,670
+So dit blyk ek vereenvoudig my
+program deur om ontslae te raak van al daardie
+
+314
+00:15:54,670 --> 00:15:58,270
+en net sit dit in hier.
+
+315
+00:15:58,270 --> 00:16:01,620
+En nou is hy nog 'n bietjie
+karretjie, en dit is goed vir nou.
+
+316
+00:16:01,620 --> 00:16:03,370
+Ons sal laat dit wees.
+
+317
+00:16:03,370 --> 00:16:06,000
+Maar my program is selfs
+eenvoudiger, en dit is ook
+
+318
+00:16:06,000 --> 00:16:09,060
+verteenwoordiger sal wees
+van 'n doel in programming--
+
+319
+00:16:09,060 --> 00:16:13,430
+is om ideaal maak jou kode as
+eenvoudige, so kompak as moontlik,
+
+320
+00:16:13,430 --> 00:16:15,650
+terwyl hy nog in so
+leesbare as moontlik.
+
+321
+00:16:15,650 --> 00:16:20,310
+Jy wil nie om dit so bondig maak
+dat dit moeilik is om te verstaan.
+
+322
+00:16:20,310 --> 00:16:22,826
+>> Maar let op wat ek vervang
+drie blokke met een,
+
+323
+00:16:22,826 --> 00:16:24,200
+en dit is waarskynlik 'n goeie ding.
+
+324
+00:16:24,200 --> 00:16:27,280
+Ek het weg onttrek die idee
+van kontrole of jy nou
+
+325
+00:16:27,280 --> 00:16:29,120
+op die rand met net een blok.
+
+326
+00:16:29,120 --> 00:16:31,520
+Nou kan ons pret te hê met hierdie, in werklikheid.
+
+327
+00:16:31,520 --> 00:16:35,790
+Dit beteken nie soseer voeg
+intellektuele waarde, maar speelse waarde.
+
+328
+00:16:35,790 --> 00:16:39,730
+Ek gaan om voort te gaan
+en hier gryp hierdie klank.
+
+329
+00:16:39,730 --> 00:16:42,900
+
+330
+00:16:42,900 --> 00:16:46,420
+So laat ek gaan voort, en laat my
+stop die program vir 'n oomblik.
+
+331
+00:16:46,420 --> 00:16:52,070
+Ek gaan die volgende noteer,
+die verlening van toegang tot my mikrofoon.
+
+332
+00:16:52,070 --> 00:16:53,181
+>> Hier gaan ons.
+
+333
+00:16:53,181 --> 00:16:53,680
+Eina.
+
+334
+00:16:53,680 --> 00:16:58,710
+
+335
+00:16:58,710 --> 00:17:01,140
+Kom ons probeer dit weer.
+
+336
+00:17:01,140 --> 00:17:02,279
+Hier gaan ons.
+
+337
+00:17:02,279 --> 00:17:03,570
+OK, aangeteken ek die verkeerde ding.
+
+338
+00:17:03,570 --> 00:17:04,580
+Hier gaan ons.
+
+339
+00:17:04,580 --> 00:17:05,080
+Eina.
+
+340
+00:17:05,080 --> 00:17:07,910
+
+341
+00:17:07,910 --> 00:17:08,800
+Eina.
+
+342
+00:17:08,800 --> 00:17:09,300
+Alles reg.
+
+343
+00:17:09,300 --> 00:17:10,791
+Nou moet ek om ontslae te raak van daardie.
+
+344
+00:17:10,791 --> 00:17:11,290
+Alles reg.
+
+345
+00:17:11,290 --> 00:17:13,950
+>> So nou het ek 'n
+opname van net "eina."
+
+346
+00:17:13,950 --> 00:17:18,040
+So nou is ek gaan om te gaan
+voort en noem dit "eina."
+
+347
+00:17:18,040 --> 00:17:20,270
+Ek gaan om terug te gaan
+om my skrifte, en nou
+
+348
+00:17:20,270 --> 00:17:25,460
+kennisgewing daar hierdie blok wat genoem
+speel klank "miaau" of speel klank "eina."
+
+349
+00:17:25,460 --> 00:17:28,920
+Ek gaan hierdie sleep, en waar
+moet ek dit vir komiese effek?
+
+350
+00:17:28,920 --> 00:17:31,740
+
+351
+00:17:31,740 --> 00:17:37,860
+Ja, so nou is dit soort
+karretjie, want nou hierdie block--
+
+352
+00:17:37,860 --> 00:17:42,050
+sien hoe hierdie "As stomp,
+weiering "is 'n soort van self-vervat.
+
+353
+00:17:42,050 --> 00:17:43,704
+So ek moet dit op te los.
+
+354
+00:17:43,704 --> 00:17:44,870
+Laat my gaan voort en doen dit.
+
+355
+00:17:44,870 --> 00:17:48,630
+Laat my ontslae te raak van hierdie en gaan terug
+ons oorspronklike, meer doelbewuste
+
+356
+00:17:48,630 --> 00:17:49,870
+funksionaliteit.
+
+357
+00:17:49,870 --> 00:18:01,080
+So "As raak rand, dan" Ek wil
+om te draai, as Victoria voorgestel
+
+358
+00:18:01,080 --> 00:18:02,480
+180 grade.
+
+359
+00:18:02,480 --> 00:18:05,497
+En ek wil om te speel
+die klank "eina" daar?
+
+360
+00:18:05,497 --> 00:18:11,800
+
+361
+00:18:11,800 --> 00:18:15,580
+>> Ja, sien dis buite
+dat geel blok.
+
+362
+00:18:15,580 --> 00:18:17,680
+So dit ook sou wees 'n
+fout, maar ek het dit opgemerk.
+
+363
+00:18:17,680 --> 00:18:21,290
+So ek gaan dit sleep hier,
+en kennis is dit nou binne-in die "as."
+
+364
+00:18:21,290 --> 00:18:24,250
+So het die "as" is hierdie soort
+van soos arm-agtige klad
+
+365
+00:18:24,250 --> 00:18:26,260
+dit is net gaan
+doen wat die binnekant van dit.
+
+366
+00:18:26,260 --> 00:18:30,216
+So nou as ek zoom uit te
+die risiko van annoying--
+
+367
+00:18:30,216 --> 00:18:32,860
+
+368
+00:18:32,860 --> 00:18:36,470
+>> REKENAAR: Eina, eina, eina.
+
+369
+00:18:36,470 --> 00:18:39,910
+>> David Malan: En dit
+sal net vir ewig aanhou.
+
+370
+00:18:39,910 --> 00:18:44,160
+Nou net om dinge te versnel
+hier, laat ek gaan voort en oop te stel,
+
+371
+00:18:44,160 --> 00:18:50,460
+Kom ons say-- laat my gaan na 'n paar
+van my eie dinge van die klas.
+
+372
+00:18:50,460 --> 00:18:53,000
+
+373
+00:18:53,000 --> 00:19:00,220
+En laat my oop te stel, kom ons sê, dit
+een wat deur een van ons onderrig genote
+
+374
+00:19:00,220 --> 00:19:01,500
+'n Paar jaar gelede.
+
+375
+00:19:01,500 --> 00:19:04,732
+So 'n paar van julle sal onthou
+hierdie spel van weleer,
+
+376
+00:19:04,732 --> 00:19:05,940
+en dit is eintlik merkwaardig.
+
+377
+00:19:05,940 --> 00:19:08,190
+Selfs al is wat ons gedoen het die
+eenvoudigste van programme op die oomblik,
+
+378
+00:19:08,190 --> 00:19:09,980
+Kom ons kyk wat hierdie
+eintlik lyk.
+
+379
+00:19:09,980 --> 00:19:10,650
+Laat my getref speel.
+
+380
+00:19:10,650 --> 00:19:14,210
+
+381
+00:19:14,210 --> 00:19:18,980
+>> So in hierdie wedstryd, het ons 'n
+kikker, en met behulp van die pyltjie keys--
+
+382
+00:19:18,980 --> 00:19:23,340
+Hy neem groter stappe as wat ek remember--
+Ek het beheer oor hierdie kikker.
+
+383
+00:19:23,340 --> 00:19:29,630
+En die doel is oor die besige te kry
+pad sonder hardloop in die motor.
+
+384
+00:19:29,630 --> 00:19:34,735
+En laat ons see-- as ek optrek hier, ek
+hoef te wag vir 'n teken om deur te blaai.
+
+385
+00:19:34,735 --> 00:19:38,130
+
+386
+00:19:38,130 --> 00:19:39,274
+Dit voel soos 'n fout.
+
+387
+00:19:39,274 --> 00:19:42,240
+
+388
+00:19:42,240 --> 00:19:43,495
+Dit is 'n soort van 'n fout.
+
+389
+00:19:43,495 --> 00:19:45,980
+
+390
+00:19:45,980 --> 00:19:46,480
+Alles reg.
+
+391
+00:19:46,480 --> 00:19:51,550
+Ek is oor hierdie hier,
+daar, en dan hou jy
+
+392
+00:19:51,550 --> 00:19:54,100
+gaan totdat jy al kry
+die paddas na die lelie pads.
+
+393
+00:19:54,100 --> 00:19:55,920
+Nou dit kan sien
+des te meer komplekse,
+
+394
+00:19:55,920 --> 00:19:57,840
+maar laat ons probeer om te breek
+dit neer geestelik
+
+395
+00:19:57,840 --> 00:20:00,040
+en mondelings in sy samestellende blokke.
+
+396
+00:20:00,040 --> 00:20:03,910
+Daar is dus waarskynlik 'n legkaart
+stuk wat ons nog nie gesien het nie
+
+397
+00:20:03,910 --> 00:20:07,440
+maar dit is te reageer op toetsaanslagen,
+om dinge wat ek getref op die sleutelbord.
+
+398
+00:20:07,440 --> 00:20:11,660
+>> Daar is dus waarskynlik 'n soort van
+blok wat sê, as sleutel gelyk het,
+
+399
+00:20:11,660 --> 00:20:15,965
+dan is daar iets met Scratch-- doen
+Miskien beweeg dit 10 stappe op hierdie manier.
+
+400
+00:20:15,965 --> 00:20:20,240
+As down sleutel gedruk word, beweeg 10 stappe
+Sodoende of links sleutel, beweeg 10 stappe
+
+401
+00:20:20,240 --> 00:20:21,710
+Sodoende 10 stappe wat.
+
+402
+00:20:21,710 --> 00:20:23,644
+Ek het duidelik geword die kat in 'n padda.
+
+403
+00:20:23,644 --> 00:20:26,060
+So dit is net waar die
+kostuum, as Scratch oproepe it-- ons
+
+404
+00:20:26,060 --> 00:20:28,440
+net 'n foto van die padda ingevoer.
+
+405
+00:20:28,440 --> 00:20:29,570
+>> Maar wat anders gebeur?
+
+406
+00:20:29,570 --> 00:20:32,794
+Wat ander reëls van die kode,
+watter ander stukke van die legkaart
+
+407
+00:20:32,794 --> 00:20:35,460
+het Blake, ons onderrig mede,
+gebruik in hierdie program, blykbaar?
+
+408
+00:20:35,460 --> 00:20:38,320
+
+409
+00:20:38,320 --> 00:20:42,730
+Wat maak alles move--
+wat ontwikkeling rig?
+
+410
+00:20:42,730 --> 00:20:44,950
+>> Beweging, sure-- so die
+beweeg blok, vir seker.
+
+411
+00:20:44,950 --> 00:20:49,330
+En wat is die gewemel blok
+binnekant van, waarskynlik?
+
+412
+00:20:49,330 --> 00:20:52,850
+Ja, 'n soort van loop, miskien 'n
+vir ewig te sluit, miskien 'n herhaling block--
+
+413
+00:20:52,850 --> 00:20:54,070
+herhaal totdat blok.
+
+414
+00:20:54,070 --> 00:20:57,330
+En dit is wat maak die logs en
+die lelie pads en alles skuif
+
+415
+00:20:57,330 --> 00:20:57,990
+heen en weer.
+
+416
+00:20:57,990 --> 00:21:00,270
+Dit is net eindeloos gebeur.
+
+417
+00:21:00,270 --> 00:21:03,180
+>> Hoekom is 'n paar van die motors
+beweeg vinniger as die ander?
+
+418
+00:21:03,180 --> 00:21:06,607
+Wat is anders aan die programme?
+
+419
+00:21:06,607 --> 00:21:09,690
+Ja, waarskynlik 'n paar van hulle neem
+meer stappe gelyktydig en sommige van hulle
+
+420
+00:21:09,690 --> 00:21:10,690
+minder stappe gelyktydig.
+
+421
+00:21:10,690 --> 00:21:14,670
+En die visuele effek
+is vinnig teenoor stadig.
+
+422
+00:21:14,670 --> 00:21:16,030
+>> Wat dink jy gebeur?
+
+423
+00:21:16,030 --> 00:21:19,700
+Toe ek my kikker al die pad
+oorkant die straat en die rivier
+
+424
+00:21:19,700 --> 00:21:23,560
+op die lelie pad, iets
+noemenswaardige gebeur.
+
+425
+00:21:23,560 --> 00:21:26,540
+Wat gebeur so gou as ek dit gedoen het?
+
+426
+00:21:26,540 --> 00:21:27,210
+Dit gestop.
+
+427
+00:21:27,210 --> 00:21:29,680
+Dit kikker gestop, en
+Ek het 'n tweede kikker.
+
+428
+00:21:29,680 --> 00:21:33,155
+So, wat konstruk moet wees
+daar gebruik word, wat die funksie?
+
+429
+00:21:33,155 --> 00:21:36,020
+
+430
+00:21:36,020 --> 00:21:38,660
+>> Ja, so daar is 'n soort van
+"As" kondisioneer daar ook.
+
+431
+00:21:38,660 --> 00:21:41,909
+En dit blyk out-- ons nie sien this--
+maar daar is ander blokke in daar dat
+
+432
+00:21:41,909 --> 00:21:45,300
+kan sê, as jy raak is
+Nog 'n ding op die skerm,
+
+433
+00:21:45,300 --> 00:21:47,720
+as jy raak die lelie pad, "dan."
+
+434
+00:21:47,720 --> 00:21:50,810
+En dan is dit wanneer ons
+maak die tweede kikker verskyn.
+
+435
+00:21:50,810 --> 00:21:54,969
+So selfs al is hierdie spel is beslis
+baie gedateer, selfs al met die eerste oogopslag
+
+436
+00:21:54,969 --> 00:21:58,010
+daar is so baie gaan is-- en Blake
+het dit nie sweep in twee minute,
+
+437
+00:21:58,010 --> 00:22:00,390
+Dit het waarskynlik hom 'n paar
+uur om hierdie spel te skep
+
+438
+00:22:00,390 --> 00:22:03,850
+gebaseer op sy geheue of video's
+van weergawe daarvan weleer se.
+
+439
+00:22:03,850 --> 00:22:07,940
+Maar al hierdie klein dingetjies
+gaan op die skerm in isolasie
+
+440
+00:22:07,940 --> 00:22:11,550
+neer op hierdie baie eenvoudige
+constructs-- bewegings of state
+
+441
+00:22:11,550 --> 00:22:15,519
+soos ons bespreek, lusse en
+voorwaardes, en dit is omtrent dit.
+
+442
+00:22:15,519 --> 00:22:17,060
+Daar is 'n paar ander liefhebber funksies.
+
+443
+00:22:17,060 --> 00:22:19,130
+Sommige van hulle is suiwer
+estetiese of akoestiese,
+
+444
+00:22:19,130 --> 00:22:20,964
+soos die geluide wat ek net met gespeel.
+
+445
+00:22:20,964 --> 00:22:23,380
+Maar vir die grootste deel, jy
+het in hierdie taal, Scratch,
+
+446
+00:22:23,380 --> 00:22:25,350
+al die fundamentele
+boustene wat jy
+
+447
+00:22:25,350 --> 00:22:29,280
+het in C, Java, JavaScript,
+PHP, Ruby, Python,
+
+448
+00:22:29,280 --> 00:22:32,960
+en 'n aantal ander tale.
+
+449
+00:22:32,960 --> 00:22:36,720
+Enige vrae oor Scratch?
+
+450
+00:22:36,720 --> 00:22:37,220
+Alles reg.
+
+451
+00:22:37,220 --> 00:22:40,303
+Dan sal ons nie 'n duik in dieper te krap,
+al is jy welkom hierdie naweek,
+
+452
+00:22:40,303 --> 00:22:42,860
+veral as jy kinders het of
+niggies en neefs en so,
+
+453
+00:22:42,860 --> 00:22:44,220
+om hulle in te voer om te krap.
+
+454
+00:22:44,220 --> 00:22:47,960
+Dit is eintlik 'n wonderlike speelse
+omgewing met, as die skrywers sê,
+
+455
+00:22:47,960 --> 00:22:49,120
+'n baie hoë plafonne.
+
+456
+00:22:49,120 --> 00:22:51,670
+Selfs al het ons begin met
+'n baie lae-vlak details,
+
+457
+00:22:51,670 --> 00:22:54,890
+jy kan regtig nie nogal 'n bietjie
+daarmee, en dit is dalk
+
+458
+00:22:54,890 --> 00:22:57,360
+'n demonstrasie van presies dit.
+
+459
+00:22:57,360 --> 00:23:02,920
+>> Maar laat ons nou die oorgang na 'n paar meer
+gesofistikeerde probleme, as jy wil,
+
+460
+00:23:02,920 --> 00:23:05,870
+bekend as "soek" en
+"Sorteer," meer algemeen.
+
+461
+00:23:05,870 --> 00:23:09,500
+Ons het hierdie telefoon boek earlier-- hier is
+'n ander een net vir discussion--
+
+462
+00:23:09,500 --> 00:23:13,460
+wat ons in staat was om te soek
+meer doeltreffend as gevolg
+
+463
+00:23:13,460 --> 00:23:15,270
+van 'n beduidende aanname.
+
+464
+00:23:15,270 --> 00:23:17,655
+En net om duidelik te wees, wat
+aanname was ek maak
+
+465
+00:23:17,655 --> 00:23:19,280
+wanneer jy soek deur middel van hierdie telefoon boek?
+
+466
+00:23:19,280 --> 00:23:23,342
+
+467
+00:23:23,342 --> 00:23:25,300
+Dit Mike Smith was in
+die telefoon boek, maar ek
+
+468
+00:23:25,300 --> 00:23:27,410
+kan hanteer sou wees
+die scenario sonder hom
+
+469
+00:23:27,410 --> 00:23:30,720
+daar as ek vroeg gestop net.
+
+470
+00:23:30,720 --> 00:23:31,806
+Die boek is alfabetiese.
+
+471
+00:23:31,806 --> 00:23:33,930
+En dit is 'n baie vrygewige
+aanname, want dit
+
+472
+00:23:33,930 --> 00:23:36,580
+beteken someone-- Ek is soort
+sny 'n hoek,
+
+473
+00:23:36,580 --> 00:23:40,580
+soos ek vinniger omdat iemand
+anders het 'n baie harde werk vir my.
+
+474
+00:23:40,580 --> 00:23:43,120
+>> Maar wat as die telefoon
+boek is Unsorted?
+
+475
+00:23:43,120 --> 00:23:47,050
+Miskien Verizon het lui, net gooi
+almal se name en nommers in daar
+
+476
+00:23:47,050 --> 00:23:50,120
+Miskien in die volgorde waarin hulle
+ingeskryf vir telefoon diens.
+
+477
+00:23:50,120 --> 00:23:54,570
+En hoeveel tyd neem dit my
+om iemand soos Mike Smith vind?
+
+478
+00:23:54,570 --> 00:23:58,160
+1000 bladsy selfoon book-- hoeveel
+bladsye moet ek deur kyk?
+
+479
+00:23:58,160 --> 00:23:58,905
+>> Almal van hulle.
+
+480
+00:23:58,905 --> 00:24:00,030
+Jy is soort van geluk.
+
+481
+00:24:00,030 --> 00:24:03,420
+Jy het letterlik op elke kyk
+bladsy as die telefoon boek is net
+
+482
+00:24:03,420 --> 00:24:04,450
+lukraak gesorteer.
+
+483
+00:24:04,450 --> 00:24:06,910
+Jy kan kry gelukkig en vind Mike
+op die heel eerste bladsy, omdat hy
+
+484
+00:24:06,910 --> 00:24:08,826
+was die eerste kliënt
+om telefoon diens te bestel.
+
+485
+00:24:08,826 --> 00:24:10,760
+Maar hy kan die laaste gewees, ook.
+
+486
+00:24:10,760 --> 00:24:12,500
+>> So enige volgorde is nie goed nie.
+
+487
+00:24:12,500 --> 00:24:16,750
+So dink ons ​​moet die sorteer
+telefoon boek of in die algemeen soort data
+
+488
+00:24:16,750 --> 00:24:18,520
+wat ons gegee.
+
+489
+00:24:18,520 --> 00:24:19,440
+Hoe kan ons dit doen?
+
+490
+00:24:19,440 --> 00:24:21,360
+>> Wel, laat ek net probeer
+'n Eenvoudige voorbeeld hier.
+
+491
+00:24:21,360 --> 00:24:24,290
+Laat my gaan voort en gooi 'n
+paar getalle op die bord.
+
+492
+00:24:24,290 --> 00:24:35,480
+Veronderstel die getalle wat ons het is,
+kom ons sê, vier, twee, een, en drie.
+
+493
+00:24:35,480 --> 00:24:38,390
+En Ben, sorteer hierdie getalle vir ons.
+
+494
+00:24:38,390 --> 00:24:39,017
+>> Goed so.
+
+495
+00:24:39,017 --> 00:24:39,850
+Hoe het jy dit gedoen?
+
+496
+00:24:39,850 --> 00:24:42,731
+
+497
+00:24:42,731 --> 00:24:43,230
+Alles reg.
+
+498
+00:24:43,230 --> 00:24:44,710
+So begin met die kleinste
+waarde en die hoogste,
+
+499
+00:24:44,710 --> 00:24:46,084
+en dit is regtig 'n goeie intuïsie.
+
+500
+00:24:46,084 --> 00:24:48,080
+En besef dat ons
+die mens is eintlik redelik
+
+501
+00:24:48,080 --> 00:24:49,913
+goed in die oplossing van probleme
+soos hierdie, ten minste
+
+502
+00:24:49,913 --> 00:24:51,810
+wanneer die data is relatief klein.
+
+503
+00:24:51,810 --> 00:24:54,860
+Sodra jy begin om honderde het
+van getalle, duisende getalle,
+
+504
+00:24:54,860 --> 00:24:58,440
+miljoene getalle, Ben waarskynlik
+kon dit nie heeltemal so vinnig te doen,
+
+505
+00:24:58,440 --> 00:25:00,620
+die veronderstelling dat daar
+gapings in die getalle.
+
+506
+00:25:00,620 --> 00:25:03,450
+Redelik maklik om te tel tot 'n miljoen
+anders, net tydrowend.
+
+507
+00:25:03,450 --> 00:25:07,150
+>> So het die algoritme wat dit klink
+soos Ben gebruik nou net
+
+508
+00:25:07,150 --> 00:25:08,930
+was op soek na die kleinste getal.
+
+509
+00:25:08,930 --> 00:25:12,900
+So selfs al het ons mense kan neem
+in 'n baie inligting visueel,
+
+510
+00:25:12,900 --> 00:25:14,830
+'n Rekenaar is eintlik
+'n bietjie meer beperk.
+
+511
+00:25:14,830 --> 00:25:17,560
+Die rekenaar kan net
+kyk na een byte op 'n slag
+
+512
+00:25:17,560 --> 00:25:20,770
+of miskien vier grepe op 'n time--
+deesdae miskien 8 grepe op 'n time--
+
+513
+00:25:20,770 --> 00:25:24,450
+maar 'n baie klein aantal
+grepe op 'n gegewe tyd.
+
+514
+00:25:24,450 --> 00:25:28,480
+>> So gegee dat ons regtig
+vier afsonderlike waardes here--
+
+515
+00:25:28,480 --> 00:25:32,440
+en jy kan dink Ben as '
+Blinders op asof hy 'n rekenaar sulke
+
+516
+00:25:32,440 --> 00:25:36,450
+dat hy nie enigiets anders kan sien
+as een nommer op 'n time--
+
+517
+00:25:36,450 --> 00:25:39,720
+sodat ons oor die algemeen sal aanvaar, soos in
+Engels, sal ons lees van regs na links.
+
+518
+00:25:39,720 --> 00:25:42,870
+So het die eerste paar Ben waarskynlik gekyk
+by was vier en dan baie vinnig
+
+519
+00:25:42,870 --> 00:25:44,770
+besef dit is 'n redelik groot
+number-- laat my bly kyk.
+
+520
+00:25:44,770 --> 00:25:45,357
+>> Daar is twee.
+
+521
+00:25:45,357 --> 00:25:45,940
+Wag 'n minuut.
+
+522
+00:25:45,940 --> 00:25:47,070
+Twee kleiner as vier.
+
+523
+00:25:47,070 --> 00:25:47,986
+Ek gaan om te onthou.
+
+524
+00:25:47,986 --> 00:25:49,070
+Twee is nou die kleinste.
+
+525
+00:25:49,070 --> 00:25:50,417
+Nou one-- dis nog beter.
+
+526
+00:25:50,417 --> 00:25:51,250
+Dit is selfs kleiner.
+
+527
+00:25:51,250 --> 00:25:54,000
+Ek gaan oor twee vergeet
+en net een dink tog.
+
+528
+00:25:54,000 --> 00:25:56,550
+>> En hy kon ophou soek?
+
+529
+00:25:56,550 --> 00:25:58,360
+Wel, hy kan op grond
+op hierdie inligting,
+
+530
+00:25:58,360 --> 00:26:00,477
+maar hy moet liewer soek
+die res van die lys.
+
+531
+00:26:00,477 --> 00:26:02,060
+Want wat as nul was in die lys?
+
+532
+00:26:02,060 --> 00:26:03,643
+Wat gebeur as negatiewe een was in die lys?
+
+533
+00:26:03,643 --> 00:26:07,720
+Hy weet net dat sy antwoord
+is korrek as hy uitvoerig
+
+534
+00:26:07,720 --> 00:26:08,729
+kyk na die hele lys.
+
+535
+00:26:08,729 --> 00:26:10,020
+So kyk ons ​​na die res van hierdie.
+
+536
+00:26:10,020 --> 00:26:11,394
+Three-- dit was 'n vermorsing van tyd.
+
+537
+00:26:11,394 --> 00:26:13,540
+Het jy ongelukkig, maar ek was
+nog korrek om dit te doen.
+
+538
+00:26:13,540 --> 00:26:17,857
+En so nou is hy vermoedelik
+gekies om die kleinste getal
+
+539
+00:26:17,857 --> 00:26:20,440
+en net sit dit aan die begin
+van die lys, soos ek sal hier doen.
+
+540
+00:26:20,440 --> 00:26:23,480
+Nou wat het jy gedoen volgende, alhoewel
+jy het nie naastenby daaroor dink
+
+541
+00:26:23,480 --> 00:26:25,962
+hierdie omvang?
+
+542
+00:26:25,962 --> 00:26:27,670
+Herhaal die proses,
+so 'n soort van loop.
+
+543
+00:26:27,670 --> 00:26:28,920
+Daar is 'n bekende idee.
+
+544
+00:26:28,920 --> 00:26:30,860
+So hier is vier.
+
+545
+00:26:30,860 --> 00:26:32,110
+Dit is tans die kleinste.
+
+546
+00:26:32,110 --> 00:26:33,220
+Dit is 'n kandidaat.
+
+547
+00:26:33,220 --> 00:26:33,900
+Nie meer nie.
+
+548
+00:26:33,900 --> 00:26:34,770
+Nou het ek twee gesien.
+
+549
+00:26:34,770 --> 00:26:36,630
+Dit is die volgende kleinste element.
+
+550
+00:26:36,630 --> 00:26:40,800
+Three-- dis nie kleiner, sodat
+nou Ben kan uitpluk die twee.
+
+551
+00:26:40,800 --> 00:26:44,510
+>> En nou is ons herhaal die proses, en
+natuurlik drie kry volgende uitgetrek.
+
+552
+00:26:44,510 --> 00:26:45,420
+Herhaal die proses.
+
+553
+00:26:45,420 --> 00:26:46,990
+Vier kry uitgetrek.
+
+554
+00:26:46,990 --> 00:26:50,140
+En nou is ons uit getalle,
+sodat die lys moet gesorteer.
+
+555
+00:26:50,140 --> 00:26:51,960
+>> En inderdaad, dit is 'n formele algoritme.
+
+556
+00:26:51,960 --> 00:26:56,610
+'N Rekenaar wetenskaplike sou
+noem dit "seleksie soort,"
+
+557
+00:26:56,610 --> 00:27:00,880
+die idee is soort 'n
+lys iteratively-- weer
+
+558
+00:27:00,880 --> 00:27:03,807
+en weer en weer te kies
+die kleinste getal.
+
+559
+00:27:03,807 --> 00:27:06,140
+En wat is lekker daaroor is
+Dit is net so darn intuïtief.
+
+560
+00:27:06,140 --> 00:27:07,470
+Dit is so eenvoudig nie.
+
+561
+00:27:07,470 --> 00:27:11,100
+En jy kan dieselfde herhaal
+werking weer en weer.
+
+562
+00:27:11,100 --> 00:27:12,150
+Dit is eenvoudig.
+
+563
+00:27:12,150 --> 00:27:17,170
+>> In hierdie geval was dit 'n vinnige, maar
+hoe lank neem dit eintlik neem?
+
+564
+00:27:17,170 --> 00:27:19,880
+Kom ons maak dit lyk en
+voel 'n bietjie meer vervelige.
+
+565
+00:27:19,880 --> 00:27:24,150
+So een, twee, drie, vier, vyf ses,
+sewe, agt, nege, 10, 11, 12, 13, 14,
+
+566
+00:27:24,150 --> 00:27:26,160
+15, 16-- arbitrêre getal.
+
+567
+00:27:26,160 --> 00:27:28,780
+Ek wou net meer hierdie
+tyd as net die vier.
+
+568
+00:27:28,780 --> 00:27:30,780
+So as ek 'n hele het
+n klomp van die nommers now-- dit
+
+569
+00:27:30,780 --> 00:27:32,420
+nie eens saak nie
+wat hulle are-- laat
+
+570
+00:27:32,420 --> 00:27:34,380
+dink oor wat hierdie
+algoritme is regtig soos.
+
+571
+00:27:34,380 --> 00:27:35,857
+>> Veronderstel daar is getalle daar.
+
+572
+00:27:35,857 --> 00:27:38,190
+Weereens, maak nie saak wat
+hulle is nie, maar hulle is lukraak.
+
+573
+00:27:38,190 --> 00:27:39,679
+Ek toepassing Ben se algoritme.
+
+574
+00:27:39,679 --> 00:27:41,220
+Ek nodig het om die kleinste aantal kies.
+
+575
+00:27:41,220 --> 00:27:41,761
+Wat doen ek?
+
+576
+00:27:41,761 --> 00:27:44,240
+En ek gaan fisiek
+doen dit hierdie keer om dit uit te tree.
+
+577
+00:27:44,240 --> 00:27:46,099
+Op soek, soek,
+soek, soek, soek.
+
+578
+00:27:46,099 --> 00:27:48,140
+Slegs deur die tyd wat ek kry om
+die einde van die lys kan
+
+579
+00:27:48,140 --> 00:27:51,230
+Ek besef die kleinste
+getal was twee hierdie tyd.
+
+580
+00:27:51,230 --> 00:27:52,720
+Een is nie in die lys.
+
+581
+00:27:52,720 --> 00:27:54,400
+So ek sit twee.
+
+582
+00:27:54,400 --> 00:27:55,590
+>> Wat doen ek nou?
+
+583
+00:27:55,590 --> 00:27:58,600
+Op soek, soek, soek, soek.
+
+584
+00:27:58,600 --> 00:28:02,250
+Nou het ek die nommer sewe, omdat
+daar is gapings in hierdie numbers--
+
+585
+00:28:02,250 --> 00:28:03,300
+maar net arbitrêr.
+
+586
+00:28:03,300 --> 00:28:03,800
+Alles reg.
+
+587
+00:28:03,800 --> 00:28:06,030
+So nou kan ek neersit sewe.
+
+588
+00:28:06,030 --> 00:28:08,860
+Op soek na, soek.
+
+589
+00:28:08,860 --> 00:28:11,030
+>> Nou ek neem aan, van
+Natuurlik, dat Ben nie
+
+590
+00:28:11,030 --> 00:28:14,780
+ekstra RAM, ekstra
+geheue, want natuurlik
+
+591
+00:28:14,780 --> 00:28:16,080
+Ek is op soek na dieselfde nommer.
+
+592
+00:28:16,080 --> 00:28:18,246
+Ja, ek kon onthou
+al daardie getalle,
+
+593
+00:28:18,246 --> 00:28:19,930
+en dit is absoluut waar.
+
+594
+00:28:19,930 --> 00:28:22,610
+Maar as Ben al onthou
+van die liedjies wat hy gesien het,
+
+595
+00:28:22,610 --> 00:28:24,430
+Hy het nie regtig gemaak
+fundamentele vordering
+
+596
+00:28:24,430 --> 00:28:26,170
+want hy het reeds
+die vermoë om te soek
+
+597
+00:28:26,170 --> 00:28:27,540
+deur die getalle op die bord.
+
+598
+00:28:27,540 --> 00:28:29,373
+Onthou al die
+getalle nie help nie,
+
+599
+00:28:29,373 --> 00:28:32,490
+want hy kan steeds as 'n rekenaar
+net kyk na, ons het gesê, 'n aantal
+
+600
+00:28:32,490 --> 00:28:33,080
+op 'n slag.
+
+601
+00:28:33,080 --> 00:28:35,760
+Daar is dus geen soort oneerlik
+daar wat jy kan benut.
+
+602
+00:28:35,760 --> 00:28:39,170
+>> So in werklikheid, as ek
+bly soek die lys,
+
+603
+00:28:39,170 --> 00:28:44,200
+Ek het letterlik net voort te gaan
+heen en weer deur dit, pluk uit
+
+604
+00:28:44,200 --> 00:28:45,710
+die volgende kleinste getal.
+
+605
+00:28:45,710 --> 00:28:48,810
+En as jy kan soort aflei
+uit my dom bewegings,
+
+606
+00:28:48,810 --> 00:28:50,860
+hierdie kry net baie
+vervelige baie vinnig,
+
+607
+00:28:50,860 --> 00:28:54,850
+en dit lyk asof ek terug gaan en
+weer, heen en weer nogal 'n bietjie.
+
+608
+00:28:54,850 --> 00:29:03,220
+Nou om eerlik te wees, weet ek nie hoef te gaan
+heeltemal so, wel, kom ons see-- om eerlik te wees,
+
+609
+00:29:03,220 --> 00:29:06,310
+Ek hoef nie te hou loop
+soveel stappe elke keer.
+
+610
+00:29:06,310 --> 00:29:09,200
+Omdat, natuurlik, soos ek
+kies nommers van die lys,
+
+611
+00:29:09,200 --> 00:29:11,860
+die oorblywende lys is korter.
+
+612
+00:29:11,860 --> 00:29:14,240
+>> En so laat ons dink oor
+hoeveel stappe Ek is eintlik
+
+613
+00:29:14,240 --> 00:29:16,010
+traipsing deur elke keer.
+
+614
+00:29:16,010 --> 00:29:18,950
+In die heel eerste situasie
+Ons het 16 nommers,
+
+615
+00:29:18,950 --> 00:29:22,210
+en so maximally-- laat ons net
+doen dit vir 'n discussion--
+
+616
+00:29:22,210 --> 00:29:25,640
+Ek het om te kyk deur 16
+getalle tot die kleinste vind.
+
+617
+00:29:25,640 --> 00:29:28,420
+Maar wanneer ek uitgegrawe
+die kleinste getal, hoe
+
+618
+00:29:28,420 --> 00:29:30,590
+lank was die oorblywende lys, natuurlik?
+
+619
+00:29:30,590 --> 00:29:31,420
+Net 15.
+
+620
+00:29:31,420 --> 00:29:34,670
+So hoeveel nommers het Ben of ek
+om te kyk deur die tweede keer rond?
+
+621
+00:29:34,670 --> 00:29:36,832
+15, net om te gaan en vind die kleinste.
+
+622
+00:29:36,832 --> 00:29:39,540
+Maar nou, natuurlik, die lys is,
+Ook kleiner as wat dit was voor.
+
+623
+00:29:39,540 --> 00:29:42,540
+So hoeveel stappe gedoen ek
+moet die volgende keer neem?
+
+624
+00:29:42,540 --> 00:29:49,970
+14 en dan 13 en dan 12, plus dot,
+dot, dot, voordat ek gelaat met net een.
+
+625
+00:29:49,970 --> 00:29:53,146
+So nou 'n rekenaar wetenskaplike sou
+vra, wel, wat beteken dat almal gelyk?
+
+626
+00:29:53,146 --> 00:29:55,770
+Dit is gelyk aan eintlik 'n paar konkrete
+getal wat ons kon beslis
+
+627
+00:29:55,770 --> 00:30:00,490
+doen aritmetisch, maar ons wil praat
+oor die doeltreffendheid van algoritmes
+
+628
+00:30:00,490 --> 00:30:04,940
+'n bietjie meer formulaically,
+onafhanklik van hoe lank die lys is.
+
+629
+00:30:04,940 --> 00:30:06,240
+>> En so weet julle wat?
+
+630
+00:30:06,240 --> 00:30:09,860
+Dit is 16, maar soos ek gesê het,
+laat ons net noem die omvang van die probleem
+
+631
+00:30:09,860 --> 00:30:10,970
+N, waar N is 'n paar nommer.
+
+632
+00:30:10,970 --> 00:30:13,220
+Miskien is dit 16, miskien is dit
+drie, miskien is dit 'n miljoen.
+
+633
+00:30:13,220 --> 00:30:13,761
+Ek weet nie.
+
+634
+00:30:13,761 --> 00:30:14,390
+Ek gee nie om.
+
+635
+00:30:14,390 --> 00:30:16,520
+Wat ek regtig wil hê, is
+'n formule wat ek kan
+
+636
+00:30:16,520 --> 00:30:19,420
+gebruik om hierdie algoritme vergelyk
+teen ander algoritmes
+
+637
+00:30:19,420 --> 00:30:22,350
+dat iemand dalk eis
+is beter of slegter.
+
+638
+00:30:22,350 --> 00:30:25,430
+>> So dit blyk, en net ek
+weet dit van graad skool,
+
+639
+00:30:25,430 --> 00:30:34,790
+dat dit werk eintlik uit om dieselfde
+iets soos n oor n plus een meer as twee.
+
+640
+00:30:34,790 --> 00:30:40,020
+En dit gebeur, moet gelyk, van
+Natuurlik N kwadraat plus N meer as twee.
+
+641
+00:30:40,020 --> 00:30:43,250
+So as ek wou 'n formule
+vir hoeveel stappe
+
+642
+00:30:43,250 --> 00:30:46,330
+was betrokke by kyk na al
+van daardie getalle weer en weer
+
+643
+00:30:46,330 --> 00:30:52,681
+en weer en weer, sou ek sê
+dit N kwadraat plus N meer as twee.
+
+644
+00:30:52,681 --> 00:30:53,430
+Maar jy weet wat?
+
+645
+00:30:53,430 --> 00:30:54,500
+Dit lyk net slordig.
+
+646
+00:30:54,500 --> 00:30:56,470
+Ek het net regtig wil 'n
+algemene gevoel van dinge.
+
+647
+00:30:56,470 --> 00:30:58,810
+En u sal onthou uit
+hoërskool dat daar
+
+648
+00:30:58,810 --> 00:31:00,660
+is die idee van die hoogste orde termyn.
+
+649
+00:31:00,660 --> 00:31:05,300
+Watter een van hierdie terme, die N
+kwadraat, die N, of die helfte,
+
+650
+00:31:05,300 --> 00:31:07,550
+het die meeste impak met verloop van tyd?
+
+651
+00:31:07,550 --> 00:31:11,920
+Hoe groter N kry, wat
+van hierdie sake die meeste?
+
+652
+00:31:11,920 --> 00:31:15,560
+>> Met ander woorde, as ek prop
+in 'n miljoen, N kwadraat
+
+653
+00:31:15,560 --> 00:31:17,900
+gaan waarskynlik wees
+die oorheersende faktor,
+
+654
+00:31:17,900 --> 00:31:21,670
+omdat 'n miljoen keer
+self is 'n baie groter
+
+655
+00:31:21,670 --> 00:31:23,682
+as plus een bykomende miljoen.
+
+656
+00:31:23,682 --> 00:31:24,390
+So jy weet wat?
+
+657
+00:31:24,390 --> 00:31:27,305
+Dit is so 'n darn groot
+indien jy vierkant 'n nommer.
+
+658
+00:31:27,305 --> 00:31:28,430
+Dit maak nie regtig saak nie.
+
+659
+00:31:28,430 --> 00:31:30,596
+Ons is net gaan kruis wat
+uit en vergeet het.
+
+660
+00:31:30,596 --> 00:31:34,250
+En so 'n rekenaarwetenskaplike sou sê
+dat die doeltreffendheid van hierdie algoritme
+
+661
+00:31:34,250 --> 00:31:37,850
+is op die einde van N squared--
+Ek bedoel regtig 'n benadering.
+
+662
+00:31:37,850 --> 00:31:40,810
+Dit is 'n soort van sowat N vierkant.
+
+663
+00:31:40,810 --> 00:31:44,130
+Met verloop van tyd, hoe groter
+en groter N kry, dit
+
+664
+00:31:44,130 --> 00:31:47,610
+is 'n goeie skatting vir wat die
+doeltreffendheid of 'n gebrek aan doeltreffendheid
+
+665
+00:31:47,610 --> 00:31:49,400
+van hierdie algoritme eintlik is.
+
+666
+00:31:49,400 --> 00:31:52,040
+En ek aflei dat, natuurlik,
+vanaf eintlik die wiskunde.
+
+667
+00:31:52,040 --> 00:31:54,040
+Maar nou is ek net waai
+my hande, want ek het net
+
+668
+00:31:54,040 --> 00:31:55,790
+wil 'n algemene gevoel van hierdie algoritme.
+
+669
+00:31:55,790 --> 00:31:58,850
+>> So met behulp van dieselfde logika, intussen,
+Kom ons kyk na 'n ander algoritme
+
+670
+00:31:58,850 --> 00:32:01,162
+Ons het reeds at-- lineêre soek.
+
+671
+00:32:01,162 --> 00:32:02,870
+Toe ek was op soek
+vir die telefoon book--
+
+672
+00:32:02,870 --> 00:32:05,980
+nie sorteer dit, soek
+deur die telefoon book--
+
+673
+00:32:05,980 --> 00:32:09,197
+Ons het gesê dat dit '
+1000 stappe, of 500 stappe.
+
+674
+00:32:09,197 --> 00:32:10,280
+Maar laat ons veralgemeen nie.
+
+675
+00:32:10,280 --> 00:32:12,860
+As daar 'n bladsye in
+die telefoon boek, wat
+
+676
+00:32:12,860 --> 00:32:17,250
+die loop van die tyd of die
+doeltreffendheid van lineêre soek?
+
+677
+00:32:17,250 --> 00:32:19,750
+Dit is op die einde van
+hoeveel stappe om uit te vind
+
+678
+00:32:19,750 --> 00:32:24,210
+Mike Smith met behulp van lineêre soek, die
+eerste algoritme, of selfs die tweede?
+
+679
+00:32:24,210 --> 00:32:27,240
+
+680
+00:32:27,240 --> 00:32:31,710
+>> In die ergste geval, Mike
+is aan die einde van die boek.
+
+681
+00:32:31,710 --> 00:32:35,590
+So as die telefoon boek het 1000 bladsye,
+Ons het die vorige keer, in die ergste geval,
+
+682
+00:32:35,590 --> 00:32:38,380
+dit kon neem ongeveer hoe
+baie bladsye Mike vind?
+
+683
+00:32:38,380 --> 00:32:38,990
+Soos 1000.
+
+684
+00:32:38,990 --> 00:32:39,830
+Dit is 'n bogrens.
+
+685
+00:32:39,830 --> 00:32:41,790
+Dit is 'n ergste moontlike situasie.
+
+686
+00:32:41,790 --> 00:32:44,410
+Maar weereens, ons wegbeweeg
+van getalle soos 1000 nou.
+
+687
+00:32:44,410 --> 00:32:45,730
+Dis net n.
+
+688
+00:32:45,730 --> 00:32:47,470
+>> So, wat is die logiese gevolgtrekking?
+
+689
+00:32:47,470 --> 00:32:50,210
+Dit vind van Mike in 'n selfoon
+boek wat N bladsye het
+
+690
+00:32:50,210 --> 00:32:55,280
+aan te gryp, in die heel ergste geval,
+hoeveel stappe op die einde van n?
+
+691
+00:32:55,280 --> 00:32:58,110
+En inderdaad 'n rekenaar
+wetenskaplike sou sê
+
+692
+00:32:58,110 --> 00:33:02,340
+dat die loop van tyd, of die
+prestasie of die doeltreffendheid
+
+693
+00:33:02,340 --> 00:33:07,470
+of ondoeltreffendheid, van 'n algoritme soos
+'n lineêre soek is op die einde van n.
+
+694
+00:33:07,470 --> 00:33:10,010
+En ons kan dieselfde van toepassing
+logika van iets uit die kruising
+
+695
+00:33:10,010 --> 00:33:13,170
+as ek nou net gedoen het om die tweede
+algoritme wat ons gehad het met die telefoon boek,
+
+696
+00:33:13,170 --> 00:33:16,040
+waar ons het twee bladsye op 'n slag.
+
+697
+00:33:16,040 --> 00:33:20,120
+>> So 1000 bladsy telefoon boek mag
+neem ons 500 bladsy draaie, plus een
+
+698
+00:33:20,120 --> 00:33:21,910
+As ons dubbel terug 'n bietjie.
+
+699
+00:33:21,910 --> 00:33:26,590
+So as 'n telefoon boek het N bladsye, maar
+ons doen twee bladsye op 'n tyd,
+
+700
+00:33:26,590 --> 00:33:28,900
+dit is min of meer wat?
+
+701
+00:33:28,900 --> 00:33:33,190
+N meer as twee, sodat dit is soos n meer as twee.
+
+702
+00:33:33,190 --> 00:33:38,490
+Maar ek het die eis 'n
+oomblik gelede dat N oor two--
+
+703
+00:33:38,490 --> 00:33:41,060
+dit is soort van die dieselfde as net n.
+
+704
+00:33:41,060 --> 00:33:44,050
+Dis net 'n konstante faktor,
+rekenaar wetenskaplikes sou sê.
+
+705
+00:33:44,050 --> 00:33:45,970
+Kom ons net fokus op
+die veranderlikes, really--
+
+706
+00:33:45,970 --> 00:33:47,780
+die grootste veranderlikes in die vergelyking.
+
+707
+00:33:47,780 --> 00:33:52,530
+>> So lineêre soek, of gedoen een
+bladsy op 'n slag of twee bladsye op 'n tyd,
+
+708
+00:33:52,530 --> 00:33:54,810
+is 'n soort van fundamenteel dieselfde.
+
+709
+00:33:54,810 --> 00:33:56,880
+Dit is nog steeds op die einde van n.
+
+710
+00:33:56,880 --> 00:34:01,930
+Maar ek beweer met my prentjie vroeër
+dat die derde algoritme was nie
+
+711
+00:34:01,930 --> 00:34:02,480
+lineêre.
+
+712
+00:34:02,480 --> 00:34:03,605
+Dit was nie 'n reguit lyn.
+
+713
+00:34:03,605 --> 00:34:08,659
+Dit was wat geboë lyn, en die
+algebraïese formule daar was wat?
+
+714
+00:34:08,659 --> 00:34:11,812
+Meld van n-- so teken basis twee van N.
+
+715
+00:34:11,812 --> 00:34:14,520
+En ons het nie in te gaan
+veel detail oor logaritmes vandag,
+
+716
+00:34:14,520 --> 00:34:17,394
+maar die meeste rekenaar wetenskaplikes sou nie
+selfs vir jou sê wat die basis is.
+
+717
+00:34:17,394 --> 00:34:20,639
+Want dit gaan alles net
+konstante faktore, om so te praat,
+
+718
+00:34:20,639 --> 00:34:22,659
+net effense numeriese verskille.
+
+719
+00:34:22,659 --> 00:34:31,179
+En so sou dit 'n baie algemene wees
+manier vir veral formele rekenaar
+
+720
+00:34:31,179 --> 00:34:33,949
+wetenskaplikes by 'n raad of
+programmeerders op 'n wit bord
+
+721
+00:34:33,949 --> 00:34:36,889
+eintlik argument wat
+algoritme hulle sou gebruik
+
+722
+00:34:36,889 --> 00:34:39,500
+of wat die doeltreffendheid
+van hul algoritme is.
+
+723
+00:34:39,500 --> 00:34:42,960
+>> En dit is nie noodwendig iets
+jy bespreek in enige detail,
+
+724
+00:34:42,960 --> 00:34:47,889
+maar 'n goeie programmeerder is iemand
+wat 'n soliede, formele agtergrond.
+
+725
+00:34:47,889 --> 00:34:50,120
+Hy is in staat om te praat
+jy in hierdie soort van manier
+
+726
+00:34:50,120 --> 00:34:53,350
+en eintlik maak
+kwalitatiewe argumente
+
+727
+00:34:53,350 --> 00:34:56,870
+waarom een ​​algoritme of
+een stuk sagteware
+
+728
+00:34:56,870 --> 00:35:00,165
+is beter in een of ander manier na 'n ander.
+
+729
+00:35:00,165 --> 00:35:02,540
+Omdat jy beslis kon
+net hardloop program een ​​persoon se
+
+730
+00:35:02,540 --> 00:35:04,980
+en tel die aantal sekondes
+wat dit neem om 'n paar nommers te sorteer,
+
+731
+00:35:04,980 --> 00:35:06,710
+en jy kan 'n paar uit te voer
+program ander persoon se
+
+732
+00:35:06,710 --> 00:35:08,418
+en die getal
+sekondes wat dit neem.
+
+733
+00:35:08,418 --> 00:35:12,840
+Maar dit is 'n meer algemene manier waarop
+jy kan gebruik om algoritmes te ontleed,
+
+734
+00:35:12,840 --> 00:35:15,520
+as jy wil, net op
+papier of net mondelings.
+
+735
+00:35:15,520 --> 00:35:18,430
+Sonder om eers om dit te draai, sonder
+selfs probeer monster insette,
+
+736
+00:35:18,430 --> 00:35:20,180
+jy kan net redeneer daardeur.
+
+737
+00:35:20,180 --> 00:35:24,670
+En so met die huur van 'n ontwikkelaar of indien
+met hom of haar soort argumenteer vir jou
+
+738
+00:35:24,670 --> 00:35:28,460
+hoekom hul algoritme, hul geheime
+sous vir die soek miljarde
+
+739
+00:35:28,460 --> 00:35:30,580
+van webblaaie vir jou
+maatskappy is beter, hierdie
+
+740
+00:35:30,580 --> 00:35:33,302
+is hierdie soort argumente wat hulle
+moet verkieslik in staat wees om te maak.
+
+741
+00:35:33,302 --> 00:35:35,010
+Of ten minste dit is
+die soort dinge
+
+742
+00:35:35,010 --> 00:35:40,211
+wat sou kom in gesprek, by
+minste in 'n baie formele bespreking.
+
+743
+00:35:40,211 --> 00:35:40,710
+Alles reg.
+
+744
+00:35:40,710 --> 00:35:44,400
+So Ben voorgestelde iets
+genoem seleksie soort.
+
+745
+00:35:44,400 --> 00:35:48,200
+Maar ek gaan voor te stel dat daar '
+ander maniere om dit te doen, ook.
+
+746
+00:35:48,200 --> 00:35:50,400
+Wat ek het nie regtig wil
+oor Ben se algoritme
+
+747
+00:35:50,400 --> 00:35:54,400
+is dat hy aangehou loop, of
+nadat my loop, heen en weer
+
+748
+00:35:54,400 --> 00:35:56,930
+en heen en weer en heen en weer.
+
+749
+00:35:56,930 --> 00:36:04,130
+Wat gebeur as plaas ek was om te doen
+iets soos hierdie getalle hier
+
+750
+00:36:04,130 --> 00:36:08,200
+en ek was net te gaan met elke
+getal op sy beurt as ek dit gegee?
+
+751
+00:36:08,200 --> 00:36:10,780
+>> Met ander woorde, hier is
+my lys van getalle.
+
+752
+00:36:10,780 --> 00:36:12,944
+Vier, een, drie, twee.
+
+753
+00:36:12,944 --> 00:36:14,360
+En ek gaan die volgende te doen.
+
+754
+00:36:14,360 --> 00:36:17,230
+Ek gaan die getalle te voeg
+waar hulle hoort eerder
+
+755
+00:36:17,230 --> 00:36:18,980
+as hulle een kies op 'n slag.
+
+756
+00:36:18,980 --> 00:36:20,820
+Met ander woorde, hier is die nommer vier.
+
+757
+00:36:20,820 --> 00:36:22,430
+>> Hier is my oorspronklike lys.
+
+758
+00:36:22,430 --> 00:36:25,290
+En ek gaan in stand te hou
+in wese 'n nuwe lys hier.
+
+759
+00:36:25,290 --> 00:36:26,710
+So, dit is die ou lys.
+
+760
+00:36:26,710 --> 00:36:28,560
+Dit is die nuwe lys.
+
+761
+00:36:28,560 --> 00:36:30,220
+Ek sien die nommer vier eerste.
+
+762
+00:36:30,220 --> 00:36:34,500
+My nuwe lys is aanvanklik leeg,
+so dit is trivially die geval
+
+763
+00:36:34,500 --> 00:36:36,410
+wat vier is nou verskillende soorte lys.
+
+764
+00:36:36,410 --> 00:36:39,560
+Ek is net om die aantal ek gegee het,
+en ek sit dit in my nuwe lys.
+
+765
+00:36:39,560 --> 00:36:41,460
+>> Is hierdie nuwe lys gesorteer?
+
+766
+00:36:41,460 --> 00:36:41,990
+Ja.
+
+767
+00:36:41,990 --> 00:36:45,090
+Dit is dom, want daar is net een
+element, maar dit is absoluut gesorteer.
+
+768
+00:36:45,090 --> 00:36:46,390
+Daar is niks uit plek.
+
+769
+00:36:46,390 --> 00:36:49,290
+Dit is meer interessant, hierdie algoritme
+toe ek gaan na die volgende stap.
+
+770
+00:36:49,290 --> 00:36:50,550
+>> Nou het ek een.
+
+771
+00:36:50,550 --> 00:36:55,430
+So een, natuurlik, behoort aan die
+begin of die einde van hierdie nuwe lys?
+
+772
+00:36:55,430 --> 00:36:56,360
+Die begin.
+
+773
+00:36:56,360 --> 00:36:58,530
+So ek het 'n paar werk nou doen.
+
+774
+00:36:58,530 --> 00:37:01,410
+Ek het al met 'n paar
+vryhede met my merker
+
+775
+00:37:01,410 --> 00:37:03,120
+deur net teken dinge
+waar ek wil hulle
+
+776
+00:37:03,120 --> 00:37:05,320
+maar dit is nie regtig
+akkuraat in 'n rekenaar.
+
+777
+00:37:05,320 --> 00:37:08,530
+'N Rekenaar, soos ons dit ken, het
+RAM, of Random Access Memory,
+
+778
+00:37:08,530 --> 00:37:12,411
+en dit is een byte en
+'n ander byte en ander byte.
+
+779
+00:37:12,411 --> 00:37:14,910
+En as jy 'n GB
+RAM, jy het 'n miljard grepe,
+
+780
+00:37:14,910 --> 00:37:16,680
+maar hulle is fisies in een plek.
+
+781
+00:37:16,680 --> 00:37:19,540
+Jy kan nie net rond te beweeg dinge
+deur dit op die bord
+
+782
+00:37:19,540 --> 00:37:20,750
+waar jy wil.
+
+783
+00:37:20,750 --> 00:37:24,090
+So as my nuwe lys het
+vier plekke in die geheue,
+
+784
+00:37:24,090 --> 00:37:27,480
+Ongelukkig is die vier is
+reeds op die verkeerde plek.
+
+785
+00:37:27,480 --> 00:37:30,410
+>> So om die getal voeg een
+Ek kan nie net hier te trek nie.
+
+786
+00:37:30,410 --> 00:37:31,901
+Dit geheue plek bestaan ​​nie.
+
+787
+00:37:31,901 --> 00:37:35,150
+Dit sou wees kullery, en ek was
+verneuk picturaal vir 'n paar minute
+
+788
+00:37:35,150 --> 00:37:35,800
+hier.
+
+789
+00:37:35,800 --> 00:37:40,950
+So regtig, as ek wil een hier sit,
+Ek het na die vier tydelik kopieer
+
+790
+00:37:40,950 --> 00:37:43,030
+en dan sit die een daar.
+
+791
+00:37:43,030 --> 00:37:45,500
+>> Dis goed dat die inligting korrek is,
+dit is tegnies moontlik,
+
+792
+00:37:45,500 --> 00:37:48,410
+maar besef dis ekstra werk.
+
+793
+00:37:48,410 --> 00:37:50,460
+Ek het nie net die getal in die plek.
+
+794
+00:37:50,460 --> 00:37:53,026
+Ek moes eers 'n skuif
+nommer, sit dit dan in die plek,
+
+795
+00:37:53,026 --> 00:37:54,650
+so ek soort verdubbel my hoeveelheid werk.
+
+796
+00:37:54,650 --> 00:37:55,660
+So hou dit in gedagte.
+
+797
+00:37:55,660 --> 00:37:57,120
+>> Maar ek nou gedoen met hierdie element.
+
+798
+00:37:57,120 --> 00:37:59,056
+Nou wil ek die nommer drie te gryp.
+
+799
+00:37:59,056 --> 00:38:00,430
+Waar, natuurlik, beteken dit hoort?
+
+800
+00:38:00,430 --> 00:38:01,480
+Tussenin.
+
+801
+00:38:01,480 --> 00:38:03,650
+Ek kan nie oneerlik nie
+en net sit dit daar,
+
+802
+00:38:03,650 --> 00:38:06,770
+omdat, weer, hierdie geheue
+is in fisiese plekke.
+
+803
+00:38:06,770 --> 00:38:10,900
+So ek moet die vier kopieer
+en sit die drie hier.
+
+804
+00:38:10,900 --> 00:38:11,550
+Nie 'n groot probleem nie.
+
+805
+00:38:11,550 --> 00:38:14,610
+Dis net 'n ekstra stap
+again-- voel baie goedkoop.
+
+806
+00:38:14,610 --> 00:38:16,445
+>> Maar nou het ek skuif op na die twee.
+
+807
+00:38:16,445 --> 00:38:17,820
+Die twee, natuurlik, behoort hier.
+
+808
+00:38:17,820 --> 00:38:20,990
+Nou begin jy sien hoe
+die werk kan ophoop.
+
+809
+00:38:20,990 --> 00:38:23,520
+Nou wat moet ek doen?
+
+810
+00:38:23,520 --> 00:38:28,570
+Ja, ek het na die vier beweeg,
+Ek moet dan die drie kopieer,
+
+811
+00:38:28,570 --> 00:38:31,200
+en nou kan ek die twee in te voeg.
+
+812
+00:38:31,200 --> 00:38:34,460
+En die vangs met hierdie
+algoritme, interessant genoeg,
+
+813
+00:38:34,460 --> 00:38:41,050
+is dat veronderstel ons 'n meer ekstreme
+geval waar dit kom ons sê agt, sewe,
+
+814
+00:38:41,050 --> 00:38:45,150
+ses, vyf, vier, drie, twee, een.
+
+815
+00:38:45,150 --> 00:38:49,450
+Dit is, in baie kontekste,
+die ergste geval scenario,
+
+816
+00:38:49,450 --> 00:38:51,570
+omdat die darn ding
+is letterlik agteruit.
+
+817
+00:38:51,570 --> 00:38:53,670
+>> Dit maak nie regtig
+invloed op Ben se algoritme,
+
+818
+00:38:53,670 --> 00:38:55,940
+want in Ben se keuse
+sorteer hy gaan hou
+
+819
+00:38:55,940 --> 00:38:58,359
+gaan heen en weer deur die lys.
+
+820
+00:38:58,359 --> 00:39:01,150
+En omdat hy altyd op soek
+deur die hele oorblywende lys,
+
+821
+00:39:01,150 --> 00:39:02,858
+dit maak nie saak
+waar die elemente is.
+
+822
+00:39:02,858 --> 00:39:05,630
+Maar in hierdie geval met my invoeging
+approach-- kom ons probeer dit.
+
+823
+00:39:05,630 --> 00:39:08,616
+>> So een, twee, drie, vier,
+vyf, ses, sewe, agt.
+
+824
+00:39:08,616 --> 00:39:11,630
+Een twee drie vier,
+vyf, ses, sewe, agt.
+
+825
+00:39:11,630 --> 00:39:14,320
+Ek gaan die agt neem,
+en waar kan ek dit?
+
+826
+00:39:14,320 --> 00:39:17,260
+Wel, aan die begin van my lys,
+want hierdie nuwe lys is gesorteer.
+
+827
+00:39:17,260 --> 00:39:18,760
+En ek steek dit uit.
+
+828
+00:39:18,760 --> 00:39:20,551
+>> Waar plaas ek die sewe?
+
+829
+00:39:20,551 --> 00:39:21,050
+Darn dit.
+
+830
+00:39:21,050 --> 00:39:23,174
+Dit moet daarheen gaan, sodat
+Ek het 'n paar kopiëring doen.
+
+831
+00:39:23,174 --> 00:39:26,820
+
+832
+00:39:26,820 --> 00:39:28,480
+En nou het die sewe gaan hier.
+
+833
+00:39:28,480 --> 00:39:29,860
+Nou beweeg ek na die ses.
+
+834
+00:39:29,860 --> 00:39:30,980
+Nou is dit nog meer werk.
+
+835
+00:39:30,980 --> 00:39:32,570
+>> Agt moet hier gaan.
+
+836
+00:39:32,570 --> 00:39:33,920
+Sewe moet hier gaan.
+
+837
+00:39:33,920 --> 00:39:35,450
+Nou is die ses kan hier gaan.
+
+838
+00:39:35,450 --> 00:39:37,950
+Nou gryp ek die vyf.
+
+839
+00:39:37,950 --> 00:39:40,560
+Nou is die agt het om te gaan
+hier, sewe het om hier te gaan,
+
+840
+00:39:40,560 --> 00:39:43,650
+ses het om hier te gaan, en
+nou die vyf en herhaal.
+
+841
+00:39:43,650 --> 00:39:46,610
+En ek is pretty much
+voortdurend in beweging is.
+
+842
+00:39:46,610 --> 00:39:52,950
+>> So aan die einde, hierdie algorithm-- ons sal
+noem dit voeg sort-- eintlik
+
+843
+00:39:52,950 --> 00:39:55,020
+het 'n baie werk ook.
+
+844
+00:39:55,020 --> 00:39:56,970
+Dis net verskillende
+soort werk as Ben se.
+
+845
+00:39:56,970 --> 00:40:00,090
+werk Ben se het my aan die gang
+heen en weer al die tyd,
+
+846
+00:40:00,090 --> 00:40:03,510
+kies die volgende kleinste
+element weer en weer.
+
+847
+00:40:03,510 --> 00:40:06,660
+So was dit juis visuele soort werk.
+
+848
+00:40:06,660 --> 00:40:10,600
+>> Dit ander algoritme, wat steeds
+correct-- dit sal die werk te kry done--
+
+849
+00:40:10,600 --> 00:40:12,800
+net verander die hoeveelheid werk.
+
+850
+00:40:12,800 --> 00:40:15,420
+Dit lyk soos aanvanklik jy
+spaar, omdat jy net is
+
+851
+00:40:15,420 --> 00:40:19,190
+die hantering van elke element
+voorlangs sonder loop al
+
+852
+00:40:19,190 --> 00:40:20,930
+die pad deur die lys soos Ben was.
+
+853
+00:40:20,930 --> 00:40:25,300
+Maar die probleem is, veral in hierdie
+Crazy gevalle waar dit gaan alles agteruit,
+
+854
+00:40:25,300 --> 00:40:27,830
+jy is net soort
+uitstel van die harde werk
+
+855
+00:40:27,830 --> 00:40:30,360
+totdat jy jou foute reg te stel.
+
+856
+00:40:30,360 --> 00:40:33,919
+>> En so as jy kan hierdie voorstel
+agt en sewe en ses en vyf
+
+857
+00:40:33,919 --> 00:40:36,710
+en later vier en drie en twee
+beweeg hulle weg deur die lys,
+
+858
+00:40:36,710 --> 00:40:39,060
+Ons het net verander die
+tipe werk wat ons doen.
+
+859
+00:40:39,060 --> 00:40:42,340
+In plaas van om dit te doen op die
+begin van my iterasie,
+
+860
+00:40:42,340 --> 00:40:45,250
+Ek is net om dit te doen op die
+einde van elke iterasie.
+
+861
+00:40:45,250 --> 00:40:50,550
+So dit blyk dat hierdie algoritme,
+Ook algemeen bekend as invoeging soort,
+
+862
+00:40:50,550 --> 00:40:52,190
+is ook op die einde van N vierkant.
+
+863
+00:40:52,190 --> 00:40:56,480
+Dit is eintlik nie 'n beter,
+geen beter nie.
+
+864
+00:40:56,480 --> 00:41:00,810
+>> Daar is egter 'n derde benadering
+Ek sou ons aanmoedig om te oorweeg,
+
+865
+00:41:00,810 --> 00:41:02,970
+wat is dit.
+
+866
+00:41:02,970 --> 00:41:07,850
+So dink my lys, vir eenvoud
+weer, is vier, een, drie,
+
+867
+00:41:07,850 --> 00:41:11,080
+two-- net vier getalle.
+
+868
+00:41:11,080 --> 00:41:13,300
+Ben het 'n goeie aanvoeling,
+goeie menslike intuïsie
+
+869
+00:41:13,300 --> 00:41:16,340
+voor, waardeur ons vaste die hele
+lys eventually-- invoeging soort.
+
+870
+00:41:16,340 --> 00:41:18,020
+Ek mislei ons saam.
+
+871
+00:41:18,020 --> 00:41:22,530
+Maar laat ons kyk na die
+eenvoudigste manier om hierdie lys te los.
+
+872
+00:41:22,530 --> 00:41:24,110
+>> Hierdie lys is nie gesorteer.
+
+873
+00:41:24,110 --> 00:41:26,130
+Hoekom?
+
+874
+00:41:26,130 --> 00:41:31,920
+In Engels, verduidelik waarom
+dit is nie eintlik gesorteer.
+
+875
+00:41:31,920 --> 00:41:33,400
+Wat beteken dit om nie gesorteer?
+
+876
+00:41:33,400 --> 00:41:34,220
+>> STUDENT: Dit is nie opeenvolgende.
+
+877
+00:41:34,220 --> 00:41:34,990
+>> David Malan: Nie opeenvolgende.
+
+878
+00:41:34,990 --> 00:41:35,822
+Gee my 'n voorbeeld.
+
+879
+00:41:35,822 --> 00:41:37,180
+>> STUDENT: Sit hulle in orde is.
+
+880
+00:41:37,180 --> 00:41:37,440
+>> David Malan: OK.
+
+881
+00:41:37,440 --> 00:41:38,790
+Gee my 'n meer spesifieke voorbeeld.
+
+882
+00:41:38,790 --> 00:41:39,832
+>> STUDENT: stygende volgorde.
+
+883
+00:41:39,832 --> 00:41:41,206
+David Malan: Nie stygende volgorde.
+
+884
+00:41:41,206 --> 00:41:42,100
+Meer akkurate.
+
+885
+00:41:42,100 --> 00:41:45,190
+Ek weet nie wat jy bedoel met stygende.
+
+886
+00:41:45,190 --> 00:41:47,150
+Wat is fout?
+
+887
+00:41:47,150 --> 00:41:49,930
+>> STUDENT: Die kleinste van die
+getalle is nie in die eerste plek.
+
+888
+00:41:49,930 --> 00:41:51,140
+>> David Malan: Kleinste se nommer
+nie in die eerste plek.
+
+889
+00:41:51,140 --> 00:41:52,120
+Wees meer spesifiek.
+
+890
+00:41:52,120 --> 00:41:55,000
+Ek is besig om te vang op.
+
+891
+00:41:55,000 --> 00:41:59,470
+Ons tel nie, maar
+wat buite werking is hier?
+
+892
+00:41:59,470 --> 00:42:00,707
+>> STUDENT: numeriese volgorde.
+
+893
+00:42:00,707 --> 00:42:02,040
+David Malan: numeriese volgorde.
+
+894
+00:42:02,040 --> 00:42:04,248
+Almal se soort bewaring
+dit here-- baie hoë vlak.
+
+895
+00:42:04,248 --> 00:42:07,450
+Net letterlik vir my sê wat is
+verkeerd soos 'n vyf-jaar-oue krag.
+
+896
+00:42:07,450 --> 00:42:08,310
+>> STUDENT: plus een.
+
+897
+00:42:08,310 --> 00:42:08,750
+>> David Malan: Wat is dit?
+
+898
+00:42:08,750 --> 00:42:09,610
+>> STUDENT: plus een.
+
+899
+00:42:09,610 --> 00:42:11,235
+>> David Malan: Wat bedoel jy plus een?
+
+900
+00:42:11,235 --> 00:42:12,754
+
+901
+00:42:12,754 --> 00:42:14,170
+Gee my 'n ander vyf-jaar-oue.
+
+902
+00:42:14,170 --> 00:42:16,840
+
+903
+00:42:16,840 --> 00:42:18,330
+Wat is fout, ma?
+
+904
+00:42:18,330 --> 00:42:19,940
+Wat is fout, pa?
+
+905
+00:42:19,940 --> 00:42:22,808
+Wat bedoel jy dit nie gesorteer?
+
+906
+00:42:22,808 --> 00:42:24,370
+>> STUDENT: Dit is nie die regte plek.
+
+907
+00:42:24,370 --> 00:42:25,580
+>> David Malan: Wat is
+nie op die regte plek?
+
+908
+00:42:25,580 --> 00:42:26,174
+>> STUDENT: Vier.
+
+909
+00:42:26,174 --> 00:42:27,090
+David Malan: OK, goed.
+
+910
+00:42:27,090 --> 00:42:29,110
+So vier is nie waar dit moet wees.
+
+911
+00:42:29,110 --> 00:42:30,590
+In die besonder, is dit reg?
+
+912
+00:42:30,590 --> 00:42:33,000
+Vier en een, die eerste
+twee getalle Ek sien.
+
+913
+00:42:33,000 --> 00:42:34,930
+Is dit reg?
+
+914
+00:42:34,930 --> 00:42:36,427
+Nee, hulle is buite orde, reg?
+
+915
+00:42:36,427 --> 00:42:38,135
+Trouens, dink nou
+oor 'n rekenaar, ook.
+
+916
+00:42:38,135 --> 00:42:40,824
+Dit kan net kyk na miskien een,
+Miskien twee dinge by once--
+
+917
+00:42:40,824 --> 00:42:43,240
+en eintlik net een ding
+op 'n tyd, maar dit kan ten minste
+
+918
+00:42:43,240 --> 00:42:45,790
+kyk na een ding dan die
+volgende ding reg langs dit.
+
+919
+00:42:45,790 --> 00:42:47,380
+>> So is dit in orde?
+
+920
+00:42:47,380 --> 00:42:48,032
+Natuurlik nie.
+
+921
+00:42:48,032 --> 00:42:48,740
+So jy weet wat?
+
+922
+00:42:48,740 --> 00:42:51,020
+Hoekom het ons nie neem baba
+stappe van hierdie probleem
+
+923
+00:42:51,020 --> 00:42:53,410
+in plaas van om hierdie fancy
+algoritmes soos Ben, waar
+
+924
+00:42:53,410 --> 00:42:56,440
+hy soort van die vasstelling dit deur
+herhaling deur die lys
+
+925
+00:42:56,440 --> 00:42:59,670
+in plaas van om te doen wat ek gedoen het, waar
+Ek het net soort van vaste dit as ons gaan?
+
+926
+00:42:59,670 --> 00:43:03,650
+Kom ons letterlik breek die
+idee van order-- numeriese volgorde,
+
+927
+00:43:03,650 --> 00:43:06,990
+Noem dit wat jy want--
+in hierdie paarsgewyse vergelykings.
+
+928
+00:43:06,990 --> 00:43:07,590
+>> Vier en een.
+
+929
+00:43:07,590 --> 00:43:09,970
+Is dit die korrekte volgorde?
+
+930
+00:43:09,970 --> 00:43:11,310
+So laat ons los dit.
+
+931
+00:43:11,310 --> 00:43:14,700
+Een en vier, en dan
+ons sal net kopieer dit.
+
+932
+00:43:14,700 --> 00:43:15,560
+Goed, goed.
+
+933
+00:43:15,560 --> 00:43:17,022
+Ek vaste een en vier.
+
+934
+00:43:17,022 --> 00:43:18,320
+Drie en twee?
+
+935
+00:43:18,320 --> 00:43:18,820
+Geen.
+
+936
+00:43:18,820 --> 00:43:21,690
+Laat my woorde pas my vingers.
+
+937
+00:43:21,690 --> 00:43:23,695
+Vier en drie?
+
+938
+00:43:23,695 --> 00:43:27,930
+>> Dit is nie in orde is, so ek gaan
+een, drie, vier, twee doen.
+
+939
+00:43:27,930 --> 00:43:28,680
+Goed so.
+
+940
+00:43:28,680 --> 00:43:32,310
+Nou vier en twee?
+
+941
+00:43:32,310 --> 00:43:33,370
+Ons moet dit op te los, te.
+
+942
+00:43:33,370 --> 00:43:36,700
+So een, drie, twee, vier.
+
+943
+00:43:36,700 --> 00:43:39,820
+So is dit gesorteer?
+
+944
+00:43:39,820 --> 00:43:43,170
+Nee, maar is dit nader aan gesorteer?
+
+945
+00:43:43,170 --> 00:43:48,930
+>> Dit is omdat ons hierdie vaste
+fout, vaste ons hierdie fout,
+
+946
+00:43:48,930 --> 00:43:50,370
+en ons vaste die fout.
+
+947
+00:43:50,370 --> 00:43:52,420
+So vaste ons drie foute waarskynlik.
+
+948
+00:43:52,420 --> 00:43:58,100
+Nog nie regtig kyk gesorteer maar
+dit is objektief nader aan gesorteerde
+
+949
+00:43:58,100 --> 00:44:00,080
+omdat ons vaste 'n paar van daardie foute.
+
+950
+00:44:00,080 --> 00:44:02,047
+>> Nou wat moet ek doen?
+
+951
+00:44:02,047 --> 00:44:03,630
+Ek hou nogal van die einde van die lys.
+
+952
+00:44:03,630 --> 00:44:05,680
+Ek skynbaar vaste
+al die foute, maar nee.
+
+953
+00:44:05,680 --> 00:44:08,510
+Want in hierdie geval, 'n paar nommers
+dalk geborrel het nader
+
+954
+00:44:08,510 --> 00:44:10,410
+om ander getalle wat
+nog buite werking.
+
+955
+00:44:10,410 --> 00:44:12,951
+So laat ons dit weer doen, en ek sal
+doen dit net in plek hierdie tyd.
+
+956
+00:44:12,951 --> 00:44:14,170
+Een en drie?
+
+957
+00:44:14,170 --> 00:44:14,720
+Dit is fyn.
+
+958
+00:44:14,720 --> 00:44:16,070
+Drie en twee?
+
+959
+00:44:16,070 --> 00:44:17,560
+Natuurlik nie, so laat ons dit verander.
+
+960
+00:44:17,560 --> 00:44:19,160
+So twee, drie.
+
+961
+00:44:19,160 --> 00:44:21,340
+Drie en vier?
+
+962
+00:44:21,340 --> 00:44:24,370
+En nou, laat ons net
+veral pedanties hier.
+
+963
+00:44:24,370 --> 00:44:26,350
+Is dit gesorteer?
+
+964
+00:44:26,350 --> 00:44:29,280
+Julle mense weet dit gesorteer.
+
+965
+00:44:29,280 --> 00:44:30,400
+>> Ek moet weer probeer.
+
+966
+00:44:30,400 --> 00:44:31,900
+So Olivia stel ek probeer weer.
+
+967
+00:44:31,900 --> 00:44:32,530
+Hoekom?
+
+968
+00:44:32,530 --> 00:44:35,810
+Omdat 'n rekenaar het nie
+die luukse van ons menslike oë
+
+969
+00:44:35,810 --> 00:44:38,080
+van net skrams back-- OK, ek gedoen.
+
+970
+00:44:38,080 --> 00:44:41,610
+Hoe werk die rekenaar te bepaal
+dat die lys is nou gesorteer?
+
+971
+00:44:41,610 --> 00:44:44,590
+Meganies.
+
+972
+00:44:44,590 --> 00:44:47,650
+>> Ek moet deurgaan
+een maal, wys en net as ek
+
+973
+00:44:47,650 --> 00:44:51,190
+maak nie / vind foute kan ek
+dan aflei as die rekenaar, yep,
+
+974
+00:44:51,190 --> 00:44:51,980
+ons is goed om te gaan.
+
+975
+00:44:51,980 --> 00:44:54,850
+So een en twee, twee en
+drie, drie en vier.
+
+976
+00:44:54,850 --> 00:44:58,030
+Nou kan ek beslis sê dit is
+gesorteer, want ek geen veranderinge gemaak.
+
+977
+00:44:58,030 --> 00:45:01,940
+Nou sou dit 'n fout wees en net
+dwase as ek, die rekenaar,
+
+978
+00:45:01,940 --> 00:45:05,640
+gevra daardie selfde vrae weer
+verwag verskillende antwoorde.
+
+979
+00:45:05,640 --> 00:45:07,110
+Indien nie gebeur nie.
+
+980
+00:45:07,110 --> 00:45:08,600
+>> En so nou is die lys is gesorteer.
+
+981
+00:45:08,600 --> 00:45:12,630
+Ongelukkig loop tyd van
+hierdie algoritme word ook N vierkant.
+
+982
+00:45:12,630 --> 00:45:13,130
+Hoekom?
+
+983
+00:45:13,130 --> 00:45:19,520
+Omdat jy N getalle, en in die
+ergste geval moet jy n getalle beweeg
+
+984
+00:45:19,520 --> 00:45:23,637
+N keer, want jy het om aan te hou
+terug te kyk en potensieel los
+
+985
+00:45:23,637 --> 00:45:24,220
+hierdie getalle.
+
+986
+00:45:24,220 --> 00:45:26,280
+En ons kan 'n meer doen
+formele analise ook.
+
+987
+00:45:26,280 --> 00:45:29,530
+>> So dit is al te sê ons het geneem
+drie verskillende benaderings, een
+
+988
+00:45:29,530 --> 00:45:32,210
+van hulle onmiddellik intuïtief
+uit die kolf van Ben
+
+989
+00:45:32,210 --> 00:45:35,170
+om my voorgestelde invoeging
+sorteer om hierdie een
+
+990
+00:45:35,170 --> 00:45:38,540
+waar jy soort van uit die oog verloor
+die bos vir die bome aanvanklik.
+
+991
+00:45:38,540 --> 00:45:41,760
+Maar dan as jy 'n stap terug te neem,
+voila, ons het die sortering idee vasgestel.
+
+992
+00:45:41,760 --> 00:45:43,824
+So dit is, waag om te sê,
+'n laer vlak miskien
+
+993
+00:45:43,824 --> 00:45:45,740
+as 'n paar van die ander
+algoritmes, maar laat ons
+
+994
+00:45:45,740 --> 00:45:48,550
+kyk of ons nie kan visualiseer
+hierdie by wyse van hierdie.
+
+995
+00:45:48,550 --> 00:45:51,450
+>> So dit is 'n paar mooi
+sagteware wat iemand
+
+996
+00:45:51,450 --> 00:45:56,110
+geskryf met behulp van kleurvolle bars dis
+gaan die volgende te doen vir ons.
+
+997
+00:45:56,110 --> 00:45:57,736
+Elkeen van hierdie bars verteenwoordig 'n aantal.
+
+998
+00:45:57,736 --> 00:46:00,026
+Langer die bar, hoe groter
+die getal, kleiner die bar,
+
+999
+00:46:00,026 --> 00:46:00,990
+hoe kleiner die nommer.
+
+1000
+00:46:00,990 --> 00:46:05,880
+Ideaal gesproke wil ons 'n lekker piramide
+waar dit begin klein en kry 'n groot,
+
+1001
+00:46:05,880 --> 00:46:08,330
+en dit sou beteken dat
+hierdie bars gesorteer.
+
+1002
+00:46:08,330 --> 00:46:11,200
+So ek gaan om voort te gaan en te kies,
+byvoorbeeld, Ben se algoritme
+
+1003
+00:46:11,200 --> 00:46:13,990
+first-- seleksie soort.
+
+1004
+00:46:13,990 --> 00:46:16,220
+>> En sien wat dit doen.
+
+1005
+00:46:16,220 --> 00:46:18,670
+Die manier waarop hulle gekies het om
+visualiseer hierdie algoritme
+
+1006
+00:46:18,670 --> 00:46:22,090
+is dat, net soos ek was
+loop deur my lys,
+
+1007
+00:46:22,090 --> 00:46:24,710
+hierdie program is loop
+deur middel van sy lys van getalle,
+
+1008
+00:46:24,710 --> 00:46:28,160
+beklemtoon in pienk elke
+getal wat dit na.
+
+1009
+00:46:28,160 --> 00:46:32,360
+En wat is die punt om nou gebeur?
+
+1010
+00:46:32,360 --> 00:46:35,154
+>> Die kleinste getal wat
+Ek of Ben gevind skielik
+
+1011
+00:46:35,154 --> 00:46:36,820
+kry verskuif na die begin van die lys.
+
+1012
+00:46:36,820 --> 00:46:40,037
+En let op wat hulle gedoen het uitjaag
+die getal wat daar was,
+
+1013
+00:46:40,037 --> 00:46:41,120
+en dit is heeltemal fyn.
+
+1014
+00:46:41,120 --> 00:46:42,600
+Ek het nie in daardie vlak van detail.
+
+1015
+00:46:42,600 --> 00:46:44,308
+Maar ons moet sit
+dat die getal iewers,
+
+1016
+00:46:44,308 --> 00:46:47,775
+sodat ons net verskuif dit na die
+oop kol wat geskep is.
+
+1017
+00:46:47,775 --> 00:46:49,900
+So ek gaan hierdie bespoedig
+up, want anders is dit
+
+1018
+00:46:49,900 --> 00:46:51,871
+word vinnig baie geduld.
+
+1019
+00:46:51,871 --> 00:46:55,800
+
+1020
+00:46:55,800 --> 00:46:58,600
+Animasie speed-- daar gaan ons.
+
+1021
+00:46:58,600 --> 00:47:01,850
+So nou dieselfde beginsel
+Ek is die toepassing, maar jy
+
+1022
+00:47:01,850 --> 00:47:06,540
+kan begin om die algoritme voel, as jy
+wil nie, of sien dit 'n bietjie meer duidelik.
+
+1023
+00:47:06,540 --> 00:47:13,190
+En hierdie algoritme het die effek van
+kies die volgende kleinste element,
+
+1024
+00:47:13,190 --> 00:47:16,422
+so jy gaan begin om
+sien dit oprit aan die linkerkant.
+
+1025
+00:47:16,422 --> 00:47:19,130
+En op elke iterasie, soos ek
+voorgestelde, is dit nie 'n bietjie minder werk.
+
+1026
+00:47:19,130 --> 00:47:21,921
+Dit hoef nie al die pad om te gaan
+terug na die linkerkant van die lys,
+
+1027
+00:47:21,921 --> 00:47:23,900
+omdat dit reeds
+weet dit is gesorteer.
+
+1028
+00:47:23,900 --> 00:47:28,129
+Daarom is dit soort van voel soos dit is
+versnel, selfs al is elke stap is
+
+1029
+00:47:28,129 --> 00:47:29,420
+neem dieselfde hoeveelheid tyd.
+
+1030
+00:47:29,420 --> 00:47:31,600
+Daar is net minder stappe wat oorbly.
+
+1031
+00:47:31,600 --> 00:47:35,240
+En nou kan jy soort van voel die
+algoritme skoonmaak van die einde van dit,
+
+1032
+00:47:35,240 --> 00:47:37,040
+en inderdaad is dit nou uitgesorteer.
+
+1033
+00:47:37,040 --> 00:47:41,620
+>> So voeg soort is al gedoen.
+
+1034
+00:47:41,620 --> 00:47:43,600
+Ek nodig het om weer dit enige van die skikking.
+
+1035
+00:47:43,600 --> 00:47:45,940
+En sien wat ek kan net
+hou randomizing dit,
+
+1036
+00:47:45,940 --> 00:47:50,630
+en ons sal 'n aanpassing van die kry
+dieselfde benadering, voeg soort.
+
+1037
+00:47:50,630 --> 00:47:55,050
+Laat my stadig dit af hier.
+
+1038
+00:47:55,050 --> 00:47:56,915
+Kom ons begin wat verby is.
+
+1039
+00:47:56,915 --> 00:47:57,414
+Stop.
+
+1040
+00:47:57,414 --> 00:48:00,662
+
+1041
+00:48:00,662 --> 00:48:02,410
+>> Kom ons slaan vier.
+
+1042
+00:48:02,410 --> 00:48:03,200
+Daar gaan ons.
+
+1043
+00:48:03,200 --> 00:48:04,190
+Dit enige hulle skikking.
+
+1044
+00:48:04,190 --> 00:48:05,555
+En hier go-- ons voeg soort.
+
+1045
+00:48:05,555 --> 00:48:10,260
+
+1046
+00:48:10,260 --> 00:48:12,800
+Speel.
+
+1047
+00:48:12,800 --> 00:48:17,280
+Let daarop dat dit die hantering van elke
+element dit ontmoetings dadelik,
+
+1048
+00:48:17,280 --> 00:48:20,282
+maar as dit hoort in
+die verkeerde plek kennisgewing
+
+1049
+00:48:20,282 --> 00:48:21,740
+al die werk wat moet gebeur.
+
+1050
+00:48:21,740 --> 00:48:24,700
+Ons moet aanhou verskuiwing meer
+en nog baie meer elemente om plek te maak
+
+1051
+00:48:24,700 --> 00:48:27,340
+vir die een wil ons in plek te stel.
+
+1052
+00:48:27,340 --> 00:48:30,740
+>> Ons is dus fokus op die
+linkerkant van slegs die lys.
+
+1053
+00:48:30,740 --> 00:48:34,460
+Sien ons het nie eens gekyk at-- ons
+het nie uitgelig in pienk enigiets
+
+1054
+00:48:34,460 --> 00:48:35,610
+aan die regterkant.
+
+1055
+00:48:35,610 --> 00:48:38,180
+Ons is net die hantering van
+die probleme as ons gaan,
+
+1056
+00:48:38,180 --> 00:48:40,430
+maar ons skep 'n baie
+werk vir onsself steeds.
+
+1057
+00:48:40,430 --> 00:48:44,410
+En so as ons bespoedig hierdie up
+nou om te gaan na voltooiing,
+
+1058
+00:48:44,410 --> 00:48:46,210
+dit het 'n ander gevoel om dit inderdaad.
+
+1059
+00:48:46,210 --> 00:48:50,150
+Dit is net te fokus op die linker kant, maar
+doen 'n bietjie meer werk as needed--
+
+1060
+00:48:50,150 --> 00:48:53,230
+soort glad dinge
+oor, vas dinge,
+
+1061
+00:48:53,230 --> 00:48:58,350
+maar die hantering uiteindelik met
+elke element een op 'n slag
+
+1062
+00:48:58,350 --> 00:49:07,740
+totdat ons om goed te the--, ons
+almal weet hoe dit gaan eindig,
+
+1063
+00:49:07,740 --> 00:49:09,700
+so dit is 'n bietjie underwhelming miskien.
+
+1064
+00:49:09,700 --> 00:49:12,830
+>> Maar die lys in die end--
+spoiler-- gaan word gesorteer.
+
+1065
+00:49:12,830 --> 00:49:15,300
+So kom ons kyk na 'n laaste een.
+
+1066
+00:49:15,300 --> 00:49:16,840
+Ons kan nie net slaan nou.
+
+1067
+00:49:16,840 --> 00:49:18,000
+Ons is amper daar.
+
+1068
+00:49:18,000 --> 00:49:19,980
+Twee gaan, een om te gaan.
+
+1069
+00:49:19,980 --> 00:49:22,680
+En voila.
+
+1070
+00:49:22,680 --> 00:49:23,450
+Uitstekende.
+
+1071
+00:49:23,450 --> 00:49:27,220
+>> So nou kom ons doen 'n laaste een,
+weer randomizing met borrelsortering.
+
+1072
+00:49:27,220 --> 00:49:31,690
+En sien hier, veral as ek stadig dit
+af, beteken dit hou neerskiet deur.
+
+1073
+00:49:31,690 --> 00:49:36,830
+Maar let op dit maak net paarsgewyse
+comparisons-- soort plaaslike oplossings.
+
+1074
+00:49:36,830 --> 00:49:39,050
+Maar so gou as wat ons kry om
+die einde van die lys in pienk,
+
+1075
+00:49:39,050 --> 00:49:40,690
+wat gaan hê om weer te gebeur?
+
+1076
+00:49:40,690 --> 00:49:44,539
+
+1077
+00:49:44,539 --> 00:49:46,830
+Ja, dit gaan om te hê
+begin oor, omdat dit slegs
+
+1078
+00:49:46,830 --> 00:49:49,870
+vaste paarsgewyse foute.
+
+1079
+00:49:49,870 --> 00:49:53,120
+En dit kan nog ander het aan die lig gebring.
+
+1080
+00:49:53,120 --> 00:49:58,950
+En dus as jy hierdie bespoedig, sal jy
+sien dat soveel as die naam impliseer,
+
+1081
+00:49:58,950 --> 00:50:01,870
+die kleiner elements-- of liewer,
+die groter elements-- begin
+
+1082
+00:50:01,870 --> 00:50:03,740
+borrel op die top, as jy wil.
+
+1083
+00:50:03,740 --> 00:50:07,380
+En die kleiner elemente
+begin borrel tot by die linkerkant.
+
+1084
+00:50:07,380 --> 00:50:10,780
+En inderdaad, dit is soort van
+die visuele effek sowel.
+
+1085
+00:50:10,780 --> 00:50:17,150
+En so sal dit uiteindelik afwerking
+in 'n baie soortgelyke wyse ook.
+
+1086
+00:50:17,150 --> 00:50:19,160
+>> Ons hoef nie te woon
+op hierdie spesifieke een.
+
+1087
+00:50:19,160 --> 00:50:21,010
+Laat my nou oop, ook.
+
+1088
+00:50:21,010 --> 00:50:24,040
+Daar is 'n paar ander sorteringsalgoritmes
+in die wêreld, 'n paar van wat
+
+1089
+00:50:24,040 --> 00:50:25,580
+Hier vasgevang.
+
+1090
+00:50:25,580 --> 00:50:29,960
+En veral vir leerders wat nie
+noodwendig visuele of wiskundige,
+
+1091
+00:50:29,960 --> 00:50:31,930
+Soos ons vantevore gedoen het, kan ons
+dit te doen ook audially
+
+1092
+00:50:31,930 --> 00:50:34,210
+As ons assosieer 'n geluid met hierdie.
+
+1093
+00:50:34,210 --> 00:50:36,990
+En net vir die pret, hier is 'n
+paar verskillende algoritmes,
+
+1094
+00:50:36,990 --> 00:50:40,950
+en een van hulle in die besonder is jy
+gaan Kennisgewing heet "merge soort."
+
+1095
+00:50:40,950 --> 00:50:43,250
+>> Dit is eintlik 'n fundamenteel
+beter algoritme,
+
+1096
+00:50:43,250 --> 00:50:45,860
+sodanig dat soort saamsmelt, een van
+die mense wat jy oor om te sien,
+
+1097
+00:50:45,860 --> 00:50:49,170
+is nie orde van N vierkant.
+
+1098
+00:50:49,170 --> 00:50:57,280
+Dit is op die einde van N keer inteken van
+N, wat eintlik kleiner en dus
+
+1099
+00:50:57,280 --> 00:50:58,940
+vinniger as die ander drie.
+
+1100
+00:50:58,940 --> 00:51:00,670
+En daar is 'n ander paartjie
+dom mense wat ons sal sien.
+
+1101
+00:51:00,670 --> 00:51:01,933
+>> So hier gaan ons met 'n paar goeie.
+
+1102
+00:51:01,933 --> 00:51:06,620
+
+1103
+00:51:06,620 --> 00:51:10,490
+Dit is invoeging soort, so weer
+dit is net die hantering van die elemente
+
+1104
+00:51:10,490 --> 00:51:13,420
+soos hulle kom.
+
+1105
+00:51:13,420 --> 00:51:17,180
+Dit is borrelsortering, so dit is
+oorweeg dit pare op 'n slag.
+
+1106
+00:51:17,180 --> 00:51:22,030
+
+1107
+00:51:22,030 --> 00:51:24,490
+En weer, die grootste elemente
+is borrelende tot die top.
+
+1108
+00:51:24,490 --> 00:51:38,098
+
+1109
+00:51:38,098 --> 00:51:41,710
+>> Volgende aan die beurt seleksie soort.
+
+1110
+00:51:41,710 --> 00:51:45,420
+Dit is Ben se algoritme, waar
+weer hy kies iteratief
+
+1111
+00:51:45,420 --> 00:51:46,843
+die volgende kleinste element.
+
+1112
+00:51:46,843 --> 00:51:49,801
+
+1113
+00:51:49,801 --> 00:51:53,900
+En weer, nou kan jy regtig hoor wat
+dit bespoediging maar slegs in soverre
+
+1114
+00:51:53,900 --> 00:51:58,230
+as dit doen al hoe minder
+werk op elke iterasie.
+
+1115
+00:51:58,230 --> 00:52:04,170
+Dit is die vinniger een, saamsmelt soort,
+wat sorteer trosse van getalle
+
+1116
+00:52:04,170 --> 00:52:05,971
+saam en dan hulle te kombineer.
+
+1117
+00:52:05,971 --> 00:52:07,720
+So look-- links
+helfte is reeds gesorteer.
+
+1118
+00:52:07,720 --> 00:52:14,165
+>> Nou is dit te sorteer die regte helfte, en
+nou dit gaan om hulle te kombineer in een.
+
+1119
+00:52:14,165 --> 00:52:19,160
+Dit is iets genaamd "Gnome soort."
+
+1120
+00:52:19,160 --> 00:52:23,460
+En jy kan soort sien dat
+dit heen en weer gaan,
+
+1121
+00:52:23,460 --> 00:52:27,950
+vaststelling werk 'n bietjie hier en
+daar voor dit verder gaan om nuwe werk.
+
+1122
+00:52:27,950 --> 00:52:32,900
+
+1123
+00:52:32,900 --> 00:52:33,692
+En dit is dit.
+
+1124
+00:52:33,692 --> 00:52:36,400
+Daar is 'n ander soort, wat
+eintlik net vir akademiese doeleindes,
+
+1125
+00:52:36,400 --> 00:52:40,980
+genoem "dom sorteer," wat neem
+jou data, sorteer dit lukraak,
+
+1126
+00:52:40,980 --> 00:52:43,350
+en dan kontroleer of dit gesorteer is.
+
+1127
+00:52:43,350 --> 00:52:47,880
+En as dit is nie, is dit weer sorteer dit
+lukraak, tjeks as dit gesorteer,
+
+1128
+00:52:47,880 --> 00:52:49,440
+en as dit nie herhaal.
+
+1129
+00:52:49,440 --> 00:52:52,660
+En in teorie, probabilistically
+dit sal voltooi,
+
+1130
+00:52:52,660 --> 00:52:54,140
+maar na nogal 'n bietjie van die tyd.
+
+1131
+00:52:54,140 --> 00:52:56,930
+Dit is nie die mees
+doeltreffende algoritmes.
+
+1132
+00:52:56,930 --> 00:53:02,550
+So enige vrae oor die
+spesifieke algoritmes of enigiets
+
+1133
+00:53:02,550 --> 00:53:04,720
+Daar verwante ook?
+
+1134
+00:53:04,720 --> 00:53:09,430
+>> Wel, laat ons nou terg uitmekaar wat al
+hierdie lyne is dat ek het al die tekens
+
+1135
+00:53:09,430 --> 00:53:15,090
+en wat Ek neem aan die rekenaar
+kan doen onder die enjinkap.
+
+1136
+00:53:15,090 --> 00:53:18,650
+Ek sou argumenteer dat al hierdie getalle
+Ek hou drawing-- wat hulle nodig het om te kry
+
+1137
+00:53:18,650 --> 00:53:21,330
+iewers gestoor in die geheue.
+
+1138
+00:53:21,330 --> 00:53:24,130
+Ons sal ontslae te raak van hierdie man kry nou ook.
+
+1139
+00:53:24,130 --> 00:53:30,110
+>> So 'n stuk van die geheue in 'n
+computer-- so RAM DIMM is
+
+1140
+00:53:30,110 --> 00:53:35,480
+wat ons gesoek het gister, dubbele
+inline memory module-- lyk soos volg.
+
+1141
+00:53:35,480 --> 00:53:39,370
+En elkeen van hierdie klein swart skyfies
+is 'n paar aantal grepe, tipies.
+
+1142
+00:53:39,370 --> 00:53:44,380
+En dan die goud penne is soos die
+drade dat dit verbind aan die rekenaar,
+
+1143
+00:53:44,380 --> 00:53:47,521
+en die groen silikon raad is net
+wat hou alles bymekaar.
+
+1144
+00:53:47,521 --> 00:53:48,770
+So wat beteken dit werklik?
+
+1145
+00:53:48,770 --> 00:53:53,180
+As ek soort van dieselfde prentjie teken,
+Kom ons veronderstel vir eenvoud
+
+1146
+00:53:53,180 --> 00:53:55,280
+dat hierdie DIMM, dubbele
+inline geheue module
+
+1147
+00:53:55,280 --> 00:54:00,530
+is een GB RAM, een GB
+geheue, wat is hoeveel grepe totale?
+
+1148
+00:54:00,530 --> 00:54:02,100
+Een GB is hoeveel grepe?
+
+1149
+00:54:02,100 --> 00:54:04,860
+
+1150
+00:54:04,860 --> 00:54:06,030
+Meer as dit.
+
+1151
+00:54:06,030 --> 00:54:09,960
+1124 is kilo, 1000.
+
+1152
+00:54:09,960 --> 00:54:11,730
+Mega is miljoen.
+
+1153
+00:54:11,730 --> 00:54:14,570
+Giga is 'n miljard.
+
+1154
+00:54:14,570 --> 00:54:15,070
+>> Ek lieg?
+
+1155
+00:54:15,070 --> 00:54:16,670
+Kan ons die etiket lees selfs?
+
+1156
+00:54:16,670 --> 00:54:19,920
+Dit is eintlik 128
+GB, so dit is meer.
+
+1157
+00:54:19,920 --> 00:54:22,130
+Maar ons sal dit voorgee
+is net een gigagreep.
+
+1158
+00:54:22,130 --> 00:54:25,640
+So dit beteken dat daar 'n miljard
+grepe van die geheue beskikbaar vir my
+
+1159
+00:54:25,640 --> 00:54:29,770
+of 8000000000 stukkies, maar ons gaan
+om te praat in terme van grepe nou,
+
+1160
+00:54:29,770 --> 00:54:30,750
+beweeg vorentoe.
+
+1161
+00:54:30,750 --> 00:54:36,330
+>> So, wat beteken dit is dit
+een byte, dit is 'n ander byte,
+
+1162
+00:54:36,330 --> 00:54:38,680
+dit is 'n ander byte,
+en as ons regtig wou
+
+1163
+00:54:38,680 --> 00:54:43,280
+spesifieke ons sou hê om te wees
+trek 'n miljard bietjie blokkies.
+
+1164
+00:54:43,280 --> 00:54:44,320
+Maar wat beteken dit?
+
+1165
+00:54:44,320 --> 00:54:46,420
+Wel, laat ek net vergroot
+in hierdie foto.
+
+1166
+00:54:46,420 --> 00:54:50,900
+As ek iets het wat lyk
+soos dit nou, dit is vier grepe.
+
+1167
+00:54:50,900 --> 00:54:53,710
+>> En so kan ek vier nommers hier sit.
+
+1168
+00:54:53,710 --> 00:54:54,990
+Een twee drie vier.
+
+1169
+00:54:54,990 --> 00:55:00,170
+Of ek kon vier letters of simbole sit.
+
+1170
+00:55:00,170 --> 00:55:02,620
+"Haai!" kon net daar gaan,
+omdat elk van die briewe,
+
+1171
+00:55:02,620 --> 00:55:04,370
+ons vroeër bespreek,
+kan verteenwoordig
+
+1172
+00:55:04,370 --> 00:55:06,650
+met agt stukkies of ASCII of 'n greep.
+
+1173
+00:55:06,650 --> 00:55:09,370
+So met ander woorde, kan jy
+sit 8000000000 dinge binne
+
+1174
+00:55:09,370 --> 00:55:11,137
+hierdie een stuk hout van geheue.
+
+1175
+00:55:11,137 --> 00:55:14,345
+Nou wat beteken dit om dinge terug te sit
+om terug te back-in die geheue soos hierdie?
+
+1176
+00:55:14,345 --> 00:55:17,330
+Dit is wat 'n programmeerder
+sou 'n "skikking." noem
+
+1177
+00:55:17,330 --> 00:55:21,250
+In 'n rekenaarprogram, dink jy nie
+oor die onderliggende hardeware, per se.
+
+1178
+00:55:21,250 --> 00:55:24,427
+Jy dink net aan jouself as wat
+toegang tot 'n miljard grepe totale,
+
+1179
+00:55:24,427 --> 00:55:26,010
+en jy kan enigiets wat jy wil met dit.
+
+1180
+00:55:26,010 --> 00:55:27,880
+Maar vir gerief
+Dit is oor die algemeen nuttig
+
+1181
+00:55:27,880 --> 00:55:31,202
+om jou geheue reg te hou
+langs mekaar soos hierdie.
+
+1182
+00:55:31,202 --> 00:55:33,660
+So as ek zoom in op this--
+omdat ons beslis nie van plan
+
+1183
+00:55:33,660 --> 00:55:39,310
+'n miljard bietjie squares-- trek
+Kom ons veronderstel dat hierdie raad verteenwoordig
+
+1184
+00:55:39,310 --> 00:55:40,610
+dat stok geheue nou.
+
+1185
+00:55:40,610 --> 00:55:43,800
+En ek sal net trek soveel as my
+merker beland hier gee my.
+
+1186
+00:55:43,800 --> 00:55:46,420
+
+1187
+00:55:46,420 --> 00:55:52,300
+So nou het ons 'n stok
+geheue op die bord
+
+1188
+00:55:52,300 --> 00:55:56,400
+Dit is het een, twee, drie, vier, vyf,
+ses, een, twee, drie, vier, vyf, ses,
+
+1189
+00:55:56,400 --> 00:56:01,130
+seven-- so 42 grepe van
+geheue op die totale skerm.
+
+1190
+00:56:01,130 --> 00:56:01,630
+Dankie.
+
+1191
+00:56:01,630 --> 00:56:02,838
+Ja, het my rekenkundige reg.
+
+1192
+00:56:02,838 --> 00:56:05,120
+So 42 grepe van die geheue hier.
+
+1193
+00:56:05,120 --> 00:56:06,660
+So wat beteken dit eintlik?
+
+1194
+00:56:06,660 --> 00:56:09,830
+Wel, 'n rekenaarprogrammeerder
+sou eintlik oor die algemeen
+
+1195
+00:56:09,830 --> 00:56:12,450
+dink aan die geheue as aanspreekbaar.
+
+1196
+00:56:12,450 --> 00:56:16,630
+Met ander woorde, elkeen van hierdie
+plekke in die geheue, in hardeware,
+
+1197
+00:56:16,630 --> 00:56:18,030
+het 'n unieke adres.
+
+1198
+00:56:18,030 --> 00:56:22,020
+>> Dit is nie so ingewikkeld as een Brattle
+Square, Cambridge, Mass., 02138.
+
+1199
+00:56:22,020 --> 00:56:23,830
+In plaas daarvan, is dit net 'n paar.
+
+1200
+00:56:23,830 --> 00:56:27,930
+Dit is byte nommer nul, dit is
+een, dit is twee, dit is drie,
+
+1201
+00:56:27,930 --> 00:56:30,327
+en dit is 41.
+
+1202
+00:56:30,327 --> 00:56:30,910
+Wag 'n minuut.
+
+1203
+00:56:30,910 --> 00:56:32,510
+Ek het gedink ek het 42 'n oomblik gelede.
+
+1204
+00:56:32,510 --> 00:56:35,050
+
+1205
+00:56:35,050 --> 00:56:37,772
+Ek het begin tel op nul,
+so dit is eintlik korrek is.
+
+1206
+00:56:37,772 --> 00:56:40,980
+Nou het ons nie eintlik trek dit
+as 'n rooster, en as jy dit tog as 'n rooster
+
+1207
+00:56:40,980 --> 00:56:43,520
+Ek dink dinge eintlik
+kry 'n bietjie misleidend.
+
+1208
+00:56:43,520 --> 00:56:46,650
+Wat 'n programmeerder sou
+in sy of haar eie gedagtes,
+
+1209
+00:56:46,650 --> 00:56:50,310
+oor die algemeen dink van hierdie
+geheue as net soos 'n band,
+
+1210
+00:56:50,310 --> 00:56:53,340
+soos 'n stuk maskeerband
+wat net gaan aan en aan vir ewig
+
+1211
+00:56:53,340 --> 00:56:54,980
+of totdat jy hardloop uit die geheue.
+
+1212
+00:56:54,980 --> 00:56:59,200
+So 'n meer algemene manier om te trek
+en net te dink oor geheue
+
+1213
+00:56:59,200 --> 00:57:03,710
+sou wees dat dit byte nul, een,
+twee, drie, en dan dot, dot, dot.
+
+1214
+00:57:03,710 --> 00:57:07,650
+En jy het 42 sulke grepe totale, selfs
+Al is hulle fisies dit kan eintlik
+
+1215
+00:57:07,650 --> 00:57:09,480
+iets meer soos hierdie.
+
+1216
+00:57:09,480 --> 00:57:12,850
+>> So as jy nou dink aan jou
+geheue as dit, net soos 'n band,
+
+1217
+00:57:12,850 --> 00:57:17,640
+dit is wat 'n programmeerder weer
+sou 'n verskeidenheid van geheue roep.
+
+1218
+00:57:17,640 --> 00:57:20,660
+En as jy wil eintlik slaan
+iets in die geheue van 'n rekenaar,
+
+1219
+00:57:20,660 --> 00:57:23,290
+jy in die algemeen doen winkel dinge
+back-to-rug aan rug-aan-rug.
+
+1220
+00:57:23,290 --> 00:57:25,010
+So ons het gepraat oor getalle.
+
+1221
+00:57:25,010 --> 00:57:30,880
+En toe ek wou probleme op te los
+soos vier, een, drie, twee,
+
+1222
+00:57:30,880 --> 00:57:33,820
+selfs al het ek was net te teken
+net die nommers vier, een, drie,
+
+1223
+00:57:33,820 --> 00:57:39,490
+twee op die bord, die rekenaar sal
+regtig hierdie opstelling in die geheue.
+
+1224
+00:57:39,490 --> 00:57:43,347
+>> En wat sou langs die wees
+twee in die rekenaar se geheue?
+
+1225
+00:57:43,347 --> 00:57:44,680
+Wel, daar is geen antwoord op daardie.
+
+1226
+00:57:44,680 --> 00:57:45,770
+Ons weet nie regtig.
+
+1227
+00:57:45,770 --> 00:57:48,200
+En so lank as wat die
+rekenaar dit nie nodig nie,
+
+1228
+00:57:48,200 --> 00:57:51,440
+Dit hoef nie om wat volgende is
+om die getalle dit nie omgee.
+
+1229
+00:57:51,440 --> 00:57:55,130
+Toe ek vroeër gesê het dat 'n rekenaar
+kan net kyk na 'n adres in 'n tyd,
+
+1230
+00:57:55,130 --> 00:57:56,170
+hierdie is 'n soort van waarom.
+
+1231
+00:57:56,170 --> 00:57:59,490
+>> Nie in teenstelling met 'n rekord
+speler en 'n lesing kop
+
+1232
+00:57:59,490 --> 00:58:03,030
+net in staat is om te kyk na 'n sekere
+groef in 'n fisiese ou-skool rekord
+
+1233
+00:58:03,030 --> 00:58:06,500
+op 'n tyd, insgelyks
+kan 'n rekenaar te danke
+
+1234
+00:58:06,500 --> 00:58:09,810
+om sy CPU en sy
+Intel stel instruksies,
+
+1235
+00:58:09,810 --> 00:58:12,480
+onder wie se opdrag
+gelees uit die geheue
+
+1236
+00:58:12,480 --> 00:58:15,590
+of stoor na 'n memory--
+rekenaar kan net kyk
+
+1237
+00:58:15,590 --> 00:58:19,210
+op een plek op 'n time--
+soms 'n kombinasie van hulle,
+
+1238
+00:58:19,210 --> 00:58:21,770
+maar eintlik net een plek op 'n slag.
+
+1239
+00:58:21,770 --> 00:58:24,770
+So wanneer ons doen
+hierdie verskillende algoritmes,
+
+1240
+00:58:24,770 --> 00:58:28,110
+Ek is nie net skryf in 'n
+vacuum-- vier, een, drie, twee.
+
+1241
+00:58:28,110 --> 00:58:30,849
+Hierdie syfers eintlik hoort
+iewers fisiese geheue.
+
+1242
+00:58:30,849 --> 00:58:32,890
+So is daar klein bietjie
+transistors of 'n soort
+
+1243
+00:58:32,890 --> 00:58:35,840
+elektronika onder die
+kap stoor hierdie waardes.
+
+1244
+00:58:35,840 --> 00:58:40,460
+>> En in totaal, hoeveel stukkies is
+betrokke op die oomblik, net om duidelik te wees?
+
+1245
+00:58:40,460 --> 00:58:45,580
+Dit is dus vier grepe, of
+nou is dit 32 stukkies totaal.
+
+1246
+00:58:45,580 --> 00:58:49,280
+So is daar eintlik 32 nulle en
+kinders komponeer hierdie vier dinge.
+
+1247
+00:58:49,280 --> 00:58:52,070
+Daar is selfs meer hier nie, maar
+weer het ons nie omgee nie.
+
+1248
+00:58:52,070 --> 00:58:55,120
+>> So nou kom ons vra 'n ander
+vraag met behulp van geheue,
+
+1249
+00:58:55,120 --> 00:58:57,519
+want dit aan die einde
+van die dag is in stryd.
+
+1250
+00:58:57,519 --> 00:59:00,310
+Maak nie saak wat ons kan doen met
+die rekenaar, aan die einde van die dag
+
+1251
+00:59:00,310 --> 00:59:02,560
+die hardeware is nog steeds die
+dieselfde onder die enjinkap.
+
+1252
+00:59:02,560 --> 00:59:04,670
+Hoe sou ek slaan 'n woord hier?
+
+1253
+00:59:04,670 --> 00:59:09,710
+Wel, 'n woord in 'n rekenaar soos
+"Hey!" sou word gestoor net soos hierdie.
+
+1254
+00:59:09,710 --> 00:59:12,300
+En as jy wil 'n langer
+woord, kan jy net
+
+1255
+00:59:12,300 --> 00:59:19,120
+oorskryf dit en iets sê
+soos "hallo" en bêre dit hier.
+
+1256
+00:59:19,120 --> 00:59:23,930
+>> En so ook hier, hierdie contiguousness
+is eintlik 'n voordeel,
+
+1257
+00:59:23,930 --> 00:59:26,530
+omdat 'n rekenaar kan net
+lees van regs na links.
+
+1258
+00:59:26,530 --> 00:59:28,680
+Maar hier is 'n vraag.
+
+1259
+00:59:28,680 --> 00:59:33,480
+In die konteks van hierdie woord,
+h-e-l-l-o, uitroepteken,
+
+1260
+00:59:33,480 --> 00:59:38,740
+hoe kan die rekenaar weet waar die
+woord begin en waar die woord eindig?
+
+1261
+00:59:38,740 --> 00:59:41,690
+
+1262
+00:59:41,690 --> 00:59:43,800
+In die konteks van getalle,
+hoe werk die rekenaar
+
+1263
+00:59:43,800 --> 00:59:48,396
+weet hoe lank die volgorde van
+getalle is of waar dit begin?
+
+1264
+00:59:48,396 --> 00:59:50,270
+Wel, dit blyk out--
+en ons sal nie te veel gaan
+
+1265
+00:59:50,270 --> 00:59:54,970
+in hierdie vlak van detail--
+rekenaars te beweeg dinge rondom in die geheue
+
+1266
+00:59:54,970 --> 00:59:57,800
+letterlik deur middel van hierdie adresse.
+
+1267
+00:59:57,800 --> 01:00:02,080
+So in 'n rekenaar, as jy
+skryf kode om dinge te stoor
+
+1268
+01:00:02,080 --> 01:00:05,800
+soos woorde, wat jy
+regtig doen is tik
+
+1269
+01:00:05,800 --> 01:00:11,320
+uitdrukkings wat onthou waar in
+geheue van die rekenaar se hierdie woorde is.
+
+1270
+01:00:11,320 --> 01:00:14,370
+So laat ek doen 'n baie,
+baie eenvoudige voorbeeld.
+
+1271
+01:00:14,370 --> 01:00:18,260
+>> Ek gaan om voort te gaan en
+oop te stel 'n eenvoudige teks program,
+
+1272
+01:00:18,260 --> 01:00:20,330
+en ek gaan om te skep
+'n lêer met die naam hello.c.
+
+1273
+01:00:20,330 --> 01:00:22,849
+Die meeste van hierdie inligting wat ons
+sal nie in te gaan in groot detail,
+
+1274
+01:00:22,849 --> 01:00:25,140
+maar ek gaan 'n skrywe
+program in wat dieselfde taal,
+
+1275
+01:00:25,140 --> 01:00:31,140
+C. Dit is veel meer intimiderend,
+Ek sou argumenteer, as nuuts af,
+
+1276
+01:00:31,140 --> 01:00:32,490
+maar dit is baie soortgelyk in die gees.
+
+1277
+01:00:32,490 --> 01:00:34,364
+Trouens, hierdie krullerige
+braces-- jy kan soort
+
+1278
+01:00:34,364 --> 01:00:37,820
+dink aan wat ek nou net gedoen soos hierdie.
+
+1279
+01:00:37,820 --> 01:00:39,240
+>> Kom ons doen dit, eintlik.
+
+1280
+01:00:39,240 --> 01:00:45,100
+Wanneer groen vlag gekliek,
+Doen die volgende.
+
+1281
+01:00:45,100 --> 01:00:50,210
+Ek wil uit te druk "hallo."
+
+1282
+01:00:50,210 --> 01:00:51,500
+So is dit nou pseudokode.
+
+1283
+01:00:51,500 --> 01:00:53,000
+Ek is soort van vervaag die lyne.
+
+1284
+01:00:53,000 --> 01:00:56,750
+In C, hierdie taal Ek praat
+oor, hierdie lyn druk hallo
+
+1285
+01:00:56,750 --> 01:01:01,940
+eintlik word "printf" met
+sommige hakies en 'n kommapunt.
+
+1286
+01:01:01,940 --> 01:01:03,480
+>> Maar dit is presies dieselfde idee.
+
+1287
+01:01:03,480 --> 01:01:06,730
+En dit baie gebruikers vriendelik
+"Toe groen vlag gekliek" word
+
+1288
+01:01:06,730 --> 01:01:10,182
+die veel meer arcane "int main leemte."
+
+1289
+01:01:10,182 --> 01:01:12,890
+En dit het regtig geen kartering,
+so ek gaan net te ignoreer nie.
+
+1290
+01:01:12,890 --> 01:01:17,210
+Maar die krullerige draadjies is soos die
+geboë legkaart stukke soos hierdie.
+
+1291
+01:01:17,210 --> 01:01:18,700
+>> Sodat jy kan soort van dink.
+
+1292
+01:01:18,700 --> 01:01:22,357
+Selfs as jy nog nooit voorheen geprogrammeer,
+Wat beteken hierdie program waarskynlik doen?
+
+1293
+01:01:22,357 --> 01:01:25,560
+
+1294
+01:01:25,560 --> 01:01:28,000
+Waarskynlik druk hallo
+met 'n uitroepteken.
+
+1295
+01:01:28,000 --> 01:01:29,150
+>> So kom ons probeer dit.
+
+1296
+01:01:29,150 --> 01:01:30,800
+Ek gaan om dit te verlos.
+
+1297
+01:01:30,800 --> 01:01:34,000
+En dit is, weer, 'n baie
+ou skoolomgewing.
+
+1298
+01:01:34,000 --> 01:01:35,420
+Ek kan nie op, ek kan nie sleep.
+
+1299
+01:01:35,420 --> 01:01:36,910
+Ek moet opdragte tik.
+
+1300
+01:01:36,910 --> 01:01:41,320
+So ek wil my program uit te voer, sodat
+Ek kan dit doen, soos hello.c.
+
+1301
+01:01:41,320 --> 01:01:42,292
+Dit is die lêer wat ek gehardloop.
+
+1302
+01:01:42,292 --> 01:01:43,500
+Maar wag, ek mis 'n stap.
+
+1303
+01:01:43,500 --> 01:01:46,470
+Wat het ons sê is 'n noodsaaklike
+stap vir 'n taal soos C?
+
+1304
+01:01:46,470 --> 01:01:49,470
+Ek het net geskrewe bron
+kode, maar wat moet ek doen?
+
+1305
+01:01:49,470 --> 01:01:50,670
+Ja, ek het 'n samesteller.
+
+1306
+01:01:50,670 --> 01:01:57,670
+So op my Mac hier, ek het 'n
+program genaamd GCC, GNU C samesteller,
+
+1307
+01:01:57,670 --> 01:02:03,990
+wat dit moontlik maak vir my om this-- beurt doen
+my bronkode in, sal ons dit noem,
+
+1308
+01:02:03,990 --> 01:02:04,930
+masjienkode.
+
+1309
+01:02:04,930 --> 01:02:10,180
+>> En ek kan sien dat,
+weer, soos volg, hierdie
+
+1310
+01:02:10,180 --> 01:02:14,090
+is die nulle en ene ek net
+geskep uit my bronkode,
+
+1311
+01:02:14,090 --> 01:02:15,730
+al die nulle en ene.
+
+1312
+01:02:15,730 --> 01:02:17,770
+En as ek wil uit te voer
+my program-- dit gebeur
+
+1313
+01:02:17,770 --> 01:02:23,010
+om a.out genoem word vir
+historiese reasons-- "hallo."
+
+1314
+01:02:23,010 --> 01:02:24,070
+Ek kan dit weer uit te voer.
+
+1315
+01:02:24,070 --> 01:02:25,690
+Hallo, hallo, hallo.
+
+1316
+01:02:25,690 --> 01:02:27,430
+En dit blyk te werk.
+
+1317
+01:02:27,430 --> 01:02:31,000
+>> Maar dit beteken iewers in my
+geheue rekenaar se is die woorde
+
+1318
+01:02:31,000 --> 01:02:35,279
+h-e-l-l-o, uitroepteken.
+
+1319
+01:02:35,279 --> 01:02:38,070
+En dit blyk, net soos 'n eenkant,
+wat 'n rekenaar sou tipies
+
+1320
+01:02:38,070 --> 01:02:40,550
+doen sodat dit weet waar
+dinge begin en end-- dis
+
+1321
+01:02:40,550 --> 01:02:42,460
+gaan 'n spesiale simbool hier sit.
+
+1322
+01:02:42,460 --> 01:02:46,064
+En die konvensie is om die plaas
+getal nul aan die einde van 'n woord
+
+1323
+01:02:46,064 --> 01:02:48,230
+sodat jy weet waar dit
+eintlik eindig, sodat jy
+
+1324
+01:02:48,230 --> 01:02:52,750
+hou nie uit te druk hoe meer
+karakters as wat jy werklik van plan is.
+
+1325
+01:02:52,750 --> 01:02:55,400
+>> Maar die afhaal hier, selfs
+al is dit redelik arcane,
+
+1326
+01:02:55,400 --> 01:02:58,140
+is dat dit uiteindelik
+relatief eenvoudig.
+
+1327
+01:02:58,140 --> 01:03:04,550
+Jy is gegee soort van 'n band, 'n leë
+ruimte waarop jy briewe kan skryf.
+
+1328
+01:03:04,550 --> 01:03:07,150
+Jy hoef net 'n moet
+spesiale simbool, soos arbitrêr
+
+1329
+01:03:07,150 --> 01:03:10,316
+die getal nul, om aan die einde van sit
+jou woorde sodat die rekenaar weet,
+
+1330
+01:03:10,316 --> 01:03:13,410
+O, ek moet druk stop nadat
+Ek sien die uitroepteken.
+
+1331
+01:03:13,410 --> 01:03:16,090
+Omdat die volgende ding wat daar
+is 'n ASCII-waarde van nul,
+
+1332
+01:03:16,090 --> 01:03:19,125
+of die nul karakter as
+iemand sou dit noem.
+
+1333
+01:03:19,125 --> 01:03:21,500
+Maar daar is soort van 'n probleem
+hier, en laat ons terugkeer
+
+1334
+01:03:21,500 --> 01:03:23,320
+om getalle vir 'n oomblik.
+
+1335
+01:03:23,320 --> 01:03:28,720
+Veronderstel dat ek, in werklikheid,
+'n skikking van getalle,
+
+1336
+01:03:28,720 --> 01:03:30,730
+en veronderstel dat die
+program Ek skryf is
+
+1337
+01:03:30,730 --> 01:03:34,680
+soos 'n graad boek vir 'n onderwyser
+en 'n onderwysers klaskamer.
+
+1338
+01:03:34,680 --> 01:03:38,720
+En hierdie program verleen hom of haar
+om te tik in tellings hul studente se
+
+1339
+01:03:38,720 --> 01:03:39,960
+op vasvrae.
+
+1340
+01:03:39,960 --> 01:03:43,750
+En veronderstel dat die student kry
+100 op hul eerste toets, miskien
+
+1341
+01:03:43,750 --> 01:03:49,920
+soos 'n 80 op die volgende een, dan 'n
+75, dan 'n 90 op die vierde toets.
+
+1342
+01:03:49,920 --> 01:03:54,150
+>> So op hierdie punt in die verhaal,
+die skikking is van groot vier.
+
+1343
+01:03:54,150 --> 01:03:58,470
+Daar is absoluut meer geheue in die
+rekenaar, maar die skikking, so te sê,
+
+1344
+01:03:58,470 --> 01:04:00,350
+is van groot vier.
+
+1345
+01:04:00,350 --> 01:04:06,060
+Veronderstel nou dat die onderwyser wil
+'n vyfde toets om die klas te wys.
+
+1346
+01:04:06,060 --> 01:04:08,510
+Wel, een van die dinge wat hy
+of sy gaan hê om te doen
+
+1347
+01:04:08,510 --> 01:04:10,650
+is nou 'n bykomende waarde slaan hier.
+
+1348
+01:04:10,650 --> 01:04:15,490
+Maar as die skikking moet die onderwyser
+geskep in hierdie program is van grootte vir,
+
+1349
+01:04:15,490 --> 01:04:22,440
+een van die probleem met 'n skikking is dat
+jy kan nie net aanhou toe te voeg tot die geheue.
+
+1350
+01:04:22,440 --> 01:04:26,470
+Want wat as 'n ander deel van die
+program het die woord "hey" net daar?
+
+1351
+01:04:26,470 --> 01:04:29,650
+>> Met ander woorde, kan my geheue wees
+gebruik word vir enigiets in 'n program.
+
+1352
+01:04:29,650 --> 01:04:33,250
+En as vooruit ek getik in, hey,
+Ek wil insette vier quiz tellings,
+
+1353
+01:04:33,250 --> 01:04:34,784
+hulle kan hier en hier gaan.
+
+1354
+01:04:34,784 --> 01:04:37,700
+En as jy skielik verander jou gedagtes
+later en sê ek wil 'n vyfde toets
+
+1355
+01:04:37,700 --> 01:04:40,872
+telling, kan jy nie net
+sit dit waar jy wil,
+
+1356
+01:04:40,872 --> 01:04:42,580
+want wat as dit
+geheue gebruik word
+
+1357
+01:04:42,580 --> 01:04:45,990
+vir iets else-- 'n ander program
+of 'n ander kenmerk van die program
+
+1358
+01:04:45,990 --> 01:04:46,910
+dat jy hardloop?
+
+1359
+01:04:46,910 --> 01:04:50,650
+So jy moet dink vooruit
+hoe jy jou data stoor,
+
+1360
+01:04:50,650 --> 01:04:54,480
+want nou het jy geverf
+jouself in 'n digitale hoek.
+
+1361
+01:04:54,480 --> 01:04:57,280
+>> So 'n onderwyser mag plaas
+sê wanneer die skryf van 'n program
+
+1362
+01:04:57,280 --> 01:04:59,360
+op te slaan sy of haar
+grade, jy weet wat?
+
+1363
+01:04:59,360 --> 01:05:04,180
+Ek gaan vra,
+tydens die skryf van my program,
+
+1364
+01:05:04,180 --> 01:05:12,070
+wat ek wil nul, een, twee, drie,
+vier, vyf, ses, agt grade totaal.
+
+1365
+01:05:12,070 --> 01:05:15,320
+So een, twee, drie, vier,
+vyf, ses, sewe, agt.
+
+1366
+01:05:15,320 --> 01:05:18,612
+Die onderwyser kan net meer toe te ken
+geheue tydens die skryf van sy of haar program
+
+1367
+01:05:18,612 --> 01:05:19,570
+en sê, jy weet wat?
+
+1368
+01:05:19,570 --> 01:05:22,236
+Ek is nooit gaan meer wys
+as agt vasvrae in 'n semester.
+
+1369
+01:05:22,236 --> 01:05:23,130
+Dit is net gek.
+
+1370
+01:05:23,130 --> 01:05:24,470
+Ek sal nooit wys dat.
+
+1371
+01:05:24,470 --> 01:05:28,270
+Sodat hierdie manier het hy of sy die
+buigsaamheid te slaan student tellings,
+
+1372
+01:05:28,270 --> 01:05:33,010
+soos 75, 90, en miskien een ekstra waar
+die student het ekstra krediet, 105.
+
+1373
+01:05:33,010 --> 01:05:36,130
+>> Maar as die onderwyser nooit
+gebruik hierdie drie ruimtes,
+
+1374
+01:05:36,130 --> 01:05:38,860
+daar is 'n intuïtiewe afhaal hier.
+
+1375
+01:05:38,860 --> 01:05:41,410
+Hy of sy is net mors spasie.
+
+1376
+01:05:41,410 --> 01:05:44,790
+So met ander woorde, daar is hierdie
+gemeenskaplike nadeel in programmering
+
+1377
+01:05:44,790 --> 01:05:48,241
+waar jy óf kan toeken
+presies soveel geheue as wat jy wil,
+
+1378
+01:05:48,241 --> 01:05:51,490
+die onderstebo waarvan is dat jy super is
+efficient-- jy nie verkwistende
+
+1379
+01:05:51,490 --> 01:05:54,640
+by all-- maar die nadeel van wat
+is wat as jy jou verstand wanneer verander
+
+1380
+01:05:54,640 --> 01:05:58,780
+die gebruik van die program wat jy wil stoor
+meer inligting as wat jy oorspronklik bedoel.
+
+1381
+01:05:58,780 --> 01:06:03,030
+>> So miskien is die oplossing is, dan,
+skryf jou programme op so 'n manier
+
+1382
+01:06:03,030 --> 01:06:05,605
+wat hulle gebruik meer geheue
+as wat hulle werklik nodig het.
+
+1383
+01:06:05,605 --> 01:06:07,730
+Hierdie manier waarop jy gaan nie
+uit te voer in die probleem,
+
+1384
+01:06:07,730 --> 01:06:09,730
+maar jy word verkwistende.
+
+1385
+01:06:09,730 --> 01:06:12,960
+En hoe meer geheue jou program maak gebruik van,
+soos ons gister bespreek, hoe minder
+
+1386
+01:06:12,960 --> 01:06:15,410
+geheue wat beskikbaar is
+op die ander kursusse,
+
+1387
+01:06:15,410 --> 01:06:18,790
+hoe gouer jou rekenaar kan vertraag
+af as gevolg van virtuele geheue.
+
+1388
+01:06:18,790 --> 01:06:22,670
+En so het die ideale oplossing sou wat wees?
+
+1389
+01:06:22,670 --> 01:06:24,610
+>> Onder-verdeling lyk sleg.
+
+1390
+01:06:24,610 --> 01:06:27,030
+Oor-verdeling lyk sleg.
+
+1391
+01:06:27,030 --> 01:06:31,120
+So, wat kan 'n beter oplossing wees?
+
+1392
+01:06:31,120 --> 01:06:32,390
+Herverdeling.
+
+1393
+01:06:32,390 --> 01:06:33,590
+Meer dinamies.
+
+1394
+01:06:33,590 --> 01:06:37,520
+Moenie jouself te dwing om 'n keuse
+priori, aan die begin, wat jy wil hê.
+
+1395
+01:06:37,520 --> 01:06:41,370
+En in elk geval nie veel toe te ken,
+sodat julle nie wees verkwistende.
+
+1396
+01:06:41,370 --> 01:06:45,770
+>> En so aan daardie doel te bereik, het ons
+nodig om hierdie datastruktuur gooi,
+
+1397
+01:06:45,770 --> 01:06:48,100
+so te sê, weg.
+
+1398
+01:06:48,100 --> 01:06:51,080
+En so what 'n programmeerder
+sal tipies gebruik
+
+1399
+01:06:51,080 --> 01:06:55,940
+is iets genoem nie 'n
+verskeidenheid, maar 'n geskakelde lys.
+
+1400
+01:06:55,940 --> 01:07:00,860
+Met ander woorde, sal hy of sy
+begin om te dink aan hul geheue
+
+1401
+01:07:00,860 --> 01:07:05,280
+as soort van 'n vorm dat hulle
+kan trek op die volgende manier.
+
+1402
+01:07:05,280 --> 01:07:08,520
+As ek wil 'n paar op te slaan in
+'n program-- so dit is September,
+
+1403
+01:07:08,520 --> 01:07:12,600
+Ek het my studente 'n quiz gegee; ek wil
+om eerste toets die studente se stoor,
+
+1404
+01:07:12,600 --> 01:07:16,220
+en hulle het 'n 100 op it-- ek
+Ek gaan op my rekenaar te vra,
+
+1405
+01:07:16,220 --> 01:07:19,540
+deur middel van die program Ek het
+geskryf, vir een stuk van die geheue.
+
+1406
+01:07:19,540 --> 01:07:22,570
+En ek gaan na die winkel
+getal 100 in dit, en dit is dit.
+
+1407
+01:07:22,570 --> 01:07:24,820
+>> Toe 'n paar weke later
+wanneer ek my tweede toets,
+
+1408
+01:07:24,820 --> 01:07:27,890
+en dit is tyd om te tik
+in daardie 90%, gaan ek
+
+1409
+01:07:27,890 --> 01:07:32,129
+om die rekenaar te vra, hey, rekenaar,
+kan ek nog 'n stuk van die geheue?
+
+1410
+01:07:32,129 --> 01:07:34,170
+Dit gaan vir my gee hierdie
+leë stuk van die geheue.
+
+1411
+01:07:34,170 --> 01:07:39,370
+Ek gaan in die getal 90 te sit,
+maar in my program op 'n manier of other--
+
+1412
+01:07:39,370 --> 01:07:42,100
+en ons sal nie bekommerd wees oor
+die sintaksis vir this-- ek nodig het
+
+1413
+01:07:42,100 --> 01:07:44,430
+om een ​​of ander manier ketting hierdie dinge saam.
+
+1414
+01:07:44,430 --> 01:07:47,430
+En Ek sal hulle saam met ketting
+wat lyk soos 'n pyl hier.
+
+1415
+01:07:47,430 --> 01:07:50,050
+>> Die derde toets wat opkom,
+Ek gaan om te sê, hey, rekenaar,
+
+1416
+01:07:50,050 --> 01:07:51,680
+Gee my 'n ander deel van die geheue.
+
+1417
+01:07:51,680 --> 01:07:54,660
+En ek gaan neersit
+wat dit ookal was, soos 75,
+
+1418
+01:07:54,660 --> 01:07:56,920
+en ek moet ketting hierdie
+saam nou een of ander manier.
+
+1419
+01:07:56,920 --> 01:08:00,290
+Vierde toets kom saam, en miskien
+dit is teen die einde van die semester.
+
+1420
+01:08:00,290 --> 01:08:03,140
+En deur daardie punt my program
+kan gebruik word om die geheue
+
+1421
+01:08:03,140 --> 01:08:05,540
+oor die hele plek, regoor fisies.
+
+1422
+01:08:05,540 --> 01:08:08,170
+En so net vir skoppe, is ek
+gaan dit voort te trek
+
+1423
+01:08:08,170 --> 01:08:11,260
+quiz-- ek vergeet wat dit was; Ek
+dink miskien 'n 80 of something--
+
+1424
+01:08:11,260 --> 01:08:12,500
+weg oor hier.
+
+1425
+01:08:12,500 --> 01:08:15,920
+>> Maar dit is goed, want picturaal
+Ek gaan hierdie streep te trek.
+
+1426
+01:08:15,920 --> 01:08:19,063
+Met ander woorde, in werklikheid,
+in hardeware van die rekenaar,
+
+1427
+01:08:19,063 --> 01:08:20,979
+die eerste telling mag
+uiteindelik hier, want dit is
+
+1428
+01:08:20,979 --> 01:08:22,529
+reg aan die begin van die semester.
+
+1429
+01:08:22,529 --> 01:08:25,810
+Die volgende een kan uiteindelik hier
+omdat 'n bietjie van die tyd verby is
+
+1430
+01:08:25,810 --> 01:08:27,210
+en die program hou hardloop.
+
+1431
+01:08:27,210 --> 01:08:30,060
+Die volgende telling, wat was
+'n 75, dalk hier.
+
+1432
+01:08:30,060 --> 01:08:33,420
+En die laaste telling dalk
+'n 80, wat is hier.
+
+1433
+01:08:33,420 --> 01:08:38,729
+>> So in werklikheid, fisies, dit kan wees
+wat jou rekenaar se geheue lyk.
+
+1434
+01:08:38,729 --> 01:08:41,569
+Maar dit is nie 'n nuttige geestelike
+paradigma vir 'n rekenaarprogrammeerder.
+
+1435
+01:08:41,569 --> 01:08:44,649
+Hoekom moet jy omgee waar die
+klink jou data is eindig?
+
+1436
+01:08:44,649 --> 01:08:46,200
+Jy wil net om data te stoor.
+
+1437
+01:08:46,200 --> 01:08:49,390
+>> Dit is soort van soos ons bespreking
+vroeër van die tekens van die kubus.
+
+1438
+01:08:49,390 --> 01:08:52,200
+Hoekom dink jy omgee wat
+die hoek van die kubus
+
+1439
+01:08:52,200 --> 01:08:53,740
+en hoe jy moet draai om dit te trek?
+
+1440
+01:08:53,740 --> 01:08:54,950
+Jy wil net 'n kubus.
+
+1441
+01:08:54,950 --> 01:08:57,359
+Net so hier, jy
+wil net graad boek.
+
+1442
+01:08:57,359 --> 01:08:59,559
+Jy wil net om te dink aan
+dit as 'n lys van getalle.
+
+1443
+01:08:59,559 --> 01:09:01,350
+Wie gee om hoe dit is
+geïmplementeer in hardeware?
+
+1444
+01:09:01,350 --> 01:09:05,180
+>> So het die onttrekking nou
+is hierdie prentjie hier.
+
+1445
+01:09:05,180 --> 01:09:07,580
+Dit is 'n geskakelde lys, soos
+'n programmeerder sou dit noem,
+
+1446
+01:09:07,580 --> 01:09:10,640
+sover as wat jy het 'n
+lys, natuurlik van getalle.
+
+1447
+01:09:10,640 --> 01:09:14,990
+Maar dit is picturaal gekoppel
+deur middel van hierdie pyle,
+
+1448
+01:09:14,990 --> 01:09:18,510
+en al hierdie pyle are-- onder
+die kap, as jy nuuskierig is,
+
+1449
+01:09:18,510 --> 01:09:23,210
+onthou dat ons fisiese hardeware het
+adresse nul, een, twee, drie, vier.
+
+1450
+01:09:23,210 --> 01:09:28,465
+Al hierdie pyle is soos 'n kaart
+of rigtings, waar as 90 is-- nou
+
+1451
+01:09:28,465 --> 01:09:29,090
+Ek het om te tel.
+
+1452
+01:09:29,090 --> 01:09:31,750
+>> Zero, een, twee, drie,
+vier, vyf, ses, sewe.
+
+1453
+01:09:31,750 --> 01:09:35,640
+Dit lyk soos die 90 is op
+geheue adres nommer sewe.
+
+1454
+01:09:35,640 --> 01:09:38,460
+Al hierdie pyle is
+soos 'n klein stukkie papier
+
+1455
+01:09:38,460 --> 01:09:42,439
+dit is die gee van aanwysings om die
+program wat sê volg hierdie kaart
+
+1456
+01:09:42,439 --> 01:09:43,880
+om plek sewe te kry.
+
+1457
+01:09:43,880 --> 01:09:46,680
+En daar sal julle die vind
+student se tweede toets telling.
+
+1458
+01:09:46,680 --> 01:09:52,100
+Intussen het die 75-- as ek voortgaan om hierdie,
+Dit is sewe, agt, nege, 10, 11, 12,
+
+1459
+01:09:52,100 --> 01:09:54,240
+13, 14, 15.
+
+1460
+01:09:54,240 --> 01:09:59,080
+>> Dit ander pyl net verteenwoordig
+'n kaart om geheue plek 15.
+
+1461
+01:09:59,080 --> 01:10:02,550
+Maar weereens, die programmeerder oor die algemeen nie
+nie omgee hierdie vlak van detail.
+
+1462
+01:10:02,550 --> 01:10:05,530
+En in die meeste elke programmering
+taal vandag, die programmeerder
+
+1463
+01:10:05,530 --> 01:10:10,490
+sal nie eens weet waar in die geheue
+hierdie getalle eintlik is.
+
+1464
+01:10:10,490 --> 01:10:14,830
+Al wat hy of sy moet omgee is
+dat hulle een of ander manier met mekaar verbind
+
+1465
+01:10:14,830 --> 01:10:18,390
+in 'n datastruktuur soos hierdie.
+
+1466
+01:10:18,390 --> 01:10:21,580
+>> Maar dit blyk nie
+te tegnies te kry.
+
+1467
+01:10:21,580 --> 01:10:27,430
+Maar net omdat ons kan dalk
+bekostig om hierdie bespreking hier te hê,
+
+1468
+01:10:27,430 --> 01:10:33,630
+veronderstel dat ons weer
+hierdie kwessie hier van 'n skikking.
+
+1469
+01:10:33,630 --> 01:10:35,780
+Kom ons kyk of ons hier spyt gaan.
+
+1470
+01:10:35,780 --> 01:10:42,950
+Dit is 100, 90, 75, en 80.
+
+1471
+01:10:42,950 --> 01:10:44,980
+>> Laat my kortliks hierdie eis te maak.
+
+1472
+01:10:44,980 --> 01:10:48,980
+Dit is 'n skikking, en weer, die
+belangrike eienskap van 'n verskeidenheid
+
+1473
+01:10:48,980 --> 01:10:52,400
+is dat al jou data is terug na
+rug aan rug in memory-- letterlik
+
+1474
+01:10:52,400 --> 01:10:56,830
+een byte of miskien vier grepe,
+sommige vaste aantal grepe weg.
+
+1475
+01:10:56,830 --> 01:11:00,710
+In 'n geskakelde lys, wat ons kan trek
+soos hierdie, onder die enjinkap wat
+
+1476
+01:11:00,710 --> 01:11:02,000
+weet waar daardie dinge is?
+
+1477
+01:11:02,000 --> 01:11:03,630
+Dit maak nie eens nodig om te vloei soos hierdie.
+
+1478
+01:11:03,630 --> 01:11:06,050
+Sommige van die data kon wees
+terug na die links daar.
+
+1479
+01:11:06,050 --> 01:11:07,530
+Jy hoef nie eens weet nie.
+
+1480
+01:11:07,530 --> 01:11:15,430
+>> En so 'n skikking, jy het 'n
+kenmerk bekend as ewetoeganklike.
+
+1481
+01:11:15,430 --> 01:11:20,570
+En wat ewetoeganklike middel is
+dat die rekenaar onmiddellik kan spring
+
+1482
+01:11:20,570 --> 01:11:22,730
+om enige plek in 'n skikking.
+
+1483
+01:11:22,730 --> 01:11:23,580
+Hoekom?
+
+1484
+01:11:23,580 --> 01:11:26,000
+Omdat die rekenaar weet
+dat die eerste plek is
+
+1485
+01:11:26,000 --> 01:11:29,540
+nul, een, twee, en drie.
+
+1486
+01:11:29,540 --> 01:11:33,890
+>> En so as jy wil gaan uit
+hierdie element na die volgende element,
+
+1487
+01:11:33,890 --> 01:11:36,099
+jy letterlik, in die
+gedagte rekenaar se, voeg net een.
+
+1488
+01:11:36,099 --> 01:11:39,140
+As jy wil om te gaan na die derde element,
+voeg net one-- volgende element, net
+
+1489
+01:11:39,140 --> 01:11:40,290
+voeg een.
+
+1490
+01:11:40,290 --> 01:11:42,980
+Maar in hierdie weergawe
+van die storie, veronderstel
+
+1491
+01:11:42,980 --> 01:11:46,080
+die rekenaar is tans op soek na
+op of die hantering van die getal 100.
+
+1492
+01:11:46,080 --> 01:11:49,770
+Hoe kry jy na die volgende
+graad in die graad boek?
+
+1493
+01:11:49,770 --> 01:11:52,560
+>> Jy moet neem sewe
+stappe, wat is arbitrêr.
+
+1494
+01:11:52,560 --> 01:11:58,120
+na die volgende een te kry, moet jy
+neem 'n ander agt stappe om 15 te kry.
+
+1495
+01:11:58,120 --> 01:12:02,250
+Met ander woorde, dit is nie 'n
+konstante gaping tussen die getalle,
+
+1496
+01:12:02,250 --> 01:12:04,857
+en dus is dit net neem die
+rekenaar meer tyd is die punt.
+
+1497
+01:12:04,857 --> 01:12:06,940
+Die rekenaar het om te soek
+deur geheue ten einde
+
+1498
+01:12:06,940 --> 01:12:08,990
+om uit te vind wat jy soek.
+
+1499
+01:12:08,990 --> 01:12:14,260
+>> So terwyl 'n verskeidenheid is geneig om 'n wees
+vinnige data structure-- omdat jy
+
+1500
+01:12:14,260 --> 01:12:17,610
+kan letterlik net eenvoudige rekenkundige
+en kry waar jy wil deur die toevoeging van een,
+
+1501
+01:12:17,610 --> 01:12:21,300
+vir instance-- n geskakelde lys,
+jy offer wat funksie.
+
+1502
+01:12:21,300 --> 01:12:24,020
+Jy kan nie net gaan van die eerste
+tweede tot derde tot vierde.
+
+1503
+01:12:24,020 --> 01:12:25,240
+Jy moet die kaart te volg.
+
+1504
+01:12:25,240 --> 01:12:28,160
+Jy moet meer stappe te neem
+om daardie waardes, te kry wat
+
+1505
+01:12:28,160 --> 01:12:30,230
+sou blyk te wees toevoeging van 'n koste.
+
+1506
+01:12:30,230 --> 01:12:35,910
+So ons betaal 'n prys, maar wat was
+die funksie wat Dan hier is op soek na?
+
+1507
+01:12:35,910 --> 01:12:38,110
+Wat doen 'n geskakelde lys
+glo ons in staat stel om dit te doen,
+
+1508
+01:12:38,110 --> 01:12:40,240
+wat was die oorsprong van
+hierdie spesifieke storie?
+
+1509
+01:12:40,240 --> 01:12:43,250
+
+1510
+01:12:43,250 --> 01:12:43,830
+>> Presies.
+
+1511
+01:12:43,830 --> 01:12:46,220
+'N dinamiese grootte om dit te.
+
+1512
+01:12:46,220 --> 01:12:48,040
+Ons kan by hierdie lys.
+
+1513
+01:12:48,040 --> 01:12:51,430
+Ons kan selfs krimp die lys, sodat
+dat ons net jy gebruik soveel geheue
+
+1514
+01:12:51,430 --> 01:12:55,560
+as ons werklik wil en so
+ons nooit oor-verdeling.
+
+1515
+01:12:55,560 --> 01:12:58,470
+>> Nou net om werklik neet-kieskeurig,
+daar is 'n versteekte koste.
+
+1516
+01:12:58,470 --> 01:13:01,980
+So jy moet nie net laat my oortuig
+jy dat dit 'n dwingende nadeel.
+
+1517
+01:13:01,980 --> 01:13:04,190
+Daar is nog 'n versteekte koste hier.
+
+1518
+01:13:04,190 --> 01:13:06,550
+Die voordeel, om duidelik te wees,
+is dat ons dinamika.
+
+1519
+01:13:06,550 --> 01:13:10,359
+As ek wil 'n ander element, kan ek net
+teken dit en sit 'n aantal in daar.
+
+1520
+01:13:10,359 --> 01:13:12,150
+En dan kan ek dit te koppel
+met 'n prentjie hier,
+
+1521
+01:13:12,150 --> 01:13:14,970
+terwyl hier weer, as ek het
+geverf myself in 'n hoek,
+
+1522
+01:13:14,970 --> 01:13:19,410
+As iets anders is reeds met behulp van
+die geheue hier, ek is out of luck.
+
+1523
+01:13:19,410 --> 01:13:21,700
+Ek het myself geverf in die hoek.
+
+1524
+01:13:21,700 --> 01:13:24,390
+>> Maar wat is die verborge
+kos in hierdie prentjie?
+
+1525
+01:13:24,390 --> 01:13:27,690
+Dit is nie net die bedrag
+tyd wat dit neem
+
+1526
+01:13:27,690 --> 01:13:29,870
+om te gaan van hier af tot hier,
+wat is sewe stappe, dan
+
+1527
+01:13:29,870 --> 01:13:32,820
+agt trappies, wat meer as een.
+
+1528
+01:13:32,820 --> 01:13:34,830
+Wat is 'n ander verborge koste?
+
+1529
+01:13:34,830 --> 01:13:35,440
+Nie net tyd.
+
+1530
+01:13:35,440 --> 01:13:44,790
+
+1531
+01:13:44,790 --> 01:13:49,940
+Meer besonderhede kan
+wat nodig is om hierdie foto te bereik.
+
+1532
+01:13:49,940 --> 01:13:53,210
+>> Ja, wat kaart, daardie klein stukkies
+papier, soos ek hou beskryf dit as.
+
+1533
+01:13:53,210 --> 01:13:55,650
+Hierdie arrows-- dit is nie vry nie.
+
+1534
+01:13:55,650 --> 01:13:57,660
+A computer-- jy weet
+wat 'n rekenaar het.
+
+1535
+01:13:57,660 --> 01:13:58,790
+Dit het nulle en ene.
+
+1536
+01:13:58,790 --> 01:14:03,170
+As jy wil 'n pyl of 'n stel
+karteer of 'n nommer, jou 'n paar geheue benodig.
+
+1537
+01:14:03,170 --> 01:14:05,950
+So het die ander prys wat jy
+betaal vir 'n geskakelde lys,
+
+1538
+01:14:05,950 --> 01:14:09,070
+'n gemeenskaplike rekenaarwetenskap
+hulpbron, is ook ruimte.
+
+1539
+01:14:09,070 --> 01:14:11,710
+>> En inderdaad so, so algemeen,
+onder die werkinge
+
+1540
+01:14:11,710 --> 01:14:15,580
+in die ontwerp van sagteware-ingenieurswese
+stelsels is tyd en space--
+
+1541
+01:14:15,580 --> 01:14:18,596
+is twee van jou bestanddele, twee
+van jou mees kosbare bestanddele.
+
+1542
+01:14:18,596 --> 01:14:21,220
+Dit kos my meer tyd
+want ek het om die kaart te volg,
+
+1543
+01:14:21,220 --> 01:14:25,730
+Maar dit is ook kos my meer ruimte
+want ek het tot die kaart om te hou.
+
+1544
+01:14:25,730 --> 01:14:28,730
+So het die hoop, as ons het soort
+bespreek oor gister en vandag,
+
+1545
+01:14:28,730 --> 01:14:31,720
+is dat die voordele
+sal swaarder as die koste.
+
+1546
+01:14:31,720 --> 01:14:33,870
+>> Maar daar is geen duidelike oplossing hier.
+
+1547
+01:14:33,870 --> 01:14:35,870
+Miskien is dit better--
+a la vinnige en vuil,
+
+1548
+01:14:35,870 --> 01:14:38,660
+as Kareem voorgestelde earlier--
+geheue te gooi by die probleem.
+
+1549
+01:14:38,660 --> 01:14:42,520
+koop net meer geheue, dink minder
+hard oor die oplossing van die probleem,
+
+1550
+01:14:42,520 --> 01:14:44,595
+en los dit in 'n makliker manier.
+
+1551
+01:14:44,595 --> 01:14:46,720
+En inderdaad vroeër, toe
+Ons het gepraat oor werkinge,
+
+1552
+01:14:46,720 --> 01:14:49,190
+dit was nie ruimte in
+die rekenaar en tyd.
+
+1553
+01:14:49,190 --> 01:14:51,810
+Dit was ontwikkelaar tyd, wat
+is nog 'n hulpbron.
+
+1554
+01:14:51,810 --> 01:14:54,829
+>> So weer, dit is hierdie balans te vind
+probeer om te besluit watter een van dié dinge
+
+1555
+01:14:54,829 --> 01:14:55,870
+is jy bereid om te spandeer?
+
+1556
+01:14:55,870 --> 01:14:57,380
+Wat is die goedkoopste?
+
+1557
+01:14:57,380 --> 01:15:01,040
+Wat lewer die beter resultate?
+
+1558
+01:15:01,040 --> 01:15:01,540
+Ja?
+
+1559
+01:15:01,540 --> 01:15:11,310
+
+1560
+01:15:11,310 --> 01:15:12,580
+>> Inderdaad.
+
+1561
+01:15:12,580 --> 01:15:15,970
+In hierdie geval, as jy
+voorstelling van getalle op die maps--
+
+1562
+01:15:15,970 --> 01:15:18,820
+hierdie is geroep in verskeie tale
+"Pointers" of "adresse" -
+
+1563
+01:15:18,820 --> 01:15:20,390
+dis dubbel die ruimte.
+
+1564
+01:15:20,390 --> 01:15:24,390
+Dit hoef nie so erg soos dubbel wees indien
+nou is ons net die stoor van getalle.
+
+1565
+01:15:24,390 --> 01:15:27,410
+Veronderstel dat ons die stoor
+pasiënt rekords in 'n hospital--
+
+1566
+01:15:27,410 --> 01:15:30,870
+sodat name Pierson se telefoonnommers,
+sosiale sekerheid nommers, dokter
+
+1567
+01:15:30,870 --> 01:15:31,540
+geskiedenis.
+
+1568
+01:15:31,540 --> 01:15:34,160
+Hierdie boks kan baie wees,
+veel groter, in welke geval
+
+1569
+01:15:34,160 --> 01:15:38,000
+'n klein bietjie wyser, die adres van
+die volgende element-- dit is nie 'n groot deal.
+
+1570
+01:15:38,000 --> 01:15:40,620
+Dit is so 'n byvoordele
+kos dit maak nie saak.
+
+1571
+01:15:40,620 --> 01:15:43,210
+Maar in hierdie geval, ja, dit is 'n verdubbeling.
+
+1572
+01:15:43,210 --> 01:15:45,290
+Goeie vraag.
+
+1573
+01:15:45,290 --> 01:15:47,900
+>> Kom ons praat oor tyd 'n
+bietjie meer konkreet.
+
+1574
+01:15:47,900 --> 01:15:50,380
+Wat is die bestuur van tyd
+van soek hierdie lys?
+
+1575
+01:15:50,380 --> 01:15:53,640
+Veronderstel ek wou soek
+deur alle grade die studente se
+
+1576
+01:15:53,640 --> 01:15:55,980
+en daar is N grade
+in hierdie datastruktuur.
+
+1577
+01:15:55,980 --> 01:15:58,830
+Ook hier kan ons leen
+die woordeskat van vroeër.
+
+1578
+01:15:58,830 --> 01:16:00,890
+Dit is 'n lineêre datastruktuur.
+
+1579
+01:16:00,890 --> 01:16:04,570
+>> Big O van N is wat nodig is om te kry
+tot aan die einde van hierdie datastruktuur,
+
+1580
+01:16:04,570 --> 01:16:08,410
+whereas-- en ons het nie gesien
+hierdie before-- 'n skikking gee jou
+
+1581
+01:16:08,410 --> 01:16:13,555
+wat genoem konstante tyd, wat beteken
+'n stap of twee stappe of 10 steps--
+
+1582
+01:16:13,555 --> 01:16:14,180
+maak nie saak.
+
+1583
+01:16:14,180 --> 01:16:15,440
+Dit is 'n vaste aantal.
+
+1584
+01:16:15,440 --> 01:16:17,440
+Dit het niks te doen met
+die grootte van die skikking.
+
+1585
+01:16:17,440 --> 01:16:20,130
+En die rede daarvoor,
+weer, is ewetoeganklike.
+
+1586
+01:16:20,130 --> 01:16:23,180
+Die rekenaar kan net onmiddellik
+spring na 'n ander plek,
+
+1587
+01:16:23,180 --> 01:16:27,770
+want hulle is almal dieselfde
+afstand van alles.
+
+1588
+01:16:27,770 --> 01:16:29,112
+Daar is geen denke betrokke is.
+
+1589
+01:16:29,112 --> 01:16:31,900
+
+1590
+01:16:31,900 --> 01:16:32,400
+Alles reg.
+
+1591
+01:16:32,400 --> 01:16:39,230
+So as ek kan, laat ek probeer om
+verf twee finale foto's.
+
+1592
+01:16:39,230 --> 01:16:42,830
+'N Baie algemene een bekend as 'n hash tafel.
+
+1593
+01:16:42,830 --> 01:16:51,120
+So om hierdie bespreking te motiveer,
+Laat my dink oor hoe om dit te doen.
+
+1594
+01:16:51,120 --> 01:16:52,610
+>> So wat dink jy hiervan?
+
+1595
+01:16:52,610 --> 01:16:55,160
+Veronderstel dat die probleem
+Ons wil nou los
+
+1596
+01:16:55,160 --> 01:16:58,360
+is die uitvoering van 'n dictionary--
+so 'n hele klomp van die Engelse woorde
+
+1597
+01:16:58,360 --> 01:16:59,330
+of wat ook al.
+
+1598
+01:16:59,330 --> 01:17:02,724
+En die doel is om in staat wees om te antwoord
+vrae van die vorm is dit 'n woord?
+
+1599
+01:17:02,724 --> 01:17:04,640
+So jy wil uit te voer
+'n speltoetser, net
+
+1600
+01:17:04,640 --> 01:17:07,220
+soos 'n fisiese woordeboek
+dat jy kan dinge opkyk in.
+
+1601
+01:17:07,220 --> 01:17:10,490
+Veronderstel ek was om dit te doen met 'n skikking.
+
+1602
+01:17:10,490 --> 01:17:12,590
+Ek kan dit doen.
+
+1603
+01:17:12,590 --> 01:17:20,756
+>> En dink die woorde is Apple
+en piesang en spanspek.
+
+1604
+01:17:20,756 --> 01:17:23,330
+
+1605
+01:17:23,330 --> 01:17:26,465
+En ek kan nie dink aan vrugte
+wat begin met D, so ons is net
+
+1606
+01:17:26,465 --> 01:17:27,590
+gaan drie vrugte het.
+
+1607
+01:17:27,590 --> 01:17:31,510
+So dit is 'n skikking, en ons is
+stoor al hierdie woorde
+
+1608
+01:17:31,510 --> 01:17:34,200
+in hierdie woordeboek as 'n skikking.
+
+1609
+01:17:34,200 --> 01:17:39,350
+Die vraag is dus hoe anders
+kon jy hierdie inligting te stoor?
+
+1610
+01:17:39,350 --> 01:17:43,160
+>> Wel, ek soort bedrog hier, want
+elk van hierdie letters in die woord
+
+1611
+01:17:43,160 --> 01:17:44,490
+is regtig 'n individu byte.
+
+1612
+01:17:44,490 --> 01:17:46,740
+So as ek regtig wou wees
+neet-kieskeurig gesê: Sou ek regtig
+
+1613
+01:17:46,740 --> 01:17:49,600
+word verdeel hierdie is in die veel
+kleiner stukke van die geheue,
+
+1614
+01:17:49,600 --> 01:17:51,289
+en ons kon presies dit te doen.
+
+1615
+01:17:51,289 --> 01:17:53,580
+Maar ons gaan loop in
+dieselfde probleem as voorheen.
+
+1616
+01:17:53,580 --> 01:17:56,674
+Wat as, soos Merriam Webster of Oxford
+doen elke year-- hulle woorde by te voeg
+
+1617
+01:17:56,674 --> 01:17:59,340
+om die dictionary-- doen ons nie
+noodwendig wil onsself te verf
+
+1618
+01:17:59,340 --> 01:18:00,780
+in 'n hoek met 'n verskeidenheid?
+
+1619
+01:18:00,780 --> 01:18:05,710
+>> So in plaas, miskien 'n slimmer benadering
+is om die appel in sy eie node of boks,
+
+1620
+01:18:05,710 --> 01:18:11,190
+as ons sou sê, piesang, en
+dan hier het ons spanspek.
+
+1621
+01:18:11,190 --> 01:18:14,990
+
+1622
+01:18:14,990 --> 01:18:16,790
+En ons string hierdie dinge saam.
+
+1623
+01:18:16,790 --> 01:18:19,980
+Dit is dus die skikking, en
+dit is die geskakelde lys.
+
+1624
+01:18:19,980 --> 01:18:23,300
+As jy nie heeltemal kan sien, is dit net
+sê "skikking," en dit sê "lys."
+
+1625
+01:18:23,300 --> 01:18:25,780
+>> Ons het dus dieselfde
+presiese kwessies soos voorheen,
+
+1626
+01:18:25,780 --> 01:18:28,600
+waardeur ons nou
+dinamika in ons geskakelde lys.
+
+1627
+01:18:28,600 --> 01:18:31,090
+Maar ons het 'n redelik stadige woordeboek.
+
+1628
+01:18:31,090 --> 01:18:32,870
+Veronderstel ek wil om te kyk op 'n woord.
+
+1629
+01:18:32,870 --> 01:18:35,430
+Dit mag dalk vir my te neem groot O van N
+stappe, want die woord kan
+
+1630
+01:18:35,430 --> 01:18:37,840
+wees al die pad aan die einde van
+die lys, soos spanspek.
+
+1631
+01:18:37,840 --> 01:18:40,600
+En dit blyk dat
+in programmering, sorteer
+
+1632
+01:18:40,600 --> 01:18:42,700
+van die heilige graal van data
+strukture, is iets
+
+1633
+01:18:42,700 --> 01:18:46,620
+wat gee jou konstante
+tyd soos 'n skikking
+
+1634
+01:18:46,620 --> 01:18:50,870
+maar wat gee jou nog dinamika.
+
+1635
+01:18:50,870 --> 01:18:52,940
+>> So kan ons die beste van beide wêrelde?
+
+1636
+01:18:52,940 --> 01:18:55,570
+En inderdaad, daar is iets
+bekend as die hash tafel
+
+1637
+01:18:55,570 --> 01:18:59,320
+wat jou toelaat om presies te doen
+dat, hoewel ongeveer.
+
+1638
+01:18:59,320 --> 01:19:03,140
+'N gemors tafel is 'n liefhebber
+datastruktuur dat ons
+
+1639
+01:19:03,140 --> 01:19:06,340
+kan dink as die
+kombinasie van 'n array--
+
+1640
+01:19:06,340 --> 01:19:12,390
+en ek gaan om dit te trek
+soos this-- en geskakelde lyste
+
+1641
+01:19:12,390 --> 01:19:17,310
+dat ek sal trek soos hierdie hier.
+
+1642
+01:19:17,310 --> 01:19:19,760
+>> En die wyse waarop hierdie ding
+werke is soos volg.
+
+1643
+01:19:19,760 --> 01:19:23,310
+
+1644
+01:19:23,310 --> 01:19:29,540
+As dit now-- hash table--
+is my derde datastruktuur,
+
+1645
+01:19:29,540 --> 01:19:32,590
+en ek wil stoor
+woorde in hierdie, ek doen nie
+
+1646
+01:19:32,590 --> 01:19:35,440
+wil net al die stoor
+woorde rug aan rug aan rug aan rug.
+
+1647
+01:19:35,440 --> 01:19:37,430
+Ek wil 'n paar hefboom
+stukkie inligting
+
+1648
+01:19:37,430 --> 01:19:40,330
+oor die woorde wat jou sal laat
+my kry waar dit vinniger.
+
+1649
+01:19:40,330 --> 01:19:43,666
+>> So kry die woorde appel
+en piesang en spanspek,
+
+1650
+01:19:43,666 --> 01:19:45,040
+Ek doelbewus gekies daardie woorde.
+
+1651
+01:19:45,040 --> 01:19:45,340
+Hoekom?
+
+1652
+01:19:45,340 --> 01:19:47,631
+Wat is soort van fundamenteel
+anders oor die drie?
+
+1653
+01:19:47,631 --> 01:19:49,950
+
+1654
+01:19:49,950 --> 01:19:51,484
+Wat is die voor die hand liggend?
+
+1655
+01:19:51,484 --> 01:19:52,900
+Hulle begin met verskillende letters.
+
+1656
+01:19:52,900 --> 01:19:53,900
+>> So jy weet wat?
+
+1657
+01:19:53,900 --> 01:19:57,120
+Eerder as om te sit al my woorde in
+dieselfde emmer, om so te praat,
+
+1658
+01:19:57,120 --> 01:20:00,390
+soos in 'n groot lys, waarom doen nie
+Ek ten minste probeer om 'n optimalisering
+
+1659
+01:20:00,390 --> 01:20:04,180
+en my lyste 26/01 solank maak.
+
+1660
+01:20:04,180 --> 01:20:07,440
+'N dwingende optimalisering
+dalk hoekom doen nie
+
+1661
+01:20:07,440 --> 01:20:10,650
+I-- wanneer invoeging van 'n woord
+in hierdie datastruktuur,
+
+1662
+01:20:10,650 --> 01:20:14,300
+in die rekenaar se geheue, waarom
+weet ek nie sit al die 'n se woorde hier,
+
+1663
+01:20:14,300 --> 01:20:17,270
+al die 'B' woorde hier,
+en al die "c" woorde hier?
+
+1664
+01:20:17,270 --> 01:20:24,610
+So eindig dit op om 'n appel
+hier, piesang hier, spanspek hier,
+
+1665
+01:20:24,610 --> 01:20:25,730
+en dies meer.
+
+1666
+01:20:25,730 --> 01:20:31,700
+>> En as ek 'n bykomende
+woord like-- wat 'n ander?
+
+1667
+01:20:31,700 --> 01:20:36,640
+Apple, piesang, peer.
+
+1668
+01:20:36,640 --> 01:20:39,370
+Enigiemand dink aan 'n vrug
+wat begin met A, B, of C?
+
+1669
+01:20:39,370 --> 01:20:40,570
+Blueberry-- volmaak.
+
+1670
+01:20:40,570 --> 01:20:43,990
+Dit gaan uiteindelik hier.
+
+1671
+01:20:43,990 --> 01:20:47,530
+En so lyk ons ​​'n moet
+effens beter oplossing,
+
+1672
+01:20:47,530 --> 01:20:50,820
+want nou as ek wil
+Soek vir appel, ek
+
+1673
+01:20:50,820 --> 01:20:53,200
+first-- ek doen nie net duik
+in my datastruktuur.
+
+1674
+01:20:53,200 --> 01:20:54,850
+Ek het nie 'n duik in die geheue van my rekenaar se.
+
+1675
+01:20:54,850 --> 01:20:56,530
+Ek kyk eers na die eerste letter.
+
+1676
+01:20:56,530 --> 01:20:58,610
+>> En dit is wat 'n rekenaar
+wetenskaplike sou sê.
+
+1677
+01:20:58,610 --> 01:21:00,760
+Jy hash in jou datastruktuur.
+
+1678
+01:21:00,760 --> 01:21:04,100
+Jy neem jou insette, wat in
+hierdie geval is 'n woord soos appel.
+
+1679
+01:21:04,100 --> 01:21:07,150
+Jy analiseer dit, kyk na
+die eerste letter in hierdie geval,
+
+1680
+01:21:07,150 --> 01:21:08,340
+daardeur hashing dit.
+
+1681
+01:21:08,340 --> 01:21:10,950
+Hashing is 'n algemene term waardeur
+jy iets as invoer neem
+
+1682
+01:21:10,950 --> 01:21:12,116
+en jy produseer sommige uitset.
+
+1683
+01:21:12,116 --> 01:21:15,090
+En die uitset in daardie
+geval is die plek
+
+1684
+01:21:15,090 --> 01:21:18,150
+jy wil soek, die eerste
+plek, tweede plek, derde.
+
+1685
+01:21:18,150 --> 01:21:22,160
+So het die insette is appel,
+die produksie is die eerste.
+
+1686
+01:21:22,160 --> 01:21:25,054
+Die insette is piesang, die
+uitset moet tweede wees.
+
+1687
+01:21:25,054 --> 01:21:27,220
+Die insette is spanspek,
+die uitset moet derde wees.
+
+1688
+01:21:27,220 --> 01:21:30,320
+Die insette is ys, die
+uitset moet weer tweede.
+
+1689
+01:21:30,320 --> 01:21:34,010
+En dit is wat jou help om te neem
+kortpaaie deur jou geheue
+
+1690
+01:21:34,010 --> 01:21:39,050
+ten einde woorde te kry
+of data meer effektief.
+
+1691
+01:21:39,050 --> 01:21:43,330
+>> Nou sny dit af ons tyd potensieel
+met soveel as een uit 26,
+
+1692
+01:21:43,330 --> 01:21:45,850
+want as jy aanvaar dat jy
+het soveel " 'n" woorde soos "Z"
+
+1693
+01:21:45,850 --> 01:21:48,080
+woorde soos "V" woorde, wat
+is nie regtig realistic--
+
+1694
+01:21:48,080 --> 01:21:50,830
+jy gaan skeef oor het
+sekere letters van die alphabet--
+
+1695
+01:21:50,830 --> 01:21:53,204
+maar dit sou 'n inkrementele wees
+benadering wat toelaat
+
+1696
+01:21:53,204 --> 01:21:55,930
+jy veel vinniger om woorde te kry.
+
+1697
+01:21:55,930 --> 01:21:59,660
+En in werklikheid, 'n gesofistikeerde
+program, die Googles van die wêreld,
+
+1698
+01:21:59,660 --> 01:22:02,180
+die Facebooks van die world--
+Hulle sou 'n gemors tafel gebruik
+
+1699
+01:22:02,180 --> 01:22:03,740
+vir 'n baie verskillende doeleindes.
+
+1700
+01:22:03,740 --> 01:22:06,590
+Maar hulle sal nie so naïef as wees
+om net te kyk na die eerste letter
+
+1701
+01:22:06,590 --> 01:22:09,700
+in appel of piesang of
+peer of spanspek,
+
+1702
+01:22:09,700 --> 01:22:13,420
+want as jy dit kan sien
+lyste kan nog steeds 'n lang.
+
+1703
+01:22:13,420 --> 01:22:17,130
+>> En so gaan dit dalk nog soort wees
+van linear-- so soort van stadig,
+
+1704
+01:22:17,130 --> 01:22:19,980
+soos met die groot O van N
+dat ons vroeër bespreek.
+
+1705
+01:22:19,980 --> 01:22:25,290
+So, wat 'n baie goeie hash tafel
+do-- dit sal 'n veel groter verskeidenheid het.
+
+1706
+01:22:25,290 --> 01:22:28,574
+En dit sal 'n baie meer gebruik
+gesofistikeerde hashing funksie,
+
+1707
+01:22:28,574 --> 01:22:30,240
+sodat dit nie net kyk na die "a."
+
+1708
+01:22:30,240 --> 01:22:35,480
+Miskien is dit kyk na " 'n p-p-l-e" en
+een of ander manier vat die vyf letters
+
+1709
+01:22:35,480 --> 01:22:38,400
+in die plek waar
+Apple moet gestoor word.
+
+1710
+01:22:38,400 --> 01:22:42,660
+Ons is net naïef met behulp van die letter 'n '
+alleen, want dit is lekker en maklik.
+
+1711
+01:22:42,660 --> 01:22:44,600
+>> Maar 'n hash tafel in
+die ou end, kan jy dink
+
+1712
+01:22:44,600 --> 01:22:47,270
+van so 'n kombinasie van
+'n skikking, wat elk
+
+1713
+01:22:47,270 --> 01:22:51,700
+'n geskakelde lys wat ideaal
+moet so kort as moontlik wees.
+
+1714
+01:22:51,700 --> 01:22:54,364
+En dit is nie 'n voor die hand liggende oplossing.
+
+1715
+01:22:54,364 --> 01:22:57,280
+Trouens, baie van die fine tuning
+wat gaan aan onder die enjinkap toe
+
+1716
+01:22:57,280 --> 01:22:59,654
+implementering van hierdie soort
+gesofistikeerde datastrukture
+
+1717
+01:22:59,654 --> 01:23:01,640
+is wat die reg
+lengte van die skikking?
+
+1718
+01:23:01,640 --> 01:23:03,250
+Wat is die regte hash funksie?
+
+1719
+01:23:03,250 --> 01:23:04,830
+Hoe kan jy slaan dinge in die geheue?
+
+1720
+01:23:04,830 --> 01:23:07,249
+>> Maar besef hoe vinnig
+hierdie soort van gesprek
+
+1721
+01:23:07,249 --> 01:23:10,540
+toegeneem, óf so ver dat dit soort
+van meer as 'n mens se kop op hierdie punt, wat
+
+1722
+01:23:10,540 --> 01:23:11,360
+is fyn.
+
+1723
+01:23:11,360 --> 01:23:18,820
+Maar ons het, onthou, met werklik
+iets lae-vlak en elektroniese.
+
+1724
+01:23:18,820 --> 01:23:20,819
+En so is dit weer hierdie
+tema van onttrekking,
+
+1725
+01:23:20,819 --> 01:23:23,610
+waar sodra jy begin om te neem vir
+verleen, OK, ek het it-- het daar
+
+1726
+01:23:23,610 --> 01:23:26,680
+fisiese geheue, OK, het dit, elke
+fisiese plek het 'n adres,
+
+1727
+01:23:26,680 --> 01:23:29,910
+OK, ek het dit, kan ek verteenwoordig
+diegene adresse as arrows--
+
+1728
+01:23:29,910 --> 01:23:34,650
+jy kan baie vinnig begin om
+meer gesofistikeerde gesprekke wat
+
+1729
+01:23:34,650 --> 01:23:38,360
+op die ou end lyk ons ​​te laat
+om probleme soos soek op te los
+
+1730
+01:23:38,360 --> 01:23:41,620
+en sorteer meer effektief.
+
+1731
+01:23:41,620 --> 01:23:44,190
+En wees verseker, too--
+want ek dink dit
+
+1732
+01:23:44,190 --> 01:23:48,700
+is die diepste ons gegaan het in 'n paar
+van hierdie CS onderwerpe proper-- ons het
+
+1733
+01:23:48,700 --> 01:23:51,880
+gedoen in 'n dag en 'n half by hierdie
+wys wat jy kan gewoonlik oor doen
+
+1734
+01:23:51,880 --> 01:23:55,520
+die loop van agt weke in 'n semester.
+
+1735
+01:23:55,520 --> 01:23:59,670
+>> Enige vrae oor hierdie?
+
+1736
+01:23:59,670 --> 01:24:01,100
+Geen?
+
+1737
+01:24:01,100 --> 01:24:01,940
+Alles reg.
+
+1738
+01:24:01,940 --> 01:24:05,610
+Wel, hoekom nie ons daar breek,
+begin middagete 'n paar minute vroeg,
+
+1739
+01:24:05,610 --> 01:24:07,052
+hervat in net oor 'n uur?
+
+1740
+01:24:07,052 --> 01:24:08,760
+En Ek sal talm vir
+'n bietjie met vrae.
+
+1741
+01:24:08,760 --> 01:24:11,343
+Toe ek gaan hê om te gaan
+neem 'n paar oproepe as dit is OK.
+
+1742
+01:24:11,343 --> 01:24:15,000
+Ek sal draai op musiek in die tussentyd,
+maar middagete moet wees om die draai.
+
+1743
+01:24:15,000 --> 01:24:17,862
+

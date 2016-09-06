@@ -1,0 +1,455 @@
+DAVID Malan: Labi, welcome atpakaļ. Pirms mēs pikējošais mākonis skaitļošanas, Es domāju, ka man pauzes uz brīdi ja ir kādi neatrisināti jautājumi vai tēmas, kas nāca klajā pusdienas laikā ka tagad varētu būt interesanti. Mērķauditorija: [dzirdams] 
+
+DAVID Malan: OK. Ak, labi. Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Nē, protams. Labi, labi, cerams, visas jūsu problēmas rodas tuvāko stundu laikā un rīt īpaši. Bet pieņemsim to apskatīt, tad, pie kur pēdējā diskusija par izveidot mājas lapā noved, vispārīgāk kad runa ir par mākonis skaitļošanas, izveidojot servera arhitektūra, veidiems lēmumu ka inženieri un izstrādātājiem un vadītājiem ir nepieciešams, lai, kad runa lai dara vairāk nekā tikai pierakstīšanos 10 $ mēnesī interneta uzņēmējas ja jūs tiešām vēlaties, lai izveidotu out savu infrastruktūru. Un mēs cenšamies piesaistīt šo atpakaļ, Piemēram, lai Dropbox un citiem kā viņiem. 
+
+Tāpēc sāksim izskatīt kādas problēmas rodas, kā bizness izpaužas labs un rodas labas problēmas. Tātad ļoti vienkāršākā gadījumā, kam daži uzņēmums, kas ir web serveri, Jums varētu būt, teiksim, serveri, kas mēs vienkārši izdarīt, ka izskatās šādi. Un šajās dienās, lielākā daļa servers-- un pieņemsim faktiski ievietot attēlu, lai tas tikai tā ka tas ir mazliet mazāk neskaidrs. 
+
+Tātad Dell rack server-- atpakaļ dienā, tur bija lieldatoriem kas paņēma visu telpas. Šajās dienās, ja Jums bija lai iegūtu serveri, to varētu likties mazliet kaut kas līdzīgs šim. Serveri mēra ko sauc plaukts vienības, vai DPU. Un viens RU ir 1,5 collas, kas ir nozares standarts. Tātad tas izskatās divi RU serveri. Tātad, tas ir 3 collas garš. Un viņi parasti 19 collas plata, kas nozīmē, ka visi šāda veida stuff ir standartizēta. 
+
+Tātad, ja jūs meklēt datu center-- ne tikai pie viena servera, bet pieņemsim ieskatieties Google datu centrs, un redzēt, ja mēs redzēt skaistu attēlu Google Images. Tas ir daudz labāk izgaismots nekā jūs tas parasti atrast, un vēl daudz sexier meklē, kā rezultātā. bet tas ir tas, kas izskatās pāris simts serveri visu par to, ka tāda paša izmēra, patiesībā, jo plaukts pēc bagāžnieku pēc plaukts pēc plaukts datu centrā. 
+
+Kaut kas līdzīgs this-- tas var labi būt Google, jo es googled Google. Bet tas varētu būt pārstāvi vairāk vispārīgi datu centrs, kurā daudzi uzņēmumi parasti atrodas vienās telpās. Un sadarbība atrodas parasti nozīmē ka jums iet uz vietas, piemēram, Equinix vai citi pārdevēji, kas ir liels noliktavām, kas ir daudz enerģijas, daudz dzesēšanas, cerams daudz drošības, un individuālie būri pievienojot pakaramie serveriem, un jūs vai nu nomāt pakaramie vai jūs celt turētājus. 
+
+Un atsevišķiem uzņēmumiem, jaunizveidotiem īpaši, būs sava veida biometrijas iekļūt savā būrī, vai atslēgu, vai galvenais karti. Jūs atvērt durvis. Un iekšā tur ir tikai kvadrātveida kadrus nospiedumu ka jūs maksājat par, iekšpusē kas jums var likt kaut ko vēlaties. 
+
+Un jūs parasti maksāt par varu. Un jūs maksājat pēdas. Un tad jūs maksājat sevi par serveriem ka jūs celt uz šo vietu. Un ko jūs pēc tam ir iespēja to darīt, ir maksāt kādam Jūsu interneta pakalpojumu savienojumu. Jūs varat maksāt jebkādu skaitu pārdevēji, no kuriem visi parasti nonāk šajā datu centrā. 
+
+Bet reālā interesants jautājums ir, kas patiesībā notiek šajās plauktiem? Tie var ļoti labi izskatās tas, ko mēs tikko redzējām. Bet tie pilda dažādas funkcijas un var būt nepieciešams darīt dažādas lietas. Un pieņemsim faktiski motivēt šo diskusiju ar jautājumu par to, kas, problēmu sāk rasties, ja jūs esat veiksmīgs? 
+
+Tātad jūs esat ieguvuši mājas lapā ka esat būvētas. Un varbūt tas pārdod preces vai kaut kas tāds. Un jūs esat dara ļoti labi ar pārdošanas widgets tiešsaistē. Un jūs sākat izjust daži simptomi, jūsu mājas lapā. Kas varētu būt daži no tehniskās simptomi ka lietotāji ziņo par biznesu pieaug un plaukstošajai un jūsu mājas lapa ir gūst labumu no tā? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tieši tā. Lai jūs varētu būt palēnināšanās no jūsu mājas lapā. Un kāpēc varētu notikt? Nu, ja mēs pieņemam, par labad diskusiju tieši tagad, ka jūs esat uz vienu Šo komerciālo web hosts ka mēs runājām par pirms pusdienām, ka jūs maksājat noteiktu skaitu dolāru uz vienu mēnesi, un jūs jau esat samaksājis ikgadējās izmaksas jūsu domēnu nosaukt, ka interneta uzņēmējas ir iespējams overselling savus resursus zināmā mērā. Lai jūs varētu būt lietotājvārdu un paroli par to serveri. Bet tā varētu vairākas citas, vai vairāki desmiti citu, vai varbūt pat vairāki simts citiem, lietotājiem. 
+
+Un mājas lapas dzīvot fiziski uz tā paša servera. Kāpēc tas ir iespējams? Nu šajās dienās, serveri kā šis parasti ir vairākas diskdziņiem, varbūt tik daudz kā seši vai vairāk cieto disku, katrs no kuriem var būt tik daudz kā 4 terabaitiem šajās dienās. Lai jūs varētu būt 24 terabaitiem telpas tikai vienu nelielu serveri, kā šis. 
+
+Un, pat ja jūs nozagt dažus no šīs vietas atlaišanas, backup mērķiem, tas joprojām ir diezgan daudz vietas. Un, protams, tipisks mājas lapa nav nepieciešams, ka daudz vietas. Just reģistrējot lietotājus un uzglabājot apaļkokiem pasūtījumu neņem visu, kas daudz vietas. Tātad jūs varat sadalīt to diezgan mazliet un dod katram lietotājam tikai nedaudz šķēle kas. 
+
+Tikmēr, dators kā šis šajās dienās parasti ir vairākas CPUs-- ne tikai vienu, varbūt divas, varbūt četri, varbūt 16, vai pat vairāk. Un katrs no šiem procesoriem ir kaut kas ko sauc kodols, kas ir veida, piemēram, smadzeņu iekšpusē smadzenēs. Tātad patiesībā lielākā daļa ikvienam šeit ar mūsdienu klēpjdatoriem ir iespējams, divkodolu vai četrkodolu CPU-- un, iespējams, tikai viens CPU iekšpusē klēpjdators šajās dienās. Bet galddatori un zobainās datori, piemēram, tas varētu būt diezgan maz vairāk CPU, un savukārt kodoliem. 
+
+Un godīgi sakot, pat mūsu Mac un PC ir Šodien, jums nav tiešām ir nepieciešams dual serdes vai quad serdes pārbaudīt savu e-pastu. Ja tur ir kāds sašaurinājums kad runa ir, izmantojot datoru, Jums cilvēka, iespējams, vislēnākais lieta par šī datora. Un jūs nebrauksim, lai varētu pārbaudiet savu e-pastu ātrāk, ja jums ir četras reizes vairāk CPU un serdeņiem. 
+
+Bet pats ir sava no patiesa no servera. Viena mājas lapā var nebūt obligāti nepieciešams vairāk nekā viens CPU vai viens kodols, kas ir viens mazas smadzenes dara visi no domāšanas un pārstrādi. Tāpēc ražotāji ir līdzīgi sāka graizīt šos resursus tā ka varbūt jūsu mājas lapā saņem vienu kodols, jūsu mājas lapā saņem vienu kodolu, vai varbūt mēs dalīties vienu šādu kodolu. Mēs arī daloties diskā. Un mēs arī dalīties RAM, vai Random Access Memory no iepriekš, no kuriem tur ir arī ierobežots daudzums. 
+
+Un tas ir galvenais. Nav svarīgi, cik dārgi dators bija, tur ir vēl ierobežots resursu apjomu tajā. Un tā vairāk un vairāk jūs mēģināt patērēt šos resursus, lēnāku lietas varētu kļūt. Bet kāpēc? Kāpēc lietas palēnināt kā simptoms servera pārslodzes? Kas notiek? 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Jā, tieši tā. Es ierosināju agrāk, ka RAM ir atmiņas veids. Tas ir gaistošs, saskaņā ar kuru tas ir kur progr un dati ir uzglabā, kad tie tiek izmantoti. Un tātad tur ir tikai ierobežots skaits lietas, varat acīmredzot darīt uzreiz. Un tas ir arī ātrāk, kas ir laba lieta. Bet tas ir arī dārgāks, kas ir slikta lieta. Un tas ir arī tāpēc klāt zemāks daudzumi nekā diska vietas, cietais disks telpa, kas mēdz būt lētāk. 
+
+Citiem vārdiem sakot, jums varētu būt 4 terabaitiem diska vietas datorā. Bet jūs varētu būt 4 gigabaitiem, vai 64 gigabaitiem, secībā lielumu, ar koeficientu 1000 mazāk, RAM savā datorā. Tātad, ko tas dators darīt? Nu, pieņemsim, ka jums darīt ir 64 gigabaiti RAM servera, piemēram, tas, kas būtu diezgan bieži, ja ne mazs šajās dienās. Bet pieņemsim, ka jums ir tik daudz Lietotājiem darot daudzas lietas ka jums veida veida vajag 65 gigabaitu atmiņu rīkoties visu, kas vienlaicīga lietošana? 
+
+Nu, jūs varētu vienkārši pateikt, sorry, daži lietotāju skaits vienkārši nevar piekļūt vietnei. Un tas ir pasākums ļaunākajā, protams. Vai jūs, kā darbības sistēma, piemēram, Windows vai Mac OS vai Linux vai Solaris vai jebkura Vairākas citas OSE šajā serverī, varētu tikai izlemt, jūs zināt, ko? Man ir tikai 64 gigabaitu RAM. Es veida vajag 65. Tātad, jūs zināt, ko? Es esmu gatavojas veikt 1 gigabaitu vērts datiem RAM kas bija vismazāk nesen piekļūt un vienkārši pārvietot to uz diska laiku, burtiski kopēt to no fast atmiņa uz lēnāku atmiņu tā, ka es pēc tam var rīkoties, ka 65. gigabaitu nepieciešamība atmiņu, darīt kādu aprēķinu par to. Tad, kad es esmu pabeidzis to dara, Es ņemšu tikai pārvietot, ka uz diska, pārvietot šo citu RAM Es laiku nodot diskā atpakaļ faktisko aparatūru tāpēc, ka es esmu veida multitasking. 
+
+Tāpēc es esmu veida liekot lietām īslaicīgi šajā lēnāk telpā tāpēc es radītu ilūziju izturēt ikvienu. Bet tur ir lejupslīde. Kāpēc? Nu, iekšpusē no tiem smagi diski šajās dienās ir tas, ko? Drīzāk, kas padara grūti vadīt atšķiras no RAM kā vislabāk jūs zināt tagad? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Labi, taisnība. Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Tātad ļoti patiess. Un tas ir blakusparādība vai funkciju ar to, ka RAM ir patiešām ātrāk. Un tāpēc jūs vēlaties izmantot to pašreizējā izmantošanā. Un disks ir lēnāks. Bet tas ir pastāvīga, vai nonvolatile. Tātad jūs izmantot to ilgstošai glabāšanai. Bet attiecībā uz īstenošanu, ja es paskatos uz augšu ko sauc DIMM, Dual Inline Memory Modulis, tas ir tas gabals RAM varētu parasti izskatās. 
+
+Tātad iekšpusē mūsu Mac-- ka ir kļūda. Inside mūsu Mac un PC, mūsu desktop datori būtu nūjas atmiņas, kā jūs varētu viņiem piezvanīt, vai DIMM, vai SIMM atpakaļ dienā, atmiņas ka izskatās šādi. Mūsu laptops, iespējams, ir lietas, kas ir trešā izmērs vai pusi no lieluma. Viņi nedaudz mazāka, bet pats idea-- maz gabali zaļā silīcija vafele vai plastmasas, kas ir maz melnā mikroshēmas par tiem ar daudz vadu savstarpēji viss. Jums varētu būt visai ķekars šie iekšpusē datora. Bet takeaway šeit ir tas ir pilnīgi elektroniskas. Ir tikai elektroniem plūst uz šo ierīci. Savukārt, ja mēs skatāmies iekšpusē cieto disku un uzvilkt attēlu šeit, jūs tā vietā redzēt kaut kas līdzīgs šim, kas tiešām ir elektrība iet caur to galu galā. Bet ko arī lec ārā pie jums par šo lietu? Mērķauditorija: [dzirdams] DAVID Malan: Jā, tur ir acīmredzot kustīgām daļām. Tas ir veids, kā vecs ieraksts atskaņotāju vai fonogrāfs atskaņotāju. Un tas diezgan daudz ir. Tas ir nedaudz mīļotājs nekā that-- tā kā fonogrāfs spēlētāja izmantotā rievas ierakstā, tas patiesībā izmanto tiny maz magnētiskās daļiņas ka mēs nevaram gluži redzēt. Bet, ja nedaudz magnētisko daļiņu izskatās šādi, tā uzskatāma par 1. Un, ja tas izskatās šādi, ziemeļu-dienvidu, nevis dienvidiem uz ziemeļiem, tas varētu būt 0. Un mēs redzēsim rīt, kā mēs varam veidot no vairāk interesantas lietas. 
+
+Bet kaut kas ir nokļuvis fiziski kustēties ir noteikti gatavojas iet lēnāk nekā gaismas ātrumu, kas teorētiski ir tas, ko elektronu varētu izplūst, lai gan reāli ne gluži. Tik mehāniskā devices-- daudz lēnāk. Bet viņi lētāki. Un jūs varat fit tik daudz vairāk datu iekšpusē no tiem. Tātad fakts, ka pastāv pasaules kaut sauc virtuālo atmiņu, izmantojot cieto disku, kā šis it kā tas būtu RAM caurspīdīgs, lai lietotājs, vienkārši pārvieto datus no RAM uz cietā diska, tad pārvietojot to atpakaļ, kad jums ir nepieciešams, tas atkal rada palēnināšanos. Tāpēc, ka jūs burtiski ir kopēt to no vienas vietas uz otru. Un ko jūs esat kopējot uz un no faktiski lēnāks nekā RAM kur jūs vēlaties, lai to. 
+
+Alternatīvs risinājums here-- ja jums nepatīk, ka palēnināt, un jūsu virtuālo atmiņu veida pārpūles, kas ir vēl viens risinājums šai problēmai? 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Nu, palielināt virtuālo atmiņu ļautu mums darīt tālāk vēl lielāks mērogs. Mēs varētu rīkoties 66 gigabaitus vērts atmiņas vajadzībām, vai 67 gigabaitiem. Bet pieņemsim, ka man nepatīk tas palēnināt, patiesībā Es gribu, lai izslēgtu virtuālo atmiņu, ja tas ir pat iespējams, ko vēl es varētu mest pie šī problēma to atrisināt, kur es gribu rīkoties vairāk lietotāju un vairāk atmiņas prasības nekā es fiziski ir šobrīd? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Diemžēl nē. Tātad CPU un serdes viņi jo ir ierobežots resurss. Un tur nav analogu šajā kontekstā. Labs jautājums, though. Tik vienkārši, lai būtu skaidrs, arī, ja iekšā šis dators, teiksim, stick RAM, kas izskatās tāpat this-- un tā mēs saucam par RAM. Un vairāk nekā šeit ir cietā diska. Un es ņemšu tikai izdarīt šo gleznieciski kā mazs apli. Ir 0 un 1 ir abās these-- dati, mēs vispārināt kā. 
+
+Un būtībā, ja lietotājs ir darbojas pieteikumu, piemēram, teiksim, tīmekļa vietni, kas prasa šo daudz RAM katram lietotājam, ko es esmu ierosinot, veidā šī lieta sauc virtuālo atmiņu, ir tikai īslaicīgi kustēties ka vairāk nekā šeit, lai tagad es var pārvietoties kāds cits atmiņu prasības tur. Un tad, kad tas ir izdarīts, Es varu kopēt šo atpakaļ pār un tas iet šeit, tādējādi pārvietojot ko es gribēju tur kaut kur citur vispār. 
+
+Tātad tur ir tikai daudz Switcheroo, ir takeaway šeit. Tātad, ja jums tas nepatīk, un jums nav gribu, lai kaut uz cietā diska, kāda veida acīmredzamo biznesa persona risinājums problēmai, vai inženiera risinājums, lai šo jautājumu, too? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, es domāju burtiski mest naudu problēmu. Un patiesībā, tas ir ideāls segue daži no augstākā līmenī diskusijas par mākonis skaitļošanas. Jo daudz no tā tiek motivēts finanšu lēmumos, pat ne obligāti tehnoloģiju. Ja 64 gigs RAM ir pārāk maz, labi, kāpēc ne saņemt 128 gigabaitu RAM? Kāpēc ne iegūt 256 gigabaitu RAM? Nu, kāpēc ne? 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Nu, tas maksā vairāk naudas, protams. Un, ja jums jau ir rezerves cietajā diskā, efektīvi, vai līdzvērtīgi, cietajā diskā ir tik daudz lētāk, jūs varētu arī izmantot. Tātad vēlreiz, tur ir šis kompromiss, ka mēs redzējām pat agrāk šorīt, kur tur tiešām nav vienmēr ir pareizā atbilde, tur ir tikai labāk vai sliktāk atbilde pamatojoties uz to, ko jūs patiesībā rūp. 
+
+Tātad tur ir arī tehnoloģiskie realitāte. Es nevaru nopirkt datoru, cik man zināms, ar triljonu gigabaitiem RAM tieši tagad. Tas vienkārši fiziski neeksistē. Tātad ir daži augšējā robeža. Bet, ja jūs esat kādreiz pat iepircies par patērētāju Mac vai PC, Arī, parasti tur ir šī līkne funkcijas kur varētu būt labs, labāku, un labākais dators. 
+
+Un marginālās atgriežas Jūsu dolāra pirkšanu labākais datoru pret labāk dators var nebūt gandrīz tikpat augsts kā tērēt nedaudz vairāk naudas un iegūt labāku datoru pa labu datoru. Citiem vārdiem sakot, jūs maksājot piemaksa, lai iegūtu top no līnijas. 
+
+Un ko mēs redzam diskusija mākonis skaitļošanas ir tas, kas ir ļoti bieži šajās dienas, un to, kas uzņēmumiem, piemēram, Google agri popularizēts, nav jāmaksā par un ēku tiešām iedomātā, dārgi souped up datori ar daudz un daudz viss, bet pērk vai celtniecības pretty pieticīgs datoriem, bet daudz no viņiem, un, izmantojot kaut ko, kas parasti sauc horizontālo mērogošana vietā vertikālās mērogošana. 
+
+Tātad vertikālā mērogošana nozīmētu iegūt vairāk RAM, vairāk diska, vairāk par visu, un veida investēt vertikāli jūsu aparatūru tāpēc jūs tikai iegūt labākais no labākajiem no labākajiem, bet jūs maksājat par to. Horizontālā mērogošana ir sava veida iegūt grunts līmeņa lietas, tad labs modelis, vai pat sliktāk modelis, bet saņemt daudz no tiem. Bet, tiklīdz jūs saņemsiet daudz them-- piemēram, šajā gadījumā, web serveri, ja šī viena servera vai viens interneta uzņēmējas ir nepietiekams, tad tikai intuitīvi, tad risinājums šai problēmai slodzes vai pārslodze uz saviem serveriem ir vai nu saņemt lielāku serveri vai, ko es esmu ierosinājusi šeit vietā mērogošanas vertikāli tā sakot, būtu, jūs zināt, ko? Tikai iegūt otru vienu no šiem. Vai varbūt pat iegūt trešdaļu. Bet tagad mēs esam izveidojuši inženiertehnisks problēma pēc būtības šajā biznesā vai finanšu lēmums. Kas ir inženierzinātņu problēma tagad? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, kā darīt jūs savienot tos and-- žēl? 
+
+Mērķauditorija: [dzirdams] DAVID Malan: pa labi, jo es joprojām have-- ja es atjaunot mani šo attēlu, ja šis ir mans klēpjdators kaut kur internetā, kas tagad starp mani un uzņēmums mēs runājam par, tagad man ir izdomāt, uz kuru serveris es varu nosūtīt šo konkrēto lietotāju? Un, ja tur ir citi lietotāji, piemēram, šis, un pēc tam šis viens virs šeit, un varbūt tas ir lietotājam A, šis ir lietotājam B, tas ir lietotājam C, un tas ir serveris 1, 2, un 3-- tagad intuitīvs atbilde varētu šeit būt tikai, mēs nosūtīsim lietotājam līdz 1 un B 2 un C 3. Un mēs varam rīkoties 3 reizes tik daudziem lietotājiem. 
+
+Bet tas ir pārāk vienkāršota. Kā jūs izlemt, kam sūtīt, ja? Tātad pamēģināsim iemesls caur šo. Tātad pieņemsim, ka datoriem A, B un C ir klienti, un serveri 1, 2 un 3, ir horizontāli samazināts serveriem. Tātad viņi veida identiski. Viņi visi darbojas to pašu programmatūru. Un viņi visi var darīt to pašu. Bet iemesls mums trīs no tiem ir tik ka mēs varam rīkoties trīs reizes vairāk cilvēku vienlaicīgi. 
+
+Tātad mēs zinām no mūsu diskusija pirms pusdienām ka tur ir aparatūra starp klēpjdatoriem un serveriem. Bet mēs tikai veida vispārināt ka tagad, internetā vai mākoni. Bet mēs zinām, ka manā mājā, tur droši vien mājas maršrutētāju. Pie serveriem, tur droši vien router, DNS serveri, DHCP. Tur var būt jebkas mēs gribam šajā stāstā. 
+
+Tātad, kā mēs sākam izlemt, ja lietotājam iet uz something.com, kas serverim maršrutu lietotājam? Kā mēs varētu sākt stāstīt šo stāstu? Mērķauditorija: Slodzes līdzsvarošana? DAVID Malan: Slodzes līdzsvarošana. Ko tu ar to domāji? 
+
+Mērķauditorija: Atgriežoties kur visvairāk izmantošana ir un kuriem viens ir tāda vairums pieejamos resursus. DAVID Malan: Labi, tāpēc ļaujiet man ieviest jauna veida aparatūru ka mums vēl nav apspriests, kas ir tieši tas, slodze ekvilibrists. Arī tas varētu būt tikai serveri. Tā varētu izskatīties tieši tāpat viens mēs redzējām pirms brīža. Slodzes ekvilibrists tiešām ir tikai gabals programmatūru ka jūs darbināt uz aparatūras. 
+
+Vai arī jūs varat maksāt pārdevējs, piemēram, Citrix vai citi, Cisco vai citi. Jūs varat maksāt par savu aparatūru, kas ir aparatūras slodze ekvilibrists. Bet tas tikai nozīmē, ka tie iepriekš instalēta slodzes līdzsvarošana programmatūras savu aparatūru un pārdeva to jums visiem kopā. Tātad mēs vienkārši izdarīt to kā taisnstūris mūsu mērķiem. 
+
+Kā tagad es varu īstenot slodze ekvilibrists? Citiem vārdiem sakot, kad lietotājam vēlas apmeklējiet manu vietni, viņu lūgumu kaut kā vai cita, iespējams, ar kā tie maršrutētāji mēs runājām par agrāk, gatavojas beidzot sasniegt šī slodze ekvilibrists, kas pēc tam nepieciešams veikt maršrutēšanas līdzīgu lēmumu. Bet tas ir maršrutēšanu veida par augstāku mērķi tagad. Tas nav tikai par kļūst no punkta A līdz punktam B. Tas ir par lēmumu, kas B punkts ir labākais starp them-- 1, 2, vai 3, šajā gadījumā. 
+
+Tātad, kā es varu izlemt, vai iet uz 1, 2, 3? Ko tas varētu melnā kaste, tāpēc, lai runā, ka dara no iekšpuses? Arī tas ir vēl viens piemērs datorzinātnes abstrakcijas. Man ir burtiski sastādīts slodze ekvilibrists kā melnā kaste ar melnu tinti, iekšpusē no kuriem ir daži interesanti loģika, vai burvju pat, no kuriem ir jānāk decision-- 1, 2, vai 3. Un ieejas ir tikai A. 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Es atvainojos? Mērķauditorija: [dzirdams] DAVID Malan: Labi, kā varētu mēs kategorizēt veidus darījumu šeit? 
+
+Mērķauditorija: Apskata tīmekļa lapu versus meklēšana datu bāzē. DAVID Malan: Labi, tas ir labi. Tātad, varbūt šim lietotājam vēlas apskatīt mājas lapā. Un varbūt tas ir pat statisks saturs, kaut kas mainās reti, ja kādreiz. Un, ka šķiet, piemēram, diezgan vienkāršu darbību. Tāpēc varbūt mēs vienkārši patvaļīgi, bet saprātīgi, teiksim, serveris 1, viņa mērķis dzīvē ir tikai pasniegsim statisku saturu, faili, kas reti, ja vispār kādreiz, maiņa. Varbūt tas ir attēlus lapā. Varbūt tas ir teksts uz lapas vai cita šāda veida neinteresantas lietas, nekas darījumu, nekas dinamisks. 
+
+Savukārt, ja lietotājs A ir pārbaudes no viņa vai viņas iepirkumu grozā, ka nepieciešama datu bāze, kaut kur uzglabāt Un atcerieties, ka darījums, labi varbūt, ka pieprasījums jādodas uz servera 2. Tātad tas ir labi. Tātad, mēs varam ielādēt līdzsvars balstās par pieprasījumu veida. Kā gan citādi mēs varētu darīt? Kas other-- 
+
+Mērķauditorija: Pamatojoties uz servera izmantošanu un jaudu. DAVID Malan: Labi, OK. Tātad, jūs minējāt, ka agrāk, Kareem. Tātad, ko tad, ja mēs sniegt dažas ieguldījumu par [dzirdams] starp serveriem 1, 2, un 3. šai slodzes ekvilibrists arī tā, ka viņi tikai pastāvīgi informējot slodze ekvilibrists kādi ir viņu statuss ir? Tāpat, hey, slodze ekvilibrists, Es esmu 50% izmantošanu. Citiem vārdiem sakot, man ir pusi tik daudzi lietotāji kā es patiesībā var rīkoties tieši tagad. Hey, slodze ekvilibrists, es esmu 100% izmantošanu. Hey, slodze ekvilibrists, 0% izmantošana. Slodze ekvilibrists, ja tas ir konstruētas tādā veidā, ka var veikt šajos komentāros kā ievade, tā tad var izlemt, ooh, numurs 2 ir 100%. Ļaujiet man sūtīt nav nākotnes pieprasījumu viņam kas nav lietotāji, jau ir pievienots. Šis puisis ir 0%. Pieņemsim nosūtīt daudz satiksmes viņam. Šis puisis teica, ka viņš ir 50%. Pieņemsim sūtīt daži satiksmes viņam. 
+
+Tā, ka būtu sastāvdaļa, kas mēs varētu ņemt slodzi vērā. Un tas notiek, lai laika gaitā mainās. Tāpēc lēmumi mainīsies. Tātad tas ir patiešām labs paņēmiens, viens, kas ir parasti izmanto. Ko vēl mēs varētu darīt? Un pieņemsim faktiski tikai apkopot šeit. Tātad lēmumi šeit varētu būt pa satiksmes veidiem, es aicinu to. To pamatā var būt slodzes. Let 's redzēt, ja mēs nevaram nākt klajā ar dažas citas. 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Location. Tātad tas ir labs. Tātad location-- kā varētu jūs sviras šo informāciju? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Ak, tas ir labi. Un par to, cik milisekundes tas tā samazināsies pamatojoties uz to, ko mēs redzējām šo no rīta, Jūs teiktu? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Nu, pamatojoties uz izsekot maršrutos mēs redzējām agrāk, kas ir tikai aptuvens pasākums kaut ko, vismaz, cik ilgi nepieciešams datu nokļūt no A līdz B jūtas kā kaut vietējā bija, ko, piemēram, 74 milisekundes, dot vai ņemt? Un tad kaut 100 plus, 200 plus, iespējams, bija ārzemēs. Un tā, pamatojoties uz to vien, šķiet pamatoti pieņemt ka lietotājs ASV piekļūt Eiropas serveri var veikt divas vai trīs reizes tik ilgi, pat milisekundes, nekā tas varētu veikt, ja tas serveris atradās šeit ģeogrāfiski, vai otrādi. Tātad, kad es ierosināju agrāk, ka īpaši Kad jūs šķērsot 200 milisekundi slieksnis, sniegt vai pieņemt, cilvēki to sāk pamanīt. Un izsekot maršruts ir tikai pieņemot, ka izejvielas, neinteresantas dati. Ja jums ir mājas lapā, jums ir iegūt lietotāju lejupielādējot attēlus vai filmu failus, daudz teksta, turpmākie pieprasījumi. Mēs redzējām, kad mēs apmeklējām, kas bija tā, Facebook vai Amazon agrāk, tur ir visai daudz sīkumi kas ir lejupielādēt. Tāpēc, ka gatavojas saskaitīt. Tātad multi-sekundes varētu nav saprātīgi. Tik labi, ģeogrāfija ir viena sastāvdaļa. Tātad faktiski uzņēmumu, piemēram, Akamai, ja esat dzirdējuši no tiem, vai citi ir sen pieņemts ģeogrāfija vērā. Un izrādās, ka pēc būtības AN IP adrese, mans klēpjdators ir IP adrese, jūs varat secināt, ar kādu varbūtību, kur jūs esat pasaulē. Un patiesībā tur ir trešo pušu pakalpojumiem var maksāt, kas uztur datu bāzes IP adreses un ģeogrāfisko teritoriju kas ar augstu ticamības būs taisnība, kad jautāja, kur pasaulē tas ir IP adrese? 
+
+Un tā patiesībā kāda citi uzņēmumi izmanto šo? Ja jums ir Hulu vai Netflix, ja jūs esat kādreiz bijis ceļojumā uz ārzemēm, un jūs mēģināt skatīties kaut ko Hulu, un jūs ne ASV, jūs varētu redzēt ziņu sakot, ne ASV. Atvainojiet, jūs nevarat skatīties šo saturu. 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Ak, tiešām? Bet jā, tik tiešām tas ir ideāls pieteikumu par kaut ko ļoti tehniskā uz faktisko problēmu. Ja tu būtu VPN no Eiropā vai Āzijā vai jebkur pasaulē ar uzņēmuma mītnē Ņujorkā vai kur jūs esat, jūs esat gatavojas izveidot izskatu lai ārpus tīmekļa vietnes, kas tu esi tiešām Ņujorkā, pat ja tu esi fiziski diezgan tālu. 
+
+Tagad jūs lietotājs gatavojas zinu, jūs acīmredzot prom. Bet jūs arī gatavojas justies, jo no šiem papildu milisekundes. Ka papildu attālums un šifrēšana, kas notiek ar VPN gatavojas palēnināt lietas leju. Tātad tā var vai nevar būt lieliska pieredze. Bet Hulu un Netflix gatavojas redzēt Jūs, sēžot kaut kur Ņujorkā, kā jūs esat skaidri spriest. Kas ideāls risinājums, lai to. 
+
+Labi, tāpēc ģeogrāfija ir viens lēmums. Ko vēl mēs varētu izmantot, lai izlemtu, kā uz maršruta satiksmi no A, B un C līdz 1, 2, un 3, atkal, liekot inženieru hat on? Tas viss izklausās ļoti sarežģīti. Uh, es pat nezinu, kur uz sākt īstenot tos. Dodiet man kaut ko, kas ir vienkāršāks. Kāds ir vienkāršākais veids, kā , lai šo lēmumu? 
+
+Mērķauditorija: Vai serveris ir pieejama? 
+
+DAVID Malan: Vai serveris ir pieejama? Tā nav slikti. Tas ir labi. Tas ir sava veida nuancing slodzes. Tātad, pieņemsim saglabātu, ka slodzes kategorijā. Ja jūs esat pieejams, es esmu tikai gatavojas nosūtīt datus tur. Bet tas varētu priekšlaicīga ātri. Jo, ja es izmantot loģiku, un ja I vienmēr jautāt 1, tu esi par, tu esi par, tu esi par, ja atbilde vienmēr ir jā, Es esmu gatavojas nosūtīt 100% no satiksmes Viņam 0% visiem pārējiem. Un kādā brīdī, mēs ejam, lai sasniegtu ka lejupslīde vai vietne nav pieejama. Tātad, kas ir nedaudz labāk nekā kas tomēr joprojām ir diezgan vienkāršs un ne tuvu nav tik gudrs, kā veikt visus Šie papildu dati vērā? 
+
+Mērķauditorija: Maksa par serveri. DAVID Malan: Maksa par serveri. Labi, tāpēc ļaujiet man mētāties ka ar slodzes kategorijā, too. Jo tas, ko jūs atradīsiet uzņēmums, too-- ka, ja jūs uzlabot savu serveri laika gaitā vai nopirkt vairāk, Jūs, iespējams, nevar saņemt tieši paši versijas aparatūru. Jo tas izkrīt no datuma. Jūs nevarat iegādāties vairs. Cenas mainās. 
+
+Lai jūs varētu būt atšķirīgi serveri jūsu kopu, lai runāt. Tas ir pilnīgi naudas sodu. Bet nākamā gada aparatūra varētu būt divreiz tik strauji, divreiz spējīgs kā šī gada. Tātad, mēs varam mētāties ka uz slodzes kategorijā. Šī atgriezeniskā saite starp 1, 2, un 3, kas slodzes ekvilibrists noteikti varētu pateikt to, hey, es esmu 50% jaudu. Bet starp citu, es arī ir divreiz tik daudz kodoliem. Izmantojiet šo informāciju. Pat simpler-- un tas būs būt tēma datorzinātnēs. Ja šaubāties, vai arī, ja vēlaties vienkārši risinājums, kas kopumā darbojas labi laika gaitā, nav izvēlēties pats serveris visu laiku, bet choose-- 
+
+Mērķauditorija: Izlases viens? DAVID Malan: --a izlases serveri. Jā, izvēlēties vienu vai otru. Tātad nejaušības faktiski Tas ir ļoti spēcīgs sastāvdaļa datorzinātnēs, un inženierzinātnēs vairāk vispār, jo īpaši, ja jūs vēlaties, veikt vienkāršu lēmumu ātri bez sarežģī to ar visu no tiem ir ļoti gudrs, bet arī ļoti gudrs, risinājumi, kas prasa vēl jo vairāk inženieru, visi jo vairāk doma, kad tiešām, kāpēc ne es tikko veida Flip monētas, vai Trīs sided monētu šajā gadījumā un izlemt, vai iet 1, 2, 3? 
+
+Tas varētu priekšlaicīga probabilistically, bet līdzīgi izredzes flipping galvas atkal un atkal un atkal un atkal un atkal un atkal ir iespējams reality-- super, super maz ticams. Tātad laikā, izredzes ir vienkārši nosūtot lietotājus nejauši ir 1, 2, un 3, kas notiek pie izstrādāt perfekti labi. Un tas ir paņēmiens parasti sauc par apaļā robin. 
+
+Vai tiešām, tas nav apaļā robin. Tas būtu izlases pieeja. Un, ja jūs vēlaties būt pat nedaudz vienkāršāka, nekā, apaļā robin būtu, pirmais cilvēks iet 1, otrais cilvēks līdz 2, trešā persona līdz 3, ceturtais cilvēks līdz 1. Un tur slēpjas apaļā robin. Jūs tikko veida iet apkārt ar ciklu. 
+
+Tagad, jums ir jābūt smart par to. Jums nevajadzētu akli jānosūta lietotājam serveris numur viens, ja kāda tā ir? Ja tas ir pie max jaudu, vai tas ir tikai vairs atsaucīgi. Tik ideāli jūs vēlaties kādu veida atgriezenisko saiti. Pretējā gadījumā jūs vienkārši sūtīt visus lietotājiem, lai strupceļā. Bet tas var ņemt vērā, too. 
+
+Līdz ar to nav ar augstu novērtējat tikai nejaušības, kas ir diezgan bieži risinājums šīm problēmām veidu. Un mēs pierakstīt Round Robin. Tātad, kā daži uzņēmumi īsteno apaļā robin vai nejaušības vai kāds no šiem lēmumiem? Nu diemžēl, tie darīt lietas, kā šis. Ļaujiet man uzvilkt vēl vienu ātru ekrānuzņēmums. 
+
+Patiesībā, pieņemsim do divi. Es nezinu, kāpēc mēs esam iegūt visus šos ēdienus. Tas ir ļoti dīvaini. Labi, ko es tiešām gribu ir screenshot. Tas ir dīvaini. Labi, lai es varētu mānīšanās šo. Es nezinu, cik daudz tālāk Es gribu, lai saglabātu ritināšanu. 
+
+Tik ļoti bieži, jūs atradīsiet sev at adresi piemēram www.2.acme.com, varbūt www.3 vai 4 vai 5. Un pastāvīgi acu par to. Jūs neredzat to, ka bieži. Bet, kad jūs darāt, tas veida tendence būt lielāks, vecākiem, stodgier uzņēmumi ka tehnoloģiski nav īsti šķiet, zina, ko viņi dara. Un jūs redzat šo par tehnoloģiju uzņēmumi Dažreiz, vecajās. 
+
+Tātad, ko viņi dara? Kā viņi īsteno balansēšanu, tas tā šķiet? Ja jūs atrast sevi kā lietotāja rakstīt www.something.com, un pēkšņi jūs esat www.2.something.com, kādi ir viņu slodzi ekvilibrists iespējams izdarīt? Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tā slodze ekvilibrists ir iespējams Pieņemot lēmumu, pamatojoties uz vienu no šie lēmumu pieņemšanas processes-- nav īsti jautājums, kas. Bet, līdzīgi kā es esmu novilkta numurus uz kuģa šeit, serveri ir ne tikai ko sauc par 1, 2, un 3. Viņi, iespējams, sauc www1, www2, www3. Un izrādās, ka iekšpuses HTTP pieprasījums ir šī funkcija. Un es esmu gatavojas simulēt to šādi. 
+
+Es esmu gatavojas atvērt tajā pašā attīstītājs tīkla tab kā pirms tikai lai mēs varētu redzēt, kas notiek uz zem motora pārsega. Es esmu gatavojas, lai notīrītu ekrānu. Un es iešu uz, pieņemsim saka, http://harvard.edu. Tagad kāda biznesa iemesli, Harvard ir nolēmusi, tāpat kā daudzi, daudzas citas mājas lapas, standartizēt tās tīmekļa vietne par www.harvard.edu gan tehniskā un tirdzniecības dēļ. Tā ir tikai sava veida in Vogue ir www. 
+
+Tātad serveris Harvard ir kaut kā novirzīt lietotāju, kā es glabāt sakot, no viens URL uz otru. Kā tas darbojas? Nu, ļaujiet man iet uz priekšu un hit Enter. Un paziņojums URL patiešām ātri mainīts uz www.harvard.edu. Ļaujiet man ritināt atpakaļ šajā vēsture un noklikšķiniet uz šo atkļūdot diagnostikas informācija, ja Jums gribas. Ļaujiet man apskatīt manu lūgumu. 
+
+Tātad, šeit ir pieprasījums es. Un pamanāt, ka tas ir savienojams ar tāda veida Lūguma Es no Facebook pirms. Bet paziņojums atbildi. Kas ir atšķirīgs reakcijas šoreiz? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tāpēc tas nav 200 OK. Tas nav 404 Not Found. Tas ir 301 Pārcelts pastāvīgi, kas ir sava veida funny veids, kā pateikt, Harvard ir palielinājuši un pārcēlās citur www.harvard.edu. 301 nozīmē, ka tas ir novirzīt. Un Kur lietotājam acīmredzot tiks novirzīts? Ir papildu tidbit informācija iekšā, ka aploksnē. Un katru no šīm līnijām būs tagad sākt aicinot HTTP galvenes. Header ir tikai galvenais vērtība pair-- kaut resnās zarnas kaut ko. Tas ir gabals informāciju. Kur jaunais atrašanās vieta acīmredzot būt? Paziņojums pēdējā rindā starp visiem šiem galvenes. 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tāpēc tur ir Papildus informācija. Pirmā līnija, ka es esmu uzsvērusi saka 301 Pārvietots pastāvīgi. Nu, kur ir tā pārcēlās? Pēdējais LINE un tie nav jābūt šādā secībā. Tas var būt nejauši. Atrašanās vieta resnās nozīmē, hey pārlūku, dodieties uz šo URL vietā. 
+
+Tātad pārlūkprogrammas saprast HTTP redirects. Un tas ir ļoti, ļoti kopīgs veids, veselīgs lietotājs no vienas vietas uz otru. Piemēram, ja jūs esat kādreiz mēģinājis apmeklēt mājas lapu, kas jūs neesat pieteicies, jūs varētu pēkšņi atrast sevi jaunā URL vispār ir piedāvāts pieteikties. 
+
+Kā tas darbojas? Serveris ir iespējams nosūtot 301. Pastāv arī citi numuri, piemēram, 302, nedaudz atšķiras nozīmē, kas jums nosūtīt uz citu URL. Un tad serveris, kad jūs esat pieteicies, nosūtīs jums atpakaļ uz vietu, kur jūs faktiski paredzēts. 
+
+Tātad, kas tad ir slikti inženierijas mājas lapas dara? Kad jūs apmeklējat www.acme.com, un viņi vienkārši gadās ir nosaukts savu serveri www1, www2, www3, un tā tālāk, tie ir ļoti simply-- kas ir taisnīga, bet ļoti kārtot foolishly-- pārprofilējot jums tiešām savādāk nosaukts serveri. Un tas strādā perfekti labi. Tas ir jauki un viegli. 
+
+Mēs esam redzējuši, kā tas būtu darīts zem motora pārsega virtuālajā aploksnē. Bet kāpēc tas ir apstrīdami slikts engineering lēmums? Un kāpēc es esmu veida condescending pret šo konkrēto inženierzinātnēs pieeja? Apgalvo, kāpēc tas ir slikti. Ben? Mērķauditorija: [dzirdams] DAVID Malan: Katram serverim būtu ir noraksta kopiju mājas lapā. Es esmu OK ar to. Un patiesībā, tas ir tas, ko es esmu pieņemot, par visu šo stāstu, jo, ja mēs wanted-- labi faktiski, izņemot Dan s agrāk ierosinājums, kur, ja jums ir atšķirīgs serveri darot dažādas lietas, tad varbūt viņi tiešām varētu būt funkcionāli darot dažādas lietas. 
+
+Bet pat tad, kādā brīdī, jūsu datu bāze ir gatavojas saņemt pārslogota. Jūsu statisks aktīvi serveris gatavojas iegūt pārslogoti. Tāpēc kādā brīdī, mēs esam atpakaļ šajā stāstā, kur mēs vajag vairākas kopijas pašu. Tāpēc es esmu OK ar to. Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Ok, tāpēc dažas lapas varētu būt nesamērīgi populārs. Un tā fiksējot uz vienu adresi ne vienmēr ir labākā lieta. [Dzirdams]? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Ko tu ar to domā? Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tieši tā. Tātad jūs nevēlaties vienmēr have-- jums noteikti nevēlos būt jūsu lietotājiem manuāli ierakstot www1 vai www2. No zīmola viedokļa, to tikai izskatās mazliet smieklīgi. Ja jūs vienkārši vēlaties sava veida tīru, elegants pieredze, kam šos veida nejauši numurētas URL tiešām nav laba. Jo tad lietotājiem ir noteikti gatavojas kopēt un ielīmēt tos uz e-pastu vai tērzēšanas ziņas. 
+
+Tagad viņi pavairošanas. Tagad jūs esat veida mulsinoši tavs mazāk tehnisks auditorija, kas domā Jūsu mājas adrese ir www2.something.com. Nav pārliecinošu semantika uz to. Tā vienkārši notiek, ir pamatā tehniskās detaļas, ka esat numurētas savu serveri šādā veidā. 
+
+Un vēl sliktāk, kas notiks, ja, piemēram, varbūt ap Ziemassvētku laiku, kad bizness ir patiešām plaukstošajai, tev www1 cauri www99, bet janvārī un februārī, un tālāk, jūs izslēdzat pusi no tiem, tāpēc jums ir tikai www1 caur www50? Kāda ir saistība tagad, ka ļoti saprātīgs biznesa lēmums? Mērķauditorija: [dzirdams] DAVID Malan: Jums ir nepieciešams, lai pārvaldīt visiem tiem joprojām. Mērķauditorija: [dzirdams] DAVID Malan: Tieši tā. Tas ir sava veida nozvejas tur. Ja jūsu klienti ir ieradums Grāmatzīmes lietas, nosūtot tos, vienkārši ietaupot URL kaut kur, vai ja tas ir tikai viņu auto pabeigt savā pārlūkprogrammā, lai viņi nav īsti apzināti ierakstot to, tas ir tikai notiek, viņi var, par 11 mēnešiem no gada efektīvi, sasniegt strupceļā. Un tikai pats vērīgs no lietotājiem gatavojas realizēt, Varbūt man vajadzētu manuāli noņemt šo numuru. Es domāju, tas vienkārši nav gatavojas notikt ar daudziem lietotājiem, tik slikts bizness, slikta īstenošana inženierzinātnes gudrs. 
+
+Tātad par laimi, tas nav pat nepieciešams. Izrādās, ka to, ko slodze balancers var darīt tā vietā, lai sakot, ja A padara request-- hey A, dodieties uz 1. Citiem vārdiem, tā vietā sūtīšanas, kas novirza tā, ka solis viens šajā process ir iet šeit, tad viņš ir teicis, lai iet citur. Un tā soli trīs ir, viņš iet citur. 
+
+Jūs varat vietā turpināt maršrutu, lai saglabāt, izmantojot šo vārdu, visi, ja datiem caur slodzes ekvilibrists lai viņš nekad kontakti 1, 2, vai 3 tieši. Visi satiksmes nav get "novirzīts" ar kravas ekvilibrists pati. Un tāpēc tagad mēs esam sava veida apzināti nojauc līnijas starp šiem dažādām ierīcēm. Slodzes ekvilibrists var maršruts datus. Tas ir tikai funkcija, kas tas ir. 
+
+Tātad slodze ekvilibrists, pārāk, tas ir gabals programmatūra, tiešām. Un router ir gabals programmatūru. Un jūs varat būt absolūti divi gabali programmatūras iekšpusē no viena fiziskā datora tik slodzes ekvilibrists var darīt šo vairākas lietas. 
+
+Tātad tur ir viens cits veids to darīt, kas faktiski iet atpakaļ veida pirmajiem principiem DNS, ko mēs runājām par pirms pārtraukuma. DNS bija Domain Name System. Atcerieties, ka jūs varat lūgt DNS serveri, kas ir IP adrese google.com, facebook.com? 
+
+Un mēs faktiski var darīt. Rīks, mēs neizmantoja agrāk ir viens, kas ir tikpat pieejama, aicināja nslookup, lai nosaukumu servera lookup. Un es esmu tikai gatavojas rakstīt facebook.com. Un es redzu, ka Facebook IP adrese ir acīmredzot tas. Ļaujiet man iet uz priekšu un kopēt ka iet uz pārlūku, un iet uz http: // un ka IP adrese un hit Enter. Un tik tiešām, tas, šķiet, darbojas. 
+
+Tagad strādā atpakaļ, kas bija iekšpusē virtuālā aploksnes ka Facebook atbildēja ar kad Es apmeklēju, ka IP adrese tieši? Jo paziņojums, kur es esmu tagad? Kur es esmu tagad, adrese? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Pie drošu versiju, un pie WWW.FACEBOOK.COM. Tātad, tas nav pat tikai drošu IP adrese. Facebook ir veikusi to uz sevi teikt, tas ir smieklīgi. Mēs nebrauksim, lai saglabātu jums šis neglīts meklē URL, kas ir ciparu. Mēs ejam, lai nosūtītu jums HTTP novirzīt veidā tajā pašā galvenē ka mēs redzējām before-- vietu resnās zarnas kaut kas. 
+
+Un tā tas vienkārši nozīmē, ka zem motora pārsegs ir joprojām tas IP adrese. Katram datoram internetā ir IP adrese, tas varētu likties. Bet jums nav obligāti pakļaut, ka, lai lietotājam. Un līdzīgi atpakaļ dienā, tur bija 1-800-Collect 1-800-C-O-L-L-E-C-T, ASV, bija veids, kā padarīt savākt aicina caur ļoti viegli neaizmirstamu phone numurs, vai 1-800-MATRAČU nopirkt gultu, un līdzīgi mnemoniska ka jūs pat redzēt pa telefonu veida veida tomēr, ka vēstules karti numuriem. 
+
+Tagad, kāpēc tā? Nu, tas ir daudz vieglāk iegaumēt 1-800-MATRAČU vai 1-800-COLLECT vietā no 1-800 kaut kaut kaut kaut kas kaut ko kaut kas kaut kas, kur katrs no tiem ir cipars. Tāpat, pasaule uzzināja ātri, ka mums nevajadzētu ir cilvēki iegaumēt IP adreses. Tas būtu muļķīgi. Mēs ejam, lai izmantotu vārdus vietā. Un tas ir iemesls, kāpēc DNS dzimis. 
+
+Labi, tāpēc ar to teica, runājot Slodzes balansēšana, pamēģināsim yahoo.com. Nu, tas ir interesanti. Yahoo šķiet atgriešanās trīs IP. Tātad no tā secinu, ja jūs varētu, kas ir vēl viens veids, ka mēs varētu īstenot šis jēdziens balansēšanu varbūt pat izmantojot fizisku ierīce, šī jaunā fiziskā ierīce? 
+
+Citiem vārdiem sakot, es varētu veikt prom finansējumu, ja jums ir slodzes ekvilibrists un pateiks, lai izmantotu dažus esošos aparatūras, lai īstenotu šis jēdziens balansēšanu? Un spoileris ir, jā, bet to, vai kā? Kas ir Yahoo varbūt dara šeit? Kareem? OK, Chris? Mērķauditorija: [dzirdams] DAVID Malan: Jā, visi Trīs no šiem darbiem. Tātad nejaušības, apaļā robin, location-- jūs varat vienkārši sviras esošo gabals puzzle ka mēs runājām par agrāk par DNS sistēma un vienkārši teikt, kad pirmais lietotājs dienas lūdz yahoo.com, dot viņiem pirmo IP adresi, kā viens beidzas 45 tur. Un nākamreiz, kad lietotājs pieprasa IP adrese, yahoo.com no kaut kur pasaulē, dot viņiem otru IP, pēc tam trešais IP, tad pirmais IP, tad otrs. Vai būtu gudri par to un darīt to grafiski. Vai arī tā nejauši un ne tikai darīt tā apaļā robin šādā veidā. 
+
+Un šajā gadījumā, tad mums pat nav nepieciešams ieviest šo melna kaste mūsu attēlu. Mums nav vajadzīga jaunu ierīci. Mēs vienkārši stāsta datorus doties uz serveriem tieši, efektīvi, bet ne veidā viņu vārda. Viņi nekad jāzina nosaukumu. Viņi vienkārši ir teicis, ka yahoo.com kartes ar jebkuru pretenziju no šīm IP adresēm. 
+
+Tātad tas sūta tieši tādu pašu lūgumu. Bet ārpusē aploksnes, tas vienkārši liek IP, ka tas tika informēts. Un šādā veidā, arī varētu mēs slodze līdzsvarot pieprasījumus , vienkārši nosūtot aploksni līdz A atšķiras viens no Yahoo pašu serveri? 
+
+Un, ja mēs turpinām rakšana, mēs redzēsim iespējams, citi uzņēmumi ar vairāk. CNN ir divi publiski pakļauta. Lai gan patiesībā, ja mēs to darām atkal un again-- cnn.com-- jūs varat redzēt viņi mainās pasūtījumu, faktiski. Tātad, kas ir mehānisms CNN izmantojot, acīmredzot? 
+
+Mērķauditorija: Random. DAVID Malan: Nu, tas varētu būt izlases, gan tā Šķiet, riteņbraukšana un atpakaļ. Tātad, tas ir iespējams, apaļā robin kur viņi vienkārši pārslēdzot kārtībā, lai ka es ņemšu iespējams veikt pirmo. Mans dators prasīs pirmo katru reizi. Tā ka ir slodzes balansēšana. Un, kas ļauj mums, galu galā, kartēt datus, vai karšu pieprasījumus, vairākiem serveriem. Tātad, kāda veida problēmas tagad joprojām pastāv? Tā uzskata, piemēram, mēs tikai patiešām atrisināt labu problēmu. Mēs saņēmām lietotājiem dažādiem serveriem. But-- oh, un Chris, darīja Jums ir jautājums pirms? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Pilnīgi atkarīgs. Tātad, kas notiek šeit? Un mēs tiešām varam redzēt šo. Tātad pamēģināsim Yahoo. Patiesībā, iesim uz Facebook. Jo mēs zinām, ka viens strādā. Tāpēc es esmu gatavojas, lai kopētu ka IP adrese atkal. Es esmu gatavojas slēgt visas šīs cilnes. Es iešu open ka īpašu tīkla tab šeit lejā. Un es esmu gatavojas apmeklēt tikai http: //. Un tagad es esmu gatavojas hit Enter. Un pieņemsim redzēt, kas noticis. 
+
+Ja es paskatos šo pieprasījumu, paziņojumu ka my-- Facebook ir slikts piemērs. Tāpēc, ka viņiem ir super fancy tehnika kas slēpj šo detaļu no mums. Ļaujiet man izmantot Yahoo instead-- http: // šo IP. Atvērsim mūsu tīklā tab, saglabāt žurnālu. Un šeit mēs ejam, Enter. Tas ir smieklīgi. Labi, tāpēc šeit ir slavens 404 ziņojumu. Kas ir smieklīgi ir tas, ka viņi iespējams, nekad būs atpakaļ. Jo tur ir iespējams nav kaut kas nepareizi per se. Viņi ir tikai tīši nolēma neatbalstīt ciparu forma to adresi. 
+
+Tātad, ko mēs patiesībā redzam tab Network, ja es pull šo šeit, ir, kā es saku, slavens 404, kur ja es paskatos reaģēšanas galvenes, Tas ir tas, ko es saņēmu here-- 404 Not Found. Tātad pamēģināsim vienu citu. Redzēsim, vai CNN sadarbojas ar mums. Es greifers viens no CNN IP adresēm, notīriet šo, HTTP, Dah, Dah, Dah, dah. Tātad atbildot uz Chris s Jautājums, ka viens strādāja. 
+
+Un iesim uz reaģēšanas galvenes. Patiesībā nē, labi, es esmu cīnās, lai atrastu darba piemērs. Tātad CNN ir nolēmusi, mēs vienkārši atstāt jūs jebkādā adrese jūs faktiski apmeklēt, branding jautājumi malā. Bet ko nebūtu noticis, ja mēs varētu redzēt to Facebook gadījumā ir, mēs iegūtu 301 Pārvietots Pastāvīgi, visticamāk, iekšpusē, kas ir atrašanās vieta: https: //www.facebook.com. Un izredzes ir www.facebook.com ir alias par tieši tādu pašu serveri mēs tikai gāja uz. 
+
+Tātad, tas ir mazliet neproduktīvi. Mēs burtiski apmeklējot serveri. tad serveris mums saka, iet prom. Iet uz šo citu adresi. Bet mēs tikai tik gadās būt dodas atpakaļ uz šo pašu serveri. Bet, iespējams, mēs tagad palikt ka Serveris bez šī un atpakaļ. Jo tagad mēs esam, izmantojot nosaukumu versija, vietā, nevis ciparu. Labs jautājums. 
+
+Labi, tāpēc, ja mēs tagad assume-- mēs ir atrisinājuši slodzes līdzsvarošanu. Mums tagad ir mehānisms, vai tas ir, izmantojot DNS, vai tas ir, izmantojot šo melno kasti, vai tas ir, izmantojot kādu no šīm metodēm. Mēs varam veikt lietotāja pieprasījumu un skaitlis, ar kuru serveri, 1, 2 vai 3, nosūtīt viņam vai viņai. 
+
+Kas sāk lauzt par mūsu mājas lapā? Citiem vārdiem sakot, mums ir uzcēla uzņēmumu, kas agrāk bija uz vienu serveri. Tagad, bizness darbojas vairākiem serveriem. Kāda veida pieņēmumiem, kāda veida dizains lēmumus, varētu tagad pārkāpj? 
+
+Tas ir tik acīmredzama. Bet pieņemsim redzēt, ja mēs nevaram likt mūsu pirkstu uz kādu no problēmas, esam izveidots par sevi. Atkal, tas ir veids kā saimniecības nosaka noplūde šļūteni. Un tagad daži jauns jautājums ir popped up vairāk nekā šeit. 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Labi, tāpēc mums ir turpina augt mūsu cietā diska. Es esmu OK ar to tieši tagad. Tā kā es domāju, ka varu horizontāli skala. Tāpat kā, ja es skrienu zems, es ņemšu tikai iegūt ceturto serveri, varbūt piektā serveri, un pēc tam palielināt mūsu spējas ar citu 30% vai 50%, vai plauktiņš. Tāpēc es esmu OK ar to, vismaz tagad. Mērķauditorija: [dzirdams] DAVID Malan: Labi, tāpēc tas ir labs punkts. Tātad pieņemsim serveriem nav identiski. Un klientu apkalpošana vai e-pastu ekvivalents ir iegūt kādu ziņu no lietotāja sakot, tas nedarbojas pareizi. Tas ir ļoti iespējams, dažreiz, ka varbūt viens vai vairāki serveri darbojas mazliet greizi, bet ne citi, kas noteikti var padara to grūtāk tramdīt leju jautājumu. Jums varētu būt skatīties vairākas vietas. 
+
+Tas ir izpausme cita veida bug, kas ir tas, ka jūs, iespējams, vajadzētu ir paredzēti jūsu infrastruktūru tā ka viss ir patiesi identiski. Bet tas atklāj jaunu problēmu ka mums nebija agrāk. Kas vēl? Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tur ir vairāk sarežģītību. Tur ir fiziski vēl vadi. Tur ir cita ierīce. Patiesībā, es esmu ieviesta fundamentāls koncepcija un būtiska problēma šeit pazīstams kā par vienu punktu neveiksmes, kas, pat ja jūs nekad neesmu dzirdējis frāze, jūs varat droši tagad strādā atpakaļ un izdomāt to ārā. Ko tas nozīmē, ka man ir viena atteice manā arhitektūrā? Un arhitektūra, es tikko nozīmē topoloģija tā. 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, ko tad, ja slodze ekvilibrists iet uz leju? Esmu ievietots šis vidū cilvēks, kura mērķis dzīvē ir, lai atrisinātu problēmu. Bet es esmu ieviesusi jaunu problēmu. Jauna noplūde ir ieplīsis šļūtenē. Jo tagad, ja slodze ekvilibrists nomirst vai pārtraukumi vai misfunctions, tagad es zaudēt piekļuvi visi trīs no maniem serveriem. Un pirms, man nav ir šī starpnieks. Un tā tas ir jauna problēma, varbūt. Mēs atgriezties kā mēs varētu noteikt, ka. 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Tas būtu viens pieeja. Jā, un tāpēc tas būs diezgan žurkas ir caurums sākam iet uz leju. Bet pieņemsim atgriezties ka tikai brīdi. Kādas citas problēmas mēs izveidojām? 
+
+Tātad, Dan pirms minēto datubāzi. Un, pat ja jūs neesat pārāk pazīstams tehniski, datu bāze ir tikai serveris, kurā mainās dati parasti uzglabā, varbūt pasūtījums kāds ir ievietots, jūsu lietotāja profils, jūsu vārds, Jūsu e-pasta adresi, lietas, kas varētu ievadīšana vai laika gaitā mainījusies. 
+
+Agrāk mana datu bāze bija pats serveris kā mana web serveri. Jo man tikko bija viens web hostinga kontu. Viss bija viss vienā un tajā pašā vietā. Kur man manu datubāzi tagad, uz 3 serveri 1, 2, vai? 
+
+Mērķauditorija: 4. 
+
+DAVID Malan: 4, OK, visi labi, tāpēc iesim tur. Tāpēc es esmu gatavojas īstenot manu database-- un pieņemsim sākt marķēšana šos www, www, www. Un es esmu gatavojas teikt, šis ir numur četri. Un es saku dB datubāzē. Labi, man patīk šis. Ko line man būtu domājams būt zīmējums šeit? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tā kods, kā mēs apspriedīsim rīt, domājams, ir tas pats uz visiem trim serveriem. Bet tas tagad ir savienot nevis uz datu bāze darbojas lokāli, bet citur. Un tas ir jauki. Mēs varam tikai dot datubāzes nosaukt, jo mums ir, vai vairāki. Un tas viss darbojas naudas sodu. Bet ko mēs esam darījuši? Mēs esam horizontāli samazināts, ņemot trīs serveri, nevis viens, kas ir labi. Jo tagad mēs varam rīkoties trīs reizes vairāk slodzi. 
+
+Un vēl labāk, ja viens vai divi no šiem serveriem iet uz leju, mans bizness var turpināt darboties. Jo man vēl joprojām ir viens, pat ja es esmu veida klibo gar sniegumu gudrs. Bet ko jauna problēma ir I ieviests, pārvietojot datubāzi šim atsevišķu serveri tā vietā, lai uz 1, 2, un 3? 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Jā, tāpēc tagad man ir vēl viena atteice. Ja mans datubāzē nomirst, vai ir nepieciešams tikt uzlaboti, vai kāds, tagad pārliecināts, mans mājas lapā ir tiešsaistē. Un es varu kalpot statisks, nemainīgs saturs. Bet es nevaru ļaut lietotājiem ieiet vai maiņa kaut vai lai kaut ko, vēl sliktāk. Jo, ja 4 ir izgājis, pēc tam 1, 2, un 3 tiešām nevar runāt ar to pēc definīcijas. 
+
+Labi, tāpēc yeah, un tāpēc tas ir iemesls, kāpēc Es esmu kavējas izdarīt to. Tātad pieņemsim atgriezties pie tā. Es nedomāju, lai saglabātu stumšanas jums off. Bet aina ir ļoti ātri gatavojas saņemt stresa. Tāpēc, ka jums ir nepieciešams, lai sāktu kam ir divi viss. Patiesībā, ja jūs esat kādreiz redzējuši filma Kontaktinformācija pirms dažiem gadiem ar Jodie Foster-- nē? 
+
+OK, lai par diviem mums, kas esam redzējuši Contact, tur ir attiecības tur, kur viņi būtībā nopirka divas no kaut nevis vienu, lai gan divreiz cenu. Tātad tas bija sava veida jautrs komentēt filmā. Tas ir sava veida, kas saistīti ar to. Mēs varētu pilnīgi darīt. Un jūs esat tikko izmaksas mums divreiz tik daudz naudas. Bet mēs būsim atpakaļ uz to. 
+
+Tātad mēs esam atrisināt šo. Tātad, jūs zināt, ko? Tas ir kā slidenas nogāzes. Es nevēlos, lai risinātu ar kuru lai būtu dublēt datu bāzi. Tas ir pārāk daudz naudas. Tu zini ko? Es gribu, lai man datubāzi tāpat kā versijā vienā kur katrs serveris ir savu vietējo datu bāzi. Tāpēc es esmu tikai gatavojas izdarīt db par katru no tiem. 
+
+Tāpēc tagad katrs web serveri ir identisks ciktāl kā tas ir un to pašu kodu, tas pats statiskā aktīvi, tie paši attēli un teksts un tā tālāk. Un katram ir savs datu bāzi. Man noteica vienu punktu no neveiksmes problēmu. Tagad man ir datu bāze. Nav svarīgi, kurā divi vai viens no šiem lietas mirst, tur vienmēr ir viens pa kreisi. Bet ko jauna problēma es esmu izveidojis ka Dan risinājums izvairīties? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, es ir sinhronizēt tos, vai ne? Jo nu man ir nepieciešams, lai sinhronizētu kas notiek where-- citiem vārdiem sakot, ja Alice apmeklē manu vietā, un viņa ir noticis nokļūt nejauši vai apaļas robined vai kāds, uz servera numur viens, pēc tam man ir vienmēr nosūtīt viņu uz serveri 1. Kāpēc? Jo, ja es sūtu viņai uz servera 2, tas notiek izskatās viņa neeksistē tur. 
+
+Es neesmu nāksies savu pasūtījumu vēsturi. Es neesmu nāksies viņas profila tur. Un ka tikai jūtas kā tas aicinot problēmas. Un, kad Jānis apmeklē, es ir jānosūta viņam vienmēr uz tā paša servera, 2, vai atkarībā no tā, viens, un Charlie uz trešo vienu, un konsekventi. Tas nav nesaprātīgs, though. To sauc par sadalīšanu savu datu bāzi. Un patiesībā tas bija tas, ko Facebook darīja sākumā. 
+
+Ja jūs pēc vēsturi Facebook, tas sākās šeit Campus kā www.thefacebook.com. Tad tas attīstījies, kad Mark sākusies izplatīšanās uz citām pilsētiņās būt harvard.thefacebook.com un mit.thefacebook.com, un, iespējams, bu.thefacebook.com, un tamlīdzīgi. Un tas bija tāpēc, ka agri, es nedomāju, ka jūs varētu būt draugi visā pilsētiņās. Bet tas ir jauki. Jo ikviens no Hārvarda got nosūtīts uz šī servera. Ikviens no BU got nosūtīts uz šī servera. Ikviens no MIT got nosūtīts šai server-- teorētiski. Man nav īsti zināt visu pamatā esošās īstenošanas detaļas. Bet viņš, iespējams, sadalīts cilvēkus ar viņu Campus, kur viņu tīkls bija. 
+
+Tā ka ir labi, līdz vietai kur jums ir nepieciešams divi serverus Harvard, vai trīs serverus Harvard. Un tad, ka vienkāršība veida sabojājas. Bet tas ir saprātīga pieeja. Pieņemsim vienmēr sūtīt Alice tajā pašā vietā, vienmēr nosūta Bobs uz to pašu vietu. Bet kas notiek, ja Alises serveris iet bezsaistē? Bobs un Čārlijs joprojām var nopirkt lietas un ieiet lapā. Bet Alice nevar. Tātad jūs esat zaudējis trešo Jūsu lietotāju bāzi. Varbūt tas ir labāk nekā 100%? Bet varbūt tas lūdzu būt jauki, ja mēs varētu joprojām atbalsta 100% no mūsu lietotājiem pat tad, ja viena trešdaļa mūsu serveri iet bezsaistē. 
+
+Lai mēs varētu sinhronizēt ko? Ne lietotāji, per se, bet datu bāze pāri visiem šiem serveriem. Tāpēc tagad mēs veida nepieciešams zināms veida starpsavienojumu šeit tā, ka paši serveri var sync-- nav nepamatota. Un patiesībā, šī tehnoloģija pastāv. Pasaulē datubāzu, tur ir jēdziens master-vergu datu bāzēm, vai pamatskolas vidusskolas, kur starp funkcijām ir ne tikai, lai uzglabātu datus un atbildēt ar datiem, bet arī tikai, lai pastāvīgi sinhronizēšanu ar otru. Tātad jebkurā laikā jūs rakstīt vai saglabāt kaut uz šo datu bāzi, tas uzreiz kļūst "atkārtot" uz citām datu bāzēm, kā arī. 
+
+Un jebkurā laikā jūs lasīt no tā, tas nav svarīgi, kur jūs esat. Jo, ja teorētiski viņi visi esam sinhronizēti, tu esi gatavojas iegūt tādu pašu viedokli datu. Tātad tas izklausās ideāli. Tur ir nokļuvis būt nozvejas. Ko varētu nozvejas būt? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tāpēc trīs reizes tik daudz sīkumi varētu iet greizi. Tas ir realitāte. Tas varētu visi būt vienādi garā. Bet kāds nepieciešams, lai konfigurētu tiem. Tur ir lielāka varbūtība, ka kaut kas notiek, lai iet greizi. Vienkārši combinatorially esat vairāk sīkumi tendētas uz kļūdām. Kas vēl ir slikti potenciāli? Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tā sinhronizācija var būt slikti. Pat kā jūs varētu zināt no backups un tāds, ja jūs vienkārši ir akli padarīt backups, kas notiks, ja kaut kas noiet greizi vienā datu bāzē? Izdzēst kaut ko jums nevajadzētu. Jūs esat uzreiz atkārtot ka problēma visur citur. Tātad Victoria bija talking-- backups būtu laba lieta šeit. Un tā mēs saņemam atpakaļ uz to. Un, lai būtu skaidrs, mēs runājam nav par backups šeit per se. Mēs runājam par patiesu replikācijas vai sinhronizācija pāri serveriem. Viņi visi dzīvot. Viņi nav domāts tikt izmantoti, lai backups. 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Kas tas ir? Mērķauditorija: Higher-- DAVID Malan: Augstākā izmaksas. Mēs esam trīskāršojies izmaksas pārliecināts, lai gan vismaz ziņā aparatūras. Tāpēc, ka datubāze ir tikai gabals programmatūru. Un web serveris ir gabals programmatūru. Tas ir iespējams bez maksas, ja mēs izmantojam jebkurš skaits atvērtā koda lietām. Bet, ja mēs izmantojam kaut kā Oracle, mēs maksājot Oracle vairāk naudas par licences, vai Microsoft par piekļuvi. Tur ir nokļuvis būt kādu citu nozvejas šeit. Tas nevar būt šo vienkāršo. 
+
+Tātad, lai jūsu punktu, es domāju, ka tas bija Kareem, par ģeogrāfiju earlier-- vai nē, Roman, bija tas, par geography-- pieņemsim ka mēs to gudri par to, un mēs esam liekot vienu no mūsu serveriem, un pārvērst mūsu datu bāzes, ASV, un vēl Eiropā, otra Dienvidamerika, vēl Āfrikā, citu Āzijā, visur mēs varētu vēlēties visā pasaulē. Mēs jau zinām no mūsu pēdām maršruti ka punkts A un punktu B, ja viņi tālāk, izņemot, gatavojas veikt vairāk laika. 
+
+Un, ja kāds no jums ir izmantoti instrumenti, piemēram, Facebook vai Twitter vai kāds no šīm vietām šajās dienās, ka ir pastāvīgi mainās, jo lietotājs radīti dati, dažreiz, ja jūs hit pārlādēt vai atvērt pašu lapu citā pārlūkprogrammā, jūs redzat dažādas versijas, gandrīz. Jūs varētu redzēt kādu statusu atjaunināt šeit, bet ne šeit, un tad jūs pārlādēt, un pēc tam to Šķiet, un jūs atkal no jauna, un tā pazūd. Citiem vārdiem sakot, pastāvīgi acu, kas par to, vismaz ja jūs izmantojat sociālā tīklu, jo īpaši. 
+
+Atkal, tikai tāpēc, ka dati mainās tik ātri, dažreiz serveriem do izkļūt no sinhronizācijā. Un varbūt tas ir super neliels logs. Bet 200 milisekundes, varbūt pat vairāk nekā that-- tas ir gatavojas veikt kādu ne-nulles summu par laika šīs datu bāzes sinhronizēt. Un mēs esam ne tikai runājam par vienu pieprasījumu. Ja uzņēmums ir tūkstošiem lietotājus, kas izmanto to vienlaicīgi, tie varētu buferis. Citiem vārdiem sakot, tur varētu būt rindā vai gaidīšanas rindu pirms visas šīs datubāzes vaicājumus var sinhronizēt. Tātad, varbūt tas ir tiešām dažas sekundes. 
+
+Un tiešām tā ir taisnība, es domāju, ka pat līdz šai dienai ar Facebook, kuru kad viņi sinhronizēt no East Coast West Coast, tā has a non-trivial izplatīšanās kavējuma, tā sakot, ka tu tikko veida ir paciest. Un tā tas ir ne tik daudz bug jo tā ir realitāte ka lietotāji varētu redzēt pareizie dati vismaz dažas sekundes. 
+
+Es redzu šo par čivināt daudz tiešām kur dažreiz es ņemšu čivināt vienā logā atveriet otru, lai tad redzēt to, lai apstiprinātu, ka tā patiešām gāja uz augšu, un tas nav tur vēl. Un man ir sava veida pārlādēt, pārlādēt, reload-- ak, tur tas ir. Un tas nav tāpēc, ka tas nav saglabāts. Tas vienkārši nav pavairots uz citiem serveriem. 
+
+Tātad šis kompromiss, too-- vai jūs tiešām vēlas pakļaut sevi riskam ka tad, ja lietotājs iet uz to, lai vēsture, tas nav reāli tur vēl? Es redzu šo par dažām bankām. Tas vienmēr kaitina mani, kad, labi, par vienu, Jūs varat iet tikai, piemēram, sešus mēnešus atpakaļ jūsu bankas pārskatos dažās bankās, kaut gan teorētiski vajadzētu iespēja saņemt visu tiešsaistē. Viņi vienkārši ņem sīkumi bezsaistē dažkārt. Dažreiz, too-- kāda mājas lapa ir? Tur one-- oh, tas ir GoDaddy, es domāju. GoDaddy, kad jūs izbraukšana pērkot domēna nosaukumu vai kaut ko, tie būs bieži dod jums saite uz jūsu saņemšanu. Un, ja jūs noklikšķiniet uz šīs saites tiesības prom, tas bieži vien nedarbojas. Tā vienkārši saka, strupceļā, nekas šeit. 
+
+Un tas ir arī tāpēc, ka šie izplatīšanās kavēšanās. Tāpēc, ka kāda iemesla dēļ, tie lietojat mazliet laika faktiski radīt to. Tātad tas ir sava veida kā jūs vēlaties pull jūsu matu out kādā brīdī. Tāpēc, ka visi jūs mēģināt darīt, ir atrisināt vienkāršu problēmu. Un mēs turpinām radīt jaunu problēmas paši. Tātad, pieņemsim redzēt, ja mēs var veida atsaukt to. 
+
+Izrādās, ka, apvienojot datu bāzes par visiem jūsu tīmekļa serveri nav īsti labākā prakse. Vispār, ko inženieris varētu darīt, vai sistēmas arhitekts, būtu jābūt atšķirīgs līmeņi serveriem. Un tikai kosmosa dēļ, es ņemšu izstrādā savu datu bāzi šeit. 
+
+Mēs varētu būt datu bāzi un servera numurs četri šeit ka tas ir savienojumi katrs no šiem serveriem šeit. Tātad tas varētu būt mūsu priekšā galu līmenim, jo ​​cilvēki teiktu. Un tas būtu mūsu back end līmeņa. Un tas tikai nozīmē, ka tie saskaras lietotājam. Un datubāzes nesaskaras lietotāju. Neviens lietotājs var tieši piekļūt datu bāzi. 
+
+Tātad, pieņemsim, tagad varbūt iet uz leju maršruts Victoria ierosināja. Šī ir viena atteice. Tas padara mani neērti. Tātad, kas ir iespējams, Pašsaprotama risinājums? Mērķauditorija: [dzirdams] DAVID Malan: Atvainojiet, teikt, ka atkal. Mērķauditorija: [dzirdams] DAVID Malan: Non-ražošanas serveri. Ko tu ar to domā? 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Ak, OK, lai backups. Labi, lai mēs varētu darīt, protams. Un patiesībā tas ir ļoti bieži darīts. Tas varētu būt datu bāzē numuru pieci. Bet tas ir tikai savienots ar numuru četri. Un jūs varētu saukt par karstu rezerves. Šīs divas datubāzes var konfigurēt tikai pastāvīgi sinhronizēt viens otru. Un tāpēc, ja šī mašīna nomirst, lai kāds stulbs reason-- cieto disku dies, kāds braucieniem pa vadu, daži programmatūra ir kļūdains un mašīna uzkaras vai crashes-- Jums varētu būt cilvēku burtiski Atvienojiet šo vienu no sienas un tā vietā, pievienojiet šo vienu. Un tad laikā, teiksim, Dažas minūtes, varbūt pusstundu, jūs esat atpakaļ tiešsaistē. 
+
+Tas nav liels, bet tas arī nav briesmīgs. Un jums nav jāuztraucas par jebkādām sinhronizācijas jautājumiem. Jo viss jau ir tur. Jo jums bija perfekts backup gatavi iet. 
+
+Jūs varētu būt nedaudz mīļotājs par to, kā daži cilvēki bieži, kur jums varētu būt datu bāzes numurs četri šeit, datu bāzes numurs pieci šeit, ka tiek runājot ar otru. Bet jums ir arī šo veida arrangement-- un tas apzināti izskatās netīrs, jo tas is-- kur visi priekšējie serverus var runāt ar visiem atpakaļ end serveriem. Un tāpēc, ja šī datu bāze nav atbildēt šie priekšējie end serveriem ir ir programmēšana kodu tiem, kas saka, ja Jums nav iegūt savienojums ar šo datu bāzi, primārais nekavējoties sāk runājot ar sekundāro. 
+
+Bet tas tagad nospiež sarežģītība ar kodu. Un tagad jūsu izstrādātājiem, jūsu programmatūra izstrādātāji, ir jāzina par to. Un jūs esat veida sasaistīšanas kodu, jūs esat rakstiski savu faktisko muguras beigās īstenošanas detaļas, kas padara to grūtāk, īpaši lielāks sabiedrība vai lielāks mājas lapā, kur jums nav obligāti vēlas programmētāji, lai būtu zināt, kā datu bāzes inženieri dara savu darbu. Jūs varētu vēlēties, lai saglabātu šos lomas veida funkcionāli nošķirta tā ka tur ir šis slānis abstrakcija starp diviem. 
+
+Tātad, kā varētu mēs noteikt šo? Nu, mēs veida atrisināta reiz pirms šī problēma. Kāpēc nav mēs ieliekam vienu no šīs lietas šeit, kur tā runā, savukārt uz ceturto un pieci, visi no front end web serveriem sarunāties ar šo starpnieks, kā arī starpnieks savukārt maršrutos savus datus? Patiesībā, ko varētu būt labs vārds par šo lietu? 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Labi, datu bāzes vadītājs. Bet ko varētu termins, ka mēs varētu atkārtoti izmantot šo ierīci? Mēs balansēšana. Jā, tāpēc tiešām, es esmu kas nav godīgi šeit. Tātad slodze ekvilibrists nozīmētu, ka mēs ieslēdzot atpakaļ un šeit atpakaļ, kas nav nepieciešams faktiski būt gadījums. Tātad tur ir daži veidi, kā mēs varētu izdarīt. 
+
+Ja tas ir faktiski slodze ekvilibrists, tad stāsts ir tieši tāds pats kā iepriekš. Daži no lūgumiem iet līdz 4. Daži no viņiem iet uz 5. Un tas ir labi. Jo tagad mēs varam rīkoties divreiz vairāk caurlaide. Bet šis savienojums šeit ir super svarīgi. Viņiem ir palikt pastāvīgi sinhronizēti un cerams nav ģeogrāfiski pārāk tālu, lai ka sinhronizācija būtībā acumirklīga. Pretējā gadījumā mēs varētu būt problēma. 
+
+Tātad tas nav slikti. Bet atkal, mēs esam ieviesa jaunu problēmu. Kāda problēma ir es tikko pārbūvēts? Viena atteice. Tātad, kāds ir risinājums, ka? Tā kā Victoria 's fond tērēt naudu, mēs varam izmantot šo puisis, un darīt. Un es esmu tikai gatavojas pārvietot šeit pietiekami daudz vietas. Un tas būs mazliet netīrs. Es esmu gatavojas glabāt zīmēšanas līnijām. Pieņemsim, ka visi šie līnijas iedziļināties gan? 
+
+Ļoti izplatīta metode šeit būtu izmantot metodi, ko sauc sirdsdarbība pie kam katrs no šīm ierīcēm, kreisi un pa labi slodze balancers, vai kāds mēs vēlamies tos saucam, pastāvīgi sakot, es esmu dzīvs, Es esmu dzīvs, es esmu dzīvs, es esmu dzīvs. Viens no tiem pēc noklusējuma darbojas kā primārais. Tātad visi satiksmes tiek maršrutēti caur viens pa kreisi, piemēram, pēc noklusējuma, patvaļīgi. 
+
+Bet, tiklīdz puisis labajā pusē nedzird no kreisās puisis vairs, viens pa labi ir ieprogrammēts lai automātiski, piemēram, pārņemt IP adresi no vienas pa kreisi, un tāpēc kļūst par primāro, un varbūt sūtīt e-pastu vai īsziņu uz cilvēkiem teikt, hey, kreisi galvenais ir bezsaistē. Es kļūs galvenais tagad. Tātad viceprezidents kļūst prezidents, lai runāt. Un kāds ir iet ietaupīt prezidents, ja vēlaties. Jo tagad mums ir pagaidu viena atteice. 
+
+Tā kā sarežģīti vai stresa kā tas varētu likties, lai sāktu to, tas ir, kā jūs atrisināt šīs problēmas. Jūs mest naudu pie tā. Jūs mest aparatūru pie tā. Bet diemžēl jums pievienot sarežģītību par to. Bet rezultāts, galu galā, ir tas, ka Jums ir daudz, teorētiski, stabila arhitektūra. Tas joprojām nav perfekta. Jo pat tad, kad mēs have-- mēs varētu nav viena atteice. Mums tagad ir divējāda punkti neveiksmes. Bet, ja divas lietas iet greizi, kas pilnīgi varētu, mēs joprojām gribam būt bezsaistē. 
+
+Un tā ļoti bieži nozare ir aprakstīt Jūsu up laiku ziņā nines. Un veida vārtiem tiekties, ir 99,999% no laika jūsu vietne ir tiešsaistē. Vai pat labāk, pievienot vēl dažas nines, ka. Diemžēl, šie Nines ir ļoti dārgi. Un pieņemsim faktiski darīt out. Tātad, ja es atvērtu manu lielo kalkulators atkal, 365 dienas gadā, 24 stundas dienā, 60 minūtes stundā, un 60 sekundes minūti, tas, cik sekundes ir gadā, ja es darīju to pareizi. Tātad, ja mēs reizes šo, .99999, kas ir cik daudz laika mēs gribam tiecamies. Tātad tas nozīmē, ka mums ir jābūt uz augšu tas daudzas sekundes gadā. Tātad, ja es tagad atņemt sākotnējā vērtība, vai drīzāk Šī jaunā vērtība no first-- 316 sekundes, kas, protams, ir piecas minūtes. 
+
+Tātad, ja jūsu mājas lapā vai jūsu uzņēmums ir apgalvojot, "pieci Nines," kuru tu esi līdz 99,99% no laika, tas nozīmē, ka jums labāk ir bijuši pietiekami gudri un ātri pietiekami un pietiekami flush ar resursiem ka jūsu serveri ir tikai offline piecas minūtes no gada. Tas ir dārgs un grūti lieta tiecamies. 
+
+Tātad, tas ir kompromiss, too. 99,999% no laika ir diezgan darn grūti un dārgi. Pieci minutes-- jūs varat tikko nokļūt ar serveri, lai fiziski aizvietot kaut kas ir nogājis greizi. Un tas ir iemesls, kāpēc mēs sākam vadu lietas kopā sarežģītāka apriori lai datori var kārtot noteikt paši. Jā. 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Problēma varētu būt jebkurā vairākās vietās. Un fact-- 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Pilnīgi, absolūti. Un, tā kā situācija ir kļūst sarežģītāka, tas varētu būt web serveri. Tas varētu būt pilnvaras ēkas. Tas varētu būt kaut kas fiziski, piemēram, kabeļi got apdeguši vai izmests. Tas varētu būt datu bāze nereaģē. Tas varētu būt tie jāatjaunina to darbības sistēma un kaut kas karājas. Tātad tur ir tik daudz citas kustīgās daļas. Un tā daudz inženierzinātņu ka ir jāiet aiz šī ir tiešām tikai kompromisus, piemēram, kā daudz laika, cik daudz naudas tas faktiski vērts, un kādi ir draudi jūs tiešām uztrauc? Tā, piemēram, In kursi man māca at Harvard, mēs izmantojam daudz mākoņdatošanu, kas mēs sāksim ņemot apskatīt tagad, patiesībā, ja mēs izmantojam Amazon Web Services. Tikai tāpēc, ka tas ir viens mēs sākām ar. Bet tur ir vēl šajās dienās Google un Microsoft un citi. Un mēs apzināti izvēlas nodot visu no mūsu kursiem "virtuālās mašīnas, kā viņi sauc, jo es domāju, ka tas ir Rietumu Virginia datu centrs. Lielākā daļa no mūsu studentiem gadās būt no ASV, lai gan ir noteikti daži starptautiski. 
+
+Bet realitāte ir tā ir tikai vienkāršāka un tas ir lētāk par mums likt visiem mūsu olas in Virginia grozā, kaut gan es zinu, ja kaut kas noiet greizi Virginia, kā ir pa laikam happened-- patīk ja tur ir viesuļvētra vai kādu laika notikums, piemēram, ka, ja tur ir dažas elektrotīklu jautājums vai like-- visu no mūsu kursiem "dati varētu iet bezsaistē kādu skaitu minūšu vai stundu laikā vai pat ilgāk. 
+
+Bet summa sarežģītība kas būtu nepieciešams, un naudas summa, kas būtu nepieciešams, lai darbotos visu paralēli Eiropā vai Kalifornijā vienkārši nav tik daudz nozīmē. Tātad, tas ir racionāla tirdzniecība off, bet sāpīga vienu kad jūs faktiski kam, ka dīkstāves. 
+
+Nu, pieņemsim pāriet tieši tagad, lai daži no mākonis balstītu risinājumu lai dažas no šīm problēmām. Viss, ko mēs esam bijuši apspriest līdz šim ir sava veida problēmas, kas ir ir ar mums kādu laiku, vai jums ir jūsu pašu serveriem savu uzņēmumu, vai jūs doties uz līdzāsatrašanos vieta kā datu centru un akciju telpa ar kādu citu, vai mūsdienās mākoni. 
+
+Un, kas ir jauka par mākonis ir, ka visi no šīm lietām es esmu zīmēšanas kā fiziskiem objektiem tagad var uzlūkot kā veida virtuālo objektu mākonis, kas ir simulēta ar programmatūru. Citiem vārdiem sakot, datori šodien, serveri šodien, piemēram, Dell attēlu Man parādīja agrāk, ir tik ātri, ir tik daudz RAM, tik daudz CPU, tik daudz diska telpa, ka cilvēki ir uzrakstījuši programmatūru, lai praktiski nodalījumā viens serveris augšup ilūziju par to ir divi serveri, vai 200 serveriem, tāpēc ka katrs no mums klienti ir ilūzija, kam ne tikai konts kādā tīmeklī uzņemt, bet mūsu pašu mašīnu, kas mēs esam īri no kāda cita. 
+
+Bet tā ir virtuālā mašīna ciktāl vienā Dell servera, tas atkal varētu tikt sadalīts augšup divi vai 200 vai vairākas virtuālās mašīnas, visi, kas dod kādu administratīvo piekļuvi, bet tādā veidā, kur neviens no mums zina vai var piekļūt citu virtuālo automātus pašu aparatūru. Tātad, lai uzzīmēt zīmējumu šodienas slaidi, Man ir tas nošauti šeit no mājas lapā sauc dokers. 
+
+Tātad tas ir nedaudz vairāk detail nekā mēs tiešām ir nepieciešams. Bet, ja jūs apskatīt to kā jūsu infrastructure-- tik vienkārši aparatūras savu, Jūsu serveri, pakaramie, datu centrs, un visi that-- turat parasti palaist uzņēmējas operētājsistēmu. Tātad kaut like-- tas varētu būt Windows. Nebūtu Mac OS. Jo tas nav īsti uzņēmums šajās dienās. Tātad tas būtu Linux vai Solaris vai Unix vai BSD vai FreeBSD vai jebkurš skaits citām operētājsistēmām kas ir vai nu bez maksas vai tirdzniecības. 
+
+Un tad jūs vadāt programma, īpašas programmas, sauc hypervisor, vai virtuālā mašīna monitoru, VMM. Un tie ir produkti, ja jūs esat pazīstami, piemēram, VMware vai VirtualBox vai Virtual PC vai citi. Un ko šīs programmas jādara, ir tieši ka iezīme es aprakstīju iepriekš. Tas rada ilūziju ka viena fiziskā mašīna var būt vairākas virtuālās mašīnas. 
+
+Un tāpēc šie krāsains kastes augšu augšu ir glezna priekšstatu par turpmāko. Tas hypervisor, šis gabals programmatūru, to sauc VMware, kas darbojas ar kādu citu operētājsistēmu, to sauc Linux, rada ilūziju, ka Šī fiziskā dators ir faktiski viens, divi, trīs virtuālie datori. Tāpēc es esmu tagad nopircis, kā īpašnieks Šī aparatūra, viena fiziskā datora. Un tagad es esmu īri to trīs klientiem. 
+
+Un šie trīs klienti visi domā tie ir veltīta virtuālā mašīna. Un tas nav ēsmu un slēdzis. Tas ir vairāk izpaušana ka jūs izmantojat virtuālo mašīnu. Bet tehnoloģiski, mēs visi ir pilnīga administratīvo kontroli vairāk katrā no šīm viesis operētājsistēmas, kas varētu būt jebkurš skaits operētājsistēmām. 
+
+Es varu instalēt kaut ko es gribu. Es varu uzlabot to, kā es gribu. Un man nav pat zināt, vai rūp citi pamatdarbības sistēmām šajā datorā, citas virtuālās mašīnas, ja īpašnieks visu šo pelēka sīkumi tiek nedaudz mantkārīgs un ir overselling savus resursus. 
+
+Tātad, ja jūs lietojat kādu fiziskā mašīna un pārdod to lai ne 200, bet 400 klienti, kādā brīdī mēs ejam, lai ceļojums tiem paši veiktspējas jautājumiem kā iepriekš. Tāpēc, ka jums ir tikai ierobežots daudzums diska un RAM un tā tālāk. Un virtuālā mašīna ir tikai programma, kas ir izliekoties par pilnvērtīga dators. Tātad jūs saņemsiet to, ko jūs maksājat par šeit. 
+
+Tātad, jūs atradīsiet tiešsaistē jūs varētu maksāt cienījama kompānija varbūt $ 100 mēnesī par savu virtuālo mašīnu, vai savu virtuālo privāto serveri, kas ir vēl viens termins, par to. Vai jūs varētu atrast kādu lidot nakts kur jūs maksājat $ 5,99 mēnesī par savu virtuālo mašīnu. Bet izredzes ir jums nav gandrīz tik daudz sniegumu pieejams jums, jo viņi ir overselling to jā, nekā jūs varētu ar augstāku līmeņa pakalpojumu vai labāk pārdevējs. 
+
+Tātad, ko tas patiesībā nozīmē mums? Tāpēc ļaujiet man iet uz to. Es iešu uz aws.amazon.com. Tikai tāpēc, ka viņi ir jauka izvēlne ar opcijām. Bet šie paši nodarbības attiecināms uz viss ķekars citu mākonis pārdevējiem. Diemžēl tas bieži vien vairāk mārketinga runā nekā jebkas. Un tas vienmēr mainās. Tātad jūs iet uz mājas lapā, kā šis. Un tas tiešām nav pateikt jums daudz neko. 
+
+Un pat es, jo es apskatīt to, nav tiešām zināt, ko kāds no šīm lietām vienmēr darīt, kamēr es ienirt. Bet sāksim pa kreisi, Compute. Un es esmu gatavojas klikšķi šis. Un tagad Amazon ir atklāti milzīgs pakalpojumu skaits šajās dienās. Bet Amazon EC2, iespējams, visvienkāršākais. 
+
+Amazon EC2 radīs mums tieši tā aina mēs redzējām pirms brīža. Tas, kā viņi dara daudz savu naudu mākonis. Acīmredzot Netflix un citi ir mākonis ar tiem. Tas ir tipiski pūkains mārketinga runāt. Tātad, ko es gribu darīt, ir doties uz Pricing-- vai drīzāk iesim uz gadījumiem pirmais vienkārši uzzīmēt zīmējumu par šo. 
+
+Tātad šī būs atkarīga no pārdevēja. Un mums nav nepieciešams, lai saņemtu pārāk dziļi nezāles šeit par to, kā tas viss darbojas. Bet kā Amazon, piemēram, īrē jums virtuālo mašīnu vai serveri mākonis ir tie esam ieguvuši šie veida funny vārdi, tāpat t2.nano, kas ir mazie, vai t2.large, kas nozīmē lielas. Katrs no tiem dod jums vai nu viena vai divas virtuālās CPU. 
+
+Kāpēc tas ir virtuāls CPU? Nu, fiziskā mašīna varētu ir 64 vai vairāk faktiskos CPU. Bet atkal, izmantojot programmatūru, tie rada ilūziju ka viena mašīna var būt divvied līdz vairākiem lietotājiem. Tātad, mēs varam domāt par to kā ar vienu Intel CPU vai divi. CPU kredīti uz hour-- es būtu lasīt fine print par to, ko tas patiesībā nozīmē. Tas nozīmē, cik daudz mašīnu Jūs varat izmantot stundā vis-a-vis citi klienti par šo aparatūru. 
+
+Lūk, cik daudz RAM vai atmiņas jums get-- nu pusi gigabaitu, vai 500 megabaiti, vai 1 gigabaitu, vai 2. Un tad uzglabāšanas tikai atsaucas uz kāda veida disku viņi jums. Tur ir dažādi uzglabāšana tehnoloģijas, ka tie piedāvā. Bet vairāk interesanti nekā šis tad varētu būt cenu. 
+
+Tātad, ja jums ir CTO vai inženieris, kurš nav vēlaties palaist serveri jūsu birojs, kāda iemesla dēļ, un tas ir pārāk sarežģīti vai dārgi pirkt serverus un kopīgi atrast tos un maksāt nomas maksu kādā fiziskajā būris telpā somewhere-- jūs vienkārši vēlaties sēdēt Jūsu klēpjdators vēlu naktī, ierakstiet savu kredītkartes informāciju, un noma serveriem cloud-- labi, mēs varam izdarīt šeit. Es esmu gatavojas iet uz leju kuri paredzēti, Linux ir populāra operētājsistēma. Un pieņemsim tikai iegūt sajūtu lietām. Whoops-- pārāk liels. 
+
+Tātad aplūkosim to vissīkākās virtuālā mašīna, kas, šķiet, ir, par mūsu mērķiem, viens CPU un 500 megabaitu RAM. Tas ir diezgan mazs. Bet atklāti sakot, web serveri nav jādara viss, ka daudz. Jums ir labākas specs jūsu klēpjdators. Bet jums nav nepieciešams tos specs šajās dienās par lietām. Jūs gatavojas maksāt stundā 0,0065 $. 
+
+Tātad, pieņemsim redzēt. Ja ir 24 stundas dienā, un mēs maksāt tik daudz par stundu, tas maksās jums $ 0,15 īrēt ka īpaši serveris mākonis. Un tas ir tikai uz vienu dienu. Ja mēs to izdarītu 365-- $ 57 līdz nomāt šo konkrēto serveri. Tātad, tas izklausās super lēti. 
+
+Tas ir arī super zemu veiktspēju. Tāpēc mēs, kursiem es mācīt šeit, mēdz izmantot Es domāju t2.smalls vai t2.mediums. Un mēs varētu būt daži simti lietotājiem, daži tūkstoši lietotāju, kopā. Tas ir diezgan pieticīgs. Tātad, pieņemsim redzēt, ko tas varētu izmaksāt. Tātad, ja es to izmaksu reizes 24 stundas reizes 365, šis viens ir $ 225. Un kursiem Es mācīt, mēs parasti palaist divus viss, lai atlaišanas un arī veiktspēju. Tātad mēs varētu tērēt, tāpēc, 500 $ par serveriem ka mums, iespējams, vajadzēs gadā. 
+
+Tagad, ja jums ir nepieciešams vairāk performance-- pieņemsim to apskatīt atmiņas. Mēs esam runājuši par atmiņu diezgan daudz. Un, ja jums ir nepieciešams vairāk memory-- un 64 gigabaitiem ir skaitlis es tur mentioning-- tas ir gandrīz $ 1 stundā. Un jūs varat diezgan ātri redzēt, kur Tas goes-- lai 24 stundas reizes 365. Tāpēc tagad ir pienācis 8000 $ gadā par diezgan cienīgu serveri. 
+
+Tāpēc kādā brīdī, tur ir šī lēciena punkts kur tagad mēs varētu tērēt $ 6000 iespējams, un nopirkt mašīnu, piemēram, ka un deldēt tās izmaksas vairāk nekā varbūt divas, trīs gadi, dzīve mašīnas. Bet ko varētu virzīt jums labu vai nežēlastība īri mašīna mākonis līdzīgs šim? Atkal, tas ir salīdzināms, iespējams, uz vienu no šiem Dell serveriem mēs redzējām attēlotie mazliet atpakaļ. 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tas ir milzīgs otrādi. Tāpēc, ka mēs esam ne pērk mašīna, mums nav Unbox to. Mums nav, lai paceltu to. Mums nav plug to mūsu bagāžnieku. Mums nav pievienojiet to. Mums nav jāmaksā elektriskā rēķinu. 
+
+Mums nav, lai ieslēgtu gaisa kondicionēšana on. Kad cietais disks mirst, mums nav vadīt vidū nakts salabot. Mums nav izveidot uzraudzību. Mums nav kuri paredzēti, saraksts turpinās un par visu no fiziskajiem lietām Jums nav jādara jo "mākoni". 
+
+Un, lai būtu skaidrs, mākonis skaitļošanas tas ir ļoti overused termins. Tas patiešām ir tikai nozīmē maksāt kādam cits, lai palaistu serveri, lai jūs, vai īri vietu Kāds cits serveriem. Tātad termins "mākonis skaitļošanas" ir jauns. Ideja ir gadu desmitiem vecs. Tātad tas ir diezgan pārliecinoši. 
+
+Un ko vēl jūs saņemsiet? Nu, jūs arī iegūt spēja darīt visu, par klēpjdators mājās. Citiem vārdiem sakot, visi bildes man bija tikai drawing-- un tas nebija tik sen, ka pat Man bija indeksēšanu apkārt uz servera grīdas tapām kabeļus par katru no līnijām, ka jūs redzēt, un uzlabot darboties sistēmas, un diskus mainās ap. Tur ir daudz fiziskumu visiem, kas. 
+
+Bet kas ir skaists par virtuālo mašīnas, kā norāda nosaukums veida liecina, tagad ir tīmekļa saskarnes saskaņā ar kuriem Ja vēlaties ekvivalentu no līnijas no šī servera uz otru, vienkārši ierakstiet, tips, veids, noklikšķiniet un velciet, noklikšķiniet uz Iesniegt, un voila, Jums tas vadu up virtuāli. Jo tas viss ir darīts programmatūru. Un iemesls, tas ir darīts programmatūras atkal jo mums ir tik daudz RAM un tā daudz CPU pieejami pie mums šajās dienās, kaut gan visi ka sīkumi prasa laiku, tas ir lēnāks vadīt lietas programmatūru nekā aparatūru, tāpat kā tas ir lēnāks izmantot mehāniska ierīce, piemēram, cieto disku, nekā RAM, kaut kas tīri elektroniski. Mums ir tik daudz resursu pieejamas mums. Mums cilvēki ir sava veida invariantly lēni. Un tāpēc tagad mašīnas var darīt tik daudz vairāk laika vienībā. Mums ir šīs spējas darīt lietas praktiski. 
+
+Un es saku kursiem Es mācīt, piemēram, šeit, mums par varbūt duci vai tāpēc kopā virtuālās mašīnas piemēram, ka darbojas jebkurā laiks dara priekšgala sīkumi, darot back end stuff. Mums ir visas mūsu noliktavas. Tāpēc jebkurš video, ieskaitot lietas piemēram, tas, ka mēs esam šaušana, mēs galu galā liekot uz mākonis. Amazon ir pakalpojumi sauc Amazon S3, to vienkāršu uzglabāšanas pakalpojumu, kas ir tāpat kā diska vietas mākonī. Viņiem ir kaut kas Sauc CloudFront, kas ir CDN serviss, saturs Piegāde Tīkla pakalpojums, kas nozīmē, ka tie veic visus jūsu failus un Jums automagically atkārtot to apkārt pasaulei. 
+
+Tāpēc tie nav darīt to preemptively. Bet pirmo reizi, kad kāds Indijā pieprasa failu, tie būs potenciāli cache to uz vietas. Pirmo reizi Ķīnā, Pirmo reizi Brazīlijā, kas notiek, viņi sāksim caching to uz vietas. Un jums nav jādara, kāds no tā. Un tā tas ir tik neticami pārliecinoši šajās dienās, lai pārvietotu lietas uz mākonis. Tāpēc, ka jums ir šī spēja burtiski lai nav cilvēki dara gandrīz tikpat daudz darbs. Un jūs burtiski nav nepieciešams tik daudz cilvēki dara šos darbus anymore-- "ops," vai darbības lomas, vairs. Jums tiešām ir nepieciešams izstrādātājiem un mazāk inženieri kurš var vienkārši darīt lietas praktiski. Patiesībā, tikai, lai dotu jums sajūtu to, ļaujiet man iet uz cenu par vienu citu produktu šeit. Paskatīsimies kaut ko līdzīgu CDN S3. Tātad tas ir būtībā virtuāls cietais disks mākonis. Un, ja mēs ritiniet uz leju līdz pricing-- tāpēc tas ir 0,007 $ par vienu gigabaitu. Un that's-- kā mēs to darām? Es domāju, ka mēnesī. 
+
+Tātad, ja tas ir uz vienu month-- vai dienā? Dan, tas ir par dienu? Tas ir mēnesī, OK. Tātad, ja tas ir par month-- sorry, tas ir mēnesī 0,03 $. Tur ir 12 mēneši no gada. Tātad, cik daudz datu varētu jūs glabājat mākonī? Gigabyte nav milzīgs, bet es nezinu, piemēram, 1 terabaitu, lai, piemēram, 1000 no tiem. Tas vēl nav viss, ka daudz. Tas ir 368 $, lai saglabātu terabaitu Datu Amazon mākonis. Tātad, kādi ir daži no tad kompromisus, tad? To nevar visi būt labi. Nekas mēs esam runājuši par šodien ir kārtot bez nozvejas vai izmaksām. Tātad, kas ir slikti par kustīgu viss uz mākonis? Mērķauditorija: Drošība. DAVID Malan: Labi, ko jūs domājat? Mērķauditorija: [dzirdams] DAVID Malan: Jā, labi. Un jūs tiešām vēlaties daži izlases inženieri Amazon, ka jūs nekad tikties ar fizisku piekļuvi šiem datoriem, Un, ja viņi patiešām vēlējās, virtuālo pieeju? Un kaut arī teorija software-- labi, šifrēšana var absolūti aizsargāt jūs pret to. Tātad, ja tas, ko jūs esat uzglabātu jūsu serveros ir encrypted-- mazāk bažas. 
+
+Bet tiklīdz cilvēks ir fiziski piekļuvi mašīnu, šifrēšana malā, visas likmes ir sava veida off. Jūs varbūt zināt, no vakardienas ka datoriem īpaši, pat ja jums bija tās lietas sauc par "BIOS paroles," bija, kad jūsu desktop booted up, jūs tiks piedāvāts ar paroli, kas nav nekāda sakara ar Logi, jūs varat parasti vienkārši atvērt šasijas mašīna, atrast tiny maz tapas, un izmantot kaut ko sauc džemperis un vienkārši savienot šie divi vadi apmēram sekundi, tādējādi pabeidzot ķēde. Un tas likvidētu paroli. 
+
+Tātad, ja jums ir fiziska piekļuve ierīce, jūs varat darīt lietas, piemēram, ka. Jūs varat noņemt cieto disku. Jūs varat piekļūt to, ka veidā. Un tā tas ir iemesls, kāpēc, jo gadījums Dropbox, Piemēram, tas ir nedaudz satraucoša, ka ne tikai tie ir dati, pat ja tas ir šifrēta, viņiem ir arī atslēga. Other rūpes? 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Jā, tas ir ļoti true-- ar Googles, āboli, tad Microsofts pasaules. Un patiesībā, cik ilgi ir jums bija jūsu iPhone? Jā, sniegt vai pieņemt. Mērķauditorija: [dzirdams] DAVID Malan: Es atvainojos? Jūs esat starp tiem, kas ir iPhone, vai ne? Mērķauditorija: Jā. DAVID Malan: Cik ilgi tu esi bijusi savu iPhone? Mērķauditorija: [dzirdams] DAVID Malan: Labi, tāpēc Apple burtiski zina kur jūs esat bijis ik stundu diena pēdējo piecu gadu laikā. 
+
+Mērķauditorija: [dzirdams] DAVID Malan: Kas ir brīnišķīga īpašība. Mērķauditorija: [dzirdams] DAVID Malan: Jā, bet tirdzniecības off for sure. Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Jā, tas ir ļoti viegli. Mērķauditorija: [dzirdams] DAVID Malan: Citi ēnas? Mērķauditorija: [dzirdams] DAVID Malan: Absolutely-- tehnoloģiski, ekonomiski, tas ir diezgan pārliecinoši, lai kārtot iegūt šos apjomradītus ietaupījumus un pārvietoties visu tā saukto mākonis. Bet jūs, iespējams, vēlaties, lai iet ar dažiem no lielākajiem zivis, Amazones, tad Googles, tad Microsofts-- Rackspace ir diezgan big-- un daži citi, un nav vienmēr lidot naktī ļaudīm kuriem tas ir ļoti viegli darīt mūsdienās šāda veida tehniku. Un tas, kam jūs varat maksāt mēnesī 5,99 $ līdz. Bet jūs, protams, iegūt to, ko jūs maksājat. 
+
+Kad jūs sakāt [nedzirdama], tas ir, kad lietas, piemēram, šiem pieciem nines nāk uz augšu, saskaņā ar kuru, pat ja tehnoloģiski mēs nevaram īsti garantēt 99.999, mēs vienkārši veidot sava veida soda ar līgumu tā, ka tad, ja tas notiek, vismaz tur ir daži izmaksas mums, pārdevējs. Un tas, ko jūs parasti kļūst viņiem piekrist. 
+
+Mērķauditorija: [dzirdams] 
+
+DAVID Malan: Un viena veida svētību ir tas, ka pat tad, kad mēs ejam uz leju, lai Piemēram, vai pat daži uzņēmumi, realitāte ir Amazon, Piemēram, ir tik daudz darn klientiem, labi pazīstami klienti, darbojas no konkrētu datu centru ka tad, kad kaut kas tiešām iet greizi, tāpat kā dabas katastrofas un laika apstākļiem, un, piemēram, ja tur ir kāds veida sudraba uzliku, tas, ka tu esi ļoti laba kompānija. Jūsu mājas lapā var būt offline. Bet tā ir, piemēram, puse tautas internets. Un tā tas ir apstrīdami nedaudz garšīgu saviem klientiem ja tas ir vairāk no interneta lieta nekā acme.com lieta. Bet tas ir mazliet apkrāptu. 
+
+Tātad attiecībā uz citām lietām paskatīties, tikai tāpēc, ka mēs neizslēdzam citiem, ja dodaties uz Microsoft Azure, tie ir gan Linux un Windows sīkumi kas ir salīdzināms ar Amazon. Ja jūs iet uz Google aprēķinu programmas, viņiem ir kaut kas līdzīgs, kā arī. Un tikai noapaļot šie mākonis piedāvājumu, Es pieminēt viena cita lieta. Tas ir populārs mājas lapa tas pārstāvi no klases tehnoloģijas. Tiem, mēs tikko runājām par, Amazon, būtu IAAS, Infrastruktūra kā pakalpojums, kur jūs veida fizisko aparatūru kā pakalpojumu. Tur ir SAAS. Patiesībā, ļaujiet man īsi pierakstīt tos uz leju. 
+
+IAAS-- Infrastruktūra Kā pakalpojums, SAAS, un PAAS, kas ir ļoti mulsinoši akronīmi kas raksturo trīs dažāda veida lietas. Un paši akronīmi nav īsti jautājums. Tas viss ir par mākonis sīkumi mēs esam tikko runā par, zemāks līmenis sīkumi, tad virtualizācijas aparatūras un uzglabāšanas ar tā saukto mākoni, vai tas ir Amazon, Microsoft, Google, vai otru. 
+
+Software kā service-- mums visiem veida izmantot šo. Ja jūs izmantojat Google Apps Gmail vai kalendāra, kāds no šiem tīmekļa Pirms programmas, kas 10 gadus mēs būtu dubultā noklikšķinājuši ikonas mūsu desktop, programmatūra kā pakalpojums tagad ir patiešām tīmekļa lietojumprogrammu. Un platforma kā apkalpošana veida atkarīgs. 
+
+Un viens piemērs es došu jums šeit saistībā ar mākonis computing-- tur ir viens uzņēmums, kas ir diezgan populārs šajās dienās, Heroku. Un tie ir pakalpojumi, platforma, ja jūs, kas iet uz augšu Amazon infrastruktūra. Un viņi tikai padara to vēl vieglāk izstrādātājiem un inženieriem iegūt tīmekļa lietojumprogrammas online. 
+
+Tas ir sāpes, kas sākotnēji, lai izmantotu Amazon Web Services un citas lietas. Tāpēc, ka jūs faktiski ir zināt un saprast par datu bāzēm un tīmekļa serveriem un slodze balancers un visi sīkumi Es tikai runāju par. Tāpēc, ka visi Amazon ir izdarījusi nav slēpta šos dizaina problēmas. Viņi vienkārši virtualizēti tos un pārvietot tos uz pārlūku, programmatūrā, nevis aparatūru. 
+
+Bet uzņēmumi, piemēram Heroku un citi Paas sniedzēji, platforma kā pakalpojums, viņi izmanto šos Barebone pamati ka mēs tikko runājām, un tie veidotu vieglāk izmantot programmatūru, uz augšu no tā tā, ka, ja jūs vēlaties, lai saņemtu tīmekļa pieteikumu tiešsaistē šajās dienās, Jums noteikti ir zināt, kā programma. Jums ir jāzina, Java vai Python vai PHP vai Ruby vai ķekars citās valodās. 
+
+Bet jūs arī nepieciešama vieta, kur likt to. Un mēs runājām agrāk par iegūt web hostinga uzņēmums. Tas ir sava veida, piemēram, vidus 2000s pieeja, lai iegūtu kaut ko internetā. Mūsdienās jūs varētu nevis maksāt kādam piemēram Heroku pāris dolāru mēnesī. Un būtībā, kad esat izdarīt kādu sākotnējo konfigurāciju, lai atjauninātu jūsu mājas lapā, jūs vienkārši ierakstiet komandu logā. Un kāds kods jūs esat rakstiski šeit jūsu klēpjdators uzreiz izpaužas izplatīts jebkuru numuru serveru mākoni. 
+
+Un Heroku rūpējas par visi ir sarežģīta. Viņi izdomāt visu datubāzi sīkumi, visas slodzes balansēšana, visas galvassāpes, ka mēs esam vienkārši rakstīts uz tāfeles, un paslēpt visu, kas jums. Un pretī, jūs vienkārši tos maksā nedaudz vairāk. Tātad jums ir šīs infrastruktūras, kā pakalpojums, platformas kā pakalpojums, un tad programmatūra kā pakalpojums. Tas ir, atkal, tas abstrakcija vai layering. 
+
+Visus jautājumus par mākoni vai veidojot vienu pašu infrastruktūru? Labi, ka bija daudz. Kāpēc mēs ejam uz priekšu un veikt mūsu 15 minūšu pārtraukumu šeit. Mēs atgriezties ar dažām jaunām koncepcijām un mazliet roku-on iespēja pirms vakarā ir beigusies. 

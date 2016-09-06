@@ -1,0 +1,8290 @@
+1
+00:00:00,000 --> 00:00:00,629
+
+2
+00:00:00,629 --> 00:00:02,170
+DAVID Malan: Labi, welcome atpakaļ.
+
+3
+00:00:02,170 --> 00:00:06,520
+Pirms mēs pikējošais mākonis skaitļošanas,
+Es domāju, ka man pauzes uz brīdi
+
+4
+00:00:06,520 --> 00:00:11,740
+ja ir kādi neatrisināti jautājumi
+vai tēmas, kas nāca klajā pusdienas laikā
+
+5
+00:00:11,740 --> 00:00:13,834
+ka tagad varētu būt interesanti.
+
+6
+00:00:13,834 --> 00:00:18,470
+
+7
+00:00:18,470 --> 00:00:21,410
+>> Mērķauditorija: [dzirdams]
+
+8
+00:00:21,410 --> 00:00:22,090
+>> DAVID Malan: OK.
+
+9
+00:00:22,090 --> 00:00:23,555
+Ak, labi.
+
+10
+00:00:23,555 --> 00:00:24,430
+Mērķauditorija: [dzirdams]
+
+11
+00:00:24,430 --> 00:00:29,880
+
+12
+00:00:29,880 --> 00:00:31,420
+>> DAVID Malan: Nē, protams.
+
+13
+00:00:31,420 --> 00:00:35,180
+Labi, labi, cerams, visas jūsu
+problēmas rodas tuvāko stundu laikā
+
+14
+00:00:35,180 --> 00:00:36,410
+un rīt īpaši.
+
+15
+00:00:36,410 --> 00:00:42,700
+Bet pieņemsim to apskatīt, tad, pie kur
+pēdējā diskusija par izveidot
+
+16
+00:00:42,700 --> 00:00:45,730
+mājas lapā noved, vispārīgāk
+kad runa ir par mākonis skaitļošanas,
+
+17
+00:00:45,730 --> 00:00:48,210
+izveidojot servera arhitektūra,
+veidiems lēmumu
+
+18
+00:00:48,210 --> 00:00:50,800
+ka inženieri un
+izstrādātājiem un vadītājiem
+
+19
+00:00:50,800 --> 00:00:53,210
+ir nepieciešams, lai, kad runa
+lai dara vairāk nekā tikai
+
+20
+00:00:53,210 --> 00:00:56,550
+pierakstīšanos 10 $ mēnesī interneta uzņēmējas
+ja jūs tiešām vēlaties, lai izveidotu out
+
+21
+00:00:56,550 --> 00:00:57,550
+savu infrastruktūru.
+
+22
+00:00:57,550 --> 00:01:00,400
+Un mēs cenšamies piesaistīt šo atpakaļ,
+Piemēram, lai Dropbox un citiem
+
+23
+00:01:00,400 --> 00:01:01,350
+kā viņiem.
+
+24
+00:01:01,350 --> 00:01:06,250
+>> Tāpēc sāksim izskatīt
+kādas problēmas rodas, kā bizness
+
+25
+00:01:06,250 --> 00:01:09,390
+izpaužas labs un rodas labas problēmas.
+
+26
+00:01:09,390 --> 00:01:14,720
+Tātad ļoti vienkāršākā gadījumā, kam
+daži uzņēmums, kas ir web serveri,
+
+27
+00:01:14,720 --> 00:01:21,470
+Jums varētu būt, teiksim, serveri, kas
+mēs vienkārši izdarīt, ka izskatās šādi.
+
+28
+00:01:21,470 --> 00:01:25,620
+Un šajās dienās, lielākā daļa servers-- un pieņemsim
+faktiski ievietot attēlu, lai tas tikai tā
+
+29
+00:01:25,620 --> 00:01:27,680
+ka tas ir mazliet mazāk neskaidrs.
+
+30
+00:01:27,680 --> 00:01:31,510
+>> Tātad Dell rack server--
+atpakaļ dienā, tur
+
+31
+00:01:31,510 --> 00:01:33,730
+bija lieldatoriem
+kas paņēma visu telpas.
+
+32
+00:01:33,730 --> 00:01:35,710
+Šajās dienās, ja Jums bija
+lai iegūtu serveri, to
+
+33
+00:01:35,710 --> 00:01:38,520
+varētu likties mazliet kaut kas līdzīgs šim.
+
+34
+00:01:38,520 --> 00:01:41,760
+Serveri mēra ko
+sauc plaukts vienības, vai DPU.
+
+35
+00:01:41,760 --> 00:01:45,280
+Un viens RU ir 1,5 collas,
+kas ir nozares standarts.
+
+36
+00:01:45,280 --> 00:01:49,300
+Tātad tas izskatās divi RU serveri.
+
+37
+00:01:49,300 --> 00:01:51,240
+Tātad, tas ir 3 collas garš.
+
+38
+00:01:51,240 --> 00:01:54,430
+Un viņi parasti 19 collas plata,
+kas nozīmē, ka visi šāda veida stuff
+
+39
+00:01:54,430 --> 00:01:55,160
+ir standartizēta.
+
+40
+00:01:55,160 --> 00:01:59,420
+>> Tātad, ja jūs meklēt datu center--
+ne tikai pie viena servera, bet pieņemsim
+
+41
+00:01:59,420 --> 00:02:02,110
+ieskatieties Google
+datu centrs, un redzēt, ja mēs
+
+42
+00:02:02,110 --> 00:02:04,280
+redzēt skaistu attēlu Google Images.
+
+43
+00:02:04,280 --> 00:02:09,090
+Tas ir daudz labāk izgaismots nekā jūs
+tas parasti atrast, un vēl daudz
+
+44
+00:02:09,090 --> 00:02:14,900
+sexier meklē, kā rezultātā. bet
+tas ir tas, kas izskatās pāris
+
+45
+00:02:14,900 --> 00:02:17,380
+simts serveri visu
+par to, ka tāda paša izmēra,
+
+46
+00:02:17,380 --> 00:02:21,450
+patiesībā, jo plaukts pēc bagāžnieku pēc
+plaukts pēc plaukts datu centrā.
+
+47
+00:02:21,450 --> 00:02:26,150
+>> Kaut kas līdzīgs this-- tas var labi
+būt Google, jo es googled Google.
+
+48
+00:02:26,150 --> 00:02:28,330
+Bet tas varētu būt pārstāvi
+vairāk vispārīgi
+
+49
+00:02:28,330 --> 00:02:31,480
+datu centrs, kurā daudzi
+uzņēmumi parasti atrodas vienās telpās.
+
+50
+00:02:31,480 --> 00:02:34,940
+Un sadarbība atrodas parasti nozīmē
+ka jums iet uz vietas, piemēram, Equinix
+
+51
+00:02:34,940 --> 00:02:40,280
+vai citi pārdevēji, kas ir liels
+noliktavām, kas ir daudz enerģijas,
+
+52
+00:02:40,280 --> 00:02:42,950
+daudz dzesēšanas, cerams
+daudz drošības,
+
+53
+00:02:42,950 --> 00:02:47,910
+un individuālie būri pievienojot pakaramie
+serveriem, un jūs vai nu nomāt pakaramie
+
+54
+00:02:47,910 --> 00:02:49,150
+vai jūs celt turētājus.
+
+55
+00:02:49,150 --> 00:02:51,420
+>> Un atsevišķiem uzņēmumiem,
+jaunizveidotiem īpaši,
+
+56
+00:02:51,420 --> 00:02:54,820
+būs sava veida biometrijas
+iekļūt savā būrī, vai atslēgu,
+
+57
+00:02:54,820 --> 00:02:55,640
+vai galvenais karti.
+
+58
+00:02:55,640 --> 00:02:56,990
+Jūs atvērt durvis.
+
+59
+00:02:56,990 --> 00:03:00,354
+Un iekšā tur ir tikai
+kvadrātveida kadrus nospiedumu
+
+60
+00:03:00,354 --> 00:03:03,270
+ka jūs maksājat par, iekšpusē
+kas jums var likt kaut ko vēlaties.
+
+61
+00:03:03,270 --> 00:03:04,770
+>> Un jūs parasti maksāt par varu.
+
+62
+00:03:04,770 --> 00:03:06,920
+Un jūs maksājat pēdas.
+
+63
+00:03:06,920 --> 00:03:08,770
+Un tad jūs maksājat
+sevi par serveriem
+
+64
+00:03:08,770 --> 00:03:10,560
+ka jūs celt uz šo vietu.
+
+65
+00:03:10,560 --> 00:03:12,850
+Un ko jūs pēc tam ir
+iespēja to darīt, ir maksāt kādam
+
+66
+00:03:12,850 --> 00:03:15,120
+Jūsu interneta pakalpojumu savienojumu.
+
+67
+00:03:15,120 --> 00:03:17,240
+Jūs varat maksāt jebkādu skaitu
+pārdevēji, no kuriem visi
+
+68
+00:03:17,240 --> 00:03:19,210
+parasti nonāk šajā datu centrā.
+
+69
+00:03:19,210 --> 00:03:22,740
+>> Bet reālā interesants jautājums ir,
+kas patiesībā notiek šajās plauktiem?
+
+70
+00:03:22,740 --> 00:03:25,020
+Tie var ļoti labi
+izskatās tas, ko mēs tikko redzējām.
+
+71
+00:03:25,020 --> 00:03:27,870
+Bet tie pilda dažādas funkcijas
+un var būt nepieciešams darīt dažādas lietas.
+
+72
+00:03:27,870 --> 00:03:29,661
+Un pieņemsim faktiski
+motivēt šo diskusiju
+
+73
+00:03:29,661 --> 00:03:35,370
+ar jautājumu par to, kas, problēmu
+sāk rasties, ja jūs esat veiksmīgs?
+
+74
+00:03:35,370 --> 00:03:37,900
+>> Tātad jūs esat ieguvuši mājas lapā
+ka esat būvētas.
+
+75
+00:03:37,900 --> 00:03:40,450
+Un varbūt tas pārdod preces
+vai kaut kas tāds.
+
+76
+00:03:40,450 --> 00:03:43,620
+Un jūs esat dara ļoti labi
+ar pārdošanas widgets tiešsaistē.
+
+77
+00:03:43,620 --> 00:03:48,490
+Un jūs sākat izjust
+daži simptomi, jūsu mājas lapā.
+
+78
+00:03:48,490 --> 00:03:51,070
+Kas varētu būt daži no
+tehniskās simptomi
+
+79
+00:03:51,070 --> 00:03:54,040
+ka lietotāji ziņo par biznesu
+pieaug un plaukstošajai
+
+80
+00:03:54,040 --> 00:03:59,482
+un jūsu mājas lapa ir
+gūst labumu no tā?
+
+81
+00:03:59,482 --> 00:04:02,690
+>> Mērķauditorija: [dzirdams]
+
+82
+00:04:02,690 --> 00:04:05,910
+
+83
+00:04:05,910 --> 00:04:07,050
+>> DAVID Malan: Jā, tieši tā.
+
+84
+00:04:07,050 --> 00:04:10,040
+Lai jūs varētu būt
+palēnināšanās no jūsu mājas lapā.
+
+85
+00:04:10,040 --> 00:04:11,240
+Un kāpēc varētu notikt?
+
+86
+00:04:11,240 --> 00:04:12,660
+Nu, ja mēs pieņemam, par
+labad diskusiju
+
+87
+00:04:12,660 --> 00:04:15,160
+tieši tagad, ka jūs esat uz vienu
+Šo komerciālo web hosts
+
+88
+00:04:15,160 --> 00:04:17,860
+ka mēs runājām par pirms pusdienām,
+ka jūs maksājat noteiktu skaitu dolāru
+
+89
+00:04:17,860 --> 00:04:20,859
+uz vienu mēnesi, un jūs jau esat samaksājis
+ikgadējās izmaksas jūsu domēnu
+
+90
+00:04:20,859 --> 00:04:25,300
+nosaukt, ka interneta uzņēmējas ir iespējams
+overselling savus resursus
+
+91
+00:04:25,300 --> 00:04:26,050
+zināmā mērā.
+
+92
+00:04:26,050 --> 00:04:29,000
+Lai jūs varētu būt lietotājvārdu
+un paroli par to serveri.
+
+93
+00:04:29,000 --> 00:04:32,410
+Bet tā varētu vairākas citas, vai vairāki
+desmiti citu, vai varbūt pat vairāki
+
+94
+00:04:32,410 --> 00:04:33,980
+simts citiem, lietotājiem.
+
+95
+00:04:33,980 --> 00:04:37,190
+>> Un mājas lapas dzīvot fiziski
+uz tā paša servera.
+
+96
+00:04:37,190 --> 00:04:38,340
+Kāpēc tas ir iespējams?
+
+97
+00:04:38,340 --> 00:04:40,680
+Nu šajās dienās, serveri
+kā šis parasti
+
+98
+00:04:40,680 --> 00:04:44,610
+ir vairākas diskdziņiem, varbūt
+tik daudz kā seši vai vairāk cieto disku,
+
+99
+00:04:44,610 --> 00:04:47,665
+katrs no kuriem var būt tik daudz
+kā 4 terabaitiem šajās dienās.
+
+100
+00:04:47,665 --> 00:04:52,140
+Lai jūs varētu būt 24 terabaitiem telpas
+tikai vienu nelielu serveri, kā šis.
+
+101
+00:04:52,140 --> 00:04:55,710
+>> Un, pat ja jūs nozagt dažus no šīs vietas
+atlaišanas, backup mērķiem,
+
+102
+00:04:55,710 --> 00:04:57,110
+tas joprojām ir diezgan daudz vietas.
+
+103
+00:04:57,110 --> 00:05:00,070
+Un, protams, tipisks mājas lapa
+nav nepieciešams, ka daudz vietas.
+
+104
+00:05:00,070 --> 00:05:03,100
+Just reģistrējot lietotājus
+un uzglabājot apaļkokiem pasūtījumu
+
+105
+00:05:03,100 --> 00:05:04,640
+neņem visu, kas daudz vietas.
+
+106
+00:05:04,640 --> 00:05:07,550
+Tātad jūs varat sadalīt to diezgan
+mazliet un dod katram lietotājam
+
+107
+00:05:07,550 --> 00:05:08,980
+tikai nedaudz šķēle kas.
+
+108
+00:05:08,980 --> 00:05:11,310
+>> Tikmēr, dators
+kā šis šajās dienās
+
+109
+00:05:11,310 --> 00:05:16,370
+parasti ir vairākas CPUs-- ne tikai
+vienu, varbūt divas, varbūt četri, varbūt 16,
+
+110
+00:05:16,370 --> 00:05:17,149
+vai pat vairāk.
+
+111
+00:05:17,149 --> 00:05:18,940
+Un katrs no šiem procesoriem
+ir kaut kas ko sauc
+
+112
+00:05:18,940 --> 00:05:22,230
+kodols, kas ir veida, piemēram,
+smadzeņu iekšpusē smadzenēs.
+
+113
+00:05:22,230 --> 00:05:26,800
+Tātad patiesībā lielākā daļa ikvienam šeit ar
+mūsdienu klēpjdatoriem ir iespējams, divkodolu
+
+114
+00:05:26,800 --> 00:05:32,030
+vai četrkodolu CPU-- un, iespējams, tikai
+viens CPU iekšpusē klēpjdators šajās dienās.
+
+115
+00:05:32,030 --> 00:05:35,030
+Bet galddatori
+un zobainās datori, piemēram,
+
+116
+00:05:35,030 --> 00:05:39,000
+tas varētu būt diezgan maz
+vairāk CPU, un savukārt kodoliem.
+
+117
+00:05:39,000 --> 00:05:44,180
+>> Un godīgi sakot, pat mūsu Mac un PC ir
+Šodien, jums nav tiešām ir nepieciešams dual serdes
+
+118
+00:05:44,180 --> 00:05:46,550
+vai quad serdes pārbaudīt savu e-pastu.
+
+119
+00:05:46,550 --> 00:05:49,090
+Ja tur ir kāds sašaurinājums kad
+runa ir, izmantojot datoru,
+
+120
+00:05:49,090 --> 00:05:51,925
+Jums cilvēka, iespējams,
+vislēnākais lieta par šī datora.
+
+121
+00:05:51,925 --> 00:05:54,800
+Un jūs nebrauksim, lai varētu
+pārbaudiet savu e-pastu ātrāk, ja jums
+
+122
+00:05:54,800 --> 00:05:57,170
+ir četras reizes vairāk CPU un serdeņiem.
+
+123
+00:05:57,170 --> 00:05:59,700
+>> Bet pats ir sava
+no patiesa no servera.
+
+124
+00:05:59,700 --> 00:06:02,970
+Viena mājas lapā var nebūt
+obligāti nepieciešams vairāk nekā viens
+
+125
+00:06:02,970 --> 00:06:05,756
+CPU vai viens kodols, kas ir viens
+mazas smadzenes dara
+
+126
+00:06:05,756 --> 00:06:07,380
+visi no domāšanas un pārstrādi.
+
+127
+00:06:07,380 --> 00:06:10,561
+Tāpēc ražotāji ir līdzīgi
+sāka graizīt šos resursus
+
+128
+00:06:10,561 --> 00:06:13,435
+tā ka varbūt jūsu mājas lapā saņem vienu
+kodols, jūsu mājas lapā saņem vienu kodolu,
+
+129
+00:06:13,435 --> 00:06:15,290
+vai varbūt mēs dalīties vienu šādu kodolu.
+
+130
+00:06:15,290 --> 00:06:16,820
+Mēs arī daloties diskā.
+
+131
+00:06:16,820 --> 00:06:20,000
+Un mēs arī dalīties RAM,
+vai Random Access Memory
+
+132
+00:06:20,000 --> 00:06:22,520
+no iepriekš, no kuriem
+tur ir arī ierobežots daudzums.
+
+133
+00:06:22,520 --> 00:06:23,420
+>> Un tas ir galvenais.
+
+134
+00:06:23,420 --> 00:06:25,960
+Nav svarīgi, cik dārgi
+dators bija,
+
+135
+00:06:25,960 --> 00:06:28,440
+tur ir vēl ierobežots
+resursu apjomu tajā.
+
+136
+00:06:28,440 --> 00:06:31,360
+Un tā vairāk un vairāk jūs
+mēģināt patērēt šos resursus,
+
+137
+00:06:31,360 --> 00:06:32,850
+lēnāku lietas varētu kļūt.
+
+138
+00:06:32,850 --> 00:06:34,646
+Bet kāpēc?
+
+139
+00:06:34,646 --> 00:06:39,352
+Kāpēc lietas palēnināt kā
+simptoms servera pārslodzes?
+
+140
+00:06:39,352 --> 00:06:40,060
+Kas notiek?
+
+141
+00:06:40,060 --> 00:06:42,895
+
+142
+00:06:42,895 --> 00:06:46,388
+>> Mērķauditorija: [dzirdams]
+
+143
+00:06:46,388 --> 00:06:54,036
+
+144
+00:06:54,036 --> 00:06:55,160
+DAVID Malan: Jā, tieši tā.
+
+145
+00:06:55,160 --> 00:06:57,730
+Es ierosināju agrāk, ka
+RAM ir atmiņas veids.
+
+146
+00:06:57,730 --> 00:07:00,290
+Tas ir gaistošs, saskaņā ar kuru tas ir
+kur progr un dati ir
+
+147
+00:07:00,290 --> 00:07:01,890
+uzglabā, kad tie tiek izmantoti.
+
+148
+00:07:01,890 --> 00:07:03,990
+Un tātad tur ir
+tikai ierobežots skaits
+
+149
+00:07:03,990 --> 00:07:05,790
+lietas, varat acīmredzot darīt uzreiz.
+
+150
+00:07:05,790 --> 00:07:07,740
+Un tas ir arī ātrāk,
+kas ir laba lieta.
+
+151
+00:07:07,740 --> 00:07:09,990
+Bet tas ir arī dārgāks,
+kas ir slikta lieta.
+
+152
+00:07:09,990 --> 00:07:15,376
+Un tas ir arī tāpēc klāt zemāks
+daudzumi nekā diska vietas, cietais disks
+
+153
+00:07:15,376 --> 00:07:16,750
+telpa, kas mēdz būt lētāk.
+
+154
+00:07:16,750 --> 00:07:18,830
+>> Citiem vārdiem sakot, jums
+varētu būt 4 terabaitiem
+
+155
+00:07:18,830 --> 00:07:20,440
+diska vietas datorā.
+
+156
+00:07:20,440 --> 00:07:24,300
+Bet jūs varētu būt 4
+gigabaitiem, vai 64 gigabaitiem,
+
+157
+00:07:24,300 --> 00:07:29,180
+secībā lielumu, ar koeficientu
+1000 mazāk, RAM savā datorā.
+
+158
+00:07:29,180 --> 00:07:30,320
+Tātad, ko tas dators darīt?
+
+159
+00:07:30,320 --> 00:07:32,236
+Nu, pieņemsim, ka jums
+darīt ir 64 gigabaiti
+
+160
+00:07:32,236 --> 00:07:35,110
+RAM servera, piemēram, tas, kas
+būtu diezgan bieži, ja ne mazs
+
+161
+00:07:35,110 --> 00:07:36,140
+šajās dienās.
+
+162
+00:07:36,140 --> 00:07:39,220
+Bet pieņemsim, ka jums ir tik daudz
+Lietotājiem darot daudzas lietas
+
+163
+00:07:39,220 --> 00:07:42,480
+ka jums veida veida
+vajag 65 gigabaitu atmiņu
+
+164
+00:07:42,480 --> 00:07:44,960
+rīkoties visu, kas
+vienlaicīga lietošana?
+
+165
+00:07:44,960 --> 00:07:47,580
+>> Nu, jūs varētu vienkārši pateikt,
+sorry, daži lietotāju skaits
+
+166
+00:07:47,580 --> 00:07:48,840
+vienkārši nevar piekļūt vietnei.
+
+167
+00:07:48,840 --> 00:07:51,410
+Un tas ir pasākums
+ļaunākajā, protams.
+
+168
+00:07:51,410 --> 00:07:55,570
+Vai jūs, kā darbības
+sistēma, piemēram, Windows vai Mac
+
+169
+00:07:55,570 --> 00:07:59,480
+OS vai Linux vai Solaris vai jebkura
+Vairākas citas OSE šajā serverī,
+
+170
+00:07:59,480 --> 00:08:01,280
+varētu tikai izlemt, jūs zināt, ko?
+
+171
+00:08:01,280 --> 00:08:03,780
+Man ir tikai 64 gigabaitu RAM.
+
+172
+00:08:03,780 --> 00:08:05,440
+Es veida vajag 65.
+
+173
+00:08:05,440 --> 00:08:06,210
+Tātad, jūs zināt, ko?
+
+174
+00:08:06,210 --> 00:08:10,030
+Es esmu gatavojas veikt 1 gigabaitu
+vērts datiem RAM
+
+175
+00:08:10,030 --> 00:08:15,240
+kas bija vismazāk nesen piekļūt
+un vienkārši pārvietot to uz diska laiku,
+
+176
+00:08:15,240 --> 00:08:19,050
+burtiski kopēt to no fast
+atmiņa uz lēnāku atmiņu
+
+177
+00:08:19,050 --> 00:08:24,000
+tā, ka es pēc tam var rīkoties, ka
+65. gigabaitu nepieciešamība atmiņu,
+
+178
+00:08:24,000 --> 00:08:25,650
+darīt kādu aprēķinu par to.
+
+179
+00:08:25,650 --> 00:08:28,580
+Tad, kad es esmu pabeidzis to dara,
+Es ņemšu tikai pārvietot, ka uz diska,
+
+180
+00:08:28,580 --> 00:08:35,030
+pārvietot šo citu RAM Es laiku nodot
+diskā atpakaļ faktisko aparatūru
+
+181
+00:08:35,030 --> 00:08:37,280
+tāpēc, ka es esmu veida multitasking.
+
+182
+00:08:37,280 --> 00:08:41,190
+>> Tāpēc es esmu veida liekot lietām
+īslaicīgi šajā lēnāk telpā
+
+183
+00:08:41,190 --> 00:08:44,159
+tāpēc es radītu ilūziju
+izturēt ikvienu.
+
+184
+00:08:44,159 --> 00:08:45,290
+Bet tur ir lejupslīde.
+
+185
+00:08:45,290 --> 00:08:45,790
+Kāpēc?
+
+186
+00:08:45,790 --> 00:08:49,380
+Nu, iekšpusē no tiem smagi
+diski šajās dienās ir tas, ko?
+
+187
+00:08:49,380 --> 00:08:52,030
+Drīzāk, kas padara grūti
+vadīt atšķiras no RAM
+
+188
+00:08:52,030 --> 00:08:53,495
+kā vislabāk jūs zināt tagad?
+
+189
+00:08:53,495 --> 00:08:56,750
+>> Mērķauditorija: [dzirdams]
+
+190
+00:08:56,750 --> 00:08:59,540
+
+191
+00:08:59,540 --> 00:09:01,445
+>> DAVID Malan: Labi, taisnība.
+
+192
+00:09:01,445 --> 00:09:02,320
+Mērķauditorija: [dzirdams]
+
+193
+00:09:02,320 --> 00:09:05,440
+
+194
+00:09:05,440 --> 00:09:06,750
+>> DAVID Malan: Tātad ļoti patiess.
+
+195
+00:09:06,750 --> 00:09:13,709
+Un tas ir blakusparādība vai funkciju
+ar to, ka RAM ir patiešām ātrāk.
+
+196
+00:09:13,709 --> 00:09:15,750
+Un tāpēc jūs vēlaties
+izmantot to pašreizējā izmantošanā.
+
+197
+00:09:15,750 --> 00:09:17,290
+Un disks ir lēnāks.
+
+198
+00:09:17,290 --> 00:09:19,630
+Bet tas ir pastāvīga, vai nonvolatile.
+
+199
+00:09:19,630 --> 00:09:21,480
+Tātad jūs izmantot to ilgstošai glabāšanai.
+
+200
+00:09:21,480 --> 00:09:25,160
+Bet attiecībā uz
+īstenošanu, ja es paskatos uz augšu
+
+201
+00:09:25,160 --> 00:09:29,297
+ko sauc DIMM, Dual Inline Memory
+Modulis, tas ir tas gabals RAM
+
+202
+00:09:29,297 --> 00:09:30,380
+varētu parasti izskatās.
+
+203
+00:09:30,380 --> 00:09:35,050
+>> Tātad iekšpusē mūsu Mac-- ka ir kļūda.
+
+204
+00:09:35,050 --> 00:09:41,080
+Inside mūsu Mac un PC, mūsu desktop
+datori būtu nūjas atmiņas,
+
+205
+00:09:41,080 --> 00:09:43,220
+kā jūs varētu viņiem piezvanīt,
+vai DIMM, vai SIMM atpakaļ
+
+206
+00:09:43,220 --> 00:09:44,970
+dienā, atmiņas
+ka izskatās šādi.
+
+207
+00:09:44,970 --> 00:09:47,900
+Mūsu laptops, iespējams, ir lietas, kas
+ir trešā izmērs vai pusi no lieluma.
+
+208
+00:09:47,900 --> 00:09:50,066
+Viņi nedaudz mazāka,
+bet pats idea-- maz
+
+209
+00:09:50,066 --> 00:09:52,110
+gabali zaļā silīcija
+vafele vai plastmasas, kas
+
+210
+00:09:52,110 --> 00:09:56,237
+ir maz melnā mikroshēmas par tiem ar daudz
+vadu savstarpēji viss.
+
+211
+00:09:56,237 --> 00:09:58,820
+Jums varētu būt visai ķekars
+šie iekšpusē datora.
+
+212
+00:09:58,820 --> 00:10:00,903
+Bet takeaway šeit ir
+tas ir pilnīgi elektroniskas.
+
+213
+00:10:00,903 --> 00:10:03,130
+Ir tikai elektroniem
+plūst uz šo ierīci.
+
+214
+00:10:03,130 --> 00:10:08,170
+Savukārt, ja mēs skatāmies
+iekšpusē cieto disku
+
+215
+00:10:08,170 --> 00:10:10,760
+un uzvilkt attēlu
+šeit, jūs tā vietā
+
+216
+00:10:10,760 --> 00:10:16,600
+redzēt kaut kas līdzīgs šim,
+kas tiešām ir elektrība
+
+217
+00:10:16,600 --> 00:10:17,950
+iet caur to galu galā.
+
+218
+00:10:17,950 --> 00:10:20,265
+Bet ko arī lec ārā
+pie jums par šo lietu?
+
+219
+00:10:20,265 --> 00:10:21,140
+Mērķauditorija: [dzirdams]
+
+220
+00:10:21,140 --> 00:10:22,710
+DAVID Malan: Jā, tur ir
+acīmredzot kustīgām daļām.
+
+221
+00:10:22,710 --> 00:10:25,210
+Tas ir veids, kā vecs ieraksts
+atskaņotāju vai fonogrāfs atskaņotāju.
+
+222
+00:10:25,210 --> 00:10:26,200
+Un tas diezgan daudz ir.
+
+223
+00:10:26,200 --> 00:10:28,950
+Tas ir nedaudz mīļotājs nekā that--
+tā kā fonogrāfs spēlētāja izmantotā
+
+224
+00:10:28,950 --> 00:10:33,150
+rievas ierakstā, tas patiesībā
+izmanto tiny maz magnētiskās daļiņas
+
+225
+00:10:33,150 --> 00:10:34,550
+ka mēs nevaram gluži redzēt.
+
+226
+00:10:34,550 --> 00:10:38,520
+Bet, ja nedaudz magnētisko daļiņu
+izskatās šādi, tā uzskatāma par 1.
+
+227
+00:10:38,520 --> 00:10:41,230
+Un, ja tas izskatās šādi,
+ziemeļu-dienvidu, nevis dienvidiem uz ziemeļiem,
+
+228
+00:10:41,230 --> 00:10:42,252
+tas varētu būt 0.
+
+229
+00:10:42,252 --> 00:10:45,460
+Un mēs redzēsim rīt, kā mēs varam veidot
+no vairāk interesantas lietas.
+
+230
+00:10:45,460 --> 00:10:47,590
+>> Bet kaut kas ir
+nokļuvis fiziski kustēties
+
+231
+00:10:47,590 --> 00:10:51,010
+ir noteikti gatavojas iet lēnāk
+nekā gaismas ātrumu,
+
+232
+00:10:51,010 --> 00:10:53,250
+kas teorētiski ir tas, ko
+elektronu varētu izplūst,
+
+233
+00:10:53,250 --> 00:10:54,620
+lai gan reāli ne gluži.
+
+234
+00:10:54,620 --> 00:10:56,900
+Tik mehāniskā devices-- daudz lēnāk.
+
+235
+00:10:56,900 --> 00:10:58,320
+Bet viņi lētāki.
+
+236
+00:10:58,320 --> 00:11:00,944
+Un jūs varat fit tik daudz
+vairāk datu iekšpusē no tiem.
+
+237
+00:11:00,944 --> 00:11:03,110
+Tātad fakts, ka
+pastāv pasaules kaut
+
+238
+00:11:03,110 --> 00:11:06,840
+sauc virtuālo atmiņu,
+izmantojot cieto disku, kā šis
+
+239
+00:11:06,840 --> 00:11:10,160
+it kā tas būtu RAM
+caurspīdīgs, lai lietotājs,
+
+240
+00:11:10,160 --> 00:11:15,320
+vienkārši pārvieto datus
+no RAM uz cietā diska,
+
+241
+00:11:15,320 --> 00:11:18,714
+tad pārvietojot to atpakaļ, kad jums ir nepieciešams,
+tas atkal rada palēnināšanos.
+
+242
+00:11:18,714 --> 00:11:21,380
+Tāpēc, ka jūs burtiski ir
+kopēt to no vienas vietas uz otru.
+
+243
+00:11:21,380 --> 00:11:25,100
+Un ko jūs esat kopējot uz un
+no faktiski lēnāks nekā RAM
+
+244
+00:11:25,100 --> 00:11:26,150
+kur jūs vēlaties, lai to.
+
+245
+00:11:26,150 --> 00:11:29,030
+>> Alternatīvs risinājums here--
+ja jums nepatīk, ka palēnināt,
+
+246
+00:11:29,030 --> 00:11:32,014
+un jūsu virtuālo atmiņu
+veida pārpūles,
+
+247
+00:11:32,014 --> 00:11:33,680
+kas ir vēl viens risinājums šai problēmai?
+
+248
+00:11:33,680 --> 00:11:35,260
+>> Mērķauditorija: [dzirdams]
+
+249
+00:11:35,260 --> 00:11:37,260
+DAVID Malan: Nu,
+palielināt virtuālo atmiņu
+
+250
+00:11:37,260 --> 00:11:39,135
+ļautu mums darīt tālāk
+vēl lielāks mērogs.
+
+251
+00:11:39,135 --> 00:11:43,540
+Mēs varētu rīkoties 66 gigabaitus vērts
+atmiņas vajadzībām, vai 67 gigabaitiem.
+
+252
+00:11:43,540 --> 00:11:45,830
+Bet pieņemsim, ka man nepatīk
+tas palēnināt, patiesībā
+
+253
+00:11:45,830 --> 00:11:49,380
+Es gribu, lai izslēgtu virtuālo
+atmiņu, ja tas ir pat iespējams,
+
+254
+00:11:49,380 --> 00:11:52,350
+ko vēl es varētu mest pie
+šī problēma to atrisināt,
+
+255
+00:11:52,350 --> 00:11:56,900
+kur es gribu rīkoties vairāk lietotāju
+un vairāk atmiņas prasības
+
+256
+00:11:56,900 --> 00:11:59,100
+nekā es fiziski ir šobrīd?
+
+257
+00:11:59,100 --> 00:12:02,600
+>> Mērķauditorija: [dzirdams]
+
+258
+00:12:02,600 --> 00:12:04,800
+
+259
+00:12:04,800 --> 00:12:06,140
+>> DAVID Malan: Diemžēl nē.
+
+260
+00:12:06,140 --> 00:12:09,850
+Tātad CPU un serdes viņi
+jo ir ierobežots resurss.
+
+261
+00:12:09,850 --> 00:12:13,280
+Un tur nav analogu šajā kontekstā.
+
+262
+00:12:13,280 --> 00:12:14,990
+Labs jautājums, though.
+
+263
+00:12:14,990 --> 00:12:19,270
+Tik vienkārši, lai būtu skaidrs, arī, ja
+iekšā šis dators,
+
+264
+00:12:19,270 --> 00:12:24,510
+teiksim, stick RAM, kas izskatās
+tāpat this-- un tā mēs saucam par RAM.
+
+265
+00:12:24,510 --> 00:12:27,070
+Un vairāk nekā šeit ir cietā diska.
+
+266
+00:12:27,070 --> 00:12:30,130
+Un es ņemšu tikai izdarīt šo
+gleznieciski kā mazs apli.
+
+267
+00:12:30,130 --> 00:12:33,740
+Ir 0 un 1 ir abās
+these-- dati, mēs vispārināt kā.
+
+268
+00:12:33,740 --> 00:12:38,030
+>> Un būtībā, ja lietotājs ir
+darbojas pieteikumu, piemēram,
+
+269
+00:12:38,030 --> 00:12:46,070
+teiksim, tīmekļa vietni, kas prasa šo
+daudz RAM katram lietotājam, ko es esmu ierosinot,
+
+270
+00:12:46,070 --> 00:12:48,380
+veidā šī lieta
+sauc virtuālo atmiņu,
+
+271
+00:12:48,380 --> 00:12:53,990
+ir tikai īslaicīgi kustēties
+ka vairāk nekā šeit, lai tagad es
+
+272
+00:12:53,990 --> 00:12:57,810
+var pārvietoties kāds cits atmiņu
+prasības tur.
+
+273
+00:12:57,810 --> 00:13:00,420
+Un tad, kad tas ir izdarīts,
+Es varu kopēt šo atpakaļ pār
+
+274
+00:13:00,420 --> 00:13:04,550
+un tas iet šeit, tādējādi pārvietojot
+ko es gribēju tur kaut kur citur
+
+275
+00:13:04,550 --> 00:13:05,050
+vispār.
+
+276
+00:13:05,050 --> 00:13:07,820
+>> Tātad tur ir tikai daudz
+Switcheroo, ir takeaway šeit.
+
+277
+00:13:07,820 --> 00:13:12,380
+Tātad, ja jums tas nepatīk, un jums nav
+gribu, lai kaut uz cietā diska,
+
+278
+00:13:12,380 --> 00:13:16,440
+kāda veida acīmredzamo
+biznesa persona risinājums
+
+279
+00:13:16,440 --> 00:13:19,684
+problēmai, vai inženiera
+risinājums, lai šo jautājumu, too?
+
+280
+00:13:19,684 --> 00:13:21,950
+>> Mērķauditorija: [dzirdams]
+
+281
+00:13:21,950 --> 00:13:24,750
+>> DAVID Malan: Jā, es domāju burtiski
+mest naudu problēmu.
+
+282
+00:13:24,750 --> 00:13:27,541
+Un patiesībā, tas ir ideāls
+segue daži no augstākā līmenī
+
+283
+00:13:27,541 --> 00:13:28,870
+diskusijas par mākonis skaitļošanas.
+
+284
+00:13:28,870 --> 00:13:31,390
+Jo daudz no tā tiek motivēts
+finanšu lēmumos,
+
+285
+00:13:31,390 --> 00:13:33,040
+pat ne obligāti tehnoloģiju.
+
+286
+00:13:33,040 --> 00:13:37,830
+Ja 64 gigs RAM ir pārāk maz, labi,
+kāpēc ne saņemt 128 gigabaitu RAM?
+
+287
+00:13:37,830 --> 00:13:40,440
+Kāpēc ne iegūt 256 gigabaitu RAM?
+
+288
+00:13:40,440 --> 00:13:41,732
+Nu, kāpēc ne?
+
+289
+00:13:41,732 --> 00:13:42,608
+>> Mērķauditorija: [dzirdams]
+
+290
+00:13:42,608 --> 00:13:44,482
+DAVID Malan: Nu, tas
+maksā vairāk naudas, protams.
+
+291
+00:13:44,482 --> 00:13:46,970
+Un, ja jums jau ir rezerves
+cietajā diskā, efektīvi,
+
+292
+00:13:46,970 --> 00:13:51,407
+vai līdzvērtīgi, cietajā diskā ir tik
+daudz lētāk, jūs varētu arī izmantot.
+
+293
+00:13:51,407 --> 00:13:54,490
+Tātad vēlreiz, tur ir šis kompromiss, ka
+mēs redzējām pat agrāk šorīt,
+
+294
+00:13:54,490 --> 00:13:56,656
+kur tur tiešām nav
+vienmēr ir pareizā atbilde,
+
+295
+00:13:56,656 --> 00:14:01,360
+tur ir tikai labāk vai sliktāk atbilde
+pamatojoties uz to, ko jūs patiesībā rūp.
+
+296
+00:14:01,360 --> 00:14:04,500
+>> Tātad tur ir arī tehnoloģiskie realitāte.
+
+297
+00:14:04,500 --> 00:14:06,870
+Es nevaru nopirkt datoru,
+cik man zināms,
+
+298
+00:14:06,870 --> 00:14:09,490
+ar triljonu gigabaitiem
+RAM tieši tagad.
+
+299
+00:14:09,490 --> 00:14:11,540
+Tas vienkārši fiziski neeksistē.
+
+300
+00:14:11,540 --> 00:14:13,240
+Tātad ir daži augšējā robeža.
+
+301
+00:14:13,240 --> 00:14:15,990
+Bet, ja jūs esat kādreiz pat iepircies
+par patērētāju Mac vai PC,
+
+302
+00:14:15,990 --> 00:14:20,180
+Arī, parasti tur ir
+šī līkne funkcijas
+
+303
+00:14:20,180 --> 00:14:23,410
+kur varētu būt labs,
+labāku, un labākais dators.
+
+304
+00:14:23,410 --> 00:14:25,730
+>> Un marginālās atgriežas
+Jūsu dolāra pirkšanu
+
+305
+00:14:25,730 --> 00:14:30,227
+labākais datoru pret
+labāk dators
+
+306
+00:14:30,227 --> 00:14:32,560
+var nebūt gandrīz tikpat augsts
+kā tērēt nedaudz vairāk naudas
+
+307
+00:14:32,560 --> 00:14:35,599
+un iegūt labāku datoru
+pa labu datoru.
+
+308
+00:14:35,599 --> 00:14:38,390
+Citiem vārdiem sakot, jūs maksājot
+piemaksa, lai iegūtu top no līnijas.
+
+309
+00:14:38,390 --> 00:14:40,790
+>> Un ko mēs redzam
+diskusija mākonis skaitļošanas
+
+310
+00:14:40,790 --> 00:14:44,940
+ir tas, kas ir ļoti bieži šajās
+dienas, un to, kas uzņēmumiem, piemēram, Google
+
+311
+00:14:44,940 --> 00:14:50,560
+agri popularizēts, nav jāmaksā
+par un ēku tiešām iedomātā, dārgi
+
+312
+00:14:50,560 --> 00:14:53,540
+souped up datori ar
+daudz un daudz viss,
+
+313
+00:14:53,540 --> 00:15:00,140
+bet pērk vai celtniecības pretty
+pieticīgs datoriem, bet daudz no viņiem,
+
+314
+00:15:00,140 --> 00:15:03,280
+un, izmantojot kaut ko, kas parasti
+sauc horizontālo mērogošana vietā
+
+315
+00:15:03,280 --> 00:15:04,320
+vertikālās mērogošana.
+
+316
+00:15:04,320 --> 00:15:08,115
+>> Tātad vertikālā mērogošana nozīmētu iegūt vairāk
+RAM, vairāk diska, vairāk par visu,
+
+317
+00:15:08,115 --> 00:15:10,187
+un veida investēt
+vertikāli jūsu aparatūru
+
+318
+00:15:10,187 --> 00:15:12,520
+tāpēc jūs tikai iegūt
+labākais no labākajiem no labākajiem,
+
+319
+00:15:12,520 --> 00:15:13,650
+bet jūs maksājat par to.
+
+320
+00:15:13,650 --> 00:15:17,580
+Horizontālā mērogošana ir sava veida iegūt
+grunts līmeņa lietas, tad labs modelis,
+
+321
+00:15:17,580 --> 00:15:19,922
+vai pat sliktāk modelis,
+bet saņemt daudz no tiem.
+
+322
+00:15:19,922 --> 00:15:22,630
+Bet, tiklīdz jūs saņemsiet daudz
+them-- piemēram, šajā gadījumā,
+
+323
+00:15:22,630 --> 00:15:27,330
+web serveri, ja šī viena servera
+vai viens interneta uzņēmējas ir nepietiekams,
+
+324
+00:15:27,330 --> 00:15:32,310
+tad tikai intuitīvi, tad
+risinājums šai problēmai slodzes
+
+325
+00:15:32,310 --> 00:15:36,460
+vai pārslodze uz saviem serveriem
+ir vai nu saņemt lielāku serveri
+
+326
+00:15:36,460 --> 00:15:40,770
+vai, ko es esmu ierosinājusi šeit vietā
+mērogošanas vertikāli tā sakot,
+
+327
+00:15:40,770 --> 00:15:41,920
+būtu, jūs zināt, ko?
+
+328
+00:15:41,920 --> 00:15:43,580
+Tikai iegūt otru vienu no šiem.
+
+329
+00:15:43,580 --> 00:15:46,560
+Vai varbūt pat iegūt trešdaļu.
+
+330
+00:15:46,560 --> 00:15:48,900
+Bet tagad mēs esam izveidojuši
+inženiertehnisks problēma
+
+331
+00:15:48,900 --> 00:15:51,920
+pēc būtības šajā biznesā
+vai finanšu lēmums.
+
+332
+00:15:51,920 --> 00:15:54,312
+Kas ir inženierzinātņu problēma tagad?
+
+333
+00:15:54,312 --> 00:15:56,040
+>> Mērķauditorija: [dzirdams]
+
+334
+00:15:56,040 --> 00:15:59,740
+>> DAVID Malan: Jā, kā darīt
+jūs savienot tos and-- žēl?
+
+335
+00:15:59,740 --> 00:16:00,651
+>> Mērķauditorija: [dzirdams]
+
+336
+00:16:00,651 --> 00:16:02,400
+DAVID Malan: pa labi,
+jo es joprojām have--
+
+337
+00:16:02,400 --> 00:16:07,280
+ja es atjaunot mani šo attēlu,
+ja šis ir mans klēpjdators kaut kur
+
+338
+00:16:07,280 --> 00:16:12,400
+internetā, kas tagad starp
+mani un uzņēmums mēs runājam par,
+
+339
+00:16:12,400 --> 00:16:17,960
+tagad man ir izdomāt, uz kuru
+serveris es varu nosūtīt šo konkrēto lietotāju?
+
+340
+00:16:17,960 --> 00:16:25,090
+Un, ja tur ir citi lietotāji, piemēram,
+šis, un pēc tam šis viens virs šeit,
+
+341
+00:16:25,090 --> 00:16:28,850
+un varbūt tas ir lietotājam A, šis
+ir lietotājam B, tas ir lietotājam C,
+
+342
+00:16:28,850 --> 00:16:34,720
+un tas ir serveris 1, 2, un 3-- tagad
+intuitīvs atbilde varētu šeit būt tikai,
+
+343
+00:16:34,720 --> 00:16:37,460
+mēs nosūtīsim lietotājam līdz 1
+un B 2 un C 3.
+
+344
+00:16:37,460 --> 00:16:39,900
+Un mēs varam rīkoties 3 reizes tik daudziem lietotājiem.
+
+345
+00:16:39,900 --> 00:16:41,360
+>> Bet tas ir pārāk vienkāršota.
+
+346
+00:16:41,360 --> 00:16:44,480
+Kā jūs izlemt, kam sūtīt, ja?
+
+347
+00:16:44,480 --> 00:16:46,400
+Tātad pamēģināsim iemesls caur šo.
+
+348
+00:16:46,400 --> 00:16:50,110
+Tātad pieņemsim, ka datoriem
+A, B un C ir klienti,
+
+349
+00:16:50,110 --> 00:16:53,972
+un serveri 1, 2 un 3, ir
+horizontāli samazināts serveriem.
+
+350
+00:16:53,972 --> 00:16:55,180
+Tātad viņi veida identiski.
+
+351
+00:16:55,180 --> 00:16:57,200
+Viņi visi darbojas to pašu programmatūru.
+
+352
+00:16:57,200 --> 00:16:59,770
+Un viņi visi var darīt to pašu.
+
+353
+00:16:59,770 --> 00:17:01,520
+Bet iemesls mums
+trīs no tiem ir tik
+
+354
+00:17:01,520 --> 00:17:04,710
+ka mēs varam rīkoties trīs
+reizes vairāk cilvēku vienlaicīgi.
+
+355
+00:17:04,710 --> 00:17:07,960
+>> Tātad mēs zinām no mūsu
+diskusija pirms pusdienām
+
+356
+00:17:07,960 --> 00:17:11,460
+ka tur ir aparatūra starp
+klēpjdatoriem un serveriem.
+
+357
+00:17:11,460 --> 00:17:14,920
+Bet mēs tikai veida vispārināt
+ka tagad, internetā vai mākoni.
+
+358
+00:17:14,920 --> 00:17:18,707
+Bet mēs zinām, ka manā mājā,
+tur droši vien mājas maršrutētāju.
+
+359
+00:17:18,707 --> 00:17:21,290
+Pie serveriem, tur droši vien
+router, DNS serveri, DHCP.
+
+360
+00:17:21,290 --> 00:17:24,780
+Tur var būt jebkas
+mēs gribam šajā stāstā.
+
+361
+00:17:24,780 --> 00:17:33,360
+>> Tātad, kā mēs sākam izlemt,
+ja lietotājam iet uz something.com,
+
+362
+00:17:33,360 --> 00:17:36,630
+kas serverim maršrutu lietotājam?
+
+363
+00:17:36,630 --> 00:17:39,409
+Kā mēs varētu sākt stāstīt šo stāstu?
+
+364
+00:17:39,409 --> 00:17:40,450
+Mērķauditorija: Slodzes līdzsvarošana?
+
+365
+00:17:40,450 --> 00:17:41,120
+DAVID Malan: Slodzes līdzsvarošana.
+
+366
+00:17:41,120 --> 00:17:42,502
+Ko tu ar to domāji?
+
+367
+00:17:42,502 --> 00:17:44,660
+>> Mērķauditorija: Atgriežoties
+kur visvairāk izmantošana ir
+
+368
+00:17:44,660 --> 00:17:47,472
+un kuriem viens ir tāda
+vairums pieejamos resursus.
+
+369
+00:17:47,472 --> 00:17:49,930
+DAVID Malan: Labi, tāpēc ļaujiet man
+ieviest jauna veida aparatūru
+
+370
+00:17:49,930 --> 00:17:53,627
+ka mums vēl nav apspriests, kas
+ir tieši tas, slodze ekvilibrists.
+
+371
+00:17:53,627 --> 00:17:54,960
+Arī tas varētu būt tikai serveri.
+
+372
+00:17:54,960 --> 00:17:58,130
+Tā varētu izskatīties tieši tāpat
+viens mēs redzējām pirms brīža.
+
+373
+00:17:58,130 --> 00:18:01,000
+Slodzes ekvilibrists tiešām ir
+tikai gabals programmatūru
+
+374
+00:18:01,000 --> 00:18:02,660
+ka jūs darbināt uz aparatūras.
+
+375
+00:18:02,660 --> 00:18:07,310
+>> Vai arī jūs varat maksāt pārdevējs, piemēram,
+Citrix vai citi, Cisco vai citi.
+
+376
+00:18:07,310 --> 00:18:10,465
+Jūs varat maksāt par savu aparatūru,
+kas ir aparatūras slodze ekvilibrists.
+
+377
+00:18:10,465 --> 00:18:12,840
+Bet tas tikai nozīmē, ka tie
+iepriekš instalēta slodzes līdzsvarošana
+
+378
+00:18:12,840 --> 00:18:15,580
+programmatūras savu aparatūru un
+pārdeva to jums visiem kopā.
+
+379
+00:18:15,580 --> 00:18:18,670
+Tātad mēs vienkārši izdarīt to kā
+taisnstūris mūsu mērķiem.
+
+380
+00:18:18,670 --> 00:18:22,040
+>> Kā tagad es varu īstenot slodze ekvilibrists?
+
+381
+00:18:22,040 --> 00:18:28,150
+Citiem vārdiem sakot, kad lietotājam vēlas
+apmeklējiet manu vietni, viņu lūgumu kaut kā
+
+382
+00:18:28,150 --> 00:18:31,070
+vai cita, iespējams, ar kā tie
+maršrutētāji mēs runājām par agrāk,
+
+383
+00:18:31,070 --> 00:18:33,750
+gatavojas beidzot sasniegt
+šī slodze ekvilibrists, kas pēc tam
+
+384
+00:18:33,750 --> 00:18:36,210
+nepieciešams veikt maršrutēšanas līdzīgu lēmumu.
+
+385
+00:18:36,210 --> 00:18:38,320
+Bet tas ir maršrutēšanu veida
+par augstāku mērķi tagad.
+
+386
+00:18:38,320 --> 00:18:40,361
+Tas nav tikai par kļūst
+no punkta A līdz punktam
+
+387
+00:18:40,361 --> 00:18:44,730
+B. Tas ir par lēmumu, kas
+B punkts ir labākais starp them--
+
+388
+00:18:44,730 --> 00:18:46,660
+1, 2, vai 3, šajā gadījumā.
+
+389
+00:18:46,660 --> 00:18:51,000
+>> Tātad, kā es varu izlemt, vai
+iet uz 1, 2, 3?
+
+390
+00:18:51,000 --> 00:18:55,180
+Ko tas varētu melnā kaste, tāpēc, lai
+runā, ka dara no iekšpuses?
+
+391
+00:18:55,180 --> 00:18:57,880
+Arī tas ir vēl viens piemērs
+datorzinātnes abstrakcijas.
+
+392
+00:18:57,880 --> 00:19:02,410
+Man ir burtiski sastādīts slodze ekvilibrists
+kā melnā kaste ar melnu tinti, iekšpusē
+
+393
+00:19:02,410 --> 00:19:05,300
+no kuriem ir daži interesanti
+loģika, vai burvju pat,
+
+394
+00:19:05,300 --> 00:19:07,840
+no kuriem ir jānāk
+decision-- 1, 2, vai 3.
+
+395
+00:19:07,840 --> 00:19:12,220
+Un ieejas ir tikai A.
+
+396
+00:19:12,220 --> 00:19:13,442
+>> Mērķauditorija: [dzirdams]
+
+397
+00:19:13,442 --> 00:19:14,400
+DAVID Malan: Es atvainojos?
+
+398
+00:19:14,400 --> 00:19:14,770
+Mērķauditorija: [dzirdams]
+
+399
+00:19:14,770 --> 00:19:18,310
+DAVID Malan: Labi, kā varētu mēs
+kategorizēt veidus darījumu
+
+400
+00:19:18,310 --> 00:19:19,095
+šeit?
+
+401
+00:19:19,095 --> 00:19:23,772
+>> Mērķauditorija: Apskata tīmekļa lapu
+versus meklēšana datu bāzē.
+
+402
+00:19:23,772 --> 00:19:24,980
+DAVID Malan: Labi, tas ir labi.
+
+403
+00:19:24,980 --> 00:19:29,210
+Tātad, varbūt šim lietotājam
+vēlas apskatīt mājas lapā.
+
+404
+00:19:29,210 --> 00:19:32,954
+Un varbūt tas ir pat statisks saturs,
+kaut kas mainās reti, ja kādreiz.
+
+405
+00:19:32,954 --> 00:19:34,870
+Un, ka šķiet, piemēram,
+diezgan vienkāršu darbību.
+
+406
+00:19:34,870 --> 00:19:38,260
+Tāpēc varbūt mēs vienkārši patvaļīgi,
+bet saprātīgi, teiksim,
+
+407
+00:19:38,260 --> 00:19:42,750
+serveris 1, viņa mērķis dzīvē ir
+tikai pasniegsim statisku saturu,
+
+408
+00:19:42,750 --> 00:19:45,150
+faili, kas reti, ja vispār kādreiz, maiņa.
+
+409
+00:19:45,150 --> 00:19:46,870
+Varbūt tas ir attēlus lapā.
+
+410
+00:19:46,870 --> 00:19:50,180
+Varbūt tas ir teksts uz lapas vai
+cita šāda veida neinteresantas lietas,
+
+411
+00:19:50,180 --> 00:19:52,460
+nekas darījumu, nekas dinamisks.
+
+412
+00:19:52,460 --> 00:19:57,000
+>> Savukārt, ja lietotājs A ir pārbaudes
+no viņa vai viņas iepirkumu grozā, ka
+
+413
+00:19:57,000 --> 00:20:00,972
+nepieciešama datu bāze, kaut kur uzglabāt
+Un atcerieties, ka darījums, labi
+
+414
+00:20:00,972 --> 00:20:02,680
+varbūt, ka pieprasījums
+jādodas uz servera 2.
+
+415
+00:20:02,680 --> 00:20:03,610
+Tātad tas ir labi.
+
+416
+00:20:03,610 --> 00:20:07,010
+Tātad, mēs varam ielādēt līdzsvars balstās
+par pieprasījumu veida.
+
+417
+00:20:07,010 --> 00:20:08,278
+Kā gan citādi mēs varētu darīt?
+
+418
+00:20:08,278 --> 00:20:13,690
+
+419
+00:20:13,690 --> 00:20:14,686
+Kas other--
+
+420
+00:20:14,686 --> 00:20:17,382
+>> Mērķauditorija: Pamatojoties uz servera
+izmantošanu un jaudu.
+
+421
+00:20:17,382 --> 00:20:18,340
+DAVID Malan: Labi, OK.
+
+422
+00:20:18,340 --> 00:20:19,950
+Tātad, jūs minējāt, ka agrāk, Kareem.
+
+423
+00:20:19,950 --> 00:20:26,850
+Tātad, ko tad, ja mēs sniegt dažas ieguldījumu
+par [dzirdams] starp serveriem 1, 2,
+
+424
+00:20:26,850 --> 00:20:32,070
+un 3. šai slodzes ekvilibrists arī tā, ka
+viņi tikai pastāvīgi informējot
+
+425
+00:20:32,070 --> 00:20:36,420
+slodze ekvilibrists kādi ir viņu statuss ir?
+
+426
+00:20:36,420 --> 00:20:39,842
+Tāpat, hey, slodze ekvilibrists,
+Es esmu 50% izmantošanu.
+
+427
+00:20:39,842 --> 00:20:41,550
+Citiem vārdiem sakot, man ir
+pusi tik daudzi lietotāji
+
+428
+00:20:41,550 --> 00:20:43,520
+kā es patiesībā var rīkoties tieši tagad.
+
+429
+00:20:43,520 --> 00:20:45,480
+Hey, slodze ekvilibrists, es esmu
+100% izmantošanu.
+
+430
+00:20:45,480 --> 00:20:47,929
+Hey, slodze ekvilibrists, 0% izmantošana.
+
+431
+00:20:47,929 --> 00:20:49,970
+Slodze ekvilibrists, ja tas ir
+konstruētas tādā veidā, ka
+
+432
+00:20:49,970 --> 00:20:53,990
+var veikt šajos komentāros
+kā ievade, tā tad var
+
+433
+00:20:53,990 --> 00:20:57,420
+izlemt, ooh, numurs 2 ir 100%.
+
+434
+00:20:57,420 --> 00:21:01,440
+Ļaujiet man sūtīt nav nākotnes pieprasījumu viņam
+kas nav lietotāji, jau ir pievienots.
+
+435
+00:21:01,440 --> 00:21:02,360
+Šis puisis ir 0%.
+
+436
+00:21:02,360 --> 00:21:03,940
+Pieņemsim nosūtīt daudz satiksmes viņam.
+
+437
+00:21:03,940 --> 00:21:05,480
+Šis puisis teica, ka viņš ir 50%.
+
+438
+00:21:05,480 --> 00:21:08,080
+Pieņemsim sūtīt daži satiksmes viņam.
+
+439
+00:21:08,080 --> 00:21:12,012
+>> Tā, ka būtu sastāvdaļa, kas
+mēs varētu ņemt slodzi vērā.
+
+440
+00:21:12,012 --> 00:21:13,470
+Un tas notiek, lai laika gaitā mainās.
+
+441
+00:21:13,470 --> 00:21:14,678
+Tāpēc lēmumi mainīsies.
+
+442
+00:21:14,678 --> 00:21:17,350
+Tātad tas ir patiešām labs paņēmiens,
+viens, kas ir parasti izmanto.
+
+443
+00:21:17,350 --> 00:21:18,410
+Ko vēl mēs varētu darīt?
+
+444
+00:21:18,410 --> 00:21:20,380
+Un pieņemsim faktiski tikai apkopot šeit.
+
+445
+00:21:20,380 --> 00:21:29,510
+Tātad lēmumi šeit varētu būt
+pa satiksmes veidiem, es aicinu to.
+
+446
+00:21:29,510 --> 00:21:32,220
+To pamatā var būt slodzes.
+
+447
+00:21:32,220 --> 00:21:34,692
+Let 's redzēt, ja mēs nevaram
+nākt klajā ar dažas citas.
+
+448
+00:21:34,692 --> 00:21:35,934
+>> Mērķauditorija: [dzirdams]
+
+449
+00:21:35,934 --> 00:21:36,850
+DAVID Malan: Location.
+
+450
+00:21:36,850 --> 00:21:37,724
+Tātad tas ir labs.
+
+451
+00:21:37,724 --> 00:21:40,880
+Tātad location-- kā varētu jūs
+sviras šo informāciju?
+
+452
+00:21:40,880 --> 00:21:44,317
+>> Mērķauditorija: [dzirdams]
+
+453
+00:21:44,317 --> 00:21:54,140
+
+454
+00:21:54,140 --> 00:21:57,040
+>> DAVID Malan: Ak, tas ir labi.
+
+455
+00:21:57,040 --> 00:21:59,450
+Un par to, cik milisekundes
+tas tā samazināsies
+
+456
+00:21:59,450 --> 00:22:02,466
+pamatojoties uz to, ko mēs redzējām šo
+no rīta, Jūs teiktu?
+
+457
+00:22:02,466 --> 00:22:04,330
+>> Mērķauditorija: [dzirdams]
+
+458
+00:22:04,330 --> 00:22:06,550
+>> DAVID Malan: Nu, pamatojoties
+uz izsekot maršrutos
+
+459
+00:22:06,550 --> 00:22:09,070
+mēs redzējām agrāk, kas ir tikai
+aptuvens pasākums kaut ko,
+
+460
+00:22:09,070 --> 00:22:11,800
+vismaz, cik ilgi nepieciešams
+datu nokļūt no A līdz B
+
+461
+00:22:11,800 --> 00:22:16,140
+jūtas kā kaut vietējā bija, ko,
+piemēram, 74 milisekundes, dot vai ņemt?
+
+462
+00:22:16,140 --> 00:22:19,200
+Un tad kaut 100 plus,
+200 plus, iespējams, bija ārzemēs.
+
+463
+00:22:19,200 --> 00:22:22,110
+Un tā, pamatojoties uz to vien,
+šķiet pamatoti pieņemt
+
+464
+00:22:22,110 --> 00:22:25,310
+ka lietotājs ASV
+piekļūt Eiropas serveri
+
+465
+00:22:25,310 --> 00:22:28,900
+var veikt divas vai trīs reizes
+tik ilgi, pat milisekundes,
+
+466
+00:22:28,900 --> 00:22:31,280
+nekā tas varētu veikt, ja tas
+serveris atradās šeit
+
+467
+00:22:31,280 --> 00:22:33,370
+ģeogrāfiski, vai otrādi.
+
+468
+00:22:33,370 --> 00:22:35,120
+Tātad, kad es ierosināju
+agrāk, ka īpaši
+
+469
+00:22:35,120 --> 00:22:37,880
+Kad jūs šķērsot 200 milisekundi
+slieksnis, sniegt vai pieņemt,
+
+470
+00:22:37,880 --> 00:22:39,210
+cilvēki to sāk pamanīt.
+
+471
+00:22:39,210 --> 00:22:42,960
+Un izsekot maršruts ir tikai
+pieņemot, ka izejvielas, neinteresantas dati.
+
+472
+00:22:42,960 --> 00:22:46,570
+Ja jums ir mājas lapā, jums ir
+iegūt lietotāju lejupielādējot attēlus vai filmu
+
+473
+00:22:46,570 --> 00:22:49,150
+failus, daudz teksta,
+turpmākie pieprasījumi.
+
+474
+00:22:49,150 --> 00:22:53,116
+Mēs redzējām, kad mēs apmeklējām, kas bija
+tā, Facebook vai Amazon agrāk,
+
+475
+00:22:53,116 --> 00:22:55,490
+tur ir visai daudz sīkumi
+kas ir lejupielādēt.
+
+476
+00:22:55,490 --> 00:22:56,573
+Tāpēc, ka gatavojas saskaitīt.
+
+477
+00:22:56,573 --> 00:23:00,259
+Tātad multi-sekundes varētu
+nav saprātīgi.
+
+478
+00:23:00,259 --> 00:23:01,800
+Tik labi, ģeogrāfija ir viena sastāvdaļa.
+
+479
+00:23:01,800 --> 00:23:05,920
+Tātad faktiski uzņēmumu, piemēram,
+Akamai, ja esat dzirdējuši no tiem,
+
+480
+00:23:05,920 --> 00:23:10,000
+vai citi ir sen pieņemts
+ģeogrāfija vērā.
+
+481
+00:23:10,000 --> 00:23:14,170
+Un izrādās, ka pēc būtības AN
+IP adrese, mans klēpjdators ir IP adrese,
+
+482
+00:23:14,170 --> 00:23:18,277
+jūs varat secināt, ar kādu varbūtību,
+kur jūs esat pasaulē.
+
+483
+00:23:18,277 --> 00:23:20,110
+Un patiesībā tur ir
+trešo pušu pakalpojumiem
+
+484
+00:23:20,110 --> 00:23:24,480
+var maksāt, kas uztur datu bāzes
+IP adreses un ģeogrāfisko teritoriju
+
+485
+00:23:24,480 --> 00:23:28,660
+kas ar augstu ticamības būs
+taisnība, kad jautāja, kur pasaulē
+
+486
+00:23:28,660 --> 00:23:30,090
+tas ir IP adrese?
+
+487
+00:23:30,090 --> 00:23:32,130
+>> Un tā patiesībā kāda
+citi uzņēmumi izmanto šo?
+
+488
+00:23:32,130 --> 00:23:35,900
+Ja jums ir Hulu vai Netflix, ja
+jūs esat kādreiz bijis ceļojumā uz ārzemēm,
+
+489
+00:23:35,900 --> 00:23:38,640
+un jūs mēģināt skatīties kaut ko
+Hulu, un jūs ne ASV,
+
+490
+00:23:38,640 --> 00:23:41,280
+jūs varētu redzēt ziņu
+sakot, ne ASV.
+
+491
+00:23:41,280 --> 00:23:43,208
+Atvainojiet, jūs nevarat skatīties šo saturu.
+
+492
+00:23:43,208 --> 00:23:44,420
+>> Mērķauditorija: [dzirdams]
+
+493
+00:23:44,420 --> 00:23:46,020
+>> DAVID Malan: Ak, tiešām?
+
+494
+00:23:46,020 --> 00:23:48,480
+Bet jā, tik tiešām tas ir
+ideāls pieteikumu
+
+495
+00:23:48,480 --> 00:23:51,060
+par kaut ko ļoti tehniskā
+uz faktisko problēmu.
+
+496
+00:23:51,060 --> 00:23:55,100
+Ja tu būtu VPN no
+Eiropā vai Āzijā vai jebkur
+
+497
+00:23:55,100 --> 00:23:57,950
+pasaulē ar uzņēmuma
+mītnē Ņujorkā
+
+498
+00:23:57,950 --> 00:24:00,670
+vai kur jūs esat, jūs esat
+gatavojas izveidot izskatu
+
+499
+00:24:00,670 --> 00:24:03,580
+lai ārpus tīmekļa vietnes, kas
+tu esi tiešām Ņujorkā,
+
+500
+00:24:03,580 --> 00:24:05,660
+pat ja tu esi
+fiziski diezgan tālu.
+
+501
+00:24:05,660 --> 00:24:08,057
+>> Tagad jūs lietotājs gatavojas
+zinu, jūs acīmredzot prom.
+
+502
+00:24:08,057 --> 00:24:11,140
+Bet jūs arī gatavojas justies, jo
+no šiem papildu milisekundes.
+
+503
+00:24:11,140 --> 00:24:14,510
+Ka papildu attālums un
+šifrēšana, kas notiek ar VPN
+
+504
+00:24:14,510 --> 00:24:15,760
+gatavojas palēnināt lietas leju.
+
+505
+00:24:15,760 --> 00:24:17,680
+Tātad tā var vai nevar
+būt lieliska pieredze.
+
+506
+00:24:17,680 --> 00:24:21,050
+Bet Hulu un Netflix gatavojas redzēt
+Jūs, sēžot kaut kur Ņujorkā,
+
+507
+00:24:21,050 --> 00:24:23,817
+kā jūs esat skaidri spriest.
+
+508
+00:24:23,817 --> 00:24:25,150
+Kas ideāls risinājums, lai to.
+
+509
+00:24:25,150 --> 00:24:28,490
+>> Labi, tāpēc ģeogrāfija ir viens lēmums.
+
+510
+00:24:28,490 --> 00:24:32,290
+Ko vēl mēs varētu izmantot, lai izlemtu, kā
+uz maršruta satiksmi no A, B un C
+
+511
+00:24:32,290 --> 00:24:37,040
+līdz 1, 2, un 3, atkal, liekot
+inženieru hat on?
+
+512
+00:24:37,040 --> 00:24:38,850
+Tas viss izklausās ļoti sarežģīti.
+
+513
+00:24:38,850 --> 00:24:41,490
+Uh, es pat nezinu, kur
+uz sākt īstenot tos.
+
+514
+00:24:41,490 --> 00:24:44,450
+Dodiet man kaut ko, kas ir vienkāršāks.
+
+515
+00:24:44,450 --> 00:24:48,160
+Kāds ir vienkāršākais veids, kā
+, lai šo lēmumu?
+
+516
+00:24:48,160 --> 00:24:49,840
+>> Mērķauditorija: Vai serveris ir pieejama?
+
+517
+00:24:49,840 --> 00:24:51,650
+>> DAVID Malan: Vai serveris ir pieejama?
+
+518
+00:24:51,650 --> 00:24:53,970
+Tā nav slikti.
+
+519
+00:24:53,970 --> 00:24:54,470
+Tas ir labi.
+
+520
+00:24:54,470 --> 00:24:56,260
+Tas ir sava veida nuancing slodzes.
+
+521
+00:24:56,260 --> 00:24:58,070
+Tātad, pieņemsim saglabātu, ka slodzes kategorijā.
+
+522
+00:24:58,070 --> 00:25:00,010
+Ja jūs esat pieejams, es esmu tikai
+gatavojas nosūtīt datus tur.
+
+523
+00:25:00,010 --> 00:25:01,343
+Bet tas varētu priekšlaicīga ātri.
+
+524
+00:25:01,343 --> 00:25:05,720
+Jo, ja es izmantot loģiku, un ja I
+vienmēr jautāt 1, tu esi par, tu esi par,
+
+525
+00:25:05,720 --> 00:25:08,970
+tu esi par, ja atbilde vienmēr ir jā,
+Es esmu gatavojas nosūtīt 100% no satiksmes
+
+526
+00:25:08,970 --> 00:25:11,060
+Viņam 0% visiem pārējiem.
+
+527
+00:25:11,060 --> 00:25:14,430
+Un kādā brīdī, mēs ejam, lai sasniegtu
+ka lejupslīde vai vietne nav pieejama.
+
+528
+00:25:14,430 --> 00:25:17,630
+Tātad, kas ir nedaudz labāk nekā
+kas tomēr joprojām ir diezgan vienkāršs
+
+529
+00:25:17,630 --> 00:25:22,412
+un ne tuvu nav tik gudrs, kā veikt visus
+Šie papildu dati vērā?
+
+530
+00:25:22,412 --> 00:25:23,992
+>> Mērķauditorija: Maksa par serveri.
+
+531
+00:25:23,992 --> 00:25:25,200
+DAVID Malan: Maksa par serveri.
+
+532
+00:25:25,200 --> 00:25:28,010
+Labi, tāpēc ļaujiet man mētāties ka
+ar slodzes kategorijā, too.
+
+533
+00:25:28,010 --> 00:25:30,790
+Jo tas, ko jūs atradīsiet
+uzņēmums, too-- ka, ja jūs
+
+534
+00:25:30,790 --> 00:25:32,790
+uzlabot savu serveri
+laika gaitā vai nopirkt vairāk,
+
+535
+00:25:32,790 --> 00:25:36,242
+Jūs, iespējams, nevar saņemt tieši
+paši versijas aparatūru.
+
+536
+00:25:36,242 --> 00:25:37,450
+Jo tas izkrīt no datuma.
+
+537
+00:25:37,450 --> 00:25:38,491
+Jūs nevarat iegādāties vairs.
+
+538
+00:25:38,491 --> 00:25:39,360
+Cenas mainās.
+
+539
+00:25:39,360 --> 00:25:42,500
+>> Lai jūs varētu būt atšķirīgi serveri
+jūsu kopu, lai runāt.
+
+540
+00:25:42,500 --> 00:25:43,890
+Tas ir pilnīgi naudas sodu.
+
+541
+00:25:43,890 --> 00:25:47,100
+Bet nākamā gada aparatūra
+varētu būt divreiz tik strauji,
+
+542
+00:25:47,100 --> 00:25:49,390
+divreiz spējīgs kā šī gada.
+
+543
+00:25:49,390 --> 00:25:51,500
+Tātad, mēs varam mētāties ka
+uz slodzes kategorijā.
+
+544
+00:25:51,500 --> 00:25:54,260
+Šī atgriezeniskā saite starp 1,
+2, un 3, kas slodzes ekvilibrists
+
+545
+00:25:54,260 --> 00:25:57,650
+noteikti varētu pateikt to,
+hey, es esmu 50% jaudu.
+
+546
+00:25:57,650 --> 00:26:00,100
+Bet starp citu, es arī
+ir divreiz tik daudz kodoliem.
+
+547
+00:26:00,100 --> 00:26:02,319
+Izmantojiet šo informāciju.
+
+548
+00:26:02,319 --> 00:26:05,110
+Pat simpler-- un tas būs
+būt tēma datorzinātnēs.
+
+549
+00:26:05,110 --> 00:26:08,990
+Ja šaubāties, vai arī, ja vēlaties vienkārši
+risinājums, kas kopumā darbojas labi
+
+550
+00:26:08,990 --> 00:26:12,730
+laika gaitā, nav izvēlēties pats
+serveris visu laiku, bet choose--
+
+551
+00:26:12,730 --> 00:26:14,039
+>> Mērķauditorija: Izlases viens?
+
+552
+00:26:14,039 --> 00:26:15,330
+DAVID Malan: --a izlases serveri.
+
+553
+00:26:15,330 --> 00:26:16,780
+Jā, izvēlēties vienu vai otru.
+
+554
+00:26:16,780 --> 00:26:21,160
+Tātad nejaušības faktiski
+Tas ir ļoti spēcīgs sastāvdaļa
+
+555
+00:26:21,160 --> 00:26:23,170
+datorzinātnēs,
+un inženierzinātnēs vairāk
+
+556
+00:26:23,170 --> 00:26:27,160
+vispār, jo īpaši, ja jūs vēlaties,
+veikt vienkāršu lēmumu ātri
+
+557
+00:26:27,160 --> 00:26:30,480
+bez sarežģī to ar visu
+no tiem ir ļoti gudrs, bet arī
+
+558
+00:26:30,480 --> 00:26:34,330
+ļoti gudrs, risinājumi, kas prasa
+vēl jo vairāk inženieru, visi
+
+559
+00:26:34,330 --> 00:26:36,220
+jo vairāk doma, kad
+tiešām, kāpēc ne es
+
+560
+00:26:36,220 --> 00:26:39,200
+tikko veida Flip monētas, vai
+Trīs sided monētu šajā gadījumā
+
+561
+00:26:39,200 --> 00:26:41,690
+un izlemt, vai iet 1, 2, 3?
+
+562
+00:26:41,690 --> 00:26:45,610
+>> Tas varētu priekšlaicīga probabilistically,
+bet līdzīgi izredzes
+
+563
+00:26:45,610 --> 00:26:48,860
+flipping galvas atkal un
+atkal un atkal un atkal
+
+564
+00:26:48,860 --> 00:26:53,870
+un atkal un atkal ir iespējams
+reality-- super, super maz ticams.
+
+565
+00:26:53,870 --> 00:26:58,170
+Tātad laikā, izredzes ir
+vienkārši nosūtot lietotājus nejauši
+
+566
+00:26:58,170 --> 00:27:00,660
+ir 1, 2, un 3, kas notiek pie
+izstrādāt perfekti labi.
+
+567
+00:27:00,660 --> 00:27:03,380
+Un tas ir paņēmiens
+parasti sauc par apaļā robin.
+
+568
+00:27:03,380 --> 00:27:05,160
+>> Vai tiešām, tas nav apaļā robin.
+
+569
+00:27:05,160 --> 00:27:06,980
+Tas būtu izlases pieeja.
+
+570
+00:27:06,980 --> 00:27:09,250
+Un, ja jūs vēlaties būt pat
+nedaudz vienkāršāka, nekā,
+
+571
+00:27:09,250 --> 00:27:12,820
+apaļā robin būtu, pirmais cilvēks iet
+1, otrais cilvēks līdz 2, trešā persona
+
+572
+00:27:12,820 --> 00:27:16,056
+līdz 3, ceturtais cilvēks līdz 1.
+
+573
+00:27:16,056 --> 00:27:17,430
+Un tur slēpjas apaļā robin.
+
+574
+00:27:17,430 --> 00:27:19,580
+Jūs tikko veida iet apkārt ar ciklu.
+
+575
+00:27:19,580 --> 00:27:21,300
+>> Tagad, jums ir jābūt smart par to.
+
+576
+00:27:21,300 --> 00:27:26,490
+Jums nevajadzētu akli jānosūta lietotājam
+serveris numur viens, ja kāda tā ir?
+
+577
+00:27:26,490 --> 00:27:30,060
+
+578
+00:27:30,060 --> 00:27:32,870
+Ja tas ir pie max jaudu, vai
+tas ir tikai vairs atsaucīgi.
+
+579
+00:27:32,870 --> 00:27:35,270
+Tik ideāli jūs vēlaties kādu
+veida atgriezenisko saiti.
+
+580
+00:27:35,270 --> 00:27:38,040
+Pretējā gadījumā jūs vienkārši sūtīt visus
+lietotājiem, lai strupceļā.
+
+581
+00:27:38,040 --> 00:27:40,790
+Bet tas var ņemt vērā, too.
+
+582
+00:27:40,790 --> 00:27:46,520
+>> Līdz ar to nav ar augstu novērtējat
+tikai nejaušības, kas ir diezgan bieži
+
+583
+00:27:46,520 --> 00:27:48,970
+risinājums šīm problēmām veidu.
+
+584
+00:27:48,970 --> 00:27:51,580
+Un mēs pierakstīt Round Robin.
+
+585
+00:27:51,580 --> 00:27:55,090
+Tātad, kā daži uzņēmumi īsteno
+apaļā robin vai nejaušības
+
+586
+00:27:55,090 --> 00:27:56,840
+vai kāds no šiem lēmumiem?
+
+587
+00:27:56,840 --> 00:28:01,840
+Nu diemžēl, tie
+darīt lietas, kā šis.
+
+588
+00:28:01,840 --> 00:28:03,660
+Ļaujiet man uzvilkt vēl vienu ātru ekrānuzņēmums.
+
+589
+00:28:03,660 --> 00:28:13,052
+
+590
+00:28:13,052 --> 00:28:14,470
+>> Patiesībā, pieņemsim do divi.
+
+591
+00:28:14,470 --> 00:28:17,420
+
+592
+00:28:17,420 --> 00:28:21,370
+Es nezinu, kāpēc mēs esam
+iegūt visus šos ēdienus.
+
+593
+00:28:21,370 --> 00:28:22,280
+Tas ir ļoti dīvaini.
+
+594
+00:28:22,280 --> 00:28:31,714
+
+595
+00:28:31,714 --> 00:28:33,630
+Labi, ko es tiešām
+gribu ir screenshot.
+
+596
+00:28:33,630 --> 00:28:36,990
+
+597
+00:28:36,990 --> 00:28:40,100
+Tas ir dīvaini.
+
+598
+00:28:40,100 --> 00:28:42,930
+Labi, lai es varētu mānīšanās šo.
+
+599
+00:28:42,930 --> 00:28:46,080
+Es nezinu, cik daudz tālāk
+Es gribu, lai saglabātu ritināšanu.
+
+600
+00:28:46,080 --> 00:28:53,220
+>> Tik ļoti bieži, jūs atradīsiet sev
+at adresi piemēram www.2.acme.com,
+
+601
+00:28:53,220 --> 00:28:56,030
+varbūt www.3 vai 4 vai 5.
+
+602
+00:28:56,030 --> 00:28:57,424
+Un pastāvīgi acu par to.
+
+603
+00:28:57,424 --> 00:28:58,590
+Jūs neredzat to, ka bieži.
+
+604
+00:28:58,590 --> 00:29:02,621
+Bet, kad jūs darāt, tas veida tendence
+būt lielāks, vecākiem, stodgier uzņēmumi
+
+605
+00:29:02,621 --> 00:29:05,370
+ka tehnoloģiski nav īsti
+šķiet, zina, ko viņi dara.
+
+606
+00:29:05,370 --> 00:29:08,150
+Un jūs redzat šo par tehnoloģiju uzņēmumi
+Dažreiz, vecajās.
+
+607
+00:29:08,150 --> 00:29:09,270
+>> Tātad, ko viņi dara?
+
+608
+00:29:09,270 --> 00:29:11,890
+Kā viņi īsteno
+balansēšanu, tas tā šķiet?
+
+609
+00:29:11,890 --> 00:29:15,986
+Ja jūs atrast sevi kā
+lietotāja rakstīt www.something.com,
+
+610
+00:29:15,986 --> 00:29:19,760
+un pēkšņi jūs esat
+www.2.something.com,
+
+611
+00:29:19,760 --> 00:29:21,866
+kādi ir viņu slodzi
+ekvilibrists iespējams izdarīt?
+
+612
+00:29:21,866 --> 00:29:22,741
+Mērķauditorija: [dzirdams]
+
+613
+00:29:22,741 --> 00:29:28,210
+
+614
+00:29:28,210 --> 00:29:31,079
+>> DAVID Malan: Jā, tā
+slodze ekvilibrists ir iespējams
+
+615
+00:29:31,079 --> 00:29:33,870
+Pieņemot lēmumu, pamatojoties uz vienu no
+šie lēmumu pieņemšanas processes--
+
+616
+00:29:33,870 --> 00:29:35,210
+nav īsti jautājums, kas.
+
+617
+00:29:35,210 --> 00:29:38,650
+Bet, līdzīgi kā es esmu novilkta
+numurus uz kuģa šeit,
+
+618
+00:29:38,650 --> 00:29:40,650
+serveri ir ne tikai
+ko sauc par 1, 2, un 3.
+
+619
+00:29:40,650 --> 00:29:43,870
+Viņi, iespējams, sauc
+www1, www2, www3.
+
+620
+00:29:43,870 --> 00:29:47,200
+Un izrādās, ka iekšpuses
+HTTP pieprasījums ir šī funkcija.
+
+621
+00:29:47,200 --> 00:29:48,950
+Un es esmu gatavojas
+simulēt to šādi.
+
+622
+00:29:48,950 --> 00:29:53,230
+>> Es esmu gatavojas atvērt tajā pašā
+attīstītājs tīkla tab kā pirms tikai
+
+623
+00:29:53,230 --> 00:29:55,560
+lai mēs varētu redzēt, kas notiek
+uz zem motora pārsega.
+
+624
+00:29:55,560 --> 00:29:57,130
+Es esmu gatavojas, lai notīrītu ekrānu.
+
+625
+00:29:57,130 --> 00:30:03,420
+Un es iešu uz, pieņemsim
+saka, http://harvard.edu.
+
+626
+00:30:03,420 --> 00:30:06,560
+Tagad kāda
+biznesa iemesli, Harvard
+
+627
+00:30:06,560 --> 00:30:08,930
+ir nolēmusi, tāpat kā daudzi,
+daudzas citas mājas lapas,
+
+628
+00:30:08,930 --> 00:30:12,712
+standartizēt tās
+tīmekļa vietne par www.harvard.edu
+
+629
+00:30:12,712 --> 00:30:14,420
+gan tehniskā
+un tirdzniecības dēļ.
+
+630
+00:30:14,420 --> 00:30:16,326
+Tā ir tikai sava veida in
+Vogue ir www.
+
+631
+00:30:16,326 --> 00:30:20,500
+>> Tātad serveris Harvard ir
+kaut kā novirzīt lietotāju,
+
+632
+00:30:20,500 --> 00:30:23,830
+kā es glabāt sakot, no
+viens URL uz otru.
+
+633
+00:30:23,830 --> 00:30:24,670
+Kā tas darbojas?
+
+634
+00:30:24,670 --> 00:30:26,740
+Nu, ļaujiet man iet uz priekšu un hit Enter.
+
+635
+00:30:26,740 --> 00:30:30,830
+Un paziņojums URL patiešām ātri
+mainīts uz www.harvard.edu.
+
+636
+00:30:30,830 --> 00:30:35,560
+Ļaujiet man ritināt atpakaļ šajā
+vēsture un noklikšķiniet uz šo atkļūdot
+
+637
+00:30:35,560 --> 00:30:37,650
+diagnostikas informācija, ja Jums gribas.
+
+638
+00:30:37,650 --> 00:30:39,170
+Ļaujiet man apskatīt manu lūgumu.
+
+639
+00:30:39,170 --> 00:30:41,020
+>> Tātad, šeit ir pieprasījums es.
+
+640
+00:30:41,020 --> 00:30:44,870
+Un pamanāt, ka tas ir savienojams ar tāda veida
+Lūguma Es no Facebook pirms.
+
+641
+00:30:44,870 --> 00:30:48,010
+Bet paziņojums atbildi.
+
+642
+00:30:48,010 --> 00:30:50,430
+Kas ir atšķirīgs
+reakcijas šoreiz?
+
+643
+00:30:50,430 --> 00:30:51,890
+>> Mērķauditorija: [dzirdams]
+
+644
+00:30:51,890 --> 00:30:54,290
+>> DAVID Malan: Jā, tāpēc tas nav 200 OK.
+
+645
+00:30:54,290 --> 00:30:56,130
+Tas nav 404 Not Found.
+
+646
+00:30:56,130 --> 00:31:00,150
+Tas ir 301 Pārcelts pastāvīgi, kas
+ir sava veida funny veids, kā pateikt,
+
+647
+00:31:00,150 --> 00:31:05,270
+Harvard ir palielinājuši un pārcēlās
+citur www.harvard.edu.
+
+648
+00:31:05,270 --> 00:31:08,220
+301 nozīmē, ka
+tas ir novirzīt.
+
+649
+00:31:08,220 --> 00:31:12,812
+Un Kur lietotājam
+acīmredzot tiks novirzīts?
+
+650
+00:31:12,812 --> 00:31:15,520
+Ir papildu tidbit
+informācija iekšā, ka aploksnē.
+
+651
+00:31:15,520 --> 00:31:19,650
+Un katru no šīm līnijām būs tagad
+sākt aicinot HTTP galvenes.
+
+652
+00:31:19,650 --> 00:31:23,620
+Header ir tikai galvenais vērtība
+pair-- kaut resnās zarnas kaut ko.
+
+653
+00:31:23,620 --> 00:31:24,850
+Tas ir gabals informāciju.
+
+654
+00:31:24,850 --> 00:31:27,131
+Kur jaunais
+atrašanās vieta acīmredzot būt?
+
+655
+00:31:27,131 --> 00:31:31,120
+
+656
+00:31:31,120 --> 00:31:33,692
+Paziņojums pēdējā rindā
+starp visiem šiem galvenes.
+
+657
+00:31:33,692 --> 00:31:34,940
+>> Mērķauditorija: [dzirdams]
+
+658
+00:31:34,940 --> 00:31:37,148
+>> DAVID Malan: Jā, tāpēc tur ir
+Papildus informācija.
+
+659
+00:31:37,148 --> 00:31:40,120
+Pirmā līnija, ka es esmu uzsvērusi
+saka 301 Pārvietots pastāvīgi.
+
+660
+00:31:40,120 --> 00:31:42,820
+Nu, kur ir tā pārcēlās?
+
+661
+00:31:42,820 --> 00:31:45,340
+Pēdējais LINE un tie nav
+jābūt šādā secībā.
+
+662
+00:31:45,340 --> 00:31:47,020
+Tas var būt nejauši.
+
+663
+00:31:47,020 --> 00:31:52,120
+Atrašanās vieta resnās nozīmē, hey
+pārlūku, dodieties uz šo URL vietā.
+
+664
+00:31:52,120 --> 00:31:55,180
+>> Tātad pārlūkprogrammas saprast HTTP redirects.
+
+665
+00:31:55,180 --> 00:31:57,540
+Un tas ir ļoti, ļoti
+kopīgs veids, veselīgs
+
+666
+00:31:57,540 --> 00:31:59,680
+lietotājs no vienas vietas uz otru.
+
+667
+00:31:59,680 --> 00:32:02,660
+Piemēram, ja jūs esat kādreiz mēģinājis
+apmeklēt mājas lapu, kas jūs neesat
+
+668
+00:32:02,660 --> 00:32:06,360
+pieteicies, jūs varētu pēkšņi atrast
+sevi jaunā URL vispār ir
+
+669
+00:32:06,360 --> 00:32:07,530
+piedāvāts pieteikties.
+
+670
+00:32:07,530 --> 00:32:08,400
+>> Kā tas darbojas?
+
+671
+00:32:08,400 --> 00:32:10,920
+Serveris ir iespējams nosūtot 301.
+
+672
+00:32:10,920 --> 00:32:14,510
+Pastāv arī citi numuri, piemēram,
+302, nedaudz atšķiras nozīmē,
+
+673
+00:32:14,510 --> 00:32:16,490
+kas jums nosūtīt uz citu URL.
+
+674
+00:32:16,490 --> 00:32:18,770
+Un tad serveris,
+kad jūs esat pieteicies,
+
+675
+00:32:18,770 --> 00:32:22,000
+nosūtīs jums atpakaļ uz vietu, kur
+jūs faktiski paredzēts.
+
+676
+00:32:22,000 --> 00:32:27,700
+>> Tātad, kas tad ir slikti
+inženierijas mājas lapas dara?
+
+677
+00:32:27,700 --> 00:32:31,340
+Kad jūs apmeklējat
+www.acme.com, un viņi vienkārši
+
+678
+00:32:31,340 --> 00:32:35,490
+gadās ir nosaukts savu serveri
+www1, www2, www3, un tā tālāk,
+
+679
+00:32:35,490 --> 00:32:39,100
+tie ir ļoti simply--
+kas ir taisnīga, bet ļoti
+
+680
+00:32:39,100 --> 00:32:46,080
+kārtot foolishly-- pārprofilējot jums
+tiešām savādāk nosaukts serveri.
+
+681
+00:32:46,080 --> 00:32:48,650
+Un tas strādā perfekti labi.
+
+682
+00:32:48,650 --> 00:32:49,930
+Tas ir jauki un viegli.
+
+683
+00:32:49,930 --> 00:32:52,200
+>> Mēs esam redzējuši, kā tas būtu
+darīts zem motora pārsega
+
+684
+00:32:52,200 --> 00:32:53,490
+virtuālajā aploksnē.
+
+685
+00:32:53,490 --> 00:32:56,450
+Bet kāpēc tas ir apstrīdami
+slikts engineering lēmums?
+
+686
+00:32:56,450 --> 00:33:00,345
+Un kāpēc es esmu veida condescending
+pret šo konkrēto inženierzinātnēs
+
+687
+00:33:00,345 --> 00:33:00,845
+pieeja?
+
+688
+00:33:00,845 --> 00:33:06,420
+
+689
+00:33:06,420 --> 00:33:07,850
+Apgalvo, kāpēc tas ir slikti.
+
+690
+00:33:07,850 --> 00:33:09,375
+Ben?
+
+691
+00:33:09,375 --> 00:33:10,250
+Mērķauditorija: [dzirdams]
+
+692
+00:33:10,250 --> 00:33:12,864
+
+693
+00:33:12,864 --> 00:33:16,030
+DAVID Malan: Katram serverim būtu
+ir noraksta kopiju mājas lapā.
+
+694
+00:33:16,030 --> 00:33:16,738
+Es esmu OK ar to.
+
+695
+00:33:16,738 --> 00:33:19,490
+Un patiesībā, tas ir tas, ko es esmu
+pieņemot, par visu šo stāstu,
+
+696
+00:33:19,490 --> 00:33:22,104
+jo, ja mēs wanted-- labi
+faktiski, izņemot Dan s agrāk
+
+697
+00:33:22,104 --> 00:33:25,270
+ierosinājums, kur, ja jums ir atšķirīgs
+serveri darot dažādas lietas, tad
+
+698
+00:33:25,270 --> 00:33:27,740
+varbūt viņi tiešām varētu būt
+funkcionāli darot dažādas lietas.
+
+699
+00:33:27,740 --> 00:33:30,698
+>> Bet pat tad, kādā brīdī, jūsu
+datu bāze ir gatavojas saņemt pārslogota.
+
+700
+00:33:30,698 --> 00:33:33,030
+Jūsu statisks aktīvi serveris
+gatavojas iegūt pārslogoti.
+
+701
+00:33:33,030 --> 00:33:34,850
+Tāpēc kādā brīdī, mēs esam
+atpakaļ šajā stāstā, kur mēs
+
+702
+00:33:34,850 --> 00:33:36,475
+vajag vairākas kopijas pašu.
+
+703
+00:33:36,475 --> 00:33:37,395
+Tāpēc es esmu OK ar to.
+
+704
+00:33:37,395 --> 00:33:38,270
+Mērķauditorija: [dzirdams]
+
+705
+00:33:38,270 --> 00:33:42,340
+
+706
+00:33:42,340 --> 00:33:45,350
+>> DAVID Malan: Ok, tāpēc dažas lapas
+varētu būt nesamērīgi populārs.
+
+707
+00:33:45,350 --> 00:33:50,460
+Un tā fiksējot uz vienu adresi
+ne vienmēr ir labākā lieta.
+
+708
+00:33:50,460 --> 00:33:51,110
+[Dzirdams]?
+
+709
+00:33:51,110 --> 00:33:51,985
+>> Mērķauditorija: [dzirdams]
+
+710
+00:33:51,985 --> 00:33:54,770
+
+711
+00:33:54,770 --> 00:33:57,623
+>> DAVID Malan: Ko tu ar to domā?
+
+712
+00:33:57,623 --> 00:33:58,498
+Mērķauditorija: [dzirdams]
+
+713
+00:33:58,498 --> 00:34:03,820
+
+714
+00:34:03,820 --> 00:34:05,072
+>> DAVID Malan: Jā, tieši tā.
+
+715
+00:34:05,072 --> 00:34:07,280
+Tātad jūs nevēlaties
+vienmēr have-- jums noteikti
+
+716
+00:34:07,280 --> 00:34:11,370
+nevēlos būt jūsu lietotājiem
+manuāli ierakstot www1 vai www2.
+
+717
+00:34:11,370 --> 00:34:14,550
+No zīmola viedokļa, to
+tikai izskatās mazliet smieklīgi.
+
+718
+00:34:14,550 --> 00:34:17,340
+Ja jūs vienkārši vēlaties sava veida
+tīru, elegants pieredze,
+
+719
+00:34:17,340 --> 00:34:20,364
+kam šos veida nejauši
+numurētas URL tiešām nav laba.
+
+720
+00:34:20,364 --> 00:34:22,780
+Jo tad lietotājiem ir noteikti
+gatavojas kopēt un ielīmēt tos
+
+721
+00:34:22,780 --> 00:34:24,449
+uz e-pastu vai tērzēšanas ziņas.
+
+722
+00:34:24,449 --> 00:34:25,659
+>> Tagad viņi pavairošanas.
+
+723
+00:34:25,659 --> 00:34:28,600
+Tagad jūs esat veida mulsinoši tavs
+mazāk tehnisks auditorija, kas domā
+
+724
+00:34:28,600 --> 00:34:32,239
+Jūsu mājas adrese ir www2.something.com.
+
+725
+00:34:32,239 --> 00:34:35,434
+Nav pārliecinošu semantika uz to.
+
+726
+00:34:35,434 --> 00:34:38,100
+Tā vienkārši notiek, ir pamatā
+tehniskās detaļas, ka esat
+
+727
+00:34:38,100 --> 00:34:40,190
+numurētas savu serveri šādā veidā.
+
+728
+00:34:40,190 --> 00:34:45,760
+>> Un vēl sliktāk, kas notiks, ja, piemēram,
+varbūt ap Ziemassvētku laiku, kad
+
+729
+00:34:45,760 --> 00:34:50,090
+bizness ir patiešām plaukstošajai,
+tev www1 cauri www99,
+
+730
+00:34:50,090 --> 00:34:53,530
+bet janvārī un februārī, un
+tālāk, jūs izslēdzat pusi no tiem,
+
+731
+00:34:53,530 --> 00:34:56,440
+tāpēc jums ir tikai www1 caur www50?
+
+732
+00:34:56,440 --> 00:35:01,963
+Kāda ir saistība tagad, ka
+ļoti saprātīgs biznesa lēmums?
+
+733
+00:35:01,963 --> 00:35:02,838
+Mērķauditorija: [dzirdams]
+
+734
+00:35:02,838 --> 00:35:05,628
+
+735
+00:35:05,628 --> 00:35:07,752
+DAVID Malan: Jums ir nepieciešams, lai
+pārvaldīt visiem tiem joprojām.
+
+736
+00:35:07,752 --> 00:35:10,515
+Mērķauditorija: [dzirdams]
+
+737
+00:35:10,515 --> 00:35:11,390
+DAVID Malan: Tieši tā.
+
+738
+00:35:11,390 --> 00:35:12,681
+Tas ir sava veida nozvejas tur.
+
+739
+00:35:12,681 --> 00:35:16,800
+Ja jūsu klienti ir ieradums
+Grāmatzīmes lietas, nosūtot tos, vienkārši
+
+740
+00:35:16,800 --> 00:35:19,351
+ietaupot URL kaut kur, vai
+ja tas ir tikai viņu auto
+
+741
+00:35:19,351 --> 00:35:22,350
+pabeigt savā pārlūkprogrammā, lai viņi
+nav īsti apzināti ierakstot to,
+
+742
+00:35:22,350 --> 00:35:25,560
+tas ir tikai notiek, viņi var,
+par 11 mēnešiem no gada
+
+743
+00:35:25,560 --> 00:35:27,190
+efektīvi, sasniegt strupceļā.
+
+744
+00:35:27,190 --> 00:35:30,100
+Un tikai pats vērīgs no
+lietotājiem gatavojas realizēt,
+
+745
+00:35:30,100 --> 00:35:32,040
+Varbūt man vajadzētu manuāli
+noņemt šo numuru.
+
+746
+00:35:32,040 --> 00:35:35,610
+Es domāju, tas vienkārši nav gatavojas notikt
+ar daudziem lietotājiem, tik slikts bizness,
+
+747
+00:35:35,610 --> 00:35:37,750
+slikta īstenošana inženierzinātnes gudrs.
+
+748
+00:35:37,750 --> 00:35:40,230
+>> Tātad par laimi, tas nav pat nepieciešams.
+
+749
+00:35:40,230 --> 00:35:43,120
+Izrādās, ka to, ko
+slodze balancers var darīt
+
+750
+00:35:43,120 --> 00:35:48,130
+tā vietā, lai sakot, ja A
+padara request-- hey A, dodieties uz 1.
+
+751
+00:35:48,130 --> 00:35:50,280
+Citiem vārdiem, tā vietā
+sūtīšanas, kas novirza
+
+752
+00:35:50,280 --> 00:35:53,540
+tā, ka solis viens šajā
+process ir iet šeit,
+
+753
+00:35:53,540 --> 00:35:55,280
+tad viņš ir teicis, lai iet citur.
+
+754
+00:35:55,280 --> 00:35:57,530
+Un tā soli trīs ir, viņš iet citur.
+
+755
+00:35:57,530 --> 00:36:04,600
+>> Jūs varat vietā turpināt maršrutu, lai
+saglabāt, izmantojot šo vārdu, visi, ja datiem
+
+756
+00:36:04,600 --> 00:36:10,590
+caur slodzes ekvilibrists lai viņš
+nekad kontakti 1, 2, vai 3 tieši.
+
+757
+00:36:10,590 --> 00:36:15,150
+Visi satiksmes nav get "novirzīts"
+ar kravas ekvilibrists pati.
+
+758
+00:36:15,150 --> 00:36:17,524
+Un tāpēc tagad mēs esam sava veida
+apzināti nojauc līnijas
+
+759
+00:36:17,524 --> 00:36:18,690
+starp šiem dažādām ierīcēm.
+
+760
+00:36:18,690 --> 00:36:20,930
+Slodzes ekvilibrists var maršruts datus.
+
+761
+00:36:20,930 --> 00:36:22,435
+Tas ir tikai funkcija, kas tas ir.
+
+762
+00:36:22,435 --> 00:36:25,420
+>> Tātad slodze ekvilibrists, pārāk, tas ir
+gabals programmatūra, tiešām.
+
+763
+00:36:25,420 --> 00:36:27,130
+Un router ir gabals programmatūru.
+
+764
+00:36:27,130 --> 00:36:29,660
+Un jūs varat būt absolūti
+divi gabali programmatūras iekšpusē
+
+765
+00:36:29,660 --> 00:36:34,000
+no viena fiziskā datora tik slodzes
+ekvilibrists var darīt šo vairākas lietas.
+
+766
+00:36:34,000 --> 00:36:36,130
+>> Tātad tur ir viens cits veids
+to darīt, kas faktiski
+
+767
+00:36:36,130 --> 00:36:39,670
+iet atpakaļ veida pirmajiem principiem
+DNS, ko mēs runājām par
+
+768
+00:36:39,670 --> 00:36:40,230
+pirms pārtraukuma.
+
+769
+00:36:40,230 --> 00:36:41,634
+DNS bija Domain Name System.
+
+770
+00:36:41,634 --> 00:36:43,550
+Atcerieties, ka jūs varat
+lūgt DNS serveri, kas ir
+
+771
+00:36:43,550 --> 00:36:46,460
+IP adrese
+google.com, facebook.com?
+
+772
+00:36:46,460 --> 00:36:48,250
+>> Un mēs faktiski var darīt.
+
+773
+00:36:48,250 --> 00:36:51,940
+Rīks, mēs neizmantoja agrāk ir
+viens, kas ir tikpat pieejama,
+
+774
+00:36:51,940 --> 00:36:55,510
+aicināja nslookup, lai nosaukumu servera lookup.
+
+775
+00:36:55,510 --> 00:36:57,410
+Un es esmu tikai gatavojas rakstīt facebook.com.
+
+776
+00:36:57,410 --> 00:37:02,500
+Un es redzu, ka Facebook IP
+adrese ir acīmredzot tas.
+
+777
+00:37:02,500 --> 00:37:05,520
+Ļaujiet man iet uz priekšu un kopēt
+ka iet uz pārlūku,
+
+778
+00:37:05,520 --> 00:37:11,690
+un iet uz http: // un ka
+IP adrese un hit Enter.
+
+779
+00:37:11,690 --> 00:37:14,140
+Un tik tiešām, tas, šķiet, darbojas.
+
+780
+00:37:14,140 --> 00:37:18,610
+>> Tagad strādā atpakaļ, kas bija
+iekšpusē virtuālā aploksnes
+
+781
+00:37:18,610 --> 00:37:25,454
+ka Facebook atbildēja ar kad
+Es apmeklēju, ka IP adrese tieši?
+
+782
+00:37:25,454 --> 00:37:26,745
+Jo paziņojums, kur es esmu tagad?
+
+783
+00:37:26,745 --> 00:37:29,250
+
+784
+00:37:29,250 --> 00:37:32,484
+Kur es esmu tagad, adrese?
+
+785
+00:37:32,484 --> 00:37:33,450
+>> Mērķauditorija: [dzirdams]
+
+786
+00:37:33,450 --> 00:37:36,116
+>> DAVID Malan: Pie drošu versiju,
+un pie WWW.FACEBOOK.COM.
+
+787
+00:37:36,116 --> 00:37:38,520
+Tātad, tas nav pat tikai
+drošu IP adrese.
+
+788
+00:37:38,520 --> 00:37:42,650
+Facebook ir veikusi to uz sevi
+teikt, tas ir smieklīgi.
+
+789
+00:37:42,650 --> 00:37:45,710
+Mēs nebrauksim, lai saglabātu jums šis
+neglīts meklē URL, kas ir ciparu.
+
+790
+00:37:45,710 --> 00:37:50,120
+Mēs ejam, lai nosūtītu jums HTTP
+novirzīt veidā tajā pašā galvenē
+
+791
+00:37:50,120 --> 00:37:53,010
+ka mēs redzējām before--
+vietu resnās zarnas kaut kas.
+
+792
+00:37:53,010 --> 00:37:56,340
+>> Un tā tas vienkārši nozīmē, ka zem
+motora pārsegs ir joprojām tas IP adrese.
+
+793
+00:37:56,340 --> 00:37:59,010
+Katram datoram internetā
+ir IP adrese, tas varētu likties.
+
+794
+00:37:59,010 --> 00:38:01,480
+Bet jums nav obligāti
+pakļaut, ka, lai lietotājam.
+
+795
+00:38:01,480 --> 00:38:07,190
+Un līdzīgi atpakaļ dienā, tur
+bija 1-800-Collect 1-800-C-O-L-L-E-C-T,
+
+796
+00:38:07,190 --> 00:38:11,700
+ASV, bija veids, kā padarīt savākt
+aicina caur ļoti viegli neaizmirstamu phone
+
+797
+00:38:11,700 --> 00:38:17,140
+numurs, vai 1-800-MATRAČU nopirkt gultu,
+un līdzīgi mnemoniska ka jūs pat redzēt
+
+798
+00:38:17,140 --> 00:38:20,460
+pa telefonu veida veida
+tomēr, ka vēstules karti numuriem.
+
+799
+00:38:20,460 --> 00:38:21,470
+>> Tagad, kāpēc tā?
+
+800
+00:38:21,470 --> 00:38:26,080
+Nu, tas ir daudz vieglāk iegaumēt
+1-800-MATRAČU vai 1-800-COLLECT vietā
+
+801
+00:38:26,080 --> 00:38:29,100
+no 1-800 kaut kaut kaut
+kaut kas kaut ko kaut kas
+
+802
+00:38:29,100 --> 00:38:31,030
+kaut kas, kur katrs
+no tiem ir cipars.
+
+803
+00:38:31,030 --> 00:38:34,390
+Tāpat, pasaule uzzināja
+ātri, ka mums nevajadzētu
+
+804
+00:38:34,390 --> 00:38:35,940
+ir cilvēki iegaumēt IP adreses.
+
+805
+00:38:35,940 --> 00:38:36,826
+Tas būtu muļķīgi.
+
+806
+00:38:36,826 --> 00:38:38,200
+Mēs ejam, lai izmantotu vārdus vietā.
+
+807
+00:38:38,200 --> 00:38:40,420
+Un tas ir iemesls, kāpēc DNS dzimis.
+
+808
+00:38:40,420 --> 00:38:45,510
+>> Labi, tāpēc ar to teica, runājot
+Slodzes balansēšana, pamēģināsim yahoo.com.
+
+809
+00:38:45,510 --> 00:38:47,030
+Nu, tas ir interesanti.
+
+810
+00:38:47,030 --> 00:38:51,464
+Yahoo šķiet atgriešanās trīs IP.
+
+811
+00:38:51,464 --> 00:38:53,940
+Tātad no tā secinu,
+ja jūs varētu, kas ir
+
+812
+00:38:53,940 --> 00:38:58,600
+vēl viens veids, ka mēs varētu īstenot
+šis jēdziens balansēšanu
+
+813
+00:38:58,600 --> 00:39:04,310
+varbūt pat izmantojot fizisku
+ierīce, šī jaunā fiziskā ierīce?
+
+814
+00:39:04,310 --> 00:39:08,070
+>> Citiem vārdiem sakot, es varētu veikt prom
+finansējumu, ja jums ir slodzes ekvilibrists
+
+815
+00:39:08,070 --> 00:39:10,990
+un pateiks, lai izmantotu dažus esošos
+aparatūras, lai īstenotu
+
+816
+00:39:10,990 --> 00:39:12,680
+šis jēdziens balansēšanu?
+
+817
+00:39:12,680 --> 00:39:18,870
+
+818
+00:39:18,870 --> 00:39:22,510
+Un spoileris ir,
+jā, bet to, vai kā?
+
+819
+00:39:22,510 --> 00:39:27,605
+Kas ir Yahoo varbūt dara šeit?
+
+820
+00:39:27,605 --> 00:39:29,200
+Kareem?
+
+821
+00:39:29,200 --> 00:39:30,635
+OK, Chris?
+
+822
+00:39:30,635 --> 00:39:31,510
+Mērķauditorija: [dzirdams]
+
+823
+00:39:31,510 --> 00:39:35,119
+
+824
+00:39:35,119 --> 00:39:36,910
+DAVID Malan: Jā, visi
+Trīs no šiem darbiem.
+
+825
+00:39:36,910 --> 00:39:39,890
+Tātad nejaušības, apaļā robin,
+location-- jūs varat vienkārši
+
+826
+00:39:39,890 --> 00:39:44,160
+sviras esošo gabals puzzle
+ka mēs runājām par agrāk par DNS
+
+827
+00:39:44,160 --> 00:39:49,580
+sistēma un vienkārši teikt, kad pirmais
+lietotājs dienas lūdz yahoo.com,
+
+828
+00:39:49,580 --> 00:39:52,970
+dot viņiem pirmo IP adresi,
+kā viens beidzas 45 tur.
+
+829
+00:39:52,970 --> 00:39:55,762
+Un nākamreiz, kad lietotājs pieprasa
+IP adrese, yahoo.com
+
+830
+00:39:55,762 --> 00:39:57,970
+no kaut kur pasaulē,
+dot viņiem otru IP,
+
+831
+00:39:57,970 --> 00:39:59,920
+pēc tam trešais IP, tad
+pirmais IP, tad otrs.
+
+832
+00:39:59,920 --> 00:40:01,850
+Vai būtu gudri par to
+un darīt to grafiski.
+
+833
+00:40:01,850 --> 00:40:05,200
+Vai arī tā nejauši un ne tikai darīt
+tā apaļā robin šādā veidā.
+
+834
+00:40:05,200 --> 00:40:07,580
+>> Un šajā gadījumā, tad
+mums pat nav nepieciešams
+
+835
+00:40:07,580 --> 00:40:10,190
+ieviest šo melna
+kaste mūsu attēlu.
+
+836
+00:40:10,190 --> 00:40:11,690
+Mums nav vajadzīga jaunu ierīci.
+
+837
+00:40:11,690 --> 00:40:16,930
+Mēs vienkārši stāsta datorus
+doties uz serveriem tieši,
+
+838
+00:40:16,930 --> 00:40:18,680
+efektīvi, bet ne
+veidā viņu vārda.
+
+839
+00:40:18,680 --> 00:40:20,054
+Viņi nekad jāzina nosaukumu.
+
+840
+00:40:20,054 --> 00:40:25,690
+Viņi vienkārši ir teicis, ka yahoo.com
+kartes ar jebkuru pretenziju no šīm IP adresēm.
+
+841
+00:40:25,690 --> 00:40:28,180
+>> Tātad tas sūta tieši tādu pašu lūgumu.
+
+842
+00:40:28,180 --> 00:40:30,100
+Bet ārpusē
+aploksnes, tas vienkārši
+
+843
+00:40:30,100 --> 00:40:32,740
+liek IP, ka tas tika informēts.
+
+844
+00:40:32,740 --> 00:40:35,590
+Un šādā veidā, arī varētu
+mēs slodze līdzsvarot pieprasījumus
+
+845
+00:40:35,590 --> 00:40:39,330
+, vienkārši nosūtot aploksni līdz A
+atšķiras viens no Yahoo pašu serveri?
+
+846
+00:40:39,330 --> 00:40:42,390
+>> Un, ja mēs turpinām rakšana, mēs redzēsim
+iespējams, citi uzņēmumi ar vairāk.
+
+847
+00:40:42,390 --> 00:40:44,380
+CNN ir divi publiski pakļauta.
+
+848
+00:40:44,380 --> 00:40:49,610
+Lai gan patiesībā, ja mēs to darām atkal
+un again-- cnn.com-- jūs varat redzēt
+
+849
+00:40:49,610 --> 00:40:51,730
+viņi mainās pasūtījumu, faktiski.
+
+850
+00:40:51,730 --> 00:40:56,680
+Tātad, kas ir mehānisms
+CNN izmantojot, acīmredzot?
+
+851
+00:40:56,680 --> 00:40:57,440
+>> Mērķauditorija: Random.
+
+852
+00:40:57,440 --> 00:40:59,440
+DAVID Malan: Nu, tas
+varētu būt izlases, gan tā
+
+853
+00:40:59,440 --> 00:41:01,110
+Šķiet, riteņbraukšana un atpakaļ.
+
+854
+00:41:01,110 --> 00:41:04,380
+Tātad, tas ir iespējams, apaļā robin kur
+viņi vienkārši pārslēdzot kārtībā, lai
+
+855
+00:41:04,380 --> 00:41:05,880
+ka es ņemšu iespējams veikt pirmo.
+
+856
+00:41:05,880 --> 00:41:08,860
+Mans dators prasīs
+pirmo katru reizi.
+
+857
+00:41:08,860 --> 00:41:10,490
+Tā ka ir slodzes balansēšana.
+
+858
+00:41:10,490 --> 00:41:18,450
+Un, kas ļauj mums, galu galā,
+kartēt datus, vai karšu pieprasījumus,
+
+859
+00:41:18,450 --> 00:41:21,240
+vairākiem serveriem.
+
+860
+00:41:21,240 --> 00:41:24,226
+Tātad, kāda veida
+problēmas tagad joprojām pastāv?
+
+861
+00:41:24,226 --> 00:41:26,350
+Tā uzskata, piemēram, mēs tikai patiešām
+atrisināt labu problēmu.
+
+862
+00:41:26,350 --> 00:41:28,740
+Mēs saņēmām lietotājiem dažādiem serveriem.
+
+863
+00:41:28,740 --> 00:41:31,420
+But-- oh, un Chris, darīja
+Jums ir jautājums pirms?
+
+864
+00:41:31,420 --> 00:41:34,378
+>> Mērķauditorija: [dzirdams]
+
+865
+00:41:34,378 --> 00:41:43,670
+
+866
+00:41:43,670 --> 00:41:45,120
+>> DAVID Malan: Pilnīgi atkarīgs.
+
+867
+00:41:45,120 --> 00:41:47,042
+Tātad, kas notiek šeit?
+
+868
+00:41:47,042 --> 00:41:48,250
+Un mēs tiešām varam redzēt šo.
+
+869
+00:41:48,250 --> 00:41:51,649
+Tātad pamēģināsim Yahoo.
+
+870
+00:41:51,649 --> 00:41:52,940
+Patiesībā, iesim uz Facebook.
+
+871
+00:41:52,940 --> 00:41:54,520
+Jo mēs zinām, ka viens strādā.
+
+872
+00:41:54,520 --> 00:41:56,545
+Tāpēc es esmu gatavojas, lai kopētu
+ka IP adrese atkal.
+
+873
+00:41:56,545 --> 00:41:58,820
+Es esmu gatavojas slēgt visas šīs cilnes.
+
+874
+00:41:58,820 --> 00:42:03,800
+Es iešu open ka
+īpašu tīkla tab šeit lejā.
+
+875
+00:42:03,800 --> 00:42:07,800
+Un es esmu gatavojas apmeklēt tikai http: //.
+
+876
+00:42:07,800 --> 00:42:10,694
+Un tagad es esmu gatavojas hit Enter.
+
+877
+00:42:10,694 --> 00:42:11,860
+Un pieņemsim redzēt, kas noticis.
+
+878
+00:42:11,860 --> 00:42:20,662
+>> Ja es paskatos šo pieprasījumu, paziņojumu
+ka my-- Facebook ir slikts piemērs.
+
+879
+00:42:20,662 --> 00:42:22,370
+Tāpēc, ka viņiem ir
+super fancy tehnika
+
+880
+00:42:22,370 --> 00:42:25,960
+kas slēpj šo detaļu no mums.
+
+881
+00:42:25,960 --> 00:42:30,690
+Ļaujiet man izmantot Yahoo
+instead-- http: // šo IP.
+
+882
+00:42:30,690 --> 00:42:36,030
+Atvērsim mūsu tīklā
+tab, saglabāt žurnālu.
+
+883
+00:42:36,030 --> 00:42:37,945
+Un šeit mēs ejam, Enter.
+
+884
+00:42:37,945 --> 00:42:40,669
+
+885
+00:42:40,669 --> 00:42:41,210
+Tas ir smieklīgi.
+
+886
+00:42:41,210 --> 00:42:44,480
+Labi, tāpēc šeit ir slavens 404 ziņojumu.
+
+887
+00:42:44,480 --> 00:42:48,500
+Kas ir smieklīgi ir tas, ka viņi
+iespējams, nekad būs atpakaļ.
+
+888
+00:42:48,500 --> 00:42:51,430
+Jo tur ir iespējams
+nav kaut kas nepareizi per se.
+
+889
+00:42:51,430 --> 00:42:54,050
+Viņi ir tikai tīši
+nolēma neatbalstīt
+
+890
+00:42:54,050 --> 00:42:56,250
+ciparu forma to adresi.
+
+891
+00:42:56,250 --> 00:43:00,270
+>> Tātad, ko mēs patiesībā redzam
+tab Network, ja es pull šo šeit,
+
+892
+00:43:00,270 --> 00:43:06,140
+ir, kā es saku, slavens 404, kur
+ja es paskatos reaģēšanas galvenes,
+
+893
+00:43:06,140 --> 00:43:09,070
+Tas ir tas, ko es saņēmu here-- 404 Not Found.
+
+894
+00:43:09,070 --> 00:43:11,360
+Tātad pamēģināsim vienu citu.
+
+895
+00:43:11,360 --> 00:43:13,180
+Redzēsim, vai CNN sadarbojas ar mums.
+
+896
+00:43:13,180 --> 00:43:19,440
+Es greifers viens no CNN IP adresēm,
+notīriet šo, HTTP, Dah, Dah, Dah, dah.
+
+897
+00:43:19,440 --> 00:43:21,620
+Tātad atbildot uz Chris s
+Jautājums, ka viens strādāja.
+
+898
+00:43:21,620 --> 00:43:24,140
+
+899
+00:43:24,140 --> 00:43:26,255
+>> Un iesim uz reaģēšanas galvenes.
+
+900
+00:43:26,255 --> 00:43:30,810
+
+901
+00:43:30,810 --> 00:43:33,640
+Patiesībā nē, labi, es esmu
+cīnās, lai atrastu darba piemērs.
+
+902
+00:43:33,640 --> 00:43:38,270
+Tātad CNN ir nolēmusi, mēs vienkārši atstāt jūs
+jebkādā adrese jūs faktiski apmeklēt,
+
+903
+00:43:38,270 --> 00:43:40,359
+branding jautājumi malā.
+
+904
+00:43:40,359 --> 00:43:43,275
+Bet ko nebūtu noticis, ja
+mēs varētu redzēt to Facebook gadījumā
+
+905
+00:43:43,275 --> 00:43:46,700
+ir, mēs iegūtu 301 Pārvietots
+Pastāvīgi, visticamāk,
+
+906
+00:43:46,700 --> 00:43:54,420
+iekšpusē, kas ir
+atrašanās vieta: https: //www.facebook.com.
+
+907
+00:43:54,420 --> 00:44:01,210
+Un izredzes ir www.facebook.com ir
+alias par tieši tādu pašu serveri mēs tikai
+
+908
+00:44:01,210 --> 00:44:01,710
+gāja uz.
+
+909
+00:44:01,710 --> 00:44:03,500
+>> Tātad, tas ir mazliet neproduktīvi.
+
+910
+00:44:03,500 --> 00:44:05,170
+Mēs burtiski apmeklējot serveri.
+
+911
+00:44:05,170 --> 00:44:07,040
+tad serveris mums saka, iet prom.
+
+912
+00:44:07,040 --> 00:44:08,320
+Iet uz šo citu adresi.
+
+913
+00:44:08,320 --> 00:44:10,870
+Bet mēs tikai tik gadās būt
+dodas atpakaļ uz šo pašu serveri.
+
+914
+00:44:10,870 --> 00:44:14,550
+Bet, iespējams, mēs tagad palikt ka
+Serveris bez šī un atpakaļ.
+
+915
+00:44:14,550 --> 00:44:18,600
+Jo tagad mēs esam, izmantojot nosaukumu
+versija, vietā, nevis ciparu.
+
+916
+00:44:18,600 --> 00:44:20,060
+Labs jautājums.
+
+917
+00:44:20,060 --> 00:44:23,690
+>> Labi, tāpēc, ja mēs tagad assume-- mēs
+ir atrisinājuši slodzes līdzsvarošanu.
+
+918
+00:44:23,690 --> 00:44:25,894
+Mums tagad ir mehānisms,
+vai tas ir, izmantojot DNS,
+
+919
+00:44:25,894 --> 00:44:29,060
+vai tas ir, izmantojot šo melno kasti, vai
+tas ir, izmantojot kādu no šīm metodēm.
+
+920
+00:44:29,060 --> 00:44:33,810
+Mēs varam veikt lietotāja pieprasījumu un
+skaitlis, ar kuru serveri, 1, 2 vai 3,
+
+921
+00:44:33,810 --> 00:44:35,420
+nosūtīt viņam vai viņai.
+
+922
+00:44:35,420 --> 00:44:39,180
+>> Kas sāk lauzt par mūsu mājas lapā?
+
+923
+00:44:39,180 --> 00:44:41,160
+Citiem vārdiem sakot, mums ir
+uzcēla uzņēmumu, kas
+
+924
+00:44:41,160 --> 00:44:43,480
+agrāk bija uz vienu serveri.
+
+925
+00:44:43,480 --> 00:44:46,870
+Tagad, bizness darbojas
+vairākiem serveriem.
+
+926
+00:44:46,870 --> 00:44:51,770
+Kāda veida pieņēmumiem,
+kāda veida dizains lēmumus,
+
+927
+00:44:51,770 --> 00:44:54,870
+varētu tagad pārkāpj?
+
+928
+00:44:54,870 --> 00:44:55,745
+>> Tas ir tik acīmredzama.
+
+929
+00:44:55,745 --> 00:44:58,620
+Bet pieņemsim redzēt, ja mēs nevaram likt mūsu
+pirkstu uz kādu no problēmas, esam
+
+930
+00:44:58,620 --> 00:44:59,780
+izveidots par sevi.
+
+931
+00:44:59,780 --> 00:45:02,750
+Atkal, tas ir veids kā saimniecības
+nosaka noplūde šļūteni.
+
+932
+00:45:02,750 --> 00:45:05,094
+Un tagad daži jauns jautājums
+ir popped up vairāk nekā šeit.
+
+933
+00:45:05,094 --> 00:45:07,880
+
+934
+00:45:07,880 --> 00:45:11,380
+>> Mērķauditorija: [dzirdams]
+
+935
+00:45:11,380 --> 00:45:16,574
+
+936
+00:45:16,574 --> 00:45:19,240
+DAVID Malan: Labi, tāpēc mums ir
+turpina augt mūsu cietā diska.
+
+937
+00:45:19,240 --> 00:45:20,450
+Es esmu OK ar to tieši tagad.
+
+938
+00:45:20,450 --> 00:45:23,212
+Tā kā es domāju, ka varu
+horizontāli skala.
+
+939
+00:45:23,212 --> 00:45:26,420
+Tāpat kā, ja es skrienu zems, es ņemšu tikai iegūt
+ceturto serveri, varbūt piektā serveri,
+
+940
+00:45:26,420 --> 00:45:30,820
+un pēc tam palielināt mūsu spējas
+ar citu 30% vai 50%, vai plauktiņš.
+
+941
+00:45:30,820 --> 00:45:32,759
+Tāpēc es esmu OK ar to, vismaz tagad.
+
+942
+00:45:32,759 --> 00:45:33,634
+Mērķauditorija: [dzirdams]
+
+943
+00:45:33,634 --> 00:45:37,314
+
+944
+00:45:37,314 --> 00:45:38,980
+DAVID Malan: Labi, tāpēc tas ir labs punkts.
+
+945
+00:45:38,980 --> 00:45:42,340
+Tātad pieņemsim serveriem
+nav identiski.
+
+946
+00:45:42,340 --> 00:45:45,260
+Un klientu apkalpošana
+vai e-pastu ekvivalents
+
+947
+00:45:45,260 --> 00:45:48,690
+ir iegūt kādu ziņu no lietotāja
+sakot, tas nedarbojas pareizi.
+
+948
+00:45:48,690 --> 00:45:52,070
+Tas ir ļoti iespējams, dažreiz,
+ka varbūt viens vai vairāki serveri
+
+949
+00:45:52,070 --> 00:45:55,000
+darbojas mazliet greizi, bet ne
+citi, kas noteikti var
+
+950
+00:45:55,000 --> 00:45:57,096
+padara to grūtāk tramdīt leju jautājumu.
+
+951
+00:45:57,096 --> 00:45:58,720
+Jums varētu būt skatīties vairākas vietas.
+
+952
+00:45:58,720 --> 00:46:00,960
+>> Tas ir izpausme
+cita veida bug,
+
+953
+00:46:00,960 --> 00:46:03,950
+kas ir tas, ka jūs, iespējams, vajadzētu
+ir paredzēti jūsu infrastruktūru tā
+
+954
+00:46:03,950 --> 00:46:06,200
+ka viss ir patiesi identiski.
+
+955
+00:46:06,200 --> 00:46:10,390
+Bet tas atklāj jaunu problēmu
+ka mums nebija agrāk.
+
+956
+00:46:10,390 --> 00:46:11,715
+Kas vēl?
+
+957
+00:46:11,715 --> 00:46:12,590
+Mērķauditorija: [dzirdams]
+
+958
+00:46:12,590 --> 00:46:16,390
+
+959
+00:46:16,390 --> 00:46:19,500
+>> DAVID Malan: Jā,
+tur ir vairāk sarežģītību.
+
+960
+00:46:19,500 --> 00:46:20,792
+Tur ir fiziski vēl vadi.
+
+961
+00:46:20,792 --> 00:46:21,750
+Tur ir cita ierīce.
+
+962
+00:46:21,750 --> 00:46:26,310
+Patiesībā, es esmu ieviesta fundamentāls
+koncepcija un būtiska problēma šeit
+
+963
+00:46:26,310 --> 00:46:28,300
+pazīstams kā par vienu punktu
+neveiksmes, kas,
+
+964
+00:46:28,300 --> 00:46:30,110
+pat ja jūs nekad neesmu dzirdējis
+frāze, jūs varat droši
+
+965
+00:46:30,110 --> 00:46:31,780
+tagad strādā atpakaļ un izdomāt to ārā.
+
+966
+00:46:31,780 --> 00:46:35,560
+Ko tas nozīmē, ka man ir viena
+atteice manā arhitektūrā?
+
+967
+00:46:35,560 --> 00:46:39,694
+Un arhitektūra, es tikko
+nozīmē topoloģija tā.
+
+968
+00:46:39,694 --> 00:46:40,610
+>> Mērķauditorija: [dzirdams]
+
+969
+00:46:40,610 --> 00:46:42,901
+>> DAVID Malan: Jā, ko tad, ja
+slodze ekvilibrists iet uz leju?
+
+970
+00:46:42,901 --> 00:46:46,290
+Esmu ievietots šis vidū cilvēks, kura
+mērķis dzīvē ir, lai atrisinātu problēmu.
+
+971
+00:46:46,290 --> 00:46:47,740
+Bet es esmu ieviesusi jaunu problēmu.
+
+972
+00:46:47,740 --> 00:46:49,350
+Jauna noplūde ir ieplīsis šļūtenē.
+
+973
+00:46:49,350 --> 00:46:53,500
+Jo tagad, ja slodze ekvilibrists
+nomirst vai pārtraukumi vai misfunctions,
+
+974
+00:46:53,500 --> 00:46:56,350
+tagad es zaudēt piekļuvi
+visi trīs no maniem serveriem.
+
+975
+00:46:56,350 --> 00:46:58,880
+Un pirms, man nav
+ir šī starpnieks.
+
+976
+00:46:58,880 --> 00:47:03,020
+Un tā tas ir jauna problēma, varbūt.
+
+977
+00:47:03,020 --> 00:47:05,245
+Mēs atgriezties
+kā mēs varētu noteikt, ka.
+
+978
+00:47:05,245 --> 00:47:06,734
+>> Mērķauditorija: [dzirdams]
+
+979
+00:47:06,734 --> 00:47:08,400
+DAVID Malan: Tas būtu viens pieeja.
+
+980
+00:47:08,400 --> 00:47:13,926
+Jā, un tāpēc tas būs diezgan
+žurkas ir caurums sākam iet uz leju.
+
+981
+00:47:13,926 --> 00:47:15,800
+Bet pieņemsim atgriezties
+ka tikai brīdi.
+
+982
+00:47:15,800 --> 00:47:17,299
+Kādas citas problēmas mēs izveidojām?
+
+983
+00:47:17,299 --> 00:47:25,540
+
+984
+00:47:25,540 --> 00:47:27,470
+>> Tātad, Dan pirms minēto datubāzi.
+
+985
+00:47:27,470 --> 00:47:29,500
+Un, pat ja jūs neesat
+pārāk pazīstams tehniski,
+
+986
+00:47:29,500 --> 00:47:33,220
+datu bāze ir tikai serveris, kurā
+mainās dati parasti uzglabā,
+
+987
+00:47:33,220 --> 00:47:36,430
+varbūt pasūtījums kāds ir ievietots,
+jūsu lietotāja profils, jūsu vārds,
+
+988
+00:47:36,430 --> 00:47:40,810
+Jūsu e-pasta adresi, lietas, kas varētu
+ievadīšana vai laika gaitā mainījusies.
+
+989
+00:47:40,810 --> 00:47:44,599
+>> Agrāk mana datu bāze bija
+pats serveris kā mana web serveri.
+
+990
+00:47:44,599 --> 00:47:46,390
+Jo man tikko bija viens
+web hostinga kontu.
+
+991
+00:47:46,390 --> 00:47:48,480
+Viss bija viss vienā un tajā pašā vietā.
+
+992
+00:47:48,480 --> 00:47:54,200
+Kur man manu datubāzi
+tagad, uz 3 serveri 1, 2, vai?
+
+993
+00:47:54,200 --> 00:47:55,100
+>> Mērķauditorija: 4.
+
+994
+00:47:55,100 --> 00:47:58,070
+>> DAVID Malan: 4, OK, visi
+labi, tāpēc iesim tur.
+
+995
+00:47:58,070 --> 00:48:01,650
+Tāpēc es esmu gatavojas īstenot manu
+database-- un pieņemsim
+
+996
+00:48:01,650 --> 00:48:06,520
+sākt marķēšana šos www, www, www.
+
+997
+00:48:06,520 --> 00:48:08,780
+Un es esmu gatavojas teikt,
+šis ir numur četri.
+
+998
+00:48:08,780 --> 00:48:11,270
+Un es saku dB datubāzē.
+
+999
+00:48:11,270 --> 00:48:12,870
+Labi, man patīk šis.
+
+1000
+00:48:12,870 --> 00:48:17,021
+Ko line man būtu
+domājams būt zīmējums šeit?
+
+1001
+00:48:17,021 --> 00:48:18,850
+>> Mērķauditorija: [dzirdams]
+
+1002
+00:48:18,850 --> 00:48:22,740
+>> DAVID Malan: Jā, tā kods,
+kā mēs apspriedīsim rīt,
+
+1003
+00:48:22,740 --> 00:48:24,900
+domājams, ir tas pats
+uz visiem trim serveriem.
+
+1004
+00:48:24,900 --> 00:48:28,374
+Bet tas tagad ir savienot nevis uz
+datu bāze darbojas lokāli, bet citur.
+
+1005
+00:48:28,374 --> 00:48:29,040
+Un tas ir jauki.
+
+1006
+00:48:29,040 --> 00:48:31,623
+Mēs varam tikai dot datubāzes
+nosaukt, jo mums ir, vai vairāki.
+
+1007
+00:48:31,623 --> 00:48:33,930
+Un tas viss darbojas naudas sodu.
+
+1008
+00:48:33,930 --> 00:48:35,820
+Bet ko mēs esam darījuši?
+
+1009
+00:48:35,820 --> 00:48:40,640
+Mēs esam horizontāli samazināts, ņemot
+trīs serveri, nevis viens, kas
+
+1010
+00:48:40,640 --> 00:48:41,140
+ir labi.
+
+1011
+00:48:41,140 --> 00:48:44,240
+Jo tagad mēs varam rīkoties
+trīs reizes vairāk slodzi.
+
+1012
+00:48:44,240 --> 00:48:47,710
+>> Un vēl labāk, ja viens vai divi
+no šiem serveriem iet uz leju,
+
+1013
+00:48:47,710 --> 00:48:49,350
+mans bizness var turpināt darboties.
+
+1014
+00:48:49,350 --> 00:48:53,960
+Jo man vēl joprojām ir viens, pat ja es esmu
+veida klibo gar sniegumu gudrs.
+
+1015
+00:48:53,960 --> 00:49:01,020
+Bet ko jauna problēma ir I
+ieviests, pārvietojot datubāzi
+
+1016
+00:49:01,020 --> 00:49:04,350
+šim atsevišķu serveri
+tā vietā, lai uz 1, 2, un 3?
+
+1017
+00:49:04,350 --> 00:49:05,412
+>> Mērķauditorija: [dzirdams]
+
+1018
+00:49:05,412 --> 00:49:08,120
+DAVID Malan: Jā, tāpēc tagad man ir
+vēl viena atteice.
+
+1019
+00:49:08,120 --> 00:49:12,330
+Ja mans datubāzē nomirst, vai ir nepieciešams
+tikt uzlaboti, vai kāds, tagad pārliecināts,
+
+1020
+00:49:12,330 --> 00:49:13,610
+mans mājas lapā ir tiešsaistē.
+
+1021
+00:49:13,610 --> 00:49:16,270
+Un es varu kalpot statisks,
+nemainīgs saturs.
+
+1022
+00:49:16,270 --> 00:49:21,210
+Bet es nevaru ļaut lietotājiem ieiet vai maiņa
+kaut vai lai kaut ko, vēl sliktāk.
+
+1023
+00:49:21,210 --> 00:49:24,120
+Jo, ja 4 ir izgājis,
+pēc tam 1, 2, un 3
+
+1024
+00:49:24,120 --> 00:49:27,710
+tiešām nevar runāt ar to pēc definīcijas.
+
+1025
+00:49:27,710 --> 00:49:31,560
+>> Labi, tāpēc yeah, un tāpēc tas ir iemesls, kāpēc
+Es esmu kavējas izdarīt to.
+
+1026
+00:49:31,560 --> 00:49:32,690
+Tātad pieņemsim atgriezties pie tā.
+
+1027
+00:49:32,690 --> 00:49:33,700
+Es nedomāju, lai saglabātu stumšanas jums off.
+
+1028
+00:49:33,700 --> 00:49:36,030
+Bet aina ir ļoti
+ātri gatavojas saņemt stresa.
+
+1029
+00:49:36,030 --> 00:49:38,620
+Tāpēc, ka jums ir nepieciešams, lai sāktu
+kam ir divi viss.
+
+1030
+00:49:38,620 --> 00:49:41,850
+Patiesībā, ja jūs esat kādreiz redzējuši
+filma Kontaktinformācija pirms dažiem gadiem
+
+1031
+00:49:41,850 --> 00:49:45,310
+ar Jodie Foster-- nē?
+
+1032
+00:49:45,310 --> 00:49:47,410
+>> OK, lai par diviem
+mums, kas esam redzējuši Contact,
+
+1033
+00:49:47,410 --> 00:49:50,800
+tur ir attiecības tur, kur viņi
+būtībā nopirka divas no kaut
+
+1034
+00:49:50,800 --> 00:49:53,250
+nevis vienu, lai gan
+divreiz cenu.
+
+1035
+00:49:53,250 --> 00:49:55,922
+Tātad tas bija sava veida jautrs
+komentēt filmā.
+
+1036
+00:49:55,922 --> 00:49:57,130
+Tas ir sava veida, kas saistīti ar to.
+
+1037
+00:49:57,130 --> 00:49:58,290
+Mēs varētu pilnīgi darīt.
+
+1038
+00:49:58,290 --> 00:50:00,123
+Un jūs esat tikko izmaksas
+mums divreiz tik daudz naudas.
+
+1039
+00:50:00,123 --> 00:50:01,300
+Bet mēs būsim atpakaļ uz to.
+
+1040
+00:50:01,300 --> 00:50:02,400
+>> Tātad mēs esam atrisināt šo.
+
+1041
+00:50:02,400 --> 00:50:03,108
+Tātad, jūs zināt, ko?
+
+1042
+00:50:03,108 --> 00:50:04,450
+Tas ir kā slidenas nogāzes.
+
+1043
+00:50:04,450 --> 00:50:07,033
+Es nevēlos, lai risinātu ar kuru
+lai būtu dublēt datu bāzi.
+
+1044
+00:50:07,033 --> 00:50:08,037
+Tas ir pārāk daudz naudas.
+
+1045
+00:50:08,037 --> 00:50:08,620
+Tu zini ko?
+
+1046
+00:50:08,620 --> 00:50:12,880
+Es gribu, lai man datubāzi
+tāpat kā versijā vienā
+
+1047
+00:50:12,880 --> 00:50:17,450
+kur katrs serveris ir
+savu vietējo datu bāzi.
+
+1048
+00:50:17,450 --> 00:50:19,480
+Tāpēc es esmu tikai gatavojas
+izdarīt db par katru no tiem.
+
+1049
+00:50:19,480 --> 00:50:22,240
+>> Tāpēc tagad katrs web serveri
+ir identisks ciktāl
+
+1050
+00:50:22,240 --> 00:50:25,650
+kā tas ir un to pašu kodu, tas pats
+statiskā aktīvi, tie paši attēli un teksts
+
+1051
+00:50:25,650 --> 00:50:26,720
+un tā tālāk.
+
+1052
+00:50:26,720 --> 00:50:29,580
+Un katram ir savs datu bāzi.
+
+1053
+00:50:29,580 --> 00:50:31,450
+Man noteica vienu punktu
+no neveiksmes problēmu.
+
+1054
+00:50:31,450 --> 00:50:32,570
+Tagad man ir datu bāze.
+
+1055
+00:50:32,570 --> 00:50:36,210
+Nav svarīgi, kurā divi vai viens no šiem
+lietas mirst, tur vienmēr ir viens pa kreisi.
+
+1056
+00:50:36,210 --> 00:50:41,156
+Bet ko jauna problēma es esmu izveidojis
+ka Dan risinājums izvairīties?
+
+1057
+00:50:41,156 --> 00:50:42,470
+>> Mērķauditorija: [dzirdams]
+
+1058
+00:50:42,470 --> 00:50:44,386
+>> DAVID Malan: Jā, es
+ir sinhronizēt tos, vai ne?
+
+1059
+00:50:44,386 --> 00:50:47,860
+Jo nu man ir nepieciešams, lai sinhronizētu
+kas notiek where-- citiem vārdiem sakot,
+
+1060
+00:50:47,860 --> 00:50:50,570
+ja Alice apmeklē manu
+vietā, un viņa ir noticis
+
+1061
+00:50:50,570 --> 00:50:55,070
+nokļūt nejauši vai apaļas robined
+vai kāds, uz servera numur viens,
+
+1062
+00:50:55,070 --> 00:50:58,770
+pēc tam man ir vienmēr
+nosūtīt viņu uz serveri 1.
+
+1063
+00:50:58,770 --> 00:50:59,420
+Kāpēc?
+
+1064
+00:50:59,420 --> 00:51:01,540
+Jo, ja es sūtu viņai
+uz servera 2, tas notiek
+
+1065
+00:51:01,540 --> 00:51:03,140
+izskatās viņa neeksistē tur.
+
+1066
+00:51:03,140 --> 00:51:04,450
+>> Es neesmu nāksies savu pasūtījumu vēsturi.
+
+1067
+00:51:04,450 --> 00:51:06,300
+Es neesmu nāksies viņas profila tur.
+
+1068
+00:51:06,300 --> 00:51:09,360
+Un ka tikai jūtas kā
+tas aicinot problēmas.
+
+1069
+00:51:09,360 --> 00:51:11,400
+Un, kad Jānis apmeklē, es
+ir jānosūta viņam vienmēr
+
+1070
+00:51:11,400 --> 00:51:14,800
+uz tā paša servera, 2, vai atkarībā no tā,
+viens, un Charlie uz trešo vienu,
+
+1071
+00:51:14,800 --> 00:51:15,797
+un konsekventi.
+
+1072
+00:51:15,797 --> 00:51:17,130
+Tas nav nesaprātīgs, though.
+
+1073
+00:51:17,130 --> 00:51:19,270
+To sauc par
+sadalīšanu savu datu bāzi.
+
+1074
+00:51:19,270 --> 00:51:21,270
+Un patiesībā tas bija tas, ko
+Facebook darīja sākumā.
+
+1075
+00:51:21,270 --> 00:51:24,020
+>> Ja jūs pēc vēsturi
+Facebook, tas sākās šeit Campus
+
+1076
+00:51:24,020 --> 00:51:25,770
+kā www.thefacebook.com.
+
+1077
+00:51:25,770 --> 00:51:29,260
+Tad tas attīstījies, kad Mark sākusies
+izplatīšanās uz citām pilsētiņās
+
+1078
+00:51:29,260 --> 00:51:34,450
+būt harvard.thefacebook.com un
+mit.thefacebook.com, un, iespējams,
+
+1079
+00:51:34,450 --> 00:51:37,027
+bu.thefacebook.com, un tamlīdzīgi.
+
+1080
+00:51:37,027 --> 00:51:38,860
+Un tas bija tāpēc, ka
+agri, es nedomāju, ka
+
+1081
+00:51:38,860 --> 00:51:40,484
+jūs varētu būt draugi visā pilsētiņās.
+
+1082
+00:51:40,484 --> 00:51:41,410
+Bet tas ir jauki.
+
+1083
+00:51:41,410 --> 00:51:43,930
+Jo ikviens no Hārvarda
+got nosūtīts uz šī servera.
+
+1084
+00:51:43,930 --> 00:51:45,744
+Ikviens no BU got nosūtīts uz šī servera.
+
+1085
+00:51:45,744 --> 00:51:47,910
+Ikviens no MIT got nosūtīts
+šai server-- teorētiski.
+
+1086
+00:51:47,910 --> 00:51:50,540
+Man nav īsti zināt visu
+pamatā esošās īstenošanas detaļas.
+
+1087
+00:51:50,540 --> 00:51:55,610
+Bet viņš, iespējams, sadalīts cilvēkus ar
+viņu Campus, kur viņu tīkls bija.
+
+1088
+00:51:55,610 --> 00:51:58,772
+>> Tā ka ir labi, līdz vietai
+kur jums ir nepieciešams divi serverus Harvard,
+
+1089
+00:51:58,772 --> 00:51:59,980
+vai trīs serverus Harvard.
+
+1090
+00:51:59,980 --> 00:52:01,800
+Un tad, ka vienkāršība
+veida sabojājas.
+
+1091
+00:52:01,800 --> 00:52:03,174
+Bet tas ir saprātīga pieeja.
+
+1092
+00:52:03,174 --> 00:52:04,950
+Pieņemsim vienmēr sūtīt Alice
+tajā pašā vietā,
+
+1093
+00:52:04,950 --> 00:52:06,366
+vienmēr nosūta Bobs uz to pašu vietu.
+
+1094
+00:52:06,366 --> 00:52:09,680
+Bet kas notiek, ja Alises
+serveris iet bezsaistē?
+
+1095
+00:52:09,680 --> 00:52:12,300
+Bobs un Čārlijs joprojām var nopirkt
+lietas un ieiet lapā.
+
+1096
+00:52:12,300 --> 00:52:13,462
+Bet Alice nevar.
+
+1097
+00:52:13,462 --> 00:52:15,170
+Tātad jūs esat zaudējis trešo
+Jūsu lietotāju bāzi.
+
+1098
+00:52:15,170 --> 00:52:16,980
+Varbūt tas ir labāk nekā 100%?
+
+1099
+00:52:16,980 --> 00:52:20,580
+Bet varbūt tas lūdzu būt jauki, ja mēs varētu
+joprojām atbalsta 100% no mūsu lietotājiem
+
+1100
+00:52:20,580 --> 00:52:23,470
+pat tad, ja viena trešdaļa mūsu
+serveri iet bezsaistē.
+
+1101
+00:52:23,470 --> 00:52:24,760
+>> Lai mēs varētu sinhronizēt ko?
+
+1102
+00:52:24,760 --> 00:52:29,250
+Ne lietotāji, per se, bet
+datu bāze pāri visiem šiem serveriem.
+
+1103
+00:52:29,250 --> 00:52:33,350
+Tāpēc tagad mēs veida nepieciešams zināms
+veida starpsavienojumu
+
+1104
+00:52:33,350 --> 00:52:37,880
+šeit tā, ka paši serveri
+var sync-- nav nepamatota.
+
+1105
+00:52:37,880 --> 00:52:40,090
+Un patiesībā, šī tehnoloģija pastāv.
+
+1106
+00:52:40,090 --> 00:52:45,550
+Pasaulē datubāzu, tur ir
+jēdziens master-vergu datu bāzēm,
+
+1107
+00:52:45,550 --> 00:52:48,240
+vai pamatskolas vidusskolas,
+kur starp funkcijām
+
+1108
+00:52:48,240 --> 00:52:51,050
+ir ne tikai, lai uzglabātu datus
+un atbildēt ar datiem,
+
+1109
+00:52:51,050 --> 00:52:53,375
+bet arī tikai, lai pastāvīgi
+sinhronizēšanu ar otru.
+
+1110
+00:52:53,375 --> 00:52:56,480
+Tātad jebkurā laikā jūs rakstīt vai saglabāt
+kaut uz šo datu bāzi,
+
+1111
+00:52:56,480 --> 00:53:00,040
+tas uzreiz kļūst "atkārtot"
+uz citām datu bāzēm, kā arī.
+
+1112
+00:53:00,040 --> 00:53:02,870
+>> Un jebkurā laikā jūs lasīt no tā,
+tas nav svarīgi, kur jūs esat.
+
+1113
+00:53:02,870 --> 00:53:05,170
+Jo, ja teorētiski
+viņi visi esam sinhronizēti, tu esi
+
+1114
+00:53:05,170 --> 00:53:07,710
+gatavojas iegūt tādu pašu viedokli datu.
+
+1115
+00:53:07,710 --> 00:53:10,800
+Tātad tas izklausās ideāli.
+
+1116
+00:53:10,800 --> 00:53:11,883
+Tur ir nokļuvis būt nozvejas.
+
+1117
+00:53:11,883 --> 00:53:15,200
+
+1118
+00:53:15,200 --> 00:53:18,990
+Ko varētu nozvejas būt?
+
+1119
+00:53:18,990 --> 00:53:21,790
+>> Mērķauditorija: [dzirdams]
+
+1120
+00:53:21,790 --> 00:53:25,830
+>> DAVID Malan: Jā, tāpēc trīs reizes
+tik daudz sīkumi varētu iet greizi.
+
+1121
+00:53:25,830 --> 00:53:26,930
+Tas ir realitāte.
+
+1122
+00:53:26,930 --> 00:53:28,480
+Tas varētu visi būt vienādi garā.
+
+1123
+00:53:28,480 --> 00:53:30,404
+Bet kāds nepieciešams, lai konfigurētu tiem.
+
+1124
+00:53:30,404 --> 00:53:33,070
+Tur ir lielāka varbūtība, ka
+kaut kas notiek, lai iet greizi.
+
+1125
+00:53:33,070 --> 00:53:38,130
+Vienkārši combinatorially esat
+vairāk sīkumi tendētas uz kļūdām.
+
+1126
+00:53:38,130 --> 00:53:40,505
+Kas vēl ir slikti potenciāli?
+
+1127
+00:53:40,505 --> 00:53:41,380
+Mērķauditorija: [dzirdams]
+
+1128
+00:53:41,380 --> 00:53:44,100
+
+1129
+00:53:44,100 --> 00:53:46,180
+>> DAVID Malan: Jā, tā
+sinhronizācija var būt slikti.
+
+1130
+00:53:46,180 --> 00:53:48,110
+Pat kā jūs varētu zināt
+no backups un tāds,
+
+1131
+00:53:48,110 --> 00:53:50,520
+ja jūs vienkārši ir akli padarīt
+backups, kas notiks, ja kaut kas
+
+1132
+00:53:50,520 --> 00:53:51,560
+noiet greizi vienā datu bāzē?
+
+1133
+00:53:51,560 --> 00:53:53,018
+Izdzēst kaut ko jums nevajadzētu.
+
+1134
+00:53:53,018 --> 00:53:56,299
+Jūs esat uzreiz atkārtot
+ka problēma visur citur.
+
+1135
+00:53:56,299 --> 00:53:58,840
+Tātad Victoria bija talking-- backups
+būtu laba lieta šeit.
+
+1136
+00:53:58,840 --> 00:54:00,549
+Un tā mēs saņemam atpakaļ uz to.
+
+1137
+00:54:00,549 --> 00:54:03,090
+Un, lai būtu skaidrs, mēs runājam
+nav par backups šeit per se.
+
+1138
+00:54:03,090 --> 00:54:08,240
+Mēs runājam par patiesu replikācijas
+vai sinhronizācija pāri serveriem.
+
+1139
+00:54:08,240 --> 00:54:09,110
+Viņi visi dzīvot.
+
+1140
+00:54:09,110 --> 00:54:12,074
+Viņi nav domāts
+tikt izmantoti, lai backups.
+
+1141
+00:54:12,074 --> 00:54:13,294
+>> Mērķauditorija: [dzirdams]
+
+1142
+00:54:13,294 --> 00:54:14,335
+DAVID Malan: Kas tas ir?
+
+1143
+00:54:14,335 --> 00:54:14,710
+Mērķauditorija: Higher--
+
+1144
+00:54:14,710 --> 00:54:15,751
+DAVID Malan: Augstākā izmaksas.
+
+1145
+00:54:15,751 --> 00:54:20,180
+Mēs esam trīskāršojies izmaksas
+pārliecināts, lai gan vismaz ziņā
+
+1146
+00:54:20,180 --> 00:54:21,100
+aparatūras.
+
+1147
+00:54:21,100 --> 00:54:23,200
+Tāpēc, ka datubāze ir
+tikai gabals programmatūru.
+
+1148
+00:54:23,200 --> 00:54:25,189
+Un web serveris ir gabals programmatūru.
+
+1149
+00:54:25,189 --> 00:54:27,980
+Tas ir iespējams bez maksas, ja mēs izmantojam
+jebkurš skaits atvērtā koda lietām.
+
+1150
+00:54:27,980 --> 00:54:30,480
+Bet, ja mēs izmantojam
+kaut kā Oracle,
+
+1151
+00:54:30,480 --> 00:54:36,574
+mēs maksājot Oracle vairāk naudas par
+licences, vai Microsoft par piekļuvi.
+
+1152
+00:54:36,574 --> 00:54:38,240
+Tur ir nokļuvis būt kādu citu nozvejas šeit.
+
+1153
+00:54:38,240 --> 00:54:39,240
+Tas nevar būt šo vienkāršo.
+
+1154
+00:54:39,240 --> 00:54:42,990
+
+1155
+00:54:42,990 --> 00:54:47,300
+>> Tātad, lai jūsu punktu, es domāju, ka tas bija
+Kareem, par ģeogrāfiju earlier-- vai nē,
+
+1156
+00:54:47,300 --> 00:54:50,870
+Roman, bija tas, par geography-- pieņemsim
+ka mēs to gudri par to,
+
+1157
+00:54:50,870 --> 00:54:54,080
+un mēs esam liekot vienu no mūsu serveriem,
+un pārvērst mūsu datu bāzes, ASV,
+
+1158
+00:54:54,080 --> 00:54:56,910
+un vēl Eiropā, otra
+Dienvidamerika, vēl Āfrikā,
+
+1159
+00:54:56,910 --> 00:55:00,290
+citu Āzijā, visur mēs
+varētu vēlēties visā pasaulē.
+
+1160
+00:55:00,290 --> 00:55:04,220
+Mēs jau zinām no mūsu pēdām
+maršruti ka punkts A un punktu
+
+1161
+00:55:04,220 --> 00:55:06,910
+B, ja viņi tālāk, izņemot,
+gatavojas veikt vairāk laika.
+
+1162
+00:55:06,910 --> 00:55:10,312
+>> Un, ja kāds no jums ir izmantoti
+instrumenti, piemēram, Facebook vai Twitter
+
+1163
+00:55:10,312 --> 00:55:13,520
+vai kāds no šīm vietām šajās dienās, ka
+ir pastāvīgi mainās, jo lietotājs
+
+1164
+00:55:13,520 --> 00:55:16,880
+radīti dati, dažreiz, ja jūs
+hit pārlādēt vai atvērt pašu lapu
+
+1165
+00:55:16,880 --> 00:55:20,270
+citā pārlūkprogrammā, jūs redzat
+dažādas versijas, gandrīz.
+
+1166
+00:55:20,270 --> 00:55:22,875
+Jūs varētu redzēt kādu statusu
+atjaunināt šeit, bet ne šeit,
+
+1167
+00:55:22,875 --> 00:55:25,500
+un tad jūs pārlādēt, un pēc tam to
+Šķiet, un jūs atkal no jauna,
+
+1168
+00:55:25,500 --> 00:55:26,640
+un tā pazūd.
+
+1169
+00:55:26,640 --> 00:55:29,076
+Citiem vārdiem sakot, pastāvīgi
+acu, kas par to, vismaz
+
+1170
+00:55:29,076 --> 00:55:30,950
+ja jūs izmantojat sociālā
+tīklu, jo īpaši.
+
+1171
+00:55:30,950 --> 00:55:33,320
+>> Atkal, tikai tāpēc, ka
+dati mainās tik ātri,
+
+1172
+00:55:33,320 --> 00:55:35,710
+dažreiz serveriem do izkļūt no sinhronizācijā.
+
+1173
+00:55:35,710 --> 00:55:37,230
+Un varbūt tas ir super neliels logs.
+
+1174
+00:55:37,230 --> 00:55:39,970
+Bet 200 milisekundes, varbūt
+pat vairāk nekā that-- tas ir
+
+1175
+00:55:39,970 --> 00:55:43,415
+gatavojas veikt kādu ne-nulles summu
+par laika šīs datu bāzes sinhronizēt.
+
+1176
+00:55:43,415 --> 00:55:45,290
+Un mēs esam ne tikai
+runājam par vienu pieprasījumu.
+
+1177
+00:55:45,290 --> 00:55:48,540
+Ja uzņēmums ir tūkstošiem
+lietotājus, kas izmanto to vienlaicīgi,
+
+1178
+00:55:48,540 --> 00:55:49,460
+tie varētu buferis.
+
+1179
+00:55:49,460 --> 00:55:52,240
+Citiem vārdiem sakot, tur varētu
+būt rindā vai gaidīšanas rindu
+
+1180
+00:55:52,240 --> 00:55:54,950
+pirms visas šīs datubāzes
+vaicājumus var sinhronizēt.
+
+1181
+00:55:54,950 --> 00:55:56,610
+Tātad, varbūt tas ir tiešām dažas sekundes.
+
+1182
+00:55:56,610 --> 00:55:59,820
+>> Un tiešām tā ir taisnība, es domāju, ka pat
+līdz šai dienai ar Facebook, kuru
+
+1183
+00:55:59,820 --> 00:56:02,010
+kad viņi sinhronizēt no
+East Coast West Coast,
+
+1184
+00:56:02,010 --> 00:56:06,026
+tā has a non-trivial
+izplatīšanās kavējuma, tā sakot,
+
+1185
+00:56:06,026 --> 00:56:07,650
+ka tu tikko veida ir paciest.
+
+1186
+00:56:07,650 --> 00:56:11,210
+Un tā tas ir ne tik daudz
+bug jo tā ir realitāte
+
+1187
+00:56:11,210 --> 00:56:14,230
+ka lietotāji varētu redzēt
+pareizie dati vismaz
+
+1188
+00:56:14,230 --> 00:56:14,970
+dažas sekundes.
+
+1189
+00:56:14,970 --> 00:56:17,410
+>> Es redzu šo par čivināt daudz
+tiešām kur dažreiz es ņemšu
+
+1190
+00:56:17,410 --> 00:56:21,227
+čivināt vienā logā atveriet otru, lai
+tad redzēt to, lai apstiprinātu, ka tā patiešām
+
+1191
+00:56:21,227 --> 00:56:22,560
+gāja uz augšu, un tas nav tur vēl.
+
+1192
+00:56:22,560 --> 00:56:25,340
+Un man ir sava veida pārlādēt,
+pārlādēt, reload-- ak, tur tas ir.
+
+1193
+00:56:25,340 --> 00:56:27,150
+Un tas nav tāpēc, ka tas nav saglabāts.
+
+1194
+00:56:27,150 --> 00:56:29,850
+Tas vienkārši nav pavairots
+uz citiem serveriem.
+
+1195
+00:56:29,850 --> 00:56:33,120
+>> Tātad šis kompromiss, too-- vai jūs tiešām
+vēlas pakļaut sevi riskam
+
+1196
+00:56:33,120 --> 00:56:37,254
+ka tad, ja lietotājs iet uz to, lai
+vēsture, tas nav reāli tur vēl?
+
+1197
+00:56:37,254 --> 00:56:38,420
+Es redzu šo par dažām bankām.
+
+1198
+00:56:38,420 --> 00:56:42,100
+Tas vienmēr kaitina mani, kad, labi, par vienu,
+Jūs varat iet tikai, piemēram, sešus mēnešus atpakaļ
+
+1199
+00:56:42,100 --> 00:56:45,160
+jūsu bankas pārskatos dažās bankās,
+kaut gan teorētiski vajadzētu
+
+1200
+00:56:45,160 --> 00:56:46,576
+iespēja saņemt visu tiešsaistē.
+
+1201
+00:56:46,576 --> 00:56:48,630
+Viņi vienkārši ņem sīkumi bezsaistē dažkārt.
+
+1202
+00:56:48,630 --> 00:56:51,430
+Dažreiz, too-- kāda mājas lapa ir?
+
+1203
+00:56:51,430 --> 00:56:53,570
+Tur one-- oh, tas ir GoDaddy, es domāju.
+
+1204
+00:56:53,570 --> 00:56:56,620
+GoDaddy, kad jūs izbraukšana
+pērkot domēna nosaukumu vai kaut ko,
+
+1205
+00:56:56,620 --> 00:56:58,630
+tie būs bieži dod jums
+saite uz jūsu saņemšanu.
+
+1206
+00:56:58,630 --> 00:57:01,470
+Un, ja jūs noklikšķiniet uz šīs saites tiesības
+prom, tas bieži vien nedarbojas.
+
+1207
+00:57:01,470 --> 00:57:03,290
+Tā vienkārši saka, strupceļā, nekas šeit.
+
+1208
+00:57:03,290 --> 00:57:05,450
+>> Un tas ir arī tāpēc, ka
+šie izplatīšanās kavēšanās.
+
+1209
+00:57:05,450 --> 00:57:08,290
+Tāpēc, ka kāda iemesla dēļ, tie
+lietojat mazliet laika
+
+1210
+00:57:08,290 --> 00:57:09,670
+faktiski radīt to.
+
+1211
+00:57:09,670 --> 00:57:12,070
+Tātad tas ir sava veida kā jūs vēlaties
+pull jūsu matu out kādā brīdī.
+
+1212
+00:57:12,070 --> 00:57:14,486
+Tāpēc, ka visi jūs mēģināt
+darīt, ir atrisināt vienkāršu problēmu.
+
+1213
+00:57:14,486 --> 00:57:16,590
+Un mēs turpinām radīt jaunu
+problēmas paši.
+
+1214
+00:57:16,590 --> 00:57:18,770
+Tātad, pieņemsim redzēt, ja mēs
+var veida atsaukt to.
+
+1215
+00:57:18,770 --> 00:57:22,730
+>> Izrādās, ka, apvienojot
+datu bāzes par visiem jūsu tīmekļa serveri
+
+1216
+00:57:22,730 --> 00:57:25,090
+nav īsti labākā prakse.
+
+1217
+00:57:25,090 --> 00:57:27,950
+Vispār, ko inženieris
+varētu darīt, vai sistēmas arhitekts,
+
+1218
+00:57:27,950 --> 00:57:30,340
+būtu jābūt atšķirīgs
+līmeņi serveriem.
+
+1219
+00:57:30,340 --> 00:57:33,160
+Un tikai kosmosa dēļ, es ņemšu
+izstrādā savu datu bāzi šeit.
+
+1220
+00:57:33,160 --> 00:57:38,060
+>> Mēs varētu būt datu bāzi un
+servera numurs četri šeit
+
+1221
+00:57:38,060 --> 00:57:42,430
+ka tas ir savienojumi
+katrs no šiem serveriem šeit.
+
+1222
+00:57:42,430 --> 00:57:45,400
+Tātad tas varētu būt mūsu priekšā
+galu līmenim, jo ​​cilvēki teiktu.
+
+1223
+00:57:45,400 --> 00:57:47,770
+Un tas būtu mūsu back end līmeņa.
+
+1224
+00:57:47,770 --> 00:57:50,580
+Un tas tikai nozīmē, ka
+tie saskaras lietotājam.
+
+1225
+00:57:50,580 --> 00:57:53,010
+Un datubāzes nesaskaras lietotāju.
+
+1226
+00:57:53,010 --> 00:57:55,480
+Neviens lietotājs var tieši
+piekļūt datu bāzi.
+
+1227
+00:57:55,480 --> 00:57:59,280
+>> Tātad, pieņemsim, tagad varbūt iet uz leju
+maršruts Victoria ierosināja.
+
+1228
+00:57:59,280 --> 00:58:00,940
+Šī ir viena atteice.
+
+1229
+00:58:00,940 --> 00:58:02,290
+Tas padara mani neērti.
+
+1230
+00:58:02,290 --> 00:58:05,790
+Tātad, kas ir iespējams,
+Pašsaprotama risinājums?
+
+1231
+00:58:05,790 --> 00:58:06,665
+Mērķauditorija: [dzirdams]
+
+1232
+00:58:06,665 --> 00:58:09,979
+
+1233
+00:58:09,979 --> 00:58:11,437
+DAVID Malan: Atvainojiet, teikt, ka atkal.
+
+1234
+00:58:11,437 --> 00:58:12,352
+Mērķauditorija: [dzirdams]
+
+1235
+00:58:12,352 --> 00:58:13,810
+DAVID Malan: Non-ražošanas serveri.
+
+1236
+00:58:13,810 --> 00:58:15,364
+Ko tu ar to domā?
+
+1237
+00:58:15,364 --> 00:58:17,120
+>> Mērķauditorija: [dzirdams]
+
+1238
+00:58:17,120 --> 00:58:19,120
+>> DAVID Malan: Ak, OK, lai backups.
+
+1239
+00:58:19,120 --> 00:58:21,110
+Labi, lai mēs varētu darīt, protams.
+
+1240
+00:58:21,110 --> 00:58:23,790
+Un patiesībā tas ir ļoti bieži darīts.
+
+1241
+00:58:23,790 --> 00:58:26,470
+Tas varētu būt datu bāzē numuru pieci.
+
+1242
+00:58:26,470 --> 00:58:28,510
+Bet tas ir tikai
+savienots ar numuru četri.
+
+1243
+00:58:28,510 --> 00:58:31,110
+Un jūs varētu saukt par karstu rezerves.
+
+1244
+00:58:31,110 --> 00:58:35,080
+Šīs divas datubāzes var konfigurēt
+tikai pastāvīgi sinhronizēt
+
+1245
+00:58:35,080 --> 00:58:35,850
+viens otru.
+
+1246
+00:58:35,850 --> 00:58:39,010
+Un tāpēc, ja šī mašīna nomirst, lai
+kāds stulbs reason-- cieto disku
+
+1247
+00:58:39,010 --> 00:58:42,100
+dies, kāds braucieniem pa
+vadu, daži programmatūra ir kļūdains
+
+1248
+00:58:42,100 --> 00:58:46,560
+un mašīna uzkaras vai crashes--
+Jums varētu būt cilvēku burtiski
+
+1249
+00:58:46,560 --> 00:58:51,090
+Atvienojiet šo vienu no sienas
+un tā vietā, pievienojiet šo vienu.
+
+1250
+00:58:51,090 --> 00:58:56,340
+Un tad laikā, teiksim,
+Dažas minūtes, varbūt pusstundu,
+
+1251
+00:58:56,340 --> 00:58:57,210
+jūs esat atpakaļ tiešsaistē.
+
+1252
+00:58:57,210 --> 00:58:59,259
+>> Tas nav liels, bet
+tas arī nav briesmīgs.
+
+1253
+00:58:59,259 --> 00:59:01,800
+Un jums nav jāuztraucas
+par jebkādām sinhronizācijas jautājumiem.
+
+1254
+00:59:01,800 --> 00:59:03,080
+Jo viss jau ir tur.
+
+1255
+00:59:03,080 --> 00:59:05,000
+Jo jums bija perfekts
+backup gatavi iet.
+
+1256
+00:59:05,000 --> 00:59:07,100
+>> Jūs varētu būt nedaudz
+mīļotājs par to,
+
+1257
+00:59:07,100 --> 00:59:12,990
+kā daži cilvēki bieži, kur jums
+varētu būt datu bāzes numurs četri šeit,
+
+1258
+00:59:12,990 --> 00:59:17,480
+datu bāzes numurs pieci šeit,
+ka tiek runājot ar otru.
+
+1259
+00:59:17,480 --> 00:59:24,120
+Bet jums ir arī šo
+veida arrangement--
+
+1260
+00:59:24,120 --> 00:59:27,440
+un tas apzināti
+izskatās netīrs, jo tas
+
+1261
+00:59:27,440 --> 00:59:30,220
+is-- kur visi
+priekšējie serverus var
+
+1262
+00:59:30,220 --> 00:59:32,870
+runāt ar visiem atpakaļ end serveriem.
+
+1263
+00:59:32,870 --> 00:59:38,130
+Un tāpēc, ja šī datu bāze nav
+atbildēt šie priekšējie end serveriem ir
+
+1264
+00:59:38,130 --> 00:59:40,212
+ir programmēšana
+kodu tiem, kas saka,
+
+1265
+00:59:40,212 --> 00:59:42,170
+ja Jums nav iegūt
+savienojums ar šo datu bāzi,
+
+1266
+00:59:42,170 --> 00:59:45,830
+primārais nekavējoties sāk
+runājot ar sekundāro.
+
+1267
+00:59:45,830 --> 00:59:48,310
+>> Bet tas tagad nospiež
+sarežģītība ar kodu.
+
+1268
+00:59:48,310 --> 00:59:52,070
+Un tagad jūsu izstrādātājiem, jūsu programmatūra
+izstrādātāji, ir jāzina par to.
+
+1269
+00:59:52,070 --> 00:59:56,454
+Un jūs esat veida sasaistīšanas kodu,
+jūs esat rakstiski savu faktisko muguras beigās
+
+1270
+00:59:56,454 --> 00:59:58,370
+īstenošanas detaļas,
+kas padara to grūtāk,
+
+1271
+00:59:58,370 --> 01:00:00,670
+īpaši lielāks
+sabiedrība vai lielāks mājas lapā,
+
+1272
+01:00:00,670 --> 01:00:05,020
+kur jums nav obligāti
+vēlas programmētāji, lai būtu
+
+1273
+01:00:05,020 --> 01:00:10,890
+zināt, kā datu bāzes
+inženieri dara savu darbu.
+
+1274
+01:00:10,890 --> 01:00:13,810
+Jūs varētu vēlēties, lai saglabātu šos lomas
+veida funkcionāli nošķirta tā
+
+1275
+01:00:13,810 --> 01:00:16,810
+ka tur ir šis slānis
+abstrakcija starp diviem.
+
+1276
+01:00:16,810 --> 01:00:17,940
+>> Tātad, kā varētu mēs noteikt šo?
+
+1277
+01:00:17,940 --> 01:00:20,290
+Nu, mēs veida atrisināta
+reiz pirms šī problēma.
+
+1278
+01:00:20,290 --> 01:00:25,680
+Kāpēc nav mēs ieliekam vienu no
+šīs lietas šeit, kur
+
+1279
+01:00:25,680 --> 01:00:30,947
+tā runā, savukārt uz ceturto un
+pieci, visi no front end web serveriem
+
+1280
+01:00:30,947 --> 01:00:33,780
+sarunāties ar šo starpnieks, kā arī
+starpnieks savukārt maršrutos savus datus?
+
+1281
+01:00:33,780 --> 01:00:38,494
+Patiesībā, ko varētu būt
+labs vārds par šo lietu?
+
+1282
+01:00:38,494 --> 01:00:39,704
+>> Mērķauditorija: [dzirdams]
+
+1283
+01:00:39,704 --> 01:00:41,120
+DAVID Malan: Labi, datu bāzes vadītājs.
+
+1284
+01:00:41,120 --> 01:00:48,030
+Bet ko varētu termins, ka
+mēs varētu atkārtoti izmantot šo ierīci?
+
+1285
+01:00:48,030 --> 01:00:49,760
+Mēs balansēšana.
+
+1286
+01:00:49,760 --> 01:00:52,480
+Jā, tāpēc tiešām, es esmu
+kas nav godīgi šeit.
+
+1287
+01:00:52,480 --> 01:00:56,760
+Tātad slodze ekvilibrists nozīmētu, ka
+mēs ieslēdzot atpakaļ un šeit atpakaļ,
+
+1288
+01:00:56,760 --> 01:00:58,836
+kas nav nepieciešams faktiski būt gadījums.
+
+1289
+01:00:58,836 --> 01:01:00,460
+Tātad tur ir daži veidi, kā mēs varētu izdarīt.
+
+1290
+01:01:00,460 --> 01:01:03,920
+>> Ja tas ir faktiski slodze ekvilibrists, tad
+stāsts ir tieši tāds pats kā iepriekš.
+
+1291
+01:01:03,920 --> 01:01:05,230
+Daži no lūgumiem iet līdz 4.
+
+1292
+01:01:05,230 --> 01:01:06,150
+Daži no viņiem iet uz 5.
+
+1293
+01:01:06,150 --> 01:01:06,710
+Un tas ir labi.
+
+1294
+01:01:06,710 --> 01:01:08,835
+Jo tagad mēs varam rīkoties
+divreiz vairāk caurlaide.
+
+1295
+01:01:08,835 --> 01:01:11,120
+Bet šis savienojums
+šeit ir super svarīgi.
+
+1296
+01:01:11,120 --> 01:01:14,050
+Viņiem ir palikt pastāvīgi
+sinhronizēti un cerams
+
+1297
+01:01:14,050 --> 01:01:17,670
+nav ģeogrāfiski pārāk tālu, lai
+ka sinhronizācija būtībā
+
+1298
+01:01:17,670 --> 01:01:18,520
+acumirklīga.
+
+1299
+01:01:18,520 --> 01:01:20,410
+Pretējā gadījumā mēs varētu būt problēma.
+
+1300
+01:01:20,410 --> 01:01:21,330
+>> Tātad tas nav slikti.
+
+1301
+01:01:21,330 --> 01:01:25,132
+Bet atkal, mēs esam
+ieviesa jaunu problēmu.
+
+1302
+01:01:25,132 --> 01:01:26,590
+Kāda problēma ir es tikko pārbūvēts?
+
+1303
+01:01:26,590 --> 01:01:30,000
+
+1304
+01:01:30,000 --> 01:01:31,020
+Viena atteice.
+
+1305
+01:01:31,020 --> 01:01:32,390
+Tātad, kāds ir risinājums, ka?
+
+1306
+01:01:32,390 --> 01:01:39,270
+Tā kā Victoria 's fond tērēt naudu,
+mēs varam izmantot šo puisis, un darīt.
+
+1307
+01:01:39,270 --> 01:01:41,731
+Un es esmu tikai gatavojas
+pārvietot šeit pietiekami daudz vietas.
+
+1308
+01:01:41,731 --> 01:01:43,230
+Un tas būs mazliet netīrs.
+
+1309
+01:01:43,230 --> 01:01:44,563
+Es esmu gatavojas glabāt zīmēšanas līnijām.
+
+1310
+01:01:44,563 --> 01:01:47,080
+Pieņemsim, ka visi
+šie līnijas iedziļināties gan?
+
+1311
+01:01:47,080 --> 01:01:52,670
+>> Ļoti izplatīta metode šeit būtu
+izmantot metodi, ko sauc sirdsdarbība
+
+1312
+01:01:52,670 --> 01:01:57,390
+pie kam katrs no šīm ierīcēm,
+kreisi un pa labi slodze balancers,
+
+1313
+01:01:57,390 --> 01:02:00,740
+vai kāds mēs vēlamies tos saucam,
+pastāvīgi sakot, es esmu dzīvs,
+
+1314
+01:02:00,740 --> 01:02:03,220
+Es esmu dzīvs, es esmu dzīvs, es esmu dzīvs.
+
+1315
+01:02:03,220 --> 01:02:05,910
+Viens no tiem pēc noklusējuma
+darbojas kā primārais.
+
+1316
+01:02:05,910 --> 01:02:09,620
+Tātad visi satiksmes tiek maršrutēti caur
+viens pa kreisi, piemēram,
+
+1317
+01:02:09,620 --> 01:02:11,260
+pēc noklusējuma, patvaļīgi.
+
+1318
+01:02:11,260 --> 01:02:16,890
+>> Bet, tiklīdz puisis labajā pusē
+nedzird no kreisās puisis vairs,
+
+1319
+01:02:16,890 --> 01:02:20,440
+viens pa labi ir ieprogrammēts
+lai automātiski, piemēram,
+
+1320
+01:02:20,440 --> 01:02:24,110
+pārņemt IP adresi
+no vienas pa kreisi,
+
+1321
+01:02:24,110 --> 01:02:28,240
+un tāpēc kļūst par primāro, un
+varbūt sūtīt e-pastu vai īsziņu
+
+1322
+01:02:28,240 --> 01:02:31,570
+uz cilvēkiem teikt, hey,
+kreisi galvenais ir bezsaistē.
+
+1323
+01:02:31,570 --> 01:02:33,310
+Es kļūs galvenais tagad.
+
+1324
+01:02:33,310 --> 01:02:35,760
+Tātad viceprezidents kļūst
+prezidents, lai runāt.
+
+1325
+01:02:35,760 --> 01:02:38,180
+Un kāds ir iet ietaupīt
+prezidents, ja vēlaties.
+
+1326
+01:02:38,180 --> 01:02:41,090
+Jo tagad mums ir pagaidu
+viena atteice.
+
+1327
+01:02:41,090 --> 01:02:45,020
+>> Tā kā sarežģīti vai stresa kā
+tas varētu likties, lai sāktu to,
+
+1328
+01:02:45,020 --> 01:02:46,990
+tas ir, kā jūs atrisināt šīs problēmas.
+
+1329
+01:02:46,990 --> 01:02:48,190
+Jūs mest naudu pie tā.
+
+1330
+01:02:48,190 --> 01:02:49,370
+Jūs mest aparatūru pie tā.
+
+1331
+01:02:49,370 --> 01:02:52,170
+Bet diemžēl jums
+pievienot sarežģītību par to.
+
+1332
+01:02:52,170 --> 01:02:56,450
+Bet rezultāts, galu galā, ir tas, ka
+Jums ir daudz, teorētiski,
+
+1333
+01:02:56,450 --> 01:02:57,670
+stabila arhitektūra.
+
+1334
+01:02:57,670 --> 01:02:58,850
+Tas joprojām nav perfekta.
+
+1335
+01:02:58,850 --> 01:03:02,470
+Jo pat tad, kad mēs have-- mēs varētu
+nav viena atteice.
+
+1336
+01:03:02,470 --> 01:03:05,240
+Mums tagad ir divējāda punkti neveiksmes.
+
+1337
+01:03:05,240 --> 01:03:07,630
+Bet, ja divas lietas iet greizi,
+kas pilnīgi varētu,
+
+1338
+01:03:07,630 --> 01:03:09,030
+mēs joprojām gribam būt bezsaistē.
+
+1339
+01:03:09,030 --> 01:03:11,660
+>> Un tā ļoti bieži
+nozare ir aprakstīt
+
+1340
+01:03:11,660 --> 01:03:14,000
+Jūsu up laiku ziņā nines.
+
+1341
+01:03:14,000 --> 01:03:18,610
+Un veida vārtiem
+tiekties, ir 99,999%
+
+1342
+01:03:18,610 --> 01:03:21,580
+no laika jūsu vietne ir tiešsaistē.
+
+1343
+01:03:21,580 --> 01:03:24,170
+Vai pat labāk, pievienot
+vēl dažas nines, ka.
+
+1344
+01:03:24,170 --> 01:03:28,159
+Diemžēl, šie
+Nines ir ļoti dārgi.
+
+1345
+01:03:28,159 --> 01:03:29,450
+Un pieņemsim faktiski darīt out.
+
+1346
+01:03:29,450 --> 01:03:35,510
+Tātad, ja es atvērtu manu lielo kalkulators atkal,
+365 dienas gadā, 24 stundas dienā,
+
+1347
+01:03:35,510 --> 01:03:44,780
+60 minūtes stundā, un
+60 sekundes minūti,
+
+1348
+01:03:44,780 --> 01:03:48,690
+tas, cik sekundes ir
+gadā, ja es darīju to pareizi.
+
+1349
+01:03:48,690 --> 01:03:55,740
+Tātad, ja mēs reizes šo, .99999, kas ir
+cik daudz laika mēs gribam tiecamies.
+
+1350
+01:03:55,740 --> 01:04:00,600
+Tātad tas nozīmē, ka mums ir jābūt uz augšu
+tas daudzas sekundes gadā.
+
+1351
+01:04:00,600 --> 01:04:03,920
+Tātad, ja es tagad atņemt
+sākotnējā vērtība, vai drīzāk
+
+1352
+01:04:03,920 --> 01:04:07,480
+Šī jaunā vērtība no
+first-- 316 sekundes,
+
+1353
+01:04:07,480 --> 01:04:09,640
+kas, protams, ir piecas minūtes.
+
+1354
+01:04:09,640 --> 01:04:13,770
+>> Tātad, ja jūsu mājas lapā vai jūsu uzņēmums ir
+apgalvojot, "pieci Nines," kuru tu esi
+
+1355
+01:04:13,770 --> 01:04:17,050
+līdz 99,99% no laika,
+tas nozīmē, ka jums labāk
+
+1356
+01:04:17,050 --> 01:04:23,470
+ir bijuši pietiekami gudri un ātri
+pietiekami un pietiekami flush ar resursiem
+
+1357
+01:04:23,470 --> 01:04:27,890
+ka jūsu serveri ir tikai offline
+piecas minūtes no gada.
+
+1358
+01:04:27,890 --> 01:04:29,980
+Tas ir dārgs un
+grūti lieta tiecamies.
+
+1359
+01:04:29,980 --> 01:04:31,430
+>> Tātad, tas ir kompromiss, too.
+
+1360
+01:04:31,430 --> 01:04:35,866
+99,999% no laika ir diezgan
+darn grūti un dārgi.
+
+1361
+01:04:35,866 --> 01:04:38,740
+Pieci minutes-- jūs varat tikko nokļūt
+ar serveri, lai fiziski aizvietot
+
+1362
+01:04:38,740 --> 01:04:40,040
+kaut kas ir nogājis greizi.
+
+1363
+01:04:40,040 --> 01:04:42,810
+Un tas ir iemesls, kāpēc mēs sākam vadu
+lietas kopā sarežģītāka
+
+1364
+01:04:42,810 --> 01:04:48,240
+apriori lai datori
+var kārtot noteikt paši.
+
+1365
+01:04:48,240 --> 01:04:49,446
+Jā.
+
+1366
+01:04:49,446 --> 01:04:52,344
+>> Mērķauditorija: [dzirdams]
+
+1367
+01:04:52,344 --> 01:05:02,014
+
+1368
+01:05:02,014 --> 01:05:04,430
+DAVID Malan: Problēma varētu
+būt jebkurā vairākās vietās.
+
+1369
+01:05:04,430 --> 01:05:05,090
+Un fact--
+
+1370
+01:05:05,090 --> 01:05:07,101
+>> Mērķauditorija: [dzirdams]
+
+1371
+01:05:07,101 --> 01:05:08,600
+DAVID Malan: Pilnīgi, absolūti.
+
+1372
+01:05:08,600 --> 01:05:10,720
+Un, tā kā situācija ir
+kļūst sarežģītāka,
+
+1373
+01:05:10,720 --> 01:05:12,110
+tas varētu būt web serveri.
+
+1374
+01:05:12,110 --> 01:05:14,690
+Tas varētu būt pilnvaras ēkas.
+
+1375
+01:05:14,690 --> 01:05:17,900
+Tas varētu būt kaut kas fiziski, piemēram,
+kabeļi got apdeguši vai izmests.
+
+1376
+01:05:17,900 --> 01:05:19,879
+Tas varētu būt datu bāze
+nereaģē.
+
+1377
+01:05:19,879 --> 01:05:22,920
+Tas varētu būt tie jāatjaunina to darbības
+sistēma un kaut kas karājas.
+
+1378
+01:05:22,920 --> 01:05:24,634
+Tātad tur ir tik daudz citas kustīgās daļas.
+
+1379
+01:05:24,634 --> 01:05:27,050
+Un tā daudz inženierzinātņu
+ka ir jāiet aiz šī
+
+1380
+01:05:27,050 --> 01:05:30,431
+ir tiešām tikai kompromisus, piemēram, kā
+daudz laika, cik daudz naudas tas faktiski
+
+1381
+01:05:30,431 --> 01:05:32,930
+vērts, un kādi ir draudi
+jūs tiešām uztrauc?
+
+1382
+01:05:32,930 --> 01:05:35,471
+Tā, piemēram, In
+kursi man māca at Harvard,
+
+1383
+01:05:35,471 --> 01:05:38,470
+mēs izmantojam daudz mākoņdatošanu, kas
+mēs sāksim ņemot apskatīt tagad,
+
+1384
+01:05:38,470 --> 01:05:41,107
+patiesībā, ja mēs izmantojam
+Amazon Web Services.
+
+1385
+01:05:41,107 --> 01:05:42,940
+Tikai tāpēc, ka tas ir
+viens mēs sākām ar.
+
+1386
+01:05:42,940 --> 01:05:45,856
+Bet tur ir vēl šajās dienās
+Google un Microsoft un citi.
+
+1387
+01:05:45,856 --> 01:05:50,030
+Un mēs apzināti izvēlas nodot visu
+no mūsu kursiem "virtuālās mašīnas,
+
+1388
+01:05:50,030 --> 01:05:55,400
+kā viņi sauc, jo es domāju, ka
+tas ir Rietumu Virginia datu centrs.
+
+1389
+01:05:55,400 --> 01:05:57,560
+Lielākā daļa no mūsu studentiem
+gadās būt no ASV,
+
+1390
+01:05:57,560 --> 01:05:59,820
+lai gan ir noteikti
+daži starptautiski.
+
+1391
+01:05:59,820 --> 01:06:02,630
+>> Bet realitāte ir tā ir tikai
+vienkāršāka un tas ir lētāk par mums
+
+1392
+01:06:02,630 --> 01:06:05,540
+likt visiem mūsu olas
+in Virginia grozā,
+
+1393
+01:06:05,540 --> 01:06:08,050
+kaut gan es zinu, ja kaut kas
+noiet greizi Virginia,
+
+1394
+01:06:08,050 --> 01:06:12,760
+kā ir pa laikam happened-- patīk
+ja tur ir viesuļvētra vai kādu laika
+
+1395
+01:06:12,760 --> 01:06:15,890
+notikums, piemēram, ka, ja tur ir dažas
+elektrotīklu jautājums vai like-- visu
+
+1396
+01:06:15,890 --> 01:06:20,240
+no mūsu kursiem "dati varētu iet bezsaistē
+kādu skaitu minūšu vai stundu laikā
+
+1397
+01:06:20,240 --> 01:06:21,600
+vai pat ilgāk.
+
+1398
+01:06:21,600 --> 01:06:24,020
+>> Bet summa sarežģītība
+kas būtu nepieciešams,
+
+1399
+01:06:24,020 --> 01:06:26,895
+un naudas summa, kas būtu
+nepieciešams, lai darbotos visu
+
+1400
+01:06:26,895 --> 01:06:31,420
+paralēli Eiropā vai Kalifornijā
+vienkārši nav tik daudz nozīmē.
+
+1401
+01:06:31,420 --> 01:06:35,080
+Tātad, tas ir racionāla tirdzniecība
+off, bet sāpīga vienu
+
+1402
+01:06:35,080 --> 01:06:37,740
+kad jūs faktiski
+kam, ka dīkstāves.
+
+1403
+01:06:37,740 --> 01:06:41,830
+>> Nu, pieņemsim pāriet tieši tagad, lai
+daži no mākonis balstītu risinājumu
+
+1404
+01:06:41,830 --> 01:06:43,320
+lai dažas no šīm problēmām.
+
+1405
+01:06:43,320 --> 01:06:45,040
+Viss, ko mēs esam bijuši
+apspriest līdz šim
+
+1406
+01:06:45,040 --> 01:06:47,527
+ir sava veida problēmas, kas ir
+ir ar mums kādu laiku,
+
+1407
+01:06:47,527 --> 01:06:49,610
+vai jums ir jūsu pašu
+serveriem savu uzņēmumu,
+
+1408
+01:06:49,610 --> 01:06:52,740
+vai jūs doties uz līdzāsatrašanos
+vieta kā datu centru un akciju
+
+1409
+01:06:52,740 --> 01:06:55,110
+telpa ar kādu citu,
+vai mūsdienās mākoni.
+
+1410
+01:06:55,110 --> 01:06:57,040
+>> Un, kas ir jauka par
+mākonis ir, ka visi
+
+1411
+01:06:57,040 --> 01:06:59,540
+no šīm lietām es esmu
+zīmēšanas kā fiziskiem objektiem
+
+1412
+01:06:59,540 --> 01:07:02,400
+tagad var uzlūkot kā
+veida virtuālo objektu
+
+1413
+01:07:02,400 --> 01:07:04,659
+mākonis, kas ir
+simulēta ar programmatūru.
+
+1414
+01:07:04,659 --> 01:07:07,700
+Citiem vārdiem sakot, datori šodien,
+serveri šodien, piemēram, Dell attēlu
+
+1415
+01:07:07,700 --> 01:07:11,720
+Man parādīja agrāk, ir tik ātri, ir
+tik daudz RAM, tik daudz CPU, tik daudz diska
+
+1416
+01:07:11,720 --> 01:07:16,140
+telpa, ka cilvēki ir uzrakstījuši
+programmatūru, lai praktiski nodalījumā
+
+1417
+01:07:16,140 --> 01:07:21,130
+viens serveris augšup ilūziju par to
+ir divi serveri, vai 200 serveriem, tāpēc
+
+1418
+01:07:21,130 --> 01:07:24,150
+ka katrs no mums klienti
+ir ilūzija, kam
+
+1419
+01:07:24,150 --> 01:07:29,110
+ne tikai konts kādā tīmeklī
+uzņemt, bet mūsu pašu mašīnu, kas mēs esam
+
+1420
+01:07:29,110 --> 01:07:30,490
+īri no kāda cita.
+
+1421
+01:07:30,490 --> 01:07:34,140
+>> Bet tā ir virtuālā mašīna
+ciktāl vienā Dell servera,
+
+1422
+01:07:34,140 --> 01:07:39,160
+tas atkal varētu tikt sadalīts augšup
+divi vai 200 vai vairākas virtuālās mašīnas,
+
+1423
+01:07:39,160 --> 01:07:43,770
+visi, kas dod kādu administratīvo
+piekļuvi, bet tādā veidā, kur neviens no mums
+
+1424
+01:07:43,770 --> 01:07:48,040
+zina vai var piekļūt citu virtuālo
+automātus pašu aparatūru.
+
+1425
+01:07:48,040 --> 01:07:53,430
+Tātad, lai uzzīmēt zīmējumu šodienas slaidi,
+Man ir tas nošauti šeit no mājas lapā
+
+1426
+01:07:53,430 --> 01:07:54,160
+sauc dokers.
+
+1427
+01:07:54,160 --> 01:07:56,970
+>> Tātad tas ir nedaudz vairāk
+detail nekā mēs tiešām ir nepieciešams.
+
+1428
+01:07:56,970 --> 01:07:59,830
+Bet, ja jūs apskatīt to kā
+jūsu infrastructure--
+
+1429
+01:07:59,830 --> 01:08:02,910
+tik vienkārši aparatūras savu,
+Jūsu serveri, pakaramie, datu
+
+1430
+01:08:02,910 --> 01:08:06,480
+centrs, un visi that-- turat
+parasti palaist uzņēmējas operētājsistēmu.
+
+1431
+01:08:06,480 --> 01:08:08,275
+Tātad kaut like-- tas varētu būt Windows.
+
+1432
+01:08:08,275 --> 01:08:09,430
+Nebūtu Mac OS.
+
+1433
+01:08:09,430 --> 01:08:11,430
+Jo tas nav īsti
+uzņēmums šajās dienās.
+
+1434
+01:08:11,430 --> 01:08:15,670
+Tātad tas būtu Linux vai Solaris
+vai Unix vai BSD vai FreeBSD
+
+1435
+01:08:15,670 --> 01:08:19,779
+vai jebkurš skaits citām operētājsistēmām
+kas ir vai nu bez maksas vai tirdzniecības.
+
+1436
+01:08:19,779 --> 01:08:22,120
+>> Un tad jūs vadāt
+programma, īpašas programmas,
+
+1437
+01:08:22,120 --> 01:08:26,479
+sauc hypervisor, vai
+virtuālā mašīna monitoru, VMM.
+
+1438
+01:08:26,479 --> 01:08:31,649
+Un tie ir produkti, ja jūs esat
+pazīstami, piemēram, VMware vai VirtualBox
+
+1439
+01:08:31,649 --> 01:08:34,080
+vai Virtual PC vai citi.
+
+1440
+01:08:34,080 --> 01:08:38,430
+Un ko šīs programmas jādara, ir tieši
+ka iezīme es aprakstīju iepriekš.
+
+1441
+01:08:38,430 --> 01:08:41,779
+Tas rada ilūziju
+ka viena fiziskā mašīna
+
+1442
+01:08:41,779 --> 01:08:44,550
+var būt vairākas virtuālās mašīnas.
+
+1443
+01:08:44,550 --> 01:08:48,260
+>> Un tāpēc šie krāsains kastes augšu augšu ir
+glezna priekšstatu par turpmāko.
+
+1444
+01:08:48,260 --> 01:08:50,260
+Tas hypervisor, šis
+gabals programmatūru, to sauc
+
+1445
+01:08:50,260 --> 01:08:54,090
+VMware, kas darbojas ar kādu citu
+operētājsistēmu, to sauc Linux,
+
+1446
+01:08:54,090 --> 01:08:56,910
+rada ilūziju, ka
+Šī fiziskā dators ir faktiski
+
+1447
+01:08:56,910 --> 01:09:00,149
+viens, divi, trīs virtuālie datori.
+
+1448
+01:09:00,149 --> 01:09:04,270
+Tāpēc es esmu tagad nopircis, kā īpašnieks
+Šī aparatūra, viena fiziskā datora.
+
+1449
+01:09:04,270 --> 01:09:06,200
+Un tagad es esmu īri
+to trīs klientiem.
+
+1450
+01:09:06,200 --> 01:09:09,731
+>> Un šie trīs klienti visi domā
+tie ir veltīta virtuālā mašīna.
+
+1451
+01:09:09,731 --> 01:09:10,939
+Un tas nav ēsmu un slēdzis.
+
+1452
+01:09:10,939 --> 01:09:13,750
+Tas ir vairāk izpaušana ka
+jūs izmantojat virtuālo mašīnu.
+
+1453
+01:09:13,750 --> 01:09:17,589
+Bet tehnoloģiski, mēs visi
+ir pilnīga administratīvo kontroli
+
+1454
+01:09:17,589 --> 01:09:19,880
+vairāk katrā no šīm viesis
+operētājsistēmas, kas varētu
+
+1455
+01:09:19,880 --> 01:09:21,370
+būt jebkurš skaits operētājsistēmām.
+
+1456
+01:09:21,370 --> 01:09:23,029
+>> Es varu instalēt kaut ko es gribu.
+
+1457
+01:09:23,029 --> 01:09:24,640
+Es varu uzlabot to, kā es gribu.
+
+1458
+01:09:24,640 --> 01:09:27,470
+Un man nav pat zināt, vai
+rūp citi pamatdarbības
+
+1459
+01:09:27,470 --> 01:09:29,678
+sistēmām šajā datorā,
+citas virtuālās mašīnas,
+
+1460
+01:09:29,678 --> 01:09:35,290
+ja īpašnieks visu šo pelēka
+sīkumi tiek nedaudz mantkārīgs
+
+1461
+01:09:35,290 --> 01:09:37,540
+un ir overselling savus resursus.
+
+1462
+01:09:37,540 --> 01:09:40,800
+>> Tātad, ja jūs lietojat kādu
+fiziskā mašīna un pārdod to
+
+1463
+01:09:40,800 --> 01:09:44,399
+lai ne 200, bet 400
+klienti, kādā brīdī
+
+1464
+01:09:44,399 --> 01:09:47,270
+mēs ejam, lai ceļojums tiem
+paši veiktspējas jautājumiem kā iepriekš.
+
+1465
+01:09:47,270 --> 01:09:50,460
+Tāpēc, ka jums ir tikai ierobežots
+daudzums diska un RAM un tā tālāk.
+
+1466
+01:09:50,460 --> 01:09:53,450
+Un virtuālā mašīna
+ir tikai programma, kas ir
+
+1467
+01:09:53,450 --> 01:09:56,140
+izliekoties par
+pilnvērtīga dators.
+
+1468
+01:09:56,140 --> 01:09:58,040
+Tātad jūs saņemsiet to, ko jūs maksājat par šeit.
+
+1469
+01:09:58,040 --> 01:10:02,150
+>> Tātad, jūs atradīsiet tiešsaistē jūs varētu maksāt
+cienījama kompānija varbūt $ 100 mēnesī
+
+1470
+01:10:02,150 --> 01:10:05,660
+par savu virtuālo mašīnu, vai
+savu virtuālo privāto serveri,
+
+1471
+01:10:05,660 --> 01:10:07,090
+kas ir vēl viens termins, par to.
+
+1472
+01:10:07,090 --> 01:10:10,400
+Vai jūs varētu atrast kādu lidot
+nakts kur jūs maksājat $ 5,99 mēnesī
+
+1473
+01:10:10,400 --> 01:10:12,080
+par savu virtuālo mašīnu.
+
+1474
+01:10:12,080 --> 01:10:15,614
+Bet izredzes ir jums nav gandrīz
+tik daudz sniegumu pieejams jums,
+
+1475
+01:10:15,614 --> 01:10:18,530
+jo viņi ir overselling to
+jā, nekā jūs varētu ar augstāku
+
+1476
+01:10:18,530 --> 01:10:22,340
+līmeņa pakalpojumu vai labāk pārdevējs.
+
+1477
+01:10:22,340 --> 01:10:24,590
+>> Tātad, ko tas patiesībā nozīmē mums?
+
+1478
+01:10:24,590 --> 01:10:26,110
+Tāpēc ļaujiet man iet uz to.
+
+1479
+01:10:26,110 --> 01:10:29,580
+Es iešu uz aws.amazon.com.
+
+1480
+01:10:29,580 --> 01:10:31,590
+Tikai tāpēc, ka viņi ir
+jauka izvēlne ar opcijām.
+
+1481
+01:10:31,590 --> 01:10:34,700
+Bet šie paši nodarbības attiecināms uz
+viss ķekars citu mākonis pārdevējiem.
+
+1482
+01:10:34,700 --> 01:10:38,201
+Diemžēl tas bieži vien vairāk
+mārketinga runā nekā jebkas.
+
+1483
+01:10:38,201 --> 01:10:39,200
+Un tas vienmēr mainās.
+
+1484
+01:10:39,200 --> 01:10:41,820
+Tātad jūs iet uz mājas lapā, kā šis.
+
+1485
+01:10:41,820 --> 01:10:44,560
+Un tas tiešām nav
+pateikt jums daudz neko.
+
+1486
+01:10:44,560 --> 01:10:47,780
+>> Un pat es, jo es apskatīt to, nav
+tiešām zināt, ko kāds no šīm lietām
+
+1487
+01:10:47,780 --> 01:10:49,334
+vienmēr darīt, kamēr es ienirt.
+
+1488
+01:10:49,334 --> 01:10:50,875
+Bet sāksim pa kreisi, Compute.
+
+1489
+01:10:50,875 --> 01:10:52,980
+Un es esmu gatavojas klikšķi šis.
+
+1490
+01:10:52,980 --> 01:10:56,960
+Un tagad Amazon ir atklāti
+milzīgs pakalpojumu skaits
+
+1491
+01:10:56,960 --> 01:10:57,960
+šajās dienās.
+
+1492
+01:10:57,960 --> 01:11:01,040
+Bet Amazon EC2, iespējams, visvienkāršākais.
+
+1493
+01:11:01,040 --> 01:11:05,840
+>> Amazon EC2 radīs mums tieši tā
+aina mēs redzējām pirms brīža.
+
+1494
+01:11:05,840 --> 01:11:10,240
+Tas, kā viņi dara daudz
+savu naudu mākonis.
+
+1495
+01:11:10,240 --> 01:11:12,910
+Acīmredzot Netflix un citi
+ir mākonis ar tiem.
+
+1496
+01:11:12,910 --> 01:11:16,260
+Tas ir tipiski
+pūkains mārketinga runāt.
+
+1497
+01:11:16,260 --> 01:11:19,720
+Tātad, ko es gribu darīt, ir doties uz Pricing--
+vai drīzāk iesim uz gadījumiem
+
+1498
+01:11:19,720 --> 01:11:23,790
+pirmais vienkārši uzzīmēt zīmējumu par šo.
+
+1499
+01:11:23,790 --> 01:11:25,800
+>> Tātad šī būs atkarīga no pārdevēja.
+
+1500
+01:11:25,800 --> 01:11:29,590
+Un mums nav nepieciešams, lai saņemtu pārāk dziļi
+nezāles šeit par to, kā tas viss darbojas.
+
+1501
+01:11:29,590 --> 01:11:34,720
+Bet kā Amazon, piemēram,
+īrē jums virtuālo mašīnu vai serveri
+
+1502
+01:11:34,720 --> 01:11:37,200
+mākonis ir tie esam ieguvuši
+šie veida funny vārdi,
+
+1503
+01:11:37,200 --> 01:11:41,000
+tāpat t2.nano, kas ir mazie,
+vai t2.large, kas nozīmē lielas.
+
+1504
+01:11:41,000 --> 01:11:43,970
+Katrs no tiem dod jums vai nu
+viena vai divas virtuālās CPU.
+
+1505
+01:11:43,970 --> 01:11:45,470
+>> Kāpēc tas ir virtuāls CPU?
+
+1506
+01:11:45,470 --> 01:11:49,440
+Nu, fiziskā mašīna varētu
+ir 64 vai vairāk faktiskos CPU.
+
+1507
+01:11:49,440 --> 01:11:52,125
+Bet atkal, izmantojot programmatūru,
+tie rada ilūziju
+
+1508
+01:11:52,125 --> 01:11:55,410
+ka viena mašīna var būt
+divvied līdz vairākiem lietotājiem.
+
+1509
+01:11:55,410 --> 01:11:58,765
+Tātad, mēs varam domāt par to kā
+ar vienu Intel CPU vai divi.
+
+1510
+01:11:58,765 --> 01:12:01,290
+CPU kredīti uz hour-- es būtu
+lasīt fine print
+
+1511
+01:12:01,290 --> 01:12:02,581
+par to, ko tas patiesībā nozīmē.
+
+1512
+01:12:02,581 --> 01:12:05,850
+Tas nozīmē, cik daudz mašīnu
+Jūs varat izmantot stundā vis-a-vis
+
+1513
+01:12:05,850 --> 01:12:07,730
+citi klienti par šo aparatūru.
+
+1514
+01:12:07,730 --> 01:12:11,560
+>> Lūk, cik daudz RAM vai atmiņas jums
+get-- nu pusi gigabaitu, vai 500
+
+1515
+01:12:11,560 --> 01:12:14,120
+megabaiti, vai 1 gigabaitu, vai 2.
+
+1516
+01:12:14,120 --> 01:12:17,390
+Un tad uzglabāšanas tikai atsaucas uz
+kāda veida disku viņi jums.
+
+1517
+01:12:17,390 --> 01:12:19,950
+Tur ir dažādi uzglabāšana
+tehnoloģijas, ka tie piedāvā.
+
+1518
+01:12:19,950 --> 01:12:22,870
+Bet vairāk interesanti nekā šis
+tad varētu būt cenu.
+
+1519
+01:12:22,870 --> 01:12:25,860
+>> Tātad, ja jums ir CTO vai
+inženieris, kurš nav
+
+1520
+01:12:25,860 --> 01:12:28,420
+vēlaties palaist serveri jūsu
+birojs, kāda iemesla dēļ,
+
+1521
+01:12:28,420 --> 01:12:30,230
+un tas ir pārāk
+sarežģīti vai dārgi
+
+1522
+01:12:30,230 --> 01:12:33,930
+pirkt serverus un kopīgi atrast tos un
+maksāt nomas maksu kādā fiziskajā būris telpā
+
+1523
+01:12:33,930 --> 01:12:36,670
+somewhere-- jūs vienkārši vēlaties sēdēt
+Jūsu klēpjdators vēlu naktī,
+
+1524
+01:12:36,670 --> 01:12:40,480
+ierakstiet savu kredītkartes informāciju,
+un noma serveriem cloud-- labi,
+
+1525
+01:12:40,480 --> 01:12:41,920
+mēs varam izdarīt šeit.
+
+1526
+01:12:41,920 --> 01:12:45,769
+Es esmu gatavojas iet uz leju kuri paredzēti, Linux
+ir populāra operētājsistēma.
+
+1527
+01:12:45,769 --> 01:12:47,310
+Un pieņemsim tikai iegūt sajūtu lietām.
+
+1528
+01:12:47,310 --> 01:12:48,990
+Whoops-- pārāk liels.
+
+1529
+01:12:48,990 --> 01:12:53,670
+>> Tātad aplūkosim to vissīkākās
+virtuālā mašīna, kas, šķiet, ir,
+
+1530
+01:12:53,670 --> 01:12:57,440
+par mūsu mērķiem, viens CPU
+un 500 megabaitu RAM.
+
+1531
+01:12:57,440 --> 01:12:58,440
+Tas ir diezgan mazs.
+
+1532
+01:12:58,440 --> 01:13:00,820
+Bet atklāti sakot, web serveri nav
+jādara viss, ka daudz.
+
+1533
+01:13:00,820 --> 01:13:02,630
+Jums ir labākas specs jūsu klēpjdators.
+
+1534
+01:13:02,630 --> 01:13:04,990
+Bet jums nav nepieciešams tos
+specs šajās dienās par lietām.
+
+1535
+01:13:04,990 --> 01:13:11,490
+Jūs gatavojas maksāt stundā 0,0065 $.
+
+1536
+01:13:11,490 --> 01:13:12,080
+>> Tātad, pieņemsim redzēt.
+
+1537
+01:13:12,080 --> 01:13:15,970
+Ja ir 24 stundas dienā, un
+mēs maksāt tik daudz par stundu,
+
+1538
+01:13:15,970 --> 01:13:20,680
+tas maksās jums $ 0,15 īrēt ka
+īpaši serveris mākonis.
+
+1539
+01:13:20,680 --> 01:13:22,210
+Un tas ir tikai uz vienu dienu.
+
+1540
+01:13:22,210 --> 01:13:27,050
+Ja mēs to izdarītu 365-- $ 57 līdz
+nomāt šo konkrēto serveri.
+
+1541
+01:13:27,050 --> 01:13:28,420
+Tātad, tas izklausās super lēti.
+
+1542
+01:13:28,420 --> 01:13:31,100
+>> Tas ir arī super zemu veiktspēju.
+
+1543
+01:13:31,100 --> 01:13:37,169
+Tāpēc mēs, kursiem es mācīt šeit, mēdz
+izmantot Es domāju t2.smalls vai t2.mediums.
+
+1544
+01:13:37,169 --> 01:13:39,960
+Un mēs varētu būt daži simti
+lietotājiem, daži tūkstoši lietotāju, kopā.
+
+1545
+01:13:39,960 --> 01:13:40,900
+Tas ir diezgan pieticīgs.
+
+1546
+01:13:40,900 --> 01:13:42,360
+Tātad, pieņemsim redzēt, ko tas varētu izmaksāt.
+
+1547
+01:13:42,360 --> 01:13:49,260
+Tātad, ja es to izmaksu reizes 24
+stundas reizes 365, šis viens ir $ 225.
+
+1548
+01:13:49,260 --> 01:13:51,160
+Un kursiem
+Es mācīt, mēs parasti
+
+1549
+01:13:51,160 --> 01:13:54,970
+palaist divus viss, lai
+atlaišanas un arī veiktspēju.
+
+1550
+01:13:54,970 --> 01:13:59,230
+Tātad mēs varētu tērēt, tāpēc,
+500 $ par serveriem
+
+1551
+01:13:59,230 --> 01:14:00,860
+ka mums, iespējams, vajadzēs gadā.
+
+1552
+01:14:00,860 --> 01:14:05,210
+>> Tagad, ja jums ir nepieciešams vairāk performance--
+pieņemsim to apskatīt atmiņas.
+
+1553
+01:14:05,210 --> 01:14:06,810
+Mēs esam runājuši par atmiņu diezgan daudz.
+
+1554
+01:14:06,810 --> 01:14:09,330
+Un, ja jums ir nepieciešams vairāk
+memory-- un 64 gigabaitiem
+
+1555
+01:14:09,330 --> 01:14:12,310
+ir skaitlis es tur mentioning--
+tas ir gandrīz $ 1 stundā.
+
+1556
+01:14:12,310 --> 01:14:16,180
+Un jūs varat diezgan ātri redzēt, kur
+Tas goes-- lai 24 stundas reizes 365.
+
+1557
+01:14:16,180 --> 01:14:20,580
+Tāpēc tagad ir pienācis 8000 $ gadā
+par diezgan cienīgu serveri.
+
+1558
+01:14:20,580 --> 01:14:23,010
+>> Tāpēc kādā brīdī, tur ir
+šī lēciena punkts
+
+1559
+01:14:23,010 --> 01:14:29,510
+kur tagad mēs varētu tērēt $ 6000
+iespējams, un nopirkt mašīnu, piemēram, ka
+
+1560
+01:14:29,510 --> 01:14:33,800
+un deldēt tās izmaksas vairāk nekā varbūt divas,
+trīs gadi, dzīve mašīnas.
+
+1561
+01:14:33,800 --> 01:14:38,880
+Bet ko varētu virzīt jums
+labu vai nežēlastība īri
+
+1562
+01:14:38,880 --> 01:14:41,230
+mašīna mākonis līdzīgs šim?
+
+1563
+01:14:41,230 --> 01:14:44,110
+Atkal, tas ir salīdzināms, iespējams,
+uz vienu no šiem Dell serveriem
+
+1564
+01:14:44,110 --> 01:14:47,208
+mēs redzējām attēlotie mazliet atpakaļ.
+
+1565
+01:14:47,208 --> 01:14:51,016
+>> Mērķauditorija: [dzirdams]
+
+1566
+01:14:51,016 --> 01:14:54,350
+
+1567
+01:14:54,350 --> 01:14:56,190
+>> DAVID Malan: Jā, tas ir milzīgs otrādi.
+
+1568
+01:14:56,190 --> 01:14:58,640
+Tāpēc, ka mēs esam ne pērk
+mašīna, mums nav Unbox to.
+
+1569
+01:14:58,640 --> 01:14:59,600
+Mums nav, lai paceltu to.
+
+1570
+01:14:59,600 --> 01:15:01,110
+Mums nav plug to mūsu bagāžnieku.
+
+1571
+01:15:01,110 --> 01:15:02,080
+Mums nav pievienojiet to.
+
+1572
+01:15:02,080 --> 01:15:03,140
+Mums nav jāmaksā
+elektriskā rēķinu.
+
+1573
+01:15:03,140 --> 01:15:05,120
+>> Mums nav, lai ieslēgtu
+gaisa kondicionēšana on.
+
+1574
+01:15:05,120 --> 01:15:07,620
+Kad cietais disks mirst, mums nav
+vadīt vidū nakts
+
+1575
+01:15:07,620 --> 01:15:08,172
+salabot.
+
+1576
+01:15:08,172 --> 01:15:09,630
+Mums nav izveidot uzraudzību.
+
+1577
+01:15:09,630 --> 01:15:13,750
+Mums nav kuri paredzēti, saraksts turpinās
+un par visu no fiziskajiem lietām
+
+1578
+01:15:13,750 --> 01:15:15,810
+Jums nav jādara
+jo "mākoni".
+
+1579
+01:15:15,810 --> 01:15:18,620
+>> Un, lai būtu skaidrs, mākonis skaitļošanas
+tas ir ļoti overused termins.
+
+1580
+01:15:18,620 --> 01:15:22,790
+Tas patiešām ir tikai nozīmē maksāt kādam
+cits, lai palaistu serveri, lai jūs,
+
+1581
+01:15:22,790 --> 01:15:25,300
+vai īri vietu
+Kāds cits serveriem.
+
+1582
+01:15:25,300 --> 01:15:27,110
+Tātad termins "mākonis skaitļošanas" ir jauns.
+
+1583
+01:15:27,110 --> 01:15:30,260
+Ideja ir gadu desmitiem vecs.
+
+1584
+01:15:30,260 --> 01:15:32,070
+Tātad tas ir diezgan pārliecinoši.
+
+1585
+01:15:32,070 --> 01:15:33,960
+>> Un ko vēl jūs saņemsiet?
+
+1586
+01:15:33,960 --> 01:15:38,287
+Nu, jūs arī iegūt spēja
+darīt visu, par klēpjdators mājās.
+
+1587
+01:15:38,287 --> 01:15:40,620
+Citiem vārdiem sakot, visi
+bildes man bija tikai drawing--
+
+1588
+01:15:40,620 --> 01:15:44,010
+un tas nebija tik sen, ka pat
+Man bija indeksēšanu apkārt uz servera grīdas
+
+1589
+01:15:44,010 --> 01:15:46,680
+tapām kabeļus par
+katru no līnijām, ka jūs redzēt,
+
+1590
+01:15:46,680 --> 01:15:49,590
+un uzlabot darboties
+sistēmas, un diskus mainās ap.
+
+1591
+01:15:49,590 --> 01:15:51,610
+Tur ir daudz
+fiziskumu visiem, kas.
+
+1592
+01:15:51,610 --> 01:15:55,300
+>> Bet kas ir skaists par virtuālo
+mašīnas, kā norāda nosaukums veida liecina,
+
+1593
+01:15:55,300 --> 01:15:57,600
+tagad ir tīmekļa
+saskarnes saskaņā ar kuriem
+
+1594
+01:15:57,600 --> 01:15:59,900
+Ja vēlaties ekvivalentu
+no līnijas no šī servera
+
+1595
+01:15:59,900 --> 01:16:03,959
+uz otru, vienkārši ierakstiet, tips, veids,
+noklikšķiniet un velciet, noklikšķiniet uz Iesniegt, un voila,
+
+1596
+01:16:03,959 --> 01:16:05,250
+Jums tas vadu up virtuāli.
+
+1597
+01:16:05,250 --> 01:16:07,235
+Jo tas viss ir darīts programmatūru.
+
+1598
+01:16:07,235 --> 01:16:09,110
+Un iemesls, tas ir darīts
+programmatūras atkal
+
+1599
+01:16:09,110 --> 01:16:12,650
+jo mums ir tik daudz RAM un tā
+daudz CPU pieejami pie mums šajās dienās,
+
+1600
+01:16:12,650 --> 01:16:14,880
+kaut gan visi
+ka sīkumi prasa laiku,
+
+1601
+01:16:14,880 --> 01:16:18,450
+tas ir lēnāks vadīt lietas
+programmatūru nekā aparatūru,
+
+1602
+01:16:18,450 --> 01:16:23,710
+tāpat kā tas ir lēnāks izmantot mehāniska
+ierīce, piemēram, cieto disku, nekā RAM,
+
+1603
+01:16:23,710 --> 01:16:25,190
+kaut kas tīri elektroniski.
+
+1604
+01:16:25,190 --> 01:16:27,490
+Mums ir tik daudz resursu
+pieejamas mums.
+
+1605
+01:16:27,490 --> 01:16:29,920
+Mums cilvēki ir sava veida invariantly lēni.
+
+1606
+01:16:29,920 --> 01:16:33,840
+Un tāpēc tagad mašīnas var darīt
+tik daudz vairāk laika vienībā.
+
+1607
+01:16:33,840 --> 01:16:36,640
+Mums ir šīs spējas
+darīt lietas praktiski.
+
+1608
+01:16:36,640 --> 01:16:39,120
+>> Un es saku kursiem
+Es mācīt, piemēram, šeit,
+
+1609
+01:16:39,120 --> 01:16:43,464
+mums par varbūt duci vai
+tāpēc kopā virtuālās mašīnas
+
+1610
+01:16:43,464 --> 01:16:45,880
+piemēram, ka darbojas jebkurā
+laiks dara priekšgala sīkumi,
+
+1611
+01:16:45,880 --> 01:16:47,620
+darot back end stuff.
+
+1612
+01:16:47,620 --> 01:16:50,237
+Mums ir visas mūsu noliktavas.
+
+1613
+01:16:50,237 --> 01:16:52,820
+Tāpēc jebkurš video, ieskaitot lietas
+piemēram, tas, ka mēs esam šaušana,
+
+1614
+01:16:52,820 --> 01:16:54,330
+mēs galu galā liekot uz mākonis.
+
+1615
+01:16:54,330 --> 01:16:58,710
+Amazon ir pakalpojumi sauc Amazon S3,
+to vienkāršu uzglabāšanas pakalpojumu, kas
+
+1616
+01:16:58,710 --> 01:17:00,397
+ir tāpat kā diska vietas mākonī.
+
+1617
+01:17:00,397 --> 01:17:02,230
+Viņiem ir kaut kas
+Sauc CloudFront, kas
+
+1618
+01:17:02,230 --> 01:17:06,040
+ir CDN serviss, saturs
+Piegāde Tīkla pakalpojums, kas
+
+1619
+01:17:06,040 --> 01:17:10,190
+nozīmē, ka tie veic visus jūsu failus un
+Jums automagically atkārtot to
+
+1620
+01:17:10,190 --> 01:17:11,290
+apkārt pasaulei.
+
+1621
+01:17:11,290 --> 01:17:12,780
+>> Tāpēc tie nav darīt to preemptively.
+
+1622
+01:17:12,780 --> 01:17:15,159
+Bet pirmo reizi, kad kāds
+Indijā pieprasa failu,
+
+1623
+01:17:15,159 --> 01:17:16,700
+tie būs potenciāli cache to uz vietas.
+
+1624
+01:17:16,700 --> 01:17:19,325
+Pirmo reizi Ķīnā,
+Pirmo reizi Brazīlijā, kas notiek,
+
+1625
+01:17:19,325 --> 01:17:20,880
+viņi sāksim caching to uz vietas.
+
+1626
+01:17:20,880 --> 01:17:22,730
+Un jums nav jādara, kāds no tā.
+
+1627
+01:17:22,730 --> 01:17:26,710
+Un tā tas ir tik neticami
+pārliecinoši šajās dienās, lai pārvietotu lietas
+
+1628
+01:17:26,710 --> 01:17:27,890
+uz mākonis.
+
+1629
+01:17:27,890 --> 01:17:31,890
+Tāpēc, ka jums ir šī spēja burtiski
+lai nav cilvēki dara gandrīz tikpat daudz
+
+1630
+01:17:31,890 --> 01:17:32,390
+darbs.
+
+1631
+01:17:32,390 --> 01:17:35,930
+Un jūs burtiski nav nepieciešams tik daudz
+cilvēki dara šos darbus anymore--
+
+1632
+01:17:35,930 --> 01:17:38,450
+"ops," vai darbības lomas, vairs.
+
+1633
+01:17:38,450 --> 01:17:43,150
+Jums tiešām ir nepieciešams
+izstrādātājiem un mazāk inženieri
+
+1634
+01:17:43,150 --> 01:17:44,840
+kurš var vienkārši darīt lietas praktiski.
+
+1635
+01:17:44,840 --> 01:17:46,590
+Patiesībā, tikai, lai dotu
+jums sajūtu to,
+
+1636
+01:17:46,590 --> 01:17:51,800
+ļaujiet man iet uz cenu par
+vienu citu produktu šeit.
+
+1637
+01:17:51,800 --> 01:17:58,170
+Paskatīsimies kaut ko līdzīgu CDN S3.
+
+1638
+01:17:58,170 --> 01:18:01,140
+Tātad tas ir būtībā
+virtuāls cietais disks mākonis.
+
+1639
+01:18:01,140 --> 01:18:14,360
+Un, ja mēs ritiniet uz leju līdz pricing--
+tāpēc tas ir 0,007 $ par vienu gigabaitu.
+
+1640
+01:18:14,360 --> 01:18:16,300
+Un that's-- kā mēs to darām?
+
+1641
+01:18:16,300 --> 01:18:17,410
+Es domāju, ka mēnesī.
+
+1642
+01:18:17,410 --> 01:18:21,530
+>> Tātad, ja tas ir uz vienu month-- vai dienā?
+
+1643
+01:18:21,530 --> 01:18:23,200
+Dan, tas ir par dienu?
+
+1644
+01:18:23,200 --> 01:18:24,700
+Tas ir mēnesī, OK.
+
+1645
+01:18:24,700 --> 01:18:28,280
+Tātad, ja tas ir par month--
+sorry, tas ir mēnesī 0,03 $.
+
+1646
+01:18:28,280 --> 01:18:29,820
+Tur ir 12 mēneši no gada.
+
+1647
+01:18:29,820 --> 01:18:32,250
+Tātad, cik daudz datu varētu
+jūs glabājat mākonī?
+
+1648
+01:18:32,250 --> 01:18:37,410
+Gigabyte nav milzīgs, bet es
+nezinu, piemēram, 1 terabaitu,
+
+1649
+01:18:37,410 --> 01:18:38,460
+lai, piemēram, 1000 no tiem.
+
+1650
+01:18:38,460 --> 01:18:39,501
+Tas vēl nav viss, ka daudz.
+
+1651
+01:18:39,501 --> 01:18:44,382
+Tas ir 368 $, lai saglabātu terabaitu
+Datu Amazon mākonis.
+
+1652
+01:18:44,382 --> 01:18:46,090
+Tātad, kādi ir daži no
+tad kompromisus, tad?
+
+1653
+01:18:46,090 --> 01:18:47,970
+To nevar visi būt labi.
+
+1654
+01:18:47,970 --> 01:18:52,260
+Nekas mēs esam runājuši par šodien ir
+kārtot bez nozvejas vai izmaksām.
+
+1655
+01:18:52,260 --> 01:18:55,269
+Tātad, kas ir slikti par kustīgu
+viss uz mākonis?
+
+1656
+01:18:55,269 --> 01:18:56,060
+Mērķauditorija: Drošība.
+
+1657
+01:18:56,060 --> 01:18:57,721
+DAVID Malan: Labi, ko jūs domājat?
+
+1658
+01:18:57,721 --> 01:18:58,596
+Mērķauditorija: [dzirdams]
+
+1659
+01:18:58,596 --> 01:19:01,589
+
+1660
+01:19:01,589 --> 01:19:02,630
+DAVID Malan: Jā, labi.
+
+1661
+01:19:02,630 --> 01:19:05,130
+Un jūs tiešām vēlaties
+daži izlases inženieri
+
+1662
+01:19:05,130 --> 01:19:08,750
+Amazon, ka jūs nekad tikties ar
+fizisku piekļuvi šiem datoriem,
+
+1663
+01:19:08,750 --> 01:19:11,010
+Un, ja viņi patiešām
+vēlējās, virtuālo pieeju?
+
+1664
+01:19:11,010 --> 01:19:15,070
+Un kaut arī
+teorija software-- labi,
+
+1665
+01:19:15,070 --> 01:19:17,442
+šifrēšana var absolūti
+aizsargāt jūs pret to.
+
+1666
+01:19:17,442 --> 01:19:19,150
+Tātad, ja tas, ko jūs esat
+uzglabātu jūsu serveros
+
+1667
+01:19:19,150 --> 01:19:21,470
+ir encrypted-- mazāk bažas.
+
+1668
+01:19:21,470 --> 01:19:25,010
+>> Bet tiklīdz cilvēks ir fiziski
+piekļuvi mašīnu, šifrēšana malā,
+
+1669
+01:19:25,010 --> 01:19:26,100
+visas likmes ir sava veida off.
+
+1670
+01:19:26,100 --> 01:19:28,240
+Jūs varbūt zināt, no vakardienas
+ka datoriem īpaši,
+
+1671
+01:19:28,240 --> 01:19:30,360
+pat ja jums bija tās lietas
+sauc par "BIOS paroles,"
+
+1672
+01:19:30,360 --> 01:19:33,360
+bija, kad jūsu desktop booted up,
+jūs tiks piedāvāts ar paroli, kas
+
+1673
+01:19:33,360 --> 01:19:35,980
+nav nekāda sakara ar
+Logi, jūs varat parasti
+
+1674
+01:19:35,980 --> 01:19:39,750
+vienkārši atvērt šasijas
+mašīna, atrast tiny maz tapas,
+
+1675
+01:19:39,750 --> 01:19:42,240
+un izmantot kaut ko sauc
+džemperis un vienkārši savienot
+
+1676
+01:19:42,240 --> 01:19:45,690
+šie divi vadi apmēram sekundi,
+tādējādi pabeidzot ķēde.
+
+1677
+01:19:45,690 --> 01:19:47,360
+Un tas likvidētu paroli.
+
+1678
+01:19:47,360 --> 01:19:49,800
+>> Tātad, ja jums ir fiziska piekļuve
+ierīce, jūs varat darīt lietas, piemēram, ka.
+
+1679
+01:19:49,800 --> 01:19:51,110
+Jūs varat noņemt cieto disku.
+
+1680
+01:19:51,110 --> 01:19:53,060
+Jūs varat piekļūt to, ka veidā.
+
+1681
+01:19:53,060 --> 01:19:55,442
+Un tā tas ir iemesls, kāpēc, jo
+gadījums Dropbox,
+
+1682
+01:19:55,442 --> 01:19:57,900
+Piemēram, tas ir nedaudz
+satraucoša, ka ne tikai tie
+
+1683
+01:19:57,900 --> 01:20:02,860
+ir dati, pat ja tas ir
+šifrēta, viņiem ir arī atslēga.
+
+1684
+01:20:02,860 --> 01:20:04,993
+Other rūpes?
+
+1685
+01:20:04,993 --> 01:20:08,430
+>> Mērķauditorija: [dzirdams]
+
+1686
+01:20:08,430 --> 01:20:27,740
+
+1687
+01:20:27,740 --> 01:20:30,240
+DAVID Malan: Jā, tas ir ļoti
+true-- ar Googles, āboli,
+
+1688
+01:20:30,240 --> 01:20:31,406
+tad Microsofts pasaules.
+
+1689
+01:20:31,406 --> 01:20:34,400
+Un patiesībā, cik ilgi ir
+jums bija jūsu iPhone?
+
+1690
+01:20:34,400 --> 01:20:35,885
+Jā, sniegt vai pieņemt.
+
+1691
+01:20:35,885 --> 01:20:36,760
+Mērķauditorija: [dzirdams]
+
+1692
+01:20:36,760 --> 01:20:37,780
+DAVID Malan: Es atvainojos?
+
+1693
+01:20:37,780 --> 01:20:39,667
+Jūs esat starp tiem, kas
+ir iPhone, vai ne?
+
+1694
+01:20:39,667 --> 01:20:40,250
+Mērķauditorija: Jā.
+
+1695
+01:20:40,250 --> 01:20:42,208
+DAVID Malan: Cik ilgi
+tu esi bijusi savu iPhone?
+
+1696
+01:20:42,208 --> 01:20:43,372
+Mērķauditorija: [dzirdams]
+
+1697
+01:20:43,372 --> 01:20:45,080
+DAVID Malan: Labi, tāpēc
+Apple burtiski zina
+
+1698
+01:20:45,080 --> 01:20:49,030
+kur jūs esat bijis ik stundu
+diena pēdējo piecu gadu laikā.
+
+1699
+01:20:49,030 --> 01:20:51,112
+>> Mērķauditorija: [dzirdams]
+
+1700
+01:20:51,112 --> 01:20:54,626
+
+1701
+01:20:54,626 --> 01:20:56,375
+DAVID Malan: Kas ir
+brīnišķīga īpašība.
+
+1702
+01:20:56,375 --> 01:20:57,860
+Mērķauditorija: [dzirdams]
+
+1703
+01:20:57,860 --> 01:21:00,875
+DAVID Malan: Jā, bet
+tirdzniecības off for sure.
+
+1704
+01:21:00,875 --> 01:21:01,750
+Mērķauditorija: [dzirdams]
+
+1705
+01:21:01,750 --> 01:21:04,720
+
+1706
+01:21:04,720 --> 01:21:07,813
+>> DAVID Malan: Jā, tas ir ļoti viegli.
+
+1707
+01:21:07,813 --> 01:21:08,688
+Mērķauditorija: [dzirdams]
+
+1708
+01:21:08,688 --> 01:21:12,040
+
+1709
+01:21:12,040 --> 01:21:13,248
+DAVID Malan: Citi ēnas?
+
+1710
+01:21:13,248 --> 01:21:16,995
+Mērķauditorija: [dzirdams]
+
+1711
+01:21:16,995 --> 01:21:26,151
+
+1712
+01:21:26,151 --> 01:21:27,900
+DAVID Malan: Absolutely--
+tehnoloģiski,
+
+1713
+01:21:27,900 --> 01:21:31,550
+ekonomiski, tas ir diezgan pārliecinoši, lai
+kārtot iegūt šos apjomradītus ietaupījumus
+
+1714
+01:21:31,550 --> 01:21:33,579
+un pārvietoties visu
+tā saukto mākonis.
+
+1715
+01:21:33,579 --> 01:21:35,870
+Bet jūs, iespējams, vēlaties, lai
+iet ar dažiem no lielākajiem
+
+1716
+01:21:35,870 --> 01:21:39,380
+zivis, Amazones, tad Googles, tad
+Microsofts-- Rackspace ir diezgan big--
+
+1717
+01:21:39,380 --> 01:21:42,200
+un daži citi, un nav
+vienmēr lidot naktī ļaudīm
+
+1718
+01:21:42,200 --> 01:21:45,640
+kuriem tas ir ļoti viegli darīt
+mūsdienās šāda veida tehniku.
+
+1719
+01:21:45,640 --> 01:21:49,140
+Un tas, kam jūs varat
+maksāt mēnesī 5,99 $ līdz.
+
+1720
+01:21:49,140 --> 01:21:50,890
+Bet jūs, protams,
+iegūt to, ko jūs maksājat.
+
+1721
+01:21:50,890 --> 01:21:54,014
+>> Kad jūs sakāt [nedzirdama], tas ir, kad
+lietas, piemēram, šiem pieciem nines nāk uz augšu,
+
+1722
+01:21:54,014 --> 01:21:58,017
+saskaņā ar kuru, pat ja tehnoloģiski
+mēs nevaram īsti garantēt 99.999,
+
+1723
+01:21:58,017 --> 01:22:00,350
+mēs vienkārši veidot sava veida
+soda ar līgumu
+
+1724
+01:22:00,350 --> 01:22:03,910
+tā, ka tad, ja tas notiek, vismaz
+tur ir daži izmaksas mums, pārdevējs.
+
+1725
+01:22:03,910 --> 01:22:07,950
+Un tas, ko jūs parasti
+kļūst viņiem piekrist.
+
+1726
+01:22:07,950 --> 01:22:09,590
+>> Mērķauditorija: [dzirdams]
+
+1727
+01:22:09,590 --> 01:22:12,290
+>> DAVID Malan: Un
+viena veida svētību
+
+1728
+01:22:12,290 --> 01:22:15,630
+ir tas, ka pat tad, kad mēs ejam uz leju, lai
+Piemēram, vai pat daži uzņēmumi,
+
+1729
+01:22:15,630 --> 01:22:17,800
+realitāte ir Amazon,
+Piemēram, ir tik daudz
+
+1730
+01:22:17,800 --> 01:22:21,780
+darn klientiem, labi pazīstami klienti,
+darbojas no konkrētu datu centru
+
+1731
+01:22:21,780 --> 01:22:26,224
+ka tad, kad kaut kas tiešām iet greizi,
+tāpat kā dabas katastrofas un laika apstākļiem, un, piemēram,
+
+1732
+01:22:26,224 --> 01:22:29,390
+ja tur ir kāds veida sudraba uzliku,
+tas, ka tu esi ļoti laba kompānija.
+
+1733
+01:22:29,390 --> 01:22:30,680
+Jūsu mājas lapā var būt offline.
+
+1734
+01:22:30,680 --> 01:22:32,750
+Bet tā ir, piemēram, puse
+tautas internets.
+
+1735
+01:22:32,750 --> 01:22:36,230
+Un tā tas ir apstrīdami nedaudz
+garšīgu saviem klientiem
+
+1736
+01:22:36,230 --> 01:22:38,780
+ja tas ir vairāk no interneta
+lieta nekā acme.com lieta.
+
+1737
+01:22:38,780 --> 01:22:41,780
+Bet tas ir mazliet apkrāptu.
+
+1738
+01:22:41,780 --> 01:22:46,740
+>> Tātad attiecībā uz citām lietām paskatīties,
+tikai tāpēc, ka mēs neizslēdzam citiem,
+
+1739
+01:22:46,740 --> 01:22:51,210
+ja dodaties uz Microsoft Azure, tie
+ir gan Linux un Windows sīkumi
+
+1740
+01:22:51,210 --> 01:22:53,190
+kas ir salīdzināms ar Amazon.
+
+1741
+01:22:53,190 --> 01:22:57,540
+Ja jūs iet uz Google aprēķinu programmas,
+viņiem ir kaut kas līdzīgs, kā arī.
+
+1742
+01:22:57,540 --> 01:23:00,500
+Un tikai noapaļot
+šie mākonis piedāvājumu,
+
+1743
+01:23:00,500 --> 01:23:02,762
+Es pieminēt viena cita lieta.
+
+1744
+01:23:02,762 --> 01:23:04,720
+Tas ir populārs mājas lapa
+tas pārstāvi
+
+1745
+01:23:04,720 --> 01:23:08,590
+no klases tehnoloģijas.
+
+1746
+01:23:08,590 --> 01:23:12,350
+Tiem, mēs tikko runājām
+par, Amazon, būtu IAAS,
+
+1747
+01:23:12,350 --> 01:23:17,150
+Infrastruktūra kā pakalpojums, kur jūs
+veida fizisko aparatūru kā pakalpojumu.
+
+1748
+01:23:17,150 --> 01:23:18,757
+Tur ir SAAS.
+
+1749
+01:23:18,757 --> 01:23:20,090
+Patiesībā, ļaujiet man īsi pierakstīt tos uz leju.
+
+1750
+01:23:20,090 --> 01:23:23,290
+
+1751
+01:23:23,290 --> 01:23:28,190
+>> IAAS-- Infrastruktūra
+Kā pakalpojums, SAAS,
+
+1752
+01:23:28,190 --> 01:23:31,870
+un PAAS, kas ir
+ļoti mulsinoši akronīmi
+
+1753
+01:23:31,870 --> 01:23:34,400
+kas raksturo trīs
+dažāda veida lietas.
+
+1754
+01:23:34,400 --> 01:23:36,400
+Un paši akronīmi
+nav īsti jautājums.
+
+1755
+01:23:36,400 --> 01:23:38,360
+Tas viss ir par mākonis sīkumi
+mēs esam tikko runā par,
+
+1756
+01:23:38,360 --> 01:23:41,570
+zemāks līmenis sīkumi, tad
+virtualizācijas aparatūras un uzglabāšanas
+
+1757
+01:23:41,570 --> 01:23:44,890
+ar tā saukto mākoni, vai tas ir
+Amazon, Microsoft, Google, vai otru.
+
+1758
+01:23:44,890 --> 01:23:47,270
+>> Software kā service--
+mums visiem veida izmantot šo.
+
+1759
+01:23:47,270 --> 01:23:49,810
+Ja jūs izmantojat Google Apps
+Gmail vai kalendāra,
+
+1760
+01:23:49,810 --> 01:23:52,530
+kāds no šiem tīmekļa
+Pirms programmas, kas 10 gadus mēs
+
+1761
+01:23:52,530 --> 01:23:55,560
+būtu dubultā noklikšķinājuši ikonas
+mūsu desktop, programmatūra kā pakalpojums
+
+1762
+01:23:55,560 --> 01:23:57,400
+tagad ir patiešām tīmekļa lietojumprogrammu.
+
+1763
+01:23:57,400 --> 01:24:00,110
+Un platforma kā
+apkalpošana veida atkarīgs.
+
+1764
+01:24:00,110 --> 01:24:03,140
+>> Un viens piemērs es došu jums šeit
+saistībā ar mākonis computing--
+
+1765
+01:24:03,140 --> 01:24:06,250
+tur ir viens uzņēmums, kas ir diezgan
+populārs šajās dienās, Heroku.
+
+1766
+01:24:06,250 --> 01:24:08,940
+Un tie ir pakalpojumi,
+platforma, ja jūs,
+
+1767
+01:24:08,940 --> 01:24:11,730
+kas iet uz augšu
+Amazon infrastruktūra.
+
+1768
+01:24:11,730 --> 01:24:15,800
+Un viņi tikai padara to vēl vieglāk
+izstrādātājiem un inženieriem
+
+1769
+01:24:15,800 --> 01:24:18,330
+iegūt tīmekļa lietojumprogrammas online.
+
+1770
+01:24:18,330 --> 01:24:22,170
+>> Tas ir sāpes, kas sākotnēji, lai izmantotu
+Amazon Web Services un citas lietas.
+
+1771
+01:24:22,170 --> 01:24:24,170
+Tāpēc, ka jūs faktiski ir
+zināt un saprast
+
+1772
+01:24:24,170 --> 01:24:27,617
+par datu bāzēm un tīmekļa serveriem un
+slodze balancers un visi sīkumi
+
+1773
+01:24:27,617 --> 01:24:28,450
+Es tikai runāju par.
+
+1774
+01:24:28,450 --> 01:24:32,780
+Tāpēc, ka visi Amazon ir izdarījusi nav
+slēpta šos dizaina problēmas.
+
+1775
+01:24:32,780 --> 01:24:35,790
+Viņi vienkārši virtualizēti tos
+un pārvietot tos uz pārlūku,
+
+1776
+01:24:35,790 --> 01:24:37,770
+programmatūrā, nevis aparatūru.
+
+1777
+01:24:37,770 --> 01:24:43,020
+>> Bet uzņēmumi, piemēram Heroku un citi
+Paas sniedzēji, platforma kā pakalpojums,
+
+1778
+01:24:43,020 --> 01:24:46,900
+viņi izmanto šos Barebone pamati
+ka mēs tikko runājām,
+
+1779
+01:24:46,900 --> 01:24:50,340
+un tie veidotu vieglāk
+izmantot programmatūru, uz augšu no tā
+
+1780
+01:24:50,340 --> 01:24:54,241
+tā, ka, ja jūs vēlaties, lai saņemtu tīmekļa
+pieteikumu tiešsaistē šajās dienās,
+
+1781
+01:24:54,241 --> 01:24:55,990
+Jums noteikti ir
+zināt, kā programma.
+
+1782
+01:24:55,990 --> 01:25:00,280
+Jums ir jāzina, Java vai Python vai PHP
+vai Ruby vai ķekars citās valodās.
+
+1783
+01:25:00,280 --> 01:25:02,180
+>> Bet jūs arī nepieciešama vieta, kur likt to.
+
+1784
+01:25:02,180 --> 01:25:04,790
+Un mēs runājām agrāk par
+iegūt web hostinga uzņēmums.
+
+1785
+01:25:04,790 --> 01:25:08,630
+Tas ir sava veida, piemēram, vidus 2000s
+pieeja, lai iegūtu kaut ko internetā.
+
+1786
+01:25:08,630 --> 01:25:12,140
+Mūsdienās jūs varētu nevis maksāt kādam
+piemēram Heroku pāris dolāru mēnesī.
+
+1787
+01:25:12,140 --> 01:25:15,370
+Un būtībā, kad esat
+izdarīt kādu sākotnējo konfigurāciju,
+
+1788
+01:25:15,370 --> 01:25:18,704
+lai atjauninātu jūsu mājas lapā, jūs
+vienkārši ierakstiet komandu logā.
+
+1789
+01:25:18,704 --> 01:25:21,370
+Un kāds kods jūs esat rakstiski
+šeit jūsu klēpjdators uzreiz
+
+1790
+01:25:21,370 --> 01:25:24,350
+izpaužas izplatīts jebkuru numuru
+serveru mākoni.
+
+1791
+01:25:24,350 --> 01:25:26,440
+>> Un Heroku rūpējas par
+visi ir sarežģīta.
+
+1792
+01:25:26,440 --> 01:25:28,930
+Viņi izdomāt visu datubāzi
+sīkumi, visas slodzes balansēšana,
+
+1793
+01:25:28,930 --> 01:25:31,480
+visas galvassāpes, ka mēs esam
+vienkārši rakstīts uz tāfeles,
+
+1794
+01:25:31,480 --> 01:25:33,320
+un paslēpt visu, kas jums.
+
+1795
+01:25:33,320 --> 01:25:36,170
+Un pretī, jūs vienkārši
+tos maksā nedaudz vairāk.
+
+1796
+01:25:36,170 --> 01:25:39,810
+Tātad jums ir šīs infrastruktūras, kā
+pakalpojums, platformas kā pakalpojums,
+
+1797
+01:25:39,810 --> 01:25:41,400
+un tad programmatūra kā pakalpojums.
+
+1798
+01:25:41,400 --> 01:25:45,390
+Tas ir, atkal, tas
+abstrakcija vai layering.
+
+1799
+01:25:45,390 --> 01:25:51,187
+>> Visus jautājumus par mākoni vai
+veidojot vienu pašu infrastruktūru?
+
+1800
+01:25:51,187 --> 01:25:52,270
+Labi, ka bija daudz.
+
+1801
+01:25:52,270 --> 01:25:54,200
+Kāpēc mēs ejam uz priekšu un
+veikt mūsu 15 minūšu pārtraukumu šeit.
+
+1802
+01:25:54,200 --> 01:25:57,241
+Mēs atgriezties ar dažām jaunām koncepcijām
+un mazliet roku-on iespēja
+
+1803
+01:25:57,241 --> 01:25:59,110
+pirms vakarā ir beigusies.
+
+1804
+01:25:59,110 --> 01:26:00,332
+

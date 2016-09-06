@@ -1,0 +1,7995 @@
+1
+00:00:00,000 --> 00:00:00,030
+
+2
+00:00:00,030 --> 00:00:00,460
+>> DAVID MALAN: Está bien.
+
+3
+00:00:00,460 --> 00:00:01,094
+Estamos de vuelta.
+
+4
+00:00:01,094 --> 00:00:04,260
+Así que en este segmento de la programación lo
+Pensé que nos gustaría hacer es una mezcla de cosas.
+
+5
+00:00:04,260 --> 00:00:06,340
+Uno de ellos, hacer un poco
+de algo práctico,
+
+6
+00:00:06,340 --> 00:00:08,690
+aunque utilizando una más lúdica
+ambiente- programación
+
+7
+00:00:08,690 --> 00:00:11,620
+uno que es demostrativo de
+exactamente el tipo de ideas
+
+8
+00:00:11,620 --> 00:00:14,220
+hemos estado hablando,
+pero un poco más formal.
+
+9
+00:00:14,220 --> 00:00:18,200
+Dos, un vistazo a algunas de las
+las formas más técnicos
+
+10
+00:00:18,200 --> 00:00:21,520
+que un programador en realidad resolver
+problemas como el problema de la búsqueda
+
+11
+00:00:21,520 --> 00:00:24,530
+que miramos antes y
+También una manera más fundamental
+
+12
+00:00:24,530 --> 00:00:26,020
+interesante problema de la clasificación.
+
+13
+00:00:26,020 --> 00:00:28,840
+>> Nosotros asumimos desde el principio
+que ese libro de teléfono se solucionó,
+
+14
+00:00:28,840 --> 00:00:31,980
+pero que por sí sola es en realidad una especie de
+problema difícil con muchas formas diferentes
+
+15
+00:00:31,980 --> 00:00:32,479
+para resolverlo.
+
+16
+00:00:32,479 --> 00:00:34,366
+Así que vamos a utilizar estos como
+una clase de problemas
+
+17
+00:00:34,366 --> 00:00:36,740
+representante de las cosas que
+podría resolverse en general.
+
+18
+00:00:36,740 --> 00:00:38,980
+Y entonces hablaremos
+sobre con cierto detalle lo
+
+19
+00:00:38,980 --> 00:00:42,360
+se llaman los datos structures--
+maneras más elegantes como listas enlazadas
+
+20
+00:00:42,360 --> 00:00:46,290
+y tablas hash y árboles que
+un programador en realidad
+
+21
+00:00:46,290 --> 00:00:48,890
+usar y generalmente utilizar
+en una pizarra para pintar
+
+22
+00:00:48,890 --> 00:00:51,840
+una imagen de lo que él o ella
+prevé para la implementación
+
+23
+00:00:51,840 --> 00:00:52,980
+alguna pieza de software.
+
+24
+00:00:52,980 --> 00:00:55,130
+>> Así que vamos a hacer las manos en la primera parte.
+
+25
+00:00:55,130 --> 00:01:00,090
+Por lo que sólo ensuciarse las manos con una
+scratch.mit.edu entorno llamada.
+
+26
+00:01:00,090 --> 00:01:02,636
+Esta es una herramienta que utilizamos
+en nuestra clase de grado.
+
+27
+00:01:02,636 --> 00:01:04,510
+A pesar de que está diseñado
+para mayores de 12 años,
+
+28
+00:01:04,510 --> 00:01:07,570
+lo usamos para arriba
+parte de eso un poco
+
+29
+00:01:07,570 --> 00:01:10,020
+ya que es un agradable, divertido
+manera gráfica de aprendizaje
+
+30
+00:01:10,020 --> 00:01:12,160
+un poco de algo acerca de la programación.
+
+31
+00:01:12,160 --> 00:01:17,600
+Así que la cabeza a esa URL, donde
+Debería ver una página como este,
+
+32
+00:01:17,600 --> 00:01:23,330
+y seguir adelante y haga clic
+Unirse a los arañazos en la parte superior derecha
+
+33
+00:01:23,330 --> 00:01:28,300
+y elegir un nombre de usuario y una
+contraseña y, finalmente, se consigue
+
+34
+00:01:28,300 --> 00:01:29,970
+un scratch.mit.edu account--.
+
+35
+00:01:29,970 --> 00:01:32,165
+
+36
+00:01:32,165 --> 00:01:34,665
+Pensé que haría uso de esto como una
+oportunidad de primera para mostrar esto.
+
+37
+00:01:34,665 --> 00:01:39,120
+Una pregunta surgió durante el descanso
+acerca de lo que en realidad parece código.
+
+38
+00:01:39,120 --> 00:01:41,315
+Y estábamos hablando
+durante el descanso sobre C,
+
+39
+00:01:41,315 --> 00:01:45,060
+en particular: en particular una
+nivel más bajo en una lengua más antigua.
+
+40
+00:01:45,060 --> 00:01:47,750
+Y acabo de hacer una rápida
+Google buscar para encontrar el código C
+
+41
+00:01:47,750 --> 00:01:51,574
+para la búsqueda binaria, el algoritmo que nos
+utilizado para buscar ese libro de teléfono anterior.
+
+42
+00:01:51,574 --> 00:01:54,240
+Este ejemplo en particular, por supuesto,
+no busca una guía telefónica.
+
+43
+00:01:54,240 --> 00:01:57,840
+Simplemente busca en un montón de
+números en la memoria del ordenador.
+
+44
+00:01:57,840 --> 00:02:01,000
+Pero si desea obtener sólo una representación visual
+sentido de lo que es una programación real
+
+45
+00:02:01,000 --> 00:02:05,370
+el lenguaje se parece, se ve
+un poco de algo como esto.
+
+46
+00:02:05,370 --> 00:02:09,759
+Por lo tanto se trata de más de 20,
+30 o más líneas de código,
+
+47
+00:02:09,759 --> 00:02:12,640
+pero la conversación que
+estaban teniendo durante las vacaciones
+
+48
+00:02:12,640 --> 00:02:16,000
+fue acerca de cómo este hecho
+obtiene transformado en ceros y unos
+
+49
+00:02:16,000 --> 00:02:19,200
+y si uno no puede revertir ese
+procesar e ir de ceros y unos
+
+50
+00:02:19,200 --> 00:02:20,210
+volver al código.
+
+51
+00:02:20,210 --> 00:02:22,620
+>> Desafortunadamente, el proceso de
+es tan transformadora
+
+52
+00:02:22,620 --> 00:02:24,890
+que es mucho más fácil decirlo que hacerlo.
+
+53
+00:02:24,890 --> 00:02:29,400
+Seguí adelante y en realidad resultó
+ese programa, búsqueda binaria,
+
+54
+00:02:29,400 --> 00:02:32,700
+en ceros y unos a modo de una
+El programa llamado compilador que yo
+
+55
+00:02:32,700 --> 00:02:34,400
+sucede que tiene aquí a la derecha en mi Mac.
+
+56
+00:02:34,400 --> 00:02:37,850
+Y si nos fijamos en la pantalla
+aquí, centrándose específicamente
+
+57
+00:02:37,850 --> 00:02:43,520
+sobre estas medias seis columnas solamente,
+verá sólo ceros y unos.
+
+58
+00:02:43,520 --> 00:02:48,290
+Y esos son los ceros y unos que
+componer exactamente ese programa de búsqueda.
+
+59
+00:02:48,290 --> 00:02:53,720
+>> Y así, cada trozo de cinco bits,
+cada byte de ceros y unos aquí,
+
+60
+00:02:53,720 --> 00:02:57,310
+representar alguna instrucción
+normalmente dentro de un ordenador.
+
+61
+00:02:57,310 --> 00:03:00,730
+Y de hecho, si usted ha oído el
+lema publicitario "Intel inside" - que,
+
+62
+00:03:00,730 --> 00:03:04,610
+por supuesto, simplemente significa que tiene una
+CPU Intel o el cerebro en el interior del equipo.
+
+63
+00:03:04,610 --> 00:03:08,000
+Y lo que significa ser un CPU es
+que tiene un conjunto de instrucciones,
+
+64
+00:03:08,000 --> 00:03:08,840
+por así decirlo.
+
+65
+00:03:08,840 --> 00:03:11,620
+>> Cada CPU en el mundo, muchos de
+ellos fabricados por Intel en estos días,
+
+66
+00:03:11,620 --> 00:03:13,690
+comprende un número finito
+número de instrucciones.
+
+67
+00:03:13,690 --> 00:03:18,690
+Y esas instrucciones son tan bajo nivel
+como añadir estos dos números,
+
+68
+00:03:18,690 --> 00:03:22,560
+multiplicar estos dos números,
+mover esta pieza de información de aquí
+
+69
+00:03:22,560 --> 00:03:27,340
+de aquí en memoria, guardar este
+la información de aquí hasta aquí en la memoria,
+
+70
+00:03:27,340 --> 00:03:32,200
+y así forth-- muy, muy
+De bajo nivel, casi detalles electrónicos.
+
+71
+00:03:32,200 --> 00:03:34,780
+Pero con los matemática
+operaciones acoplada
+
+72
+00:03:34,780 --> 00:03:37,410
+con lo que hemos comentado anteriormente,
+la representación de datos
+
+73
+00:03:37,410 --> 00:03:40,450
+como ceros y unos, puede
+todo lo que se acumulan
+
+74
+00:03:40,450 --> 00:03:44,180
+que un ordenador puede hacer hoy, si
+es textual, gráfica, musical,
+
+75
+00:03:44,180 --> 00:03:45,580
+o de otro modo.
+
+76
+00:03:45,580 --> 00:03:49,450
+>> Así que esto es muy fácil de conseguir
+perdido entre la maleza de forma rápida.
+
+77
+00:03:49,450 --> 00:03:52,150
+Y hay una gran cantidad de
+retos sintácticos
+
+78
+00:03:52,150 --> 00:03:56,630
+por lo que si se hace el más simple,
+más estúpida de errores tipográficos ninguno de los programas
+
+79
+00:03:56,630 --> 00:03:57,860
+funcionará en absoluto.
+
+80
+00:03:57,860 --> 00:04:00,366
+Y así, en lugar de utilizar una
+lenguaje como C esta mañana,
+
+81
+00:04:00,366 --> 00:04:02,240
+Pensé que sería
+más divertido para hacer realidad
+
+82
+00:04:02,240 --> 00:04:04,840
+algo más visual, que
+mientras diseñado para niños
+
+83
+00:04:04,840 --> 00:04:08,079
+es en realidad una manifestación perfecta
+de una programación real
+
+84
+00:04:08,079 --> 00:04:10,370
+language-- sólo pasa a
+utilizar imágenes en lugar de texto
+
+85
+00:04:10,370 --> 00:04:11,710
+para representar esas ideas.
+
+86
+00:04:11,710 --> 00:04:15,470
+>> Así que una vez que de hecho tiene una
+cuenta en scratch.mit.edu,
+
+87
+00:04:15,470 --> 00:04:21,070
+haga clic en el botón Crear
+en la parte superior izquierda de la página.
+
+88
+00:04:21,070 --> 00:04:24,620
+Y hay que ver un entorno como
+el que estoy a punto de ver en mi pantalla
+
+89
+00:04:24,620 --> 00:04:26,310
+aquí.
+
+90
+00:04:26,310 --> 00:04:29,350
+Y vamos a pasar sólo un poco
+poco de tiempo jugando aquí.
+
+91
+00:04:29,350 --> 00:04:34,080
+Veamos si no todos podemos resolver algunos
+problemas juntos de la manera siguiente.
+
+92
+00:04:34,080 --> 00:04:39,420
+>> Así que lo que verá dentro de este
+ambiente- y de hecho acaba de dejar
+
+93
+00:04:39,420 --> 00:04:40,050
+Me detengo.
+
+94
+00:04:40,050 --> 00:04:42,680
+¿Hay alguien que no está aquí?
+
+95
+00:04:42,680 --> 00:04:45,070
+¿Aqui no?
+
+96
+00:04:45,070 --> 00:04:45,800
+DE ACUERDO.
+
+97
+00:04:45,800 --> 00:04:49,030
+Así que permítanme señalar algunos
+características de este entorno.
+
+98
+00:04:49,030 --> 00:04:55,024
+>> Así que en la parte superior izquierda de la pantalla, nos
+La etapa de tener arañazos, por así decirlo.
+
+99
+00:04:55,024 --> 00:04:57,440
+Scratch es no sólo el nombre
+de este lenguaje de programación;
+
+100
+00:04:57,440 --> 00:05:00,356
+que es también el nombre del gato que se
+ves por defecto no en naranja.
+
+101
+00:05:00,356 --> 00:05:02,160
+Él está en una etapa, por lo
+al igual que describí
+
+102
+00:05:02,160 --> 00:05:05,770
+la tortuga anteriormente como miembros de un
+rectangular entorno de la tarjeta blanca.
+
+103
+00:05:05,770 --> 00:05:09,800
+El mundo de este gato está confinado en su totalidad
+a ese rectángulo encima de la tapa allí.
+
+104
+00:05:09,800 --> 00:05:12,210
+>> Mientras tanto, a la derecha
+lado aquí, es
+
+105
+00:05:12,210 --> 00:05:15,610
+sólo un área de secuencias de comandos, una
+pizarra en blanco si se quiere.
+
+106
+00:05:15,610 --> 00:05:18,590
+Aquí es donde vamos a escribir
+nuestros programas en un momento.
+
+107
+00:05:18,590 --> 00:05:22,935
+Y los bloques de construcción que deberán
+utilizar para escribir este program-- el rompecabezas
+
+108
+00:05:22,935 --> 00:05:25,310
+piezas, si usted está Voluntad--
+los que están aquí en el medio,
+
+109
+00:05:25,310 --> 00:05:27,500
+y están categorizados
+por funcionalidad.
+
+110
+00:05:27,500 --> 00:05:31,000
+Así, por ejemplo, voy a seguir adelante
+y demostrar por lo menos uno de estos.
+
+111
+00:05:31,000 --> 00:05:33,690
+Voy a seguir adelante y haga clic
+la Categoría de control hasta la parte superior.
+
+112
+00:05:33,690 --> 00:05:35,720
+>> Así que estas son las categorías encima de la tapa.
+
+113
+00:05:35,720 --> 00:05:39,410
+Voy a clic en la categoría de control.
+
+114
+00:05:39,410 --> 00:05:44,020
+Más bien, voy a haga clic en los Eventos
+categoría, el primero de todos en la superior.
+
+115
+00:05:44,020 --> 00:05:47,790
+Y si desea seguir adelante, incluso
+al hacer esto, usted es muy bienvenido a.
+
+116
+00:05:47,790 --> 00:05:52,180
+Voy a hacer clic y arrastrar este
+primero, "cuando se hace clic en bandera verde."
+
+117
+00:05:52,180 --> 00:05:58,410
+Y luego voy a dejar que sólo
+más o menos en la parte superior de mis pizarras en blanco.
+
+118
+00:05:58,410 --> 00:06:01,450
+>> Y lo que es bueno de los arañazos
+es que esta pieza del rompecabezas, cuando
+
+119
+00:06:01,450 --> 00:06:04,560
+enclavada con otro rompecabezas
+piezas, se van a hacer, literalmente,
+
+120
+00:06:04,560 --> 00:06:06,460
+lo que esas piezas del rompecabezas dicen que hacer.
+
+121
+00:06:06,460 --> 00:06:09,710
+Así, por ejemplo, Scratch es correcta
+ahora en el centro de su mundo.
+
+122
+00:06:09,710 --> 00:06:14,660
+Voy a seguir adelante y elegir
+Ahora, vamos a decir, la categoría de movimiento,
+
+123
+00:06:14,660 --> 00:06:18,000
+Si desea hacer lo
+same-- categoría de movimiento.
+
+124
+00:06:18,000 --> 00:06:20,430
+Y ahora noto que tengo en su conjunto
+montón de piezas de un rompecabezas aquí
+
+125
+00:06:20,430 --> 00:06:23,370
+que, de nuevo, una especie de hacer lo que dicen.
+
+126
+00:06:23,370 --> 00:06:28,110
+Y voy a seguir adelante y arrastrar y
+dejar caer el bloque de movimiento por aquí.
+
+127
+00:06:28,110 --> 00:06:31,860
+>> Y note que tan pronto como se obtiene
+cerca de la parte inferior de la "bandera verde
+
+128
+00:06:31,860 --> 00:06:34,580
+hecho clic en "botón, el aviso
+cómo aparece una línea blanca,
+
+129
+00:06:34,580 --> 00:06:36,950
+como si fuera casi
+magnética, que quiere ir allí.
+
+130
+00:06:36,950 --> 00:06:43,070
+Simplemente deja ir, y se encajará
+juntos y las formas coincidirán.
+
+131
+00:06:43,070 --> 00:06:46,620
+tal vez y ahora casi se puede
+adivinar hacia dónde vamos con esto.
+
+132
+00:06:46,620 --> 00:06:51,570
+>> Si nos fijamos en la etapa de Scratch
+por aquí y mirar a la parte superior de la misma,
+
+133
+00:06:51,570 --> 00:06:55,142
+verá una luz roja, una
+señal de stop, y una bandera verde.
+
+134
+00:06:55,142 --> 00:06:57,100
+Y voy a seguir adelante
+y ver mis screen--
+
+135
+00:06:57,100 --> 00:06:58,460
+por un momento, si pudiera.
+
+136
+00:06:58,460 --> 00:07:01,960
+Voy a hacer clic en el
+bandera verde en este momento,
+
+137
+00:07:01,960 --> 00:07:07,850
+y se trasladó lo que parece ser 10 pasos
+o 10 píxeles, 10 puntos, en la pantalla.
+
+138
+00:07:07,850 --> 00:07:13,390
+>> Y lo que no es tan emocionante,
+pero permítanme proponer
+
+139
+00:07:13,390 --> 00:07:17,440
+sin ni siquiera la enseñanza de esto, sólo
+utilizando el dueño de su propio let intuition--
+
+140
+00:07:17,440 --> 00:07:22,560
+Me propongo a averiguar cómo
+hacer pie derecho arañazos fuera del escenario.
+
+141
+00:07:22,560 --> 00:07:28,700
+Haga que dar paso a la derecha de
+la pantalla, todo el camino a la derecha.
+
+142
+00:07:28,700 --> 00:07:32,200
+Déjeme darle un momento
+o por lo que luchar con eso.
+
+143
+00:07:32,200 --> 00:07:37,681
+Es posible que desee echar un vistazo
+en otras categorías de bloques.
+
+144
+00:07:37,681 --> 00:07:38,180
+Todo bien.
+
+145
+00:07:38,180 --> 00:07:41,290
+Así que para recapitular, cuando tenemos
+la bandera verde clic aquí
+
+146
+00:07:41,290 --> 00:07:44,850
+y mover 10 pasos es la
+única instrucción, cada vez que
+
+147
+00:07:44,850 --> 00:07:46,720
+haga clic en la bandera verde, lo que está pasando?
+
+148
+00:07:46,720 --> 00:07:50,070
+Bueno, eso es correr mi programa.
+
+149
+00:07:50,070 --> 00:07:52,450
+Por lo que podía hacer esto
+tal vez 10 veces de forma manual,
+
+150
+00:07:52,450 --> 00:07:55,130
+pero esto se siente un poco
+hackish poco, por así decirlo,
+
+151
+00:07:55,130 --> 00:07:57,480
+por lo que no estoy realmente
+resolviendo el problema.
+
+152
+00:07:57,480 --> 00:08:00,530
+Sólo intento una y otra
+una y otra y otra vez
+
+153
+00:08:00,530 --> 00:08:03,180
+hasta que tipo de accidente
+lograr la directiva
+
+154
+00:08:03,180 --> 00:08:05,560
+que se propuso lograr antes.
+
+155
+00:08:05,560 --> 00:08:08,200
+>> Pero sabemos por nuestra
+pseudocódigo anterior que hay
+
+156
+00:08:08,200 --> 00:08:11,870
+esta noción en la programación de bucles,
+hacer algo una y otra vez.
+
+157
+00:08:11,870 --> 00:08:14,888
+Y así vi que un montón de ustedes
+alcanzado para la pieza de puzzle lo que?
+
+158
+00:08:14,888 --> 00:08:17,870
+
+159
+00:08:17,870 --> 00:08:18,730
+Repetir hasta.
+
+160
+00:08:18,730 --> 00:08:21,400
+Así que podríamos hacer algo
+al igual que repetir hasta.
+
+161
+00:08:21,400 --> 00:08:23,760
+¿Y qué se repite hasta que exactamente?
+
+162
+00:08:23,760 --> 00:08:27,720
+
+163
+00:08:27,720 --> 00:08:28,540
+>> DE ACUERDO.
+
+164
+00:08:28,540 --> 00:08:31,974
+Y déjame ir con uno que es
+algo más sencillo sólo por un momento.
+
+165
+00:08:31,974 --> 00:08:33,140
+Déjame seguir adelante y hacer esto.
+
+166
+00:08:33,140 --> 00:08:35,559
+Tenga en cuenta que, ya que puede tener
+descubierto bajo control,
+
+167
+00:08:35,559 --> 00:08:38,409
+hay este bloque de repetición, lo cual
+no se ve como si fuera tan grande.
+
+168
+00:08:38,409 --> 00:08:41,039
+No hay mucho ambiente en
+entre esas dos líneas amarillas.
+
+169
+00:08:41,039 --> 00:08:43,539
+Sin embargo, como algunos de ustedes podrían tener
+notado, si arrastra y soltar,
+
+170
+00:08:43,539 --> 00:08:45,150
+observe cómo crece para rellenar la forma.
+
+171
+00:08:45,150 --> 00:08:46,274
+>> E incluso se puede meter más.
+
+172
+00:08:46,274 --> 00:08:48,670
+Simplemente va a seguir creciendo si
+se arrastra y se pasa sobre ella.
+
+173
+00:08:48,670 --> 00:08:51,110
+Y no sé lo que es
+mejor aquí, así que vamos
+
+174
+00:08:51,110 --> 00:08:54,760
+Me repito al menos cinco veces, para
+instancia y, a continuación, volver a la etapa
+
+175
+00:08:54,760 --> 00:08:56,720
+y haga clic en la bandera verde.
+
+176
+00:08:56,720 --> 00:08:59,110
+Y ahora se dio cuenta que no es muy allá.
+
+177
+00:08:59,110 --> 00:09:02,400
+>> Ahora algunos de ustedes proponen, como
+Victoria acaba de hacer, repetir 10 veces.
+
+178
+00:09:02,400 --> 00:09:05,140
+Y que hace por lo general
+llevarlo hasta el final,
+
+179
+00:09:05,140 --> 00:09:10,510
+pero ¿no habría un más robusto
+de manera arbitraria averiguar
+
+180
+00:09:10,510 --> 00:09:12,640
+cuántos movimientos para hacer?
+
+181
+00:09:12,640 --> 00:09:17,680
+¿Cuál podría ser un bloque mejor
+que repetir 10 veces?
+
+182
+00:09:17,680 --> 00:09:20,380
+>> Sí, ¿por qué no hacer algo para siempre?
+
+183
+00:09:20,380 --> 00:09:24,390
+Y ahora vamos a mover este pedazo del rompecabezas
+En el interior hay y deshacerse de éste.
+
+184
+00:09:24,390 --> 00:09:28,300
+Ahora note, sin importar dónde los arañazos
+aperturas, que va hasta el borde.
+
+185
+00:09:28,300 --> 00:09:30,700
+Y afortunadamente el MIT,
+que hace Scratch, simplemente
+
+186
+00:09:30,700 --> 00:09:33,190
+se asegura de que nunca
+desaparece por completo.
+
+187
+00:09:33,190 --> 00:09:35,360
+Siempre se puede agarrar su cola.
+
+188
+00:09:35,360 --> 00:09:37,680
+>> Y de la misma manera intuitiva,
+¿por qué sigue en movimiento?
+
+189
+00:09:37,680 --> 00:09:38,892
+¿Que esta pasando aqui?
+
+190
+00:09:38,892 --> 00:09:41,440
+
+191
+00:09:41,440 --> 00:09:43,824
+Él parece haberse detenido, pero
+entonces, si recojo y arrastre
+
+192
+00:09:43,824 --> 00:09:45,240
+él sigue queriendo ir por allí.
+
+193
+00:09:45,240 --> 00:09:46,123
+¿Porqué es eso?
+
+194
+00:09:46,123 --> 00:09:51,610
+
+195
+00:09:51,610 --> 00:09:54,360
+En verdad, un ordenador es, literalmente,
+va a hacer lo que le indica que hacer.
+
+196
+00:09:54,360 --> 00:09:58,380
+Así que si usted le dijo que haga lo antes
+Lo siguiente para siempre, mover 10 pasos,
+
+197
+00:09:58,380 --> 00:10:01,860
+que va a seguir y seguir
+hasta que llegué a la señal de stop roja
+
+198
+00:10:01,860 --> 00:10:04,620
+y detener el programa completo.
+
+199
+00:10:04,620 --> 00:10:06,610
+>> Así que incluso si no lo hizo
+hacer esto, ¿cómo podría hacerlo
+
+200
+00:10:06,610 --> 00:10:09,510
+hacer que los arañazos se mueven más rápido
+a través de la pantalla?
+
+201
+00:10:09,510 --> 00:10:12,060
+
+202
+00:10:12,060 --> 00:10:13,280
+Más pasos, ¿verdad?
+
+203
+00:10:13,280 --> 00:10:15,710
+Así que en lugar de hacer 10
+a la vez, ¿por qué no
+
+204
+00:10:15,710 --> 00:10:20,100
+seguir adelante y cambiarlo a--
+¿qué le propose-- 50?
+
+205
+00:10:20,100 --> 00:10:24,410
+Así que ahora voy a hacer clic en el verde
+bandera, y, de hecho, va muy rápido.
+
+206
+00:10:24,410 --> 00:10:27,180
+>> Y esto, por supuesto, es sólo
+una manifestación de la animación.
+
+207
+00:10:27,180 --> 00:10:28,060
+¿Cuál es la animación?
+
+208
+00:10:28,060 --> 00:10:33,090
+Es sólo que muestra el ser humano
+manojo entero de imágenes fijas en realidad,
+
+209
+00:10:33,090 --> 00:10:34,160
+muy, muy rápido.
+
+210
+00:10:34,160 --> 00:10:36,500
+Y así, si sólo estamos diciendo
+que se mueva más pasos,
+
+211
+00:10:36,500 --> 00:10:39,750
+sólo estamos teniendo el efecto sea
+donde el cambio es en la pantalla
+
+212
+00:10:39,750 --> 00:10:42,900
+tanto más rápidamente por unidad de tiempo.
+
+213
+00:10:42,900 --> 00:10:46,454
+>> Ahora, el siguiente reto que propuse
+iba a tener que rebote fuera del borde.
+
+214
+00:10:46,454 --> 00:10:49,120
+Y sin saber qué rompecabezas
+la cual existen piezas, ya que está bien
+
+215
+00:10:49,120 --> 00:10:53,030
+si no se llega a la
+etapa del challenge-- lo
+
+216
+00:10:53,030 --> 00:10:54,280
+Qué desea hacer intuitivamente?
+
+217
+00:10:54,280 --> 00:10:58,030
+¿Cómo tendríamos que rebote hacia atrás y
+etc., entre la izquierda y la derecha?
+
+218
+00:10:58,030 --> 00:11:02,630
+
+219
+00:11:02,630 --> 00:11:03,810
+>> Sí.
+
+220
+00:11:03,810 --> 00:11:05,680
+Así que necesitamos algún tipo
+de la condición, y
+
+221
+00:11:05,680 --> 00:11:09,710
+parecen tener condicionales, por lo que
+hablar, en la categoría de control.
+
+222
+00:11:09,710 --> 00:11:14,110
+¿Cuál de estos bloques
+es lo que probablemente queremos?
+
+223
+00:11:14,110 --> 00:11:15,200
+Sí, tal vez "si, entonces".
+
+224
+00:11:15,200 --> 00:11:18,780
+Así notar que entre los bloques amarillos
+tenemos aquí, no es este "si"
+
+225
+00:11:18,780 --> 00:11:23,920
+o este "si, de lo contrario" bloque que
+nos permiten hacer una decisión para hacer esto
+
+226
+00:11:23,920 --> 00:11:25,000
+o para hacer eso.
+
+227
+00:11:25,000 --> 00:11:27,380
+E incluso se puede anidar
+hacer varias cosas.
+
+228
+00:11:27,380 --> 00:11:34,910
+O si no has ido aquí todavía,
+seguir adelante con la categoría de detección
+
+229
+00:11:34,910 --> 00:11:39,612
+y- vamos a ver si es aquí.
+
+230
+00:11:39,612 --> 00:11:43,050
+
+231
+00:11:43,050 --> 00:11:52,050
+>> Entonces, ¿qué bloque podría ser útil aquí
+para detectar si está fuera del escenario?
+
+232
+00:11:52,050 --> 00:11:56,740
+Sí, darse cuenta de que algunos de estos bloques
+puede ser parametrizada, por así decirlo.
+
+233
+00:11:56,740 --> 00:12:00,706
+Pueden ser una especie de personalizarse, no
+a diferencia de HTML ayer con atributos,
+
+234
+00:12:00,706 --> 00:12:03,330
+donde dichos atributos tipo de
+personalizar el comportamiento de una variable.
+
+235
+00:12:03,330 --> 00:12:08,880
+Del mismo modo aquí, puedo agarrar esta conmovedora
+bloque y el cambio y hacer la pregunta,
+
+236
+00:12:08,880 --> 00:12:11,500
+estás tocando el ratón
+puntero al igual que el cursor
+
+237
+00:12:11,500 --> 00:12:13,250
+o está tocando el borde?
+
+238
+00:12:13,250 --> 00:12:15,210
+>> Así que déjame ir y hacer esto.
+
+239
+00:12:15,210 --> 00:12:18,130
+Voy a alejar por un momento.
+
+240
+00:12:18,130 --> 00:12:21,320
+Permítanme aprovechar esta pieza del rompecabezas
+aquí, esta pieza del rompecabezas de esto,
+
+241
+00:12:21,320 --> 00:12:24,570
+y voy a jumble
+para arriba para un momento.
+
+242
+00:12:24,570 --> 00:12:27,620
+Voy a mover esto,
+cambiar esto a tocar el borde,
+
+243
+00:12:27,620 --> 00:12:38,590
+y voy a hacer esto de movimiento.
+
+244
+00:12:38,590 --> 00:12:40,490
+Así que aquí están algunos de los ingredientes.
+
+245
+00:12:40,490 --> 00:12:42,570
+Creo que tengo todo lo que quiero.
+
+246
+00:12:42,570 --> 00:12:47,710
+>> ¿Alguien quiere proponer cómo
+se puede conectar éstos tal vez de arriba a abajo
+
+247
+00:12:47,710 --> 00:12:52,020
+con el fin de resolver el problema de tener
+Scratch derecha a izquierda a derecha para mover
+
+248
+00:12:52,020 --> 00:12:57,020
+de izquierda a derecha a izquierda, cada una
+tiempo sólo rebotando en la pared?
+
+249
+00:12:57,020 --> 00:12:58,050
+¿Qué quiero hacer?
+
+250
+00:12:58,050 --> 00:13:01,097
+¿Qué bloque se debe conectar a la
+"Bandera verde cuando se hace clic en primer lugar"?
+
+251
+00:13:01,097 --> 00:13:04,060
+
+252
+00:13:04,060 --> 00:13:06,200
+>> OK, así que vamos a empezar con el "para siempre".
+
+253
+00:13:06,200 --> 00:13:07,170
+Lo que va dentro de la próxima?
+
+254
+00:13:07,170 --> 00:13:10,290
+Alguien más.
+
+255
+00:13:10,290 --> 00:13:11,850
+OK, mover los pasos.
+
+256
+00:13:11,850 --> 00:13:12,350
+Todo bien.
+
+257
+00:13:12,350 --> 00:13:14,470
+¿Y que?
+
+258
+00:13:14,470 --> 00:13:15,120
+Con esto, el caso.
+
+259
+00:13:15,120 --> 00:13:17,720
+Y note, a pesar de lo que parece
+intercalado juntas firmemente,
+
+260
+00:13:17,720 --> 00:13:19,500
+sólo crecerá para llenar.
+
+261
+00:13:19,500 --> 00:13:21,500
+Se acaba de entrar en donde lo quiero.
+
+262
+00:13:21,500 --> 00:13:25,920
+>> Y ¿qué es lo que puso entre
+el si y el entonces?
+
+263
+00:13:25,920 --> 00:13:27,180
+Probablemente "si tocar el borde."
+
+264
+00:13:27,180 --> 00:13:31,800
+Y aviso, de nuevo, es demasiado grande
+para ello, pero que crecerá para llenar.
+
+265
+00:13:31,800 --> 00:13:35,002
+Y luego girar 15 grados?
+
+266
+00:13:35,002 --> 00:13:35,710
+¿Cuántos grados?
+
+267
+00:13:35,710 --> 00:13:38,800
+
+268
+00:13:38,800 --> 00:13:41,196
+Sí, por lo que 180 girará
+conmigo todo el camino alrededor.
+
+269
+00:13:41,196 --> 00:13:42,570
+Así que vamos a ver si tengo ese derecho.
+
+270
+00:13:42,570 --> 00:13:43,930
+Permítanme Alejar.
+
+271
+00:13:43,930 --> 00:13:45,130
+>> Permítanme arrastro hasta rasguño.
+
+272
+00:13:45,130 --> 00:13:50,030
+Así que es un poco distorsionada
+ahora, pero que está bien.
+
+273
+00:13:50,030 --> 00:13:52,231
+¿Cómo le puedo restablecer fácilmente?
+
+274
+00:13:52,231 --> 00:13:59,879
+
+275
+00:13:59,879 --> 00:14:01,045
+Yo os voy a engañar un poco.
+
+276
+00:14:01,045 --> 00:14:04,074
+
+277
+00:14:04,074 --> 00:14:05,990
+Así que estoy añadiendo otra
+bloque, para ser claros.
+
+278
+00:14:05,990 --> 00:14:08,424
+Quiero que el punto 90 grados
+a la derecha por defecto,
+
+279
+00:14:08,424 --> 00:14:10,840
+así que sólo voy a decirle
+de hacerlo mediante programación.
+
+280
+00:14:10,840 --> 00:14:11,632
+Y aquí vamos.
+
+281
+00:14:11,632 --> 00:14:14,740
+
+282
+00:14:14,740 --> 00:14:15,740
+Parece que hemos hecho.
+
+283
+00:14:15,740 --> 00:14:19,980
+Es un poco raro, porque
+él está caminando al revés.
+
+284
+00:14:19,980 --> 00:14:21,250
+Vamos a llamar a que un error.
+
+285
+00:14:21,250 --> 00:14:22,120
+Eso es un error.
+
+286
+00:14:22,120 --> 00:14:27,320
+Un error es un error en un programa, una
+error lógico que yo, el ser humano, hice.
+
+287
+00:14:27,320 --> 00:14:28,985
+Por qué se va al revés?
+
+288
+00:14:28,985 --> 00:14:33,560
+
+289
+00:14:33,560 --> 00:14:35,250
+¿Se tornillo MIT arriba o hacía yo?
+
+290
+00:14:35,250 --> 00:14:38,840
+
+291
+00:14:38,840 --> 00:14:42,550
+>> Sí, quiero decir, no es de MIT
+culpa. Me dieron una pieza del rompecabezas
+
+292
+00:14:42,550 --> 00:14:44,970
+dice que a su vez cierta cantidad de grados.
+
+293
+00:14:44,970 --> 00:14:47,672
+Y por sugerencia de Victoria,
+Estoy girando 180 grados,
+
+294
+00:14:47,672 --> 00:14:48,880
+que es la intuición correcta.
+
+295
+00:14:48,880 --> 00:14:53,700
+Pero convertir 180 grados literalmente
+significa girar 180 grados,
+
+296
+00:14:53,700 --> 00:14:55,860
+y eso no es verdad
+lo que yo quiero, al parecer.
+
+297
+00:14:55,860 --> 00:14:58,026
+Debido a que al menos está en
+este mundo de dos dimensiones,
+
+298
+00:14:58,026 --> 00:15:00,740
+de modo decisivo es realmente va
+a él voltear al revés.
+
+299
+00:15:00,740 --> 00:15:04,030
+>> Probablemente quiero usar lo que el bloque
+en cambio, en base a lo que se ve aquí?
+
+300
+00:15:04,030 --> 00:15:11,890
+
+301
+00:15:11,890 --> 00:15:14,790
+¿Cómo podemos solucionar este problema?
+
+302
+00:15:14,790 --> 00:15:18,380
+Sí, por lo que podríamos señalar
+en la dirección opuesta.
+
+303
+00:15:18,380 --> 00:15:22,300
+Y, de hecho, incluso eso es
+no va a ser suficiente,
+
+304
+00:15:22,300 --> 00:15:26,410
+porque sólo podemos codificar
+que apunta hacia la izquierda o hacia la derecha.
+
+305
+00:15:26,410 --> 00:15:27,920
+>> Ya sabes lo que podríamos hacer?
+
+306
+00:15:27,920 --> 00:15:30,160
+Parece que tenemos una
+bloque de conveniencia aquí.
+
+307
+00:15:30,160 --> 00:15:32,987
+Si hago zoom, consulte
+algo que nos gusta aquí?
+
+308
+00:15:32,987 --> 00:15:36,120
+
+309
+00:15:36,120 --> 00:15:40,020
+Así que parece que el MIT tiene una
+abstracción construida aquí.
+
+310
+00:15:40,020 --> 00:15:45,440
+Este bloque parece ser equivalente
+a la que otros bloques, plural?
+
+311
+00:15:45,440 --> 00:15:49,510
+>> Esta a una cuadra parece ser equivalente
+a todo este trío de bloques
+
+312
+00:15:49,510 --> 00:15:50,880
+que tenemos aquí.
+
+313
+00:15:50,880 --> 00:15:54,670
+Así que resulta que puedo simplificar mi
+programa por deshacerse de todo eso
+
+314
+00:15:54,670 --> 00:15:58,270
+y sólo hay que poner esto aquí.
+
+315
+00:15:58,270 --> 00:16:01,620
+Y ahora está todavía un poco
+con errores, y eso está bien por ahora.
+
+316
+00:16:01,620 --> 00:16:03,370
+Vamos a dejar que sea.
+
+317
+00:16:03,370 --> 00:16:06,000
+Pero mi programa es aún
+más simple, y esto, también,
+
+318
+00:16:06,000 --> 00:16:09,060
+sería representativa
+de un objetivo en programming--
+
+319
+00:16:09,060 --> 00:16:13,430
+es hacer idealmente como su código
+simple, lo más compacto posible,
+
+320
+00:16:13,430 --> 00:16:15,650
+sin dejar de ser tan
+legibles como sea posible.
+
+321
+00:16:15,650 --> 00:16:20,310
+Usted no quiere hacerlo de modo sucinto
+que es difícil de entender.
+
+322
+00:16:20,310 --> 00:16:22,826
+>> Pero nótese que he sustituido
+tres bloques con uno,
+
+323
+00:16:22,826 --> 00:16:24,200
+y eso es sin duda una buena cosa.
+
+324
+00:16:24,200 --> 00:16:27,280
+He abstrae la noción
+de comprobar si estás
+
+325
+00:16:27,280 --> 00:16:29,120
+en el borde con un solo bloque.
+
+326
+00:16:29,120 --> 00:16:31,520
+Ahora podemos tener diversión con esto, de hecho.
+
+327
+00:16:31,520 --> 00:16:35,790
+Esto no agrega tanto
+valor intelectual pero el valor lúdico.
+
+328
+00:16:35,790 --> 00:16:39,730
+Voy a seguir adelante
+y apoderarse de este sonido aquí.
+
+329
+00:16:39,730 --> 00:16:42,900
+
+330
+00:16:42,900 --> 00:16:46,420
+Así que déjame ir por delante, y me dejó
+detener el programa por un momento.
+
+331
+00:16:46,420 --> 00:16:52,070
+Voy a grabar lo siguiente,
+permitiendo el acceso al micrófono.
+
+332
+00:16:52,070 --> 00:16:53,181
+>> Aquí vamos.
+
+333
+00:16:53,181 --> 00:16:53,680
+Ay.
+
+334
+00:16:53,680 --> 00:16:58,710
+
+335
+00:16:58,710 --> 00:17:01,140
+Vamos a intentarlo de nuevo.
+
+336
+00:17:01,140 --> 00:17:02,279
+Aquí vamos.
+
+337
+00:17:02,279 --> 00:17:03,570
+OK, he grabado lo que no debía.
+
+338
+00:17:03,570 --> 00:17:04,580
+Aquí vamos.
+
+339
+00:17:04,580 --> 00:17:05,080
+Ay.
+
+340
+00:17:05,080 --> 00:17:07,910
+
+341
+00:17:07,910 --> 00:17:08,800
+Ay.
+
+342
+00:17:08,800 --> 00:17:09,300
+Todo bien.
+
+343
+00:17:09,300 --> 00:17:10,791
+Ahora necesito para deshacerse de eso.
+
+344
+00:17:10,791 --> 00:17:11,290
+Todo bien.
+
+345
+00:17:11,290 --> 00:17:13,950
+>> Así que ahora tengo una
+grabación de sólo "ouch".
+
+346
+00:17:13,950 --> 00:17:18,040
+Así que ahora voy a ir
+adelante y llamar a este "ay".
+
+347
+00:17:18,040 --> 00:17:20,270
+Voy a volver
+a mis guiones, y ahora
+
+348
+00:17:20,270 --> 00:17:25,460
+notificación no este bloque que se llama
+jugar "maullido" sonido o reproducir sonido "ay".
+
+349
+00:17:25,460 --> 00:17:28,920
+Voy a arrastrar este, y donde
+debería poner esto para el efecto cómico?
+
+350
+00:17:28,920 --> 00:17:31,740
+
+351
+00:17:31,740 --> 00:17:37,860
+Sí, por lo que ahora es una especie de
+con errores, porque ahora esta block--
+
+352
+00:17:37,860 --> 00:17:42,050
+notar cómo este "si en el borde,
+rebote "es una especie de auto-contenido.
+
+353
+00:17:42,050 --> 00:17:43,704
+Así que tengo que arreglar esto.
+
+354
+00:17:43,704 --> 00:17:44,870
+Déjame seguir adelante y hacer esto.
+
+355
+00:17:44,870 --> 00:17:48,630
+Permítanme deshacerse de este y volver
+a nuestro original, más deliberado
+
+356
+00:17:48,630 --> 00:17:49,870
+funcionalidad.
+
+357
+00:17:49,870 --> 00:18:01,080
+Por lo que "si toca el borde, a continuación," Quiero
+a su vez, como se propuso Victoria,
+
+358
+00:18:01,080 --> 00:18:02,480
+180 grados.
+
+359
+00:18:02,480 --> 00:18:05,497
+Y es lo que quiero para jugar
+el sonido "ay" hay?
+
+360
+00:18:05,497 --> 00:18:11,800
+
+361
+00:18:11,800 --> 00:18:15,580
+>> Sí, observe que está fuera
+ese bloque amarillo.
+
+362
+00:18:15,580 --> 00:18:17,680
+Así que esto también sería una
+insecto, pero me he dado cuenta de ello.
+
+363
+00:18:17,680 --> 00:18:21,290
+Así que voy a arrastrarla hasta aquí,
+y el aviso que ahora está dentro de la "si".
+
+364
+00:18:21,290 --> 00:18:24,250
+Por lo que el "si" ¿es esta clase
+como de transferencia en forma de brazo
+
+365
+00:18:24,250 --> 00:18:26,260
+que sólo va a
+hacer lo que hay dentro de ella.
+
+366
+00:18:26,260 --> 00:18:30,216
+Así que ahora si Alejar a
+el riesgo de annoying--
+
+367
+00:18:30,216 --> 00:18:32,860
+
+368
+00:18:32,860 --> 00:18:36,470
+>> ORDENADOR: ¡Ay, ay, ay.
+
+369
+00:18:36,470 --> 00:18:39,910
+>> DAVID MALAN: Y
+sólo va a durar para siempre.
+
+370
+00:18:39,910 --> 00:18:44,160
+Ahora sólo para acelerar las cosas
+aquí, déjame ir por delante y abrir,
+
+371
+00:18:44,160 --> 00:18:50,460
+vamos a decir-- déjame ir a alguna
+de mi propio material de la clase.
+
+372
+00:18:50,460 --> 00:18:53,000
+
+373
+00:18:53,000 --> 00:19:00,220
+Y déjame abrir hasta, digamos, este
+una hecha por uno de nuestros compañeros de enseñanza
+
+374
+00:19:00,220 --> 00:19:01,500
+un par de años atras.
+
+375
+00:19:01,500 --> 00:19:04,732
+Por lo que algunos de ustedes pueden recordar
+este juego de antaño,
+
+376
+00:19:04,732 --> 00:19:05,940
+y de hecho es notable.
+
+377
+00:19:05,940 --> 00:19:08,190
+A pesar de que hemos hecho el
+más simple de los programas en este momento,
+
+378
+00:19:08,190 --> 00:19:09,980
+vamos a considerar lo que este
+que en realidad parece.
+
+379
+00:19:09,980 --> 00:19:10,650
+Me Hit juego.
+
+380
+00:19:10,650 --> 00:19:14,210
+
+381
+00:19:14,210 --> 00:19:18,980
+>> Así que en este juego, tenemos una
+rana, y el uso de la flecha keys--
+
+382
+00:19:18,980 --> 00:19:23,340
+toma pasos más grandes de lo que remember--
+Tengo control sobre esta rana.
+
+383
+00:19:23,340 --> 00:19:29,630
+Y el objetivo es conseguir a través de la ocupada
+camino sin caer en los coches.
+
+384
+00:19:29,630 --> 00:19:34,735
+Y vamos a ver-- si voy hasta aquí,
+tener que esperar a que un registro para desplazarse por.
+
+385
+00:19:34,735 --> 00:19:38,130
+
+386
+00:19:38,130 --> 00:19:39,274
+Esto se siente como un insecto.
+
+387
+00:19:39,274 --> 00:19:42,240
+
+388
+00:19:42,240 --> 00:19:43,495
+Esta es una especie de insecto.
+
+389
+00:19:43,495 --> 00:19:45,980
+
+390
+00:19:45,980 --> 00:19:46,480
+Todo bien.
+
+391
+00:19:46,480 --> 00:19:51,550
+Estoy en esto aquí,
+allí, y luego se mantiene
+
+392
+00:19:51,550 --> 00:19:54,100
+avanzando hasta llegar todo
+las ranas a las hojas de nenúfar.
+
+393
+00:19:54,100 --> 00:19:55,920
+Ahora bien, esto puede tener un aspecto
+todo el más complejo,
+
+394
+00:19:55,920 --> 00:19:57,840
+pero vamos a tratar de romper
+esto abajo mentalmente
+
+395
+00:19:57,840 --> 00:20:00,040
+y verbalmente en sus bloques de componentes.
+
+396
+00:20:00,040 --> 00:20:03,910
+Así que es probable que haya un rompecabezas
+pieza que no hemos visto todavía
+
+397
+00:20:03,910 --> 00:20:07,440
+pero eso es responder a las pulsaciones de teclado,
+a las cosas me golpeó en el teclado.
+
+398
+00:20:07,440 --> 00:20:11,660
+>> Así que es probable que haya algún tipo de
+bloque que dice, si la clave es igual a,
+
+399
+00:20:11,660 --> 00:20:15,965
+a continuación, hacer algo con Scratch--
+tal vez moverlo 10 pasos de esta manera.
+
+400
+00:20:15,965 --> 00:20:20,240
+Si se pulsa la tecla hacia abajo, mover 10 pasos
+de esta manera, o la tecla izquierda, se mueven 10 pasos
+
+401
+00:20:20,240 --> 00:20:21,710
+De esta manera, los pasos que 10.
+
+402
+00:20:21,710 --> 00:20:23,644
+Me he convertido claramente el gato en una rana.
+
+403
+00:20:23,644 --> 00:20:26,060
+Así que eso es justo donde el
+traje, como llamadas de Scratch que it--
+
+404
+00:20:26,060 --> 00:20:28,440
+acaba de importar una imagen de la rana.
+
+405
+00:20:28,440 --> 00:20:29,570
+>> Pero lo que más está sucediendo?
+
+406
+00:20:29,570 --> 00:20:32,794
+¿Qué otras líneas de código,
+lo demás piezas del rompecabezas
+
+407
+00:20:32,794 --> 00:20:35,460
+Blake hizo, nuestros compañeros de la enseñanza,
+utilizar en este programa, por lo visto?
+
+408
+00:20:35,460 --> 00:20:38,320
+
+409
+00:20:38,320 --> 00:20:42,730
+Lo que está haciendo todo lo move--
+lo que la programación de la construcción?
+
+410
+00:20:42,730 --> 00:20:44,950
+>> Movimiento, por lo que el sure--
+mover el bloque, seguro.
+
+411
+00:20:44,950 --> 00:20:49,330
+Y lo que es ese bloque de movimiento
+Dentro, más probable?
+
+412
+00:20:49,330 --> 00:20:52,850
+Sí, algún tipo de bucle, tal vez una
+siempre bloquear, tal vez una repetición block--
+
+413
+00:20:52,850 --> 00:20:54,070
+repetir hasta que el bloque.
+
+414
+00:20:54,070 --> 00:20:57,330
+Y eso es lo que está haciendo los registros y
+las hojas de nenúfar y todo lo demás jugada
+
+415
+00:20:57,330 --> 00:20:57,990
+de ida y vuelta.
+
+416
+00:20:57,990 --> 00:21:00,270
+Es sólo sucediendo sin fin.
+
+417
+00:21:00,270 --> 00:21:03,180
+>> ¿Por qué son algunos de los coches
+mueve más rápido que los demás?
+
+418
+00:21:03,180 --> 00:21:06,607
+Lo que es diferente acerca de estos programas?
+
+419
+00:21:06,607 --> 00:21:09,690
+Sí, probablemente algunos de ellos están tomando
+más pasos a la vez y algunas de ellas
+
+420
+00:21:09,690 --> 00:21:10,690
+un menor número de pasos a la vez.
+
+421
+00:21:10,690 --> 00:21:14,670
+Y el efecto visual
+es rápido frente lento.
+
+422
+00:21:14,670 --> 00:21:16,030
+>> ¿Qué crees que pasó?
+
+423
+00:21:16,030 --> 00:21:19,700
+Cuando llegué a mi rana de todo el camino
+cruzar la calle y el río
+
+424
+00:21:19,700 --> 00:21:23,560
+en la almohadilla de lirio, algo
+digno de mención ocurrió.
+
+425
+00:21:23,560 --> 00:21:26,540
+¿Qué pasó tan pronto como lo hice?
+
+426
+00:21:26,540 --> 00:21:27,210
+Se detuvo.
+
+427
+00:21:27,210 --> 00:21:29,680
+Que la rana se detuvo, y
+Tengo una segunda rana.
+
+428
+00:21:29,680 --> 00:21:33,155
+Entonces, ¿cuál debe ser constructo
+utilizado allí, qué función?
+
+429
+00:21:33,155 --> 00:21:36,020
+
+430
+00:21:36,020 --> 00:21:38,660
+>> Sí, por lo que hay algún tipo de
+"Si" condición hasta allí, también.
+
+431
+00:21:38,660 --> 00:21:41,909
+Y resulta out-- no vimos esto-
+pero hay otros bloques en que hay
+
+432
+00:21:41,909 --> 00:21:45,300
+se puede decir, si usted está tocando
+otra cosa en la pantalla,
+
+433
+00:21:45,300 --> 00:21:47,720
+si usted está tocando la hoja de lirio, "entonces".
+
+434
+00:21:47,720 --> 00:21:50,810
+Y entonces es cuando nos
+hacer aparecer la segunda rana.
+
+435
+00:21:50,810 --> 00:21:54,969
+Así que a pesar de que este juego es sin duda
+muy anticuado, a pesar de que a primera vista
+
+436
+00:21:54,969 --> 00:21:58,010
+hay tantas cosas que pasan y Blake en--
+no azotar esto en dos minutos,
+
+437
+00:21:58,010 --> 00:22:00,390
+es probable que se lo llevó a varios
+horas para crear este juego
+
+438
+00:22:00,390 --> 00:22:03,850
+basado en su memoria o vídeos
+de la versión de antaño de la misma.
+
+439
+00:22:03,850 --> 00:22:07,940
+Pero todas estas pequeñas cosas
+va en la pantalla en forma aislada
+
+440
+00:22:07,940 --> 00:22:11,550
+se reducen a éstos muy simple
+constructs-- movimientos o estados
+
+441
+00:22:11,550 --> 00:22:15,519
+como hemos comentado, los bucles y
+condiciones, y eso es todo.
+
+442
+00:22:15,519 --> 00:22:17,060
+Hay algunas otras características más elegantes.
+
+443
+00:22:17,060 --> 00:22:19,130
+Algunos de ellos son puramente
+estética o acústica,
+
+444
+00:22:19,130 --> 00:22:20,964
+como los sonidos que yo en el con.
+
+445
+00:22:20,964 --> 00:22:23,380
+Pero en su mayor parte, se
+tienen en este idioma, Scratch,
+
+446
+00:22:23,380 --> 00:22:25,350
+todo de la fundamental
+bloques de construcción que se
+
+447
+00:22:25,350 --> 00:22:29,280
+tener en C, Java, JavaScript,
+PHP, Ruby, Python,
+
+448
+00:22:29,280 --> 00:22:32,960
+y cualquier número de otros idiomas.
+
+449
+00:22:32,960 --> 00:22:36,720
+Una pregunta sobre el principio?
+
+450
+00:22:36,720 --> 00:22:37,220
+Todo bien.
+
+451
+00:22:37,220 --> 00:22:40,303
+Así que no vamos a bucear más profundamente a la altura,
+aunque de nada este fin de semana,
+
+452
+00:22:40,303 --> 00:22:42,860
+especialmente si usted tiene niños o
+sobrinos y demás,
+
+453
+00:22:42,860 --> 00:22:44,220
+para introducirlos a los arañazos.
+
+454
+00:22:44,220 --> 00:22:47,960
+En realidad es un maravillosamente lúdico
+medio ambiente, con, como dicen sus autores,
+
+455
+00:22:47,960 --> 00:22:49,120
+techos muy altos.
+
+456
+00:22:49,120 --> 00:22:51,670
+A pesar de que empezamos con
+mismos detalles de bajo nivel,
+
+457
+00:22:51,670 --> 00:22:54,890
+realmente se puede hacer un poco
+con ello, y esto es quizás
+
+458
+00:22:54,890 --> 00:22:57,360
+una demostración de exactamente eso.
+
+459
+00:22:57,360 --> 00:23:02,920
+>> Pero ahora vamos transición a un poco más de
+problemas sofisticados, si se quiere,
+
+460
+00:23:02,920 --> 00:23:05,870
+conocida como "búsqueda" y
+"Clasificación", en términos más generales.
+
+461
+00:23:05,870 --> 00:23:09,500
+Hemos tenido este libro de teléfono antes les hablé aquí está
+otra plantilla sólo para discussion--
+
+462
+00:23:09,500 --> 00:23:13,460
+que hemos sido capaces de buscar
+de manera más eficiente porque
+
+463
+00:23:13,460 --> 00:23:15,270
+de un supuesto significativo.
+
+464
+00:23:15,270 --> 00:23:17,655
+Y sólo para que quede claro, lo
+Se suponía que hacer
+
+465
+00:23:17,655 --> 00:23:19,280
+cuando se busca a través de esta guía de teléfonos?
+
+466
+00:23:19,280 --> 00:23:23,342
+
+467
+00:23:23,342 --> 00:23:25,300
+Que Mike Smith estaba en
+la guía de teléfonos, aunque
+
+468
+00:23:25,300 --> 00:23:27,410
+sería capaz de manejar
+el escenario sin él
+
+469
+00:23:27,410 --> 00:23:30,720
+allí si sólo se detuvo prematuramente.
+
+470
+00:23:30,720 --> 00:23:31,806
+El libro es alfabético.
+
+471
+00:23:31,806 --> 00:23:33,930
+Y eso es un muy generoso
+supuesto, porque eso
+
+472
+00:23:33,930 --> 00:23:36,580
+significa alguien-- Soy una especie
+de cortar una esquina,
+
+473
+00:23:36,580 --> 00:23:40,580
+como yo soy más rápido porque alguien
+más hizo un montón de trabajo duro para mí.
+
+474
+00:23:40,580 --> 00:23:43,120
+>> Pero ¿y si el teléfono
+libro fueron sin ordenar?
+
+475
+00:23:43,120 --> 00:23:47,050
+Tal vez Verizon obtuvo perezoso, acaba de lanzar
+nombres y números de todo el mundo allí
+
+476
+00:23:47,050 --> 00:23:50,120
+tal vez en el orden en que se
+firmado para el servicio telefónico.
+
+477
+00:23:50,120 --> 00:23:54,570
+Y cuánto tiempo se me lleve
+encontrar a alguien como Mike Smith?
+
+478
+00:23:54,570 --> 00:23:58,160
+1.000 telefónico página book-- cuántos
+páginas tengo que mirar a través de?
+
+479
+00:23:58,160 --> 00:23:58,905
+>> Todos ellos.
+
+480
+00:23:58,905 --> 00:24:00,030
+Eres una especie de fuera de suerte.
+
+481
+00:24:00,030 --> 00:24:03,420
+Literalmente tienes que mirar cada
+página si la guía telefónica es sólo
+
+482
+00:24:03,420 --> 00:24:04,450
+ordenados aleatoriamente.
+
+483
+00:24:04,450 --> 00:24:06,910
+Puede que tenga suerte y encuentre Mike
+en la primera página, porque él
+
+484
+00:24:06,910 --> 00:24:08,826
+fue el primer cliente
+para ordenar el servicio telefónico.
+
+485
+00:24:08,826 --> 00:24:10,760
+Pero podría haber sido la última, también.
+
+486
+00:24:10,760 --> 00:24:12,500
+>> Así orden aleatorio no es bueno.
+
+487
+00:24:12,500 --> 00:24:16,750
+Así que supongamos que tenemos para ordenar la
+directorio telefónico o en datos generales especie
+
+488
+00:24:16,750 --> 00:24:18,520
+que se nos ha dado.
+
+489
+00:24:18,520 --> 00:24:19,440
+¿Cómo podemos hacer eso?
+
+490
+00:24:19,440 --> 00:24:21,360
+>> Bueno, déjame sólo trato
+aquí un ejemplo sencillo.
+
+491
+00:24:21,360 --> 00:24:24,290
+Déjame ir adelante y lanzar una
+unos números en el tablero.
+
+492
+00:24:24,290 --> 00:24:35,480
+Supongamos que los números que tenemos son,
+digamos, cuatro, dos, uno y tres.
+
+493
+00:24:35,480 --> 00:24:38,390
+Y, Ben, ordenar estos números para nosotros.
+
+494
+00:24:38,390 --> 00:24:39,017
+>> Bien.
+
+495
+00:24:39,017 --> 00:24:39,850
+¿Cómo hiciste eso?
+
+496
+00:24:39,850 --> 00:24:42,731
+
+497
+00:24:42,731 --> 00:24:43,230
+Todo bien.
+
+498
+00:24:43,230 --> 00:24:44,710
+Así que empieza con los más pequeños
+el valor y la más alta,
+
+499
+00:24:44,710 --> 00:24:46,084
+y eso es muy buena intuición.
+
+500
+00:24:46,084 --> 00:24:48,080
+Y darse cuenta de que
+los seres humanos son en realidad bastante
+
+501
+00:24:48,080 --> 00:24:49,913
+bueno en la solución de problemas
+de esta manera, al menos
+
+502
+00:24:49,913 --> 00:24:51,810
+cuando los datos es relativamente pequeño.
+
+503
+00:24:51,810 --> 00:24:54,860
+Tan pronto como usted comienza a tener cientos
+de números, miles de números,
+
+504
+00:24:54,860 --> 00:24:58,440
+millones de números, Ben probablemente
+No podría hacerlo bastante rápido que,
+
+505
+00:24:58,440 --> 00:25:00,620
+suponiendo que no eran
+lagunas en los números.
+
+506
+00:25:00,620 --> 00:25:03,450
+Bastante fácil de contar hasta un millón
+de lo contrario, solo consume mucho tiempo.
+
+507
+00:25:03,450 --> 00:25:07,150
+>> Así que el algoritmo que suena
+como Ben utiliza ahora
+
+508
+00:25:07,150 --> 00:25:08,930
+fue buscar el número más pequeño.
+
+509
+00:25:08,930 --> 00:25:12,900
+Así que a pesar de que los seres humanos podemos tener
+en una gran cantidad de información visual,
+
+510
+00:25:12,900 --> 00:25:14,830
+un ordenador es en realidad
+un poco más limitada.
+
+511
+00:25:14,830 --> 00:25:17,560
+El equipo sólo puede
+mirar a un byte a la vez
+
+512
+00:25:17,560 --> 00:25:20,770
+o tal vez cuatro bytes a la vez--
+en estos días quizás 8 bytes a la vez--
+
+513
+00:25:20,770 --> 00:25:24,450
+pero un número muy pequeño
+de bytes en un momento dado.
+
+514
+00:25:24,450 --> 00:25:28,480
+>> Por lo tanto, dado que realmente tenemos
+cuatro valores separados aquí--
+
+515
+00:25:28,480 --> 00:25:32,440
+y que se pueda imaginar Ben como tener
+venda en los ojos si fuera un ordenador, tales
+
+516
+00:25:32,440 --> 00:25:36,450
+que él no puede ver otra cosa
+de un número a un tiempo--
+
+517
+00:25:36,450 --> 00:25:39,720
+por lo que generalmente se asume, como en
+Inglés, vamos a leer de derecha a izquierda.
+
+518
+00:25:39,720 --> 00:25:42,870
+Así que el primer número Ben probablemente se veía
+a era cuatro y luego muy rápidamente
+
+519
+00:25:42,870 --> 00:25:44,770
+se dieron cuenta de que es una bastante grande
+number-- déjame seguir buscando.
+
+520
+00:25:44,770 --> 00:25:45,357
+>> Hay dos.
+
+521
+00:25:45,357 --> 00:25:45,940
+Espera un minuto.
+
+522
+00:25:45,940 --> 00:25:47,070
+Dos es menor que cuatro.
+
+523
+00:25:47,070 --> 00:25:47,986
+Voy a recordar.
+
+524
+00:25:47,986 --> 00:25:49,070
+Dos es ahora el más pequeño.
+
+525
+00:25:49,070 --> 00:25:50,417
+Ahora uno-- que es incluso mejor.
+
+526
+00:25:50,417 --> 00:25:51,250
+Eso es aún más pequeño.
+
+527
+00:25:51,250 --> 00:25:54,000
+Voy a olvidarse de dos
+y sólo recuerda una ahora.
+
+528
+00:25:54,000 --> 00:25:56,550
+>> Y podía dejar de mirar?
+
+529
+00:25:56,550 --> 00:25:58,360
+Bueno, él podría basada
+en esta información,
+
+530
+00:25:58,360 --> 00:26:00,477
+pero será mejor que la búsqueda
+el resto de la lista.
+
+531
+00:26:00,477 --> 00:26:02,060
+Porque lo que si eran cero en la lista?
+
+532
+00:26:02,060 --> 00:26:03,643
+¿Qué pasa si uno fuera negativo en la lista?
+
+533
+00:26:03,643 --> 00:26:07,720
+Sólo sabe que su respuesta
+es correcto si él es exhaustiva
+
+534
+00:26:07,720 --> 00:26:08,729
+verificado la lista entera.
+
+535
+00:26:08,729 --> 00:26:10,020
+Así que nos fijamos en el resto de este.
+
+536
+00:26:10,020 --> 00:26:11,394
+Tres-- que era una pérdida de tiempo.
+
+537
+00:26:11,394 --> 00:26:13,540
+Tengo mala suerte, pero yo estaba
+siendo correcta para hacerlo.
+
+538
+00:26:13,540 --> 00:26:17,857
+Y por lo que ahora es de suponer
+seleccionado el número más pequeño
+
+539
+00:26:17,857 --> 00:26:20,440
+y sólo hay que poner al principio
+de la lista, ya que voy a hacer aquí.
+
+540
+00:26:20,440 --> 00:26:23,480
+Ahora lo hizo después, a pesar de que
+que no piensa en ello casi
+
+541
+00:26:23,480 --> 00:26:25,962
+¿en esta medida?
+
+542
+00:26:25,962 --> 00:26:27,670
+Repita el proceso,
+así que algún tipo de bucle.
+
+543
+00:26:27,670 --> 00:26:28,920
+Hay una idea familiar.
+
+544
+00:26:28,920 --> 00:26:30,860
+Así que aquí es cuatro.
+
+545
+00:26:30,860 --> 00:26:32,110
+Eso es actualmente el más pequeño.
+
+546
+00:26:32,110 --> 00:26:33,220
+Eso es un candidato.
+
+547
+00:26:33,220 --> 00:26:33,900
+Ya no.
+
+548
+00:26:33,900 --> 00:26:34,770
+Ahora que he visto dos.
+
+549
+00:26:34,770 --> 00:26:36,630
+Ese es el siguiente elemento más pequeño.
+
+550
+00:26:36,630 --> 00:26:40,800
+Tres-- eso no es menor, por lo
+Ahora Ben puede extirpar a los dos.
+
+551
+00:26:40,800 --> 00:26:44,510
+>> Y ahora repetimos el proceso, y
+por supuesto, se tira a cabo tres siguiente.
+
+552
+00:26:44,510 --> 00:26:45,420
+Repetir el proceso.
+
+553
+00:26:45,420 --> 00:26:46,990
+Cuatro se retiró.
+
+554
+00:26:46,990 --> 00:26:50,140
+Y ahora que estamos fuera de los números,
+por lo que la lista debe ser ordenada.
+
+555
+00:26:50,140 --> 00:26:51,960
+>> Y, en efecto, se trata de un algoritmo formal.
+
+556
+00:26:51,960 --> 00:26:56,610
+Un científico de la computación haría
+llamar a esta "ordenación por selección"
+
+557
+00:26:56,610 --> 00:27:00,880
+con la idea de una especie
+iteratively-- enumerar de nuevo
+
+558
+00:27:00,880 --> 00:27:03,807
+y otra vez y otra vez seleccionando
+el número más pequeño.
+
+559
+00:27:03,807 --> 00:27:06,140
+Y lo que es agradable sobre él es
+es tan rematadamente intuitiva.
+
+560
+00:27:06,140 --> 00:27:07,470
+Es tan simple.
+
+561
+00:27:07,470 --> 00:27:11,100
+Y se puede repetir el mismo
+operación una y otra vez.
+
+562
+00:27:11,100 --> 00:27:12,150
+Es sencillo.
+
+563
+00:27:12,150 --> 00:27:17,170
+>> En este caso fue rápido, pero
+¿Cuánto tiempo se tome realmente?
+
+564
+00:27:17,170 --> 00:27:19,880
+Vamos a hacer que parezca y
+sentir un poco más tedioso.
+
+565
+00:27:19,880 --> 00:27:24,150
+Así que uno, dos, tres, cuatro, cinco y seis,
+siete, ocho, nueve, 10, 11, 12, 13, 14,
+
+566
+00:27:24,150 --> 00:27:26,160
+15, 16-- número arbitrario.
+
+567
+00:27:26,160 --> 00:27:28,780
+Sólo quería más este
+tiempo del que sólo el cuatro.
+
+568
+00:27:28,780 --> 00:27:30,780
+Así que si tengo un todo
+montón de números que ahora--
+
+569
+00:27:30,780 --> 00:27:32,420
+Ni siquiera importa
+lo que se trate: de dejar
+
+570
+00:27:32,420 --> 00:27:34,380
+pensar en lo que esta
+algoritmo es muy similar.
+
+571
+00:27:34,380 --> 00:27:35,857
+>> Supongamos que hay un número allí.
+
+572
+00:27:35,857 --> 00:27:38,190
+Una vez más, no importa lo
+que son, pero son al azar.
+
+573
+00:27:38,190 --> 00:27:39,679
+Estoy aplicando el algoritmo de Ben.
+
+574
+00:27:39,679 --> 00:27:41,220
+Necesito seleccionar el número más pequeño.
+
+575
+00:27:41,220 --> 00:27:41,761
+¿Qué debo hacer?
+
+576
+00:27:41,761 --> 00:27:44,240
+Y voy a físicamente
+hacer que este momento de actuar hacia fuera.
+
+577
+00:27:44,240 --> 00:27:46,099
+Buscando, buscando,
+mira, mira, mira.
+
+578
+00:27:46,099 --> 00:27:48,140
+Sólo por el momento de llegar a
+Al final de la lista se puede
+
+579
+00:27:48,140 --> 00:27:51,230
+Soy consciente de los más pequeños
+número dos fue esta vez.
+
+580
+00:27:51,230 --> 00:27:52,720
+Uno no está en la lista.
+
+581
+00:27:52,720 --> 00:27:54,400
+Así que puse abajo dos.
+
+582
+00:27:54,400 --> 00:27:55,590
+>> ¿Que hago después?
+
+583
+00:27:55,590 --> 00:27:58,600
+Mirando, mirando, mirando, mirando.
+
+584
+00:27:58,600 --> 00:28:02,250
+Ahora he encontrado el número siete, porque
+hay lagunas en estos numbers--
+
+585
+00:28:02,250 --> 00:28:03,300
+pero sólo arbitraria.
+
+586
+00:28:03,300 --> 00:28:03,800
+Todo bien.
+
+587
+00:28:03,800 --> 00:28:06,030
+Así que ahora puedo poner siete.
+
+588
+00:28:06,030 --> 00:28:08,860
+Mirando mirando, mirando.
+
+589
+00:28:08,860 --> 00:28:11,030
+>> Ahora estoy suponiendo,
+Por supuesto, que Ben no
+
+590
+00:28:11,030 --> 00:28:14,780
+tiene RAM adicional, extra
+memoria, porque, por supuesto,
+
+591
+00:28:14,780 --> 00:28:16,080
+Estoy mirando el mismo número.
+
+592
+00:28:16,080 --> 00:28:18,246
+Seguramente que podría haber recordado
+todos esos números,
+
+593
+00:28:18,246 --> 00:28:19,930
+y eso es absolutamente cierto.
+
+594
+00:28:19,930 --> 00:28:22,610
+Pero si Ben recuerda todo
+de los números que ha visto,
+
+595
+00:28:22,610 --> 00:28:24,430
+en realidad no ha hecho
+avances fundamentales
+
+596
+00:28:24,430 --> 00:28:26,170
+porque ya tiene
+la capacidad de buscar
+
+597
+00:28:26,170 --> 00:28:27,540
+a través de los números en el tablero.
+
+598
+00:28:27,540 --> 00:28:29,373
+Recordando a todos los
+los números no ayuda,
+
+599
+00:28:29,373 --> 00:28:32,490
+porque él puede todavía como un ordenador
+Sólo mira, lo hemos dicho, un número
+
+600
+00:28:32,490 --> 00:28:33,080
+a la vez.
+
+601
+00:28:33,080 --> 00:28:35,760
+Así que no hay ningún tipo de trucos
+ahí que puede aprovechar.
+
+602
+00:28:35,760 --> 00:28:39,170
+>> Así que en realidad, como ya
+seguir buscando la lista,
+
+603
+00:28:39,170 --> 00:28:44,200
+Yo, literalmente, tengo que acaba de seguir adelante
+de ida y vuelta a través de él, arrancando
+
+604
+00:28:44,200 --> 00:28:45,710
+el número inmediatamente inferior.
+
+605
+00:28:45,710 --> 00:28:48,810
+Y como se puede inferir tipo de
+de mis movimientos tontos,
+
+606
+00:28:48,810 --> 00:28:50,860
+Esto se pone muy
+tedioso muy rápidamente,
+
+607
+00:28:50,860 --> 00:28:54,850
+y me parece estar yendo y
+adelante, atrás y adelante un poco.
+
+608
+00:28:54,850 --> 00:29:03,220
+Ahora, para ser justos, no tengo que ir
+tan, bueno, vamos a ver-- para ser justos,
+
+609
+00:29:03,220 --> 00:29:06,310
+No tengo que caminar bastante
+tantos pasos cada vez.
+
+610
+00:29:06,310 --> 00:29:09,200
+Porque, por supuesto, como yo
+seleccionar los números de la lista,
+
+611
+00:29:09,200 --> 00:29:11,860
+la lista restante se hace más corto.
+
+612
+00:29:11,860 --> 00:29:14,240
+>> Y así vamos a pensar
+la cantidad de pasos que estoy realmente
+
+613
+00:29:14,240 --> 00:29:16,010
+penosamente a través de cada vez.
+
+614
+00:29:16,010 --> 00:29:18,950
+En la primera situación
+teníamos 16 números,
+
+615
+00:29:18,950 --> 00:29:22,210
+y así sólo vamos a maximally--
+hacer esto por un discussion--
+
+616
+00:29:22,210 --> 00:29:25,640
+Tenía que mirar a través de 16
+números para encontrar la más pequeña.
+
+617
+00:29:25,640 --> 00:29:28,420
+Pero una vez que arranqué
+el número más pequeño, cómo
+
+618
+00:29:28,420 --> 00:29:30,590
+siempre fue la lista restante, por supuesto?
+
+619
+00:29:30,590 --> 00:29:31,420
+Sólo 15.
+
+620
+00:29:31,420 --> 00:29:34,670
+Entonces, ¿cuántos números de Ben hizo o que tienen
+para mirar a través de la segunda vez?
+
+621
+00:29:34,670 --> 00:29:36,832
+15, sólo para ir a buscar a los más pequeños.
+
+622
+00:29:36,832 --> 00:29:39,540
+Pero ahora, por supuesto, la lista es,
+también, más pequeña de lo que era antes.
+
+623
+00:29:39,540 --> 00:29:42,540
+Entonces, ¿cómo lo hicieron muchos pasos
+tiene que tomar la próxima vez?
+
+624
+00:29:42,540 --> 00:29:49,970
+14 y luego 13 y luego 12, más punto,
+punto, punto, hasta que me quedo con uno solo.
+
+625
+00:29:49,970 --> 00:29:53,146
+Así que ahora lo haría un científico de la computación
+preguntar, bueno, lo que hace que todos iguales?
+
+626
+00:29:53,146 --> 00:29:55,770
+En realidad, es igual a poco de concreto
+número que sin duda podríamos
+
+627
+00:29:55,770 --> 00:30:00,490
+hacemos aritméticamente, pero queremos hablar
+acerca de la eficiencia de los algoritmos
+
+628
+00:30:00,490 --> 00:30:04,940
+un poco más formulaically,
+independiente de la duración de la lista es.
+
+629
+00:30:04,940 --> 00:30:06,240
+>> Y para que sepa qué?
+
+630
+00:30:06,240 --> 00:30:09,860
+Esto es 16, pero como he dicho antes,
+Vamos a llamar el tamaño del problema
+
+631
+00:30:09,860 --> 00:30:10,970
+n, donde n es un número.
+
+632
+00:30:10,970 --> 00:30:13,220
+Tal vez sea 16, tal vez es
+tres, tal vez es un millón.
+
+633
+00:30:13,220 --> 00:30:13,761
+No lo sé.
+
+634
+00:30:13,761 --> 00:30:14,390
+No me importa.
+
+635
+00:30:14,390 --> 00:30:16,520
+Lo que realmente quiero es
+una fórmula que pueda
+
+636
+00:30:16,520 --> 00:30:19,420
+utilizar para comparar este algoritmo
+contra otros algoritmos
+
+637
+00:30:19,420 --> 00:30:22,350
+que alguien podría reclamar
+son mejores o peores.
+
+638
+00:30:22,350 --> 00:30:25,430
+>> Así que resulta, y sólo yo
+saber esto desde la escuela primaria,
+
+639
+00:30:25,430 --> 00:30:34,790
+que esto realmente funciona a la misma
+cosa como n sobre n más uno más de dos.
+
+640
+00:30:34,790 --> 00:30:40,020
+Y esto pasa a ser igual, de
+Por supuesto, n al cuadrado más n más de dos.
+
+641
+00:30:40,020 --> 00:30:43,250
+Así que si quería una fórmula
+¿De cuántos pasos
+
+642
+00:30:43,250 --> 00:30:46,330
+participaron en el estudio de todos
+de esos números una y otra vez
+
+643
+00:30:46,330 --> 00:30:52,681
+y otra vez y otra vez, yo diría
+que está n al cuadrado más n más de dos.
+
+644
+00:30:52,681 --> 00:30:53,430
+¿Pero sabes que?
+
+645
+00:30:53,430 --> 00:30:54,500
+Esto sólo se ve desordenado.
+
+646
+00:30:54,500 --> 00:30:56,470
+Yo realmente quiero una
+sentido general de las cosas.
+
+647
+00:30:56,470 --> 00:30:58,810
+Y se puede recordar de
+la escuela secundaria que hay
+
+648
+00:30:58,810 --> 00:31:00,660
+es la noción de término más alto orden.
+
+649
+00:31:00,660 --> 00:31:05,300
+¿Cuál de estos términos, el n
+cuadrado, el n, o la mitad,
+
+650
+00:31:05,300 --> 00:31:07,550
+tiene el mayor impacto en el tiempo?
+
+651
+00:31:07,550 --> 00:31:11,920
+Cuanto más grande n consigue, que
+de estos asuntos más?
+
+652
+00:31:11,920 --> 00:31:15,560
+>> En otras palabras, si lo conecto
+en un millón, n al cuadrado
+
+653
+00:31:15,560 --> 00:31:17,900
+va a ser más probable
+el factor dominante,
+
+654
+00:31:17,900 --> 00:31:21,670
+porque un millón de veces
+en sí es mucho más grande
+
+655
+00:31:21,670 --> 00:31:23,682
+que más uno adicional millones.
+
+656
+00:31:23,682 --> 00:31:24,390
+Así que ya saben qué?
+
+657
+00:31:24,390 --> 00:31:27,305
+Este es un darn tan grande
+número si se eleva al cuadrado un número.
+
+658
+00:31:27,305 --> 00:31:28,430
+Esto en realidad no importa.
+
+659
+00:31:28,430 --> 00:31:30,596
+Sólo vamos cruz que
+y olvidarse de él.
+
+660
+00:31:30,596 --> 00:31:34,250
+Y por lo que un científico de la computación diría
+que la eficacia de este algoritmo
+
+661
+00:31:34,250 --> 00:31:37,850
+es del orden de n squared--
+Me refiero a realmente una aproximación.
+
+662
+00:31:37,850 --> 00:31:40,810
+Es una especie de más o menos n al cuadrado.
+
+663
+00:31:40,810 --> 00:31:44,130
+Con el tiempo, cuanto más grande
+y más grande que n se hace, esto
+
+664
+00:31:44,130 --> 00:31:47,610
+es una buena estimación de lo que el
+la eficiencia o la falta de eficiencia
+
+665
+00:31:47,610 --> 00:31:49,400
+de este algoritmo es en realidad.
+
+666
+00:31:49,400 --> 00:31:52,040
+Y derivo que, por supuesto,
+en cuanto a realizar los cálculos.
+
+667
+00:31:52,040 --> 00:31:54,040
+Pero ahora sólo estoy agitando
+mis manos, porque acabo
+
+668
+00:31:54,040 --> 00:31:55,790
+desear un sentido general de este algoritmo.
+
+669
+00:31:55,790 --> 00:31:58,850
+>> Así, utilizando la misma lógica, por su parte,
+vamos a considerar otro algoritmo
+
+670
+00:31:58,850 --> 00:32:01,162
+ya encontramos at-- búsqueda lineal.
+
+671
+00:32:01,162 --> 00:32:02,870
+Cuando yo estaba buscando
+para la book-- teléfono
+
+672
+00:32:02,870 --> 00:32:05,980
+No arreglármelo, buscando
+a través de la book-- teléfono
+
+673
+00:32:05,980 --> 00:32:09,197
+mantuvimos diciendo que era
+1.000 pasos, o 500 pasos.
+
+674
+00:32:09,197 --> 00:32:10,280
+Pero vamos a generalizar eso.
+
+675
+00:32:10,280 --> 00:32:12,860
+Si hay n páginas en
+la guía de teléfonos, lo que es
+
+676
+00:32:12,860 --> 00:32:17,250
+el tiempo de ejecución o la
+eficiencia de búsqueda lineal?
+
+677
+00:32:17,250 --> 00:32:19,750
+Es del orden de
+la cantidad de pasos para encontrar
+
+678
+00:32:19,750 --> 00:32:24,210
+Mike Smith mediante la búsqueda lineal, la
+primer algoritmo, o incluso el segundo?
+
+679
+00:32:24,210 --> 00:32:27,240
+
+680
+00:32:27,240 --> 00:32:31,710
+>> En el peor de los casos, Mike
+está en el extremo del libro.
+
+681
+00:32:31,710 --> 00:32:35,590
+Así que si el directorio tiene 1.000 páginas,
+dijimos la última vez, en el peor de los casos,
+
+682
+00:32:35,590 --> 00:32:38,380
+que podría tomar la forma más o menos
+muchas páginas para encontrar Mike?
+
+683
+00:32:38,380 --> 00:32:38,990
+Al igual que 1,000.
+
+684
+00:32:38,990 --> 00:32:39,830
+Es un límite superior.
+
+685
+00:32:39,830 --> 00:32:41,790
+Es una peor situación posible.
+
+686
+00:32:41,790 --> 00:32:44,410
+Pero, de nuevo, nos estamos alejando
+de 1.000 números como ahora.
+
+687
+00:32:44,410 --> 00:32:45,730
+Es sólo n.
+
+688
+00:32:45,730 --> 00:32:47,470
+>> ¿Cuál es la conclusión lógica?
+
+689
+00:32:47,470 --> 00:32:50,210
+Encontrar Mike en un teléfono
+libro que tiene n páginas
+
+690
+00:32:50,210 --> 00:32:55,280
+podría llevar, en el peor de los casos,
+el número de pasos en el orden de los n?
+
+691
+00:32:55,280 --> 00:32:58,110
+Y de hecho un ordenador
+científico diría
+
+692
+00:32:58,110 --> 00:33:02,340
+que el tiempo de ejecución, o la
+rendimiento o la eficiencia
+
+693
+00:33:02,340 --> 00:33:07,470
+o ineficiencia, de un algoritmo como
+una búsqueda lineal es del orden de n.
+
+694
+00:33:07,470 --> 00:33:10,010
+Y podemos aplicar el mismo
+lógica de cruzar algo fuera
+
+695
+00:33:10,010 --> 00:33:13,170
+como acabo de hacer a la segunda
+algoritmo que tuvimos con la guía telefónica,
+
+696
+00:33:13,170 --> 00:33:16,040
+donde fuimos dos páginas a la vez.
+
+697
+00:33:16,040 --> 00:33:20,120
+>> Así 1,000 página de la guía telefónica podría
+llevarnos a 500 vueltas de página, más uno
+
+698
+00:33:20,120 --> 00:33:21,910
+si doblamos un poco hacia atrás.
+
+699
+00:33:21,910 --> 00:33:26,590
+Así que si un directorio tiene n páginas, pero
+que estamos haciendo dos páginas a la vez,
+
+700
+00:33:26,590 --> 00:33:28,900
+que es más o menos qué?
+
+701
+00:33:28,900 --> 00:33:33,190
+N más de dos, por lo que es como n más de dos.
+
+702
+00:33:33,190 --> 00:33:38,490
+Pero hice el reclamo de una
+Hace momento en que n sobre dos--
+
+703
+00:33:38,490 --> 00:33:41,060
+eso es un poco lo mismo que acaba de n.
+
+704
+00:33:41,060 --> 00:33:44,050
+Es sólo un factor constante,
+los informáticos dirían.
+
+705
+00:33:44,050 --> 00:33:45,970
+Vamos sólo se centran en
+las variables, realmente--
+
+706
+00:33:45,970 --> 00:33:47,780
+los mayores variables en la ecuación.
+
+707
+00:33:47,780 --> 00:33:52,530
+>> búsqueda de modo lineal, ya se haga una
+página a la vez o dos páginas a la vez,
+
+708
+00:33:52,530 --> 00:33:54,810
+es una especie de fundamentalmente los mismos.
+
+709
+00:33:54,810 --> 00:33:56,880
+Todavía es del orden de n.
+
+710
+00:33:56,880 --> 00:34:01,930
+Pero yo decía con mi cuadro anterior
+que la tercera algoritmo no era
+
+711
+00:34:01,930 --> 00:34:02,480
+lineal.
+
+712
+00:34:02,480 --> 00:34:03,605
+No era una línea recta.
+
+713
+00:34:03,605 --> 00:34:08,659
+Fue esa línea curva, y la
+fórmula algebraica no había qué?
+
+714
+00:34:08,659 --> 00:34:11,812
+Registro de n- tan logaritmo en base dos de n.
+
+715
+00:34:11,812 --> 00:34:14,520
+Y no tenemos que entrar en demasiado
+muchos detalles sobre los logaritmos de hoy,
+
+716
+00:34:14,520 --> 00:34:17,394
+pero la mayoría de los informáticos no lo haría
+incluso le dirá lo que es la base.
+
+717
+00:34:17,394 --> 00:34:20,639
+Debido a que todo es sólo
+factores constantes, por así decirlo,
+
+718
+00:34:20,639 --> 00:34:22,659
+sólo ligeras diferencias numéricas.
+
+719
+00:34:22,659 --> 00:34:31,179
+Y así, esta sería una muy comunes
+camino para ordenador particular formales
+
+720
+00:34:31,179 --> 00:34:33,949
+los científicos en una junta o
+programadores en un tablero blanco
+
+721
+00:34:33,949 --> 00:34:36,889
+En realidad el argumento de los cuales
+algoritmo que usarían
+
+722
+00:34:36,889 --> 00:34:39,500
+o lo que la eficiencia
+de su algoritmo es.
+
+723
+00:34:39,500 --> 00:34:42,960
+>> Y esto no es necesariamente algo
+se discute en gran detalle,
+
+724
+00:34:42,960 --> 00:34:47,889
+pero un buen programador es alguien
+que tiene un fondo sólido y formal.
+
+725
+00:34:47,889 --> 00:34:50,120
+Él es capaz de hablar con
+que en este tipo de camino
+
+726
+00:34:50,120 --> 00:34:53,350
+y hacer de
+argumentos cualitativos como
+
+727
+00:34:53,350 --> 00:34:56,870
+de por qué un algoritmo o
+una pieza de software
+
+728
+00:34:56,870 --> 00:35:00,165
+es superior en alguna forma a otra.
+
+729
+00:35:00,165 --> 00:35:02,540
+Debido a que ciertamente se podría
+basta con ejecutar el programa de una persona
+
+730
+00:35:02,540 --> 00:35:04,980
+y contar el número de segundos
+que se necesita para solucionar algunos números,
+
+731
+00:35:04,980 --> 00:35:06,710
+y se puede ejecutar algunos
+El programa de otra persona
+
+732
+00:35:06,710 --> 00:35:08,418
+y contar el número de
+de segundos que tarda.
+
+733
+00:35:08,418 --> 00:35:12,840
+Pero esta es una manera más general que
+se puede utilizar para analizar los algoritmos,
+
+734
+00:35:12,840 --> 00:35:15,520
+si se quiere, sólo en
+papel o sólo verbalmente.
+
+735
+00:35:15,520 --> 00:35:18,430
+Sin ni siquiera ejecutarlo, sin
+incluso tratando de entradas de muestra,
+
+736
+00:35:18,430 --> 00:35:20,180
+sólo puede razonar a través de él.
+
+737
+00:35:20,180 --> 00:35:24,670
+Y así, con la contratación de un desarrollador o si
+que él o ella una especie de discutir con usted
+
+738
+00:35:24,670 --> 00:35:28,460
+Por eso su algoritmo, su secreto
+salsa para buscar miles de millones
+
+739
+00:35:28,460 --> 00:35:30,580
+de páginas web para su
+empresa es mejor, estos
+
+740
+00:35:30,580 --> 00:35:33,302
+son los tipos de argumentos que
+idealmente debería ser capaz de hacer.
+
+741
+00:35:33,302 --> 00:35:35,010
+O, al menos, estos son
+el tipo de cosas
+
+742
+00:35:35,010 --> 00:35:40,211
+que habría surgido en la discusión, en
+menos en una discusión muy formal.
+
+743
+00:35:40,211 --> 00:35:40,710
+Todo bien.
+
+744
+00:35:40,710 --> 00:35:44,400
+Así Ben propuso algo
+llamada ordenación por selección.
+
+745
+00:35:44,400 --> 00:35:48,200
+Pero voy a proponer que hay
+otras maneras de hacer esto, también.
+
+746
+00:35:48,200 --> 00:35:50,400
+Lo que no me gusta mucho
+sobre el algoritmo de Ben
+
+747
+00:35:50,400 --> 00:35:54,400
+es que él siguió caminando, o
+habiendo a caminar, de ida y vuelta
+
+748
+00:35:54,400 --> 00:35:56,930
+y de ida y vuelta y de ida y vuelta.
+
+749
+00:35:56,930 --> 00:36:04,130
+¿Y si en vez tuviera que hacer
+algo así como estos números aquí
+
+750
+00:36:04,130 --> 00:36:08,200
+y tuviera que lidiar solo con cada uno
+número a su vez que a mí se da?
+
+751
+00:36:08,200 --> 00:36:10,780
+>> En otras palabras, aquí está
+mi lista de números.
+
+752
+00:36:10,780 --> 00:36:12,944
+Cuatro, uno, tres, dos.
+
+753
+00:36:12,944 --> 00:36:14,360
+Y voy a hacer lo siguiente.
+
+754
+00:36:14,360 --> 00:36:17,230
+Voy a insertar los números
+a la que pertenecen más bien
+
+755
+00:36:17,230 --> 00:36:18,980
+que seleccionándolas una a la vez.
+
+756
+00:36:18,980 --> 00:36:20,820
+En otras palabras, este es el número cuatro.
+
+757
+00:36:20,820 --> 00:36:22,430
+>> Aquí está mi lista original.
+
+758
+00:36:22,430 --> 00:36:25,290
+Y voy a mantener
+esencialmente una nueva lista aquí.
+
+759
+00:36:25,290 --> 00:36:26,710
+Así que esta es la lista de edad.
+
+760
+00:36:26,710 --> 00:36:28,560
+Esta es la lista nueva.
+
+761
+00:36:28,560 --> 00:36:30,220
+Veo el número cuatro en primer lugar.
+
+762
+00:36:30,220 --> 00:36:34,500
+Mi nueva lista está vacía inicialmente,
+por lo que es trivial el caso
+
+763
+00:36:34,500 --> 00:36:36,410
+que cuatro está ahora lista variados.
+
+764
+00:36:36,410 --> 00:36:39,560
+Sólo estoy tomando el número que me dan,
+y lo estoy poniendo en mi nueva lista.
+
+765
+00:36:39,560 --> 00:36:41,460
+>> Se ordena esta nueva lista?
+
+766
+00:36:41,460 --> 00:36:41,990
+Sí.
+
+767
+00:36:41,990 --> 00:36:45,090
+Es estúpido porque sólo hay una
+elemento, pero es absolutamente ordenada.
+
+768
+00:36:45,090 --> 00:36:46,390
+No hay nada fuera de lugar.
+
+769
+00:36:46,390 --> 00:36:49,290
+Es más interesante, este algoritmo,
+cuando muevo a la siguiente etapa.
+
+770
+00:36:49,290 --> 00:36:50,550
+>> Ahora tengo uno.
+
+771
+00:36:50,550 --> 00:36:55,430
+Así que, por supuesto, pertenece a la
+principio o al final de esta nueva lista?
+
+772
+00:36:55,430 --> 00:36:56,360
+El principio.
+
+773
+00:36:56,360 --> 00:36:58,530
+Así que tengo que hacer un trabajo ahora.
+
+774
+00:36:58,530 --> 00:37:01,410
+He estado tomando algunos
+libertades con mi marcador
+
+775
+00:37:01,410 --> 00:37:03,120
+con sólo dibujar cosas
+donde los quiero,
+
+776
+00:37:03,120 --> 00:37:05,320
+pero eso no es realmente
+exacta en un ordenador.
+
+777
+00:37:05,320 --> 00:37:08,530
+Un equipo que, como se sabe, tiene
+RAM, o memoria de acceso aleatorio,
+
+778
+00:37:08,530 --> 00:37:12,411
+y eso es un byte y
+otro byte y otro byte.
+
+779
+00:37:12,411 --> 00:37:14,910
+Y si tiene un gigabyte de
+RAM, que tiene mil millones de bytes,
+
+780
+00:37:14,910 --> 00:37:16,680
+pero están físicamente en un solo lugar.
+
+781
+00:37:16,680 --> 00:37:19,540
+No se puede simplemente mover cosas de un lado
+dibujando en la pizarra
+
+782
+00:37:19,540 --> 00:37:20,750
+donde quieras.
+
+783
+00:37:20,750 --> 00:37:24,090
+Así que si mi nueva lista tiene
+cuatro ubicaciones en la memoria,
+
+784
+00:37:24,090 --> 00:37:27,480
+por desgracia, el cuatro es
+Ya en el lugar equivocado.
+
+785
+00:37:27,480 --> 00:37:30,410
+>> Así que para insertar el número uno
+No puedo dibujar aquí.
+
+786
+00:37:30,410 --> 00:37:31,901
+Esta posición de memoria no existe.
+
+787
+00:37:31,901 --> 00:37:35,150
+Eso sería hacer trampa, y han sido
+trampa pictóricamente durante unos minutos
+
+788
+00:37:35,150 --> 00:37:35,800
+aquí.
+
+789
+00:37:35,800 --> 00:37:40,950
+Así que en realidad, si yo quiero poner uno aquí,
+Tengo que copiar temporalmente los cuatro
+
+790
+00:37:40,950 --> 00:37:43,030
+y luego poner el uno allí.
+
+791
+00:37:43,030 --> 00:37:45,500
+>> Eso está bien, eso es correcto,
+eso es técnicamente posible,
+
+792
+00:37:45,500 --> 00:37:48,410
+pero se dan cuenta de que es un trabajo extra.
+
+793
+00:37:48,410 --> 00:37:50,460
+Yo no sólo hay que poner el número en su lugar.
+
+794
+00:37:50,460 --> 00:37:53,026
+La primera vez que tuve que mover una
+número, a continuación, poner en su lugar,
+
+795
+00:37:53,026 --> 00:37:54,650
+así que tipo de doblé mi cantidad de trabajo.
+
+796
+00:37:54,650 --> 00:37:55,660
+Así que tenlo en mente.
+
+797
+00:37:55,660 --> 00:37:57,120
+>> Pero ahora estoy hecho con este elemento.
+
+798
+00:37:57,120 --> 00:37:59,056
+Ahora quiero agarrar el número tres.
+
+799
+00:37:59,056 --> 00:38:00,430
+Donde, por supuesto, pertenece?
+
+800
+00:38:00,430 --> 00:38:01,480
+Entre.
+
+801
+00:38:01,480 --> 00:38:03,650
+No puedo engañar más
+y sólo hay que poner allí,
+
+802
+00:38:03,650 --> 00:38:06,770
+porque, de nuevo, esta memoria
+está en ubicaciones físicas.
+
+803
+00:38:06,770 --> 00:38:10,900
+Así que tengo que copiar los cuatro
+y poner el tres por aquí.
+
+804
+00:38:10,900 --> 00:38:11,550
+No es un gran trato.
+
+805
+00:38:11,550 --> 00:38:14,610
+Es sólo un paso adicional
+nuevo-- se siente muy barato.
+
+806
+00:38:14,610 --> 00:38:16,445
+>> Pero ahora de pasar a los dos.
+
+807
+00:38:16,445 --> 00:38:17,820
+Los dos, por supuesto, pertenece aquí.
+
+808
+00:38:17,820 --> 00:38:20,990
+Ahora se empieza a ver cómo
+el trabajo puede acumularse.
+
+809
+00:38:20,990 --> 00:38:23,520
+Ahora, ¿qué tengo que hacer?
+
+810
+00:38:23,520 --> 00:38:28,570
+Sí, tengo que mover los cuatro,
+entonces tengo que copiar los tres,
+
+811
+00:38:28,570 --> 00:38:31,200
+y ahora puedo insertar los dos.
+
+812
+00:38:31,200 --> 00:38:34,460
+Y la captura con este
+algoritmo, curiosamente,
+
+813
+00:38:34,460 --> 00:38:41,050
+es que supongamos que tenemos una manera más extrema
+caso en el que es digamos ocho, siete,
+
+814
+00:38:41,050 --> 00:38:45,150
+seis, cinco, cuatro, tres, dos, uno.
+
+815
+00:38:45,150 --> 00:38:49,450
+Esto es, en muchos contextos,
+el peor de los casos,
+
+816
+00:38:49,450 --> 00:38:51,570
+porque la maldita cosa
+es literalmente hacia atrás.
+
+817
+00:38:51,570 --> 00:38:53,670
+>> En realidad no
+afectará algoritmo de Ben,
+
+818
+00:38:53,670 --> 00:38:55,940
+porque en la selección de Ben
+especie que va a mantener
+
+819
+00:38:55,940 --> 00:38:58,359
+ir arriba y abajo por la lista.
+
+820
+00:38:58,359 --> 00:39:01,150
+Y debido a que estaba siempre en busca
+a través de toda la lista restante,
+
+821
+00:39:01,150 --> 00:39:02,858
+No importa
+donde los elementos son.
+
+822
+00:39:02,858 --> 00:39:05,630
+Pero en este caso con mi inserción
+approach-- vamos a probar esto.
+
+823
+00:39:05,630 --> 00:39:08,616
+>> Así que uno, dos, tres, cuatro,
+cinco seis SIETE OCHO.
+
+824
+00:39:08,616 --> 00:39:11,630
+Uno dos tres CUATRO,
+cinco seis SIETE OCHO.
+
+825
+00:39:11,630 --> 00:39:14,320
+Voy a tomar el ocho,
+y dónde lo pongo?
+
+826
+00:39:14,320 --> 00:39:17,260
+Bueno, al principio de la lista,
+ya que esta nueva lista está ordenada.
+
+827
+00:39:17,260 --> 00:39:18,760
+Y cruzo hacia fuera.
+
+828
+00:39:18,760 --> 00:39:20,551
+>> ¿Dónde pongo los siete?
+
+829
+00:39:20,551 --> 00:39:21,050
+Maldita sea.
+
+830
+00:39:21,050 --> 00:39:23,174
+Tiene que ir allí, por lo
+Tengo que hacer algunas copias.
+
+831
+00:39:23,174 --> 00:39:26,820
+
+832
+00:39:26,820 --> 00:39:28,480
+Y ahora los siete va aquí.
+
+833
+00:39:28,480 --> 00:39:29,860
+Ahora de pasar a los seis.
+
+834
+00:39:29,860 --> 00:39:30,980
+Ahora es aún más trabajo.
+
+835
+00:39:30,980 --> 00:39:32,570
+>> La octava tiene que ir aquí.
+
+836
+00:39:32,570 --> 00:39:33,920
+Siete tiene que ir aquí.
+
+837
+00:39:33,920 --> 00:39:35,450
+Ahora el seis pueden ir aquí.
+
+838
+00:39:35,450 --> 00:39:37,950
+Ahora me agarra el cinco.
+
+839
+00:39:37,950 --> 00:39:40,560
+Ahora los ocho tiene que ir
+aquí, siete tiene que ir aquí,
+
+840
+00:39:40,560 --> 00:39:43,650
+seis tiene que ir aquí, y
+Ahora los cinco y repetir.
+
+841
+00:39:43,650 --> 00:39:46,610
+Y estoy más o menos
+moviendo constantemente.
+
+842
+00:39:46,610 --> 00:39:52,950
+>> Así que al final, esto vamos a algorithm--
+llamarlo inserción sort-- realidad
+
+843
+00:39:52,950 --> 00:39:55,020
+tiene un montón de trabajo, también.
+
+844
+00:39:55,020 --> 00:39:56,970
+Es simplemente diferente
+tipo de trabajo que Ben.
+
+845
+00:39:56,970 --> 00:40:00,090
+El trabajo de Ben me había vuelvo
+de ida y vuelta todo el tiempo,
+
+846
+00:40:00,090 --> 00:40:03,510
+la selección de la siguiente más pequeña
+elemento y otra vez.
+
+847
+00:40:03,510 --> 00:40:06,660
+Por lo que era este tipo muy visual de la obra.
+
+848
+00:40:06,660 --> 00:40:10,600
+>> Este otro algoritmo, que todavía está
+correct-- que conseguirá el trabajo done--
+
+849
+00:40:10,600 --> 00:40:12,800
+Sólo cambia la cantidad de trabajo.
+
+850
+00:40:12,800 --> 00:40:15,420
+Parece que inicialmente eres
+el ahorro, porque estás solo
+
+851
+00:40:15,420 --> 00:40:19,190
+tratar con cada elemento
+por adelantado sin tener que caminar todo
+
+852
+00:40:19,190 --> 00:40:20,930
+el camino a través de la lista como Ben era.
+
+853
+00:40:20,930 --> 00:40:25,300
+Pero el problema es, sobre todo en estos
+locas casos en los que es todo al revés,
+
+854
+00:40:25,300 --> 00:40:27,830
+eres sólo un poco
+posponer el trabajo duro
+
+855
+00:40:27,830 --> 00:40:30,360
+hasta que tenga que corregir sus errores.
+
+856
+00:40:30,360 --> 00:40:33,919
+>> Y por lo que si se puede imaginar esto
+ocho y siete y seis y cinco
+
+857
+00:40:33,919 --> 00:40:36,710
+y más tarde de cuatro y tres y dos
+mover su camino a través de la lista,
+
+858
+00:40:36,710 --> 00:40:39,060
+que acaba de cambiar el
+tipo de trabajo que estamos haciendo.
+
+859
+00:40:39,060 --> 00:40:42,340
+En lugar de hacerlo en el
+a partir de mi iteración,
+
+860
+00:40:42,340 --> 00:40:45,250
+Sólo estoy haciendo en el
+final de cada iteración.
+
+861
+00:40:45,250 --> 00:40:50,550
+Así que resulta que este algoritmo,
+también, generalmente se llama ordenación por inserción,
+
+862
+00:40:50,550 --> 00:40:52,190
+También está en el orden de n al cuadrado.
+
+863
+00:40:52,190 --> 00:40:56,480
+En realidad no es mejor,
+no son mejores para todos.
+
+864
+00:40:56,480 --> 00:41:00,810
+>> Sin embargo, hay un tercer enfoque
+Yo nos animaría a considerar,
+
+865
+00:41:00,810 --> 00:41:02,970
+que es esto.
+
+866
+00:41:02,970 --> 00:41:07,850
+Así que supongo que mi lista, por simplicidad
+de nuevo, es de cuatro, uno, tres,
+
+867
+00:41:07,850 --> 00:41:11,080
+dos-- sólo cuatro números.
+
+868
+00:41:11,080 --> 00:41:13,300
+Ben tenía buena intuición,
+buena intuición humana
+
+869
+00:41:13,300 --> 00:41:16,340
+antes, por el cual se fijó la totalidad
+eventually-- lista de ordenación por inserción.
+
+870
+00:41:16,340 --> 00:41:18,020
+Yo nos engatusé lo largo.
+
+871
+00:41:18,020 --> 00:41:22,530
+Pero vamos a considerar la
+forma más sencilla de solucionar esta lista.
+
+872
+00:41:22,530 --> 00:41:24,110
+>> Esta lista no está ordenada.
+
+873
+00:41:24,110 --> 00:41:26,130
+¿Por qué?
+
+874
+00:41:26,130 --> 00:41:31,920
+En Inglés, explicar por qué
+En realidad no es ordenada.
+
+875
+00:41:31,920 --> 00:41:33,400
+¿Qué quiere decir que ser resuelto?
+
+876
+00:41:33,400 --> 00:41:34,220
+>> ESTUDIANTE: No es secuencial.
+
+877
+00:41:34,220 --> 00:41:34,990
+>> DAVID MALAN: no secuencial.
+
+878
+00:41:34,990 --> 00:41:35,822
+Dame un ejemplo.
+
+879
+00:41:35,822 --> 00:41:37,180
+>> ESTUDIANTE: Poner en orden.
+
+880
+00:41:37,180 --> 00:41:37,440
+>> DAVID MALAN: OK.
+
+881
+00:41:37,440 --> 00:41:38,790
+Dame un ejemplo más específico.
+
+882
+00:41:38,790 --> 00:41:39,832
+>> ESTUDIANTE: orden ascendente.
+
+883
+00:41:39,832 --> 00:41:41,206
+DAVID MALAN: fin de no ascender.
+
+884
+00:41:41,206 --> 00:41:42,100
+Ser más precisos.
+
+885
+00:41:42,100 --> 00:41:45,190
+No sé qué quiere decir con ascendente.
+
+886
+00:41:45,190 --> 00:41:47,150
+¿Qué ocurre?
+
+887
+00:41:47,150 --> 00:41:49,930
+>> ESTUDIANTE: El más pequeño de la
+números no es en el primer espacio.
+
+888
+00:41:49,930 --> 00:41:51,140
+>> DAVID MALAN: número más pequeño de
+no en el primer espacio.
+
+889
+00:41:51,140 --> 00:41:52,120
+Sé más específico.
+
+890
+00:41:52,120 --> 00:41:55,000
+Estoy empezando a hacerse popular.
+
+891
+00:41:55,000 --> 00:41:59,470
+Estamos contando, pero
+lo que está fuera de aquí?
+
+892
+00:41:59,470 --> 00:42:00,707
+>> ESTUDIANTE: secuencia numérica.
+
+893
+00:42:00,707 --> 00:42:02,040
+DAVID MALAN: secuencia numérica.
+
+894
+00:42:02,040 --> 00:42:04,248
+tipo de mantenimiento de todo el mundo
+que aquí-- nivel muy alto.
+
+895
+00:42:04,248 --> 00:42:07,450
+Sólo literalmente, dime lo que es
+mal como lo haría una y cinco años de edad.
+
+896
+00:42:07,450 --> 00:42:08,310
+>> ESTUDIANTE: más uno.
+
+897
+00:42:08,310 --> 00:42:08,750
+>> DAVID MALAN: ¿Qué es eso?
+
+898
+00:42:08,750 --> 00:42:09,610
+>> ESTUDIANTE: más uno.
+
+899
+00:42:09,610 --> 00:42:11,235
+>> DAVID MALAN: ¿Qué quiere decir que uno más?
+
+900
+00:42:11,235 --> 00:42:12,754
+
+901
+00:42:12,754 --> 00:42:14,170
+Dame una diferente de cinco años de edad.
+
+902
+00:42:14,170 --> 00:42:16,840
+
+903
+00:42:16,840 --> 00:42:18,330
+¿Qué pasa, mamá?
+
+904
+00:42:18,330 --> 00:42:19,940
+¿Qué pasa, papá?
+
+905
+00:42:19,940 --> 00:42:22,808
+¿Qué quiere decir esto no está ordenada?
+
+906
+00:42:22,808 --> 00:42:24,370
+>> ESTUDIANTE: No es el lugar correcto.
+
+907
+00:42:24,370 --> 00:42:25,580
+>> DAVID MALAN: ¿Cuál es
+no en el lugar correcto?
+
+908
+00:42:25,580 --> 00:42:26,174
+>> ESTUDIANTE: Cuatro.
+
+909
+00:42:26,174 --> 00:42:27,090
+DAVID MALAN: OK, bueno.
+
+910
+00:42:27,090 --> 00:42:29,110
+Así que cuatro no es donde tiene que estar.
+
+911
+00:42:29,110 --> 00:42:30,590
+En particular, ¿es esto correcto?
+
+912
+00:42:30,590 --> 00:42:33,000
+Cuatro y uno, el primero
+dos números que veo.
+
+913
+00:42:33,000 --> 00:42:34,930
+¿Es esto correcto?
+
+914
+00:42:34,930 --> 00:42:36,427
+No, están fuera de orden, ¿verdad?
+
+915
+00:42:36,427 --> 00:42:38,135
+De hecho, piensa ahora
+acerca de un equipo, también.
+
+916
+00:42:38,135 --> 00:42:40,824
+Sólo puede mirar en tal vez uno,
+tal vez dos cosas a la vez--
+
+917
+00:42:40,824 --> 00:42:43,240
+y en realidad sólo una cosa
+a la vez, pero al menos puede
+
+918
+00:42:43,240 --> 00:42:45,790
+mirar a una cosa, entonces el
+Lo siguiente que justo al lado de ella.
+
+919
+00:42:45,790 --> 00:42:47,380
+>> Así son estos con el fin?
+
+920
+00:42:47,380 --> 00:42:48,032
+Por supuesto no.
+
+921
+00:42:48,032 --> 00:42:48,740
+Así que ya saben qué?
+
+922
+00:42:48,740 --> 00:42:51,020
+¿Por qué no tomamos bebé
+etapas de fijación de este problema
+
+923
+00:42:51,020 --> 00:42:53,410
+en lugar de hacer estos de lujo
+algoritmos como Ben, donde
+
+924
+00:42:53,410 --> 00:42:56,440
+Es una especie de fijación por
+bucle a través de la lista
+
+925
+00:42:56,440 --> 00:42:59,670
+en vez de hacer lo que hice, donde
+Yo sólo tipo de fijo que a medida que avanzamos?
+
+926
+00:42:59,670 --> 00:43:03,650
+Vamos a romper, literalmente, por la
+noción de orden numérico order--,
+
+927
+00:43:03,650 --> 00:43:06,990
+Llámalo como quieras--
+en estas comparaciones por pares.
+
+928
+00:43:06,990 --> 00:43:07,590
+>> Cuatro y uno.
+
+929
+00:43:07,590 --> 00:43:09,970
+Es este el orden correcto?
+
+930
+00:43:09,970 --> 00:43:11,310
+Así que vamos a arreglar eso.
+
+931
+00:43:11,310 --> 00:43:14,700
+Uno y cuatro, y luego
+sólo tendremos que copiamos.
+
+932
+00:43:14,700 --> 00:43:15,560
+Muy bien, muy bien.
+
+933
+00:43:15,560 --> 00:43:17,022
+Me fijo uno y cuatro.
+
+934
+00:43:17,022 --> 00:43:18,320
+Tres y dos?
+
+935
+00:43:18,320 --> 00:43:18,820
+No.
+
+936
+00:43:18,820 --> 00:43:21,690
+Que mis palabras coincidan con los dedos.
+
+937
+00:43:21,690 --> 00:43:23,695
+Cuatro y tres?
+
+938
+00:43:23,695 --> 00:43:27,930
+>> No es el fin, así que voy
+hacer uno, tres, cuatro, dos.
+
+939
+00:43:27,930 --> 00:43:28,680
+Bien.
+
+940
+00:43:28,680 --> 00:43:32,310
+Ahora cuatro y dos?
+
+941
+00:43:32,310 --> 00:43:33,370
+Tenemos que arreglar esto, también.
+
+942
+00:43:33,370 --> 00:43:36,700
+Así que uno, tres, dos, cuatro.
+
+943
+00:43:36,700 --> 00:43:39,820
+Así se lo arregló?
+
+944
+00:43:39,820 --> 00:43:43,170
+No, pero es lo más cerca ordenados?
+
+945
+00:43:43,170 --> 00:43:48,930
+>> Es, pues hemos arreglado este
+error, hemos arreglado este error,
+
+946
+00:43:48,930 --> 00:43:50,370
+y hemos arreglado este error.
+
+947
+00:43:50,370 --> 00:43:52,420
+Así que podría decirse que lo arreglaron tres errores.
+
+948
+00:43:52,420 --> 00:43:58,100
+Aún en realidad no mirar ordenada, pero
+es objetivamente más cerca ordenada
+
+949
+00:43:58,100 --> 00:44:00,080
+porque hemos arreglado algunos de esos errores.
+
+950
+00:44:00,080 --> 00:44:02,047
+>> Ahora, ¿qué hago ahora?
+
+951
+00:44:02,047 --> 00:44:03,630
+Yo como que llegó al final de la lista.
+
+952
+00:44:03,630 --> 00:44:05,680
+Me parecía haber fijado
+todos los errores, pero no.
+
+953
+00:44:05,680 --> 00:44:08,510
+Porque en este caso, algunos números
+podría haber burbujeaba más cerca
+
+954
+00:44:08,510 --> 00:44:10,410
+a otros números que
+todavía están fuera de servicio.
+
+955
+00:44:10,410 --> 00:44:12,951
+Así que vamos a hacerlo de nuevo, y voy a
+sólo lo hacen en su lugar esta vez.
+
+956
+00:44:12,951 --> 00:44:14,170
+Uno y tres?
+
+957
+00:44:14,170 --> 00:44:14,720
+Está bien.
+
+958
+00:44:14,720 --> 00:44:16,070
+Tres y dos?
+
+959
+00:44:16,070 --> 00:44:17,560
+Por supuesto que no, así que vamos a cambiar.
+
+960
+00:44:17,560 --> 00:44:19,160
+Así que dos, tres.
+
+961
+00:44:19,160 --> 00:44:21,340
+Tres y cuatro?
+
+962
+00:44:21,340 --> 00:44:24,370
+Y ahora vamos a ser
+particularmente pedante aquí.
+
+963
+00:44:24,370 --> 00:44:26,350
+Se lo arregló?
+
+964
+00:44:26,350 --> 00:44:29,280
+Usted sabe que es el ser humano ordenadas.
+
+965
+00:44:29,280 --> 00:44:30,400
+>> Debería intentarlo de nuevo.
+
+966
+00:44:30,400 --> 00:44:31,900
+Así que Olivia está proponiendo lo intento de nuevo.
+
+967
+00:44:31,900 --> 00:44:32,530
+¿Por qué?
+
+968
+00:44:32,530 --> 00:44:35,810
+Debido a que un equipo no tiene
+el lujo de los ojos humanos
+
+969
+00:44:35,810 --> 00:44:38,080
+de simplemente echando un vistazo espaldas; OK, he terminado.
+
+970
+00:44:38,080 --> 00:44:41,610
+¿Cómo determina el equipo
+que la lista está ordenada ahora?
+
+971
+00:44:41,610 --> 00:44:44,590
+Mecánicamente.
+
+972
+00:44:44,590 --> 00:44:47,650
+>> Debería ir a través
+una vez más, y sólo si
+
+973
+00:44:47,650 --> 00:44:51,190
+No hacer / algún comentario sobre errores puedo
+entonces la conclusión de que el equipo, sip,
+
+974
+00:44:51,190 --> 00:44:51,980
+somos buenos para ir.
+
+975
+00:44:51,980 --> 00:44:54,850
+Así uno y dos, dos y
+tres, tres y cuatro.
+
+976
+00:44:54,850 --> 00:44:58,030
+Ahora definitivamente puedo decir que es
+ordenados, porque he hecho ningún cambio.
+
+977
+00:44:58,030 --> 00:45:01,940
+Ahora bien, sería un error y justo
+tonto si yo, el equipo,
+
+978
+00:45:01,940 --> 00:45:05,640
+hecho estas mismas preguntas una
+esperando respuestas diferentes.
+
+979
+00:45:05,640 --> 00:45:07,110
+no debería suceder.
+
+980
+00:45:07,110 --> 00:45:08,600
+>> Y por lo que ahora se ordena la lista.
+
+981
+00:45:08,600 --> 00:45:12,630
+Desafortunadamente, el tiempo de funcionamiento de
+este algoritmo es n al cuadrado.
+
+982
+00:45:12,630 --> 00:45:13,130
+¿Por qué?
+
+983
+00:45:13,130 --> 00:45:19,520
+Debido a que tiene un número n, y en el
+peor de los casos se tiene que mover un número n
+
+984
+00:45:19,520 --> 00:45:23,637
+n veces porque hay que seguir adelante
+volver a comprobar y corregir potencialmente
+
+985
+00:45:23,637 --> 00:45:24,220
+estos números.
+
+986
+00:45:24,220 --> 00:45:26,280
+Y podemos hacer un mayor
+análisis formal, también.
+
+987
+00:45:26,280 --> 00:45:29,530
+>> Así que esto es todo lo que decir que hemos tomado
+tres enfoques diferentes, uno
+
+988
+00:45:29,530 --> 00:45:32,210
+de ellos inmediatamente intuitiva
+del palo de Ben
+
+989
+00:45:32,210 --> 00:45:35,170
+a mi se ha sugerido,
+ordenar a ésta
+
+990
+00:45:35,170 --> 00:45:38,540
+donde tipo de pierde de vista
+el bosque por los árboles inicialmente.
+
+991
+00:45:38,540 --> 00:45:41,760
+Pero entonces, si usted toma un paso atrás,
+voilá, hemos fijado la noción de clasificación.
+
+992
+00:45:41,760 --> 00:45:43,824
+Así que esto es, se atreve a decir,
+un nivel más bajo quizá
+
+993
+00:45:43,824 --> 00:45:45,740
+que algunos de los otros
+algoritmos, pero vamos a
+
+994
+00:45:45,740 --> 00:45:48,550
+ver si no podemos visualizar
+estos por medio de esto.
+
+995
+00:45:48,550 --> 00:45:51,450
+>> Así que esto es una buena
+software que alguien
+
+996
+00:45:51,450 --> 00:45:56,110
+escribió usando barras de colores que de
+vamos a hacer lo siguiente para nosotros.
+
+997
+00:45:56,110 --> 00:45:57,736
+Cada una de estas barras representa un número.
+
+998
+00:45:57,736 --> 00:46:00,026
+Taller de la barra, mayor
+el número, más pequeña es la barra,
+
+999
+00:46:00,026 --> 00:46:00,990
+cuanto menor sea el número.
+
+1000
+00:46:00,990 --> 00:46:05,880
+Por lo que idealmente queremos un buen pirámide
+donde empieza pequeño y se llena grande,
+
+1001
+00:46:05,880 --> 00:46:08,330
+y eso significaría que
+estas barras están ordenados.
+
+1002
+00:46:08,330 --> 00:46:11,200
+Así que voy a seguir adelante y elegir,
+por ejemplo, el algoritmo de Ben
+
+1003
+00:46:11,200 --> 00:46:13,990
+la selección primero-- tipo.
+
+1004
+00:46:13,990 --> 00:46:16,220
+>> Y observe lo que está haciendo.
+
+1005
+00:46:16,220 --> 00:46:18,670
+La forma en que han elegido
+visualizar este algoritmo
+
+1006
+00:46:18,670 --> 00:46:22,090
+es que, al igual que yo
+caminando a través de mi lista,
+
+1007
+00:46:22,090 --> 00:46:24,710
+este programa está caminando
+a través de su lista de números,
+
+1008
+00:46:24,710 --> 00:46:28,160
+destacando en rosa cada
+número que se está mirando.
+
+1009
+00:46:28,160 --> 00:46:32,360
+Y lo que va a ocurrir ahora?
+
+1010
+00:46:32,360 --> 00:46:35,154
+>> El número más pequeño que
+Me encontré de repente o Ben
+
+1011
+00:46:35,154 --> 00:46:36,820
+obtiene movido al principio de la lista.
+
+1012
+00:46:36,820 --> 00:46:40,037
+Y el aviso que hicieron evict
+el número que estaba allí,
+
+1013
+00:46:40,037 --> 00:46:41,120
+y que está perfectamente bien.
+
+1014
+00:46:41,120 --> 00:46:42,600
+No me meto en ese nivel de detalle.
+
+1015
+00:46:42,600 --> 00:46:44,308
+Pero tenemos que poner
+ese número en alguna parte,
+
+1016
+00:46:44,308 --> 00:46:47,775
+por lo que acabamos de mudar a la
+lugar abierto que fue creado.
+
+1017
+00:46:47,775 --> 00:46:49,900
+Así que voy a acelerar este
+, porque de lo contrario,
+
+1018
+00:46:49,900 --> 00:46:51,871
+se vuelve muy tedioso rápidamente.
+
+1019
+00:46:51,871 --> 00:46:55,800
+
+1020
+00:46:55,800 --> 00:46:58,600
+Animación speed-- haya que ir.
+
+1021
+00:46:58,600 --> 00:47:01,850
+Así que ahora mismo principio
+Yo estaba aplicando, pero
+
+1022
+00:47:01,850 --> 00:47:06,540
+puede comenzar a sentir el algoritmo, si
+voluntad, ni se ve un poco más claramente.
+
+1023
+00:47:06,540 --> 00:47:13,190
+Y este algoritmo tiene el efecto de
+seleccionar el siguiente elemento más pequeño,
+
+1024
+00:47:13,190 --> 00:47:16,422
+por lo que vamos a empezar a
+ver que la rampa encima de la izquierda.
+
+1025
+00:47:16,422 --> 00:47:19,130
+Y en cada iteración, como yo
+propuesto, se hace un poco menos de trabajo.
+
+1026
+00:47:19,130 --> 00:47:21,921
+No tiene que ir todo el camino
+de nuevo al extremo izquierdo de la lista,
+
+1027
+00:47:21,921 --> 00:47:23,900
+porque ya
+conoce a los se ordenan.
+
+1028
+00:47:23,900 --> 00:47:28,129
+Así que tipo de se siente como si fuera
+acelerando, a pesar de que cada paso es
+
+1029
+00:47:28,129 --> 00:47:29,420
+teniendo la misma cantidad de tiempo.
+
+1030
+00:47:29,420 --> 00:47:31,600
+Sólo hay un menor número de pasos restantes.
+
+1031
+00:47:31,600 --> 00:47:35,240
+Y ahora se puede sentir el tipo de
+algoritmo de limpieza al final de ella,
+
+1032
+00:47:35,240 --> 00:47:37,040
+y de hecho ahora se ha solucionado.
+
+1033
+00:47:37,040 --> 00:47:41,620
+>> Así ordenación por inserción se hace todo.
+
+1034
+00:47:41,620 --> 00:47:43,600
+Tengo que volver a cambiar aleatoriamente la matriz.
+
+1035
+00:47:43,600 --> 00:47:45,940
+Y note que sólo puede
+mantener la aleatorización de ella,
+
+1036
+00:47:45,940 --> 00:47:50,630
+y nos pondremos una aproximación de
+el mismo enfoque, la ordenación por inserción.
+
+1037
+00:47:50,630 --> 00:47:55,050
+Permítanme retardarlo hasta aquí.
+
+1038
+00:47:55,050 --> 00:47:56,915
+Vamos a empezar que más.
+
+1039
+00:47:56,915 --> 00:47:57,414
+Detener.
+
+1040
+00:47:57,414 --> 00:48:00,662
+
+1041
+00:48:00,662 --> 00:48:02,410
+>> Vamos a saltar cuatro.
+
+1042
+00:48:02,410 --> 00:48:03,200
+Aquí vamos.
+
+1043
+00:48:03,200 --> 00:48:04,190
+Selección aleatoria de ellos matriz.
+
+1044
+00:48:04,190 --> 00:48:05,555
+Y aquí vaya-- ordenación por inserción.
+
+1045
+00:48:05,555 --> 00:48:10,260
+
+1046
+00:48:10,260 --> 00:48:12,800
+Jugar.
+
+1047
+00:48:12,800 --> 00:48:17,280
+Tenga en cuenta que se trata de cada uno
+elemento que encuentra de forma inmediata,
+
+1048
+00:48:17,280 --> 00:48:20,282
+pero si pertenece en
+el lugar equivocado aviso
+
+1049
+00:48:20,282 --> 00:48:21,740
+todo el trabajo que tiene que suceder.
+
+1050
+00:48:21,740 --> 00:48:24,700
+Tenemos que seguir desplazándose más
+y más elementos para hacer espacio
+
+1051
+00:48:24,700 --> 00:48:27,340
+para el que queremos poner en su lugar.
+
+1052
+00:48:27,340 --> 00:48:30,740
+>> Así que nos estamos enfocando en el
+extremo izquierdo de la lista única.
+
+1053
+00:48:30,740 --> 00:48:34,460
+Aviso ni siquiera hemos visto que at--
+no han puesto de relieve en rosa nada
+
+1054
+00:48:34,460 --> 00:48:35,610
+a la derecha.
+
+1055
+00:48:35,610 --> 00:48:38,180
+Estamos frente a
+los problemas a medida que avanzamos,
+
+1056
+00:48:38,180 --> 00:48:40,430
+pero estamos creando una gran cantidad de
+trabajar para nosotros mismos todavía.
+
+1057
+00:48:40,430 --> 00:48:44,410
+Y por lo que si acelerar esto
+ahora ir hasta su finalización,
+
+1058
+00:48:44,410 --> 00:48:46,210
+tiene una sensación diferente a él de hecho.
+
+1059
+00:48:46,210 --> 00:48:50,150
+Es sólo centrándose en el extremo izquierdo, pero
+haciendo un poco más de trabajo como needed--
+
+1060
+00:48:50,150 --> 00:48:53,230
+tipo de cosas suavizado
+encima, arreglar cosas,
+
+1061
+00:48:53,230 --> 00:48:58,350
+pero en última instancia se trata con
+cada elemento de una en una
+
+1062
+00:48:58,350 --> 00:49:07,740
+hasta llegar a el-- bueno,
+Todos sabemos cómo va a terminar,
+
+1063
+00:49:07,740 --> 00:49:09,700
+así que es un poco decepcionante, tal vez.
+
+1064
+00:49:09,700 --> 00:49:12,830
+>> Pero la lista en el end--
+spoiler-- va a ser resuelto.
+
+1065
+00:49:12,830 --> 00:49:15,300
+Así que vamos a ver una última uno.
+
+1066
+00:49:15,300 --> 00:49:16,840
+No podemos simplemente saltar ahora.
+
+1067
+00:49:16,840 --> 00:49:18,000
+Casi estámos allí.
+
+1068
+00:49:18,000 --> 00:49:19,980
+Quedan dos, uno para ir.
+
+1069
+00:49:19,980 --> 00:49:22,680
+Y listo.
+
+1070
+00:49:22,680 --> 00:49:23,450
+Excelente.
+
+1071
+00:49:23,450 --> 00:49:27,220
+>> Así que ahora vamos a hacer una última,
+volver a la aleatorización con la ordenación de burbuja.
+
+1072
+00:49:27,220 --> 00:49:31,690
+Y noto aquí, especialmente si retardarlo
+abajo, esto deslizándose por mantener.
+
+1073
+00:49:31,690 --> 00:49:36,830
+Pero nótese que sólo tiene dos a dos
+comparisons-- tipo de soluciones locales.
+
+1074
+00:49:36,830 --> 00:49:39,050
+Pero tan pronto como se llega a
+Al final de la lista en rosa,
+
+1075
+00:49:39,050 --> 00:49:40,690
+lo que va a tener que pasar de nuevo?
+
+1076
+00:49:40,690 --> 00:49:44,539
+
+1077
+00:49:44,539 --> 00:49:46,830
+Sí, va a tener que
+empezar de nuevo, ya que sólo
+
+1078
+00:49:46,830 --> 00:49:49,870
+errores fijos por pares.
+
+1079
+00:49:49,870 --> 00:49:53,120
+Y que podría haber revelado aún otros.
+
+1080
+00:49:53,120 --> 00:49:58,950
+Y por lo que si acelerar este proceso, se le
+ver que, tanto como el nombre implica,
+
+1081
+00:49:58,950 --> 00:50:01,870
+la más pequeña elements-- o más bien,
+elements-- los más grandes están comenzando
+
+1082
+00:50:01,870 --> 00:50:03,740
+que suben a la parte superior, si se quiere.
+
+1083
+00:50:03,740 --> 00:50:07,380
+Y los elementos más pequeños son
+empezando a burbuja hacia abajo a la izquierda.
+
+1084
+00:50:07,380 --> 00:50:10,780
+Y, en efecto, que es una especie de
+el efecto visual.
+
+1085
+00:50:10,780 --> 00:50:17,150
+Y así, esto va a terminar el acabado
+de una manera muy similar, también.
+
+1086
+00:50:17,150 --> 00:50:19,160
+>> No tenemos habitar
+en este caso en particular.
+
+1087
+00:50:19,160 --> 00:50:21,010
+Permítanme abrir esto ahora, también.
+
+1088
+00:50:21,010 --> 00:50:24,040
+Hay algunos otros algoritmos de ordenación
+en el mundo, algunos de los cuales
+
+1089
+00:50:24,040 --> 00:50:25,580
+son capturados aquí.
+
+1090
+00:50:25,580 --> 00:50:29,960
+Y especialmente para los estudiantes que no están
+necesariamente visual o matemática,
+
+1091
+00:50:29,960 --> 00:50:31,930
+como lo hicimos antes, podemos
+También hacer esto audially
+
+1092
+00:50:31,930 --> 00:50:34,210
+si asociar un sonido a esto.
+
+1093
+00:50:34,210 --> 00:50:36,990
+Y sólo por diversión, he aquí una
+unos algoritmos diferentes,
+
+1094
+00:50:36,990 --> 00:50:40,950
+y uno de ellos, en particular, que está
+va a notar que se llama "fusión especie."
+
+1095
+00:50:40,950 --> 00:50:43,250
+>> En realidad, es una forma fundamentalmente
+mejor algoritmo,
+
+1096
+00:50:43,250 --> 00:50:45,860
+de tal manera que se funden especie, una de
+los que están a punto de ver,
+
+1097
+00:50:45,860 --> 00:50:49,170
+No es el fin de n al cuadrado.
+
+1098
+00:50:49,170 --> 00:50:57,280
+Es del orden de n veces de registro
+n, que es en realidad más pequeño y por lo tanto
+
+1099
+00:50:57,280 --> 00:50:58,940
+más rápido que los otros tres.
+
+1100
+00:50:58,940 --> 00:51:00,670
+Y hay un par de otro
+los tontos que ya veremos.
+
+1101
+00:51:00,670 --> 00:51:01,933
+>> Así que aquí vamos con un poco de sonido.
+
+1102
+00:51:01,933 --> 00:51:06,620
+
+1103
+00:51:06,620 --> 00:51:10,490
+Esta es la ordenación por inserción, así que de nuevo
+es sólo tratar con los elementos
+
+1104
+00:51:10,490 --> 00:51:13,420
+como vienen.
+
+1105
+00:51:13,420 --> 00:51:17,180
+Se trata de una especie de burbuja, por lo que es
+teniendo en cuenta los pares a la vez.
+
+1106
+00:51:17,180 --> 00:51:22,030
+
+1107
+00:51:22,030 --> 00:51:24,490
+Y de nuevo, los elementos más importantes
+están burbujeando hasta la parte superior.
+
+1108
+00:51:24,490 --> 00:51:38,098
+
+1109
+00:51:38,098 --> 00:51:41,710
+>> Selección El siguiente tipo.
+
+1110
+00:51:41,710 --> 00:51:45,420
+Este es el algoritmo de Ben, donde
+De nuevo se ha de seleccionar de forma iterativa
+
+1111
+00:51:45,420 --> 00:51:46,843
+el elemento inmediatamente inferior.
+
+1112
+00:51:46,843 --> 00:51:49,801
+
+1113
+00:51:49,801 --> 00:51:53,900
+Y de nuevo, ahora se puede escuchar que realmente
+está acelerando, pero sólo en la medida en
+
+1114
+00:51:53,900 --> 00:51:58,230
+como lo está haciendo cada vez menos
+trabajar en cada iteración.
+
+1115
+00:51:58,230 --> 00:52:04,170
+Este es el más rápido, combinar especie,
+que se clasificar grupos de números
+
+1116
+00:52:04,170 --> 00:52:05,971
+combinando juntos y luego ellos.
+
+1117
+00:52:05,971 --> 00:52:07,720
+Así look-- la izquierda
+la mitad ya está ordenada.
+
+1118
+00:52:07,720 --> 00:52:14,165
+>> Ahora está la clasificación de la mitad derecha, y
+Ahora se va a combinar en una sola.
+
+1119
+00:52:14,165 --> 00:52:19,160
+Esto es algo que se llama "Gnome tipo."
+
+1120
+00:52:19,160 --> 00:52:23,460
+Y se puede ver que tipo de
+que va de ida y vuelta,
+
+1121
+00:52:23,460 --> 00:52:27,950
+la fijación de trabajo un poco aquí y
+no antes de proceder al nuevo trabajo.
+
+1122
+00:52:27,950 --> 00:52:32,900
+
+1123
+00:52:32,900 --> 00:52:33,692
+Y eso es.
+
+1124
+00:52:33,692 --> 00:52:36,400
+Hay otro tipo, que es
+en realidad sólo con fines académicos,
+
+1125
+00:52:36,400 --> 00:52:40,980
+llamada "clase estúpida", que tiene
+sus datos, que ordena al azar,
+
+1126
+00:52:40,980 --> 00:52:43,350
+y luego comprueba si está ordenada.
+
+1127
+00:52:43,350 --> 00:52:47,880
+Y si no lo es, se volverá a ordenar que
+al azar, comprueba si está ordenada,
+
+1128
+00:52:47,880 --> 00:52:49,440
+y si no se repite.
+
+1129
+00:52:49,440 --> 00:52:52,660
+Y, en teoría, probabilísticamente
+Esto completará,
+
+1130
+00:52:52,660 --> 00:52:54,140
+pero después de un poco de tiempo.
+
+1131
+00:52:54,140 --> 00:52:56,930
+No es el más
+eficiente de los algoritmos.
+
+1132
+00:52:56,930 --> 00:53:02,550
+Así que cualquier pregunta sobre los
+algoritmos o cualquier particulares
+
+1133
+00:53:02,550 --> 00:53:04,720
+relacionada con ellas, también?
+
+1134
+00:53:04,720 --> 00:53:09,430
+>> Bueno, ahora vamos a desmenuzar lo que todos
+estas líneas son que he estado dibujando
+
+1135
+00:53:09,430 --> 00:53:15,090
+y lo que estoy suponiendo que el ordenador
+puede hacer debajo de la campana.
+
+1136
+00:53:15,090 --> 00:53:18,650
+Yo diría que todos estos números
+Sigo drawing-- que necesitan para obtener
+
+1137
+00:53:18,650 --> 00:53:21,330
+almacenado en algún lugar de la memoria.
+
+1138
+00:53:21,330 --> 00:53:24,130
+Vamos a deshacernos de este tipo ahora, también.
+
+1139
+00:53:24,130 --> 00:53:30,110
+>> Así que una pieza de la memoria en una
+computer-- por lo DIMM RAM es
+
+1140
+00:53:30,110 --> 00:53:35,480
+lo que se realizaron búsquedas de ayer, dual
+module-- de memoria en línea tiene este aspecto.
+
+1141
+00:53:35,480 --> 00:53:39,370
+Y cada una de estas pequeñas fichas negras
+es un número de bytes, por lo general.
+
+1142
+00:53:39,370 --> 00:53:44,380
+Y a continuación, los alfileres de oro son como el
+cables que se conectan a la computadora,
+
+1143
+00:53:44,380 --> 00:53:47,521
+y la placa de silicio verde es sólo
+lo que mantiene todo junto.
+
+1144
+00:53:47,521 --> 00:53:48,770
+Entonces, ¿qué significa esto realmente?
+
+1145
+00:53:48,770 --> 00:53:53,180
+Si este tipo de dibujo misma imagen,
+Supongamos por simplicidad
+
+1146
+00:53:53,180 --> 00:53:55,280
+que este DIMM, dual
+módulo de memoria en línea,
+
+1147
+00:53:55,280 --> 00:54:00,530
+es un gigabyte de memoria RAM, un gigabyte de
+memoria, que es el número de bytes en total?
+
+1148
+00:54:00,530 --> 00:54:02,100
+Un gigabyte es el número de bytes?
+
+1149
+00:54:02,100 --> 00:54:04,860
+
+1150
+00:54:04,860 --> 00:54:06,030
+Más que eso.
+
+1151
+00:54:06,030 --> 00:54:09,960
+1.124 es el kilo, 1.000.
+
+1152
+00:54:09,960 --> 00:54:11,730
+Mega es millones.
+
+1153
+00:54:11,730 --> 00:54:14,570
+Giga es un mil millones.
+
+1154
+00:54:14,570 --> 00:54:15,070
+>> ¿Estoy mintiendo?
+
+1155
+00:54:15,070 --> 00:54:16,670
+Podemos incluso leer la etiqueta?
+
+1156
+00:54:16,670 --> 00:54:19,920
+Esto es en realidad 128
+gigabytes, por lo que es mucho más.
+
+1157
+00:54:19,920 --> 00:54:22,130
+Pero vamos a pretender este
+es sólo un gigabyte.
+
+1158
+00:54:22,130 --> 00:54:25,640
+Por lo que significa que hay un mil millones
+bytes de memoria disponibles para mí
+
+1159
+00:54:25,640 --> 00:54:29,770
+o 8 mil millones de bits, pero vamos
+para hablar en términos de bytes ahora,
+
+1160
+00:54:29,770 --> 00:54:30,750
+avanzar.
+
+1161
+00:54:30,750 --> 00:54:36,330
+>> Así que lo que esto significa es que esto es
+un byte, esto es otro byte,
+
+1162
+00:54:36,330 --> 00:54:38,680
+este es otro byte,
+y si realmente queríamos
+
+1163
+00:54:38,680 --> 00:54:43,280
+para ser específicos, tendríamos que
+dibujar un billón de pequeños cuadrados.
+
+1164
+00:54:43,280 --> 00:54:44,320
+Pero ¿qué significa eso?
+
+1165
+00:54:44,320 --> 00:54:46,420
+Bueno, permítanme zoom
+en esta imagen.
+
+1166
+00:54:46,420 --> 00:54:50,900
+Si tengo algo que parece
+así ahora, eso es cuatro bytes.
+
+1167
+00:54:50,900 --> 00:54:53,710
+>> Y por lo que podría poner cuatro números aquí.
+
+1168
+00:54:53,710 --> 00:54:54,990
+Uno dos tres CUATRO.
+
+1169
+00:54:54,990 --> 00:55:00,170
+O podría poner cuatro letras o símbolos.
+
+1170
+00:55:00,170 --> 00:55:02,620
+"¡Oye!" podría ir allí,
+porque cada una de las letras,
+
+1171
+00:55:02,620 --> 00:55:04,370
+hemos comentado anteriormente,
+podría ser representado
+
+1172
+00:55:04,370 --> 00:55:06,650
+con ocho bits o ASCII o un byte.
+
+1173
+00:55:06,650 --> 00:55:09,370
+Así, en otras palabras, se puede
+poner 8 mil millones de cosas en el interior
+
+1174
+00:55:09,370 --> 00:55:11,137
+de este un palo de memoria.
+
+1175
+00:55:11,137 --> 00:55:14,345
+Ahora, ¿qué significa para poner las cosas
+con espalda con espalda en la memoria de esta manera?
+
+1176
+00:55:14,345 --> 00:55:17,330
+Esto es lo que un programador
+llamaría una "matriz".
+
+1177
+00:55:17,330 --> 00:55:21,250
+En un programa de ordenador, que no creo
+sobre el hardware subyacente, per se.
+
+1178
+00:55:21,250 --> 00:55:24,427
+Usted sólo piensa en sí mismo como teniendo
+acceso a un total de mil millones de bytes,
+
+1179
+00:55:24,427 --> 00:55:26,010
+y se puede lo que quiera con ella.
+
+1180
+00:55:26,010 --> 00:55:27,880
+Pero por conveniencia
+generalmente es útil
+
+1181
+00:55:27,880 --> 00:55:31,202
+para mantener su derecho de memoria
+uno junto al otro como este.
+
+1182
+00:55:31,202 --> 00:55:33,660
+Así que si hago zoom sobre esto-
+porque desde luego no vamos
+
+1183
+00:55:33,660 --> 00:55:39,310
+para dibujar un billón de pequeños squares--
+vamos a suponer que este tablero representa
+
+1184
+00:55:39,310 --> 00:55:40,610
+que palo de la memoria ahora.
+
+1185
+00:55:40,610 --> 00:55:43,800
+Y sólo voy a señalar a todos los que mi
+marcador termina por darme aquí.
+
+1186
+00:55:43,800 --> 00:55:46,420
+
+1187
+00:55:46,420 --> 00:55:52,300
+Así que ahora tenemos un palo
+de memoria de la placa
+
+1188
+00:55:52,300 --> 00:55:56,400
+eso tiene uno, dos, tres, cuatro, cinco,
+seis, uno, dos, tres, cuatro, cinco, seis,
+
+1189
+00:55:56,400 --> 00:56:01,130
+seven-- así que 42 bytes de
+memoria en el total de la pantalla.
+
+1190
+00:56:01,130 --> 00:56:01,630
+Gracias.
+
+1191
+00:56:01,630 --> 00:56:02,838
+Sí, lo hizo mi aritmética derecha.
+
+1192
+00:56:02,838 --> 00:56:05,120
+Por lo que 42 bytes de memoria aquí.
+
+1193
+00:56:05,120 --> 00:56:06,660
+Entonces, ¿qué significa esto realmente?
+
+1194
+00:56:06,660 --> 00:56:09,830
+Bueno, un programador de computadoras
+en realidad generalmente
+
+1195
+00:56:09,830 --> 00:56:12,450
+pensar en esta memoria como direccionable.
+
+1196
+00:56:12,450 --> 00:56:16,630
+En otras palabras, cada uno de estos
+ubicaciones en la memoria, en hardware,
+
+1197
+00:56:16,630 --> 00:56:18,030
+tiene una dirección única.
+
+1198
+00:56:18,030 --> 00:56:22,020
+>> No es tan complejo como un Brattle
+Square, Cambridge, Mass., 02138.
+
+1199
+00:56:22,020 --> 00:56:23,830
+En cambio, es sólo un número.
+
+1200
+00:56:23,830 --> 00:56:27,930
+Este es el número de bytes cero, esto es
+uno, esto es dos, esto es tres,
+
+1201
+00:56:27,930 --> 00:56:30,327
+y esto es 41.
+
+1202
+00:56:30,327 --> 00:56:30,910
+Espera un minuto.
+
+1203
+00:56:30,910 --> 00:56:32,510
+Pensé que dije hace un momento 42.
+
+1204
+00:56:32,510 --> 00:56:35,050
+
+1205
+00:56:35,050 --> 00:56:37,772
+Empecé a contar desde cero,
+por lo que es realmente correcto.
+
+1206
+00:56:37,772 --> 00:56:40,980
+Ahora no tenemos que llamar la realidad
+como una rejilla, y si lo dibuja como una cuadrícula
+
+1207
+00:56:40,980 --> 00:56:43,520
+Creo que las cosas realmente
+ser un poco engañoso.
+
+1208
+00:56:43,520 --> 00:56:46,650
+¿Qué haría un programador,
+en su propia mente,
+
+1209
+00:56:46,650 --> 00:56:50,310
+en general, pensar en esto
+la memoria como es como una cinta,
+
+1210
+00:56:50,310 --> 00:56:53,340
+como un trozo de cinta adhesiva
+eso es sólo una y otra vez para siempre
+
+1211
+00:56:53,340 --> 00:56:54,980
+o hasta que se agote la memoria.
+
+1212
+00:56:54,980 --> 00:56:59,200
+Así que de una manera más común para dibujar
+y sólo pensar en la memoria
+
+1213
+00:56:59,200 --> 00:57:03,710
+sería que esto es byte cero, uno,
+dos, tres, y después del punto, punto, punto.
+
+1214
+00:57:03,710 --> 00:57:07,650
+Y usted tiene 42 de esos bytes en total, incluso
+aunque físicamente en realidad podría
+
+1215
+00:57:07,650 --> 00:57:09,480
+ser algo más parecido a esto.
+
+1216
+00:57:09,480 --> 00:57:12,850
+>> Así que si usted ahora piensa en su
+la memoria, ya que, al igual que una cinta,
+
+1217
+00:57:12,850 --> 00:57:17,640
+esto es lo que un programador nuevo
+llamaría a una matriz de memoria.
+
+1218
+00:57:17,640 --> 00:57:20,660
+Y cuando se desea almacenar en realidad
+algo en la memoria de un ordenador,
+
+1219
+00:57:20,660 --> 00:57:23,290
+por lo general, se debe de conservar las cosas
+espalda con espalda con espalda con espalda.
+
+1220
+00:57:23,290 --> 00:57:25,010
+Así que hemos estado hablando de números.
+
+1221
+00:57:25,010 --> 00:57:30,880
+Y cuando yo quería para resolver problemas
+como cuatro, uno, tres, dos,
+
+1222
+00:57:30,880 --> 00:57:33,820
+a pesar de que yo estaba dibujando
+sólo el número cuatro, uno, tres,
+
+1223
+00:57:33,820 --> 00:57:39,490
+dos de la mesa, la computadora
+realmente tienen esta configuración en la memoria.
+
+1224
+00:57:39,490 --> 00:57:43,347
+>> Y lo que sería al lado de la
+dos en la memoria del ordenador?
+
+1225
+00:57:43,347 --> 00:57:44,680
+Bueno, no hay una respuesta a eso.
+
+1226
+00:57:44,680 --> 00:57:45,770
+No se sabe muy bien.
+
+1227
+00:57:45,770 --> 00:57:48,200
+Y siempre que la
+equipo no lo necesita,
+
+1228
+00:57:48,200 --> 00:57:51,440
+que no tiene que preocuparse de lo que es el próximo
+a los números que se preocupa por.
+
+1229
+00:57:51,440 --> 00:57:55,130
+Y cuando he dicho antes que una computadora
+sólo puede mirar en una dirección a la vez,
+
+1230
+00:57:55,130 --> 00:57:56,170
+esto es una especie de por qué.
+
+1231
+00:57:56,170 --> 00:57:59,490
+>> No a diferencia de un registro
+jugador y un cabezal de lectura
+
+1232
+00:57:59,490 --> 00:58:03,030
+sólo ser capaz de mirar a una cierta
+ranura en un registro físico de la vieja escuela
+
+1233
+00:58:03,030 --> 00:58:06,500
+a la vez, de manera similar
+puede un ordenador gracias
+
+1234
+00:58:06,500 --> 00:58:09,810
+a su CPU y su
+conjunto de instrucciones Intel,
+
+1235
+00:58:09,810 --> 00:58:12,480
+entre cuyas instrucciones
+se lee de la memoria
+
+1236
+00:58:12,480 --> 00:58:15,590
+o guardar en un memory--
+equipo sólo puede mirar
+
+1237
+00:58:15,590 --> 00:58:19,210
+en un lugar en un tiempo--
+a veces una combinación de ellos,
+
+1238
+00:58:19,210 --> 00:58:21,770
+pero en realidad un solo lugar a la vez.
+
+1239
+00:58:21,770 --> 00:58:24,770
+Así que cuando hacíamos
+estos diversos algoritmos,
+
+1240
+00:58:24,770 --> 00:58:28,110
+No sólo estoy escribiendo en una
+vacuum-- cuatro, uno, tres, dos.
+
+1241
+00:58:28,110 --> 00:58:30,849
+Esos números pertenecen en realidad
+en algún lugar físico en la memoria.
+
+1242
+00:58:30,849 --> 00:58:32,890
+Así que hay diminuto
+transistores o algún tipo
+
+1243
+00:58:32,890 --> 00:58:35,840
+de la electrónica debajo de la
+campana de almacenamiento de estos valores.
+
+1244
+00:58:35,840 --> 00:58:40,460
+>> Y en total, el número de bits
+involucrado en este momento, sólo para ser claros?
+
+1245
+00:58:40,460 --> 00:58:45,580
+Así que esto es de cuatro bytes, o
+ahora es 32 bits en total.
+
+1246
+00:58:45,580 --> 00:58:49,280
+Así que en realidad hay 32 ceros y
+los que componen estas cuatro cosas.
+
+1247
+00:58:49,280 --> 00:58:52,070
+Hay aún más por aquí, pero
+de nuevo, no se preocupan por eso.
+
+1248
+00:58:52,070 --> 00:58:55,120
+>> Así que ahora vamos a pedir otra
+pregunta usando la memoria,
+
+1249
+00:58:55,120 --> 00:58:57,519
+porque que al final
+del día es la varianza.
+
+1250
+00:58:57,519 --> 00:59:00,310
+No importa lo que podríamos hacer con
+el equipo, al final del día
+
+1251
+00:59:00,310 --> 00:59:02,560
+el hardware es todavía el
+misma debajo de la campana.
+
+1252
+00:59:02,560 --> 00:59:04,670
+¿Cómo iba a almacenar una palabra en esta lista?
+
+1253
+00:59:04,670 --> 00:59:09,710
+Pues bien, una palabra en un equipo como
+"¡Oye!" se almacenaría como este.
+
+1254
+00:59:09,710 --> 00:59:12,300
+Y si quería una más larga
+palabra, sólo tiene que
+
+1255
+00:59:12,300 --> 00:59:19,120
+sobrescribir y que decir algo
+así como "hola" y tienda que aquí.
+
+1256
+00:59:19,120 --> 00:59:23,930
+>> Y así, también, esta contigüidad
+es en realidad una ventaja,
+
+1257
+00:59:23,930 --> 00:59:26,530
+debido a que un equipo puede simplemente
+lee de derecha a izquierda.
+
+1258
+00:59:26,530 --> 00:59:28,680
+Pero he aquí una pregunta.
+
+1259
+00:59:28,680 --> 00:59:33,480
+En el contexto de esta palabra,
+h-e-l-l-o, signo de exclamación,
+
+1260
+00:59:33,480 --> 00:59:38,740
+¿Cómo podría el equipo saber dónde está el
+palabra empieza y donde termina la palabra?
+
+1261
+00:59:38,740 --> 00:59:41,690
+
+1262
+00:59:41,690 --> 00:59:43,800
+En el contexto de los números,
+¿Cómo funciona el equipo
+
+1263
+00:59:43,800 --> 00:59:48,396
+saber cuánto tiempo la secuencia de
+números es o dónde comienza?
+
+1264
+00:59:48,396 --> 00:59:50,270
+Bueno, resulta out--
+y no vamos a ir demasiado
+
+1265
+00:59:50,270 --> 00:59:54,970
+en este nivel de detail--
+computadoras mueven la materia alrededor en la memoria
+
+1266
+00:59:54,970 --> 00:59:57,800
+literalmente, a través de estas direcciones.
+
+1267
+00:59:57,800 --> 01:00:02,080
+Así que en un ordenador, si estás
+escribir código para almacenar cosas
+
+1268
+01:00:02,080 --> 01:00:05,800
+como las palabras, lo que está
+haciendo en realidad está escribiendo
+
+1269
+01:00:05,800 --> 01:00:11,320
+expresiones que recuerdan en donde
+la memoria del ordenador estas palabras son.
+
+1270
+01:00:11,320 --> 01:00:14,370
+Así que déjame hacer un muy,
+ejemplo muy sencillo.
+
+1271
+01:00:14,370 --> 01:00:18,260
+>> Voy a seguir adelante y
+abrir un programa de texto simple,
+
+1272
+01:00:18,260 --> 01:00:20,330
+y yo voy a crear
+un archivo llamado hola.c.
+
+1273
+01:00:20,330 --> 01:00:22,849
+La mayor parte de esta información,
+No voy a entrar en gran detalle,
+
+1274
+01:00:22,849 --> 01:00:25,140
+pero voy a escribir una
+programa en el mismo idioma,
+
+1275
+01:00:25,140 --> 01:00:31,140
+C. Esto es mucho más intimidante,
+Yo diría, que rascar,
+
+1276
+01:00:31,140 --> 01:00:32,490
+pero es muy similar en espíritu.
+
+1277
+01:00:32,490 --> 01:00:34,364
+De hecho, estos rizado
+braces-- puedas tipo de
+
+1278
+01:00:34,364 --> 01:00:37,820
+pensar en lo que he hecho como este.
+
+1279
+01:00:37,820 --> 01:00:39,240
+>> Vamos a hacer esto, en realidad.
+
+1280
+01:00:39,240 --> 01:00:45,100
+Cuando hace clic en bandera verde,
+Haz lo siguiente.
+
+1281
+01:00:45,100 --> 01:00:50,210
+Quiero imprimir "hola".
+
+1282
+01:00:50,210 --> 01:00:51,500
+Así que esto es ahora pseudocódigo.
+
+1283
+01:00:51,500 --> 01:00:53,000
+Soy una especie de desdibujar las líneas.
+
+1284
+01:00:53,000 --> 01:00:56,750
+En C, este idioma estoy hablando
+aproximadamente, esta línea de impresión hola
+
+1285
+01:00:56,750 --> 01:01:01,940
+en realidad se convierte en "printf" con
+algunos paréntesis y un punto y coma.
+
+1286
+01:01:01,940 --> 01:01:03,480
+>> Pero es la misma idea exacta.
+
+1287
+01:01:03,480 --> 01:01:06,730
+Y esto muy fácil de usar
+"Cuando se hace clic en bandera verde" se convierte
+
+1288
+01:01:06,730 --> 01:01:10,182
+el más arcano "void main int."
+
+1289
+01:01:10,182 --> 01:01:12,890
+Y esto realmente sin ninguna asignación,
+así que sólo voy a ignorar eso.
+
+1290
+01:01:12,890 --> 01:01:17,210
+Sin embargo, las llaves son como el
+piezas del rompecabezas curvas de este tipo.
+
+1291
+01:01:17,210 --> 01:01:18,700
+>> Por lo que puede tipo de adivinar.
+
+1292
+01:01:18,700 --> 01:01:22,357
+Incluso si nunca has programado antes,
+¿qué hace este programa probablemente hacer?
+
+1293
+01:01:22,357 --> 01:01:25,560
+
+1294
+01:01:25,560 --> 01:01:28,000
+Probablemente imprime hola
+con un signo de exclamación.
+
+1295
+01:01:28,000 --> 01:01:29,150
+>> Así que vamos a tratar de eso.
+
+1296
+01:01:29,150 --> 01:01:30,800
+Voy a guardarlo.
+
+1297
+01:01:30,800 --> 01:01:34,000
+Y esto es, de nuevo, una muy
+entorno de la vieja escuela.
+
+1298
+01:01:34,000 --> 01:01:35,420
+No puedo hacer clic, no puedo arrastrar.
+
+1299
+01:01:35,420 --> 01:01:36,910
+Tengo que escribir comandos.
+
+1300
+01:01:36,910 --> 01:01:41,320
+Por eso quiero correr mi programa, por lo
+Yo podría hacer esto, al igual que hola.c.
+
+1301
+01:01:41,320 --> 01:01:42,292
+Ese es el archivo me encontré.
+
+1302
+01:01:42,292 --> 01:01:43,500
+Pero espera, que me falta un paso.
+
+1303
+01:01:43,500 --> 01:01:46,470
+¿Qué dijimos es una condición necesaria
+paso para un lenguaje como C?
+
+1304
+01:01:46,470 --> 01:01:49,470
+He fuente acaba de escribir
+código, pero ¿qué necesito?
+
+1305
+01:01:49,470 --> 01:01:50,670
+Sí, necesito un compilador.
+
+1306
+01:01:50,670 --> 01:01:57,670
+Así que en mi Mac aquí, tengo una
+programa llamado GCC, GNU compilador de C,
+
+1307
+01:01:57,670 --> 01:02:03,990
+lo que me permite hacer esto- a su vez
+mi código fuente en, lo llamaremos,
+
+1308
+01:02:03,990 --> 01:02:04,930
+codigo de maquina.
+
+1309
+01:02:04,930 --> 01:02:10,180
+>> Y puedo ver que,
+de nuevo, de la siguiente manera, estos
+
+1310
+01:02:10,180 --> 01:02:14,090
+son los ceros y unos I solo
+creado a partir de mi código fuente,
+
+1311
+01:02:14,090 --> 01:02:15,730
+todos los ceros y unos.
+
+1312
+01:02:15,730 --> 01:02:17,770
+Y si quiero correr
+mi program-- sucede
+
+1313
+01:02:17,770 --> 01:02:23,010
+para ser llamado a.out para
+reasons-- histórica "hola".
+
+1314
+01:02:23,010 --> 01:02:24,070
+Puedo correr de nuevo.
+
+1315
+01:02:24,070 --> 01:02:25,690
+Hola hola hola.
+
+1316
+01:02:25,690 --> 01:02:27,430
+Y parece que funciona.
+
+1317
+01:02:27,430 --> 01:02:31,000
+>> Pero eso significa que en algún lugar de mi
+la memoria del ordenador son las palabras
+
+1318
+01:02:31,000 --> 01:02:35,279
+h-e-l-l-o, signo de exclamación.
+
+1319
+01:02:35,279 --> 01:02:38,070
+Y resulta que, al igual que un aparte,
+lo que un ordenador haría normalmente
+
+1320
+01:02:38,070 --> 01:02:40,550
+hacer para que sepa donde
+las cosas empiezan y es end--
+
+1321
+01:02:40,550 --> 01:02:42,460
+va a poner un símbolo especial aquí.
+
+1322
+01:02:42,460 --> 01:02:46,064
+Y la convención es poner el
+número cero al final de una palabra
+
+1323
+01:02:46,064 --> 01:02:48,230
+para que sepa donde
+en realidad termina, por lo que se
+
+1324
+01:02:48,230 --> 01:02:52,750
+no seguir imprimiendo más y más
+caracteres de los que en realidad se proponen.
+
+1325
+01:02:52,750 --> 01:02:55,400
+>> Pero la comida para llevar aquí, incluso
+aunque esto es bastante arcano,
+
+1326
+01:02:55,400 --> 01:02:58,140
+es que es en última instancia,
+relativamente simple.
+
+1327
+01:02:58,140 --> 01:03:04,550
+Se le dio una especie de cinta, un espacio en blanco
+espacio en el que puede escribir letras.
+
+1328
+01:03:04,550 --> 01:03:07,150
+Usted simplemente tiene que tener una
+símbolo especial, al igual que de manera arbitraria
+
+1329
+01:03:07,150 --> 01:03:10,316
+el número cero, para poner al final de
+sus palabras para que la computadora sabe,
+
+1330
+01:03:10,316 --> 01:03:13,410
+Oh, debería detener la impresión después de
+Veo el signo de exclamación.
+
+1331
+01:03:13,410 --> 01:03:16,090
+Porque lo siguiente que hay
+es un valor ASCII de cero,
+
+1332
+01:03:16,090 --> 01:03:19,125
+o el carácter nulo como
+alguien lo llamaría.
+
+1333
+01:03:19,125 --> 01:03:21,500
+Pero hay una especie de un problema
+aquí, y vamos a volver de nuevo
+
+1334
+01:03:21,500 --> 01:03:23,320
+a los números por un momento.
+
+1335
+01:03:23,320 --> 01:03:28,720
+Supongamos que hago, de hecho,
+dispondrá de un conjunto de números,
+
+1336
+01:03:28,720 --> 01:03:30,730
+y supongamos que la
+programa que estoy escribiendo es
+
+1337
+01:03:30,730 --> 01:03:34,680
+como un libro de calificaciones de un maestro
+y un aula de profesores.
+
+1338
+01:03:34,680 --> 01:03:38,720
+Y este programa le permite
+para escribir en las puntuaciones de los estudiantes
+
+1339
+01:03:38,720 --> 01:03:39,960
+en las pruebas.
+
+1340
+01:03:39,960 --> 01:03:43,750
+Y supongamos que el estudiante obtiene
+100 en su primer concurso, tal vez
+
+1341
+01:03:43,750 --> 01:03:49,920
+como un 80 en la próxima, a continuación, una
+75, luego a 90 en la cuarta prueba.
+
+1342
+01:03:49,920 --> 01:03:54,150
+>> Así que en este punto de la historia,
+la matriz es de un tamaño cuatro.
+
+1343
+01:03:54,150 --> 01:03:58,470
+No hay absolutamente más memoria en el
+ordenador, pero la matriz, por así decirlo,
+
+1344
+01:03:58,470 --> 01:04:00,350
+es de tamaño cuatro.
+
+1345
+01:04:00,350 --> 01:04:06,060
+Supongamos ahora que el profesor quiere
+para asignar una quinta prueba para la clase.
+
+1346
+01:04:06,060 --> 01:04:08,510
+Bueno, una de las cosas que él
+o ella va a tener que hacer
+
+1347
+01:04:08,510 --> 01:04:10,650
+ahora es almacenar un valor adicional aquí.
+
+1348
+01:04:10,650 --> 01:04:15,490
+Pero si la matriz tiene el maestro
+creado en este programa es de tamaño para,
+
+1349
+01:04:15,490 --> 01:04:22,440
+uno de los problemas con una matriz que es
+no se puede simplemente seguir añadiendo a la memoria.
+
+1350
+01:04:22,440 --> 01:04:26,470
+Porque lo que si otra parte de la
+programa tiene la palabra "hey" justo ahí?
+
+1351
+01:04:26,470 --> 01:04:29,650
+>> En otras palabras, la memoria puede ser
+utilizado para cualquier cosa en un programa.
+
+1352
+01:04:29,650 --> 01:04:33,250
+Y si de antemano Tecleé, hey,
+Quiero entrada de cuatro puntuaciones de las pruebas,
+
+1353
+01:04:33,250 --> 01:04:34,784
+que podrían ir aquí y aquí.
+
+1354
+01:04:34,784 --> 01:04:37,700
+Y si cambia de parecer rápidamente
+más tarde y decir que quiero un quinto concurso
+
+1355
+01:04:37,700 --> 01:04:40,872
+puntuación, no se puede simplemente
+puesto que más le convenga,
+
+1356
+01:04:40,872 --> 01:04:42,580
+porque lo que si esta
+se utiliza la memoria
+
+1357
+01:04:42,580 --> 01:04:45,990
+por algo else-- algún otro programa
+o alguna otra característica del programa
+
+1358
+01:04:45,990 --> 01:04:46,910
+que se está ejecutando?
+
+1359
+01:04:46,910 --> 01:04:50,650
+Así que hay que pensar de antemano
+la forma en la que desea almacenar sus datos,
+
+1360
+01:04:50,650 --> 01:04:54,480
+porque ahora se ha pintado
+a sí mismo en una esquina digital.
+
+1361
+01:04:54,480 --> 01:04:57,280
+>> Por lo que un profesor puede en cambio
+decir al escribir un programa
+
+1362
+01:04:57,280 --> 01:04:59,360
+para almacenar su
+grados, ¿saben qué?
+
+1363
+01:04:59,360 --> 01:05:04,180
+Voy a solicitar,
+al escribir mi programa,
+
+1364
+01:05:04,180 --> 01:05:12,070
+Quiero que cero, uno, dos, tres,
+cuatro, cinco, seis, ocho grados en total.
+
+1365
+01:05:12,070 --> 01:05:15,320
+Así que uno, dos, tres, cuatro,
+cinco seis SIETE OCHO.
+
+1366
+01:05:15,320 --> 01:05:18,612
+El profesor puede simplemente sobreasigne
+la memoria al escribir su programa
+
+1367
+01:05:18,612 --> 01:05:19,570
+y decir, ¿saben qué?
+
+1368
+01:05:19,570 --> 01:05:22,236
+Nunca voy a asignar más
+de ocho pruebas en un semestre.
+
+1369
+01:05:22,236 --> 01:05:23,130
+Eso es una locura.
+
+1370
+01:05:23,130 --> 01:05:24,470
+Nunca voy a asignar ese.
+
+1371
+01:05:24,470 --> 01:05:28,270
+Así que de esta manera él o ella tiene la
+flexibilidad a la puntuación de tienda de los estudiantes,
+
+1372
+01:05:28,270 --> 01:05:33,010
+como 75, 90, y tal vez uno adicional donde
+el estudiante tiene el crédito adicional, 105.
+
+1373
+01:05:33,010 --> 01:05:36,130
+>> Pero si el maestro nunca
+utiliza estos tres espacios,
+
+1374
+01:05:36,130 --> 01:05:38,860
+hay una comida para llevar intuitiva aquí.
+
+1375
+01:05:38,860 --> 01:05:41,410
+Él o ella está perdiendo espacio.
+
+1376
+01:05:41,410 --> 01:05:44,790
+Así, en otras palabras, hay una
+desventaja común en la programación
+
+1377
+01:05:44,790 --> 01:05:48,241
+donde puede asignar
+exactamente como la cantidad de memoria que desee,
+
+1378
+01:05:48,241 --> 01:05:51,490
+al alza de los cuales es que eres muy
+efficient-- no estás siendo un desperdicio
+
+1379
+01:05:51,490 --> 01:05:54,640
+en todo-- pero la desventaja de los cuales
+es lo que si cambia de opinión cuando
+
+1380
+01:05:54,640 --> 01:05:58,780
+usando el programa que desea almacenar
+más datos que los que originalmente previsto.
+
+1381
+01:05:58,780 --> 01:06:03,030
+>> Así que tal vez la solución es, entonces,
+escribir sus programas de tal manera
+
+1382
+01:06:03,030 --> 01:06:05,605
+que utilizan más memoria
+de lo que realmente necesitan.
+
+1383
+01:06:05,605 --> 01:06:07,730
+De esta manera no vas
+a ejecutar en ese problema,
+
+1384
+01:06:07,730 --> 01:06:09,730
+pero estás siendo un desperdicio.
+
+1385
+01:06:09,730 --> 01:06:12,960
+Y cuanto más memoria utiliza su programa,
+como dijimos ayer, menos
+
+1386
+01:06:12,960 --> 01:06:15,410
+la memoria que está disponible
+para otros programas,
+
+1387
+01:06:15,410 --> 01:06:18,790
+cuanto antes el equipo podría ralentizar
+a causa de la memoria virtual.
+
+1388
+01:06:18,790 --> 01:06:22,670
+Y así, la solución ideal podría ser qué?
+
+1389
+01:06:22,670 --> 01:06:24,610
+>> Bajo-se reparten parece mal.
+
+1390
+01:06:24,610 --> 01:06:27,030
+Sobre-el que se reparten parece mal.
+
+1391
+01:06:27,030 --> 01:06:31,120
+Entonces, ¿qué podría ser una solución mejor?
+
+1392
+01:06:31,120 --> 01:06:32,390
+La reasignación.
+
+1393
+01:06:32,390 --> 01:06:33,590
+Ser más dinámico.
+
+1394
+01:06:33,590 --> 01:06:37,520
+No se obligue a elegir un
+a priori, al principio, lo que quieren.
+
+1395
+01:06:37,520 --> 01:06:41,370
+Y ciertamente no sobreasigne,
+para que no sea un desperdicio.
+
+1396
+01:06:41,370 --> 01:06:45,770
+>> Y así, para lograr ese objetivo,
+necesitar descargar a esta estructura de datos,
+
+1397
+01:06:45,770 --> 01:06:48,100
+por así decirlo, de distancia.
+
+1398
+01:06:48,100 --> 01:06:51,080
+Y así lo que un programador
+normalmente utilizará
+
+1399
+01:06:51,080 --> 01:06:55,940
+es algo que se llama no es una
+matriz, pero una lista enlazada.
+
+1400
+01:06:55,940 --> 01:07:00,860
+En otras palabras, él o ella
+comenzar a pensar en su memoria
+
+1401
+01:07:00,860 --> 01:07:05,280
+como una especie de forma que se
+puede sacar de la siguiente manera.
+
+1402
+01:07:05,280 --> 01:07:08,520
+Si quiero almacenar un número en
+un program-- por lo que es de septiembre
+
+1403
+01:07:08,520 --> 01:07:12,600
+Me he dado a mis estudiantes un cuestionario; yo quiero
+para almacenar la primera prueba de los estudiantes,
+
+1404
+01:07:12,600 --> 01:07:16,220
+y consiguieron un 100 en it-- I
+voy a pedir a mi equipo,
+
+1405
+01:07:16,220 --> 01:07:19,540
+por medio del programa que he
+por escrito, por un trozo de memoria.
+
+1406
+01:07:19,540 --> 01:07:22,570
+Y voy a almacenar el
+número 100 en el mismo, y eso es todo.
+
+1407
+01:07:22,570 --> 01:07:24,820
+>> A continuación, unas semanas más tarde
+cuando llego a mi segunda prueba,
+
+1408
+01:07:24,820 --> 01:07:27,890
+y es el momento de escribir
+en el que el 90%, voy
+
+1409
+01:07:27,890 --> 01:07:32,129
+preguntar al equipo, hey, ordenador,
+puedo tener otro trozo de memoria?
+
+1410
+01:07:32,129 --> 01:07:34,170
+Se me va a dar a este
+trozo vacío de la memoria.
+
+1411
+01:07:34,170 --> 01:07:39,370
+Voy a poner en el número 90,
+pero en mi programa de una manera u otro--
+
+1412
+01:07:39,370 --> 01:07:42,100
+y no vamos a preocuparse por
+la sintaxis para esto- que necesito
+
+1413
+01:07:42,100 --> 01:07:44,430
+de alguna manera encadenar estas cosas juntas.
+
+1414
+01:07:44,430 --> 01:07:47,430
+Y les voy a encadenar con
+lo que parece una sola flecha.
+
+1415
+01:07:47,430 --> 01:07:50,050
+>> El tercer cuestionario que aparece,
+Voy a decir, oye, ordenador,
+
+1416
+01:07:50,050 --> 01:07:51,680
+dame otra parte de la memoria.
+
+1417
+01:07:51,680 --> 01:07:54,660
+Y voy a poner en el suelo
+lo que fuera, al igual que 75,
+
+1418
+01:07:54,660 --> 01:07:56,920
+y tengo que esta cadena de
+juntos ahora de alguna manera.
+
+1419
+01:07:56,920 --> 01:08:00,290
+Cuarta prueba viene, y tal vez
+eso es hacia el final del semestre.
+
+1420
+01:08:00,290 --> 01:08:03,140
+Y en ese momento mi programa
+podría ser el uso de la memoria
+
+1421
+01:08:03,140 --> 01:08:05,540
+por todo el lugar, todo físicamente.
+
+1422
+01:08:05,540 --> 01:08:08,170
+Y así, sólo por diversión, yo soy
+va a sacar esta vuelta
+
+1423
+01:08:08,170 --> 01:08:11,260
+quiz-- me olvido de lo que era; yo
+pensar que tal vez un 80 o algo--
+
+1424
+01:08:11,260 --> 01:08:12,500
+hasta aquí.
+
+1425
+01:08:12,500 --> 01:08:15,920
+>> Pero eso está bien, porque pictóricamente
+Voy a trazar esta línea.
+
+1426
+01:08:15,920 --> 01:08:19,063
+En otras palabras, en la realidad,
+en el hardware del ordenador,
+
+1427
+01:08:19,063 --> 01:08:20,979
+la primera puntuación podría
+terminan aquí porque es
+
+1428
+01:08:20,979 --> 01:08:22,529
+justo al comienzo del semestre.
+
+1429
+01:08:22,529 --> 01:08:25,810
+El próximo podría terminar aquí
+porque un poco de tiempo ha pasado
+
+1430
+01:08:25,810 --> 01:08:27,210
+y el programa sigue funcionando.
+
+1431
+01:08:27,210 --> 01:08:30,060
+La puntuación siguiente, que era
+un 75, podría ser aquí.
+
+1432
+01:08:30,060 --> 01:08:33,420
+Y la última puntuación podría ser
+un 80, que es por aquí.
+
+1433
+01:08:33,420 --> 01:08:38,729
+>> Así que, en realidad, físicamente, esto podría ser
+lo que la memoria de su ordenador se parece.
+
+1434
+01:08:38,729 --> 01:08:41,569
+Pero esto no es un trastorno mental útil
+paradigma para un programador de computadoras.
+
+1435
+01:08:41,569 --> 01:08:44,649
+¿Por qué debe tener cuidado cuando el
+diablos sus datos está terminando para arriba?
+
+1436
+01:08:44,649 --> 01:08:46,200
+Lo que desea es almacenar datos.
+
+1437
+01:08:46,200 --> 01:08:49,390
+>> Esto es algo así como nuestra discusión
+antes de sacar el cubo.
+
+1438
+01:08:49,390 --> 01:08:52,200
+¿Por qué te importa lo
+el ángulo es del cubo
+
+1439
+01:08:52,200 --> 01:08:53,740
+y cómo se tiene que dar vuelta a dibujar?
+
+1440
+01:08:53,740 --> 01:08:54,950
+Lo que desea es un cubo.
+
+1441
+01:08:54,950 --> 01:08:57,359
+Del mismo modo aquí,
+sólo quieren libro de calificaciones.
+
+1442
+01:08:57,359 --> 01:08:59,559
+Lo que desea es pensar
+esto como una lista de números.
+
+1443
+01:08:59,559 --> 01:09:01,350
+A quién le importa cómo es
+implementado en hardware?
+
+1444
+01:09:01,350 --> 01:09:05,180
+>> Así que la abstracción ahora
+Es esta imagen aquí.
+
+1445
+01:09:05,180 --> 01:09:07,580
+Esta es una lista vinculada, como
+un programador lo llamaría,
+
+1446
+01:09:07,580 --> 01:09:10,640
+en la medida en que tiene una
+lista, obviamente, de los números.
+
+1447
+01:09:10,640 --> 01:09:14,990
+Pero está vinculado pictóricamente
+por medio de estas flechas,
+
+1448
+01:09:14,990 --> 01:09:18,510
+y todas estas flechas debajo son--
+el capó, si tienes curiosidad,
+
+1449
+01:09:18,510 --> 01:09:23,210
+recordar que nuestro hardware físico tiene
+direcciones cero, uno, dos, tres, cuatro.
+
+1450
+01:09:23,210 --> 01:09:28,465
+Todas estas flechas son es como un mapa
+o direcciones, en la que si ahora 90 es--
+
+1451
+01:09:28,465 --> 01:09:29,090
+Tengo que contar.
+
+1452
+01:09:29,090 --> 01:09:31,750
+>> Cero, uno, dos, tres,
+cuatro, cinco, seis, siete.
+
+1453
+01:09:31,750 --> 01:09:35,640
+Parece que el 90 es en
+memoria de número de dirección de siete.
+
+1454
+01:09:35,640 --> 01:09:38,460
+Todas estas flechas son es
+como un pequeño trozo de papel
+
+1455
+01:09:38,460 --> 01:09:42,439
+que es dar instrucciones a la
+programa que dice sigue este mapa
+
+1456
+01:09:42,439 --> 01:09:43,880
+para llegar al lugar de siete.
+
+1457
+01:09:43,880 --> 01:09:46,680
+Y allí se encuentra el
+segunda puntuación de la prueba de Student.
+
+1458
+01:09:46,680 --> 01:09:52,100
+Mientras tanto, el 75-- si continúo esto,
+esto es siete, ocho, nueve, 10, 11, 12,
+
+1459
+01:09:52,100 --> 01:09:54,240
+13, 14, 15.
+
+1460
+01:09:54,240 --> 01:09:59,080
+>> Esta otra flecha representa solo
+un mapa de ubicación de la memoria 15.
+
+1461
+01:09:59,080 --> 01:10:02,550
+Pero, de nuevo, el programador hace generalmente
+no se preocupan por este nivel de detalle.
+
+1462
+01:10:02,550 --> 01:10:05,530
+Y en la mayoría de cada programación
+lenguaje de hoy, el programador
+
+1463
+01:10:05,530 --> 01:10:10,490
+ni siquiera saber dónde en la memoria
+estos números son en realidad.
+
+1464
+01:10:10,490 --> 01:10:14,830
+Todo lo que él o ella tiene que tener en cuenta es
+que de alguna manera están vinculados entre sí
+
+1465
+01:10:14,830 --> 01:10:18,390
+en una estructura de datos como este.
+
+1466
+01:10:18,390 --> 01:10:21,580
+>> Pero resulta que no
+para conseguir demasiado técnico.
+
+1467
+01:10:21,580 --> 01:10:27,430
+Pero el hecho de que tal vez puede
+permitirse el lujo de tener esta discusión aquí,
+
+1468
+01:10:27,430 --> 01:10:33,630
+Suponemos que volvamos
+esta cuestión aquí de una matriz.
+
+1469
+01:10:33,630 --> 01:10:35,780
+Vamos a ver si nos arrepentimos ir aquí.
+
+1470
+01:10:35,780 --> 01:10:42,950
+Esto es 100, 90, 75, y 80.
+
+1471
+01:10:42,950 --> 01:10:44,980
+>> Permítanme brevemente hacer esta afirmación.
+
+1472
+01:10:44,980 --> 01:10:48,980
+Esta es una matriz, y de nuevo, la
+característica sobresaliente de una matriz
+
+1473
+01:10:48,980 --> 01:10:52,400
+es que todos sus datos están de nuevo a
+espalda con espalda en memory-- literalmente
+
+1474
+01:10:52,400 --> 01:10:56,830
+Un byte o tal vez cuatro bytes,
+un número fijo de bytes de distancia.
+
+1475
+01:10:56,830 --> 01:11:00,710
+En una lista enlazada, que podríamos llamar la
+así, debajo de la campana que
+
+1476
+01:11:00,710 --> 01:11:02,000
+sabe dónde está eso?
+
+1477
+01:11:02,000 --> 01:11:03,630
+Ni siquiera se necesita para fluir como este.
+
+1478
+01:11:03,630 --> 01:11:06,050
+Algunos de los datos podría ser
+de vuelta a la izquierda hasta allí.
+
+1479
+01:11:06,050 --> 01:11:07,530
+Ni siquiera sabe.
+
+1480
+01:11:07,530 --> 01:11:15,430
+>> Y así, con una matriz, que tiene una
+característica conocida como acceso aleatorio.
+
+1481
+01:11:15,430 --> 01:11:20,570
+Y lo que los medios de acceso aleatorio es
+de que el equipo puede saltar al instante
+
+1482
+01:11:20,570 --> 01:11:22,730
+a cualquier lugar de una matriz.
+
+1483
+01:11:22,730 --> 01:11:23,580
+¿Por qué?
+
+1484
+01:11:23,580 --> 01:11:26,000
+Debido a que la computadora sabe
+que la primera ubicación es
+
+1485
+01:11:26,000 --> 01:11:29,540
+cero, uno, dos, y tres.
+
+1486
+01:11:29,540 --> 01:11:33,890
+>> Y así que si quieres ir de
+este elemento al siguiente elemento,
+
+1487
+01:11:33,890 --> 01:11:36,099
+que, literalmente, en el
+la mente del ordenador, sólo tiene que añadir uno.
+
+1488
+01:11:36,099 --> 01:11:39,140
+Si quieres ir al tercer elemento,
+sólo tiene que añadir uno-- siguiente elemento, simplemente
+
+1489
+01:11:39,140 --> 01:11:40,290
+Agrega uno.
+
+1490
+01:11:40,290 --> 01:11:42,980
+Sin embargo, en esta versión
+de la historia, suponga
+
+1491
+01:11:42,980 --> 01:11:46,080
+el equipo está buscando actualmente
+en o por tratar con el número 100.
+
+1492
+01:11:46,080 --> 01:11:49,770
+¿Cómo se llega a la siguiente
+grado en el libro de calificaciones?
+
+1493
+01:11:49,770 --> 01:11:52,560
+>> Usted tiene que tomar siete
+pasos, que es arbitrario.
+
+1494
+01:11:52,560 --> 01:11:58,120
+Para llegar a la siguiente, hay que
+tomar otros ocho pasos para llegar a 15.
+
+1495
+01:11:58,120 --> 01:12:02,250
+En otras palabras, no es una
+distancia constante entre los números,
+
+1496
+01:12:02,250 --> 01:12:04,857
+y por lo tanto sólo se necesita la
+equipo más tiempo es el punto.
+
+1497
+01:12:04,857 --> 01:12:06,940
+El equipo tiene que buscar
+a través de la memoria con el fin
+
+1498
+01:12:06,940 --> 01:12:08,990
+para encontrar lo que estás buscando.
+
+1499
+01:12:08,990 --> 01:12:14,260
+>> Así, mientras una matriz tiende a ser una
+structure-- rápida de datos, ya que
+
+1500
+01:12:14,260 --> 01:12:17,610
+literalmente, puede simplemente hacer aritmética simple
+y obtener en la que desea mediante la adición de uno,
+
+1501
+01:12:17,610 --> 01:12:21,300
+instance-- de una lista enlazada,
+se sacrifica esa característica.
+
+1502
+01:12:21,300 --> 01:12:24,020
+No se puede simplemente pasar de la primera
+la segunda a tercera a la cuarta.
+
+1503
+01:12:24,020 --> 01:12:25,240
+Usted tiene que seguir el mapa.
+
+1504
+01:12:25,240 --> 01:12:28,160
+Usted tiene que tomar más medidas
+para llegar a esos valores, los cuales
+
+1505
+01:12:28,160 --> 01:12:30,230
+parecería ser la adición de un costo.
+
+1506
+01:12:30,230 --> 01:12:35,910
+Así que estamos pagando un precio, pero lo que se
+la característica de que Dan estaba buscando aquí?
+
+1507
+01:12:35,910 --> 01:12:38,110
+¿Cómo es una lista enlazada
+al parecer, nos permite hacer,
+
+1508
+01:12:38,110 --> 01:12:40,240
+que fue el origen de
+esta historia en particular?
+
+1509
+01:12:40,240 --> 01:12:43,250
+
+1510
+01:12:43,250 --> 01:12:43,830
+>> Exactamente.
+
+1511
+01:12:43,830 --> 01:12:46,220
+Un tamaño de dinámica a la misma.
+
+1512
+01:12:46,220 --> 01:12:48,040
+Podemos añadir a esta lista.
+
+1513
+01:12:48,040 --> 01:12:51,430
+Incluso podemos reducir la lista, por lo
+que sólo estamos utilizando tanta memoria
+
+1514
+01:12:51,430 --> 01:12:55,560
+ya que en realidad queremos y por lo
+nunca estamos sobre-el que se reparten.
+
+1515
+01:12:55,560 --> 01:12:58,470
+>> Ahora acaba de ser muy puntillosos,
+hay un costo oculto.
+
+1516
+01:12:58,470 --> 01:13:01,980
+Así que no debe dejar a convencer
+que este es un compromiso convincente.
+
+1517
+01:13:01,980 --> 01:13:04,190
+Hay otro coste oculto aquí.
+
+1518
+01:13:04,190 --> 01:13:06,550
+El beneficio, para ser claro,
+es que tenemos dinamismo.
+
+1519
+01:13:06,550 --> 01:13:10,359
+Si quiero otro elemento, sólo puede
+elaborar y poner un número en ese país.
+
+1520
+01:13:10,359 --> 01:13:12,150
+Y entonces puedo vincularlo
+con una imagen aquí,
+
+1521
+01:13:12,150 --> 01:13:14,970
+mientras que aquí, de nuevo, si tengo
+mí mismo pintado en una esquina,
+
+1522
+01:13:14,970 --> 01:13:19,410
+si algo más ya está utilizando
+la memoria aquí, estoy fuera de suerte.
+
+1523
+01:13:19,410 --> 01:13:21,700
+Yo mismo he pintado en la esquina.
+
+1524
+01:13:21,700 --> 01:13:24,390
+>> Pero lo que es lo oculto
+costaría en esta imagen?
+
+1525
+01:13:24,390 --> 01:13:27,690
+No es sólo la cantidad
+de tiempo que se tarda
+
+1526
+01:13:27,690 --> 01:13:29,870
+para ir desde aquí hasta aquí,
+que es siete pasos, entonces
+
+1527
+01:13:29,870 --> 01:13:32,820
+ocho pasos, que es más de uno.
+
+1528
+01:13:32,820 --> 01:13:34,830
+¿Cuál es otra costo oculto?
+
+1529
+01:13:34,830 --> 01:13:35,440
+No sólo el tiempo.
+
+1530
+01:13:35,440 --> 01:13:44,790
+
+1531
+01:13:44,790 --> 01:13:49,940
+Información adicional está
+necesarias para lograr esta imagen.
+
+1532
+01:13:49,940 --> 01:13:53,210
+>> Sí, ese mapa, esos pequeños trozos de
+papel, como sigo describiéndolos como.
+
+1533
+01:13:53,210 --> 01:13:55,650
+Estos arrows-- los que no son libres.
+
+1534
+01:13:55,650 --> 01:13:57,660
+Un computer-- sabes
+lo que tiene un ordenador.
+
+1535
+01:13:57,660 --> 01:13:58,790
+Cuenta con ceros y unos.
+
+1536
+01:13:58,790 --> 01:14:03,170
+Si desea representar una flecha o una
+mapa o un número, se necesita algo de memoria.
+
+1537
+01:14:03,170 --> 01:14:05,950
+Así que el otro precio que
+pagar por una lista enlazada,
+
+1538
+01:14:05,950 --> 01:14:09,070
+una informática común
+de recursos, es también el espacio.
+
+1539
+01:14:09,070 --> 01:14:11,710
+>> Y de hecho es así, por lo común,
+entre las compensaciones
+
+1540
+01:14:11,710 --> 01:14:15,580
+en el diseño de la ingeniería de software
+sistemas requiere tiempo y espacio--
+
+1541
+01:14:15,580 --> 01:14:18,596
+son dos de sus ingredientes, dos
+de sus ingredientes más costosos.
+
+1542
+01:14:18,596 --> 01:14:21,220
+Esto me está costando más tiempo
+porque tengo que sigue este mapa,
+
+1543
+01:14:21,220 --> 01:14:25,730
+Pero también me cuesta más espacio
+porque tengo que mantener este mapa alrededor.
+
+1544
+01:14:25,730 --> 01:14:28,730
+Por lo que la esperanza, como hemos tipo de
+discutido sobre el ayer y hoy,
+
+1545
+01:14:28,730 --> 01:14:31,720
+es que los beneficios
+serán mayores que los costos.
+
+1546
+01:14:31,720 --> 01:14:33,870
+>> Pero no hay una solución obvia aquí.
+
+1547
+01:14:33,870 --> 01:14:35,870
+Tal vez es mejor--
+a la rápida y sucia,
+
+1548
+01:14:35,870 --> 01:14:38,660
+como Kareem propuso antes les hablé
+a tirar de memoria en el problema.
+
+1549
+01:14:38,660 --> 01:14:42,520
+Acaba de comprar más memoria, pensar menos
+tendido sobre la solución del problema,
+
+1550
+01:14:42,520 --> 01:14:44,595
+y resolverlo de una manera más fácil.
+
+1551
+01:14:44,595 --> 01:14:46,720
+Y, de hecho antes, cuando
+hablamos acerca de las compensaciones,
+
+1552
+01:14:46,720 --> 01:14:49,190
+no había espacio en
+equipo y la hora.
+
+1553
+01:14:49,190 --> 01:14:51,810
+Era tiempo de desarrollo, lo cual
+es un recurso más.
+
+1554
+01:14:51,810 --> 01:14:54,829
+>> Así que de nuevo, es este acto de equilibrio
+tratando de decidir cuál de esas cosas
+
+1555
+01:14:54,829 --> 01:14:55,870
+¿está dispuesto a gastar?
+
+1556
+01:14:55,870 --> 01:14:57,380
+¿Qué es el menos costoso?
+
+1557
+01:14:57,380 --> 01:15:01,040
+Que produce los mejores resultados?
+
+1558
+01:15:01,040 --> 01:15:01,540
+¿Sí?
+
+1559
+01:15:01,540 --> 01:15:11,310
+
+1560
+01:15:11,310 --> 01:15:12,580
+>> En efecto.
+
+1561
+01:15:12,580 --> 01:15:15,970
+En este caso, si estás
+en representación de números en el maps--
+
+1562
+01:15:15,970 --> 01:15:18,820
+estos son llamados en muchos idiomas
+"punteros" o "direcciones" -
+
+1563
+01:15:18,820 --> 01:15:20,390
+que es el doble de espacio.
+
+1564
+01:15:20,390 --> 01:15:24,390
+Eso no tiene por qué ser tan malo como el doble si
+en este momento sólo estamos almacenar números.
+
+1565
+01:15:24,390 --> 01:15:27,410
+Supóngase que se almacenaban
+registros de los pacientes en un hospital--
+
+1566
+01:15:27,410 --> 01:15:30,870
+por lo que los nombres de Pierson, números de teléfono,
+números de seguridad social, médico
+
+1567
+01:15:30,870 --> 01:15:31,540
+historia.
+
+1568
+01:15:31,540 --> 01:15:34,160
+Este cuadro puede ser mucho,
+mucho más grande, en cuyo caso
+
+1569
+01:15:34,160 --> 01:15:38,000
+un diminuto puntero, la dirección de
+la próxima element-- que no es un gran problema.
+
+1570
+01:15:38,000 --> 01:15:40,620
+Es una franja tales
+cuesta no importa.
+
+1571
+01:15:40,620 --> 01:15:43,210
+Pero en este caso, sí, es una duplicación.
+
+1572
+01:15:43,210 --> 01:15:45,290
+Buena pregunta.
+
+1573
+01:15:45,290 --> 01:15:47,900
+>> Vamos a hablar de una vez
+poco más concreta.
+
+1574
+01:15:47,900 --> 01:15:50,380
+¿Qué es el tiempo de ejecución
+de buscar esta lista?
+
+1575
+01:15:50,380 --> 01:15:53,640
+Supongamos que se quiere buscar
+a través de todos los grados de los estudiantes,
+
+1576
+01:15:53,640 --> 01:15:55,980
+y hay n grados
+en esta estructura de datos.
+
+1577
+01:15:55,980 --> 01:15:58,830
+Aquí, también, podemos pedir prestado
+el vocabulario de la anterior.
+
+1578
+01:15:58,830 --> 01:16:00,890
+Esta es una estructura de datos lineal.
+
+1579
+01:16:00,890 --> 01:16:04,570
+>> O grande de n es lo que se requiere para conseguir
+al final de esta estructura de datos,
+
+1580
+01:16:04,570 --> 01:16:08,410
+whereas-- y no hemos visto
+esto antes-- una matriz que da
+
+1581
+01:16:08,410 --> 01:16:13,555
+lo que se llama constante de tiempo, lo que significa
+un paso o dos pasos o 10 steps--
+
+1582
+01:16:13,555 --> 01:16:14,180
+no importa.
+
+1583
+01:16:14,180 --> 01:16:15,440
+Es un número fijo.
+
+1584
+01:16:15,440 --> 01:16:17,440
+No tiene nada que ver con
+el tamaño de la matriz.
+
+1585
+01:16:17,440 --> 01:16:20,130
+Y la razón de que,
+de nuevo, es de acceso aleatorio.
+
+1586
+01:16:20,130 --> 01:16:23,180
+El ordenador puede simplemente inmediatamente
+saltar a otra ubicación,
+
+1587
+01:16:23,180 --> 01:16:27,770
+porque son todos iguales
+distancia de todo lo demás.
+
+1588
+01:16:27,770 --> 01:16:29,112
+No hay pensamiento involucrado.
+
+1589
+01:16:29,112 --> 01:16:31,900
+
+1590
+01:16:31,900 --> 01:16:32,400
+Todo bien.
+
+1591
+01:16:32,400 --> 01:16:39,230
+Así que si puedo, voy a tratar
+pintar dos cuadros finales.
+
+1592
+01:16:39,230 --> 01:16:42,830
+Uno muy común conocida como una tabla hash.
+
+1593
+01:16:42,830 --> 01:16:51,120
+Así que para motivar a esta discusión,
+déjame pensar acerca de cómo hacer esto.
+
+1594
+01:16:51,120 --> 01:16:52,610
+>> Así que ¿qué tal esto?
+
+1595
+01:16:52,610 --> 01:16:55,160
+Supongamos que el problema
+queremos resolver ahora
+
+1596
+01:16:55,160 --> 01:16:58,360
+está llevando a cabo en un dictionary--
+por lo que un montón de palabras en inglés
+
+1597
+01:16:58,360 --> 01:16:59,330
+o lo que sea.
+
+1598
+01:16:59,330 --> 01:17:02,724
+Y el objetivo es ser capaz de responder
+preguntas de la forma se trata de una palabra?
+
+1599
+01:17:02,724 --> 01:17:04,640
+Por lo que desea aplicar
+un corrector ortográfico, justo
+
+1600
+01:17:04,640 --> 01:17:07,220
+como un diccionario física
+que se puede mirar las cosas en.
+
+1601
+01:17:07,220 --> 01:17:10,490
+Supongamos que yo fuera a hacer esto con una matriz.
+
+1602
+01:17:10,490 --> 01:17:12,590
+Yo podría hacer esto.
+
+1603
+01:17:12,590 --> 01:17:20,756
+>> Y supongamos que las palabras son la manzana
+y el plátano y melón.
+
+1604
+01:17:20,756 --> 01:17:23,330
+
+1605
+01:17:23,330 --> 01:17:26,465
+Y no puedo pensar en las frutas
+que empiezan con D., por lo que sólo estamos
+
+1606
+01:17:26,465 --> 01:17:27,590
+va a tener tres frutas.
+
+1607
+01:17:27,590 --> 01:17:31,510
+Así que esta es una matriz, y estamos
+almacenar todas estas palabras
+
+1608
+01:17:31,510 --> 01:17:34,200
+en este diccionario como una matriz.
+
+1609
+01:17:34,200 --> 01:17:39,350
+La pregunta es, entonces, ¿de qué otra
+se puede almacenar esta información?
+
+1610
+01:17:39,350 --> 01:17:43,160
+>> Bien, estoy tipo de trampa aquí, porque
+cada una de estas letras de la palabra
+
+1611
+01:17:43,160 --> 01:17:44,490
+es realmente un byte individual.
+
+1612
+01:17:44,490 --> 01:17:46,740
+Así que si realmente quería ser
+nit-exigente, que realmente debería
+
+1613
+01:17:46,740 --> 01:17:49,600
+se divide esto en gran parte
+trozos más pequeños de la memoria,
+
+1614
+01:17:49,600 --> 01:17:51,289
+y podríamos hacer exactamente eso.
+
+1615
+01:17:51,289 --> 01:17:53,580
+Pero vamos a ejecutar en
+el mismo problema que antes.
+
+1616
+01:17:53,580 --> 01:17:56,674
+¿Qué pasa si, como Merriam Webster u Oxford
+¿Tiene cada año-- añaden palabras
+
+1617
+01:17:56,674 --> 01:17:59,340
+a la dictionary-- no lo hacemos
+necesariamente quiere pintarnos
+
+1618
+01:17:59,340 --> 01:18:00,780
+en una esquina con una matriz?
+
+1619
+01:18:00,780 --> 01:18:05,710
+>> Así que en vez, tal vez un enfoque más inteligente
+es poner manzana en su propio nodo o caja,
+
+1620
+01:18:05,710 --> 01:18:11,190
+como diríamos, plátano, y
+entonces aquí tenemos melón.
+
+1621
+01:18:11,190 --> 01:18:14,990
+
+1622
+01:18:14,990 --> 01:18:16,790
+Y la cadena que estas cosas juntas.
+
+1623
+01:18:16,790 --> 01:18:19,980
+Así que esta es la matriz, y
+esta es la lista enlazada.
+
+1624
+01:18:19,980 --> 01:18:23,300
+Si no puede ver bien, sólo
+dice "matriz", y esto dice "lista".
+
+1625
+01:18:23,300 --> 01:18:25,780
+>> Así que tenemos la misma
+cuestiones exactas como antes,
+
+1626
+01:18:25,780 --> 01:18:28,600
+por lo que ahora tenemos
+dinamismo en nuestra lista enlazada.
+
+1627
+01:18:28,600 --> 01:18:31,090
+Pero tenemos un diccionario bastante lento.
+
+1628
+01:18:31,090 --> 01:18:32,870
+Supongamos que quiero buscar una palabra.
+
+1629
+01:18:32,870 --> 01:18:35,430
+Me podría tener gran O de n
+pasos, porque la palabra podría
+
+1630
+01:18:35,430 --> 01:18:37,840
+ser todo el camino al final de
+la lista, al igual que el melón.
+
+1631
+01:18:37,840 --> 01:18:40,600
+Y resulta que
+en la programación, más o menos
+
+1632
+01:18:40,600 --> 01:18:42,700
+del Santo Grial de los datos
+estructuras, es algo
+
+1633
+01:18:42,700 --> 01:18:46,620
+que le da constante
+tiempo como una matriz
+
+1634
+01:18:46,620 --> 01:18:50,870
+pero que todavía le da dinamismo.
+
+1635
+01:18:50,870 --> 01:18:52,940
+>> Así podemos tener lo mejor de ambos mundos?
+
+1636
+01:18:52,940 --> 01:18:55,570
+Y, en efecto, hay algo
+llama la tabla hash
+
+1637
+01:18:55,570 --> 01:18:59,320
+que le permite hacer exactamente
+que, aunque aproximadamente.
+
+1638
+01:18:59,320 --> 01:19:03,140
+Una tabla hash es un colombófilo
+estructura de datos que nos
+
+1639
+01:19:03,140 --> 01:19:06,340
+se puede pensar en como el
+combinación de un array--
+
+1640
+01:19:06,340 --> 01:19:12,390
+y voy a sacar,
+así- y listas enlazadas
+
+1641
+01:19:12,390 --> 01:19:17,310
+que voy a dibujar como esto aquí.
+
+1642
+01:19:17,310 --> 01:19:19,760
+>> Y la forma en que esta cosa
+obras es como sigue.
+
+1643
+01:19:19,760 --> 01:19:23,310
+
+1644
+01:19:23,310 --> 01:19:29,540
+Si esto ahora-- el hash table--
+es la tercera estructura de datos,
+
+1645
+01:19:29,540 --> 01:19:32,590
+y quiero almacenar
+palabras de este, no lo sé
+
+1646
+01:19:32,590 --> 01:19:35,440
+querer simplemente almacenar toda la
+palabras espalda con espalda con espalda con espalda.
+
+1647
+01:19:35,440 --> 01:19:37,430
+Quiero aprovechar alguna
+pieza de información
+
+1648
+01:19:37,430 --> 01:19:40,330
+acerca de las palabras que le permitirá
+yo entiendo donde es más rápido.
+
+1649
+01:19:40,330 --> 01:19:43,666
+>> Por lo tanto, dada la manzana palabras
+y el plátano y melón,
+
+1650
+01:19:43,666 --> 01:19:45,040
+Elegí deliberadamente esas palabras.
+
+1651
+01:19:45,040 --> 01:19:45,340
+¿Por qué?
+
+1652
+01:19:45,340 --> 01:19:47,631
+Lo que es una especie de, fundamentalmente,
+diferente en los tres?
+
+1653
+01:19:47,631 --> 01:19:49,950
+
+1654
+01:19:49,950 --> 01:19:51,484
+¿Qué es lo obvio?
+
+1655
+01:19:51,484 --> 01:19:52,900
+Comienzan con diferentes letras.
+
+1656
+01:19:52,900 --> 01:19:53,900
+>> Así que ya saben qué?
+
+1657
+01:19:53,900 --> 01:19:57,120
+En lugar de poner todas mis palabras
+el mismo cubo, por así decirlo,
+
+1658
+01:19:57,120 --> 01:20:00,390
+como en una enorme lista, ¿por qué no hacer
+Yo, al menos, trato una optimización
+
+1659
+01:20:00,390 --> 01:20:04,180
+y hacer mis listas 1/26 siempre.
+
+1660
+01:20:04,180 --> 01:20:07,440
+Una optimización convincente
+podría ser por qué no hacer
+
+1661
+01:20:07,440 --> 01:20:10,650
+Yo-- al insertar una palabra
+en esta estructura de datos,
+
+1662
+01:20:10,650 --> 01:20:14,300
+en la memoria del ordenador, ¿por qué
+No puse todas las palabras 'a' aquí,
+
+1663
+01:20:14,300 --> 01:20:17,270
+todas las palabras 'b' aquí,
+y todas las palabras 'c' aquí?
+
+1664
+01:20:17,270 --> 01:20:24,610
+Así que esto termina poniendo una manzana
+aquí, plátano aquí, melón aquí,
+
+1665
+01:20:24,610 --> 01:20:25,730
+Etcétera.
+
+1666
+01:20:25,730 --> 01:20:31,700
+>> Y si tengo un adicional
+palabra como- ¿cuál es la otra?
+
+1667
+01:20:31,700 --> 01:20:36,640
+Manzana, plátano, pera.
+
+1668
+01:20:36,640 --> 01:20:39,370
+Alguien piensa de una fruta
+que comienza con A, B, o C?
+
+1669
+01:20:39,370 --> 01:20:40,570
+Blueberry-- perfecta.
+
+1670
+01:20:40,570 --> 01:20:43,990
+Eso va a terminar aquí.
+
+1671
+01:20:43,990 --> 01:20:47,530
+Y por lo que parece que tienen una
+marginalmente mejor solución,
+
+1672
+01:20:47,530 --> 01:20:50,820
+porque ahora si quiero
+para buscar la manzana, me
+
+1673
+01:20:50,820 --> 01:20:53,200
+primero-- no me acaba de buceo
+en mi estructura de datos.
+
+1674
+01:20:53,200 --> 01:20:54,850
+No me sumerjo en la memoria de mi ordenador.
+
+1675
+01:20:54,850 --> 01:20:56,530
+La primera vez que miro a la primera letra.
+
+1676
+01:20:56,530 --> 01:20:58,610
+>> Y esto es lo que un ordenador
+científico diría.
+
+1677
+01:20:58,610 --> 01:21:00,760
+Usted comprobación aleatoria, la estructura de datos.
+
+1678
+01:21:00,760 --> 01:21:04,100
+Usted toma su entrada, que a su
+este caso es una palabra como la manzana.
+
+1679
+01:21:04,100 --> 01:21:07,150
+Usted lo analiza, mirando
+la primera letra en este caso,
+
+1680
+01:21:07,150 --> 01:21:08,340
+hash de ese modo.
+
+1681
+01:21:08,340 --> 01:21:10,950
+Hashing mediante el cual es un término general
+tomas algo como entrada
+
+1682
+01:21:10,950 --> 01:21:12,116
+y producir una salida.
+
+1683
+01:21:12,116 --> 01:21:15,090
+Y la salida en ese
+caso es la ubicación
+
+1684
+01:21:15,090 --> 01:21:18,150
+que desea buscar, el primer
+ubicación, segunda ubicación, tercero.
+
+1685
+01:21:18,150 --> 01:21:22,160
+Así que la entrada es de manzana,
+la salida es primero.
+
+1686
+01:21:22,160 --> 01:21:25,054
+La entrada es plátano, la
+salida debe ser segundo.
+
+1687
+01:21:25,054 --> 01:21:27,220
+La entrada es melón,
+la salida debe ser tercero.
+
+1688
+01:21:27,220 --> 01:21:30,320
+La entrada es el arándano, la
+salida debe volver a ser segundo.
+
+1689
+01:21:30,320 --> 01:21:34,010
+Y eso es lo que le ayuda a tomar
+accesos directos a través de la memoria
+
+1690
+01:21:34,010 --> 01:21:39,050
+con el fin de llegar a las palabras
+o los datos de manera más eficaz.
+
+1691
+01:21:39,050 --> 01:21:43,330
+>> Ahora bien, esto reduce nuestro tiempo potencialmente
+por tanto como uno de cada 26,
+
+1692
+01:21:43,330 --> 01:21:45,850
+porque si se asume que usted
+tener tantos "a" palabras como "z"
+
+1693
+01:21:45,850 --> 01:21:48,080
+palabras como palabras "q", que
+no es realmente realistic--
+
+1694
+01:21:48,080 --> 01:21:50,830
+vas a tener sesgo en todos
+ciertas letras del alphabet--
+
+1695
+01:21:50,830 --> 01:21:53,204
+pero esto sería un incremento
+enfoque que permite
+
+1696
+01:21:53,204 --> 01:21:55,930
+usted pueda llegar a decir mucho más rápidamente.
+
+1697
+01:21:55,930 --> 01:21:59,660
+Y en realidad, un sofisticado
+programa, el Googles del mundo,
+
+1698
+01:21:59,660 --> 01:22:02,180
+la Facebooks del mundo--
+usarían una tabla hash
+
+1699
+01:22:02,180 --> 01:22:03,740
+para una gran cantidad de propósitos diferentes.
+
+1700
+01:22:03,740 --> 01:22:06,590
+Pero ellos no serían tan ingenuos como
+a tan sólo mirar a la primera letra
+
+1701
+01:22:06,590 --> 01:22:09,700
+en la manzana o un plátano o
+pera o el melón,
+
+1702
+01:22:09,700 --> 01:22:13,420
+ya que como se puede ver estos
+listas todavía podían hacer larga.
+
+1703
+01:22:13,420 --> 01:22:17,130
+>> Y así, esto todavía podría ser una especie
+de modo linear-- especie de lento,
+
+1704
+01:22:17,130 --> 01:22:19,980
+al igual que con el gran O de n
+que hemos comentado anteriormente.
+
+1705
+01:22:19,980 --> 01:22:25,290
+Así que lo que es una verdadera buena voluntad tabla hash
+hacer-- que tendrá una gama mucho más grande.
+
+1706
+01:22:25,290 --> 01:22:28,574
+Y va a utilizar una forma mucho más
+sofisticada función hash,
+
+1707
+01:22:28,574 --> 01:22:30,240
+de modo que no se limita a considerar la "a".
+
+1708
+01:22:30,240 --> 01:22:35,480
+Tal vez se ve en "a-p-p-l-e" y
+de alguna manera convierte esas cinco letras
+
+1709
+01:22:35,480 --> 01:22:38,400
+en la ubicación donde
+manzana debe ser almacenado.
+
+1710
+01:22:38,400 --> 01:22:42,660
+Estamos ingenuamente utilizando la letra "a"
+solo, porque es agradable y sencilla.
+
+1711
+01:22:42,660 --> 01:22:44,600
+>> Pero una tabla hash, en
+Al final, se puede pensar
+
+1712
+01:22:44,600 --> 01:22:47,270
+de como una combinación de
+una matriz, cada uno de los cuales
+
+1713
+01:22:47,270 --> 01:22:51,700
+tiene una lista enlazada que, idealmente,
+debe ser lo más corto posible.
+
+1714
+01:22:51,700 --> 01:22:54,364
+Y esto no es una solución obvia.
+
+1715
+01:22:54,364 --> 01:22:57,280
+De hecho, gran parte de la sintonización fina
+que continúa debajo de la capucha cuando
+
+1716
+01:22:57,280 --> 01:22:59,654
+la implementación de este tipo de
+estructuras de datos sofisticadas
+
+1717
+01:22:59,654 --> 01:23:01,640
+es lo que es el derecho
+longitud de la matriz?
+
+1718
+01:23:01,640 --> 01:23:03,250
+¿Cuál es la función hash correcto?
+
+1719
+01:23:03,250 --> 01:23:04,830
+¿Cómo se puede almacenar en la memoria las cosas?
+
+1720
+01:23:04,830 --> 01:23:07,249
+>> Pero darse cuenta de lo rápido
+este tipo de discusión
+
+1721
+01:23:07,249 --> 01:23:10,540
+escalada, o bien hasta el momento que es una especie
+de sobre la cabeza de uno en este punto, que
+
+1722
+01:23:10,540 --> 01:23:11,360
+está bien.
+
+1723
+01:23:11,360 --> 01:23:18,820
+Pero empezamos, memoria, con verdad
+algo de bajo nivel y la electrónica.
+
+1724
+01:23:18,820 --> 01:23:20,819
+Y por lo que este nuevo es este
+el tema de la abstracción,
+
+1725
+01:23:20,819 --> 01:23:23,610
+donde una vez que comience a tomar para
+concedida, OK, he it-- llegué allí es
+
+1726
+01:23:23,610 --> 01:23:26,680
+memoria física, OK, lo consiguió, cada
+ubicación física tiene una dirección,
+
+1727
+01:23:26,680 --> 01:23:29,910
+OK, lo tengo, puedo representar
+esas direcciones como arrows--
+
+1728
+01:23:29,910 --> 01:23:34,650
+puede empezar muy rápidamente a tener
+conversaciones más sofisticadas que
+
+1729
+01:23:34,650 --> 01:23:38,360
+al final parecen ser lo que nos
+para resolver problemas como la búsqueda
+
+1730
+01:23:38,360 --> 01:23:41,620
+y clasificar de manera más eficaz.
+
+1731
+01:23:41,620 --> 01:23:44,190
+Y puede estar seguro, también--
+porque creo que esto
+
+1732
+01:23:44,190 --> 01:23:48,700
+es la más profunda que hemos ido en alguna
+de estos temas CS proper-- que hemos
+
+1733
+01:23:48,700 --> 01:23:51,880
+hecho en un día y medio en este
+apuntar lo que normalmente podría hacer más de
+
+1734
+01:23:51,880 --> 01:23:55,520
+el curso de ocho semanas en un semestre.
+
+1735
+01:23:55,520 --> 01:23:59,670
+>> Cualquier pregunta sobre estos?
+
+1736
+01:23:59,670 --> 01:24:01,100
+¿No?
+
+1737
+01:24:01,100 --> 01:24:01,940
+Todo bien.
+
+1738
+01:24:01,940 --> 01:24:05,610
+Bueno, ¿por qué no nos detenemos allí,
+comenzar el almuerzo unos minutos antes,
+
+1739
+01:24:05,610 --> 01:24:07,052
+reanudar en tan sólo alrededor de una hora?
+
+1740
+01:24:07,052 --> 01:24:08,760
+Y voy a permanecer durante
+un poco con preguntas.
+
+1741
+01:24:08,760 --> 01:24:11,343
+A continuación, voy a tener que ir
+tomar un par de llamadas si eso está bien.
+
+1742
+01:24:11,343 --> 01:24:15,000
+Voy a su vez algo de música en el ínterin,
+pero el almuerzo debe ser la vuelta de la esquina.
+
+1743
+01:24:15,000 --> 01:24:17,862
+

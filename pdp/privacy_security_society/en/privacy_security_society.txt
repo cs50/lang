@@ -1,0 +1,517 @@
+DAVID MALAN: All right. Welcome. Hello, everyone. My name is David Malan. I'm on the computer science faculty here at Harvard, and teach a few courses-- most of them related to introductory computer science and higher level concepts that derive from that. The next couple of days are not so much though about building from the ground up, as we might in a typical undergraduate course, but looking at computer science as it relates to business and to decision making-- really from the top down so that we can accommodate a range of backgrounds, as you'll soon see, both less technical and more technical, and also a number of goals that folks have. In fact, we thought we'd start off by taking a look at some of the demographics we have here. But first, let's take a look at where we're headed. 
+
+So today, we have four blocks focused for the day. First up, we will focus on privacy, security, and society. And we'll do this by way of a couple of case studies of sorts. Very much in the news of late has been a certain company called Apple and a certain agency known as the FBI, as you might have read. And we'll use this as an opportunity to discuss exactly what some of the underlying issues there are, why it's interesting, what it means technologically, and use that to transition more generally to a discussion about security and making decisions there on. 
+
+Two, looking at encryption specifically. So we'll look a little more technically at what it means to actually scramble or encrypt information. And then we'll take a look at Dropbox, which is one of these very popular file sharing tools these days. You might use it, or Box, or SkyDrive, or the more recent incarnation thereof and so forth. And we'll take a look at some of the underlying security and privacy implications there. We'll have a break, and then we'll look at internet technologies in the latter half of this morning-- trying to give you a better sense of how that thing works that many of you are connected to at the moment-- certainly use most every day-- and what the implications are there for performance, for hardware, for software, and any number of other attributes, specifically trying to tease apart a whole bunch of acronyms that you might have seen or might even use, but don't necessarily know what's going on underneath the hood. And we'll take a look to at the process of actually getting a company or getting a entity online on the web, and what that actually means. Then we'll have a break for lunch. We'll come back and take a look at cloud computing, and also designing server architectures more generally so that you'll walk out with a better understanding, hopefully, of this buzzword "cloud computing," but what it actually means. And if you're trying to build a business or you're trying to expand a business, exactly what you need to know and what you need to do in order to handle increasing numbers of users online, and what kind of decisions you have to make around that. 
+
+And then in the last part of today, we'll take a look at web development specifically. We won't get our hands too dirty, but I thought it might be enlightening if we actually do get our hands a little dirty, and take a look at something called HTML, CSS, and an actual server set up so that you'll create a little web page for yourself, even if you've done this before. But we'll talk about what the interesting ideas are underlying that and what actually is happening every time you go to Google Apps, or Facebook, or any number of other web-based tools. 
+
+Tomorrow, meanwhile, we'll transition to a look in the morning at computational thinking-- a fancy way of describing how a computer might think or a human versed in computing might think-- a little more methodical, a little more algorithmic, as we might say. And we won't go too deeply into programming per se, but we'll focus on some of the tenets that you see in programming and computer science-- abstraction, algorithms, and how you represent data, and why that's actually interesting. We will take somewhat of a look at reprogramming in the latter half of tomorrow morning. We'll get your hands a little dirty with that, but only so that we have some context for talking about some of the terms of art that an engineer or a programmer might actually use, things you might hear or see on a whiteboard when engineers are designing something. In the latter half of tomorrow, we'll take a look at what might be called technology stacks. In other words, most people today don't really sit down with an empty screen in front of them and start building some application or building some website. You stand on the shoulders of others using things called frameworks and libraries, many of them open source these days. So we'll give you a sense of what all that's about and how you go about designing software and choosing those ingredients. 
+
+And then we'll conclude with a look at web programming specifically and some of the technologies related there, too-- things like databases, open source, or commercial APIs, or application programming interfaces, and then one such language that you might use with that. So it'll be a mix of conceptual introductions, a mix of hands on, and a mix for discussion throughout. 
+
+But before we do that, let me give you an answer to a couple of the questions that everyone here was asked. How would you describe your comfort with technology? We have a bit of a range here. So six people said somewhat comfortable, five said very, and two said not very. So that should lend itself to some interesting discussions. 
+
+And please, at any point, whether you are in the not very or very categories, do push back if either I'm assuming too much or speaking at too high of a level. Do bring me back down. And conversely, if you'd like to get a little more into the weeds with some topic technically, by all means push on that. I'm to happy to answer down to 0s and 1s if need be. 
+
+Do you have any programming experience in any language? Just to calibrate, almost everyone has no prior programming experience, which is great. And even for those that do, we won't spend too much time actually teaching how to program, but rather just giving you a taste so that we can then move from there and talk at a higher level about why some of those concepts are interesting. 
+
+This and more will all be available online. In fact, if there's one URL you want to keep open in a tab throughout today and tomorrow, you might want to go to this one here. And that's a copy of the slides. And any changes we make over the course of today or discussions that we annotate on the slides, they'll be there instantly if you just reload your browser. So I'll give you a moment to jot that down, and you'll then be able to see exactly what I see. 
+
+But before we forge ahead, I thought it might be helpful, especially since we're an intimate group, just to get to know each other a little bit and perhaps say where you're from, or what you do, and what you're hoping to get out of today and tomorrow, ideally so that you might find one or more like minded spirits or folks to talk to during break or lunch. And I'll jump us around somewhat randomly. Arwa, you'd like to say hello, first? 
+
+AUDIENCE: Hello. Good morning, everyone. My name is Arwa. [INAUDIBLE]. I work at at my sector like banking, business [INAUDIBLE]. DAVID MALAN: OK. Wonderful. Welcome. Andrew. AUDIENCE: Yeah. Hi, everyone. I'm Andrew [INAUDIBLE]. So I work for a technology company, Red Hat, which is a big open source company. I have a business background so [INAUDIBLE] get more versed into making solution oriented investments, I just need to know what people are talking about. So I lead our global partner operations. I've been doing that for about five years. Your overview is fantastic. I'm really looking to pick up all those [INAUDIBLE]. DAVID MALAN: Wonderful. Glad to have you. Chris. 
+
+AUDIENCE: Good morning. My name is Chris Pratt. I work for a company called [INAUDIBLE]. It's a family business, so I do a lot of different projects. And right now, I'm focused on technology initiatives and managing our IT staff. So I'm here to get a more high level and broad understanding of the types of things that [INAUDIBLE] is doing and familiar with so I can help them make the decisions [INAUDIBLE]. DAVID MALAN: Wonderful. Welcome aboard. Olivier, is it? 
+
+AUDIENCE: Yes. So I'm French living in Switzerland working for [INAUDIBLE]. It's a [INAUDIBLE] corporations. So we're collecting money when there's a disaster and everything. And I'm teaching some strategies there. 
+
+So I have to work on [INAUDIBLE] digital projects, but also quite technological projects. So the idea for me is really to be able to make better decisions and being better informed of what I'm really [INAUDIBLE]. DAVID MALAN: Wonderful. Welcome. And Roman or Roman, is it? AUDIENCE: I'm from [INAUDIBLE]. And I'm responsible for the [INAUDIBLE]. And in the team we-- we're a cross functional team so we work with engineers. And what I'm looking forward to is being able to communicate better with engineers. [INAUDIBLE] 
+
+DAVID MALAN: Wonderful. And Karina. 
+
+AUDIENCE: I'm Karina from Montreal. I'm on [INAUDIBLE] of province of Quebec. Sorry, for my English. And I'm here to better understand what my programmer or supplier explained to me. [INAUDIBLE] DAVID MALAN: Oh. Wonderful. Well, if I ever speak too quickly, do slow me down. And I'm happy to repeat. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Sure. No worries. And Nikisa, is it? AUDIENCE: Yes. Thank you. My name is Nikisa, and I'm [INAUDIBLE]. [INAUDIBLE] I am myself [INAUDIBLE]. So I'm always confused with [INAUDIBLE] whatever you are really [INAUDIBLE]. 
+
+DAVID MALAN: OK. Wonderful. Welcome. Victoria. 
+
+AUDIENCE: I'm Victoria. I live in Czech Republic. I work for [INAUDIBLE] Enterprise. And even though it is an IT company, it's possible that in an IT company [INAUDIBLE]. So I'm focused on business development, and whenever I go to a customer meeting, I have to take a technical person with me because my customer asks questions about technical side of the story. [INAUDIBLE]. They talk to each other, but then I have no understanding of what they're discussing. So I'd like to get a better understanding because I think it would help myself [INAUDIBLE] with my relationship with the customers as well. 
+
+DAVID MALAN: And it's a good point for me to chime in. There's only so much we'll be able to do in just two days. But among the goals, I would hope, is that, after the next couple of days, at least more words will look familiar as you're poking around online. And you'll have a better sense of what to Google, or what words actually mean something and what might be fluffy marketing speak so that, over time, you can build up that comfort and hopefully displace the person that has to tag along each time. Ben. AUDIENCE: My name's Ben [INAUDIBLE]. I'm a technology transaction attorney. [INAUDIBLE]. And I'm really here to just get a better understanding of what CTOs and Engineers at [INAUDIBLE] legal side of structuring things [INAUDIBLE]. DAVID MALAN: Wonderful. AUDIENCE: And Dan. Hi, everybody. My name's Dan. I live local here. I'm from Andover. I work locally at a software company, Kronos Incorporated. Been in software over 20 years and [INAUDIBLE] marketing and development type jobs. For the last five years, I've managed a team of technical cloud consultants in presales fashion. 
+
+So I picked up a lot of concepts on the way. And so I do a lot of technical discussions. But I can only take it so far. Similar to Victoria, lots of times I get lost and need to call in a technical person. So I'm just looking to string a lot of technology jargon together so I get a better understanding so I can have more informed conversations. DAVID MALAN: Excellent. Well, ultimately, we can steer the next couple of days in any direction folks would like. We have a straw man for both today and tomorrow. But by all means, feel free to steer us either during the session or during breaks or lunch if there's something you'd like to get off your chest. And let me emphasize, there really is no dumb question. And if you feel like your question is dumb, by all means just ask me more quietly during breaks, or lunch, or the like. But rest assured, we seem to be in very good company-- very mixed company here, both internationally and technically. So feel free to share as comfortably as you'd like. 
+
+So why don't we take a look, again, in this context of privacy, security, and society at this particular case involving Apple and the FBI. And you might be generally familiar with this case. It's hard to escape mention of it these days. 
+
+Out of curiosity, how many of you have iPhones? Almost everyone. And you have an Android phone? So fortunately, even though this is a little biased toward iPhone specifically, the reality is the Android operating system by Google has so many of the similar features to what Apple is doing. 
+
+They simply happen to be in the spotlight right now, and they've been particularly on the cutting edge when it comes to actually locking down these devices more and more with each iteration of iOS, the operating system that actually runs on Apple's devices. So why don't we take a look here just to set the stage at what the actual issue is. So what's going on with Apple and the FBI to the extent that you're familiar with the issue? 
+
+AUDIENCE: The FBI wants to get access to the data, which is encrypted by Apple. 
+
+DAVID MALAN: Exactly, so the FBI wants to get access to data that's encrypted. So first, step back. What does it mean for data to be encrypted, just as a quick definition? 
+
+AUDIENCE: Somehow secure that people won't have such easy access to it [INAUDIBLE]. DAVID MALAN: Yeah. Exactly So it's some way of obscuring information so that no one else can, in theory, access that information. And so you can just casually think of it as scrambling. So if it's an English word or an English paragraph, you might just jumble the words up so that someone might look at it and it sees nonsense. But hopefully, there's a way to rearrange those letters. 
+
+Now, in reality, it's much more secure than that because someone who's simply diligent could unscramble the words with high probability and figure out what a sentence says. And in reality, at the end of the day, all of this is happening at a very low level-- 0s and 1s. And tomorrow morning, we'll talk about computational thinking and what it means for data to be implemented or represented with just 0s and 1s. But for today's purposes, let's just assume that you have things like emails, and photos, and videos, and all of that on a iPhone or an Android device. And somehow, that data is ideally scrambled. And so there's a suspect in this particular case, San Bernardino, where they have the suspect's phone, and they want to get data off of it. But in this case, Apple has essentially said no to some things and yes to other things. So they've said yes to a few things in a manner consistent with what a lot of US companies would do when subpoenaed or the like. They've provided, for instance, the authorities with the iCloud backup. So if I'm familiar, iCloud is this cloud base-- and we'll come back to cloud computing-- this nebulously defined cloud based service where it just backs up your data. And it turns out that you can access data there unencrypted. So it's unscrambled when it's actually being backed up there. And so Apple's turned that over. But unfortunately, the suspect in question seems to have disabled automatic iCloud backup some weeks prior to the FBI obtaining this particular iPhone. So there's a few weeks of potential data that lives on the phone, but not in iCloud. And so the FBI wants to actually look at what's on that particular phone. Unfortunately, the phone, like many of ours here, is protected with the passcode. And how long are these passcodes typically-- whether on your phone or in general? 
+
+AUDIENCE: Four. 
+
+DAVID MALAN: Yeah. So often four digits. They've started with newer versions of iOS to make these passcodes a little longer. And let's just put that into perspective. So if it's a four digit passcode, that's pretty good. That's comparable to what many people have on their ATMs or their debit cards. What's the implication for security? 
+
+Well, let's take a step back. If you have a four digit code-- and let's let's start to ourselves even before tomorrow morning. Think computationally. It's a four digit code. How would you, as a human off the street, not necessarily a technophile, characterize just how secure an iPhone is if it's using a four digit passcode-- 0s through 9s. How do you begin to quantify the security of an iPhone then? AUDIENCE: Five? DAVID MALAN: Five? And what you mean by five? 
+
+AUDIENCE: [INAUDIBLE] this technology-- it's easy to access trying from 1001 [INAUDIBLE]. 
+
+DAVID MALAN: OK. 
+
+AUDIENCE: Try 111, 000, [INAUDIBLE]. And if I [INAUDIBLE] my computer so many times [INAUDIBLE]. DAVID MALAN: Ah, good. So already, if we've defined the problem scenario as this device is secure because it has a four digit passcode, an attack on that phone would simply be to try all possible numbers. You might just start 0 0 0 0. And frighteningly, that is the default passcode on a lot of devices these days. In fact, as an aside, if you have any device that supports a wireless technology called Bluetooth, the default passcode very often is 0 0 0 0. Or maybe, if it's a more secure device, 0 0 0 0 0-- one additional 0. So when in doubt, if you need to get into some device, start there. 
+
+But of course, if the iPhone shakes or whatnot, and says, nope, that's not it, what number might you try after 0 0 0 0? 1 1 1 1. 2 2 2 2. 7 7 7 7-- that's yours? OK. You might just brute force, as a computer scientist says-- try all possible values. 
+
+So let's steer back to the original question. How secure is an iPhone? Someone off the street might say very secure, or not very secure, or medium secure, but that's kind of meaningless. It would be nice if we could ascribe something more quantitative, even if its numbers. We don't need fancy math, but just some numerical estimate or qualification of the security. 
+
+So if you've got a four digit passcode, can we begin to ascribe some kind of numeric rating to it? How secure is it? 
+
+AUDIENCE: 1 out of 10,000. DAVID MALAN: Yeah. So 1 out of 10,000. Where do you get the 10,000 from? 
+
+AUDIENCE: All possibilities [INAUDIBLE]. DAVID MALAN: Yeah, exactly. If you've got a 4 digit code, you can have 0 0 0 0, or you can have 9 9 9 9, maximally. And so that's 10,000 possibilities. So that seems pretty big. And it would certainly take a human quite some time to try all of those codes. 
+
+And so suppose, I, during lunch swiped one of your iPhones and you have a four digit code. If I had enough time, maybe I could type in 0 0 0 0. And then it shakes and says, no. 0 0 0 1, 0 0 0 2, 0 0 3, and maybe I can do 1 per second. So that's 10,000 seconds. So how long would it take me in the end to actually get to decrypting or hacking into someone's iPhone, given these numbers? And we'll play with a few perhaps here. 
+
+Let me go ahead and pull up overkill of a calculator. So if it's 10,000 seconds, there are 60 seconds in a minute, and there are 60 minutes in an hour. So it's like 2.7 hours. So I have to miss the afternoon sessions, if I started during lunch. But it would only take me 2.7 hours to try getting into your iPhone. 
+
+Now, you might be familiar with mechanisms that Apple and soon probably other companies use to defend against this. This does not seem or feel very secure anymore. And we'll come back in just a bit to do one more introduction, unless we feel omitted. What can we do to make this more secure? 10,000 feels like a lot. But 2.7 hours does not really feel like that long. AUDIENCE: Doesn't it get locked after three attempts or something like that? DAVID MALAN: Ah, maybe it does. In fact, hopefully not three, because even I goof on my passcode three or more times. So there is typically some threshold. And I believe in iOS's case, the default is actually 10. But similarly-- 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: --similarly reasonable. So what does that mean-- so what happens after 10 tries or whatever number of tries? 
+
+AUDIENCE: It gets locked. 
+
+DAVID MALAN: Yeah. So the phone maybe locks itself down. 
+
+AUDIENCE: Time delay. 
+
+DAVID MALAN: Time delay. Would do you mean by time delay? 
+
+AUDIENCE: It'll lock the phone for five minutes, and after five minutes, you can try again. 
+
+DAVID MALAN: All right. But that doesn't feel like it's solving the problem, right? Can't I just come back 5 minutes later and continue hacking on it? 
+
+AUDIENCE: Yes. 
+
+DAVID MALAN: OK. 
+
+AUDIENCE: But after you try again, it goes to 10 minutes. DAVID MALAN: Ah. AUDIENCE: --keeps expanding. AUDIENCE: So the thing increases but-- DAVID MALAN: Yeah, exactly. So let's suppose it's not one per second, but it takes me for 10,000 codes, instead of times 1 second for each, it's actually not even 60 seconds. It's five minutes. So now, this is the total number-- this is the total amount of time I need in order to hack into a phone. And again, there's 60 seconds in a minute, and 60 minutes in an hour. 
+
+So now, we're up to 833 hours. And if we want to see this precisely, now we're talking about 34 days. So it's going to take an adversary, without sleep, 34 days now to hack into your iPhone, if there is this five minute delay. But it's not even just five minutes. As Kareem said, what happens after the next-- 
+
+AUDIENCE: After you've tried-- 
+
+DAVID MALAN: --misattempt? 
+
+AUDIENCE: --five more times, then it gives you a 10-minute delay. DAVID MALAN: A 10 minute delay. And I'm not sure what it is after that, but maybe it's 20 minutes. Maybe it's 40 minutes. And if it is, that's actually an example of a fairly common technique in computing known as exponential backoff, where this exponentiation usually means you double something again and again. 
+
+So that starts out being not so significant. But once you start doubling from 2 to 4 to 8 to 16 to 32 to 64, the gaps really start to widen. And so it might take a month, or a year, or a lifetime to actually get into that device. Now, there's other mechanisms still. Time is a good thing because, in general, this is a common security technique. You can't necessarily stop the bad guys, but you can slow them down. And because there are finite resources in life, like living, you can eventually push out the threat so far that even though, sure, the adversary might get really lucky and try 7 7 7 7 on your phone and get the answer right, the probability of that is incredibly low. And so, generally security is a function, not of absolute protection, but of probabilistic protection. You're just pretty sure that you're safe from some kind of attack. 
+
+But that might not be really good enough. So what more could you do? And what more does Apple do, if people have enabled this, if an adversary or bad guy tries to get in more than 10 times, besides inserting a delay. What would be a stronger measure of defense that might make you sleep better at night? 
+
+AUDIENCE: Erasing the data. 
+
+DAVID MALAN: Erase the data. Yeah. So in fact, that's a very common technique where, much like the old movies, this message will self-destruct in 10 seconds. Very commonly, will devices, iPhones among them, just wipe themselves, delete themselves after 10 incorrect attempts. So is this a good thing or a bad thing? Now, let's put on more of the product manager's hat. What's good about this? Why is this a positive feature? 
+
+[INTERPOSING VOICES] 
+
+No access to your information. So now, not only have you slowed the adversary down, if you do have those artificial time delays, but you've also ensured that if he or she screws up 10 times, now the window of opportunity is just gone. They've only had 10 attempts. And the probability of getting the answer correct out of 10 attempts when there's 10,000 possibilities is 1 out of 1,000. So 10 divided by 10,000-- 1 over 1,000. But even that's not all that good. So we'll come back to making me feel better about that probability because it actually feels somewhat high. It's 1/10 of a percent. What's bad about this feature though? 
+
+AUDIENCE: It's bad because-- DAVID MALAN: Yeah. What do you mean in my hands? 
+
+AUDIENCE: If you didn't lose it, and you're just trying to get into your phone. 
+
+DAVID MALAN: Yeah. So what if there has been no compromise, your just kind of distracted, you're an idiot, you forget your password. And so it's not that unreasonable, especially if you don't log in to your phone that often or you're distracted while doing it, maybe you yourself mistype your code 11 times. And now, dammit, you've just wiped your own device. So this too is kind of a theme in computing and computer science of trade-offs. There really is rarely a right answer. There's simply a more preferable or a less costly answer. And in this case, there's a trade-off. One, our data is a little more secure, if it gets into the hands of some adversary. But I can shoot myself in the foot by wiping, accidentally, my own data if I don't actually get that passcode right within the first 10 times. So what's the push? How do we fix that? Do we throw the feature out altogether, if we're Apple, and say, this feels bad because we're going to have-- if we have one irate customer, this is not a situation we want to invite. AUDIENCE: We encrypted and then we recovered the code somehow by Apple or whatever [INAUDIBLE]. DAVID MALAN: Can you elaborate? AUDIENCE: [INAUDIBLE] DAVID MALAN: OK. So maybe we don't do this wiping thing, which feels a little overly dramatic. Why don't we just keep the data encrypted? Well, so in this case, Apple already does keep the data encrypted. And what's keeping the adversary from seeing your encrypted data is unfortunately that passcode. 
+
+So the passcode effectively unlocks the data so that while it's scrambled, if you're just holding the phone, as soon as you log in with that passcode, it's unscrambled and the user can see it. So it is already encrypted. But if we want to avoid wiping the data, but we somehow want to have a good answer on the customer support line if the absent minded or forgetful user has accidentally wiped his or her phone because they mistyped the password 11 times, what solution could we offer? How else could we solve that problem now? Yeah. 
+
+AUDIENCE: Customer service [INAUDIBLE]. DAVID MALAN: OK. So that's good. So maybe without using resorting to wiping, we could have some out-of-band mechanism for solving this problem. And by out-of-band, I mean you don't interact just with the phone, maybe you grab someone else's phone or email and you talk to customer service. And maybe they ask you the usual questions of, well, what's your name, what's your birthdate, what are the last four digits of your social security number or country ID. 
+
+And what's good about that? Well, of course, with high probability, it lets you and only you into your phone because maybe they send a temporary passcode. And this does not exist in Apple's case, but maybe they do send you a temporary passcode. You get in, and you're back on your way. But what's the downside of this solution? 
+
+AUDIENCE: If someone steals your identity, they might have access to all this information. DAVID MALAN: Yeah. If someone steals your identity-- and frankly, it's not all that hard, especially when so many companies ask the same questions. What's your name, what's your address, what are the last four digits of your social security number, what was your favorite pet, what was your favorite parent or whatever the questions might be. And in fact, as an aside, I've noticed, having just the other day filled out questions like these, the questions in a reasonable effort to become a little less well-known are getting increasingly personal. And as soon as you start giving this tidbit of information that might indeed be a secret to this company, and to this company, and to this company, and to this company, it's not going to be long before some company aggregates this kind of information. And so you've told little simple secrets, like your best friend growing up, to all of these individual companies. And soon enough, you have an attack known as social engineering, whereby someone just masquerades as you on the phone or spoofs your email address and somehow gets into the phone. 
+
+So I'm not liking that. It's a possible solution, but let's suppose I'm not liking that. Let's go back to the issue at hand where phone is encrypted and we've not enabled some kind of self-destruct mechanism. But I do-- rather, I have enabled some self-destruct mechanism, but I nonetheless want to appease a customer who accidentally wipes his or her phone. How else could we solve that problem? 
+
+AUDIENCE: Make a backup. 
+
+DAVID MALAN: Make a backup. And indeed, this is how Apple happens to do this. One of the motivations of iCloud is exactly this-- not only convenience and resting assured that all of your photos and everything are backed up, but in this case-- because if your individual device, whether it's an iPod, or iPhone, or iPad is lost, or stolen, or accidentally or deliberately wiped, at least all of your data is somewhere else. And you can just go buy or borrow another iPhone. You can restore from backup, so to speak, from iCloud, and you're back up and running. 
+
+Now, there's a trade-off there. Potentially, Apple now has access to all of that same data. And we can come back to that some time. But at least now, we've solved the problem in a different way. 
+
+And if you visualize this story line in your mind's eye, you can perhaps see that every time we solve a problem-- kind of covering up a leak in hose, some other problem springs up elsewhere. We're really just pushing the problem somewhere else. And in the case of the adversary with the time delays, really what we're doing is we're not keeping adversary out, we're just raising the bar over which he or she has to jump in order to actually get access to our data. 
+
+So any time, henceforth, you go to a website, or you read some white paper, or some CTO or CSO tells you, oh, our systems are secure-- it's baloney. There's nothing to be meant by "our systems are secure" other than we take industry standard probabilistic measures to keep people away from your servers or away from your data. 
+
+Now, the Apple situation has gotten kind of interesting because they've been asked to do something that's not quite as simple as turn over the adversary's data. They've already done that from iCloud. But now, the FBI wants to get into this phone. And the belief that it does in fact have this self-destruct mechanism built in after 10 attempts-- and I believe that's because they looked at the backups and realized this feature seems to be enabled, and I assume they don't want to necessarily try and waste one out of their 10 attempts to confirm or deny this feature. 
+
+And they also, unfortunately-- and this is sort of the irony of it all, the county where this fellow worked actually owned and was paying for special software-- device management software-- that had it been installed on their employees' phones-- so the phone in question is actually state property or county property that was being used by an employee. Had they installed in advance this device management software, they could have with a simple click on a PC or Mac unlocked this phone trivially. But unfortunately, they didn't have that software actually installed. 
+
+So there are yet other ways to address this kind of issue. It doesn't have to be a black box in your employee's pocket. But they didn't. And so now we're stuck with the situation with an encrypted iPhone that will literally self-- will figuratively self-destruct after 10 incorrect attempts. And the FBI wants to get data off of that phone. 
+
+So let's take a look at what Tim Cook has announced to the world and taken this bold stand. If you've not read it, let me go ahead and do this. If you'd like either on your computer to go to this you URL here, or I can grab for you some paper copies. Why don't we just take two minutes, if you would, and read the actual letter that Tim Cook wrote to Apple's customers. And we'll see if we can't then tease apart what it actually means. And so I've circled a few things in this. But let's see if we can't distill what's actually being said here and where the real interesting stuff is hidden. So I for instance, on the paragraph starting-- under the San Bernardino case, the paragraph starting "we have great respect for," Tim Cook's last sentence is this. "They have asked us to build a backdoor to the iPhone." This is a commonly used phrase, "backdoor" to something. What does this actually mean, as best you can tell, from what you've read here or elsewhere? AUDIENCE: Hack it. DAVID MALAN: They want to be able to hack it, and what does that mean? What is a backdoor? 
+
+AUDIENCE: An alternate entry point? DAVID MALAN: Yeah. So it's an alternate entry point. Much like an actual house where you have a front door, and sometimes a back door where you're supposed to come in the front door and maybe not so much the back door, unless you belong there, the FBI is asking for a figurative back door-- another way of getting into the phone that isn't simply a human finger touching the code and getting in in the usual way. They want to somehow slurp the data off, maybe with a cable, maybe wirelessly, or they want to somehow be able to input the code, perhaps, to the phone without just using a raw human finger. 
+
+So they allude to, in the next paragraph, "the FBI wants us to make a new version of the iPhone operating system, circumventing several important security features." So why is the FBI asking Apple to make a new operating system? That seems to be kind of besides the point? No? Why do you think they might be saying that? How is the solution to the problem? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah. AUDIENCE: [INAUDIBLE] DAVID MALAN: Exactly. The version of iOS, the operating system that's running on the phone currently, has all of the security measures that we were discussing earlier, for instance, the time delay, potentially the self-destruct mechanism, all of which are particularly bad. And so the data is on there encrypted, and as best we can tell, Apple somehow stores data separate from the underlying operation of the phone-- the operating system. And so it would seem to be possible to install a new operating system on the phone without touching the user's data. 
+
+In fact, if any of you have ever updated Mac OS or Windows, it would be-- hopefully, it's supposed to go this way. Hopefully, you've been able to update your operating system from an older version to a newer version without starting over, without deleting all of your files. Now, some of you have probably had the experience where that does not go according to plan. But in theory, this should be possible-- update the operating system, but do not delete or touch the actual data. 
+
+So the FBI is proposing that Apple create an operating system that doesn't have these kinds of defense mechanisms, installed onto the phone so that they can get access to the data. Now, how is that possible? Wouldn't the suspect himself, who is now deceased, have to install that software for the FBI? What is the FBI counting on here? 
+
+AUDIENCE: Push it down somehow? That was my question. How do you install it if you can't log in to it? DAVID MALAN: Yeah. Exactly. So you would seem to have a chicken and the egg problem here, whereby, you would think, to update the software, you need to log into the phone. But to log into the phone, you need to update the software so as to avoid these defense mechanisms. 
+
+So lets just reason backwards. So not necessarily being the programmer at Apple, what must be the case? If the FBI thinks it can do this, what must be the case logically? What is the answer to that question? 
+
+It must be possible to do, presumably, somehow. So how might you do it? All you are is a user with an iPhone, maybe a Mac or a PC, maybe a cable, maybe a network connection. How might the FBI be assuming Apple can do this? 
+
+AUDIENCE: Maybe through automatic updates? 
+
+DAVID MALAN: Yeah. So very much in vogue these days is automatic updates where an Android phone, and iPhone, Windows Phone, whatnot will just automatically download updates. So maybe Apple could just update the operating system, as the FBI has requested, put a copy of the new operating system in the cloud on their servers, and just wait for the suspect's phone to connect automatically, as it probably does nightly or every five minutes or something, to pull down the new operating system. 
+
+Now, let's pause for just a moment. You probably don't want to do that for everyone in the world, otherwise we have an even bigger problem. Well, maybe the FBI might like to do that to everyone in the world, but probably won't go over so well. So just thinking logically here, is that possible? Is that a deal breaker? Can you roll out software to just one user in that scenario? How, would you think? 
+
+AUDIENCE: You make it available only for that device's address. DAVID MALAN: Yeah. Just for that device's address. And maybe that addresses is some numeric address. Maybe it's the device's phone number. Maybe it's the device's Apple ID, if you're familiar, like the email address that the human uses to log in to that-- for automatic updates to the App Store. So there's probably a way to do that. 
+
+So you have the operating system for everyone in the world, except for this one person who has his own version of the operating system getting pulled down. Now, maybe it's not on the network. Maybe that's a little easier said than done. So what's another mechanism? Well, it wasn't all that long ago that most of us here, Android or iPhone, were updating our phones via cable-- some kind of USB cable connected to your Mac or PC. And that might very well be possible. 
+
+And in fact, this is arguably a security flaw in the current version of iOS, and iPhones more generally, that that is in fact possible. You can update the software on the phone without unlocking the phone, it would seem. Now, why is that a security flaw? Because they have opened themselves to exactly this kind of request. 
+
+So as an aside, the outcome that seems inevitable from this whole process is there is no way that's going to be possible with the next version, you would think, of iOS. Right? They could have deliberately tied their hands-- Apple-- so that this isn't even possible. 
+
+Now, they've probably been assuming that because only they own the source code to iOS that this isn't really a threat because no one's going to sit down and build a whole operating system and figure out how to install it on an iPhone. But it's certainly possible now to just require a passcode moving forward to install this operating system. 
+
+So that's the gist of what they're asking. And the bigger picture that we can defer to perhaps a lunchtime style chat or dinner table style chat-- the government suggests that this tool could be used only once on one phone. And that's where privacy defendants really bring some strength to bear that just seems very unreasonable. As soon as the software actually exists, surely additional legal requests will come in, surely there's a risk of some bad guy getting access to that kind of software, installing it him or herself on phones, and so you're just opening, it would seem , a can of worms. 
+
+Now, even Obama recently, if you've read or listened to one of his recent speeches, commented, I think, that folks seemed to be fetishizing their phones, so to speak, whereby we have accepted over 300 years the fact that the police with a warrant hopefully can come into your home or can search through the contents of your drawers or whatnot, and yet, we seem to be putting a phone on this pedestal whereby it should be immune to all prying eyes. But I would argue, frankly, from a computer scientist's perspective, that is actually progress-- the fact that we now have the mathematical means to actually keep data truly secure by way of this thing called encryption, and we'll come back to in just a little bit. 
+
+So any questions about any of that just yet? Well, let me show you just how there is, in fact, one way to brute force your way into a phone. And in fact, this is not out of the question. This is just a short YouTube video of essentially a little robot someone built that does this with a little pad. 
+
+And I forget what it is. This is using an Android phone because an Android phone, in this case, is vulnerable to this attack. It will not timeout. It does not increase the delay between attempts. And so you can just do this-- I think for like three days, I think, was the caption in this video. After three days, this funny looking device will hack into an Android phone that has a four-- maybe it was a six digit passcode. So beware something like this-- you see this on the table near you. 
+
+This though is one mechanism. So what is Apple actually asking for? This article's a little longer. And it's the only other article we'll read today on paper or online. But let me invite you to take probably four or so minutes to take a look at the following. This is a longer URL here. But if you have the slides open in a tab, you can probably just copy and paste this from the slides themselves. And I have a printout here, if you would prefer actually looking on paper. 
+
+This is a more technical article that'll offer us an opportunity to actually tease apart more technical jargon, and see what the authors actually mean. So if you need to keep finishing up-- but let me toss the question out there, based on what you've read, are there any buzzwords, sentences, claims, that we should first translate or distill that would make everything more straightforward? Anything at all? So if I started to pop quiz us on what certain sentences mean, we should be OK? Oh, there we go. OK. AUDIENCE: [INAUDIBLE] building some code into RAM. DAVID MALAN: Oh, RAM. OK. Yeah. RAM-- let me define it first and we'll come back to that point. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: What they're asking for there. OK. So as a definition, RAM is Random Access Memory. This is the type of memory that all of our computers have. It is distinct from a hard disk or a solid state disk. And a solid state disk or hard disk is where your data is stored long term. So when you unplug the cord, even when your battery dies, any data or programs that you have on your hard drive or solid state drive remain there. 
+
+RAM, meanwhile is the type of memory that, when you double click an icon, or open some file, or run some program, it's copied from the hard drive or the solid state drive into RAM. RAM tends to be faster, albeit more expensive. And that's where files and programs live while they're being used. 
+
+So we'll come back to the implications of that in just a moment. But for those unfamiliar, that's what that's all about. And phones have it as well. Any other definitions or clarifications we can make? All right. So the pop quiz is what are the three, at least, things that the FBI is specifically asking Apple for technically? One of them does indeed relate to RAM. So that's the spoiler there. And we'll come back to what that means. But what does the government want? Yeah, Chris, you want to give us one other? 
+
+AUDIENCE: I think the ability to electronically brute force a password, DAVID MALAN: Yeah, electronically brute force the passwords. Again, brute force-- quick recap, what does brute forcing mean? 
+
+AUDIENCE: Try the number of combinations. DAVID MALAN: Again. Exactly. Just try it again, and again, and again, via brute force, not via intellect, not via cleverness. Just try every darn possibility. So the government wants a way to avoid brute force-- they want a way to be able to brute force it electronically, and electronically as opposed to what? 
+
+AUDIENCE: Manually. 
+
+DAVID MALAN: Manually. So as opposed to an FBI agent physically typing things in, and as opposed to silly looking devices like the one we just saw, automatically punching them, they presumably want to do this wirelessly. And in fact, if you read the government's request-- the court document-- via Bluetooth, Wi-Fi, whatever is possible-- or maybe via lightning cable that plugs into the phone itself that would be connected via USB to some hacking device that they have. 
+
+So they want the ability to brute force the phone electronically so that they can just do it faster than a human or a robot could do it. They want somehow RAM-- let me read that sentence. "It wants Apple to design this crippled software, the new operating system, to be loaded into memory, AKA RAM, instead of on disk so that the data on the phone remains forensically sound and won't be altered." 
+
+So it's not clear to us, the readers, exactly where the data is stored and where the operating system is stored. But presumably, as a matter of principle in law, the government doesn't want to risk mutating any of the bits-- any of the 0s and 1s, or the data on the drive-- by putting a new operating system onto the hard disk itself, lest that open them up to a claim that wait a minute that file wasn't previously there when the suspect owned the phone. 
+
+Rather they want to put the operating system in RAM, Random Access Memory, which is this faster speed place that is distinct, physically, from the actual hard disk. Of course, the operating system doesn't typically go there in its entirety, so that's a non-trivial request. So we've got this RAM request, we've got this brute force request, and one other at least. What else is the government asking for? Ben? AUDIENCE: Remove the timing delay. DAVID MALAN: Yeah. Remove that timing delay, which in this case is how many seconds, or milliseconds, or-- 80 milliseconds? Which sounds pretty fast. I mean most humans can only notice delays of 100 200 milliseconds before something actually feels slow. But 80 milliseconds is roughly 100 milliseconds. And 1,000 milliseconds is a second. So that's like-- you can do 10 attempts per second, give or take. 
+
+So that feels pretty fast, but not nearly fast enough if you've got a six digit code. And in fact, the article makes mention of that too. So if you've got a four digit code, as we discussed before, you might have one, two, three, four. 
+
+And each of these numbers can be the number 0 through 9. So that's 10 possibilities times 10 possibilities times 10 possibilities times 10. And this is where we got that 10,000 from. If you have a 6 digit code, you of course just add this here, which is another 10, and another 10, which means we can just add another 0. And now, we're up to a million possibilities. 
+
+So as an engineer, if 6 is too few, a million-- that still feels relatively low, especially if you can do 10 per second. It gets a little boring, but you can do it via brute force. What might be better than a 6 digit passcode? What's better? 
+
+AUDIENCE: [INAUDIBLE] digits or letters and different combinations [INAUDIBLE]. 
+
+DAVID MALAN: Yeah. So let's take both of those in turn. So slightly better than a six digit passcode might be, of course, a seven digit passcode, which gives us 10 million possibilities, and just an additional digit. Better than that though would be an 8 digit passcode, 9 digit passcode, 10 digit passcode. 
+
+But push back, now. Now, you're not the engineer or the security person. Now you're the product manager or the marketing person. Why is a seven digit passcode not better than a six digit passcode for some definition of "better"? AUDIENCE: It takes longer for the user. DAVID MALAN: Yeah. It takes longer for the user. It takes an additional click. And slightly more compellingly too, I would say, is what? AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah. It's slightly harder to remember the longer and longer it gets. We humans, at least in the US, have kind of maxed out at 10 digits for phone numbers. And even that, I know like three people's phone numbers these days. So that's kind of a wash. 
+
+So there's a point where it's just not a good user experience-- or UX would be the trendy way of saying that. So what's better than just using digits? Well, instead of 10 possibilities, why don't we just get more clever-- and instead of using 10 digits, 0 through 9. 
+
+How else could we make a 6 digit passcode-- a 6 symbol passcode more secure? What did you propose? Letters. So instead of maybe digits, why don't we just do letters, like 26 times 26 times 26-- and wow, this is actually getting pretty big fast. 
+
+So if I go here-- this is my little calculator. And if I do 10 times 10 times 10 times 10 times 10 times 10. That's where we got the million possibilities from for a 6 digit passcode. But if instead we're doing 26 times 26 times 26 times another 26, 26, 26-- this is now giving us 308 million possibilities. 
+
+And is that reasonable to switch from numbers to letters and still have it 6 digits? This means you need a 6 letter word. Most of us could probably remember a six digit English or some other language word. That's pretty reasonable. 
+
+But we don't need to restrict ourselves to just letters. Why don't I get a little more ambitious? What might be slightly better than letters here? Be the engineer proposing an even better solution. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: A combination-- characters. So not just 26 letters, but if I add back those numbers from before-- well, everything's going wrong-- that's 36. That's still 26. That's 36 times 36 times-- and so forth. So that's getting bigger. 
+
+How much bigger can we get this address space, as someone might say? What else could you add in besides letters and numbers? I'm up to 36. I'm 26, a through z. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah. So we can really go crazy with the keyboard. Or even more simply, we can keep it simpler. 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah. If we go uppercase and lowercase, now I have 26 plus 26. So that's 52 already-- plus another 10. That's 62. And just to see the implications of this, now, let's just do another bit of math. So 62 times 62 times 62 times 62 times 62 times 62. That now is giving me 56 billion possibilities. 
+
+And it's still kind of reasonable. Could a human remember a 6 symbol-- where a symbol is just a letter or a number character password? Probably. That doesn't feel all that unreasonable. So what more can we add in? And as an aside, has anyone here, ever heard the phrase base 64? Base 64? 
+
+So we'll come back to this tomorrow when we talk about representation. Long story short, all of us humans in the room most likely understand base 10, the so-called decimal system. And all of us in this room count using 0s through 9s. We're going to see tomorrow, in more detail, that a computer counts using only 0s and 1s, the so-called binary system. So dec-- decimal-- is 10. Bi-- binary-- is 2. 
+
+Turns out there's also base 64 for which there isn't, to my knowledge, a really fancy word. But that means that you have not 0 through 1 or 0 through 9, you essentially have 0 through 64. But you use letters in that mix. And so we'll actually see that the means by which computers, for instance, attach files in an email these days-- an email, of course, might have an image on it-- maybe even a sound or a movie file. But email is just text. 
+
+It turns out that you can represent things like music, and videos, and pictures and the like as text using something called base 64 where you use not only lowercase letters, and upper case letters, and numbers, but also the underscore character and the slash on a keyboard. So more on that to come. So this is just getting really big. And now, as the security researcher, how could you make a pass code even more secure? We're now using lower case letters, upper case letters, and numbers. And you proposed, Victoria, just a moment ago-- AUDIENCE: [INAUDIBLE] DAVID MALAN: Dots are symbols. And now, we're really just kind of getting crazy. We're using all of the keys on the keyboard. And let me estimate that there are 128, give or take, possibilities on a typical keyboard, depending on your language and such. And there might even be more than that. 
+
+So now, let's still assume that we're only using a 6 digit passcode and that's why I have 6 of those 128. Let's see if I can pronounce this now. All right. So that's millions, billions-- four quadrillion possibilities, if I counted this correctly-- four quadrillion. Let me just double check, lest I be exaggerating our security. 
+
+So that's hundreds of thousands, millions-- sorry, trillions. I overestimated by a factor of a thousand. My apologies. 4 trillion possibilities. So that's more secure, right? Especially when we began this discussion with 1 out of 10,000 possible codes. Now, we're up to 4 trillion. 
+
+Now, does this mean a phone is "secure" if it is using a passcode that is 6 characters long, each of which can be a number, or a letter, or some funky symbol on the keyboard? Is a phone secure now if this is in fact what the suspect was using? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah. And that's a perfect answer. You conditionally explained that by reasonable standards-- probabilistically, you're not going to get into this phone anytime soon. However there is a chance, if small chance-- one out of 4 trillion-- that you might actually get the answer right on the first time. 
+
+And the reality is, too, that if this suspect is like most humans-- probably many of us in his room-- he probably did not choose some crazy password with funky symbols on the key because why? Most of us wouldn't remember something that's so funky as that. And so it probably is maybe someone's birthday, or some word, or some phrase, or something more memorable. 
+
+So it's probably not even as "secure" as it might be mathematically. So where does this leave things? It remains to be seen what Apple is going to agree to here. But it certainly has implications more broadly for society. But the takeaways for today are not so much the legalities, not so much the ethics, or any of that, but really the understanding of what's actually going on. 
+
+And when you read something like this to think to yourself, is this an author just using buzzwords, is there actually technical meat to this comment, and what might I go and Google in this case? And in fact, probably one of the more technical things in here was this mention of RAM or memory, and that was simply for, presumably, the legal issue to which they allude. 
+
+A secure enclave is, I think, Kareem, you mentioned earlier this idea of exponential backoff, so to speak-- or I put those words in your mouth. And that's a feature not in this phone. It apparently just has the 80 millisecond delay so it doesn't get worse, and worse, and worse, over time. All right. Any questions? Yeah, Dan. 
+
+AUDIENCE: If you don't mind me asking, where do you stand on the issue? DAVID MALAN: I would side, absolutely, with Apple. I think math is not something that you should poke holes in. And I think the reality is, as even this article cites, you can poke holes in the iPhone, you can poke holes in the Android, but there will always be some alternative that a particularly smart adversary can use. 
+
+So these kinds of measures really just protect us against the dummies-- the lesser adversaries, which has value, but the reality is a determined adversary will absolutely keep encrypting his or her data by some other mechanism, whether it's via a mobile application, a desktop application. I think this is inevitable, and I also think this is a good thing as a matter of principle. 
+
+AUDIENCE: My question is, at the end of the day, [INAUDIBLE] there is the one guy who can access everything. 
+
+DAVID MALAN: Yeah. 
+
+AUDIENCE: So is it easy for FBI [INAUDIBLE] or somebody else instead of other companies [INAUDIBLE]? 
+
+DAVID MALAN: Yeah. And I think, especially in this country, at least where there were the recent revelations as to just how far the NSA has been going that I, especially nowadays, don't buy the argument that we'll just use it in this particular case. I think that sets a bad precedent. 
+
+And already, there is a fundamental paranoia we should have. All of us, like chumps, if you will, are walking around with cameras, and microphones, and GPS responders in our pockets, willingly, telling someone potentially, even if it's just Apple or just Google, where we are at all times. And there really is nothing stopping Apple or some malicious engineer at Apple from somehow embedding in iOS a feature that only turns on David Malan's microphone 24/7, and sends that data up to Apple. 
+
+And in fact, an interesting side note here this is kind of sort of already happening as a "feature." If you read the news about a year ago, Samsung started, rightfully so, to take some flak in the press because they have these "smart TVs," where as best I can tell "smart TV" really just means "TV with bad user interface." But a "smart TV," as a function of hardware, typically has a microphone and a camera these days. And why? Why does a TV need a microphone or a camera? 
+
+AUDIENCE: Skype. 
+
+DAVID MALAN: Skype, which is reasonable if you want to use it in a conference room or at home for video conferencing-- pretty reasonable, pretty compelling. 
+
+AUDIENCE: Voice commands. 
+
+DAVID MALAN: Voice commands-- if you want to say change channel, lower volume, raise volume, turn off. That's not unreasonable, a la Siri, and Google Now, and such. Why else? 
+
+AUDIENCE: To spy on you. DAVID MALAN: Yeah. So that's what the paranoid in us might say. And the reality is, whether by a bug or deliberate intent, this is absolutely possible. Let's give them some credit. Why might you, as a user, actually want a camera in your TV-- or what's the proposed feature there? Why is there a camera in your living room or in your bedroom staring down at you all-- 
+
+AUDIENCE: Security [INAUDIBLE]. DAVID MALAN: OK. Security. You could argue that. In this case, it's not so much the consumer TVs that are in the business of security. In this case it's, because of a [INAUDIBLE] feature. Why is there a camera in a TV? AUDIENCE: Video games detecting [INAUDIBLE]. DAVID MALAN: OK. Yeah. Closer. And some TVs probably do that-- have built in games. This-- and I frankly think is a little stupid-- gesture control. I think stupid insofar as I don't really think we're there yet where we're living in the Jetsons where it just works. Now, I think you probably look like an idiot to your TV when it doesn't work. 
+
+But gesture control, whereby the world is getting better, incrementing a la Xbox Kinect, if you're familiar with the video game system, being able to detect motion. So maybe this means lower the volume, this means raise the volume, maybe this means swipe left to change channel, swipe right to change channels. 
+
+This is one of the reasons-- this is the purported reason that they have the thing in there. But what Samsung took some flak for just a few months ago was that if you read their privacy policy, which no one of course is going to do, they encourage you in their privacy policy not to have private conversations in the vicinity of your TV. 
+
+[LAUGHTER] 
+
+And we laugh, but like it's actually there. And that is because in order to implement this feature, the TV is always listening. It has to be-- or it's always watching. And even if you have some defense mechanism in place-- kind of like Siri where you have to say, hey, Siri, or OK, Google, or whatever-- the TV still has to be listening 24/7 for you to say, hey, Siri, or OK, Google. So hopefully, that's all staying local. And there's no technical reason why it couldn't stay local, software updates aside. 
+
+But in reality, very often, Siri and Google alike are sending these data to the cloud, so to speak, where they get processed there by smarter, faster, constantly updated computers, and then send the responses back down to the TV. Oh and the fun thing here-- we took a look at this for another class I teach. We'll see this a little later today. 
+
+There's something in the world called security and encryption, which we're getting to right now. And in theory, there's something called HTTP and HTTPS, the latter of which is secure. The S is for Security, and we'll come back to that. And then they operate on something called different ports, different numeric values inside of a computer signifies if this is secure or not secure typically. 
+
+Samsung, I believe, in this case, was using the "secure port," so to speak. They were using the secure address, but they were using it to send encrypted data. So some security researchers essentially connected a device to their TV and realized when they spoke commands to their TV, it was being uploaded to the cloud through the correct channel, so to speak, but completely unencrypted, which meant anyone in the vicinity or anyone on the internet between points A and B could be seeing and listening to your voice commands from your living room or your bedroom. 
+
+So there too, not only are we vulnerable potentially to maliciousness, also just stupidity and bugs, in this case. So these are the kinds of things to be ware. And again, the goals for today and tomorrow are to understand not necessarily how you would implement that underneath the hood, but just reason backwards, if my TV is responding to gesture control and my words, I'm guessing my TV is not so sophisticated as to have the entire English or the entire Spanish or whatever language I speak dictionary built into it constantly updated. It's probably easier just to send those commands up to some server-- Google, or Apple, or Samsung, or the like. And indeed, that's what's typically happening. So mind what you say in front of your TVs starting tonight perhaps. 
+
+All right. So that leads us then to encryption with a more technical look. And we won't go too deep a dive into this, but this article we looked at did mention something called AES-- Advanced Encryption Standard, is what it stands for. And it made mention of something juicy, a 256-bit AES key-- secret key. And I'll just pull it up if you're curious to see where it was. It was in the-- How Would They Do That. So somewhere inside of an iPhone and an Android phone, presumably, is some kind of secret key. And it's this secret key that keeps data secure. 
+
+And in fact, have any of you and your iPhones ever gone to Settings-- I think, Settings, maybe General, and then Erase iPhone? It's somewhere under Settings. You can erase your iPhone, and it tells you that you're going to erase it securely. And what does it mean, typically, to erase a phone or a computer securely? And actually, let me see if I can give you just a quick screenshot. We can probably find this. So, iphone erase securely setting screenshot. Let's see if we can just find a quick photo. Erase data-- that's not-- here it is. 
+
+So this is the screen I was thinking of. You can generally, on an iPhone, navigate to a screen that looks like this. And Erase All Content and Settings-- if you click that, it tells you it's going to do it securely. What does securely mean in a phone or a computer? Ben? 
+
+AUDIENCE: In a way that's difficult to then go back and actually find it. DAVID MALAN: Good. So in a way that's difficult to go back and find what you've erased. So erasing it truly means erasing it. And the industry does not have a good history with this. 
+
+Back in the day, most of us probably had PCs in some form. Some of you still might. Back in the day, when we still had floppy disks and certain other media, it was very common to run a format command, or an erase command, or a partition command, which are all generally related to getting a drive-- a disk ready for use. 
+
+And back in the day, I can even visualize it now, the DOS-- if you're familiar, the command-- the black and white prompt in Windows-- or even before Windows-- would yell at you in all capital letters, ALL DATA WILL BE DESTROYED or ALL DATA WILL BE ERASED-- complete lie. It was a complete technical and actual lie because, typically, what a computer does-- even to this day in most contexts is that when you drag a file to your Recycle bin or to your trash can on Mac OS, or Windows, or what not-- we all probably know that it hasn't actually been deleted yet, right? You have to actually do what to actually delete a file? AUDIENCE: Empty the trash. DAVID MALAN: You have to empty the trash can or empty the Recycle bin. We've all been taught that, and that's the mental model we have in the real world. That is also a lie. Almost always, by default these days, when you empty your trash or empty your Recycle bin, even by going to the right menu option, or right clicking, or Control clicking and following good human intuition, it's a lie. 
+
+All the computer is doing is "forgetting" your file. In other words, somewhere inside of your computer, you can think of there as being a big cheat sheet, a big Excel file, a big table with rows and columns that says a file called resume.doc is at this location on my hard drive, and a file called friends.text is in this location, and profilephoto.jpeg is at this location in my hard drive. 
+
+So whole bunch of file names-- whole bunch of physical locations inside of your computer. And when a computer "erases" a file, typically all it does is it deletes that row or crosses that out. It leaves the file on the disk. It just forgets where it is. And that's useful because if it's forgotten where it is, it can reuse that space later on. It can just put another file on top of it. And tomorrow again, we'll talk about 0s and 1s-- that just means changing some 0s to 1s, some 1s to 0s, leaving some alone-- but generally, reconstituting a file out of bits, 0s and 1s. 
+
+So what is this actually doing? Thankfully, in iOS's case, since Apple actually is quite good at security, even on Mac OS, erasing your files does in fact do it securely. But how? Well in Mac OS and Windows, if you have the right software, what it will-- to erase something securely does have some technical meaning. And again, we'll come back to this in more detail tomorrow. 
+
+But to erase a file securely does mean doing something to it so it can't be recovered. But what does that mean? Well, if a file, for today's purposes, is represented with 0s and 1s somehow-- I have no idea how, more on that tomorrow. But 0s and 1s-- the way you erase a file securely is you maybe change all of those 0s and 1s to just all 0s or just all the 1s-- just scramble them up completely randomly so that if someone thereafter looks at those 0s and 1s, it's meaningless. And it's not recoverable because you did it randomly, or you made them all 0's or all 1's. 
+
+That's not actually what Apple does. Because it turns out when you erased your iPhone, it doesn't take all that long. No, in fact, if you erase a computer hard drive, it might take an hour, it might take three days to literally change every 0 and 1 to some other value. There's just a lot of bits these days, especially if you have a hard drive that's one terabyte, so to speak-- four terrabytes-- will take a really long time. But Apple does it within a few seconds-- maybe a couple minutes, but reasonably quickly. 
+
+Now, why is that? It all relates to the same discussion. Apple, by default, keeps all of the data on your phone encrypted-- scrambled in some way. And so to erase a phone, you don't necessarily have to change the data-- because the general principle of encryption-- the art of scrambling information or cryptography as the science itself is called, is that to an adversary looking at encrypted data, it should look random-- he or she should not be able to glean any insights. They should not be able to realize-- this person seems to use the word "the" a lot. Just because I see some pattern emerging again and again-- it should look completely random statistically to an adversary. 
+
+So by that logic, when Apple allows you to erase all content in settings, the data already looks random to any person on the streets who might look at your phone's data. So they don't have to change your data. All they have to do to erase your phone is do what do you think? AUDIENCE: [INAUDIBLE] your code incorrectly. DAVID MALAN: Yeah. Well, you could do-- yes. Physically, they could just type your code in, 7 7 7 7, 10 times incorrectly. But rather, you can just forget the secret key. So encryption is all about having, generally, some secrets. 
+
+So much like you can't get into a bank vault without a combination, much like you can't get into your front door without a physical key, you can't get into your hotel room without one of those magnetic cards or such, in theory, there is something special something that only you know or have that allows you access to some secure resource. In the case of your phone, it's the four digit code. In the case of your hotel, it's the little card key. In the case of your home, it's the physical key. Any number of things can be a key. 
+
+But in computing, it's almost always a number, where a number is just a sequence of bits. And again, a bit is just a 0 or 1, but more on that tomorrow. So when Apple claims to be using 256-bit AES secret key. That just means that the secret key inside of your computer is something like 1011001100000. 
+
+I'm just making this up as we go, and I won't bother writing out 256 possible 0s and 1s. And we'll see tomorrow how this maps to an actual number. But for now, just know it's a really long pattern of 0s and 1s. And that secret-- that's like a really big magnetic card key for your hotel room that only you have, or it's like a really special metal key with lots of little teeth that only you have. 
+
+How is this useful? How was it useful to use a key? Well, let's do this. Let's start with truly a clean slate. And let me propose, just as in a little experiment here for say, a moment-- how about we take the word "hello." 
+
+And suppose that you're back in middle school and you want to send the boy or girl across the aisle that you have a crush on a secret message, "hello," but you don't want to be embarrassed if the teacher picks up the scrap of paper that intercepts the note that you're passing to him or her. 
+
+You want to encrypt this information. You want to scramble it so it just looks like you're writing nonsense. And probably, it's something juicier than "hello," but we'll just take the word "hello." 
+
+How could we go about encrypting this message between the two little kids on a piece of paper? What should he or she write instead of "hello"? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: What's that? 
+
+AUDIENCE: Number of letter in the alphabet. 
+
+DAVID MALAN: The number of letter in the alphabet. OK, so if it's a b c d e f g h, I could maybe do something like 8 for that. And a b c d e-- and I can do the 5 for that. And similarly, I can just come up with a numeric mapping that would presumably just confuse the teacher. And he or she probably doesn't have enough-- doesn't care enough to actually figure out what it is. So let's consider though, is it secure? Why not? 
+
+AUDIENCE: Because it's easy to guess it. If in case someone is really interested. 
+
+DAVID MALAN: Yeah. If they are really interested and if they have more numbers to go with than just five-- if there's like a whole paragraph-- and it just so happens that all of the numbers are between 1 and 26, that's kind of an interesting clue. And you could brute force that. Let's see if a is 1, and b is 2, and c is 3. And if not, maybe let's try some other pairing. But a determined teacher-- an adversarial teacher-- could certainly figure this out. So what else could we do? A simple encoding-- and this truly is called a code-- not to be confused with programming code or programming languages-- a code. And in fact, if you recall stories from yesteryear, especially in the military, a code book-- a code book might literally be a physical book that's got two columns, one is a letter, one is a number-- or some other such symbol-- that just maps to the other. And a code is a mapping from one thing to another. 
+
+So that would be a code. Encryption though-- or a cipher as you might say-- is more of an algorithm. It's a process. It's not just something you look up. You have to apply some logic to apply encryption, or a cipher in this case. So what's slightly more sophisticated, do you think, than that? What else could we do to send the word "hello" semisecretly? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: OK. So we could write it backwards. So we could do something like o-l-l-e-h or such, and it starts to look a little more complicated. So it's kind of scrambled. And you have to know the secret, and the secret is "backwords" or "reverse" or some sort of mechanism there. 
+
+But that is an algorithm. That is a process where you have to move this letter over here, this letter over here, this letter over here, and you have to repeat it again and again. And we'll see tomorrow that this repetition is something called a loop, which is fairly intuitive, but it's very common in computer programming. What else might we do? 
+
+AUDIENCE: You could increase the first letter by 1, second letter by 2, third letter by 3 [INAUDIBLE]. DAVID MALAN: Very nice. So we could do something like-- and increase them-- you mean like h becomes i. And let me keep it simple for the moment. Maybe e becomes f. And this becomes m m, and this is p. 
+
+Now, I'm kind of liking this because now it doesn't jump out at you what has happened. And it looks like nonsense. But in terms of the security of this cipher, and the cipher here is kind of like a plus 1 algorithm of just adding 1 letter to each of my own letters. And just as a corner case, what should I do if I hit z? 
+
+AUDIENCE: A. 
+
+DAVID MALAN: Yeah. Probably just go back to a. But what if I want an exclamation point? Well, we'll have to come back to that sometime. So there's some corner cases, so to speak-- things you need to anticipate if you want to support those features. But what is attackable about this? It's obviously not that secure because we sort of thought of it and wrote it down super fast. So presumably, a smart adversary could do the opposite. But what information is leaked in this particular ciphertext? Computer scientists would call this cleartext and this ciphertext-- ciphertext meaning just scrambled or encrypted. We're leaking information, so to speak, with this ciphertext. I know something about the original word, right now. 
+
+AUDIENCE: Same number of letter. DAVID MALAN: Same number of letters. So that's leaking information. I have sent my crush a five letter word, it would seem. And what else? 
+
+AUDIENCE: Yeah. There are letters. 
+
+DAVID MALAN: They're still letters. 
+
+AUDIENCE: Third and fourth characters repeat. DAVID MALAN: Yeah, the third and fourth letters repeat. And this is very common-- this realization for what's called a frequency analysis. And I used the word "the," anticipating this earlier. "The" is a very common English word. And so if we actually had a paragraph or a whole essay that was somehow encrypted, and I kept seeing the same patterns of three letters, not t-h-e, but like x-y-z or something like that, I might just guess, on a hunch, based on the popularity of "the" in English that maybe I should start replacing every x-y-z with t-h-e, respectively-- and you chip away at the problem. 
+
+And in fact, if you've ever seen a movie about cryptographers, especially during military times, cracking codes-- a lot of it is this trial and error, and leveraging assumptions, and taking guesses, and seeing where it goes. And in fact, m-m-- we sometimes see m-m in the English word, so maybe this is unchanged. We see e-e, we see o-o, we see l-l, we don't really see y-x. And there's bunches of others I could probably contrive that we never see. So we've narrowed our search space, so to speak. In other words, if the problem initially feels this big, as soon as you start ruling out possibilities or ruling in possibilities, starts to get a little more tenable, a little more solvable. And in fact, this is an example actually of something called a Caesar cipher, where a Caesar cipher is a rotational cipher where one letter becomes another and you just add uniformly the same number of changes to each letter. And Dan actually hinted at something slightly more sophisticated earlier, which we might add, for instance, 1 letter to the first letter. e-f-- Maybe this becomes g, two away. Maybe this becomes m-n-o-- this time it becomes p. And then so forth. 
+
+We add incrementing values to each of the letters, which is harder because, now notice, l-l does not look like m-m, anymore. We now need to be a little fancier. And this is what's called, after a French guy, a Vigenere cipher, where you're using disparate keys, different values. And in fact, let's tie that back together. 
+
+We used the word "key" before, both in the physical sense, for hotels and homes. But in the electronic sense, a key is just a secret value, typically. And a secret value in this earlier case, i-f-m-m-p-- what is the secret key I'm using for this cipher that Dan proposed earlier? AUDIENCE: Plus 1 [INAUDIBLE]. DAVID MALAN: Yeah. The key is just the number 1-- not the most secure, but it's simple. But all of these security mechanisms require what-- that not only I know the secret is 1, but also what? Who else has to know it? AUDIENCE: The recipient [INAUDIBLE]. DAVID MALAN: The recipient has to know it. And just for clarity, who must not know it? AUDIENCE: The teacher. DAVID MALAN: The teacher-- right? Unless he or she has the time and energy to brute force it or figure it out. So super simple idea, but it maps to what you're reading about and hearing about every day in the news. But the 256-- this is essentially 1 bit. 256 bits is much bigger. And again, we'll get a quantitative sense of that tomorrow. Any questions then on Apple, security, encryption, in these building blocks? Yeah, Roman. 
+
+AUDIENCE: [INAUDIBLE]. Do you have any insights [INAUDIBLE]? DAVID MALAN: Oh, it's good question. I don't know internally-- and Apple, of all companies is particularly quiet when it comes to those kinds of implementation details. But I can say more generally, a fundamental tenet of security, at least in the academic community, is that you should never have what's called security through obscurity. You should never do something to protect data, or users, or information, whose security and privacy is all grounded on no one knowing how it works. 
+
+In other words, what the article alludes to, AES, Advanced Encryption Standard-- that is actually a global, public, standard that you can open up a math book or go on Wikipedia and actually read what the algorithm is. And much like the algorithm here is the super simple plus 1, this is more complicated mathematics, but it's public knowledge. And this has a number of upsides. One, it means anyone can use it and implement it. But two, it also means that millions of smart people can review it and make sure to speak up if it's flawed in some way. 
+
+And so in fact, one of the best defenses against governmental back doors, whether in this country or any other, is to just publicly discuss these kinds of algorithms because it's very unlikely that the entire world of academic researchers is going to collude and actually tolerate hidden back doors in algorithms like that. 
+
+However, you do need to keep something secret. And so just to be clear, when you're using a cipher, like AES, or something like Caesar, or Vigenere that we alluded to there, what does have to be kept secret? Not the algorithm, not the process. AUDIENCE: The code. DAVID MALAN: The code, right-- and the key, to be clear. And so to be super clear, even though this is a trivial example, the cipher, or algorithm, that we've generally been using in this discussion is this thing here, the plus. So addition is our super simple cipher or algorithm. AES would be a much more complex equivalent of the plus. You do a lot more math, a lot more additions, multiplications, and so forth. 
+
+But the key is not the same as the cipher. In this case, it's also super simple-- just the number 1. In Apple's case, it's some 256-bit pattern of 0s and 1s. So I'm not really answering your own question because I can't really speak to what Apple knows, but the Apple engineers have disclosed that they implement this algorithm to some extent. We have to trust that they're being true, and we have to trust that they didn't, nonetheless, build in some secret backdoor for the NSA. And that's fundamentally hard to do. 
+
+In fact, the frightening thought I can leave you with on this particular subject is, much as we might all talk about this and much as Tim Cook might assure us that these phones do not already do what the FBI wants them to do, it's nearly impossible to verify or audit as much. Do we even know that my camera's not on right now? Do you know that your own Macbook's camera's not on right now? Well, most of you might know intuitively or from experience, well, if the green light's off, what does that mean? AUDIENCE: It's not on. DAVID MALAN: It's not on. OK. You've been taught that, but why couldn't you write software that turns off the light but turns on the camera? There's really no fundamental defense against something like that. 
+
+So even we humans can be socially engineered by our computers to trust one truth-- one reality, when really we can then be taken advantage of because of that exact same assumption that a green light means the camera's on. That's not necessarily true. 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah. So actually, I always kind of smile, but I appreciate it when you see real diehards around campus-- you have tape on yours. OK. So putting tape on it is a more surefire thing. Of course, there's still a microphone that you can't really tape over as effectively. But these are the kinds of trade-offs. 
+
+And in fact, one take away hopefully for today should be absolute terror when it comes to these kinds of things because, at the end of the day, we have to trust someone. And that too is a fundamental tenet of security. Ultimately, you have to trust someone. You have to trust that the person you have a crush on is not going to tell his or her best friend what that secret code is, and then disclose that same information that you're trying to keep secret. All right. Let's take a look-- yeah, Dan. 
+
+AUDIENCE: What does the acronym CBC stand for under the latest AES? 
+
+DAVID MALAN: Oh, CBC is block-- what's it stand for-- block [INAUDIBLE] CBC. Cypher Block Chaining. So Cypher Block Chaining is an acronym that refers to, I believe, the process of what goes on inside of an algorithm for cryptography, in this case, whereby it's iterative. You do something again, and again, and again. And you take a previous output, and feed it into your process as a subsequent input. So you keep feeding the results back into themselves. 
+
+And an analog here might be-- I should be able to come up with a good metaphor here. Let me try to think of a better example here. Let's see if we can come up with a quick picture. Let's see if Wikipedia gives us a picture that would explain-- no, that's good. This is a more pictorial complexity than we really want. But the idea here is that if you are enciphering something, it gets fed in, then the output gets fed in again, then it gets fed in again, so that your iteratively scrambling information using previous output as a subsequent input. Let me see if I come up with a better explanation. Give me lunch time to noodle on that one. 
+
+All right. Let's come back here. I want to encourage you-- your only homework for tonight, if you'd like, and you haven't seen it, is to watch a 20 minute video, if you have internet access and go on YouTube. Last Week Tonight is a brilliant show by John Oliver from The Daily Show. 
+
+And at this URL here, you can actually look at his look-- his humorous, but simultaneously serious look at the same issue. And hopefully, even more of that video will make sense. And this is in the slides, too. So if you have the URL up with the slides, this is here, too. And we'll get you online during the break as well. 
+
+So in our concluding minutes, let's take a quick look at one other example of a technology that's ever present these days, file sharing, both in consumer and in corporate contexts. And that is by way of, for our purposes, something called Dropbox. So for those unfamiliar, in a sentence or two, what problem does Dropbox solve? 
+
+AUDIENCE: [INAUDIBLE] and then get it on your iPhone or iPad anywhere. 
+
+DAVID MALAN: Yeah. Exactly. It allows you to share files often with yourself so that if you do have an iPhone, an Android phone, a Mac, a PC, multiple Macs, multiple PCs, home computers, work computers, you can have a folder that in turn has its own sub folders that automatically get synchronized across all your devices. And it's wonderfully useful. 
+
+For instance, in the morning, if I'm preparing for class, I might get my slides, or videos, or pictures ready, drop them in a folder on a home computer, then walk to school, and open up a work computer here, and voila, it's magically there-- unless I screwed up, which has happened sometimes, and there's nothing more stressful than having done all that work hours prior and you have nothing to show for it when it comes time for class. So it fails sometimes, or the human fails, but in theory that's exactly what it's supposed to do. 
+
+More compellingly, for other users, is that I can very often then Control click or right click a folder or file that I'm using with this service, and I can send a URL that results from that click to a friend, and he or she can then download a copy of that file. Or better yet, we can share folders so that if I make a change, then Victoria can see my changes in her folder, and Kareem later in the day can edit it and see that same file and folder as well. So there's a lot of implications here. And we'll just scratch the surface, and try here to spook you a bit into not taking for granted how all of this works and what the actual implications are for things that you're using. 
+
+In particular, let's consider how Dropbox must surely work. So if I'm over here-- let's draw a quick picture of me. If this is little old me-- this is little old me on my laptop here. And let's say this is Victoria with her tape on her camera. And here we have Kareem, with his laptop here. And then somewhere is this thing called the cloud, more on that this afternoon as well. 
+
+So how does Dropbox work? Suppose I create a folder on my computer, and I install this software called Dropbox. But we could also be talking about OneDrive from Microsoft, or we could talk about the Google Drive, or any number of other products. It's all fundamentally the same. 
+
+If I've got a folder called Dropbox on this computer, and I've just created a PowerPoint presentation, or an Excel file, or an essay, and I drag it into that folder, what must happen in order to get it to Victoria's computer or Kareem's computer? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah. So somewhere in here, there's a company. And we'll call this Dropbox. And this is David. This is Victoria. And this is Kareem here. 
+
+So somehow, I must have an internet connection that leads to the internet-- more on that after our break-- that gets stored on servers in Dropbox's headquarters, or data center, wherever it is. And then Victoria's computer and Kareem's computer get that data how? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Have to say again? AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah. I have to share it with them. So I have to have sent Kareem to Victoria a URL, or I have to click some menu option and type in their e-mail address so it automatically gets shared. Let's suppose I've done that. What then happens in terms of this picture? 
+
+AUDIENCE: You need a user account and a way to authenticate-- DAVID MALAN: Yeah. We're going to need a priori some kind of user account. So I've got to register for Dropbox. Each of you probably has to register for Dropbox, at least in this scenario. But then ultimately, that file gets transmitted down in this direction, just as it went up from my direction there. 
+
+Similarly, if we've used a certain feature of Dropbox, you can either make copies of files or actually share the originals. If you guys start to make copies, then in theory those should propagate back to me. 
+
+So if you're a particularly paranoid user, or you're the CTO or chief security officer at a company, what kinds of questions should you be asking here about this whole process? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah. OK. So I am now the head of Dropbox. Yes. We use industry standard encryption to secure your data. Satisfied? Why not? OK, I'll be more specific. I use 256-bit AES encryption just like our friends at Apple do. 
+
+AUDIENCE: But all that data exists on all those machines, and all those machines are a vulnerability. DAVID MALAN: OK. True. So suppose there's a whole bunch of servers in Dropbox's headquarters, or data center, or all of their data centers, and it's the data-- and this is a feature-- is replicated-- copied-- across multiple servers because, God forbid, one computer, one hard drive dies. These days very common is to replicate data across at least two computers or two hard drives-- sometimes as many as five or more so that, statistically, even though, yes, lightning might strike all of Dropbox's data centers simultaneously, or they might get physically attacked, or compromised all at the same time, the probability of that happening is very, very, very low. So for all intents and purposes, my data is backed up safely. 
+
+But it's encrypted. So what? Doesn't matter if every copy gets stolen, doesn't matter if the data center gets infiltrated, my data is still encrypted so no one can see what it is. What questions should you continue asking? AUDIENCE: Is it all encrypted the same way across [INAUDIBLE]? 
+
+DAVID MALAN: Embarrassingly, yes. We use the same key to encrypt all of our customer's data. AUDIENCE: But then it's very easy to unencrypt and decrypt [INAUDIBLE]. DAVID MALAN: It is. And that's a feature. We can do this super fast for you, which is why the file syncs so quickly. We use the same encryption-- the same key for everyone. It's a feature. 
+
+And I said it sheepishly-- and this actually, I believe, is still actually technically true. They do use the same secret key, whether it's 256 bits or more, for all customer's data. And this is partly for technical reasons. One, if I am sharing a file with Victoria and Kareem, and they want to be able to access it, I've got to somehow decrypt it for them. But I don't really have a mechanism to give Victoria and Karim a secret key. 
+
+If I email it to them, I'm compromising it because anyone on the internet could intercept my email. I certainly am not going to call them with a sequence of 256 0s and 1s or more, and tell them to type it in. 
+
+It could just be a password, but I'd still have to call them. And in business, this isn't going to work very well. If you want to share a file with 30 people, I'm not going to make 30 darn phone calls. And I can't send out an email because that's insecure. 
+
+So there's really this fundamental problem of sharing it. So you know what, it's just easier if Dropbox does the encryption for us. But if they do it for us, only they know the key. And if they reuse the key, that means that all of the data could be compromised if that key itself is compromised. Now, having asked at least one buddy at Dropbox, they do have-- and I think they have white papers that testify to this fact-- they do have very, very few people who have access to that key. The computers have to have it in memory, and it's got to be locked up in some vault somewhere so that, God forbid, the computers crash or need to be rebooted, someone does have to type in that key at some point. 
+
+So that is really the secret sauce if there were any. But this definitely has implications for my data. It's disclosable, if someone compromises that key or that data center. 
+
+But it also allows Dropbox another feature. It turns out-- and this is kind of a business cost-- if you used a different key for every customer, or even more so for every file, mathematically, every file, when encrypted, would look different from every other file. 
+
+So even if I had two copies of the same PowerPoint presentation on Kareem's computer and on my computer, if those files were encrypted with different keys, the ciphertext-- the scrambled thing-- would look different. This is not a good thing because it doesn't let Dropbox realize that those files are the same, as we've kind of discussed earlier. Why might Dropbox want to know when two users or more are sharing the exact same file? Why is that useful information for Dropbox from a business perspective? 
+
+AUDIENCE: Space. 
+
+DAVID MALAN: Space. A PowerPoint presentation's not that big, but people commonly share big movie files, video files-- maybe really big PowerPoint presentations. And if you have two users with the same file, or 10 users, or maybe a million users with the same popular illegally downloaded movie file, it's kind of wasteful to store a million copies of the same gigabytes of information, the same gigabyte sized video, and so Dropbox, like a lot of companies, have a feature called "deduplication-- deduplication, which is just a fancy way of saying store one copy of the same file, not multiple, and just keep track of the fact that a million people, or whatever, have that same file. 
+
+So just point all million people or so to that same file. And you still back it up a few times. So this is separate from the issue of redundancy in case you have hardware failures or the like. But deduplication requires that you not encrypt files individually if you want to be able to determine after the fact if they're still in fact the same. 
+
+So there's some trade-offs here. And it's not necessarily clear what the right call is. Personally with Dropbox, I'll use it for anything related to work, certainly anything related to class, certainly for any files that I know are going to end up on the internet anyway by choice. But I don't really use it for financial stuff, nothing particularly private or family related because, as a matter of principle, not super comfortable with the fact that it might be encrypted on my own Mac, but as soon as it goes out of the cloud, it's on little old Dropbox's Servers. And I'm pretty sure no one at Dropbox has it out for me and is going to go poking around my files, but they absolutely could in theory, no matter what policies or defense mechanisms they put in place. It just must be technologically possible. 
+
+And God forbid they are compromised, I'd rather my file not end up in some big zip that some hacker puts online for the whole world to see. So let's push back on that. What's a solution then? Could you continue using a service like Dropbox comfortably and assuage my kinds of concerns? 
+
+AUDIENCE: Private cloud. DAVID MALAN: Private cloud. What does that mean? 
+
+AUDIENCE: Well, you secure it somehow so that it's available only for a particular group. 
+
+DAVID MALAN: Yeah. So you need to partition the cloud into something a little more narrowly defined. And we'll talk about-- AUDIENCE: Internet. 
+
+DAVID MALAN: An internet. So I could just backup locally to my own home, backup server, or cloud server, so to speak. Unfortunately, that means that Victoria and Kareem need to visit more often if I want to share files with them but. That might be one way. 
+
+There are also third party software that I could use on my Mac or my PC that encrypts the contents of a folder, but then I do have to call Victoria or Karim, or email them, or something to tell them that secret. And that's a bit of a white lie because there are types of cryptography that do allow me and Kareem, and me and Victoria, to exchange secret messages without having to, in advance, share a private key-- a secret key with each other. It's actually something called public key cryptography. 
+
+And we won't go into technical detail, but whereas we today have been talking about secret key cryptography, where both sender and recipient have to know the same secret, there's something called public key cryptography, which has a public key and a private key, which long story short have a fancy mathematical relationship whereby if I want to send Victoria a secret message, I ask her for her public key, which by definition she can email me. She can post it on her website. 
+
+It is meant mathematically to be public. But it has a relationship with another really big number called the private key such that when I encrypt my message to her, "hello," with her public key, you can perhaps guess what's the only key mathematically in the world that can decrypt my message-- her private key or corresponding private key. 
+
+It's fancier math than we've been to talking about here. It's not just addition certainly, but that too exists. And in fact, and we'll come back to this when we talk about the web, odds are you've never called someone at amazon.com when you want to check out with your shopping cart and type in your credit card number, and yet somehow or other that padlock symbol is telling you your connection is secure. Somehow or other your little old Mac or PC does have an encrypted connection to Amazon even though you've never arranged with them for a secret. And that's because the web is using public key cryptography. Why don't we pause here, take our 15 minute break after Olivier's question. AUDIENCE: I just have a dumb question. DAVID MALAN: No, not at all. AUDIENCE: If you have the original file, and the key's the same for Dropbox, for everyone, and you have the encrypted file. Can you [INAUDIBLE] the key? DAVID MALAN: Say that once more. AUDIENCE: If you have the original file and the encrypted file, and you have both of them, can't you just [INAUDIBLE]? DAVID MALAN: Oh. A good question. If you have the plaintext and the ciphertext, can you infer the secret key? Depends on the cipher. Sometimes yes, sometimes no. It depends on how complex the actual algorithm is. 
+
+But that does not help your situation. It is a fundamental tenet to, if you have access to the original file and the resulting file, you should no longer use that key because now you have leaked information. And an adversary could use that and exploit that to do what you're alluding to, and reverse engineer what that key is. 
+
+But in this case, presumably when you're sending something to the recipient, you already have a trust relationship with them. And so by definition, they should have or know that key already. It's when someone in the middle gets in the way. Good question. 
+
+All right, Why don't we pause, take a 15 minute break. Rest rooms are that way. I think there's probably some drinks and snacks that way. And we'll resume at 5 after 11, how about? 11:05. 

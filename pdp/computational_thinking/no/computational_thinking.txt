@@ -1,0 +1,463 @@
+DAVID MALAN: Velkommen tilbake, alle sammen. Så i går, vil du huske at fokuserte vi på disse emnene her. Så vi hadde fire overordnede topics-- personvern, sikkerhet og samfunn; internett-teknologi; cloud computing; og til slutt, webutvikling. Var det noen som har båndbredde eller tids å se litt John Oliver i går kveld? Det er faktisk ganske morsomt, hvis ikke litt skremmende. Eventuelle spørsmål om noe vi gjorde i går? Eventuelle avklaringer? Eventuelle spørsmål som du ønsker å gjøre sikker på at vi komme inn på i dag i en eller annen form? Så rent rulleblad. 
+
+Så hva er på agendaen for i dag? Så jeg tenkte at vi skulle begynne i dag med en titt på hva som er generelt såkalte beregnings thinking-- på risikoen for oversimplifying, tenker som en datamaskin, kanskje tenke som en ingeniør, og prøver å begynne å organisere tankene dine eller for å gi deg en bedre følelse av hva som er involvert i faktisk kommanderende en datamaskin til å gjøre noe ved hjelp av programmering. Og vi vil holde det på en ganske høyt nivå, ganske mye engelsk, men prøv å bruke av kjent eksempler for å formalisere hvordan ville du gå om å løse problemer. 
+
+Og vi gjengir noen CS temaer, som abstraksjon, som kom opp et par ganger i går, algoritmer, og deretter representasjon. Og det er der vi skal begynne dag i løpet av et øyeblikk. Deretter vil vi ta en titt på programmering. Vi vil ta en titt på noen grunnleggende konstruksjoner som kan du bli kjent og kan selv finne ganske intuitiv. 
+
+Vi skal se, faktisk, på en prøveprogrammer miljø som er svært tilgjengelig, veldig leken, og faktisk målrettet for alderen 12 og oppover. Vi vil bruke noen minutter der og deretter ta ting til et lavere nivå og faktisk snakke om noen av algoritmer og datastrukturer så å si, at programmerere bruker vanligvis for å løse problemene langt mer effektivt enn du kanskje kunne gjøre uten dem helt. Så etter lunsj, vil vi ta en titt på teknologi stabler, som er bare en fancy måte å si samlinger av teknologier som du kan bruke til å løse noen problem. Og vi skal snakke om alfabetet suppe av språkene som finnes today-- Java og Python og C ++ og PHP og Ruby og alle slags andre ting. 
+
+Vi vil ta en titt kort ved design patterns. Programmerere, over tid, har vedtatt metoder som pleier å hjelpe dem løse problemer lettere. Når du begynner å se deg selv å skrive samme type kode igjen og igjen, folk formalisere disse repetisjoner og tilskrive navnene til dem og deretter bruke dem og fremme dem, til slutt. Og vi skal snakke litt om mobile strategier, som hva betyr det å faktisk lage en mobil app eller et mobilnettsted. Gjør du det for Android? Gjør du det for iOS? Gjør du det for begge disse? Og hva er de avveininger? Og så til slutt, vil vi ta Se web-programmering, som er et samlebegrep virkelig beskriver som helst du skrive programvare som er ment å kjøre på nettet, enten på telefon eller stasjonære eller bærbare datamaskiner. Vi vil ta en kort titt på databaser og design deri, hvis bare fordi nesten alle interessant web-basert applikasjon disse dager har en slags database. Ellers ville bare være statisk innhold. Og en database kan du gjøre endringer over tid, enten selv eller fra brukerne. Og vi vil vurdere hvordan du ville gå om å designe den databasen og hva slags sjargong som kan komme opp i en ingeniørs diskusjon på et hvitt bord når faktisk gjennomføring en app for første gang. 
+
+Vi skal snakke kort om APIer, nyttige tjenester som du kan bruke til å stå på skuldrene til andre, enten selskaper eller enkeltpersoner, og løse egne problemer raskere. Og så får vi prøve seg kanskje litt med Javascript, et programmeringsspråk som brukes både i nettlesere i disse dager, men også i servere. Og kanskje vil vi se, tiden tillater det, noen av hands-on web ting vi gjorde i går og integrere de to sammen før vi utsette. 
+
+Så med at-- hva som er ahead-- er det noe som mangler som du ønsker å sørge for at vi setter inn og trykk på på et tidspunkt. Hvis det er fjærer til tankene, ta det opp før lenge. Men hvorfor ikke vi begynne med en se på beregningsorientert tenkning. 
+
+Og la meg foreslå at beregningsorientert tenkning er, igjen, liksom det høye nivået beskrivelse av hva en datamaskin vitenskapsmann kan gjøre. Og ja, la oss starte med tre ingredienser som kan gå inn i beregningsorientert tenkning. Dette er bare en måte å beskrive det. Vi kan sikkert definere dette på en rekke måter. 
+
+Men la meg foreslå, for å få til i dag, at verdens problemer, alle verdens problemer, da kontaktet av en datamaskin vitenskapsmann kunne bli sett på som hva vi vil samtale innganger, noe som trenger å bli matet inn i det vi kaller algoritmer, som deretter vike utganger. Med andre ord, hele verden av problemløsning jeg krav kan destilleres inn disse tre ingrediensene. Så hva mener jeg med innganger? Innganger er akkurat det du er levert for å løse. 
+
+For eksempel, her en gammel skole problem. Hvis jeg har en telefonbok her og Jeg ønsker å se noe i det, Dette er mitt innspill. Jeg har 1000 eller så sider i en telefonkatalog. Dette er innspill til mitt problem. Og jeg ønsker å finne noe som Mike Smith, så en venn hvis navn og nummer er forhåpentligvis i denne adresseboken. 
+
+Dette er før dagene av cellen telefoner, så jeg kan ikke bare søke etter den. Så jeg må gjøre det gamle skole og faktisk søk disse innganger for noen svar. Og det svaret er bare kommer å bli kalt utgangen. Så inngangen er telefonboken. Algoritmen er uansett sett fremgangsmåten jeg bruker for å finne Mike Smith. Og utgang er, forhåpentligvis, Mike Smith telefonnummer. Og dette vil da være bare representativ for de fleste problemer til med deg er hendte innganger og ønsker å produsere utganger. 
+
+Så før vi vurdere prosessen som vi kan løse det problemet, finne Mike Smith og noe sånt, la oss vurdere det første og de last-- innganger og utganger. Fysisk, selvfølgelig, inngangs her er en hel haug med papir limt sammen i form av en telefonkatalog. Men datamaskiner, av course-- bærbare datamaskiner og stasjonære og til og med telefoner disse days-- de er elektroniske enheter. 
+
+Og ved slutten av dagen, hvilke er den eneste inngang til en datamaskin? Vel, det er noe som dette strømledningen her. Jeg plugger den inn i veggen, og Jeg får en strøm av elektroner, som tillater meg å kjøre maskinen. Eller kanskje disse elektronene er skapt ved hjelp av mitt batteri. Men på slutten av dagen, det er det eneste som kommer inn i min laptop. Og så mye interessant ting er slutt kommer ut, enten ved hjelp av skriveren eller skjermen eller audially eller lignende. 
+
+Så hvis alt vi har som vår grunnleggende inngang til en datamaskin er elektrisitet, så bare elektroner går inn og eller ut, og så hvordan kan vi bruke den inngangen å faktisk representerer informasjon? Med andre ord, hvordan får vi fra en enkel strøm av elektrisitet til å representere faktiske tall eller faktiske bokstaver eller faktiske bilder på skjermen eller selve filmene eller e-post eller hvilket som helst antall av disse høyere nivå begreper, om du vil, som ved slutten av dagen liksom har til å bli lagret i denne elektronisk mekanisk innretning bruker bare de enkle ingredients-- elektroner som kommer inn og ut? 
+
+Så det synes som, i den enkleste form den eneste form for stater Jeg har i min verden, så til speak-- forhold i min world-- er enten Jeg har elektroner flyter, elektrisitet flyter, eller jeg gjør Ikke slik så videre, off. Og la oss formal av og på, som en datamaskin vitenskapsmann kan, med bare 1 og 0. La oss bare beskrive noen vilkårlig men konsekvent nummer. 1 betyr på, 0 betyr off. Eller du kan også se dette som sanne midler på og falske midler. Du kan også gjøre svart hvitt eller rødt og blått. Du trenger bare to beskrivelsene. Og en dataforskere ville vanligvis bare bruker 0 og 1. 
+
+Så hvis det er tilfelle, min eneste alfabetet er bestående av 0 og 1-ere, hvordan kunne jeg muligens få til selv antall 2 i en datamaskin, enn si nummer 3 eller en bokstav i alfabetet eller et bilde eller en film? Hvordan kan vi liksom bootstrap oss fra dette grunnleggende prinsippet fra 0 og 1-ere og faktisk representere noe mer interessant? 
+
+Vel, la oss sette det spørsmålet på vent for bare et øyeblikk og vurdere noe forhåpentligvis kjent, selv om du ikke har egentlig tenkt på det i noen detalj for 10, 20, 30, 40, 50 flere år. Dette er hva? Hvordan ville du uttale det? Ikke et lurespørsmål. En rekke, men hva er det? 1, 2, 3 eller 123. Og jeg likte hvordan du sa en, to, tre, fordi det er en måte å se det. 1, 2, 3, er det en sekvens av tre symboler. Det er bilder som vi Nå har ord for. Og hvis du liksom lest dem alle sammen, et typisk menneske i engelsk vil si 123. Og det er liksom en høyere nivå konsept, føles som et rimelig stort tall. 
+
+Men hvordan kom vi dit? Vel, det kan være en stund siden du har tenkt på det sånn, men tilbake i min dag, jeg slags lært dette som en søyle av 10-tallet kolonne, og 100 s kolonnen. Så som Lakisa sier, er det 1, 2, 3, men det er også 123. Men hvordan får vi fra førstnevnte til sistnevnte? 
+
+Vel, ville du vanligvis gjør i 100 kolonne, jeg har en 1. Så det er som å si 100 ganger 1. Og så i 10 kolonne, jeg har to. Så det er som å si 10 ganger 2. I en spalte, jeg har tre. Så det er som å si 1 ganger 3. 
+
+Og hvis jeg legger disse tingene sammen, dette er selvfølgelig er 100 pluss 10 pluss tre. Og oh, det er derfor jeg får dette høyere nivå oppfatningen av 123. Det er bare grunnleggende matematikk, der disse symboler har vekter til dem, hvis du vil, plassholder eller kolonneverdier. Og når jeg formere alt ut, får jeg dette nummeret. 
+
+Så hvor mange av dere vet hvordan man snakker binary-- 0 og 1's-- som en datamaskin? OK, perfekt, ingen, eller ingen av dere tror dere gjør. Men jeg vil hevde deg faktisk vet dette allerede. Vi trenger bare å liksom justere vår mentale modell litt. Men prosessen er nøyaktig den samme. 
+
+La meg forlate dette opp der og i stedet trekke dette ned et øyeblikk. I en verden av datamaskiner, vi har bare 0 og 1-ere. Og så det som er kommer til å forandre er hva? Vel, i mitt menneskelige verden, desimalsystemet, desember betydning 10, Jeg har hvor mange sifre til min disposisjon? 10, ikke sant? 0 til 9, selvfølgelig. 
+
+Og det er derfor vi har 10 plass og 100 plass. Hvor er det fra? Vel, dette er 10 til kraften i 0. Dette er 10 til makten til 1, 10 til kraften i to, og så videre. Du bare holde multiplisere kolonnene med 10, starter med bare ett i den høyre en her. 
+
+Så i en verden av datamaskiner, hvis du bare har binary-- bi mening 2-- eller 0 og 1-ere, vi bare virkelig trenger å endre bunnen av den matte. Så med andre ord, nå vil vi bare har en spalte og folk flest i hvor er dette going-- 2 kolonne, 4 kolonne, og kanskje utover. Hvorfor det? Vel, dette er to 0-te potens. Dette er to i en. Dette er 2 til 2, og så videre. 
+
+Så mens her, har vi 1, 10-tallet, 100-tallet, 1000-tallet, 10 000-tallet, 100 000-tallet, en millioner, og så videre, her vi har 1, 2, 4, 8, 16, 32, 64. Du bare fortsette å multiplisere med 2, i stedet for å holde multiplisere med 10. Så nå, hvis målet på hånd er å representere tall ved hjelp av bare 0 og 1-ere, la oss vurdere hvordan vi kommer dit. 
+
+Dette, selvfølgelig, er mønsteret 0 0 0, men hvilket nummer konseptuelt representerer det? Vel, 4 ganger 0 pluss 2 ganger 0 pluss 1 ganger 0, la oss legge dem sammen. 4 ganger 0 er, selvfølgelig, 0, pluss 2 ganger 0 er, selvfølgelig, 0 pluss 1 ganger 0 er, selvfølgelig, 0. Så ah, representerer dette nummer vi mennesker kjenner som 0. 
+
+Vel, la oss veldig raskt spole fremover. Hvis jeg i stedet ikke representerer 0 0 0, men la oss gjøre en 0 1, som kan være hvordan Lakisa, tidligere, ville bare uttale det 1 0 1. Men nå, hvordan tar vi det til høyere utjevne antall vi mennesker kanskje vet? Så hva er dette nummeret? Det er fem, nummer vi kjenner som fem. 
+
+Vel, hvorfor er det? Vel, kan vi virkelig slags gå gjennom den metodisk 4 ganger 1, 2 ganger, 1 0 ganger 1. Legg dem sammen, så Dette er fire pluss 0 pluss 1. Og det er faktisk fem. Så det begynner å bli litt kjedelig nå gjør det aritmetiske igjen og igjen. Men prosessen er nøyaktig den samme. 
+
+Det eneste som har endret i vår verden er at våre kolonner er 1, 2, 4, 8, 16, og så videre, i stedet for en, 10, 100, 1000. Og det er bare fordi vår alfabetet har krympet fra 0 til 9 for å bare 0-1. 
+
+Så som en liten quiz her, hvordan ville du representerer nummer 7 i binær? 0? Vel, 0, mener du 0 0 0? Si det igjen, Karina. Perfekt. Hvorfor det? Det er effektivt fire pluss to pluss en. Så bra. 
+
+Hvordan representerer vi et lite another-- hva med nummer to? Close, men bakover. Så hva er dette? Er 4 pluss 1, så det er fem igjen. 
+
+Så what's-- Jeg beklager, Karina? 0 1 0. 0 1 0 ville være to, fordi igjen, selv hvis det liksom ikke hoppe ut på deg, bare gjøre regnestykket. 4 ganger 0, 0, 2 ganger 1 er 2, 1 ganger 0 er 0. Så dette er tall vi kjenner som to. 
+
+Hva med nummer 8? Hm? God. Så vi slags trenger en plassholder. Vi trenger 1 0 0 0. Og det er sant for vår slags av gamle skolen desimalsystemet. Hvordan representerer du nummeret 1000? 
+
+Vel, du ville synes å være slags i en tøff spot, hvis be deg om å representere tallet 1000, fordi selv om du gir deg selv som 9 av disse, 9 av disse, 0 av disse, som er den største nummeret du har, gjorde du ikke helt får til 1000. Så hvis du 1000, du bare trenger en annen posisjon, slik at du kan gjøre en 0 0 0, ergo antall tusen. 
+
+Så la oss nå kartlegge denne typen konseptuelle diskusjonen tilbake til maskinvare, der igjen, inngangen var bare denne lille strømkabel, strøm kommer inn og flyter ut. Og så for at det skal kartlegges herfra til det, vel, hva gjør vi egentlig trenger? Vel, du kan tenke på å være inne i en datamaskin, en hel haug med lyspærer, om du vil. De er egentlig kalles transistorer. Og transistorer er bare brytere som kan enten være av eller på. Så du kan tenke på en transistor som er på er slik at strøm til å flyte og en transistor som er utenfor som å stoppe elektrisitet fra strømmer. Og i stedet for å ta over lysene her, hvorfor jeg ikke gjøre denne typen av ny skole stil. Så dette kan være en 1, en lommelykt å være på, bare så vidt skjønt. Og dette kan være en 0, og nå er det off. 
+
+Så bruker dette fysisk enhet, jeg Nå kan representere binære systemet. Jeg trenger bare to stater. Det spiller ingen rolle hva farge det er eller hva det er. Alt som betyr noe er at jeg har en stat på, og en annen stat av. Så bruker telefonen min her, hvordan gjør jeg representerer antall vi kjenner som 0? Eller sagt ekvivalent, hva nummer er jeg representerer nå? 0, fordi enheten er slått av. 
+
+Og hvis jeg gjør dette? Og nå, hvordan gjør jeg representerer nummer 2? Kan jeg låne telefonen her, som vi gjorde i går? Så la oss se, så hvis jeg ønsker å representere nummer 2, dette er nummer 2? Nei. Hvilket nummer er jeg ved et uhell representerer her? Dette er faktisk nummer tre. 
+
+Så hvilken ønsker jeg å slå av? Den svarte telefonen or-- vel, hvis they're-- svarte telefonen eller den hvite telefonen? Den hvite telefonen. Så hvis jeg slår dette av og vi linjen opp over her, har vi en 1 i 2-sted og en 0 i en plass. Og så er jeg nå representerer tallet 2. Og dette, selvfølgelig, vil være antall 3, fordi nå begge disse lysene er på. 
+
+Og jeg vil stoppe her, men det står til grunn hvis jeg ønsker å representere nummer 4 eller 8 eller høyere, Jeg kommer til å trenge flere telefoner. Men det er alt som skjer. Så hvis du noen gang har hørt at innsiden av a-- takke you-- datamaskin er millioner av transistorer, det er bare millioner av bitte små brytere. Og de er ikke lett pærer som slår av og på, men de har enten tillate strøm å flyte et sted eller stoppe den. Og så det er dine to states-- på eller av, på eller av. 
+
+Så vi synes nå for å ha denne evnen for å representere dette konseptet som vi ønsker i selve maskinvaren. Men alt vi har nå er muligheten til å representere tall det ville virke. Så hvordan skal vi gå om tilsvar bokstavene i alfabetet, som føles som den neste slags funksjon du ønsker å legge til en moderne datamaskin når du har tall? 
+
+Og ja, hvis du tenker på det, historisk, datamaskiner ble introdusert virkelig å tjene som kalkulatorer numerisk. Men selvfølgelig, disse dager, de gjør mye mer. Selv når de starter opp, du vanligvis ser ett eller flere ord. Så hvordan du representerer ord, hvis alt du har er, igjen, strøm ved slutten av dag, eller ekvivalent 0 og 1-ere? 
+
+Yeah. Ja, jeg mener, vi gjorde slags dette går i noen form, der på et tidspunkt, Jeg tror jeg vilkårlig sa at dersom vi ønsker å representere bokstaven A, vi kan bare kalle det en en. Det var i sammenheng med kryptografi, der vi bare trengte en slags kode, noen form for kartlegging. 
+
+Så kanskje A vil være representert som en 1, og B vil være representert som en 2, og Z vil være representert som en 26, for eksempel. Og så den eneste forbeholdet er at hvis jeg er kommer til å kode bokstaver i e-postene mine eller i mine tekstmeldinger som tall, dere alle være enige om å bruke samme sett av konvensjoner. Og ja, verden har gjort akkurat det. 
+
+Det er et system i verden kalt ASCII, American Standard Kode for Information Interchange, som er rett og slett en avgjørelse noen år siden at menneskene gjorde at besluttet at A kommer til å like, ikke 1, 2 og 26, og slik at det er en forth-- Litt different-- men 65, 66, 67. Og jeg skal trekke opp en diagram i bare et øyeblikk. Men det er tilfeldig. Men det spiller ingen rolle at det er tilfeldig. Verden må bare være konsekvent. 
+
+Nå, mer nylig, det er noe mer avansert kalt Unicode, fordi verdens slag av realisert, etter oppfinne datamaskiner, at det er mer enn godt 256 symboler i verden at vi kanskje ønsker å representere, spesielt når du introdusere Asiatiske språk og andre symbologies som trenger mer ekspressivitet enn deg kan passe i den tidligste versjonen av denne koden, som ble kalt ASCII. Så Unicode tillater faktisk du å bruke mer 0 og 2. Spesielt holde deg høre Ordet byte i samfunnet og selv bare i går. Og en byte er hva igjen? 
+
+Hva er en byte? Det er bare 8 bits. Så hva betyr det egentlig? Vel, det betyr, tidligere, da vi var snakker om binære, og jeg var med vilkårlig tre biter når vi var snakker om binary-- det en plass, 2 plass, og 4-tallet sted-- godt, en byte betyr bare at du snakker ikke i enheter av tre, men fire, fem, seks, sju åtte, som gir oss 8 plass, 16-tallet, 32-tallet, 64-tallet, og 128-tallet. 
+
+Med andre ord, er en smule ikke alle som nyttig en måleenhet, fordi det er akkurat som en bitte liten opplysning, på eller av. Så for noen år siden, verden bare besluttet det er litt mer praktisk å snakke i oppgis i byte, åtte ting om gangen. Og så dermed ble født oppfatningen av en byte. Og så har vi åtte biter her. 
+
+Og det viser seg også, for lignende årsaker, besluttet verden år siden at å representere en ASCII brev, du kommer til å bruke enheter av 8 bits. Så selv om du ikke gjør det trenger at mange, du er alltid kommer til å bruke 8 biter til representerer en bokstav i alfabetet. Og dette er praktisk, fordi da hvis du mottar en melding som har en 0 0 0 1 1 1 1 0 etterfulgt av en annen 1 1 1 0 1 0 0 1, så hvis du mottar 16 bits, kan bare verden anta at den første 8 er en bokstav og den andre åtte er en annen bokstav. 
+
+Spiller ingen rolle hvor mange det er. Det betyr bare at vi er alle konsekvent når vi tolker disse bitene. Og dette var bare tilfeldig. Det betyr noe, men jeg gjorde ikke virkelig tenke over hva det betyr. 
+
+Så det er en liten hvit løgn. Opprinnelig, ASCII faktisk brukt bare 7 bits. Og den åttende bit er kalles utvidet ASCII. Men poenget er, til syvende og sist, det samme. Verdens generelt standardisert på 8 biter. 
+
+Så dette synes å være litt begrensende, fordi jeg bare kan representerer kapital A, kapital B gjennom hovedstaden Z. Men faktisk ikke, hvis jeg går to-- det er en haug av ressurser på nettet, for eksempel, asciitable.com, dette kommer til å være litt overveldende i starten. Men jeg vil påpeke hva som er viktig her. 
+
+Dette skjer bare for å be-- og jeg vil walk-- la oss se, hvis jeg går over her. Her er, i desimal søyle, tallet 65. Og på høyre kolonne brev karakter, Chr, er bokstaven A. Og du kan ignorere, for nå, alt i midten. Dette er heksadesimale, oktale, og en HTML-kode. Til dette nettstedet er bare prøver å kaste mye informasjon på deg med en gang. Men alt vi bryr oss om er desimal kolonne og tegnet kolonnen. 
+
+Så ved denne logikken, hva er tallet at verden har besluttet representerer en liten bokstav a? Ja, 97. Og bare for å forvirre potensielt litt, hvilket nummer har verden bestemt seg ville representerer antall 1? Høyre, fordi we-- 49, virker det her nede i bunnen igjen. 
+
+Nå, hva jeg mener med det? Så det viser seg at i datasystemer Det er vanligvis en fundamental forskjell mellom et tall og et tegn. Et tall er det vi lært å vokse opp når vi var super unge i grunnskolen. Det er ting du teller med. Men en karakter er bare en form, en glyph, så å si, på skjermen. 
+
+Nå, vi mennesker liksom se noe som ser ut som dette. Og vi sier, oh, som er nummer to. Men nei, det er bare et symbol som ser som det vi kjenner som nummer to. Og så er det denne grunnleggende skillet mellom faktiske tall og tegn. Dette er et tall. Men generelt, i forbindelse med en datamaskin, Hvis du i stedet se noe som dette quoted-- og du ikke alltid må se det sitert, men på grunn av discussion-- hvis ser du anførselstegn rundt nummeret, Dette er nå et tegn. Så dette nummer to under hetten på innsiden av en datamaskin vil være representert med et mønster av biter som representerer antallet 50 i henhold til diagrammet på nettet. 
+
+Men hvis en datamaskin bare ser dette, dette vil være representert med Mønsteret til bit 0 0 0 0 0 0 1 0. Mens, ville dette tegnet faktisk være representert as-- og nå, Jeg fikk til å tenke litt harder-- så dette karakter vil være representert med 0 0 1-- hva trenger jeg her? 0 0 1 1 0 0 1 0. Hvordan klarte jeg dette? Vel, dette er nummer 50, hvis du multiplisere det ut ved hjelp av disse kolonnene, Dette er tallet 2, og så det er derfor det er denne motsetningen. 
+
+Og dette er bare en teaser nå for funksjoner som finnes i programmeringsspråk at vi vil komme inn på kort senere i dag. I programmeringsspråk, du har generelt, men ikke alltid, ting kalle ulike datatyper. Med andre ord, en programmer-- når han eller hun skriver, en programmerer får bestemme i hvilken formatet til å lagre sine data. Du kan enten lagre data som rå tall som nummer to. Eller du kan lagre dem som strenger, eller sekvenser av tegn som du vanligvis ville uttrykke med sitater i ditt programmeringsspråk. 
+
+Du kan ha ting called-- Jeg skal overforenkle og kaller dem real numbers-- så tallene som er ikke tall som nummer to, men tall som 4,56. Så reelle tall kan også har desimaler, så det er en annen grunnleggende stykke data i en datamaskin. Og så kan du selv ha andre datatyper fortsatt. Så det er bare en teaser egentlig av den enkleste av design beslutninger at en programmerer kanskje gjøre under panseret. 
+
+Så noen spørsmål ennå? Så la oss prøve å gjøre dette litt mer ekte. Denne maskinvaren er ikke så mye i bruk lenger. Men de fleste alle i dette rommet sannsynligvis vokste opp med og fremdeles bruker harddisker på en måte. 
+
+Selv om de fleste av våre bærbare datamaskiner ikke lenger har enheter som opererer som dette, i stedet laptoper i dag generelt har solid state-disker uten bevegelige deler. Og som har en tendens til å bli dyrere, dessverre, men litt raskere og a-- godt, ofte, mye raskere, som er en av årsakene. Og også den ikke gjør generere så mye varme. Det kan være mindre, slik at den er vanligvis en netto positiv. 
+
+Men dette gir oss mulighet til å kartlegge en Litt mer konkret hva vi snakker om på 0 og 1 nivå nå til en fysisk enhet. Det er én ting for meg å snakke ca 0-er og 1-ere i form av telefonen min eller abstrakt i form av brytere være av og på. Men hva med harddisker? I din bærbare PC, hvis du har en eldre en, eller i den stasjonære datamaskinen, eller i hvert fall i servere i dag, hvor du har harddisker som har en terabyte med plass, 4 terabyte med plass, vel hva betyr det? 
+
+En harddisk med en terabyte plass midler det er 1 billion bytes innsiden av det liksom, eller ekvivalent 8 billioner bits inne. 1 terabyte vil være 8 terabits eller 1 billion bits, noe som betyr at hvis du har en hard stasjonen, har du liksom eller andre en trillion 0-tallet og en er inne for det. Og hvis vi bare ta en titt på en vilkårlig bilde av en harddisk representant, dette er hva en hard stasjonen kan typisk se ut inni. 
+
+Det også er typen som en gammel grammofon spiller men generelt med flere poster inne, så til speak-- flere fat, som de kalles, metall sirkulære disker, og deretter en liten lesehode, mye som en gammel platespiller. Og at lesehodet beveger seg tilbake og frem og liksom leser biter. Og hva som skjer på disse platene, selv om vi mennesker ikke kan se dem, enten i virkeligheten eller i dette bildet, det er bitte små magnetiske partikler. Og selv om du har lang glemt hvordan elektrisitet fungerer, en magnetisk partikkel som er belastet generelt har en nordenden og en sør end-- så nord og sør. Og så verden bare besluttet for en tid siden at dersom en magnetisk protokoll i det vesentlige er innrettet slik, nord-sør, la oss kalle det en en. Hvis det er i stedet sør-nord, la oss bare kalle det en 0. Og så hvis du har din disposisjon en trillion bitte liten magnetisk particles-- og forhåpentligvis, maskinvaren oppfinnsomhet i For å snu dem rundt som du ser fit-- hvis du vil representere en hel haug med 0-er, du bare trenger 8 magnetiske partikler alle justert som dette. Og hvis du ønsker å representere åtte 1s, du bare trenger 8 magnetiske partikler på linje rygg mot rygg mot rygg som dette. 
+
+Hva mener jeg med det magnetiske partikler? Oppriktig, alle disse år senere, Det som likevel kommer til meg er denne fyren, hvis du vokste opp med denne tingen. Dette er en little-- for de unfamiliar-- en Litt barndommen leketøy som har denne hårløs mann her som har alle disse bitte liten svart magnetiske partikler som følger med det. Og bruker det røde stick, som er bare en magnet, du kan liksom gi ham en bart eller øyenbrynene eller hår eller noe på ham. Så faktisk, hvis vi zoome i, for eksempel, denne er den typen spill du kan spille med Wooly Willy. 
+
+Og dette er bare å si, disse er mye større magnetiske partikler enn er faktisk på en harddisk, og langt færre magnetiske partikler. Men la oss faktisk se så hvis du har små magnetiske partikler i en harddisk, hvordan du faktisk kan bruke disse til å representere data. 
+
+[VIDEO PLAYBACK] 
+
+-Den Harddisk er hvor din PC butikker de fleste av sine faste data. For å gjøre det, data reiser fra RAM sammen med programvare signaler som forteller harddisk hvordan å lagre disse dataene. Harddisken kretser sette de signaler til spenningsvariasjoner. Disse i sin tur styrer harddiskens bevegelige parts-- noen av de få bevegelige delene igjen i moderne datamaskin. 
+
+Noen av de signaler som styrer en motor, som spinner metallbelagte fat. Dine data er faktisk lagret på disse platene. Andre signaler flytte lese / skrive-hodene å lese eller skrive data på platene. Dette maskiner er så presis at et hårstrå kunne ikke engang passere mellom hodene og spinne fat. Likevel, det hele virker til veldig bra hastigheter. [END PLAYBACK] Og du kan se på halen slutten av videoen, Det er generelt flere fat. Og slik at lesehode er ikke bare å lese toppen. Det er litt som tre eller fire eller flere lesehoder som beveger seg som dette, leser data samtidig. 
+
+Så det er mye kompleksitet og slags timing som er involvert i en harddisk. Og ting er spinning virkelig darn fort, så det er mye av kompleksitet. Men la oss zoome inn litt dypere og se hvor er disse magnetiske partikler og hvordan vi får på dem. 
+
+[VIDEO PLAYBACK] 
+
+-La Oss se på hva vi nettopp så i sakte film. Når en kort puls av elektrisitet sendes til lese- / skrivehodet, det knipser på en liten elektro for en brøkdel av et sekund. Magneten skaper en felt, noe som endrer polariteten til en bitteliten del av metallpartiklene som pels hver tallerken overflate. Et mønster serie av disse bittesmå ladet opp områder på disken representerer en enkelt bit av data i binære tallsystemet som brukes av datamaskiner. 
+
+Nå, hvis den nåværende er sendt en gjennom lese- / skrivehodet, området er polarisert i en retning. Dersom strømmen blir sendt i i motsatt retning, polarisasjonen blir reversert. Hvordan får du data fra harddisken? Bare reversere prosessen. Så det er partikler på disk som får strøm i lese- / skrivehodet beveger seg. Sett sammen millioner av disse magnetisert segmenter, og du har en fil. 
+
+Nå kan deler av en enkelt fil være spredt over et stasjonens fat, typen som rotet papirer på pulten din. Så en spesiell ekstra fil holder rede på hvor alt er. Ikke du ønske du hadde noe sånt? 
+
+[END PLAYBACK] 
+
+Så blir hentydet til det, kanskje, er som tema fra i går av sletting. Når du sletter en fil, går vi sa at en datamaskin faktisk gjør hva, når du drar noe til papirkurven eller papirkurven? Det glemmer bare det. Men 0 og 1-ere, de magnetiske partikler det ser ut som rød og blå ting her, eller min arm her, er fremdeles på harddisken. 
+
+Og så finnes det software-- Norton Utilities og Yesteryear og andre mer moderne software-- som bare vil skanne en hel harddisk ute på alle de 0-er og 1-ere, fordi det viser seg at de fleste fil formater-- Word-dokumenter, Excel-filer, bilder, video files-- alle har visst mønstre som er vanlig blant dem. Hver videofil kanskje være av en annen video, men først flere biter er vanligvis den samme. Eller de siste bitene er vanligvis den samme. 
+
+Og det med stor sannsynlighet, du kan se etter disse mønstrene. Og selv om filen har blitt glemt, du kan si med stor sannsynlighet, men dette ser ut som et Word-dokument, lar gjenopprette den og un-glem det, om du vil. Og så det er hvordan du kan gjenopprette data som enten har vært et uhell slettet eller slettet eller bevisst slettet for uansett formål. 
+
+Derimot, gjør sikker sletting hva i sammenheng med et bilde som dette? Akkurat, gjør dem tilfeldig. Så det liksom flytter noen av dem ned, noen av dem opp, later noen av dem uendret, og vanligvis gjør tilfeldig støy ut av det, eller bare kanskje gjør alle dem 0-er eller alle av dem en-tallet. Og som også kan generelt skrubbe dataene unna. 
+
+Så la oss gå tilbake nå til spørsmålet av beregningsorientert tenkning, der Vi har formelen innganger. Og algoritmer gir du sender ut til slutt. Vi fokuserer nå på innganger og utganger, for nå, jeg krav vi har en måte representerer innganger og utganger. Vi kommer bare til å bruke binære. 
+
+Og uansett hva vi ønsker å representere i dag, enten det er et tall eller en bokstav eller tusenvis av disse i en telefonbok eller bilder eller filmer, på slutten av dagen, det handler 0 og 1-ere. Og jeg hevder at, selv om dette er en super enkel verden med bare 0-tallet og 1-tallet, kan vi bygge oss opp. Og vi har sett et eksempel på som med bokstaver så langt. 
+
+Så la oss fokusere nå på denne midten ingrediens, en algoritme. Og la oss gå tilbake til denne eksempel på Mike Smith. Så i denne telefonlisten, som riktignok, Vi bruker ikke så mye lenger, det er et problem som må løses. Vi ønsker å finne noen som Mike Smith. 
+
+Og hva kan jeg gjøre for å finne Mike? Vel, jeg kan bare åpne opp dette bok, starter på første side, og realisere, oh, jeg er i A-delen. Mike er ikke der. Jeg trenger S seksjon for Smith. Så bare holde snu en side av gangen. La meg late som om dette er alt hvite sider og ikke gule sider, fordi vi ikke kommer til å finne Mike i gule sider uansett. Men jeg er i den hvite sider. Og nå er jeg i B-delen. Jeg har fortsatt ikke funnet ham. Så jeg holde snu en side av gangen. 
+
+Dette er en algoritme. Det er et sett med instruksjoner for å løse noen problem. Med andre ord, se side, hvis Mike er ikke på det, snu siden, og gjentar igjen og igjen og igjen, ideelt sett ser ned som du gjør det. Så er denne algoritmen, denne prosessen, riktig? 
+
+Beklager. Nei, jeg hører noen nos. OK, men det er-- yeah, det er sikkert kjedelig. Like, vi vil være her hele dagen hvis jeg holde utkikk etter Mike på denne hastigheten. Men la meg hevder det er riktig. Det er dumt, men det er riktig. 
+
+På slutten av dagen, lenge som det kanskje ta, jeg vil finne Mike hvis han er der inne og jeg betaler oppmerksomhet. Og jeg til slutt nå sin side. Og hvis jeg får for langt, hvis Jeg kommer til T seksjon, så jeg kan litt optimalisere og bare si, hm, alt gjort. Jeg trenger ikke engang å kaste bort gang kommer til Z-tallet. Men dette er en veldig lineær tilnærming, hvis du vil en meget slags venstre-til-høyre tilnærming, en rett linje. Og det er riktig, men treg. 
+
+Så jeg husker fra barneskolen, liksom av en optimalisering fra en førsteklassing, hvor jeg lærte å telle ikke av de, men ved twos-- så 2, 4, 6. Det er A, mye vanskeligere å gjør, men i teorien, er det faster-- 8, 10, 12, 14, og så videre. Hva med at algoritmen? Er det mer effektivt? Er det raskere? 
+
+PUBLIKUM: Den er effektiv. 
+
+DAVID MALAN: Ja, så det er def-- det er bokstavelig talt dobbelt så raskt, forutsatt at jeg Ikke bli utløst opp med fingrene. Det er dobbelt så raskt, fordi Jeg slå gjennom to sider på en gang i stedet for en, men det er potensielt i riktig, fordi hvorfor? 
+
+PUBLIKUM: Du hopper over noen. DAVID MALAN: Høyre, hva om Mike skjer skal sandwiched-- kanskje når jeg er senere i telefonboken, skjer Mike å være klemt mellom disse to sidene, og jeg bare blindt hoppe over det. Så vi trenger litt fix der. Når jeg treffer T seksjon, jeg kan ikke bare trygt si, Vi fant ikke Mike Smith. Jeg har sannsynligvis å doble tilbake. Eller faktisk, når jeg nå noen heter S-N, i stedet for S-M for Smith, umiddelbart, jeg kunne doble tilbake, fordi kanskje han var på forrige side. 
+
+Men jeg trenger ikke å doble tilbake langt. I teorien, hvis jeg gjør det på riktig tid, jeg bare gå én side tilbake. Så det er å legge til bare ett ekstra trinn. Så jeg har gått dobbelt så fort, men det kostet meg en ekstra side. Men det føles som en nettogevinst. 
+
+Men dette er ikke hvordan folk flest i dette rommet ville løse dette problemet. Hva ville en typisk person, kanskje en For noen år siden gjør, for å finne Mike Smith? Ja, fant ikke Mike. Hva gjør jeg? Så får litt nærmere, men jeg gjør know-- hva som er sant om en telefonbok? PUBLIKUM: Det er sekvensiell. DAVID MALAN: Det er sekvensiell. Det er alfabetisk. Og så hvis jeg er i M-delen, Mike er klart til høyre, Jeg kan bokstavelig talt rive problemet i half-- det er vanligvis lettere enn at-- tåre problemet i to og kaste det bort, så nå har jeg et problem som er ikke lenger 1000 pages-- som var vanskelig, fordi jeg tror jeg faktisk tore telefonboken denne tid-- ikke 1000 sider, men 500. 
+
+Så problemet er bokstavelig talt halvparten så stor. Og det er ganske overbevisende, fordi med mine tidligere algoritmer, versjon 1 og 2, ble jeg bare gjør problemet en side mindre, to sider mindre på en gang. Mens nå, jeg har gjort det 500 sider mindre alt på en gang. 
+
+OK, så nå foreslår Karim at jeg går til høyre halvdel. Så jeg kommer til å gå rundt til midten, gi eller ta. Og hvis jeg gjorde dette matematisk, Jeg kunne gå rett til midten. Og nå skjønner jeg, oh, Jeg er i T seksjon. Jeg faktisk gikk for langt. 
+
+Men jeg kan, igjen, rive problem i to, kaste den bort. Og mine bytes ikke så stor. Det er bare, hva, 256 sider eller 250 sider, gi eller ta akkurat nå. Men det er fortsatt mye mer enn en side eller to sider. 
+
+Og så nå, jeg går omtrent til midten. Oh, det gjorde jeg ikke gå ganske langt nok nå. Så jeg gjentar, gjenta, gjenta, gjenta, til jeg er forhåpentligvis igjen med bare én side. 
+
+Slik at inviterer spørsmålet, hvis jeg startet med omtrent 1000 sider, hvor mange skritt tok det meg med versjon 1 av min algoritme? Vel, hvis Mike er i S seksjon, i verste fall det er ganske nær slutten av alfabetet. Så hvis telefonboken har 1000 sider, Jeg skal finne Mike innen 1000 sider, gi eller ta. Kanskje det er som 800 eller så, men det er ganske nær til 1000. 
+
+Mens, i den andre algoritme, hvor mange side viser maksimalt kanskje jeg trenger for å finne Mike Smith? Det er 1000 sider, men jeg er gjør dem to om gangen. Høyre, så max som 500ish, fordi hvis jeg går gjennom hele telefonboken, og da kan jeg stoppe. Men jeg kan barbere av noen av bare stopper på T seksjon. Men det er i verste fall 500 sider. 
+
+Så hvor mange ganger kan jeg dele en 1,00o-side telefonboken i to igjen og igjen og igjen-- fra 1000 til 500 til 250-125? Hvor lenge før jeg traff en side? Ja, det er ca 10. Avhengig av avrunding og slikt, er det 10 sider totalt behov for å bli slått eller telefonen bøker trenger å bli revet. 
+
+Så det er ganske kraftig. Vi startet med en 1000-siders problem i alle tre av disse historiene. Men i den første algoritme, det tok meg, verste fall 1000 side blir å finne Mike. Second algoritme, 500 sider for å finne Mike. Tredje algoritme, 10 sider for å finne Mike. Og det er enda mer kraftig når du tror om liksom en motsatt scenario. Anta at telefonselskapet neste år kanskje fusjonerer to byene sammen, og telefonboken er plutselig denne tykke, i stedet for dette som, så 2000 sider i stedet for 1000. Vel, min første algoritme leter etter Mike Smith i en 2000-siders telefonboken, verre tilfelle, kommer det til å ta hvor mange side snur neste år? 
+
+Telefonboken er 2000 sider, Slik: vel, ikke en til. Hvis telefonlisten er dobbelt så tykk i den første algoritmen, først algoritmen, 2000, ikke sant? I verste fall er Mike virkelig lukke til slutten av boken, så det er 2000 side svinger. Second algoritmen går av toere, som 1000 sider. 
+
+Men hva med i min tredje og nyeste algoritme? Hvis telefonen selskapet dobler antall sider fra 1000 til 2000, hvor mange ganger må jeg rive den boken i to for å finne Mike? 
+
+PUBLIKUM: Bare ett. 
+
+DAVID MALAN: Bare ett, fordi med en side tåre, Jeg kan bokstavelig talt dele og erobre, om du vil, det problemet i to taking en massiv bit av det. Og slik at dette er et eksempel på effektivitet og uten tvil en algoritme som alle av oss er slags intuitivt kjent. Men det er like riktig som min andre algoritmer med at tweak for den andre algoritme, men det er så mye mer effektiv. 
+
+Og faktisk, hva en datamaskin vitenskapsmann, eller i sin tur en programmerer, ville vanligvis gjør når du skriver Koden er prøve å finne ut, all right, jeg ønsker ikke min program bare for å være korrekt, Jeg ønsker også at det skal være effektiv og løse problemer i tillegg. Forestill deg i den virkelige verden i dag, som Google indekserer, søk som milliarder av sider, tenk om de anvendes den første algoritme for å finne katter blant en milliard pages-- å se på den første siden i deres database, den andre, tredje, bare se for en katt, på jakt etter en katt. Det er ganske utrolig tregt det ville virke. De kan i stedet bruke noe kalles binær søk, som er ingen coincidence-- bi betyr to, vi fortsette å dele noe i to, i half-- de kunne bruke binære søk og kanskje finne katter enda raskere, eller hva det er du leter etter. 
+
+Og ærlig talt, det er selv mer avansert algoritmer som gjør mye mer enn bare dele ting på halv for å finne informasjon raskt. Og vi skal snakke litt om de etter lunsj i dag. Så la meg bare prøve å representere dette. Vi trenger ikke å gå inn i noen matematikk eller faktiske tallene. Vi kan snakke om dette i det abstrakte. 
+
+Men la meg bare foreslå, hvis du hadde en diskusjon nå med ingeniørene foreslår denne algoritmen og du prøver å gjøre en beregnet beslutning, fordi kanskje ingeniør sier til deg, Vet du hva, jeg kan gjennomføre en søk i som to minutter lineær. Det er så enkelt. Binary søk er ikke så fancy, men det kommer til å ta meg som 10 minutter, så 5 ganger så lenge. 
+
+Det er en trade her, selv i form avgjøre hvilken programvare for å skrive. Skriver du det enklere algoritmen, som vil bare ta deg to minutter? Eller vil du bruke mer tid, 10 minutter, skriver mer avansert algoritme? Hvordan avgjør den slags spørsmål du? Eller du kan gjøre det litt mer ekte. Jeg forteller sjefen min det kommer til å ta meg enten en uke eller 10 uker å gjennomføre programvare på denne måten, hvordan du bestemme hvilke algoritme for å grønt lys? Karim? 
+
+PUBLIKUM: Publikum, antar jeg. 
+
+DAVID MALAN: Publikum. Hva mener du med publikum? 
+
+PUBLIKUM: Hvis det kommer som skal brukes av brukere som [hørbar] av brukere [hørbar]. Men hvis det er noe du er bare gjør for deg selv å legge til rette et problem, [Hørbar] raskere. DAVID MALAN: Ja, det er raskt og skitne er en god måte å beskrive det. Faktisk, hvis du er beskriver mye av min tid i grad skolen, hvor ofte, Jeg skrev dårlig kode bevisst Slik: minst, det er hvordan jeg rasjonalisert it bevisst så, fordi selv om jeg var å skrive kode som var relativt treg til å utføre, Jeg var i stand til å skrive selve koden ganske fort, utgifter bare noen minutter eller timer ikke dager. Og det viste seg, jeg tidvis trengte å sove. Så selv om min kode som kreves 8 timer å kjøre, vel det er greit, Jeg vil bare gå i dvale mens den kjører. 
+
+Så på den tiden, jeg trodde dette var veldig flink, selv om jeg tilsynelatende arbeidet gjennom min PhD veldig sakte. Men det motsatte av denne er at hvis jeg skulle skrive programvare for andre mennesker som betydde noe mer enn meg, vel, å ha dem vente 8 timer til få tilbake sine søkeresultater er ikke alle som overbevisende. Og så bruker mer tid opp foran til å skrive programvare som er mer effektive, mer som vår tredje algoritme, sannsynligvis fordeler brukerne over tid. Så det er egentlig avhengig løpet tid hvor disse kostnadene legge opp. Hvis du skal skrive programvare for å bruke det en gang, sannsynligvis kan like godt gjøre rask og skitne, som de sier. Bare kaste det sammen. Dette er kode som embarrasses du, det er så ille, men det får jobben gjort riktig, selv om det ikke er effektiv. Motsatt, bruker du mer tid på noe, får det akkurat. Og så avskrives over tid, at forhånd kostnaden for tiden er trolig verdt, hvis du holder optimalisere for den felles sak. 
+
+Og ja, det er et tema i programmering, eller informatikk mer generelt, prøver å optimalisere ikke for uvanlig saken men felles case-- hva drift kommer til å skje igjen og igjen? Hvis du skal ha milliarder av brukere som søker på nettstedet ditt, du bør nok bruke de ekstra uker opp foran skrive bedre programvare, slik at alle brukerne nytte. Nå, la oss prøve å fange dette en lite bildemessig, men ikke så mye numerisk. 
+
+Så her er bare en gammel skole diagram. Og la meg si at dette er tid. Og det spiller ingen rolle what-- faktisk, nei, ikke tid. La oss sette det på den andre aksen. La oss si at dette er tiden, og dette er størrelsen på problemet. 
+
+Og en datamaskin vitenskapsmann kan vanligvis kaller dette bare n. n er som våre går til variable, hvor n er et tall, n antall, og det er den antall uansett innganger du har. Så i dette tilfellet er n antall sider. Så det kan være 1000 i tilfelle vi fortalt. 
+
+Så tiden kan være noen måleenhet. Kanskje er det andre. Kanskje er det dager. Kanskje, det er som side svinger. Spiller ingen rolle. Uansett hva du vil telle i, at vil være tid eller koste tilsvarende. 
+
+Så med det aller første algoritmen, hvis jeg, for eksempel, hadde en 1000-siders telefonboken, Jeg kommer til å trekke en prikk der, fordi hvis det er 1000 sider, tok det omtrent 1000 side svinger, gi eller ta. Og så hvis jeg hadde en 2000-siders telefonboken, og jeg kommer til å trekke en andre dot her, fordi for 2.000 sider, det er som 2000 sekunder eller siden snur eller hva. Og så når jeg sa tidligere, det er slag av en lineær sammenheng, det var bevisst, fordi jeg ønsket senere on-- rett now-- å trekke en linje. Det er litt av en rett linjen forholdet. Skråningen er 1/1, hvis du vil. 
+
+I mellomtiden, den andre algoritmen sa, hvis du har 1000 sider og du brukte den andre algoritmen, hvor jeg regnet med 2-tallet, snu to sider om gangen, skal jeg trekke en prikk under eller over mitt opprinnelige dot? 
+
+PUBLIKUM: Under. 
+
+DAVID MALAN: Under, fordi som vi så, det tar kortere tid, halvparten så mye tid. Så dot bør være halvparten så høy som den andre. Og samme avtale over her, dette dot bør nok være omtrent der. Og så min andre algoritme, på samme måte, har et lineært forhold med tiden. Og vi kan trekke det som sådan. 
+
+Så nå, den tredje og siste algoritmen er litt vanskeligere å trekke. Men intuitivt, hvis jeg har fått 1000 sider med min tredje algoritme, det skal bare ta meg som 10 trinn. Og hvis jeg har 2000 sider med min tredje algoritme, det skal ta meg ikke 10 trinn, men 11, bare en mer. Så vi bare knapt kommer til å se dette. 
+
+Og det viser seg, hvis Jeg zoome inn på dette, jeg er kommer til å overdrive for effekt, formen av den linjen, til slutt, er ikke en rett line-- fordi, ja hvis den var, det ville se mer ut som others-- det er faktisk en buet linje at dersom vi zoomer inn, kommer å se mye mer som dette. It vel, OK, ignorere denne delen. Det var min penn går av vinkel. Det er en buet linje som alltid økende, alltid, alltid, alltid øker, men bare så vidt. 
+
+Og så over tid, har du en forhold som er mer som dette. Det ser nesten rett. Men det er aldri så sakte økende. Men for nesten alle punkter langs din x-aksen, horisontal akse, det er lavere enn de andre linjene. 
+
+Så dette kan være en sammenheng n, der hvis du har n sider, tar deg n sekunder. Dette kan være en sammenheng n / 2. Du har n sider, tar det du n / 2 sekunder, halvparten så mange. Og dette er en logaritmisk forhold, som hvis du husker, log base to av n fanger denne type vekst, så å si. Så dette er den slags hellig gral blant de tre av disse her, fordi det er bare så mye mer effektiv, men kanskje mer kompleks å implementere. Noen spørsmål? 
+
+Vel la meg gjøre dette, la meg åpne opp et tekstvindu bare slik at vi kan prøve å formalisere noe her. Så la meg gå videre nå og implementere denne algoritmen for å finne Mike Smith i kode, om du vil, pseudokode. Jeg har ikke tenkt å bruke Java eller C ++. Jeg bare kommer til å bruke liksom Norsk-lignende syntaks, som vi vil vanligvis kaller pseudokode. Her har jeg et tomt vindu. Og jeg sier trinn 1 av de aller første algoritme er å plukke opp telefonboken. Trinn 2 er åpen bok til første side. Trinn 3 vil være ser på side for Mike Smith. Hvis på side, ringe Mike. annet turn siden og gå til trinn 3. Ferdig, la oss si. 
+
+Og så det er ikke helt perfekt, som vi skal se i et øyeblikk. Men la oss vurdere hva konsepter Jeg har introdusert her. Så trinn 1 og 2 og 3 er ganske mye verb. De er uttalelser, actions-- gjøre dette. Og så i et programmerings språk, ville vi vanligvis kalle dem uttalelser eller funksjoner eller prosedyrer, kalle dem en rekke ting. Men de er bare actions-- gjøre dette. 
+
+Trinn 4 er fundamentalt annerledes, fordi det er slags stille et spørsmål. Det sier vi er snill på en gaffel i veien. Hvis Mike er på siden, ring ham, så tar du til venstre, hvis du vil. Og hvis ikke, gå tilbake til noen andre page-- eller rettere sagt, beklager, gå tilbake til et annet trinn, som induserer en slags looping konstruksjon. Og vi gjør det igjen og igjen og igjen. 
+
+Og faktisk, vet du hva? Yeah. else if på slutten av boken stopp. Så vi trenger slag av en tredje tilstand, fordi du kan ikke holde snu siden annonsen nauseum, fordi til slutt, vil jeg treffer slutten av boken. Og en feil i et program kan være ikke forutse at scenario. Og da jeg innså, oh, vent et minutt, jeg trenger en tredje scenario. Hvis jeg er ute av sider, jeg bør egentlig bare slutte. Ellers er det udefinert. Hva kommer til å skje hvis jeg holder sier snu siden og gå tilbake, Dette er når datamaskiner fryse eller krasjer, når du treffer noen uventede situasjonen sånn. 
+
+Nå, hva om Mike Smiths tredje algorithm-- plukke opp telefonboken, åpen bok å first-- til nei, ikke første side denne gangen, til middle-- oh, vel, det hadde være den andre algoritmen. La oss bare hoppe til den tredje. 
+
+PUBLIKUM: Å, jeg beklager. 
+
+DAVID MALAN: Det er greit. La oss bare hoppe til third-- åpen til midten og nå lete etter Mike Smith. hvis på side, ringe Mike. Og hva gjør vi ønsker å si her? ellers hva? Vi kan uttrykke dette i en rekke måter. Det er ikke riktig svar. OK, hvis ikke igjen, men vi må be-- OK, vi ønsker å dele i to, men gjør vi ønsker å gå til venstre eller gå rett? Hvordan uttrykker vi at begrepet? Vel, i Mike tilfelle, ja, det er rettferdig. Men OK, så det er faktisk et godt poeng. Det er greit. Vi vil holde det gående med denne logikken. Så-- 
+
+PUBLIKUM: Mindre enn halvparten. DAVID MALAN: Ja. Så annet hvis siden er, vil vi si, mindre enn Smith, til venstre for Smith, then-- la oss se, er dette kommer til å komplisere? else if side kommer før Smith, rive i to, kaste bort som halvparten? 
+
+PUBLIKUM: Jeg trodde det var [hørbar]. 
+
+DAVID MALAN: Jeg hører begge svarene. 
+
+PUBLIKUM: Venstre. DAVID MALAN: OK, kaste bort igjen halvparten, som Lakisa sa tidligere, venstre halvparten, så jeg slags vil bare gå to-- jeg går til høyre. Eller ekvivalent, og jeg gjorde en liten litt av et rot av begynnelsen her, Jeg effektivt vil gå til trinn 2 igjen, hvor åpen for middle-- eller open-- Ja, la oss bare si, sider til midten. Og dette fikser det. Det er ikke lenger en bok. Det er bare halvparten av en bok, så åpne sider til midten. 
+
+else-- var nesten der. Trinn 6, annet hvis side kommer etter Smith, rive i to, kaste høyre halvdel, deretter går du til trinn 2. ellers slutte, et fjerde scenario hvis vi har ingen sider igjen å snu. Så vi kan rydde opp dette. Og vi bør rydde opp dette. Dette er veldig pseudokode, hvis du vil, svært høyt nivå beskrivelse. Men det betyr vanligvis fange ideen. 
+
+Og, igjen, i dette scenariet, vi har den oppfatningen av en tilstand, en gren, en gaffel i veien, noe som gjør en decision-- om dette, gå på denne måten, else if, gå på denne måten, else if, gå den veien. Og dette er en svært vanlig programmering teknikk å bestemme hvilken retning å gå, så å si. Og vi har også en slags av looping struktur, hvor vi gjør noe igjen og igjen. 
+
+Nå viser det seg, mye som i dette eksemplet å være super presis er viktig. Men vi har også sett noe at vi holder ringer abstraksjon. Hva betyr det å plukke opp telefonboken? Vi er bare slags ta for gitt i dette rommet at det har noen semantiske betydning. Alle av oss bare slags vet, oh, vel, plukke opp telefonboken. Hva betyr det egentlig? Vel, som virkelig betyr utvide hånd, helle over, strekke fingrene, klype bok mellom fingrene, stå opp, trekke hånden mot deg. Og vi kan være veldig pedantisk om dette, egentlig å være super presis om hva jeg gjør. Men alle disse trinnene kollektivt er hva det betyr å plukke opp en telefonkatalog. 
+
+Og så tidligere, da jeg sa, hver av disse to første setningene kan betraktes som en fortsette eller en funksjon, egentlig det representerer hva vi holde ringer en abstraksjon. Det er som et høyt nivå konseptuell beskrivelse av et problem som faktisk innebærer ganske få skritt. Og så dette, også er en tilbakevendende tema i programmering, der jeg kan skrive et program bruker syntaks som dette-- pick_up_phone_book (). Og så syntaktisk, jeg kommer til å stjele noe fra de fleste programmeringsspråk. 
+
+Nå, trinn 1 ser enda mer som en funksjon som programmerer vil kalle det. Det ser ut som kode som noen har gitt et navn til og gitt for meg å bruke somehow-- i andre ord, hva linjen jeg har uthevet representerer funksjonalitet som kanskje Jeg hadde ikke engang gjennomføre meg selv. Noen eldre, klokere enn meg allerede funnet ut hvordan du uttrykker oppfatningen for å plukke opp en telefonkatalog. Og det er som de fem trinnene jeg bare ramset opp, på toppen av hodet mitt. 
+
+Men han eller hun allerede implementert dette, ga de flere trinn et navn, pick_up_phone_book. Og parentes er akkurat hva de fleste programmerere gjøre på slutten av utsagn som dette. Jeg nå kan stå på hans eller hennes skuldre og aldri igjen, tenke på hva det betyr å plukke opp en telefonkatalog. Jeg kan bare si, plukke opp telefonboken. Og det er akkurat det alle av oss mennesker gjorde her. 
+
+Da vi var sannsynligvis en år gammel, 2 år gammel, noen måtte lære oss hva det ment å plukke opp en telefonkatalog. Og helt siden da, vi har abstrahert bort fra de svært uinteressant mekaniske trinn. Og vi har bare en intuitiv forståelse av hva det vil si å plukke opp en telefonkatalog. 
+
+Og du kan ekstrapolere nå til mer kompliserte things-- konstruere en bygning. Som, for noen, som faktisk har betydning. Til entreprenører, arkitekter, som har noen betydning. Og de ville vite hva de skal gjøre, hvis Jeg sa, gå konstruere en bygning. 
+
+Men de fleste av oss i rommet kunne ikke avtale med det nivået av abstraksjon. Du må fortelle oss like go få spade og gå får betongen og spikre trestykker sammen og alt annet er involvert i å bygge en bygning. Og det er fordi vi ikke har ennå blitt programmert til å forstå hva det betyr å konstruere en bygning. Vi har ikke det abstraksjon. Vi har ikke den funksjonaliteten. 
+
+Og så hva du vil se i programmeringsspråk, generelt, spesielt mer moderne språk, som Java, PHP, Ruby, og Python, de er mye mer moden enn eldre språk, som C og C ++ og ennå andre. Og så kommer de med mer funksjonalitet innebygd. Mer koden er skrevet av mennesker i fortiden at vi nå kan ringe eller innkalle eller bruker, som jeg antydet på med dette uthevet linje her. Og så selv om vi ikke snakker om programmeringsspråk per se, bare pseudokode, alle av ideer er fortsatt i den diskusjonen. Og det viser seg presisjon er super viktig, som er abstraksjon. Og la oss prøve å kommunisere det som følger. 
+
+Jeg tilfeldigvis kan ha bortskjemt dette ved å blinke et lysbilde på skjermen for tidlig. Men la meg spørre om en modig frivillig, hvis du ikke tankene kommer opp. Du vil være i front av kamera, hvis du er OK med det. Vil noen liker å komme opp og gi instruksjoner til dine kolleger her? Bare nødt til å komme over her og stå over her og si noen ord. 
+
+Victoria smiler mest og unngå øynene mine mest. Ville du være villig til å komme på opp? OK. Og hvis alle andre på din seter kunne ta ut et stykke av skrap papir, om du vil. Foret papir er fine. Kom rundt på denne måten. Eller noen av papiret som du fikk i går, bare noen blanke ark papir, hvis du kunne. Og hvis du ikke har noen, bare spør naboen om du kunne. 
+
+Så for øyeblikket, for dette eksempelet, Victoria kommer til å spille rollen som en programmerer, en ingeniør, som trenger å programmere dere alle, som datamaskinene, for å gjøre noe. Og vi får se hva forutsetninger du bestemmer deg for å gjøre. Vi får se hvordan presis hun velger å være. Og hvis denne demonstrasjonen går pedagogisk godt, massevis av feil vil bli gjort, at vi vil da bruke det som en mulighet for diskusjon. Men utfordringen for deg bør være å unngå disse feilene, være en god programmerer. Og så utfordringen for hånden, hvis ville du likt å gå over her, er foran Victoria på skjermen her-- og forhåpentligvis ingen av dere Husk dette når jeg blinket på skjermen. Og ikke snu det hele tatt, fordi det er en annen skjerm i dette rommet at jeg kan slå av. Så ikke snu. 
+
+Foran Victoria er det samme skrik. Og hennes jobb er nå å fortelle deg alt på din stykke papir hva du skal tegne. Og vi vil se, basert på verbale instruksjoner alene, datakode, om du vil, hvor nøyaktige tegninger are-- dine implementeringer er. Gir mening? 
+
+PUBLIKUM: Yeah. DAVID MALAN: OK, utføre. 
+
+PUBLIKUM: Tegn en firkant. 
+
+[LATTER] 
+
+DAVID MALAN: Og nei spørsmål kan bli bedt om. Kan bare gjøre det du får beskjed om. Oh, og hvis du har dagens lysbilder åpne i en fane, ikke se på fanen. OK? 
+
+PUBLIKUM: OK, tegne en sirkel. En slope-- kan jeg si skråningen? DAVID MALAN: Opp til deg. PUBLIKUM: En skråning. Og en trekant. 
+
+DAVID MALAN: Greit. Og bo her for bare et øyeblikk. Og jeg kommer til å komme rundt i bare et øyeblikk. Og du trenger ikke å sette navn på det. La meg komme rundt og samle dine tegninger, hvis du ikke har noe imot å rive dem ut. 
+
+Her er hva vi fikk tilbake. Jeg skal projisere det på skjermen. Jeg ser et kvadrat, en sirkel, en skråning, og en trekant. Så det var ett svar der. Og let's-- Uff. Takk skal du ha. Her er en annen sortiment, og en bak den. 
+
+Så de alle synes å fange ånden. Takk skal du ha. Det er en annen, og her er en annen. Skråningen tolkning er en litt annerledes, litt svingete. Og den nærmeste, enten på grunn av fantastisk spesifisitet som du har beskrevet, eller kanskje du slags så det før, er dette faktisk hva Victoria var faktisk beskriver. 
+
+Men nå, de av dere som ikke får det helt rett, La oss gi noen innvendinger her. Så Victoria først sa tegne en firkant. Og nå kan vi anta for å få til i dag at alle vet hvordan å tegne en firkant. Men det er ikke helt klart, ikke sant? Hvordan ellers kunne du ha tegnet en firkant, eller hvor kan være noen av de uklarheter her for datamaskinen? PUBLIKUM: Beliggenhet og størrelse. DAVID MALAN: Beliggenhet, ikke sant? Alle dere hadde et papir av noen form, generelt rektangler, men litt forskjellige størrelser. Men du sikkert kunne ha trukket, Hvis du ville, en stor firkant, kanskje en liten firkant. Kanskje ble det roteres. Jeg tror ikke vi så det. Men det kunne ha vært mer diamant liker, men likevel, likevel, Matematisk en firkant. Så det var kanskje tvetydig. 
+
+Så sa hun, tegne en sirkel. Noen av dere fikk tegne det ved siden av det, som er ikke urimelig, fordi mennesker har en tendens til å tenke eller lese høyre til venstre på de fleste språk, så ikke en dårlig gjetning. Men den sirkelen kunne ha vært inne på torget, kunne ha vært rundt torget, kunne ha vært et annet sted på arket, så uten tvil tvetydig. 
+
+Slope kan ha vært kanskje tar de fleste friheter verbalt med hva det betyr. Og noen av dere tolket det som en snirklete linje eller en rett linje eller lignende. Og så trekant, også, kunne ha blitt orientert i en rekke måter. Så kort sagt, selv med noe som du blikk og du er som wow, så enkelt, et barn kunne tegne dette, vel ikke egentlig, med mindre du er super, super overbevisende og fortelle datamaskinen nøyaktig hva du skal gjøre. Så hvis vi kunne, hvis du har et annet ark, la oss prøve dette på nytt. Og jeg kommer til å gi Victoria en annet eksempel på skjermen her. Og igjen, ikke snu og ikke se på lysbildene. Og jeg vil gi henne tid til å tenke på hvordan å beskrive dette. Ikke la dem se frykten i øynene. 
+
+[LATTER] 
+
+Og igjen, denne gangen innflytelse noen av disse gatekjøkken og prøve å få nesten alle i det minste det rette svaret. 
+
+PUBLIKUM: OK, ta en stykke papir, se i midten av det stykke papir. I midten av det stykke papir, tegne en kube. 
+
+[LATTER] DAVID MALAN: Hva har vi lært? Vi var så nær. OK, gjenta hvis du kan, for alle. 
+
+PUBLIKUM: I midten av stykke papir, tegne et objekt, som ser ut som en kube. 
+
+DAVID MALAN: OK, det er alt du kommer til å jobbe med. Tillat meg å være analytisk og ikke så mye kritisk, men for å gjøre kravet at Victoria definitivt ser ut til å tenke i svært høyt nivå abstraksjoner, som er ikke urimelig. Fordi ellers ville vi alle være ganske dysfunksjonelle, hvis vi måtte være aldri så presis med alt vi gjør i verden. 
+
+Men å si gå til middle-- jeg Trodde vi var på en så god track der, som går til den midterste på siden, og deretter tegne en kube. Så hun tenker på abstraksjoner, fordi hun er fremdeles visning hva som skjer på skjermen som faktisk en kube. Men det er så mange muligheter for tolkning der. Og faktisk, det er så mange andre måter du kan uttrykke det, som jeg vil foreslå i et øyeblikk. Så her har vi en inkarnasjon av picture-- whoops-- en inkarnasjon av bildet, slik at en lite tre dimensionality til det, som er fint. 
+
+Her er en annen en, der du har samme, selv om det er litt av en åpen kube. Noen folk tok det litt mer flat, todimensjonalt. Og det er greit. Så der, faktisk i midten av arket. Dette tror jeg du vil som, fordi hvis vi går her, Dette er hva hun beskriver. Så nå, la meg foreslå hvordan ellers vi kan beskrive denne situasjonen. 
+
+Tilbake i dag en av de mest vanligste måtene å lære programmering var å skrive kode, skriver linjer med instruksjoner, som kontrollerte litt skilpadde på skjermen. Logo og andre varianter av denne het av språket. Og skilpadden levde i en verden. 
+
+Så antar at dette rektangulær plass er hans verden. Og du vil starte med å assuming-- jeg vet egentlig ikke hvordan å tegne skilpadde, så la oss gjøre det på denne måten. Og så har han en skallet og så kanskje noen føtter. Så du kan ha denne lille tegn på skjermen. 
+
+Og formålet med denne programmeringsspråk var å tvinge skilpadden å gå opp, ned, venstre, høyre og å sette pennen ned eller plukke hans penn opp, så han kan faktisk tegne på skjermen i dette meget flat rektangulær verden. Så hvor jeg tenkte at du kanskje kommer, og hvor du bør vurdere dykking ned til mentalt når de beskriver instruksjoner mer generelt, Jeg vil hevde, er satt inn pennen ned i middle-- og vi vil bli kvitt den skilpadde, fordi jeg kan egentlig ikke holde tegning ham veldig godt. 
+
+Og nå, hvordan ellers kunne Jeg sier tegne en kube? Vel, vi kan si noe sånt som uavgjort en diagonal linje nordøst, for eksempel, eller ved en 45-graders vinkel oppover. Og som kanskje har fått meg her. Og jeg er ganske langt fra en kube. Men nå, jeg kunne si noe som slår 90 grader til venstre og trekke en linje fra lik lengde nordvest. Og jeg kunne fortsette med tilsvarende retninger. Og det kommer ikke til å bli lett. Og ærlig talt, vi sannsynligvis ville har vært her i fem minutter. Men kanskje vi ville ha fått til noe som, ved slutten av dagen, ender opp som en kube, men vi dykket innsiden av det abstraksjon å gjøre det på en så lav nivå at du ikke kan egentlig se hva du gjør før hele ting er faktisk det på siden. Og så dette er et generelt prinsipp, igjen, av programming-- denne ideen av abstraksjon. Det er så fantastisk kraftig, fordi igjen, hun sa, tegne en kube, som alle oss ganske mye ville Grok svært raskt. Vi ville bare forstå, OK, tegne en kube. Vi kan ikke vite retningen, slik at vi kunne være litt mer presis, men vi kan generelt bilde eller vet hva en kube er. Og det er nyttig, fordi hvis hver gang du satte seg som programmerer på tastaturet for å skrive kode, hvis du måtte tenke på slikt et lavt nivå, ingen av oss noen gang ville få noe gjort. Og sikkert, ingen av oss ville nyte prosessen med å skrive kode. Det ville være som å skrive i 0-er og 1-ere, som ærlig var ikke så lenge siden mennesker var å skrive kode i 0 og 1-ere. Og vi svært raskt kom opp med disse høyere nivå languages-- C ++ og Java og andre. 
+
+Så la oss prøve dette på nytt bare for å snu bordene, slik at alle av oss har sjansen til å tenke i stedet for på samme måte. Kan vi få en mer frivillig dette tid til å komme opp til tavlen og tegne, ikke resitere? Ja, OK. Ben, kom opp. Og Ben, i dette tilfellet, når du møte i styret, ikke se til venstre, ser ikke riktig. Bare gjøre hva din kolleger her fortelle deg. Og for alle andre i rom, du nå er programmerer. Han er datamaskinen. Og bildet jeg har valgt her på forhånd er denne her. De er just-- de tenker av en morsom spøk er alt. 
+
+Så ville ikke noen å frivillig første instruksjon eller uttalelse som bør kommando Ben penn? Og vi vil gjøre dette kollektivt, kanskje en instruksjon fra hver person. Unnskyld? 
+
+PUBLIKUM: Tegn en sirkel. DAVID MALAN: Tegn en sirkel er den første jeg har hørt. 
+
+PUBLIKUM: Up toppen. 
+
+DAVID MALAN: Opp toppen. OK, vi kan la deg slette, angre. Og nå, noen andre. Dan, du ville være komfortabel tilbyr den neste instruksjon? 
+
+PUBLIKUM: Jada, tegne sentrum av bunnen av sirkelen med en small-- litt liten plass fra det, tegne en rett linje ned til tre fjerdedeler av veien ned brettet en liten vinkel til venstre. 
+
+DAVID MALAN: Good. 
+
+PUBLIKUM: Svakt vinkel. 
+
+DAVID MALAN: Angre, Ctrl-Z. OK. Andrew, ønsker du å tilby opp neste instruksjon? 
+
+PUBLIKUM: Sure. Fra bunnen av den linjen, en ytterligere liten angle-- whoops-- kanskje omtrent en tredjedel av lengden [hørbar] litt på skrå nedover og som en tredjedel av lengden av [ikke hørbar]. Så ja, fra det punktet, tegne en linje en tredje av lengden av det foregå linje ytterligere mot venstre. 
+
+DAVID MALAN: At OK? Rett linje, det er OK? OK, Olivier, vil du å tilby opp neste? 
+
+PUBLIKUM: [uhørlig] fra bunnen av sirkelen, [hørbar]. Tegn på høyre side av [hørbar] centimeter. 
+
+[LATTER] 
+
+DAVID MALAN: Jeg tror du kommer til å må konvertere det er inches her. 
+
+PUBLIKUM: Stopp. 
+
+[LATTER] 
+
+DAVID MALAN: OK. [? Ara,?] Du vil å tilby opp neste? 
+
+PUBLIKUM: Tegn en [uhørbart] den øvre [hørbar] det samme. [Hørbar] sirkel, trekke til [Hørbar] og trekke [hørbar]. 
+
+DAVID MALAN: OK, ikke mer angre. La oss gjøre en eller to flere instruksjoner. Chris, ønsker du å tilby en? 
+
+PUBLIKUM: Nederst av sirkelen, [hørbar] tegne en lik linje skrått nedover til venstre [hørbar]. 
+
+DAVID MALAN: OK. Andrew? Vi did-- Karim? 
+
+PUBLIKUM: Fra høyre linje, enden av den venstre linje, den nederste, du kommer til å gå rett om den samme lengde som linjen du er på, og trekker til rett [hørbar]. [Hørbar] grader, så [hørbar] grader på høyre side. 
+
+DAVID MALAN: Greit. La oss ta en pause. Ikke snu ennå. La oss ta en pause, og la oss prøve en annen forsøk før vi avslører Ben hva han har å tegne. Kan du shuffle Ben til den right-- eller faktisk, Nei, la oss bare gi deg et annet bord, enda bedre. Så vil noen nå liker for å ta mer av tilnærmingen at Victoria tok tidligere, hvor vi snakker i et høyere nivå abstraksjon og i bare en setning eller to beskrive for Ben hva du skal tegne uten komme inn i ugress, så å si, ved dette et lavere nivå? Victoria. [LATTER] PUBLIKUM: Tegn en figur av gang mannen. Og hans ben og armer må være på høyre side. 
+
+DAVID MALAN: OK, det er alt du får. Greit. Hvorfor gjør vi ikke avsløre for Ben hva han gjorde. Så en runde med applaus. Det var den vanskeligste kanskje. 
+
+Så selv om vi snakker i ganske dum når det gjelder om bare tegning bilder, forhåpentligvis kan virkelig sette pris på graden av ekspressivitet som kan være nødvendig for å fortelle en datamaskin hva de skal gjøre. Og faktisk det faktum at Ben var i stand til å trekke dette så raskt er liksom testament til å bruke en språk, kanskje et høyere nivå versjon av engelsk, som lar ham å bare bruke ord, eller hører ord fra Victoria, som tillater ham disse abstractions-- bare trekke en figur som går til right-- den slags har noen semantiske mening til det som ikke er nesten like opplagt når du er bare sier, sette pennen ned, tegne til høyre, trekke til venstre. 
+
+Og så dette, også er veldig vanlig innen programmering. Dette vil kunne sies å være som en meget lavt nivå språk, programmering i 0-er og 1-ere om du vil. Og dette vil være et høyere nivå språk programmering i Java, eller noe sånt. En bit av en forenkling, er men at det liksom som emosjonell følelsen av at du føler når ved hjelp av en slags ting eller en annen. En bit av frustrasjon her ved behov for en slik presisjon, men sjansen å være litt løsere med tolkningen her. Men selvfølgelig, bugs kan oppstå som et resultat. 
+
+Hvis du ønsker at home-- vi vil ikke gjøre dette i class-- men hvis du ønsker å bringe kampen, Jeg trodde vi skulle dykke inn i dette. Så hvis du har lyst til å spille dette spill med betydelige andre eller barn eller lignende, du kan nyte det også. 
+
+Så la oss gå videre og se på en siste ting her for beregningsorientert tenkning. Og det bringer oss til John Oliver, ikke for klippet du kanskje har sett i går kveld, men til en noe fersk utgave. For noen måneder tilbake, Volkswagen tok seg en bit av antiluftskyts for hvilken grunn, hvis du vet? Hva fikk de i trøbbel for? 
+
+Ja, så emissions-- de prøvde å slå utslipp tester av i hovedsak ha sin biler forurenser miljøet mindre når deres biler ble testet og forurenser miljøet mer når bilene ikke ble testet. Og hva er mer interessant i verden, som du kanskje har inferred fra diskusjoner om like-- hva er it CarPlay, Apples programvare for biler og det faktum at mange av oss stadig har touch-skjermer i våre biler, det er en skremmende mengde av programvare i folks biler i dag, noe som ærlig åpner en hel boks med ormer når det kommer til sikkerhet og fysisk risiko. Men for i dag, la oss fokusere på akkurat hva som er involvert i skriving som kanskje har gamed systemet. 
+
+For definisjonen av problem, for dem ukjent, la oss ta en titt på John Oliver. Og for de som er kjent med problemet, la oss se på det på en morsom linse via John Oliver også. Så la meg trykke play på dette, jeg tror, ​​tre minutters introduksjon. Pokker. [VIDEO PLAYBACK] -Biler-- DAVID MALAN: Selvfølgelig, på YouTube, it's-- - --Rommet smarteste karakterene i Fast and Furious filmene. Denne uken, tyske bilprodusenten Volkswagen funnet seg selv midt i en skandale av potensielt kriminelle proporsjoner. 
+
+-Volkswagen Er oppkvikkende for milliarder i bøter, mulige kriminelle anklager for sine ledere, som Selskapet beklager for rigging 11 millioner biler til hjelpe det slå utslippstester. 
+
+-Certain Diesel modeller ble utformet med avansert programvare som brukt informasjon, inkludert posisjon av rattet og kjøretøy hastighet, for å bestemme bil var omgår utslipp testing. Under dette forholdet, motoren vil redusere giftige utslipp. Men bilen ble rigget til bypass at når det ble kjørt. Utslippene økte 10-40 ganger over akseptable EPA nivåer. 
+
+-WOW, 10 til 40 ganger større enn EPA tillater. Det er det verste Volkswagen har noensinne gjort, er noe du kan si om du hadde aldri hørt om andre verdenskrig. Men kanskje den sikreste tegn på hvor mye trøbbel Volkswagen er i, er at folk på svært Toppen har trappet ned. Administrerende direktør trakk seg onsdag etter desperat å gjøre skade kontroll, sa han var uendelige beklager, som hørtes bra før det viste seg Han var bare 10% beklager men hadde rigget munnen å kunstig blåse hans sorriness. Og i mellomtiden, Volkswagen USA sjef hadde en unnskyldning for sin egen. 
+
+-La Oss være klart om dette, vårt selskap var uærlig. Og i mine tyske ord, vi har helt ødelagt. 
+
+-Ja, Men helt ødelagt opp er ikke tyske verk. Og det tyske språket har mange vakre setninger å beskrive situasjoner akkurat som denne, for eksempel [GERMAN], noe som betyr at omtrent, sorgen som kommer fra forretningsrelaterte løgner, eller [TYSK], som kan oversettes som skjemmer seg far involverer skyer av bensin. Det er et vakkert språk. Det seiler like ved tungen. Og forresten, mens den mannens unnskyldning kan ha hørtes oppriktig, det er verdt å merke seg at han talte på en offisiell lanseringsfesten for 2016 Volkswagen Passat, noe som betyr at om kort tid etter å si beklager, sa han dette. 
+
+-Takk Veldig mye for å komme. Nyt kvelden. Opp neste er Lenny Kravitz. 
+
+[MUSIKK] 
+
+-OK, OK, slutter din unnskyldning med opp neste Lenny Kravitz ikke skrike edru anger. Det skriker, vi spurte Bon Jovi, og han sa nei. Volkswagen merkevare har blitt alvorlig skadet. Og ærlig, deres ny annonse Kampanjen er ikke akkurat hjelper. 
+
+- [TYSK], ville vi på Volkswagen liker å be om unnskyldning for å lure deg med våre biler. 
+
+[END PLAYBACK] DAVID MALAN: Så dette var en rundkjøring måte of-- sorry-- dette var en rundkjøring måte innføre et grunnleggende problem i programvare, som er at du behov for å detektere visse betingelser. Og så er spørsmålet for hånden her er, hvordan en bil potensielt, som implementert i software av disse programmerere, oppdage at det faktisk blir testet? Så for å være super klar, hva de gjorde var, i miljøer der programmerere skjønte bilen var å være testet, de liksom gjort bilen slipper ut mindre utslipp, mindre utslipp, slik at mindre giftig røyk og lignende. Men når det er normalt kjører på veien, det ville bare slippe ut så mye forurensning som det ville. 
+
+Så hvordan kan vi skrive pseudokode for denne algoritmen? Hvordan kan vi skrive pseudo for programvaren som kjører i bilen? Jeg mener, i et nøtteskall, det koker ned til noe sånt som dette. hvis blir testet, avgir mindre. ellers avgir mer. Men det er en liten for høyt nivå, ikke sant? 
+
+La oss prøve å dykke i hva denne abstraksjon av å være testet midler. Med andre ord, selv om du vet ingenting om biler, hva slags spørsmål kan du spørre for å avgjøre om du blir testet, hvis du er i bilen? Hvilke egenskaper kan være presentere hvis en bil blir testet? 
+
+PUBLIKUM: Testing utstyr. 
+
+DAVID MALAN: Testing utstyr. Så hvis testing av utstyr nærheten, da slipper ut mindre. Så jeg kunne tenke meg å implementere som med en slags kameraer eller avdekke hva som er rundt deg. Og la meg foreslå at bare føles for komplisert å faktisk ha ekstra maskinvare nettopp for dette formålet. 
+
+PUBLIKUM: Hvis du er i park, hvis panseret er åpent. 
+
+DAVID MALAN: I parken eller panseret åpent, så det er bra. 
+
+PUBLIKUM: Og bilen kjører. 
+
+DAVID MALAN: Så det er litt mer concrete-- og bilen kjører. Så dette ville være sammen med en noen forskjellige forhold, hvis du vil. Så hvis bilen er i parken, og selv om dette er en veldig mekanisk ting typisk, jeg kunne forestille seg å skrive programvare, spesielt fordi det er ofte et lys der ute i disse dager, Jeg kunne tenke meg at det er programvare som kan søke i shifter eller hva ikke, du er i parken, er du i stasjonen, er du i revers. Og jeg kan komme tilbake en svare på det er enten ja eller nei til slike spørsmål. 
+
+Og så kunne jeg også trolig svare et spørsmål som er panseret åpent. Kanskje er det en slags sensor som enten gir meg tilbake en 1 eller 0, sant eller usant, er panseret åpent. Og da bilen kjører, kan jeg oppdage som liksom via hva mekanisme? Liker, er bilen kjører, jeg kunne oppdage at det er på, Jeg kunne påvise en eller annen måte at bilen er i bevegelse? 
+
+PUBLIKUM: RPM. 
+
+DAVID MALAN: Ja, så det er alltid at nål som forteller deg hvor mange rotasjoner per minutt hjulene opplever. Og så jeg kunne se på det. Og hvis det ikke er 0, som trolig betyr at bilen er i bevegelse. Men vi må være en litt forsiktig der, because-- la oss forenkle dette-- hvis vi sa, hvis bilen kjører, vi ønsker ikke å bare slippe ut mindre, vi vil hvis bilen kjører og det blir testet. 
+
+Så er det noen andre Ingredienser som folk har en hypotese om programvaren gjør, fordi fraværende selve kildekoden, du kan bare liksom slutte fra fysiske virkningene av bilen med hensyn til hva kan gå på under panseret i programvaren. Så hvis bilen kjører og kanskje, sier bakhjulene ikke beveger seg, kan dette være en indikasjon av en slags test? Hva er det jeg antydet at her? Ja, kanskje, det er på en av disse rulle ting, hvor som hjulene er å snu foran eller bak, avhengig av om det er forhjulet eller bakhjulsdrift, slik at halvparten av hjulene er i bevegelse, men andre to er ikke, hvilken er en merkelig situasjon i den virkelige verden. Hvis du kjører på veien, det bør ikke skje. Men hvis du er i et lager på en slags roller system, som kan faktisk skje. 
+
+Jeg tror folk også foreslått at kanskje, hvis bilen er i gang og styring hjulet ikke beveger seg, at også kan være et signal, fordi det er rimelig for som en straight på en vei. Men selv da, er den menneskelige trolig flytte den litt eller helt sikkert i løpet av noen få sekunder. Eller i løpet av en minutt, oddsen er det ikke kommer til å bli fiksert i nøyaktig samme posisjon. 
+
+Så med andre ord, vi kan ta subtraksjon, er du blir testet, og bryte ned denne funksjonaliteten inn i disse komponent ingredienser. Og det er virkelig hva Volkswagens ingeniører eller annen måte gjorde. De skrev programvare bevisst å oppdage om bilen blir testet, Derfor slipper ut mindre, annet avgir på vanlig måte. 
+
+Og problemet her også, er at programvaren ikke noe du virkelig kan se med mindre du har den såkalte kildekoden. Så det er to forskjellige typer av code-- minst to forskjellige typer av koden i verden. Det er noe som heter kilde kode, som ikke er i motsetning til hva vi har skrevet, kildekode. 
+
+Dette kildekode skrevet i et språk som kalles pseudo, som er bare noe engelsk-aktig. Det er ingen formell definisjon av det. Men C, og Java, C ++, disse er alle formelle språk som, når du skriver i dem, hva du har er en tekstfil som inneholder kildekoden. 
+
+Men det er også noe i verden kalles maskinkode. Og maskinkode, dessverre, er bare 0-er og 1-ere. Så maskinkode er hva maskiner forstår, selvfølgelig. Kildekoden er hva mennesker forstår. 
+
+Og vanligvis, men ikke alltid, er det et program at en programmerer bruker som tar kilde kode og gjør den til maskinkode. Og at programmet er vanligvis kalt en kompilator. Så dine innspill er kildekoden, utskriften er maskinkode, og kompilatoren er et stykke programvaren som gjør denne prosessen. Så dette faktisk kartene pent til våre innganger, algoritmer, utganger. 
+
+Men dette er en veldig bestemt inkarnasjon av det, det vil si at, selv om du eier en av Volkswagens biler som er skyldig i dette, det er ikke som du kan bare åpne hette eller åpne bruksanvisningen eller se på kildekoden, fordi da den når bilen i oppkjørselen din, det har allerede vært omgjort til 0 og 1-ere. Og det er veldig vanskelig, ikke umulig, men svært vanskelig å fange opp mye av noe fra bare å se på underliggende 0-er og 1-ere. Så du kan finne ut av det til slutt, hvis du forstår hvordan en maskin operates-- Intel inside-- hvis du forstår Intel-arkitektur, men det er veldig tidkrevende. Og selv der, kan du ikke være i stand til å se alt at koden faktisk kan gjøre. 
+
+Eventuelle spørsmål om denne eller denne typen prosess mer generelt? Og faktisk, kan vi knytte denne diskusjonen til gårsdagens diskusjon av Apple. Også dette er grunnen til at FBI kan ikke bare gå og se på den mistenkte telefon og finne linjer med kode, for eksempel, som gjør det mulig passordet eller aktivere at 80-millisekund forsinkelse. Fordi da er det på stipendiatens iPhone, det har allerede vært konvertert til 0 og 1-ere. 
+
+Vel, la oss stoppe her for vår se på beregningsorientert tenkning. Hvorfor kan ikke vi ta en 15 minutters pause. Og når vi kommer tilbake, vil vi ta en titt på programmering seg og begynner å kartlegge noen av disse høyt nivå begrepene til en faktisk, hvis leken, programmeringsspråk. 

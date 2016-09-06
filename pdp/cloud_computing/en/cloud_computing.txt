@@ -1,0 +1,455 @@
+DAVID MALAN: All right, welcome back. Before we dive into cloud computing, I thought I'd pause for a moment if there are any outstanding questions or topics that came up during lunch that might now be of interest. AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: OK. Oh, OK. AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: No, of course. OK, well hopefully all of your problems arise in the next few hours and tomorrow especially. But let's take a look, then, at where the last discussion about setting up a website leads, more generally when it comes to cloud computing, setting up a server architecture, the kinds of decisions that engineers and developers and managers need to make when it comes to doing more than just signing up for a $10 per month web host when you actually want to build out your own infrastructure. And we'll try to tie this back, for instance, to Dropbox and others like them. 
+
+So let's start to consider what problems arise as business gets good and good problems arise. So in the very simplest case of having some company that has a web server, you might have, let's say, a server that we'll just draw that looks like this. And these days, most servers-- and let's actually put a picture to this just so that it's a little less nebulous. 
+
+So Dell rack server-- back in the day, there were mainframe computers that took up entire rooms. These days, if you were to get a server, it might look a little something like this. Servers are measured in what are called rack units, or RUs. And one RU is 1.5 inches, which is an industry standard. So this looks like a two RU server. So it's 3 inches tall. And they're generally 19 inches wide, which means all of this kind of stuff is standardized. 
+
+So if you look in a data center-- not just at one server, but let's take a look at Google's data center and see if we see a nice picture in Google Images. This is much better lit than you would typically find, and much sexier looking as a result. But this is what looks like a couple hundred servers all about that same size, actually, in rack after rack after rack after rack in a data center. 
+
+Something like this-- this may well be Google's, since I googled Google's. But it could be representative of more generally a data center in which many companies are typically co-located. And co-located generally means that you go to a place like Equinix or other vendors that have large warehouses that have lots of power, lots of cooling, hopefully lots of security, and individual cages enclosing racks of servers, and you either rent the racks or you bring the racks in. 
+
+And individual companies, startups especially, will have some kind of biometrics to get into their cage, or a key, or a key card. You open up the door. And inside of there is just a square footage footprint that you're paying for, inside of which you can put anything you want. 
+
+And you typically pay for the power. And you pay for the footprints. And then you pay yourself for the servers that you're bringing into that space. And what you then have the option to do is pay someone for your internet service connectivity. You can pay any number of vendors, all of whom typically come into that data center. 
+
+But the real interesting question is, what actually goes in those racks? They might all very well look like what we just saw. But they perform different functions and might need to do different things. And let's actually motivate this discussion with the question of, what problem starts to arise if you're successful? 
+
+So you've got a website that you've built. And maybe it sells widgets or something like that. And you've been doing very well with sales of widgets online. And you start to experience some symptoms, your website. What might be some of the technical symptoms that users report as business is growing and booming and your website is benefiting from that? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, exactly. So you might have a slowdown of your website. And why might that happen? Well, if we assume, for the sake of discussion right now, that you're on one of these commercial web hosts that we talked about before lunch, that you pay some number of dollars to per month, and you've already paid for the annual cost of your domain name, that web host is probably overselling their resources to some extent. So you might have a username and password on their server. But so might several other, or several dozen other, or maybe even several hundred other, users. 
+
+And websites live physically on the same server. Why is this possible? Well these days, servers like this typically have multiple hard drives, maybe as many as six or more hard drives, each of which might be as much as 4 terabytes these days. So you might have 24 terabytes of space in just one little server like this. 
+
+And even if you steal some of that space for redundancy, for backup purposes, it's still quite a lot of space. And certainly, a typical website doesn't need that much space. Just registering users and storing logs of orders doesn't take all that much space. So you can partition it quite a bit and give every user just a little slice of that. 
+
+Meanwhile, a computer like this these days typically has multiple CPUs-- not just one, maybe two, maybe four, maybe 16, or even more. And each of those CPUs has something called a core, which is kind of like a brain inside of a brain. So in fact most everyone here with modern laptops has probably a dual core or quad core CPU-- and probably only one CPU inside of a laptop these days. But desktop computers and rack computers like this might have quite a few more CPUs, and in turn cores. 
+
+And frankly, even in our Macs and PCs of today, you don't really need dual cores or quad cores to check your email. If there's any bottleneck when it comes to using a computer, you the human are probably the slowest thing about that computer. And you're not going to be able to check your email any faster if you have four times as many CPUs or cores. 
+
+But the same is kind of true of a server. One single website might not necessarily need more than one CPU or one core, one small brain inside doing all of the thinking and the processing. So manufacturers have similarly started to slice up those resources so that maybe your website gets one core, your website gets one core, or maybe we're sharing one such core. We're also sharing disk space. And we're also sharing RAM, or Random Access Memory from before, of which there's also a finite amount. 
+
+And that's the key. No matter how expensive the computer was, there's still a finite amount of resources in it. And so the more and more you try to consume those resources, the slower things might become. But why? Why would things slow down as a symptom of a server being overloaded? What's happening? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah, exactly. I proposed earlier that RAM is a type of memory. It's volatile, whereby that's where apps and data are stored when they're being used. And so therefore there's only a finite number of things you can apparently do at once. And it's also faster, which is a good thing. But it's also more expensive, which is a bad thing. And it's also therefore present in lower quantities than disk space, hard disk space, which tends to be cheaper. 
+
+In other words, you might have 4 terabytes of disk space in your computer. But you might have 4 gigabytes, or 64 gigabytes, in order of magnitude, a factor of 1,000 less, of RAM in your computer. So what does a computer do? Well, suppose that you do have 64 gigabytes of RAM in a server like this, which would be quite common, if not low these days. But suppose you have so many users doing so many things that you kind of sort of need 65 gigabytes of memory to handle all of that simultaneous usage? 
+
+Well, you could just say, sorry, some number of users just can't access the site. And that is the measure of last resort, certainly. Or you, as the operating system, like the Windows or Mac OS or Linux or Solaris or any number of other OSes on that server, could just decide, you know what? I only have 64 gigabytes of RAM. I kind of need 65. So you know what? I'm going to take 1 gigabyte worth of the data in RAM that was the least recently accessed and just move it to disk temporarily, literally copy it from the fast memory to the slower memory so that I can then handle that 65th gigabyte need for memory, do some computation on it. Then when I'm done doing that, I'll just move that to disk, move that other RAM I temporarily put on disk back into the actual hardware so that I'm kind of multitasking. 
+
+So I'm sort of putting things temporarily in this slower space so I create the illusion of handling everyone. But there's a slowdown. Why? Well, inside of these hard disks these days is what? Rather, what makes a hard drive different from RAM as best you know now? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: OK, true. AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: So very true. And that is a side effect or feature of the fact that RAM is indeed faster. And therefore you want to use it for current use. And a disk is slower. But it's permanent, or nonvolatile. So you use it for long term storage. But in terms of implementation, if I look up what's called a DIMM, Dual Inline Memory Module, this is what a piece of RAM might typically look like. 
+
+So inside of our Mac-- that's a bug. Inside of our Macs and PCs, our desktop computers would have sticks of memory, as you would call them, or DIMMs, or SIMMs back in the day, of memory that look like this. Our laptops probably have things that are a third the size or half the size. They're a little smaller, but the same idea-- little pieces of green silicon wafer or plastic that has little black chips on them with lots of wires interconnecting everything. You might have a whole bunch of these inside of your computer. But the takeaway here is it's entirely electronic. There's just electrons flowing on this device. By contrast, if we look at the inside of a hard drive and pull up a picture here, you would instead see something like this, which does have electricity going through it ultimately. But what also jumps out at you about this thing? AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah, there's apparently moving parts. It's kind of like an old record player or phonograph player. And it pretty much is. It's a little fancier than that-- whereas a phonograph player used grooves in the record, this actually uses tiny little magnetic particles that we can't quite see. But if a little magnetic particle looks like this, it's considered a 1. And if it looks like this, north-south instead of south-north, it might be a 0. And we'll see tomorrow how we can build from that to more interesting things. 
+
+But anything that's got to physically move is surely going to go slower than the speed of light, which in theory is what an electron might flow at, though realistically not quite. So mechanical devices-- much slower. But they're cheaper. And you can fit so much more data inside of them. So the fact that there exists in the world something called virtual memory, using a hard disk like this as though it were RAM transparent to the user, simply by moving data from RAM to the hard disk, then moving it back when you need it again, creates the slowdown. Because you literally have to copy it from one place to another. And the thing you're copying it to and from is actually slower than the RAM where you want it to be. 
+
+The alternative solution here-- if you don't like that slow down, and your virtual memory is sort of being overtaxed, what's another solution to this problem? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Well, increasing the virtual memory would let us do this on an even bigger scale. We could handle 66 gigabytes worth of memory needs, or 67 gigabytes. But suppose I don't like this slow down, in fact I want to turn off virtual memory if that's even possible, what else could I throw at this problem to solve it, where I want to handle more users and more memory requirements than I physically have at the moment? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Unfortunately no. So the CPU and the cores they're in are a finite resource. And there's no analog in that context. Good question, though. So just to be clear, too, if inside of this computer is, let's say, a stick of RAM that looks like this-- and so we'll call this RAM. And over here is the hard disk drive. And I'll just draw this pictorially as a little circle. There are 0's and 1's in both of these-- data, we'll generalize it as. 
+
+And essentially, if a user is running an application like, let's say, a website that requires this much RAM per user, what I'm proposing, by way of this thing called virtual memory, is to just temporarily move that over here so that now I can move someone else's memory requirements over there. And then when that's done, I can copy this back over and this goes here, thereby moving what I wanted in there somewhere else altogether. 
+
+So there's just a lot of switcheroo, is the takeaway here. So if you don't like this, and you don't want to put anything on the hard drive, what's sort of the obvious business person's solution to the problem, or the engineer's solution, for that matter, too? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, I mean literally throw money at the problem. And actually, this is the perfect segue to some of the higher level discussions of cloud computing. Because a lot of it is motivated by financial decisions, not even necessarily technological. If 64 gigs of RAM is too little, well, why not get 128 gigabytes of RAM? Why not get 256 gigabytes of RAM? Well, why not? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Well, it costs more money, sure. And if you already have spare hard disk space, effectively, or equivalently, hard disk space is so much cheaper you might as well use it. So again, there's this trade off that we saw even earlier on this morning, where there's really not necessarily a right answer, there's just a better or worse answer based on what you actually care about. 
+
+So there's also technological realities. I cannot buy a computer, to my knowledge, with a trillion gigabytes of RAM right now. It just physically doesn't exist. So there is some upper bound. But if you've ever even shopped for a consumer Mac or PC, too, generally there's this curve of features where there might be a good, a better, and a best computer. 
+
+And the marginal returns on your dollar buying the best computer versus the better computer might not be nearly as high as spending a bit more money and getting the better computer over the good computer. In other words, you're paying a premium to get the top of the line. 
+
+And what we'll see in the discussion of cloud computing is that what's very common these days, and what companies like Google early on popularized, was not paying for and building really fancy, expensive souped up computers with lots and lots of everything, but rather buying or building pretty modest computers but lots of them, and using something that's generally called horizontal scaling instead of vertical scaling. 
+
+So vertical scaling would mean get more RAM, more disk, more of everything, and sort of invest vertically in your hardware so you're just getting the best of the best of the best, but you're paying for it. Horizontal scaling is sort of get the bottom tier things, the good model, or even the worse model, but get lots of them. But as soon as you get lots of them-- for instance, in this case, web servers, if this one server or one web host is insufficient, then just intuitively, the solution to this problem of load or overload on your servers is either get a bigger server or, what I'm proposing here instead of scaling vertically so to speak, would be, you know what? Just get a second one of these. Or maybe even get a third. But now we've created an engineering problem by nature of this business or financial decision. What's the engineering problem now? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, how do you connect them and-- sorry? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Right, because I still have-- if I reintroduce me into this picture, if this is my laptop somewhere on the internet, which is now between me and the company we're talking about, now I have to figure out, to which server do I send this particular user? And if there's other users, like this, and then this one over here, and maybe this is user A, this is user B, this is user C, and this is server 1, 2, and 3-- now an intuitive answer might here be just, we'll send user A to 1 and B to 2 and C to 3. And we can handle 3 times as many users. 
+
+But that's an oversimplification. How do you decide whom to send where? So let's try to reason through this. So suppose that computers A, B, and C are customers, and servers 1, 2, and 3 are horizontally scaled servers. So they're sort of identical. They're all running the same software. And they can all do the same thing. But the reason we have three of them is so that we can handle three times as many people at once. 
+
+So we know from our discussion prior to lunch that there's hardware in between the laptops and the servers. But we'll just sort of generalize that now as the internet or the cloud. But we know that in my home, there's probably a home router. Near the servers, there's probably a router, DNS server, DHCP. There can be anything we want in this story. 
+
+So how do we start to decide, when user A goes to something.com, which server to route the user to? How might we begin to tell this story? AUDIENCE: Load balancing? DAVID MALAN: Load balancing. What do you mean by that? 
+
+AUDIENCE: Returning where the most usage is and which one has the most available resources. DAVID MALAN: OK, so let me introduce a new type of hardware that we haven't yet discussed, which is exactly that, a load balancer. This too could just be a server. It could look exactly like the one we saw a moment ago. A load balancer really is just a piece of software that you run on a piece of hardware. 
+
+Or you can pay a vendor, like Citrix or others, Cisco or others. You can pay for their own hardware, which is a hardware load balancer. But that just means they pre-installed the load balancing software on their hardware and sold it to you all together. So we'll just draw it as a rectangle for our purposes. 
+
+How now do I implement a load balancer? In other words, when user A wants to visit my site, their request somehow or other, probably by way of those routers we talked about earlier, is going to eventually reach this load balancer, who then needs to make a routing-like decision. But it's routing for sort of a higher purpose now. It's not just about getting from point A to point B. It's about deciding which point B is the best among them-- 1, 2, or 3 in this case. 
+
+So how do I decide whether to go to 1, to 2, to 3? What might this black box, so to speak, be doing on the inside? This too is another example in computer science of abstraction. I have literally drawn a load balancer as a black box in black ink, inside of which is some interesting logic, or magic even, out of which needs to come a decision-- 1, 2, or 3. And the input is just A. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: I'm sorry? AUDIENCE: [INAUDIBLE] DAVID MALAN: All right, how might we categorize the types of transactions here? 
+
+AUDIENCE: Viewing a webpage versus querying a database. DAVID MALAN: OK, that's good. So maybe this user A wants to view a web page. And maybe it's even static content, something that changes rarely, if ever. And that seems like a pretty simple operation. So maybe we'll just arbitrarily, but reasonably, say, server 1, his purpose in life is to just serve up static content, files that rarely, if ever, change. Maybe it's the images on the page. Maybe it's the text on the page or other such sort of uninteresting things, nothing transactional, nothing dynamic. 
+
+By contrast, if user A is checking out of his or her shopping cart that requires a database, someplace to store and remember that transaction, well maybe that request should go to server 2. So that's good. So we can load balance based on the type of requests. How else might we do this? What other-- 
+
+AUDIENCE: Based on the server's utilization and capacity. DAVID MALAN: Right, OK. So you mentioned that earlier, Kareem. So what if we provide some input on [INAUDIBLE] among servers 1, 2, and 3 to this load balancer so that they're just constantly informing the load balancer what their status is? Like, hey, load balancer, I'm at 50% utilization. In other words, I have half as many users as I can actually handle right now. Hey, load balancer, I'm at 100% utilization. Hey, load balancer, 0% utilization. The load balancer, if it's designed in a way that can take in those comments as input, it can then decide, ooh, number 2 is at 100%. Let me send no future requests to him other than the users already connected. This guy's at 0%. Let's send a lot of traffic to him. This guy said he's at 50%. Let's send some traffic to him. 
+
+So that would be an ingredient, that we could take load into account. And it's going to change over time. So the decisions will change. So that's a really good technique, one that's commonly used. What else could we do? And let's actually just summarize here. So the decisions here could be by type of traffic, I'll call it. It can be based on load. Let's see if we can't come up with a few other. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Location. So that's a good one. So location-- how might you leverage that information? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Oh, that's good. And about how many milliseconds would it decrease by based on what we saw this morning, would you say? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Well, based on the trace routes we saw earlier, which is just a rough measure of something, at least how long it takes for data to get from A to B feels like anything local was, what, like 74 milliseconds, give or take? And then anything 100 plus, 200 plus was probably abroad. And so based on that alone, it seems reasonable to assume that for a user in the US to access a European server might take twice or three times as long, even in milliseconds, than it might take if that server were located here geographically, or vice versa. So when I proposed earlier that especially once you cross that 200 millisecond threshold, give or take, humans do start to notice. And the trace route is just assuming raw, uninteresting data. When you have a website, you have to get the user downloading images or movie files, lots of text, subsequent requests. We saw when we visited, what was it, Facebook or Amazon earlier, there's a whole lot of stuff that needs to be downloaded. So that's going to add up. So multi-seconds might not be unreasonable. So good, geography is one ingredient. So in fact companies like Akamai, if you've heard of them, or others have long taken geography into account. And it turns out that by nature of an IP address, my laptop's IP address, you can infer, with some probability, where you are in the world. And in fact there's third party services you can pay who maintain databases of IP addresses and geographies that with high confidence will be true when asked, where in the world is this IP address? 
+
+And so in fact what other companies use this? If you have Hulu or Netflix, if you've ever been traveling abroad, and you try to watch something on Hulu, and you're not in the US, you might see a message saying, not in the US. Sorry, you can't view this content. 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Oh, really? But yes, so actually that's a perfect application of something very technical to an actual problem. If you were to VPN from Europe or Asia or anywhere in the world to your corporate headquarters in New York or wherever you are, you're going to create the appearance to outside websites that you're actually in New York, even though you're physically quite far away. 
+
+Now you the user are going to know you're obviously away. But you're also going to feel it because of those additional milliseconds. That additional distance and the encryption that's happening in the VPN is going to slow things down. So it may or may not be a great experience. But Hulu and Netflix are going to see you as sitting somewhere in New York, as you've clearly gleaned. What a perfect solution to that. 
+
+All right, so geography is one decision. What else might we use to decide how to route traffic from A, B, and C to 1, 2, and 3, again, putting the engineering hat on? This all sounds very complicated. Uh, I don't even know where to begin implementing those. Give me something that's simpler. What's the simplest way to make this decision? 
+
+AUDIENCE: Is the server available? 
+
+DAVID MALAN: Is the server available? So not bad. That's good. That's sort of a nuancing of load. So let's keep that in the load category. If you're available, I'm just going to send the data there. But that could backfire quickly. Because if I use that logic, and if I always ask 1, are you on, are you on, are you on, if the answer is always yes, I'm going to send 100% of the traffic to him, 0% to everyone else. And at some point, we're going to hit that slowdown or site unavailable. So what's slightly better than that but still pretty simple and not nearly as clever as taking all these additional data into account? 
+
+AUDIENCE: Cost per server. DAVID MALAN: Cost per server. OK, so let me toss that in the load category, too. Because what you'll find in a company, too-- that if you upgrade your servers over time or buy more, you might not be able to get exactly the same versions of hardware. Because it falls out of date. You can't buy it anymore. Prices change. 
+
+So you might have disparate servers in your cluster, so to speak. That's totally fine. But next year's hardware might be twice as fast, twice as capable as this year's. So we can toss that into the load category. This feedback loop between 1, 2, and 3 in the load balancer could certainly tell it, hey, I'm at 50% capacity. But by the way, I also have twice as many cores. Use that information. Even simpler-- and this is going to be a theme in computer science. When in doubt, or when you want a simple solution that generally works well over time, don't choose the same server all the time, but choose-- 
+
+AUDIENCE: A random one? DAVID MALAN: --a random server. Yeah, choose one or the other. So randomness is actually this very powerful ingredient in computer science, and in engineering more generally, especially when you want to make a simple decision quickly without complicating it with all of these very clever, but also very clever, solutions that require all the more engineering, all the more thought, when really, why don't I just kind of flip a coin, or a three sided coin in this case, and decide whether to go 1, 2, 3? 
+
+That might backfire probabilistically, but much like the odds of flipping heads again and again and again and again and again and again is possible in reality-- super, super unlikely. So over time, odds are just sending users randomly to 1, 2, and 3 is going to work out perfectly fine. And this is a technique generally known as round robin. 
+
+Or actually, that's not round robin. This would be the random approach. And if you want to be even a little simpler than that, round robin would be, first person goes to 1, second person to 2, third person to 3, fourth person to 1. And therein lies the round robin. You just kind of go around in a cycle. 
+
+Now, you should be smart about it. You should not blindly send the user to server number one if what is the case? If it's at max capacity, or it's just no longer responsive. So ideally you want some kind of feedback loop. Otherwise, you just send all of your users to a dead end. But that can be taken into account, too. 
+
+So don't under appreciate the value of just randomness, which is quite often a solution to these kinds of problems. And we'll write down round robin. So how do some companies implement round robin or randomness or any of these decisions? Well unfortunately, they do things like this. Let me pull up another quick screenshot. 
+
+Actually, let's do two. I don't know why we're getting all of these dishes. That's very strange. All right, what I really want is a screenshot. That is weird. All right, so I can spoof this. I don't know how much farther I want to keep scrolling. 
+
+So very commonly, you'll find yourself at an address like www.2.acme.com, maybe www.3 or 4 or 5. And keep an eye for this. You don't see it that often. But when you do, it kind of tends to be bigger, older, stodgier companies that technologically don't really seem to know what they're doing. And you see this on tech companies sometimes, the older ones. 
+
+So what are they doing? How are they implementing load balancing, would it seem? If you find yourself as the user typing www.something.com, and suddenly you're at www.2.something.com, what has their load balancer probably done? AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, so the load balancer is presumably making a decision based on one of these decision making processes-- doesn't really matter which. But much like I've drawn the numbers on the board here, the servers aren't just called 1, 2, and 3. They're probably called www1, www2, www3. And it turns out that inside of an HTTP request is this feature. And I'm going to simulate this as follows. 
+
+I'm going to open up that same developer network tab as before just so we can see what's going on underneath the hood. I'm going to clear the screen. And I'm going to go to, let's say, http://harvard.edu. Now for whatever business reasons, Harvard has decided, like many, many other websites, to standardize its website on www.harvard.edu for both technical and marketing reasons. It's just kind of in vogue to have the www. 
+
+So the server at Harvard has to somehow redirect the user, as I keep saying, from one URL to the other. How does that work? Well, let me go ahead and hit Enter. And notice the URL indeed quickly changed to www.harvard.edu. Let me scroll back in this history and click on this debug diagnostic information, if you will. Let me look at my request. 
+
+So here's the request I made. And notice it's consistent with the kind of request I made of Facebook before. But notice the response. What's different in the response this time? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, so it's not a 200 OK. It's not a 404 Not Found. It's a 301 Moved Permanently, which is kind of a funny way of saying, Harvard has upped and moved elsewhere to www.harvard.edu. The 301 signifies that this is a redirect. And to where should the user apparently be redirected? There's an additional tidbit of information inside that envelope. And each of these lines will now start calling an HTTP header. Header is just a key value pair-- something colon something. It's a piece of information. Where should the new location apparently be? Notice the last line among all those headers. 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, so there's additional information. The first line that I've highlighted says 301 Moved Permanently. Well, where has it moved? The last line-- and they don't have to be in this order. It can be random. Location colon means, hey browser, go to this URL instead. 
+
+So browsers understand HTTP redirects. And this is a very, very common way of bouncing the user from one place to another. For instance, if you've ever tried to visit a website that you're not logged into, you might suddenly find yourself at a new URL altogether being prompted to log in. 
+
+How does that work? The server is probably sending a 301. There's also other numbers, like 302, somewhat different in meaning, that send you to another URL. And then the server, once you've logged in, will send you back to where you actually intended. 
+
+So what, then, are poorly engineered websites doing? When you visit www.acme.com, and they just happen to have named their servers www1, www2, www3, and so forth, they are very simply-- which is fair, but very sort of foolishly-- redirecting you to an actually differently named server. And it works perfectly fine. It's nice and easy. 
+
+We've seen how it would be done underneath the hood in the virtual envelope. But why is this arguably a bad engineering decision? And why am I sort of condescending toward this particular engineering approach? Argue why this is bad. Ben? AUDIENCE: [INAUDIBLE] DAVID MALAN: Each server would have to have a duplicate copy of the website. I'm OK with that. And in fact, that's what I'm supposing for this whole story, since if we wanted-- well actually, except for Dan's earlier suggestion, where if you have different servers doing different things, then maybe they could actually be functionally doing different things. 
+
+But even then, at some point, your database is going to get overloaded. Your static assets server is going to get overloaded. So at some point, we're back at this story, where we need multiple copies of the same thing. So I'm OK with that. AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: OK, so some pages might be disproportionately popular. And so fixating on one address isn't necessarily the best thing. [INAUDIBLE]? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: What do you mean by that? AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, exactly. So you don't want to necessarily have-- you certainly don't want to have your users manually typing in www1 or www2. From a branding perspective, it just looks a little ridiculous. If you just want sort of a clean, elegant experience, having these sort of randomly numbered URLs really isn't good. Because then users are surely going to copy and paste them into emails or instant messages. 
+
+Now they're propagating. Now you're sort of confusing your less technical audience, who thinks your web address is www2.something.com. There's no compelling semantics to that. It just happens to be an underlying technical detail that you've numbered your servers in this way. 
+
+And worse yet, what if, for instance, maybe around Christmas time when business is really booming, you've got www1 through www99, but in January and February and onward, you turn off half of those so you only have www1 through www50? What's the implication now for that very reasonable business decision? AUDIENCE: [INAUDIBLE] DAVID MALAN: You need to manage all of those still. AUDIENCE: [INAUDIBLE] DAVID MALAN: Exactly. That's kind of the catch there. If your customers are in the habit of bookmarking things, emailing them, just saving the URL somewhere, or if it's just in their auto complete in their browser so they're not really intentionally typing it, it's just happening, they might, for 11 months out of the year effectively, reach a dead end. And only the most astute of users is going to realize, maybe I should manually remove this number. I mean, it's just not going to happen with many users, so bad for business, bad implementation engineering wise. 
+
+So thankfully, it's not even necessary. It turns out that what load balancers can do is instead of saying, when A makes a request-- hey A, go to 1. In other words, instead of sending that redirect such that step one in this process is the go here, he is then told to go elsewhere. And so step three is, he goes elsewhere. 
+
+You can instead continue to route, to keep using that term, all of A's data through the load balancer so that he never contacts 1, 2, or 3 directly. All of the traffic does get "routed" by the load balancer itself. And so now we're sort of deliberately blurring the lines among these various devices. A load balancer can route data. It's just a function that it has. 
+
+So a load balancer, too, it's a piece of software, really. And a router is a piece of software. And you can absolutely have two pieces of software inside of one physical computer so a load balancer can do these multiple things. 
+
+So there's one other way to do this, which actually goes back to sort of first principles of DNS, which we talked about before break. DNS was Domain Name System. Remember that you can ask a DNS server, what's the IP address of google.com, facebook.com? 
+
+And we can actually do this. A tool we did not use earlier is one that's just as accessible, called nslookup, for name server lookup. And I'm just going to type facebook.com. And I see that Facebook's IP address is apparently this. Let me go ahead and copy that, go to a browser, and go to http:// and that IP address and hit Enter. And sure enough, it seems to work. 
+
+Now working backwards, what was inside of the virtual envelope that Facebook responded with when I visited that IP address directly? Because notice, where am I now? Where am I now, the address? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: At the secure version, and at the www.facebook.com. So it's not even just the secure IP address. Facebook has taken it upon itself to say, this is ridiculous. We're not going to keep you at this ugly looking URL that's numeric. We're going to send you an HTTP redirect by way of that same header that we saw before-- location colon something. 
+
+And so this simply means that underneath the hood is still this IP address. Every computer on the internet has an IP address, it would seem. But you don't necessarily have to expose that to the user. And much like back in the day, there was 1-800-COLLECT, 1-800-C-O-L-L-E-C-T, in the US, was a way of making collect calls via a very easily memorable phone number, or 1-800-MATTRESS to buy a bed, and similar mnemonics that you even see on the telephone kind of sort of still, that letters map to numbers. 
+
+Now, why is that? Well, it's a lot easier to memorize 1-800-MATTRESS or 1-800-COLLECT instead of 1-800 something something something something something something something, where each of those is a digit. Similarly, the world learned quickly that we should not have people memorize IP addresses. That would be silly. We're going to use names instead. And that's why DNS was born. 
+
+All right, so with that said, in terms of load balancing, let's try yahoo.com. Well, that's interesting. Yahoo seems to be returning three IPs. So infer from this, if you could, what is another way that we could implement this notion of load balancing maybe without even using a physical device, this new physical device? 
+
+In other words, can I take away the funding you have for the load balancer and tell you to use some existing piece of hardware to implement this notion of load balancing? And the spoiler is, yes, but what, or how? What is Yahoo perhaps doing here? Kareem? OK, Chris? AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah, all three of those work. So randomness, round robin, location-- you can just leverage an existing piece of the puzzle that we talked about earlier of the DNS system and simply say, when the first user of the day requests yahoo.com, give them the first IP address, like the one ending in 45 up there. And the next time a user requests the IP address of yahoo.com from somewhere in the world, give them the second IP, then the third IP, then the first IP, then the second. Or be smart about it and do it graphically. Or do it randomly and not just do it round robin in this fashion. 
+
+And in this case, then we don't even need to introduce this black box into our picture. We don't need a new device. We're simply telling computers to go to the servers directly, effectively, but not by way of their name. They never need to know the name. They're just being told that yahoo.com maps to any one of these IP addresses. 
+
+So it sends the exact same request. But on the outside of the envelope, it simply puts the IP that it was informed of. And in this way, too, could we load balance the requests by just sending the envelope to a different one of Yahoo's own servers? 
+
+And if we keep digging, we'll see probably other companies with more. CNN has two publicly exposed. Though actually if we do this again and again-- cnn.com-- you can see they're changing order, actually. So what mechanism is CNN using, apparently? 
+
+AUDIENCE: Random. DAVID MALAN: Well, it could be random, though it seems to be cycling back and forth. So it's probably round robin where they're just switching the order so that I'll presumably take the first. My computer will take the first each time. So that's load balancing. And that allows us, ultimately, to map data, or map requests, across multiple servers. So what kinds of problems now still exist? It feels like we just really solved a good problem. We got users to different servers. But-- oh, and Chris, did you have a question before? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Totally depends. So what is happening here? And we can actually see this. So let's try Yahoo's. Actually, let's go to Facebook. Because we know that one works. So I'm going to copy that IP address again. I'm going to close all these tabs. I'm going to go open that special network tab down here. And I'm going to visit only http://. And now I'm going to hit Enter. And let's see what happened. 
+
+If I look at that request, notice that my-- Facebook is a bad example. Because they have a super fancy technique that hides that detail from us. Let me use Yahoo instead-- http:// that IP. Let's open our network tab, preserve log. And here we go, Enter. That's funny. OK, so here is the famed 404 message. What's funny here is that they probably never will be back. Because there's probably not something wrong per se. They have just deliberately decided not to support the numeric form of their address. 
+
+So what we're actually seeing in the Network tab, if I pull this up here, is, as I say, the famed 404, where if I look at the response headers, this is what I got here-- 404 Not Found. So let's try one other. Let's see if CNN cooperates with us. I'll grab one of CNN's IP addresses, clear this, http, dah, dah, dah, dah. So in answer to Chris's question, that one worked. 
+
+And let's go to response headers. Actually no, all right, I am struggling to find a working example. So CNN has decided, we'll just leave you at whatever address you actually visit, branding issues aside. But what wouldn't be happening, if we could see it in Facebook's case, is we would get a 301 Moved Permanently, most likely, inside of which is location:https://www.facebook.com. And odds are www.facebook.com is an alias for the exact same server we just went to. 
+
+So it's a little counterproductive. We're literally visiting the server. The server is then telling us, go away. Go to this other address. But we just so happen to be going back to that same server. But presumably we now stay on that server without this back and forth. Because now we're using the named version of the site, not the numeric. Good question. 
+
+OK, so if we now assume-- we have solved load balancing. We now have a mechanism, whether it's via DNS, whether it's via this black box, whether it's using any of these techniques. We can take a user's request in and figure out to which server, 1, 2, or 3, to send him or her. 
+
+What starts to break about our website? In other words, we have built a business that was previously on one single server. Now that business is running across multiple servers. What kinds of assumptions, what kinds of design decisions, might now be breaking? 
+
+This is less obvious. But let's see if we can't put our finger on some of the problem we've created for ourselves. Again, it's kind of like holding down the leak in the hose. And now some new issue has popped up over here. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: OK, so we have to keep growing our hard disk space. I'm OK with that right now. Because I think I can horizontally scale. Like if I'm running low, I'll just get a fourth server, maybe a fifth server, and then increase our capacity by another 30% or 50% or whatnot. So I'm OK with that, at least for now. AUDIENCE: [INAUDIBLE] DAVID MALAN: OK, so that's a good point. So suppose the servers are not identical. And customer service or the email equivalent is getting some message from a user saying, this isn't working right. It's very possible, sometimes, that maybe one or more servers is acting a bit awry, but not the others, which can certainly make it harder to chase down the issue. You might have to look multiple places. 
+
+That is manifestation of another kind of bug, which is that you probably should have designed your infrastructure so that everything is truly identical. But it does reveal a new problem that we didn't have before. What else? AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, there's more complexity. There's physically more wires. There's another device. In fact, I've introduced a fundamental concept and a fundamental problem here known as a single point of failure, which, even if you've never heard the phrase, you can probably now work backwards and figure it out. What does it mean that I have a single point of failure in my architecture? And by architecture, I just mean the topology of it. 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, what if the load balancer goes down? I've inserted this middle man whose purpose in life is to solve a problem. But I've introduced a new problem. A new leak has sprung in the hose. Because now if the load balancer dies or breaks or misfunctions, now I lose access to all three of my servers. And before, I didn't have this middleman. And so this is a new problem, arguably. We'll come back to how we might fix that. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: That would be one approach. Yeah, and so this is going to be quite the rat's hole we start to go down. But let's come back to that in just a moment. What other problems have we created? 
+
+So Dan mentioned database before. And even if you're not too familiar technically, a database is just a server where changing data is typically stored, maybe an order someone has placed, your user profile, your name, your email address, things that might be inputted or changed over time. 
+
+Previously, my database was on the same server as my web server. Because I just had one web hosting account. Everything was all in the same place. Where should I put my database now, on server 1, 2, or 3? 
+
+AUDIENCE: 4. 
+
+DAVID MALAN: 4, OK, all right, so let's go there. So I'm going to put my database-- and let's start labeling these www, www, www. And I'm going to say, this is number four. And I'll say db for database. OK, I like this. What line should I presumably be drawing here? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, so the code, as we'll discuss tomorrow, presumably is the same on all three servers. But it now needs to connect not to a database running locally but elsewhere. And that's fine. We can just give the database a name, as we have, or a number. And that all works fine. But what have we done? We've horizontally scaled by having three servers instead of one, which is good. Because now we can handle three times as much load. 
+
+And better yet, if one or two of those servers goes down, my business can continue to operate. Because I still have one, even if I'm kind of limping along performance-wise. But what new problem have I introduced by moving the database to this separate server instead of on 1, 2, and 3? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah, so now I have another single point of failure. If my database dies, or needs to be upgraded, or whatever, now sure, my website is online. And I can serve static, unchanging content. But I can't let users log in or change anything or order anything, worse yet. Because if 4 is offline, then 1, 2, and 3 really can't talk to it by definition. 
+
+OK so yeah, and so this is why I'm hesitating to draw this. So let's come back to that. I don't mean to keep pushing you off. But the picture is very quickly going to get stressful. Because you need to start having two of everything. In fact, if you've ever seen the movie Contact a few years ago with Jodie Foster-- no? 
+
+OK, so for the two of us who've seen Contact, there's a relationship there where they essentially bought two of something rather than one, albeit at twice the price. So it was sort of a playful comment in the movie. It's kind of related to this. We could absolutely do that. And you've just cost us twice as much money. But we'll come back to that. 
+
+So we've solved this. So you know what? This is like a slippery slope. I don't want to deal with having to have a duplicate database. It's too much money. You know what? I want to have my database just like in version one where each server has its own local database. So I'm just going to draw db on each of these. 
+
+So now each web server is identical in so far as it has the same code, the same static assets, same pictures and text and so forth. And each has its own database. I fixed the single point of failure problem. Now I have a database. No matter which two or one of these things die, there's always one left. But what new problem have I created that Dan's solution avoided? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, I have to sync them, right? Because either I need to sync who's going where-- in other words, if Alice visits my site, and she happened to get randomly or round robined or whatever, to server number one, thereafter I have to always send her to server 1. Why? Because if I send her to server 2, it's going to look like she doesn't exist there. 
+
+I'm not going to have her order history. I'm not going to have her profile there. And that just feels like it's inviting problems. And when Bob visits, I have to send him always to the same server, 2, or whichever one, and Charlie to a third one, and consistently. This isn't unreasonable, though. This is called partitioning your database. And in fact this was what Facebook did early on. 
+
+If you followed the history of Facebook, it started here at campus as www.thefacebook.com. Then it evolved once Mark started spreading into other campuses to be harvard.thefacebook.com and mit.thefacebook.com, and probably bu.thefacebook.com, and the like. And that was because early on, I don't think you could have friends across campuses. But that's fine. Because anyone from Harvard got sent to this server. Anyone from BU got sent to this server. Anyone from MIT got sent to this server-- in theory. I don't quite know all the underlying implementation details. But he presumably partitioned people by their campus, where their network was. 
+
+So that's good up until the point where you need two servers for Harvard, or three servers for Harvard. And then that simplicity kind of breaks down. But that's a reasonable approach. Let's always send Alice to the same place, always send Bob to the same place. But what happens if Alice's server goes offline? Bob and Charlie can still buy things and log into the site. But Alice can't. So you've lost a third of your user base. Maybe that's better than 100%? But maybe it'd be nice if we could still support 100% of our users even when a third of our servers goes offline. 
+
+So we could sync what? Not the users, per se, but the database across all these servers. So now we kind of need some kind of interconnection here so that the servers themselves can sync-- not unreasonable. And in fact, this technology exists. In the world of databases, there's the notion of master-slave databases, or primary-secondary, where among the features is not only to store data and respond with data, but also just to constantly sync with each other. So any time you write or save something to this database, it immediately gets "replicated" to the other databases as well. 
+
+And any time you read from it, it doesn't matter where you are. Because if in theory they've all synced, you're going to get the same view of the data. So this sounds perfect. There's got to be a catch. What might the catch be? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, so three times as much stuff could go wrong. That's a reality. It might all be the same in spirit. But someone needs to configure these. There's a higher probability that something's going to go wrong. Just combinatorially you have more stuff prone to errors. What else is bad potentially? AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, so syncing can be bad. Even as you might know from backups and such, if you just are blindly making backups, what if something does go wrong on one database? You delete something you shouldn't. You've immediately replicated that problem everywhere else. So Victoria was talking-- backups would be a good thing here. And so we'll get back to that. And to be clear, we're talking not about backups here per se. We're talking about true replication or synchronization across servers. They're all live. They're not meant to be used for backups. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: What's that? AUDIENCE: Higher-- DAVID MALAN: Higher cost. We've tripled the cost for sure, although at least in terms of the hardware. Because a database is just a piece of software. And a web server is a piece of software. It's probably free if we're using any number of open source things. But if we are using something like Oracle, we're paying Oracle more money per licenses, or Microsoft for access. There's got to be some other catch here. It can't be this simple. 
+
+So to your point, I think it was Kareem, for geography earlier-- or no, Roman, was it, for geography-- suppose that we're being smart about this, and we're putting one of our servers, and in turn our databases, in the US, and another in Europe, another in South America, another in Africa, another in Asia, anywhere we might want around the world. We already know from our trace routes that point A and point B, if they're farther apart, are going to take more time. 
+
+And if some of you have used tools, like Facebook or Twitter or any of these sites these days that are constantly changing because of user created data, sometimes if you hit Reload or open the same page in another browser, you see different versions, almost. You might see someone's status update here but not here, and then you reload, and then it appears, and you reload again, and it disappears. In other words, keep an eye out for this, at least if you're using social networking especially. 
+
+Again, just because the data is changing so quickly, sometimes servers do get out of sync. And maybe it's a super small window. But 200 milliseconds, maybe even more than that-- it's going to take some non-zero amount of time for these databases to sync. And we're not just talking about one request. If a company has thousands of users using it simultaneously, they might buffer. In other words, there might be a queue or a wait line before all of those database queries can get synchronized. So maybe it's actually a few seconds. 
+
+And indeed this is true I think even to this day with Facebook, whereby when they synchronize from East Coast to West Coast, it has a non-trivial propagation delay, so to speak, that you just kind of have to tolerate. And so it's not so much a bug as it is a reality that your users might not see the correct data for at least a few seconds. 
+
+I see this on Twitter a lot actually where sometimes I'll tweet in one window, open another to then see it to confirm that it indeed went up, and it's not there yet. And I have to kind of reload, reload, reload-- oh, there it is. And that's not because it wasn't saved. It just hasn't propagated to other servers. 
+
+So this trade-off, too-- do you really want to expose yourself to the risk that if the user goes to their order history, it's not actually there yet? I see this on certain banks. It always annoys me when, well, for one, you can only go like six months back in your bank statements in some banks, even though in theory they should be able to have everything online. They just take stuff offline sometimes. Sometimes, too-- what website is it? There's one-- oh, it's GoDaddy, I think. GoDaddy, when you check out buying a domain name or something, they'll often give you a link to your receipt. And if you click that link right away, it often doesn't work. It just says, dead end, nothing here. 
+
+And that's too because of these propagation delays. Because for whatever reason, they are taking a little bit of time to actually generate that. So this is sort of like you want to pull your hair out at some point. Because all you're trying to do is solve a simple problem. And we keep creating new problems for ourselves. So let's see if we can kind of undo this. 
+
+It turns out that combining databases on all of your web servers is not really best practice. Generally, what an engineer would do, or systems architect, would be to have different tiers of servers. And just for space's sake, I'll draw their database up here. 
+
+We might have database and server number four here that does have connections to each of these servers here. So this might be our front end tier, as people would say. And this would be our back end tier. And that just means that these face the user. And the databases don't face the user. No user can directly access the database. 
+
+So let's now maybe go down the route Victoria proposed. This is a single point of failure. That makes me uncomfortable. So what's perhaps the most obvious solution? AUDIENCE: [INAUDIBLE] DAVID MALAN: Sorry, say that again. AUDIENCE: [INAUDIBLE] DAVID MALAN: Non-production server. What do you mean? 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Oh, OK, so backups. OK, so we could do that, certainly. And actually this is very commonly done. This might be database number five. But that's only connected to number four. And you might call it a hot spare. These two databases could be configured to just constantly synchronize each other. And so if this machine dies, for whatever stupid reason-- the hard drive dies, someone trips over the cord, some software is flawed and the machine hangs or crashes-- you could have a human literally unplug this one from the wall and instead plug this one in. And then within, let's say, a few minutes, maybe half an hour, you're back online. 
+
+It's not great, but it's also not horrible. And you don't have to worry about any synchronization issues. Because everything is already there. Because you had a perfect backup ready to go. 
+
+You could be a little fancier about this, as some people often do, where you might have database number four here, database number five here, that are talking to each other. But you also have this kind of arrangement-- and it deliberately looks messy, because it is-- where all of the front end servers can talk to all of the back end servers. And so if this database doesn't respond, these front end servers have to have programming code in them that says, if you don't get a connection to this database, the primary immediately starts talking to the secondary. 
+
+But this now pushes the complexity to the code. And now your developers, your software developers, have to know about this. And you're kind of tying the code that you're writing to your actual back end implementation details, which makes it harder, especially in a bigger company or a bigger website, where you don't necessarily want the programmers to have to know how the database engineers are doing their jobs. You might want to keep those roles sort of functionally distinct so that there's this layer of abstraction between the two. 
+
+So how might we fix this? Well, we kind of solved this problem once before. Why don't we put one of these things here where it talks in turn to number four and five, all of the front end web servers talk to this middleman, and the middleman in turn routes their data? In fact, what might be a good name for this thing? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: OK, database manager. But what might a term be that we could reuse for this device? We're balancing. Yeah, so actually, I'm not being fair here. So a load balancer would imply that we're toggling back and forth here, which needn't actually be the case. So there's a few ways we could do this. 
+
+If this is in fact a load balancer, the story is exactly the same as before. Some of the requests go to 4. Some of them go to 5. And that's good. Because now we can handle twice as much throughput. But this connection here is super important. They have to stay constantly synchronized and hopefully are not geographically too far apart so that the synchronization is essentially instantaneous. Otherwise we might have a problem. 
+
+So that's not bad. But again, we've introduced a new problem. What problem have I just recreated? Single point of failure. So what's the solution to that? So as Victoria's fond to spend money, we can take this guy out and do this. And I'm just going to move here enough room. And it's going to be a little messy. I'm going to keep drawing lines. Suppose that all of those lines go into both? 
+
+A very common technique here would be to use a technique called heartbeat whereby each of these devices, left and right load balancers, or whatever we want to call them, is constantly saying, I'm alive, I'm alive, I'm alive, I'm alive. One of them by default acts as the primary. So all traffic is being routed through the one on the left, for instance, by default, arbitrarily. 
+
+But as soon as the guy on the right doesn't hear from the left guy anymore, the one on the right is programmed to automatically, for instance, take over the IP address of the one on the left, and therefore become the primary, and maybe send an email or a text message to the humans to say, hey, the left primary is offline. I will become primary for now. So vice president becomes president, so to speak. And someone has to go save the president, if you want. Because now we have a temporary single point of failure. 
+
+So as complicated or stressful as this might seem to start being, this is how you solve these problems. You do throw money at it. You throw hardware at it. But unfortunately you add complexity for it. But the result, ultimately, is that you have a much more, in theory, robust architecture. It's still not perfect. Because even when we have-- we might not have a single point of failure. We now have dual points of failure. But if two things go wrong, which absolutely could, we're still going to be offline. 
+
+And so very common in the industry is to describe your up time in terms of nines. And sort of the goal to aspire to is 99.999% of the time your site is online. Or even better, add a few more nines to that. Unfortunately, these nines are very expensive. And let's actually do this out. So if I open up my big calculator again, 365 days in a year, 24 hours in a day, 60 minutes in an hour, and 60 seconds in a minute, that's how many seconds there are in a year if I did this correctly. So if we times this by .99999, that's how much time we want to aspire to. So that means we should be up this many seconds during the year. So if I now subtract the original value, or rather this new value from the first-- 316 seconds, which of course is five minutes. 
+
+So if your website or your company is claiming "five nines," whereby you're up 99.99% of the time, that means you better have been smart enough and quick enough and flush enough with resources that your servers are only offline five minutes out of the year. It's an expensive and hard thing to aspire to. 
+
+So it's a trade off, too. 99.999% of the time is pretty darn hard and expensive. Five minutes-- you can barely get to the server to physically replace something that's gone wrong. And that's why we start wiring things together more complicated apriori so that the computers can sort of fix themselves. Yeah. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: The problem could be in any number of places. And in fact-- 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Absolutely, absolutely. And as the picture is getting more complicated, it could be the web servers. It could be the power to the building. It could be something physical, like the cables got frayed or kicked out. It could be the database isn't responding. It could be they updated their operating system and something is hanging. So there are so many other moving parts. And so a lot of the engineering that has to go behind this is really just trade offs, like how much time, how much money is it actually worth, and what are the threats you're really worried about? For instance, in the courses I teach at Harvard, we use a lot of cloud computing, which we'll start taking a look at now, in fact, where we use Amazon Web Services. Just because that's the one we started with. But there's ever more these days from Google and Microsoft and others. And we consciously choose to put all of our courses' virtual machines, as they're called, in the I think it's Western Virginia data center. Most of our students happen to be from the US, though there are certainly some internationally. 
+
+But the reality is it's just simpler and it's cheaper for us to put all of our eggs in the Virginia basket, even though I know if something goes wrong in Virginia, as has occasionally happened-- like if there's a hurricane or some weather event like that, if there's some power grid issue or the like-- all of our courses' data might go offline for some number of minutes or hours or even longer. 
+
+But the amount of complexity that would be required, and the amount of money that would be required, to operate everything in parallel in Europe or in California just doesn't make so much sense. So it's a rational trade off, but a painful one when you're actually having that downtime. 
+
+Well, let's transition right now to some of the cloud-based solutions to some of these problems. Everything we've been discussing thus far is kind of problems that have been with us for some time, whether you have your own servers in your company, whether you go to a co-location place like a data center and share space with someone else, or nowadays in the cloud. 
+
+And what's nice about the cloud is that all of these things I'm drawing as physical objects can now be thought of as sort of virtual objects in the cloud that are simulated with software. In other words, the computers today, servers today, like the Dell picture I showed earlier, are so fast, have so much RAM, so much CPU, so much disk space, that people have written software to virtually partition one server up into the illusion of it being two servers, or 200 servers, so that each of us customers has the illusion of having not just an account on some web host, but our own machine that we're renting from someone else. 
+
+But it's a virtual machine in so far as on one Dell server, it again might be partitioned up into two or 200 or more virtual machines, all of which give someone administrative access, but in a way where none of us knows or can access other virtual machines on the same hardware. So to paint a picture in today's slides, I have this shot here from a website called Docker. 
+
+So this is a little more detail than we actually need. But if you view this as your infrastructure-- so just the hardware your own, your servers, the racks, the data center, and all of that-- you would typically run a host operating system. So something like-- it could be Windows. It wouldn't be Mac OS. Because that's not really enterprise these days. So it would be Linux or Solaris or Unix or BSD or FreeBSD or any number of other operating systems that are either free or commercial. 
+
+And then you run a program, special program, called a hypervisor, or virtual machine monitor, VMM. And these are products, if you're familiar, like VMware or VirtualBox or Virtual PC or others. And what those programs do is exactly that feature I described earlier. It creates the illusion that one physical machine can be multiple virtual machines. 
+
+And so these colorful boxes up top is painting a picture of the following. This hypervisor, this piece of software, call it VMware, running on some other operating system, call it Linux, is creating the illusion that this physical computer is actually one, two, three virtual computers. So I've now bought, as the owner of this hardware, one physical computer. And now I'm renting it to three customers. 
+
+And those three customers all think they have a dedicated virtual machine. And it's not bait and switch. It's more disclosure that you're using a virtual machine. But technologically, we all have full administrative control over each of those guest operating systems, which could be any number of operating systems. 
+
+I can install anything I want. I can upgrade it as I want. And I don't even have to know or care about the other operating systems on that computer, the other virtual machines, unless the owner of all this gray stuff is being a little greedy and is overselling his or her resources. 
+
+So if you're taking one physical machine and selling it to not 200 but 400 customers, at some point we're going to trip into those same performance issues as before. Because you only have a finite amount of disk and RAM and so forth. And a virtual machine is just a program that's pretending to be a full fledged computer. So you get what you pay for here. 
+
+So you'll find online you might pay a reputable company maybe $100 a month for your own virtual machine, or your own virtual private server, which is another term for it. Or you might find some fly by night where you pay $5.99 a month for your own virtual machine. But odds are you don't have nearly as much performance available to you, because they've been overselling it so, than you would with the higher tier of service or the better vendor. 
+
+So what does this actually mean for us? So let me go to this. I'm going to go to aws.amazon.com. Just because they have a nice menu of options. But these same lessons apply to a whole bunch of other cloud vendors. Unfortunately, it's often more marketing speak than anything. And this keeps changing. So you go to a website like this. And this really doesn't tell you much of anything. 
+
+And even I, as I look at this, don't really know what any of these things necessarily do until I dive in. But let's start on the left, Compute. And I'm going to click this. And now Amazon has frankly an overwhelming number of services these days. But Amazon EC2 is perhaps the simplest. 
+
+Amazon EC2 will create for us exactly the picture we saw a moment ago. It's how they make a lot of their money in the cloud. Apparently Netflix and others are in the cloud with them. This is all typically fluffy marketing speak. So what I want to do is go to Pricing-- or rather let's go to Instances first just to paint a picture of this. 
+
+So this will vary by vendor. And we don't need to get too deep into the weeds here of how this all works. But the way Amazon, for instance, rents you a virtual machine or a server in the cloud is they've got these sort of funny names, like t2.nano, which means small, or t2.large, which means big. Each of them gives you either one or two virtual CPUs. 
+
+Why is it a virtual CPU? Well, the physical machine might have 64 or more actual CPUs. But again, through software, they create the illusion that that one machine can be divvied up to multiple users. So we can think of this as having one Intel CPU or two. CPU credits per hour-- I would have to read the fine print as to what this actually means. It means how much of the machine you can use per hour vis-a-vis other customers on that hardware. 
+
+Here's how much RAM or memory you get-- either half a gigabyte, or 500 megabytes, or 1 gigabyte, or 2. And then the storage just refers to what kind of disks they give you. There's different storage technologies that they offer. But more interesting than this then might be the pricing. 
+
+So if you are the CTO or an engineer who doesn't want to run a server in your office, for whatever reason, and it's way too complicated or expensive to buy servers and co-locate them and pay rent in some physical cage space somewhere-- you just want to sit at your laptop late at night, type in your credit card information, and rent servers in the cloud-- well, we can do it here. I'm going to go down to-- Linux is a popular operating system. And let's just get a sense of things. Whoops-- too big. 
+
+So let's look at their tiniest virtual machine, which seems to have, for our purposes, one CPU and 500 megabytes of RAM. That's pretty small. But frankly, web servers don't need to do all that much. You have better specs in your laptop. But you don't need those specs these days for things. You're going to pay $0.0065 per hour. 
+
+So let's see. If there are 24 hours in a day, and we're paying this much per hour, it will cost you $0.15 to rent that particular server in the cloud. And that's just for a day. If we do this 365-- $57 to rent that particular server. So it sounds super cheap. 
+
+That's also super low performance. So we, for courses I teach here, tend to use I think t2.smalls or t2.mediums. And we might have a few hundred users, a few thousand users, total. It's pretty modest. So let's see what this would cost. So if I do this cost times 24 hours times 365, this one's $225. And for the courses I teach, we generally run two of everything, for redundancy and also for performance. So we might spend, therefore, $500 for the servers that we might need per year. 
+
+Now, if you need more performance-- let's take a look at memory. We've talked about memory quite a bit. And if you do need more memory-- and 64 gigabytes is the number I kept mentioning-- this is almost $1 per hour. And you can pretty quickly see where this goes-- so 24 hours times 365. So now it's $8,000 per year for a pretty decent server. 
+
+So at some point, there's this inflection point where now we could spend $6,000 probably and buy a machine like that and amortize its cost over maybe two, three years, the life of the machine. But what might push you in favor or disfavor of renting a machine in the cloud like this? Again, this is comparable, probably, to one of those Dell servers we saw pictured a bit ago. 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, that's a huge upside. Because we're not buying the machine, we don't have to unbox it. We don't have to lift it. We don't have to plug it into our rack. We don't have to plug it in. We don't have to pay the electrical bill. 
+
+We don't have to turn the air conditioning on. When a hard drive dies, we don't have to drive in in the middle of the night to fix it. We don't have to set up monitoring. We don't have to-- the list goes on and on of all of the physical things you don't need to do because of "the cloud." 
+
+And to be clear, cloud computing is this very overused term. It really just means paying someone else to run servers for you, or renting space on someone else's servers. So the term "cloud computing" is new. The idea is decades old. So that's pretty compelling. 
+
+And what more do you get? Well, you also get the ability to do everything on a laptop at home. In other words, all of the pictures I was just drawing-- and it wasn't that long ago that even I was crawling around on a server floor plugging the cables in for each of the lines that you see, and upgrading the operating systems, and changing drives around. There's a lot of physicality to all of that. 
+
+But what's beautiful about virtual machines, as the name kind of suggests, now there are web-based interfaces whereby if you want the equivalent of a line from this server to another, just type, type, type, click and drag, click Submit, and voila, you have it wired up virtually. Because it's all done in software. And the reason it's done in software is again because we have so much RAM and so much CPU available to us these days, even though all of that stuff takes time, it is slower to run things in software than hardware, just as it's slower to use a mechanical device like a hard drive than RAM, something purely electronic. We have so many resources available to us. We humans are sort of invariantly slow. And so now the machines can do so much more per unit of time. We have these abilities to do things virtually. 
+
+And I will say for courses I teach, for instance, here, we have about maybe a dozen or so total of virtual machines like that running at any given time doing front end stuff, doing back end stuff. We have all of our storage. So any videos, including things like this that we're shooting, we end up putting into the cloud. Amazon has services called Amazon S3, their simple storage service, which is just like disk space in the cloud. They have something called CloudFront, which is a CDN service, Content Delivery Network service, which means they take all of your files and for you automagically replicate it around the world. 
+
+So they don't do it preemptively. But the first time someone in India requests your file, they'll potentially cache it locally. The first time in China, the first time in Brazil that happens, they'll start caching it locally. And you don't have to do any of that. And so it is so incredibly compelling these days to move things into the cloud. Because you have this ability literally to not have humans doing nearly as much work. And you literally don't need as many humans doing these jobs anymore-- "ops," or operational roles, anymore. You really just need developers and fewer engineers who can just do things virtually. In fact, just to give you a sense of this, let me go to pricing for one other product here. Let's see something like CDN S3. So this is essentially a virtual hard drive in the cloud. And if we scroll down to pricing-- so it's $0.007 per gigabyte. And that's-- how do we do this? I think that's per month. 
+
+So if that's per month-- or per day? Dan, is this per day? This is per month, OK. So if this is per month-- sorry, it's the $0.03 per month. There's 12 months out of the year. So how much data might you store in the cloud? A gigabyte isn't huge, but I don't know, like 1 terabyte, so like 1,000 of those. That's not all that much. It's $368 to store a terabyte of data in Amazon's cloud. So what are some of the trade offs, then? It can't all be good. Nothing we've talked about today is sort of without a catch or a cost. So what's bad about moving everything into the cloud? AUDIENCE: Security. DAVID MALAN: OK, what do you mean? AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah, right. And do you really want some random engineers at Amazon that you'll never meet having physical access to those computers, and if they really wanted, virtual access? And even though in theory software-- well, encryption can absolutely protect you against this. So if what you're storing on your servers is encrypted-- less of a concern. 
+
+But as soon as a human has physical access to a machine, encryption aside, all bets are sort of off. You might know from yesteryear that PCs especially, even if you had those things called "BIOS passwords," were when your desktop booted up, you'd be prompted with a password that has nothing to do with Windows, you can typically just open the chassis of the machine, find tiny little pins, and use something called a jumper and just connect those two wires for about a second, thereby completing a circuit. And that would eliminate the password. 
+
+So when you have physical access to a device, you can do things like that. You can remove the hard drive. You can gain access to it that way. And so this is why, in the case of Dropbox, for instance, it's a little worrisome that not only do they have the data, even though it's encrypted, they also have the key. Other worries? 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah, it's very true-- the Googles, the Apples, the Microsofts of the world. And in fact, how long have you had your iPhone for? Yeah, give or take. AUDIENCE: [INAUDIBLE] DAVID MALAN: I'm sorry? You're among those who has an iPhone, right? AUDIENCE: Yes. DAVID MALAN: How long have you had your iPhone? AUDIENCE: [INAUDIBLE] DAVID MALAN: OK, so Apple literally knows where you've been every hour of the day for the last five years. 
+
+AUDIENCE: [INAUDIBLE] DAVID MALAN: Which is a wonderful feature. AUDIENCE: [INAUDIBLE] DAVID MALAN: Yeah, but trade off for sure. AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: Yeah, it's very easy to. AUDIENCE: [INAUDIBLE] DAVID MALAN: Other downsides? AUDIENCE: [INAUDIBLE] DAVID MALAN: Absolutely-- technologically, economically, it's pretty compelling to sort of gain these economies of scale and move everything into the so-called cloud. But you probably do want to go with some of the biggest fish, the Amazons, the Googles, the Microsofts-- Rackspace is pretty big-- and a few others, and not necessarily fly by night folks for whom it's very easy to do this kind of technique nowadays. And that's whom you can pay $5.99 per month to. But you'll certainly get what you pay for. 
+
+When you say [INAUDIBLE], that's when things like these five nines come up, whereby even if technologically we can't really guarantee 99.999, we'll just build in some kind of penalty to the contract so that if that does happen, at least there's some cost to us, the vendor. And that's what you would typically be getting them to agree to. 
+
+AUDIENCE: [INAUDIBLE] 
+
+DAVID MALAN: And the one sort of blessing is that even when we go down, for instance, or even certain companies, the reality is Amazon, for instance, has so many darn customers, well-known customers, operating out of certain data centers that when something really goes wrong, like acts of God and weather and such, if there's any sort of silver lining, it's that you're in very good company. Your website might be offline. But so is like half of the popular internet. And so it's arguably a little more palatable to your customers if it's more of an internet thing than an acme.com thing. But that's a bit of a cheat. 
+
+So in terms of other things to look at, just so that we don't rule out others, if you go to Microsoft Azure, they have both Linux and Windows stuff that's comparable to Amazon's. If you go to Google Compute Engine, they have something similar as well. And just to round out these cloud offerings, I'll make mention of one other thing. This is a popular website that's representative of a class of technologies. The ones we just talked about, Amazon, would be IAAS, Infrastructure As A Service, where you sort of physical hardware as a service. There's SAAS. Actually, let me jot these down. 
+
+IAAS-- Infrastructure As A Service, SAAS, and PAAS, which are remarkably confusing acronyms that do describe three different types of things. And the acronyms themselves don't really matter. This is all of the cloud stuff we've just been talking about, the lower level stuff, the virtualization of hardware and storage in the so-called cloud, whether it's Amazon, Microsoft, Google, or other. 
+
+Software as a service-- all of us kind of use this. If you use Google Apps for Gmail or calendaring, any of these web-based applications that 10 years ago we would have double clicked icons on our desktop, software as a service is now really web application. And platform as a service kind of depends. 
+
+And one example I'll give you here in the context of cloud computing-- there's one company that's quite popular these days, Heroku. And they are a service, a platform, if you will, that runs on top of Amazon's infrastructure. And they just make it even easier for developers and engineers to get web-based applications online. 
+
+It is a pain, initially, to use Amazon Web Services and other things. Because you actually have to know and understand about databases and web servers and load balancers and all the stuff I just talked about. Because all Amazon has done is not hidden those design challenges. They've just virtualized them and move them into a browser, into software instead of hardware. 
+
+But companies like Heroku and other PAAS providers, Platform As A Service, they use those barebone fundamentals that we just talked about, and they build easier to use software on top of it so that if you want to get a web-based application online these days, you certainly have to know how to program. You need to know Java or Python or PHP or Ruby or a bunch of other languages. 
+
+But you also need a place to put it. And we talked earlier about getting a web hosting company. That's sort of the like mid-2000s approach to getting something online. Nowadays you might instead pay someone like Heroku a few dollars a month. And essentially, once you've done some initial configuration, to update your website, you just type a command in a window. And whatever code you've written here on your laptop immediately gets distributed to any number of servers in the cloud. 
+
+And Heroku takes care of all of the complexity. They figure all the database stuff, all the load balancing, all of the headaches that we've just written on the board, and hide all of that for you. And in return, you just pay them a bit more. So you have these infrastructures as a service, platforms as a service, and then software as a service. It's, again, this abstraction or layering. 
+
+Any questions on the cloud or building one's own infrastructure? All right, that was a lot. Why don't we go ahead and take our 15 minute break here. We'll come back with a few new concepts and a bit of hands-on opportunity before the evening is over. 

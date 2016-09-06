@@ -1,0 +1,8290 @@
+1
+00:00:00,000 --> 00:00:00,629
+
+2
+00:00:00,629 --> 00:00:02,170
+DAVID MALAN: All right, welcome back.
+
+3
+00:00:02,170 --> 00:00:06,520
+Before we dive into cloud computing,
+I thought I'd pause for a moment
+
+4
+00:00:06,520 --> 00:00:11,740
+if there are any outstanding questions
+or topics that came up during lunch
+
+5
+00:00:11,740 --> 00:00:13,834
+that might now be of interest.
+
+6
+00:00:13,834 --> 00:00:18,470
+
+7
+00:00:18,470 --> 00:00:21,410
+>> AUDIENCE: [INAUDIBLE]
+
+8
+00:00:21,410 --> 00:00:22,090
+>> DAVID MALAN: OK.
+
+9
+00:00:22,090 --> 00:00:23,555
+Oh, OK.
+
+10
+00:00:23,555 --> 00:00:24,430
+AUDIENCE: [INAUDIBLE]
+
+11
+00:00:24,430 --> 00:00:29,880
+
+12
+00:00:29,880 --> 00:00:31,420
+>> DAVID MALAN: No, of course.
+
+13
+00:00:31,420 --> 00:00:35,180
+OK, well hopefully all of your
+problems arise in the next few hours
+
+14
+00:00:35,180 --> 00:00:36,410
+and tomorrow especially.
+
+15
+00:00:36,410 --> 00:00:42,700
+But let's take a look, then, at where
+the last discussion about setting up
+
+16
+00:00:42,700 --> 00:00:45,730
+a website leads, more generally
+when it comes to cloud computing,
+
+17
+00:00:45,730 --> 00:00:48,210
+setting up a server architecture,
+the kinds of decisions
+
+18
+00:00:48,210 --> 00:00:50,800
+that engineers and
+developers and managers
+
+19
+00:00:50,800 --> 00:00:53,210
+need to make when it comes
+to doing more than just
+
+20
+00:00:53,210 --> 00:00:56,550
+signing up for a $10 per month web host
+when you actually want to build out
+
+21
+00:00:56,550 --> 00:00:57,550
+your own infrastructure.
+
+22
+00:00:57,550 --> 00:01:00,400
+And we'll try to tie this back,
+for instance, to Dropbox and others
+
+23
+00:01:00,400 --> 00:01:01,350
+like them.
+
+24
+00:01:01,350 --> 00:01:06,250
+>> So let's start to consider
+what problems arise as business
+
+25
+00:01:06,250 --> 00:01:09,390
+gets good and good problems arise.
+
+26
+00:01:09,390 --> 00:01:14,720
+So in the very simplest case of having
+some company that has a web server,
+
+27
+00:01:14,720 --> 00:01:21,470
+you might have, let's say, a server that
+we'll just draw that looks like this.
+
+28
+00:01:21,470 --> 00:01:25,620
+And these days, most servers-- and let's
+actually put a picture to this just so
+
+29
+00:01:25,620 --> 00:01:27,680
+that it's a little less nebulous.
+
+30
+00:01:27,680 --> 00:01:31,510
+>> So Dell rack server--
+back in the day, there
+
+31
+00:01:31,510 --> 00:01:33,730
+were mainframe computers
+that took up entire rooms.
+
+32
+00:01:33,730 --> 00:01:35,710
+These days, if you were
+to get a server, it
+
+33
+00:01:35,710 --> 00:01:38,520
+might look a little something like this.
+
+34
+00:01:38,520 --> 00:01:41,760
+Servers are measured in what
+are called rack units, or RUs.
+
+35
+00:01:41,760 --> 00:01:45,280
+And one RU is 1.5 inches,
+which is an industry standard.
+
+36
+00:01:45,280 --> 00:01:49,300
+So this looks like a two RU server.
+
+37
+00:01:49,300 --> 00:01:51,240
+So it's 3 inches tall.
+
+38
+00:01:51,240 --> 00:01:54,430
+And they're generally 19 inches wide,
+which means all of this kind of stuff
+
+39
+00:01:54,430 --> 00:01:55,160
+is standardized.
+
+40
+00:01:55,160 --> 00:01:59,420
+>> So if you look in a data center--
+not just at one server, but let's
+
+41
+00:01:59,420 --> 00:02:02,110
+take a look at Google's
+data center and see if we
+
+42
+00:02:02,110 --> 00:02:04,280
+see a nice picture in Google Images.
+
+43
+00:02:04,280 --> 00:02:09,090
+This is much better lit than you
+would typically find, and much
+
+44
+00:02:09,090 --> 00:02:14,900
+sexier looking as a result. But
+this is what looks like a couple
+
+45
+00:02:14,900 --> 00:02:17,380
+hundred servers all
+about that same size,
+
+46
+00:02:17,380 --> 00:02:21,450
+actually, in rack after rack after
+rack after rack in a data center.
+
+47
+00:02:21,450 --> 00:02:26,150
+>> Something like this-- this may well
+be Google's, since I googled Google's.
+
+48
+00:02:26,150 --> 00:02:28,330
+But it could be representative
+of more generally
+
+49
+00:02:28,330 --> 00:02:31,480
+a data center in which many
+companies are typically co-located.
+
+50
+00:02:31,480 --> 00:02:34,940
+And co-located generally means
+that you go to a place like Equinix
+
+51
+00:02:34,940 --> 00:02:40,280
+or other vendors that have large
+warehouses that have lots of power,
+
+52
+00:02:40,280 --> 00:02:42,950
+lots of cooling, hopefully
+lots of security,
+
+53
+00:02:42,950 --> 00:02:47,910
+and individual cages enclosing racks of
+servers, and you either rent the racks
+
+54
+00:02:47,910 --> 00:02:49,150
+or you bring the racks in.
+
+55
+00:02:49,150 --> 00:02:51,420
+>> And individual companies,
+startups especially,
+
+56
+00:02:51,420 --> 00:02:54,820
+will have some kind of biometrics
+to get into their cage, or a key,
+
+57
+00:02:54,820 --> 00:02:55,640
+or a key card.
+
+58
+00:02:55,640 --> 00:02:56,990
+You open up the door.
+
+59
+00:02:56,990 --> 00:03:00,354
+And inside of there is just
+a square footage footprint
+
+60
+00:03:00,354 --> 00:03:03,270
+that you're paying for, inside of
+which you can put anything you want.
+
+61
+00:03:03,270 --> 00:03:04,770
+>> And you typically pay for the power.
+
+62
+00:03:04,770 --> 00:03:06,920
+And you pay for the footprints.
+
+63
+00:03:06,920 --> 00:03:08,770
+And then you pay
+yourself for the servers
+
+64
+00:03:08,770 --> 00:03:10,560
+that you're bringing into that space.
+
+65
+00:03:10,560 --> 00:03:12,850
+And what you then have the
+option to do is pay someone
+
+66
+00:03:12,850 --> 00:03:15,120
+for your internet service connectivity.
+
+67
+00:03:15,120 --> 00:03:17,240
+You can pay any number
+of vendors, all of whom
+
+68
+00:03:17,240 --> 00:03:19,210
+typically come into that data center.
+
+69
+00:03:19,210 --> 00:03:22,740
+>> But the real interesting question is,
+what actually goes in those racks?
+
+70
+00:03:22,740 --> 00:03:25,020
+They might all very well
+look like what we just saw.
+
+71
+00:03:25,020 --> 00:03:27,870
+But they perform different functions
+and might need to do different things.
+
+72
+00:03:27,870 --> 00:03:29,661
+And let's actually
+motivate this discussion
+
+73
+00:03:29,661 --> 00:03:35,370
+with the question of, what problem
+starts to arise if you're successful?
+
+74
+00:03:35,370 --> 00:03:37,900
+>> So you've got a website
+that you've built.
+
+75
+00:03:37,900 --> 00:03:40,450
+And maybe it sells widgets
+or something like that.
+
+76
+00:03:40,450 --> 00:03:43,620
+And you've been doing very well
+with sales of widgets online.
+
+77
+00:03:43,620 --> 00:03:48,490
+And you start to experience
+some symptoms, your website.
+
+78
+00:03:48,490 --> 00:03:51,070
+What might be some of
+the technical symptoms
+
+79
+00:03:51,070 --> 00:03:54,040
+that users report as business
+is growing and booming
+
+80
+00:03:54,040 --> 00:03:59,482
+and your website is
+benefiting from that?
+
+81
+00:03:59,482 --> 00:04:02,690
+>> AUDIENCE: [INAUDIBLE]
+
+82
+00:04:02,690 --> 00:04:05,910
+
+83
+00:04:05,910 --> 00:04:07,050
+>> DAVID MALAN: Yeah, exactly.
+
+84
+00:04:07,050 --> 00:04:10,040
+So you might have a
+slowdown of your website.
+
+85
+00:04:10,040 --> 00:04:11,240
+And why might that happen?
+
+86
+00:04:11,240 --> 00:04:12,660
+Well, if we assume, for
+the sake of discussion
+
+87
+00:04:12,660 --> 00:04:15,160
+right now, that you're on one
+of these commercial web hosts
+
+88
+00:04:15,160 --> 00:04:17,860
+that we talked about before lunch,
+that you pay some number of dollars
+
+89
+00:04:17,860 --> 00:04:20,859
+to per month, and you've already paid
+for the annual cost of your domain
+
+90
+00:04:20,859 --> 00:04:25,300
+name, that web host is probably
+overselling their resources
+
+91
+00:04:25,300 --> 00:04:26,050
+to some extent.
+
+92
+00:04:26,050 --> 00:04:29,000
+So you might have a username
+and password on their server.
+
+93
+00:04:29,000 --> 00:04:32,410
+But so might several other, or several
+dozen other, or maybe even several
+
+94
+00:04:32,410 --> 00:04:33,980
+hundred other, users.
+
+95
+00:04:33,980 --> 00:04:37,190
+>> And websites live physically
+on the same server.
+
+96
+00:04:37,190 --> 00:04:38,340
+Why is this possible?
+
+97
+00:04:38,340 --> 00:04:40,680
+Well these days, servers
+like this typically
+
+98
+00:04:40,680 --> 00:04:44,610
+have multiple hard drives, maybe
+as many as six or more hard drives,
+
+99
+00:04:44,610 --> 00:04:47,665
+each of which might be as much
+as 4 terabytes these days.
+
+100
+00:04:47,665 --> 00:04:52,140
+So you might have 24 terabytes of space
+in just one little server like this.
+
+101
+00:04:52,140 --> 00:04:55,710
+>> And even if you steal some of that space
+for redundancy, for backup purposes,
+
+102
+00:04:55,710 --> 00:04:57,110
+it's still quite a lot of space.
+
+103
+00:04:57,110 --> 00:05:00,070
+And certainly, a typical website
+doesn't need that much space.
+
+104
+00:05:00,070 --> 00:05:03,100
+Just registering users
+and storing logs of orders
+
+105
+00:05:03,100 --> 00:05:04,640
+doesn't take all that much space.
+
+106
+00:05:04,640 --> 00:05:07,550
+So you can partition it quite
+a bit and give every user
+
+107
+00:05:07,550 --> 00:05:08,980
+just a little slice of that.
+
+108
+00:05:08,980 --> 00:05:11,310
+>> Meanwhile, a computer
+like this these days
+
+109
+00:05:11,310 --> 00:05:16,370
+typically has multiple CPUs-- not just
+one, maybe two, maybe four, maybe 16,
+
+110
+00:05:16,370 --> 00:05:17,149
+or even more.
+
+111
+00:05:17,149 --> 00:05:18,940
+And each of those CPUs
+has something called
+
+112
+00:05:18,940 --> 00:05:22,230
+a core, which is kind of like
+a brain inside of a brain.
+
+113
+00:05:22,230 --> 00:05:26,800
+So in fact most everyone here with
+modern laptops has probably a dual core
+
+114
+00:05:26,800 --> 00:05:32,030
+or quad core CPU-- and probably only
+one CPU inside of a laptop these days.
+
+115
+00:05:32,030 --> 00:05:35,030
+But desktop computers
+and rack computers like
+
+116
+00:05:35,030 --> 00:05:39,000
+this might have quite a few
+more CPUs, and in turn cores.
+
+117
+00:05:39,000 --> 00:05:44,180
+>> And frankly, even in our Macs and PCs of
+today, you don't really need dual cores
+
+118
+00:05:44,180 --> 00:05:46,550
+or quad cores to check your email.
+
+119
+00:05:46,550 --> 00:05:49,090
+If there's any bottleneck when
+it comes to using a computer,
+
+120
+00:05:49,090 --> 00:05:51,925
+you the human are probably the
+slowest thing about that computer.
+
+121
+00:05:51,925 --> 00:05:54,800
+And you're not going to be able to
+check your email any faster if you
+
+122
+00:05:54,800 --> 00:05:57,170
+have four times as many CPUs or cores.
+
+123
+00:05:57,170 --> 00:05:59,700
+>> But the same is kind
+of true of a server.
+
+124
+00:05:59,700 --> 00:06:02,970
+One single website might not
+necessarily need more than one
+
+125
+00:06:02,970 --> 00:06:05,756
+CPU or one core, one
+small brain inside doing
+
+126
+00:06:05,756 --> 00:06:07,380
+all of the thinking and the processing.
+
+127
+00:06:07,380 --> 00:06:10,561
+So manufacturers have similarly
+started to slice up those resources
+
+128
+00:06:10,561 --> 00:06:13,435
+so that maybe your website gets one
+core, your website gets one core,
+
+129
+00:06:13,435 --> 00:06:15,290
+or maybe we're sharing one such core.
+
+130
+00:06:15,290 --> 00:06:16,820
+We're also sharing disk space.
+
+131
+00:06:16,820 --> 00:06:20,000
+And we're also sharing RAM,
+or Random Access Memory
+
+132
+00:06:20,000 --> 00:06:22,520
+from before, of which
+there's also a finite amount.
+
+133
+00:06:22,520 --> 00:06:23,420
+>> And that's the key.
+
+134
+00:06:23,420 --> 00:06:25,960
+No matter how expensive
+the computer was,
+
+135
+00:06:25,960 --> 00:06:28,440
+there's still a finite
+amount of resources in it.
+
+136
+00:06:28,440 --> 00:06:31,360
+And so the more and more you
+try to consume those resources,
+
+137
+00:06:31,360 --> 00:06:32,850
+the slower things might become.
+
+138
+00:06:32,850 --> 00:06:34,646
+But why?
+
+139
+00:06:34,646 --> 00:06:39,352
+Why would things slow down as a
+symptom of a server being overloaded?
+
+140
+00:06:39,352 --> 00:06:40,060
+What's happening?
+
+141
+00:06:40,060 --> 00:06:42,895
+
+142
+00:06:42,895 --> 00:06:46,388
+>> AUDIENCE: [INAUDIBLE]
+
+143
+00:06:46,388 --> 00:06:54,036
+
+144
+00:06:54,036 --> 00:06:55,160
+DAVID MALAN: Yeah, exactly.
+
+145
+00:06:55,160 --> 00:06:57,730
+I proposed earlier that
+RAM is a type of memory.
+
+146
+00:06:57,730 --> 00:07:00,290
+It's volatile, whereby that's
+where apps and data are
+
+147
+00:07:00,290 --> 00:07:01,890
+stored when they're being used.
+
+148
+00:07:01,890 --> 00:07:03,990
+And so therefore there's
+only a finite number
+
+149
+00:07:03,990 --> 00:07:05,790
+of things you can apparently do at once.
+
+150
+00:07:05,790 --> 00:07:07,740
+And it's also faster,
+which is a good thing.
+
+151
+00:07:07,740 --> 00:07:09,990
+But it's also more expensive,
+which is a bad thing.
+
+152
+00:07:09,990 --> 00:07:15,376
+And it's also therefore present in lower
+quantities than disk space, hard disk
+
+153
+00:07:15,376 --> 00:07:16,750
+space, which tends to be cheaper.
+
+154
+00:07:16,750 --> 00:07:18,830
+>> In other words, you
+might have 4 terabytes
+
+155
+00:07:18,830 --> 00:07:20,440
+of disk space in your computer.
+
+156
+00:07:20,440 --> 00:07:24,300
+But you might have 4
+gigabytes, or 64 gigabytes,
+
+157
+00:07:24,300 --> 00:07:29,180
+in order of magnitude, a factor of
+1,000 less, of RAM in your computer.
+
+158
+00:07:29,180 --> 00:07:30,320
+So what does a computer do?
+
+159
+00:07:30,320 --> 00:07:32,236
+Well, suppose that you
+do have 64 gigabytes
+
+160
+00:07:32,236 --> 00:07:35,110
+of RAM in a server like this, which
+would be quite common, if not low
+
+161
+00:07:35,110 --> 00:07:36,140
+these days.
+
+162
+00:07:36,140 --> 00:07:39,220
+But suppose you have so many
+users doing so many things
+
+163
+00:07:39,220 --> 00:07:42,480
+that you kind of sort of
+need 65 gigabytes of memory
+
+164
+00:07:42,480 --> 00:07:44,960
+to handle all of that
+simultaneous usage?
+
+165
+00:07:44,960 --> 00:07:47,580
+>> Well, you could just say,
+sorry, some number of users
+
+166
+00:07:47,580 --> 00:07:48,840
+just can't access the site.
+
+167
+00:07:48,840 --> 00:07:51,410
+And that is the measure
+of last resort, certainly.
+
+168
+00:07:51,410 --> 00:07:55,570
+Or you, as the operating
+system, like the Windows or Mac
+
+169
+00:07:55,570 --> 00:07:59,480
+OS or Linux or Solaris or any
+number of other OSes on that server,
+
+170
+00:07:59,480 --> 00:08:01,280
+could just decide, you know what?
+
+171
+00:08:01,280 --> 00:08:03,780
+I only have 64 gigabytes of RAM.
+
+172
+00:08:03,780 --> 00:08:05,440
+I kind of need 65.
+
+173
+00:08:05,440 --> 00:08:06,210
+So you know what?
+
+174
+00:08:06,210 --> 00:08:10,030
+I'm going to take 1 gigabyte
+worth of the data in RAM
+
+175
+00:08:10,030 --> 00:08:15,240
+that was the least recently accessed
+and just move it to disk temporarily,
+
+176
+00:08:15,240 --> 00:08:19,050
+literally copy it from the fast
+memory to the slower memory
+
+177
+00:08:19,050 --> 00:08:24,000
+so that I can then handle that
+65th gigabyte need for memory,
+
+178
+00:08:24,000 --> 00:08:25,650
+do some computation on it.
+
+179
+00:08:25,650 --> 00:08:28,580
+Then when I'm done doing that,
+I'll just move that to disk,
+
+180
+00:08:28,580 --> 00:08:35,030
+move that other RAM I temporarily put
+on disk back into the actual hardware
+
+181
+00:08:35,030 --> 00:08:37,280
+so that I'm kind of multitasking.
+
+182
+00:08:37,280 --> 00:08:41,190
+>> So I'm sort of putting things
+temporarily in this slower space
+
+183
+00:08:41,190 --> 00:08:44,159
+so I create the illusion
+of handling everyone.
+
+184
+00:08:44,159 --> 00:08:45,290
+But there's a slowdown.
+
+185
+00:08:45,290 --> 00:08:45,790
+Why?
+
+186
+00:08:45,790 --> 00:08:49,380
+Well, inside of these hard
+disks these days is what?
+
+187
+00:08:49,380 --> 00:08:52,030
+Rather, what makes a hard
+drive different from RAM
+
+188
+00:08:52,030 --> 00:08:53,495
+as best you know now?
+
+189
+00:08:53,495 --> 00:08:56,750
+>> AUDIENCE: [INAUDIBLE]
+
+190
+00:08:56,750 --> 00:08:59,540
+
+191
+00:08:59,540 --> 00:09:01,445
+>> DAVID MALAN: OK, true.
+
+192
+00:09:01,445 --> 00:09:02,320
+AUDIENCE: [INAUDIBLE]
+
+193
+00:09:02,320 --> 00:09:05,440
+
+194
+00:09:05,440 --> 00:09:06,750
+>> DAVID MALAN: So very true.
+
+195
+00:09:06,750 --> 00:09:13,709
+And that is a side effect or feature
+of the fact that RAM is indeed faster.
+
+196
+00:09:13,709 --> 00:09:15,750
+And therefore you want to
+use it for current use.
+
+197
+00:09:15,750 --> 00:09:17,290
+And a disk is slower.
+
+198
+00:09:17,290 --> 00:09:19,630
+But it's permanent, or nonvolatile.
+
+199
+00:09:19,630 --> 00:09:21,480
+So you use it for long term storage.
+
+200
+00:09:21,480 --> 00:09:25,160
+But in terms of
+implementation, if I look up
+
+201
+00:09:25,160 --> 00:09:29,297
+what's called a DIMM, Dual Inline Memory
+Module, this is what a piece of RAM
+
+202
+00:09:29,297 --> 00:09:30,380
+might typically look like.
+
+203
+00:09:30,380 --> 00:09:35,050
+>> So inside of our Mac-- that's a bug.
+
+204
+00:09:35,050 --> 00:09:41,080
+Inside of our Macs and PCs, our desktop
+computers would have sticks of memory,
+
+205
+00:09:41,080 --> 00:09:43,220
+as you would call them,
+or DIMMs, or SIMMs back
+
+206
+00:09:43,220 --> 00:09:44,970
+in the day, of memory
+that look like this.
+
+207
+00:09:44,970 --> 00:09:47,900
+Our laptops probably have things that
+are a third the size or half the size.
+
+208
+00:09:47,900 --> 00:09:50,066
+They're a little smaller,
+but the same idea-- little
+
+209
+00:09:50,066 --> 00:09:52,110
+pieces of green silicon
+wafer or plastic that
+
+210
+00:09:52,110 --> 00:09:56,237
+has little black chips on them with lots
+of wires interconnecting everything.
+
+211
+00:09:56,237 --> 00:09:58,820
+You might have a whole bunch of
+these inside of your computer.
+
+212
+00:09:58,820 --> 00:10:00,903
+But the takeaway here is
+it's entirely electronic.
+
+213
+00:10:00,903 --> 00:10:03,130
+There's just electrons
+flowing on this device.
+
+214
+00:10:03,130 --> 00:10:08,170
+By contrast, if we look at
+the inside of a hard drive
+
+215
+00:10:08,170 --> 00:10:10,760
+and pull up a picture
+here, you would instead
+
+216
+00:10:10,760 --> 00:10:16,600
+see something like this,
+which does have electricity
+
+217
+00:10:16,600 --> 00:10:17,950
+going through it ultimately.
+
+218
+00:10:17,950 --> 00:10:20,265
+But what also jumps out
+at you about this thing?
+
+219
+00:10:20,265 --> 00:10:21,140
+AUDIENCE: [INAUDIBLE]
+
+220
+00:10:21,140 --> 00:10:22,710
+DAVID MALAN: Yeah, there's
+apparently moving parts.
+
+221
+00:10:22,710 --> 00:10:25,210
+It's kind of like an old record
+player or phonograph player.
+
+222
+00:10:25,210 --> 00:10:26,200
+And it pretty much is.
+
+223
+00:10:26,200 --> 00:10:28,950
+It's a little fancier than that--
+whereas a phonograph player used
+
+224
+00:10:28,950 --> 00:10:33,150
+grooves in the record, this actually
+uses tiny little magnetic particles
+
+225
+00:10:33,150 --> 00:10:34,550
+that we can't quite see.
+
+226
+00:10:34,550 --> 00:10:38,520
+But if a little magnetic particle
+looks like this, it's considered a 1.
+
+227
+00:10:38,520 --> 00:10:41,230
+And if it looks like this,
+north-south instead of south-north,
+
+228
+00:10:41,230 --> 00:10:42,252
+it might be a 0.
+
+229
+00:10:42,252 --> 00:10:45,460
+And we'll see tomorrow how we can build
+from that to more interesting things.
+
+230
+00:10:45,460 --> 00:10:47,590
+>> But anything that's
+got to physically move
+
+231
+00:10:47,590 --> 00:10:51,010
+is surely going to go slower
+than the speed of light,
+
+232
+00:10:51,010 --> 00:10:53,250
+which in theory is what
+an electron might flow at,
+
+233
+00:10:53,250 --> 00:10:54,620
+though realistically not quite.
+
+234
+00:10:54,620 --> 00:10:56,900
+So mechanical devices-- much slower.
+
+235
+00:10:56,900 --> 00:10:58,320
+But they're cheaper.
+
+236
+00:10:58,320 --> 00:11:00,944
+And you can fit so much
+more data inside of them.
+
+237
+00:11:00,944 --> 00:11:03,110
+So the fact that there
+exists in the world something
+
+238
+00:11:03,110 --> 00:11:06,840
+called virtual memory,
+using a hard disk like this
+
+239
+00:11:06,840 --> 00:11:10,160
+as though it were RAM
+transparent to the user,
+
+240
+00:11:10,160 --> 00:11:15,320
+simply by moving data
+from RAM to the hard disk,
+
+241
+00:11:15,320 --> 00:11:18,714
+then moving it back when you need
+it again, creates the slowdown.
+
+242
+00:11:18,714 --> 00:11:21,380
+Because you literally have to
+copy it from one place to another.
+
+243
+00:11:21,380 --> 00:11:25,100
+And the thing you're copying it to and
+from is actually slower than the RAM
+
+244
+00:11:25,100 --> 00:11:26,150
+where you want it to be.
+
+245
+00:11:26,150 --> 00:11:29,030
+>> The alternative solution here--
+if you don't like that slow down,
+
+246
+00:11:29,030 --> 00:11:32,014
+and your virtual memory is
+sort of being overtaxed,
+
+247
+00:11:32,014 --> 00:11:33,680
+what's another solution to this problem?
+
+248
+00:11:33,680 --> 00:11:35,260
+>> AUDIENCE: [INAUDIBLE]
+
+249
+00:11:35,260 --> 00:11:37,260
+DAVID MALAN: Well,
+increasing the virtual memory
+
+250
+00:11:37,260 --> 00:11:39,135
+would let us do this on
+an even bigger scale.
+
+251
+00:11:39,135 --> 00:11:43,540
+We could handle 66 gigabytes worth
+of memory needs, or 67 gigabytes.
+
+252
+00:11:43,540 --> 00:11:45,830
+But suppose I don't like
+this slow down, in fact
+
+253
+00:11:45,830 --> 00:11:49,380
+I want to turn off virtual
+memory if that's even possible,
+
+254
+00:11:49,380 --> 00:11:52,350
+what else could I throw at
+this problem to solve it,
+
+255
+00:11:52,350 --> 00:11:56,900
+where I want to handle more users
+and more memory requirements
+
+256
+00:11:56,900 --> 00:11:59,100
+than I physically have at the moment?
+
+257
+00:11:59,100 --> 00:12:02,600
+>> AUDIENCE: [INAUDIBLE]
+
+258
+00:12:02,600 --> 00:12:04,800
+
+259
+00:12:04,800 --> 00:12:06,140
+>> DAVID MALAN: Unfortunately no.
+
+260
+00:12:06,140 --> 00:12:09,850
+So the CPU and the cores they're
+in are a finite resource.
+
+261
+00:12:09,850 --> 00:12:13,280
+And there's no analog in that context.
+
+262
+00:12:13,280 --> 00:12:14,990
+Good question, though.
+
+263
+00:12:14,990 --> 00:12:19,270
+So just to be clear, too, if
+inside of this computer is,
+
+264
+00:12:19,270 --> 00:12:24,510
+let's say, a stick of RAM that looks
+like this-- and so we'll call this RAM.
+
+265
+00:12:24,510 --> 00:12:27,070
+And over here is the hard disk drive.
+
+266
+00:12:27,070 --> 00:12:30,130
+And I'll just draw this
+pictorially as a little circle.
+
+267
+00:12:30,130 --> 00:12:33,740
+There are 0's and 1's in both of
+these-- data, we'll generalize it as.
+
+268
+00:12:33,740 --> 00:12:38,030
+>> And essentially, if a user is
+running an application like,
+
+269
+00:12:38,030 --> 00:12:46,070
+let's say, a website that requires this
+much RAM per user, what I'm proposing,
+
+270
+00:12:46,070 --> 00:12:48,380
+by way of this thing
+called virtual memory,
+
+271
+00:12:48,380 --> 00:12:53,990
+is to just temporarily move
+that over here so that now I
+
+272
+00:12:53,990 --> 00:12:57,810
+can move someone else's memory
+requirements over there.
+
+273
+00:12:57,810 --> 00:13:00,420
+And then when that's done,
+I can copy this back over
+
+274
+00:13:00,420 --> 00:13:04,550
+and this goes here, thereby moving
+what I wanted in there somewhere else
+
+275
+00:13:04,550 --> 00:13:05,050
+altogether.
+
+276
+00:13:05,050 --> 00:13:07,820
+>> So there's just a lot of
+switcheroo, is the takeaway here.
+
+277
+00:13:07,820 --> 00:13:12,380
+So if you don't like this, and you don't
+want to put anything on the hard drive,
+
+278
+00:13:12,380 --> 00:13:16,440
+what's sort of the obvious
+business person's solution
+
+279
+00:13:16,440 --> 00:13:19,684
+to the problem, or the engineer's
+solution, for that matter, too?
+
+280
+00:13:19,684 --> 00:13:21,950
+>> AUDIENCE: [INAUDIBLE]
+
+281
+00:13:21,950 --> 00:13:24,750
+>> DAVID MALAN: Yeah, I mean literally
+throw money at the problem.
+
+282
+00:13:24,750 --> 00:13:27,541
+And actually, this is the perfect
+segue to some of the higher level
+
+283
+00:13:27,541 --> 00:13:28,870
+discussions of cloud computing.
+
+284
+00:13:28,870 --> 00:13:31,390
+Because a lot of it is motivated
+by financial decisions,
+
+285
+00:13:31,390 --> 00:13:33,040
+not even necessarily technological.
+
+286
+00:13:33,040 --> 00:13:37,830
+If 64 gigs of RAM is too little, well,
+why not get 128 gigabytes of RAM?
+
+287
+00:13:37,830 --> 00:13:40,440
+Why not get 256 gigabytes of RAM?
+
+288
+00:13:40,440 --> 00:13:41,732
+Well, why not?
+
+289
+00:13:41,732 --> 00:13:42,608
+>> AUDIENCE: [INAUDIBLE]
+
+290
+00:13:42,608 --> 00:13:44,482
+DAVID MALAN: Well, it
+costs more money, sure.
+
+291
+00:13:44,482 --> 00:13:46,970
+And if you already have spare
+hard disk space, effectively,
+
+292
+00:13:46,970 --> 00:13:51,407
+or equivalently, hard disk space is so
+much cheaper you might as well use it.
+
+293
+00:13:51,407 --> 00:13:54,490
+So again, there's this trade off that
+we saw even earlier on this morning,
+
+294
+00:13:54,490 --> 00:13:56,656
+where there's really not
+necessarily a right answer,
+
+295
+00:13:56,656 --> 00:14:01,360
+there's just a better or worse answer
+based on what you actually care about.
+
+296
+00:14:01,360 --> 00:14:04,500
+>> So there's also technological realities.
+
+297
+00:14:04,500 --> 00:14:06,870
+I cannot buy a computer,
+to my knowledge,
+
+298
+00:14:06,870 --> 00:14:09,490
+with a trillion gigabytes
+of RAM right now.
+
+299
+00:14:09,490 --> 00:14:11,540
+It just physically doesn't exist.
+
+300
+00:14:11,540 --> 00:14:13,240
+So there is some upper bound.
+
+301
+00:14:13,240 --> 00:14:15,990
+But if you've ever even shopped
+for a consumer Mac or PC,
+
+302
+00:14:15,990 --> 00:14:20,180
+too, generally there's
+this curve of features
+
+303
+00:14:20,180 --> 00:14:23,410
+where there might be a good,
+a better, and a best computer.
+
+304
+00:14:23,410 --> 00:14:25,730
+>> And the marginal returns
+on your dollar buying
+
+305
+00:14:25,730 --> 00:14:30,227
+the best computer versus
+the better computer
+
+306
+00:14:30,227 --> 00:14:32,560
+might not be nearly as high
+as spending a bit more money
+
+307
+00:14:32,560 --> 00:14:35,599
+and getting the better computer
+over the good computer.
+
+308
+00:14:35,599 --> 00:14:38,390
+In other words, you're paying a
+premium to get the top of the line.
+
+309
+00:14:38,390 --> 00:14:40,790
+>> And what we'll see in the
+discussion of cloud computing
+
+310
+00:14:40,790 --> 00:14:44,940
+is that what's very common these
+days, and what companies like Google
+
+311
+00:14:44,940 --> 00:14:50,560
+early on popularized, was not paying
+for and building really fancy, expensive
+
+312
+00:14:50,560 --> 00:14:53,540
+souped up computers with
+lots and lots of everything,
+
+313
+00:14:53,540 --> 00:15:00,140
+but rather buying or building pretty
+modest computers but lots of them,
+
+314
+00:15:00,140 --> 00:15:03,280
+and using something that's generally
+called horizontal scaling instead
+
+315
+00:15:03,280 --> 00:15:04,320
+of vertical scaling.
+
+316
+00:15:04,320 --> 00:15:08,115
+>> So vertical scaling would mean get more
+RAM, more disk, more of everything,
+
+317
+00:15:08,115 --> 00:15:10,187
+and sort of invest
+vertically in your hardware
+
+318
+00:15:10,187 --> 00:15:12,520
+so you're just getting the
+best of the best of the best,
+
+319
+00:15:12,520 --> 00:15:13,650
+but you're paying for it.
+
+320
+00:15:13,650 --> 00:15:17,580
+Horizontal scaling is sort of get the
+bottom tier things, the good model,
+
+321
+00:15:17,580 --> 00:15:19,922
+or even the worse model,
+but get lots of them.
+
+322
+00:15:19,922 --> 00:15:22,630
+But as soon as you get lots of
+them-- for instance, in this case,
+
+323
+00:15:22,630 --> 00:15:27,330
+web servers, if this one server
+or one web host is insufficient,
+
+324
+00:15:27,330 --> 00:15:32,310
+then just intuitively, the
+solution to this problem of load
+
+325
+00:15:32,310 --> 00:15:36,460
+or overload on your servers
+is either get a bigger server
+
+326
+00:15:36,460 --> 00:15:40,770
+or, what I'm proposing here instead
+of scaling vertically so to speak,
+
+327
+00:15:40,770 --> 00:15:41,920
+would be, you know what?
+
+328
+00:15:41,920 --> 00:15:43,580
+Just get a second one of these.
+
+329
+00:15:43,580 --> 00:15:46,560
+Or maybe even get a third.
+
+330
+00:15:46,560 --> 00:15:48,900
+But now we've created
+an engineering problem
+
+331
+00:15:48,900 --> 00:15:51,920
+by nature of this business
+or financial decision.
+
+332
+00:15:51,920 --> 00:15:54,312
+What's the engineering problem now?
+
+333
+00:15:54,312 --> 00:15:56,040
+>> AUDIENCE: [INAUDIBLE]
+
+334
+00:15:56,040 --> 00:15:59,740
+>> DAVID MALAN: Yeah, how do
+you connect them and-- sorry?
+
+335
+00:15:59,740 --> 00:16:00,651
+>> AUDIENCE: [INAUDIBLE]
+
+336
+00:16:00,651 --> 00:16:02,400
+DAVID MALAN: Right,
+because I still have--
+
+337
+00:16:02,400 --> 00:16:07,280
+if I reintroduce me into this picture,
+if this is my laptop somewhere
+
+338
+00:16:07,280 --> 00:16:12,400
+on the internet, which is now between
+me and the company we're talking about,
+
+339
+00:16:12,400 --> 00:16:17,960
+now I have to figure out, to which
+server do I send this particular user?
+
+340
+00:16:17,960 --> 00:16:25,090
+And if there's other users, like
+this, and then this one over here,
+
+341
+00:16:25,090 --> 00:16:28,850
+and maybe this is user A, this
+is user B, this is user C,
+
+342
+00:16:28,850 --> 00:16:34,720
+and this is server 1, 2, and 3-- now
+an intuitive answer might here be just,
+
+343
+00:16:34,720 --> 00:16:37,460
+we'll send user A to 1
+and B to 2 and C to 3.
+
+344
+00:16:37,460 --> 00:16:39,900
+And we can handle 3 times as many users.
+
+345
+00:16:39,900 --> 00:16:41,360
+>> But that's an oversimplification.
+
+346
+00:16:41,360 --> 00:16:44,480
+How do you decide whom to send where?
+
+347
+00:16:44,480 --> 00:16:46,400
+So let's try to reason through this.
+
+348
+00:16:46,400 --> 00:16:50,110
+So suppose that computers
+A, B, and C are customers,
+
+349
+00:16:50,110 --> 00:16:53,972
+and servers 1, 2, and 3 are
+horizontally scaled servers.
+
+350
+00:16:53,972 --> 00:16:55,180
+So they're sort of identical.
+
+351
+00:16:55,180 --> 00:16:57,200
+They're all running the same software.
+
+352
+00:16:57,200 --> 00:16:59,770
+And they can all do the same thing.
+
+353
+00:16:59,770 --> 00:17:01,520
+But the reason we have
+three of them is so
+
+354
+00:17:01,520 --> 00:17:04,710
+that we can handle three
+times as many people at once.
+
+355
+00:17:04,710 --> 00:17:07,960
+>> So we know from our
+discussion prior to lunch
+
+356
+00:17:07,960 --> 00:17:11,460
+that there's hardware in between
+the laptops and the servers.
+
+357
+00:17:11,460 --> 00:17:14,920
+But we'll just sort of generalize
+that now as the internet or the cloud.
+
+358
+00:17:14,920 --> 00:17:18,707
+But we know that in my home,
+there's probably a home router.
+
+359
+00:17:18,707 --> 00:17:21,290
+Near the servers, there's probably
+a router, DNS server, DHCP.
+
+360
+00:17:21,290 --> 00:17:24,780
+There can be anything
+we want in this story.
+
+361
+00:17:24,780 --> 00:17:33,360
+>> So how do we start to decide,
+when user A goes to something.com,
+
+362
+00:17:33,360 --> 00:17:36,630
+which server to route the user to?
+
+363
+00:17:36,630 --> 00:17:39,409
+How might we begin to tell this story?
+
+364
+00:17:39,409 --> 00:17:40,450
+AUDIENCE: Load balancing?
+
+365
+00:17:40,450 --> 00:17:41,120
+DAVID MALAN: Load balancing.
+
+366
+00:17:41,120 --> 00:17:42,502
+What do you mean by that?
+
+367
+00:17:42,502 --> 00:17:44,660
+>> AUDIENCE: Returning
+where the most usage is
+
+368
+00:17:44,660 --> 00:17:47,472
+and which one has the
+most available resources.
+
+369
+00:17:47,472 --> 00:17:49,930
+DAVID MALAN: OK, so let me
+introduce a new type of hardware
+
+370
+00:17:49,930 --> 00:17:53,627
+that we haven't yet discussed, which
+is exactly that, a load balancer.
+
+371
+00:17:53,627 --> 00:17:54,960
+This too could just be a server.
+
+372
+00:17:54,960 --> 00:17:58,130
+It could look exactly like
+the one we saw a moment ago.
+
+373
+00:17:58,130 --> 00:18:01,000
+A load balancer really is
+just a piece of software
+
+374
+00:18:01,000 --> 00:18:02,660
+that you run on a piece of hardware.
+
+375
+00:18:02,660 --> 00:18:07,310
+>> Or you can pay a vendor, like
+Citrix or others, Cisco or others.
+
+376
+00:18:07,310 --> 00:18:10,465
+You can pay for their own hardware,
+which is a hardware load balancer.
+
+377
+00:18:10,465 --> 00:18:12,840
+But that just means they
+pre-installed the load balancing
+
+378
+00:18:12,840 --> 00:18:15,580
+software on their hardware and
+sold it to you all together.
+
+379
+00:18:15,580 --> 00:18:18,670
+So we'll just draw it as a
+rectangle for our purposes.
+
+380
+00:18:18,670 --> 00:18:22,040
+>> How now do I implement a load balancer?
+
+381
+00:18:22,040 --> 00:18:28,150
+In other words, when user A wants to
+visit my site, their request somehow
+
+382
+00:18:28,150 --> 00:18:31,070
+or other, probably by way of those
+routers we talked about earlier,
+
+383
+00:18:31,070 --> 00:18:33,750
+is going to eventually reach
+this load balancer, who then
+
+384
+00:18:33,750 --> 00:18:36,210
+needs to make a routing-like decision.
+
+385
+00:18:36,210 --> 00:18:38,320
+But it's routing for sort
+of a higher purpose now.
+
+386
+00:18:38,320 --> 00:18:40,361
+It's not just about getting
+from point A to point
+
+387
+00:18:40,361 --> 00:18:44,730
+B. It's about deciding which
+point B is the best among them--
+
+388
+00:18:44,730 --> 00:18:46,660
+1, 2, or 3 in this case.
+
+389
+00:18:46,660 --> 00:18:51,000
+>> So how do I decide whether
+to go to 1, to 2, to 3?
+
+390
+00:18:51,000 --> 00:18:55,180
+What might this black box, so to
+speak, be doing on the inside?
+
+391
+00:18:55,180 --> 00:18:57,880
+This too is another example in
+computer science of abstraction.
+
+392
+00:18:57,880 --> 00:19:02,410
+I have literally drawn a load balancer
+as a black box in black ink, inside
+
+393
+00:19:02,410 --> 00:19:05,300
+of which is some interesting
+logic, or magic even,
+
+394
+00:19:05,300 --> 00:19:07,840
+out of which needs to come
+a decision-- 1, 2, or 3.
+
+395
+00:19:07,840 --> 00:19:12,220
+And the input is just A.
+
+396
+00:19:12,220 --> 00:19:13,442
+>> AUDIENCE: [INAUDIBLE]
+
+397
+00:19:13,442 --> 00:19:14,400
+DAVID MALAN: I'm sorry?
+
+398
+00:19:14,400 --> 00:19:14,770
+AUDIENCE: [INAUDIBLE]
+
+399
+00:19:14,770 --> 00:19:18,310
+DAVID MALAN: All right, how might we
+categorize the types of transactions
+
+400
+00:19:18,310 --> 00:19:19,095
+here?
+
+401
+00:19:19,095 --> 00:19:23,772
+>> AUDIENCE: Viewing a webpage
+versus querying a database.
+
+402
+00:19:23,772 --> 00:19:24,980
+DAVID MALAN: OK, that's good.
+
+403
+00:19:24,980 --> 00:19:29,210
+So maybe this user A
+wants to view a web page.
+
+404
+00:19:29,210 --> 00:19:32,954
+And maybe it's even static content,
+something that changes rarely, if ever.
+
+405
+00:19:32,954 --> 00:19:34,870
+And that seems like a
+pretty simple operation.
+
+406
+00:19:34,870 --> 00:19:38,260
+So maybe we'll just arbitrarily,
+but reasonably, say,
+
+407
+00:19:38,260 --> 00:19:42,750
+server 1, his purpose in life is
+to just serve up static content,
+
+408
+00:19:42,750 --> 00:19:45,150
+files that rarely, if ever, change.
+
+409
+00:19:45,150 --> 00:19:46,870
+Maybe it's the images on the page.
+
+410
+00:19:46,870 --> 00:19:50,180
+Maybe it's the text on the page or
+other such sort of uninteresting things,
+
+411
+00:19:50,180 --> 00:19:52,460
+nothing transactional, nothing dynamic.
+
+412
+00:19:52,460 --> 00:19:57,000
+>> By contrast, if user A is checking
+out of his or her shopping cart that
+
+413
+00:19:57,000 --> 00:20:00,972
+requires a database, someplace to store
+and remember that transaction, well
+
+414
+00:20:00,972 --> 00:20:02,680
+maybe that request
+should go to server 2.
+
+415
+00:20:02,680 --> 00:20:03,610
+So that's good.
+
+416
+00:20:03,610 --> 00:20:07,010
+So we can load balance based
+on the type of requests.
+
+417
+00:20:07,010 --> 00:20:08,278
+How else might we do this?
+
+418
+00:20:08,278 --> 00:20:13,690
+
+419
+00:20:13,690 --> 00:20:14,686
+What other--
+
+420
+00:20:14,686 --> 00:20:17,382
+>> AUDIENCE: Based on the server's
+utilization and capacity.
+
+421
+00:20:17,382 --> 00:20:18,340
+DAVID MALAN: Right, OK.
+
+422
+00:20:18,340 --> 00:20:19,950
+So you mentioned that earlier, Kareem.
+
+423
+00:20:19,950 --> 00:20:26,850
+So what if we provide some input
+on [INAUDIBLE] among servers 1, 2,
+
+424
+00:20:26,850 --> 00:20:32,070
+and 3 to this load balancer so that
+they're just constantly informing
+
+425
+00:20:32,070 --> 00:20:36,420
+the load balancer what their status is?
+
+426
+00:20:36,420 --> 00:20:39,842
+Like, hey, load balancer,
+I'm at 50% utilization.
+
+427
+00:20:39,842 --> 00:20:41,550
+In other words, I have
+half as many users
+
+428
+00:20:41,550 --> 00:20:43,520
+as I can actually handle right now.
+
+429
+00:20:43,520 --> 00:20:45,480
+Hey, load balancer, I'm
+at 100% utilization.
+
+430
+00:20:45,480 --> 00:20:47,929
+Hey, load balancer, 0% utilization.
+
+431
+00:20:47,929 --> 00:20:49,970
+The load balancer, if it's
+designed in a way that
+
+432
+00:20:49,970 --> 00:20:53,990
+can take in those comments
+as input, it can then
+
+433
+00:20:53,990 --> 00:20:57,420
+decide, ooh, number 2 is at 100%.
+
+434
+00:20:57,420 --> 00:21:01,440
+Let me send no future requests to him
+other than the users already connected.
+
+435
+00:21:01,440 --> 00:21:02,360
+This guy's at 0%.
+
+436
+00:21:02,360 --> 00:21:03,940
+Let's send a lot of traffic to him.
+
+437
+00:21:03,940 --> 00:21:05,480
+This guy said he's at 50%.
+
+438
+00:21:05,480 --> 00:21:08,080
+Let's send some traffic to him.
+
+439
+00:21:08,080 --> 00:21:12,012
+>> So that would be an ingredient, that
+we could take load into account.
+
+440
+00:21:12,012 --> 00:21:13,470
+And it's going to change over time.
+
+441
+00:21:13,470 --> 00:21:14,678
+So the decisions will change.
+
+442
+00:21:14,678 --> 00:21:17,350
+So that's a really good technique,
+one that's commonly used.
+
+443
+00:21:17,350 --> 00:21:18,410
+What else could we do?
+
+444
+00:21:18,410 --> 00:21:20,380
+And let's actually just summarize here.
+
+445
+00:21:20,380 --> 00:21:29,510
+So the decisions here could be
+by type of traffic, I'll call it.
+
+446
+00:21:29,510 --> 00:21:32,220
+It can be based on load.
+
+447
+00:21:32,220 --> 00:21:34,692
+Let's see if we can't
+come up with a few other.
+
+448
+00:21:34,692 --> 00:21:35,934
+>> AUDIENCE: [INAUDIBLE]
+
+449
+00:21:35,934 --> 00:21:36,850
+DAVID MALAN: Location.
+
+450
+00:21:36,850 --> 00:21:37,724
+So that's a good one.
+
+451
+00:21:37,724 --> 00:21:40,880
+So location-- how might you
+leverage that information?
+
+452
+00:21:40,880 --> 00:21:44,317
+>> AUDIENCE: [INAUDIBLE]
+
+453
+00:21:44,317 --> 00:21:54,140
+
+454
+00:21:54,140 --> 00:21:57,040
+>> DAVID MALAN: Oh, that's good.
+
+455
+00:21:57,040 --> 00:21:59,450
+And about how many milliseconds
+would it decrease by
+
+456
+00:21:59,450 --> 00:22:02,466
+based on what we saw this
+morning, would you say?
+
+457
+00:22:02,466 --> 00:22:04,330
+>> AUDIENCE: [INAUDIBLE]
+
+458
+00:22:04,330 --> 00:22:06,550
+>> DAVID MALAN: Well, based
+on the trace routes
+
+459
+00:22:06,550 --> 00:22:09,070
+we saw earlier, which is just
+a rough measure of something,
+
+460
+00:22:09,070 --> 00:22:11,800
+at least how long it takes
+for data to get from A to B
+
+461
+00:22:11,800 --> 00:22:16,140
+feels like anything local was, what,
+like 74 milliseconds, give or take?
+
+462
+00:22:16,140 --> 00:22:19,200
+And then anything 100 plus,
+200 plus was probably abroad.
+
+463
+00:22:19,200 --> 00:22:22,110
+And so based on that alone,
+it seems reasonable to assume
+
+464
+00:22:22,110 --> 00:22:25,310
+that for a user in the US
+to access a European server
+
+465
+00:22:25,310 --> 00:22:28,900
+might take twice or three times
+as long, even in milliseconds,
+
+466
+00:22:28,900 --> 00:22:31,280
+than it might take if that
+server were located here
+
+467
+00:22:31,280 --> 00:22:33,370
+geographically, or vice versa.
+
+468
+00:22:33,370 --> 00:22:35,120
+So when I proposed
+earlier that especially
+
+469
+00:22:35,120 --> 00:22:37,880
+once you cross that 200 millisecond
+threshold, give or take,
+
+470
+00:22:37,880 --> 00:22:39,210
+humans do start to notice.
+
+471
+00:22:39,210 --> 00:22:42,960
+And the trace route is just
+assuming raw, uninteresting data.
+
+472
+00:22:42,960 --> 00:22:46,570
+When you have a website, you have to
+get the user downloading images or movie
+
+473
+00:22:46,570 --> 00:22:49,150
+files, lots of text,
+subsequent requests.
+
+474
+00:22:49,150 --> 00:22:53,116
+We saw when we visited, what was
+it, Facebook or Amazon earlier,
+
+475
+00:22:53,116 --> 00:22:55,490
+there's a whole lot of stuff
+that needs to be downloaded.
+
+476
+00:22:55,490 --> 00:22:56,573
+So that's going to add up.
+
+477
+00:22:56,573 --> 00:23:00,259
+So multi-seconds might
+not be unreasonable.
+
+478
+00:23:00,259 --> 00:23:01,800
+So good, geography is one ingredient.
+
+479
+00:23:01,800 --> 00:23:05,920
+So in fact companies like
+Akamai, if you've heard of them,
+
+480
+00:23:05,920 --> 00:23:10,000
+or others have long taken
+geography into account.
+
+481
+00:23:10,000 --> 00:23:14,170
+And it turns out that by nature of an
+IP address, my laptop's IP address,
+
+482
+00:23:14,170 --> 00:23:18,277
+you can infer, with some probability,
+where you are in the world.
+
+483
+00:23:18,277 --> 00:23:20,110
+And in fact there's
+third party services you
+
+484
+00:23:20,110 --> 00:23:24,480
+can pay who maintain databases
+of IP addresses and geographies
+
+485
+00:23:24,480 --> 00:23:28,660
+that with high confidence will be
+true when asked, where in the world
+
+486
+00:23:28,660 --> 00:23:30,090
+is this IP address?
+
+487
+00:23:30,090 --> 00:23:32,130
+>> And so in fact what
+other companies use this?
+
+488
+00:23:32,130 --> 00:23:35,900
+If you have Hulu or Netflix, if
+you've ever been traveling abroad,
+
+489
+00:23:35,900 --> 00:23:38,640
+and you try to watch something on
+Hulu, and you're not in the US,
+
+490
+00:23:38,640 --> 00:23:41,280
+you might see a message
+saying, not in the US.
+
+491
+00:23:41,280 --> 00:23:43,208
+Sorry, you can't view this content.
+
+492
+00:23:43,208 --> 00:23:44,420
+>> AUDIENCE: [INAUDIBLE]
+
+493
+00:23:44,420 --> 00:23:46,020
+>> DAVID MALAN: Oh, really?
+
+494
+00:23:46,020 --> 00:23:48,480
+But yes, so actually that's
+a perfect application
+
+495
+00:23:48,480 --> 00:23:51,060
+of something very technical
+to an actual problem.
+
+496
+00:23:51,060 --> 00:23:55,100
+If you were to VPN from
+Europe or Asia or anywhere
+
+497
+00:23:55,100 --> 00:23:57,950
+in the world to your corporate
+headquarters in New York
+
+498
+00:23:57,950 --> 00:24:00,670
+or wherever you are, you're
+going to create the appearance
+
+499
+00:24:00,670 --> 00:24:03,580
+to outside websites that
+you're actually in New York,
+
+500
+00:24:03,580 --> 00:24:05,660
+even though you're
+physically quite far away.
+
+501
+00:24:05,660 --> 00:24:08,057
+>> Now you the user are going to
+know you're obviously away.
+
+502
+00:24:08,057 --> 00:24:11,140
+But you're also going to feel it because
+of those additional milliseconds.
+
+503
+00:24:11,140 --> 00:24:14,510
+That additional distance and the
+encryption that's happening in the VPN
+
+504
+00:24:14,510 --> 00:24:15,760
+is going to slow things down.
+
+505
+00:24:15,760 --> 00:24:17,680
+So it may or may not
+be a great experience.
+
+506
+00:24:17,680 --> 00:24:21,050
+But Hulu and Netflix are going to see
+you as sitting somewhere in New York,
+
+507
+00:24:21,050 --> 00:24:23,817
+as you've clearly gleaned.
+
+508
+00:24:23,817 --> 00:24:25,150
+What a perfect solution to that.
+
+509
+00:24:25,150 --> 00:24:28,490
+>> All right, so geography is one decision.
+
+510
+00:24:28,490 --> 00:24:32,290
+What else might we use to decide how
+to route traffic from A, B, and C
+
+511
+00:24:32,290 --> 00:24:37,040
+to 1, 2, and 3, again, putting
+the engineering hat on?
+
+512
+00:24:37,040 --> 00:24:38,850
+This all sounds very complicated.
+
+513
+00:24:38,850 --> 00:24:41,490
+Uh, I don't even know where
+to begin implementing those.
+
+514
+00:24:41,490 --> 00:24:44,450
+Give me something that's simpler.
+
+515
+00:24:44,450 --> 00:24:48,160
+What's the simplest way
+to make this decision?
+
+516
+00:24:48,160 --> 00:24:49,840
+>> AUDIENCE: Is the server available?
+
+517
+00:24:49,840 --> 00:24:51,650
+>> DAVID MALAN: Is the server available?
+
+518
+00:24:51,650 --> 00:24:53,970
+So not bad.
+
+519
+00:24:53,970 --> 00:24:54,470
+That's good.
+
+520
+00:24:54,470 --> 00:24:56,260
+That's sort of a nuancing of load.
+
+521
+00:24:56,260 --> 00:24:58,070
+So let's keep that in the load category.
+
+522
+00:24:58,070 --> 00:25:00,010
+If you're available, I'm just
+going to send the data there.
+
+523
+00:25:00,010 --> 00:25:01,343
+But that could backfire quickly.
+
+524
+00:25:01,343 --> 00:25:05,720
+Because if I use that logic, and if I
+always ask 1, are you on, are you on,
+
+525
+00:25:05,720 --> 00:25:08,970
+are you on, if the answer is always yes,
+I'm going to send 100% of the traffic
+
+526
+00:25:08,970 --> 00:25:11,060
+to him, 0% to everyone else.
+
+527
+00:25:11,060 --> 00:25:14,430
+And at some point, we're going to hit
+that slowdown or site unavailable.
+
+528
+00:25:14,430 --> 00:25:17,630
+So what's slightly better than
+that but still pretty simple
+
+529
+00:25:17,630 --> 00:25:22,412
+and not nearly as clever as taking all
+these additional data into account?
+
+530
+00:25:22,412 --> 00:25:23,992
+>> AUDIENCE: Cost per server.
+
+531
+00:25:23,992 --> 00:25:25,200
+DAVID MALAN: Cost per server.
+
+532
+00:25:25,200 --> 00:25:28,010
+OK, so let me toss that
+in the load category, too.
+
+533
+00:25:28,010 --> 00:25:30,790
+Because what you'll find in
+a company, too-- that if you
+
+534
+00:25:30,790 --> 00:25:32,790
+upgrade your servers
+over time or buy more,
+
+535
+00:25:32,790 --> 00:25:36,242
+you might not be able to get exactly
+the same versions of hardware.
+
+536
+00:25:36,242 --> 00:25:37,450
+Because it falls out of date.
+
+537
+00:25:37,450 --> 00:25:38,491
+You can't buy it anymore.
+
+538
+00:25:38,491 --> 00:25:39,360
+Prices change.
+
+539
+00:25:39,360 --> 00:25:42,500
+>> So you might have disparate servers
+in your cluster, so to speak.
+
+540
+00:25:42,500 --> 00:25:43,890
+That's totally fine.
+
+541
+00:25:43,890 --> 00:25:47,100
+But next year's hardware
+might be twice as fast,
+
+542
+00:25:47,100 --> 00:25:49,390
+twice as capable as this year's.
+
+543
+00:25:49,390 --> 00:25:51,500
+So we can toss that
+into the load category.
+
+544
+00:25:51,500 --> 00:25:54,260
+This feedback loop between 1,
+2, and 3 in the load balancer
+
+545
+00:25:54,260 --> 00:25:57,650
+could certainly tell it,
+hey, I'm at 50% capacity.
+
+546
+00:25:57,650 --> 00:26:00,100
+But by the way, I also
+have twice as many cores.
+
+547
+00:26:00,100 --> 00:26:02,319
+Use that information.
+
+548
+00:26:02,319 --> 00:26:05,110
+Even simpler-- and this is going
+to be a theme in computer science.
+
+549
+00:26:05,110 --> 00:26:08,990
+When in doubt, or when you want a simple
+solution that generally works well
+
+550
+00:26:08,990 --> 00:26:12,730
+over time, don't choose the same
+server all the time, but choose--
+
+551
+00:26:12,730 --> 00:26:14,039
+>> AUDIENCE: A random one?
+
+552
+00:26:14,039 --> 00:26:15,330
+DAVID MALAN: --a random server.
+
+553
+00:26:15,330 --> 00:26:16,780
+Yeah, choose one or the other.
+
+554
+00:26:16,780 --> 00:26:21,160
+So randomness is actually
+this very powerful ingredient
+
+555
+00:26:21,160 --> 00:26:23,170
+in computer science,
+and in engineering more
+
+556
+00:26:23,170 --> 00:26:27,160
+generally, especially when you want
+to make a simple decision quickly
+
+557
+00:26:27,160 --> 00:26:30,480
+without complicating it with all
+of these very clever, but also
+
+558
+00:26:30,480 --> 00:26:34,330
+very clever, solutions that require
+all the more engineering, all
+
+559
+00:26:34,330 --> 00:26:36,220
+the more thought, when
+really, why don't I
+
+560
+00:26:36,220 --> 00:26:39,200
+just kind of flip a coin, or a
+three sided coin in this case,
+
+561
+00:26:39,200 --> 00:26:41,690
+and decide whether to go 1, 2, 3?
+
+562
+00:26:41,690 --> 00:26:45,610
+>> That might backfire probabilistically,
+but much like the odds
+
+563
+00:26:45,610 --> 00:26:48,860
+of flipping heads again and
+again and again and again
+
+564
+00:26:48,860 --> 00:26:53,870
+and again and again is possible in
+reality-- super, super unlikely.
+
+565
+00:26:53,870 --> 00:26:58,170
+So over time, odds are
+just sending users randomly
+
+566
+00:26:58,170 --> 00:27:00,660
+to 1, 2, and 3 is going to
+work out perfectly fine.
+
+567
+00:27:00,660 --> 00:27:03,380
+And this is a technique
+generally known as round robin.
+
+568
+00:27:03,380 --> 00:27:05,160
+>> Or actually, that's not round robin.
+
+569
+00:27:05,160 --> 00:27:06,980
+This would be the random approach.
+
+570
+00:27:06,980 --> 00:27:09,250
+And if you want to be even
+a little simpler than that,
+
+571
+00:27:09,250 --> 00:27:12,820
+round robin would be, first person goes
+to 1, second person to 2, third person
+
+572
+00:27:12,820 --> 00:27:16,056
+to 3, fourth person to 1.
+
+573
+00:27:16,056 --> 00:27:17,430
+And therein lies the round robin.
+
+574
+00:27:17,430 --> 00:27:19,580
+You just kind of go around in a cycle.
+
+575
+00:27:19,580 --> 00:27:21,300
+>> Now, you should be smart about it.
+
+576
+00:27:21,300 --> 00:27:26,490
+You should not blindly send the user to
+server number one if what is the case?
+
+577
+00:27:26,490 --> 00:27:30,060
+
+578
+00:27:30,060 --> 00:27:32,870
+If it's at max capacity, or
+it's just no longer responsive.
+
+579
+00:27:32,870 --> 00:27:35,270
+So ideally you want some
+kind of feedback loop.
+
+580
+00:27:35,270 --> 00:27:38,040
+Otherwise, you just send all
+of your users to a dead end.
+
+581
+00:27:38,040 --> 00:27:40,790
+But that can be taken into account, too.
+
+582
+00:27:40,790 --> 00:27:46,520
+>> So don't under appreciate the value of
+just randomness, which is quite often
+
+583
+00:27:46,520 --> 00:27:48,970
+a solution to these kinds of problems.
+
+584
+00:27:48,970 --> 00:27:51,580
+And we'll write down round robin.
+
+585
+00:27:51,580 --> 00:27:55,090
+So how do some companies implement
+round robin or randomness
+
+586
+00:27:55,090 --> 00:27:56,840
+or any of these decisions?
+
+587
+00:27:56,840 --> 00:28:01,840
+Well unfortunately, they
+do things like this.
+
+588
+00:28:01,840 --> 00:28:03,660
+Let me pull up another quick screenshot.
+
+589
+00:28:03,660 --> 00:28:13,052
+
+590
+00:28:13,052 --> 00:28:14,470
+>> Actually, let's do two.
+
+591
+00:28:14,470 --> 00:28:17,420
+
+592
+00:28:17,420 --> 00:28:21,370
+I don't know why we're
+getting all of these dishes.
+
+593
+00:28:21,370 --> 00:28:22,280
+That's very strange.
+
+594
+00:28:22,280 --> 00:28:31,714
+
+595
+00:28:31,714 --> 00:28:33,630
+All right, what I really
+want is a screenshot.
+
+596
+00:28:33,630 --> 00:28:36,990
+
+597
+00:28:36,990 --> 00:28:40,100
+That is weird.
+
+598
+00:28:40,100 --> 00:28:42,930
+All right, so I can spoof this.
+
+599
+00:28:42,930 --> 00:28:46,080
+I don't know how much farther
+I want to keep scrolling.
+
+600
+00:28:46,080 --> 00:28:53,220
+>> So very commonly, you'll find yourself
+at an address like www.2.acme.com,
+
+601
+00:28:53,220 --> 00:28:56,030
+maybe www.3 or 4 or 5.
+
+602
+00:28:56,030 --> 00:28:57,424
+And keep an eye for this.
+
+603
+00:28:57,424 --> 00:28:58,590
+You don't see it that often.
+
+604
+00:28:58,590 --> 00:29:02,621
+But when you do, it kind of tends to
+be bigger, older, stodgier companies
+
+605
+00:29:02,621 --> 00:29:05,370
+that technologically don't really
+seem to know what they're doing.
+
+606
+00:29:05,370 --> 00:29:08,150
+And you see this on tech companies
+sometimes, the older ones.
+
+607
+00:29:08,150 --> 00:29:09,270
+>> So what are they doing?
+
+608
+00:29:09,270 --> 00:29:11,890
+How are they implementing
+load balancing, would it seem?
+
+609
+00:29:11,890 --> 00:29:15,986
+If you find yourself as the
+user typing www.something.com,
+
+610
+00:29:15,986 --> 00:29:19,760
+and suddenly you're at
+www.2.something.com,
+
+611
+00:29:19,760 --> 00:29:21,866
+what has their load
+balancer probably done?
+
+612
+00:29:21,866 --> 00:29:22,741
+AUDIENCE: [INAUDIBLE]
+
+613
+00:29:22,741 --> 00:29:28,210
+
+614
+00:29:28,210 --> 00:29:31,079
+>> DAVID MALAN: Yeah, so the
+load balancer is presumably
+
+615
+00:29:31,079 --> 00:29:33,870
+making a decision based on one of
+these decision making processes--
+
+616
+00:29:33,870 --> 00:29:35,210
+doesn't really matter which.
+
+617
+00:29:35,210 --> 00:29:38,650
+But much like I've drawn the
+numbers on the board here,
+
+618
+00:29:38,650 --> 00:29:40,650
+the servers aren't just
+called 1, 2, and 3.
+
+619
+00:29:40,650 --> 00:29:43,870
+They're probably called
+www1, www2, www3.
+
+620
+00:29:43,870 --> 00:29:47,200
+And it turns out that inside of
+an HTTP request is this feature.
+
+621
+00:29:47,200 --> 00:29:48,950
+And I'm going to
+simulate this as follows.
+
+622
+00:29:48,950 --> 00:29:53,230
+>> I'm going to open up that same
+developer network tab as before just
+
+623
+00:29:53,230 --> 00:29:55,560
+so we can see what's going
+on underneath the hood.
+
+624
+00:29:55,560 --> 00:29:57,130
+I'm going to clear the screen.
+
+625
+00:29:57,130 --> 00:30:03,420
+And I'm going to go to, let's
+say, http://harvard.edu.
+
+626
+00:30:03,420 --> 00:30:06,560
+Now for whatever
+business reasons, Harvard
+
+627
+00:30:06,560 --> 00:30:08,930
+has decided, like many,
+many other websites,
+
+628
+00:30:08,930 --> 00:30:12,712
+to standardize its
+website on www.harvard.edu
+
+629
+00:30:12,712 --> 00:30:14,420
+for both technical
+and marketing reasons.
+
+630
+00:30:14,420 --> 00:30:16,326
+It's just kind of in
+vogue to have the www.
+
+631
+00:30:16,326 --> 00:30:20,500
+>> So the server at Harvard has
+to somehow redirect the user,
+
+632
+00:30:20,500 --> 00:30:23,830
+as I keep saying, from
+one URL to the other.
+
+633
+00:30:23,830 --> 00:30:24,670
+How does that work?
+
+634
+00:30:24,670 --> 00:30:26,740
+Well, let me go ahead and hit Enter.
+
+635
+00:30:26,740 --> 00:30:30,830
+And notice the URL indeed quickly
+changed to www.harvard.edu.
+
+636
+00:30:30,830 --> 00:30:35,560
+Let me scroll back in this
+history and click on this debug
+
+637
+00:30:35,560 --> 00:30:37,650
+diagnostic information, if you will.
+
+638
+00:30:37,650 --> 00:30:39,170
+Let me look at my request.
+
+639
+00:30:39,170 --> 00:30:41,020
+>> So here's the request I made.
+
+640
+00:30:41,020 --> 00:30:44,870
+And notice it's consistent with the kind
+of request I made of Facebook before.
+
+641
+00:30:44,870 --> 00:30:48,010
+But notice the response.
+
+642
+00:30:48,010 --> 00:30:50,430
+What's different in
+the response this time?
+
+643
+00:30:50,430 --> 00:30:51,890
+>> AUDIENCE: [INAUDIBLE]
+
+644
+00:30:51,890 --> 00:30:54,290
+>> DAVID MALAN: Yeah, so it's not a 200 OK.
+
+645
+00:30:54,290 --> 00:30:56,130
+It's not a 404 Not Found.
+
+646
+00:30:56,130 --> 00:31:00,150
+It's a 301 Moved Permanently, which
+is kind of a funny way of saying,
+
+647
+00:31:00,150 --> 00:31:05,270
+Harvard has upped and moved
+elsewhere to www.harvard.edu.
+
+648
+00:31:05,270 --> 00:31:08,220
+The 301 signifies that
+this is a redirect.
+
+649
+00:31:08,220 --> 00:31:12,812
+And to where should the user
+apparently be redirected?
+
+650
+00:31:12,812 --> 00:31:15,520
+There's an additional tidbit of
+information inside that envelope.
+
+651
+00:31:15,520 --> 00:31:19,650
+And each of these lines will now
+start calling an HTTP header.
+
+652
+00:31:19,650 --> 00:31:23,620
+Header is just a key value
+pair-- something colon something.
+
+653
+00:31:23,620 --> 00:31:24,850
+It's a piece of information.
+
+654
+00:31:24,850 --> 00:31:27,131
+Where should the new
+location apparently be?
+
+655
+00:31:27,131 --> 00:31:31,120
+
+656
+00:31:31,120 --> 00:31:33,692
+Notice the last line
+among all those headers.
+
+657
+00:31:33,692 --> 00:31:34,940
+>> AUDIENCE: [INAUDIBLE]
+
+658
+00:31:34,940 --> 00:31:37,148
+>> DAVID MALAN: Yeah, so there's
+additional information.
+
+659
+00:31:37,148 --> 00:31:40,120
+The first line that I've highlighted
+says 301 Moved Permanently.
+
+660
+00:31:40,120 --> 00:31:42,820
+Well, where has it moved?
+
+661
+00:31:42,820 --> 00:31:45,340
+The last line-- and they don't
+have to be in this order.
+
+662
+00:31:45,340 --> 00:31:47,020
+It can be random.
+
+663
+00:31:47,020 --> 00:31:52,120
+Location colon means, hey
+browser, go to this URL instead.
+
+664
+00:31:52,120 --> 00:31:55,180
+>> So browsers understand HTTP redirects.
+
+665
+00:31:55,180 --> 00:31:57,540
+And this is a very, very
+common way of bouncing
+
+666
+00:31:57,540 --> 00:31:59,680
+the user from one place to another.
+
+667
+00:31:59,680 --> 00:32:02,660
+For instance, if you've ever tried
+to visit a website that you're not
+
+668
+00:32:02,660 --> 00:32:06,360
+logged into, you might suddenly find
+yourself at a new URL altogether being
+
+669
+00:32:06,360 --> 00:32:07,530
+prompted to log in.
+
+670
+00:32:07,530 --> 00:32:08,400
+>> How does that work?
+
+671
+00:32:08,400 --> 00:32:10,920
+The server is probably sending a 301.
+
+672
+00:32:10,920 --> 00:32:14,510
+There's also other numbers, like
+302, somewhat different in meaning,
+
+673
+00:32:14,510 --> 00:32:16,490
+that send you to another URL.
+
+674
+00:32:16,490 --> 00:32:18,770
+And then the server,
+once you've logged in,
+
+675
+00:32:18,770 --> 00:32:22,000
+will send you back to where
+you actually intended.
+
+676
+00:32:22,000 --> 00:32:27,700
+>> So what, then, are poorly
+engineered websites doing?
+
+677
+00:32:27,700 --> 00:32:31,340
+When you visit
+www.acme.com, and they just
+
+678
+00:32:31,340 --> 00:32:35,490
+happen to have named their servers
+www1, www2, www3, and so forth,
+
+679
+00:32:35,490 --> 00:32:39,100
+they are very simply--
+which is fair, but very
+
+680
+00:32:39,100 --> 00:32:46,080
+sort of foolishly-- redirecting you to
+an actually differently named server.
+
+681
+00:32:46,080 --> 00:32:48,650
+And it works perfectly fine.
+
+682
+00:32:48,650 --> 00:32:49,930
+It's nice and easy.
+
+683
+00:32:49,930 --> 00:32:52,200
+>> We've seen how it would be
+done underneath the hood
+
+684
+00:32:52,200 --> 00:32:53,490
+in the virtual envelope.
+
+685
+00:32:53,490 --> 00:32:56,450
+But why is this arguably a
+bad engineering decision?
+
+686
+00:32:56,450 --> 00:33:00,345
+And why am I sort of condescending
+toward this particular engineering
+
+687
+00:33:00,345 --> 00:33:00,845
+approach?
+
+688
+00:33:00,845 --> 00:33:06,420
+
+689
+00:33:06,420 --> 00:33:07,850
+Argue why this is bad.
+
+690
+00:33:07,850 --> 00:33:09,375
+Ben?
+
+691
+00:33:09,375 --> 00:33:10,250
+AUDIENCE: [INAUDIBLE]
+
+692
+00:33:10,250 --> 00:33:12,864
+
+693
+00:33:12,864 --> 00:33:16,030
+DAVID MALAN: Each server would have to
+have a duplicate copy of the website.
+
+694
+00:33:16,030 --> 00:33:16,738
+I'm OK with that.
+
+695
+00:33:16,738 --> 00:33:19,490
+And in fact, that's what I'm
+supposing for this whole story,
+
+696
+00:33:19,490 --> 00:33:22,104
+since if we wanted-- well
+actually, except for Dan's earlier
+
+697
+00:33:22,104 --> 00:33:25,270
+suggestion, where if you have different
+servers doing different things, then
+
+698
+00:33:25,270 --> 00:33:27,740
+maybe they could actually be
+functionally doing different things.
+
+699
+00:33:27,740 --> 00:33:30,698
+>> But even then, at some point, your
+database is going to get overloaded.
+
+700
+00:33:30,698 --> 00:33:33,030
+Your static assets server
+is going to get overloaded.
+
+701
+00:33:33,030 --> 00:33:34,850
+So at some point, we're
+back at this story, where we
+
+702
+00:33:34,850 --> 00:33:36,475
+need multiple copies of the same thing.
+
+703
+00:33:36,475 --> 00:33:37,395
+So I'm OK with that.
+
+704
+00:33:37,395 --> 00:33:38,270
+AUDIENCE: [INAUDIBLE]
+
+705
+00:33:38,270 --> 00:33:42,340
+
+706
+00:33:42,340 --> 00:33:45,350
+>> DAVID MALAN: OK, so some pages
+might be disproportionately popular.
+
+707
+00:33:45,350 --> 00:33:50,460
+And so fixating on one address
+isn't necessarily the best thing.
+
+708
+00:33:50,460 --> 00:33:51,110
+[INAUDIBLE]?
+
+709
+00:33:51,110 --> 00:33:51,985
+>> AUDIENCE: [INAUDIBLE]
+
+710
+00:33:51,985 --> 00:33:54,770
+
+711
+00:33:54,770 --> 00:33:57,623
+>> DAVID MALAN: What do you mean by that?
+
+712
+00:33:57,623 --> 00:33:58,498
+AUDIENCE: [INAUDIBLE]
+
+713
+00:33:58,498 --> 00:34:03,820
+
+714
+00:34:03,820 --> 00:34:05,072
+>> DAVID MALAN: Yeah, exactly.
+
+715
+00:34:05,072 --> 00:34:07,280
+So you don't want to
+necessarily have-- you certainly
+
+716
+00:34:07,280 --> 00:34:11,370
+don't want to have your users
+manually typing in www1 or www2.
+
+717
+00:34:11,370 --> 00:34:14,550
+From a branding perspective, it
+just looks a little ridiculous.
+
+718
+00:34:14,550 --> 00:34:17,340
+If you just want sort of a
+clean, elegant experience,
+
+719
+00:34:17,340 --> 00:34:20,364
+having these sort of randomly
+numbered URLs really isn't good.
+
+720
+00:34:20,364 --> 00:34:22,780
+Because then users are surely
+going to copy and paste them
+
+721
+00:34:22,780 --> 00:34:24,449
+into emails or instant messages.
+
+722
+00:34:24,449 --> 00:34:25,659
+>> Now they're propagating.
+
+723
+00:34:25,659 --> 00:34:28,600
+Now you're sort of confusing your
+less technical audience, who thinks
+
+724
+00:34:28,600 --> 00:34:32,239
+your web address is www2.something.com.
+
+725
+00:34:32,239 --> 00:34:35,434
+There's no compelling semantics to that.
+
+726
+00:34:35,434 --> 00:34:38,100
+It just happens to be an underlying
+technical detail that you've
+
+727
+00:34:38,100 --> 00:34:40,190
+numbered your servers in this way.
+
+728
+00:34:40,190 --> 00:34:45,760
+>> And worse yet, what if, for instance,
+maybe around Christmas time when
+
+729
+00:34:45,760 --> 00:34:50,090
+business is really booming,
+you've got www1 through www99,
+
+730
+00:34:50,090 --> 00:34:53,530
+but in January and February and
+onward, you turn off half of those
+
+731
+00:34:53,530 --> 00:34:56,440
+so you only have www1 through www50?
+
+732
+00:34:56,440 --> 00:35:01,963
+What's the implication now for that
+very reasonable business decision?
+
+733
+00:35:01,963 --> 00:35:02,838
+AUDIENCE: [INAUDIBLE]
+
+734
+00:35:02,838 --> 00:35:05,628
+
+735
+00:35:05,628 --> 00:35:07,752
+DAVID MALAN: You need to
+manage all of those still.
+
+736
+00:35:07,752 --> 00:35:10,515
+AUDIENCE: [INAUDIBLE]
+
+737
+00:35:10,515 --> 00:35:11,390
+DAVID MALAN: Exactly.
+
+738
+00:35:11,390 --> 00:35:12,681
+That's kind of the catch there.
+
+739
+00:35:12,681 --> 00:35:16,800
+If your customers are in the habit of
+bookmarking things, emailing them, just
+
+740
+00:35:16,800 --> 00:35:19,351
+saving the URL somewhere, or
+if it's just in their auto
+
+741
+00:35:19,351 --> 00:35:22,350
+complete in their browser so they're
+not really intentionally typing it,
+
+742
+00:35:22,350 --> 00:35:25,560
+it's just happening, they might,
+for 11 months out of the year
+
+743
+00:35:25,560 --> 00:35:27,190
+effectively, reach a dead end.
+
+744
+00:35:27,190 --> 00:35:30,100
+And only the most astute of
+users is going to realize,
+
+745
+00:35:30,100 --> 00:35:32,040
+maybe I should manually
+remove this number.
+
+746
+00:35:32,040 --> 00:35:35,610
+I mean, it's just not going to happen
+with many users, so bad for business,
+
+747
+00:35:35,610 --> 00:35:37,750
+bad implementation engineering wise.
+
+748
+00:35:37,750 --> 00:35:40,230
+>> So thankfully, it's not even necessary.
+
+749
+00:35:40,230 --> 00:35:43,120
+It turns out that what
+load balancers can do
+
+750
+00:35:43,120 --> 00:35:48,130
+is instead of saying, when A
+makes a request-- hey A, go to 1.
+
+751
+00:35:48,130 --> 00:35:50,280
+In other words, instead
+of sending that redirect
+
+752
+00:35:50,280 --> 00:35:53,540
+such that step one in this
+process is the go here,
+
+753
+00:35:53,540 --> 00:35:55,280
+he is then told to go elsewhere.
+
+754
+00:35:55,280 --> 00:35:57,530
+And so step three is, he goes elsewhere.
+
+755
+00:35:57,530 --> 00:36:04,600
+>> You can instead continue to route, to
+keep using that term, all of A's data
+
+756
+00:36:04,600 --> 00:36:10,590
+through the load balancer so that he
+never contacts 1, 2, or 3 directly.
+
+757
+00:36:10,590 --> 00:36:15,150
+All of the traffic does get "routed"
+by the load balancer itself.
+
+758
+00:36:15,150 --> 00:36:17,524
+And so now we're sort of
+deliberately blurring the lines
+
+759
+00:36:17,524 --> 00:36:18,690
+among these various devices.
+
+760
+00:36:18,690 --> 00:36:20,930
+A load balancer can route data.
+
+761
+00:36:20,930 --> 00:36:22,435
+It's just a function that it has.
+
+762
+00:36:22,435 --> 00:36:25,420
+>> So a load balancer, too, it's
+a piece of software, really.
+
+763
+00:36:25,420 --> 00:36:27,130
+And a router is a piece of software.
+
+764
+00:36:27,130 --> 00:36:29,660
+And you can absolutely have
+two pieces of software inside
+
+765
+00:36:29,660 --> 00:36:34,000
+of one physical computer so a load
+balancer can do these multiple things.
+
+766
+00:36:34,000 --> 00:36:36,130
+>> So there's one other way
+to do this, which actually
+
+767
+00:36:36,130 --> 00:36:39,670
+goes back to sort of first principles
+of DNS, which we talked about
+
+768
+00:36:39,670 --> 00:36:40,230
+before break.
+
+769
+00:36:40,230 --> 00:36:41,634
+DNS was Domain Name System.
+
+770
+00:36:41,634 --> 00:36:43,550
+Remember that you can
+ask a DNS server, what's
+
+771
+00:36:43,550 --> 00:36:46,460
+the IP address of
+google.com, facebook.com?
+
+772
+00:36:46,460 --> 00:36:48,250
+>> And we can actually do this.
+
+773
+00:36:48,250 --> 00:36:51,940
+A tool we did not use earlier is
+one that's just as accessible,
+
+774
+00:36:51,940 --> 00:36:55,510
+called nslookup, for name server lookup.
+
+775
+00:36:55,510 --> 00:36:57,410
+And I'm just going to type facebook.com.
+
+776
+00:36:57,410 --> 00:37:02,500
+And I see that Facebook's IP
+address is apparently this.
+
+777
+00:37:02,500 --> 00:37:05,520
+Let me go ahead and copy
+that, go to a browser,
+
+778
+00:37:05,520 --> 00:37:11,690
+and go to http:// and that
+IP address and hit Enter.
+
+779
+00:37:11,690 --> 00:37:14,140
+And sure enough, it seems to work.
+
+780
+00:37:14,140 --> 00:37:18,610
+>> Now working backwards, what was
+inside of the virtual envelope
+
+781
+00:37:18,610 --> 00:37:25,454
+that Facebook responded with when
+I visited that IP address directly?
+
+782
+00:37:25,454 --> 00:37:26,745
+Because notice, where am I now?
+
+783
+00:37:26,745 --> 00:37:29,250
+
+784
+00:37:29,250 --> 00:37:32,484
+Where am I now, the address?
+
+785
+00:37:32,484 --> 00:37:33,450
+>> AUDIENCE: [INAUDIBLE]
+
+786
+00:37:33,450 --> 00:37:36,116
+>> DAVID MALAN: At the secure version,
+and at the www.facebook.com.
+
+787
+00:37:36,116 --> 00:37:38,520
+So it's not even just
+the secure IP address.
+
+788
+00:37:38,520 --> 00:37:42,650
+Facebook has taken it upon itself
+to say, this is ridiculous.
+
+789
+00:37:42,650 --> 00:37:45,710
+We're not going to keep you at this
+ugly looking URL that's numeric.
+
+790
+00:37:45,710 --> 00:37:50,120
+We're going to send you an HTTP
+redirect by way of that same header
+
+791
+00:37:50,120 --> 00:37:53,010
+that we saw before--
+location colon something.
+
+792
+00:37:53,010 --> 00:37:56,340
+>> And so this simply means that underneath
+the hood is still this IP address.
+
+793
+00:37:56,340 --> 00:37:59,010
+Every computer on the internet
+has an IP address, it would seem.
+
+794
+00:37:59,010 --> 00:38:01,480
+But you don't necessarily have
+to expose that to the user.
+
+795
+00:38:01,480 --> 00:38:07,190
+And much like back in the day, there
+was 1-800-COLLECT, 1-800-C-O-L-L-E-C-T,
+
+796
+00:38:07,190 --> 00:38:11,700
+in the US, was a way of making collect
+calls via a very easily memorable phone
+
+797
+00:38:11,700 --> 00:38:17,140
+number, or 1-800-MATTRESS to buy a bed,
+and similar mnemonics that you even see
+
+798
+00:38:17,140 --> 00:38:20,460
+on the telephone kind of sort of
+still, that letters map to numbers.
+
+799
+00:38:20,460 --> 00:38:21,470
+>> Now, why is that?
+
+800
+00:38:21,470 --> 00:38:26,080
+Well, it's a lot easier to memorize
+1-800-MATTRESS or 1-800-COLLECT instead
+
+801
+00:38:26,080 --> 00:38:29,100
+of 1-800 something something something
+something something something
+
+802
+00:38:29,100 --> 00:38:31,030
+something, where each
+of those is a digit.
+
+803
+00:38:31,030 --> 00:38:34,390
+Similarly, the world learned
+quickly that we should not
+
+804
+00:38:34,390 --> 00:38:35,940
+have people memorize IP addresses.
+
+805
+00:38:35,940 --> 00:38:36,826
+That would be silly.
+
+806
+00:38:36,826 --> 00:38:38,200
+We're going to use names instead.
+
+807
+00:38:38,200 --> 00:38:40,420
+And that's why DNS was born.
+
+808
+00:38:40,420 --> 00:38:45,510
+>> All right, so with that said, in terms
+of load balancing, let's try yahoo.com.
+
+809
+00:38:45,510 --> 00:38:47,030
+Well, that's interesting.
+
+810
+00:38:47,030 --> 00:38:51,464
+Yahoo seems to be returning three IPs.
+
+811
+00:38:51,464 --> 00:38:53,940
+So infer from this,
+if you could, what is
+
+812
+00:38:53,940 --> 00:38:58,600
+another way that we could implement
+this notion of load balancing
+
+813
+00:38:58,600 --> 00:39:04,310
+maybe without even using a physical
+device, this new physical device?
+
+814
+00:39:04,310 --> 00:39:08,070
+>> In other words, can I take away the
+funding you have for the load balancer
+
+815
+00:39:08,070 --> 00:39:10,990
+and tell you to use some existing
+piece of hardware to implement
+
+816
+00:39:10,990 --> 00:39:12,680
+this notion of load balancing?
+
+817
+00:39:12,680 --> 00:39:18,870
+
+818
+00:39:18,870 --> 00:39:22,510
+And the spoiler is,
+yes, but what, or how?
+
+819
+00:39:22,510 --> 00:39:27,605
+What is Yahoo perhaps doing here?
+
+820
+00:39:27,605 --> 00:39:29,200
+Kareem?
+
+821
+00:39:29,200 --> 00:39:30,635
+OK, Chris?
+
+822
+00:39:30,635 --> 00:39:31,510
+AUDIENCE: [INAUDIBLE]
+
+823
+00:39:31,510 --> 00:39:35,119
+
+824
+00:39:35,119 --> 00:39:36,910
+DAVID MALAN: Yeah, all
+three of those work.
+
+825
+00:39:36,910 --> 00:39:39,890
+So randomness, round robin,
+location-- you can just
+
+826
+00:39:39,890 --> 00:39:44,160
+leverage an existing piece of the puzzle
+that we talked about earlier of the DNS
+
+827
+00:39:44,160 --> 00:39:49,580
+system and simply say, when the first
+user of the day requests yahoo.com,
+
+828
+00:39:49,580 --> 00:39:52,970
+give them the first IP address,
+like the one ending in 45 up there.
+
+829
+00:39:52,970 --> 00:39:55,762
+And the next time a user requests
+the IP address of yahoo.com
+
+830
+00:39:55,762 --> 00:39:57,970
+from somewhere in the world,
+give them the second IP,
+
+831
+00:39:57,970 --> 00:39:59,920
+then the third IP, then the
+first IP, then the second.
+
+832
+00:39:59,920 --> 00:40:01,850
+Or be smart about it
+and do it graphically.
+
+833
+00:40:01,850 --> 00:40:05,200
+Or do it randomly and not just do
+it round robin in this fashion.
+
+834
+00:40:05,200 --> 00:40:07,580
+>> And in this case, then
+we don't even need
+
+835
+00:40:07,580 --> 00:40:10,190
+to introduce this black
+box into our picture.
+
+836
+00:40:10,190 --> 00:40:11,690
+We don't need a new device.
+
+837
+00:40:11,690 --> 00:40:16,930
+We're simply telling computers
+to go to the servers directly,
+
+838
+00:40:16,930 --> 00:40:18,680
+effectively, but not
+by way of their name.
+
+839
+00:40:18,680 --> 00:40:20,054
+They never need to know the name.
+
+840
+00:40:20,054 --> 00:40:25,690
+They're just being told that yahoo.com
+maps to any one of these IP addresses.
+
+841
+00:40:25,690 --> 00:40:28,180
+>> So it sends the exact same request.
+
+842
+00:40:28,180 --> 00:40:30,100
+But on the outside of
+the envelope, it simply
+
+843
+00:40:30,100 --> 00:40:32,740
+puts the IP that it was informed of.
+
+844
+00:40:32,740 --> 00:40:35,590
+And in this way, too, could
+we load balance the requests
+
+845
+00:40:35,590 --> 00:40:39,330
+by just sending the envelope to a
+different one of Yahoo's own servers?
+
+846
+00:40:39,330 --> 00:40:42,390
+>> And if we keep digging, we'll see
+probably other companies with more.
+
+847
+00:40:42,390 --> 00:40:44,380
+CNN has two publicly exposed.
+
+848
+00:40:44,380 --> 00:40:49,610
+Though actually if we do this again
+and again-- cnn.com-- you can see
+
+849
+00:40:49,610 --> 00:40:51,730
+they're changing order, actually.
+
+850
+00:40:51,730 --> 00:40:56,680
+So what mechanism is
+CNN using, apparently?
+
+851
+00:40:56,680 --> 00:40:57,440
+>> AUDIENCE: Random.
+
+852
+00:40:57,440 --> 00:40:59,440
+DAVID MALAN: Well, it
+could be random, though it
+
+853
+00:40:59,440 --> 00:41:01,110
+seems to be cycling back and forth.
+
+854
+00:41:01,110 --> 00:41:04,380
+So it's probably round robin where
+they're just switching the order so
+
+855
+00:41:04,380 --> 00:41:05,880
+that I'll presumably take the first.
+
+856
+00:41:05,880 --> 00:41:08,860
+My computer will take
+the first each time.
+
+857
+00:41:08,860 --> 00:41:10,490
+So that's load balancing.
+
+858
+00:41:10,490 --> 00:41:18,450
+And that allows us, ultimately,
+to map data, or map requests,
+
+859
+00:41:18,450 --> 00:41:21,240
+across multiple servers.
+
+860
+00:41:21,240 --> 00:41:24,226
+So what kinds of
+problems now still exist?
+
+861
+00:41:24,226 --> 00:41:26,350
+It feels like we just really
+solved a good problem.
+
+862
+00:41:26,350 --> 00:41:28,740
+We got users to different servers.
+
+863
+00:41:28,740 --> 00:41:31,420
+But-- oh, and Chris, did
+you have a question before?
+
+864
+00:41:31,420 --> 00:41:34,378
+>> AUDIENCE: [INAUDIBLE]
+
+865
+00:41:34,378 --> 00:41:43,670
+
+866
+00:41:43,670 --> 00:41:45,120
+>> DAVID MALAN: Totally depends.
+
+867
+00:41:45,120 --> 00:41:47,042
+So what is happening here?
+
+868
+00:41:47,042 --> 00:41:48,250
+And we can actually see this.
+
+869
+00:41:48,250 --> 00:41:51,649
+So let's try Yahoo's.
+
+870
+00:41:51,649 --> 00:41:52,940
+Actually, let's go to Facebook.
+
+871
+00:41:52,940 --> 00:41:54,520
+Because we know that one works.
+
+872
+00:41:54,520 --> 00:41:56,545
+So I'm going to copy
+that IP address again.
+
+873
+00:41:56,545 --> 00:41:58,820
+I'm going to close all these tabs.
+
+874
+00:41:58,820 --> 00:42:03,800
+I'm going to go open that
+special network tab down here.
+
+875
+00:42:03,800 --> 00:42:07,800
+And I'm going to visit only http://.
+
+876
+00:42:07,800 --> 00:42:10,694
+And now I'm going to hit Enter.
+
+877
+00:42:10,694 --> 00:42:11,860
+And let's see what happened.
+
+878
+00:42:11,860 --> 00:42:20,662
+>> If I look at that request, notice
+that my-- Facebook is a bad example.
+
+879
+00:42:20,662 --> 00:42:22,370
+Because they have a
+super fancy technique
+
+880
+00:42:22,370 --> 00:42:25,960
+that hides that detail from us.
+
+881
+00:42:25,960 --> 00:42:30,690
+Let me use Yahoo
+instead-- http:// that IP.
+
+882
+00:42:30,690 --> 00:42:36,030
+Let's open our network
+tab, preserve log.
+
+883
+00:42:36,030 --> 00:42:37,945
+And here we go, Enter.
+
+884
+00:42:37,945 --> 00:42:40,669
+
+885
+00:42:40,669 --> 00:42:41,210
+That's funny.
+
+886
+00:42:41,210 --> 00:42:44,480
+OK, so here is the famed 404 message.
+
+887
+00:42:44,480 --> 00:42:48,500
+What's funny here is that they
+probably never will be back.
+
+888
+00:42:48,500 --> 00:42:51,430
+Because there's probably
+not something wrong per se.
+
+889
+00:42:51,430 --> 00:42:54,050
+They have just deliberately
+decided not to support
+
+890
+00:42:54,050 --> 00:42:56,250
+the numeric form of their address.
+
+891
+00:42:56,250 --> 00:43:00,270
+>> So what we're actually seeing in the
+Network tab, if I pull this up here,
+
+892
+00:43:00,270 --> 00:43:06,140
+is, as I say, the famed 404, where
+if I look at the response headers,
+
+893
+00:43:06,140 --> 00:43:09,070
+this is what I got here-- 404 Not Found.
+
+894
+00:43:09,070 --> 00:43:11,360
+So let's try one other.
+
+895
+00:43:11,360 --> 00:43:13,180
+Let's see if CNN cooperates with us.
+
+896
+00:43:13,180 --> 00:43:19,440
+I'll grab one of CNN's IP addresses,
+clear this, http, dah, dah, dah, dah.
+
+897
+00:43:19,440 --> 00:43:21,620
+So in answer to Chris's
+question, that one worked.
+
+898
+00:43:21,620 --> 00:43:24,140
+
+899
+00:43:24,140 --> 00:43:26,255
+>> And let's go to response headers.
+
+900
+00:43:26,255 --> 00:43:30,810
+
+901
+00:43:30,810 --> 00:43:33,640
+Actually no, all right, I am
+struggling to find a working example.
+
+902
+00:43:33,640 --> 00:43:38,270
+So CNN has decided, we'll just leave you
+at whatever address you actually visit,
+
+903
+00:43:38,270 --> 00:43:40,359
+branding issues aside.
+
+904
+00:43:40,359 --> 00:43:43,275
+But what wouldn't be happening, if
+we could see it in Facebook's case,
+
+905
+00:43:43,275 --> 00:43:46,700
+is we would get a 301 Moved
+Permanently, most likely,
+
+906
+00:43:46,700 --> 00:43:54,420
+inside of which is
+location:https://www.facebook.com.
+
+907
+00:43:54,420 --> 00:44:01,210
+And odds are www.facebook.com is an
+alias for the exact same server we just
+
+908
+00:44:01,210 --> 00:44:01,710
+went to.
+
+909
+00:44:01,710 --> 00:44:03,500
+>> So it's a little counterproductive.
+
+910
+00:44:03,500 --> 00:44:05,170
+We're literally visiting the server.
+
+911
+00:44:05,170 --> 00:44:07,040
+The server is then telling us, go away.
+
+912
+00:44:07,040 --> 00:44:08,320
+Go to this other address.
+
+913
+00:44:08,320 --> 00:44:10,870
+But we just so happen to be
+going back to that same server.
+
+914
+00:44:10,870 --> 00:44:14,550
+But presumably we now stay on that
+server without this back and forth.
+
+915
+00:44:14,550 --> 00:44:18,600
+Because now we're using the named
+version of the site, not the numeric.
+
+916
+00:44:18,600 --> 00:44:20,060
+Good question.
+
+917
+00:44:20,060 --> 00:44:23,690
+>> OK, so if we now assume-- we
+have solved load balancing.
+
+918
+00:44:23,690 --> 00:44:25,894
+We now have a mechanism,
+whether it's via DNS,
+
+919
+00:44:25,894 --> 00:44:29,060
+whether it's via this black box, whether
+it's using any of these techniques.
+
+920
+00:44:29,060 --> 00:44:33,810
+We can take a user's request in and
+figure out to which server, 1, 2, or 3,
+
+921
+00:44:33,810 --> 00:44:35,420
+to send him or her.
+
+922
+00:44:35,420 --> 00:44:39,180
+>> What starts to break about our website?
+
+923
+00:44:39,180 --> 00:44:41,160
+In other words, we have
+built a business that
+
+924
+00:44:41,160 --> 00:44:43,480
+was previously on one single server.
+
+925
+00:44:43,480 --> 00:44:46,870
+Now that business is running
+across multiple servers.
+
+926
+00:44:46,870 --> 00:44:51,770
+What kinds of assumptions,
+what kinds of design decisions,
+
+927
+00:44:51,770 --> 00:44:54,870
+might now be breaking?
+
+928
+00:44:54,870 --> 00:44:55,745
+>> This is less obvious.
+
+929
+00:44:55,745 --> 00:44:58,620
+But let's see if we can't put our
+finger on some of the problem we've
+
+930
+00:44:58,620 --> 00:44:59,780
+created for ourselves.
+
+931
+00:44:59,780 --> 00:45:02,750
+Again, it's kind of like holding
+down the leak in the hose.
+
+932
+00:45:02,750 --> 00:45:05,094
+And now some new issue
+has popped up over here.
+
+933
+00:45:05,094 --> 00:45:07,880
+
+934
+00:45:07,880 --> 00:45:11,380
+>> AUDIENCE: [INAUDIBLE]
+
+935
+00:45:11,380 --> 00:45:16,574
+
+936
+00:45:16,574 --> 00:45:19,240
+DAVID MALAN: OK, so we have to
+keep growing our hard disk space.
+
+937
+00:45:19,240 --> 00:45:20,450
+I'm OK with that right now.
+
+938
+00:45:20,450 --> 00:45:23,212
+Because I think I can
+horizontally scale.
+
+939
+00:45:23,212 --> 00:45:26,420
+Like if I'm running low, I'll just get
+a fourth server, maybe a fifth server,
+
+940
+00:45:26,420 --> 00:45:30,820
+and then increase our capacity
+by another 30% or 50% or whatnot.
+
+941
+00:45:30,820 --> 00:45:32,759
+So I'm OK with that, at least for now.
+
+942
+00:45:32,759 --> 00:45:33,634
+AUDIENCE: [INAUDIBLE]
+
+943
+00:45:33,634 --> 00:45:37,314
+
+944
+00:45:37,314 --> 00:45:38,980
+DAVID MALAN: OK, so that's a good point.
+
+945
+00:45:38,980 --> 00:45:42,340
+So suppose the servers
+are not identical.
+
+946
+00:45:42,340 --> 00:45:45,260
+And customer service
+or the email equivalent
+
+947
+00:45:45,260 --> 00:45:48,690
+is getting some message from a user
+saying, this isn't working right.
+
+948
+00:45:48,690 --> 00:45:52,070
+It's very possible, sometimes,
+that maybe one or more servers
+
+949
+00:45:52,070 --> 00:45:55,000
+is acting a bit awry, but not
+the others, which can certainly
+
+950
+00:45:55,000 --> 00:45:57,096
+make it harder to chase down the issue.
+
+951
+00:45:57,096 --> 00:45:58,720
+You might have to look multiple places.
+
+952
+00:45:58,720 --> 00:46:00,960
+>> That is manifestation
+of another kind of bug,
+
+953
+00:46:00,960 --> 00:46:03,950
+which is that you probably should
+have designed your infrastructure so
+
+954
+00:46:03,950 --> 00:46:06,200
+that everything is truly identical.
+
+955
+00:46:06,200 --> 00:46:10,390
+But it does reveal a new problem
+that we didn't have before.
+
+956
+00:46:10,390 --> 00:46:11,715
+What else?
+
+957
+00:46:11,715 --> 00:46:12,590
+AUDIENCE: [INAUDIBLE]
+
+958
+00:46:12,590 --> 00:46:16,390
+
+959
+00:46:16,390 --> 00:46:19,500
+>> DAVID MALAN: Yeah,
+there's more complexity.
+
+960
+00:46:19,500 --> 00:46:20,792
+There's physically more wires.
+
+961
+00:46:20,792 --> 00:46:21,750
+There's another device.
+
+962
+00:46:21,750 --> 00:46:26,310
+In fact, I've introduced a fundamental
+concept and a fundamental problem here
+
+963
+00:46:26,310 --> 00:46:28,300
+known as a single point
+of failure, which,
+
+964
+00:46:28,300 --> 00:46:30,110
+even if you've never heard
+the phrase, you can probably
+
+965
+00:46:30,110 --> 00:46:31,780
+now work backwards and figure it out.
+
+966
+00:46:31,780 --> 00:46:35,560
+What does it mean that I have a single
+point of failure in my architecture?
+
+967
+00:46:35,560 --> 00:46:39,694
+And by architecture, I just
+mean the topology of it.
+
+968
+00:46:39,694 --> 00:46:40,610
+>> AUDIENCE: [INAUDIBLE]
+
+969
+00:46:40,610 --> 00:46:42,901
+>> DAVID MALAN: Yeah, what if
+the load balancer goes down?
+
+970
+00:46:42,901 --> 00:46:46,290
+I've inserted this middle man whose
+purpose in life is to solve a problem.
+
+971
+00:46:46,290 --> 00:46:47,740
+But I've introduced a new problem.
+
+972
+00:46:47,740 --> 00:46:49,350
+A new leak has sprung in the hose.
+
+973
+00:46:49,350 --> 00:46:53,500
+Because now if the load balancer
+dies or breaks or misfunctions,
+
+974
+00:46:53,500 --> 00:46:56,350
+now I lose access to
+all three of my servers.
+
+975
+00:46:56,350 --> 00:46:58,880
+And before, I didn't
+have this middleman.
+
+976
+00:46:58,880 --> 00:47:03,020
+And so this is a new problem, arguably.
+
+977
+00:47:03,020 --> 00:47:05,245
+We'll come back to
+how we might fix that.
+
+978
+00:47:05,245 --> 00:47:06,734
+>> AUDIENCE: [INAUDIBLE]
+
+979
+00:47:06,734 --> 00:47:08,400
+DAVID MALAN: That would be one approach.
+
+980
+00:47:08,400 --> 00:47:13,926
+Yeah, and so this is going to be quite
+the rat's hole we start to go down.
+
+981
+00:47:13,926 --> 00:47:15,800
+But let's come back to
+that in just a moment.
+
+982
+00:47:15,800 --> 00:47:17,299
+What other problems have we created?
+
+983
+00:47:17,299 --> 00:47:25,540
+
+984
+00:47:25,540 --> 00:47:27,470
+>> So Dan mentioned database before.
+
+985
+00:47:27,470 --> 00:47:29,500
+And even if you're not
+too familiar technically,
+
+986
+00:47:29,500 --> 00:47:33,220
+a database is just a server where
+changing data is typically stored,
+
+987
+00:47:33,220 --> 00:47:36,430
+maybe an order someone has placed,
+your user profile, your name,
+
+988
+00:47:36,430 --> 00:47:40,810
+your email address, things that might
+be inputted or changed over time.
+
+989
+00:47:40,810 --> 00:47:44,599
+>> Previously, my database was on
+the same server as my web server.
+
+990
+00:47:44,599 --> 00:47:46,390
+Because I just had one
+web hosting account.
+
+991
+00:47:46,390 --> 00:47:48,480
+Everything was all in the same place.
+
+992
+00:47:48,480 --> 00:47:54,200
+Where should I put my database
+now, on server 1, 2, or 3?
+
+993
+00:47:54,200 --> 00:47:55,100
+>> AUDIENCE: 4.
+
+994
+00:47:55,100 --> 00:47:58,070
+>> DAVID MALAN: 4, OK, all
+right, so let's go there.
+
+995
+00:47:58,070 --> 00:48:01,650
+So I'm going to put my
+database-- and let's
+
+996
+00:48:01,650 --> 00:48:06,520
+start labeling these www, www, www.
+
+997
+00:48:06,520 --> 00:48:08,780
+And I'm going to say,
+this is number four.
+
+998
+00:48:08,780 --> 00:48:11,270
+And I'll say db for database.
+
+999
+00:48:11,270 --> 00:48:12,870
+OK, I like this.
+
+1000
+00:48:12,870 --> 00:48:17,021
+What line should I
+presumably be drawing here?
+
+1001
+00:48:17,021 --> 00:48:18,850
+>> AUDIENCE: [INAUDIBLE]
+
+1002
+00:48:18,850 --> 00:48:22,740
+>> DAVID MALAN: Yeah, so the code,
+as we'll discuss tomorrow,
+
+1003
+00:48:22,740 --> 00:48:24,900
+presumably is the same
+on all three servers.
+
+1004
+00:48:24,900 --> 00:48:28,374
+But it now needs to connect not to a
+database running locally but elsewhere.
+
+1005
+00:48:28,374 --> 00:48:29,040
+And that's fine.
+
+1006
+00:48:29,040 --> 00:48:31,623
+We can just give the database a
+name, as we have, or a number.
+
+1007
+00:48:31,623 --> 00:48:33,930
+And that all works fine.
+
+1008
+00:48:33,930 --> 00:48:35,820
+But what have we done?
+
+1009
+00:48:35,820 --> 00:48:40,640
+We've horizontally scaled by having
+three servers instead of one, which
+
+1010
+00:48:40,640 --> 00:48:41,140
+is good.
+
+1011
+00:48:41,140 --> 00:48:44,240
+Because now we can handle
+three times as much load.
+
+1012
+00:48:44,240 --> 00:48:47,710
+>> And better yet, if one or two
+of those servers goes down,
+
+1013
+00:48:47,710 --> 00:48:49,350
+my business can continue to operate.
+
+1014
+00:48:49,350 --> 00:48:53,960
+Because I still have one, even if I'm
+kind of limping along performance-wise.
+
+1015
+00:48:53,960 --> 00:49:01,020
+But what new problem have I
+introduced by moving the database
+
+1016
+00:49:01,020 --> 00:49:04,350
+to this separate server
+instead of on 1, 2, and 3?
+
+1017
+00:49:04,350 --> 00:49:05,412
+>> AUDIENCE: [INAUDIBLE]
+
+1018
+00:49:05,412 --> 00:49:08,120
+DAVID MALAN: Yeah, so now I have
+another single point of failure.
+
+1019
+00:49:08,120 --> 00:49:12,330
+If my database dies, or needs to
+be upgraded, or whatever, now sure,
+
+1020
+00:49:12,330 --> 00:49:13,610
+my website is online.
+
+1021
+00:49:13,610 --> 00:49:16,270
+And I can serve static,
+unchanging content.
+
+1022
+00:49:16,270 --> 00:49:21,210
+But I can't let users log in or change
+anything or order anything, worse yet.
+
+1023
+00:49:21,210 --> 00:49:24,120
+Because if 4 is offline,
+then 1, 2, and 3
+
+1024
+00:49:24,120 --> 00:49:27,710
+really can't talk to it by definition.
+
+1025
+00:49:27,710 --> 00:49:31,560
+>> OK so yeah, and so this is why
+I'm hesitating to draw this.
+
+1026
+00:49:31,560 --> 00:49:32,690
+So let's come back to that.
+
+1027
+00:49:32,690 --> 00:49:33,700
+I don't mean to keep pushing you off.
+
+1028
+00:49:33,700 --> 00:49:36,030
+But the picture is very
+quickly going to get stressful.
+
+1029
+00:49:36,030 --> 00:49:38,620
+Because you need to start
+having two of everything.
+
+1030
+00:49:38,620 --> 00:49:41,850
+In fact, if you've ever seen the
+movie Contact a few years ago
+
+1031
+00:49:41,850 --> 00:49:45,310
+with Jodie Foster-- no?
+
+1032
+00:49:45,310 --> 00:49:47,410
+>> OK, so for the two of
+us who've seen Contact,
+
+1033
+00:49:47,410 --> 00:49:50,800
+there's a relationship there where they
+essentially bought two of something
+
+1034
+00:49:50,800 --> 00:49:53,250
+rather than one, albeit
+at twice the price.
+
+1035
+00:49:53,250 --> 00:49:55,922
+So it was sort of a playful
+comment in the movie.
+
+1036
+00:49:55,922 --> 00:49:57,130
+It's kind of related to this.
+
+1037
+00:49:57,130 --> 00:49:58,290
+We could absolutely do that.
+
+1038
+00:49:58,290 --> 00:50:00,123
+And you've just cost
+us twice as much money.
+
+1039
+00:50:00,123 --> 00:50:01,300
+But we'll come back to that.
+
+1040
+00:50:01,300 --> 00:50:02,400
+>> So we've solved this.
+
+1041
+00:50:02,400 --> 00:50:03,108
+So you know what?
+
+1042
+00:50:03,108 --> 00:50:04,450
+This is like a slippery slope.
+
+1043
+00:50:04,450 --> 00:50:07,033
+I don't want to deal with having
+to have a duplicate database.
+
+1044
+00:50:07,033 --> 00:50:08,037
+It's too much money.
+
+1045
+00:50:08,037 --> 00:50:08,620
+You know what?
+
+1046
+00:50:08,620 --> 00:50:12,880
+I want to have my database
+just like in version one
+
+1047
+00:50:12,880 --> 00:50:17,450
+where each server has
+its own local database.
+
+1048
+00:50:17,450 --> 00:50:19,480
+So I'm just going to
+draw db on each of these.
+
+1049
+00:50:19,480 --> 00:50:22,240
+>> So now each web server
+is identical in so far
+
+1050
+00:50:22,240 --> 00:50:25,650
+as it has the same code, the same
+static assets, same pictures and text
+
+1051
+00:50:25,650 --> 00:50:26,720
+and so forth.
+
+1052
+00:50:26,720 --> 00:50:29,580
+And each has its own database.
+
+1053
+00:50:29,580 --> 00:50:31,450
+I fixed the single point
+of failure problem.
+
+1054
+00:50:31,450 --> 00:50:32,570
+Now I have a database.
+
+1055
+00:50:32,570 --> 00:50:36,210
+No matter which two or one of these
+things die, there's always one left.
+
+1056
+00:50:36,210 --> 00:50:41,156
+But what new problem have I created
+that Dan's solution avoided?
+
+1057
+00:50:41,156 --> 00:50:42,470
+>> AUDIENCE: [INAUDIBLE]
+
+1058
+00:50:42,470 --> 00:50:44,386
+>> DAVID MALAN: Yeah, I
+have to sync them, right?
+
+1059
+00:50:44,386 --> 00:50:47,860
+Because either I need to sync
+who's going where-- in other words,
+
+1060
+00:50:47,860 --> 00:50:50,570
+if Alice visits my
+site, and she happened
+
+1061
+00:50:50,570 --> 00:50:55,070
+to get randomly or round robined
+or whatever, to server number one,
+
+1062
+00:50:55,070 --> 00:50:58,770
+thereafter I have to always
+send her to server 1.
+
+1063
+00:50:58,770 --> 00:50:59,420
+Why?
+
+1064
+00:50:59,420 --> 00:51:01,540
+Because if I send her
+to server 2, it's going
+
+1065
+00:51:01,540 --> 00:51:03,140
+to look like she doesn't exist there.
+
+1066
+00:51:03,140 --> 00:51:04,450
+>> I'm not going to have her order history.
+
+1067
+00:51:04,450 --> 00:51:06,300
+I'm not going to have her profile there.
+
+1068
+00:51:06,300 --> 00:51:09,360
+And that just feels like
+it's inviting problems.
+
+1069
+00:51:09,360 --> 00:51:11,400
+And when Bob visits, I
+have to send him always
+
+1070
+00:51:11,400 --> 00:51:14,800
+to the same server, 2, or whichever
+one, and Charlie to a third one,
+
+1071
+00:51:14,800 --> 00:51:15,797
+and consistently.
+
+1072
+00:51:15,797 --> 00:51:17,130
+This isn't unreasonable, though.
+
+1073
+00:51:17,130 --> 00:51:19,270
+This is called
+partitioning your database.
+
+1074
+00:51:19,270 --> 00:51:21,270
+And in fact this was what
+Facebook did early on.
+
+1075
+00:51:21,270 --> 00:51:24,020
+>> If you followed the history of
+Facebook, it started here at campus
+
+1076
+00:51:24,020 --> 00:51:25,770
+as www.thefacebook.com.
+
+1077
+00:51:25,770 --> 00:51:29,260
+Then it evolved once Mark started
+spreading into other campuses
+
+1078
+00:51:29,260 --> 00:51:34,450
+to be harvard.thefacebook.com and
+mit.thefacebook.com, and probably
+
+1079
+00:51:34,450 --> 00:51:37,027
+bu.thefacebook.com, and the like.
+
+1080
+00:51:37,027 --> 00:51:38,860
+And that was because
+early on, I don't think
+
+1081
+00:51:38,860 --> 00:51:40,484
+you could have friends across campuses.
+
+1082
+00:51:40,484 --> 00:51:41,410
+But that's fine.
+
+1083
+00:51:41,410 --> 00:51:43,930
+Because anyone from Harvard
+got sent to this server.
+
+1084
+00:51:43,930 --> 00:51:45,744
+Anyone from BU got sent to this server.
+
+1085
+00:51:45,744 --> 00:51:47,910
+Anyone from MIT got sent
+to this server-- in theory.
+
+1086
+00:51:47,910 --> 00:51:50,540
+I don't quite know all the
+underlying implementation details.
+
+1087
+00:51:50,540 --> 00:51:55,610
+But he presumably partitioned people by
+their campus, where their network was.
+
+1088
+00:51:55,610 --> 00:51:58,772
+>> So that's good up until the point
+where you need two servers for Harvard,
+
+1089
+00:51:58,772 --> 00:51:59,980
+or three servers for Harvard.
+
+1090
+00:51:59,980 --> 00:52:01,800
+And then that simplicity
+kind of breaks down.
+
+1091
+00:52:01,800 --> 00:52:03,174
+But that's a reasonable approach.
+
+1092
+00:52:03,174 --> 00:52:04,950
+Let's always send Alice
+to the same place,
+
+1093
+00:52:04,950 --> 00:52:06,366
+always send Bob to the same place.
+
+1094
+00:52:06,366 --> 00:52:09,680
+But what happens if Alice's
+server goes offline?
+
+1095
+00:52:09,680 --> 00:52:12,300
+Bob and Charlie can still buy
+things and log into the site.
+
+1096
+00:52:12,300 --> 00:52:13,462
+But Alice can't.
+
+1097
+00:52:13,462 --> 00:52:15,170
+So you've lost a third
+of your user base.
+
+1098
+00:52:15,170 --> 00:52:16,980
+Maybe that's better than 100%?
+
+1099
+00:52:16,980 --> 00:52:20,580
+But maybe it'd be nice if we could
+still support 100% of our users
+
+1100
+00:52:20,580 --> 00:52:23,470
+even when a third of our
+servers goes offline.
+
+1101
+00:52:23,470 --> 00:52:24,760
+>> So we could sync what?
+
+1102
+00:52:24,760 --> 00:52:29,250
+Not the users, per se, but the
+database across all these servers.
+
+1103
+00:52:29,250 --> 00:52:33,350
+So now we kind of need some
+kind of interconnection
+
+1104
+00:52:33,350 --> 00:52:37,880
+here so that the servers themselves
+can sync-- not unreasonable.
+
+1105
+00:52:37,880 --> 00:52:40,090
+And in fact, this technology exists.
+
+1106
+00:52:40,090 --> 00:52:45,550
+In the world of databases, there's
+the notion of master-slave databases,
+
+1107
+00:52:45,550 --> 00:52:48,240
+or primary-secondary,
+where among the features
+
+1108
+00:52:48,240 --> 00:52:51,050
+is not only to store data
+and respond with data,
+
+1109
+00:52:51,050 --> 00:52:53,375
+but also just to constantly
+sync with each other.
+
+1110
+00:52:53,375 --> 00:52:56,480
+So any time you write or save
+something to this database,
+
+1111
+00:52:56,480 --> 00:53:00,040
+it immediately gets "replicated"
+to the other databases as well.
+
+1112
+00:53:00,040 --> 00:53:02,870
+>> And any time you read from it,
+it doesn't matter where you are.
+
+1113
+00:53:02,870 --> 00:53:05,170
+Because if in theory
+they've all synced, you're
+
+1114
+00:53:05,170 --> 00:53:07,710
+going to get the same view of the data.
+
+1115
+00:53:07,710 --> 00:53:10,800
+So this sounds perfect.
+
+1116
+00:53:10,800 --> 00:53:11,883
+There's got to be a catch.
+
+1117
+00:53:11,883 --> 00:53:15,200
+
+1118
+00:53:15,200 --> 00:53:18,990
+What might the catch be?
+
+1119
+00:53:18,990 --> 00:53:21,790
+>> AUDIENCE: [INAUDIBLE]
+
+1120
+00:53:21,790 --> 00:53:25,830
+>> DAVID MALAN: Yeah, so three times
+as much stuff could go wrong.
+
+1121
+00:53:25,830 --> 00:53:26,930
+That's a reality.
+
+1122
+00:53:26,930 --> 00:53:28,480
+It might all be the same in spirit.
+
+1123
+00:53:28,480 --> 00:53:30,404
+But someone needs to configure these.
+
+1124
+00:53:30,404 --> 00:53:33,070
+There's a higher probability that
+something's going to go wrong.
+
+1125
+00:53:33,070 --> 00:53:38,130
+Just combinatorially you have
+more stuff prone to errors.
+
+1126
+00:53:38,130 --> 00:53:40,505
+What else is bad potentially?
+
+1127
+00:53:40,505 --> 00:53:41,380
+AUDIENCE: [INAUDIBLE]
+
+1128
+00:53:41,380 --> 00:53:44,100
+
+1129
+00:53:44,100 --> 00:53:46,180
+>> DAVID MALAN: Yeah, so
+syncing can be bad.
+
+1130
+00:53:46,180 --> 00:53:48,110
+Even as you might know
+from backups and such,
+
+1131
+00:53:48,110 --> 00:53:50,520
+if you just are blindly making
+backups, what if something does
+
+1132
+00:53:50,520 --> 00:53:51,560
+go wrong on one database?
+
+1133
+00:53:51,560 --> 00:53:53,018
+You delete something you shouldn't.
+
+1134
+00:53:53,018 --> 00:53:56,299
+You've immediately replicated
+that problem everywhere else.
+
+1135
+00:53:56,299 --> 00:53:58,840
+So Victoria was talking-- backups
+would be a good thing here.
+
+1136
+00:53:58,840 --> 00:54:00,549
+And so we'll get back to that.
+
+1137
+00:54:00,549 --> 00:54:03,090
+And to be clear, we're talking
+not about backups here per se.
+
+1138
+00:54:03,090 --> 00:54:08,240
+We're talking about true replication
+or synchronization across servers.
+
+1139
+00:54:08,240 --> 00:54:09,110
+They're all live.
+
+1140
+00:54:09,110 --> 00:54:12,074
+They're not meant to
+be used for backups.
+
+1141
+00:54:12,074 --> 00:54:13,294
+>> AUDIENCE: [INAUDIBLE]
+
+1142
+00:54:13,294 --> 00:54:14,335
+DAVID MALAN: What's that?
+
+1143
+00:54:14,335 --> 00:54:14,710
+AUDIENCE: Higher--
+
+1144
+00:54:14,710 --> 00:54:15,751
+DAVID MALAN: Higher cost.
+
+1145
+00:54:15,751 --> 00:54:20,180
+We've tripled the cost for
+sure, although at least in terms
+
+1146
+00:54:20,180 --> 00:54:21,100
+of the hardware.
+
+1147
+00:54:21,100 --> 00:54:23,200
+Because a database is
+just a piece of software.
+
+1148
+00:54:23,200 --> 00:54:25,189
+And a web server is a piece of software.
+
+1149
+00:54:25,189 --> 00:54:27,980
+It's probably free if we're using
+any number of open source things.
+
+1150
+00:54:27,980 --> 00:54:30,480
+But if we are using
+something like Oracle,
+
+1151
+00:54:30,480 --> 00:54:36,574
+we're paying Oracle more money per
+licenses, or Microsoft for access.
+
+1152
+00:54:36,574 --> 00:54:38,240
+There's got to be some other catch here.
+
+1153
+00:54:38,240 --> 00:54:39,240
+It can't be this simple.
+
+1154
+00:54:39,240 --> 00:54:42,990
+
+1155
+00:54:42,990 --> 00:54:47,300
+>> So to your point, I think it was
+Kareem, for geography earlier-- or no,
+
+1156
+00:54:47,300 --> 00:54:50,870
+Roman, was it, for geography-- suppose
+that we're being smart about this,
+
+1157
+00:54:50,870 --> 00:54:54,080
+and we're putting one of our servers,
+and in turn our databases, in the US,
+
+1158
+00:54:54,080 --> 00:54:56,910
+and another in Europe, another in
+South America, another in Africa,
+
+1159
+00:54:56,910 --> 00:55:00,290
+another in Asia, anywhere we
+might want around the world.
+
+1160
+00:55:00,290 --> 00:55:04,220
+We already know from our trace
+routes that point A and point
+
+1161
+00:55:04,220 --> 00:55:06,910
+B, if they're farther apart,
+are going to take more time.
+
+1162
+00:55:06,910 --> 00:55:10,312
+>> And if some of you have used
+tools, like Facebook or Twitter
+
+1163
+00:55:10,312 --> 00:55:13,520
+or any of these sites these days that
+are constantly changing because of user
+
+1164
+00:55:13,520 --> 00:55:16,880
+created data, sometimes if you
+hit Reload or open the same page
+
+1165
+00:55:16,880 --> 00:55:20,270
+in another browser, you see
+different versions, almost.
+
+1166
+00:55:20,270 --> 00:55:22,875
+You might see someone's status
+update here but not here,
+
+1167
+00:55:22,875 --> 00:55:25,500
+and then you reload, and then it
+appears, and you reload again,
+
+1168
+00:55:25,500 --> 00:55:26,640
+and it disappears.
+
+1169
+00:55:26,640 --> 00:55:29,076
+In other words, keep an
+eye out for this, at least
+
+1170
+00:55:29,076 --> 00:55:30,950
+if you're using social
+networking especially.
+
+1171
+00:55:30,950 --> 00:55:33,320
+>> Again, just because the
+data is changing so quickly,
+
+1172
+00:55:33,320 --> 00:55:35,710
+sometimes servers do get out of sync.
+
+1173
+00:55:35,710 --> 00:55:37,230
+And maybe it's a super small window.
+
+1174
+00:55:37,230 --> 00:55:39,970
+But 200 milliseconds, maybe
+even more than that-- it's
+
+1175
+00:55:39,970 --> 00:55:43,415
+going to take some non-zero amount
+of time for these databases to sync.
+
+1176
+00:55:43,415 --> 00:55:45,290
+And we're not just
+talking about one request.
+
+1177
+00:55:45,290 --> 00:55:48,540
+If a company has thousands of
+users using it simultaneously,
+
+1178
+00:55:48,540 --> 00:55:49,460
+they might buffer.
+
+1179
+00:55:49,460 --> 00:55:52,240
+In other words, there might
+be a queue or a wait line
+
+1180
+00:55:52,240 --> 00:55:54,950
+before all of those database
+queries can get synchronized.
+
+1181
+00:55:54,950 --> 00:55:56,610
+So maybe it's actually a few seconds.
+
+1182
+00:55:56,610 --> 00:55:59,820
+>> And indeed this is true I think even
+to this day with Facebook, whereby
+
+1183
+00:55:59,820 --> 00:56:02,010
+when they synchronize from
+East Coast to West Coast,
+
+1184
+00:56:02,010 --> 00:56:06,026
+it has a non-trivial
+propagation delay, so to speak,
+
+1185
+00:56:06,026 --> 00:56:07,650
+that you just kind of have to tolerate.
+
+1186
+00:56:07,650 --> 00:56:11,210
+And so it's not so much
+a bug as it is a reality
+
+1187
+00:56:11,210 --> 00:56:14,230
+that your users might not see
+the correct data for at least
+
+1188
+00:56:14,230 --> 00:56:14,970
+a few seconds.
+
+1189
+00:56:14,970 --> 00:56:17,410
+>> I see this on Twitter a lot
+actually where sometimes I'll
+
+1190
+00:56:17,410 --> 00:56:21,227
+tweet in one window, open another to
+then see it to confirm that it indeed
+
+1191
+00:56:21,227 --> 00:56:22,560
+went up, and it's not there yet.
+
+1192
+00:56:22,560 --> 00:56:25,340
+And I have to kind of reload,
+reload, reload-- oh, there it is.
+
+1193
+00:56:25,340 --> 00:56:27,150
+And that's not because it wasn't saved.
+
+1194
+00:56:27,150 --> 00:56:29,850
+It just hasn't propagated
+to other servers.
+
+1195
+00:56:29,850 --> 00:56:33,120
+>> So this trade-off, too-- do you really
+want to expose yourself to the risk
+
+1196
+00:56:33,120 --> 00:56:37,254
+that if the user goes to their order
+history, it's not actually there yet?
+
+1197
+00:56:37,254 --> 00:56:38,420
+I see this on certain banks.
+
+1198
+00:56:38,420 --> 00:56:42,100
+It always annoys me when, well, for one,
+you can only go like six months back
+
+1199
+00:56:42,100 --> 00:56:45,160
+in your bank statements in some banks,
+even though in theory they should
+
+1200
+00:56:45,160 --> 00:56:46,576
+be able to have everything online.
+
+1201
+00:56:46,576 --> 00:56:48,630
+They just take stuff offline sometimes.
+
+1202
+00:56:48,630 --> 00:56:51,430
+Sometimes, too-- what website is it?
+
+1203
+00:56:51,430 --> 00:56:53,570
+There's one-- oh, it's GoDaddy, I think.
+
+1204
+00:56:53,570 --> 00:56:56,620
+GoDaddy, when you check out
+buying a domain name or something,
+
+1205
+00:56:56,620 --> 00:56:58,630
+they'll often give you
+a link to your receipt.
+
+1206
+00:56:58,630 --> 00:57:01,470
+And if you click that link right
+away, it often doesn't work.
+
+1207
+00:57:01,470 --> 00:57:03,290
+It just says, dead end, nothing here.
+
+1208
+00:57:03,290 --> 00:57:05,450
+>> And that's too because of
+these propagation delays.
+
+1209
+00:57:05,450 --> 00:57:08,290
+Because for whatever reason, they
+are taking a little bit of time
+
+1210
+00:57:08,290 --> 00:57:09,670
+to actually generate that.
+
+1211
+00:57:09,670 --> 00:57:12,070
+So this is sort of like you want to
+pull your hair out at some point.
+
+1212
+00:57:12,070 --> 00:57:14,486
+Because all you're trying to
+do is solve a simple problem.
+
+1213
+00:57:14,486 --> 00:57:16,590
+And we keep creating new
+problems for ourselves.
+
+1214
+00:57:16,590 --> 00:57:18,770
+So let's see if we
+can kind of undo this.
+
+1215
+00:57:18,770 --> 00:57:22,730
+>> It turns out that combining
+databases on all of your web servers
+
+1216
+00:57:22,730 --> 00:57:25,090
+is not really best practice.
+
+1217
+00:57:25,090 --> 00:57:27,950
+Generally, what an engineer
+would do, or systems architect,
+
+1218
+00:57:27,950 --> 00:57:30,340
+would be to have different
+tiers of servers.
+
+1219
+00:57:30,340 --> 00:57:33,160
+And just for space's sake, I'll
+draw their database up here.
+
+1220
+00:57:33,160 --> 00:57:38,060
+>> We might have database and
+server number four here
+
+1221
+00:57:38,060 --> 00:57:42,430
+that does have connections to
+each of these servers here.
+
+1222
+00:57:42,430 --> 00:57:45,400
+So this might be our front
+end tier, as people would say.
+
+1223
+00:57:45,400 --> 00:57:47,770
+And this would be our back end tier.
+
+1224
+00:57:47,770 --> 00:57:50,580
+And that just means that
+these face the user.
+
+1225
+00:57:50,580 --> 00:57:53,010
+And the databases don't face the user.
+
+1226
+00:57:53,010 --> 00:57:55,480
+No user can directly
+access the database.
+
+1227
+00:57:55,480 --> 00:57:59,280
+>> So let's now maybe go down
+the route Victoria proposed.
+
+1228
+00:57:59,280 --> 00:58:00,940
+This is a single point of failure.
+
+1229
+00:58:00,940 --> 00:58:02,290
+That makes me uncomfortable.
+
+1230
+00:58:02,290 --> 00:58:05,790
+So what's perhaps the
+most obvious solution?
+
+1231
+00:58:05,790 --> 00:58:06,665
+AUDIENCE: [INAUDIBLE]
+
+1232
+00:58:06,665 --> 00:58:09,979
+
+1233
+00:58:09,979 --> 00:58:11,437
+DAVID MALAN: Sorry, say that again.
+
+1234
+00:58:11,437 --> 00:58:12,352
+AUDIENCE: [INAUDIBLE]
+
+1235
+00:58:12,352 --> 00:58:13,810
+DAVID MALAN: Non-production server.
+
+1236
+00:58:13,810 --> 00:58:15,364
+What do you mean?
+
+1237
+00:58:15,364 --> 00:58:17,120
+>> AUDIENCE: [INAUDIBLE]
+
+1238
+00:58:17,120 --> 00:58:19,120
+>> DAVID MALAN: Oh, OK, so backups.
+
+1239
+00:58:19,120 --> 00:58:21,110
+OK, so we could do that, certainly.
+
+1240
+00:58:21,110 --> 00:58:23,790
+And actually this is very commonly done.
+
+1241
+00:58:23,790 --> 00:58:26,470
+This might be database number five.
+
+1242
+00:58:26,470 --> 00:58:28,510
+But that's only
+connected to number four.
+
+1243
+00:58:28,510 --> 00:58:31,110
+And you might call it a hot spare.
+
+1244
+00:58:31,110 --> 00:58:35,080
+These two databases could be configured
+to just constantly synchronize
+
+1245
+00:58:35,080 --> 00:58:35,850
+each other.
+
+1246
+00:58:35,850 --> 00:58:39,010
+And so if this machine dies, for
+whatever stupid reason-- the hard drive
+
+1247
+00:58:39,010 --> 00:58:42,100
+dies, someone trips over the
+cord, some software is flawed
+
+1248
+00:58:42,100 --> 00:58:46,560
+and the machine hangs or crashes--
+you could have a human literally
+
+1249
+00:58:46,560 --> 00:58:51,090
+unplug this one from the wall
+and instead plug this one in.
+
+1250
+00:58:51,090 --> 00:58:56,340
+And then within, let's say, a
+few minutes, maybe half an hour,
+
+1251
+00:58:56,340 --> 00:58:57,210
+you're back online.
+
+1252
+00:58:57,210 --> 00:58:59,259
+>> It's not great, but
+it's also not horrible.
+
+1253
+00:58:59,259 --> 00:59:01,800
+And you don't have to worry
+about any synchronization issues.
+
+1254
+00:59:01,800 --> 00:59:03,080
+Because everything is already there.
+
+1255
+00:59:03,080 --> 00:59:05,000
+Because you had a perfect
+backup ready to go.
+
+1256
+00:59:05,000 --> 00:59:07,100
+>> You could be a little
+fancier about this,
+
+1257
+00:59:07,100 --> 00:59:12,990
+as some people often do, where you
+might have database number four here,
+
+1258
+00:59:12,990 --> 00:59:17,480
+database number five here,
+that are talking to each other.
+
+1259
+00:59:17,480 --> 00:59:24,120
+But you also have this
+kind of arrangement--
+
+1260
+00:59:24,120 --> 00:59:27,440
+and it deliberately
+looks messy, because it
+
+1261
+00:59:27,440 --> 00:59:30,220
+is-- where all of the
+front end servers can
+
+1262
+00:59:30,220 --> 00:59:32,870
+talk to all of the back end servers.
+
+1263
+00:59:32,870 --> 00:59:38,130
+And so if this database doesn't
+respond, these front end servers have
+
+1264
+00:59:38,130 --> 00:59:40,212
+to have programming
+code in them that says,
+
+1265
+00:59:40,212 --> 00:59:42,170
+if you don't get a
+connection to this database,
+
+1266
+00:59:42,170 --> 00:59:45,830
+the primary immediately starts
+talking to the secondary.
+
+1267
+00:59:45,830 --> 00:59:48,310
+>> But this now pushes the
+complexity to the code.
+
+1268
+00:59:48,310 --> 00:59:52,070
+And now your developers, your software
+developers, have to know about this.
+
+1269
+00:59:52,070 --> 00:59:56,454
+And you're kind of tying the code that
+you're writing to your actual back end
+
+1270
+00:59:56,454 --> 00:59:58,370
+implementation details,
+which makes it harder,
+
+1271
+00:59:58,370 --> 01:00:00,670
+especially in a bigger
+company or a bigger website,
+
+1272
+01:00:00,670 --> 01:00:05,020
+where you don't necessarily
+want the programmers to have
+
+1273
+01:00:05,020 --> 01:00:10,890
+to know how the database
+engineers are doing their jobs.
+
+1274
+01:00:10,890 --> 01:00:13,810
+You might want to keep those roles
+sort of functionally distinct so
+
+1275
+01:00:13,810 --> 01:00:16,810
+that there's this layer of
+abstraction between the two.
+
+1276
+01:00:16,810 --> 01:00:17,940
+>> So how might we fix this?
+
+1277
+01:00:17,940 --> 01:00:20,290
+Well, we kind of solved
+this problem once before.
+
+1278
+01:00:20,290 --> 01:00:25,680
+Why don't we put one of
+these things here where
+
+1279
+01:00:25,680 --> 01:00:30,947
+it talks in turn to number four and
+five, all of the front end web servers
+
+1280
+01:00:30,947 --> 01:00:33,780
+talk to this middleman, and the
+middleman in turn routes their data?
+
+1281
+01:00:33,780 --> 01:00:38,494
+In fact, what might be a
+good name for this thing?
+
+1282
+01:00:38,494 --> 01:00:39,704
+>> AUDIENCE: [INAUDIBLE]
+
+1283
+01:00:39,704 --> 01:00:41,120
+DAVID MALAN: OK, database manager.
+
+1284
+01:00:41,120 --> 01:00:48,030
+But what might a term be that
+we could reuse for this device?
+
+1285
+01:00:48,030 --> 01:00:49,760
+We're balancing.
+
+1286
+01:00:49,760 --> 01:00:52,480
+Yeah, so actually, I'm
+not being fair here.
+
+1287
+01:00:52,480 --> 01:00:56,760
+So a load balancer would imply that
+we're toggling back and forth here,
+
+1288
+01:00:56,760 --> 01:00:58,836
+which needn't actually be the case.
+
+1289
+01:00:58,836 --> 01:01:00,460
+So there's a few ways we could do this.
+
+1290
+01:01:00,460 --> 01:01:03,920
+>> If this is in fact a load balancer, the
+story is exactly the same as before.
+
+1291
+01:01:03,920 --> 01:01:05,230
+Some of the requests go to 4.
+
+1292
+01:01:05,230 --> 01:01:06,150
+Some of them go to 5.
+
+1293
+01:01:06,150 --> 01:01:06,710
+And that's good.
+
+1294
+01:01:06,710 --> 01:01:08,835
+Because now we can handle
+twice as much throughput.
+
+1295
+01:01:08,835 --> 01:01:11,120
+But this connection
+here is super important.
+
+1296
+01:01:11,120 --> 01:01:14,050
+They have to stay constantly
+synchronized and hopefully
+
+1297
+01:01:14,050 --> 01:01:17,670
+are not geographically too far apart so
+that the synchronization is essentially
+
+1298
+01:01:17,670 --> 01:01:18,520
+instantaneous.
+
+1299
+01:01:18,520 --> 01:01:20,410
+Otherwise we might have a problem.
+
+1300
+01:01:20,410 --> 01:01:21,330
+>> So that's not bad.
+
+1301
+01:01:21,330 --> 01:01:25,132
+But again, we've
+introduced a new problem.
+
+1302
+01:01:25,132 --> 01:01:26,590
+What problem have I just recreated?
+
+1303
+01:01:26,590 --> 01:01:30,000
+
+1304
+01:01:30,000 --> 01:01:31,020
+Single point of failure.
+
+1305
+01:01:31,020 --> 01:01:32,390
+So what's the solution to that?
+
+1306
+01:01:32,390 --> 01:01:39,270
+So as Victoria's fond to spend money,
+we can take this guy out and do this.
+
+1307
+01:01:39,270 --> 01:01:41,731
+And I'm just going to
+move here enough room.
+
+1308
+01:01:41,731 --> 01:01:43,230
+And it's going to be a little messy.
+
+1309
+01:01:43,230 --> 01:01:44,563
+I'm going to keep drawing lines.
+
+1310
+01:01:44,563 --> 01:01:47,080
+Suppose that all of
+those lines go into both?
+
+1311
+01:01:47,080 --> 01:01:52,670
+>> A very common technique here would be
+to use a technique called heartbeat
+
+1312
+01:01:52,670 --> 01:01:57,390
+whereby each of these devices,
+left and right load balancers,
+
+1313
+01:01:57,390 --> 01:02:00,740
+or whatever we want to call them,
+is constantly saying, I'm alive,
+
+1314
+01:02:00,740 --> 01:02:03,220
+I'm alive, I'm alive, I'm alive.
+
+1315
+01:02:03,220 --> 01:02:05,910
+One of them by default
+acts as the primary.
+
+1316
+01:02:05,910 --> 01:02:09,620
+So all traffic is being routed through
+the one on the left, for instance,
+
+1317
+01:02:09,620 --> 01:02:11,260
+by default, arbitrarily.
+
+1318
+01:02:11,260 --> 01:02:16,890
+>> But as soon as the guy on the right
+doesn't hear from the left guy anymore,
+
+1319
+01:02:16,890 --> 01:02:20,440
+the one on the right is programmed
+to automatically, for instance,
+
+1320
+01:02:20,440 --> 01:02:24,110
+take over the IP address
+of the one on the left,
+
+1321
+01:02:24,110 --> 01:02:28,240
+and therefore become the primary, and
+maybe send an email or a text message
+
+1322
+01:02:28,240 --> 01:02:31,570
+to the humans to say, hey,
+the left primary is offline.
+
+1323
+01:02:31,570 --> 01:02:33,310
+I will become primary for now.
+
+1324
+01:02:33,310 --> 01:02:35,760
+So vice president becomes
+president, so to speak.
+
+1325
+01:02:35,760 --> 01:02:38,180
+And someone has to go save
+the president, if you want.
+
+1326
+01:02:38,180 --> 01:02:41,090
+Because now we have a temporary
+single point of failure.
+
+1327
+01:02:41,090 --> 01:02:45,020
+>> So as complicated or stressful as
+this might seem to start being,
+
+1328
+01:02:45,020 --> 01:02:46,990
+this is how you solve these problems.
+
+1329
+01:02:46,990 --> 01:02:48,190
+You do throw money at it.
+
+1330
+01:02:48,190 --> 01:02:49,370
+You throw hardware at it.
+
+1331
+01:02:49,370 --> 01:02:52,170
+But unfortunately you
+add complexity for it.
+
+1332
+01:02:52,170 --> 01:02:56,450
+But the result, ultimately, is that
+you have a much more, in theory,
+
+1333
+01:02:56,450 --> 01:02:57,670
+robust architecture.
+
+1334
+01:02:57,670 --> 01:02:58,850
+It's still not perfect.
+
+1335
+01:02:58,850 --> 01:03:02,470
+Because even when we have-- we might
+not have a single point of failure.
+
+1336
+01:03:02,470 --> 01:03:05,240
+We now have dual points of failure.
+
+1337
+01:03:05,240 --> 01:03:07,630
+But if two things go wrong,
+which absolutely could,
+
+1338
+01:03:07,630 --> 01:03:09,030
+we're still going to be offline.
+
+1339
+01:03:09,030 --> 01:03:11,660
+>> And so very common in the
+industry is to describe
+
+1340
+01:03:11,660 --> 01:03:14,000
+your up time in terms of nines.
+
+1341
+01:03:14,000 --> 01:03:18,610
+And sort of the goal
+to aspire to is 99.999%
+
+1342
+01:03:18,610 --> 01:03:21,580
+of the time your site is online.
+
+1343
+01:03:21,580 --> 01:03:24,170
+Or even better, add a
+few more nines to that.
+
+1344
+01:03:24,170 --> 01:03:28,159
+Unfortunately, these
+nines are very expensive.
+
+1345
+01:03:28,159 --> 01:03:29,450
+And let's actually do this out.
+
+1346
+01:03:29,450 --> 01:03:35,510
+So if I open up my big calculator again,
+365 days in a year, 24 hours in a day,
+
+1347
+01:03:35,510 --> 01:03:44,780
+60 minutes in an hour, and
+60 seconds in a minute,
+
+1348
+01:03:44,780 --> 01:03:48,690
+that's how many seconds there are
+in a year if I did this correctly.
+
+1349
+01:03:48,690 --> 01:03:55,740
+So if we times this by .99999, that's
+how much time we want to aspire to.
+
+1350
+01:03:55,740 --> 01:04:00,600
+So that means we should be up
+this many seconds during the year.
+
+1351
+01:04:00,600 --> 01:04:03,920
+So if I now subtract the
+original value, or rather
+
+1352
+01:04:03,920 --> 01:04:07,480
+this new value from the
+first-- 316 seconds,
+
+1353
+01:04:07,480 --> 01:04:09,640
+which of course is five minutes.
+
+1354
+01:04:09,640 --> 01:04:13,770
+>> So if your website or your company is
+claiming "five nines," whereby you're
+
+1355
+01:04:13,770 --> 01:04:17,050
+up 99.99% of the time,
+that means you better
+
+1356
+01:04:17,050 --> 01:04:23,470
+have been smart enough and quick
+enough and flush enough with resources
+
+1357
+01:04:23,470 --> 01:04:27,890
+that your servers are only offline
+five minutes out of the year.
+
+1358
+01:04:27,890 --> 01:04:29,980
+It's an expensive and
+hard thing to aspire to.
+
+1359
+01:04:29,980 --> 01:04:31,430
+>> So it's a trade off, too.
+
+1360
+01:04:31,430 --> 01:04:35,866
+99.999% of the time is pretty
+darn hard and expensive.
+
+1361
+01:04:35,866 --> 01:04:38,740
+Five minutes-- you can barely get
+to the server to physically replace
+
+1362
+01:04:38,740 --> 01:04:40,040
+something that's gone wrong.
+
+1363
+01:04:40,040 --> 01:04:42,810
+And that's why we start wiring
+things together more complicated
+
+1364
+01:04:42,810 --> 01:04:48,240
+apriori so that the computers
+can sort of fix themselves.
+
+1365
+01:04:48,240 --> 01:04:49,446
+Yeah.
+
+1366
+01:04:49,446 --> 01:04:52,344
+>> AUDIENCE: [INAUDIBLE]
+
+1367
+01:04:52,344 --> 01:05:02,014
+
+1368
+01:05:02,014 --> 01:05:04,430
+DAVID MALAN: The problem could
+be in any number of places.
+
+1369
+01:05:04,430 --> 01:05:05,090
+And in fact--
+
+1370
+01:05:05,090 --> 01:05:07,101
+>> AUDIENCE: [INAUDIBLE]
+
+1371
+01:05:07,101 --> 01:05:08,600
+DAVID MALAN: Absolutely, absolutely.
+
+1372
+01:05:08,600 --> 01:05:10,720
+And as the picture is
+getting more complicated,
+
+1373
+01:05:10,720 --> 01:05:12,110
+it could be the web servers.
+
+1374
+01:05:12,110 --> 01:05:14,690
+It could be the power to the building.
+
+1375
+01:05:14,690 --> 01:05:17,900
+It could be something physical, like
+the cables got frayed or kicked out.
+
+1376
+01:05:17,900 --> 01:05:19,879
+It could be the database
+isn't responding.
+
+1377
+01:05:19,879 --> 01:05:22,920
+It could be they updated their operating
+system and something is hanging.
+
+1378
+01:05:22,920 --> 01:05:24,634
+So there are so many other moving parts.
+
+1379
+01:05:24,634 --> 01:05:27,050
+And so a lot of the engineering
+that has to go behind this
+
+1380
+01:05:27,050 --> 01:05:30,431
+is really just trade offs, like how
+much time, how much money is it actually
+
+1381
+01:05:30,431 --> 01:05:32,930
+worth, and what are the threats
+you're really worried about?
+
+1382
+01:05:32,930 --> 01:05:35,471
+For instance, in the
+courses I teach at Harvard,
+
+1383
+01:05:35,471 --> 01:05:38,470
+we use a lot of cloud computing, which
+we'll start taking a look at now,
+
+1384
+01:05:38,470 --> 01:05:41,107
+in fact, where we use
+Amazon Web Services.
+
+1385
+01:05:41,107 --> 01:05:42,940
+Just because that's the
+one we started with.
+
+1386
+01:05:42,940 --> 01:05:45,856
+But there's ever more these days
+from Google and Microsoft and others.
+
+1387
+01:05:45,856 --> 01:05:50,030
+And we consciously choose to put all
+of our courses' virtual machines,
+
+1388
+01:05:50,030 --> 01:05:55,400
+as they're called, in the I think
+it's Western Virginia data center.
+
+1389
+01:05:55,400 --> 01:05:57,560
+Most of our students
+happen to be from the US,
+
+1390
+01:05:57,560 --> 01:05:59,820
+though there are certainly
+some internationally.
+
+1391
+01:05:59,820 --> 01:06:02,630
+>> But the reality is it's just
+simpler and it's cheaper for us
+
+1392
+01:06:02,630 --> 01:06:05,540
+to put all of our eggs
+in the Virginia basket,
+
+1393
+01:06:05,540 --> 01:06:08,050
+even though I know if something
+goes wrong in Virginia,
+
+1394
+01:06:08,050 --> 01:06:12,760
+as has occasionally happened-- like
+if there's a hurricane or some weather
+
+1395
+01:06:12,760 --> 01:06:15,890
+event like that, if there's some
+power grid issue or the like-- all
+
+1396
+01:06:15,890 --> 01:06:20,240
+of our courses' data might go offline
+for some number of minutes or hours
+
+1397
+01:06:20,240 --> 01:06:21,600
+or even longer.
+
+1398
+01:06:21,600 --> 01:06:24,020
+>> But the amount of complexity
+that would be required,
+
+1399
+01:06:24,020 --> 01:06:26,895
+and the amount of money that would
+be required, to operate everything
+
+1400
+01:06:26,895 --> 01:06:31,420
+in parallel in Europe or in California
+just doesn't make so much sense.
+
+1401
+01:06:31,420 --> 01:06:35,080
+So it's a rational trade
+off, but a painful one
+
+1402
+01:06:35,080 --> 01:06:37,740
+when you're actually
+having that downtime.
+
+1403
+01:06:37,740 --> 01:06:41,830
+>> Well, let's transition right now to
+some of the cloud-based solutions
+
+1404
+01:06:41,830 --> 01:06:43,320
+to some of these problems.
+
+1405
+01:06:43,320 --> 01:06:45,040
+Everything we've been
+discussing thus far
+
+1406
+01:06:45,040 --> 01:06:47,527
+is kind of problems that have
+been with us for some time,
+
+1407
+01:06:47,527 --> 01:06:49,610
+whether you have your own
+servers in your company,
+
+1408
+01:06:49,610 --> 01:06:52,740
+whether you go to a co-location
+place like a data center and share
+
+1409
+01:06:52,740 --> 01:06:55,110
+space with someone else,
+or nowadays in the cloud.
+
+1410
+01:06:55,110 --> 01:06:57,040
+>> And what's nice about
+the cloud is that all
+
+1411
+01:06:57,040 --> 01:06:59,540
+of these things I'm
+drawing as physical objects
+
+1412
+01:06:59,540 --> 01:07:02,400
+can now be thought of as
+sort of virtual objects
+
+1413
+01:07:02,400 --> 01:07:04,659
+in the cloud that are
+simulated with software.
+
+1414
+01:07:04,659 --> 01:07:07,700
+In other words, the computers today,
+servers today, like the Dell picture
+
+1415
+01:07:07,700 --> 01:07:11,720
+I showed earlier, are so fast, have
+so much RAM, so much CPU, so much disk
+
+1416
+01:07:11,720 --> 01:07:16,140
+space, that people have written
+software to virtually partition
+
+1417
+01:07:16,140 --> 01:07:21,130
+one server up into the illusion of it
+being two servers, or 200 servers, so
+
+1418
+01:07:21,130 --> 01:07:24,150
+that each of us customers
+has the illusion of having
+
+1419
+01:07:24,150 --> 01:07:29,110
+not just an account on some web
+host, but our own machine that we're
+
+1420
+01:07:29,110 --> 01:07:30,490
+renting from someone else.
+
+1421
+01:07:30,490 --> 01:07:34,140
+>> But it's a virtual machine in
+so far as on one Dell server,
+
+1422
+01:07:34,140 --> 01:07:39,160
+it again might be partitioned up into
+two or 200 or more virtual machines,
+
+1423
+01:07:39,160 --> 01:07:43,770
+all of which give someone administrative
+access, but in a way where none of us
+
+1424
+01:07:43,770 --> 01:07:48,040
+knows or can access other virtual
+machines on the same hardware.
+
+1425
+01:07:48,040 --> 01:07:53,430
+So to paint a picture in today's slides,
+I have this shot here from a website
+
+1426
+01:07:53,430 --> 01:07:54,160
+called Docker.
+
+1427
+01:07:54,160 --> 01:07:56,970
+>> So this is a little more
+detail than we actually need.
+
+1428
+01:07:56,970 --> 01:07:59,830
+But if you view this as
+your infrastructure--
+
+1429
+01:07:59,830 --> 01:08:02,910
+so just the hardware your own,
+your servers, the racks, the data
+
+1430
+01:08:02,910 --> 01:08:06,480
+center, and all of that-- you would
+typically run a host operating system.
+
+1431
+01:08:06,480 --> 01:08:08,275
+So something like-- it could be Windows.
+
+1432
+01:08:08,275 --> 01:08:09,430
+It wouldn't be Mac OS.
+
+1433
+01:08:09,430 --> 01:08:11,430
+Because that's not really
+enterprise these days.
+
+1434
+01:08:11,430 --> 01:08:15,670
+So it would be Linux or Solaris
+or Unix or BSD or FreeBSD
+
+1435
+01:08:15,670 --> 01:08:19,779
+or any number of other operating systems
+that are either free or commercial.
+
+1436
+01:08:19,779 --> 01:08:22,120
+>> And then you run a
+program, special program,
+
+1437
+01:08:22,120 --> 01:08:26,479
+called a hypervisor, or
+virtual machine monitor, VMM.
+
+1438
+01:08:26,479 --> 01:08:31,649
+And these are products, if you're
+familiar, like VMware or VirtualBox
+
+1439
+01:08:31,649 --> 01:08:34,080
+or Virtual PC or others.
+
+1440
+01:08:34,080 --> 01:08:38,430
+And what those programs do is exactly
+that feature I described earlier.
+
+1441
+01:08:38,430 --> 01:08:41,779
+It creates the illusion
+that one physical machine
+
+1442
+01:08:41,779 --> 01:08:44,550
+can be multiple virtual machines.
+
+1443
+01:08:44,550 --> 01:08:48,260
+>> And so these colorful boxes up top is
+painting a picture of the following.
+
+1444
+01:08:48,260 --> 01:08:50,260
+This hypervisor, this
+piece of software, call it
+
+1445
+01:08:50,260 --> 01:08:54,090
+VMware, running on some other
+operating system, call it Linux,
+
+1446
+01:08:54,090 --> 01:08:56,910
+is creating the illusion that
+this physical computer is actually
+
+1447
+01:08:56,910 --> 01:09:00,149
+one, two, three virtual computers.
+
+1448
+01:09:00,149 --> 01:09:04,270
+So I've now bought, as the owner of
+this hardware, one physical computer.
+
+1449
+01:09:04,270 --> 01:09:06,200
+And now I'm renting
+it to three customers.
+
+1450
+01:09:06,200 --> 01:09:09,731
+>> And those three customers all think
+they have a dedicated virtual machine.
+
+1451
+01:09:09,731 --> 01:09:10,939
+And it's not bait and switch.
+
+1452
+01:09:10,939 --> 01:09:13,750
+It's more disclosure that
+you're using a virtual machine.
+
+1453
+01:09:13,750 --> 01:09:17,589
+But technologically, we all
+have full administrative control
+
+1454
+01:09:17,589 --> 01:09:19,880
+over each of those guest
+operating systems, which could
+
+1455
+01:09:19,880 --> 01:09:21,370
+be any number of operating systems.
+
+1456
+01:09:21,370 --> 01:09:23,029
+>> I can install anything I want.
+
+1457
+01:09:23,029 --> 01:09:24,640
+I can upgrade it as I want.
+
+1458
+01:09:24,640 --> 01:09:27,470
+And I don't even have to know or
+care about the other operating
+
+1459
+01:09:27,470 --> 01:09:29,678
+systems on that computer,
+the other virtual machines,
+
+1460
+01:09:29,678 --> 01:09:35,290
+unless the owner of all this gray
+stuff is being a little greedy
+
+1461
+01:09:35,290 --> 01:09:37,540
+and is overselling his or her resources.
+
+1462
+01:09:37,540 --> 01:09:40,800
+>> So if you're taking one
+physical machine and selling it
+
+1463
+01:09:40,800 --> 01:09:44,399
+to not 200 but 400
+customers, at some point
+
+1464
+01:09:44,399 --> 01:09:47,270
+we're going to trip into those
+same performance issues as before.
+
+1465
+01:09:47,270 --> 01:09:50,460
+Because you only have a finite
+amount of disk and RAM and so forth.
+
+1466
+01:09:50,460 --> 01:09:53,450
+And a virtual machine
+is just a program that's
+
+1467
+01:09:53,450 --> 01:09:56,140
+pretending to be a
+full fledged computer.
+
+1468
+01:09:56,140 --> 01:09:58,040
+So you get what you pay for here.
+
+1469
+01:09:58,040 --> 01:10:02,150
+>> So you'll find online you might pay a
+reputable company maybe $100 a month
+
+1470
+01:10:02,150 --> 01:10:05,660
+for your own virtual machine, or
+your own virtual private server,
+
+1471
+01:10:05,660 --> 01:10:07,090
+which is another term for it.
+
+1472
+01:10:07,090 --> 01:10:10,400
+Or you might find some fly by
+night where you pay $5.99 a month
+
+1473
+01:10:10,400 --> 01:10:12,080
+for your own virtual machine.
+
+1474
+01:10:12,080 --> 01:10:15,614
+But odds are you don't have nearly
+as much performance available to you,
+
+1475
+01:10:15,614 --> 01:10:18,530
+because they've been overselling it
+so, than you would with the higher
+
+1476
+01:10:18,530 --> 01:10:22,340
+tier of service or the better vendor.
+
+1477
+01:10:22,340 --> 01:10:24,590
+>> So what does this actually mean for us?
+
+1478
+01:10:24,590 --> 01:10:26,110
+So let me go to this.
+
+1479
+01:10:26,110 --> 01:10:29,580
+I'm going to go to aws.amazon.com.
+
+1480
+01:10:29,580 --> 01:10:31,590
+Just because they have
+a nice menu of options.
+
+1481
+01:10:31,590 --> 01:10:34,700
+But these same lessons apply to a
+whole bunch of other cloud vendors.
+
+1482
+01:10:34,700 --> 01:10:38,201
+Unfortunately, it's often more
+marketing speak than anything.
+
+1483
+01:10:38,201 --> 01:10:39,200
+And this keeps changing.
+
+1484
+01:10:39,200 --> 01:10:41,820
+So you go to a website like this.
+
+1485
+01:10:41,820 --> 01:10:44,560
+And this really doesn't
+tell you much of anything.
+
+1486
+01:10:44,560 --> 01:10:47,780
+>> And even I, as I look at this, don't
+really know what any of these things
+
+1487
+01:10:47,780 --> 01:10:49,334
+necessarily do until I dive in.
+
+1488
+01:10:49,334 --> 01:10:50,875
+But let's start on the left, Compute.
+
+1489
+01:10:50,875 --> 01:10:52,980
+And I'm going to click this.
+
+1490
+01:10:52,980 --> 01:10:56,960
+And now Amazon has frankly an
+overwhelming number of services
+
+1491
+01:10:56,960 --> 01:10:57,960
+these days.
+
+1492
+01:10:57,960 --> 01:11:01,040
+But Amazon EC2 is perhaps the simplest.
+
+1493
+01:11:01,040 --> 01:11:05,840
+>> Amazon EC2 will create for us exactly
+the picture we saw a moment ago.
+
+1494
+01:11:05,840 --> 01:11:10,240
+It's how they make a lot of
+their money in the cloud.
+
+1495
+01:11:10,240 --> 01:11:12,910
+Apparently Netflix and others
+are in the cloud with them.
+
+1496
+01:11:12,910 --> 01:11:16,260
+This is all typically
+fluffy marketing speak.
+
+1497
+01:11:16,260 --> 01:11:19,720
+So what I want to do is go to Pricing--
+or rather let's go to Instances
+
+1498
+01:11:19,720 --> 01:11:23,790
+first just to paint a picture of this.
+
+1499
+01:11:23,790 --> 01:11:25,800
+>> So this will vary by vendor.
+
+1500
+01:11:25,800 --> 01:11:29,590
+And we don't need to get too deep into
+the weeds here of how this all works.
+
+1501
+01:11:29,590 --> 01:11:34,720
+But the way Amazon, for instance,
+rents you a virtual machine or a server
+
+1502
+01:11:34,720 --> 01:11:37,200
+in the cloud is they've got
+these sort of funny names,
+
+1503
+01:11:37,200 --> 01:11:41,000
+like t2.nano, which means small,
+or t2.large, which means big.
+
+1504
+01:11:41,000 --> 01:11:43,970
+Each of them gives you either
+one or two virtual CPUs.
+
+1505
+01:11:43,970 --> 01:11:45,470
+>> Why is it a virtual CPU?
+
+1506
+01:11:45,470 --> 01:11:49,440
+Well, the physical machine might
+have 64 or more actual CPUs.
+
+1507
+01:11:49,440 --> 01:11:52,125
+But again, through software,
+they create the illusion
+
+1508
+01:11:52,125 --> 01:11:55,410
+that that one machine can be
+divvied up to multiple users.
+
+1509
+01:11:55,410 --> 01:11:58,765
+So we can think of this as
+having one Intel CPU or two.
+
+1510
+01:11:58,765 --> 01:12:01,290
+CPU credits per hour-- I would
+have to read the fine print
+
+1511
+01:12:01,290 --> 01:12:02,581
+as to what this actually means.
+
+1512
+01:12:02,581 --> 01:12:05,850
+It means how much of the machine
+you can use per hour vis-a-vis
+
+1513
+01:12:05,850 --> 01:12:07,730
+other customers on that hardware.
+
+1514
+01:12:07,730 --> 01:12:11,560
+>> Here's how much RAM or memory you
+get-- either half a gigabyte, or 500
+
+1515
+01:12:11,560 --> 01:12:14,120
+megabytes, or 1 gigabyte, or 2.
+
+1516
+01:12:14,120 --> 01:12:17,390
+And then the storage just refers to
+what kind of disks they give you.
+
+1517
+01:12:17,390 --> 01:12:19,950
+There's different storage
+technologies that they offer.
+
+1518
+01:12:19,950 --> 01:12:22,870
+But more interesting than this
+then might be the pricing.
+
+1519
+01:12:22,870 --> 01:12:25,860
+>> So if you are the CTO or
+an engineer who doesn't
+
+1520
+01:12:25,860 --> 01:12:28,420
+want to run a server in your
+office, for whatever reason,
+
+1521
+01:12:28,420 --> 01:12:30,230
+and it's way too
+complicated or expensive
+
+1522
+01:12:30,230 --> 01:12:33,930
+to buy servers and co-locate them and
+pay rent in some physical cage space
+
+1523
+01:12:33,930 --> 01:12:36,670
+somewhere-- you just want to sit
+at your laptop late at night,
+
+1524
+01:12:36,670 --> 01:12:40,480
+type in your credit card information,
+and rent servers in the cloud-- well,
+
+1525
+01:12:40,480 --> 01:12:41,920
+we can do it here.
+
+1526
+01:12:41,920 --> 01:12:45,769
+I'm going to go down to-- Linux
+is a popular operating system.
+
+1527
+01:12:45,769 --> 01:12:47,310
+And let's just get a sense of things.
+
+1528
+01:12:47,310 --> 01:12:48,990
+Whoops-- too big.
+
+1529
+01:12:48,990 --> 01:12:53,670
+>> So let's look at their tiniest
+virtual machine, which seems to have,
+
+1530
+01:12:53,670 --> 01:12:57,440
+for our purposes, one CPU
+and 500 megabytes of RAM.
+
+1531
+01:12:57,440 --> 01:12:58,440
+That's pretty small.
+
+1532
+01:12:58,440 --> 01:13:00,820
+But frankly, web servers don't
+need to do all that much.
+
+1533
+01:13:00,820 --> 01:13:02,630
+You have better specs in your laptop.
+
+1534
+01:13:02,630 --> 01:13:04,990
+But you don't need those
+specs these days for things.
+
+1535
+01:13:04,990 --> 01:13:11,490
+You're going to pay $0.0065 per hour.
+
+1536
+01:13:11,490 --> 01:13:12,080
+>> So let's see.
+
+1537
+01:13:12,080 --> 01:13:15,970
+If there are 24 hours in a day, and
+we're paying this much per hour,
+
+1538
+01:13:15,970 --> 01:13:20,680
+it will cost you $0.15 to rent that
+particular server in the cloud.
+
+1539
+01:13:20,680 --> 01:13:22,210
+And that's just for a day.
+
+1540
+01:13:22,210 --> 01:13:27,050
+If we do this 365-- $57 to
+rent that particular server.
+
+1541
+01:13:27,050 --> 01:13:28,420
+So it sounds super cheap.
+
+1542
+01:13:28,420 --> 01:13:31,100
+>> That's also super low performance.
+
+1543
+01:13:31,100 --> 01:13:37,169
+So we, for courses I teach here, tend
+to use I think t2.smalls or t2.mediums.
+
+1544
+01:13:37,169 --> 01:13:39,960
+And we might have a few hundred
+users, a few thousand users, total.
+
+1545
+01:13:39,960 --> 01:13:40,900
+It's pretty modest.
+
+1546
+01:13:40,900 --> 01:13:42,360
+So let's see what this would cost.
+
+1547
+01:13:42,360 --> 01:13:49,260
+So if I do this cost times 24
+hours times 365, this one's $225.
+
+1548
+01:13:49,260 --> 01:13:51,160
+And for the courses
+I teach, we generally
+
+1549
+01:13:51,160 --> 01:13:54,970
+run two of everything, for
+redundancy and also for performance.
+
+1550
+01:13:54,970 --> 01:13:59,230
+So we might spend, therefore,
+$500 for the servers
+
+1551
+01:13:59,230 --> 01:14:00,860
+that we might need per year.
+
+1552
+01:14:00,860 --> 01:14:05,210
+>> Now, if you need more performance--
+let's take a look at memory.
+
+1553
+01:14:05,210 --> 01:14:06,810
+We've talked about memory quite a bit.
+
+1554
+01:14:06,810 --> 01:14:09,330
+And if you do need more
+memory-- and 64 gigabytes
+
+1555
+01:14:09,330 --> 01:14:12,310
+is the number I kept mentioning--
+this is almost $1 per hour.
+
+1556
+01:14:12,310 --> 01:14:16,180
+And you can pretty quickly see where
+this goes-- so 24 hours times 365.
+
+1557
+01:14:16,180 --> 01:14:20,580
+So now it's $8,000 per year
+for a pretty decent server.
+
+1558
+01:14:20,580 --> 01:14:23,010
+>> So at some point, there's
+this inflection point
+
+1559
+01:14:23,010 --> 01:14:29,510
+where now we could spend $6,000
+probably and buy a machine like that
+
+1560
+01:14:29,510 --> 01:14:33,800
+and amortize its cost over maybe two,
+three years, the life of the machine.
+
+1561
+01:14:33,800 --> 01:14:38,880
+But what might push you in
+favor or disfavor of renting
+
+1562
+01:14:38,880 --> 01:14:41,230
+a machine in the cloud like this?
+
+1563
+01:14:41,230 --> 01:14:44,110
+Again, this is comparable, probably,
+to one of those Dell servers
+
+1564
+01:14:44,110 --> 01:14:47,208
+we saw pictured a bit ago.
+
+1565
+01:14:47,208 --> 01:14:51,016
+>> AUDIENCE: [INAUDIBLE]
+
+1566
+01:14:51,016 --> 01:14:54,350
+
+1567
+01:14:54,350 --> 01:14:56,190
+>> DAVID MALAN: Yeah, that's a huge upside.
+
+1568
+01:14:56,190 --> 01:14:58,640
+Because we're not buying the
+machine, we don't have to unbox it.
+
+1569
+01:14:58,640 --> 01:14:59,600
+We don't have to lift it.
+
+1570
+01:14:59,600 --> 01:15:01,110
+We don't have to plug it into our rack.
+
+1571
+01:15:01,110 --> 01:15:02,080
+We don't have to plug it in.
+
+1572
+01:15:02,080 --> 01:15:03,140
+We don't have to pay
+the electrical bill.
+
+1573
+01:15:03,140 --> 01:15:05,120
+>> We don't have to turn
+the air conditioning on.
+
+1574
+01:15:05,120 --> 01:15:07,620
+When a hard drive dies, we don't have
+to drive in in the middle of the night
+
+1575
+01:15:07,620 --> 01:15:08,172
+to fix it.
+
+1576
+01:15:08,172 --> 01:15:09,630
+We don't have to set up monitoring.
+
+1577
+01:15:09,630 --> 01:15:13,750
+We don't have to-- the list goes on
+and on of all of the physical things
+
+1578
+01:15:13,750 --> 01:15:15,810
+you don't need to do
+because of "the cloud."
+
+1579
+01:15:15,810 --> 01:15:18,620
+>> And to be clear, cloud computing
+is this very overused term.
+
+1580
+01:15:18,620 --> 01:15:22,790
+It really just means paying someone
+else to run servers for you,
+
+1581
+01:15:22,790 --> 01:15:25,300
+or renting space on
+someone else's servers.
+
+1582
+01:15:25,300 --> 01:15:27,110
+So the term "cloud computing" is new.
+
+1583
+01:15:27,110 --> 01:15:30,260
+The idea is decades old.
+
+1584
+01:15:30,260 --> 01:15:32,070
+So that's pretty compelling.
+
+1585
+01:15:32,070 --> 01:15:33,960
+>> And what more do you get?
+
+1586
+01:15:33,960 --> 01:15:38,287
+Well, you also get the ability to
+do everything on a laptop at home.
+
+1587
+01:15:38,287 --> 01:15:40,620
+In other words, all of the
+pictures I was just drawing--
+
+1588
+01:15:40,620 --> 01:15:44,010
+and it wasn't that long ago that even
+I was crawling around on a server floor
+
+1589
+01:15:44,010 --> 01:15:46,680
+plugging the cables in for
+each of the lines that you see,
+
+1590
+01:15:46,680 --> 01:15:49,590
+and upgrading the operating
+systems, and changing drives around.
+
+1591
+01:15:49,590 --> 01:15:51,610
+There's a lot of
+physicality to all of that.
+
+1592
+01:15:51,610 --> 01:15:55,300
+>> But what's beautiful about virtual
+machines, as the name kind of suggests,
+
+1593
+01:15:55,300 --> 01:15:57,600
+now there are web-based
+interfaces whereby
+
+1594
+01:15:57,600 --> 01:15:59,900
+if you want the equivalent
+of a line from this server
+
+1595
+01:15:59,900 --> 01:16:03,959
+to another, just type, type, type,
+click and drag, click Submit, and voila,
+
+1596
+01:16:03,959 --> 01:16:05,250
+you have it wired up virtually.
+
+1597
+01:16:05,250 --> 01:16:07,235
+Because it's all done in software.
+
+1598
+01:16:07,235 --> 01:16:09,110
+And the reason it's done
+in software is again
+
+1599
+01:16:09,110 --> 01:16:12,650
+because we have so much RAM and so
+much CPU available to us these days,
+
+1600
+01:16:12,650 --> 01:16:14,880
+even though all of
+that stuff takes time,
+
+1601
+01:16:14,880 --> 01:16:18,450
+it is slower to run things
+in software than hardware,
+
+1602
+01:16:18,450 --> 01:16:23,710
+just as it's slower to use a mechanical
+device like a hard drive than RAM,
+
+1603
+01:16:23,710 --> 01:16:25,190
+something purely electronic.
+
+1604
+01:16:25,190 --> 01:16:27,490
+We have so many resources
+available to us.
+
+1605
+01:16:27,490 --> 01:16:29,920
+We humans are sort of invariantly slow.
+
+1606
+01:16:29,920 --> 01:16:33,840
+And so now the machines can do
+so much more per unit of time.
+
+1607
+01:16:33,840 --> 01:16:36,640
+We have these abilities
+to do things virtually.
+
+1608
+01:16:36,640 --> 01:16:39,120
+>> And I will say for courses
+I teach, for instance, here,
+
+1609
+01:16:39,120 --> 01:16:43,464
+we have about maybe a dozen or
+so total of virtual machines
+
+1610
+01:16:43,464 --> 01:16:45,880
+like that running at any given
+time doing front end stuff,
+
+1611
+01:16:45,880 --> 01:16:47,620
+doing back end stuff.
+
+1612
+01:16:47,620 --> 01:16:50,237
+We have all of our storage.
+
+1613
+01:16:50,237 --> 01:16:52,820
+So any videos, including things
+like this that we're shooting,
+
+1614
+01:16:52,820 --> 01:16:54,330
+we end up putting into the cloud.
+
+1615
+01:16:54,330 --> 01:16:58,710
+Amazon has services called Amazon S3,
+their simple storage service, which
+
+1616
+01:16:58,710 --> 01:17:00,397
+is just like disk space in the cloud.
+
+1617
+01:17:00,397 --> 01:17:02,230
+They have something
+called CloudFront, which
+
+1618
+01:17:02,230 --> 01:17:06,040
+is a CDN service, Content
+Delivery Network service, which
+
+1619
+01:17:06,040 --> 01:17:10,190
+means they take all of your files and
+for you automagically replicate it
+
+1620
+01:17:10,190 --> 01:17:11,290
+around the world.
+
+1621
+01:17:11,290 --> 01:17:12,780
+>> So they don't do it preemptively.
+
+1622
+01:17:12,780 --> 01:17:15,159
+But the first time someone
+in India requests your file,
+
+1623
+01:17:15,159 --> 01:17:16,700
+they'll potentially cache it locally.
+
+1624
+01:17:16,700 --> 01:17:19,325
+The first time in China, the
+first time in Brazil that happens,
+
+1625
+01:17:19,325 --> 01:17:20,880
+they'll start caching it locally.
+
+1626
+01:17:20,880 --> 01:17:22,730
+And you don't have to do any of that.
+
+1627
+01:17:22,730 --> 01:17:26,710
+And so it is so incredibly
+compelling these days to move things
+
+1628
+01:17:26,710 --> 01:17:27,890
+into the cloud.
+
+1629
+01:17:27,890 --> 01:17:31,890
+Because you have this ability literally
+to not have humans doing nearly as much
+
+1630
+01:17:31,890 --> 01:17:32,390
+work.
+
+1631
+01:17:32,390 --> 01:17:35,930
+And you literally don't need as many
+humans doing these jobs anymore--
+
+1632
+01:17:35,930 --> 01:17:38,450
+"ops," or operational roles, anymore.
+
+1633
+01:17:38,450 --> 01:17:43,150
+You really just need
+developers and fewer engineers
+
+1634
+01:17:43,150 --> 01:17:44,840
+who can just do things virtually.
+
+1635
+01:17:44,840 --> 01:17:46,590
+In fact, just to give
+you a sense of this,
+
+1636
+01:17:46,590 --> 01:17:51,800
+let me go to pricing for
+one other product here.
+
+1637
+01:17:51,800 --> 01:17:58,170
+Let's see something like CDN S3.
+
+1638
+01:17:58,170 --> 01:18:01,140
+So this is essentially a
+virtual hard drive in the cloud.
+
+1639
+01:18:01,140 --> 01:18:14,360
+And if we scroll down to pricing--
+so it's $0.007 per gigabyte.
+
+1640
+01:18:14,360 --> 01:18:16,300
+And that's-- how do we do this?
+
+1641
+01:18:16,300 --> 01:18:17,410
+I think that's per month.
+
+1642
+01:18:17,410 --> 01:18:21,530
+>> So if that's per month-- or per day?
+
+1643
+01:18:21,530 --> 01:18:23,200
+Dan, is this per day?
+
+1644
+01:18:23,200 --> 01:18:24,700
+This is per month, OK.
+
+1645
+01:18:24,700 --> 01:18:28,280
+So if this is per month--
+sorry, it's the $0.03 per month.
+
+1646
+01:18:28,280 --> 01:18:29,820
+There's 12 months out of the year.
+
+1647
+01:18:29,820 --> 01:18:32,250
+So how much data might
+you store in the cloud?
+
+1648
+01:18:32,250 --> 01:18:37,410
+A gigabyte isn't huge, but I
+don't know, like 1 terabyte,
+
+1649
+01:18:37,410 --> 01:18:38,460
+so like 1,000 of those.
+
+1650
+01:18:38,460 --> 01:18:39,501
+That's not all that much.
+
+1651
+01:18:39,501 --> 01:18:44,382
+It's $368 to store a terabyte
+of data in Amazon's cloud.
+
+1652
+01:18:44,382 --> 01:18:46,090
+So what are some of
+the trade offs, then?
+
+1653
+01:18:46,090 --> 01:18:47,970
+It can't all be good.
+
+1654
+01:18:47,970 --> 01:18:52,260
+Nothing we've talked about today is
+sort of without a catch or a cost.
+
+1655
+01:18:52,260 --> 01:18:55,269
+So what's bad about moving
+everything into the cloud?
+
+1656
+01:18:55,269 --> 01:18:56,060
+AUDIENCE: Security.
+
+1657
+01:18:56,060 --> 01:18:57,721
+DAVID MALAN: OK, what do you mean?
+
+1658
+01:18:57,721 --> 01:18:58,596
+AUDIENCE: [INAUDIBLE]
+
+1659
+01:18:58,596 --> 01:19:01,589
+
+1660
+01:19:01,589 --> 01:19:02,630
+DAVID MALAN: Yeah, right.
+
+1661
+01:19:02,630 --> 01:19:05,130
+And do you really want
+some random engineers
+
+1662
+01:19:05,130 --> 01:19:08,750
+at Amazon that you'll never meet having
+physical access to those computers,
+
+1663
+01:19:08,750 --> 01:19:11,010
+and if they really
+wanted, virtual access?
+
+1664
+01:19:11,010 --> 01:19:15,070
+And even though in
+theory software-- well,
+
+1665
+01:19:15,070 --> 01:19:17,442
+encryption can absolutely
+protect you against this.
+
+1666
+01:19:17,442 --> 01:19:19,150
+So if what you're
+storing on your servers
+
+1667
+01:19:19,150 --> 01:19:21,470
+is encrypted-- less of a concern.
+
+1668
+01:19:21,470 --> 01:19:25,010
+>> But as soon as a human has physical
+access to a machine, encryption aside,
+
+1669
+01:19:25,010 --> 01:19:26,100
+all bets are sort of off.
+
+1670
+01:19:26,100 --> 01:19:28,240
+You might know from yesteryear
+that PCs especially,
+
+1671
+01:19:28,240 --> 01:19:30,360
+even if you had those things
+called "BIOS passwords,"
+
+1672
+01:19:30,360 --> 01:19:33,360
+were when your desktop booted up,
+you'd be prompted with a password that
+
+1673
+01:19:33,360 --> 01:19:35,980
+has nothing to do with
+Windows, you can typically
+
+1674
+01:19:35,980 --> 01:19:39,750
+just open the chassis of the
+machine, find tiny little pins,
+
+1675
+01:19:39,750 --> 01:19:42,240
+and use something called
+a jumper and just connect
+
+1676
+01:19:42,240 --> 01:19:45,690
+those two wires for about a second,
+thereby completing a circuit.
+
+1677
+01:19:45,690 --> 01:19:47,360
+And that would eliminate the password.
+
+1678
+01:19:47,360 --> 01:19:49,800
+>> So when you have physical access to a
+device, you can do things like that.
+
+1679
+01:19:49,800 --> 01:19:51,110
+You can remove the hard drive.
+
+1680
+01:19:51,110 --> 01:19:53,060
+You can gain access to it that way.
+
+1681
+01:19:53,060 --> 01:19:55,442
+And so this is why, in
+the case of Dropbox,
+
+1682
+01:19:55,442 --> 01:19:57,900
+for instance, it's a little
+worrisome that not only do they
+
+1683
+01:19:57,900 --> 01:20:02,860
+have the data, even though it's
+encrypted, they also have the key.
+
+1684
+01:20:02,860 --> 01:20:04,993
+Other worries?
+
+1685
+01:20:04,993 --> 01:20:08,430
+>> AUDIENCE: [INAUDIBLE]
+
+1686
+01:20:08,430 --> 01:20:27,740
+
+1687
+01:20:27,740 --> 01:20:30,240
+DAVID MALAN: Yeah, it's very
+true-- the Googles, the Apples,
+
+1688
+01:20:30,240 --> 01:20:31,406
+the Microsofts of the world.
+
+1689
+01:20:31,406 --> 01:20:34,400
+And in fact, how long have
+you had your iPhone for?
+
+1690
+01:20:34,400 --> 01:20:35,885
+Yeah, give or take.
+
+1691
+01:20:35,885 --> 01:20:36,760
+AUDIENCE: [INAUDIBLE]
+
+1692
+01:20:36,760 --> 01:20:37,780
+DAVID MALAN: I'm sorry?
+
+1693
+01:20:37,780 --> 01:20:39,667
+You're among those who
+has an iPhone, right?
+
+1694
+01:20:39,667 --> 01:20:40,250
+AUDIENCE: Yes.
+
+1695
+01:20:40,250 --> 01:20:42,208
+DAVID MALAN: How long
+have you had your iPhone?
+
+1696
+01:20:42,208 --> 01:20:43,372
+AUDIENCE: [INAUDIBLE]
+
+1697
+01:20:43,372 --> 01:20:45,080
+DAVID MALAN: OK, so
+Apple literally knows
+
+1698
+01:20:45,080 --> 01:20:49,030
+where you've been every hour of
+the day for the last five years.
+
+1699
+01:20:49,030 --> 01:20:51,112
+>> AUDIENCE: [INAUDIBLE]
+
+1700
+01:20:51,112 --> 01:20:54,626
+
+1701
+01:20:54,626 --> 01:20:56,375
+DAVID MALAN: Which is
+a wonderful feature.
+
+1702
+01:20:56,375 --> 01:20:57,860
+AUDIENCE: [INAUDIBLE]
+
+1703
+01:20:57,860 --> 01:21:00,875
+DAVID MALAN: Yeah, but
+trade off for sure.
+
+1704
+01:21:00,875 --> 01:21:01,750
+AUDIENCE: [INAUDIBLE]
+
+1705
+01:21:01,750 --> 01:21:04,720
+
+1706
+01:21:04,720 --> 01:21:07,813
+>> DAVID MALAN: Yeah, it's very easy to.
+
+1707
+01:21:07,813 --> 01:21:08,688
+AUDIENCE: [INAUDIBLE]
+
+1708
+01:21:08,688 --> 01:21:12,040
+
+1709
+01:21:12,040 --> 01:21:13,248
+DAVID MALAN: Other downsides?
+
+1710
+01:21:13,248 --> 01:21:16,995
+AUDIENCE: [INAUDIBLE]
+
+1711
+01:21:16,995 --> 01:21:26,151
+
+1712
+01:21:26,151 --> 01:21:27,900
+DAVID MALAN: Absolutely--
+technologically,
+
+1713
+01:21:27,900 --> 01:21:31,550
+economically, it's pretty compelling to
+sort of gain these economies of scale
+
+1714
+01:21:31,550 --> 01:21:33,579
+and move everything into
+the so-called cloud.
+
+1715
+01:21:33,579 --> 01:21:35,870
+But you probably do want to
+go with some of the biggest
+
+1716
+01:21:35,870 --> 01:21:39,380
+fish, the Amazons, the Googles, the
+Microsofts-- Rackspace is pretty big--
+
+1717
+01:21:39,380 --> 01:21:42,200
+and a few others, and not
+necessarily fly by night folks
+
+1718
+01:21:42,200 --> 01:21:45,640
+for whom it's very easy to do
+this kind of technique nowadays.
+
+1719
+01:21:45,640 --> 01:21:49,140
+And that's whom you can
+pay $5.99 per month to.
+
+1720
+01:21:49,140 --> 01:21:50,890
+But you'll certainly
+get what you pay for.
+
+1721
+01:21:50,890 --> 01:21:54,014
+>> When you say [INAUDIBLE], that's when
+things like these five nines come up,
+
+1722
+01:21:54,014 --> 01:21:58,017
+whereby even if technologically
+we can't really guarantee 99.999,
+
+1723
+01:21:58,017 --> 01:22:00,350
+we'll just build in some kind
+of penalty to the contract
+
+1724
+01:22:00,350 --> 01:22:03,910
+so that if that does happen, at least
+there's some cost to us, the vendor.
+
+1725
+01:22:03,910 --> 01:22:07,950
+And that's what you would typically
+be getting them to agree to.
+
+1726
+01:22:07,950 --> 01:22:09,590
+>> AUDIENCE: [INAUDIBLE]
+
+1727
+01:22:09,590 --> 01:22:12,290
+>> DAVID MALAN: And the
+one sort of blessing
+
+1728
+01:22:12,290 --> 01:22:15,630
+is that even when we go down, for
+instance, or even certain companies,
+
+1729
+01:22:15,630 --> 01:22:17,800
+the reality is Amazon,
+for instance, has so many
+
+1730
+01:22:17,800 --> 01:22:21,780
+darn customers, well-known customers,
+operating out of certain data centers
+
+1731
+01:22:21,780 --> 01:22:26,224
+that when something really goes wrong,
+like acts of God and weather and such,
+
+1732
+01:22:26,224 --> 01:22:29,390
+if there's any sort of silver lining,
+it's that you're in very good company.
+
+1733
+01:22:29,390 --> 01:22:30,680
+Your website might be offline.
+
+1734
+01:22:30,680 --> 01:22:32,750
+But so is like half of
+the popular internet.
+
+1735
+01:22:32,750 --> 01:22:36,230
+And so it's arguably a little
+more palatable to your customers
+
+1736
+01:22:36,230 --> 01:22:38,780
+if it's more of an internet
+thing than an acme.com thing.
+
+1737
+01:22:38,780 --> 01:22:41,780
+But that's a bit of a cheat.
+
+1738
+01:22:41,780 --> 01:22:46,740
+>> So in terms of other things to look at,
+just so that we don't rule out others,
+
+1739
+01:22:46,740 --> 01:22:51,210
+if you go to Microsoft Azure, they
+have both Linux and Windows stuff
+
+1740
+01:22:51,210 --> 01:22:53,190
+that's comparable to Amazon's.
+
+1741
+01:22:53,190 --> 01:22:57,540
+If you go to Google Compute Engine,
+they have something similar as well.
+
+1742
+01:22:57,540 --> 01:23:00,500
+And just to round out
+these cloud offerings,
+
+1743
+01:23:00,500 --> 01:23:02,762
+I'll make mention of one other thing.
+
+1744
+01:23:02,762 --> 01:23:04,720
+This is a popular website
+that's representative
+
+1745
+01:23:04,720 --> 01:23:08,590
+of a class of technologies.
+
+1746
+01:23:08,590 --> 01:23:12,350
+The ones we just talked
+about, Amazon, would be IAAS,
+
+1747
+01:23:12,350 --> 01:23:17,150
+Infrastructure As A Service, where you
+sort of physical hardware as a service.
+
+1748
+01:23:17,150 --> 01:23:18,757
+There's SAAS.
+
+1749
+01:23:18,757 --> 01:23:20,090
+Actually, let me jot these down.
+
+1750
+01:23:20,090 --> 01:23:23,290
+
+1751
+01:23:23,290 --> 01:23:28,190
+>> IAAS-- Infrastructure
+As A Service, SAAS,
+
+1752
+01:23:28,190 --> 01:23:31,870
+and PAAS, which are
+remarkably confusing acronyms
+
+1753
+01:23:31,870 --> 01:23:34,400
+that do describe three
+different types of things.
+
+1754
+01:23:34,400 --> 01:23:36,400
+And the acronyms themselves
+don't really matter.
+
+1755
+01:23:36,400 --> 01:23:38,360
+This is all of the cloud stuff
+we've just been talking about,
+
+1756
+01:23:38,360 --> 01:23:41,570
+the lower level stuff, the
+virtualization of hardware and storage
+
+1757
+01:23:41,570 --> 01:23:44,890
+in the so-called cloud, whether it's
+Amazon, Microsoft, Google, or other.
+
+1758
+01:23:44,890 --> 01:23:47,270
+>> Software as a service--
+all of us kind of use this.
+
+1759
+01:23:47,270 --> 01:23:49,810
+If you use Google Apps
+for Gmail or calendaring,
+
+1760
+01:23:49,810 --> 01:23:52,530
+any of these web-based
+applications that 10 years ago we
+
+1761
+01:23:52,530 --> 01:23:55,560
+would have double clicked icons on
+our desktop, software as a service
+
+1762
+01:23:55,560 --> 01:23:57,400
+is now really web application.
+
+1763
+01:23:57,400 --> 01:24:00,110
+And platform as a
+service kind of depends.
+
+1764
+01:24:00,110 --> 01:24:03,140
+>> And one example I'll give you here
+in the context of cloud computing--
+
+1765
+01:24:03,140 --> 01:24:06,250
+there's one company that's quite
+popular these days, Heroku.
+
+1766
+01:24:06,250 --> 01:24:08,940
+And they are a service,
+a platform, if you will,
+
+1767
+01:24:08,940 --> 01:24:11,730
+that runs on top of
+Amazon's infrastructure.
+
+1768
+01:24:11,730 --> 01:24:15,800
+And they just make it even easier
+for developers and engineers
+
+1769
+01:24:15,800 --> 01:24:18,330
+to get web-based applications online.
+
+1770
+01:24:18,330 --> 01:24:22,170
+>> It is a pain, initially, to use
+Amazon Web Services and other things.
+
+1771
+01:24:22,170 --> 01:24:24,170
+Because you actually have
+to know and understand
+
+1772
+01:24:24,170 --> 01:24:27,617
+about databases and web servers and
+load balancers and all the stuff
+
+1773
+01:24:27,617 --> 01:24:28,450
+I just talked about.
+
+1774
+01:24:28,450 --> 01:24:32,780
+Because all Amazon has done is not
+hidden those design challenges.
+
+1775
+01:24:32,780 --> 01:24:35,790
+They've just virtualized them
+and move them into a browser,
+
+1776
+01:24:35,790 --> 01:24:37,770
+into software instead of hardware.
+
+1777
+01:24:37,770 --> 01:24:43,020
+>> But companies like Heroku and other
+PAAS providers, Platform As A Service,
+
+1778
+01:24:43,020 --> 01:24:46,900
+they use those barebone fundamentals
+that we just talked about,
+
+1779
+01:24:46,900 --> 01:24:50,340
+and they build easier to
+use software on top of it
+
+1780
+01:24:50,340 --> 01:24:54,241
+so that if you want to get a web-based
+application online these days,
+
+1781
+01:24:54,241 --> 01:24:55,990
+you certainly have to
+know how to program.
+
+1782
+01:24:55,990 --> 01:25:00,280
+You need to know Java or Python or PHP
+or Ruby or a bunch of other languages.
+
+1783
+01:25:00,280 --> 01:25:02,180
+>> But you also need a place to put it.
+
+1784
+01:25:02,180 --> 01:25:04,790
+And we talked earlier about
+getting a web hosting company.
+
+1785
+01:25:04,790 --> 01:25:08,630
+That's sort of the like mid-2000s
+approach to getting something online.
+
+1786
+01:25:08,630 --> 01:25:12,140
+Nowadays you might instead pay someone
+like Heroku a few dollars a month.
+
+1787
+01:25:12,140 --> 01:25:15,370
+And essentially, once you've
+done some initial configuration,
+
+1788
+01:25:15,370 --> 01:25:18,704
+to update your website, you
+just type a command in a window.
+
+1789
+01:25:18,704 --> 01:25:21,370
+And whatever code you've written
+here on your laptop immediately
+
+1790
+01:25:21,370 --> 01:25:24,350
+gets distributed to any number
+of servers in the cloud.
+
+1791
+01:25:24,350 --> 01:25:26,440
+>> And Heroku takes care of
+all of the complexity.
+
+1792
+01:25:26,440 --> 01:25:28,930
+They figure all the database
+stuff, all the load balancing,
+
+1793
+01:25:28,930 --> 01:25:31,480
+all of the headaches that we've
+just written on the board,
+
+1794
+01:25:31,480 --> 01:25:33,320
+and hide all of that for you.
+
+1795
+01:25:33,320 --> 01:25:36,170
+And in return, you just
+pay them a bit more.
+
+1796
+01:25:36,170 --> 01:25:39,810
+So you have these infrastructures as
+a service, platforms as a service,
+
+1797
+01:25:39,810 --> 01:25:41,400
+and then software as a service.
+
+1798
+01:25:41,400 --> 01:25:45,390
+It's, again, this
+abstraction or layering.
+
+1799
+01:25:45,390 --> 01:25:51,187
+>> Any questions on the cloud or
+building one's own infrastructure?
+
+1800
+01:25:51,187 --> 01:25:52,270
+All right, that was a lot.
+
+1801
+01:25:52,270 --> 01:25:54,200
+Why don't we go ahead and
+take our 15 minute break here.
+
+1802
+01:25:54,200 --> 01:25:57,241
+We'll come back with a few new concepts
+and a bit of hands-on opportunity
+
+1803
+01:25:57,241 --> 01:25:59,110
+before the evening is over.
+
+1804
+01:25:59,110 --> 01:26:00,332
+

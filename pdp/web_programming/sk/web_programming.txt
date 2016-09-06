@@ -1,0 +1,423 @@
+DAVID Malan: Dobre, sme späť. Takže pre vzrušujúce záver, náš posledný úsek na webové programovanie, ktoré som myslel, že by sme používať ako všeobecný termín zachytiť niekoľko zostávajúcich tém. Takže na konci deň, budeme vlastne robiť trochu hands-on programovanie pre web s jazykom volal JavaScript. A myslím, že my sa pozrieme na niečo, čo súvisí s obrazmi a objavovanie niečoho tajne skryté v obraze, a tiež sa pozrieť na Google Maps API, aplikačné programové rozhranie, ako niečo, reprezentatívne pre typ softvéru To je stále viac a voľne k dispozícii dnes. 
+
+Ale prečo by sme sa pozrieť pri prísada do tohto sveta že sme boli trochu brať ako samozrejmosť existuje na nejakú dobu, databázy. Za posledný deň a pol sme sa predpokladať, že máme prístup k databáze, ale aký problém sa databázy vyriešiť? Čo to robí pre nás? Čo je to? 
+
+Divákov: [nepočuteľné] DAVID Malan: Pojme všetky informácie, OK a aké druhy informácií Možno ste dal v ňom? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Všetky informácie dáte do nej, dostanete späť. To je pravda. A na typické webové stránky alebo web Aplikácie, aké druhy informácií, špecificky, môžete dať? Divákov: [nepočuteľné] DAVID Malan: Používatelia. Takže to, čo je užívateľ? 
+
+Divákov: [nepočuteľné] DAVID Malan: OK, zapísaná Užívateľ webu. A čo to znamená Úložisko informácií užívateľov? Čo komponuje používateľa? Užívateľ má čo? Divákov: [nepočuteľné] DAVID Malan: Jo, osobné Údaje, a to sa mi páči. Buďme presnejšie. Takže užívateľ má zvyčajne názov, čo iného by mohol používateľ mať? Divákov: [nepočuteľné] DAVID Malan: an addr-- OK, takže prvé meno, priezvisko. To je dobré. V skutočnosti, poďme opraviť , Pretože to sa deje otvoriť príležitosť pre diskusie, ešte ďalej. Krstné meno, priezvisko, pohlavie. ID nejakého druhu. Čo ešte? Počul som niečo iné predtým, taky. E-mail, poštová adresa. 
+
+Takže poďme tam pauzu a teraz považujú nie to, čo sme ukladanie v databáze, ale- a nie je dôvod, prečo, pretože je možná zrejmé, že akonáhle sa zaregistrujete užívateľa, Ak chcete pamätať na nejakú dobu. Nechcete, aby ju len byť uložený v pamäti RAM a byť tak forgotten-- zamerajme na how. 
+
+Ukazuje sa, že v svet databáz, tú aspoň dva typy týchto dňoch. Niečo, čo nazýva SQL databáze, Štruktúrovaný Dopytovací Jazyk, alebo cutely pomenovaný, NoSQL, ktorý nie je SQL. A ten je príkladom toho, čo by mohlo nazvať objektovo orientovaný, alebo sklad objekt, databázy ktorý uchováva objekty, a nie výhovorkou me, ako skoro uvidíme, riadky. 
+
+Takže sa budeme sústrediť len na krátky okamih na Prvý z nich, a síce, SQL databázy, aj keby len preto, že je tak známy už nikomu kto používa Excel alebo Tabuľky Google alebo Apple Čísla alebo akýkoľvek štandardný tabuľkový kalkulátor, alebo ekvivalentne, alebo viac sofistikovane, niečo ako Microsoft Access alebo Oracle alebo MySQL alebo PostgreSQL, z ktorých všetky sú názvy produktov pre implementácie z nasledujúceho nápadu. 
+
+Relačnej databázy je jednoducho niečo, čo má riadkov a stĺpcov. A riadkov a stĺpcov, Doslova som na mysli niečo takto, tak kde by sme mohli mať názov poľa a svojho druhu tu. A skutočne, nechaj ma teraz začínajú mapovať tieto. Takže vlastne neviem Preto som nakreslil samostatný graf. Skúsme udržať tento jednoduchý. 
+
+Máme právo tu Počiatky nášho stola, kde To je názov poľa a to je dátový typ, a podľa typu mám na mysli nasledujúce. Je to číslo, je to reťazec, krátky reťazec ako slovo, Je to bod, je to binárne údaje, ako obrázok? A nech to len dráždiť toto od seba na chvíľu. Takže prvé meno, číslo, string, veľký kus text-- Divákov: [nepočuteľné] DAVID Malan: Áno, tak reťazec. A v kontexte databázy, zmienime obvykle nazývajú toto pole char. Budem len povedať, char nateraz ale my sme bude rafinovať to za chvíľu. Charakter terénu. Posledný názov je pravdepodobne rovnaký. Pohlavie? 
+
+Muž alebo žena, tak to môže byť pole char. Mohlo by to byť buď citát, koniec citátu "Mužské" alebo citát, koniec citátu "ženské" alebo to môže byť m alebo f. Ak chcete byť viac inkluzívny, Možno budete potrebovať tretiu hodnotu alebo nejaký druh iné oblasti úplne. A tak môžete použiť true false. Pole by sa dalo nazvať mužskej a potom by sa dalo povedať true alebo false. Ale nemusí nutne zachytiť všetky informácie, ktoré by vás mohli chcieť. 
+
+Tak to dopadá je tu iný typ pole, ktoré by mohli byť užitočné tu v typickom databáze, nazvaný ENUM, pokiaľ sa jedná o pole znak, ale tie, ktoré navrhujú, dostať zoznam možných hodnôt, ako citát, koniec citátu "mužské", citujem: unquote "ženské", a tak ďalej. Takže bez ohľadu na hodnotu je v databáze, je skutočne znakových, avšak musí byť jedna z týchto hodnôt. Pravdepodobne by sme nechceli ENUM pre krstné meno alebo priezvisko. V opačnom prípade budeme mať výpočet, ako názov pochádza z doslova každý je to možné krstné meno a priezvisko. 
+
+OK, takže ID čo by malo byť ID? Áno, možno celý rad. Takže poďme držať sa že pre túto chvíľu, číslo. A podľa čísla, číslo je trochu príliš široká teraz. Na konci druhého deň, mám pocit, že sme malo byť o niečo presnejšie. Počet mohlo znamenať podobne, ho by mohlo byť niečo ako 1,236. A to asi nebude Čo máme na mysli ID. Čo máme na mysli pravdepodobne pomocou ID? 
+
+Divákov: [nepočuteľné] DAVID Malan: Oh, OK, takže Možno to nie je ani číslo. Možno je to skutočne jedinečný identifikátor to je reťazec, rovnako ako užívateľské meno. Takže absolútne, by mohol byť. Myslím, že niekto pravdepodobne znamenalo numerický, hoci. Takže poďme zostať s tým. Aké číslo? Čo je viac precise-- celé číslo. Takže celá rada, ako 0, 1, 2, 3, takže budeme nazývať celé číslo. A aj potom, by som mohol byť hľadanie hníd, to je Nie je naozaj len Všeobecne číslo chcete. Pravdepodobne nechcú záporných hodnôt, len preto, že to jednoducho divné. Pravdepodobne budete chcieť kladné celé čísla. Takže môžete tiež vyjadriť že v databáze, ale teraz, budeme hovoriť číslo. 
+
+E-mail? To je pravdepodobne prostě-- Čože? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Je to e-mail, ale to postavy, nie? Má proste funky charakter ako "AT" symbol alebo niečo iné, ale je to stále pole znak. A poštová adresa? Charakter terénu. Tak to je pekný začiatok, ale buďme trochu presnejšie dnes. 
+
+Tak to dopadá, že vo databázy, často majú na výber cez jemnejšie verzie týchto vecí. V skutočnosti, v typickom SQL databázy, SQL, alebo všeobecnejšie, relačné databázy, databáz s radmi a stĺpy, často dostať určiť nielen na type field-- dovoľte mi urobiť nejaké miestnosti here-- ale aj dĺžka. 
+
+Tak, ako je krstné meno? Myslím, že D-A-V-I-D. OK, to mám ja Pravdepodobne práve urazil ako polovicu ľudí v miestnosti, vpravo, pretože vaše mená sú dlhšie ako päť listy, takže päť zdá byť trochu sebec a naivná, takže to, čo je lepšie hodnota? 10, v poriadku, a myslím, Sme v poriadku v miestnosti. 13? 30? Prečo nemôžem vziať Prístup skôr, keď sme hovorili o polia a pamäti? Prečo nie ja len povedať, ako 1000? Názov nikto sa deje byť dlhší ako 1,000. Tlačiť späť. 
+
+Divákov: [nepočuteľné] DAVID Malan: Jo, je to nehospodárne, vpravo, zvlášť ak väčšina názvy sú len päť alebo desať alebo 15 znakov, že je to veľmi nehospodárne. Tak viete čo? To je trochu ťažká otázka. Teraz môžeme určite analyzovať anglicky a názvy akomkoľvek inom jazyku je a prísť na to, no, čo je average-- priemer nie je naozaj pomôcť us-- čo je max je asi to, čo naozaj chceme. Ale ukazuje sa, máme dokonca niektorí voľba nad Sem. 
+
+V typickom SQL databázy, budete majú niečo, čo nazýva char poľa a tiež varchar, V-A-R, variabilné pole char. A rozdiel je to. Char pole, tie, ktoré navrhujú, musieť zadať vopred Presná dĺžka poľa. Takže možno krstné meno rovnako ako 20 cíti trochu bezpečia. Možno budete musieť urobiť nejaké googling na uvidíme, či to stačí skutočne bezpečné. Tam je zrejme názov s 21 znaky, ale teraz, predpokladám 20 je v bezpečí. 
+
+Pole char by znamenalo v databáze, ktorá vám Používate 20 a vždy 20 znakmi. Teraz, keď je to len D-A-V-I-D, 15 z nich sú len bude prázdne znaky, ale stále používate všetkých 20 bajtov. Varchar poľa, naopak znamená, že reťazec by mal byť až 20 znakov ale keď je to len päť, ste len bude používať päť, možno šesť Aby Špeciálna hodnota na konci, ako ten 0 sme diskutovali, že znamená koniec znaku sekvencie v pamäti. 
+
+Takže keď si o tom myslíš môžete si vybrať char proti varcharNebo vzhľadom na to, že trade-off? Char používa toľko charakterov, varchar používa viac ako toľko charakterov. Divákov: [nepočuteľné] DAVID Malan: OK, keď viete, že dĺžka reťazca celkom presvedčivé stačí použiť char, pretože v prípade, ty to vieš, proste dať dole. A možno, že to platí aj pre zips kód, v Spojených štátoch, prinajmenšom, 02138, je to vždy bude päť znaky, kým sa pridať pomlčku štyri. Ale môžete mať nejaké hodnoty ktoré vždy viete dĺžku. Alebo štátne symboly, ako NY do New Yorku, a MA Massachusetts v USA. Možno ste si nejaké situácie kde to je úplne rozumné, ale podľa tejto logiky, prečo sú dokonca sme overthinking to? Prečo nie my stačí použiť varchar a potom sme len bude Vždy použite dve postavy tak ako tak, alebo Vždy použite päť znakov vlastne je? Prečo nie len uložiť varchar pre všetko tým, že touto logikou? Tam musí byť nejaký háčik. Divákov: [nepočuteľné] DAVID Malan: Could napísať niečo zlé. Takže je to pravda. Ale aj vtedy, nemôžu používať viac pamäte, než som prideliť. Stále mám finále povedať, po celej dĺžke, takže nemôžu náhodne robiť že chyba, ale dobrá myšlienka. Je to jemnejšie, ale je to veľmi príbuzné do našej diskusie, vlastne polí a spojových zoznamov skôr. 
+
+Ukazuje sa, že v databáze, ak vie, že všetky hodnoty sú pevnú dĺžku, a to aj v prípade, niektoré z týchto hodnôt sú prázdne, druh esteticky prázdny, D-A-V-I-D a potom 15 polotovary, Ukazuje sa, že ak by každý pole má rovnakú dĺžku, podobne ako pole mala všetky svoje veci chrbtom k sebe, aby chrbtom k sebe tak, aby môžete len plus 1 sa dostať do ďalšej hodnota Rovnaká myšlienka v tabuľke databázy. Ak sú všetky vaše postava Reťazce sú rovnako dlhé, Máte to, čo sa nazýva random access. Ak sú všetky reťazce sú Dĺžka 20, vy nie len robiť plus 1 stačí urobiť navyše 20 plus 20 plus 20 plus 20, a môžete veľmi rýchlo listovať alebo prehľadávať všetky vaše dáta. 
+
+Premenná pole char, naopak, nemá vždy 20 znakov. To môže mať 20 a potom 15 a potom 19 a potom 10, a tak ak chcete vyhľadávať cez to, nemôžeš len slepo pridá sa 20 bajtov sa dostať na ten budúci. Doslova musieť prehľadávať preto, že okraj dátové štruktúry, ak chcete, je členitý. Je to trochu ide dovnútra a von vychádza na skutočnú dĺžku reťazca. Takže keď viete, dĺžku, ako Kareem hovorí, použiť pole char, pretože získavaš účinnosť je schopný prehľadávať rýchlejšie keď hľadáte pre dáta, ktoré, inak používať premenné. 
+
+Bohužiaľ, nemám dobrú odpoveď na tom, ako dlho by mal byť názov, ale na niečo také meno, povedal by som, VARCHAR je obyčajný pretože to nebude byť pevnou dĺžkou pre každého. 20, neviem, 20 cíti trochu tesný. Povedzme, 50, 50. To nie je naozaj niečo stať, že oveľa viac, povedzme 50 miesto 40, ale na nejakom mieste, budete potrebovať urobiť úsudok volanie. 
+
+Veľmi časté, úprimne povedané, pre [? Historický?] Dôvody, aj keď je to prehnané, teda 255, pretože pred nejakým časom, v populárnych databázových systémov, ako MySQL, bezplatný open source nástroj že mnoho spoločností rovnako ako aj Facebook používa, to je maximálna predvolená takže ľudia jednoducho išiel s ním. Takže nie je nerozumné, ale budeme použite trochu viac intuíciu a povedať, či 50, to je asi trochu prehnané. 
+
+Pohlavia, mám rád ENUM, a tak môžeme teda vymenovať mužom alebo ženou alebo možno efektívnejšie, m alebo f alebo nejaký iný symbolika, ale Výpočet cíti ako dobrá voľba tam. Aby bolo jasno, pohlavie by mohol byť len varchar A mohli by sme jednoducho všetko Súhlasíte s tým, ako milí ľudia, vždy dať rovnaké hodnoty tam. Muž alebo žena, alebo ktovie čo ešte. 
+
+Ale problém teda je, že sme mohli urobiť chybu, pretože [nepočuteľné] navrhla skôr v inom kontexte. Ak urobíme chybu, mohli by sme získať nesprávne hodnoty v našej databáze. Takže to, čo je pekné o databázach ako Oracle a MySQL a ďalšie, je, že máte táto posledná Vrstva obranu kde administrátor DBA, databázy, kto je navrhovanie tejto tabuľky ako my sú slovne, mohli dať na miesto ENUM, že chráni proti tomu zadaním muž, žena, a tak nikto inde nie programátor môže náhodne vložiť inú hodnotu. Takže by to byť dobrá vec. To je vlastnosť. 
+
+Takže ID, za predpokladu, že číselný identifikátor, Pravdepodobne by malo byť kladné celé číslo. A my niekedy majú príležitosťou na diskusiu o dĺžku. Vy nie typicky zadať číslo tu, by ste namiesto toho určiť, to je int, alebo veľký int, pretože sú typicky volal. Ale typicky, celé číslo by bolo, povedzme, 4 bajty. A či je to 4 bajty, To je, koľko bitov? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: 32 bitov. Tak koľko užívateľov môžeme mať v naše databázy v prípade, že všetci majú identifikátor a toto číslo musí byť jedinečný? 32 bitov znamená, že máme vzory jeden, dva, tri, štyri, five-- Tak ako veľa rôznych vzorov z núl a tie môžete mať, ak existujú 32? To je to isté ako pýtať, čo to dva na 32? Je to veľké číslo, ktoré Nemôžem dosť dostať v poriadku, ale viem, že je to zhruba 4 miliardy. Takže to znamená, že vaša databáza tabuľka môže majú štyri miliardy užívateľov a to je všetko. 
+
+Takže je to zaujímavá Design implikácie. Slušný počet spoločností sa rozhodli, možno nie toľko k ich stolu užívateľa, pretože majú 4 miliardy užívateľov je vzácny problém. To je akýsi Facebook štýlu Problém, nie je typický spoločnosť problém. Ale možno, ak máte protokolov transakcií alebo nejaký druh dát, ktoré sa neustále dostane zapísaný do databázy že absolútne mohla mať miliardy a miliardy riadkov, a Ak použijete číslo na to, čo sa stane, akonáhle dostanete do riadku číslo 4 miliardy a potom skúste vložiť 4000000000. a 1, tak povediac? Ja zjednodušenie čísla trochu. 
+
+Môžete znížiť späť, mám na mysli vás musieť zvládnuť nejako. A aký počítač bude typicky robiť, premýšľať o tom ani z dnešného rána, ak máte 4-bitovú hodnotu ako 1, 1, 1, 1, ktorý, len zviazať ráno spoločne popoludní, čo nemá toto číslo predstavuje v binárnej? OK, budeme robiť to jednoduchšie. Čo toto číslo predstavujú v binárnej? OK, budeme robiť to jednoduchšie, aká to predstavuje v binárnej? Divákov: Tri. DAVID Malan: Tri, pretože máme tie column-- [Smiech], Uff! Mali sme stĺpec ones a stĺpec dvojky. Takže predpokladám, že skutočne naše [? infield?] neboli 32 bitov, ale to bolo dva bity, môžeme počítať od užívateľa číslo 0, 1, 2, 3, a potom sme trochu späť k užívateľovi 00 znova. Tak toto je to, čo zvyčajne sa stane. Ak ste niekedy počuli expression-- Pravdepodobne nie, ale ak have-- integer overflow, kde vás zachovať obracející všetky svoje bity byť najväčšie možné hodnoty, a potom ste mimo bitov, čo by sa obvykle stalo? Prečo to hovorím 00? No, to je tri. Ako môžem reprezentovať štyri? Ako môžem reprezentovať pre číslo 4 v binárnej? Divákov: [nepočuteľné] DAVID Malan: One-- jo, Nehovorte 100 samy o sebe, pretože má zlý konotácie, ale 1-0-0. Takže číslo 1-0-0 je vskutku v poriadku, ale ak máte len dva bity, Čo ste vlastne urobil? Vy ste sa prevalil na 00. A vskutku, že to, čo by sa stalo. V skutočnosti si môžete myslieť o tom známejší. Ak si spomínate, čo, pred 16 rokmi, svet mal skončiť, keď Problém Y2K stalo. Prečo tomu tak bolo? No väčšina počítačov, pre rozumné rozhodnutie, bolo ukladanie čísel podobne ako rok 1975 alebo rok 1999 len pomocou dvoch číslic V pamäti počítača. Takže samozrejme, čo sa stane, keď sa dostanete do roku 2000, pôjdete do toho, alebo skôr, jo. Takže idete do roku 2000, ale v prípade, používate iba dve číslice to vyzerá rovnako ako v roku 00 a Takže si prevrátil. A to je dôvod, prečo mnoho systémov potreboval byť aktualizované v tej dobe. 
+
+Takže s tým povedal, firmy ako Facebook naráža na to. Takže jediný spôsob, ako zaobchádzať s Situácia, úprimne povedané, je to predvídať. Alebo najčistejšie spôsob, ako zvládnuť túto situáciu Je to predvídať, takže nemusíte musieť vykonať zmeny neskôr. Takže miesto 8 bajtov, viete čo? Ja budem pokrokové tu, aj keď je to trochu optimistický, že budeme mať 4 miliardy a 1 ľudí na našich webových stránkach. Ale poďme stačí použiť 8 bajtov, alebo 64 bitov, ktoré by vo všeobecnosti mali byť volal veľké číslo, veľmi technický. A to práve znamená, že môžete mať ešte viac číslic vášho čísla. Ale to je dôležitý Rozhodnutie dizajn, pretože ak si vybrať číslo, ktoré má príliš málo kúskov výraznosti by ste mohli skutočne vytvoriť chyba v softvéri. 
+
+V poriadku, takže môžeme zabaliť s e-maily a poštovú adresu. Tak e-mail, ako dlho by mal e-mailová adresa bude? 50. Naozaj netuším, ale je to Pravdepodobne niečo také, pretože inak nikto to bude napísať vás, ak sa dostane príliš dlho, takže 50, ideme s ním teraz. Adresa, ako dlho by to bolo? Divákov: [nepočuteľné] 
+
+DAVID Malan: Nejde len poštové smerovacie číslo, hoci. Poštová adresa, počul som. Takže to je ako 1 Brattle námestie, čiarka, Cambridge Mass., čiarka, 02138. A v skutočnosti, dovoľte mi stačí vytiahnuť up trochu listu tu. Tento pocit, ako by to premárnená príležitosť. Ak máme 1 Brattle námestie, čiarka, Cambridge MA 02138, Mám pocit, že môžeme robiť lepšie než len poštovú adresu. Prečo nie my explodovať to trochu? Čo mám ide? Čo by sme mali mať miesto Pre naše riadkov tu, snáď? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Jo, tak sa poďme nazývajú street_number, a podčiarkovník je len obyčajný spôsob, ako s čo vyzerá ako priestor, ale nie je to v skutočnosti. Street, a potom city-- ľúto? 
+
+Divákov: [nepočuteľné] DAVID Malan: Mohli by sme to urobiť. Linka jedno, riadok dva. Prečo sa budeme držať to jednoduché pre teraz, ale to je úplne prijateľné rozhodnutie. A potom stať, a potom sa poďme byť trochu US-centric nateraz a jednoducho poštové smerovacie číslo, len preto, bude to viesť k zaujímavým omylom alebo problém tu. Takže predpokladám, že teraz našu adresu. Je to trochu nepríjemné, že máme všetky tieto viac polí, ale teraz môžeme označiť veci trochu lepšie. 
+
+Takže teraz ulica číslo pravdepodobne by nemala byť char, by malo? Čo by to malo byť? Divákov: [nepočuteľné] DAVID Malan: Možno, že celá rada ako zase celé číslo? Veľkú integer? pravdepodobne nežijú na 4 miliardy Main Street alebo niečo šialené takhle. Takže celé číslo je pravdepodobne v poriadku, ale má niekoho kedy žil na adrese ako 1A Brattle námestia, alebo 1 a 1/2? Tieto veci existujú, bohužiaľ, aj keď ste tam žili, sú tieto anomálie ako byt 1A, 1B, 1C. Tak viete čo, my pravdepodobne by nemalo ísť s celým číslom, inak ideme stratiť niektoré predaja. 
+
+Char pole, možno? Neviem, ako dlho. To asi nebude Tak dlho, tak 10 alebo tak niečo. Nikto sa bude písať dlhšia číslo, možno. Ale opäť, mali by sme pravdepodobne dať viac myslel na to. Možno google, urobiť nejaký výskum, ale pôjdeme so svojimi vnútornosťami pre túto chvíľu. Ulíc, char, 50, neviem. Na nejakom mieste, nikto sa deje písať na obálke, taky, takže je to asi Niektoré horná hranica tam. City, rovnaký, jasne, takže char 50. 
+
+Štát môže byť US-centric zatiaľ. Takže by to mohlo byť zoznam, taký láskavý z úsudku, štátne. Mohlo by to byť ako dva znaky. Takže vlastne, možno, som si hovoril char. Asi som na mysli varchar, len na nejakú účinnosť, ale vrátime k toto rozhodnutie za chvíľu. Mohol by to byť char s dĺžkou 2 pre štát. Ak v Spojených štátoch, ktoré majú, rovnako ako MA, Massachusetts, NY, New York, NJ, New Jersey, a tak ďalej. Takže by to mohlo byť stanovená na to. DC pre Washington DC. 
+
+Ale myslím si, Olivier, budete Navrhovaná iný prístup. Divákov: [nepočuteľné] DAVID Malan: Jo, takže je to Trochu nepríjemné písať, ale zoznam by mohol dávať väčší zmysel, preto, že týmto spôsobom, aspoň v USA, by ste mohli vymenovať, ak zdĺhavo, ale to urobiť len raz v databáze a nikdy nebudete musieť premýšľať o tom, to sú všetky 50 dvoch-znakové kódy. Tak som rád ENUM. Držme sa, že tam, pretože Tak nejako presadzuje väčšiu prísnosť. A potom sa poštové smerovacie číslo? Myslím, že Andrew mal myšlienku na to Divákov: [nepočuteľné] DAVID Malan: Jo, päť alebo deväť. Povedzme, aby to jednoduché. Len to, päť pre túto chvíľu. Ale možno som mohol len robiť celé číslo, nie? Mohol by som, ale viete, čo som urobil Táto chyba raz, v istom zmysle. Pred rokmi som bol migráciu z Microsoft Outlook do služby Gmail, a Outlook má spôsob, ako export všetky svoje kontakty ako súbor programu Excel, CSV súboru, oddelené čiarkami súbor hodnôt. A ja som urobil chybu, ja myslím, dvojité kliknutím na neho, Raz som stiahol vývoz k dispozícii uistite sa, že to vyzeralo, ako som očakával. Musím mať hit uložiť alebo nechať auto-save kop alebo tak niečo. Pretože keď som potom importované to do Gmailu, to všetko funguje. Ale po celé roky, k tomuto dňu, a Urobil som to päť, pred 10 rokmi, Som stále nájsť priateľov, ktorí majú adresy, ktoré vyzerajú ako tento. Prečo? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Trvalo tlačidiel 0, no, skôr ju vzal celú poštové smerovacie číslo as veľké množstvo, a preto je predné 0, čo znamená, nemá žiadny význam. A tak 2138 sa zdá byť moje poštové smerovacie číslo. A to je, úprimne povedané, nepríjemné Excel Funkcia čím myslím, že v predvolenom nastavení, aj keby to znamenalo len byť text, Microsoft Excel rozhodne, nechaj ma byť užitočné, a oh, vidím len čísla. Poďme zaobchádzajú s tými ako čísla. A to skráti úvodnej nuly. 
+
+Prisahám bohu, každý pár mesiacov som nájsť adresu, a von z akejsi OCD, idem naspäť dovnútra a pridajte 0, aj keď som nikdy poslať ľuďom listy alebo čokoľvek. Ale ja stále nachádzame zvyšky toto. Takže to znamená, že je to dobrý nápad? OK, nie, pretože každý v Massachusetts, v tejto oblasti, bude mať O ich vedúci. Takže poďme sa ako char, pravdepodobne päť. 
+
+A tu, my si uvedomiť, mohol použiť ENUM a my mohol vymenovať 10,000 Možné poštových smerovacích čísel ale že sa cíti, ako by to zrejme kríženie linku, apod výhody. Ak máte na vstupe, ktorý veľa dát do databázy k ochrane proti niečomu. Takže char si uvedomil, stačí napísať v H-E-L-L-O ako vaše PSČ, ktorá nie je, samozrejme, numerické. Takže neexistuje žiadny spôsob, v typická databázy, špecifikovať iba číselné a len päť znakov, takže budeme mať k tomu, že v kóde. Budeme k tomu, že v PHP alebo Java alebo čokoľvek jazyka sme použitie na serveri vynútiť tento druh obmedzenia. 
+
+Whoo! V poriadku, takže všetky otázky ešte nie? Poďme rozhodovať iný vzor. Ukazuje sa, že vás Tiež si musíme vybrať, Pri navrhovaní databázy SQL, alebo typické relačné database-- kde Znovu, relačné len znamená riadkov a stĺpcov, To je, ako organizovať svoje data-- a uvedomiť si, že to, čo to znamená, Bol som zavádzajúce že som to drawing-- je to, čo sa nazýva schéma pre databázové tabuľky. To je ako špecifikácia pre table-- ale keď príde čas skutočne ukladanie dát, a budeme to robiť len príkladom tu. Idem otvoriť Excel, pretože Excel mi dá riadkov a stĺpcov. A to je presne to, čo Oracle a MySQL a ďalšie nástroje mi dá. Takže som jednoducho ísť na použitie to kvôli diskusie je. Nechaj ma ísť dopredu a otvoriť Zástupca dokument tu priblížiť trochu. Tak napríklad, naše hlavičky sú teraz krstné meno, priezvisko, pohlavie, číslo, e-mail, číslo popisné, ulice, pokriky. Ulica, mesto, štát, len o vojde na obrazovke. 
+
+Takže to, čo to znamená, že keď Užívateľ najskôr zaregistruje mojich webových stránkach, že to bude niečo podobné Dávid, Malan, m, povedzme 1, malan@harvard.edu, bude číslo popisné byť ako 1 Brattle Square, Cambridge, Massachusetts, 02.138, a potom tak ďalej. Takže keď poviem, že relačné databázy alebo SQL databázy je riadkov a stĺpcov, Mám na mysli to. Že skutočná dáta sú ukladané do riadkov a stĺpcov. Je to len náhoda, že sme hovorili, a ja som jednoducho kreslenie v riadkoch a stĺpcoch. To je len schéma, zastrešujúcej definície. 
+
+Takže z týchto polí tu, alebo ekvivalentne, tam, čo sú oblasti, ktoré si myslíte Som pravdepodobne hľadať na tom, či som používateľ alebo či som správcu databázy? Rovnako ako to, čo som ja polí vlastne bude hľadať ďalej? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Meno, jo tak Páči sa mi, to-- jo, e-mail môže byť celkom bežné. Je nám ľúto, povedal meno. Takže maybe-- a znova, my sme druh hovoriť abstraktne. Neviem, prečo by si bude hľadať mená, ale že sa cíti rozumné, ak hľadáte pre užívateľov. Možno sa uvádza, iste, ID. 
+
+A je to klzké sklon, pretože som mohol vymyslieť scenár, kde Možno, že môj šéf požiadal ma, koľko mužov máme na našich stránkach? Koľko žien máme na našich stránkach? A tak na tom mieste, možno budete chcieť vyhľadávať v oblasti žien a mužov, príliš, a nič iné. Takže tam je tu trade-off. Opäť platí, že neexistuje správna odpoveď, ale existujú je funkcia vo väčšine databáz SQL známy ako indexovanie, pričom vy, návrhár sa správcu databázy, dostať sa dopredu rozhodnúť, ktorý oblastí informačných technológií databáza by mala optimalizovať pri vyhľadávaní. 
+
+Dalo by sa povedať veľmi naivne, optimalizovať to, že optimalizovať, optimalizovať to, optimalizovať, že aj to, a databázy bude urobiť nejaké magické veci pod kapucňa a robiť niečo takým spôsobom, že až sa nabudúce budete hľadať Na niektoré z týchto polí, to bude v skutočnosti byť rýchlejší. Je to možné. To nezruší samo. Ale tam musí byť cena, ktorú zaplatil. 
+
+Ak sa vám naivne, alebo príliš nadšene povedzme, index všetkých týchto oblastiach, tak povediac, aby boli všetky efektívne vyhľadávať, akú cenu sú pravdepodobne platiť? Divákov: [nepočuteľné] DAVID Malan: Performance. Čo tým myslíte? Aj výkonnosť, aspoň v kontext som diskutovať, je teraz lepšie. To je definícia indexovanie. To bude robiť vyhľadávanie rýchlejšie. Takže čas klesá, tak povediac. Divákov: [nepočuteľné] DAVID Malan: Space. Takže znovu, ide o bežný obchod. Môžem urýchliť vyhľadávanie, ale je to bude stáť viac bajtov priestoru. Prečo? No, v predvolenom nastavení, ak máme žiadny z Tieto červené hviezdy, žiadny z týchto indexov, ako hovorím, ako si hľadať mená v tejto databáze? Takže poďme čerpať naše Pozornosť na tento príklad. Ak máme Davida a Scullyová a Kareem a Arwa a iní v týchto radoch, napríklad. 
+
+Takže poďme robiť presne to. Scullyová je tu, a potom máme Kareem a Arwa, a všetci ostatní, ak nemáte majú definovaný index, tak povediac, najlepšie, čo môžete urobiť, je lineárna hľadanie. Ak hľadáte Arwa, nie sme bude môcť skočiť priamo na ňu rýchlo. Chystáme sa začať vrchol a ísť celú cestu až na dno, nie na rozdiel od nášho pôvodného Príkladom Mike Smith. 
+
+Ak však hovorím, hej, databázy, Index krstné meno poľa, potom to bude niečo robiť milovník a podporovať niečo ako binárne vyhľadávanie. Pravdepodobne to nie je binárne vyhľadávanie samo o sebe. Databáza majú tendenciu používať iný dátová štruktúra volal b-stromy, nesmie zamieňať s binárnymi stromy, že jednoducho robiť to rýchlejšie vyhľadávanie niečo logaritmickej v prírode. Ale cena, ktorú zaplatíte vybudovať, že vlastnosť, že štruktúra dát v pamäti, je viac bytov. Tak to by mohlo trvať niekoľko megabajtov, Niektoré GB, kto vie? Záleží na type dát. 
+
+Takže na nejakom mieste, musíte sa rozhodnúť, to asi nie je bežný prípad. Takže aké sú skutočné spoločné Prípady, či naozaj musel vybrať, čo by mohlo byť vaše obľúbené pole? E-mailu. A páči sa mi EMAIL, pretože e-mail, Teoreticky by mal byť jedinečný. A tak obvykle, keď viete, vopred, že jeden z vašich polí je alebo bude jedinečný, že inklinuje byť dobrým poľa hľadať ďalej, pretože týmto spôsobom, pri hľadaní niečoho, budete sa dostať späť jeden alebo nulu odpovede a potom máte hotovo. Nemusíte sa držať hľadá napriek tomu iní. 
+
+A tak v tomto prípade tu, e-mail, tak dlho, ako si nemožno registrovať dvakrát s rovnakým e-mailu, je dobrý. ID podľa definície v computer science world, ak hovoríte o ID, že mali lepšie byť jedinečný. To je niečo ako konotácie ID alebo identifikátor. A zvyšok z nich by mohlo byť, volajme ich pekné vyvolených, ale nie v skutočnosti nutná. 
+
+A tak v databáze, určíte indexy, ale môže byť ešte presnejší. Môžete povedať, hej, databázy, uistite sa, ID, že každý v tejto tabuľke je jedinečný. Ani sa nechať programátor náhodne dať do duplicitné e-mailu alebo duplicitné ID číslo. Toľko ako výpočty chrániť nás podobne, vám môžu mať tieto obrany nižšej úrovne. A tak návrh databázy, v nejaký zmysel, je celkom sranda, pretože si to defenzívne. Môžete tak nejako predpokladá, že budete pracovať s hrozné, hrozné programátorov a chcete, aby v čo najväčšom počte obrany ako sa môžete chrániť svoje dáta, ale zároveň chcete aby im pomohla lepším výkonom výberom, ktorý Pole optimalizovať. Ale nemôžete byť nutne to v vákuum, ako sme trochu tu. Musíš vedieť, aké sú tieto spoločné prípady bytia. V prípade, že vývojári sú vykonávacie adresár, môžete veľmi dobre chcete byť schopní vyhľadávať na takmer vo všetkých oblastiach, Len podľa charakteru aplikácie. Takže možno budete tráviť že dodatočný priestor. 
+
+Správne, nejaké otázky? Jo. 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Nie. 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: OK. 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Oh, takže sme Reč je svojím spôsobom Teraz je to úplne jazyk agnostik. Takže sme teraz hovoríme o relačnej databázy všeobecnejšie alebo SQL databáz všeobecnejšie. 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Lepšie slovo používať sa môže použiť každý jazyk. Takže môžem písať kód JavaScript, C kód, C ++ kódu, kód v jazyku Java, Ruby kód, z ktorých všetky hovoriť s databázy a spúšťať dotazy. V skutočnosti to nie je zlé segue príkladného dotazu. A opäť, my nebudeme ísť do Java alebo C ++ alebo nič z toho už, ale v SQL, jazyk, ktorý držím s odkazom, Structured Query Language, to samo o sebe je programovací jazyk, ale je to znamenalo, ktoré majú byť použité pre žiadny prekvapenie, Structured Query otázky. 
+
+Tým mám na mysli to. Tak, ako si vybrať dáta z databázy MySQL Je doslova písať vo svojom programe niečo ako vyberte hviezdu zo strany užívateľov. Som za predpokladu, že táto tabuľka, odteraz sa nazýva užívateľov. Aj to by mohlo hovoriť čokoľvek chceme, ale tento druh dáva zmysel. A tak select je veľmi Spoločný sloveso, ak vás bude v SQL, ktorá doslova robí. Čo si myslíte star znamená, že v tomto kontexte? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Je mi to ľúto? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Nie je nutná, je to obsažnejšie než to, že v skutočnosti. Je to postava divoké karty. Hviezda takmer vždy znamená čokoľvek, tak to znamená, že v tomto prípade, vybrať všetko z databázy. Takže keď to hovorím, mám na mysli vráť mi každý stĺpec z môjho stola s názvom užívateľa. Tak daj mi sadu výsledkov, ako sa volá. Inými slovami, daj mi kópiu tabuľkový procesor, je to, čo som dostať na adrese. 
+
+Ale keby som povedal, vyberte hviezda od užívateľov kde ID je rovné 1, aká veľká by mala môj výsledok set bude ďalej? Alebo ekvivalentne, mali koľko riadkov Ja sa vrátil z databázy? Pravdepodobne len jedno, či mám naozaj zaobchádzané ID ako jedinečný identifikátor, a ak je David má tento jedinečný identifikátor, I by sme sa vrátiť jeden a iba jeden riadok obsahujúce všetky Dávidovej informácií. Keby som povedal, kde ID sa rovná 99, mal by som sa vrátiť, v tejto súvislosti, nulový počet riadkov, aspoň v súčasnosti. 
+
+Avšak, keď nemám naozaj starostlivosti o všetkých týchto informácií, Mohol by som len povedať, odkiaľ David žije? Vybrať poštové smerovacie číslo od Užívatelia kde ID je 1. Tým sa vyberú ku mne len Dávidov zips kód a nie celistvosť tohto riadku. Prečo by som to miesto robiť hviezda dotazu, divoké karty? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Jo, ja by som mohol potrebovať iba ju. Takže výkon je opäť odpoveď tu. Prečo žiadať viac Informácie, ako je potreba, pretože aj keď je to v poriadku dohromady, stále máte skopírovať tieto dáta Zdalo by sa, z databázy do svojho programu nejakým spôsobom, a to je jednoducho hlúpe, ak vás Jediné, čo potrebujete päť z týchto číslic, Nie je celistvosť riadku. 
+
+Tak ako mám vložiť užívateľa? Predpokladajme, že používateľ má práve registrované prvýkrát. Syntax by zvyčajne vyzerať napríklad takto. Vložiť do užívateľov, a potom by sme povedať hodnoty, a potom by sme povedať hodnoty ako, povedzme, Lauren Scullyovou, tu náš kameraman. A ďalšie pole pohlavia. Takže budeme hovoriť citát, koniec citátu "F", potom máme ID a budem say-- poďme predstierať, že to nie je vlastne tu, takže budeme vzad v príbehu. Takže 2 bude jej číslo. A potom ďalšie pole Tu je jej e-mail. Takže to bude ako Lauren Scullyová a tak ďalej, a my jednoducho dot dot dot ho odtiaľ ďalej. Teraz to bude trochu zdĺhavé, ale vložka dotaz by nakoniec vyzerať takto. 
+
+Ak chcem zbaviť Scully, uh-oh, poďme odhlásiť ju, ona odstráni svoj účet, zmazať od užívateľov, kde ID sa rovná 2, sa zbaviť Scullyovej. Alebo môžem povedať aktualizovať užívatelia nastaviť, povedzme, čo by sme mohli zmeniť? Predpokladajme, že sa pohybuje. Set zips rovná 021-- ani náhodou, že je jej súčasný zips. 90210. Jedinou ďalšie poštové smerovacie číslo Viem, že vo svete. Takže sa zmení Jej zips code-- v skutočnosti, že by sa zmeniť jej PSČ. 
+
+Čo som práve urobil? Aj napriek tomu, že syntax je pravdepodobne nová. 
+
+Divákov: [nepočuteľné] DAVID Malan: Jo, presťahoval som všetkým Beverly Hills v Kalifornii. Takže by som mal vlastne povedať, kde ID rovná 2. A tak ďalej. Takže SQL je všetko okolo nich druhy inštrukcií. Vyberte, vkladať, odstraňovať, aktualizovať s týmito predikátu na konci Tieto doložky, kde sa tak povediac. A je tu oveľa viac môžete áno, ale je to naozaj len scvrkáva jednoducho, ak arcanely, vyjadrujúce čo chcete databázy robiť. 
+
+A potom databázy bude zistiť, kedy Vložíte Lauren Scullyová do databázy, kde ju dať do pamäti takže môžeme veľmi rýchlo dostať ju na základe jej e-mailovej adresy alebo na základe svojej identifikačné číslo alebo podobne. Jo, Dan. Divákov: [nepočuteľné] DAVID Malan: Naozaj dobrá otázka. Budú tieto skripty zmeniť z Microsoft Access do Oracle MySQL do PostgreSQL? Stručná odpoveď je, že záleží na okolnostiach. V teórii, je veľmi významný spoločný podmnožinou SQL ktorý je zdieľaný naprieč všetkými týchto implementácií. Avšak, rôzni výrobcovia majú pridané funkcie ku svojim databázam robiť určité veci nad rámec týchto funkcií, ktoré by mohli v skutočnosti zlomiť. 
+
+Takže vývojári akým zaistenie proti tomu, je to, že skôr než písať surovej SQL kód ako píšem tu, oni namiesto toho používať knižnicu, spoločná knižnica, ktorá sama o sebe je trochu vyššej úrovni a súhrny vzdialenosti, ktorá produkt, ktorý používate. A to vám dáva Funkcie a procedúry zavolať, takže už nikdy v skutočnosti napísať surové SQL. 
+
+V teórii, potom môžete zmeniť Výrobky z Oracle Microsoft alebo vice versa, alebo niečo inde, a tie doslova Zmena nič o kóde. Skutočnosťou však je, že niekedy vzdať funkcie ako výsledok. Možno ste si vybrali výrobky, pretože to má tieto funkcie s pridanou hodnotou, a vy ste práve teraz nie je ich použitie vedome. 
+
+A anecdotally, väčšina spoločností tendenciu Nikdy sa vzdialiť od svojej databázy. Takže aj keď je to pekné majú funkciu, realita znamená, že ak ste reorganizáciu databázy, že ste pravdepodobne robiť kytice ďalších zmien tak ako tak, že vy nie nevyhnutne treba predpokladať, že. Takže je to zrejme over-inžinierske problém, ale záleží na kontextu. Ale teoreticky, SQL je zdieľaná cez tieto rôzne produkty. Naozaj dobré otázky. Jo. 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Jo, si môžete myslieť databázu je len server, na konci deň, a vo vnútri tohto servera je celý rad stoly, riadkov a stĺpcov. A pri odoslaní dotazu takhle zo svojho programu, vaše webové stránky, napísaný v jazyku Java, Ruby, Python, čokoľvek, server prijíma tento príkaz a výkladu vo doslova rovnakým spôsobom sme diskutovali skôr s interpretovaný jazyk, a potom sa vykonáva nejakú akciu na nulu alebo viac riadkov v nula alebo viac tabuliek. Divákov: [nepočuteľné] 
+
+DAVID Malan: Presne tak, presne tak. Takže v pseudokódu na niečo ako by to mohlo byť toto. Vo vašom PHP súboru alebo Váš Python súbor alebo vaše Java súbor, budete musieť pseudocode kód, alebo Stieracie-ako kamene, ako, ak používateľ navštívi acme.com/register~~V prvýkrát, vložte do používateľa a tak ďalej. A my by sme si to preložiť do viac kódu betón do konca roka. Ale vážne, všetci sme základné stavebné kamene tu aj keď sme preskakovanie niektorých z vykonávacích opatrení. 
+
+Dovoľte mi teda nájsť chybu s tým, čo úžasne urobil pred chvíľou. Vytvorili ste pekne celá tabuľka pre užívateľov. Je pravda, že by sme mohli realizovať že v niekoľkými rôznymi spôsobmi, ale vy ste v skutočnosti nás viedli dole path-- a hovorím vám, ale je to asi moje fault-- z dosť Implementácia neefektívne databázy. Nie je to normalizovať. 
+
+A tým myslím normalizovaná tam bude, v priebehu času, významná redundancia, a teda neefektívnosť, to je plytvanie miestom. Na len to, čo vidíte tu, môže založený môžete si predstaviť, ak to plytvanie miestom sa chystá pochádzajú, v priebehu doby, ako viac a viac užívateľov registrovať pre vaše webové stránky? Aké dáta sa môže stať nadbytočné? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Prečo myslíš, že? Divákov: [nepočuteľné] DAVID Malan: Jo. A predpokladajme, že na účely Od dnešného dňa, že je to pravda. Ukázalo sa, a my sme sa naučili toto tvrdo, že to nie je pravda. Nejako viacerých mestách, nejako rovnaké poštové smerovacie číslo, ktorý poruší toto nádherné intuíciu. Ale predpokladajme, že je to pravda, pretože je to takmer vždy pravda. Takže predpokladám, že poštové smerovacie číslo je vždy spojená s rovnakým mestom a štát, ktorý je láskavý primerané predpokladu, ale nesprávne, to dopadá. Ale rozumný predpoklad pre dnešné účely. 
+
+Potom predpokladám, že žijem v Cambridge, MA, podľa tabuľky tohto používateľa, a predpokladám, že Lauren Scullyová žije v Cambridge, Massachusetts, a predpokladám, že Kareem žije v Cambridge, Massachusetts, a Arwa žije v Cambridge, MA, každý z nás v 02138. Prečo sme si pamätať Cambridge, MA, 02138 pre všetky štyri z nás? Čo by malo stačiť mať na pamäti? 
+
+Divákov: [nepočuteľné] DAVID Malan: Len poštové smerovacie číslo. Len to 02.138 existuje, pretože Viete, čo by sme mohli robiť? Mohli by sme si trochu fantázie tu a tu, definovať iné tabuľky kde to má byť meno, to bude druh, to bude, že je Dĺžka a odteraz, som bude nazývať môj miest tabuľky. To bolo volané, z Samozrejme, že moje užívatelia tabuľky. A tak čo by som mal dať sem pre moju miest stôl, myslíš? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Jo. Takže zips a štát a mesto. A tak typu tu, budeme hovoriť to bude char 5 znovu, s výhradou na diskusiu o skôr. To bude zoznam, snáď ako skôr, a mesto bude varchar 50. A tak teraz Čo získam vymazať z tejto tabuľky eliminovať neefektívnosť, že? 
+
+Divákov: [nepočuteľné] DAVID Malan: Nice. Štátne a mestské ísť preč, takže som teraz eliminovať potenciálne neefektívnosť pre zapamätanie redundantne, Cambridge, MA, Cambridge, MA, Cambridge, MA, Cambridge, MA, čo dúfajme sa nikdy nezmení. A aj keď to robí, to je minorly nepríjemné, teraz že musím zmeniť že v niekoľkých radoch, zatiaľ čo tu, mohol som len zmeňte ju na jednom mieste. 
+
+A teraz, čo je trade-off, snáď? To bolo mimoriadne výhodné. Mal všetky svoje dáta pekne pohromade. Ale čo je jednoznačne tento prípad teraz? 
+
+Divákov: [nepočuteľné] DAVID Malan: Presne tak, a ja rád, že ste použili slovo pripojiť, pretože to je skutočne kľúčové slovo, vo svete relačných databáz v SQL, je to skutočné slovo, Možno typ alebo aspoň oznámiť. A v skutočnosti to, čo teraz máme robiť zvoliť Dávidov úplné informácie niečo ako select hviezda z Používatelia, pripojiť miest, on-- a teraz Chystám sa len presunúť na druhý riadok takže tento fits-- users.zip rovná cities.zip, kde users.ID rovná1. 
+
+Tak čo sa deje? Je to škaredé hľadať, ale môžete druh čítať to zľava doprava, zhora nadol. Vybrať hviezda od užívateľov je rovnaké ako predtým, ale nie je to od užívateľov, sú samy o sebe. Je to od užívateľov pripojiť miest. Čo mám spájajúci tieto dva stoly ďalej? No, zdá sa, že Členovia Tabuľky zips poľa, a toto obdobie je len špeciálne Syntax vyjadriť túto myšlienku, A toto je mesta tabuľky zips poľa. Chcem tí dvaja sa rovná, ale ja chcem, aby nakoniec vybrať len tie riadky, kde ID v tabuľke užívateľov rovná 1, čo zhodou okolností moja. 
+
+A len preto, aby bolo jasno, je programátor, typicky pri napevno niečo podobné čísla 1, pretože inak len webové stránky podporuje Davida alebo Úplne prvý užívateľ, budete by namiesto toho robiť niečo ako ID, kde to predstavuje Premenná, niečo, sa môžu časom meniť, podobný v duchu toho, čo som povedal predtým S týmito druhmi zástupný znak. Ale teraz proste budeme napevno ju ako 1. A tak čo to znamená? No, príjemný spôsob, ako predstaviť to je že v prípade tejto kombinácie je tabuľka užívateľov, a to ruka je na zipsy stolík, sme tak nejako finding-- a končeky prstov sú na zips sem a končekmi prstov Tu je zips, si druh ho zámkovej tak, že dostanete späť výsledný pôvodná tabuľka tým, že skutočne spájanie dva stoly na spoločnom poli. A to nemusí byť zips. Mohlo by to byť najviac niečo iné, ale zips je pekné, pretože človek, je to krátke, dva, je to vždy rovnakú dĺžku, takže je tu skutočnú účinnosť s tým, čo Olivier tu navrhovanej s vytknutím zips, a [Nepočuteľný] navrhuje, aby sa zbavíme mestá a štáty. 
+
+Tak to je ten proces známy ako normalizácia. Akékoľvek otázky na to? No dovoľte mi pripomenúť, To je ten druh vecí, aj keď je to pomerne nízkej úrovni, Táto diskusia, ktoré by ste si mohli myslieť ste nejako dostať stratil v burín, To je prejavom dostatok príležitosť pre developerov byť zlé. A v skutočnosti, aj keď sme v kurzy som sa naučil, keď sme mali, Napríklad, neskúsený vysokoškolské programátori vytvárať webové stránky, na prvý pohľad, webové stránky môže vyzerať úžasne. A majú všetky Funkčnosť sme požadovali, vývojári odviedli dobrú prácu. 
+
+Ale nemusela nutne vedieť dosť o návrhu databázy alebo nemali premýšľať dosť o typoch dát a typy užívateľov na webová stránka sa bude musieť, a my zistíme, teda o šesť mesiacov neskôr, potom, čo som absolvoval, alebo presunul, že sakra, naše webové stránky Je naozaj, naozaj pomaly. A ja to ani nehovorím o tom mať milióny či tisíce užívateľov. Mám na mysli niekoľko sto používateľov na akademickej pôde, všetky z nich urobiť, napríklad, obchod pre kurzoch v rovnakom čase, sú použitím tejto katalóg kurzu Žiadosť som sa zmienil a tá vec je stále v skutočnosti spomaliť, pretože tam neboli žiadne indexy. Neboli zistené žiadne červené hviezdy, takže sa hovoriť, alebo sme mali nemusí byť nutne vytknúť spoločné dáta získať nejaké úspory priestoru. 
+
+A tak, keď preverovanie vývojárov alebo databázu osoby alebo podobne, druhy otázok premyslieť Je dokonca pri kontrole niečí kód, hovoriť, nie nutne vyzerať cez všetky ich kódu, ale hovoria, Pozrime sa skrz databázových tabuliek. Čo to ukladanie? A potom hovoriť, no, počkaj minúta, prečo ste pomocou celé číslo? Čo keď máme 4 miliardy a jeden z týchto riadkoch? A tieto druhy Otázky je príležitosť na druh tlačiť späť a získať predstavu o tom, kde ak nie ste spokojní robiť to, s niekým technickejší opýtať na tieto otázky o tom, či alebo nie človek naozaj pozná svoje veci. A to je ten druh veci tiež, že ľudia na internete, ktorí sú-samouk, možno učiť sa menej často, pretože vás nemusí nutne naraziť na neho toľko, pretože sa môžete dostať Databáza hore a beh, ale ak ste čítali up na seminároch alebo boli povedal o normalizácii databázy a indexovanie a výkon, jedná sa o veľa vecí, ktoré sú tí neublíži. A by ste si mohli myslieť, alebo zlý inžinier by sa povedať, oh, dobre, sme lepší plat pre väčšiu databázu alebo rýchlejší databázy alebo len hádzať peniaze na to, vertikálne stupnice, nemusí to tak byť. Ak sa vydáte in-- a môžete ísť po fact-- a pridať indexy, a to by mohlo trvať niekoľko hodín, než sa Databáza vybudovať, že nové údaje štruktúra, ktorá som spomenul predtým, stále môžete opraviť po faktu, že toto je miesto, kde vás začať rozlišovať dobrých dizajnéri z zlý dizajnéri, a to nielen z estetického hľadiska, ale výkon-múdry rovnako. Nejaké otázky? Nie? Takže pre NoSQL, ktorý bol iný typ z databázy, ku ktorej som sa zmieňoval skôr, nemáte riadkov a stĺpcov. Namiesto toho, mali by ste mať niečo ktorá vyzerá trochu ako je tento. Budem používať spoločné syntax. Zložené zátvorky náhodou sa tu používa pomerne veľa. Tie by mohli mať niečo ako krstné meno je David, môžete mať poslednú Meno je Malan, citácie, môžete mať ID je-- prepáčte, whoops-- číslo 1, e-mail je malan@harvard.edu, a nebudem obťažovať písanie sa na ostatných, a potom niektoré ďalšie veci. 
+
+Inými slovami, to je reprezentácie textová z toho, čo by sme všeobecne nazývať objekt v počítačovom programe. A objekt je všeobecne len zbierka párov kľúčových hodnôt. Takže znovu, to opakujúce sa téma. Videli sme páry kľúč hodnota v HTML, sme videli dvojica hodnotu kľúča teraz v súvislosti s databázou a my Videl páry kľúčových hodnôt v rámci of Myslím, že jazyk dnes. Udržuje prísť. A vskutku, to je fakt aké dáta scvrkáva, dáta a metadáta, alebo hodnoty a kľúče, príslušne. 
+
+Tak non-relačná databázy, niečo na báze Na objektoch, kde sa práve zhlukujú všetko dohromady a dať ho do pamäte, by vo všeobecnosti zobrazený ako alebo myšlienka, pretože to. A nechám, že teraz ako typ alternatívneho prístupu. A jeden nemusí byť nutne lepší ako ostatní. V skutočnosti je veľmi v móde Tieto dni sú databázové systémy ako MongoDB a REDIS a málo iné takéto nástroje, voľne dostupné, ale sú stále v móde. Čiastočne preto, že ponúkajú dodatočné obsahuje viac ako týchto tabuľkových prístupov, ale aj preto, že sú trochu jednoduchšie použitie, pretože nemusíte premýšľať, aké ťažké o veľa týchto rozhodnutí dizajnu. Takže plusy a mínusy. Takže si uvedomiť, tam sú možnosti rámec toho, čo sme práve strávili čas. 
+
+Tak ideme na to. Poďme prechod trochu späť na webové programovanie, takže sme trochu k záveru, dnes s niečím To je trochu hands-on, plniace V niektorých medzier od včerajška. Nechaj ma ísť do toho prvého. Takže pripomenúť, že včera sme mali nejaké kanonickej HTML Stránky, ktoré mali na začiatku, len HTML, a potom sekundárne mal CSS, kaskádové štýly. Jedná sa o nový tag, ktorý sme nemali Včera, alebo zaoberať, takzvaný tag script. 
+
+Ukázalo sa, že môžete skutočne vložiť jazyk nazvaný JavaScript Váš web stránky a urobiť svoj web Stránky niečo urobiť. Tak čo mám na mysli? No, nechaj ma ísť dopredu a len požičať si tento kód na chvíľu. Chystám sa ísť do Cloud9, nie je potrebné sa tam sami ešte nie, a budem volať túto alert.HTML. Idem vložiť svoj spis sem. A len preto, aby bolo jasnejšie, čo som urobil, nechaj ma ísť na túto adresu a ísť upozorniť, a uvidíte Hello World. 
+
+Ale to je trochu nezaujatý. Chcem robiť niečo trochu inak. Takže budem skutočne urobiť. Chystám sa ísť sem e, a medzi moje značky skriptu, hovoria alert ( "ahoj, svet"); takže oznámenia je to trochu nedbalý, ale mám HTML, vnútri ktorej je jazyk s názvom JavaScript a to je to, čo sa nazýva Funkcia volania alebo volania procedúr. To je sloveso, doslova, v tomto prípade, a ja vyvolanie funkcie kódu že niekto iný napísal. 
+
+Takže funkčnosť je strehu, takže poďme na túto stránku teraz a kliknite na tlačidlo Načítať znova, a teraz pozri trochu interaktivity. Je to trochu starej školy a škaredý. To vám trochu pripomína pop-up, snáď, z dávnych čias ale to predsa urobiť niečo trochu viac programový. 
+
+Takže viac než to, urobme niečo zaujímavejšie. Nechajte ma ísť sem a zbaviť sa toho. A ja idem dopredu a vytvoriť formulár ako my včera. Vlastne, viete čo? Chystám sa ísť do google.html, ktoré sme začal včera, ktoré vyzerala ako to, prostredníctvom ktorého sme hľadali pre mačku Ale všimnúť, je tu niečo ako chyba v aktuálnej verzii. Pracuje pre mačky, ale predpokladám, že Aj nespolupracujú a som písať nič, a ja jednoducho na tlačidlo odoslať. To je trochu podivné správanie. Vzal ma k skutočnému Google, mi nedali chybovú správu. Chcel by som povedať užívateľa je potrebné, aby nám nejakú hodnotu. 
+
+Tak ako môžeme to urobiť? No dovoľte mi vrátiť sa do Cloud9 a nechaj ma ísť do hornej časti mojej stránky a pridať tag script ako je tento, kde Idem písať nejaký kód JavaScriptu. A ja budem robiť nasledujúce. If (document.getelementByID-- a odvolanie že sme hovorili o tom skôr, táto funkcia. Aké ID chcem dostať? Chcem sa dostať q, a idem povedzme rovná nič, ako tohle-- v skutočnosti dovoľte mi použiť dvojité úvodzovky Len pre consistency-- sa rovná nič, Potom alert ( "Prosím, zadajte dotaz") tu. 
+
+Takže mám čo sa zdá byť niečo ako podmienku. Videli sme túto všeobecnú myšlienku na Scratch. Je to ako jeden z tých puzzle kúsky, ktoré vyzerali ako tento. A čo to hovorím? No, tu dole si všimnite, že som robiť nasledujúce. Chystám sa dať tento formulár Pole nielen názov q, čo je to, čo dostane prešiel na Google, ale ja som chystá dať mu lokálne identifikátor, tiež volal q. Ale ja som mohol zavolať to niečo, čo by som chcieť, ja som jednoducho ísť, aby to jednoduché a tiež to nazývajú q, len pre jednoduchosť. 
+
+A teraz budem robiť niečo trochu viac. Na polí formulára tu, idem pridať, čo sa nazýva spracovanie udalosti. Na predložiť, chcem volať funkcia nazvaná validovať. To ešte neexistuje, toto slovo, alebo to sloveso overovania, pretože to, čo budem robiť up tu je pridať nejaký kód. 
+
+Idem povedať funkcie Overiť. Idem odsadiť to a pridať ďalšie zložená zátvorka tu a druhá tu. Pozrime sa, čo je to práve robí. Mám now-- myslieť na to, ako bol vytvorený my Vlastné skladačky, ktoré neboli predtým existovať, a ja som to nazval puzzle poskladať overením kúsok skladačky. Jeho zmyslom života je realizovať štyri riadky kódu vnútri nej. 
+
+Ak document.getElementById tak koncepčne, ktorý sa chystá ísť do prvku, HTML element, ktorého jedinečný myšlienka je len q, a potom hoci Syntax vyzerá trochu divne, že rovné rovná len znamená, že rovná. Tak to znamená, že v prípade, že prvok s jedinečný identifikátor q, kedy dostal, nemá žiadnu hodnotu, to jednoducho rovná citát koniec citátu, nič nie je, potom čo chcem robiť? Chcem kričať na užívateľovi. 
+
+A nepôjdeme veľmi podrobne tu. Idem return false. Že sa jedná o chybu. Else, idem sa vrátiť pravda. Takže buď to fungovalo, alebo nie. Nepravdivé alebo pravda. A teraz keď som neurobil žiadnu chybu, dovoľte mi zachrániť to a znovu to. A nech mi práve dvakrát skontrolujte, že Nechcel som v skutočnosti vykonávať žiadne preklepy, takže si nemyslím rozpakov sám. Uvidíme, či to funguje. 
+
+Takže teraz budem písať mačky. To ešte funguje, alebo polovica práce, minimálne. Teraz mi dovoľte to znova, a teraz sa me pokúste sa o odoslaní bez písania anything-- sakra, to zlomilo. Chvíľku. Dovoľte mi, aby som otvorenie konzoly, [Nepočuteľné] prihlásiť, znovu načítať stránku. Skúsim to znova. Oh, sakra. Zabudol som. Urobil som preklep. Spomínam si, čo to je. .value. Chcel som povedať, ak je hodnota prvku, ktorých ID je q rovná, potom kričať na používateľa. 
+
+Takže teraz mi dovoľte znova zadržať dych. Ideme na to. Tam sme ísť. Prosím, zadajte dotaz. Takže to nie je ma nechal prejsť. Môžem byť trochu hravý s tým, a miesto kontroly pre žiadnu hodnotu, Môžem povedať niečo ako: už nemusíte hľadať pre mačky, a teraz môžeme len viac hravou nechať užívateľ hľadať pre psov ak on alebo ona chce, alebo keď idem sem a vyhľadávať pre mačky, teraz nemôžem. 
+
+Takže to, čo je tu stánok s jedlom? Takže jedno, sme zaviedli do náš svet HTML a CSS, programovacie funkcie. Môžem vlastne teraz robiť rozhodnutia v kóde. Skôr, všetko, čo som mohol urobiť, je označiť textový obsah alebo grafického obsahu a povedať mu, na čo sa zamerať podobne, a kde sa má zobraziť. Teraz môžem vlastne pýtať otázky webové stránky a urobiť rozhodnutie na základe na ňom, a vyzve užívateľa keď potrebujem kričať na neho. 
+
+Tak poďme skúsiť niečo sami s tým. Len do toho, dovoľte mi otvoriť ďalšiu snímku tu, a len poukázať na jednu vec. Rovnako ako u CSS, môžeme vytknúť Naše JavaScript kód do samostatného súboru, môžete urobiť to isté s JavaScriptu pomocou CSS. A vy ju využiť pomocou zdroja atribút script tag. Ale nebudeme komplikovať veci pre túto chvíľu. Namiesto toho, ak si mohol prejsť na tejto stránke nie je, ale-- dovoľte mi presunúť tento okolo order-- prejsť na, keby mohol, túto stránku tu. Táto adresa URL tu. Je to v dnešných snímok. Možno budete musieť znova načítať, pretože Pridal som pár vecí. 
+
+Ale tam, kde niektorí hádanky čakajú. A to nám dá šancu, v trochu viac zábavy kontextu, fušovať s niektorými JavaScriptu. A keď sa tam dostať, Vysvetlím ti to, čo čaká. Získať zelenú. Nastaviť modré. Nastaví zelená, červená sady. Och. Prepáčte. 
+
+To je rozsah nášho Dokumentácia pre túto výzvu. A to bude pracovať nasledujúcim spôsobom. Takže to, čo máte na túto tému Stránka je celá partia obrazových hádanky tým kamaráta Stanfordovej univerzity. Takže to, čo vidíte tu je takmer druh jednej z týchto magické oko hádanky, ale jednoducho pozerať, či na to, sa nič vyskočí na vás. Skôr je niečo skryté v tomto snímku. A to je skrytý v nasledujúcom spôsobom. Snímky, ako možno viete, môže byť zložený z iba troch farieb. Niektoré červená, niektoré modrej, a niektoré zelené. A môžeme robiť všetko farby dúhy zmiešaním týchto troch farieb nejako. 
+
+Takže to vyzerá väčšinou zelené a modré, ale ako hovorí tady Nick, Tento železo puzzle obrázok je logická. Že obsahuje obraz čo slávny, však, bol obraz skreslený. Slávny objekt je v červených hodnotách. Avšak, červené hodnoty boli všetci delené 10. Tak oni sú príliš malé faktorom 10. Takže inými slovami, Nick vzal originálny obraz, a on desaturated všetko z červenej z neho, zníženie množstva červenej atrament, ak chcete, v ňom. 
+
+Zelenej a modrej hodnoty sú len bezvýznamné, náhodné hodnoty, aka hluk navrhnutý zakryť skutočný obraz. Takže to, čo urobil, bolo, že Nick zmiernil červené a potom jednoducho hodil náhodné Množstvo modrá a zelená Na obrazu na druhu temný čo je vlastne tam stále. Musíte sa vrátiť späť tieto rozpory odhaliť obraz. Po prvé, nastaviť všetky modré a zelené hodnoty na nulu dostať von z cesty, a pozrieť sa na výsledok. potom vynásobiť každú červenú hodnotu 10, škálovanie späť do približne jej konečná hodnota. Čo je známy objekt? 
+
+Takže vy všetci majú tento obdĺžnik vo svojom prehliadači práve teraz. A všimnite si, že tam je nejaká štartovacie kód, aby som tak povedal. To je kód JavaScript, ktorý Nick napísal pre vás. A všimnite si, že je tu čiara uprostred, že začína lomkou lomítkom, to je čo sa všeobecne nazýva komentár. To znamená, že je to výraz pre programátora že nemá žiadny funkčný význam. Je to len vizuálny podnet k človeku. 
+
+Takže môžete ísť dopredu a odstrániť iba jeden riadok a bolo super pozor, aby ste odstrániť alebo zmeniť niečo iné. A dovoľte mi, aby som vás prevedú čo tento kód robí, a to nechám na vás, aby ste zistili tajný obraz. Tento prvý riadok tu, že som len zvýraznený vám dáva nasledujúce. Na ľavej strane, Máte to, čo sa nazýva premenná, ktorá má Nick ľubovoľne, ale rozumne volal im pre imidž. Na pravej strane uvedeného znamienko rovnosti, on hovorí mi dať nový citát, koniec citátu "simple imidž". 
+
+Jednoduchý obraz, v tejto súvislosti je to, čo sa nazýva trieda, no, je to niečo ako class-- technicky prototype-- ale v skutočnosti, to mi dáva nový objekt, ktorého obsah sú súbor, železo-puzzle.png. Inými slovami, Nick vytvoril tento pojem jednoduchého obrazu takže môžeme, pre pedagogické účely, hrať sa s obrazom a zmeniť jeho červená, zelenej a modrej hodnoty. 
+
+A ako sme na tom, že? Toto trochu záhadný syntaxe tu Je niečo ako opakovanie bloku že niektorí z vás videl v Scratch skôr Dnes, kde si môžete opakovať 10 krát. V tomto prípade, Nick nemá napevno čísla ako 10. Namiesto toho hovorí, inicializovať premenná s názvom x 0, skontrolujte, či je x menšie ako šírka obrazu. 
+
+A tak, aby sa viac správne, ako je variabilné, bodka znamená ísť vnútri nej a získať jeho šírku a Potom otvorte párenia, uzavretá Paren je len programátorský spôsob, hovoriť to je funkcia. Jedná sa o postup. To je funkčnosť niekto iný napísal. Použite ju a vráť mi odpoveď. A potom x ++ je ozdobný spôsob, hovoriť, potom, čo ste urobil to raz, prírastok x o 1. Inými slovami, toto je programátorský spôsob, vyvolať slučku, ktorý je bude iteráciu všetky stĺpce v obraze. 
+
+Obraz je iba mriežka bodky, riadky a stĺpce bodov. To je spôsob, ako iterácie cez všetky tieto stĺpce. A na vnútornej strane, Medzitým sme iterácie cez výšok, tu aj tu a tu. Takže je to len spôsob, ako traipsing, skoro ako starý školský písací stroj, jednoducho ísť cez Celý obraz opakovane. Dokonca to nie je tak celkom úplne jasná, jednoducho vziať na vieru teraz, že tieto tri riadky kódu sú spoločne bude vám umožní opakovane hľadať na každom pixelu, každá bodka v obraze. 
+
+Čo je to pixel? Tak aby bolo jasno, ak sa pozrieme na originálu a zväčšenie, ak naozaj dať svoje oči na obrazovke počítača, to je len celá rada bodov, niekoľko Tisíc bodov balené spoločne tam. A tak to, čo ste asi robiť? Každý z týchto bodov, konečná definícia, je výsledkom toho, čo je všeobecne volal RGB, červená, zelená, modrá, ktoré opäť, môžu byť kombinované, aby dať ľubovoľný počet farieb. 
+
+V skutočnosti, ak si spomeniete Z mnohých rokmi, mnoho rokov, Projektorové plátna, ako sú tieto veci mával nie jednu šošovku, ale tri. Jeden z nich vypľuť červené svetlo, jeden z je vypľuť zelenú, jeden z nich vypľuť modré svetlo. A ak ste boli na strednej škole ako som bol, kde nikdy neboli správne vyrovnaný, že si Vždy sledovanie filmov histórie ktoré boli mierne skreslený, pretože tieto tri farby neboli Kombináciou správne. 
+
+Ale ukazuje sa, že každý z Tieto hodnoty červenej, zelenej a modrej, môže mať niekoľko spojený s nimi. Napríklad, 0 pre Red znamená žiadny červenej, 0 zelenej znamená, že žiadna zelená, a 0 pre modré znamená bez modrej. Takže ak máte nie červená, nie zelená, a nie modré, akú farbu máte? 
+
+Divákov: [nepočuteľné] DAVID Malan: To by si dúfam, že je to biele. Bohužiaľ, toto operates-- ľúto? 
+
+Divákov: [nepočuteľné] DAVID Malan: Takže ste vlastne majú čierny, v tomto prípade. Takže ak máte žiadny z nich Farby zapnutá, máte čierne. Avšak, ak máte, povedzme veľa z nich, rovnako ako veľa červenej, 255 o tom, veľa zelene, a mnoho z modrej, ktorá je biela. Tak to sú dva extrémy. Takže podľa tejto logiky, keď mám veľa červenej a zelenej nie a nie modrá, akú farbu to je? Divákov: [nepočuteľné] DAVID Malan: Jasné, samozrejme. A potom nie je červená, veľa zelená, modrá nie, a potom ak ste have-- dobre, budeme len dokončiť to, len preto, že, ale to, samozrejme, Teraz je modrá. A teraz môžete kombinovať tieto farby. Teraz ako stranou, ak je niekto z vás niekedy urobil nejakú skutočnú dizajnu webových stránok, ste v skutočnosti môže pozri symboly ako je táto. FFF-- a v skutočnosti, to je pravdepodobne ani to nie. Je to FFFFFF. 
+
+Každý, kto niekedy videl F je a ŽP a A through-- tak to dopadá, sme hovorili včera o jedno desatinné miesto, a dnes, druh o desiatkovej sústave. Dnes sme hovorili o binárny. Ukázalo sa, hexadecimálne je veľmi spoločný základ systému pre použitie v počítači. Binárne je dve za desatinnou čiarkou je 10, hex je 16. A ukázalo sa, ako robiť môžete počítať v šestnástkovej sústave? Nula, jeden, dva, tri, štyri, päť, šesť, sedem, osem, deväť, čo používate po deviatej? Aký je ďalšie číslo? Už sme použili nulu. Musím 16 z nich. Nula, jeden, dva, tri, štyri, päť, šesť, sedem, osem, deväť, budete potrebovať nejaké ľubovoľné konvencie. 
+
+A čo ľudstvo rozhodol nejaký čas Pred že po deviatich prichádza písmeno A a potom B a neskôr C. Takže ako ste počítať v hexadecimálnej je nula, jedna, dva, tri, štyri, päť, šesť, sedem, osem, deväť, A, B, C, D, E, F, a že sa bude počítať ste celú cestu, to dopadá, na 15. Tak nula až 15 je nula až F. A prečo je to dôležité? No, keď máte dva F je, že to, ako sa vyjadriť 255. 
+
+Tak dlhý príbeh krátky, v svet Photoshop, že grafický dizajn softvér, vo svete vývoj webových aplikácií, kde máte veľa farieb, Samozrejme, hrať s, Často budú programátori vyjadrovať tie v šestnástkovej sústave, len preto, že to inklinuje byť trochu jednoduchšie. Aj keď sa na prvý pohľad je to oveľa zložitejšie. 
+
+Takže v každom prípade, to je dôležité pretože Nick v Stanforde nám dal šesť kusov funkčnosti To si ty, pučiace programátori, budú mať teraz možnosť používať. Zabudované do tohto webu Stránka je šesť funkcií, Šesť postupy, ktoré Nick napísal. Tri z nich sa dostanete číslo, červená, zelená alebo modrá hodnotu. Tri z nich sa nastaví túto hodnotu. A tieto podčiarknutia sú len zástupné symboly, takže je potrebné vedieť, čo to je. 
+
+Takže sa tieto tri funkcie, Prvý z týchto vecí bude x-súradnicu, a druhý z týchto vecí sa bude jednať o súradnici y. Inými slovami, ktoré DOT, ktorý pixel chceš dostať zeleň, dostať modrej, dostať červenou farbou. A potom tu, to bude x, to bude Y hodnotu, a to sa bude celá rada. Takže poďme urobiť prvý rad dohromady a potom Nechám to na vás pokúsiť sa odvodiť zvyšok. Takže podľa pokynov Na tejto stránke potrebujeme pre zvýšenie červené o faktor 10, a musíme odstrániť zelenú a vyberte modrej. Začnime s posledne spomenutých scenárov. Takže ak chcem, a idem odsadiť pomocou nejakej medzery, keď chcem nastaviť červenú, zelená alebo modrá hodnotu, Chystám sa urobiť nasledovné. 
+
+Image, im.setBlue, a potom na základe mojich inštrukcií tu, Aké tri veci by som mal typ vnútri zátvoriek teraz? Musím x hodnotu, y hodnotu a aké číslo By som mal dať sem, keď chcem zbaviť ničoho, založený na tomto príbehu tu? Jednoducho nula. Ak chcem Nedôjde k vytvoreniu modrého, som len chystá zmeniť na nulu. 
+
+Teraz sa poďme len zhrnúť, čo to robí. Mám tu na týchto špičkových Druhý a tretí riadok, Celok som dve slučky, vnorené slučky, ak vás bude, že budú mať za následok postupujúci zľava doprava, zhora nadol cez všetky x hodnoty a všetky hodnoty y. Vzhľadom k tomu, znovu, je obraz len mriežka riadkov a stĺpcov. Takže toto je dostane zbaviť všetkého čistého neba. Nechaj ma odísť do ďalšieho riadku na vás. Ako sa môžem zbaviť všetky zelené? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Nice. 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Nice. A budem oddialiť, a len brať starostlivosť o ktoré ste neurobili žiadne preklepy. A ak ste pohodlné s tým, čo ste urobil, pokračujte a kliknite na tlačidlo Spustiť / Uložiť a vidieť to, čo dostanete. A opäť sme urobili len tri zmeny. vypúšťa sme, že prvý komentovať a nahradil ju s týmito dvoma riadky kódu. A to je v poriadku, ak je potreba zasiahnuť tlačidlá Run / ušetriť pár krát niečo napraviť. 
+
+A dovoľte mi tiež priblížiť na mojom kód, takže môžete prepísať. Dobre. Vidím Andrew má čo Zdá sa, že to bola chyba. Len dostal veľký čierny obdĺžnik na jeho obrazovke. Má niekto iný má veľký čierny obdĺžnik? 
+
+Divákov: Áno. 
+
+DAVID Malan: Veľký čierny obdĺžnik? OK, takže poďme premýšľať o tom, čo to znamená. Povedali sme si, že nula, nula, nula, takže nie je zelená, nie červená, nie modrá, sa chystá dať tie čierna. A ukázalo sa, že Väčšina našich notebookov jednoducho nemajú dostatok vernosť. Nemôžete docela tam povedať, je v skutočnosti niečo, čo existuje. A ak ste trochu možno oprieť obrazovka dopredu a dozadu, Možno to vidíte tam niečo malé? Možno, druh, tak nejako? Nie je to úplne čierne. 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Spoiler! Tam je nejaká červená tam, ale pamätať zo špecifikácií problému, Nick tónovaný dole. On to desaturated trochu ale nie úplne na nulu. Takže ak chceme zväčšiť objem červenej, dovoľte mi navrhnúť tento trik. Nechaj ma priblížiť na mojej obrazovke. A nechaj ma ísť napred a povedz Suma sa rovná im.getRed (x, y). 
+
+Tento riadok kódu sa mi dávať niečo, čo nazýva premenné. Mám ľubovoľne, ale pravdepodobne, rozumne zavolal môj variabilný čo, očividne? Čiastka. Len sumy. Mohol som to nazval čokoľvek chcem, ale som Pomocou tejto ďalšie funkcie že som opísal skôr získať množstvo červenej farby u x čiarka y. Prečo som to urobil? Čo chcete robiť? musíte add-- Divákov: [nepočuteľné] DAVID Malan: Áno, možno vynásobte ju 10 rokov. A ak sa vám to neviete, že som ísť dopredu a to urobiť. Chystám sa ísť dopredu a povedzme, chcem množstvo červenej Chcem byť čokoľvek je v mínuse, krát 10, a hviezda, hviezdička na vašom Klávesnica je the-- nepoužívajú x. Použite hviezdu. Takto sa množiť veci vo väčšine programovacích jazykov. 
+
+Takže podľa Kareem intuície, uložené v tejto premennej nazvanej množstvo, Je koľko červený Chcem na umiestnenie xy. Ako teraz mám robiť, že Pixel mať toto číslo? Ste už predtým urobil. Nastavíte zelená a modrej na žiadnu hodnotu, na nulu. Divákov: [nepočuteľné] DAVID Malan: Áno, Nechcete ho do 10. Už ste urobil matematický tu. Tak sa dostávame hodnotu červenej, čo je nízky počet, pravdepodobne. Sme vynásobením až o 10. Čo chcete robiť s Premenná suma teraz? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Nice. Takže im.set-- čo? 
+
+Divákov: setRed. 
+
+DAVID Malan: setRed na umiestnenie xy. Jo. A práve vyššie. Inými slovami, premenná je dočasný zástupný že si môžete dať čokoľvek chcete v. My stalo, že sa dosadením Číslo v nej, v túto chvíľu. Máme násobí ju 10, aby bolo väčšie. A teraz som náhradou tejto premennej ako ten tretí argument, alebo vstup pre nastavenie červenej. A tak, že akonáhle dokončiť to, a berú na vedomie z bodkočiarkou a v zátvorkách. 
+
+Pokračujte a kliknite spustiť / uložiť znova, a vy Mali by ste vidieť, magicky, čo bolo v skutočnosti tam. [? Arwa ,?], Čo tam je? Eiffelova veža v plnohodnotnej červená, nie tak celkom tma. to by malo byť viac zrejmé teraz, áno? OK. A Andrew, nič viac čierna skrinka? Divákov: [nepočuteľné] DAVID Malan: Dobre. Takže budem držať to na obrazovke. Ak chcete hrať s touto neskôr, budem znovu to pre vás. Ale tento kód tu urobil presne to. Prečo nie my, kto iný. Nechaj ma mierne posunúť nadol. 
+
+Takže v tomto prípade, projektora nie je naozaj to spravodlivosť. Ale na svojich obrazovkách, pravdepodobne majú veľmi červené a veľmi čiernu skrinku. Aj to je hádanka, ktorá ukazuje niečo slávnou. Snímka však bol skreslený. Skutočný obraz, tentokrát je v modrých a zelených hodnotách. Avšak, Všetci boli rozdelení o 20, takže hodnoty sú veľmi malé. Červené hodnoty sú len náhodné čísla, šum. Vrátiť týchto narušení odhaliť pravdivý obraz. 
+
+Takže Nick potom vám povie, čo má robiť. Nastavte červené hodnoty na nulu, a potom nekazí, čo to je. Potom násobiť modré a zelené hodnoty od 20. Takže je to skoro Rovnaký program ako predtým, ale vy ste zvrátenie procesu. A dám kód než sa na obrazovke v prípade, Ak chcete sa vrátiť späť k nemu alebo hrať ďalej s tým, že jeden. Nechaj ma priblížiť na to. Ale riešiť medi image puzzle, číslo dva. 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: OK, takže to jedno, že som nebude dať čo najviac rád. Tak som would-- oh, poďme vidieť, že máte preklep tu. Takže pamätajte, že to tu v skutočnosti potrebuje ísť tam. Takže to, čo by som navrhoval, ak chcete zamerať sa na tento jeden, je tu odpoveď. Ak chcete prepísať to, že by mal dostať prvý jeden pracovný. A potom môžete použiť ako inšpiráciou pre iných. Pekný. Dobre. 
+
+A pre zvedavé, To je jednoduchý príklad z vedy alebo umenia volal steganografie, umenie skrývanie informácií v obrazoch. Typicky môže byť obrazy vodoznakom veľmi nehanebne s logom v spodnej časti roh, ale je jasné, vy môže byť oveľa sofistikovanejšie o ňom a vlastne skryť ďalšie obrazy v obrazoch nejako s touto technikou. 
+
+Trvať ďalších 30 sekúnd, a potom budeme aspoň oznámiť, čo by ste mali vidieť. A Nechám tretie onu vo forme at-home cvičenia, ak by ste chceli skôr ako spochybniť tento víkend. A myslím, že by mohol Andrew ju najprv dostať. Aký je druhý obraz, Andrew? 
+
+Publikum: Socha Slobody. 
+
+DAVID Malan: Socha Slobody Bude odpoveď tentoraz. Takže znovu, len niekoľko jednoduchých príklady, ktorého cieľom je poskytnúť vám predstavu, ako sme preložený obrazovú Scratch bloky na viac nepríjemné a ďalšie zložitý kód, ale všetky myšlienky sú stále presne rovnaké, aj keď sa zavedením Teraz pojmu premenné, pričom schopné dočasne ukladať niečo. 
+
+Urobme ešte jeden hands-on, len preto, aby sa pospájať na niečo trochu viac reálneho sveta. Až budete pripravení, keď si mohol choďte na túto adresu URL na obrazovke. To je tiež svoju kópiu šmykľavky, developers.google.com/maps~~V. Poďme niečo robiť real, tak povediac, na webe s použitím Google Maps API, alebo aplikačné programovacie rozhranie, a to nasledujúcim spôsobom. 
+
+Google, rovnako ako mnoho firiem, poskytuje veľa voľného funkčnosti ktoré môžete použiť na vybudovanie svojho Vlastné zaujímavé aplikácie. V skutočnosti, ak ste niekedy používali Uber, aby si taxi alebo auto, pravdepodobne viete, že má Uber mapy a to ukazuje vozy na ňom. To znamená, že ako najlepšie môžem povedať, Google Maps API. Oni sú vlastne pomocou máp Google, ale Uber nie je mapovanie spoločnosť, ani by to byť Zvlášť zaujímavý problém riešiť na vrchole svojej Problém autoservisov. A tak stojíme, opäť na ramenách druhých, Google v tomto prípade. Takže oni používajú Google Maps, ale ich vlastné autoopravovniach a ďalšie podobné črty. 
+
+Takže budeme využívať z toho robiť nasledujúce. A či som zašiel príliš rýchlo, stačí zavolať si ma za chvíľu. Šťastný zhrnúť niektoré z obrazu vecí. Mal by si sa vidieť na stránke, ako je táto. Tak pekný Google, a sú to jedny z najlepších poskytovať nielen API, ale bez API, ktoré vám Môžete hrať s alebo komerčnému využitiu. Nemajú spustiť, ak vaše použitie vás nabíja je vysoká, ale ja šiel dopredu s predstihom a podpísal nás sa k účtu zdarma že dúfajme, 10 počítačov nás nebudú diskvalifikovať pre naraz. Tak dúfajme, že tento Demonštrácia bude fungovať. 
+
+A všimnite si, že majú API pre Android, iOS, web a webové služby, čo to je. Zamerajme sa na webe. Takže kliknite na ružový box, web, a to vás dovedie snáď aj na stránku tu. A že mám veľa API. A to môže byť trochu ohromujúce na prvý, ale nám to riadiť tým, čo chceme. 
+
+V ľavom hornom rohu je Google Maps JavaScript API JavaScript API. Preto neváhajte a kliknite na tento jeden. A to vás povedie teraz na Nasledujúce stránky, ukážky a ukážkový kód. Nechaj ma tu oddialiť. A dovoľte mi, aby som nás to-- posunúť nadol k miestu, kde sa hovorí, že rýchle počiatočné kroky. Vaša obrazovka by mala vyzerať moja. 
+
+A je tu dva kroky, získať kľúč a začať rozvíjať. Už som urobil krok, jeden pre us, dostať takzvaný kľúč. A je to spoločný nápad. Kľúč API je spravidla len veľké náhodné číslo alebo reťazec že ste mal vložiť do svojho kódu, tak, že Google vie, kto ste, keď používate svoje služby, ich API. Neznamená, že sme nabíja čokoľvek. A teraz, kliknite namiesto jeden, kliknite na tlačidlo štart vyvíja. Ak by ste mohli len zamávať mi cez ak nie si istý, kde sme. 
+
+Takže budeme len poškriabať povrchu, ale čo tu Myslel som, že by bolo presvedčivé je vlastne mať všetky z nás, použitím Cloud9 v jednom okne a Tento výukový program v inom okne, umožňuje skutočne dostať naše vlastné Aplikácia hore a beh že vloží vlastné Google máp v našej vlastnej webovej stránky, a potom pridá jednu alebo dve funkcie. Ale my si len poškriabať Povrch, čo môžeme urobiť. 
+
+Takže len rýchla kontrola zdravý rozum. Sú všetci na tejto stránke, Google Maps API JavaScript? Mal povedať, ako začať. nebudeme prejsť celá vec akýmikoľvek prostriedkami. OK, v inom karte, ak nie majú ju otvorenú, idú do Cloud9 a dostať sa do práve Novú kartu nakoniec. Takže znovu, c9.io zo včerajška, c9.io, a len vytvoriť nový súbor. A ísť dopredu a volania to, čo by ste chceli. Zavolal som dolu map.html. Nazvime to niečo končiace .html. A vy by ste mali byť zhruba kde som v tomto procese len s blikajúcim riadku v prázdny Karta s názvom niečo ako map.html. Alebo súbor, nový súbor tentoraz. 
+
+A teraz, viac ako na API Google Maps JavaScript budeme preskočiť čítanie cez všetky tohto textu. Ale všimnite si, že je hello world naozaj všade, to vidíte teraz. Hello world má tento veľký farebný Príkladom veľa HTML. Pokračuj a skopírovať a vložiť len to, že HTML, takže od typu doc ​​v hornej časti celú cestu až do tesného HTML tagu, choď Prepisom všetky to-- znova, že je pod hello world example-- a vložiť, že do svojej karte Cloud9, takže teraz obrazovka by mal vyzerať zhruba ako ja. 
+
+A môžete si ju uložiť, ale nenačítajú to ešte nie. Poďme sa pozrieť na prvý kód a uvidíme, či budeme nedá odvodiť, alebo sa dozvedieť z toho, čo je Google bolo nás slepo kopírovať a vložiť. Oni jednoducho chcú pomôcť, doslova, dostať nás začal, ale tam to nie je moc Zložitosť v skutočnosti tam. Nejaké otázky ešte nie? Sme v bezpečí postupovať vpred? OK. 
+
+Tak rýchlo, nech to jednoducho urobiť niekoľko rýchlych rýchle kontroly. Linka jedno z toho, čo som vidieť, a dúfajme, že vám vidieť, čo to znamená, DOCTYPE html? Kareem, pripomínajú? Divákov: [nepočuteľné] DAVID Malan: Áno. Tu prichádza HTML 5. Medzitým, lemujú dva na Obrazovka tu znamená hej prehliadač, Tu prichádza skutočná HTML. Riadok tri je hej prehliadač, tu je hlava. Linka štyri je, samozrejme, hej prehliadača, prichádza titul. Čo linka päť robiť? V skutočnosti to nie je robiť nič pre nás. V tomto prípade je to len zmení stránku v predvolenom nastavení. Linka šesť, sme sa hovoriť, ale to Určuje kódovanie znakov. Je tu rôzne spôsoby, ako zakódovať súbory, najmä pre výučbu cudzích jazykov. UTF-8 len inklinuje byť predvolené. 
+
+Takže teraz uvidíme v súlade sedem až 16, niektoré CSS. A aj keď sme sa nevideli všetky tieto veci skôr, môžeme odvodiť druh. Takže linku osem prostriedky, hej prehliadač, platí všetky tieto operácie dvoch značiek, očividne? HTML a telo textu. Takže čiarka je nová vec tam. A to je len spôsob, zadávanie viacerých značiek naraz. 
+
+Potom sme dostali zložené zátvorky. Takže zdá sa, že to hovorí prehliadači, aby výšku strana 100%. Takže aj keď je tam veľmi málo obsah, aby celú stránku, aby sa vec vyplnil stránku. Make mapu nakoniec vyplnil stránku. Margin, čo to znamená? To je obvykle ako ľubovoľná biely priestor okolo okrajov že niektoré prehliadače dizajnér len rozhodol, by mala byť, preto, že druh robí veci vyzerajú čistejšie. Ale my nechceme. Chceme, aby sa mapa bude celú cestu k okrajom. Polstrovanie, svojím duchom podobať marže. Okraje znamená mimo, výplň prostriedky dovnútra, ale je to rovnaký druh obchodu. Je to trochu vyrovnávacej pamäte medzi vami a na okrajoch. 
+
+A potom linka 13 je dobrá šanca pre rýchly prehľad. Čo robí ostrý označenia map znamenať, alebo hashtag mapa znamená? Čo to odkazujú na v zásade? 
+
+Divákov: [nepočuteľné] DAVID Malan: Presne tak. Táto vlastnosť, táto vlastnosť CSS sa týka len jednu vec, značka HTML ktorý má ID citát, koniec citátu "mapu". A teraz poďme rýchlo dopredu, zvitok až na koniec súboru, ktorý Nie je príliš ďaleko, a upozornenie na linke 19, ak ste ju vložiť presne tak, ako ja, linka 19 má len div, čo je divízia, kde som včera volal obdĺžnikový región. Je to nemá nič v ňom. Je to otvorený tag, v blízkosti tag. Ale to mať jedinečný identifikátor. 
+
+Takže to, čo sa zdá byť dialo tu je Google sa chystá našu webovú stránku mať kompletný výšku 100%, a nie výplň, žiadne okraje, pretože čo budeme dať dovnútra tento div, ktorého jedinečný identifikátor je máp, je skutočná vloženou mapu. A chceme, aby vyplniť stránku, a to nielen byť nejaký malý obdĺžnik uprostred. Takže linka 14 obdobne zdôrazňuje sa Pre seba by mal mať výšku 100%. 
+
+Takže teraz si všimnúť medzi riadkami 20 a 28, to je JavaScript kód. A to znamená, že aj keď je to syntakticky trochu divne, že to nie je tak moc tu deje. V riadku 21, to prehlasuje niečo, čo nazýva premenné. Namiesto toho, volať to súm, ako sme to urobili predtým, budeme presnejšie hovorí var, čo znamená len premenné. Mohli by sme použili, že v Nickova kód, ale neurobil to, a tak som sa neobťažoval robiť to jeden. Je to premenná s názvom máp, a potom je tu funkcia, ktorá je vraj volal initMap. 
+
+Takže to je ako naše vlastné zvyklosti skladačky do nuly. Vytvorili sme kus Funkčnosť nazývaný initMap, a môžete odvodiť druh čo sa tu deje. Na ľavej strane, máme premennú, takže ideme dať nasledujúce vec vnútri tejto premennej, sprava doľava. Pravá strana hovorí, hej browser, daj mi novú mapu Google. A google.maps.map je len funky spôsob, špecifikujúca, že túto funkciu Patrí do Map Google. 
+
+Po zátvorkách, sme videli predtým, hej prehliadača, získate me prvky v stránky, tag na stránke, ktorej jedinečný identifikátor je-- 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: --map. A čo sa deje, dobre, Táto linka spolu, linka 23, je v podstate hovorí, hej prehliadač, choď si ma ktoré sa vlievajú div na stránke ktorého jedinečný identifikátor je mapa, pretože chcem vložiť do to-- injekciu do nej, ak ste will-- veľa obsahu čo sa stane, že prichádza z webu, následne. A Google robí všetko pre nás. 
+
+Takže znovu, na samom konci dňa, máme tento príklad abstrakcie. Nemám potuchy, čo je mapa alebo ako implementovať mapy API. Nepotrebujeme sa. Len musíme povedať mapy kam umiestniť seba, a odísť sú základom implementácia Podrobnosti Googlu. Teraz je tu zjavne dva údaje že tento príklad je poskytujúca API Google. Zrejme stredu mapy, a úroveň zväčšenia, tak povediac. 
+
+A niekto rozpoznať tieto súradnice, zemepisnej šírky a dĺžky? Pravdepodobne nie, ale môžeme sa vrátiť na tutoriálu, doslova vidieť. Ale my ho uvidíme za chvíľu. Úroveň zoomu je hodnota medzi, ja nie Viete, jeden v 13. alebo niečo také. Len to má čo do činenia s tým, ako ďaleko ste zväčšovať a zmenšovať, a to je všetko. A teraz na samom konci stránky, vývesné linka 29-- je to trochu škaredé, pretože to wraps-- tento riadok kódu je to, čo stiahne do Prehliadač skutočné API Google. Všetok kód, ktorý je Google inžinieri písali, ktoré implementujú Celý tento rys nezabudovatelného máp. 
+
+Teraz sa poďme nič nezmení. Ak ste po dobu, choďte do toho a len uložiť tento súbor, ak ste naozaj mať čo mám. Prejdite na jeho adresu URL. Môžete kliknúť na tlačidlo Spustiť up vrchole a že povie ste URL webového servera znova. A to vás povedie k novej karte. Ak kliknete na tlačidlo Otvoriť pre map.html, a šance sú ste dostane upozornenie, chybové hlásenie, áno? Chybové hlásenie, chybové hlásenie? 
+
+Takže bohužiaľ, chyba Správa nie je to poučné ak ste skutočne otvoriť konzola, že karta zvláštne my uchovávané otvorenie včera trochu skôr. Ale ja narazil skôr, takže už som prišiel na to, čo je riešenie. V dnešných šmýkačky, alebo skôr v Cloud9, vývesné že sme nemali robiť niečo zámerne. Všimnite si, že tento skript značka v linka 29, ak budete čítať cez to, Je to ako maps.googleapis.com/~~pobj niečo, niečo, niečo, Všimnite si niekoho, jeden z vývojárov, napísal v celom hlavnom meste listy, váš kľúč API. 
+
+Musíme vložiť niečo tam. A to bol krok Urobil som pre nás predtým, a opäť by mohli blacklist us Ak naraz 12 alebo viac z nás začať používať rovnaký kľúč, ale uvidíme, čo sa stane. Takže ak idete do dnešnej šmykľavky, jednu snímku neskôr, je tu Tento veľmi funky-vyzerať ako textový reťazec. Ísť dopredu a len skopírovať to a vložte ho tam, kde sa hovorí, že váš API kľúč. To je ten, čo som sa prihlásili k. 
+
+A rozhodne neskúšajte písať to ručne, pretože to je plný s preklepy, potenciálne. Takže stačí skopírovať a vložiť to. A to bude robiť linku dlhšie, ale teraz, len aby bolo jasno, to by malo vyzerať trochu viac ako je tento, kde kľúč sa rovná nie kapitalizované revať na vás. Uložte stránku, vráťte na kartu druhú, znovu, a dúfať, že vidí mapu, kde? 
+
+Divákov: Australia. 
+
+DAVID Malan: Austrália. Takže zrejme to sú tie GPS súradníc z Austrálie. A dovoľte mi chodiť na chvíľu a pomáhajú každému, kto nie je úplne tam, ale dovoľte mi navrhnúť, cez Google, nájsť GPS súradníc zo svojej vlastnej rodné mesto alebo vlastné domovskej krajiny. A pravdepodobne Google môže premeniť toto up, alebo Wikipedia vám povedať. Ale vybrať dve rôzne hodnoty pre zemepisnej šírky a dĺžky, prejsť späť a vložiť, a potom znova načítať stránku po uložení a uvidíme, či môžete mať máp pre vlastné rodnom meste. 
+
+A keď budete hotoví s že následná-up challenge-- a ja ti dám trochu menej smer, úmyselne, takže vás zámerne musieť bojovať za pár minút s dokumentáciou, zmeniť mapu byť nie to cartoonish default, ale satelitná mapa. Takže ste vlastne vidieť satelit snímok namiesto pekných farieb. 
+
+A náznak dám tí Ak je zmeniť typ mapy. Vráť sa, že dostať začal stránky pre inšpiráciu. Ako ste si možno zbierala, ak hľadáte, je ich toľko viac čo môžete urobiť. Niektorí z vás už bol zmenený typ mapy. Ale môžete do-- napríklad, dovoľte mi, aby som prejsť na niečo, čo sme urobili pre kurz Aj teach-- maps.cs50.net. Jeden z našich undergrads to urobil. My stred mapy cez Harvard Yard a prekryť všetky z týchto mien stavebných, a mali sme ho pridať toto. Takže keď chcem hľadať, Napríklad, Matthews Hall, Máme trochu drop-down menu. A myslím, že je pomocou Bootstrap, na Knižnica sme diskutovali skôr pre toto. A ak kliknete na Matthews Hall, okamžite skoky mapy do určitej umiestnenia, a to ukazuje Ste obraz v tejto malej pop-up. 
+
+Ale aj tento malý pop-up, sme nemali realizovať. Keby som sa posunúť nadol na našich získanie začal stránku a pozrite sa na informačných okien, uvidíte, že niektoré z Funkčnosť vy sám môže pridať, aj keď s trochu viac zložitosť, je niečo, čo nazýva informačné okno. A keď som na tlačidlo príklad tu, a to je to, čo je zábavné, môžete robiť veci, ako je tento, Kliknutím na značku a potom voila, Informácie o vyskočí. 
+
+Takže sme sa celkom zavedené dosť vlastnosti JavaScriptu maľovať obraz presne tak, ako vám mohol zapojiť všetky tieto veci dohromady, ale my sme trochu pod povrch. V skutočnosti to, čo som práve urobil, keď Som klikol na túto značku, bol spúšťací udalosť, takzvaný na udalosť click. A my sme vlastne videli Udalosť dneska, tzv predložiť udalosť, Keď sme boli prevenciu Užívateľ pátranie po mačiek. Takže sme sa trochu zdvihol a choosed zo všetkých týchto rôznych funkcií, aby vám pocit, dúfajme, z toho, čo môžete vlastne čo robiť s trochu viac komfort pri programovaní, a úplne voľné prostriedky. 
+
+Nejaké otázky? Nie? Toto je vaša posledná šanca, že aspoň dnes, v piatok, dostať niečo z vášho hrudníka takže odtiaľto pocit sebavedomia a pohodlné. Áno. 
+
+Divákov: Prečo nie pridáte ešte jednu vec? 
+
+DAVID Malan: Oh môj bože. Musím si oddýchnuť tento víkend, myslím. Ďalšie otázky? 
+
+Divákov: [nepočuteľné] 
+
+DAVID Malan: Vy can-- v Internet Explorer, odpočinok v mieri, môžete použiť, aby bolo možné dať VB skript, virtuálne základný scenár, ale že v skutočnosti nikdy pochopil. Tak krátka odpoveď je jednoducho JavaScript. Ďalšie otázky? Dobre, dobre, nechaj ma to urobiť. Nechaj ma chytiť naše kolegami vonku. Majú nejaké hodnotenie formy, ktoré chcú každého stráviť pár minút vypĺňanie. Chcú zbierať túto formu a akýkoľvek odpustenie, ktoré ste vonku. Budú mať tiež certifikáty. Hádam, že to ešte nejaké občerstvenie vonku. Nech prejdeme tieto von, a ak vás máte akékoľvek otázky do tej doby, Budem chodiť viac individuálne a môžeme začať. Áno, samozrejme. Divákov: [nepočuteľné] DAVID Malan: To je Zvyčajne platí v týchto dňoch. Iste s webu softvér, budete nakláňať na ostatných, či už ste esteticky použitie veci ako bootstrap, takže sa nemusíte musieť vykonávať nízku úroveň podrobnosti o ponukách a Tlačidlá a tak. Tie opierajúci sa o niekoho ako je Google, aby vás Nemusíte vybudovať Uber obchodné a mapovanie podnikania, a ľubovoľný počet podobnú aplikáciách. 
+
+V skutočnosti, prihlásenie sú populárne tiež. Ak ste použili Spotify alebo ľubovoľný počet webových stránok, budete sa prihlásiť do niektorej webové stránky pomocou Facebooku. čo takže je tu pekný, sú API pre prihlásenie v dnešnej dobe, takže nemáte mať svoj vlastný užívatelia tabuľku a všetky svoje vlastné databázy nutne v rovnakom rozsahu. Môžete nechať Facebook robiť všetko tejto zložitosti pre vás. Takže je to vzrušujúca doba, čestne, pri programovaní, pretože existuje toľko treťou stranou služby, ktoré môžete stavať na vrchole. 
+
+A opäť, cena, ktorú zaplatíte, je či už finančné alebo prestoje. Ak Google ide dole, tak robí Uber, pravdepodobne, ale možno to je rozumný kompromis. A opäť, že bol jedným z tém, dúfajme, že za posledných pár dní, Práve tieto kompromisy. A málokedy je tam deje byť správna odpoveď. Je to naozaj lepšie z dvoch alebo viacerých odpovedí. 
+
+Odovzdať tieto okolo. 
+
+A tieto účty Cloud9 bude pokračovať do práce, teoreticky, na neobmedzenú dobu. Dalo by sa zistiť, či budete čakať niekoľko dní alebo týždeň alebo viac prihlásiť späť do nich, to môže trvať ako jeden alebo päť minút otvoriť zálohovať, ale to len preto, že dal to spať ušetriť na zdroje. 

@@ -1,0 +1,739 @@
+1
+00:00:00,000 --> 00:00:00,500
+
+2
+00:00:00,500 --> 00:00:01,960
+TALARE 1: Låt oss tala om vatten.
+
+3
+00:00:01,960 --> 00:00:07,280
+I detta problem, ber vi användaren att berätta
+oss hur länge i minuter deras dusch var
+
+4
+00:00:07,280 --> 00:00:11,040
+och sedan beräknar vi motsvarande
+antal flaskor med vatten
+
+5
+00:00:11,040 --> 00:00:12,970
+att deras dusch används.
+
+6
+00:00:12,970 --> 00:00:16,379
+>> Så vad är vår att göra-
+för det här problemet?
+
+7
+00:00:16,379 --> 00:00:20,050
+Först kommer vi att vilja
+att uppmana och sedan validera
+
+8
+00:00:20,050 --> 00:00:22,100
+den ingång som användaren ger oss.
+
+9
+00:00:22,100 --> 00:00:24,790
+När vi ser till att vi
+har giltiga indata från användaren,
+
+10
+00:00:24,790 --> 00:00:28,230
+vi kommer att beräkna
+motsvarande antal flaskor med vatten
+
+11
+00:00:28,230 --> 00:00:30,770
+att användaren hade under
+deras dusch, och då är vi
+
+12
+00:00:30,770 --> 00:00:33,720
+kommer att tala om för dem av
+att skriva ut det numret.
+
+13
+00:00:33,720 --> 00:00:37,230
+>> Så låt oss ta itu med vår första
+uppgift, vilket fick och validera
+
+14
+00:00:37,230 --> 00:00:38,550
+användardata.
+
+15
+00:00:38,550 --> 00:00:40,910
+För detta har vi skrivit en
+funktion för dig som kallas
+
+16
+00:00:40,910 --> 00:00:43,950
+get_int ligger i CS50 biblioteket.
+
+17
+00:00:43,950 --> 00:00:48,710
+get_int säkerställer att användaren matar
+ett heltal, så alla positiva tal
+
+18
+00:00:48,710 --> 00:00:51,700
+negativa tal, eller
+noll är alla accepteras.
+
+19
+00:00:51,700 --> 00:00:55,900
+Men om användaren matar något annat,
+så valfri kombination av bokstäver eller siffror
+
+20
+00:00:55,900 --> 00:00:59,710
+eller decimaltal, då
+Användaren uppmanas att försöka igen
+
+21
+00:00:59,710 --> 00:01:04,319
+och funktionen inte kommer att acceptera något
+tills användaren ger dem ett heltal.
+
+22
+00:01:04,319 --> 00:01:06,410
+>> Så hur använder vi get_int?
+
+23
+00:01:06,410 --> 00:01:10,830
+Om du öppnar din arbetsyta och
+skapa en fil med namnet integer.c låt oss
+
+24
+00:01:10,830 --> 00:01:12,110
+skriver du följande.
+
+25
+00:01:12,110 --> 00:01:14,760
+Hashtag inkluderar cs50.h.
+
+26
+00:01:14,760 --> 00:01:18,480
+Detta är nödvändigt eftersom get_int
+är en CS50 biblioteksfunktion,
+
+27
+00:01:18,480 --> 00:01:21,890
+så vi måste hashtag inkluderar
+sin förklaring i syfte
+
+28
+00:01:21,890 --> 00:01:23,370
+att använda funktionen.
+
+29
+00:01:23,370 --> 00:01:26,570
+Och sedan i min huvudsakliga
+fungera Jag ska bara
+
+30
+00:01:26,570 --> 00:01:29,560
+att helt enkelt anropa funktionen get_int.
+
+31
+00:01:29,560 --> 00:01:31,750
+>> Så låt oss köra och se hur det fungerar.
+
+32
+00:01:31,750 --> 00:01:35,092
+Jag har redan sammanställt det, så låt oss
+bara gå vidare och köra detta program,
+
+33
+00:01:35,092 --> 00:01:36,480
+./heltal.
+
+34
+00:01:36,480 --> 00:01:39,880
+Här har jag en snabb och
+här är där jag mata in värdet.
+
+35
+00:01:39,880 --> 00:01:44,880
+Säger jag sätta i bara några heltal,
+50, program excepts och Avslutar
+
+36
+00:01:44,880 --> 00:01:45,960
+och det är det.
+
+37
+00:01:45,960 --> 00:01:49,350
+>> Men säger jag köra den igen och
+I ingångs något annat.
+
+38
+00:01:49,350 --> 00:01:51,350
+Kanske, hallå världen.
+
+39
+00:01:51,350 --> 00:01:55,660
+Det är inte ett heltal så
+Programmet kommer att fråga mig att försöka igen.
+
+40
+00:01:55,660 --> 00:01:59,160
+Låt oss försöka igen med
+kanske en decimal denna tid.
+
+41
+00:01:59,160 --> 00:02:03,450
+0,5, återigen, inte är ett heltal så
+Programmet kommer inte att acceptera det
+
+42
+00:02:03,450 --> 00:02:05,290
+och det kommer att tala om för mig att försöka igen.
+
+43
+00:02:05,290 --> 00:02:07,070
+Så låt oss ge det ett annat nummer.
+
+44
+00:02:07,070 --> 00:02:09,830
+Programmet accepterar det,
+avslutas, och vi är klara.
+
+45
+00:02:09,830 --> 00:02:13,520
+>> Så nu har vi en funktion
+som tillåter oss och säkerställer
+
+46
+00:02:13,520 --> 00:02:16,790
+att användaren inmatar en
+heltal, men hur kan vi
+
+47
+00:02:16,790 --> 00:02:20,330
+faktiskt hålla koll på
+heltal inmatade av användaren?
+
+48
+00:02:20,330 --> 00:02:25,260
+Tja, är allt vi gör butik
+detta värde i en variabel, säg n.
+
+49
+00:02:25,260 --> 00:02:30,580
+Så om jag förklara ett heltal n,
+och jag satt att värdet get_int,
+
+50
+00:02:30,580 --> 00:02:34,700
+då n kommer då att lagra vad
+värdera användaren inmatade.
+
+51
+00:02:34,700 --> 00:02:38,620
+>> Okej, så nu har vi säkerställt att
+användaren kommer att ge oss ett heltal
+
+52
+00:02:38,620 --> 00:02:42,550
+och vi vet hur man hålla koll
+av heltal, men kom ihåg,
+
+53
+00:02:42,550 --> 00:02:45,610
+heltal är både positiv och negativ.
+
+54
+00:02:45,610 --> 00:02:49,110
+Så det inte riktigt vettigt
+i samband med detta problem
+
+55
+00:02:49,110 --> 00:02:53,570
+att användaren tar en dusch
+av säg negativa 12 minuter.
+
+56
+00:02:53,570 --> 00:02:59,310
+Så vi måste se till att användaren
+faktiskt ger oss ett positivt heltal.
+
+57
+00:02:59,310 --> 00:03:02,130
+Nu har vi inte bara en
+enda funktion för detta,
+
+58
+00:03:02,130 --> 00:03:04,620
+så vi kommer att ha
+att skapa det själva.
+
+59
+00:03:04,620 --> 00:03:07,190
+>> Så vi vill att kontinuerligt
+uppmana användaren
+
+60
+00:03:07,190 --> 00:03:09,730
+tills de ger oss ett positivt heltal.
+
+61
+00:03:09,730 --> 00:03:14,300
+Om jag gör något kontinuerligt sedan
+det är besläktad med en slinga, en upprepning.
+
+62
+00:03:14,300 --> 00:03:19,130
+Så en av de konstruktioner som vi använder
+i c för att genomföra upprepning och loopar
+
+63
+00:03:19,130 --> 00:03:20,410
+är en while-slinga.
+
+64
+00:03:20,410 --> 00:03:23,020
+Så en while-slinga, som
+visas här, kommer att utföra
+
+65
+00:03:23,020 --> 00:03:27,030
+det som finns i kroppen i slingan, som
+länge de givna villkoret utvärderas
+
+66
+00:03:27,030 --> 00:03:27,900
+till true.
+
+67
+00:03:27,900 --> 00:03:30,640
+Så snart detta villkor
+utvärderas till false, då
+
+68
+00:03:30,640 --> 00:03:34,830
+Programmet kommer att fortsätta till vad
+kommer efter kroppen av slingan.
+
+69
+00:03:34,830 --> 00:03:39,400
+>> Så medan slingorna kommer att
+vara riktigt användbar i CS50.
+
+70
+00:03:39,400 --> 00:03:42,590
+Men i detta särskilda
+fall, vi vet att vi är
+
+71
+00:03:42,590 --> 00:03:48,140
+kommer att uppmana användaren åtminstone
+en gång och sedan bara slinga om nödvändigt.
+
+72
+00:03:48,140 --> 00:03:51,080
+Så här kommer vi till en
+speciell konstruktion och det är
+
+73
+00:03:51,080 --> 00:03:55,020
+mycket lik den samtidigt
+loop kallas en gör-while-slinga.
+
+74
+00:03:55,020 --> 00:03:58,840
+>> Så en gör-while-slinga utför
+kroppen av slingan åtminstone en gång
+
+75
+00:03:58,840 --> 00:04:01,750
+och sedan kontrollerar den för att se
+om den ska utföra,
+
+76
+00:04:01,750 --> 00:04:05,310
+i motsats till en while-slinga,
+som kommer att kontrollera tillståndet
+
+77
+00:04:05,310 --> 00:04:07,200
+och sedan köra kroppen.
+
+78
+00:04:07,200 --> 00:04:11,880
+Så i en gör-while-slinga vad vi kanske
+göra är att fråga användaren om ett heltal,
+
+79
+00:04:11,880 --> 00:04:14,450
+och sedan kontrollera om det är ogiltigt eller inte.
+
+80
+00:04:14,450 --> 00:04:18,130
+Om det är ogiltigt, då vi
+upprepa processen frågar användaren
+
+81
+00:04:18,130 --> 00:04:22,290
+att ge oss en annan heltal, och sedan
+endast när det heltal är giltigt,
+
+82
+00:04:22,290 --> 00:04:25,060
+Vi kommer att fortsätta att
+vad kommer efteråt.
+
+83
+00:04:25,060 --> 00:04:28,030
+>> Nu kommer du att märka att
+förklaring heltal n
+
+84
+00:04:28,030 --> 00:04:31,670
+är något annorlunda än vad vi
+gjorde tidigare i det föregående exemplet
+
+85
+00:04:31,670 --> 00:04:33,640
+och detta på grund av omfattningen.
+
+86
+00:04:33,640 --> 00:04:37,920
+Om vi ​​hade förklarat heltal n inuti
+av kroppen av do-while loopen,
+
+87
+00:04:37,920 --> 00:04:42,640
+då skulle vi inte kunna få tillgång till
+att värdet på n utanför de lockigt
+
+88
+00:04:42,640 --> 00:04:45,050
+hängslen indikerar kroppen av slingan.
+
+89
+00:04:45,050 --> 00:04:51,080
+Men vi i själva verket vill komma åt
+värdet på n senare i vårt program.
+
+90
+00:04:51,080 --> 00:04:55,730
+>> OK, så nu ska vi prata om
+vad detta villkor ska vara.
+
+91
+00:04:55,730 --> 00:05:00,400
+Vi vill endast Fråga igen den
+användaren, så länge som n är ogiltig.
+
+92
+00:05:00,400 --> 00:05:04,640
+Så tänk dig själv vad en ogiltig
+heltalsvärde skulle se ut
+
+93
+00:05:04,640 --> 00:05:08,060
+och sedan skapa en Boolean
+uttryck för att uttrycka det.
+
+94
+00:05:08,060 --> 00:05:13,070
+>> Vi är nästan färdiga med vår underaktivitet
+att förmå och validera användarinmatning.
+
+95
+00:05:13,070 --> 00:05:16,010
+Så låt oss göra det lite
+lite mer användarvänligt
+
+96
+00:05:16,010 --> 00:05:18,390
+och ge användaren en liten
+bit mer information
+
+97
+00:05:18,390 --> 00:05:20,510
+av vad vi meddelar dem.
+
+98
+00:05:20,510 --> 00:05:24,500
+Så låt oss uppmana användaren, per
+spec, med sträng minuter.
+
+99
+00:05:24,500 --> 00:05:28,935
+Så använder dina printf uttalanden, göra
+Se till att du matchar detta exakt.
+
+100
+00:05:28,935 --> 00:05:30,230
+>> Okej.
+
+101
+00:05:30,230 --> 00:05:33,840
+Så nu har vi ett giltigt användarnamn
+ingång, ett positivt heltal
+
+102
+00:05:33,840 --> 00:05:37,400
+värde för hur många minuter
+de tillbringade i duschen.
+
+103
+00:05:37,400 --> 00:05:41,300
+Så vad händer nu är att beräkna
+motsvarande antal flaskor.
+
+104
+00:05:41,300 --> 00:05:45,250
+Vad vi ska göra här är kanske
+vara mycket uppenbart för dig vid första,
+
+105
+00:05:45,250 --> 00:05:46,640
+och det är OK.
+
+106
+00:05:46,640 --> 00:05:49,320
+Vad vi vill göra är att vi
+vill börja träna
+
+107
+00:05:49,320 --> 00:05:53,810
+idén att upptäcka mönster och
+utveckla formler för problemet.
+
+108
+00:05:53,810 --> 00:05:57,200
+>> Så vi får höra per spec
+att en minut i duschen
+
+109
+00:05:57,200 --> 00:05:59,960
+är ekvivalent med omkring
+12 flaskor med vatten.
+
+110
+00:05:59,960 --> 00:06:03,020
+Alltså två minuter skulle
+vara ekvivalent med 24,
+
+111
+00:06:03,020 --> 00:06:05,850
+och fem minuter skulle
+motsvara 60.
+
+112
+00:06:05,850 --> 00:06:08,390
+Så nu om du tror
+du har det, så låt oss
+
+113
+00:06:08,390 --> 00:06:10,390
+se om du kan komma
+med ett mönster eller formel
+
+114
+00:06:10,390 --> 00:06:14,990
+att uttrycka om vi har att säga, n
+minuter, hur många flaskor vatten
+
+115
+00:06:14,990 --> 00:06:17,930
+skulle det uttryckas i termer av n?
+
+116
+00:06:17,930 --> 00:06:20,680
+>> Återigen, även om detta
+kan vara enkla vid första,
+
+117
+00:06:20,680 --> 00:06:23,240
+senare när vi kommer till
+mer komplicerade problem
+
+118
+00:06:23,240 --> 00:06:26,360
+vi kommer att vilja komma in
+bruket att identifiera
+
+119
+00:06:26,360 --> 00:06:30,120
+mönster och utvecklings formler
+att räkna ut dessa saker.
+
+120
+00:06:30,120 --> 00:06:33,450
+>> I c har du tillgång till
+standard aritmetiska operationer,
+
+121
+00:06:33,450 --> 00:06:36,520
+addition, subtraktion,
+multiplikation och division.
+
+122
+00:06:36,520 --> 00:06:38,420
+Så jag lämnar det till
+du nu att räkna ut
+
+123
+00:06:38,420 --> 00:06:41,300
+hur man uttrycker det
+motsvarande antal flaskor
+
+124
+00:06:41,300 --> 00:06:43,990
+att användaren konsumeras
+under deras dusch.
+
+125
+00:06:43,990 --> 00:06:45,700
+>> Okej, vi nästan klar.
+
+126
+00:06:45,700 --> 00:06:50,650
+Vi har tillfrågas användaren om deras insatser,
+Vi har sett till att det är giltiga indata,
+
+127
+00:06:50,650 --> 00:06:53,330
+och sedan har vi räknat ut hur
+vid beräkning av motsvarande
+
+128
+00:06:53,330 --> 00:06:55,480
+antal flaskor att de konsumeras.
+
+129
+00:06:55,480 --> 00:06:59,430
+Så det sista att göra är att mata
+motsvarande antal flaskor
+
+130
+00:06:59,430 --> 00:07:02,410
+och förhoppningsvis uppmuntra
+dem att bevara en del vatten.
+
+131
+00:07:02,410 --> 00:07:06,270
+>> Utmatning av värdet
+vara en printf uttalande.
+
+132
+00:07:06,270 --> 00:07:09,720
+Om jag ville säga att jag
+ha tre husdjur, till exempel,
+
+133
+00:07:09,720 --> 00:07:13,090
+Jag kan använda en printf uttalande
+som ser ut ungefär så här.
+
+134
+00:07:13,090 --> 00:07:15,880
+Jag har tre husdjur, och en ny
+linje för trevlig formatering.
+
+135
+00:07:15,880 --> 00:07:17,880
+>> Nu vill vi inte att
+helt enkelt svårt kod saker.
+
+136
+00:07:17,880 --> 00:07:20,740
+Säg antalet min
+husdjur förändras över tiden.
+
+137
+00:07:20,740 --> 00:07:25,080
+Då kommer jag att använda
+platshållare i mitt printf uttalande.
+
+138
+00:07:25,080 --> 00:07:27,350
+Så här mitt nummer är ett heltal.
+
+139
+00:07:27,350 --> 00:07:31,480
+Så jag kommer att göra en platshållare
+för ett heltal med% i.
+
+140
+00:07:31,480 --> 00:07:33,930
+Jag kommer att skriva strängen,
+och sedan efter strängen
+
+141
+00:07:33,930 --> 00:07:38,000
+Jag skriver ett kommatecken och sedan
+variabel som jag vill skriva ut.
+
+142
+00:07:38,000 --> 00:07:42,730
+Så att värdet kommer att skrivas ut
+i stället för att platshållare,% i.
+
+143
+00:07:42,730 --> 00:07:47,630
+>> Du kan använda platshållare, som
+väl, för flottar med% f.
+
+144
+00:07:47,630 --> 00:07:50,420
+Du kan också ha flera
+platshållare i en sträng.
+
+145
+00:07:50,420 --> 00:07:53,950
+Till exempel, om jag har ett visst antal
+av hundar och visst antal katter,
+
+146
+00:07:53,950 --> 00:07:59,210
+Jag satte tvåplatshållare här och sedan
+mina två variabler i respektive ordning.
+
+147
+00:07:59,210 --> 00:08:03,130
+>> Så nu när vi vet hur man skriver ut
+de värden som lagras i variabler,
+
+148
+00:08:03,130 --> 00:08:06,030
+den allra sista sak att
+göra är att se till att vi
+
+149
+00:08:06,030 --> 00:08:10,920
+Skriv ut värdet i rätt format
+anges i specifikationen.
+
+150
+00:08:10,920 --> 00:08:14,990
+Därmed har vi meddelade
+användare och validerade deras insatser.
+
+151
+00:08:14,990 --> 00:08:17,920
+Vi har sedan beräknas den ekvivalenta
+antal flaskor med vatten
+
+152
+00:08:17,920 --> 00:08:22,100
+att de konsumerar under deras dusch,
+och vi har matas detta värde till dem.
+
+153
+00:08:22,100 --> 00:08:24,440
+Och så har vi avslutat vatten.
+
+154
+00:08:24,440 --> 00:08:28,730
+>> Mitt namn är [? Zamila,?]
+och detta är CS50.
+
+155
+00:08:28,730 --> 00:08:29,909
+

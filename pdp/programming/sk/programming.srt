@@ -1,0 +1,7995 @@
+1
+00:00:00,000 --> 00:00:00,030
+
+2
+00:00:00,030 --> 00:00:00,460
+>> DAVID Malan: Dobre.
+
+3
+00:00:00,460 --> 00:00:01,094
+Sme späť.
+
+4
+00:00:01,094 --> 00:00:04,260
+Takže v tomto segmente o programovaní, čo
+Myslel som, že by sme urobiť, je mix vecí.
+
+5
+00:00:04,260 --> 00:00:06,340
+Po prvé, urobiť trochu
+niečoho hands-on,
+
+6
+00:00:06,340 --> 00:00:08,690
+hoci s použitím hravejší
+programovanie environment--
+
+7
+00:00:08,690 --> 00:00:11,620
+ten, ktorý je demonštratívny
+presne tie druhy nápadov
+
+8
+00:00:11,620 --> 00:00:14,220
+sme hovorili o,
+ale trochu viac formálne.
+
+9
+00:00:14,220 --> 00:00:18,200
+Po druhé, pozrite sa na niektoré z
+čím viac technických spôsobov
+
+10
+00:00:18,200 --> 00:00:21,520
+že programátor by skutočne riešiť
+Problémy, ako je vyhľadávanie problému
+
+11
+00:00:21,520 --> 00:00:24,530
+že sme sa zaoberali skôr a
+tiež viac zásadne
+
+12
+00:00:24,530 --> 00:00:26,020
+zaujímavý problém triedenia.
+
+13
+00:00:26,020 --> 00:00:28,840
+>> Len sme predpokladali, od dostať ísť
+že telefónny zoznam bol triedený,
+
+14
+00:00:28,840 --> 00:00:31,980
+ale to samo o sebe je vlastne niečo ako
+ťažký problém s mnohými rôznymi spôsobmi
+
+15
+00:00:31,980 --> 00:00:32,479
+to vyriešiť.
+
+16
+00:00:32,479 --> 00:00:34,366
+Takže budeme používať tieto ako
+trieda problémov
+
+17
+00:00:34,366 --> 00:00:36,740
+Zástupca vecí, ktoré
+by mohol byť vyriešený všeobecne.
+
+18
+00:00:36,740 --> 00:00:38,980
+A potom si pohovoríme
+asi v nejakom detaile, čo
+
+19
+00:00:38,980 --> 00:00:42,360
+sa nazývajú dát structures--
+milovník spôsoby, ako spojových zoznamov
+
+20
+00:00:42,360 --> 00:00:46,290
+a hashovacie tabuľky a stromy, ktoré
+programátor by vlastne
+
+21
+00:00:46,290 --> 00:00:48,890
+použitie a všeobecne používajú
+Na tabuli maľovať
+
+22
+00:00:48,890 --> 00:00:51,840
+obrázok o tom, čo on alebo ona
+predpokladá pre vykonávanie
+
+23
+00:00:51,840 --> 00:00:52,980
+niektoré kus softvéru.
+
+24
+00:00:52,980 --> 00:00:55,130
+>> Takže poďme robiť hands-na prvej časti.
+
+25
+00:00:55,130 --> 00:01:00,090
+Takže len dostať svoje špinavé ruky s
+Prostredie tzv scratch.mit.edu.
+
+26
+00:01:00,090 --> 00:01:02,636
+Ide o nástroj, ktorý používame
+v našej triede vysokoškoláka.
+
+27
+00:01:02,636 --> 00:01:04,510
+Aj napriek tomu, že je navrhnutý
+pre deti od 12 a hore,
+
+28
+00:01:04,510 --> 00:01:07,570
+budeme používať ho pre hore
+Súčasťou tohto docela dost
+
+29
+00:01:07,570 --> 00:01:10,020
+pretože je to pekné, zábavné
+grafický spôsob učenia
+
+30
+00:01:10,020 --> 00:01:12,160
+niečo málo o programovaní.
+
+31
+00:01:12,160 --> 00:01:17,600
+Takže zamieriť do tejto adresy URL, kde vás
+Mali by ste vidieť stránku presne takto,
+
+32
+00:01:17,600 --> 00:01:23,330
+a pokračujte a kliknite
+Pridajte sa k poškriabaniu v pravom hornom rohu
+
+33
+00:01:23,330 --> 00:01:28,300
+a vybrať si užívateľské meno a
+heslom a nakoniec si sami
+
+34
+00:01:28,300 --> 00:01:29,970
+account-- scratch.mit.edu.
+
+35
+00:01:29,970 --> 00:01:32,165
+
+36
+00:01:32,165 --> 00:01:34,665
+Myslel som, že použiť ako
+Príležitosť prvý to ukázať.
+
+37
+00:01:34,665 --> 00:01:39,120
+Otázka prišiel počas prestávky
+o tom, čo vlastne kód vyzerá.
+
+38
+00:01:39,120 --> 00:01:41,315
+A my sme sa rozprávali
+počas prestávky o C,
+
+39
+00:01:41,315 --> 00:01:45,060
+v particular-- obzvlášť
+Nižšia úroveň v staršom jazykom.
+
+40
+00:01:45,060 --> 00:01:47,750
+A ja som práve urobil rýchly
+Google hľadanie nájsť C kód
+
+41
+00:01:47,750 --> 00:01:51,574
+pre binárne vyhľadávanie, algoritmus, ktorý sme
+použité k hľadanie tohto telefónneho zoznamu skôr.
+
+42
+00:01:51,574 --> 00:01:54,240
+Tento konkrétny príklad, samozrejme,
+nevyhľadáva telefónny zoznam.
+
+43
+00:01:54,240 --> 00:01:57,840
+Je to len hľadá veľa
+Čísla v pamäti počítača.
+
+44
+00:01:57,840 --> 00:02:01,000
+Ale ak by ste chceli len dostať vizuálne
+o tom, čo skutočné programovanie
+
+45
+00:02:01,000 --> 00:02:05,370
+jazyk vyzerá, že vyzerá
+trochu niečo také.
+
+46
+00:02:05,370 --> 00:02:09,759
+Takže je to asi 20-plus,
+Približne 30 riadkov kódu,
+
+47
+00:02:09,759 --> 00:02:12,640
+ale rozhovor sme
+viedli cez prestávku
+
+48
+00:02:12,640 --> 00:02:16,000
+Bol o tom, ako to vlastne
+dostane premenil núl a jednotiek
+
+49
+00:02:16,000 --> 00:02:19,200
+a môžete nielen vrátiť v prípade, že
+spracovávať a ísť z núl a jednotiek
+
+50
+00:02:19,200 --> 00:02:20,210
+späť ku kódu.
+
+51
+00:02:20,210 --> 00:02:22,620
+>> Bohužiaľ, tento proces
+Je tak transformačné
+
+52
+00:02:22,620 --> 00:02:24,890
+že je to oveľa ľahšie povie, ako urobí.
+
+53
+00:02:24,890 --> 00:02:29,400
+Išiel som dopredu a v skutočnosti sa obrátil
+tento program, binárne vyhľadávanie,
+
+54
+00:02:29,400 --> 00:02:32,700
+do núl a jednotiek formou
+program s názvom kompilátora, že som
+
+55
+00:02:32,700 --> 00:02:34,400
+stalo sa, že tu práve na mojom počítači Mac.
+
+56
+00:02:34,400 --> 00:02:37,850
+A keď sa pozriete na obrazovke
+Tu, najmä s dôrazom
+
+57
+00:02:37,850 --> 00:02:43,520
+Na týchto stredných šesť stĺpcov iba
+uvidíte iba núl a jednotiek.
+
+58
+00:02:43,520 --> 00:02:48,290
+A to sú tie nuly a tie, ktoré
+skladať presne ten vyhľadávací program.
+
+59
+00:02:48,290 --> 00:02:53,720
+>> A tak každý kus z piatich bitov,
+každý bajt núl a jednotiek tu,
+
+60
+00:02:53,720 --> 00:02:57,310
+reprezentujú nejakú inštrukciu
+typicky vnútri počítača.
+
+61
+00:02:57,310 --> 00:03:00,730
+A v skutočnosti, ak ste počuli
+marketing slogan "Intel inside" - to,
+
+62
+00:03:00,730 --> 00:03:04,610
+Samozrejme, jednoducho znamená, že máte
+Intel CPU alebo mozgu vnútri počítača.
+
+63
+00:03:04,610 --> 00:03:08,000
+A čo to znamená byť CPU
+že máte inštrukčnú sadu,
+
+64
+00:03:08,000 --> 00:03:08,840
+tak povediac.
+
+65
+00:03:08,840 --> 00:03:11,620
+>> Každý procesor na svete, mnohí
+je vyrobený firmou Intel v týchto dňoch,
+
+66
+00:03:11,620 --> 00:03:13,690
+chápe konečný
+počet inštrukcií.
+
+67
+00:03:13,690 --> 00:03:18,690
+A tieto pokyny sú tak nízkej úrovni
+ako doplnok týchto dvoch čísel dohromady,
+
+68
+00:03:18,690 --> 00:03:22,560
+násobiť týchto dvoch čísel dohromady,
+presunúť tento kúsok dát odtiaľ
+
+69
+00:03:22,560 --> 00:03:27,340
+tu v pamäti uložiť toto
+Informácie odtiaľ do tu v pamäti,
+
+70
+00:03:27,340 --> 00:03:32,200
+a tak forth-- tak veľmi, veľmi
+low-level, takmer elektronické detaily.
+
+71
+00:03:32,200 --> 00:03:34,780
+But s tými, matematický
+operácie spojené
+
+72
+00:03:34,780 --> 00:03:37,410
+s tým, čo sme diskutovali skôr,
+reprezentácie dát
+
+73
+00:03:37,410 --> 00:03:40,450
+ako núl a jednotiek, môže
+si vybudovať všetko
+
+74
+00:03:40,450 --> 00:03:44,180
+že počítač môže urobiť dnes, či už
+je to textové, grafické, hudobné,
+
+75
+00:03:44,180 --> 00:03:45,580
+alebo inak.
+
+76
+00:03:45,580 --> 00:03:49,450
+>> Takže je to veľmi ľahké sa dostať
+stratil v buriny rýchlo.
+
+77
+00:03:49,450 --> 00:03:52,150
+A je tu veľa
+syntaktické výzvy
+
+78
+00:03:52,150 --> 00:03:56,630
+pričom keď urobíte najjednoduchšie,
+najhlúpejší preklepov nikto z programu
+
+79
+00:03:56,630 --> 00:03:57,860
+bude fungovať vôbec.
+
+80
+00:03:57,860 --> 00:04:00,366
+A tak namiesto použitia
+jazyk C dnes ráno,
+
+81
+00:04:00,366 --> 00:04:02,240
+Myslel som si, že by bolo
+zábavnejšie vlastne robiť
+
+82
+00:04:02,240 --> 00:04:04,840
+niečo viac vizuálne, čo
+zatiaľ čo určený pre deti
+
+83
+00:04:04,840 --> 00:04:08,079
+je vlastne ideálna prejav
+o skutočnom programovaní
+
+84
+00:04:08,079 --> 00:04:10,370
+language-- len sa stane
+použiť obrázky namiesto textu
+
+85
+00:04:10,370 --> 00:04:11,710
+reprezentovať týchto myšlienok.
+
+86
+00:04:11,710 --> 00:04:15,470
+>> Takže až budete naozaj mať
+Účet na scratch.mit.edu,
+
+87
+00:04:15,470 --> 00:04:21,070
+kliknite na tlačidlo Vytvoriť
+V ľavom hornom rohu stránky.
+
+88
+00:04:21,070 --> 00:04:24,620
+A mali by ste vidieť prostredie, ako je
+ten, že som asi vidieť na mojej obrazovke
+
+89
+00:04:24,620 --> 00:04:26,310
+tu.
+
+90
+00:04:26,310 --> 00:04:29,350
+A budeme tráviť len trochu
+Trochu času hraním tu.
+
+91
+00:04:29,350 --> 00:04:34,080
+Uvidíme, či sa nám podarí nie všetci riešiť niektoré
+Problémy spolu v nasledujúcom spôsobom.
+
+92
+00:04:34,080 --> 00:04:39,420
+>> Takže to, čo uvidíte v tejto
+environment-- a vlastne len nechať
+
+93
+00:04:39,420 --> 00:04:40,050
+me pauzy.
+
+94
+00:04:40,050 --> 00:04:42,680
+Je niekto nie tu?
+
+95
+00:04:42,680 --> 00:04:45,070
+Nie tu?
+
+96
+00:04:45,070 --> 00:04:45,800
+OK.
+
+97
+00:04:45,800 --> 00:04:49,030
+Takže mi dovoľte zdôrazniť niekoľko
+Charakteristiky tohto prostredia.
+
+98
+00:04:49,030 --> 00:04:55,024
+>> Takže v ľavom hornom rohu obrazovky, my
+majú štádium Scratch je, aby som tak povedal.
+
+99
+00:04:55,024 --> 00:04:57,440
+Scratch nie je len názov
+tohto programovacieho jazyka;
+
+100
+00:04:57,440 --> 00:05:00,356
+je to tiež meno mačky, ktorá
+vidíte v predvolenom nastavení tam v oranžovej farbe.
+
+101
+00:05:00,356 --> 00:05:02,160
+Že je na javisku, tak
+rovnako ako som popísal
+
+102
+00:05:02,160 --> 00:05:05,770
+korytnačka skôr ako v
+obdĺžniková biela tabuľa prostredia.
+
+103
+00:05:05,770 --> 00:05:09,800
+Táto mačka svet je obmedzená výhradne
+v tomto obdĺžniku do vrcholu.
+
+104
+00:05:09,800 --> 00:05:12,210
+>> Medzitým sa na pravej strane
+strane tu, je to
+
+105
+00:05:12,210 --> 00:05:15,610
+len skripty priestor,
+nepopísaný list ak chcete.
+
+106
+00:05:15,610 --> 00:05:18,590
+To je miesto, kde budeme písať
+naše programy za chvíľu.
+
+107
+00:05:18,590 --> 00:05:22,935
+A stavebné kamene, ktoré budeme
+použiť na napísanie tejto program-- puzzle
+
+108
+00:05:22,935 --> 00:05:25,310
+kusy, ak ste will-- sú
+ty tu v stredu,
+
+109
+00:05:25,310 --> 00:05:27,500
+a oni sú rozdelené do kategórií
+funkčnosťou.
+
+110
+00:05:27,500 --> 00:05:31,000
+Tak napríklad, budem pokračovať
+a ukazujú, aspoň jeden z nich.
+
+111
+00:05:31,000 --> 00:05:33,690
+Chystám sa ísť dopredu a kliknite
+kategórie Control hore vrchole.
+
+112
+00:05:33,690 --> 00:05:35,720
+>> Tak to sú kategórie hore vrchole.
+
+113
+00:05:35,720 --> 00:05:39,410
+Idem kliknúť na kategóriu konania.
+
+114
+00:05:39,410 --> 00:05:44,020
+Skôr idem kliknúť na udalosti
+kategórie, prvý jedno až hore.
+
+115
+00:05:44,020 --> 00:05:47,790
+A ak by ste chceli sledovať spolu dokonca
+ako to urobíme, ste celkom vítaní.
+
+116
+00:05:47,790 --> 00:05:52,180
+Idem kliknúť a pretiahnuť
+Prvý z nich, "keď zelená vlajka kliknutí."
+
+117
+00:05:52,180 --> 00:05:58,410
+A potom budem ju neupustili len
+zhruba v hornej časti svojich prázdnych bridlíc.
+
+118
+00:05:58,410 --> 00:06:01,450
+>> A čo je pekné o Scratch
+je, že tento skladačky, keď
+
+119
+00:06:01,450 --> 00:06:04,560
+spojený s iným puzzle
+kusov, sa chystá urobiť doslova
+
+120
+00:06:04,560 --> 00:06:06,460
+čo tieto kúsky skladačky povedať robiť.
+
+121
+00:06:06,460 --> 00:06:09,710
+Tak napríklad, Scratch je správne
+sa v polovici jeho sveta.
+
+122
+00:06:09,710 --> 00:06:14,660
+Chystám sa ísť dopredu a vybrať
+Teraz, povedzme, kategórie Motion,
+
+123
+00:06:14,660 --> 00:06:18,000
+ak by ste chceli, aby urobili
+same-- kategórii Motion.
+
+124
+00:06:18,000 --> 00:06:20,430
+A teraz si všimnúť mám celok
+banda skladačky tu
+
+125
+00:06:20,430 --> 00:06:23,370
+že opäť trochu robiť to, čo hovoria.
+
+126
+00:06:23,370 --> 00:06:28,110
+A ja idem ďalej a pretiahnuť
+drop Presun bloku tamto.
+
+127
+00:06:28,110 --> 00:06:31,860
+>> A všimnite si, že akonáhle sa dostanete
+v blízkosti spodnej časti "zelenou vlajkou
+
+128
+00:06:31,860 --> 00:06:34,580
+kliknutí "tlačidlo, vývesné
+ako sa objaví biela čiara,
+
+129
+00:06:34,580 --> 00:06:36,950
+ako keby to je takmer
+magnetické, že tam chce ísť.
+
+130
+00:06:36,950 --> 00:06:43,070
+Len nech idú, a to bude snap
+dohromady a tvary budú odpovedať.
+
+131
+00:06:43,070 --> 00:06:46,620
+A teraz môžete snáď takmer
+hádajte, kde ideme s tým.
+
+132
+00:06:46,620 --> 00:06:51,570
+>> Ak sa pozriete vo fáze Scratch
+sem a pozerať sa na vrchole toho,
+
+133
+00:06:51,570 --> 00:06:55,142
+uvidíte červené svetlo, je
+stopka a zelenú vlajku.
+
+134
+00:06:55,142 --> 00:06:57,100
+A ja idem napred
+a sledovať moje screen--
+
+135
+00:06:57,100 --> 00:06:58,460
+na chvíľu, ak by ste mohli.
+
+136
+00:06:58,460 --> 00:07:01,960
+Idem kliknúť na
+Zelená vlajka práve teraz,
+
+137
+00:07:01,960 --> 00:07:07,850
+a prešiel čo sa zdá byť 10 krokov
+alebo 10 obrazových bodov, 10 bodov na obrazovke.
+
+138
+00:07:07,850 --> 00:07:13,390
+>> A tak nie je tak vzrušujúce,
+ale dovoľte mi navrhnúť
+
+139
+00:07:13,390 --> 00:07:17,440
+bez toho aby sa učia to, len
+s použitím vlastnej svoj vlastný intuition-- rokov
+
+140
+00:07:17,440 --> 00:07:22,560
+ja navrhujem, aby vám zistiť, ako sa
+aby Scratch prechádzku hneď javiska.
+
+141
+00:07:22,560 --> 00:07:28,700
+Už ho robiť cestu pre pravú stranu
+obrazovky, úplne napravo.
+
+142
+00:07:28,700 --> 00:07:32,200
+Dám vám chvíľku
+alebo tak zápasiť s tým.
+
+143
+00:07:32,200 --> 00:07:37,681
+Možno budete chcieť, aby sa pozreli
+u ostatných kategórií blokov.
+
+144
+00:07:37,681 --> 00:07:38,180
+Dobre.
+
+145
+00:07:38,180 --> 00:07:41,290
+Takže len zhrnúť, keď máme
+zelená vlajka sem klikol
+
+146
+00:07:41,290 --> 00:07:44,850
+a presunúť 10 krokov je
+iba pokyn, zakaždým, keď som
+
+147
+00:07:44,850 --> 00:07:46,720
+kliknite na zelenú vlajku, čo sa deje?
+
+148
+00:07:46,720 --> 00:07:50,070
+No, to beží môj program.
+
+149
+00:07:50,070 --> 00:07:52,450
+Takže som mohol urobiť
+Možno 10-krát ručne,
+
+150
+00:07:52,450 --> 00:07:55,130
+ale to cíti trochu
+bit hackish, tak povediac,
+
+151
+00:07:55,130 --> 00:07:57,480
+pričom Nie som
+vyriešenie problému.
+
+152
+00:07:57,480 --> 00:08:00,530
+Ja som len ďalším pokusom a
+Znovu a znovu a znovu
+
+153
+00:08:00,530 --> 00:08:03,180
+kým som tak nejako náhodou
+dosiahnuť smernicu
+
+154
+00:08:03,180 --> 00:08:05,560
+že som vytýčených cieľov skôr.
+
+155
+00:08:05,560 --> 00:08:08,200
+>> Ale vieme z našich
+pseudocode skôr, že je tu
+
+156
+00:08:08,200 --> 00:08:11,870
+Tento pojem v programovaní zacykleniu,
+robiť niečo znovu a znovu.
+
+157
+00:08:11,870 --> 00:08:14,888
+A tak som videl, že banda vás
+siahol po tom, čo skladačky?
+
+158
+00:08:14,888 --> 00:08:17,870
+
+159
+00:08:17,870 --> 00:08:18,730
+Opakujte, pokiaľ.
+
+160
+00:08:18,730 --> 00:08:21,400
+Takže by sme mohli niečo urobiť
+ako opakujte, kým.
+
+161
+00:08:21,400 --> 00:08:23,760
+A čo ste opakujte, kým presne?
+
+162
+00:08:23,760 --> 00:08:27,720
+
+163
+00:08:27,720 --> 00:08:28,540
+>> OK.
+
+164
+00:08:28,540 --> 00:08:31,974
+A nechaj ma ísť s jedným, ktorý je
+trochu jednoduchšie len na okamih.
+
+165
+00:08:31,974 --> 00:08:33,140
+Nechaj ma ísť dopredu a to urobiť.
+
+166
+00:08:33,140 --> 00:08:35,559
+Všimnite si, že, ako môžete mať
+objavil pod kontrolou,
+
+167
+00:08:35,559 --> 00:08:38,409
+je toto opakovanie blok, ktorý
+nevyzerá, že je to tak veľký.
+
+168
+00:08:38,409 --> 00:08:41,039
+Nie je toho moc izby v hoteli
+medzi týmito dvoma žltou čiarou.
+
+169
+00:08:41,039 --> 00:08:43,539
+Ale ako niektorí z vás môžu mať
+si všimol, ak ste drag and drop,
+
+170
+00:08:43,539 --> 00:08:45,150
+Všimnite si, ako rastie na vyplnenie tvaru.
+
+171
+00:08:45,150 --> 00:08:46,274
+>> A dokonca môžete napchať viac.
+
+172
+00:08:46,274 --> 00:08:48,670
+Bude to len neustále rastú, ak
+preťahovanie a vznášať sa nad ním.
+
+173
+00:08:48,670 --> 00:08:51,110
+A ja neviem, čo je
+Tu najlepšie, tak nech
+
+174
+00:08:51,110 --> 00:08:54,760
+me aspoň opakuje päťkrát, pre
+inštancie, a potom sa vrátiť na javisko
+
+175
+00:08:54,760 --> 00:08:56,720
+a kliknite na zelenú vlajku.
+
+176
+00:08:56,720 --> 00:08:59,110
+A teraz si všimnúť, že to nie je úplne tam.
+
+177
+00:08:59,110 --> 00:09:02,400
+>> Teraz niektorí z vás navrhol, as
+Victoria len to, opakujte 10 krát.
+
+178
+00:09:02,400 --> 00:09:05,140
+A to zvyčajne robí
+dostať ho celú cestu,
+
+179
+00:09:05,140 --> 00:09:10,510
+Ale nebolo tam byť odolnejšie
+spôsob, ako svojvoľne prísť na to,
+
+180
+00:09:10,510 --> 00:09:12,640
+koľko ťahov urobiť?
+
+181
+00:09:12,640 --> 00:09:17,680
+Čo by mohlo byť lepšie blok
+než opakovať 10-krát byť?
+
+182
+00:09:17,680 --> 00:09:20,380
+>> Jo, tak prečo nie niečo navždy?
+
+183
+00:09:20,380 --> 00:09:24,390
+A teraz mi dovoľte presunúť tento kúsok skladačky
+tam vnútri a zbaviť sa tejto jednej.
+
+184
+00:09:24,390 --> 00:09:28,300
+Teraz všimnúť, bez ohľadu na miesto Scratch
+Spustí sa, chodí k okraju.
+
+185
+00:09:28,300 --> 00:09:30,700
+A našťastie MIT,
+kto robí nuly, len
+
+186
+00:09:30,700 --> 00:09:33,190
+zabezpečuje, že nikdy
+zmizne úplne.
+
+187
+00:09:33,190 --> 00:09:35,360
+Vždy sa môžete chytiť svoj chvost.
+
+188
+00:09:35,360 --> 00:09:37,680
+>> A práve intuitívne,
+prečo sa neustále v pohybe?
+
+189
+00:09:37,680 --> 00:09:38,892
+Čo sa tu deje?
+
+190
+00:09:38,892 --> 00:09:41,440
+
+191
+00:09:41,440 --> 00:09:43,824
+Zdá sa, že sa zastavil, ale
+Potom keď som vyzdvihnúť a ťahajte
+
+192
+00:09:43,824 --> 00:09:45,240
+Stále chce ísť tam.
+
+193
+00:09:45,240 --> 00:09:46,123
+Prečo to tak je?
+
+194
+00:09:46,123 --> 00:09:51,610
+
+195
+00:09:51,610 --> 00:09:54,360
+Naozaj, je počítač doslova
+robiť to, čo ste to povedať robiť.
+
+196
+00:09:54,360 --> 00:09:58,380
+Takže ak ste to povedal skôr robiť
+Nasledujúce vec navždy, presunúť 10 krokov,
+
+197
+00:09:58,380 --> 00:10:01,860
+že to bude pokračovať a bude
+až som narazila na červenú stopku
+
+198
+00:10:01,860 --> 00:10:04,620
+a zastavenie programu úplne.
+
+199
+00:10:04,620 --> 00:10:06,610
+>> Takže aj keď nie
+to, ako by som mohol
+
+200
+00:10:06,610 --> 00:10:09,510
+aby Scratch pohybovať rýchlejšie
+cez obrazovku?
+
+201
+00:10:09,510 --> 00:10:12,060
+
+202
+00:10:12,060 --> 00:10:13,280
+Ďalšie kroky, nie?
+
+203
+00:10:13,280 --> 00:10:15,710
+Takže namiesto toho robil 10
+v čase, prečo nie my
+
+204
+00:10:15,710 --> 00:10:20,100
+choďte do toho a zmeniť ho to--
+Čo by ste propose-- 50?
+
+205
+00:10:20,100 --> 00:10:24,410
+Takže teraz idem kliknúť na zelenú
+vlajka, a naozaj, jede naozaj rýchlo.
+
+206
+00:10:24,410 --> 00:10:27,180
+>> A to, samozrejme, je len
+prejavom animácie.
+
+207
+00:10:27,180 --> 00:10:28,060
+Čo je animácia?
+
+208
+00:10:28,060 --> 00:10:33,090
+Je to len vy zobrazujúci ľudskému
+celá rada statických snímok v skutočnosti,
+
+209
+00:10:33,090 --> 00:10:34,160
+naozaj, ale naozaj rýchlo.
+
+210
+00:10:34,160 --> 00:10:36,500
+A tak či sme len hovoriť
+ho presunúť viac krokov,
+
+211
+00:10:36,500 --> 00:10:39,750
+my sme len mať vplyv malo byť
+Zmena kde je na obrazovke
+
+212
+00:10:39,750 --> 00:10:42,900
+o to rýchlejšie za jednotku času.
+
+213
+00:10:42,900 --> 00:10:46,454
+>> Teraz ďalšiu úlohu, ktorý som navrhol
+mal mať ho odraziť cez okraj.
+
+214
+00:10:46,454 --> 00:10:49,120
+A bez toho aby vedel, čo puzzle
+kusy exist--, pretože to je v poriadku
+
+215
+00:10:49,120 --> 00:10:53,030
+ak nechcete dostať do
+etapa challenge-- čo
+
+216
+00:10:53,030 --> 00:10:54,280
+chceš robiť intuitívne?
+
+217
+00:10:54,280 --> 00:10:58,030
+Ako by sme museli ho odrazí späť a
+ďalej, medzi ľavou a pravou?
+
+218
+00:10:58,030 --> 00:11:02,630
+
+219
+00:11:02,630 --> 00:11:03,810
+>> Jo.
+
+220
+00:11:03,810 --> 00:11:05,680
+Takže potrebujeme nejaký druh
+o stave, a my
+
+221
+00:11:05,680 --> 00:11:09,710
+Zdá sa, že podmieňovací, tak
+povediac, v kategórii Control.
+
+222
+00:11:09,710 --> 00:11:14,110
+Ktorý z týchto blokov
+budeme chcieť?
+
+223
+00:11:14,110 --> 00:11:15,200
+Jo, možno "if, then."
+
+224
+00:11:15,200 --> 00:11:18,780
+Takže si všimnúť, že medzi žltými blokmi
+tu máme, je to "keby"
+
+225
+00:11:18,780 --> 00:11:23,920
+alebo to "if, else" blok, ktorý bude
+nám umožňujú urobiť rozhodnutie, ako to dosiahnuť
+
+226
+00:11:23,920 --> 00:11:25,000
+alebo to urobiť.
+
+227
+00:11:25,000 --> 00:11:27,380
+A dokonca môžete vnoriť im
+robiť viac vecí.
+
+228
+00:11:27,380 --> 00:11:34,910
+Alebo ak ste doteraz preč tu,
+pokračovať do kategórie snímania
+
+229
+00:11:34,910 --> 00:11:39,612
+a-- uvidíme, či je to tu.
+
+230
+00:11:39,612 --> 00:11:43,050
+
+231
+00:11:43,050 --> 00:11:52,050
+>> Takže to, čo blok by mohlo byť užitočné tu
+zistiť, či je to z javiska?
+
+232
+00:11:52,050 --> 00:11:56,740
+Jo, všimnite si, že niektoré z týchto blokov
+možno parametrizovať, aby som tak povedal.
+
+233
+00:11:56,740 --> 00:12:00,706
+Môžu byť nejako prispôsobiť, nie
+Na rozdiel od HTML včera s atribútmi,
+
+234
+00:12:00,706 --> 00:12:03,330
+ak tieto atribúty druh
+nastaviť správanie tagu.
+
+235
+00:12:03,330 --> 00:12:08,880
+Rovnako tak tu, môžem uchopiť toto dojemné
+blok a zmeny a položiť otázku,
+
+236
+00:12:08,880 --> 00:12:11,500
+ste dotýka myš
+Ukazovateľ ako kurzor
+
+237
+00:12:11,500 --> 00:12:13,250
+alebo ste dotýkať okraja?
+
+238
+00:12:13,250 --> 00:12:15,210
+>> Tak nechaj ma ísť dovnútra a urobiť.
+
+239
+00:12:15,210 --> 00:12:18,130
+Idem pre oddialenie na chvíľu.
+
+240
+00:12:18,130 --> 00:12:21,320
+Nechaj ma uchopiť tento kúsok skladačky
+Tu tento skladačky to,
+
+241
+00:12:21,320 --> 00:12:24,570
+a budem míchanice
+je až na chvíľu.
+
+242
+00:12:24,570 --> 00:12:27,620
+Chystám sa pohybovať to,
+zmeniť na dotyku hrany,
+
+243
+00:12:27,620 --> 00:12:38,590
+a ja idem do pohybu to urobiť.
+
+244
+00:12:38,590 --> 00:12:40,490
+Takže tu sú niektoré ingrediencie.
+
+245
+00:12:40,490 --> 00:12:42,570
+Myslím, že mám všetko, čo chcem.
+
+246
+00:12:42,570 --> 00:12:47,710
+>> By niekto chcel navrhnúť, ako som
+možno pripojiť tieto možná zhora nadol
+
+247
+00:12:47,710 --> 00:12:52,020
+na vyriešenie problému s
+Scratch pohyb sprava doľava doprava na
+
+248
+00:12:52,020 --> 00:12:57,020
+zľava sprava doľava, pričom každý
+Doba len odrazil od steny?
+
+249
+00:12:57,020 --> 00:12:58,050
+Čo chcem robiť?
+
+250
+00:12:58,050 --> 00:13:01,097
+Ktoré blokujú by som mal pripojiť k internetu
+"Pri zelenou vlajkou kliknutí na prvom mieste"?
+
+251
+00:13:01,097 --> 00:13:04,060
+
+252
+00:13:04,060 --> 00:13:06,200
+>> OK, takže začnime s "navždy".
+
+253
+00:13:06,200 --> 00:13:07,170
+Čo sa deje vo vnútri ďalej?
+
+254
+00:13:07,170 --> 00:13:10,290
+Niekto iný.
+
+255
+00:13:10,290 --> 00:13:11,850
+OK, pohybovať kroky.
+
+256
+00:13:11,850 --> 00:13:12,350
+Dobre.
+
+257
+00:13:12,350 --> 00:13:14,470
+Čo potom?
+
+258
+00:13:14,470 --> 00:13:15,120
+Takže potom, ak.
+
+259
+00:13:15,120 --> 00:13:17,720
+A všimnite si, aj keď to vyzerá
+obložené spolu pevne,
+
+260
+00:13:17,720 --> 00:13:19,500
+to bude len rásť zaplniť.
+
+261
+00:13:19,500 --> 00:13:21,500
+To bude len skočiť, kde to chcem.
+
+262
+00:13:21,500 --> 00:13:25,920
+>> A čo mám dať medzi
+if a potom?
+
+263
+00:13:25,920 --> 00:13:27,180
+Pravdepodobne ", ak sa dotknete hrany."
+
+264
+00:13:27,180 --> 00:13:31,800
+A oznámenia, opäť, je to príliš veľká
+pre neho, ale porastie zaplniť.
+
+265
+00:13:31,800 --> 00:13:35,002
+A potom zase 15 stupňov?
+
+266
+00:13:35,002 --> 00:13:35,710
+Koľko stupňov?
+
+267
+00:13:35,710 --> 00:13:38,800
+
+268
+00:13:38,800 --> 00:13:41,196
+Jo, takže 180 bude točiť
+ma celú cestu okolo.
+
+269
+00:13:41,196 --> 00:13:42,570
+Tak uvidíme, či mám toto právo.
+
+270
+00:13:42,570 --> 00:13:43,930
+Nechaj ma oddialiť.
+
+271
+00:13:43,930 --> 00:13:45,130
+>> Nechaj ma ťahať Scratch nahor.
+
+272
+00:13:45,130 --> 00:13:50,030
+Takže on je trochu skreslený
+teraz, ale to je v poriadku.
+
+273
+00:13:50,030 --> 00:13:52,231
+Ako môžem resetovať ho ľahko?
+
+274
+00:13:52,231 --> 00:13:59,879
+
+275
+00:13:59,879 --> 00:14:01,045
+Idem trochu podvádzať.
+
+276
+00:14:01,045 --> 00:14:04,074
+
+277
+00:14:04,074 --> 00:14:05,990
+Tak som pridať ďalšie
+blok, len aby bolo jasno.
+
+278
+00:14:05,990 --> 00:14:08,424
+Chcem, aby bod o 90 stupňov
+doprava v predvolenom nastavení,
+
+279
+00:14:08,424 --> 00:14:10,840
+tak som jednoducho ísť mu to povedať
+k tomu, že programovo.
+
+280
+00:14:10,840 --> 00:14:11,632
+A tu to máme.
+
+281
+00:14:11,632 --> 00:14:14,740
+
+282
+00:14:14,740 --> 00:14:15,740
+Zdá sa, že to urobil.
+
+283
+00:14:15,740 --> 00:14:19,980
+Je to trochu divné, pretože
+on išiel hore nohami.
+
+284
+00:14:19,980 --> 00:14:21,250
+Hovorme, že chyby.
+
+285
+00:14:21,250 --> 00:14:22,120
+To je chyba.
+
+286
+00:14:22,120 --> 00:14:27,320
+Chyba je chyba v programe, A
+logická chyba, že som človek, urobil.
+
+287
+00:14:27,320 --> 00:14:28,985
+Prečo sa deje hore nohami?
+
+288
+00:14:28,985 --> 00:14:33,560
+
+289
+00:14:33,560 --> 00:14:35,250
+Vedeli MIT mhouřit alebo som?
+
+290
+00:14:35,250 --> 00:14:38,840
+
+291
+00:14:38,840 --> 00:14:42,550
+>> Jo, myslím, že to nie je MIT
+chyba. Dali mi kúsok skladačky
+
+292
+00:14:42,550 --> 00:14:44,970
+ktorý hovorí, že otočiť určitý počet stupňov.
+
+293
+00:14:44,970 --> 00:14:47,672
+A na Victoria je návrh,
+Som otočil o 180 stupňov,
+
+294
+00:14:47,672 --> 00:14:48,880
+čo je tá správna intuícia.
+
+295
+00:14:48,880 --> 00:14:53,700
+Ale otočenie o 180 stupňov doslovne
+znamená otočenie o 180 stupňov,
+
+296
+00:14:53,700 --> 00:14:55,860
+a to nie je naozaj
+čo chcem, zrejme.
+
+297
+00:14:55,860 --> 00:14:58,026
+Vzhľadom k tomu, aspoň že je v
+Tento dvojrozmerný svet,
+
+298
+00:14:58,026 --> 00:15:00,740
+takže sústruženie sa naozaj deje
+aby ho otočiť hore nohami.
+
+299
+00:15:00,740 --> 00:15:04,030
+>> Asi chcem použiť to, čo blok
+Namiesto toho, podľa toho, čo vidíte tu?
+
+300
+00:15:04,030 --> 00:15:11,890
+
+301
+00:15:11,890 --> 00:15:14,790
+Ako môžeme tento problém vyriešiť?
+
+302
+00:15:14,790 --> 00:15:18,380
+Jo, takže sme mohli poukázať
+v opačnom smere.
+
+303
+00:15:18,380 --> 00:15:22,300
+A vlastne aj to je
+nebude stačiť,
+
+304
+00:15:22,300 --> 00:15:26,410
+pretože môžeme len ťažko kód
+aby ukázal vľavo alebo vpravo.
+
+305
+00:15:26,410 --> 00:15:27,920
+>> Vieš, čo by sme mohli robiť?
+
+306
+00:15:27,920 --> 00:15:30,160
+Vyzerá to, že máme
+pohodlie blok tu.
+
+307
+00:15:30,160 --> 00:15:32,987
+Keby som priblížiť, pozri
+niečo, čo sa nám páči tu?
+
+308
+00:15:32,987 --> 00:15:36,120
+
+309
+00:15:36,120 --> 00:15:40,020
+Takže to vyzerá, že MIT má
+abstrakcie postavená v roku tady.
+
+310
+00:15:40,020 --> 00:15:45,440
+Tento blok sa zdá byť ekvivalentná
+na ktoré ostatní bloky, množné číslo?
+
+311
+00:15:45,440 --> 00:15:49,510
+>> Tento jeden blok sa zdá byť ekvivalentná
+k celej tejto trojice blokov
+
+312
+00:15:49,510 --> 00:15:50,880
+že tu máme.
+
+313
+00:15:50,880 --> 00:15:54,670
+Tak to dopadá môžem zjednodušiť môj
+Program zbavíme to všetko
+
+314
+00:15:54,670 --> 00:15:58,270
+a len dať to tu.
+
+315
+00:15:58,270 --> 00:16:01,620
+A teraz je ešte trochu
+buggy, a to je v poriadku pre túto chvíľu.
+
+316
+00:16:01,620 --> 00:16:03,370
+Necháme to byť.
+
+317
+00:16:03,370 --> 00:16:06,000
+Ale môj program je dokonca
+jednoduchšie, a to taky,
+
+318
+00:16:06,000 --> 00:16:09,060
+by byť reprezentatívne
+si za cieľ v programming--
+
+319
+00:16:09,060 --> 00:16:13,430
+je v ideálnom prípade vytvoriť svoj kód ako
+jednoduché, kompaktné, ako je to možné,
+
+320
+00:16:13,430 --> 00:16:15,650
+a pritom stále as
+čitateľné ako je to možné.
+
+321
+00:16:15,650 --> 00:16:20,310
+Nechcete, aby to tak pregnantne
+že je ťažké pochopiť.
+
+322
+00:16:20,310 --> 00:16:22,826
+>> Nevšimnúť som nahradil
+tri bloky s jedným,
+
+323
+00:16:22,826 --> 00:16:24,200
+a to je pravdepodobne dobrá vec.
+
+324
+00:16:24,200 --> 00:16:27,280
+Ja som abstrahovať preč pojmu
+kontroly, či ste
+
+325
+00:16:27,280 --> 00:16:29,120
+na hrane len jeden blok.
+
+326
+00:16:29,120 --> 00:16:31,520
+Teraz môžeme baviť s tým, v skutočnosti.
+
+327
+00:16:31,520 --> 00:16:35,790
+To nepridá toľko
+intelektuálne hodnotu, ale hravý hodnotu.
+
+328
+00:16:35,790 --> 00:16:39,730
+Chystám sa pokračovať
+a chytiť tento zvuk tu.
+
+329
+00:16:39,730 --> 00:16:42,900
+
+330
+00:16:42,900 --> 00:16:46,420
+Tak nechaj ma ísť dopredu, a dovoľte mi, aby som
+program zastaviť na chvíľu.
+
+331
+00:16:46,420 --> 00:16:52,070
+Chystám sa zaznamenať nasledujúce,
+umožňujúci prístup k môjmu mikrofónu.
+
+332
+00:16:52,070 --> 00:16:53,181
+>> Ideme na to.
+
+333
+00:16:53,181 --> 00:16:53,680
+Ouch.
+
+334
+00:16:53,680 --> 00:16:58,710
+
+335
+00:16:58,710 --> 00:17:01,140
+Skúsme to znovu.
+
+336
+00:17:01,140 --> 00:17:02,279
+Ideme na to.
+
+337
+00:17:02,279 --> 00:17:03,570
+OK, zaznamenal som zlú vec.
+
+338
+00:17:03,570 --> 00:17:04,580
+Ideme na to.
+
+339
+00:17:04,580 --> 00:17:05,080
+Ouch.
+
+340
+00:17:05,080 --> 00:17:07,910
+
+341
+00:17:07,910 --> 00:17:08,800
+Ouch.
+
+342
+00:17:08,800 --> 00:17:09,300
+Dobre.
+
+343
+00:17:09,300 --> 00:17:10,791
+Teraz potrebujem sa zbaviť toho.
+
+344
+00:17:10,791 --> 00:17:11,290
+Dobre.
+
+345
+00:17:11,290 --> 00:17:13,950
+>> Takže teraz mám
+nahrávka len "Au."
+
+346
+00:17:13,950 --> 00:17:18,040
+Takže teraz idem
+vpred a nazývať "Au."
+
+347
+00:17:18,040 --> 00:17:20,270
+Chystám sa vrátiť
+mojich skriptov, a teraz
+
+348
+00:17:20,270 --> 00:17:25,460
+Oznámenie, že je to blok, ktorý sa nazýva
+prehrať zvuk "mňau" alebo prehrať zvuk "Au."
+
+349
+00:17:25,460 --> 00:17:28,920
+Chystám sa pretiahnuť, a kde
+Mal by som dať to na komický efekt?
+
+350
+00:17:28,920 --> 00:17:31,740
+
+351
+00:17:31,740 --> 00:17:37,860
+Jo, takže teraz je to trochu
+buggy, pretože teraz to block--
+
+352
+00:17:37,860 --> 00:17:42,050
+Všimnite si, ako toto "-Li na hrane,
+odraz "je tak trochu sebestačný.
+
+353
+00:17:42,050 --> 00:17:43,704
+Tak som potrebné to napraviť.
+
+354
+00:17:43,704 --> 00:17:44,870
+Nechaj ma ísť dopredu a to urobiť.
+
+355
+00:17:44,870 --> 00:17:48,630
+Dovoľte mi, aby som sa zbaviť tohto a vrátiť
+k našej pôvodnej, viac úmyselné
+
+356
+00:17:48,630 --> 00:17:49,870
+funkčnosť.
+
+357
+00:17:49,870 --> 00:18:01,080
+Takže ", ak sa dotknete hrany, potom" Chcem
+otočiť, ako Victoria navrhnuté,
+
+358
+00:18:01,080 --> 00:18:02,480
+180 stupňov.
+
+359
+00:18:02,480 --> 00:18:05,497
+A nechcem hrať
+zvuk "Au" tam?
+
+360
+00:18:05,497 --> 00:18:11,800
+
+361
+00:18:11,800 --> 00:18:15,580
+>> Jo, všimnite si, že je to vonku
+že žltý blok.
+
+362
+00:18:15,580 --> 00:18:17,680
+Takže aj to, by bolo
+bug, ale všimol som si to.
+
+363
+00:18:17,680 --> 00:18:21,290
+Takže budem pretiahnite ju tu,
+a upozornenie teraz je to vo vnútri "ak".
+
+364
+00:18:21,290 --> 00:18:24,250
+Takže "ak" je tento druh
+podobnú ramenom ako škvrna
+
+365
+00:18:24,250 --> 00:18:26,260
+že to bude len
+to, čo je vnútri nej.
+
+366
+00:18:26,260 --> 00:18:30,216
+Takže teraz, keď som oddialiť na
+riziko annoying--
+
+367
+00:18:30,216 --> 00:18:32,860
+
+368
+00:18:32,860 --> 00:18:36,470
+>> COMPUTER: Au, Au, Au.
+
+369
+00:18:36,470 --> 00:18:39,910
+>> DAVID Malan: A
+bude len pokračovať donekonečna.
+
+370
+00:18:39,910 --> 00:18:44,160
+Teraz už len stačí na urýchlenie veci
+tu, nechaj ma ísť dopredu a otvoriť,
+
+371
+00:18:44,160 --> 00:18:50,460
+poďme say-- nechaj ma ísť k niektorým
+zo svojej vlastnej veci z triedy.
+
+372
+00:18:50,460 --> 00:18:53,000
+
+373
+00:18:53,000 --> 00:19:00,220
+A dovoľte mi otvoriť, povedzme, toto
+jedna zo strany jedného z našich výukových kolegami
+
+374
+00:19:00,220 --> 00:19:01,500
+pred pár rokmi.
+
+375
+00:19:01,500 --> 00:19:04,732
+Takže niektorí z vás možno pamätáte
+Táto hra z dávnych čias,
+
+376
+00:19:04,732 --> 00:19:05,940
+a je to skutočne pozoruhodné.
+
+377
+00:19:05,940 --> 00:19:08,190
+Aj napriek tomu, že sme hotová
+Najjednoduchšie programov práve teraz,
+
+378
+00:19:08,190 --> 00:19:09,980
+uvažujme, čo to
+v skutočnosti vyzerá.
+
+379
+00:19:09,980 --> 00:19:10,650
+Nechaj ma zasiahla hru.
+
+380
+00:19:10,650 --> 00:19:14,210
+
+381
+00:19:14,210 --> 00:19:18,980
+>> Takže v tejto hre, máme
+žaba, a pomocou šípky keys--
+
+382
+00:19:18,980 --> 00:19:23,340
+berie väčšie kroky, ako som remember--
+Mám kontrolu nad touto žabou.
+
+383
+00:19:23,340 --> 00:19:29,630
+A cieľom je dostať sa cez rušný
+Cesta bez spustenia do auta.
+
+384
+00:19:29,630 --> 00:19:34,735
+A poďme see-- keď pôjdem sem, ja
+musieť počkať na protokol k posúvať.
+
+385
+00:19:34,735 --> 00:19:38,130
+
+386
+00:19:38,130 --> 00:19:39,274
+To sa cíti ako chrobák.
+
+387
+00:19:39,274 --> 00:19:42,240
+
+388
+00:19:42,240 --> 00:19:43,495
+To je druh chyby.
+
+389
+00:19:43,495 --> 00:19:45,980
+
+390
+00:19:45,980 --> 00:19:46,480
+Dobre.
+
+391
+00:19:46,480 --> 00:19:51,550
+Som na to tu,
+tam, a potom budete mať
+
+392
+00:19:51,550 --> 00:19:54,100
+ísť, až sa dostanete všetko
+žaby na ľalie podložky.
+
+393
+00:19:54,100 --> 00:19:55,920
+Teraz to môže vyzerať
+o to zložitejšie,
+
+394
+00:19:55,920 --> 00:19:57,840
+ale poďme skúsiť zlomiť
+toto dole psychicky
+
+395
+00:19:57,840 --> 00:20:00,040
+a slovne na jednotlivé bloky.
+
+396
+00:20:00,040 --> 00:20:03,910
+Takže je to asi logická
+kus, ktorý sme ešte nevideli
+
+397
+00:20:03,910 --> 00:20:07,440
+ale to reaguje na úderov,
+k veciam som narazila na klávesnici.
+
+398
+00:20:07,440 --> 00:20:11,660
+>> Takže je to asi nejaká
+blok, ktorý hovorí, ak je kľúč rovná up,
+
+399
+00:20:11,660 --> 00:20:15,965
+potom urobiť niečo s Scratch--
+Možno ju presunúť 10 krokov týmto spôsobom.
+
+400
+00:20:15,965 --> 00:20:20,240
+Ak je stlačené klávesy pohybovať 10 krokov
+Týmto spôsobom, alebo vľavo kľúč, presunúť 10 krokov
+
+401
+00:20:20,240 --> 00:20:21,710
+Týmto spôsobom desať krokov, ktoré.
+
+402
+00:20:21,710 --> 00:20:23,644
+Ja som jasne ukázalo mačku v žabu.
+
+403
+00:20:23,644 --> 00:20:26,060
+Tak to je len, kedy
+kostým, ako Scratch hovory to-- we
+
+404
+00:20:26,060 --> 00:20:28,440
+práve importovali obraz žaby.
+
+405
+00:20:28,440 --> 00:20:29,570
+>> Ale čo iného sa deje?
+
+406
+00:20:29,570 --> 00:20:32,794
+Aké ďalšie riadky kódu,
+čo skladačky
+
+407
+00:20:32,794 --> 00:20:35,460
+urobil Blake, náš kolega učenia,
+použiť v tomto programe, podľa všetkého?
+
+408
+00:20:35,460 --> 00:20:38,320
+
+409
+00:20:38,320 --> 00:20:42,730
+Čo sa robiť všetko move--
+čo programovací postaviť?
+
+410
+00:20:42,730 --> 00:20:44,950
+>> Motion, takže sure--
+presunúť blok, pre istotu.
+
+411
+00:20:44,950 --> 00:20:49,330
+A čo je to pohyb blok
+vnútri, s najväčšou pravdepodobnosťou?
+
+412
+00:20:49,330 --> 00:20:52,850
+Jo, nejaký druh slučky, možno
+navždy zablokovať, možno opakovanie block--
+
+413
+00:20:52,850 --> 00:20:54,070
+opakujte, kým bloku.
+
+414
+00:20:54,070 --> 00:20:57,330
+A to je to, čo robiť protokoly a
+Lily podložky a všetko ostatné ťah
+
+415
+00:20:57,330 --> 00:20:57,990
+sem a tam.
+
+416
+00:20:57,990 --> 00:21:00,270
+Je to proste deje donekonečna.
+
+417
+00:21:00,270 --> 00:21:03,180
+>> Prečo sú niektoré vozidlá
+pohybujúce sa rýchlejšie ako ostatné?
+
+418
+00:21:03,180 --> 00:21:06,607
+Aký je rozdiel o týchto programoch?
+
+419
+00:21:06,607 --> 00:21:09,690
+Jo, pravdepodobne niektoré z nich užívate
+viac krokov naraz a niektoré z nich
+
+420
+00:21:09,690 --> 00:21:10,690
+menej krokov naraz.
+
+421
+00:21:10,690 --> 00:21:14,670
+A vizuálny efekt
+je veľmi pomalý proti.
+
+422
+00:21:14,670 --> 00:21:16,030
+>> Čo myslíš, že sa stalo?
+
+423
+00:21:16,030 --> 00:21:19,700
+Keď som dostal žabu celú cestu
+cez ulicu a rieku
+
+424
+00:21:19,700 --> 00:21:23,560
+na ľalie pad, niečo
+pozoruhodný stalo.
+
+425
+00:21:23,560 --> 00:21:26,540
+Čo sa stalo, hneď ako som to urobil?
+
+426
+00:21:26,540 --> 00:21:27,210
+To sa zastavil.
+
+427
+00:21:27,210 --> 00:21:29,680
+Že žaba sa zastavil, a
+Dostal som druhú žaba.
+
+428
+00:21:29,680 --> 00:21:33,155
+Takže to, čo musí byť konštrukt
+používaný tam, aké funkcie?
+
+429
+00:21:33,155 --> 00:21:36,020
+
+430
+00:21:36,020 --> 00:21:38,660
+>> Jo, takže tam je nejaký druh
+"Keby" podmieňujú tam hore, taky.
+
+431
+00:21:38,660 --> 00:21:41,909
+A ukázalo sa out-- sme nevideli tohle--
+ale je tu ďalšie bloky v tam, že
+
+432
+00:21:41,909 --> 00:21:45,300
+Dá sa povedať, ak ste dojemné
+Ďalšia vec, na obrazovke,
+
+433
+00:21:45,300 --> 00:21:47,720
+ak ste sa dotýka ľalie pad "a potom".
+
+434
+00:21:47,720 --> 00:21:50,810
+A potom je to, keď sme
+aby sa druhá žaba objaví.
+
+435
+00:21:50,810 --> 00:21:54,969
+Takže aj keď táto hra je určite
+veľmi starý, aj keď na prvý pohľad
+
+436
+00:21:54,969 --> 00:21:58,010
+tam je toľko deje on-- a Blake
+ani bič to v dvoch minút,
+
+437
+00:21:58,010 --> 00:22:00,390
+to asi trvalo mu niekoľko
+hodiny vytvoriť túto hru
+
+438
+00:22:00,390 --> 00:22:03,850
+založený na jeho pamäti alebo videa
+verzia dávnych čias je to.
+
+439
+00:22:03,850 --> 00:22:07,940
+Ale všetky tieto maličkostí
+deje na obrazovke v izolácii
+
+440
+00:22:07,940 --> 00:22:11,550
+redukuje na tieto veľmi jednoduché
+constructs-- pohyby alebo vyhlásenia
+
+441
+00:22:11,550 --> 00:22:15,519
+ako sme diskutovali, slučiek a
+podmienky, a to je o tom.
+
+442
+00:22:15,519 --> 00:22:17,060
+Je tu niekoľko ďalších milovník rysy.
+
+443
+00:22:17,060 --> 00:22:19,130
+Niektoré z nich sú čisto
+estetické alebo akustické,
+
+444
+00:22:19,130 --> 00:22:20,964
+ako zvuky Len som hral.
+
+445
+00:22:20,964 --> 00:22:23,380
+Ale z väčšej časti, budete
+majú v tomto jazyku, škrabanie,
+
+446
+00:22:23,380 --> 00:22:25,350
+všetky základné
+stavebné kamene, ktoré vás
+
+447
+00:22:25,350 --> 00:22:29,280
+majú v C, Java, JavaScript,
+PHP, Ruby, Python,
+
+448
+00:22:29,280 --> 00:22:32,960
+a akýkoľvek počet ďalších jazykov.
+
+449
+00:22:32,960 --> 00:22:36,720
+Akékoľvek otázky ohľadom začiatku?
+
+450
+00:22:36,720 --> 00:22:37,220
+Dobre.
+
+451
+00:22:37,220 --> 00:22:40,303
+Takže nebudeme ponoriť hlbšie do nuly,
+keď ste zač tento víkend,
+
+452
+00:22:40,303 --> 00:22:42,860
+najmä ak máte deti alebo
+netere a synovci a také,
+
+453
+00:22:42,860 --> 00:22:44,220
+uviesť ich do nuly.
+
+454
+00:22:44,220 --> 00:22:47,960
+Je to vlastne úžasne hravé
+Prostredie sa, ako jeho autori hovoria,
+
+455
+00:22:47,960 --> 00:22:49,120
+veľmi vysoké stropy.
+
+456
+00:22:49,120 --> 00:22:51,670
+Aj keď sme začali s
+práve detaily low-level,
+
+457
+00:22:51,670 --> 00:22:54,890
+môžete naozaj dosť
+s ním, a to je možno
+
+458
+00:22:54,890 --> 00:22:57,360
+ukážka presne to.
+
+459
+00:22:57,360 --> 00:23:02,920
+>> Ale poďme teraz prejsť na niečo viac
+sofistikované problémy, ak chcete,
+
+460
+00:23:02,920 --> 00:23:05,870
+známy ako "vyhľadávanie" a
+"Triedenie," všeobecnejšie.
+
+461
+00:23:05,870 --> 00:23:09,500
+Mali sme tento telefónny zoznam tu earlier-- je
+ešte jeden len pre discussion--
+
+462
+00:23:09,500 --> 00:23:13,460
+že sme boli schopní vyhľadávať
+efektívnejšie, pretože
+
+463
+00:23:13,460 --> 00:23:15,270
+významného predpokladu.
+
+464
+00:23:15,270 --> 00:23:17,655
+A len preto, aby bolo jasno, aké
+predpoklad bol som robiť
+
+465
+00:23:17,655 --> 00:23:19,280
+Pri vyhľadávaní prostredníctvom tohto telefónneho zoznamu?
+
+466
+00:23:19,280 --> 00:23:23,342
+
+467
+00:23:23,342 --> 00:23:25,300
+Že Mike Smith bol v
+telefónneho zoznamu, aj keď som
+
+468
+00:23:25,300 --> 00:23:27,410
+by mal byť schopný zvládnuť
+Scenár bez neho
+
+469
+00:23:27,410 --> 00:23:30,720
+tam, ak som sa predčasne ukončená.
+
+470
+00:23:30,720 --> 00:23:31,806
+Kniha je abecedný.
+
+471
+00:23:31,806 --> 00:23:33,930
+A to je veľmi veľkorysý
+predpoklad, pretože
+
+472
+00:23:33,930 --> 00:23:36,580
+znamená someone-- Som typ
+rezanie za roh,
+
+473
+00:23:36,580 --> 00:23:40,580
+ako ja rýchlejšie, pretože niekým
+iný urobil veľa tvrdej práce pre mňa.
+
+474
+00:23:40,580 --> 00:23:43,120
+>> Ale čo keď je telefón
+Kniha bola nevytriedené?
+
+475
+00:23:43,120 --> 00:23:47,050
+Možno, že Verizon dostal lenivý, práve hodil
+Mená všetkých a čísla tam
+
+476
+00:23:47,050 --> 00:23:50,120
+Možno v poradí, v akom
+prihlásili k telefónnej služby.
+
+477
+00:23:50,120 --> 00:23:54,570
+A koľko času zaberie mi
+nájsť niekoho, ako je Mike Smith?
+
+478
+00:23:54,570 --> 00:23:58,160
+1000 strana telefónu book-- koľko
+Stránky musím pozrieť?
+
+479
+00:23:58,160 --> 00:23:58,905
+>> Všetky.
+
+480
+00:23:58,905 --> 00:24:00,030
+Vy ste nejako smolu.
+
+481
+00:24:00,030 --> 00:24:03,420
+Doslova sa pozrieť na každý
+strana v prípade, že telefónny zoznam je len
+
+482
+00:24:03,420 --> 00:24:04,450
+náhodne triediť.
+
+483
+00:24:04,450 --> 00:24:06,910
+Možno budete mať šťastie a nájsť Mika
+na prvej stránke, pretože on
+
+484
+00:24:06,910 --> 00:24:08,826
+bol prvý zákazník
+objednať telefónne služby.
+
+485
+00:24:08,826 --> 00:24:10,760
+Ale on by mohol byť posledný, taky.
+
+486
+00:24:10,760 --> 00:24:12,500
+>> Takže náhodnom poradí nie je dobré.
+
+487
+00:24:12,500 --> 00:24:16,750
+Takže predpokladám, že musíme zoradíte
+telefónnom zozname alebo v súhrnnom triedenie dát
+
+488
+00:24:16,750 --> 00:24:18,520
+že nám bola daná.
+
+489
+00:24:18,520 --> 00:24:19,440
+Ako môžeme urobiť?
+
+490
+00:24:19,440 --> 00:24:21,360
+>> No, dovoľte mi pokúsiť
+jednoduchý príklad tu.
+
+491
+00:24:21,360 --> 00:24:24,290
+Nechaj ma ísť dopredu a hodiť
+Niekoľko čísel na palube.
+
+492
+00:24:24,290 --> 00:24:35,480
+Predpokladajme, že čísla, ktoré máme, sú
+povedzme, štyri, dva, jedna a tri.
+
+493
+00:24:35,480 --> 00:24:38,390
+A Ben, triedenie týchto čísel pre nás.
+
+494
+00:24:38,390 --> 00:24:39,017
+>> OK, dobre.
+
+495
+00:24:39,017 --> 00:24:39,850
+Ako si to spravil?
+
+496
+00:24:39,850 --> 00:24:42,731
+
+497
+00:24:42,731 --> 00:24:43,230
+Dobre.
+
+498
+00:24:43,230 --> 00:24:44,710
+Takže začať s najmenšou
+a najvyššou,
+
+499
+00:24:44,710 --> 00:24:46,084
+a to je naozaj dobrá intuícia.
+
+500
+00:24:46,084 --> 00:24:48,080
+A uvedomiť si, že sme
+ľudia sú vlastne celkom
+
+501
+00:24:48,080 --> 00:24:49,913
+dobrý v riešení problémov
+ako je tento, minimálne
+
+502
+00:24:49,913 --> 00:24:51,810
+pri dáta je relatívne malý.
+
+503
+00:24:51,810 --> 00:24:54,860
+Akonáhle sa začnete mať stovky
+čísel, tisíce čísel,
+
+504
+00:24:54,860 --> 00:24:58,440
+milióny čísel, Ben pravdepodobne
+Nemohol to celkom tak rýchlo,
+
+505
+00:24:58,440 --> 00:25:00,620
+za predpokladu, že existujú
+medzery v číslach.
+
+506
+00:25:00,620 --> 00:25:03,450
+Celkom ľahko spočítať na milión
+V opačnom prípade iba časovo náročné.
+
+507
+00:25:03,450 --> 00:25:07,150
+>> Takže to vyzerá algoritmus
+ako Ben používa práve teraz
+
+508
+00:25:07,150 --> 00:25:08,930
+Bol hľadať pre najmenšie číslo.
+
+509
+00:25:08,930 --> 00:25:12,900
+Takže aj keď my ľudia môžu mať
+v mnohých informácií vizuálne,
+
+510
+00:25:12,900 --> 00:25:14,830
+počítač je v skutočnosti
+trochu obmedzenejšie.
+
+511
+00:25:14,830 --> 00:25:17,560
+Počítač môže len
+pozrieme na jeden bajt naraz
+
+512
+00:25:17,560 --> 00:25:20,770
+alebo možno štyri byty na prvý time--
+v týchto dňoch možno 8 bytov na jeden time--
+
+513
+00:25:20,770 --> 00:25:24,450
+ale veľmi malý počet
+bytov v danom čase.
+
+514
+00:25:24,450 --> 00:25:28,480
+>> Takže vzhľadom na to, že skutočne máme
+štyri oddelené hodnoty here--
+
+515
+00:25:28,480 --> 00:25:32,440
+a môžete si myslieť, že majú Ben
+klapky na keby bol počítač ako
+
+516
+00:25:32,440 --> 00:25:36,450
+že nevidí nič iné,
+ako jedno číslo pri time--
+
+517
+00:25:36,450 --> 00:25:39,720
+takže sme sa všeobecne bude predpokladať, rovnako ako v
+Angličtina, budeme čítať sprava doľava.
+
+518
+00:25:39,720 --> 00:25:42,870
+Takže prvé číslo Ben asi vyzeral
+v Boli štyri a potom sa veľmi rýchlo
+
+519
+00:25:42,870 --> 00:25:44,770
+si uvedomil, že je to dosť veľký
+number-- nechaj ma hľadať ďalej.
+
+520
+00:25:44,770 --> 00:25:45,357
+>> Je tu dva.
+
+521
+00:25:45,357 --> 00:25:45,940
+Počkaj minútu.
+
+522
+00:25:45,940 --> 00:25:47,070
+Dva je menšia ako štyri.
+
+523
+00:25:47,070 --> 00:25:47,986
+Idem si spomenúť.
+
+524
+00:25:47,986 --> 00:25:49,070
+Dva je teraz najmenší.
+
+525
+00:25:49,070 --> 00:25:50,417
+Teraz one-- je to ešte lepšie.
+
+526
+00:25:50,417 --> 00:25:51,250
+To je ešte menšia.
+
+527
+00:25:51,250 --> 00:25:54,000
+Idem na to zabudnúť dva
+a stačí spomenúť si ho.
+
+528
+00:25:54,000 --> 00:25:56,550
+>> A mohol prestať hľadať?
+
+529
+00:25:56,550 --> 00:25:58,360
+No, mohol based
+Na základe týchto informácií,
+
+530
+00:25:58,360 --> 00:26:00,477
+ale už tak vyhľadávanie
+zvyšok zoznamu.
+
+531
+00:26:00,477 --> 00:26:02,060
+Vzhľadom k tomu, čo keď nulu boli v zozname?
+
+532
+00:26:02,060 --> 00:26:03,643
+Čo keď negatívne niektorý z nich v zozname?
+
+533
+00:26:03,643 --> 00:26:07,720
+On len vie, že jeho odpoveď
+je správna, ak je to vyčerpávajúcim spôsobom
+
+534
+00:26:07,720 --> 00:26:08,729
+kontroluje celý zoznam.
+
+535
+00:26:08,729 --> 00:26:10,020
+Takže sa pozrieme na zvyšok tohto.
+
+536
+00:26:10,020 --> 00:26:11,394
+Three-- to bolo plytvanie časom.
+
+537
+00:26:11,394 --> 00:26:13,540
+Mám smolu, ale bol som
+Stále správne, aby tak urobili.
+
+538
+00:26:13,540 --> 00:26:17,857
+A tak teraz podľa všetkého
+zvolili najmenší počet
+
+539
+00:26:17,857 --> 00:26:20,440
+a len dať to na začiatku
+zoznamu, ako budem robiť.
+
+540
+00:26:20,440 --> 00:26:23,480
+A teraz, čo si robil ďalej, hoci
+ste si nemyslel, že o ňom takmer
+
+541
+00:26:23,480 --> 00:26:25,962
+v tomto rozsahu?
+
+542
+00:26:25,962 --> 00:26:27,670
+Opakujte proces,
+takže nejaký druh slučky.
+
+543
+00:26:27,670 --> 00:26:28,920
+K dispozícii je známy nápad.
+
+544
+00:26:28,920 --> 00:26:30,860
+Tak tu sú štyri.
+
+545
+00:26:30,860 --> 00:26:32,110
+To je v súčasnej dobe najmenší.
+
+546
+00:26:32,110 --> 00:26:33,220
+To je kandidátom.
+
+547
+00:26:33,220 --> 00:26:33,900
+Už nie.
+
+548
+00:26:33,900 --> 00:26:34,770
+Teraz som videl dva.
+
+549
+00:26:34,770 --> 00:26:36,630
+To je ďalší najmenší prvok.
+
+550
+00:26:36,630 --> 00:26:40,800
+Three-- to nie je menšie, takže
+Teraz Ben môže vyklovnout dva.
+
+551
+00:26:40,800 --> 00:26:44,510
+>> A teraz sme proces opakovať, a
+Samozrejme tri dostane vytiahol ďalšie.
+
+552
+00:26:44,510 --> 00:26:45,420
+Tento postup opakujte.
+
+553
+00:26:45,420 --> 00:26:46,990
+Štyri dostane vytiahol.
+
+554
+00:26:46,990 --> 00:26:50,140
+A teraz sme z čísel,
+Preto musí byť zoznam triedi.
+
+555
+00:26:50,140 --> 00:26:51,960
+>> A skutočne sa jedná o formálne algoritmus.
+
+556
+00:26:51,960 --> 00:26:56,610
+Počítačový vedec by
+nazývajú "Voľba druhu"
+
+557
+00:26:56,610 --> 00:27:00,880
+bytia nápadu triedenie A
+znova vypísať iteratively--
+
+558
+00:27:00,880 --> 00:27:03,807
+a znova a znova zvolením
+najmenšie číslo.
+
+559
+00:27:03,807 --> 00:27:06,140
+A čo je príjemné na tom je,
+je to proste tak sakramentsky intuitívne.
+
+560
+00:27:06,140 --> 00:27:07,470
+Je to tak jednoduché.
+
+561
+00:27:07,470 --> 00:27:11,100
+A môžete opakovať rovnaký
+znovu a znovu prevádzku.
+
+562
+00:27:11,100 --> 00:27:12,150
+Je to jednoduché.
+
+563
+00:27:12,150 --> 00:27:17,170
+>> V tomto prípade išlo rýchlo, ale
+ako dlho to vlastne trvá?
+
+564
+00:27:17,170 --> 00:27:19,880
+Povedzme, aby sa mohlo zdať, a
+cítiť trochu únavné.
+
+565
+00:27:19,880 --> 00:27:24,150
+Tak jeden, dva, tri, štyri, päť šesť,
+sedem, osem, deväť, 10, 11, 12, 13, 14,
+
+566
+00:27:24,150 --> 00:27:26,160
+15, 16-- ľubovoľný počet.
+
+567
+00:27:26,160 --> 00:27:28,780
+Len som chcel viac to
+Doba než len štyri.
+
+568
+00:27:28,780 --> 00:27:30,780
+Takže ak mám jeden celok
+banda čísel to now--
+
+569
+00:27:30,780 --> 00:27:32,420
+ani jedno
+čo are-- Povedzme
+
+570
+00:27:32,420 --> 00:27:34,380
+premýšľať o tom, čo to
+Algoritmus je naozaj.
+
+571
+00:27:34,380 --> 00:27:35,857
+>> Predpokladajme, že existujú čísla tam.
+
+572
+00:27:35,857 --> 00:27:38,190
+Opäť platí, že nezáleží na tom, aké
+sú, ale sú náhodné.
+
+573
+00:27:38,190 --> 00:27:39,679
+Žiadam Benov algoritmus.
+
+574
+00:27:39,679 --> 00:27:41,220
+Musím vyberte najmenšie číslo.
+
+575
+00:27:41,220 --> 00:27:41,761
+Čo robím?
+
+576
+00:27:41,761 --> 00:27:44,240
+A budem fyzicky
+robiť to tentoraz konať to.
+
+577
+00:27:44,240 --> 00:27:46,099
+Pri pohľade, hľadáte,
+hľadáte looking.
+
+578
+00:27:46,099 --> 00:27:48,140
+Až v čase, keď som sa dostať do
+koniec zoznamu môže
+
+579
+00:27:48,140 --> 00:27:51,230
+Uvedomujem si najmenší
+číslo bolo dve tentoraz.
+
+580
+00:27:51,230 --> 00:27:52,720
+Raz to nie je v zozname.
+
+581
+00:27:52,720 --> 00:27:54,400
+Tak som si položil dva.
+
+582
+00:27:54,400 --> 00:27:55,590
+>> Čo mám robiť ďalej?
+
+583
+00:27:55,590 --> 00:27:58,600
+Looking looking.
+
+584
+00:27:58,600 --> 00:28:02,250
+Teraz som našiel číslo sedem, pretože
+je tu medzery v týchto numbers--
+
+585
+00:28:02,250 --> 00:28:03,300
+ale len subjektívne.
+
+586
+00:28:03,300 --> 00:28:03,800
+Dobre.
+
+587
+00:28:03,800 --> 00:28:06,030
+Takže teraz môžem dať dole sedem.
+
+588
+00:28:06,030 --> 00:28:08,860
+Pri pohľade hľadá, hľadá.
+
+589
+00:28:08,860 --> 00:28:11,030
+>> Teraz som za predpokladu, ze
+Samozrejme, že Ben nemá
+
+590
+00:28:11,030 --> 00:28:14,780
+extra RAM, extra
+pamäť, pretože, samozrejme,
+
+591
+00:28:14,780 --> 00:28:16,080
+Pozerám sa rovnakým číslom.
+
+592
+00:28:16,080 --> 00:28:18,246
+Určite som mohol pamätal
+Zo všetkých týchto čísel,
+
+593
+00:28:18,246 --> 00:28:19,930
+a to je úplná pravda.
+
+594
+00:28:19,930 --> 00:28:22,610
+Ale ak Ben pamätá všetky
+z čísel, že videl,
+
+595
+00:28:22,610 --> 00:28:24,430
+on nie je naozaj urobil
+zásadný pokrok
+
+596
+00:28:24,430 --> 00:28:26,170
+pretože už má
+schopnosť vyhľadávať
+
+597
+00:28:26,170 --> 00:28:27,540
+cez čísla na palube.
+
+598
+00:28:27,540 --> 00:28:29,373
+Spomienka na všetky
+Čísla nepomôže,
+
+599
+00:28:29,373 --> 00:28:32,490
+pretože sa môže ešte ako počítač
+len sa pozrieť na, sme povedali, jedným číslom
+
+600
+00:28:32,490 --> 00:28:33,080
+v tom čase.
+
+601
+00:28:33,080 --> 00:28:35,760
+Takže nie je žiadny druh podvodu
+tam, ktoré môžete využiť.
+
+602
+00:28:35,760 --> 00:28:39,170
+>> Takže v skutočnosti, ako som
+pokračovať v hľadaní v zozname,
+
+603
+00:28:39,170 --> 00:28:44,200
+Doslova som si to len ďalej
+tam a späť cez to, olúpanie
+
+604
+00:28:44,200 --> 00:28:45,710
+druhý najmenší počet.
+
+605
+00:28:45,710 --> 00:28:48,810
+A ako si môžete odvodiť druh
+z mojich hlúpych pohybov,
+
+606
+00:28:48,810 --> 00:28:50,860
+to jednoducho dostane veľmi
+únavné veľmi rýchlo,
+
+607
+00:28:50,860 --> 00:28:54,850
+a ja sa zdajú byť vracať
+tam, tam a späť celkom dosť.
+
+608
+00:28:54,850 --> 00:29:03,220
+Teraz aby sme boli spravodliví, nemám ísť
+zas až tak dobre, poďme see-- byť spravodlivý,
+
+609
+00:29:03,220 --> 00:29:06,310
+Nemám chodiť docela
+ako rad krokov, každý čas.
+
+610
+00:29:06,310 --> 00:29:09,200
+Vzhľadom k tomu, samozrejme, ako som
+výber čísel zo zoznamu,
+
+611
+00:29:09,200 --> 00:29:11,860
+zostávajúce zoznam je čím ďalej kratšie.
+
+612
+00:29:11,860 --> 00:29:14,240
+>> A tak sa poďme premýšľať o tom,
+koľko krokov som vlastne
+
+613
+00:29:14,240 --> 00:29:16,010
+traipsing cez každý čas.
+
+614
+00:29:16,010 --> 00:29:18,950
+V úplne prvej situácii
+sme mali 16 čísel,
+
+615
+00:29:18,950 --> 00:29:22,210
+a tak maximally-- Nechal len
+to pre discussion--
+
+616
+00:29:22,210 --> 00:29:25,640
+Musel som sa pozerať až 16
+Čísla nájsť najmenší.
+
+617
+00:29:25,640 --> 00:29:28,420
+Ale akonáhle som vyloupíce
+najmenšie číslo, ako
+
+618
+00:29:28,420 --> 00:29:30,590
+dlho bol zostávajúce zoznam, samozrejme?
+
+619
+00:29:30,590 --> 00:29:31,420
+Len 15.
+
+620
+00:29:31,420 --> 00:29:34,670
+Takže koľko čísel robil Ben alebo mám
+prehliadnuť druhýkrát okolo?
+
+621
+00:29:34,670 --> 00:29:36,832
+15, jednoducho ísť a nájsť najmenšie.
+
+622
+00:29:36,832 --> 00:29:39,540
+Ale teraz, samozrejme, ktorých zoznam je,
+Tiež menšie, než tomu bolo predtým.
+
+623
+00:29:39,540 --> 00:29:42,540
+Tak koľko krokov urobil ja
+musieť vziať nabudúce?
+
+624
+00:29:42,540 --> 00:29:49,970
+14 a potom 13 a potom 12 plus dot,
+bodka, bodka, kým som odišiel len s jedným.
+
+625
+00:29:49,970 --> 00:29:53,146
+Takže teraz počítačový vedec by
+opýtať sa, dobre, čo robí, že si všetci rovní?
+
+626
+00:29:53,146 --> 00:29:55,770
+Je to vlastne rovná niektorými konkrétnymi
+Číslo, ktoré by sme mohli iste
+
+627
+00:29:55,770 --> 00:30:00,490
+robiť aritmeticky, ale chceme hovoriť
+o účinnosti algoritmov
+
+628
+00:30:00,490 --> 00:30:04,940
+trochu viac formulaically,
+nezávisle na tom, ako dlho je zoznam.
+
+629
+00:30:04,940 --> 00:30:06,240
+>> A tak viete čo?
+
+630
+00:30:06,240 --> 00:30:09,860
+To je 16, ale ako som povedal predtým,
+poďme stačí zavolať na rozsah problému
+
+631
+00:30:09,860 --> 00:30:10,970
+n, pričom n je nejaké číslo.
+
+632
+00:30:10,970 --> 00:30:13,220
+Možno je to 16, možno je to
+tri, možno je to milión.
+
+633
+00:30:13,220 --> 00:30:13,761
+Neviem.
+
+634
+00:30:13,761 --> 00:30:14,390
+Nezaujíma ma.
+
+635
+00:30:14,390 --> 00:30:16,520
+Čo naozaj chcem, je
+vzorec, ktorý môžem
+
+636
+00:30:16,520 --> 00:30:19,420
+použiť na porovnanie tohto algoritmu
+s inými algoritmy
+
+637
+00:30:19,420 --> 00:30:22,350
+že niekto môže tvrdiť,
+sú lepšie alebo horšie.
+
+638
+00:30:22,350 --> 00:30:25,430
+>> Tak to dopadá, a to iba ja
+viem, že to od základnej školy,
+
+639
+00:30:25,430 --> 00:30:34,790
+že to vlastne vyjde na rovnakej
+vec ako n cez n plus jedna cez dva.
+
+640
+00:30:34,790 --> 00:30:40,020
+A to sa deje na rovné, z
+Samozrejme, že n a n na druhú cez dva.
+
+641
+00:30:40,020 --> 00:30:43,250
+Takže keď som chcel vzorec
+za koľko krokov
+
+642
+00:30:43,250 --> 00:30:46,330
+boli zapojení do pohľade na všetky
+of znovu a znovu týmito číslami
+
+643
+00:30:46,330 --> 00:30:52,681
+a znova a znova, povedal by som,
+to n druhú a n cez dva.
+
+644
+00:30:52,681 --> 00:30:53,430
+Ale viete čo?
+
+645
+00:30:53,430 --> 00:30:54,500
+To len vyzerá chaotický.
+
+646
+00:30:54,500 --> 00:30:56,470
+Ja len naozaj chcieť
+všeobecný zmysel vecí.
+
+647
+00:30:56,470 --> 00:30:58,810
+A tie by mohli vyvolať z
+vysoká škola, ktorá tam
+
+648
+00:30:58,810 --> 00:31:00,660
+je predstava najvyššieho rádu termíne.
+
+649
+00:31:00,660 --> 00:31:05,300
+Ktorý z týchto podmienok, n
+štvorcový, N, alebo polovicu,
+
+650
+00:31:05,300 --> 00:31:07,550
+má najväčší vplyv v priebehu času?
+
+651
+00:31:07,550 --> 00:31:11,920
+Čím väčšia n dostane, čo
+z týchto záležitostí najviac?
+
+652
+00:31:11,920 --> 00:31:15,560
+>> Inými slovami, ak sa pripojíte
+z milióna, n štvorcový
+
+653
+00:31:15,560 --> 00:31:17,900
+bude s najväčšou pravdepodobnosťou
+dominantným faktorom,
+
+654
+00:31:17,900 --> 00:31:21,670
+Vzhľadom k tomu, miliónkrát
+sama o sebe je oveľa väčšia
+
+655
+00:31:21,670 --> 00:31:23,682
+ako plus jeden ďalší milión.
+
+656
+00:31:23,682 --> 00:31:24,390
+Tak viete čo?
+
+657
+00:31:24,390 --> 00:31:27,305
+Je to tak veľký zašiť
+číslo, ak námestí číslo.
+
+658
+00:31:27,305 --> 00:31:28,430
+To naozaj nezáleží.
+
+659
+00:31:28,430 --> 00:31:30,596
+Budeme len kríž, ktorý
+out a zabudnúť na to.
+
+660
+00:31:30,596 --> 00:31:34,250
+A tak počítačový vedec by sa povedať,
+že účinnosť tohto algoritmu
+
+661
+00:31:34,250 --> 00:31:37,850
+je v poriadku n squared--
+Mám na mysli skutočne priblíženie.
+
+662
+00:31:37,850 --> 00:31:40,810
+Je to akýsi zhruba n druhú.
+
+663
+00:31:40,810 --> 00:31:44,130
+V priebehu doby, tým väčšia
+a väčšie n dostane toto
+
+664
+00:31:44,130 --> 00:31:47,610
+Je to dobrý odhad pre to, čo
+efektivita alebo nedostatok účinnosti
+
+665
+00:31:47,610 --> 00:31:49,400
+tohto algoritmu v skutočnosti je.
+
+666
+00:31:49,400 --> 00:31:52,040
+A ja odvodiť, že, samozrejme,
+od skutočne robí matematiku.
+
+667
+00:31:52,040 --> 00:31:54,040
+Ale teraz som len mávanie
+moje ruky, pretože som zrovna
+
+668
+00:31:54,040 --> 00:31:55,790
+Chcete všeobecný zmysel tohto algoritmu.
+
+669
+00:31:55,790 --> 00:31:58,850
+>> Takže pomocou rovnakého logiku, zatiaľ,
+uvažujme iný algoritmus
+
+670
+00:31:58,850 --> 00:32:01,162
+už vyzeral at-- lineárne hľadanie.
+
+671
+00:32:01,162 --> 00:32:02,870
+Keď som hľadal
+pre telefónne book--
+
+672
+00:32:02,870 --> 00:32:05,980
+Nie je ich triedenie, vyhľadávanie
+cez telefónne book--
+
+673
+00:32:05,980 --> 00:32:09,197
+sme stále hovorila, že to bolo
+1000 kroky, alebo 500 krokov.
+
+674
+00:32:09,197 --> 00:32:10,280
+Ale poďme generalizovať to.
+
+675
+00:32:10,280 --> 00:32:12,860
+Ak existuje n stránok v
+telefónny zoznam, čo je
+
+676
+00:32:12,860 --> 00:32:17,250
+doba chodu alebo
+Účinnosť lineárny hľadanie?
+
+677
+00:32:17,250 --> 00:32:19,750
+Je to v poriadku
+koľko krokov k nájdeniu
+
+678
+00:32:19,750 --> 00:32:24,210
+Mike Smith pomocou lineárne vyhľadávanie,
+Prvý algoritmus, alebo aj druhý?
+
+679
+00:32:24,210 --> 00:32:27,240
+
+680
+00:32:27,240 --> 00:32:31,710
+>> V najhoršom prípade, Mike
+je na konci knihy.
+
+681
+00:32:31,710 --> 00:32:35,590
+Takže v prípade, že telefónny zoznam má 1000 stránok,
+sme si povedali minule, v najhoršom prípade,
+
+682
+00:32:35,590 --> 00:32:38,380
+to môže trvať zhruba ako
+veľa stránok nájsť Miku?
+
+683
+00:32:38,380 --> 00:32:38,990
+Rovnako ako 1,000.
+
+684
+00:32:38,990 --> 00:32:39,830
+Je to horná hranica.
+
+685
+00:32:39,830 --> 00:32:41,790
+Je to najhoršie možné situáciu.
+
+686
+00:32:41,790 --> 00:32:44,410
+Ale opäť, ideme preč
+z čísel, ako je teraz 1000.
+
+687
+00:32:44,410 --> 00:32:45,730
+Je to len n.
+
+688
+00:32:45,730 --> 00:32:47,470
+>> Tak aký je logický záver?
+
+689
+00:32:47,470 --> 00:32:50,210
+Nájdenie Mika v telefóne
+Kniha, ktorá má n strán
+
+690
+00:32:50,210 --> 00:32:55,280
+môže trvať, v najhoršom prípade,
+koľko krokov v poriadku n?
+
+691
+00:32:55,280 --> 00:32:58,110
+A naozaj počítačový
+vedec by sa povedať,
+
+692
+00:32:58,110 --> 00:33:02,340
+že beží čas alebo sa
+výkonnosť alebo účinnosť
+
+693
+00:33:02,340 --> 00:33:07,470
+alebo neúčinnosť, algoritmu, ako je
+lineárne vyhľadávanie v poriadku n.
+
+694
+00:33:07,470 --> 00:33:10,010
+A môžeme aplikovať rovnaký
+Logika kríženie niečo
+
+695
+00:33:10,010 --> 00:33:13,170
+ako som práve urobil do druhého
+Algoritmus sme mali s telefónnom zozname,
+
+696
+00:33:13,170 --> 00:33:16,040
+kde sme urobili dve stránky naraz.
+
+697
+00:33:16,040 --> 00:33:20,120
+>> Takže 1000 strana telefónny zoznam by mohol
+nás zavedie 500 otočených strán, plus jedna
+
+698
+00:33:20,120 --> 00:33:21,910
+ak by sme zdvojnásobiť späť trochu.
+
+699
+00:33:21,910 --> 00:33:26,590
+Takže ak telefónny zoznam má n strán, ale
+robíme dve stránky naraz,
+
+700
+00:33:26,590 --> 00:33:28,900
+To je zhruba to, čo?
+
+701
+00:33:28,900 --> 00:33:33,190
+N cez dva, takže to ako n cez dva.
+
+702
+00:33:33,190 --> 00:33:38,490
+Ale ja som urobil nárokovať
+Pred okamihom, že n cez two--
+
+703
+00:33:38,490 --> 00:33:41,060
+to je druh rovnaké ako práve n.
+
+704
+00:33:41,060 --> 00:33:44,050
+Je to len konštantný faktor,
+počítačoví odborníci by sa povedať.
+
+705
+00:33:44,050 --> 00:33:45,970
+Poďme sa zamerať iba na
+premenné, really--
+
+706
+00:33:45,970 --> 00:33:47,780
+najväčšie premenné v rovnici.
+
+707
+00:33:47,780 --> 00:33:52,530
+>> Takže lineárne vyhľadávanie, či urobil jednu
+Strana naraz alebo dve stránky naraz,
+
+708
+00:33:52,530 --> 00:33:54,810
+je niečo v podstate rovnaké.
+
+709
+00:33:54,810 --> 00:33:56,880
+Je to stále v poriadku n.
+
+710
+00:33:56,880 --> 00:34:01,930
+Ale ja tvrdil s mojím obrázku skôr
+že tretí algoritmus nebol
+
+711
+00:34:01,930 --> 00:34:02,480
+lineárne.
+
+712
+00:34:02,480 --> 00:34:03,605
+Bolo to nie je priamka.
+
+713
+00:34:03,605 --> 00:34:08,659
+Bolo to, že krivka, a
+algebraické rovnice nebolo čo?
+
+714
+00:34:08,659 --> 00:34:11,812
+Log n- takže log základňu dva n.
+
+715
+00:34:11,812 --> 00:34:14,520
+A nemusíme ísť do príliš
+veľa detailov na logaritmy dnes,
+
+716
+00:34:14,520 --> 00:34:17,394
+ale väčšina počítačoví experti nechceli
+aj tí, čo je základňa.
+
+717
+00:34:17,394 --> 00:34:20,639
+Vzhľadom k tomu, že je to všetko len
+konštantný faktory, tak povediac,
+
+718
+00:34:20,639 --> 00:34:22,659
+Len drobné číselné rozdiely.
+
+719
+00:34:22,659 --> 00:34:31,179
+A tak by to bolo veľmi časté
+spôsob, najmä formálnu počítače
+
+720
+00:34:31,179 --> 00:34:33,949
+Vedci na palube alebo
+programátori na bielu tabuľu
+
+721
+00:34:33,949 --> 00:34:36,889
+v skutočnosti tvrdí, ktoré
+Algoritmus by sa používať
+
+722
+00:34:36,889 --> 00:34:39,500
+alebo to, čo je účinnosť
+z ich algoritmus.
+
+723
+00:34:39,500 --> 00:34:42,960
+>> A to nie je nevyhnutne niečo
+diskutujete v každom detaile,
+
+724
+00:34:42,960 --> 00:34:47,889
+ale dobrý programátor je ten,
+ktorý má pevnú, formálne pozadia.
+
+725
+00:34:47,889 --> 00:34:50,120
+On je schopný hovoriť
+vám v tomto druhu cesty
+
+726
+00:34:50,120 --> 00:34:53,350
+a vlastne robiť
+kvalitatívne argumenty ako
+
+727
+00:34:53,350 --> 00:34:56,870
+prečo jeden algoritmus alebo
+jeden kus softvéru
+
+728
+00:34:56,870 --> 00:35:00,165
+je lepšia ako nejakým spôsobom do druhého.
+
+729
+00:35:00,165 --> 00:35:02,540
+Pretože tie by určite
+stačí spustiť program, jedného človeka
+
+730
+00:35:02,540 --> 00:35:04,980
+a spočítať počet sekúnd
+trvá triediť nejaké čísla,
+
+731
+00:35:04,980 --> 00:35:06,710
+a môžete spustiť niektoré
+Program iné osoby
+
+732
+00:35:06,710 --> 00:35:08,418
+a počítanie
+sekúnd trvá.
+
+733
+00:35:08,418 --> 00:35:12,840
+Ale to je všeobecnejší spôsob,
+môžete použiť na analýzu algoritmov,
+
+734
+00:35:12,840 --> 00:35:15,520
+ak chcete, len na
+papiera alebo len slovne.
+
+735
+00:35:15,520 --> 00:35:18,430
+Bez toho aby si beží to bez toho,
+dokonca sa snaží vzorové vstupmi,
+
+736
+00:35:18,430 --> 00:35:20,180
+môžete len rozum cez neho.
+
+737
+00:35:20,180 --> 00:35:24,670
+A tak s prenájmom vývojárov, alebo ak
+mať ho alebo ju nejako argumentovať pre vás
+
+738
+00:35:24,670 --> 00:35:28,460
+prečo ich algoritmus, ich tajomstvo
+omáčka pre vyhľadávanie miliardy
+
+739
+00:35:28,460 --> 00:35:30,580
+webových stránok pre vaše
+Firma je lepšie, títo
+
+740
+00:35:30,580 --> 00:35:33,302
+sú druhy argumentov, že
+by v ideálnom prípade byť schopný vykonať.
+
+741
+00:35:33,302 --> 00:35:35,010
+Alebo aspoň to sú
+druhy vecí
+
+742
+00:35:35,010 --> 00:35:40,211
+ktoré by prísť v diskusii, pri
+aspoň vo veľmi formálne diskusie.
+
+743
+00:35:40,211 --> 00:35:40,710
+Dobre.
+
+744
+00:35:40,710 --> 00:35:44,400
+Takže Ben navrhovanej niečo
+volal výber triediť.
+
+745
+00:35:44,400 --> 00:35:48,200
+Ale budem navrhovať, že je tu
+iné spôsoby, ako to urobiť taky.
+
+746
+00:35:48,200 --> 00:35:50,400
+To, čo som nemal naozaj rád
+o Benovom algoritmu
+
+747
+00:35:50,400 --> 00:35:54,400
+je to, že išiel ďalej, alebo
+čo ma chodiť sem a tam
+
+748
+00:35:54,400 --> 00:35:56,930
+a sem a tam a sem a tam.
+
+749
+00:35:56,930 --> 00:36:04,130
+Čo keď namiesto toho som mal robiť
+niečo podobné týchto čísel tu
+
+750
+00:36:04,130 --> 00:36:08,200
+a ja sme boli len rokovať s každým
+číslo v poradí, ako som vzhľadom k tomu, že?
+
+751
+00:36:08,200 --> 00:36:10,780
+>> Inými slovami, je tu
+môj zoznam čísel.
+
+752
+00:36:10,780 --> 00:36:12,944
+Štyri, jedna, tri, dva.
+
+753
+00:36:12,944 --> 00:36:14,360
+A ja budem robiť nasledujúce.
+
+754
+00:36:14,360 --> 00:36:17,230
+Idem vložiť čísla
+kam patrí skôr
+
+755
+00:36:17,230 --> 00:36:18,980
+Okrem výberu im jeden po druhom.
+
+756
+00:36:18,980 --> 00:36:20,820
+Inými slovami, tu je číslo štyri.
+
+757
+00:36:20,820 --> 00:36:22,430
+>> Tu je môj pôvodný zoznam.
+
+758
+00:36:22,430 --> 00:36:25,290
+A budem zachovávať
+v podstate nový zoznam tu.
+
+759
+00:36:25,290 --> 00:36:26,710
+Tak toto je starý zoznam.
+
+760
+00:36:26,710 --> 00:36:28,560
+Jedná sa o nový zoznam.
+
+761
+00:36:28,560 --> 00:36:30,220
+Vidím, že číslo štyri prvé.
+
+762
+00:36:30,220 --> 00:36:34,500
+Môj nový zoznam je spočiatku prázdny,
+tak je to v prípade triviálne
+
+763
+00:36:34,500 --> 00:36:36,410
+že štyri je teraz roztriedený zoznam.
+
+764
+00:36:36,410 --> 00:36:39,560
+Ja beriem len to číslo som dal,
+a ja ho uvedenie vo svojom novom zozname.
+
+765
+00:36:39,560 --> 00:36:41,460
+>> Je zoradený tento nový zoznam?
+
+766
+00:36:41,460 --> 00:36:41,990
+Jo.
+
+767
+00:36:41,990 --> 00:36:45,090
+Je to hlúpe, pretože tam je len jeden
+prvok, ale je to úplne triediť.
+
+768
+00:36:45,090 --> 00:36:46,390
+Nie je nič na svojom mieste.
+
+769
+00:36:46,390 --> 00:36:49,290
+Je to oveľa zaujímavejšie, tento algoritmus,
+keď som sa presunúť k ďalšiemu kroku.
+
+770
+00:36:49,290 --> 00:36:50,550
+>> Teraz mám jeden.
+
+771
+00:36:50,550 --> 00:36:55,430
+Tak jeden, samozrejme, patrí u
+začiatok alebo koniec tohto nového zoznamu?
+
+772
+00:36:55,430 --> 00:36:56,360
+Začiatok.
+
+773
+00:36:56,360 --> 00:36:58,530
+Takže musím urobiť nejakú prácu hneď.
+
+774
+00:36:58,530 --> 00:37:01,410
+Bral som niektoré
+slobody s mojou značku
+
+775
+00:37:01,410 --> 00:37:03,120
+jednoduchým kreslenie veci
+kde chcem im,
+
+776
+00:37:03,120 --> 00:37:05,320
+ale v skutočnosti to nie je
+presný v počítači.
+
+777
+00:37:05,320 --> 00:37:08,530
+Počítač, ako vieme, má
+RAM, alebo Random Access Memory,
+
+778
+00:37:08,530 --> 00:37:12,411
+a to je jeden bajt a
+ďalšie byte a ďalšie byte.
+
+779
+00:37:12,411 --> 00:37:14,910
+A ak máte gigabajt
+RAM, máte miliarde bajtov
+
+780
+00:37:14,910 --> 00:37:16,680
+ale sú fyzicky na jednom mieste.
+
+781
+00:37:16,680 --> 00:37:19,540
+Nemôžete len presunúť veci okolo
+tým, že ho na tabuľu
+
+782
+00:37:19,540 --> 00:37:20,750
+kdekoľvek chceš.
+
+783
+00:37:20,750 --> 00:37:24,090
+Takže ak môj nový zoznam musí
+Štyri miesta v pamäti,
+
+784
+00:37:24,090 --> 00:37:27,480
+Bohužiaľ štyri je
+Už na zlom mieste.
+
+785
+00:37:27,480 --> 00:37:30,410
+>> Takže vložiť číslo jedna
+Nemôžem len tak kresliť ho sem.
+
+786
+00:37:30,410 --> 00:37:31,901
+Toto miesto v pamäti neexistuje.
+
+787
+00:37:31,901 --> 00:37:35,150
+To by bolo podvádzanie, a bol som
+podvádzanie obrazovo po dobu niekoľkých minút
+
+788
+00:37:35,150 --> 00:37:35,800
+tu.
+
+789
+00:37:35,800 --> 00:37:40,950
+Takže naozaj, keď chcem dať jeden tu,
+Musím sa dočasne skopírovať štyri
+
+790
+00:37:40,950 --> 00:37:43,030
+a potom dal ten tam.
+
+791
+00:37:43,030 --> 00:37:45,500
+>> To je v poriadku, to je v poriadku,
+je to technicky možné,
+
+792
+00:37:45,500 --> 00:37:48,410
+ale uvedomiť, že je to práca navyše.
+
+793
+00:37:48,410 --> 00:37:50,460
+Nechcel som len dať číslo na svojom mieste.
+
+794
+00:37:50,460 --> 00:37:53,026
+Najskôr som musel presunúť
+číslo, potom ju na mieste,
+
+795
+00:37:53,026 --> 00:37:54,650
+tak nejako som zdvojnásobil svoj objem práce.
+
+796
+00:37:54,650 --> 00:37:55,660
+Takže majte na pamäti, že.
+
+797
+00:37:55,660 --> 00:37:57,120
+>> Ale ja som teraz urobil s týmto prvkom.
+
+798
+00:37:57,120 --> 00:37:59,056
+Teraz chcem chytiť číslo tri.
+
+799
+00:37:59,056 --> 00:38:00,430
+V prípade, samozrejme, to patrí?
+
+800
+00:38:00,430 --> 00:38:01,480
+Medzi.
+
+801
+00:38:01,480 --> 00:38:03,650
+Nemôžem podvádzať už
+a proste to tam dal,
+
+802
+00:38:03,650 --> 00:38:06,770
+pretože, znovu, tejto pamäti
+je vo fyzických miestach.
+
+803
+00:38:06,770 --> 00:38:10,900
+Takže mám skopírovať štyri
+a dal tri sem.
+
+804
+00:38:10,900 --> 00:38:11,550
+Nie je to veľký problém.
+
+805
+00:38:11,550 --> 00:38:14,610
+Je to len jeden krok navyše
+again-- cíti veľmi lacná.
+
+806
+00:38:14,610 --> 00:38:16,445
+>> Ale teraz som sa presunúť na dva.
+
+807
+00:38:16,445 --> 00:38:17,820
+Dva, samozrejme, patrí sem.
+
+808
+00:38:17,820 --> 00:38:20,990
+Teraz môžete začať sledovať, ako
+Práca môže nahromadiť.
+
+809
+00:38:20,990 --> 00:38:23,520
+A teraz, čo mám robiť?
+
+810
+00:38:23,520 --> 00:38:28,570
+Jo, mám presunúť štyri,
+potom musím skopírovať tri,
+
+811
+00:38:28,570 --> 00:38:31,200
+a teraz môžem vložiť dva.
+
+812
+00:38:31,200 --> 00:38:34,460
+A úlovok s týmto
+algoritmus, je dosť zaujímavé,
+
+813
+00:38:34,460 --> 00:38:41,050
+je, že predpokladám, že máme viac extrémne
+prípad, kedy je to povedzme, osem, sedem,
+
+814
+00:38:41,050 --> 00:38:45,150
+šesť, päť, štyri, tri, dva, jedna.
+
+815
+00:38:45,150 --> 00:38:49,450
+To je, v mnohých kontextoch,
+najhorší možný scenár,
+
+816
+00:38:49,450 --> 00:38:51,570
+pretože zatratenou vec
+je doslova pospiatky.
+
+817
+00:38:51,570 --> 00:38:53,670
+>> To nie je naozaj
+ovplyvní Benov algoritmus,
+
+818
+00:38:53,670 --> 00:38:55,940
+pretože v Benovom výberu
+sort že to bude držať
+
+819
+00:38:55,940 --> 00:38:58,359
+tam a späť cez zoznam.
+
+820
+00:38:58,359 --> 00:39:01,150
+A pretože bol stále hľadá
+po celú zostávajúcu zoznamu
+
+821
+00:39:01,150 --> 00:39:02,858
+to nevadí
+kde sú prvky.
+
+822
+00:39:02,858 --> 00:39:05,630
+Ale v tomto prípade sa svojím vkladanie
+approach-- skúsme to.
+
+823
+00:39:05,630 --> 00:39:08,616
+>> Tak jeden, dva, tri, štyri,
+päť, šesť, sedem, osem.
+
+824
+00:39:08,616 --> 00:39:11,630
+Raz dva tri štyri,
+päť, šesť, sedem, osem.
+
+825
+00:39:11,630 --> 00:39:14,320
+Chystám sa vziať osem,
+a kde mám dať?
+
+826
+00:39:14,320 --> 00:39:17,260
+No, na začiatku môjho zoznamu
+pretože tento nový zoznam je zoradený.
+
+827
+00:39:17,260 --> 00:39:18,760
+A ja ju prechádzajú von.
+
+828
+00:39:18,760 --> 00:39:20,551
+>> Kam mám dať sedem?
+
+829
+00:39:20,551 --> 00:39:21,050
+Látat to.
+
+830
+00:39:21,050 --> 00:39:23,174
+Je potrebné ísť tam, tak
+Musím urobiť nejaké kopírovanie.
+
+831
+00:39:23,174 --> 00:39:26,820
+
+832
+00:39:26,820 --> 00:39:28,480
+A teraz sedem chodia sem.
+
+833
+00:39:28,480 --> 00:39:29,860
+Teraz som sa presunúť na šesť.
+
+834
+00:39:29,860 --> 00:39:30,980
+Teraz je to ešte viac práce.
+
+835
+00:39:30,980 --> 00:39:32,570
+>> Osem musí ísť sem.
+
+836
+00:39:32,570 --> 00:39:33,920
+Sedem musí ísť sem.
+
+837
+00:39:33,920 --> 00:39:35,450
+Teraz je šesť môže ísť sem.
+
+838
+00:39:35,450 --> 00:39:37,950
+Teraz som chytiť päť.
+
+839
+00:39:37,950 --> 00:39:40,560
+Teraz osem musí ísť
+tu, sedem musí ísť sem,
+
+840
+00:39:40,560 --> 00:39:43,650
+šesť musí ísť sem, a
+teraz päť a opakovať.
+
+841
+00:39:43,650 --> 00:39:46,610
+A som celkom veľa
+pohybujúce sa to neustále.
+
+842
+00:39:46,610 --> 00:39:52,950
+>> Takže na konci, to algorithm-- zmienime
+hovoriť vloženie sort-- vlastne
+
+843
+00:39:52,950 --> 00:39:55,020
+Má veľa práce, taky.
+
+844
+00:39:55,020 --> 00:39:56,970
+Je to proste iný
+druh práce, než Bena.
+
+845
+00:39:56,970 --> 00:40:00,090
+Benov práca mala ma deje
+sem a tam po celú dobu,
+
+846
+00:40:00,090 --> 00:40:03,510
+zvolenie budúci najmenší
+znovu a znovu element.
+
+847
+00:40:03,510 --> 00:40:06,660
+Tak to bolo to veľmi vizuálne druh práce.
+
+848
+00:40:06,660 --> 00:40:10,600
+>> Tento iný algoritmus, ktorý je ešte
+correct-- to dostane prácu done--
+
+849
+00:40:10,600 --> 00:40:12,800
+Len zmení množstvo práce.
+
+850
+00:40:12,800 --> 00:40:15,420
+Vyzerá to, že spočiatku budete
+úsporu, pretože si zrovna
+
+851
+00:40:15,420 --> 00:40:19,190
+rokovania s každým prvkom
+vpredu, bez šiel all
+
+852
+00:40:19,190 --> 00:40:20,930
+cesta cez zozname ako Ben bol.
+
+853
+00:40:20,930 --> 00:40:25,300
+Ale problém je, a to najmä v tých
+bláznivé prípady, keď je to všetko obrátene,
+
+854
+00:40:25,300 --> 00:40:27,830
+si len trochu
+odkladá ťažkú ​​prácu
+
+855
+00:40:27,830 --> 00:40:30,360
+kým nebudete mať na opravu chyby.
+
+856
+00:40:30,360 --> 00:40:33,919
+>> A tak ak môžete si to predstaviť
+osem a sedem a šesť a päť
+
+857
+00:40:33,919 --> 00:40:36,710
+a neskôr štyri a tri a dva
+pohybujúce sa ich cestu cez zoznamu
+
+858
+00:40:36,710 --> 00:40:39,060
+sme práve zmenený
+druh práce robíme.
+
+859
+00:40:39,060 --> 00:40:42,340
+Namiesto toho, ako to robí u
+počiatok mojej iteráciu
+
+860
+00:40:42,340 --> 00:40:45,250
+Robím len to u
+Koniec každej iterácii.
+
+861
+00:40:45,250 --> 00:40:50,550
+Tak to dopadá, že tento algoritmus,
+Tiež všeobecne nazývané triedenie priamym vkladaním,
+
+862
+00:40:50,550 --> 00:40:52,190
+je tiež na objednávku n štvorcový.
+
+863
+00:40:52,190 --> 00:40:56,480
+Je to vlastne o nič lepší,
+o nič lepšie vôbec.
+
+864
+00:40:56,480 --> 00:41:00,810
+>> Avšak, tam je tretina prístup
+Bol by som nás povzbudiť, aby zvážila,
+
+865
+00:41:00,810 --> 00:41:02,970
+ktorý je to.
+
+866
+00:41:02,970 --> 00:41:07,850
+Takže predpokladám, že môj zoznam, pre jednoduchosť
+znovu, je štyri, jeden, tri,
+
+867
+00:41:07,850 --> 00:41:11,080
+two-- len štyri čísla.
+
+868
+00:41:11,080 --> 00:41:13,300
+Ben mal dobrú intuíciu,
+dobrý človek intuícia
+
+869
+00:41:13,300 --> 00:41:16,340
+Pred tým, ktorú pevné celý
+Zoznam eventually-- triedenie priamym vkladaním.
+
+870
+00:41:16,340 --> 00:41:18,020
+nám vyprosil som ďalej.
+
+871
+00:41:18,020 --> 00:41:22,530
+Ale poďme zvážiť
+Najjednoduchší spôsob, ako opraviť tento zoznam.
+
+872
+00:41:22,530 --> 00:41:24,110
+>> Tento zoznam nie je zoradená.
+
+873
+00:41:24,110 --> 00:41:26,130
+Prečo?
+
+874
+00:41:26,130 --> 00:41:31,920
+V angličtine, vysvetliť, prečo
+to nie je v skutočnosti triediť.
+
+875
+00:41:31,920 --> 00:41:33,400
+Čo to znamená nebyť radené?
+
+876
+00:41:33,400 --> 00:41:34,220
+>> STUDENT: To nie je sekvenčná.
+
+877
+00:41:34,220 --> 00:41:34,990
+>> DAVID Malan: Nie je sekvenčná.
+
+878
+00:41:34,990 --> 00:41:35,822
+Dajte mi príklad.
+
+879
+00:41:35,822 --> 00:41:37,180
+>> STUDENT: Dajte je v poriadku.
+
+880
+00:41:37,180 --> 00:41:37,440
+>> DAVID Malan: OK.
+
+881
+00:41:37,440 --> 00:41:38,790
+Daj mi viac konkrétny príklad.
+
+882
+00:41:38,790 --> 00:41:39,832
+>> STUDENT: vzostupnom poradí.
+
+883
+00:41:39,832 --> 00:41:41,206
+DAVID Malan: Nie je vzostupne.
+
+884
+00:41:41,206 --> 00:41:42,100
+Byť presnejší.
+
+885
+00:41:42,100 --> 00:41:45,190
+Neviem, čo myslíš tým vzostupne.
+
+886
+00:41:45,190 --> 00:41:47,150
+Čo je zle?
+
+887
+00:41:47,150 --> 00:41:49,930
+>> STUDENT: Najmenší z
+Čísla nie je v prvom priestore.
+
+888
+00:41:49,930 --> 00:41:51,140
+>> DAVID Malan: Najmenšie číslo je
+nie je v prvom priestore.
+
+889
+00:41:51,140 --> 00:41:52,120
+Byť konkrétnejší.
+
+890
+00:41:52,120 --> 00:41:55,000
+Začínam pochopiť.
+
+891
+00:41:55,000 --> 00:41:59,470
+Počítame, ale
+čo je mimo prevádzky tu?
+
+892
+00:41:59,470 --> 00:42:00,707
+>> STUDENT: číselné postupnosti.
+
+893
+00:42:00,707 --> 00:42:02,040
+DAVID Malan: číselné postupnosti.
+
+894
+00:42:02,040 --> 00:42:04,248
+druh vecí každého z chovu
+to here-- veľmi vysokú úroveň.
+
+895
+00:42:04,248 --> 00:42:07,450
+Len mi doslova povedať, čo je
+zle ako päť rokov staré sile.
+
+896
+00:42:07,450 --> 00:42:08,310
+>> STUDENT: Plus jeden.
+
+897
+00:42:08,310 --> 00:42:08,750
+>> DAVID Malan: Čo je to?
+
+898
+00:42:08,750 --> 00:42:09,610
+>> STUDENT: Plus jeden.
+
+899
+00:42:09,610 --> 00:42:11,235
+>> DAVID Malan: Čo tým myslíš plus jedna?
+
+900
+00:42:11,235 --> 00:42:12,754
+
+901
+00:42:12,754 --> 00:42:14,170
+Daj mi iný päť-ročný.
+
+902
+00:42:14,170 --> 00:42:16,840
+
+903
+00:42:16,840 --> 00:42:18,330
+Čo sa deje, mami?
+
+904
+00:42:18,330 --> 00:42:19,940
+Čo sa deje, ocko?
+
+905
+00:42:19,940 --> 00:42:22,808
+Čo tým myslíš, to nie je radené?
+
+906
+00:42:22,808 --> 00:42:24,370
+>> STUDENT: To nie je to správne miesto.
+
+907
+00:42:24,370 --> 00:42:25,580
+>> DAVID Malan: Čo je
+nie je na správnom mieste?
+
+908
+00:42:25,580 --> 00:42:26,174
+>> STUDENT: Štyri.
+
+909
+00:42:26,174 --> 00:42:27,090
+DAVID Malan: OK, dobre.
+
+910
+00:42:27,090 --> 00:42:29,110
+Takže štyri nie je tam, kde by mala byť.
+
+911
+00:42:29,110 --> 00:42:30,590
+Najmä, je to pravda?
+
+912
+00:42:30,590 --> 00:42:33,000
+Štyri a jeden, prvý
+dve čísla Aha.
+
+913
+00:42:33,000 --> 00:42:34,930
+Je to správne?
+
+914
+00:42:34,930 --> 00:42:36,427
+Nie, oni sú mimo prevádzky, nie?
+
+915
+00:42:36,427 --> 00:42:38,135
+V skutočnosti, že teraz
+o počítači, taky.
+
+916
+00:42:38,135 --> 00:42:40,824
+Môže sa iba na možno jeden,
+možno dve veci once--
+
+917
+00:42:40,824 --> 00:42:43,240
+a vlastne len jedna vec
+v čase, ale môže aspoň
+
+918
+00:42:43,240 --> 00:42:45,790
+pozrieť sa na jednu vec, potom
+Ďalšia vec, ktorú hneď vedľa neho.
+
+919
+00:42:45,790 --> 00:42:47,380
+>> Takže sú tieto v poriadku?
+
+920
+00:42:47,380 --> 00:42:48,032
+Samozrejme, že nie.
+
+921
+00:42:48,032 --> 00:42:48,740
+Tak viete čo?
+
+922
+00:42:48,740 --> 00:42:51,020
+Prečo nie vezmeme dieťa
+Kroky upevňovacie tento problém
+
+923
+00:42:51,020 --> 00:42:53,410
+namiesto toho, aby tieto fantázie
+algoritmy ako Ben, kde
+
+924
+00:42:53,410 --> 00:42:56,440
+Je to vlastne trochu upevnenie ju
+slučky v zozname
+
+925
+00:42:56,440 --> 00:42:59,670
+namiesto toho robiť to, čo som urobil, kde
+Aj tak nejako pripevnil ju, ako sme ísť?
+
+926
+00:42:59,670 --> 00:43:03,650
+Povedzme doslova rozobrať
+Pojem order-- číselnom poradí,
+
+927
+00:43:03,650 --> 00:43:06,990
+hovoriť čokoľvek want--
+Do týchto párová porovnanie.
+
+928
+00:43:06,990 --> 00:43:07,590
+>> Štyri a.
+
+929
+00:43:07,590 --> 00:43:09,970
+Je to správne poradie?
+
+930
+00:43:09,970 --> 00:43:11,310
+Takže poďme napraviť.
+
+931
+00:43:11,310 --> 00:43:14,700
+Jeden a štyri, a potom
+budeme len skopírovať to.
+
+932
+00:43:14,700 --> 00:43:15,560
+Dobre, dobre.
+
+933
+00:43:15,560 --> 00:43:17,022
+Opravil som jeden a štyri.
+
+934
+00:43:17,022 --> 00:43:18,320
+Tri a dve?
+
+935
+00:43:18,320 --> 00:43:18,820
+Nie.
+
+936
+00:43:18,820 --> 00:43:21,690
+Nech moje slová zodpovedala prsty.
+
+937
+00:43:21,690 --> 00:43:23,695
+Štyri a tri?
+
+938
+00:43:23,695 --> 00:43:27,930
+>> Nie je to v poriadku, takže idem
+robiť jeden, tri, štyri, dva.
+
+939
+00:43:27,930 --> 00:43:28,680
+OK, dobre.
+
+940
+00:43:28,680 --> 00:43:32,310
+Teraz štyri a dve?
+
+941
+00:43:32,310 --> 00:43:33,370
+Musíme to opraviť taky.
+
+942
+00:43:33,370 --> 00:43:36,700
+Tak jeden, tri, dva, štyri.
+
+943
+00:43:36,700 --> 00:43:39,820
+Takže je to radené?
+
+944
+00:43:39,820 --> 00:43:43,170
+Nie, ale je to bližšie do triedeného?
+
+945
+00:43:43,170 --> 00:43:48,930
+>> Je to preto, že sme opravil toto
+chyba, sme opravili túto chybu,
+
+946
+00:43:48,930 --> 00:43:50,370
+a my pevne túto chybu.
+
+947
+00:43:50,370 --> 00:43:52,420
+Takže sme opravili tri chyby pravdepodobne.
+
+948
+00:43:52,420 --> 00:43:58,100
+Stále nie je naozaj vyzerajú triedené, ale
+je objektívne bližšie do triedeného
+
+949
+00:43:58,100 --> 00:44:00,080
+pretože sme pevne niektoré z týchto chýb.
+
+950
+00:44:00,080 --> 00:44:02,047
+>> A teraz, čo mám robiť ďalej?
+
+951
+00:44:02,047 --> 00:44:03,630
+Tak nejako som došiel na koniec zoznamu.
+
+952
+00:44:03,630 --> 00:44:05,680
+Zdalo sa, že som fixné
+všetky chyby, ale nie.
+
+953
+00:44:05,680 --> 00:44:08,510
+Vzhľadom k tomu v tomto prípade, niektoré čísla
+mohol bublala bližšie
+
+954
+00:44:08,510 --> 00:44:10,410
+do iných čísel, ktoré
+sú stále mimo prevádzky.
+
+955
+00:44:10,410 --> 00:44:12,951
+Takže poďme urobiť to znova, a budem
+Len to v mieste tentoraz.
+
+956
+00:44:12,951 --> 00:44:14,170
+Jeden a tri?
+
+957
+00:44:14,170 --> 00:44:14,720
+Je to fajn.
+
+958
+00:44:14,720 --> 00:44:16,070
+Tri a dve?
+
+959
+00:44:16,070 --> 00:44:17,560
+Samozrejme že nie, tak sa poďme zmeniť.
+
+960
+00:44:17,560 --> 00:44:19,160
+Tak dva, tri.
+
+961
+00:44:19,160 --> 00:44:21,340
+Tri a štyri?
+
+962
+00:44:21,340 --> 00:44:24,370
+A teraz poďme byť len
+Zvlášť tu pedantská.
+
+963
+00:44:24,370 --> 00:44:26,350
+Je to radené?
+
+964
+00:44:26,350 --> 00:44:29,280
+Vy ľudia viem, že to triediť.
+
+965
+00:44:29,280 --> 00:44:30,400
+>> Mal by som skúsiť znova.
+
+966
+00:44:30,400 --> 00:44:31,900
+Takže Olivia navrhuje Aj skúste to znova.
+
+967
+00:44:31,900 --> 00:44:32,530
+Prečo?
+
+968
+00:44:32,530 --> 00:44:35,810
+Pretože počítač nemá
+luxus našich ľudských očí
+
+969
+00:44:35,810 --> 00:44:38,080
+púheho pozrel back-- OK, som urobil.
+
+970
+00:44:38,080 --> 00:44:41,610
+Ako sa počítač určí
+že zoznam je teraz radené?
+
+971
+00:44:41,610 --> 00:44:44,590
+Mechanicky.
+
+972
+00:44:44,590 --> 00:44:47,650
+>> Mal by som prejsť
+ešte raz, a to iba v prípade, I
+
+973
+00:44:47,650 --> 00:44:51,190
+nerobia / nájsť žiadnu chybu môžem
+potom uzavrie ako počítač, jo,
+
+974
+00:44:51,190 --> 00:44:51,980
+sme dobrí ísť.
+
+975
+00:44:51,980 --> 00:44:54,850
+Aby jedna a dve, dve a
+tri, tri a štyri.
+
+976
+00:44:54,850 --> 00:44:58,030
+Teraz môžem konečne povedať, že je
+triedené, pretože som nerobil žiadne zmeny.
+
+977
+00:44:58,030 --> 00:45:01,940
+Teraz to bude chyba a len
+Ak by som hlúpy, počítač,
+
+978
+00:45:01,940 --> 00:45:05,640
+spýtal sa tie isté otázky znovu
+očakával rôzne odpovede.
+
+979
+00:45:05,640 --> 00:45:07,110
+By sa nemalo stať.
+
+980
+00:45:07,110 --> 00:45:08,600
+>> A tak teraz je zoradený zoznam.
+
+981
+00:45:08,600 --> 00:45:12,630
+Bohužiaľ, doba behu
+Tento algoritmus je tiež N druhú.
+
+982
+00:45:12,630 --> 00:45:13,130
+Prečo?
+
+983
+00:45:13,130 --> 00:45:19,520
+Pretože máte n čísel, a vo
+najhoršom prípade budete musieť presunúť n čísel
+
+984
+00:45:19,520 --> 00:45:23,637
+n časy, pretože musíte ísť ďalej
+späť skontrolovať a prípadne opraviť
+
+985
+00:45:23,637 --> 00:45:24,220
+tieto čísla.
+
+986
+00:45:24,220 --> 00:45:26,280
+A môžeme urobiť viac
+formálna analýza, taky.
+
+987
+00:45:26,280 --> 00:45:29,530
+>> Tak to je všetko, povedať, že sme si vziať
+tri rôzne prístupy, jeden
+
+988
+00:45:29,530 --> 00:45:32,210
+z nich okamžite intuitívne
+off netopiera z Ben
+
+989
+00:45:32,210 --> 00:45:35,170
+mojej navrhované vloženie
+radiť k tomuto
+
+990
+00:45:35,170 --> 00:45:38,540
+kde ste druh strácať zo zreteľa
+les pre stromy spočiatku.
+
+991
+00:45:38,540 --> 00:45:41,760
+Ale potom, keď idete o krok späť,
+voila, máme fixné triedenie predstavu.
+
+992
+00:45:41,760 --> 00:45:43,824
+Takže toto je, trúfam tvrdiť,
+nižšiu úroveň snáď
+
+993
+00:45:43,824 --> 00:45:45,740
+ako niektorí z tých, ostatné
+algoritmy, ale poďme
+
+994
+00:45:45,740 --> 00:45:48,550
+uvidíme, či nemôžeme predstaviť
+Tieto prostredníctvom tohto.
+
+995
+00:45:48,550 --> 00:45:51,450
+>> Takže to je nejaký pekný
+softvér, ktorý niekto
+
+996
+00:45:51,450 --> 00:45:56,110
+napísal pomocou farebné pruhy, aby to
+robiť nasledujúce pre nás.
+
+997
+00:45:56,110 --> 00:45:57,736
+Každý z týchto tyčí predstavuje číslo.
+
+998
+00:45:57,736 --> 00:46:00,026
+Vyššia je stĺpec, tým väčšia
+číslo, menšie bar,
+
+999
+00:46:00,026 --> 00:46:00,990
+čím menší je počet.
+
+1000
+00:46:00,990 --> 00:46:05,880
+Takže v ideálnom prípade chceme krásny pyramídu
+kde začína malý a dostane veľký,
+
+1001
+00:46:05,880 --> 00:46:08,330
+a to by znamenalo, že
+Tieto tyče sú radené.
+
+1002
+00:46:08,330 --> 00:46:11,200
+Takže ja idem dopredu a zvoliť,
+Napríklad, Benov algoritmus
+
+1003
+00:46:11,200 --> 00:46:13,990
+first-- výber triediť.
+
+1004
+00:46:13,990 --> 00:46:16,220
+>> A všimnite si, čo robí.
+
+1005
+00:46:16,220 --> 00:46:18,670
+Spôsob, akým ste sa rozhodli
+vizualizovať tento algoritmus
+
+1006
+00:46:18,670 --> 00:46:22,090
+je, že rovnako ako ja
+prechádzal mojom zozname,
+
+1007
+00:46:22,090 --> 00:46:24,710
+Tento program je chôdza
+prostredníctvom svojho zoznamu čísiel,
+
+1008
+00:46:24,710 --> 00:46:28,160
+zvýraznenie v ružovej každého
+Číslo že to pozerá.
+
+1009
+00:46:28,160 --> 00:46:32,360
+A čo sa stane teraz?
+
+1010
+00:46:32,360 --> 00:46:35,154
+>> Najmenšie číslo, ktoré
+I alebo Ben našiel náhle
+
+1011
+00:46:35,154 --> 00:46:36,820
+sa presunie na začiatok zoznamu.
+
+1012
+00:46:36,820 --> 00:46:40,037
+A všimnite si urobili vypudiť
+číslo, ktoré tam bol,
+
+1013
+00:46:40,037 --> 00:46:41,120
+a to je úplne v poriadku.
+
+1014
+00:46:41,120 --> 00:46:42,600
+Nedostal som sa do tejto úrovni detailu.
+
+1015
+00:46:42,600 --> 00:46:44,308
+Ale musíme dať
+toto číslo niekde,
+
+1016
+00:46:44,308 --> 00:46:47,775
+tak sme ho presťahovali do
+otvorené miesto, ktoré bolo vytvorené.
+
+1017
+00:46:47,775 --> 00:46:49,900
+Tak idem na urýchlenie tohto
+up, pretože inak
+
+1018
+00:46:49,900 --> 00:46:51,871
+sa stáva veľmi únavné rýchlo.
+
+1019
+00:46:51,871 --> 00:46:55,800
+
+1020
+00:46:55,800 --> 00:46:58,600
+Animácia speed-- tam ideme.
+
+1021
+00:46:58,600 --> 00:47:01,850
+Takže teraz Rovnaký princíp
+Bol som uplatňujú, ale vy
+
+1022
+00:47:01,850 --> 00:47:06,540
+môže začať cítiť algoritmus, ak sa
+vôle, alebo to vidieť trochu jasnejšie.
+
+1023
+00:47:06,540 --> 00:47:13,190
+A tento algoritmus má za následok
+výbere ďalšieho najmenší prvok,
+
+1024
+00:47:13,190 --> 00:47:16,422
+takže budete začať
+vidieť to rozbehnúť na ľavej strane.
+
+1025
+00:47:16,422 --> 00:47:19,130
+A na každej iterácii, ako som
+navrhuje, to robí trochu menej práce.
+
+1026
+00:47:19,130 --> 00:47:21,921
+Nemusí ísť celú cestu
+späť na ľavý koniec zoznamu,
+
+1027
+00:47:21,921 --> 00:47:23,900
+pretože už
+pozná tie sú radené.
+
+1028
+00:47:23,900 --> 00:47:28,129
+Takže to trochu pocit, ako by to
+zrýchľuje, aj keď každý krok je
+
+1029
+00:47:28,129 --> 00:47:29,420
+pričom rovnaké množstvo času.
+
+1030
+00:47:29,420 --> 00:47:31,600
+Je tu len menej krokov zostávajúce.
+
+1031
+00:47:31,600 --> 00:47:35,240
+A teraz sa môžete trochu cítiť
+Algoritmus vyčistenie jej koniec,
+
+1032
+00:47:35,240 --> 00:47:37,040
+a naozaj teraz je to triediť.
+
+1033
+00:47:37,040 --> 00:47:41,620
+>> Takže triedenie priamym vkladaním je všetko hotové.
+
+1034
+00:47:41,620 --> 00:47:43,600
+Musím znovu náhodne poľa.
+
+1035
+00:47:43,600 --> 00:47:45,940
+A všimnite si môžem len
+udržiavať randomizing to,
+
+1036
+00:47:45,940 --> 00:47:50,630
+a dostaneme aproximáciu
+rovnaký prístup, vloženie sort.
+
+1037
+00:47:50,630 --> 00:47:55,050
+Nechaj ma to spomaliť až sem.
+
+1038
+00:47:55,050 --> 00:47:56,915
+Začnime že v priebehu.
+
+1039
+00:47:56,915 --> 00:47:57,414
+Prestať.
+
+1040
+00:47:57,414 --> 00:48:00,662
+
+1041
+00:48:00,662 --> 00:48:02,410
+>> Poďme preskočiť štyri.
+
+1042
+00:48:02,410 --> 00:48:03,200
+Tam sme ísť.
+
+1043
+00:48:03,200 --> 00:48:04,190
+Náhodne oni poľa.
+
+1044
+00:48:04,190 --> 00:48:05,555
+A tu sme go-- triedenie priamym vkladaním.
+
+1045
+00:48:05,555 --> 00:48:10,260
+
+1046
+00:48:10,260 --> 00:48:12,800
+Hrať.
+
+1047
+00:48:12,800 --> 00:48:17,280
+Všimnite si, že to zaobchádzanie s jednotlivým
+prvok narazí hneď,
+
+1048
+00:48:17,280 --> 00:48:20,282
+ale v prípade, že patrí do
+zlé oznámenia miesta
+
+1049
+00:48:20,282 --> 00:48:21,740
+všetky práce, ktorá má diať.
+
+1050
+00:48:21,740 --> 00:48:24,700
+Musíme sa držať presúva viac
+a ďalšie prvky, aby sa vytvoril priestor
+
+1051
+00:48:24,700 --> 00:48:27,340
+Pre jedného chceme zaviesť.
+
+1052
+00:48:27,340 --> 00:48:30,740
+>> Takže sme sa zameraním na
+ľavý koniec jediného zoznamu.
+
+1053
+00:48:30,740 --> 00:48:34,460
+Všimnite si, sme ani my vyzeral at--
+ešte zvýraznené v ružovej čokoľvek
+
+1054
+00:48:34,460 --> 00:48:35,610
+doprava.
+
+1055
+00:48:35,610 --> 00:48:38,180
+Práve sme sa zaoberajú
+problémy, ako sme ísť,
+
+1056
+00:48:38,180 --> 00:48:40,430
+ale my sme vytvoriť veľa
+pracovať pre seba stále.
+
+1057
+00:48:40,430 --> 00:48:44,410
+A tak ak by sme toto urýchliť
+Teraz ísť do dokončenia,
+
+1058
+00:48:44,410 --> 00:48:46,210
+má iný pocit na to naozaj.
+
+1059
+00:48:46,210 --> 00:48:50,150
+Je to len so zameraním na ľavom konci, ale
+robí trochu viac práce ako needed--
+
+1060
+00:48:50,150 --> 00:48:53,230
+druh vyhladzovanie vecí
+cez, napravuješ,
+
+1061
+00:48:53,230 --> 00:48:58,350
+ale nakoniec zaoberajúce sa
+každý prvok jeden po druhom
+
+1062
+00:48:58,350 --> 00:49:07,740
+až sa dostaneme do dobre the--, my
+Všetci vieme, ako to skončí,
+
+1063
+00:49:07,740 --> 00:49:09,700
+takže je to trochu nezaujatý možná.
+
+1064
+00:49:09,700 --> 00:49:12,830
+>> Ale Zoznam v end--
+spoiler-- sa bude triediť.
+
+1065
+00:49:12,830 --> 00:49:15,300
+Takže poďme sa pozrieť na jeden posledný.
+
+1066
+00:49:15,300 --> 00:49:16,840
+Nemôžeme len tak preskočiť teraz.
+
+1067
+00:49:16,840 --> 00:49:18,000
+Už tam skoro sme.
+
+1068
+00:49:18,000 --> 00:49:19,980
+Dva ísť, kto ísť.
+
+1069
+00:49:19,980 --> 00:49:22,680
+A voila.
+
+1070
+00:49:22,680 --> 00:49:23,450
+Výborne.
+
+1071
+00:49:23,450 --> 00:49:27,220
+>> Takže teraz poďme urobiť jednu posledný,
+re-randomizing s bublinou druhu.
+
+1072
+00:49:27,220 --> 00:49:31,690
+A všimnite si tu, zvlášť keď som ho spomaliť
+dole, to sa udržať znášať prejsť.
+
+1073
+00:49:31,690 --> 00:49:36,830
+Nevšimnúť to jednoducho robí po dvojiciach
+comparisons-- druh miestnych riešení.
+
+1074
+00:49:36,830 --> 00:49:39,050
+Ale akonáhle sa dostaneme do
+koniec zoznamu v ružovej,
+
+1075
+00:49:39,050 --> 00:49:40,690
+čo sa muselo stať znova?
+
+1076
+00:49:40,690 --> 00:49:44,539
+
+1077
+00:49:44,539 --> 00:49:46,830
+Jo, to bude musieť
+začať znovu, pretože to len
+
+1078
+00:49:46,830 --> 00:49:49,870
+Pevné párové chyby.
+
+1079
+00:49:49,870 --> 00:49:53,120
+A to by mohol odhaliť ešte ďalšie.
+
+1080
+00:49:53,120 --> 00:49:58,950
+A tak keď sa toto urýchliť, budete
+vidieť, že, rovnako ako názov napovedá,
+
+1081
+00:49:58,950 --> 00:50:01,870
+menšie elements-- alebo skôr,
+väčšie elements-- začínajú
+
+1082
+00:50:01,870 --> 00:50:03,740
+bublať až na vrchol, ak chcete.
+
+1083
+00:50:03,740 --> 00:50:07,380
+A menšie prvky sú
+začína bublať dole doľava.
+
+1084
+00:50:07,380 --> 00:50:10,780
+A vskutku, to je druh
+Vizuálny efekt rovnako.
+
+1085
+00:50:10,780 --> 00:50:17,150
+A tak to bude skončiť dokončovacie práce
+vo veľmi podobným spôsobom, taky.
+
+1086
+00:50:17,150 --> 00:50:19,160
+>> Nemáme na bývanie
+na tento konkrétny jeden.
+
+1087
+00:50:19,160 --> 00:50:21,010
+Dovoľ mi otvoriť to teraz taky.
+
+1088
+00:50:21,010 --> 00:50:24,040
+Je tu niekoľko ďalších triediace algoritmy
+vo svete, málo z nich
+
+1089
+00:50:24,040 --> 00:50:25,580
+Tu sú zachytené.
+
+1090
+00:50:25,580 --> 00:50:29,960
+A to najmä pre študentov, ktorí nie sú
+nutne vizuálny alebo matematické,
+
+1091
+00:50:29,960 --> 00:50:31,930
+ako tomu bolo predtým, môžeme
+Tiež to audially
+
+1092
+00:50:31,930 --> 00:50:34,210
+ak budeme spájať zvuk s tým.
+
+1093
+00:50:34,210 --> 00:50:36,990
+A len tak pre zábavu, tu je
+Niekoľko rôznych algoritmov,
+
+1094
+00:50:36,990 --> 00:50:40,950
+a jeden z nich, najmä ste
+bude všimnúť, sa nazýva "triedenie zlučovaním."
+
+1095
+00:50:40,950 --> 00:50:43,250
+>> Je to vlastne zásadne
+lepší algoritmus,
+
+1096
+00:50:43,250 --> 00:50:45,860
+tak, aby zlúčiť druh, jedným z
+tie sa chystáte vidieť,
+
+1097
+00:50:45,860 --> 00:50:49,170
+Nie je poriadok n druhú.
+
+1098
+00:50:49,170 --> 00:50:57,280
+Je to v poriadku n-krát logaritmu
+n, čo je v skutočnosti menší, a teda
+
+1099
+00:50:57,280 --> 00:50:58,940
+rýchlejšie ako ostatné tri.
+
+1100
+00:50:58,940 --> 00:51:00,670
+A je tu ďalší pár
+tie hlúpe, že uvidíme.
+
+1101
+00:51:00,670 --> 00:51:01,933
+>> Tak ideme na to s nejakým zvukom.
+
+1102
+00:51:01,933 --> 00:51:06,620
+
+1103
+00:51:06,620 --> 00:51:10,490
+To je triedenie priamym vkladaním, takže opäť
+je to len do činenia s prvkami
+
+1104
+00:51:10,490 --> 00:51:13,420
+ako prídu.
+
+1105
+00:51:13,420 --> 00:51:17,180
+To je bublina triediť, takže je to
+vzhľadom im párov naraz.
+
+1106
+00:51:17,180 --> 00:51:22,030
+
+1107
+00:51:22,030 --> 00:51:24,490
+A opäť najväčšími elementy
+vyviera až na vrchol.
+
+1108
+00:51:24,490 --> 00:51:38,098
+
+1109
+00:51:38,098 --> 00:51:41,710
+>> Ďalší na rade výber triediť.
+
+1110
+00:51:41,710 --> 00:51:45,420
+To je Benov algoritmus, kde
+Znovu on výberom iteratívne
+
+1111
+00:51:45,420 --> 00:51:46,843
+druhý najmenší prvok.
+
+1112
+00:51:46,843 --> 00:51:49,801
+
+1113
+00:51:49,801 --> 00:51:53,900
+A opäť, teraz si môžete skutočne počuť, že
+to urýchliť, ale len do tej miery,
+
+1114
+00:51:53,900 --> 00:51:58,230
+ako to robí menej a menej
+práca na každom opakovaní.
+
+1115
+00:51:58,230 --> 00:52:04,170
+To je rýchlejšie jedno, triedenie zlučovaním,
+ktorý je triedenie zhluky čísel
+
+1116
+00:52:04,170 --> 00:52:05,971
+dohromady a potom ich kombinovať.
+
+1117
+00:52:05,971 --> 00:52:07,720
+Takže look-- ľavý
+polovica už je zoradený.
+
+1118
+00:52:07,720 --> 00:52:14,165
+>> Teraz je to triedenie pravú polovicu, a
+Teraz to bude skombinovať do jedného.
+
+1119
+00:52:14,165 --> 00:52:19,160
+To je niečo, čo nazýva "Gnome sort."
+
+1120
+00:52:19,160 --> 00:52:23,460
+A môžete trochu vidieť, že
+to tam a späť,
+
+1121
+00:52:23,460 --> 00:52:27,950
+ktorým sa práca trochu tu a
+že pred tým, než pokračuje do novej práce.
+
+1122
+00:52:27,950 --> 00:52:32,900
+
+1123
+00:52:32,900 --> 00:52:33,692
+A to je všetko.
+
+1124
+00:52:33,692 --> 00:52:36,400
+Je tu iný druh, ktorý je
+naozaj len pre akademické účely,
+
+1125
+00:52:36,400 --> 00:52:40,980
+volal "hlúpy druh", ktorý berie
+vaše dáta, triedi to náhodne,
+
+1126
+00:52:40,980 --> 00:52:43,350
+a skontroluje, ak je zoradené.
+
+1127
+00:52:43,350 --> 00:52:47,880
+A ak to tak nie je, to re-triedi ho
+náhodne, skontroluje, či je to triedené,
+
+1128
+00:52:47,880 --> 00:52:49,440
+a ak nie, opakuje.
+
+1129
+00:52:49,440 --> 00:52:52,660
+A teoreticky, pravdepodobnostne
+Tým sa dokončí,
+
+1130
+00:52:52,660 --> 00:52:54,140
+ale po celkom dosť času.
+
+1131
+00:52:54,140 --> 00:52:56,930
+Nie je to najviac
+účinné algoritmov.
+
+1132
+00:52:56,930 --> 00:53:02,550
+Takže akékoľvek otázky týkajúce sa tých,
+Konkrétne algoritmy alebo čokoľvek
+
+1133
+00:53:02,550 --> 00:53:04,720
+vzťahujúce sa tam taky?
+
+1134
+00:53:04,720 --> 00:53:09,430
+>> Dobre, poďme teraz šprýmař oddelene čo všetko
+Tieto linky sú, že som bol kreslenie
+
+1135
+00:53:09,430 --> 00:53:15,090
+a to, čo som za predpokladu, že počítač
+môže robiť pod kapotou.
+
+1136
+00:53:15,090 --> 00:53:18,650
+Povedal by som, že všetky z týchto čísel
+Stále drawing-- oni potrebujú dostať
+
+1137
+00:53:18,650 --> 00:53:21,330
+uložené niekde v pamäti.
+
+1138
+00:53:21,330 --> 00:53:24,130
+Budeme sa zbaviť toho chlapa teraz taky.
+
+1139
+00:53:24,130 --> 00:53:30,110
+>> Takže kus v pamäti
+computer-- takže RAM DIMM je
+
+1140
+00:53:30,110 --> 00:53:35,480
+to, čo sme hľadali včera, dual
+inline memory module-- vyzerá takto.
+
+1141
+00:53:35,480 --> 00:53:39,370
+A každý z týchto malých čiernych čipov
+je nejaký počet bajtov, typicky.
+
+1142
+00:53:39,370 --> 00:53:44,380
+A potom zlaté kolíky sú rovnako ako
+drôty, ktoré ju pripojiť k počítaču,
+
+1143
+00:53:44,380 --> 00:53:47,521
+a zelený kremík doska je jednoducho
+čo drží všetko pohromade.
+
+1144
+00:53:47,521 --> 00:53:48,770
+Takže čo to vlastne znamená?
+
+1145
+00:53:48,770 --> 00:53:53,180
+Keby som druh nakresliť rovnaký obrázok,
+Predpokladajme pre jednoduchosť
+
+1146
+00:53:53,180 --> 00:53:55,280
+že tento DIMM, dual
+inline pamäťový modul,
+
+1147
+00:53:55,280 --> 00:54:00,530
+Je jedno GB pamäte RAM, jeden gigabajt
+pamäť, ktorá je, koľko bytov celkom?
+
+1148
+00:54:00,530 --> 00:54:02,100
+Jeden gigabajt je to, koľko bytov?
+
+1149
+00:54:02,100 --> 00:54:04,860
+
+1150
+00:54:04,860 --> 00:54:06,030
+Viac ako.
+
+1151
+00:54:06,030 --> 00:54:09,960
+1124 je kíl, 1000.
+
+1152
+00:54:09,960 --> 00:54:11,730
+Mega je milión.
+
+1153
+00:54:11,730 --> 00:54:14,570
+Giga je miliarda.
+
+1154
+00:54:14,570 --> 00:54:15,070
+>> Klamem?
+
+1155
+00:54:15,070 --> 00:54:16,670
+Môžeme dokonca čítať etiketu?
+
+1156
+00:54:16,670 --> 00:54:19,920
+To je vlastne 128
+GB, takže je to viac.
+
+1157
+00:54:19,920 --> 00:54:22,130
+Ale budeme predstierať, že toto
+Je len jeden gigabajt.
+
+1158
+00:54:22,130 --> 00:54:25,640
+Takže to znamená, že je o miliardu
+bajtov pamäte k dispozícii pre mňa
+
+1159
+00:54:25,640 --> 00:54:29,770
+alebo 8 miliárd bitov, ale ideme
+hovoriť, pokiaľ ide o bytoch teraz,
+
+1160
+00:54:29,770 --> 00:54:30,750
+hýbať sa vpred.
+
+1161
+00:54:30,750 --> 00:54:36,330
+>> Takže to, čo to znamená, že je to
+jeden bajt, je to ďalší bajt,
+
+1162
+00:54:36,330 --> 00:54:38,680
+Ide o ďalší bajt,
+a keby sme naozaj chceli
+
+1163
+00:54:38,680 --> 00:54:43,280
+byť konkrétny budeme musieť
+čerpať miliardu malé štvorce.
+
+1164
+00:54:43,280 --> 00:54:44,320
+Ale čo to znamená?
+
+1165
+00:54:44,320 --> 00:54:46,420
+No, dovoľte mi zoom
+na tomto obrázku.
+
+1166
+00:54:46,420 --> 00:54:50,900
+Ak mám niečo, čo vyzerá
+ako je to teraz, to je štyri bajty.
+
+1167
+00:54:50,900 --> 00:54:53,710
+>> A tak som mohol dať štyri čísla tu.
+
+1168
+00:54:53,710 --> 00:54:54,990
+Raz dva tri štyri.
+
+1169
+00:54:54,990 --> 00:55:00,170
+Alebo by som mohol dať štyri písmená alebo symboly.
+
+1170
+00:55:00,170 --> 00:55:02,620
+"Hej!" môže ísť priamo tam,
+pretože každý z listov,
+
+1171
+00:55:02,620 --> 00:55:04,370
+sme diskutovali skôr,
+by mohol byť zastúpený
+
+1172
+00:55:04,370 --> 00:55:06,650
+s ôsmimi bitov alebo ASCII alebo byte.
+
+1173
+00:55:06,650 --> 00:55:09,370
+Takže inými slovami, môžete
+dať 8 miliárd veci vo vnútri
+
+1174
+00:55:09,370 --> 00:55:11,137
+táto jedna palica pamäte.
+
+1175
+00:55:11,137 --> 00:55:14,345
+A teraz čo to znamená dať veci späť
+sa chrbtom v pamäti takto?
+
+1176
+00:55:14,345 --> 00:55:17,330
+To je to, čo programátor
+by sa nazvať "pole."
+
+1177
+00:55:17,330 --> 00:55:21,250
+V počítačovom programe, si nemyslím, že
+o hardvérom, samy o sebe.
+
+1178
+00:55:21,250 --> 00:55:24,427
+Ty jednoducho myslieť na seba ako vlastnenie
+Prístup k celkovo o miliarde bajtov
+
+1179
+00:55:24,427 --> 00:55:26,010
+a môžete čo chcete s ním.
+
+1180
+00:55:26,010 --> 00:55:27,880
+Ale pre pohodlie
+je všeobecne užitočné
+
+1181
+00:55:27,880 --> 00:55:31,202
+aby sa vaša pamäť právo
+vedľa seba, ako to.
+
+1182
+00:55:31,202 --> 00:55:33,660
+Takže keď som sa priblížiť na tohle--
+pretože my rozhodne nebudeme
+
+1183
+00:55:33,660 --> 00:55:39,310
+čerpať miliardy trochu squares--
+Dajme tomu, že táto doska predstavuje
+
+1184
+00:55:39,310 --> 00:55:40,610
+že palicu pamäti hneď.
+
+1185
+00:55:40,610 --> 00:55:43,800
+A ja budem len čerpať toľko ako my
+Značka skončí mi dáva sem.
+
+1186
+00:55:43,800 --> 00:55:46,420
+
+1187
+00:55:46,420 --> 00:55:52,300
+Takže teraz máme palicu
+pamäte na doske
+
+1188
+00:55:52,300 --> 00:55:56,400
+ktorý má jeden, dva, tri, štyri, päť,
+šesť, jeden, dva, tri, štyri, päť, šesť,
+
+1189
+00:55:56,400 --> 00:56:01,130
+siedmej takže 42 bajtov
+pamäť na celkovú obrazovky.
+
+1190
+00:56:01,130 --> 00:56:01,630
+Ďakujem.
+
+1191
+00:56:01,630 --> 00:56:02,838
+Áno, urobil môj aritmetický pravdu.
+
+1192
+00:56:02,838 --> 00:56:05,120
+tu tak 42 bajtov pamäte.
+
+1193
+00:56:05,120 --> 00:56:06,660
+Takže čo to vlastne znamená?
+
+1194
+00:56:06,660 --> 00:56:09,830
+No, počítačový programátor
+by v skutočnosti všeobecne
+
+1195
+00:56:09,830 --> 00:56:12,450
+myslíte o tejto pamäti ako adresovať.
+
+1196
+00:56:12,450 --> 00:56:16,630
+Inými slovami, každý z nich
+umiestnenia v pamäti, v hardvéru,
+
+1197
+00:56:16,630 --> 00:56:18,030
+má jedinečnú adresu.
+
+1198
+00:56:18,030 --> 00:56:22,020
+>> Nie je to tak zložité, ako jeden Brattle
+Square, Cambridge, Mass., 02138.
+
+1199
+00:56:22,020 --> 00:56:23,830
+Namiesto toho, je to len číslo.
+
+1200
+00:56:23,830 --> 00:56:27,930
+To je byte číslo nula, to je
+jeden, to je dve, to je tri,
+
+1201
+00:56:27,930 --> 00:56:30,327
+a to je 41.
+
+1202
+00:56:30,327 --> 00:56:30,910
+Počkaj minútu.
+
+1203
+00:56:30,910 --> 00:56:32,510
+Myslel som, že som povedal 42 pred chvíľou.
+
+1204
+00:56:32,510 --> 00:56:35,050
+
+1205
+00:56:35,050 --> 00:56:37,772
+Začal som počítať od nuly,
+takže je vlastne správne.
+
+1206
+00:56:37,772 --> 00:56:40,980
+Teraz nemáme na to skutočne čerpať
+ako mriežka, a pokiaľ ju nakresliť ako mriežka
+
+1207
+00:56:40,980 --> 00:56:43,520
+Myslím, že sa veci v skutočnosti
+dostať trochu zavádzajúce.
+
+1208
+00:56:43,520 --> 00:56:46,650
+Čo programátor by,
+v jeho vlastnej mysli,
+
+1209
+00:56:46,650 --> 00:56:50,310
+všeobecne myslieť na to
+Pamäť ako je rovnako ako páska,
+
+1210
+00:56:50,310 --> 00:56:53,340
+ako kus krycou páskou
+že jednoducho pokračuje ďalej a ďalej navždy
+
+1211
+00:56:53,340 --> 00:56:54,980
+alebo kým vám dôjdu pamäte.
+
+1212
+00:56:54,980 --> 00:56:59,200
+Takže častejšie spôsob, ako čerpať
+a len premýšľať o pamäti
+
+1213
+00:56:59,200 --> 00:57:03,710
+by sa, že je to bajt nula, jedna,
+dva, tri, a potom bodka, bodka, bodka.
+
+1214
+00:57:03,710 --> 00:57:07,650
+A máš celkom 42 takých bytov, a to aj
+aj keď fyzicky mohlo by to v skutočnosti
+
+1215
+00:57:07,650 --> 00:57:09,480
+byť niečo viac takhle.
+
+1216
+00:57:09,480 --> 00:57:12,850
+>> Takže ak si teraz myslí vašich
+pamäť, pretože to, rovnako ako páska,
+
+1217
+00:57:12,850 --> 00:57:17,640
+to je to, čo programátor znovu
+by vyžadovalo rad pamäte.
+
+1218
+00:57:17,640 --> 00:57:20,660
+A keď chcete skutočne uložiť
+niečo v pamäti počítača,
+
+1219
+00:57:20,660 --> 00:57:23,290
+budete všeobecne robiť uloženie vecí
+back-to-back back-to-back.
+
+1220
+00:57:23,290 --> 00:57:25,010
+Takže sme hovorili o číslach.
+
+1221
+00:57:25,010 --> 00:57:30,880
+A keď som chcel riešiť problémy
+rovnako ako štyri, jeden, tri, dva,
+
+1222
+00:57:30,880 --> 00:57:33,820
+aj keď len som bol kreslenie
+len čísla štyri, jeden, tri,
+
+1223
+00:57:33,820 --> 00:57:39,490
+dva na palube, by počítač
+Naozaj majú toto nastavenie do pamäte.
+
+1224
+00:57:39,490 --> 00:57:43,347
+>> A čo by bolo vedľa
+dva v pamäti počítača?
+
+1225
+00:57:43,347 --> 00:57:44,680
+No, nie je odpoveď na túto otázku.
+
+1226
+00:57:44,680 --> 00:57:45,770
+My naozaj neviem.
+
+1227
+00:57:45,770 --> 00:57:48,200
+A tak dlho, kým
+Počítač nepotrebuje,
+
+1228
+00:57:48,200 --> 00:57:51,440
+to nemusí starať, čo je ďalší
+s číslami, že sa zaujíma o.
+
+1229
+00:57:51,440 --> 00:57:55,130
+A keď som skôr povedal, že v počítači
+môže sa iba na jednej adrese v čase,
+
+1230
+00:57:55,130 --> 00:57:56,170
+To je druh prečo.
+
+1231
+00:57:56,170 --> 00:57:59,490
+>> Nie na rozdiel od záznamu
+prehrávačom a čítacia hlava
+
+1232
+00:57:59,490 --> 00:58:03,030
+budú môcť prezrieť určitá len
+Drážka vo fyzickom zázname old-school
+
+1233
+00:58:03,030 --> 00:58:06,500
+v čase, obdobne
+môže počítač vďaka
+
+1234
+00:58:06,500 --> 00:58:09,810
+k jeho CPU a jeho
+Intel inštrukčná sada,
+
+1235
+00:58:09,810 --> 00:58:12,480
+medzi ktorého pokyn
+sa číta z pamäte
+
+1236
+00:58:12,480 --> 00:58:15,590
+alebo uložiť do memory--
+Počítač môže len pozerať
+
+1237
+00:58:15,590 --> 00:58:19,210
+na jednom mieste pri time--
+niekedy aj ich kombinácie,
+
+1238
+00:58:19,210 --> 00:58:21,770
+ale naozaj len jedno miesto naraz.
+
+1239
+00:58:21,770 --> 00:58:24,770
+Takže keď sme robili
+tieto rôzne algoritmy,
+
+1240
+00:58:24,770 --> 00:58:28,110
+Nie som len písanie v
+vacuum-- štyri, jeden, tri, dva.
+
+1241
+00:58:28,110 --> 00:58:30,849
+Tieto čísla skutočne patriť
+niekde fyzickej pamäte.
+
+1242
+00:58:30,849 --> 00:58:32,890
+Takže tam sú malinké
+tranzistory alebo nejaký druh
+
+1243
+00:58:32,890 --> 00:58:35,840
+elektroniky pod
+kapucňa ukladanie týchto hodnôt.
+
+1244
+00:58:35,840 --> 00:58:40,460
+>> A celkom, koľko bitov
+podieľajú práve teraz, len aby bolo jasno?
+
+1245
+00:58:40,460 --> 00:58:45,580
+Tak toto je štyri byty, alebo
+Teraz je to 32 bitov celkom.
+
+1246
+00:58:45,580 --> 00:58:49,280
+Takže tam sú vlastne 32 nuly a
+Tí tvoriaci tieto štyri veci.
+
+1247
+00:58:49,280 --> 00:58:52,070
+Tam je ešte tu, ale
+Znovu sme sa nestarajú o to.
+
+1248
+00:58:52,070 --> 00:58:55,120
+>> Takže teraz poďme položiť ďalšie
+Otázkou pomocou pamäte,
+
+1249
+00:58:55,120 --> 00:58:57,519
+preto, že na konci
+dňa je v rozpore.
+
+1250
+00:58:57,519 --> 00:59:00,310
+Bez ohľadu na to, čo by sme mohli robiť s
+počítač, na konci dňa
+
+1251
+00:59:00,310 --> 00:59:02,560
+hardvér je stále
+Rovnaký pod kapotou.
+
+1252
+00:59:02,560 --> 00:59:04,670
+Ako by som ukladať slovo tu?
+
+1253
+00:59:04,670 --> 00:59:09,710
+No, slovo v počítači, ako
+"Hej!" by boli uložené, rovnako ako to.
+
+1254
+00:59:09,710 --> 00:59:12,300
+A ak by ste chceli dlhšiu
+Slovo, môžete jednoducho
+
+1255
+00:59:12,300 --> 00:59:19,120
+prepísať, že aj niečo povedať
+ako "ahoj" a obchod, ktorý tu.
+
+1256
+00:59:19,120 --> 00:59:23,930
+>> A tak aj tu to contiguousness
+je v skutočnosti výhodou,
+
+1257
+00:59:23,930 --> 00:59:26,530
+pretože počítač môže len
+čítať sprava doľava.
+
+1258
+00:59:26,530 --> 00:59:28,680
+Ale tu je otázka.
+
+1259
+00:59:28,680 --> 00:59:33,480
+V súvislosti s týmto slovom,
+h-e-l-l-o, výkričník,
+
+1260
+00:59:33,480 --> 00:59:38,740
+ako by počítač vedieť, kde je
+Slovo začína a kde slovo končí?
+
+1261
+00:59:38,740 --> 00:59:41,690
+
+1262
+00:59:41,690 --> 00:59:43,800
+V súvislosti s číslami,
+Ako sa počítače
+
+1263
+00:59:43,800 --> 00:59:48,396
+vedieť, ako dlho sled
+Čísla je alebo tam, kde to začína?
+
+1264
+00:59:48,396 --> 00:59:50,270
+No, to ukáže out--
+a nepôjdeme príliš veľa
+
+1265
+00:59:50,270 --> 00:59:54,970
+do tejto úrovne detail--
+Počítače pohybovať veci okolo v pamäti
+
+1266
+00:59:54,970 --> 00:59:57,800
+doslova prostredníctvom týchto adries.
+
+1267
+00:59:57,800 --> 01:00:02,080
+Takže v počítači, ak ste
+písania kódu na uloženie vecí
+
+1268
+01:00:02,080 --> 01:00:05,800
+ako slová, čo ste
+naozaj robia, je písanie
+
+1269
+01:00:05,800 --> 01:00:11,320
+výrazy, ktoré si spomenúť, kde v
+Pamäť počítača sú tieto slová.
+
+1270
+01:00:11,320 --> 01:00:14,370
+Tak ma nechaj robiť veľmi,
+veľmi jednoduchý príklad.
+
+1271
+01:00:14,370 --> 01:00:18,260
+>> Chystám sa ísť dopredu a
+otvárajú jednoduchého textového programu,
+
+1272
+01:00:18,260 --> 01:00:20,330
+a idem k vytvoreniu
+súbor s názvom hello.c.
+
+1273
+01:00:20,330 --> 01:00:22,849
+Väčšina týchto informácií sme
+nepôjde do veľmi podrobne,
+
+1274
+01:00:22,849 --> 01:00:25,140
+ale budem písať
+Program v tomto jazyku,
+
+1275
+01:00:25,140 --> 01:00:31,140
+C. To je oveľa viac zastrašujúce,
+Tvrdím, než Scratch,
+
+1276
+01:00:31,140 --> 01:00:32,490
+ale je to veľmi podobné v duchu.
+
+1277
+01:00:32,490 --> 01:00:34,364
+V skutočnosti tieto vlnité
+braces-- môžete druh
+
+1278
+01:00:34,364 --> 01:00:37,820
+myslieť na to, čo som práve urobil, pretože to.
+
+1279
+01:00:37,820 --> 01:00:39,240
+>> Ideme na to, v skutočnosti.
+
+1280
+01:00:39,240 --> 01:00:45,100
+Keď zelená vlajka kliknutie
+vykonajte nasledujúce.
+
+1281
+01:00:45,100 --> 01:00:50,210
+Chcem vytlačiť "Dobrý deň."
+
+1282
+01:00:50,210 --> 01:00:51,500
+Takže toto je teraz pseudocode.
+
+1283
+01:00:51,500 --> 01:00:53,000
+Som typ rozmazanie linky.
+
+1284
+01:00:53,000 --> 01:00:56,750
+V jazyku C, tento jazyk hovorím
+o tento riadok print ahoj
+
+1285
+01:00:56,750 --> 01:01:01,940
+v skutočnosti sa stáva "printf" s
+Niektoré zátvorky a bodkočiarku.
+
+1286
+01:01:01,940 --> 01:01:03,480
+>> Ale je to presne rovnaký nápad.
+
+1287
+01:01:03,480 --> 01:01:06,730
+A to veľmi užívateľsky príjemný
+"Pri zelenou vlajkou kliknutí" sa stáva
+
+1288
+01:01:06,730 --> 01:01:10,182
+oveľa viac tajomný "int main neplatné."
+
+1289
+01:01:10,182 --> 01:01:12,890
+A to naozaj nemá mapovanie,
+tak som len tak ignorovať.
+
+1290
+01:01:12,890 --> 01:01:17,210
+Ale zložené zátvorky sú rovnako ako
+zakrivené dieliky takto.
+
+1291
+01:01:17,210 --> 01:01:18,700
+>> Takže si môžete trochu hádať.
+
+1292
+01:01:18,700 --> 01:01:22,357
+Dokonca aj keď ste nikdy predtým naprogramovaný,
+Čo tento program pravdepodobne robiť?
+
+1293
+01:01:22,357 --> 01:01:25,560
+
+1294
+01:01:25,560 --> 01:01:28,000
+Pravdepodobne vytlačí ahoj
+s výkričníkom.
+
+1295
+01:01:28,000 --> 01:01:29,150
+>> Takže poďme to skúsiť.
+
+1296
+01:01:29,150 --> 01:01:30,800
+Chystám sa ho zachrániť.
+
+1297
+01:01:30,800 --> 01:01:34,000
+A to je opäť veľmi
+old school prostredie.
+
+1298
+01:01:34,000 --> 01:01:35,420
+Nemôžem na tlačidlo, nemôžem pretiahnuť.
+
+1299
+01:01:35,420 --> 01:01:36,910
+Musím písať príkazy.
+
+1300
+01:01:36,910 --> 01:01:41,320
+Takže chcem spustiť svoj program, takže
+Mohol som to urobiť, rovnako ako hello.c.
+
+1301
+01:01:41,320 --> 01:01:42,292
+To je súbor som bežal.
+
+1302
+01:01:42,292 --> 01:01:43,500
+Ale počkajte, ja som chýba krok.
+
+1303
+01:01:43,500 --> 01:01:46,470
+Čo urobil hovoríme, je nevyhnutným
+krokom pre jazyk C?
+
+1304
+01:01:46,470 --> 01:01:49,470
+Práve som napísal zdroj
+kód, ale čo k tomu potrebujem?
+
+1305
+01:01:49,470 --> 01:01:50,670
+Jo, musím kompilátora.
+
+1306
+01:01:50,670 --> 01:01:57,670
+Takže na mojom počítači Mac tu, mám
+program s názvom GCC, GNU C kompilátor,
+
+1307
+01:01:57,670 --> 01:02:03,990
+ktorý mi umožňuje robiť tohle-- zákrutu
+môj zdrojový kód do, budeme hovoriť,
+
+1308
+01:02:03,990 --> 01:02:04,930
+strojový kód.
+
+1309
+01:02:04,930 --> 01:02:10,180
+>> A vidím, že
+opäť nasledujúcim spôsobom, tieto
+
+1310
+01:02:10,180 --> 01:02:14,090
+sú nuly a tie, ktoré som práve
+vytvorené z môjho zdrojového kódu,
+
+1311
+01:02:14,090 --> 01:02:15,730
+všetky núl a jednotiek.
+
+1312
+01:02:15,730 --> 01:02:17,770
+A keď chcem spustiť
+my program-- sa to stane
+
+1313
+01:02:17,770 --> 01:02:23,010
+byť nazývaný a.out pre
+historická reasons-- "Dobrý deň."
+
+1314
+01:02:23,010 --> 01:02:24,070
+Aj to môže bežať znovu.
+
+1315
+01:02:24,070 --> 01:02:25,690
+Ahoj ahoj ahoj.
+
+1316
+01:02:25,690 --> 01:02:27,430
+A zdá sa, že pracuje.
+
+1317
+01:02:27,430 --> 01:02:31,000
+>> Ale to znamená, že niekde v mojom
+Pamäť počítača sú slová
+
+1318
+01:02:31,000 --> 01:02:35,279
+h-e-l-l-o, výkričník.
+
+1319
+01:02:35,279 --> 01:02:38,070
+A ukázalo sa, rovnako ako stranou,
+čo je to počítač by typicky
+
+1320
+01:02:38,070 --> 01:02:40,550
+tomu, že vie, kde
+veci začnú a end-- je to
+
+1321
+01:02:40,550 --> 01:02:42,460
+bude klásť zvláštny symbol tady.
+
+1322
+01:02:42,460 --> 01:02:46,064
+A konvencie je umiestniť
+číslo nula na konci slova
+
+1323
+01:02:46,064 --> 01:02:48,230
+takže viete, kde to
+skutočne končí, takže
+
+1324
+01:02:48,230 --> 01:02:52,750
+nevedú vytlačiť viac a viac
+znaky, ako si v skutočnosti v úmysle.
+
+1325
+01:02:52,750 --> 01:02:55,400
+>> Ale stánok s jedlom tu, a to aj
+hoci to je docela tajomný,
+
+1326
+01:02:55,400 --> 01:02:58,140
+je, že to nakoniec
+relatívne jednoduché.
+
+1327
+01:02:58,140 --> 01:03:04,550
+Ste dostali akúsi pásku, prázdne
+Priestor na ktoré môžete písať listy.
+
+1328
+01:03:04,550 --> 01:03:07,150
+Vy proste musíte mať
+Špeciálny symbol, ako je ľubovoľne
+
+1329
+01:03:07,150 --> 01:03:10,316
+číslo nula, aby na konci
+vaše slová tak, aby počítač vie,
+
+1330
+01:03:10,316 --> 01:03:13,410
+oh, mal by som prestať tlače po
+Vidím výkričník.
+
+1331
+01:03:13,410 --> 01:03:16,090
+Vzhľadom k tomu, ďalšia vec, ktorú tu
+je ASCII hodnota nula,
+
+1332
+01:03:16,090 --> 01:03:19,125
+alebo null charakter as
+niekto by sa to nazvať.
+
+1333
+01:03:19,125 --> 01:03:21,500
+Ale je tu trochu problém
+tu a poďme vrátiť
+
+1334
+01:03:21,500 --> 01:03:23,320
+čísel na chvíľu.
+
+1335
+01:03:23,320 --> 01:03:28,720
+Predpokladajme, že mám v skutočnosti,
+majú celý rad čísel,
+
+1336
+01:03:28,720 --> 01:03:30,730
+a predpokladajme, že
+Program píšem je
+
+1337
+01:03:30,730 --> 01:03:34,680
+ako stupeň knihy pre učiteľov
+a učiteľov v triede.
+
+1338
+01:03:34,680 --> 01:03:38,720
+A tento program mu umožňuje
+zadať skóre svojich žiakov
+
+1339
+01:03:38,720 --> 01:03:39,960
+Na vypočúva.
+
+1340
+01:03:39,960 --> 01:03:43,750
+A predpokladám, že študent dostane
+100 na svojom prvom teste, možno
+
+1341
+01:03:43,750 --> 01:03:49,920
+ako 80 na ten budúci, potom
+75, potom 90 na štvrtom teste.
+
+1342
+01:03:49,920 --> 01:03:54,150
+>> Takže v tomto bode príbehu,
+poľa je veľkosti štyri.
+
+1343
+01:03:54,150 --> 01:03:58,470
+Tam je absolútne väčšie množstvo pamäte v
+počítač, ale pole, aby som tak povedal,
+
+1344
+01:03:58,470 --> 01:04:00,350
+je o veľkosti štyri.
+
+1345
+01:04:00,350 --> 01:04:06,060
+Predpokladajme teraz, že učiteľ chce
+priradiť piaty kvíz na triedu.
+
+1346
+01:04:06,060 --> 01:04:08,510
+No, jedna z vecí,
+alebo ona bude musieť robiť
+
+1347
+01:04:08,510 --> 01:04:10,650
+Teraz je uložiť dodatočnú hodnotu tu.
+
+1348
+01:04:10,650 --> 01:04:15,490
+Ale ak pole má učiteľ
+vytvorené v tomto programe je veľkosti pre,
+
+1349
+01:04:15,490 --> 01:04:22,440
+jeden z problému s poľom je, že
+môžete nielen držať pridanie do pamäte.
+
+1350
+01:04:22,440 --> 01:04:26,470
+Vzhľadom k tomu, čo keď iné časti
+Program má slovo "hej" práve tam?
+
+1351
+01:04:26,470 --> 01:04:29,650
+>> Inými slovami, má pamäť môže byť
+použiť na čokoľvek v programe.
+
+1352
+01:04:29,650 --> 01:04:33,250
+A ak sa vopred som zadal, hej,
+Chcem vstup štyroch kvíz skóre,
+
+1353
+01:04:33,250 --> 01:04:34,784
+Môžu ísť tu a tu.
+
+1354
+01:04:34,784 --> 01:04:37,700
+A ak sa náhle zmení svoj názor
+neskôr a že chcem piaty kvíz
+
+1355
+01:04:37,700 --> 01:04:40,872
+skóre, môžete nielen
+dať kamkoľvek budete chcieť,
+
+1356
+01:04:40,872 --> 01:04:42,580
+pretože čo keby to
+Pamäť je používaný
+
+1357
+01:04:42,580 --> 01:04:45,990
+o niečo else-- nejaký iný program
+alebo iné funkcie programu
+
+1358
+01:04:45,990 --> 01:04:46,910
+že vediete?
+
+1359
+01:04:46,910 --> 01:04:50,650
+Takže musíte myslieť dopredu
+Ako chcete uložiť svoje dáta,
+
+1360
+01:04:50,650 --> 01:04:54,480
+pretože teraz si namaľoval
+yourself do digitálneho rohu.
+
+1361
+01:04:54,480 --> 01:04:57,280
+>> Takže učiteľ by mohol miesto
+povedať, kedy písanie programu
+
+1362
+01:04:57,280 --> 01:04:59,360
+pre uloženie jeho alebo jej
+stupňa, viete čo?
+
+1363
+01:04:59,360 --> 01:05:04,180
+Budem požadovať,
+Pri písaní môj program,
+
+1364
+01:05:04,180 --> 01:05:12,070
+že chcem nula, jedna, dva, tri,
+štyri, päť, šesť, osem stupňov celkom.
+
+1365
+01:05:12,070 --> 01:05:15,320
+Tak jeden, dva, tri, štyri,
+päť, šesť, sedem, osem.
+
+1366
+01:05:15,320 --> 01:05:18,612
+Učiteľ môže len niečo málo cez prideliť
+pamäti pri písaní jeho alebo jej program,
+
+1367
+01:05:18,612 --> 01:05:19,570
+a hovoriť, viete čo?
+
+1368
+01:05:19,570 --> 01:05:22,236
+Nikdy nebudem priradiť viac
+ako osem vypočúva v semestri.
+
+1369
+01:05:22,236 --> 01:05:23,130
+To je jednoducho šialené.
+
+1370
+01:05:23,130 --> 01:05:24,470
+Už nikdy prideliť to.
+
+1371
+01:05:24,470 --> 01:05:28,270
+Tak, že tento spôsob on alebo ona má
+Flexibilita pre ukladanie študentské skóre,
+
+1372
+01:05:28,270 --> 01:05:33,010
+rovnako ako 75, 90, a možno jeden navyše, ak
+študent dostal kreditu navyše, 105.
+
+1373
+01:05:33,010 --> 01:05:36,130
+>> Ale v prípade, že učiteľ nikdy
+používa tieto tri medzery,
+
+1374
+01:05:36,130 --> 01:05:38,860
+je tu intuitívne stánok s jedlom tu.
+
+1375
+01:05:38,860 --> 01:05:41,410
+On alebo ona je len plytvanie miestom.
+
+1376
+01:05:41,410 --> 01:05:44,790
+Takže inými slovami, tam je to
+Spoločný kompromis pri programovaní
+
+1377
+01:05:44,790 --> 01:05:48,241
+kde si môžete buď prideliť
+presne toľko, koľko pamäte, ako chcete,
+
+1378
+01:05:48,241 --> 01:05:51,490
+Nahor z nich je, že si výborný
+efficient-- nie ste byť nehospodárne
+
+1379
+01:05:51,490 --> 01:05:54,640
+na all-- ale nevýhoda, z ktorých
+Je čo keď si to rozmyslíte, kedy
+
+1380
+01:05:54,640 --> 01:05:58,780
+pomocou programu, ktorý chcete uložiť
+viac dát, než ste pôvodne zamýšľali.
+
+1381
+01:05:58,780 --> 01:06:03,030
+>> Možné riešenia je, teda,
+napísať svoje programy tak,
+
+1382
+01:06:03,030 --> 01:06:05,605
+že používajú viac pamäte
+než v skutočnosti potrebujú.
+
+1383
+01:06:05,605 --> 01:06:07,730
+Týmto spôsobom si nejdeš
+naraziť na tento problém,
+
+1384
+01:06:07,730 --> 01:06:09,730
+ale tie sú nehospodárne.
+
+1385
+01:06:09,730 --> 01:06:12,960
+A čím viac pamäte váš program používa,
+ako sme diskutovali včera, tým menej
+
+1386
+01:06:12,960 --> 01:06:15,410
+pamäť, ktorá je k dispozícii
+pre iné programy,
+
+1387
+01:06:15,410 --> 01:06:18,790
+tým skôr môže byť váš počítač spomaliť
+dole, pretože virtuálnej pamäte.
+
+1388
+01:06:18,790 --> 01:06:22,670
+A tak ideálnym riešením by mohlo byť to, čo?
+
+1389
+01:06:22,670 --> 01:06:24,610
+>> Under-prideľovanie zdá zlé.
+
+1390
+01:06:24,610 --> 01:06:27,030
+Over-Pridelenie zdá zlé.
+
+1391
+01:06:27,030 --> 01:06:31,120
+Takže to, čo by mohlo byť lepším riešením?
+
+1392
+01:06:31,120 --> 01:06:32,390
+Prerozdelenie.
+
+1393
+01:06:32,390 --> 01:06:33,590
+Byť dynamickejšie.
+
+1394
+01:06:33,590 --> 01:06:37,520
+Nenúťte si vybrať
+priori, na začiatku, čo chcete.
+
+1395
+01:06:37,520 --> 01:06:41,370
+A už vôbec nie viac ako prideliť,
+aby ste neboli nehospodárne.
+
+1396
+01:06:41,370 --> 01:06:45,770
+>> A tak na dosiahnutie tohto cieľa sme
+musieť hodiť túto dátovú štruktúru,
+
+1397
+01:06:45,770 --> 01:06:48,100
+tak povediac, preč.
+
+1398
+01:06:48,100 --> 01:06:51,080
+A tak to, čo programátor
+sa zvyčajne používajú
+
+1399
+01:06:51,080 --> 01:06:55,940
+Je niečo, čo nazýva nie je
+array ale previazaný zoznam.
+
+1400
+01:06:55,940 --> 01:07:00,860
+Inými slovami, on alebo ona bude
+začať premýšľať o ich pamäť
+
+1401
+01:07:00,860 --> 01:07:05,280
+ako bytia druh tvaru, ktorý im
+možno čerpať v nasledujúcom spôsobom.
+
+1402
+01:07:05,280 --> 01:07:08,520
+Ak chcem uložiť jedno číslo
+program-- takže je to september,
+
+1403
+01:07:08,520 --> 01:07:12,600
+Dal som moji študenti kvíz; Chcem
+ukladať prvý kvíz študentov,
+
+1404
+01:07:12,600 --> 01:07:16,220
+a dostali 100 na to-- I
+Chystám sa opýtať môj počítač,
+
+1405
+01:07:16,220 --> 01:07:19,540
+prostredníctvom tohto programu som
+napísané, pre jeden kus pamäte.
+
+1406
+01:07:19,540 --> 01:07:22,570
+A budem ukladať
+Číslo 100 v ňom, a to je všetko.
+
+1407
+01:07:22,570 --> 01:07:24,820
+>> Potom niekoľko týždňov neskôr
+keď som si svoj druhý kvíz,
+
+1408
+01:07:24,820 --> 01:07:27,890
+a je čas písať
+V tomto 90%, idem
+
+1409
+01:07:27,890 --> 01:07:32,129
+požiadať počítač, hej, počítač,
+môžem mať iný kus pamäti?
+
+1410
+01:07:32,129 --> 01:07:34,170
+Bude to, aby mi to
+prázdny kus pamäte.
+
+1411
+01:07:34,170 --> 01:07:39,370
+Chystám sa dať do položky 90,
+ale v mojom programe nejakým spôsobom other--
+
+1412
+01:07:39,370 --> 01:07:42,100
+a nebudeme báť
+syntax pre tohle-- potrebujem
+
+1413
+01:07:42,100 --> 01:07:44,430
+nejako reťaz tieto veci dohromady.
+
+1414
+01:07:44,430 --> 01:07:47,430
+A ja im to reťaz spolu s
+čo vyzerá ako šíp tu.
+
+1415
+01:07:47,430 --> 01:07:50,050
+>> Tretí kvíz, ktorý príde,
+Chystám sa povedať, hej, počítač,
+
+1416
+01:07:50,050 --> 01:07:51,680
+daj mi ešte kus pamäte.
+
+1417
+01:07:51,680 --> 01:07:54,660
+A ja idem dať dole
+čo to bolo, ako 75,
+
+1418
+01:07:54,660 --> 01:07:56,920
+a musím reťazci tejto
+teraz spolu nejako.
+
+1419
+01:07:56,920 --> 01:08:00,290
+Štvrtý kvíz príde, a možno
+to je ku koncu semestra.
+
+1420
+01:08:00,290 --> 01:08:03,140
+A tým bodom môjho programu
+môže byť použitie pamäte
+
+1421
+01:08:03,140 --> 01:08:05,540
+všade, po celom fyzicky.
+
+1422
+01:08:05,540 --> 01:08:08,170
+A tak len pre zábavu, som
+bude kresliť to tam
+
+1423
+01:08:08,170 --> 01:08:11,260
+quiz-- som zabudol, aké to bolo; ja
+že možno 80 alebo something--
+
+1424
+01:08:11,260 --> 01:08:12,500
+cesta sem.
+
+1425
+01:08:12,500 --> 01:08:15,920
+>> Ale to je v poriadku, pretože obrazovo
+Budem čerpať tento riadok.
+
+1426
+01:08:15,920 --> 01:08:19,063
+Inými slovami, v skutočnosti,
+v hardvéru počítača,
+
+1427
+01:08:19,063 --> 01:08:20,979
+Prvý skóre mohlo
+skončiť tu, pretože je to
+
+1428
+01:08:20,979 --> 01:08:22,529
+hneď na začiatku semestra.
+
+1429
+01:08:22,529 --> 01:08:25,810
+Budúci jeden by mohol skončiť tady
+pretože trochu času uplynulo
+
+1430
+01:08:25,810 --> 01:08:27,210
+a program stále beží.
+
+1431
+01:08:27,210 --> 01:08:30,060
+Ďalším skóre, ktorá bola
+75, by mohol byť tu.
+
+1432
+01:08:30,060 --> 01:08:33,420
+A posledná skóre mohlo byť
+80, čo je tu.
+
+1433
+01:08:33,420 --> 01:08:38,729
+>> Takže v skutočnosti fyzicky, by to mohlo byť
+čo pamäte počítača vyzerá.
+
+1434
+01:08:38,729 --> 01:08:41,569
+Ale to nie je užitočný mentálny
+paradigma pre počítačový programátor.
+
+1435
+01:08:41,569 --> 01:08:44,649
+Prečo by vám záleží, kde je
+Heck vaše dáta skončí?
+
+1436
+01:08:44,649 --> 01:08:46,200
+Chcete len pre ukladanie dát.
+
+1437
+01:08:46,200 --> 01:08:49,390
+>> To je niečo ako našu diskusiu
+skoršie čerpanie kocky.
+
+1438
+01:08:49,390 --> 01:08:52,200
+Prečo sa staráš, čo
+uhol je kocka
+
+1439
+01:08:52,200 --> 01:08:53,740
+a ako budete musieť obrátiť ju nakresliť?
+
+1440
+01:08:53,740 --> 01:08:54,950
+Chcete len kocky.
+
+1441
+01:08:54,950 --> 01:08:57,359
+Rovnako tak tu vás
+jednoducho chcú stupňa knihe.
+
+1442
+01:08:57,359 --> 01:08:59,559
+Len chcete myslieť
+toto ako zoznam čísel.
+
+1443
+01:08:59,559 --> 01:09:01,350
+Koho zaujíma, ako je to
+realizované v hardvéri?
+
+1444
+01:09:01,350 --> 01:09:05,180
+>> Takže teraz abstrakcie
+Je to obrázok tu.
+
+1445
+01:09:05,180 --> 01:09:07,580
+Ide o zoznam spojená, as
+programátor by to nazval,
+
+1446
+01:09:07,580 --> 01:09:10,640
+ak máte
+Zoznam samozrejme čísel.
+
+1447
+01:09:10,640 --> 01:09:14,990
+Ale je to spojené obrazovo
+pomocou týchto šípok,
+
+1448
+01:09:14,990 --> 01:09:18,510
+a všetky tieto šípy are-- naspodku
+digestor, ak ste zvedaví,
+
+1449
+01:09:18,510 --> 01:09:23,210
+Pripomíname, že náš fyzický hardvér má
+adresy nula, jedna, dva, tri, štyri.
+
+1450
+01:09:23,210 --> 01:09:28,465
+Všetky tieto šípy sú ako mapu
+alebo nasmerovanie, kde v prípade 90 je-- teraz
+
+1451
+01:09:28,465 --> 01:09:29,090
+Musím počítať.
+
+1452
+01:09:29,090 --> 01:09:31,750
+>> Nula, jedna, dva, tri,
+štyri, päť, šesť, sedem.
+
+1453
+01:09:31,750 --> 01:09:35,640
+Vyzerá to, že 90 je
+adresa pamäti číslo sedem.
+
+1454
+01:09:35,640 --> 01:09:38,460
+Všetky tieto strely sa
+ako malý kúsok papiera
+
+1455
+01:09:38,460 --> 01:09:42,439
+že to dáva pokyny k
+Program, ktorý hovorí, že riadiť túto mapu
+
+1456
+01:09:42,439 --> 01:09:43,880
+sa dostať na miesto siedmej.
+
+1457
+01:09:43,880 --> 01:09:46,680
+A tam nájdu
+Druhý kvíz skóre študenta.
+
+1458
+01:09:46,680 --> 01:09:52,100
+Medzitým, 75--, či budem pokračovať to,
+To je sedem, osem, deväť, 10, 11, 12,
+
+1459
+01:09:52,100 --> 01:09:54,240
+13, 14, 15.
+
+1460
+01:09:54,240 --> 01:09:59,080
+>> Tento druhý šíp práve predstavuje
+mapy na pamäťové miesto 15.
+
+1461
+01:09:59,080 --> 01:10:02,550
+Ale opäť, programátor zvyčajne robí
+nestará o tejto úrovni detailu.
+
+1462
+01:10:02,550 --> 01:10:05,530
+A vo väčšine každom programovania
+jazyka dnes, programátor
+
+1463
+01:10:05,530 --> 01:10:10,490
+ani nebude vedieť, kde v pamäti
+tieto čísla v skutočnosti sú.
+
+1464
+01:10:10,490 --> 01:10:14,830
+Všetky on alebo ona má sa starať o ich
+ktoré sú nejakým spôsobom spojené dohromady
+
+1465
+01:10:14,830 --> 01:10:18,390
+V dátové štruktúry, ako je táto.
+
+1466
+01:10:18,390 --> 01:10:21,580
+>> Ale ukazuje sa, nie je
+sa dostať príliš technické.
+
+1467
+01:10:21,580 --> 01:10:27,430
+Ale len preto, že môžeme snáď
+dovoliť mať túto diskusiu,
+
+1468
+01:10:27,430 --> 01:10:33,630
+Domnievame sa, že sme znova
+Tento problém tu z poľa.
+
+1469
+01:10:33,630 --> 01:10:35,780
+Uvidíme, či budeme ľutovať ísť sem.
+
+1470
+01:10:35,780 --> 01:10:42,950
+To je 100, 90, 75, a 80.
+
+1471
+01:10:42,950 --> 01:10:44,980
+>> Dovoľte mi, aby som stručne, aby toto tvrdenie.
+
+1472
+01:10:44,980 --> 01:10:48,980
+Toto je pole, a znovu,
+charakteristickým rysom maticu
+
+1473
+01:10:48,980 --> 01:10:52,400
+je to, že všetky vaše dáta je späť, aby
+chrbtom k sebe v memory-- doslovne
+
+1474
+01:10:52,400 --> 01:10:56,830
+jeden byte alebo možno štyri bajty,
+niektoré fixný počet bajtov preč.
+
+1475
+01:10:56,830 --> 01:11:00,710
+V prepojenom zozname, ktorý by sme mohli čerpať
+takto, pod kapotou, ktorý
+
+1476
+01:11:00,710 --> 01:11:02,000
+vie, kde tá vec je?
+
+1477
+01:11:02,000 --> 01:11:03,630
+To ani nemusí prúdiť takhle.
+
+1478
+01:11:03,630 --> 01:11:06,050
+Niektoré z týchto údajov môže byť
+späť vľavo hore.
+
+1479
+01:11:06,050 --> 01:11:07,530
+Nemusíte ani vedieť.
+
+1480
+01:11:07,530 --> 01:11:15,430
+>> A tak s radom, máte
+Funkcia známy ako náhodný prístup.
+
+1481
+01:11:15,430 --> 01:11:20,570
+A čo s priamym prístupom znamená,
+že počítač môže skočiť okamžite
+
+1482
+01:11:20,570 --> 01:11:22,730
+na ľubovoľné miesto v poli.
+
+1483
+01:11:22,730 --> 01:11:23,580
+Prečo?
+
+1484
+01:11:23,580 --> 01:11:26,000
+Vzhľadom k tomu, že počítač vie
+že prvá poloha je
+
+1485
+01:11:26,000 --> 01:11:29,540
+nula, jedna, dve, tri.
+
+1486
+01:11:29,540 --> 01:11:33,890
+>> A tak ak chcete prejsť z
+tento prvok k ďalšiemu prvku,
+
+1487
+01:11:33,890 --> 01:11:36,099
+doslova, v
+počítače myseľ, stačí pridať jeden.
+
+1488
+01:11:36,099 --> 01:11:39,140
+Ak chcete ísť do tretieho prvku,
+stačí pridať one-- ďalší prvok, len
+
+1489
+01:11:39,140 --> 01:11:40,290
+pridať jeden.
+
+1490
+01:11:40,290 --> 01:11:42,980
+Avšak, v tejto verzii
+príbehu, predpokladám
+
+1491
+01:11:42,980 --> 01:11:46,080
+počítač je v súčasnej dobe hľadá
+na alebo do činenia s číslom 100.
+
+1492
+01:11:46,080 --> 01:11:49,770
+Ako sa dostanete k ďalšiemu
+stupňa v platovej triede knihe?
+
+1493
+01:11:49,770 --> 01:11:52,560
+>> Musíte vziať sedem
+Kroky, ktoré je ľubovoľná.
+
+1494
+01:11:52,560 --> 01:11:58,120
+Ak chcete získať na ten budúci, budete musieť
+trvať ďalších osem krokov sa dostať do 15 rokov.
+
+1495
+01:11:58,120 --> 01:12:02,250
+Inými slovami, to nie je
+konštantný medzeru medzi číslami,
+
+1496
+01:12:02,250 --> 01:12:04,857
+a tak to jednoducho berie
+Počítač viac času je bod.
+
+1497
+01:12:04,857 --> 01:12:06,940
+Počítač má k hľadanie
+prostredníctvom pamäte v poradí
+
+1498
+01:12:06,940 --> 01:12:08,990
+nájsť to, čo hľadáte.
+
+1499
+01:12:08,990 --> 01:12:14,260
+>> Tak vzhľadom k tomu, pole má tendenciu byť
+rýchla údaje structure-- kvôli tebe
+
+1500
+01:12:14,260 --> 01:12:17,610
+môže doslova robiť jednoduchú aritmetiku
+a dostať tam, kam chcete, pridaním jedného,
+
+1501
+01:12:17,610 --> 01:12:21,300
+Pre instance-- spájať zoznam,
+obetujete túto funkciu.
+
+1502
+01:12:21,300 --> 01:12:24,020
+Nemôžete jednoducho ísť od prvej
+na druhej až tretieho na štvrté miesto.
+
+1503
+01:12:24,020 --> 01:12:25,240
+Budete musieť nasledovať mapy.
+
+1504
+01:12:25,240 --> 01:12:28,160
+Budete musieť vziať ďalšie kroky
+sa dostať k tým hodnotám, ktoré
+
+1505
+01:12:28,160 --> 01:12:30,230
+Zdá sa, že pridanie náklady.
+
+1506
+01:12:30,230 --> 01:12:35,910
+Takže budeme platiť cenu, ale to, čo bolo
+funkcia, ktorá Dan hľadal tu?
+
+1507
+01:12:35,910 --> 01:12:38,110
+Čo spájať zoznam
+zrejme nám umožňujú robiť,
+
+1508
+01:12:38,110 --> 01:12:40,240
+ktorý bol pôvod
+tento konkrétny príbeh?
+
+1509
+01:12:40,240 --> 01:12:43,250
+
+1510
+01:12:43,250 --> 01:12:43,830
+>> Presne tak.
+
+1511
+01:12:43,830 --> 01:12:46,220
+Dynamická veľkosť na to.
+
+1512
+01:12:46,220 --> 01:12:48,040
+Môžeme pridať do tohto zoznamu.
+
+1513
+01:12:48,040 --> 01:12:51,430
+Môžeme dokonca zmenšiť zoznamu, takže
+že sme iba pomocou toľko pamäti
+
+1514
+01:12:51,430 --> 01:12:55,560
+ako vlastne chceme a tak
+nikdy nie sme over-prideľovanie.
+
+1515
+01:12:55,560 --> 01:12:58,470
+>> Teraz už len stačí byť naozaj niť-vyberavý,
+tam je skrytá náklady.
+
+1516
+01:12:58,470 --> 01:13:01,980
+Takže by ste nemali nechať ma presvedčiť
+ste, že je to presvedčivý kompromis.
+
+1517
+01:13:01,980 --> 01:13:04,190
+Je tu ďalšie skryté náklady tu.
+
+1518
+01:13:04,190 --> 01:13:06,550
+Výhoda, aby bolo jasné,
+je to, že dostaneme dynamiku.
+
+1519
+01:13:06,550 --> 01:13:10,359
+Ak chcem ďalší prvok, môžem len
+nakresliť a vložiť číslo tam.
+
+1520
+01:13:10,359 --> 01:13:12,150
+A potom som ho prepojiť
+s obrázkom tu,
+
+1521
+01:13:12,150 --> 01:13:14,970
+zatiaľ čo tu opäť, či som
+maľoval sám seba do kúta,
+
+1522
+01:13:14,970 --> 01:13:19,410
+-Li niečo iné už používa
+pamäť tu, som smolu.
+
+1523
+01:13:19,410 --> 01:13:21,700
+Ja som namaľoval sám seba do kúta.
+
+1524
+01:13:21,700 --> 01:13:24,390
+>> Ale to, čo je skryté
+stálo na tomto obrázku?
+
+1525
+01:13:24,390 --> 01:13:27,690
+Nejde len o sumu
+o čas potrebný
+
+1526
+01:13:27,690 --> 01:13:29,870
+ísť odtiaľ až sem,
+čo je sedem krokov, potom
+
+1527
+01:13:29,870 --> 01:13:32,820
+osem stupňov, čo je viac ako jedna.
+
+1528
+01:13:32,820 --> 01:13:34,830
+Aký je ďalšie skryté náklady?
+
+1529
+01:13:34,830 --> 01:13:35,440
+Nie je to len čas.
+
+1530
+01:13:35,440 --> 01:13:44,790
+
+1531
+01:13:44,790 --> 01:13:49,940
+Doplňujúce informácie
+potrebné na dosiahnutie tento obrázok.
+
+1532
+01:13:49,940 --> 01:13:53,210
+>> Jasne, že mapa, tie malé kúsky
+papiera, ako som držať popisovať je ako.
+
+1533
+01:13:53,210 --> 01:13:55,650
+Jedná arrows-- tie nie sú zadarmo.
+
+1534
+01:13:55,650 --> 01:13:57,660
+Computer-- viete
+čo je v počítači.
+
+1535
+01:13:57,660 --> 01:13:58,790
+To má núl a jednotiek.
+
+1536
+01:13:58,790 --> 01:14:03,170
+Ak chcete reprezentovať šípky alebo A
+máp alebo číslo, budete potrebovať nejakú pamäť.
+
+1537
+01:14:03,170 --> 01:14:05,950
+Takže druhú cenu, ktorú
+platiť za prepojeného zoznamu
+
+1538
+01:14:05,950 --> 01:14:09,070
+obyčajná počítačová veda
+zdroj, je tiež priestor.
+
+1539
+01:14:09,070 --> 01:14:11,710
+>> A skutočne tak, tak často,
+medzi kompromisov
+
+1540
+01:14:11,710 --> 01:14:15,580
+pri navrhovaní softvérové ​​inžinierstvo
+Systémy je čas a space--
+
+1541
+01:14:15,580 --> 01:14:18,596
+sú dve z vašich zložiek, dvaja
+z vašich najnákladnejších zložiek.
+
+1542
+01:14:18,596 --> 01:14:21,220
+To ma stojí viac času
+pretože musím sledovať túto mapu,
+
+1543
+01:14:21,220 --> 01:14:25,730
+ale je to tiež mi stojí viac priestoru
+pretože musím držať túto mapu okolia.
+
+1544
+01:14:25,730 --> 01:14:28,730
+Takže nádej, ako sme druh
+diskutovali viac ako včera a dnes
+
+1545
+01:14:28,730 --> 01:14:31,720
+je, že výhody
+preváži náklady.
+
+1546
+01:14:31,720 --> 01:14:33,870
+>> Ale nie je jasné riešenie tu.
+
+1547
+01:14:33,870 --> 01:14:35,870
+Možno je to better--
+a la rýchle a špinavé,
+
+1548
+01:14:35,870 --> 01:14:38,660
+ako Kareem navrhnuté earlier--
+hodiť pamäte na problém.
+
+1549
+01:14:38,660 --> 01:14:42,520
+Stačí kúpiť viac pamäte, myslím, že menej
+hard o vyriešenie problému,
+
+1550
+01:14:42,520 --> 01:14:44,595
+a riešiť ju v jednoduchším spôsobom.
+
+1551
+01:14:44,595 --> 01:14:46,720
+A skutočne skôr, keď
+sme sa rozprávali o kompromisy,
+
+1552
+01:14:46,720 --> 01:14:49,190
+to nebolo priestor v
+počítač a čas.
+
+1553
+01:14:49,190 --> 01:14:51,810
+Bolo na čase developer, ktorý
+je ďalším zdrojom.
+
+1554
+01:14:51,810 --> 01:14:54,829
+>> Takže znova, je to balansovanie
+sa snaží rozhodnúť, ktorá z týchto vecí
+
+1555
+01:14:54,829 --> 01:14:55,870
+ste ochotní minúť?
+
+1556
+01:14:55,870 --> 01:14:57,380
+Čo je najlacnejšie?
+
+1557
+01:14:57,380 --> 01:15:01,040
+Čo vedie k lepším výsledkom?
+
+1558
+01:15:01,040 --> 01:15:01,540
+Jo?
+
+1559
+01:15:01,540 --> 01:15:11,310
+
+1560
+01:15:11,310 --> 01:15:12,580
+>> Naozaj.
+
+1561
+01:15:12,580 --> 01:15:15,970
+V takom prípade, ak ste
+reprezentujúci čísla v maps--
+
+1562
+01:15:15,970 --> 01:15:18,820
+títo sú povolaní v mnohých jazykoch
+"Ukazovátka" alebo "adresa" -
+
+1563
+01:15:18,820 --> 01:15:20,390
+je to dvojnásobok priestor.
+
+1564
+01:15:20,390 --> 01:15:24,390
+Že nemusí byť tak zlé, ako double ak
+Teraz sme len ukladanie čísel.
+
+1565
+01:15:24,390 --> 01:15:27,410
+Predpokladajme, že sme boli ukladanie
+záznamy o pacientoch v hospital--
+
+1566
+01:15:27,410 --> 01:15:30,870
+takže mená Pierson to, telefónne čísla,
+čísla sociálneho poistenia, lekár
+
+1567
+01:15:30,870 --> 01:15:31,540
+históriou.
+
+1568
+01:15:31,540 --> 01:15:34,160
+Tento box môže byť veľa,
+oveľa väčšie, v takom prípade
+
+1569
+01:15:34,160 --> 01:15:38,000
+malinké ukazovateľ, adresa
+ďalšie element--, že to nie je veľký problém.
+
+1570
+01:15:38,000 --> 01:15:40,620
+Je to taký strapce
+stálo na tom nezáleží.
+
+1571
+01:15:40,620 --> 01:15:43,210
+Ale v tomto prípade, jo, je to dvojnásobok.
+
+1572
+01:15:43,210 --> 01:15:45,290
+Dobrá otázka.
+
+1573
+01:15:45,290 --> 01:15:47,900
+>> Poďme sa baviť o dobe, kedy
+trochu konkrétnejšie.
+
+1574
+01:15:47,900 --> 01:15:50,380
+Aká je doba chodu
+vyhľadávania tento zoznam?
+
+1575
+01:15:50,380 --> 01:15:53,640
+Dajme tomu, že som chcel hľadať
+cez všetky stupne študentov,
+
+1576
+01:15:53,640 --> 01:15:55,980
+a je tu n tried
+v tejto dátovej štruktúry.
+
+1577
+01:15:55,980 --> 01:15:58,830
+Tiež tu môžeme požičať
+Slovník skôr.
+
+1578
+01:15:58,830 --> 01:16:00,890
+Jedná sa o lineárny štruktúra dát.
+
+1579
+01:16:00,890 --> 01:16:04,570
+>> Veľký O n je to, čo je potrebné, aby si
+na konci tejto dátové štruktúry,
+
+1580
+01:16:04,570 --> 01:16:08,410
+whereas-- a my sme nevideli
+Tento before-- pole vám dáva
+
+1581
+01:16:08,410 --> 01:16:13,555
+čomu sa hovorí časová konštanta, čo znamená,
+jeden krok alebo dva kroky alebo 10 steps--
+
+1582
+01:16:13,555 --> 01:16:14,180
+nezáleží.
+
+1583
+01:16:14,180 --> 01:16:15,440
+Je to pevne stanovený počet.
+
+1584
+01:16:15,440 --> 01:16:17,440
+To nemá nič spoločné s
+veľkosť poľa.
+
+1585
+01:16:17,440 --> 01:16:20,130
+A dôvod pre to,
+Znovu je náhodný prístup.
+
+1586
+01:16:20,130 --> 01:16:23,180
+Počítač môže len bezprostredne
+skočiť na inom mieste,
+
+1587
+01:16:23,180 --> 01:16:27,770
+pretože sú všetky rovnaké
+vzdialenosť od všetkého ostatného.
+
+1588
+01:16:27,770 --> 01:16:29,112
+Neexistuje žiadna myslenie zapojiť.
+
+1589
+01:16:29,112 --> 01:16:31,900
+
+1590
+01:16:31,900 --> 01:16:32,400
+Dobre.
+
+1591
+01:16:32,400 --> 01:16:39,230
+Takže ak môžem, dovoľte mi, aby som sa snaží
+maľovať dve posledné fotky.
+
+1592
+01:16:39,230 --> 01:16:42,830
+Veľmi častým jeden známy ako hash tabuľky.
+
+1593
+01:16:42,830 --> 01:16:51,120
+Takže motivovať túto diskusiu,
+nechaj ma premýšľať o tom, ako to urobiť.
+
+1594
+01:16:51,120 --> 01:16:52,610
+>> Tak ako o tom?
+
+1595
+01:16:52,610 --> 01:16:55,160
+Predpokladajme, že problém
+Ak chceme riešiť teraz
+
+1596
+01:16:55,160 --> 01:16:58,360
+realizuje v dictionary--
+takže celá partia anglických slov
+
+1597
+01:16:58,360 --> 01:16:59,330
+alebo čokoľvek iného.
+
+1598
+01:16:59,330 --> 01:17:02,724
+A cieľom je, aby bolo možné zodpovedať
+otázky forme je to slovo?
+
+1599
+01:17:02,724 --> 01:17:04,640
+Takže chcete implementovať
+kontrolu pravopisu, len
+
+1600
+01:17:04,640 --> 01:17:07,220
+ako fyzická slovníka
+že sa môžete pozrieť, čo sa v.
+
+1601
+01:17:07,220 --> 01:17:10,490
+Predpokladajme, že keby som to s poľom.
+
+1602
+01:17:10,490 --> 01:17:12,590
+Nemohol som to urobiť.
+
+1603
+01:17:12,590 --> 01:17:20,756
+>> A predpokladám, že slová sú jablká
+a banán a melón.
+
+1604
+01:17:20,756 --> 01:17:23,330
+
+1605
+01:17:23,330 --> 01:17:26,465
+A ja si nemyslím, že ovocie
+že začať s d, takže sme len
+
+1606
+01:17:26,465 --> 01:17:27,590
+bude mať tri plody.
+
+1607
+01:17:27,590 --> 01:17:31,510
+Takže to je pole, a my sme
+skladovanie všetky tieto slová
+
+1608
+01:17:31,510 --> 01:17:34,200
+v tomto slovníku ako pole.
+
+1609
+01:17:34,200 --> 01:17:39,350
+Otázkou teda je, ako inak
+mohol by ste uložiť tieto informácie?
+
+1610
+01:17:39,350 --> 01:17:43,160
+>> No, ja som trochu podvádzanie tu, pretože
+každý z týchto písmen v slove
+
+1611
+01:17:43,160 --> 01:17:44,490
+je naozaj individuálne byte.
+
+1612
+01:17:44,490 --> 01:17:46,740
+Takže keď som naozaj chcel byť
+niť-vyberavý, mal som naozaj
+
+1613
+01:17:46,740 --> 01:17:49,600
+Tento rozdelit do oveľa
+Menšie kúsky pamäte,
+
+1614
+01:17:49,600 --> 01:17:51,289
+a my sme mohli robiť presne to.
+
+1615
+01:17:51,289 --> 01:17:53,580
+Ale budeme narážať na
+rovnaký problém ako predtým.
+
+1616
+01:17:53,580 --> 01:17:56,674
+Čo keď, ako Merriam Webster alebo Oxford
+robí každý rok-- dodávajú slová
+
+1617
+01:17:56,674 --> 01:17:59,340
+na dictionary-- my nie
+nutne chcú maľovať sami
+
+1618
+01:17:59,340 --> 01:18:00,780
+do rohu s poľom?
+
+1619
+01:18:00,780 --> 01:18:05,710
+>> Takže namiesto toho, možno múdrejší prístup
+je dať jablko vo vlastnom uzla alebo box
+
+1620
+01:18:05,710 --> 01:18:11,190
+ako by sme povedať, banán, a
+Potom tu máme ananásový melón.
+
+1621
+01:18:11,190 --> 01:18:14,990
+
+1622
+01:18:14,990 --> 01:18:16,790
+A my string tieto veci dohromady.
+
+1623
+01:18:16,790 --> 01:18:19,980
+Tak toto je pole, a
+To je previazaný zoznam.
+
+1624
+01:18:19,980 --> 01:18:23,300
+Ak sa vám nie je úplne vidieť, to jednoducho
+hovorí: "pole", a to hovorí, že "zoznam."
+
+1625
+01:18:23,300 --> 01:18:25,780
+>> Takže máme rovnaký
+Presné problémy ako predtým,
+
+1626
+01:18:25,780 --> 01:18:28,600
+kedy máme teraz
+dynamika nášho prepojeného zoznamu.
+
+1627
+01:18:28,600 --> 01:18:31,090
+Ale my máme pomerne pomalý slovník.
+
+1628
+01:18:31,090 --> 01:18:32,870
+Dajme tomu, že chcem vyhľadať slovo.
+
+1629
+01:18:32,870 --> 01:18:35,430
+To mi môže trvať veľký O n
+kroky, pretože slovo by mohla
+
+1630
+01:18:35,430 --> 01:18:37,840
+sa celú cestu na konci
+zoznam, rovnako ako melónu.
+
+1631
+01:18:37,840 --> 01:18:40,600
+A ukázalo sa, že
+programovanie, triedenie
+
+1632
+01:18:40,600 --> 01:18:42,700
+Svätého grálu údajov
+štruktúry, je niečo,
+
+1633
+01:18:42,700 --> 01:18:46,620
+že vám dáva konštantný
+Čas ako maticu
+
+1634
+01:18:46,620 --> 01:18:50,870
+ale napriek tomu vám dáva dynamiku.
+
+1635
+01:18:50,870 --> 01:18:52,940
+>> Takže môžeme mať to najlepšie z oboch svetov?
+
+1636
+01:18:52,940 --> 01:18:55,570
+A skutočne, je tu niečo
+volal hash tabuľky
+
+1637
+01:18:55,570 --> 01:18:59,320
+ktorý vám umožní robiť presne
+že, hoci len približne.
+
+1638
+01:18:59,320 --> 01:19:03,140
+Hash tabuľka je milovník
+Dátová štruktúra, ktorá nám
+
+1639
+01:19:03,140 --> 01:19:06,340
+napadne ako
+kombinácia array--
+
+1640
+01:19:06,340 --> 01:19:12,390
+a budem ju čerpať
+ako tohle-- a spojových zoznamov
+
+1641
+01:19:12,390 --> 01:19:17,310
+že budem čerpať takhle tady.
+
+1642
+01:19:17,310 --> 01:19:19,760
+>> A to, ako tá vec
+Práca je nasledujúci.
+
+1643
+01:19:19,760 --> 01:19:23,310
+
+1644
+01:19:23,310 --> 01:19:29,540
+Pokiaľ toto now-- hash table--
+je môj tretí dátová štruktúra,
+
+1645
+01:19:29,540 --> 01:19:32,590
+A chcem uložiť
+slov to, nemám
+
+1646
+01:19:32,590 --> 01:19:35,440
+chcete len ukladať všetky
+Slová chrbtom k sebe, aby chrbtom k sebe.
+
+1647
+01:19:35,440 --> 01:19:37,430
+Chcem využiť niektoré
+kus informácií
+
+1648
+01:19:37,430 --> 01:19:40,330
+o slovách, ktorá vám umožní
+me dostať tam, kde je to rýchlejšie.
+
+1649
+01:19:40,330 --> 01:19:43,666
+>> Tak daný slová jablko
+a banán a melón,
+
+1650
+01:19:43,666 --> 01:19:45,040
+Zámerne som zvolil tie slová.
+
+1651
+01:19:45,040 --> 01:19:45,340
+Prečo?
+
+1652
+01:19:45,340 --> 01:19:47,631
+Čo je to druh zásadne
+odlišný o tri?
+
+1653
+01:19:47,631 --> 01:19:49,950
+
+1654
+01:19:49,950 --> 01:19:51,484
+Čo je jasné?
+
+1655
+01:19:51,484 --> 01:19:52,900
+Začínajú s rôznymi písmenami.
+
+1656
+01:19:52,900 --> 01:19:53,900
+>> Tak viete čo?
+
+1657
+01:19:53,900 --> 01:19:57,120
+Skôr než dať všetky moje slová
+rovnaký vedro, tak povediac,
+
+1658
+01:19:57,120 --> 01:20:00,390
+rovnako ako v jednej veľkej zozname, prečo nie
+Aj aspoň pokúsiť optimalizácia
+
+1659
+01:20:00,390 --> 01:20:04,180
+a aby sa moje zoznamy 1/26 tak dlho.
+
+1660
+01:20:04,180 --> 01:20:07,440
+presvedčivá optimalizácia
+by mohol byť dôvod, prečo nie
+
+1661
+01:20:07,440 --> 01:20:10,650
+Já-- pri vkladaní slovo
+do tejto dátovej štruktúry,
+
+1662
+01:20:10,650 --> 01:20:14,300
+do pamäte počítača, prečo
+Čo keby som sem dať všetky "A" slovo,
+
+1663
+01:20:14,300 --> 01:20:17,270
+všetky "b" slová tu,
+a všetky "C" slova tu?
+
+1664
+01:20:17,270 --> 01:20:24,610
+Takže toto skončí uvedenie jablko
+tu, banán tu, ananásový melón tu,
+
+1665
+01:20:24,610 --> 01:20:25,730
+a tak ďalej.
+
+1666
+01:20:25,730 --> 01:20:31,700
+>> A ak mám ďalšie
+Slovo jako--, čo je ďalší?
+
+1667
+01:20:31,700 --> 01:20:36,640
+Jablko, banán, hruška.
+
+1668
+01:20:36,640 --> 01:20:39,370
+Každý, kto myslieť na ovocie
+ktorý začína, B alebo C?
+
+1669
+01:20:39,370 --> 01:20:40,570
+Blueberry-- perfektné.
+
+1670
+01:20:40,570 --> 01:20:43,990
+Že sa chystá skončiť tu.
+
+1671
+01:20:43,990 --> 01:20:47,530
+A tak sa zdá, že majú
+okrajovo lepšie riešenie,
+
+1672
+01:20:47,530 --> 01:20:50,820
+pretože teraz, keď chcem
+hľadať jablko, ja
+
+1673
+01:20:50,820 --> 01:20:53,200
+first-- ja nie len ponoriť
+do mojej dátové štruktúry.
+
+1674
+01:20:53,200 --> 01:20:54,850
+Nemyslím ponoriť do pamäte svojho počítača.
+
+1675
+01:20:54,850 --> 01:20:56,530
+Prvýkrát som sa pozrieť na prvé písmeno.
+
+1676
+01:20:56,530 --> 01:20:58,610
+>> A to je to, čo počítačový
+vedec povie.
+
+1677
+01:20:58,610 --> 01:21:00,760
+Vy hash do svojej dátovej štruktúry.
+
+1678
+01:21:00,760 --> 01:21:04,100
+Budete mať svoj vstup, ktorý v
+Tento prípad je slovo, ako jablko.
+
+1679
+01:21:04,100 --> 01:21:07,150
+Môžete analyzovať, pri pohľade na
+Prvé písmeno v tomto prípade,
+
+1680
+01:21:07,150 --> 01:21:08,340
+tým ju hash.
+
+1681
+01:21:08,340 --> 01:21:10,950
+Hešovanie je všeobecný termín, kedy
+budete mať niečo ako vstup
+
+1682
+01:21:10,950 --> 01:21:12,116
+a produkovať nejaký výstup.
+
+1683
+01:21:12,116 --> 01:21:15,090
+A výstup v tom, že
+Prípad je umiestnenie
+
+1684
+01:21:15,090 --> 01:21:18,150
+Ak chcete vyhľadávať, prvý
+lokalita, druhé miesto, tretí.
+
+1685
+01:21:18,150 --> 01:21:22,160
+Takže vstup je jablko,
+je výstup prvej.
+
+1686
+01:21:22,160 --> 01:21:25,054
+Vstup je banán sa
+Výstup by mal byť druhý.
+
+1687
+01:21:25,054 --> 01:21:27,220
+Vstup je ananásový melón,
+výstup by mal byť tretí.
+
+1688
+01:21:27,220 --> 01:21:30,320
+Vstup je čučoriedka sa
+Výstup by mal byť opäť druhý.
+
+1689
+01:21:30,320 --> 01:21:34,010
+A to je to, čo vám pomôže vziať
+skratky cez svoju pamäť
+
+1690
+01:21:34,010 --> 01:21:39,050
+za účelom získania slovám
+alebo dáta efektívnejšie.
+
+1691
+01:21:39,050 --> 01:21:43,330
+>> Teraz to znižuje svoj čas potenciálne
+ako veľa ako jedna z 26,
+
+1692
+01:21:43,330 --> 01:21:45,850
+pretože ak predpokladáme, že vás
+mať toľko "A" slová ako "z"
+
+1693
+01:21:45,850 --> 01:21:48,080
+Slová ako "q" slov, ktorá
+v skutočnosti nie je realistic--
+
+1694
+01:21:48,080 --> 01:21:50,830
+budete mať prekrútiť naprieč
+niektoré písmená alphabet--
+
+1695
+01:21:50,830 --> 01:21:53,204
+ale to by prírastkové
+Prístup, ktorý má umožniť
+
+1696
+01:21:53,204 --> 01:21:55,930
+môžete sa dostať do slov oveľa rýchlejšie.
+
+1697
+01:21:55,930 --> 01:21:59,660
+A v skutočnosti, sofistikovaná
+programu, Okuliare na svete,
+
+1698
+01:21:59,660 --> 01:22:02,180
+Facebooks z world--
+by použiť hash tabuľky
+
+1699
+01:22:02,180 --> 01:22:03,740
+pre mnoho rôznych účelov.
+
+1700
+01:22:03,740 --> 01:22:06,590
+Ale oni by nemala byť tak naivný,
+len pozrieť na prvé písmeno
+
+1701
+01:22:06,590 --> 01:22:09,700
+V jablko alebo banán alebo
+hruškovica alebo melónu,
+
+1702
+01:22:09,700 --> 01:22:13,420
+pretože ako môžete vidieť tieto
+zoznamy by mohli ešte dostať dlho.
+
+1703
+01:22:13,420 --> 01:22:17,130
+>> A tak by to mohlo byť ešte sort
+z linear-- tak nejako pomaly,
+
+1704
+01:22:17,130 --> 01:22:19,980
+rovnako ako s veľkým O n
+ktoré sme diskutovali skôr.
+
+1705
+01:22:19,980 --> 01:22:25,290
+Takže, čo je to naozaj dobrý hash tabuľka
+do-- to bude mať oveľa väčší poľa.
+
+1706
+01:22:25,290 --> 01:22:28,574
+A bude používať oveľa
+sofistikované funkcie zatrieďovanie
+
+1707
+01:22:28,574 --> 01:22:30,240
+takže to nie je len pozrieť na "A".
+
+1708
+01:22:30,240 --> 01:22:35,480
+Možno to vyzerá na "A-p-p-l-e" a
+nejako prevádza tých päť písmen
+
+1709
+01:22:35,480 --> 01:22:38,400
+do miesta, kde
+Apple by mal byť uložený.
+
+1710
+01:22:38,400 --> 01:22:42,660
+My len naivne pomocou písmeno "A"
+sám, pretože je to pekný a jednoduchý.
+
+1711
+01:22:42,660 --> 01:22:44,600
+>> Ale hash tabuľka, v
+koniec, môžete myslieť
+
+1712
+01:22:44,600 --> 01:22:47,270
+ako kombinácia
+poľa, pričom každý z nich
+
+1713
+01:22:47,270 --> 01:22:51,700
+Má prepojený zoznam, ktorý v ideálnom prípade
+by mala byť čo najkratšia.
+
+1714
+01:22:51,700 --> 01:22:54,364
+A to nie je samozrejmé riešenie.
+
+1715
+01:22:54,364 --> 01:22:57,280
+V skutočnosti, veľa z jemného doladenia
+, Čo sa deje pod kapotou, keď
+
+1716
+01:22:57,280 --> 01:22:59,654
+vykonávaní týchto druhov
+sofistikované dátové štruktúry
+
+1717
+01:22:59,654 --> 01:23:01,640
+je to, čo je správne
+Dĺžka poľa?
+
+1718
+01:23:01,640 --> 01:23:03,250
+Aká je správna hash funkcie?
+
+1719
+01:23:03,250 --> 01:23:04,830
+Ako sa vám uloženie vecí do pamäte?
+
+1720
+01:23:04,830 --> 01:23:07,249
+>> Ale uvedomujem, ako rýchlo
+tento druh diskusie
+
+1721
+01:23:07,249 --> 01:23:10,540
+stupňoval, a to buď tak ďaleko, že je to trochu
+of nad hlavou v tomto bode, ktorý
+
+1722
+01:23:10,540 --> 01:23:11,360
+je v poriadku.
+
+1723
+01:23:11,360 --> 01:23:18,820
+Ale my sme začali, odvolanie, sa skutočne
+niečo, čo low-level a elektronické.
+
+1724
+01:23:18,820 --> 01:23:20,819
+A tak to zase je to
+Téma abstrakcie,
+
+1725
+01:23:20,819 --> 01:23:23,610
+kde akonáhle začnete brať za
+samozrejmosť, OK, mám tú to--
+
+1726
+01:23:23,610 --> 01:23:26,680
+fyzickej pamäte, OK, to mám každý
+fyzické umiestnenie má adresu,
+
+1727
+01:23:26,680 --> 01:23:29,910
+OK, ja to mám, môžem reprezentovať
+tieto adresy sú arrows--
+
+1728
+01:23:29,910 --> 01:23:34,650
+môžete veľmi rýchlo začať mať
+sofistikovanejšie konverzácie, ktoré
+
+1729
+01:23:34,650 --> 01:23:38,360
+nakoniec sa zdá, že nám umožňuje
+riešiť problémy, ako je vyhľadávanie
+
+1730
+01:23:38,360 --> 01:23:41,620
+a triedenie efektívnejšie.
+
+1731
+01:23:41,620 --> 01:23:44,190
+A buďte si istý, too--
+pretože myslím, že to
+
+1732
+01:23:44,190 --> 01:23:48,700
+je najhlbšia sme išli do niektorej
+z týchto tém SK proper-- my sme
+
+1733
+01:23:48,700 --> 01:23:51,880
+vykonaná v deň a pol na to
+bod, čo by ste mohli robiť viac ako obvykle
+
+1734
+01:23:51,880 --> 01:23:55,520
+Priebeh osem týždňov v semestri.
+
+1735
+01:23:55,520 --> 01:23:59,670
+>> Akékoľvek otázky týkajúce sa títo?
+
+1736
+01:23:59,670 --> 01:24:01,100
+Nie?
+
+1737
+01:24:01,100 --> 01:24:01,940
+Dobre.
+
+1738
+01:24:01,940 --> 01:24:05,610
+No, prečo nie my pozastaviť tam,
+spustiť obed niekoľko minút skôr,
+
+1739
+01:24:05,610 --> 01:24:07,052
+pokračovať v len asi hodinu?
+
+1740
+01:24:07,052 --> 01:24:08,760
+A budem prodleva pre
+trochu otázkami.
+
+1741
+01:24:08,760 --> 01:24:11,343
+Potom budem musieť ísť
+trvať niekoľko hovory iba v prípade, že je v poriadku.
+
+1742
+01:24:11,343 --> 01:24:15,000
+Budem zapnúť nejakú hudbu do tej doby,
+ale obed by mal byť za rohom.
+
+1743
+01:24:15,000 --> 01:24:17,862
+

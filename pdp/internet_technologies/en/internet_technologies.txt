@@ -1,0 +1,609 @@
+DAVID J. MALAN: All right, so the overarching question now, and we started down this road with our look at Dropbox, is the internet. So let me try to ask a loaded question deliberately. What is the internet? Surely you all use It. 
+
+AUDIENCE: Network? DAVID J. MALAN: A network? OK, what is a network? 
+
+AUDIENCE: A connectivity between different systems. DAVID J. MALAN: OK, connectivity between different people and systems. All right, and what makes the internet an internet as opposed to just a network as we might have in just a building or a classroom? AUDIENCE: It's global. DAVID J. MALAN: It's global. All right, so it's a network of networks, if you will. Internet denoting connections across individual networks. And of course, there's different services that the internet provides these days. 
+
+There's, of course, the world wide web with which all of us are familiar. There's services like email. There's services like chat or Google Chat. Or there's things like voice over IP. There's things like Skype, and Google Hangouts, and FaceTime, and the like. 
+
+And so there's this layering concept in the internet. And indeed, this too is a fundamental concept in computer science of layering, or abstraction, where you build one thing down here. Then, you build something else on top of it, and then, something else on top of it, on top of it, on top of it. And so we'll see some manifestations of that in this discussion and, perhaps, others moving forward. 
+
+So let's start to paint a picture of some of the technologies all around us by considering what is, perhaps, in most everyone's home here, and use that as a point of departure for a conversation more generally about how all of this stuff works, and what some of the issues underlying design decisions have to be when building networks and when using the internet. So back at home, we'll go back to my little laptop here. You probably have one or more computers, and maybe one or more phones, that are connected these days via Wi-Fi. Maybe once upon a time, you had a cable. Maybe you do still have a desktop computer at home that has a cable. But our story's not really going to change that much there. 
+
+Here is the so-called cloud, or internet. And there are bunches of other things on the internet like Amazon.com, and Facebook, and Google, and Microsoft, and other such companies on the internet, and certainly people as well. But there's a whole lot of stuff that goes on between you and the internet. 
+
+So let's first tease apart that. What is your computer, if wirelessly, connected to at home? What kind of devices gets you on the internet these days? 
+
+AUDIENCE: Router. 
+
+DAVID J. MALAN: A router. So you have this a home device called a router, whose purpose in life, ultimately, is to route information at the simplest form. If this is the internet over here, your computer has connectivity between it. And the router, meanwhile, somehow has connectivity between the rest of the internet. 
+
+But there's even more going on inside of here. So let's dive in a little deeper. You go home. You open your laptop's lid or turn on your desktop for the first time ever, the first time in a while. What happens? 
+
+What kinds of steps have to happen before you can actually get on the internet? Well, it turns out-- oh, yeah? Nakissa? Sorry? 
+
+AUDIENCE: User ID. 
+
+DAVID J. MALAN: A user ID. So you might have to log in to something. Although, typically at home, most typically this would just work these days. 
+
+But as we just saw, in environments like universities, companies, you have to log in. So let's avoid the login scenario for now. Keep it simple. 
+
+AUDIENCE: Open up a browser. 
+
+DAVID J. MALAN: You might open a web browser. Or what, Pat? 
+
+AUDIENCE: Number or passcode. DAVID J. MALAN: Ah, a number or passcode. So let's go with number, not so much passcode just yet. Let's not worry about security for this particular discussion. But a number. 
+
+So, yeah, in fact, much like all of our homes or a building like has a physical address. This building is One Brattle Square in Cambridge, Massachusetts, 02138, USA. That address uniquely identifies us, in theory, in the whole world. 
+
+AUDIENCE: An IP. 
+
+DAVID J. MALAN: An IP address, exactly, is the analog in the computer world that uniquely addresses a computer. So an IP address, or internet protocol address, is just a numeric address. Computers prefer things that are a little simpler, that are easier to read than long phrases like One Brattle Square, Cambridge, Mass., and so forth. 
+
+And so an IP address is a number of the form something dot something dot something dot something. And each of these somethings, as denoted by the pound sign here, is a number between 0 and 255. And so it's a four-dotted decimal number-- something dot something dot something dot something. 
+
+And this numeric address, in theory, uniquely identifies a computer on the internet. So at the risk of oversimplifying, let's now assume that when I connect to Wi-Fi or via cable, at home, my home router is what is somehow giving me an IP address. Because gone are the days for the most part, at least locally here, where when you sign up for Comcast, or RCN, or your local internet service provider, no longer does a technician have to come to your house with a printout, and then have you, or him, or her type in your IP address into your computer. 
+
+Rather, this is all discovered dynamically. When you open your laptop's lid or turn on your computer, your computer just starts broadcasting a message, essentially. It says, hello. I'm awake. What should my IP address be? 
+
+And the purpose in life of a home router these days, among them, is to give you exactly one of these addresses. And the mechanism by which it does it, just to tease apart some jargon, is called a DHCP server. Fancy way of saying Dynamic Host Configuration Protocol. It's just a really fancy way of saying it is a piece of software running inside of our home router that, upon hearing your request-- hello. I'm online. Please give me an IP address-- responds with exactly that. And it tells you to use something dot something dot something dot something. And then, your Mac or PC does exactly that. And just to make this a little more concrete before we take your question, on Mac OS, and there's a comparable window in Windows, if I go to Network, I can actually see here that my laptop is connected to Harvard University, which is the Wi-Fi, and has the IP address 10.254.25.237. 
+
+If I'm more curious, I can click Advanced on my Mac. I can go up to TCP/IP. And notice what is now familiar, perhaps. What protocol, what feature is my laptop using to do exactly what we've just described? DHCP. I can't even change it. Because I'm already configured right now. It's locked, this setting. But my computer's configured using DHCP. And it looks like what the Harvard's DHCP server has given me is an IP address-- and 254.25.237-- a subnet mask, which we won't go into today. 
+
+But a subnet mask is just an additional number that specifies what network you're on. Maybe it's this room's. Maybe it's a different building. Maybe it's a different part of Harvard. It's a way of segmenting a local network. 
+
+Router, that word sounds familiar. Because we were just talking about it here. And even though I'm on Harvard's network, not like a home network, the principles are still the same here. 
+
+Harvard has also told me the IP address of a router-- 10.254.16.1. And as an aside, generally as a convention, but it's not required, a router's IP address does tend to end with .1, which is a useful signal, just to know this. So what do these things do? 
+
+The IPv4 address, version 4, which is sort of the older but most popular version of internet protocol these days, is that address. I've got a router address. So why do I need to know a router's address? 
+
+Isn't it sufficient to know where I am? AUDIENCE: That's [INAUDIBLE] related to my question. So if you have two routers in the same room so we can get connected to each other, then you will get a separate IP address because it's going to be associated with a network. 
+
+DAVID J. MALAN: Ah, so this is where we actually have to start teasing apart what we really mean by router. Because the term, certainly in the consumer market, is overused. So in this room alone, we have what most people would call two routers, these things with antennas and the blue lights on either side of the wall. 
+
+But router, in this case, they're not. These aren't quite home routers. But let's just suppose, for simplicity, we do have two such things here. If you had two access points, as they're more properly called because of the antennas-- a wireless access point or AP-- they should be configured in a way that they, in turn, connect to one central device, whose purpose in life is to do what you're describing, to give out the IP address. 
+
+If you did have two of these kinds of devices at home, maybe two Linksys, devices two D-Link devices, two AirPort Extremes at home, or AirPort Expresses. You can configure all of those products, even if you have two identical models, to make one the primary, and then the other the secondary. So that you run a wire between them, typically, or you have someone come do it for you behind the walls. 
+
+And then, one is the primary. One is in charge of giving out IP addresses. And the other one is just responsible for extending the range of your wireless signal. In fact, at home I have two such things. 
+
+We have in our office five such things, all of which are physically wired together. But it's just to give us more wireless coverage. But one of them is in charge. 
+
+OK, so with that said, why does my Mac in this room right now, need to know what the IP address of the router is? Isn't it sufficient just to be told what my address is? AUDIENCE: But it can change. If you get connected to the VPN, it's going to be different. DAVID J. MALAN: Oh, now you're using another word I don't know yet-- VPN. So let's not go there. Because VPN's going to complicate it. I just want to get, little old me wants to get on the internet right now. Well, this really invites the question, how does the internet work? 
+
+All right, I might have an address. That's all fine and good. But why do I have an address? 
+
+Well, let's consider what really is going on on the internet. I'll use a different picture for the moment. And in the actual internet, we might have me over here on my laptop. We might have the internet over here. And then, we might have, let's say, Amazon.com this time. 
+
+And this is me. And, somehow, I want to connect to Amazon.com, through the internet, and get my data from point A to point B. Or I guess, in Amazon, from point A to point Z in Amazon's case. 
+
+So what is inside of this internet? It turns out, there's a whole bunch of things called routers. And now, we're mixing terms. But we'll see how even home routers relate to the dots that I've just drawn on the screen. 
+
+A router on the internet is generally like a medium-sized device. It's not like an old mainframe. But it's a device that's probably this wide, maybe this tall, maybe this tall, maybe this tall. Depends on how expensive a model you have. 
+
+And it's got a lot of cables coming into it and a lot of cables going out to it. And at the risk of oversimplifying, you can think of a router's purpose in life as being to take in data from this cable here, look at the information that's come in, and look at its address. Where is this information being sent? And then say, OK, I'm going to send this along this way. If I get another piece of information over here, it's destined for a different address. I'm going to send it this way, instead, up this cable. And if I see another piece of information destined for yet a different address, I'm going to send it out this cable, over in this way. 
+
+So a router's purpose in life is to truly route information. And in it's simplest form, a router just has a big Excel file inside of it that says any IP address starting with the number 1, send it this way. Any IP address starting with the number 2, send it this way. Number 3, send it this way. Number 4, send it that way. 
+
+Oversimplifying, but it uses those numbers and, specifically, prefixes of numbers, typically, to decide to go left, right, back, forward. Because a router, typically, has multiple connections to other routers. In fact, I've not drawn them here. 
+
+But you can imagine this being a web, not to be confused with the web we use, but a web of devices, all of which are interconnected very deliberately so. In fact, the origins of the internet are militaristic in design. And one of the designing principles was that if a router, or worse, a city were taken out in a military sense, you want the data to be able to route around that problem. 
+
+And so what happens when I send a request to Amazon.com for their home page, my data might leave my computer, go to my default router, or default gateway as it's often called. Then, maybe that router will decide to send it here, here, here, here, here, here, here, and then on its way to Amazon. 
+
+And that was an arbitrary path I drew. But what's noteworthy about the red line I just drew? How would you describe it? 
+
+AUDIENCE: It's not direct. 
+
+DAVID J. MALAN: It's not direct. So contrary to the popular saying, "The shortest distance between two points is a straight line," it's not necessarily true on the internet when it comes to routing information. Because geographic distance isn't necessarily the only metric you care about. Rather, what else might govern what direction the data should take in order to get from point A to point B? AUDIENCE: Speed? DAVID J. MALAN: Speed. So it turns out you might configure a router to favor a faster connection. Even if you might have to go a few hundred extra miles, maybe it's just faster to go this way than over, maybe, an old school satellite connection this way just to get from one point to another. It doesn't even have to be physical devices on the ground. It can be physical devices in the sky, for instance, or even underwater these days, or so forth. 
+
+So that's true. What else might dictate that a company, an internet service provider, or ISP, want to send data this way instead of that way, even though it's farther? 
+
+Well, it turns out the way the internet itself is governed commercially is that there's a lot of big players out here on the internet, whether it's Comcast, or Verizon, or Level 3, or more arcane names that you might not have heard of but that are fairly big infrastructure companies that compose the internet's backbone-- the wiring, the routers, the cabling that you just don't really see or care about. Because it's all in the inside run commercially. 
+
+Well, there are things called peering points whereby a big ISP might have some server, might have some routers and some cables in a data center. And other ISPs might have the same. And other ISPs might have the same all inside the same data center. 
+
+And the intraconnect. It's a peering point in so far as they all connect. That's where peers connect. 
+
+And by nature of financial arrangements, it might be the case that Comcast has agreed to send as much of its data as it can this way instead of this way. Because, maybe, the vendor over here is going to charge them more per gigabyte to send their data over in that direction. So it might be financial decisions that govern which direction things go. 
+
+It might just be performance implications, even more commonly. Routers get overloaded. If there's a lot of people get home at 5:00 PM and start getting on the internet, maybe there's congestion on the internet. And the algorithms, the software running on routers, generally will say, if I start to get overloaded, I should provide some feedback to other routers near me so that they, hopefully, go in another direction, much like you would avoid a traffic jam. 
+
+So this is not all that unlikely of a path that data might take from point A to point B. And in fact, you can generally assume that your data is going to take 30 or fewer such hops from point A to point B. That is there might be as many as 30 or so routers between you and point B. 
+
+And we can, sometimes, see this. Let me see if the network here cooperates. Otherwise, I'll try a different example. Let me see if I can do it on this network. And I can. 
+
+So I have just run, let me simplify my outputs slightly. I'm going to do not that. Here, OK. 
+
+So I'm going to do the following command called traceroute. So right now, I'm just on my Mac. I'm in an old school black and white interface, nothing like DOS from yesteryear. But I just want to see some textual output. 
+
+And I, literally, here at Harvard University want to trace the route between me and www.cnn.com. So let's see what happens now when I hit Enter. A whole bunch of stuff starts flashing up on the screen. 
+
+And let's see if we can't make some sense of this. So 1, 2, 3, 4, 5, 6, 7, and it's kind of hanging right now. We'll see if it completes this process or not. It turns out that each of the lines of output, on the screen, represent something. And based on our leading discussion thus far, what do each of these lines of output, numbered 1 through 11 at the moment, represent? 
+
+AUDIENCE: Different routers. DAVID J. MALAN: Different routers, different dots on the screen. And so what this program, traceroute, is doing is it's literally tracing the route between me and CNN.com. So in this case, step 1 is, apparently, a router whose IP address is what? 
+
+AUDIENCE: [INAUDIBLE] DAVID J. MALAN: Yeah, but specifically, its IP address. Remember, its IP address is numeric. So to just make sure we're all on the same page, what's the IP address of the first router between me and Harvard? I mean, sorry, between me and CNN? 
+
+AUDIENCE: [INAUDIBLE] DAVID J. MALAN: Perfect. AUDIENCE: [INAUDIBLE] DAVID J. MALAN: Exactly. We're just inferring this from the reality that this first hop, so to speak, just has that address. It doesn't have a name for some reason. But that's just because the humans decided not to give it a name. And so be it. 
+
+Step 2 is another router. But again, I said it was convention. It's not required that routers IPs end in .1. This one does not. The second router's IP is this. 
+
+Now, it looks like the humans got a little more organized and have started naming their routers with what look like URLs or portions of URLs. But they're not. They're just the names that humans give to things. 
+
+And it, apparently, is the case that this router, not surprisingly, is owned by whom probably? It's probably Harvard, right? Because the name of the thing ends in harvard.edu. What is the name? coregw1, core just means important, in the middle. gw is-- I said it earlier. 
+
+AUDIENCE: Gateway. 
+
+DAVID J. MALAN: Gateway, just a synonym for router. So this is the very important core gateway number 1. I don't know what te means. 3-5, don't know. core, probably means the same thing. 
+
+.net.harvard.edu, doesn't necessarily look clean. But it's useful to some system administrator somewhere at Harvard. Step 4, I'm inferring from convention. What do you think 4 represents? It's still a router. 
+
+What does bdr probably, what does it sound like? Border. So this is probably a router that's physically on the border of Harvard and the rest of the world, so on the edge of the campus somewhere. 
+
+Step 5 is interesting. Step 5 still says harvard. But NoX tends to stand for Northern Crossroads, which is a very popular peering point-- as I described earlier, a data center where lots of different people, Harvard and other big ISPs, come together and interconnect their cabling so that data can go out elsewhere on the internet. 
+
+And now, things get a little more interesting. I don't know where this is just yet. Apparently, rtr, I'm guessing, is router. Equinix in New York is possibly the origin of that. But internet2 is a super fast internet connectivity among universities, especially. So that seems to be what we're connected to there. For whatever reason, the routers in steps 7, 8, and 9 are just not answering us. That's probably because of either misconfiguration or conscious configuration. Whoever runs those routers doesn't care to disclose information. 
+
+But step 10 is interesting enough. Because I can guess from this, with some probability, that my data, the data leaving my laptop, by step 10-- 10 steps later-- has entered what geography? New York. 
+
+And how fast did it take my data, from my laptop, to get to New York on its way to CNN would you guess? 28 milliseconds. And this tool not only traces the route. It also times things. 
+
+And things can get congested. So the numbers could sometimes jump up or down a little unexpectedly. But if you think, now, how long it takes to get to New York from here, which is probably about four or so hours by car or train, it's much faster to send yourself via electronically if it takes just 28 milliseconds to get from here to there. Now unfortunately, the other routers don't seem to be disclosing. Let's try another one. Just for kicks, let's try Amazon.com and see if the routers are a little more cooperating, knowing that it could take a completely different path. So maybe we won't hit as much blockages there. 
+
+It looks a little different here. I don't think we saw aws sum1 net. And in fact, aws is Amazon Web Services. Harvard has a service called Direct Connect with Amazon, where we pay a little bit of money to Amazon to get faster connectivity to Amazon's network. So we use a lot of their cloud services, some of which we might talk about a little later. 
+
+Seems the routers here, too, are being a little shy. So we don't see all that much more. But let's see if we can glean a little something more by going a different direction altogether. 
+
+Let's try our friends at Stanford.edu. See if we get any farther. No, still being a little private. Seems this same path is hiding itself a little bit. So we'll try one more if this doesn't yield juicy results. But you can kind of see those IPs, I can make an inference here. What might you conclude, even if you're not a network engineer, is true based on the numbers you're seeing in step 7 through 9 and 12 through 15? 
+
+What's an educated guess here? What's a true statement? 
+
+AUDIENCE: Something around the 205 [INAUDIBLE]. 
+
+DAVID J. MALAN: True, and I'm looking at the numbers to the right. Where are these routers, even though they don't seem to have names? 
+
+AUDIENCE: Somewhere further away than [INAUDIBLE]. 
+
+DAVID J. MALAN: Yeah. And I don't know where. But notice step 7 says 123 milliseconds. But just three hops prior, it only took 3 milliseconds. 
+
+AUDIENCE: So [INAUDIBLE] DAVID J. MALAN: Not here, yeah. So maybe it is middle of the country. Maybe it's the West Coast already. I really don't know, completely guessing. 
+
+But given that every other hop thereafter also took more time, feels reasonable to conclude that there's just physical geography between us and them. And to be clear, each of these numbers isn't pairwise. It doesn't mean each hop takes 100 milliseconds. 
+
+Each of these numbers represents from point A to that intermediate hop. So in general, they should just be incrementing ever so slightly. So the fact that all of these, now, are roughly 100 milliseconds, feels like it's got to be farther away. And I'll try one last one. 
+
+But I'm guessing we're going to see a bunch of stars. Let's try the Japanese version of CNN's website. Oh, OK, now it's getting juicy. Because apparently it really has taken a different path through the US. 
+
+Let's take a look at, oh, this is great. This one finished. So this is powerful. In steps 1 through 4, what town are we probably in? 
+
+AUDIENCE: Cambridge. DAVID J. MALAN: Cambridge. And why do you say that? It's all harvard.edu. In step 5, where might we be? Boston. In step 6, where might we be? 
+
+AUDIENCE: Number 6. 
+
+DAVID J. MALAN: And where is San Jose? 
+
+AUDIENCE: It's in California. 
+
+DAVID J. MALAN: California? It's probably the San Jose, California, which is kind of amazing. Now, why do we say that? So one, San Jose-- that's the only San Jose I know of. But I'm sure there are others. But corroborating that hunch is what other piece of data? 
+
+AUDIENCE: The geographical. DAVID J. MALAN: The geographical path feels like that's the direction we probably are going to go to get to Japan over the Pacific Ocean. And what furthermore piece of data corroborates that, yeah, we just took a left turn to California? The time really jumps. 
+
+Notice we go from 1.989 milliseconds, in row 5, to 74 milliseconds in row 6, which suggests there's probably some big body of land. So there's also some really expensive, powerful cable, it would seem, going across the entire country leading from Boston to San Jose in this case. Don't know where step 7 is. 
+
+But it gets really cool when we look, now, at step 8 and 9 onward. Where are those routers? Probably Japan. So what is between step 7 and 8 most likely? 
+
+AUDIENCE: London. 
+
+DAVID J. MALAN: Yeah, so there's also trans-Pacific, transatlantic, transoceanic cabling that really big ships just roll out and put on the bottom of the ocean, that carries all of this internet connectivity. And that's why our network connection gets so much slower, relatively speaking. And I mentioned earlier, generally, and well, this is something a web developer might want to keep in mind. 
+
+We won't go into too much detail tomorrow. But generally, a human will start to notice delays on a web page if something takes 200 or more milliseconds to load. I mean, that's still super fast-- a fifth of a second. But this is one of the metrics that a web developer should keep in mind when designing a page, when he or she is creating graphics, or adding in third-party software-- advertisements, perhaps. 
+
+You don't want to slow down the page load. You, ideally, want to keep it as fast as possible. And if you start having page load times of 200 plus milliseconds, the human's going to notice that it's not truly instant. And so these numbers aren't all that unfamiliar to us. 
+
+So this, then, captures a little more quantitatively what's going on here. And it truly is, even though I'm sort of bemoaning how slow it is to get to Japan. I mean, it's still less than half a second to get your data halfway around the world, whether that's an email, a web page, or anything else along these lines. 
+
+All right, so how does this, then, relate to where we were going earlier. We were talking about an IP address. And every computer, on the internet, has a unique address, we'll say for now-- but a bit of a white lie-- called an IP address. And that IP address is used how? 
+
+It's used by these routers to decide whether the data should go here, here, here, or here. And I simplified things by saying it just looks at the first digit. But that's not really true. It looks at more of the digits, typically, to figure this out. 
+
+And either humans have decided or computer algorithms have decided what the best route is for that data. So that, hopefully, within 30 or so hops, it eventually gets to its destination. Once I've requested Amazon's home page, how does Amazon know to whom to send the home page? 
+
+Right, in old school form, I send a postcard to Amazon saying, please send me your home page. Amazon's going to respond with some kind of message, some kind of postcard, some kind of envelope of its own. So let's do exactly this just to visualize this for a moment. 
+
+So the internet these days, as you may have heard, seems to be filled with cats and pictures of cats. So suppose that someone's trying to visit not Amazon.com, but some website to download a picture of a cat. So my laptop wants to send a request, via the web, to some websites saying, give me today's picture of a cat. 
+
+And this cat, hopefully, has to then get downloaded to my computer. So what's really happening? Well, let me go ahead and do this. I've got four old school envelopes here. And this is a useful metaphor. Because this is, essentially, electronically what happens underneath the hood when I send a message. 
+
+So for the sake of discussion, let's say this is no longer Amazon. This is cats.com or something. And my IP address, I'm going to say for simplicity, is 1.2.3.4. And the cat website will be 5.6.7.8. 
+
+And what this means for me is the following. I am going to put 1.2.3.4, 1.2.3.4. And I'll hold these up in a second. 1.2.3.4. I'm going to put my return address on all of these envelopes, in the top left-hand corner as you typically would when mailing an envelope. And now, just take a guess what needs to go in the main part of the envelope. AUDIENCE: [INAUDIBLE] DAVID J. MALAN: Yeah, yeah. That's all. So 5.6.7.8. So 5.6.7.8, 5.6.7.8, 5.6.7.8, 5.6.7.8. 
+
+And now, this cat here, by design, is going to be chomped up into multiple pieces after I request it. So let's say, for the sake of this story, I've already sent out an envelope of my own to cats.com saying, please give me today's cats. So what we're talking about, now, is the latter half of the transaction, when the reply comes back from cats.com to little old me. 
+
+So it turns out that the protocol, that these computers speak, is generally something called TCP/IP, which you probably have seen somewhere or other on your Mac, or PC, or media, or on a movie, or a TV show, or the like. So what does this all mean? This is actually a combination of two protocols. 
+
+And a protocol is just a language that two computers speak. In fact, a protocol in the human world, hello. My name's David. 
+
+AUDIENCE: Hello. 
+
+DAVID J. MALAN: Nice to meet you. So this is a fairly stupid human protocol, where I extend my hand. And Arwa extends her hand. And we meet and greet. And then, the transaction is complete. 
+
+But it's a protocol in so far as it's a set of steps that it's a script that both of us know how to act out. And there's a beginning. And there's an end to it. Similarly, when it comes to computers, they have protocols-- sets of conventions that, in fairness, have been decided by humans. But they're used by computers that dictate how computers intercommunicate. 
+
+IP is the half of this pair of protocols that governs how you address computers. How do you address computers? Exactly like this. 
+
+So IP is a set of conventions that says make sure you have an IP address of the recipient and an IP address of the sender. And use it in dotted, something dot something dot something dot something format. For instance, TCP is a different protocol, used in conjunction with IP, that generally guarantees delivery. IP just tells computers how to address each other. 
+
+It's just when I said David, you said Arwa. That was our IP equivalent, our steps for addressing each other. But to confirm delivery, computers use a protocol called TCP, Transmission Control Protocol, which is just a fancy way of saying there are additional features used by computers to ensure that all of these envelopes I keep holding up actually get to their destination. 
+
+And one mechanism for that is as follows. I seem to have how many envelopes here at the moment? 
+
+AUDIENCE: Four. DAVID J. MALAN: OK, four. So feels like, just to be a little tidy about this all, I'm going to number them in the bottom left-hand corner, like the memo field. And I'm just going to say 1, 2, 3, 4. But now, start thinking a bit more like an engineer. 
+
+Have I jotted down as much information as I actually have? Can I be even more uptight than this when it comes to specifying these numbers? What more could I put on the envelope that just maybe is useful? 
+
+AUDIENCE: [INAUDIBLE]. 
+
+DAVID J. MALAN: What's that? 
+
+AUDIENCE: The number of total envelopes that you have. 
+
+DAVID J. MALAN: Yeah, the total number. I feel like I'm not capturing as much available information as I have. So, you know, I probably should do that. So 1 out of 4, 2 out of 4, 3 out of 4, 4 out of 4. 
+
+And now, why is that? What's the intuition behind also jotting down the total number of envelopes I'm about to send? AUDIENCE: Find out if something's missing. DAVID J. MALAN: Exactly. So TCP leverages this. It uses something called a sequence number, very similar in spirit to what we're drawing here. But it needs to know how many packets, or envelopes, there're supposed to be. Because otherwise, how do you know if when you get 1, 2, and 3 should there have been a 4? 
+
+You can infer if you get 1, 2, and 4, wait a minute. There probably was a number 3. And in fact, that's closer to how TCP works. But for our purposes now, let's just be super precise and say this is 1 of 4, 2 of 4, 3 of 4, 4 of 4 so that we know at the end of the process, the end of the handshake if you will, if the whole thing is actually complete. 
+
+Now, it turns out TCP does one other thing. TCP also allows a computer to provide multiple services. And by services I mean web, email, chats, voice over IP. There's bunches of different things the internet and servers on the internet can do these days. 
+
+So for instance, just thinking hypothetically, if I hand this to Arwa, how do you know what's going to be inside of these envelopes? Is it going to be a request for a web page? Is it an email? Is it an instant message? 
+
+You don't know based on this information. All you know is who it's from, who it's to, and what number of envelope this is. So we need one more piece of information. And we're talking about the web in this case, just because it's pictures of cats. But it could be anything. 
+
+So I could write web on it. Or more properly, I could write HTTP, which is the protocol used by web browsers and servers to communicate. More on that in a moment. But I'm going to be even more computer-oriented than that. 
+
+It turns out that humans, some time ago, decided to assign unique numbers to popular internet services. HTTP happens to use the number 80, or as we'll see, 443. But 80 is fine for now. 
+
+SMTP, which is a fancy way of saying outbound email. This is Simple Mail Transfer Protocol. Just the set of conventions that governs how computers send email from one computer to another. Happens to use the number 25. 
+
+FTP, with which some of you might be familiar, what does FTP do? 
+
+AUDIENCE: File transfer. DAVID J. MALAN: Yeah, File Transfer Protocol should not be used anymore. If your company still uses it, you're probably using it without encryption, which means you've been sending your username and password across the internet all of this time. Probably shouldn't use it. Because secure versions exist. It uses port 21. And there's bunches of other examples like this. So in other words, humans, some time ago, decided that, hey, let's just assign numbers to all these services to keep everything nice and tidy. But what that really means, even though this envelope's starting to look a little arcane, I can now put on the end of it, for instance, colon 80. And I'm just going to use a colon here just because that's computer convention. I'm going to add a colon 80 to the end of the address just to arcanely capture the fact that this is destined for 5.6.7.8 port 80. So now, when I hand it to Arwa, assuming she is running an email server, a web server, an instant message server, she now knows that upon seeing the number 80, oh, this should go into this bucket. Or this should go into this mailbox. Or this should be handed off to this service that's running on her particular server. 
+
+So now, the last piece of it, this is the cat. And why do I have four envelopes? Well, one of the features offered by IP, in addition to addressing, is also the ability to fragment requests. 
+
+This is a pretty big cat. And in fact, for efficiency and to maximize throughput, so to speak, what fragmentation is good for is taking big files like this and tearing them up into smaller pieces for fragments, we'll say in this case, the upside of which is that just because one person is monopolizing your network by downloading really big video files, those video files are still going to be chopped up into super small pieces and transmitted one or more at a time. So that little of me with my cat, or my email, or my instant message, or something more important than any of those things can also have an opportunity to go out from your computer or your home to the rest of the internet. 
+
+And it's up to the software and the routers to decide how to send these things out. But eventually, they will all get to their destinations. As an aside, if you've ever thought about the issue of, or read about, the issue of net neutrality? Net neutrality, this was in vogue for quite some time, in this country, where politically it became a hotbed issue. Because some companies, for instance, wanted to prioritize certain traffic over others. For instance, people were worried that maybe Microsoft with Skype, or Google with Hangouts, or maybe Netflix with videos would, maybe, be willing to pay Comcast, or Verizon, or who knows, even the government more money to prioritize their traffic. Now, what does that actually mean technologically? That might mean that an ISP, upon seeing certain IP addresses, might give those packets, those envelopes, priority. Upon seeing certain port numbers, might give those packets priority and, then, slow down my e-mail, or slow down my service. And it really just boils down to prioritizing or quality of service for these various different services. So and that's how it would be done on a technical level. 
+
+So in any case, we now have these four envelopes. I'm going to put one quarter of the cat in this envelope, one quarter of the cat in this envelope, one quarter in this envelope. And now, suppose my goal is to send these, let's say, to Jeffery. Recall that just like the picture up here suggests, they don't all necessarily have to take the same route. 
+
+So if I am the cats.com server, I'm responding to Jeffery's request in this story. I'm going to pass one off here. They probably start in the same location. So Arwa, if you want to decide whom to route this to next, you can go ahead and send it that way. And don't send it to the same router every time. 
+
+[CHUCKLING] 
+
+So Dan's getting a little congested. There you go. All right. And so those need to make their way around the room. And again, you as a router generally know Jeffery's that way. So just keep sending it that way. And now, suppose Dan didn't quite make it. And so this packet got dropped along the way, if I can steal that away from you forcefully, sorry. 
+
+Very nice. It's not necessarily the most geographic direct route. Still trying to get to Jeffery. And complete. Now, this was deliberate. I didn't mean to hit your hand when I did it. But packet 4 of 4 did get lost or dropped. And maybe that happened because there was a hardware error. Maybe that's because Dan got overloaded or Andrew got overloaded. But it happened. So if, Jefferey, you'd like to reassemble that. What picture do you have in front of you right now? If you'd like to take the messages out of the envelopes. 
+
+AUDIENCE: 1, 2, 3. 
+
+DAVID J. MALAN: OK, go ahead and open them up and take the pieces of cat out. 
+
+AUDIENCE: [INAUDIBLE]. 
+
+DAVID J. MALAN: All right, so we have the top left of the cat, the bottom right, and the bottom left. So we're missing the top right of the cat. So TCP, again, is this protocol that kicks in here. So Jeffery, upon receiving 1, and 2, and 3 of 4, in this scenario, somehow sends a message back to me, via some route-- could be any number of different hops here-- that says, hey, but wait a minute. Resend 4 out of 4. 
+
+And so what I have to go and do is-- it's all electronic data. So I can very easily copy the cat inside of my own RAM or memory. I can come up with another envelope, put another copy of just this fragment for efficiency. I don't have to resend the whole cat. I can put it in a new envelope, send it all around. And some number of milliseconds later, Jeffrey, hopefully, has the entirety of the packet. So it took a little time to tell this story. And that's not unreasonable. 
+
+Because there is a lot of complexity going on here. These protocols aren't simple. But if you want to guarantee delivery in this way, you need to have those extra measures, that extra metadata, if you will. 
+
+And just to toss a term out there, data that we care about is like the cat inside the envelope. Metadata, which is data that's useful but not what I actually care about at the end of the day, is all the stuff that I wrote on the outside of the envelope-- the address, the destination, the port number, the sequence numbers. All of that is metadata. It's useful. But it's not what I ultimately want out of that whole transaction. Now, this seems pretty compelling that no matter what, Jeffrey will get a copy of that cat, assuming we have a physical connection to him at the end of the day. But are there certain types of applications where guaranteeing delivery would be a bad design decision and an undesirable feature? Do you always want to retransmit like I proposed just now? 
+
+AUDIENCE: Pay for it, I guess. 
+
+DAVID J. MALAN: If you pay, what might you mean? 
+
+AUDIENCE: [INAUDIBLE]. 
+
+DAVID J. MALAN: Oh, OK, good question. Might you get double charged if it's like checking out of Amazon or something? Short answer, no. Because in that these fragments are, so to speak, at a lower level. And they need to be reassembled before you could actually be charged. So good thought but not worrisome in this case. 
+
+Let's reason backwards. So retransmitting required a little more effort. That didn't feel like a huge deal. But it does require a little more time. 
+
+Because now, Jeffrey has to wait few more milliseconds to get that fourth piece of data again. Minor blip, but it will slow things down. And maybe the internet's super crowded. 
+
+And maybe Andrew keeps dropping packets on the floor. So these delays start to accumulate. So after a while, this cat doesn't take 74 milliseconds to get there. It takes 1.5 seconds. 
+
+And maybe the next picture of a cat takes half a second, two seconds. In other words, we start bogging things down. What applications might be annoying to bog down in this way? 
+
+AUDIENCE: Video streams or voice. 
+
+DAVID J. MALAN: Yeah, so what if you're watching a baseball game online, or what if you're Skyping with someone, or FaceTime, especially in the case of video conferencing, kind of not acceptable, at some point, to start hearing your human response a second late. Wouldn't it be better to just leave that packet on the ground, only show 3/4 of the cat, or in this case, a video conferencing, show 3/4 of my face with my mouth moving as I'm talking, and just let the audio, at least, go through, for instance. So there's this notion of quality of service here, more generally, where you know what, for real-time applications-- whether it's streaming a sporting event or streaming video conferencing-- maybe you don't need all of the bits. And maybe it's actually better to just bite your tongue and just keep plowing forward with more and more data, never looking back. Because the human will figure it out in his or her own mind what they actually missed. 
+
+And it would be more annoying to buffer, buffer. Right? There's this thing, with which we're all familiar, where I just start talking while being, that's just annoying to actually have that, to wait for me to catch up. 
+
+Maybe it's better if you just miss a few seconds of what I say. But then, it comes back strong. So it's again, it's a trade-off. And in fact, the protocol that allows you to do that would not be TCP, but something called UDP, which is simply a different protocol used sometimes for those contexts. Yeah, question. 
+
+AUDIENCE: [INAUDIBLE] certain [INAUDIBLE] protocol slow [INAUDIBLE]? 
+
+DAVID J. MALAN: To stop slow in what sense? 
+
+AUDIENCE: I want to send my data as fast as possible. 
+
+DAVID J. MALAN: OK. 
+
+AUDIENCE: If somebody doesn't want [INAUDIBLE] transfer to stop [INAUDIBLE]. 
+
+DAVID J. MALAN: Oh, you absolutely can interfere with any of this data. For instance, between all of the hops, between point A and B, all of these hops here can decide just to blacklist all UDP data. They could just stop. They could copy it knowing that this is video data that they might want to look at. So in short, anyone with access to the wireless or wired connectivity between two points could absolutely stop it if they want. 
+
+And in fact, even in our home routers, which is the story we'll come back to now, might have settings where you can enable or disable certain services whether it's for parental reasons, or just not wanting your kids to watch online videos, or for corporate reasons as well. So in fact, let's rein things back in. 
+
+Because we've allowed ourselves to look, now, at all of the servers inside of the internet here. But if, at the end of the day, I'm just trying to get to Amazon, what is that little home router actually doing for me? Well, it turns out that the home router, that we described earlier, that's all draw disproportionately large here, has a whole bunch of services built in. 
+
+It has, typically, a DHCP server built in. It often has an access point built in. And that's often because it has these antennas, like these things here. It often has a firewall built in. 
+
+It often has a router, which is its own distinct piece of functionality, built in. It might have something called a DNS server built in, if not even other functions. So let's tease apart just the couple of remaining ones here. DHCP, just to recap, does what? 
+
+AUDIENCE: Assigns the IP. 
+
+DAVID J. MALAN: Exactly. Assigns IP address and few other things. It will also tell my Mac or PC what my default router is and a few other details, like we saw on my Mac screen. Access point just means, these days, that it supports Wi-Fi. And it wirelessly will allow people to connect, just like a physical cable from yesteryear. 
+
+Firewall between two buildings or two stores in a building, it's a physical device that, ideally, prevents fire from spreading from one store to another. In the virtual world, it prevents data from getting from one place to another. So in fact, if your home network, or even your corporate or university network, have somehow blacklisted, let's say, all access to Facebook.com, deeming it a waste of time, how might your university, or home, or company do that in the context of envelopes like these? 
+
+In other words, if all of my computers here-- my laptop and any other-- is somehow talking to the internet through this home router, or this corporate router, or this university router, what information would a firewall use in order to stop traffic from flowing? 
+
+AUDIENCE: [INAUDIBLE]. 
+
+DAVID J. MALAN: Yeah, so if they know that Facebook's web server, on the internet, has the IP address 5.6.7.8, it is trivial for a system administrator to configure a firewall, just deny and to drop all envelopes destined for that IP address. In reality, Facebook has a few different IPs, maybe dozens, maybe hundreds. But so long as those are publicly known, an administrator can actually blacklist all of those. 
+
+Or if that's not possible, just because Facebook, maybe, has too many IPs or they change too frequently, well, it turns out, as we'll see, any time you make a request for a web page, like Facebook.com, instead of there being a cat in the envelope, there's going to be a mention. Oh, this user wants Facebook.com/MarkZuckerberg.php or whatever the file may be. 
+
+So you can just look inside the envelope and see, oh, this is for Facebook. I'm going to drop it now. You can look inside of the envelope as a firewall as well. 
+
+So a firewall, in short, can look at the IP address. It can look at the port number. It can look at the inside of the envelope. 
+
+And by port number, this is an interesting one too. A firewall, therefore, could block, it seems, all web access, if it wants, just by blacklisting any envelopes that have the number 80 on them, or all email by blacklisting port 25, or blocking FTP, by blocking port 21. And the list goes on and on. 
+
+As an aside, do any of you use Google's DNS server-- 8.8.8.8? Does this sound familiar? No? 
+
+So turns out you can configure your computer to use custom addresses. And we'll come back to this in just a moment. And it's very common for corporate networks and hotel networks to block that kind of thing, as we'll soon see. 
+
+So the last bit of functionality, then, here is a router and DNS. A router, again, very simple idea. It just routes data left, right, up, and down based on the wires and the connectivity that it has, whether it's a small network at home or a bigger one on the internet itself. So DNS is the last of the big acronyms here. 
+
+What does a DNS server do? It's very useful functionality often built into a home router. Well, we haven't quite connected two dots here. When I type out Amazon.com or cats.com into my browser, somehow or other that ends up on an envelope, maybe, with Amazon or cats.com on the inside of the envelope, as I proposed with Facebook. 
+
+But what has to go on the outside, have we been saying? AUDIENCE: The IP address-- DAVID J. MALAN: The IP address. AUDIENCE: [INAUDIBLE] named to the IP address. DAVID J. MALAN: Exactly. A DNS server, Domain Name System server, it's sole purpose in life is to translate domain names to IP addresses and vice versa. And so it, too, you can think of like a big Excel file with two columns-- domain names in one and IP addresses in the other. But it's a particularly big file. 
+
+And it turns out that when I turn on my AirPort Extreme, or my Linksys device, or my D-Link device, or whatever you have at home, surely, that little device does not know about, in advance, all possible IP addresses and all possible domain names in the world. Because it can't. Because what if someone buys a domain name tomorrow, puts it on the internet? 
+
+It'd be nice if your home router could still access it. And surely, it can. So it turns out there's a whole hierarchy of DNS servers in the world. 
+
+Your home router, typically, has one. But it just is a caching DNS server. And by cache I mean C-A-C-H-E, where it just stores copies of information temporarily. But if I have internet service through Comcast, or Verizon, or RCN, very popular vendors locally in the US, or any other company, or even Harvard University, Harvard, and Comcast, and Verizon, and your local ISP all have their own DNS servers. 
+
+And they, too, cache information. But there's also some special big DNS servers in the world, at least 13, so-called root servers that know where all the dot coms are, and knows where all the dot nets are, and all the dot orgs, and all of the dozens and dozens of other top level domains these days. And so there's this whole hierarchical system to DNS such that if you don't know and your higher up doesn't, hopefully, your higher up's higher up knows. Because the buck ultimately stops up here. And so, as we'll see, when you buy a domain name, you're essentially informing one of these top folks. And the information trickles down to all other computers on the internet. But there's a danger here. 
+
+Suppose that Comcast is suddenly taken over by someone who doesn't, Comcast wants to put Facebook out of business. How does Comcast go about putting Facebook out of business for quite a few people? What does it configure its DNS server to do? What would you do? 
+
+AUDIENCE: Just block it. Just block it. 
+
+DAVID J. MALAN: Just block, right? So if I'm Comcast, and maybe I'm the nontechnical CEO, I have just announced a decree, don't let our customers go to Facebook.com. Because for whatever business reason, we're not playing nicely with them right now. 
+
+Well, what do you do? It's a pretty trivial implementation. You just have to ask some system administrator to tweak the DNS server to say, if you receive requests for Facebook.com, don't respond with an IP address, or respond with a bogus one-- 1.2.3.4, which is meaningless. Because it doesn't belong to Facebook. 
+
+And in fact, certain countries have been known to do this, where if they've wanted to blacklist certain sites-- this sort of great firewall of China, which can be implemented in any number of ways-- might do exactly this just based on DNS alone. So if you tweak your user's DNS server to just respond no or bogus DNS or responses, you can very easily block access. 
+
+Now, as I alluded to earlier, and this is only how a naive network would do this, I can actually go in my Mac, click DNS, which notice now is, hopefully, another familiar tab. Perhaps a bit ago, you only knew what the term Wi-Fi meant. Now, hopefully, we know a bit more about TCP/IP. Now, we have DNS. 
+
+These, it seems, are the DNS servers that Harvard has automatically assigned to my computer. When I said earlier that DHCP gives me more than just an IP address, it gives my router's address. Also gives me one or more DNS servers that I'm supposed to use when here on Harvard's network. 
+
+I can actually override this by clicking, oh, I can't. Because I'm on the guest account. OK, so if I could actually physically click this plus sign, I could type in any DNS server I want. 
+
+A popular one to use is 8.8.8.8, which Google bought some time ago. And if my Mac let me, I could then tell my own Mac here, don't use Harvard's DNS servers. Use Google's instead. 
+
+So this is a common way of avoiding either one system restrictions, like the ones we just described. If they're poorly implemented, you can just use a different DNS server. Very much in vogue on home ISPs, and perhaps you too, if you've ever made a typo when typing out a domain name, you should just get an error message from your browser. That's what they're designed to do. 404 or, actually in this case, something different, you could get an invalid response page. But some of you, do you ever see advertisements if you make a typo and mistype a domain name? If so, it's possible, and Comcast has been known to do this. They, very obnoxiously, will intercept incorrect DNS lookups. 
+
+If you type Facebook.com but make a typo, they'll return an IP address to you, not Facebook's but one of Comcast's advertising servers' IP addresses so that you, then, suddenly see ads, and maybe suggested misspellings, and the like. So some people might use Google to work around that. Sometimes it's very common in hotels, and airports, and the like where the DNS servers are just bad. Or they're just broken. Or they're dysfunctional. 
+
+So very often, if I'm not getting internet connectivity but my icon suggests I should be on the network, I'll manually change my DNS server to Google's just to see if it start working. And two times out of 10, that seems to solve the problem. And the takeaway here is not so much all these silly little work-arounds but why they actually work. 
+
+You're just telling your computer to talk to some other device instead. So this home router, that you might have paid 0 or more dollars for to put in your home, is doing all of this functionality and even more all just in this tiny little box. But when we explode this story to the whole internet, it tends to be dedicated servers and computers doing each of those individual services. But our homes are just little microcosms of the whole story. 
+
+Any questions? Yeah. Yeah, Dan? 
+
+AUDIENCE: Earlier, you talked about the ports, the specific ports, but it's specific services. So for instance, you said if I don't block a certain service, I say don't log that port? Is it possible for a service to be completed through the port? 
+
+DAVID J. MALAN: Absolutely. Yes, in fact, you will often find on a network that the only ports that are allowed are, for instance, port 80 and 443-- web traffic. This is very common in hotels or airports where they presumptuously think, eh, 90 plus percent of our users only need these services anyway. Let's block everything else. 
+
+And that leaves people like me out cold, out to dry, hung out to dry. Because I can't access certain servers at Harvard, which use different ports. I could, preemptively before leaving campus, change my special server to use port 80 or 443. Even though humanity has decided that should be for web traffic, it doesn't have to be. I can send my email through that or the like. 
+
+AUDIENCE: So that was my second question to it. So humanity decided. Is there a published list somewhere that say these are best practices before? DAVID J. MALAN: Indeed. And in fact, if I go here, common TCP port, here we go. On Wikipedia itself is the first hit. Here's well-known ports. 
+
+So the list, up to essentially 1,024, is very standardized, and even some beyond that. So there's a lot of services that-- 
+
+AUDIENCE: So if you were developing a service, in theory, you should go there and decide what port lines for that service? DAVID J. MALAN: Correct. And if you've come up with some new application, like Napster back in the day or like WhatsApp more modernly, you would generally, if you're a good designer, you would take a look at a list like this and make sure you're choosing a number that is within a range that you should be choosing from, essentially a big enough number that no one else has chosen. 
+
+AUDIENCE: That would be about port designs, correct? DAVID J. MALAN: Correct, correct. And there's a lot. I mean, a port number is generally a 16-bit number, which gives you 65,536 possibilities. And only a few of those are actually standardized. 
+
+And the reality is there's only so many popular services these days. So there really isn't that much contention. So it's not such a big deal. 
+
+But from a clever undergraduate's perspective or dissident within a country, you might indeed, if a country, or a corporate entity, or university is blocking certain traffic, what's very commonly done, by sophisticated enough people, would be to tunnel, so to speak, to route all of their traffic with envelopes that don't say what they should say, but instead just using 80 for everything. Even if it is FaceTime, or Skype, or financial transactions, or whatever, you just make it look like it's actually web traffic. And better still is another solution that Victoria alluded to earlier, which is a VPN. 
+
+And quite often is VPN traffic allowed on a network. In fact, I found myself commonly in airports, and hotels, and on planes where I can't access certain secure servers at Harvard. Because they're running on fairly unusual port numbers-- 555 or whatever the number might be. 
+
+But if I first connect via VPN from that airplane or hotel to Harvard University, what a VPN does is what? Do you know what it does for you underneath the hood, Victoria? 
+
+AUDIENCE: Well, it will presumably change the server [INAUDIBLE]. DAVID J. MALAN: It does. It does. It makes it look, to someone else, like you're coming from another place. It looks like you're coming from your corporate headquarters when visiting some sites. And what it also does is it tunnels, so to speak, all of your traffic, whether it is email, or web, or printing, or the like all through this encrypted channel between you and your corporate headquarters, typically, so that no one-- including the local country, or airline, or cafe-- knows what's inside of your encrypted tunnel. And so it looks like random noise. And so very often, a VPN will work around those kinds of port restrictions, too, if the VPN port itself is not blocked, which is sometimes the case. And Dacosta, you we're about to say? 
+
+AUDIENCE: What time [INAUDIBLE] jump especially using the [INAUDIBLE] can jump group of [INAUDIBLE] Is this cloud different? What [INAUDIBLE] to jump? [INAUDIBLE] value [INAUDIBLE] DAVID J. MALAN: And by jump, what do you mean exactly? AUDIENCE: That they would block, [INAUDIBLE]. DAVID J. MALAN: Oh, and it's broken within a given country? AUDIENCE: Yes, it's blocked. DAVID J. MALAN: Oh, blocked. So it can be implemented in any number of ways. The simplest, again, would be that the country and anyone in it, via DNS, they just don't return the IP address to you when you visit Facebook.com. Two, they can actually look inside everyone's envelopes and see if those requests are headed to Facebook.com. In which case, they would similarly block the traffic as well. AUDIENCE: You can block the [INAUDIBLE]. DAVID J. MALAN: Indeed. And it depends. I mean, so long as there are relatively few internet connections coming into the country-- so dozens, or hundreds, not thousands or tens of thousands-- then yes, so long as they have control over all wires, wireless, or otherwise coming into the country, absolutely, they can block everything. 
+
+So and worse yet, and a very possible attack is if, for instance, we're all here on Harvard's network. And therefore, your computers, by the story we've been telling, are all using Harvard's DHCP server. Some of you might have, in a tab right now, Facebook.com open, or Gmail.com, or some other random website. Do you necessarily know you're at the real Facebook.com? 
+
+I mean, maybe you're subjects in a Harvard psychology experiment here, where we're feeding you fake Facebook information. Or we're telling you you've been poked by someone you haven't been. Or we're changing messages to sound angrier than they actually are. 
+
+I mean, really when you have control over the network, you have control over quite a few aspects of the user's experience. Now, thankfully, it's not as frightening as that. Because most of you, in your URL bars, of any such tabs, probably start with what? HTTPS, hopefully. Because the S does designate secure. 
+
+And in theory, what that means is that you do actually have an encrypted connection between you and Facebook, you and Amazon, you and Gmail.com, or wherever you are. And that's a good thing. Because there's this whole system of trust. 
+
+And this is actually a good segue to web traffic specifically. There's this whole system of trust, in the world, that allows us with some reassurance to trust that if I go to Facebook.com, and I see a little padlock icon in my browser, I am very, very, very likely to be actually connected to the real Facebook.com. Now, why is that? 
+
+So it turns out that when you put a website on the world wide web, you need an IP address, it would seem. Your server needs an IP address. And you probably need a domain name. So what does that involve? 
+
+Well, have any of you ever bought a domain name before? Yes? Yeah? OK. And what websites have you used or looked at for buying domain names? 
+
+Any in particular come to mind? OK, GoDaddy is pretty popular. And there's others-- Namecheap, Network Solutions, others. 
+
+And so if I want to go to something like, if I want to buy a domain like ComputerScienceforBusinessLeaders.com-- awful name because it's atrocious to type. It doesn't even fit on one line, apparently. For $11.99, I can buy that domain name. 
+
+Now, what does that mean? If I click Select and put this into my Shopping Cart, let me first caution. GoDaddy is atrocious about trying to upsell you. So you will be asked if you want email, if you want web hosting, if you want a phone call for all this stuff. It's hard to check out at GoDaddy. 
+
+But when you finally get there, you will own that domain name for a period of one year, typically, or two, or three years. You have to renew these things. So it's more like renting a domain name. 
+
+But once you own that domain name, you need to tell GoDaddy something, typically. You need to tell GoDaddy what your web servers, DNS servers shall be. How do you know what your servers, DNS servers are going to be? 
+
+Well, typically, in another tab, you have to buy, or pay, for web hosting if you don't actually physically own your own servers, and your own company, or in your own data center. So you'd go to a web hosting company. And it could be GoDaddy. They offer the same service as one of their upsells. 
+
+But there's hundreds, thousands of web hosting companies of varying quality out there. And when you pay someone else for web hosting, you get a username, and a password, and some amount of space in the cloud, so to speak, to which you can upload your files, and create your web pages, and put your website online. So essentially, you have to tell GoDaddy what the DNS servers are that that web hosting company has provided to you. Probably in a e-mail or in a web page, they inform you. 
+
+And then GoDaddy's responsibility is to tell the rest of the world by way of those root servers and other DNS servers. So that, the next day, when someone tries to visit ComputerScienceforBusinessLeaders.com, their DNS server probably doesn't know the answer. Because it's a brand new website. So their DNS server asks this one, asks this one. This one knows. And then, the information propagates back down to the rest of the world. So this is how to if you don't pay the bill for renewing your domain name. All of this can just kind of stop. 
+
+Because GoDaddy, for instance, can delete those DNS records so that no one in the world knows whom to ask where is your website. What is your IP address? And so that's how they enforce this kind of control. 
+
+But what GoDaddy also sells, I want to see here if we can chat with them here. They want our business. If we go to All Products, this is overwhelming. 
+
+I want to buy SSL. Here we go, Web Security. So, oh, it's on sale. Nice. 
+
+OK. So here, too, this is kind of overwhelming at first glance for folks. So there's different types of SSL certificates as they're called. So it's not just enough to have a domain name or have a web hosting account. If you want to have encryption, which, frankly, is just a given nowadays. And this is becoming de facto practice. 
+
+You should also buy an SSL certificate. Unfortunately, it can be hard to navigate all of this. But let's see where this leads to this sort of system of trust. So if I just have one domain name, www.ComputerSciencef orBusinessLeaders.com, I'm going to go ahead and just buy the $62.99 version here. However, even this is expensive. You can go on other websites, like Namecheap.com and a few others, where varying degrees of reputation. But you can spend even less than this. Beware. 
+
+And in fact, let's go somewhere we shouldn't-- Verisign.com. This is a global leader in domain names and internet security apparently. And you know it's expensive when they don't just say what they sell. Verisign SSL certificate, you can see how many competitors they have, who are advertising for that same query. 
+
+All right, so via Google, I found this page I wanted. So let's see. Oh, here we go. 
+
+So it looks like if I want a Secure Site, their SSL certificates start at $399. If I want more security, with EV, which I think is extended validation or enhanced validation, that's $995, point 00. Or Secure Site Pro with EV, $1,500. Almost all of this is atrocious and, also, unnecessary. 
+
+But let's understand what the tradeoffs here are and how it all works. At the end of the day, the math and the fundamental cryptography underlying your website security is all the same, for the most parts. All of this is upsells and, largely, marketing things. 
+
+Oh, and please, don't ever put something like this on your website, even if the consultant proposes that you do. It means absolutely nothing. You'll see, later today or tomorrow, it is absolutely trivial to add an image to a website and simply saying you are Norton secured means absolutely nothing. 
+
+And all you're doing is training your customers, or humanity more generally, to look for that symbol, which surely a bad guy could put on his or her own website and just claim they, too, are Norton secured. So we've gotten into some bad habits, as humans, as embodied even right here. So just as an aside, the reason there are different styles of certificates, they keep wanting to talk to us. 
+
+You can buy a SSL certificate for just one domain name, dub dub dub dot ComputerScienceforBusinessLeaders.com. Multiple websites, suppose I had dub dub dub dot ComputerScienceforBusinessLeaders.com. But I also wanted users to be able to visit ComputerScienceforBusinessLeaders.com without the www. Or, maybe, I have a third domain, like email.ComputerScienc eforBusinessLeaders.com. So if I have multiple domain names, they actually each need a different type of certificate, potentially. So I might as well get this version, which allows exactly that. 
+
+Or all subdomains, if you just want to have, and this is for fancier setups, if you want to have 10 or 20 different websites or servers that start with something, dot ComputerScienceforBusinessLeaders.com, then you get what's called a wildcard certificate. And it supports all of those variations. 
+
+Now, once you buy this, you install. It's a file that you download. And that file, essentially, just contains a really big, random number that has some mathematical relationship to some other number that you've already generated. We'll call it a public key and a private key, as I did just before. 
+
+And the idea here is that you install into your web server by just using FTP or some other protocol, dragging and dropping or copying and pasting these really big numbers into your own web server. And you follow the instructions consistent with your server software to do this. And your web server, henceforth, any time someone visits your business' website-- www.ComputerScienceBusinessLeaders.com-- your web server automatically, because this is built-in functionality these days, will just tell the world what its public key is. And remember that the public key has this mathematical relationship with a so-called private key. And so when users, customers talk securely to your server, their envelopes, like the ones we've been passing around, have seeming nonsense inside of them. Because the contents are encrypted. 
+
+And only your business' private key, which you generated as part of this process of buying an SSL certificate, can actually decrypt. And all of that happens transparently. But you can only buy these certificates from a finite number of companies in the world. 
+
+Because Microsoft, who makes IE and Edge, and Google, who makes Chrome, and Mozilla, who makes Firefox, and a few other players have all decided to ship their browsers. When you install any of those browsers-- IE, Edge, Firefox, Mozilla, Opera, or any others, Chrome-- they come with a finite number of certificates, so to speak, built into them. A finite list of, let's call them, companies whose SSL certificates should be allowed and considered secure. 
+
+So this means that I, David Malan, can't just go on DavidMalan.com and start selling SSL certificates. Because if I don't have some kind of relationship with Google, and Microsoft, and Mozilla, or contractors of theirs, no one's browsers will trust David Malan's certificates, even if I sell them at a discount versus everyone else. I can make them mathematically. But I can't trick the browsers into trusting them. 
+
+And what do I mean by trust? Well, notice. We are on GoDaddy.com. And as is the case with many websites, notice the padlock up at top right. What is that padlock presumably indicate, either prior to today's discussion or as of now? 
+
+AUDIENCE: It's secure. 
+
+DAVID J. MALAN: That it's secure. That just means that I am using some kind of cryptography, encryption between me and GoDaddy.com. And it doesn't have to be a GoDaddy. Let's go somewhere else. Let's go to Facebook.com. And notice I end up at HTTPS colon slash slash. So even if you don't type HTTPS, increasingly, our websites today redirecting you to the secure version of the website. This was often true when you typed in your passwords for quite some time. But then, you would often get the insecure version of the website after you logged in or after you checked out with your shopping cart and credit card. 
+
+Nowadays, increasingly, are websites-- because it's getting easier and cheaper to use this kind of encryption, and it's becoming expected-- are just using it for absolutely every web page. And this is a good thing. Because this means, for instance, when you go to Google, who also has started enabling SSL by default, this means when you search for something on Google, it's absolutely true that Google knows everything you're searching for on the internet, for all time unless you delete your history. And even then, hopefully, it actually deletes. 
+
+But no one in between you and Google, in theory, knows what you're searching for. So if you're searching for something private, or medical, or whatnot, so long as that bar is green, and you see the padlock, and the URL is HTTPS, and you're connected to Google, hopefully, your employer can't see what you're doing. Your university can't see what you're doing. 
+
+Now, if someone looks over your shoulder, they might still. And if it ends up in your browser's history, people might still know. But at least that tunnel between you and Google, in this case, is secure. And we can see this a little more. And you can do this at home, too. If I click on the padlock, on Chrome at least, there's a bunch of technical information here. If I click Connection, notice that, "Chrome verified that the Digi/Cert SHA2 High Assurance Server CA," certificate authority, "Issued this website's certificate." 
+
+Let's click on the Certificate Information. And we can see that Facebook, someone at Facebook bought this certificate. And notice the star. That's the wildcard that I alluded to earlier, the something dot Facebook.com. Notice that their certificate expires when? 
+
+December, so Facebook better pay the SSL bill over the next few months. And they're going to have to install new certificates on their servers. And if I really want to get curious, I can click on Details. And this is going to be more arcane than I want. 
+
+But you can see that this is, apparently, bought by Facebook, Inc. in Menlo Park. This is some technical information, where they bought it from. SHA-256 refers to something similar to encryption. It's called hash. RSA is the encryption if you've heard of RSA. 
+
+And then, there's even more fancy stuff in here. Elliptic Curve Public, this refers to a type of cryptography. Most of this is way more information than you actually need. But you can see that this is the technical detail underlying Facebook certificate. 
+
+Now, unfortunately, just to speak to social engineering, this now is a pretty useful indicator of the fact that someone, one, has a secure connection and, in turn, that the server you visited paid for that certificate. But it wasn't that long ago that websites could have default icons. In fact, do you notice these icons in Chrome's tabs right now? And browsers have kind of learned their lesson and put these icons up there, the logo for a website? 
+
+It wasn't that long ago that these fav icons, or favorite icons as they're called, were right there next to the address. In fact, I did a search during our break. For instance, not that long ago, let me open this one. Just on Google Images. 
+
+Let me zoom out. Come on. So not that long ago, browsers were doing this. Not only did they put the favorite icon up here in the tab, they also put it right next to the address bar. Why? Just, eh, it looked good. 
+
+It was kind of nice. You see the company's logo right next to its URL. So now, think from the perspective of an adversary, a bad guy. If you were a bad guy and the browsers were dumb enough to allow you to put a custom icon right next to the browsers URL, what icon would you choose for your fake website that's trying to fish for people's credit card information and such? AUDIENCE: The original website. DAVID J. MALAN: The original website, certainly, if you're mimicking one websites. What else might you put there that's even more deceitful? A padlock icon, which looks like a padlock and semantically suggests this site is secure, but has no technical meaning whatsoever, and which is to say you're conditioning people. 
+
+We, as a society, are conditioning people when you see padlock, assume site is secure. And that same logic can be completely reversed and manipulated so that people, now, are tricked into thinking something's secure. And the worst offenders, frankly, are people like banks, who idiotically, to this day-- let's see if Bank of America, a popular local one or national one, is doing the same. 
+
+OK. So what is this? What do you see here. This is the log in form for their website. They've done the exact same thing. You're training humans to think when you see a button on a website with a padlock that that means the connection is secure. 
+
+That means only that there is a graphic designer who knows how to make a picture of a padlock and put it on a website. Now, in this case, it is true, that the website is secure. Because notice the green padlock up here. And I'm using a new enough version of Chrome that I can't just put an arbitrary logo next to the URL. Now, only the secure icon goes there or not. 
+
+But this is absolutely meaningless here. And we humans continue to make these kinds of mistakes. Because we condition people to look for certain cues and infer meaning from them. But again, that same meaning can be abused. 
+
+So when building one's own corporate website, these signals are generally a bad thing. And even in emails, too, we have, as a society, conditioned people to click links on emails. And so it's not surprising that bad guys send out fake emails from PayPal, from Bank of America with links. Because we've trained people to click links in email. 
+
+A far better practice would be for Bank of America, when emailing its customers, say only, please visit Bank of America's website at your earliest convenience. And don't give people the URL. Because otherwise, they're just going to click it. Let it go. Let them search for it or, actually, go to it manually. 
+
+All right, so a bit of a sidetrack there. But the goal here was to paint the picture of this system of trust. With browsers, there are these things in the world called certificate authorities-- companies, a finite number of them, that are allowed to issue SSL certificates. Or, in turn, they are allowed to validate other third-party contractors to issue SSL certificates. If you're not on that list, though, you can mathematically create these big, random numbers that work for cryptography. 
+
+But the browser is, generally, going to yell at you. In fact, can I go to a website? Let me see. This site is not secure. If we just look for a Google image here, you might see screens like this. Browser manufacturers keep changing them. 
+
+This is typically what you would see. You see a red line in the URL, where HTTPS is crossed out. Because it's trying to be secure. But something's going on. And here it says, "This is probably not the site you're looking for!" 
+
+And this is either malicious, or it's because of a misconfiguration. Someone's using the wrong SSL certificate on the server for the site that the user is actually trying to visit. Any questions? 
+
+Well, let's take, before we break for lunch, one last look at what can be inside of these envelopes. I'm going to go into a clean browser tab here. And this is a feature. If you use Chrome, or most any other browser, you actually have this feature. 
+
+I'm going to go to the Menu. I'm going to go to More Tools and Developer Tools. Though you sometimes have to enable this special menu. And we'll see more of this in a little bit. 
+
+And I'm going to go down here to the bottom left. And I'm going to click on Network. So this is just something an engineer would use when he or she wants to look underneath the hood at what's going on between a browser and a server. 
+
+And let's go ahead and do this. I'm going to go to, click Preserve Log. In other words, I wanted to save everything that's going on, what we're about to do. And I'm going to type in HTTP colon slash slash www.Stanford.edu for Stanford University. I'm going to clear again just so we can start fresh. 
+
+And here we go. So here is Stanford's home page-- whole bunch of text, whole bunch of pictures, maybe some videos, and some other stuff. And this web page-- here, I'm going to reload now. Because I broke it by heading back. 
+
+This web page is written in a language called HTML that we'll take a brief look at later. And HTML is not a programming language. It's what's called a markup language. So we'll see it's just English-like syntax that tells the web page what to look like, what colors to use, what text to use, and the like. 
+
+But juicier is in this special Developer tab, I can actually see everything that just went on underneath the hood. For instance, in this web page, about how many images are there? I see 1, 2,3, 4, 5, 6, 7, 8, 9, 10, on the right, 11. So there's a dozen or more images on this web page. 
+
+Each of those images is a file on Stanford's web server. And this home page, written in this language called HTML, is also a file on Stanford's web server. So it turns out that a browser is smart enough to know, and we'll see this afternoon, when you receive the home page for a website, look at that HTML language, as we'll soon see. 
+
+And if you notice the names of images inside of it, go get those as well. Send additional requests, additional envelopes. So we might have gotten back, now, one, maybe 13 or more envelopes containing text, and images, maybe some other stuff that we, then, assemble inside of my browser to present this entire web page. 
+
+And notice down here the very first of those was a request just for HTTP colon slash slash www.Stanford.edu itself. And if I click on this row, I'm going to see some pretty arcane information. But let me scroll down and see if I can understand exactly what's going on here. 
+
+Let me make this a little bigger so we can see more at a time. And notice this. If I click on View Source, this text here, that I just highlighted, when I send, my browser sends that first envelope from here in Cambridge to Stanford, saying give me your home page, what is inside this envelope is exactly what I've highlighted there. 
+
+HTTP, Hypertext Transfer Protocol, is the set of conventions that a web browser uses when requesting web pages of a server. So just as I reached out with my hand to Arwa earlier, this is the digital equivalent of my browser reaching out digitally to Stanford's web server, putting this message inside this envelope. The most important line is the very first. 
+
+GET is a standard verb, used in this convention, that literally just means get the following. Get slash. Slash is just the default home page. It's nothing more specific than that. And use the version of HTTP known as 1.1. It's got some newer features than 1.0 had. 
+
+And the second most important line is this one-- Host colon dub dub dub dot Stanford.edu. When I mentioned earlier that a firewall could look inside of an envelope and figure out what website is being requested-- maybe it's Facebook. And we want to blacklist it. 
+
+The reason is the browser is very kindly telling us, inside the envelope, what it is requesting. And then, there's some less interesting stuff that's more technical. But slightly interesting, if not a little unnerving at first, is that also inside this envelope is apparently what information? 
+
+AUDIENCE: [INAUDIBLE]. DAVID J. MALAN: Yeah, what kind of computer I have. So I have a Mac. It's running Mac OS 10.11.2, it seems. And if I read farther down, it tells the server that I'm using a certain version of Chrome, in fact. 
+
+So that's mildly disconcerting. But slightly more disconcerting should be the fact that I already told Stanford what my IP address is. So they can already figure out, perhaps, a little bit more about me from that. And then, there's some other stuff there too. Now, let me scroll up slightly. Here is what Stanford responded with. Inside of this envelope was, first and foremost, the web page itself, the HTML that we'll see later this afternoon. But also inside Stanford's envelope to me is everything I've highlighted here. 
+
+The juiciest of lines of which is the top, which says, OK, yep, I speak HTTP 1.1. 200 is my status code, OK. Now, you might not have ever seen the number 200 before, which makes sense. Because 200, indeed, means OK, all is well. 
+
+But you probably have seen a number, on your web browser, that was sent to you from some server inside of an envelope that's not the number 200. What numbers have you seen that spring to mind? 
+
+AUDIENCE:404. 
+
+DAVID J. MALAN: 404. So if you've ever wondered where is this 404 convention coming from, of all the arcane things to tell me, 404 file not found, that simply means that a web server, if you request this page that doesn't exist, it's not there, files not found, this message in blue is going to say HTTP 1.1 space 404 not found. And your browser notices that and, then, presents it to you, maybe in a bigger font, bigger, bold information with some explanatory text. But that's all. 
+
+And then, the rest of the information is more arcane information, from the server to you, just telling your browser where it came from. Every single request you make over the internet contains information like this. This is both useful for technical reasons. 
+
+It's also useful for login reasons, to know who's visiting your website, what browser they're using, maybe what browser you should be optimizing your website for if everyone's using Chrome these days. Maybe you don't need to support Internet Explorer anymore. How do you know that? You can just log all of the information that's coming in these requests. 
+
+Conversely, this clearly means that every time you visit any website on the internet, not only do they know your IP address, because you gave it to them in the top left corner of the envelope, they also know what's your browser is, what day of time it is, what pages you're requesting. 
+
+And increasingly, especially on websites that have advertisements, more worrisome here is if you've got a company, and this is super common these days, that has sells advertisements for this website, let's call it A.com, and also on this website, B.com, and this website, C.com, A and B and C.com might not know that they have a customer in common. 
+
+But if this third-party advertising company is seeing requests from the same IP address visiting both A.com, B.com, and C.com, why? Because the advertising server's being asked to serve up ads to all three of these websites. And therefore, it will be provided with your IP address so that your web page, your browser sees the ad. 
+
+There are these middlemen, so to speak, on the internet that know even more about you than the websites you're visiting. And Google is certainly among the biggest offenders, or featurerers, along those lines. And in fact, when I mention their DNS server, before you might think at first glance, oh, this is a handy feature. Google provides the world with a free DNS server that sometimes helps me solve problems. Mm-mm. Now, you're telling Google not only every page you're searching for, but every page you're going to directly. Because you're saying, hey, Google, I want to go to Z.com. What's its IP address? 
+
+And this all boils down to these very simple requests and responses that we've now seen from top to bottom. So why don't we pause here for an hour. Return at 1:30 for lunch. I'm going to disappear for a bit. And we'll resume with a hands-on look and some more concepts. And happy to stick around, for a few minutes, with questions individually. 
