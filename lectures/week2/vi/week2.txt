@@ -1,0 +1,689 @@
+[NHẠC] 
+
+DAVID J. Malan: Tất cả các quyền. Đây là CS50 và điều này là sự bắt đầu của tuần 2. Và bạn sẽ nhớ lại rằng hơn quá khứ vài tuần, chúng tôi đã giới thiệu máy tính khoa học và, lần lượt, lập trình. 
+
+Và chúng tôi bắt đầu câu chuyện bằng cách Scratch, mà ngôn ngữ đồ họa từ Media Lab của MIT'S. Và sau đó gần đây nhất, tuần trước, chúng tôi đã làm giới thiệu một higher-- một ngôn ngữ cấp thấp hơn được biết đến như C, một cái gì đó hoàn toàn là văn bản. Và, quả thật vậy, thời gian qua chúng tôi khám phá trong bối cảnh một số khái niệm. 
+
+, Thu hồi này, là rất Chương trình đầu tiên chúng ta nhìn vào. Và chương trình này, khá đơn giản, in ra, "hello, thế giới." Nhưng có rất nhiều dường như kỳ diệu xảy ra. Có #include này với các dấu ngoặc nhọn. Có int. Có (void). Có dấu ngoặc đơn, dấu ngoặc, dấu chấm phẩy, và nhiều hơn nữa. 
+
+Và như vậy, nhớ lại rằng chúng tôi giới thiệu Scratch để chúng tôi có thể, tốt nhất, xem qua rằng cú pháp, những thứ đó thực sự không tất cả những trí tuệ thú vị, nhưng sớm là, hoàn toàn, một chút khéo léo để hết tâm trí bạn. Và, quả thật vậy, một trong những phổ biến nhất điều sớm trong một lớp học lập trình, đặc biệt là cho những người kém thoải mái, là để có được thất vọng bởi vấp ngã bởi cú pháp nhất định lỗi, chưa kể đến các lỗi logic. Và như vậy giữa các mục tiêu của chúng tôi ngày hôm nay, thực sự, sẽ được trang bị cho bạn với một số kỹ thuật giải quyết vấn đề như thế nào cho để giải quyết tốt hơn những vấn đề bản thân trong các hình thức gỡ lỗi. Và bạn sẽ nhớ lại, quá, mà các môi trường mà chúng tôi giới thiệu Lần cuối cùng được gọi là CS50 IDE. Đây là phần mềm dựa trên web cho phép bạn để chương trình trong các đám mây, vậy để nói chuyện, trong khi vẫn giữ tất cả các bạn tập tin với nhau, như chúng ta sẽ một lần nữa ngày hôm nay. Và nhớ lại chúng tôi rằng xem xét lại các chủ đề này ở đây, trong đó có chức năng, và các vòng lặp, và biến và biểu thức Boolean và điều kiện. Và trên thực tế một vài chi tiết mà chúng ta dịch từ thế giới của Scratch với thế giới của C. 
+
+Nhưng việc xây dựng cơ bản khối, có thể nói, đã thực sự vẫn như nhau vào tuần trước. Trong thực tế, chúng tôi thực sự chỉ có một khác nhau mảnh ghép, nếu bạn muốn. Thay vào đó màu tím tiết kiệm khối, chúng tôi thay vì đã printf, đó là chức năng này trong C cho phép bạn in một cái gì đó và định dạng nó trên màn hình. Chúng tôi giới thiệu CS50 Thư viện, nơi bạn có tại get_char ý của bạn, và get_int, và get_string, và một vài chức năng khác như tốt, thông qua đó bạn có thể nhận được đầu vào từ bàn phím riêng của người dùng. Và chúng tôi cũng đã xem xét mọi thứ như these- bool và char, và double, float, int, string long_long. Và thậm chí còn có các kiểu dữ liệu khác trong C. 
+
+Nói cách khác, khi bạn khai báo một biến để lưu trữ một số giá trị, hoặc khi bạn thực hiện một chức năng mà trả về một số giá trị, bạn có thể chỉ định những gì loại của giá trị đó là. Nó là một chuỗi, như một chuỗi các ký tự? Có một số, giống như một số nguyên? Có một điểm nổi giá trị, hoặc như thế nào? Vì vậy, trong C, không giống như Scratch, chúng tôi thực sự bắt đầu để xác định loại dữ liệu chúng tôi đã trở về hoặc sử dụng. 
+
+Nhưng, tất nhiên, chúng tôi cũng chạy vào một số giới hạn cơ bản của máy tính. Và đặc biệt, này ngôn ngữ C, thu hồi mà chúng ta đã xem xét tràn số nguyên, thực tế rằng nếu bạn chỉ có một số lượng hữu hạn của bộ nhớ hay cụ thể, một số hữu hạn bit, bạn chỉ có thể đếm quá cao. Và vì vậy chúng tôi đã xem xét ví dụ này đây theo đó một truy cập trong một chiếc máy bay,, trên thực tế, nếu chạy đủ lâu sẽ tràn và kết quả trong một phần mềm một lỗi tiềm năng vật lý thực tế. 
+
+Chúng tôi cũng nhìn nổi điểm không chính xác, thực tế mà chỉ có một số hữu hạn bit, cho dù đó là 32 hoặc 64, bạn chỉ có thể chỉ định nhiều số sau khi một điểm thập phân, sau đó bạn bắt đầu để có được chính xác. Vì vậy, ví dụ, một phần ba trong thế giới ở đây, trong thế giới của con người, chúng ta biết chỉ là một số lượng vô hạn của 3s sau dấu thập phân. Tuy nhiên, một máy tính có thể không nhất thiết phải đại diện một số vô hạn các số nếu bạn chỉ cho phép nó một số số lượng hữu hạn của thông tin. 
+
+Vì vậy, chúng tôi không chỉ trang bị cho bạn với sức mạnh lớn hơn trong điều kiện làm thế nào bạn có thể thể hiện chính mình tại một bàn phím về lập trình, chúng tôi cũng giới hạn những gì bạn thực sự có thể làm. Và quả thực, lỗi và những sai lầm có thể phát sinh từ những loại vấn đề. Và quả thực, trong số các chủ đề hiện nay sẽ được các chủ đề như gỡ lỗi và thực sự tìm kiếm bên dưới mui xe cách điều đã được giới thiệu tuần trước đang thực sự thực hiện để bạn tốt hơn hiểu cả những khả năng và những hạn chế của một ngôn ngữ như C. 
+
+Và trên thực tế, chúng tôi sẽ bóc lại các lớp trong những đơn giản của cấu trúc dữ liệu, một cái gì đó gọi là một mảng, mà Scratch xảy ra để gọi một "danh sách." Đó là một chút khác nhau trong bối cảnh đó. Và sau đó chúng tôi cũng sẽ giới thiệu một trong những đầu tiên của các vấn đề tên miền cụ thể của chúng tôi trong CS50, thế giới mật mã học, nghệ thuật xáo trộn hoặc trong mã hoá thông tin để bạn có thể gửi tin nhắn bí mật và giải mã thông điệp bí mật giữa hai người, A và B. 
+
+Vì vậy, trước khi chuyển chúng tôi cho rằng thế giới mới, chúng ta hãy cố gắng trang bị cho bạn với một số kỹ thuật mà bạn có thể loại bỏ hoặc ít nhất là giảm số những nỗi thất vọng mà bạn có thể gặp phải trong tuần vừa qua. Trong thực tế, trước mắt của bạn được such-- một số vấn đề đầu tiên của bạn trong C. Và tỷ lệ cược là, nếu bạn đang như tôi, lần đầu tiên bạn cố gắng để loại ra một chương trình, thậm chí nếu bạn suy nghĩ logic chương trình khá đơn giản, bạn rất tốt có thể đánh một bức tường, và trình biên dịch sẽ không hợp tác. Thực hiện hoặc Clang sẽ không để thực sự làm đấu thầu của bạn. 
+
+Và tại sao điều đó có thể được? Vâng, chúng ta hãy nhìn vào, có lẽ, một chương trình đơn giản. Tôi sẽ đi trước và lưu này trong một tập tin gọi là cố tình buggy0.c, bởi vì tôi biết nó đến có những thiếu sót trước. Nhưng tôi có thể không nhận ra rằng nếu điều này là chương trình đầu tiên hoặc thứ hai hoặc thứ ba rằng tôi thực sự làm cho bản thân mình. Vì vậy, tôi sẽ đi trước và loại ra, int main (void). Và sau đó bên trong các dấu ngoặc nhọn của tôi, rất quen thuộc ( "hello, world-- xuyệc ngược, n ") - và một dấu chấm phẩy. 
+
+Tôi đã lưu tập tin. Bây giờ tôi sẽ đi xuống đến cửa sổ thiết bị đầu cuối của tôi và kiểu make buggy0, bởi vì, một lần nữa, tên của tập tin hôm nay là buggy0.c. Vì vậy, tôi gõ làm buggy0, Enter. 
+
+Và, ồ, trời ơi, nhớ lại từ lần cuối cùng mà không có thông báo lỗi là một điều tốt. Vì vậy, không có đầu ra là một điều tốt. Nhưng ở đây tôi có rõ ràng một số số những sai lầm. 
+
+Vì vậy, dòng đầu tiên của đầu ra sau khi nhập làm buggy0, thu hồi, là đầu ra khá dài dòng Clang của. Bên dưới mui xe, CS50 IDE được cấu hình sử dụng một bó toàn bộ tùy chọn với trình biên dịch này do đó bạn không có để suy nghĩ về chúng. Và đó là tất cả những dòng đầu tiên phương tiện bắt đầu với Clang. 
+
+Nhưng sau đó, những vấn đề bắt đầu làm cho sự xuất hiện của họ. Buggy0.c trên dòng 3, nhân vật 5, có một lỗi lớn màu đỏ. Đó là gì? Ngầm tuyên bố chức năng thư viện printf với kiểu int (const char *, ...) [-Werror]. Ý tôi là, nó rất nhanh chóng sẽ rất phức tạp. Và chắc chắn, lần đầu tiên Trong nháy mắt, chúng tôi sẽ không mong bạn hiểu được toàn bộ các tin nhắn đó. Và vì vậy một trong những bài học cho ngày hôm nay sẽ để được thử để ý mô hình, hoặc những điều tương tự, lỗi bạn có thể có gặp phải trong quá khứ. Vì vậy, hãy trêu chọc nhau chỉ những từ mà trông quen thuộc. Việc lớn, báo lỗi màu đỏ rõ ràng là biểu tượng của một cái gì đó là sai. 
+
+ngầm tuyên bố Thư viện hàm printf. Vì vậy, ngay cả khi tôi không hoàn toàn hiểu những gì ngầm tuyên bố chức năng thư viện phương tiện, vấn đề chắc chắn liên quan đến printf bằng cách nào đó. Và nguồn gốc của vấn đề đó đã làm với tuyên bố nó. 
+
+Khai báo một chức năng là nhắc đến nó lần đầu tiên. Và chúng tôi sử dụng các thuật ngữ tuần trước khai báo nguyên mẫu của một chức năng, hoặc với một dòng ở đầu của bạn tập tin riêng hoặc trong một tập tin tiêu đề cái gọi là. Và trong những tập tin đã làm chúng ta nói Tuần trước, printf là báo giá, unquote, tuyên bố? Trong tập tin những gì là nguyên mẫu của nó? 
+
+Vì vậy, nếu bạn gọi lại, điều đầu tiên tôi đánh máy, hầu hết các chương trình time-- cuối cùng và vô tình một thời điểm trước đây bắt đầu gõ myself-- là này một đây-- hash-- #include <stio-- cho đầu vào / output-- dot h Và quả thực, nếu bây giờ tôi lưu tập tin này, tôi sẽ đi trước và xóa màn hình của tôi, mà bạn có thể làm bằng cách gõ Rõ ràng, hoặc bạn có thể giữ Control L, chỉ để xóa sổ terminal của bạn chỉ để loại bỏ một số lộn xộn. 
+
+Tôi sẽ đi trước và tái kiểu make buggy0, Enter. Và đây rồi, tôi vẫn nhận thấy rằng lệnh dài từ Clang, nhưng không có thông báo lỗi thời gian này. Và quả thực, nếu tôi làm ./buggy0, giống như thời gian qua, nơi dot nghĩa này thư mục, Slash chỉ có nghĩa là, ở đây có tên của chương trình và rằng tên của chương trình là buggy0, Nhập, "hello, thế giới." 
+
+Bây giờ, làm thế nào bạn có thể có lượm lặt giải pháp này mà không nhất thiết phải công nhận càng nhiều từ như tôi đã làm, chắc chắn, có làm điều này trong nhiều năm? Vâng, nhận ra mỗi vấn đề đầu tiên thiết lập, chúng tôi giới thiệu bạn đến một lệnh rằng nhân viên của CS50 của đã viết gọi là help50. Và quả thực, C không đặc điểm kỹ thuật vấn đề thiết lập như thế nào để sử dụng này. 
+
+Nhưng về cơ bản là help50 một chương trình mà nhân viên của CS50 đã viết cho phép bạn chạy một lệnh hoặc chạy một chương trình, và nếu bạn không hiểu nó đầu ra, để vượt qua sản lượng của nó để help50, điểm mà tại đó các phần mềm rằng nhân viên của khóa học đã viết sẽ xem xét đầu ra của chương trình của bạn từng dòng, từng ký tự. Và nếu chúng tôi, các nhân viên, công nhận thông báo lỗi mà bạn đang gặp phải, chúng tôi sẽ cố gắng để gây cho bạn một số câu hỏi tu từ, với một số lời khuyên, giống như một TF hoặc một CA hoặc bản thân mình sẽ làm trực tiếp tại văn phòng giờ. 
+
+Vì vậy, nhìn vào help50 nếu bạn không nhất thiết phải nhận ra một vấn đề. Nhưng đừng dựa vào nó quá nhiều như một cái nạng. Chắc chắn cố gắng hiểu nó đầu ra và sau đó học hỏi từ nó do đó chỉ một lần hoặc hai lần làm bạn bao giờ chạy help50 cho một lỗi cụ thể thông điệp. Sau đó, bạn nên có trang bị tốt hơn cho mình để tìm ra những gì nó thực sự là. 
+
+Hãy làm một khác ở đây. Hãy để tôi đi trước, và trong một tập tin chúng tôi sẽ gọi buggy1.c này. Và trong tập tin này tôi sẽ deliberately-- nhưng giả vờ rằng tôi không hiểu những gì sai lầm tôi đã thực hiện. 
+
+Tôi sẽ đi trước và làm này-- #include, kể từ khi tôi đã học được bài học của tôi từ lúc nãy. Int main (void), như trước đây. Và sau đó ở đây tôi sẽ để làm chuỗi s - get_string. Và nhớ lại từ lần cuối cùng phương tiện này, hey, máy tính, cho tôi một biến, gọi nó là, và làm kiểu của biến mà một chuỗi vì vậy tôi có thể lưu trữ một hoặc nhiều từ trong đó. 
+
+Và sau đó vào cánh tay phải bên của dấu bằng được get_string, mà là một chức năng trong thư viện CS50 thực hiện chính xác đó. Nó được một chức năng và sau đó tay nó từ phải sang trái. Vì vậy, dấu bằng này không có nghĩa là "Bằng" như chúng ta có thể nghĩ rằng trong toán học. Nó có nghĩa là chuyển nhượng từ phải sang trái. Vì vậy, điều này có nghĩa, lấy chuỗi từ người sử dụng và lưu trữ nó bên trong của s. 
+
+Bây giờ chúng ta hãy sử dụng nó. Hãy để tôi đi trước bây giờ và như một thứ hai dòng, hãy để tôi đi trước và nói "xin chào" - không phải là "thế giới", nhưng "hello,% s-- đó là giữ chỗ của chúng tôi, dấu phẩy s, đó là biến của chúng tôi, và sau đó là một dấu chấm phẩy. Vì vậy, nếu tôi không vít lên quá nhiều ở đây, điều này trông giống như mã đúng. 
+
+Và bản năng của tôi bây giờ là để biên dịch nó. Các tập tin được gọi là buggy1.c. Vì vậy, tôi sẽ làm làm cho buggy1, Enter. Và darn-nó, nếu không có thậm chí lỗi nhiều hơn so với trước đây. Ý tôi là, có nhiều thông báo lỗi nó sẽ vẻ hơn dòng thực tế trong chương trình này. 
+
+Nhưng takeaway ở đây là, ngay cả khi bạn đang bị choáng ngợp với hai hoặc ba hoặc bốn thông điệp báo lỗi hơn, tập trung luôn trên rất đầu tiên của những tin nhắn. Nhìn vào top-nhất một, di chuyển trở lại lên nếu thấy cần thiết. Vì vậy, ở đây tôi gõ make buggy1. Dưới đây là sản lượng Clang như mong đợi. 
+
+Và đây là lỗi màu đỏ đầu tiên. Sử dụng định không khai báo chuỗi, đã làm tôi có nghĩa là tiêu chuẩn trong? Vì vậy, trong các ý kiến thực sự cái gì khác. Nó đề cập đến những người sử dụng của bàn phím, về cơ bản. 
+
+Nhưng đó không phải là những gì tôi muốn nói. Tôi có nghĩa là chuỗi, và tôi có nghĩa là get_string. Vì vậy, nó là những gì mà tôi quên để làm thời gian này? Những gì còn thiếu thời gian này? Tôi có #include của tôi, vì vậy tôi có quyền truy cập vào printf. 
+
+Nhưng những gì tôi không có truy cập vào chỉ chưa? Vâng, giống như thời gian qua, Tôi cần phải nói với trình biên dịch Clang những gì các chức năng này. Get_string không đến C. Và đặc biệt, nó không đến ở tiêu đề tập tin,. Nó thay vì đi kèm trong một cái gì đó các nhân viên đã viết, mà là một tập tin khác nhau tên nhưng đã khéo léo đặt tên. 
+
+Vì vậy, chỉ đơn giản bằng cách thêm vào đó một dòng thu hồi code-- từ lần cuối cùng rằng khi Clang chạy, nó sẽ để xem mã hàng đầu của tôi xuống dưới, trái sang phải. Nó sẽ để ý, oh, bạn muốn. Hãy để tôi đi và thấy rằng, bất cứ nơi nào nó là trên máy chủ, sao chép và dán nó, về cơ bản, vào đầu tập tin riêng của bạn vì vậy mà vào thời điểm này trong câu chuyện, dòng 1, phần còn lại của chương trình có thể, thực sự, sử dụng bất kỳ chức năng trong đó, trong đó get_string. Vì vậy, tôi sẽ bỏ qua phần còn lại của những sai sót, bởi vì tôi, thực sự, nghi ngờ rằng chỉ người đầu tiên thực sự quan trọng. Và tôi sẽ đi trước và chạy lại, sau khi lưu file của tôi làm cho buggy1. Và đây rồi, nó đã làm việc. Và nếu tôi làm ./buggy1 và gõ, cho Ví dụ, Zamyla, bây giờ tôi sẽ nhận được hello, Zamyla, thay vì xin chào, thế giới. 
+
+Tất cả các quyền. Vì vậy, các takeaways ở đây sau đó là tới, một, cố gắng thu thập càng nhiều như bạn có thể từ các thông báo lỗi một mình, nhìn ở một số từ dễ nhận biết. Chặn điều đó, sử dụng help50 mỗi vấn đề thiết lập đặc điểm kỹ thuật. Nhưng chặn điều đó, quá, luôn luôn tìm tại các lỗi trên chỉ, ít nhất Ban đầu, để xem thông tin nó thực sự có thể mang lại. Nhưng hóa ra có của nhiều chức năng hơn được xây dựng vào thư viện để giúp CS50 bạn sớm trong học kỳ và sớm trong lập trình tìm ra những gì đang xảy ra sai. Vì vậy, chúng ta hãy làm một ví dụ khác ở đây. Tôi sẽ gọi buggy2 này, trong đó, một lần nữa, sẽ có những thiếu sót ra của các cửa khẩu, do thiết kế. 
+
+Và tôi sẽ đi trước và làm #include. Và sau đó tôi sẽ làm int main (void). Và sau đó tôi sẽ làm cho vòng lặp. For (int i _ 0. i nhỏ hơn hoặc bằng 10. i ++, và sau đó trong dấu ngoặc, tôi sẽ để in ra chỉ là một biểu tượng hashtag đây và một ký tự dòng mới. 
+
+Vì vậy, ý định của tôi với điều này chương trình khá đơn giản để lặp 10 lần và trên mỗi lần lặp vòng lặp đó mỗi lần thông qua các chu kỳ, in ra một hashtag, hashtag, hashtag. Một dòng mỗi vì tôi có dòng mới có. Và nhớ lại rằng cho vòng lặp, mỗi week-- cuối cùng và bạn sẽ nhận được nhiều hơn quen thuộc với cú pháp bằng cách sử dụng nó với thực tế trước long-- này mang lại cho tôi một biến gọi tôi và đặt nó vào 0. 
+
+Đây increments i trên mỗi lần lặp bằng 1. Vì vậy, tôi đi đến 1 đến 2-3. Và sau đó tình trạng này ở các trung gian giữa các dấu chấm phẩy được kiểm tra mỗi lần lặp để làm cho chắc chắn rằng chúng tôi vẫn còn trong phạm vi. Vì vậy, tôi muốn lặp 10 lần, vì vậy tôi có loại rất trực giác chỉ đưa 10 như ràng buộc trên của tôi ở đó. 
+
+Thế nhưng, khi tôi chạy này, sau khi biên dịch nó với make buggy2-- và nó biên dịch OK. Vì vậy, tôi không có một lỗi cú pháp lần này. Hãy để tôi đi trước nay và chạy buggy2, Enter. Và bây giờ di chuyển lên. Và hãy để tôi tăng kích thước của cửa sổ. 
+
+Tôi dường như có 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Vì vậy, có 11 hashtags, mặc dù Tôi đặt rõ 10 bên trong vòng lặp này. Bây giờ, một số bạn có thể thấy ngay lập tức những gì lỗi là bởi vì, thực sự, điều này không phải là một lỗi rất khó để thực hiện. Nhưng nó rất phổ biến thực hiện rất sớm. 
+
+Những gì tôi muốn chỉ ra, mặc dù, là, làm thế nào tôi có thể con số này ra? Vâng, nó chỉ ra rằng Thư viện CS50 đến với không chỉ get_string và get_int và get_float và các chức năng khác. Nó cũng đi kèm với một chức năng đặc biệt gọi eprintf, hoặc, lỗi printf. Và nó tồn tại chỉ để làm cho nó một chút dễ dàng hơn cho bạn khi gỡ lỗi mã của bạn để chỉ in một thông báo lỗi trên màn hình và biết nó đến từ đâu. 
+
+Vì vậy, ví dụ, có một điều tôi có thể làm ở đây với chức năng này là này-- eprintf, và sau đó tôi sẽ đi trước và nói rằng tôi bây giờ là% i, dấu gạch chéo, n. Và tôi sẽ cắm vào giá trị của i. Và lên hàng đầu, bởi vì đây là trong Thư viện CS50, Tôi sẽ đi trước và bao gồm vì vậy tôi có quyền truy cập vào chức năng này. Nhưng chúng ta hãy xem xét những gì dòng 9 là vụ phải được làm. Tôi sẽ xóa này cuối cùng. Điều này không có gì để làm với mục tiêu bao trùm của tôi. Nhưng eprintf, lỗi printf, chỉ là nghĩa để cung cấp cho tôi một số thông tin chẩn đoán. Khi tôi chạy chương trình của tôi, tôi muốn thấy điều này trên màn hình tạm thời cũng chỉ để hiểu những gì đang xảy ra. 
+
+Và, quả thật vậy, trên mỗi lặp đi lặp lại ở đây của dòng 9 Tôi muốn nhìn thấy, giá trị của tôi là gì? giá trị của tôi là gì? giá trị của tôi là gì? Và, hy vọng, tôi chỉ nên thấy rằng thông điệp, cũng, gấp 10 lần. 
+
+Vì vậy, hãy để tôi đi trước và biên dịch lại chương trình của tôi, như tôi phải làm bất cứ lúc nào Tôi làm cho một sự thay đổi. ./buggy2. Và now-- OK. Có rất nhiều nhiều đang xảy ra. Vì vậy, hãy để tôi di chuyển lên trong một cửa sổ lớn hơn. 
+
+Và bạn sẽ thấy rằng mỗi các hashtags vẫn in. Nhưng ở giữa mỗi trong số họ giờ đây là chẩn đoán sản lượng được định dạng như sau. Tên của chương trình của tôi ở đây là buggy2. Tên của tập tin là buggy2.c. Số đường mà từ đó này đã được in là dòng 9. Và sau đó bên phải đó là thông báo lỗi mà tôi đang mong đợi. 
+
+Và những gì là tốt đẹp về việc này là bây giờ tôi không phải nhất thiết phải đếm trong đầu của tôi những gì chương trình của tôi đang làm. Tôi có thể thấy rằng trên Phiên đầu tiên tôi là 0, sau đó 1, sau đó 2, sau đó 3, sau đó 4, sau đó 5, sau đó 6, sau đó 7, sau đó 8, sau đó 9, sau đó 10. Vì vậy, chờ một phút. Những gì đang xảy ra ở đây? Tôi dường như vẫn được đếm như dự định lên đến 10. 
+
+Nhưng mà tôi lại bắt đầu? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10. Vì vậy, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- ngón tay thứ 11 là biểu hiện của vấn đề. Tôi dường như đã tính không đúng trong vòng lặp của tôi. Thay vì đi 10 lần lặp lại, Tôi đang bắt đầu từ 0, Tôi kết thúc tại và thông qua 10. Nhưng bởi vì, giống như một máy tính, Tôi bắt đầu đếm từ 0, Tôi nên đếm lên để, nhưng không thông qua, 10. 
+
+Và vì vậy việc sửa chữa, tôi cuối cùng nhận ra ở đây, là một trong hai điều. Tôi có thể rất đơn giản nói đếm đến nhỏ hơn 10. Vì vậy, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, đó là, trên thực tế, chính xác, mặc dù nó có vẻ một chút sai. Hoặc tôi có thể làm nhỏ hơn hoặc bằng đến 9, miễn là tôi bắt đầu từ 0. Hoặc nếu bạn thực sự không thích điều đó, bạn có thể đếm lên qua 10 nhưng bắt đầu từ 1. Nhưng một lần nữa, điều này chỉ là không phải là phổ biến. Trong programming-- dù không quá nhiều trong Scratch-- nhưng trong lập trình C và các ngôn ngữ khác, như JavaScript và Python và những người khác, đó là chỉ rất phổ biến cho thảo luận của chúng ta về nhị phân chỉ bắt đầu đếm tại số thấp nhất bạn có thể, mà là 0. Tất cả các quyền. Vì vậy, đó là eprintf. Và một lần nữa, bây giờ mà tôi đã tìm ra tôi vấn đề, và tôi sẽ trở về 0 qua ít hơn 10, tôi sẽ để đi vào và xóa eprintf. 
+
+Nó không nên có khi tôi tàu mã của tôi hoặc gửi mã của tôi hoặc hiển thị nó cho bất cứ ai khác. Nó thực sự chỉ có nghĩa là được sử dụng tạm thời. Nhưng bây giờ tôi đã cố định này vấn đề cụ thể là tốt. 
+
+Vâng, chúng ta hãy làm một ví dụ nữa đây rằng tôi sẽ whip lên như sau. Tôi sẽ đi trước và #include. $ 50 Và tôi sẽ đi trước và #include. 
+
+Và tôi sẽ tiết kiệm tập tin này như buggy3.c. Và tôi sẽ đi trước và tuyên bố int main (void). Và sau đó bên trong có Tôi sẽ làm int i _ - Tôi muốn thực hiện một chương trình với một get_negative_int. Đây không phải là một chức năng mà tồn tại chưa. Vì vậy, chúng ta sẽ thực hiện nó chỉ trong một khoảnh khắc. Nhưng chúng ta sẽ thấy tại sao đó là lỗi tại đầu tiên vượt qua. Và một khi tôi đã nhận được một int từ người sử dụng, Tôi chỉ cần đi để in% i là tiêu cực số nguyên, dấu gạch chéo, n, dấu phẩy, i. Nói cách khác, tất cả tôi muốn chương trình này để làm là có được một int tiêu cực từ người sử dụng và sau đó in ra mà như vậy và như vậy là một int tiêu cực. 
+
+Bây giờ tôi cần phải thực hiện chức năng này. Vì vậy, sau này trong tập tin của tôi, tôi sẽ đi trước và tuyên bố một chức năng gọi là get_negative_int (void) - và chúng tôi sẽ trở về với những dòng đó có nghĩa là một lần nữa trong một moment-- int n; do-- làm các following-- printf n là :. Và sau đó tôi sẽ làm n - get_int, và làm trong khi n này là lớn hơn 0. Và sau đó trở n ;. 
+
+Vì vậy, có rất nhiều xảy ra trong này, nhưng không ai trong số đó chúng tôi đã không nhìn vào tuần trước, ít nhất một thời gian ngắn. Vì vậy, trên đường 10 ở đây tôi đã tuyên bố một chức năng gọi get_negative_int, và tôi đã đặt (void), trong dấu ngoặc đơn, lý do là đây không mất một đầu vào. Tôi không đi qua bất cứ điều gì chức năng này. Tôi chỉ nhận được một cái gì đó trở lại từ nó. 
+
+Và những gì tôi hy vọng được trở lại là một số nguyên. Không có kiểu dữ liệu trong C được gọi là negative_int. Nó chỉ là int, vì vậy nó sẽ để trên chúng tôi để đảm bảo rằng giá trị đó là thực sự trở lại không chỉ một int nhưng cũng là tiêu cực. 
+
+On line 12 Tôi đang khai báo một biến gọi n và làm cho nó có kiểu int. Và sau đó trong dòng 13 đến 18 Tôi làm một cái gì đó trong khi một cái gì đó là sự thật. Tôi đi trước và in ấn n là, ruột kết, và sau đó là một không gian, như một nhắc nhở cho người sử dụng. 
+
+Tôi sau đó gọi get_int và lưu trữ được gọi là giá trị trả về của nó trong đó biến n. Nhưng tôi sẽ tiếp tục làm trong khi n này là lớn hơn 0. Nói cách khác, nếu người sử dụng mang lại cho tôi một int và con số này lớn hơn 0, ergo, tích cực, tôi sẽ chỉ cần giữ reprompting người sử dụng, giữ reprompting, bằng cách buộc chúng hợp tác và cung cấp cho tôi một int tiêu cực. 
+
+Và một khi n là thực sự negative-- giả sử người sử dụng cuối cùng loại -50, sau đó vòng lặp trong khi điều này không còn đúng vì -50 là không lớn hơn 0. Vì vậy, chúng ta thoát ra khỏi đó vòng lặp một cách hợp lý và trả lại n. 
+
+Nhưng có một khác điều tôi phải làm. Và tôi chỉ có thể làm điều này bằng cách sao chép và dán một dòng mã ở trên cùng của tập tin. Tôi cần dạy Clang, hoặc hứa sẽ kêu vang, một cách rõ ràng rằng tôi sẽ, thực sự, hãy đi và thực hiện Chức năng này get_negative_int. Nó chỉ có thể là thấp hơn trong tập tin. Một lần nữa, nhớ lại rằng Clang đọc những thứ trên xuống dưới, trái sang phải, vì vậy bạn có thể không gọi một chức năng nếu Clang không biết nó sẽ tồn tại. 
+
+Bây giờ, không may, chương trình này, như một số bạn có thể thấy, là đã có lỗi. Hãy để tôi đi trước và thực hiện buggy3. Nó biên dịch, vì vậy vấn đề của tôi bây giờ không phải là lỗi cú pháp, giống như một lỗi văn bản, nó thực sự sẽ là một logic lỗi mà tôi đã cố tình thực hiện như một cơ hội để bước qua những gì đang xảy ra. 
+
+Tôi sẽ đi trước bây giờ và chạy buggy3. Và tôi sẽ đi trước và không hợp tác. Tôi sẽ cung cấp cho nó số 1. Nó không thích nó, vì vậy nó khiến tôi một lần nữa. 
+
+Làm thế nào về 2? 3? 50? Không ai trong số những người đang làm việc. Làm thế nào về -50? Và chương trình dường như làm việc. 
+
+Hãy để tôi thử nó một lần nữa. Hãy để tôi thử -1, dường như làm việc. Hãy để tôi thử -2, dường như làm việc. Hãy để tôi thử 0. Huh, đó là không chính xác. Bây giờ, chúng tôi đang được một chút mô phạm ở đây. Nhưng đó là, thực sự, những trường hợp đó 0 không phải là tích cực hay tiêu cực. Và do đó, thực tế là chương trình của tôi là nói rằng 0 là một số nguyên âm, đó không phải là kỹ thuật chính xác. 
+
+Bây giờ, tại sao nó làm điều này? Vâng, nó có thể được rõ ràng. Và, quả thật vậy, chương trình là có nghĩa là để được khá đơn giản vì vậy chúng tôi có một cái gì đó để khám phá. 
+
+Nhưng chúng ta hãy giới thiệu một gỡ lỗi thứ ba kỹ thuật ở đây gọi là debug50. Vì vậy, đây là một chương trình mà chúng ta vừa tạo năm được gọi là debug50 này mà sẽ cho phép bạn sử dụng những gì được gọi là một built-in debugger đồ họa trong CS50 IDE. Và một trình gỡ lỗi chỉ là một chương trình mà thường cho phép bạn chạy chương trình của bạn nhưng từng bước từng bước, dòng bởi từng dòng, tạm dừng, chọc xung quanh, nhìn vào các biến để chương trình không chỉ thổi qua bạn và nhanh chóng in một cái gì đó hoặc không in cái gì. Nó cung cấp cho bạn một cơ hội, tại tốc độ của con người, để tương tác với nó. 
+
+Và để làm được điều này, bạn chỉ đơn giản là làm như sau. Sau khi biên dịch mã của bạn, mà tôi đã làm, buggy3, bạn đi trước và chạy debug50 ./buggy. Vì vậy, nhiều như help50 có bạn chạy help50 và sau đó các lệnh, debug50 có bạn chạy debug50 và sau đó tên của lệnh. 
+
+Bây giờ xem những gì xảy ra trên màn hình của tôi, ở phía bên tay phải đặc biệt. Khi tôi nhấn Run, tất cả các bảng điều khiển bên phải này đột ngột mở ra trên màn hình. Và có rất nhiều đi trên ở cái nhìn đầu tiên. Nhưng không có quá nhiều lo lắng về chưa. 
+
+Điều này được hiển thị cho tôi tất cả mọi thứ đang xảy ra bên trong các chương trình của tôi ngay bây giờ và thông qua các nút lên hàng đầu là sau đó cho phép tôi để bước qua mã của tôi cuối cùng là từng bước từng bước một. Nhưng không chỉ được nêu ra. Chú ý những gì sẽ xảy ra. Tại cửa sổ thiết bị đầu cuối của tôi Tôi bị nhắc nhở cho n. Và tôi sẽ đi trước và hợp tác lần này và gõ vào -1. Và mặc dù một chút khó hiểu, -1 là một số nguyên âm, như mong đợi. 
+
+Và sau đó con đã thoát với trạng thái 0 gdbserver thoát. GDB, GNU Debugger, là tên của các phần mềm cơ bản mà thực hiện sửa lỗi này. Nhưng tất cả những điều này thực sự có nghĩa là, các trình gỡ lỗi ra đi vì chương trình của tôi bỏ và tất cả đều tốt đẹp. Nếu tôi muốn thực sự gỡ lỗi chương trình của tôi, Tôi có làm việc tạm thời cho debug50, nơi nào tôi muốn bắt đầu bước qua mã của tôi? 
+
+Và có lẽ cách đơn giản nhất để làm điều đó là như sau. Nếu tôi đưa chuột qua máng xối của biên tập viên của tôi ở đây, như vậy thực sự chỉ trong thanh bên đây, bên trái của số dòng, việc thông báo rằng nếu tôi chỉ cần nhấp một lần, tôi đặt một chấm nhỏ màu đỏ. Và đó là chấm nhỏ màu đỏ, như một dấu hiệu dừng lại, có nghĩa là, hey, debug50, thực hiện tạm dừng mã của tôi ngay khi tôi chạy chương trình này. 
+
+Vì vậy, hãy làm điều đó. Hãy để tôi đi trước và chạy chương trình của tôi một lần nữa với debug50 ./buggy3, Enter. Và bây giờ, thông báo, một cái gì đó khác nhau đã xảy ra. Tôi không bị nhắc nhở nhưng trong cửa sổ thiết bị đầu cuối của tôi cho bất cứ điều gì, bởi vì tôi có không nhận có được nêu trong chương trình của tôi. Chú ý rằng trên dòng 8 mà hiện nay được đánh dấu, và có một mũi tên nhỏ ở câu nói trái, bạn đang dừng lại ở đây. dòng mã này, dòng 8, đã không được thực hiện. 
+
+Và điều tò mò, nếu tôi nhìn ở đây ở phía bên tay phải, nhận thấy rằng tôi là một địa phương biến, địa phương theo nghĩa rằng đó là bên trong các chức năng hiện nay. Và giá trị của nó, rõ ràng bởi mặc định, và loại thuận tiện, là 0. Nhưng tôi đã không đánh 0. Điều đó chỉ xảy ra được nó Giá trị mặc định vào lúc này. 
+
+Vì vậy, hãy để tôi đi trước và làm điều này ngay bây giờ. Hãy để tôi đi trước và trên phía trên bên phải ở đây, tôi sẽ đi trước và nhấp vào biểu tượng đầu tiên này mà có nghĩa là bước trên có nghĩa là không bỏ qua nó nhưng bước qua dòng mã này, thực hiện nó trên đường đi. 
+
+Và bây giờ, để ý, tôi nhắc vừa thay đổi. Tại sao vậy? Tôi đã nói với debug50, chạy dòng mã này. không dòng này dùng để làm gì? Nhắc tôi cho một int. ĐƯỢC. Hãy để tôi hợp tác. Hãy để tôi đi trước bây giờ và gõ -1, Enter. Và bây giờ chú ý những gì đã thay đổi. Bên phía tay phải, biến địa phương của tôi được chỉ định như là -1 bây giờ. Và nó vẫn còn có kiểu int. 
+
+Và thông báo, quá, tôi được gọi là gọi chồng, nơi mà tôi tạm dừng? Chúng tôi sẽ nói thêm về này trong tương lai. Nhưng các cuộc gọi stack chỉ đề cập đến những gì chức năng hiện đang chuyển động. Ngay bây giờ nó chỉ là chính. Và ngay bây giờ chỉ có các địa phương biến là i với giá trị là 1. 
+
+Và khi cuối cùng tôi bước qua dòng này ở đây, với cùng một biểu tượng ở góc trên bên phải, -1 Là một số nguyên âm. Bây giờ nó đang tạm dừng hơn mà đôi xoăn. Hãy để cho nó làm việc của nó. Tôi bước qua dòng, và thì đấy. 
+
+Vì vậy, không phải tất cả những gì khủng khiếp khai sáng nào, nhưng nó đã cho tôi tạm dừng và suy nghĩ logic những gì chương trình này đang làm. Nhưng đó không phải là trường hợp có sai sót. Hãy làm điều này một lần nữa như sau. 
+
+Tôi sẽ để lại breakpoint mà trên dòng 8 với các chấm đỏ. Tôi sẽ chạy lại debug50. Nó sẽ tự động dừng lại ở đây. Nhưng lần này, thay vì bước qua dòng này, hãy để tôi thực sự đi vào bên trong của get_negative_int và tìm ra, tại sao nó được chấp nhận 0 như là một câu trả lời hợp lệ? 
+
+Vì vậy, thay vì nhấn Step Over. Tôi sẽ đi trước và bấm Bước vào. Và nhận thấy rằng các dòng 8 đó là hiện nay nhấn mạnh bây giờ đột nhiên trở thành dòng 17. 
+
+Bây giờ, nó không phải là chương trình gỡ rối đã bỏ qua dòng 14 và 15 và 16. Nó chỉ là không có gì là để cho bạn có. Những người được chỉ cần khai báo các biến, và sau đó là từ Do và sau đó là một cú đúp xoăn mở. Các chỉ dòng chức năng đó là ngon ngọt thực sự là một trong những điều này ở đây, 17. Và đó là nơi chúng tôi đã dừng tự động. 
+
+Vì vậy, printf ( "n.is:") ;, vậy đó vẫn chưa xảy ra. Vì vậy, chúng ta hãy đi trước và bấm Step Over. Bây giờ dấu nhắc của tôi, thực sự, thay đổi ( "n là:"). Bây giờ get_int, tôi sẽ không bận tâm bước vào, bởi vì chức năng đó là do CS50 trong Library. Đó có lẽ là đúng. 
+
+Vì vậy, tôi sẽ đi trước và loại hợp tác bằng cách cho nó một int, nhưng không phải là một int tiêu cực. Vì vậy, hãy để tôi đi trước và đạt 0. Và bây giờ những gì xảy ra ở đây khi tôi nhận được đến dòng 21? Tôi đã không lặp lại. Tôi dường như không bị mắc kẹt trong vòng lặp đó. Nói cách khác, đây vàng thanh không tiếp tục đi xung quanh, và xung quanh, và xung quanh. 
+
+Bây giờ, tại sao vậy? Vâng, n, những gì được n ngay bây giờ? Tôi có thể nhìn vào các địa phương biến trong các trình gỡ lỗi. n là 0. Tất cả các quyền, tình trạng của tôi là gì? 
+
+20-- dòng 20 là, tốt, 0 là lớn hơn 0. Đó không phải là sự thật. 0 là không lớn hơn 0. Và vì vậy tôi đã phá vỡ ra điều này. 
+
+Và đó là lý do tại sao trên đường 21, nếu tôi thực sự tiếp tục, Tôi sẽ trở về 0, thậm chí mặc dù tôi nên đã từ chối 0 như không thực sự là tiêu cực. Vì vậy, bây giờ, tôi không thực sự thậm chí quan tâm đến các chương trình gỡ rối. Chấn nó, tôi không cần phải biết nhiều hơn những gì đang xảy ra. 
+
+Vì vậy, tôi sẽ đi trước và chỉ cần nhấp vào nút Play, và để kết thúc này lên. Bây giờ, tôi đã nhận ra rằng tôi lỗi là rõ ràng trên dòng 20. Đó là lỗi logic của tôi. 
+
+Và vì vậy những gì tôi muốn phải làm gì để thay đổi điều này? Nếu vấn đề là tôi không bắt 0, nó chỉ là một lỗi logic. Và tôi có thể nói rằng trong khi n là lớn hơn hoặc bằng 0, giữ khiến người sử dụng một lần nữa và một lần nữa. 
+
+Vì vậy, một lần nữa, sai lầm đơn giản, có lẽ thậm chí rõ ràng khi bạn nhìn thấy tôi viết nó chỉ là một vài phút trước đây. Nhưng takeaway đây là với debug 50, và với lỗi phần mềm nói chung, bạn có khả năng này mới được tìm thấy để đi bộ qua mã riêng của bạn, hãy tìm qua đó bảng điều khiển tay phải những gì giá trị các biến của bạn. Vì vậy, bạn không nhất thiết phải phải sử dụng một cái gì đó như bạn eprintf để in những giá trị. Bạn thực sự có thể nhìn thấy chúng trực quan trên màn hình. 
+
+Bây giờ, ngoài này, nó là đáng chú ý rằng có một kỹ thuật đó là thực sự siêu phổ biến. Và bạn có thể tự hỏi tại sao điều này chút chàng trai ở đây đã được ngồi trên sân khấu. Vì vậy, có kỹ thuật này, nói chung được gọi là cao su gỡ lỗi vịt, mà thực sự chỉ là một minh chứng cho thực tế mà các lập trình thường khi đang viết code, họ không nhất thiết cộng tác với những người khác, hoặc làm việc trong một môi trường chia sẻ. 
+
+Họ là loại tại nhà. Có lẽ đó là đêm khuya. Họ đang cố gắng để con số ra một số lỗi trong mã của họ. Và họ chỉ không nhìn thấy nó. 
+
+Và không có bạn cùng phòng. Không có TF. Không có CA xung quanh. Tất cả họ có trên kệ của họ là người chăn nuôi cao su nhỏ này. 
+
+Và do đó, gỡ lỗi vịt cao su chỉ là lời mời này nghĩ về một cái gì đó như ngớ ngẩn vì đây là một sinh vật thực, và thực sự đi qua mã của bạn bằng lời nói đến đối tượng vô tri vô giác này. Vì vậy, ví dụ, nếu đây là ví dụ của tôi tại đây-- và nhớ lại rằng trước đó vấn đề là điều này, nếu tôi xóa dòng đầu tiên của mã, và tôi đi trước và làm cho buggy 0 một lần nữa, nhớ lại rằng tôi đã có những thông báo lỗi ở đây. Vì vậy, ý tưởng ở đây, mặc dù tôi vô lý cảm thấy vào lúc này làm điều này công khai, là lỗi đó. 
+
+OK, vì vậy vấn đề của tôi là tôi đã ngầm tuyên bố một chức năng thư viện. Và đó là chức năng thư viện là printf. Declare-- OK, kê khai nhắc nhở tôi về nguyên mẫu. 
+
+Điều đó có nghĩa là tôi cần phải thực sự cho trình biên dịch trước những gì các chức năng như thế nào. Chờ một chút. Tôi không có io.h. chuẩn Cảm ơn nhiều. 
+
+Vì vậy, chỉ quá trình này lượng-- bạn không cần phải thực sự có một con vịt. Nhưng ý tưởng này đi bộ mình thông qua mã của riêng bạn do đó bạn thậm chí nghe mình, vì vậy mà bạn nhận ra thiếu sót của chính mình nhận xét, nói chung là ý tưởng. 
+
+Và, có lẽ hợp lý hơn, không quá nhiều với ai nhưng tham gia nhiều hơn Ví dụ chúng ta chỉ cần làm trong 3.c lỗi, bạn có thể đi bộ mình thông qua nó như sau. Vì vậy, tất cả các quyền, cao su người chăn nuôi, DDB, nếu bạn muốn. Ở đây chúng tôi có trong chức năng chính của tôi, Tôi gọi được int tiêu cực. 
+
+Và tôi nhận được các giá trị trả về. Tôi đang lưu trữ nó ở phía bên tay trái trên dòng 8 trong một biến gọi là i. OK, nhưng chờ đợi, làm thế nào đã mà có được giá trị đó? Hãy để tôi nhìn vào các chức năng trong dòng 12. 
+
+Trong dòng 12, chúng tôi đã nhận được int tiêu cực. Không có bất kỳ đầu vào, không trả lại một int, OK. Tôi tuyên bố trên dòng 14 một biến n. Nó sẽ lưu trữ một số nguyên. Đó là điều tôi muốn. 
+
+Vì vậy, làm như sau trong khi n hợp-- phép tôi hoàn tác những gì sửa chữa tôi đã thực hiện. Vì vậy, trong khi n lớn hơn 0, in ra n là, OK. Và sau đó gọi được lưu trữ trong int n. Và sau đó kiểm tra nếu n là 0, n là not-- có nó được. Vì vậy, một lần nữa, bạn không cần con vịt thực tế. Nhưng chỉ đi bộ qua chính mình code của bạn như một bài tập trí tuệ thường xuyên sẽ giúp bạn nhận ra những gì đang xảy ra, như trái ngược với chỉ làm điều gì đó như thế này, nhìn chằm chằm vào màn hình, và không nói cho mình thông qua nó, trung thực mà không phải là gần như là một kỹ thuật hiệu quả. Vì vậy, có bạn có nó, một số kỹ thuật khác nhau cho thực gỡ lỗi mã của bạn và tìm lỗi, tất cả đều nên là công cụ trong bộ công cụ của bạn do đó bạn không phải là muộn vào ban đêm, đặc biệt là, bạn đang ở trong phòng ăn hội trường, hoặc ít giờ hành chính, đập đầu của bạn chống lại các tường, cố gắng để giải quyết một số vấn đề. Nhận ra rằng có những công cụ phần mềm. Có những công cụ vịt cao su. Và có một đội ngũ nhân viên toàn bộ hỗ trợ chờ đợi để giúp một tay. 
+
+Vì vậy, bây giờ, một lời về vấn đề này bộ, và về những gì chúng tôi hy vọng bạn có được ra khỏi họ, và làm thế nào chúng tôi đi về đánh giá. Mỗi giáo trình của khóa học, bộ vấn đề của CS50 được đánh giá trên bốn trục chính, do đó để speak-- phạm vi, đúng đắn, thiết kế, và phong cách. Và phạm vi chỉ đề cập đến bao nhiêu của mảnh bạn đã bị cắn đứt? Làm thế nào nhiều của một vấn đề có bạn đã thử? độ gì của nỗ lực bạn đã thể hiện? 
+
+Chính xác là, hiện các chương trình làm việc như đó là nghĩa vụ mỗi đặc điểm kỹ thuật CS50 khi bạn cung cấp đầu vào nhất định hoặc kết quả đầu ra nhất định quay trở lại? Thiết kế là sự chủ quan nhất của họ. Và đó là một trong đó sẽ đi dài nhất để học và dài nhất để giảng dạy, trong xa như vậy nó nắm xuống, viết như thế nào là mã của bạn? 
+
+Đó là một điều chỉ in đúng kết quả đầu ra, hoặc trả lại những giá trị đúng. Nhưng bạn làm việc đó như hiệu quả nhất có thể? bạn đang làm nó phân chia và chinh phục, hoặc nhị phân tìm kiếm như chúng ta sẽ sớm thấy rằng chúng tôi đã làm hai tuần trước với các cuốn sách điện thoại? Có cách nào tốt hơn để giải quyết vấn đề hơn bạn đang có ở đây? Đó là một cơ hội cho các thiết kế tốt hơn. 
+
+Và sau đó style-- cách khá là mã của bạn? Bạn sẽ nhận thấy rằng tôi khá cụ thể về thụt mã của tôi, và đảm bảo các biến của tôi được đặt tên một cách hợp lý. n, thời gian ngắn, là một tên tốt cho một số, tôi cho một số nguyên đếm, s cho một chuỗi. Và chúng ta có thể còn biến tên phong cách. Phong cách là như thế nào tốt không mã của bạn tìm? Và làm thế nào có thể đọc được là nó? 
+
+Và theo thời gian, những gì hỗ trợ kỹ thuật của bạn và TF sẽ làm gì trong khóa học được cung cấp cho bạn với điều đó loại thông tin phản hồi về chất lượng để bạn có được tốt hơn ở những khía cạnh khác nhau. Và trong điều kiện như thế nào chúng tôi đánh giá từng trục, nó thường có rất ít xô để bạn, nói chung, có được một cảm giác như thế nào bạn đang làm. Và, quả thật vậy, nếu bạn nhận được một số điểm trên bất kỳ của những xác axes--, thiết kế và phong cách especially-- số đó nói chung sẽ là từ 1 đến 5. Và, theo nghĩa đen, nếu bạn đang nhận được 3 nhân vào đầu học kỳ, Đây là một điều rất tốt. Nó có nghĩa là vẫn còn phòng để cải thiện, mà bạn sẽ hy vọng cho trong tham gia một lớp cho lần đầu tiên. Có hy vọng một số bit của trần mà bạn đang khao khát đạt. Và để nhận được trên 3 của các mảnh sớm nhất, nếu không một số của 2 và 4, là, thực sự, một điều tốt. Nó cũng trong phạm vi, cũng nằm trong sự mong đợi. 
+
+Và nếu tâm trí của bạn đang chạy đua, chờ đợi một phút, ba trong số năm. Đó thực sự là một hiện 6 của 10. Đó là 60%. Thiên Chúa của tôi, đó là một F. 
+
+Nó không phải. Đó không phải là, trên thực tế, điều đó. Thay vào đó, nó là một cơ hội để cải thiện trong quá trình của học kỳ. Và nếu bạn đang nhận được một số sự cằn cỏi, đây là một cơ hội để tận dụng giờ làm việc, chắc chắn phần và các nguồn lực khác. 
+
+Tốt nhất là một cơ hội, thực sự, đáng tự hào như thế nào đến nay bạn đã đi qua các khóa học của học kỳ. Vì vậy, nhận ra, nếu không có gì khác, ba là tốt. Và nó cho phép phòng cho sự phát triển theo thời gian. 
+
+Như thế nào những trục là trọng, thực tế bạn sẽ dành phần lớn thời gian của bạn nhận được điều cần làm, hãy để một mình một cách chính xác. Và như vậy có đúng không có xu hướng được trọng nhất, như với tố chất nhân này của ba. Thiết kế cũng là quan trọng, nhưng một cái gì đó mà bạn không nhất thiết phải dành tất cả những giờ trên cố gắng để có được những thứ chỉ để làm việc. 
+
+Và do đó, nó có trọng một chút nhẹ nhàng hơn. Và sau đó phong cách là trọng ít nhất. Mặc dù nó không kém quan trọng về cơ bản, nó chỉ là, có lẽ, Điều dễ nhất để làm đúng, bắt chước các ví dụ chúng tôi làm trong bài giảng và phần, với những thứ độc đáo thụt vào, và nhận xét, và vv là một trong những đơn giản nhất Những việc cần làm và có được quyền. Vì vậy, như vậy, nhận ra đó là những điểm là tương đối dễ dàng nắm bắt. 
+
+Và bây giờ là một từ trên này-- trung thực trong học tập. Vì vậy, mỗi quá trình của giáo trình, bạn sẽ thấy khoá học đó có khá chút về ngôn ngữ xung quanh này. Và tất nhiên có vấn đề trung thực học tập khá nghiêm túc. 
+
+Chúng tôi có sự phân biệt, Cho tốt hơn hoặc tồi tệ hơn, là đã gửi đi mỗi năm hơn cho học sinh bị kỷ luật hơn hầu hết bất kỳ khác Tất nhiên, là tôi biết. Đây không phải là nhất thiết thấy một thực tế sinh viên CS, hoặc sinh viên CS50, là ít hơn bất kỳ trung thực hơn so với các bạn cùng lớp của bạn. Nhưng thực tế rằng trong này thế giới, điện tử, chúng tôi chỉ có công nghệ nghĩa của phát hiện này. 
+
+Điều quan trọng là chúng tôi cho sự công bằng giữa các lớp mà chúng ta làm phát hiện này, và nâng cao vấn đề khi chúng ta nhìn thấy mọi thứ. Và chỉ để vẽ một bức tranh, và thực sự để giúp một cái gì đó giống như bồn rửa này trong, đây là những con số của sinh viên trong vòng 10 năm qua đã được tham gia vào một số những vấn đề như sự trung thực của học tập, với một số 32 học sinh từ mùa thu năm 2015, trong đó là để nói rằng chúng ta mất vấn đề rất nghiêm trọng. Và, cuối cùng, những con số sáng tác, Gần đây nhất, khoảng 3%, 4% hoặc hơn của lớp. 
+
+Vì vậy, đối với phần lớn siêu của sinh viên có vẻ như các dòng là rõ ràng. Tuy nhiên cần lưu này trong quan tâm, đặc biệt là vào cuối vào ban đêm khi đấu tranh với một số giải pháp cho một bộ vấn đề, rằng có những cơ chế để nhận bản thân tốt hơn hỗ trợ hơn có lẽ bạn nghĩ rằng, ngay cả vào giờ đó. Nhận ra rằng khi chúng tôi nhận được đệ trình của sinh viên, chúng tôi băng qua so sánh mọi trình năm nay chống lại mọi trình năm ngoái, chống lại mọi trình từ năm 2007, và kể từ đó, nhìn vào, cũng như, Mã kho lưu trữ trực tuyến, diễn đàn thảo luận, các trang web việc làm. Và chúng tôi đề cập đến điều này, thực sự, tất cả vì lợi ích công bố thông tin đầy đủ, mà nếu người khác có thể tìm thấy nó trực tuyến, chắc chắn, vì vậy chúng ta có thể học. Nhưng, thực sự, tinh thần tất nhiên là nắm quy định tại khoản này trong giáo trình. Nó thực sự chỉ là, hợp lý. 
+
+Và nếu chúng tôi phải xây dựng trên đó chỉ với một ngôn ngữ nhiều hơn một chút, nhận ra rằng bản chất của tất cả công việc mà bạn gửi cho khóa học này phải là của riêng của bạn. Nhưng trong đó, chắc chắn có cơ hội, và khuyến khích, và giá trị sư phạm trong chuyển sang others-- bản thân mình, TF, CA, các hỗ trợ kỹ thuật, và những người khác trong lớp, hỗ trợ, cho bạn bè của mình và bạn cùng phòng, người đã nghiên cứu CS và lập trình trước. Và do đó, có một khoản chi cho điều đó. Và quy luật chung của ngón tay cái được này-- khi yêu cầu giúp đỡ, bạn có thể hiển thị mã của bạn cho người khác, nhưng bạn có thể không xem của họ. Vì vậy, ngay cả khi bạn đang ở giờ văn phòng, hoặc trong hội trường D, hoặc ở một nơi khác làm việc trên một số bộ mảnh, làm việc cùng với một người bạn, mà là hoàn toàn tốt, tại cuối ngày làm việc của bạn cuối cùng phải thuộc về nhau của bạn tương ứng, và không có một số nỗ lực hợp tác, trừ các dự án cuối cùng, nơi nó cho phép và khuyến khích. 
+
+Nhận ra rằng nếu bạn là đấu tranh với một cái gì đó và bạn của bạn chỉ xảy ra được tốt hơn lúc này sau đó bạn, hoặc tốt hơn vấn đề đó hơn bạn, hoặc xa hơn một chút về phía trước hơn bạn, nó hoàn toàn hợp lý để biến cho bạn bè của bạn và nói, hey, Bạn có phiền nhìn vào code của tôi ở đây, Giúp tôi tại chỗ những gì vấn đề của tôi là gì? Và, hy vọng, trong quan tâm của các giá trị sư phạm người bạn rằng không chỉ nói, oh, làm điều này, nhưng đúng hơn, những gì bạn đang mất tích trên đường 6, hoặc một cái gì đó như thế? Nhưng giải pháp không phải là cho những người bạn bên cạnh bạn để nói, oh, tốt, ở đây, hãy để tôi kéo này, và cho thấy giải pháp của tôi cho bạn. Vì vậy, đó là dòng. Bạn chỉ cho mã của bạn để những người khác, nhưng bạn có thể không xem họ, chịu sự khác hạn chế trong giáo trình của khóa học. 
+
+Vì vậy, hãy nhớ này cái gọi là khoản hối tiếc trong giáo trình của khóa học là tốt, rằng nếu bạn cam kết một số hành động mà là không hợp lý, nhưng mang nó đến sự chú ý của người đứng đầu của khóa học trong vòng 72 giờ, khóa học có thể áp đặt lệnh trừng phạt địa phương có thể bao gồm một hoặc không đạt yêu cầu không cấp cho các công việc nộp. Nhưng tất nhiên sẽ không tham khảo các quan trọng cho hành động kỷ luật hơn nữa, ngoại trừ trong trường hợp hành vi lặp đi lặp lại. Nói cách khác, nếu bạn làm một số ngu ngốc, đặc biệt là đêm cuối, quyết định mà sáng hôm sau hoặc hai ngày sau đó, bạn thức dậy và nhận ra, đã được tôi nghĩ gì? Bạn làm gì trong CS50 có một lối thoát để sửa chữa các vấn đề mà và sở hữu lên đến nó, vì vậy mà chúng ta sẽ đáp ứng bạn nửa chừng và đối phó với nó trong một vấn đề đó là cả hai giáo dục và có giá trị cho bạn, nhưng vẫn mang tính trừng phạt một cách nào đó. Và bây giờ, để giúp bạn bắt, điều này. 
+
+[XEM LẠI VIDEO] 
+
+[NHẠC] 
+
+[END PLAYBACK] DAVID J. Malan: Được rồi, chúng ta trở lại. Và bây giờ chúng ta nhìn vào một trong những đầu tiên của lĩnh thế giới thực của chúng tôi trong CS50, nghệ thuật mật mã, nghệ thuật của việc gửi và nhận tin nhắn bí mật, mã hóa tin nhắn nếu bạn sẽ, mà chỉ có thể được giải mã nếu bạn có một số thành phần quan trọng mà người gửi có cũng. Vì vậy, để tạo động lực này, chúng tôi sẽ đưa một nhìn vào điều này ở đây, đó là một ví dụ về một nhẫn giải mã bí mật mà có thể được sử dụng để tìm ra những gì một thông điệp bí mật thực sự. Trong thực tế, trở lại trong ngày đi học, nếu bạn đã bao giờ gửi tin nhắn bí mật đến một số người bạn hay một số lòng trong lớp, bạn có thể đã nghĩ bạn đã bị thông minh bởi trên mảnh của bạn thay đổi giấy, như, A đến B, và B đến C, và C đến D, và kể từ đó trở đi. Nhưng bạn đã thực sự mã hóa thông tin của bạn, thậm chí nếu nó là một chút tầm thường, không phải là rằng khó khăn cho giáo viên để nhận ra, tốt, nếu bạn chỉ cần thay đổi B đến A và C đến B, bạn thực sự tìm ra những gì được thông báo là, nhưng bạn đang ở trong mật mã thông tin. 
+
+Bạn đã được chỉ làm việc đó đơn giản, giống như Ralphie đây trong một bộ phim nổi tiếng mà chơi nauseum quảng cáo khá nhiều mỗi mùa đông. [XEM LẠI VIDEO] -Be Nó biết là tất cả mà Ralph Parker là hướng bổ nhiệm một thành viên của Little Orphan Annie bí mật mối và được hưởng tất cả các danh hiệu và lợi ích xảy ra kèm theo. 
+
+-Signed, Little Orphan Annie, phản ký Pierre Andre, bằng mực. Danh dự và lợi ích, đã ở tuổi chín. 
+
+[Hét] -Thôi nào. Hãy về với nó. Tôi không cần tất cả những nhạc jazz về buôn lậu và cướp biển. 
+
+tối mai -Listen cho cuộc phiêu lưu kết luận của con tàu cướp biển đen. Bây giờ, đó là thời gian cho thông điệp bí mật của Annie cho bạn thành viên của Secret Circle. Hãy nhớ rằng, trẻ em, chỉ các thành viên Secret Vòng Annie có thể giải mã thông điệp bí mật của Annie. 
+
+Hãy nhớ rằng, Annie là tùy thuộc vào bạn. Đặt chân của bạn B2. Dưới đây là thông điệp. 12, 11-- 
+
+-Tôi Đang ở, cuộc họp bí mật đầu tiên của tôi. 
+
+-14, 11, 18, 16. 
+
+-Pierre Là trong đêm nay giọng hát tuyệt vời. Tôi có thể nói rằng tối nay tin là thực sự quan trọng. 
+
+-3, 25 tuổi, đó là một thông điệp từ Annie mình. Hãy nhớ rằng, đừng nói cho bất cứ ai. 
+
+-90 Giây sau, tôi đang ở chỉ các phòng trong nhà, nơi một cậu bé chín có thể ngồi trong sự riêng tư và giải mã. Aha, B! Tôi đã đi đến tiếp theo, E. 
+
+Từ đầu tiên là được. S, nó đã đến dễ dàng hơn bây giờ, U, 25-- 
+
+-Oh, Come on, Ralphie, tôi phải đi đây! 
+
+-I'll Được phải xuống, Ma! Gee whiz! 
+
+-T, O, hãy chắc chắn đối với: hãy chắc chắn những gì? Ít Orphan là gì Annie cố gắng để nói? Hãy chắc chắn với những gì? 
+
+-Ralphie, Andy đã nhận đi, bạn sẽ vui lòng đi ra? 
+
+-Tất Cả các quyền, Ma! Tôi sẽ ra ngay! 
+
+-Tôi Đã nhận được gần gũi hơn với doanh nghiệp. Sự căng thẳng là khủng khiếp. Nó là cái gì vậy? Số phận của hành tinh có thể treo trong sự cân bằng. 
+
+-Ralphie! gotta Andy đi! 
+
+-I'll Ra ngay, buồn thì thôi! 
+
+-Almost Đó, ngón tay của tôi đã bay, tâm trí của tôi là một cái bẫy thép, mỗi lỗ chân lông rung. Đó là gần như rõ ràng, vâng, vâng, vâng. 
+
+-Be Chắc chắn để uống Ovaltine của bạn. Ovaltine? Một thương mại dể thương? Con trai của một chó cái. [END PLAYBACK] DAVID J. Malan: OK, vậy đó là một chặng đường rất dài giới thiệu mật mã, và cũng Ovaltine. Trong thực tế, từ quảng cáo cũ này ở đây, tại sao là Ovaltine tốt như vậy? Nó là một chiết xuất tập trung của chín mạch nha lúa mạch, sữa nguyên chất kem bò, và đặc biệt chuẩn bị ca cao, cùng với phosphatides tự nhiên và các vitamin. Đó là tiếp tục củng cố bằng bổ sung vitamin B và D, yum. Và bạn vẫn có thể có được nó, rõ ràng, trên Amazon, như chúng ta đã làm ở đây. 
+
+Nhưng động lực ở đây là để giới thiệu mật mã, cụ thể một loại mật mã được biết đến như mật mã khóa bí mật. Và như tên cho thấy, toàn bộ an ninh của một hệ thống mật mã khóa bí mật, nếu bạn sẽ, một phương pháp luận chỉ xáo trộn thông tin giữa hai người, là chỉ người gửi và chỉ những người nhận biết một bí mật key-- một số giá trị, một số cụm từ bí mật, một số con số bí mật, mà cho phép họ cả mã hóa và giải mã thông tin. Và mật mã, thực sự, chỉ này từ tuần 0 là. 
+
+Đó là một vấn đề mà có đầu vào, như tin nhắn thực tế bằng tiếng Anh hoặc bất cứ ngôn ngữ mà bạn muốn gửi đến một ai đó trong lớp, hoặc trên internet. Có một số sản lượng, mà là có là thông điệp hỗn độn mà bạn muốn người nhận nhận được. Và thậm chí nếu ai đó trong giữa nhận nó quá, bạn không muốn họ nhất thiết phải có khả năng giải mã nó, vì bên trong này hộp đen, hoặc thuật toán, một số cơ chế, một số từng bước hướng dẫn, để lấy đầu vào mà và chuyển đổi nó vào đầu ra, trong hy vọng một cách an toàn. 
+
+Và, trên thực tế, có một số từ vựng trong thế giới này như sau. Đồng bằng văn bản là một từ khoa học máy tính sẽ sử dụng để mô tả các đầu vào tin nhắn, như tiếng Anh hoặc bất cứ ngôn ngữ bạn thực sự muốn gửi đến một số người khác. Và sau đó các bản mã là tranh giành đến enciphered, hoặc mật mã, phiên bản hiện. 
+
+Nhưng có một thành phần khác ở đây. Có một đầu vào khác bí mật mật mã khóa. Và đó chính là chìa khóa riêng của mình, đó là, nói chung, như chúng ta sẽ thấy, một số, hoặc lá thư, hoặc từ, bất cứ điều gì các thuật toán đó là thực sự hy vọng. 
+
+Và làm thế nào để bạn giải mã thông tin? Làm thế nào để bạn xắp xếp lại nó? Vâng, bạn chỉ cần đảo ngược kết quả đầu ra và đầu vào. 
+
+Nói cách khác, một khi một người nào đó nhận được tin nhắn mã hóa của bạn, anh ta hoặc cô chỉ đơn giản là có để biết rằng cùng một chìa khóa. Họ đã nhận được bản mã. Và bằng cách cắm hai đầu vào cho hệ thống mật, các thuật toán, hộp đen này, trên nên đến các bản rõ ban đầu. Và đó là mức độ rất cao xem những gì thực sự là mật mã tất cả về. 
+
+Vì vậy, chúng ta hãy đến đó. Giờ hãy xem bên dưới mui xe của một cái gì đó chúng tôi đã thực hiện trong nhiều cấp cho tuần qua, và cho phần này đây-- chuỗi. Một chuỗi vào cuối ngày chỉ là một chuỗi các ký tự. 
+
+Nó có thể là hello thế giới, hoặc xin chào Zamyla, hoặc bất cứ điều gì. Nhưng điều đó có nghĩa là là một chuỗi các ký tự? Trong thực tế, thư viện CS50 cho chúng ta một loại dữ liệu được gọi là chuỗi. 
+
+Nhưng có thật là không những điều như một chuỗi trong C. Nó thực sự chỉ là một chuỗi các nhân vật, nhân vật, nhân vật, nhân vật, trở lại, trở lại, để trở lại, trở lại, để trở lại bên trong bộ nhớ của máy tính, hoặc bộ nhớ RAM. Và chúng ta sẽ tìm hiểu sâu hơn rằng trong tương lai khi chúng ta nhìn vào bộ nhớ chính nó, và việc sử dụng, và các mối đe dọa có liên quan. 
+
+Nhưng chúng ta hãy xem xét các chuỗi Zamyla. Vì vậy, chỉ là tên của những con người ở đây, Zamyla, đó là một chuỗi các ký tự, Z-A-M-Y-L-A. Và bây giờ chúng ta hãy giả sử rằng tên của Zamyla đang được lưu trữ bên trong của một máy tính chương trình. 
+
+Vâng, nó đứng vào lý do đó chúng ta nên có thể nhìn vào những nhân vật cá nhân. Vì vậy, tôi chỉ cần đi để vẽ một chút hộp xung quanh tên Zamyla ở đây. Và đó là trường hợp trong C mà khi bạn có một chuỗi, như Zamyla-- và có thể chuỗi đó đã trở lại từ một chức năng như get chuỗi, bạn thực sự có thể thao tác nó từng ký tự. 
+
+Bây giờ, đây là Gecman cho chuyện ở bàn tay, bởi vì trong mật mã nếu bạn muốn thay đổi A đến B, và B đến C, và C đến D, và vv, bạn cần để có thể để xem xét các đặc điểm cá nhân trong một chuỗi. Bạn cần để có thể thay đổi Z đến cái gì khác, A cái gì khác, M để cái gì khác, và như vậy. Và như vậy chúng ta cần có một cách, lập trình, vì vậy để nói chuyện, trong C để có thể thay đổi và nhìn vào bức thư cá nhân. Và chúng ta có thể làm điều này như sau. 
+
+Hãy để tôi đi quay trở lại trong CS50 IDE. Và hãy để tôi đi trước và tạo ra một tập tin mới mà tôi sẽ gọi thời gian string0 này, như đầu tiên ví dụ như chúng tôi, chấm c. Và tôi sẽ đi trước và quất nó lên như sau. 
+
+Vì vậy, bao gồm CS50.h, và sau đó bao gồm io.h tiêu chuẩn, mà tôi gần như luôn luôn được sử dụng trong các chương trình của tôi, ít nhất ban đầu. int void main, và sau đó ở đây tôi sẽ làm dây bị nhận được chuỗi. Và sau đó tôi sẽ đi trước và làm điều này. Tôi muốn đi trước và, như một kiểm tra sự tỉnh táo, chỉ nói, chào hỏi, phần trăm s, dấu chấm phẩy, làm cho chuỗi 0. Uh oh, tôi đã làm gì ở đây? Oh, tôi không cắm nó vào. Vì vậy, bài học kinh nghiệm, đó không cố ý. 
+
+Vì vậy, lỗi, hơn trăm chuyển đổi hơn so với đối số dữ liệu. Và đây là nơi mà, trong dòng 7-- OK, vì vậy tôi có, quote unquote, đó là chuỗi của tôi printf. Tôi đã có một dấu phần trăm. Nhưng tôi là thiếu số thứ hai. 
+
+Tôi đang thiếu các dấu phẩy s, Tôi đã có trong ví dụ trước. Vì vậy, một cơ hội tốt để sửa chữa thêm một sai lầm, vô tình. Và bây giờ hãy để tôi chạy string0, gõ Zamyla. OK, xin chào Zamyla. 
+
+Vì vậy, chúng tôi đã chạy loại chương trình một vài lần khác bây giờ. Nhưng chúng ta hãy làm một cái gì đó chút khác nhau thời gian này. Thay vì chỉ cần in Zamyla của toàn bộ tên với printf, chúng ta hãy làm điều đó từng ký tự. 
+
+Tôi sẽ sử dụng một vòng lặp for. Và tôi sẽ cung cấp cho bản thân mình một biến đếm, gọi tôi. Và tôi sẽ giữ iterating, vì vậy khi i nhỏ hơn chiều dài của s. 
+
+Hóa ra, chúng tôi đã không làm này thời gian qua, mà c đi kèm với một chức năng gọi là Stirling. Quay lại trong ngày, và nói chung vẫn còn khi thực hiện chức năng, con người thường sẽ chọn rất tên ngắn gọn rằng loại âm thanh giống như những gì bạn muốn, mặc dù nó thiếu một vài nguyên âm hoặc chữ cái. Vì vậy, Stirling là tên của một hàm có một đối giữa ngoặc đơn mà phải là một chuỗi. Và nó chỉ trả về một số nguyên, chiều dài của chuỗi. 
+
+Vì vậy, điều này cho vòng lặp trên dòng 7 sẽ để bắt đầu đếm tại i bằng 0. Nó sẽ tăng i trên mỗi lần lặp 1, như chúng tôi đã làm một vài lần. Nhưng nó sẽ chỉ làm up này cho đến khi các điểm khi tôi là chiều dài của chuỗi chính nó. 
+
+Vì vậy, đây là một cách, cuối cùng, iterating trên các ký tự trong chuỗi như là sau. Tôi sẽ in ra không phải là một toàn bộ chuỗi, nhưng tỷ lệ c, một nhân vật duy nhất theo sau là một dòng mới. Và sau đó tôi sẽ đi trước, và tôi cần để nói rằng tôi muốn in nhân vật thứ i của s. 
+
+Vì vậy, nếu tôi là biến mà chỉ chỉ số của chuỗi, nơi bạn đang ở trong đó, tôi cần để có thể nói, đưa cho tôi nhân vật thứ i của s. Và c có một cách làm này với dấu ngoặc vuông. Bạn chỉ cần nói tên của chuỗi, mà trong trường hợp này là s. Sau đó, bạn sử dụng dấu ngoặc vuông, đó là thường chỉ trên Return hoặc Enter của bạn phím trên bàn phím. Và sau đó bạn đưa các chỉ số của các nhân vật mà bạn muốn in. Vì vậy, các chỉ số sẽ là một number-- 0 hoặc 1, hoặc 2, hoặc 3, hoặc dấu chấm, dấu chấm, dấu chấm, một số số khác. 
+
+Và chúng tôi đảm bảo rằng nó sẽ là số đúng, bởi vì tôi bắt đầu đếm từ 0. Và theo mặc định, các ký tự đầu tiên trong một chuỗi là do quy ước 0. Và nhân vật thứ hai là khung 1. Và nhân vật thứ ba là khung 2. Và bạn không muốn đi quá đến nay, nhưng chúng ta sẽ không phải vì chúng tôi sẽ chỉ tăng i cho đến khi nó bằng với chiều dài của chuỗi. Và tại thời điểm đó, điều này cho vòng lặp sẽ dừng lại. 
+
+Vì vậy, hãy để tôi đi trước và lưu này chương trình, và chạy làm cho chuỗi 0. Nhưng tôi hơi say lên. Ngầm tuyên bố chức năng thư viện Stirling với loại như vậy và such-- bây giờ, điều này có vẻ quen thuộc. Nhưng nó không printf. Và nó không nhận được chuỗi. 
+
+Tôi không vít lên trong cách cùng thời gian này. Nhưng chú ý xuống đây một chút xuống hơn nữa, bao gồm string.h tiêu đề, một cách rõ ràng cung cấp khai Stirling. Vì vậy, có thực sự là một đầu mối trong đó. 
+
+Và thực sự nó quay ra có một tập tin tiêu đề mà chúng tôi đã không được sử dụng trong lớp, nhưng nó trong số những người có sẵn cho bạn, gọi là string.h. Và trong tập tin, string.h là Stirling tuyên bố. Vì vậy, hãy để tôi đi trước và tiết kiệm này, làm cho chuỗi 0-- tốt đẹp, không có thông báo lỗi thời gian này. 
+
+./string0 Zamyla, và Tôi về để nhấn Enter, tại thời điểm đó getString sẽ để trả lại chuỗi, đặt nó trong s. Sau đó, mà cho vòng lặp sẽ lặp nhân vật của S cùng một lúc, và in chúng trên mỗi dòng, bởi vì Tôi đã có n dấu chéo ngược ở cuối. Vì vậy, tôi có thể bỏ qua dấu chéo ngược mà n, và sau đó chỉ cần in Zamyla tất cả trong cùng một dòng, reimplementing hiệu quả printf, đó không phải là tất cả những gì có ích. Nhưng trong trường hợp này, tôi đã không làm điều đó. Tôi đã thực sự in một nhân vật tại một thời điểm, mỗi dòng, để chúng tôi thực sự thấy hiệu quả. 
+
+Nhưng tôi cần phải lưu ý một điều ở đây. Và chúng tôi sẽ trở lại này trong một tuần trong tương lai. Nó chỉ ra rằng điều này đang có khả năng lỗi. 
+
+Nó chỉ ra rằng get chuỗi và một số chức năng khác trong cuộc sống không nhất thiết phải luôn luôn trả lại những gì bạn đang mong đợi. Chúng tôi biết từ lớp cuối cùng Hiện tại này mà có được chuỗi là vụ phải trả lại một chuỗi. Nhưng nếu sử dụng các loại ra như vậy một từ lâu, hoặc đoạn, hoặc bài luận rằng có chỉ là không đủ bộ nhớ trong máy tính để phù hợp với nó. 
+
+Giống như, nếu có điều gì sai bên dưới mui xe? Nó có thể không xảy ra thường xuyên, nhưng nó có thể xảy ra một lần trong một thời gian, rất thường xuyên. Và do đó, nó chỉ ra rằng get chuỗi và các chức năng như nó không nhất thiết phải luôn luôn trở về chuỗi. Họ có thể trở lại một số giá trị lỗi, một số giá trị trọng điểm như vậy để nói chuyện, mà chỉ ra rằng một cái gì đó đã đi sai. Và bạn sẽ chỉ biết điều này từ đã học được nó trong lớp bây giờ, hoặc khi đọc một số tài liệu hơn. Nó chỉ ra rằng get chuỗi có thể trả về một giá trị gọi là null. Null là một giá trị đặc biệt mà chúng tôi sẽ trở lại trong một tuần trong tương lai. Nhưng bây giờ, chỉ biết rằng nếu tôi muốn phải thực sự thích hợp trong việc di chuyển về phía trước sử dụng get chuỗi, tôi không nên chỉ gọi nó, và mù quáng sử dụng giá trị trả về của nó, tin tưởng rằng đó là một chuỗi. 
+
+đầu tiên tôi nên nói, hey, chờ một chút, chỉ tiến hành nếu s không bằng null, nơi null, một lần nữa, chỉ là một số giá trị đặc biệt. Và nó chỉ có giá trị đặc biệt của bạn cần phải lo lắng về cho get chuỗi. Nhận chuỗi là hoặc sẽ trả về một chuỗi hoặc null. 
+
+Và dấu chấm than này dấu bằng bạn có thể biết từ có lẽ lớp toán học mà bạn có thể vẽ một dấu bằng với một dòng qua nó để chỉ ra không bằng nhau. Đó không phải là một nhân vật thường bạn có thể gõ trên bàn phím của bạn. Và do đó, trong hầu hết các ngôn ngữ lập trình, khi bạn muốn nói không bằng nhau, bạn sử dụng một dấu chấm than, hay còn gọi là nổ. Vì vậy, bạn nói nổ bình đẳng là có nghĩa là không bằng, hợp lý. Nó giống như không có một lớn hơn hơn, hoặc bằng, hoặc ít hơn hoặc bằng chìa khóa trên bàn phím của bạn mà sẽ làm tất cả trong một biểu tượng. Vì vậy, đó là lý do tại sao, trong các ví dụ trước đây, bạn đã làm một khung mở, và sau đó một dấu bằng, để làm lớn hơn hoặc, nói, ít hơn. 
+
+Vì vậy, các takeaway những gì ở đây? Điều này chỉ đơn giản là một cách bây giờ của giới thiệu cú pháp này, tính năng này, iterating trên cá nhân ký tự trong một chuỗi. Và cũng giống như những vuông dấu ngoặc đơn cho phép bạn để có được ở họ, xem xét những dấu ngoặc vuông như loại gián tiếp tại cơ bản này thiết kế, theo đó mỗi nhân vật bên trong của một chuỗi là loại đóng hộp ở đâu đó bên dưới mui xe trong bộ nhớ của máy tính của bạn. 
+
+Nhưng chúng ta hãy làm một biến thể của này. Nó chỉ ra rằng điều này chương trình là đúng. Vì vậy, mỗi trục CS50 của để đánh giá code, điều này là đúng ngay bây giờ. Đặc biệt là bây giờ mà tôi đang kiểm tra cho null, chương trình này không bao giờ sụp đổ. Và tôi chỉ biết rằng từ kinh nghiệm. Nhưng không có gì khác mà chúng tôi thực sự có thể đi sai ở đây. Nhưng nó không phải là rất được thiết kế tốt, bởi vì chúng ta hãy quay trở lại vấn đề cơ bản. 
+
+Đầu tiên, principles-- những gì hiện một vòng lặp làm gì? Một vòng lặp hiện ba điều. Nó khởi tạo một số giá trị, nếu bạn yêu cầu. Nó kiểm tra một điều kiện. Và sau mỗi lặp đi lặp lại, sau mỗi chu kỳ, nó increments số giá trị, hoặc giá trị, ở đây. 
+
+Vậy điều đó có nghĩa là gì? Chúng tôi khởi tạo i đến 0. Chúng tôi kiểm tra và chắc chắn rằng tôi là ít hơn chiều dài của s, đó là Z-A-M-Y-L-A, như vậy mà là ít hơn 6. Và, quả thật vậy, 0 là ít hơn 6. 
+
+Chúng tôi in ra Z từ tên Zamyla của. Sau đó, chúng tôi tăng i 0-1. Sau đó chúng tôi kiểm tra, là 1 ít so với chiều dài của s? Chiều dài của s là 6. Vâng, đó là. 
+
+Vì vậy, chúng tôi in một tên Zamyla của, ZA. Chúng tôi tăng i từ 0, 1, 2. Sau đó chúng tôi kiểm tra, là 2 ít hơn chiều dài của tên Zamyla của. 6- do đó, 2 là ít hơn 6. Vâng, chúng ta hãy in ra tại M trong Tên Zamyla của, nhân vật thứ ba. 
+
+Chìa khóa ở đây là trên mỗi lặp đi lặp lại của câu chuyện, tôi đang kiểm tra, là tôi ít hơn độ dài của Zamyla? Nhưng nắm bắt được rằng Stirling không phải là một tài sản. Những người bạn của những người đã được lập trình trước ở Java hoặc các ngôn ngữ khác có thể biết chiều dài của một chuỗi là một tài sản, chỉ cần một số chỉ đọc giá trị. 
+
+Trong C trong trường hợp này, nếu điều này là một chức năng mà là nghĩa đen đếm số lượng nhân vật trong Zamyla mỗi lần chúng tôi gọi là chức năng. Mỗi khi bạn yêu cầu máy tính để sử dụng Stirling, nó lấy một cái nhìn tại Zamyla, và nói Z-A-M-Y-L-A, 6. Và nó trả 6. Lần sau khi bạn gọi nó bên trong vòng lặp for, nó sẽ nhìn vào Zamyla một lần nữa, nói Z-A-M-Y-L-A, 6. Và nó sẽ trở lại 6. Vậy điều gì ngu ngốc về thiết kế này? 
+
+Tại sao mã của tôi không phải là một 5 trong 5 cho thiết kế ngay bây giờ, có thể nói? Vâng, tôi đang hỏi một câu hỏi không cần thiết. Tôi đang làm việc nhiều hơn tôi cần. 
+
+Vì vậy, mặc dù Câu trả lời là đúng, tôi yêu cầu máy tính, những gì là chiều dài của Zamyla một lần nữa, và một lần nữa, và một lần nữa, và một lần nữa? Và câu trả lời là sẽ không bao giờ thay đổi. Nó luôn luôn có được 6. 
+
+Vì vậy, một giải pháp tốt hơn thế này sẽ là phiên bản tiếp theo này. Hãy để tôi đi trước và đặt nó trong một file riêng biệt gọi là string1.c, chỉ để giữ cho nó tách biệt. Và hóa ra trong một cho vòng lặp, bạn có thể thực sự khai báo nhiều biến cùng một lúc. 
+
+Vì vậy, tôi sẽ giữ tôi và đặt nó vào 0. Nhưng tôi cũng sẽ đến thêm một dấu phẩy, và nói, cho tôi một biến gọi là n, có giá trị bằng với chiều dài chuỗi s. Và bây giờ, xin hãy làm cho tình trạng của tôi miễn là tôi là nhỏ hơn n. 
+
+Vì vậy, theo cách này, logic là giống hệt nhau vào cuối ngày. Nhưng tôi nhớ lại giá trị 6, trong trường hợp này. chiều dài của tên Zamyla là gì? Và tôi đặt nó ở n. 
+
+Và tôi vẫn đang kiểm tra điều kiện mỗi lần. Là 0 ít hơn 6? Là 1 ít hơn 6? Là 2 ít hơn 6, và vân vân? 
+
+Nhưng tôi không yêu cầu máy tính một lần nữa, và một lần nữa, có chuyện gì chiều dài của tên Zamyla của? chiều dài của tên Zamyla của là gì? chiều dài của tên của Zamyla này là gì? Tôi nghĩa đen nhớ rằng đầu tiên và chỉ trả lời trong n biến thứ hai này. Vì vậy, đây bây giờ sẽ là không chỉ chính xác, nhưng cũng được thiết kế tốt. 
+
+Bây giờ, những gì về phong cách? Tôi đã đặt tên biến của tôi khá tốt, tôi sẽ nói. Họ là siêu gọn gàng ngay bây giờ. Và đó là hoàn toàn tốt đẹp. 
+
+Nếu bạn chỉ có một chuỗi trong một chương trình, bạn cũng có thể gọi nó là cho chuỗi. Nếu bạn chỉ có một biến đếm trong một chương trình, bạn cũng có thể gọi nó là i. Nếu bạn có một chiều dài, n là siêu chung là tốt. Nhưng tôi đã không nhận xét bất kỳ mã của tôi. 
+
+Tôi đã không thông báo reader-- cho dù đó là TF của tôi, hoặc hỗ trợ kỹ thuật, hoặc chỉ colleague-- những gì được mong được diễn ra trong chương trình này. Và như vậy để có được phong cách tốt, những gì tôi muốn làm là một cái gì đó này-- như yêu cầu người sử dụng cho đầu vào. Và tôi có thể viết lại này nhiều cách. 
+
+Hãy chắc chắn rằng s-- đảm bảo get chuỗi trả lại một chuỗi. Và sau đó trong đây-- và điều này có lẽ là sự lặp comment-- quan trọng nhất qua các nhân vật trong s cùng một lúc. Và tôi có thể sử dụng bất kỳ lựa chọn ngôn ngữ tiếng Anh đây để mô tả mỗi các khối mã. 
+
+Chú ý rằng tôi đã không đặt một nhận xét về tất cả các dòng mã, thực sự chỉ là trên thú những người thân, những người mà có một số ý nghĩa mà tôi có thể muốn làm siêu rõ ràng cho người đọc mã của tôi. Và tại sao bạn gọi được chuỗi hỏi người dùng cho đầu vào? Thậm chí có một không nhất thiết phải là tất cả những gì mô tả. Nhưng nó giúp kể một câu chuyện, bởi vì dòng thứ hai trong câu chuyện, chắc chắn nhận được chuỗi trả về một chuỗi. 
+
+Và dòng thứ ba trong câu chuyện là, lặp qua các nhân vật trong s một tại một thời điểm. Và bây giờ chỉ cần cho các biện pháp tốt, Tôi sẽ đi trước và thêm một bình luận thêm rằng chỉ nói in thứ i tính bằng s. Bây giờ, những gì tôi đã thực hiện vào cuối ngày? 
+
+Tôi đã thêm một số tiếng Anh từ trong hình thức bình luận. Các biểu tượng dấu gạch chéo slash nghĩa, hey, máy tính này là dành cho con người, không dành cho bạn, máy tính. Vì vậy, họ đang bỏ qua một cách hợp lý. Họ chỉ ở đó. 
+
+Và, quả thật vậy, CS50 IDE cho thấy chúng là màu xám, như là hữu ích, nhưng không quan trọng vào chương trình. Chú ý những gì bạn có thể làm. Cho dù bạn biết C lập trình hay không, bạn chỉ có thể đứng lại tại đây chương trình, và lướt qua các ý kiến. Yêu cầu người dùng nhập vào, đảm bảo nhận được chuỗi trả về một chuỗi, lặp qua các nhân vật trong s một lúc, in các nhân vật nhân vật thứ i trong s-- bạn không thậm chí phải nhìn vào mã để hiểu những gì chương trình này không. Và, tốt hơn, nếu bạn tự mình tìm tại chương trình này trong một hoặc hai tuần, hay một tháng, hoặc một năm, bạn quá không có nhìn chằm chằm vào các mã, cố nhớ lại, những gì đã được tôi cố gắng để làm với mã này? 
+
+Bạn đã nói với chính mình. Bạn đã mô tả nó cho chính mình, hoặc một số đồng nghiệp, hoặc hỗ trợ kỹ thuật, hoặc TF. Và do đó, đây bây giờ sẽ là chính xác, và thiết kế tốt, và cuối cùng là tốt phong cách là tốt. Vì vậy, giữ cho rằng trong tâm trí. 
+
+Vì vậy, có một khác điều tôi sẽ làm ở đây mà bây giờ có thể tiết lộ chính xác những gì xảy ra dưới mui xe. Vì vậy, có tính năng này trong C, và các ngôn ngữ khác, gọi typecasting đó hoặc là ngầm hoặc một cách rõ ràng cho phép bạn chuyển đổi từ một loại dữ liệu khác. Chúng tôi đã được xử lý để nay ngày hôm nay với chuỗi. 
+
+Và dây là ký tự. Nhưng nhớ lại từ tuần 0 ký tự là gì? Nhân vật chỉ là một khái niệm trừu tượng trên đầu trang của các số thập phân numbers--, và số thập phân là thực sự chỉ là một trừu tượng trên đầu trang của các số nhị phân, như chúng ta định nghĩa nó. 
+
+Vì vậy, nhân vật là những con số. Và con số này là các nhân vật, chỉ phụ thuộc vào ngữ cảnh. Và nó chỉ ra rằng bên trong của một chương trình máy tính, bạn có thể chỉ định cách bạn muốn tìm tại các bit bên trong của chương trình đó? 
+
+Nhớ lại từ tuần 0 mà chúng tôi đã có Ascii, mà chỉ là mã này chữ để lập bản đồ số. Và chúng tôi đã nói, vốn A là 65. Capital B là 66, và vv. 
+
+Và thông báo, chúng tôi về cơ bản có ký tự trên hàng đầu ở đây, như C sẽ gọi cho họ, ký tự, và sau đó ints vào hàng thứ hai. Và hóa ra bạn có thể chuyển đổi liền mạch giữa hai, thông thường. Và nếu chúng ta muốn làm này cố ý, chúng tôi có thể muốn giải quyết một cái gì đó như thế này. 
+
+Chúng tôi có thể muốn chuyển đổi trường hợp trên để giảm trường hợp, hoặc trường hợp thấp hơn trường hợp trên. Và hóa ra có của thực sự là một mô hình ở đây chúng ta có thể nắm lấy chỉ trong một khoảnh khắc. Nhưng chúng ta hãy xem xét đầu tiên tại một Ví dụ để làm điều này một cách rõ ràng. 
+
+Tôi sẽ quay trở lại vào CS50 IDE. Tôi sẽ tạo ra một tập tin gọi là Ascii 0.c. Và tôi sẽ đi trước và thêm tôi io.h tiêu chuẩn ở đầu trang, int void main ở đầu chức năng của tôi. Và sau đó tôi chỉ cần đi để làm following-- một vòng lặp từ i bằng, hãy nói, 65. 
+
+Và sau đó tôi sẽ được ít hơn 65, cộng với 26 chữ cái trong bảng chữ cái. Vì vậy, tôi sẽ cho máy tính làm toán cho tôi ở đó. Và sau đó bên trong vòng lặp này, những gì tôi sẽ in? 
+
+C% là% i backslash n. Và bây giờ tôi muốn cắm trong hai giá trị. Tôi đã tạm thời đặt câu hỏi đánh dấu có mời các câu hỏi. 
+
+Tôi muốn lặp từ 65 trở đi cho 26 chữ cái trong bảng chữ cái, in ra trên mỗi lần lặp đó nhân vật tương đương không thể thiếu. Nói cách khác, tôi muốn lặp trên 26 số in ấn những gì các nhân vật Ascii là chữ cái, và những gì các số tương ứng hợp-- thực sự chỉ là tái tạo các biểu đồ từ slide đó. Vì vậy, những gì nên những dấu hỏi được? 
+
+Vâng, nó quay ra rằng thứ hai một trong những chỉ nên là tôi biến. Tôi muốn xem đó như là một con số. Và cuộc tranh luận giữa ở đây, tôi có thể nói cho máy tính để điều trị số nguyên tôi như một nhân vật, như vậy là để thay thế nó ở đây cho phần trăm C. 
+
+Nói cách khác, nếu tôi, các lập trình của con người, biết đây là những chỉ số vào cuối ngày. Và tôi biết rằng 65 nên bản đồ cho một số nhân vật. Với diễn viên rõ ràng này, với một dấu ngoặc đơn, tên của các loại dữ liệu mà bạn muốn chuyển đổi, và một dấu ngoặc đóng, bạn có thể nói máy tính, hey, máy tính, chuyển đổi số nguyên này cho một char. 
+
+Vì vậy, khi tôi chạy này chương trình sau khi biên dịch, chúng ta hãy xem những gì tôi làm cho get-- Ascii 0. Darn nó, tôi đã làm gì sai ở đây? Sử dụng các định danh không khai báo, tất cả các bên phải, không cố ý, nhưng chúng ta hãy xem nếu chúng ta có thể không Lý do thông qua này. 
+
+Vì vậy, dòng five-- vì vậy tôi đã không nhận được rất xa trước khi điều chỉnh các. Vậy là được rồi. Vì vậy, dòng 5 cho tôi bằng 65-- tôi nhìn thấy. Vì vậy, hãy nhớ rằng trong C, không giống như một số ngôn ngữ nếu bạn có chương trình trước kinh nghiệm, bạn có để nói với máy tính, không giống như Scratch, những gì loại biến nó được. 
+
+Và tôi quên một cụm từ khóa ở đây. Cùng năm, tôi đã bắt đầu sử dụng i. Nhưng tôi đã không nói với C những kiểu dữ liệu của nó. Vì vậy, tôi sẽ đi ở đây và nói, ah, làm cho nó một số nguyên. 
+
+Bây giờ tôi sẽ đi trước và biên dịch lại. Đó là cố định đó. ./ascii0 Enter, đó là loại mát mẻ. Không chỉ là nó siêu nhanh yêu cầu máy tính câu hỏi này, chứ không phải là tìm kiếm nó lên trên một slide, nó được in ra mỗi dòng, A là 65, B là 66, tất cả các cách down-- kể từ khi tôi đã làm điều này 26 times-- để các chữ z, đó là 90. Và, trên thực tế, hơi thông minh hơn sẽ đã được cho tôi không phải dựa trên máy tính để thêm 26. Tôi có thể chỉ cần thực hiện 90 là tốt, quá lâu như tôi không mắc phải sai lầm tương tự hai lần. Tôi muốn đi lên qua z, không chỉ lên thông qua y. 
+
+Vì vậy, đó là một diễn viên rõ ràng. Nó chỉ ra rằng điều này là không còn cần thiết. Hãy để tôi đi trước và chạy lại này biên dịch và chạy lại Ascii 0. Nó chỉ ra rằng C là khá thông minh. 
+
+Và printf, đặc biệt, là khá thông minh. Nếu bạn chỉ cần vượt qua một hai lần tôi cho cả placeholders, printf sẽ nhận ra, oh, tôi cũng biết bạn đã cho tôi một integer-- một số, như 65, hoặc 90, hoặc bất cứ điều gì. Nhưng tôi thấy rằng bạn muốn tôi định dạng mà số giống như một nhân vật. Và như vậy printf ngầm có thể cast các int đến một char cho bạn là tốt. Vì vậy, đó không phải là vấn đề gì cả. 
+
+Nhưng chú ý, vì tính tương đương này chúng tôi thực sự có thể làm được điều này là tốt. Hãy để tôi đi trước và thực hiện một Phiên bản khác của này-- 1.c. Ascii Và thay vì lặp qua số nguyên, thực sự có thể thổi tâm trí của bạn bằng cách duyệt qua các nhân vật. Nếu một char c được vốn A, tôi muốn đi trước và làm điều này, miễn là C là nhỏ hơn hoặc bằng đến Z. vốn Và trên mỗi lần lặp Tôi muốn tăng C, tôi có thể bây giờ trong dòng printf của tôi ở đây nói, phần trăm C là phần trăm tôi một lần nữa, dấu phẩy C. 
+
+Và bây giờ, tôi có thể đi theo một hướng khác, đúc các nhân vật một cách rõ ràng để một số nguyên. Vì vậy, một lần nữa, tại sao bạn làm điều này? Đó là một chút lạ để sắp xếp của đếm về nhân vật. 
+
+Nhưng nếu bạn hiểu những gì xảy ra dưới mui xe, có thực sự không có phép thuật. Bạn chỉ cần nói, hey, máy tính bỏ tôi một biến gọi là C kiểu char. Khởi tạo nó vốn A. Và nhận báo giá duy nhất vấn đề. 
+
+Đối với các nhân vật trong C, nhớ lại từ tuần cuối cùng, bạn sử dụng dấu ngoặc đơn. Đối với dây, các từ, cụm từ, bạn sử dụng dấu ngoặc kép. OK, máy tính, tiếp tục làm điều này, vì vậy miễn là nhân vật ít hơn hoặc bằng z. Và tôi biết từ bảng Ascii của tôi rằng tất cả các mã Ascii liền kề nhau. 
+
+Không có khoảng trống. Vì vậy, nó chỉ là từ A đến Z, ngăn cách bởi một số lượng mỗi loại. Và sau đó tôi có thể tăng một char, nếu tôi thực sự muốn. Vào cuối ngày, nó chỉ là một con số. Tôi biết cái này. Vì vậy, tôi chỉ có thể đoán thêm 1 đến nó. 
+
+Và rồi thời gian này, tôi in c, và sau đó là tương đương không thể thiếu. Và tôi thậm chí không cần diễn viên rõ ràng. Tôi có thể cho printf và hình máy tính những điều trên, vì vậy mà bây giờ nếu tôi chạy làm Ascii1./ascii1, Tôi nhận được một điều chính xác là tốt. 
+
+chương trình vô dụng, không có ai though-- sẽ thực sự viết phần mềm để tìm ra, những gì là số mà các bản đồ với A, hoặc B, hoặc Z? Bạn chỉ cần đi để Google nó, hoặc nhìn nó lên trực tuyến, hoặc xem nó lên trên một slide, hoặc tương tự. Vì vậy, nơi thực hiện điều này thực sự có được hữu ích? 
+
+Vâng, nói rằng slide, nhận thấy có một mô hình thực tế ở đây giữa chữ hoa và chữ thường đó không phải là tình cờ. Chú ý rằng vốn A là 65. Chữ thường một là 97. Và làm thế nào xa là trường hợp thấp hơn? 
+
+Vì vậy, 65 là bao nhiêu bước đi từ 97? Vì vậy, 97 trừ đi 65 là 32. Vì vậy, vốn một là 65. Nếu bạn thêm 32 đến đó, bạn sẽ có được chữ thường a. Và, tương đương, nếu bạn trừ đi 32, bạn trở lại với vốn là-- cùng với B để ít b, lớn C để ít c. 
+
+Tất cả những khoảng trống là 32 ngoài. Bây giờ, điều này có vẻ như để cho phép chúng tôi làm một cái gì đó giống như Microsoft Word, hoặc Google Docs tính năng này, nơi bạn có thể chọn tất cả mọi thứ và sau đó nói rằng, thay đổi tất cả thành chữ thường, hoặc thay đổi tất cả thành chữ hoa, hoặc chỉ thay đổi từ đầu tiên trong câu để trường hợp trên. Chúng tôi thực sự có thể làm điều gì đó như thế mình. 
+
+Hãy để tôi đi trước và lưu một tập tin đây gọi là tận 0.c. Và chúng ta hãy đi trước và whip lên một chương trình thực hiện chính xác đó như sau. Vì vậy, bao gồm các thư viện CS50. Và bao gồm tiêu chuẩn I / O. 
+
+Và tôi biết điều này là đến sớm. Vì vậy, tôi sẽ đặt nó trong đã có, string.h, vì vậy tôi có quyền truy cập vào những thứ như Stirling, và sau đó int void main, như thường lệ. Và sau đó tôi sẽ đi trước và làm các chuỗi được nhận được chuỗi, chỉ để có được một chuỗi từ người sử dụng. Và sau đó tôi sẽ thực hiện kiểm tra sự tỉnh táo của tôi. Nếu chuỗi không làm rỗng bằng nhau, sau đó nó an toàn để tiến hành. Và làm những gì tôi muốn làm gì? Tôi sẽ lặp từ i bằng 0, và n lên với chiều dài chuỗi s. 
+
+Và tôi sẽ làm điều này miễn là i nhỏ hơn n, và tôi cộng cộng. Cho đến nay, tôi thực sự chỉ mượn ý tưởng từ trước. Và bây giờ tôi sẽ giới thiệu một chi nhánh. 
+
+Vì vậy, suy nghĩ lại về Scratch, nơi chúng tôi đã có những ngã ba đường, và tuần cuối cùng trong C. Tôi sẽ nói điều này, nếu nhân vật thứ i trong s là lớn hơn hoặc bình đẳng để giảm trường hợp một, và- trong Scratch bạn sẽ theo nghĩa đen nói và, nhưng trong C bạn nói dấu và, ampersand-- và nhân vật thứ i trong s là nhỏ hơn hoặc bằng để giảm trường hợp z, chúng ta hãy làm một cái gì đó thú vị. Hãy thực sự in ra một nhân vật không có xuống dòng đó là các nhân vật trong chuỗi, nhân vật thứ i trong chuỗi. 
+
+Nhưng chúng ta hãy đi trước và trừ đi 32 từ nó. Khác nếu các nhân vật trong chuỗi mà chúng tôi đang tìm kiếm không phải là giữa một chút và ít z, đi trước và chỉ cần in ra không thay đổi. Vì vậy, chúng tôi đã giới thiệu ký hiệu trong ngoặc vuông này cho chuỗi của chúng tôi để có được ở các thứ i nhân vật trong chuỗi. 
+
+Tôi đã thêm một số logic điều kiện, như Scratch trong một tuần của tuần trước, nơi Tôi chỉ sử dụng cơ bản của tôi sự hiểu biết về những gì xảy ra dưới mui xe. Là nhân vật thứ i của s lớn hơn hoặc bằng một? Giống như, nó là 97, hay 98, hoặc 99, và vân vân? 
+
+Nhưng là nó cũng nhỏ hơn hoặc bằng với giá trị của chữ thường z? Và nếu như vậy, những gì hiện dòng này nghĩa là gì? 14, đây là hai yếu tố mầm mống của toàn bộ ý tưởng, hoa chữ bằng chỉ đơn giản là trừ đi 32 từ nó, trong trường hợp này, bởi vì tôi biết, mỗi mà biểu đồ, làm thế nào con số của tôi được đại diện. Vì vậy, chúng ta hãy đi trước và chạy này, sau khi biên dịch tận 0.c, và chạy tận 0. 
+
+Hãy cùng đánh vào một cái gì đó như Zamyla trong tất cả các chữ thường nhập. Và bây giờ chúng tôi có Zamyla trong tất cả các chữ hoa. Hãy gõ Rob trong tất cả các chữ thường. Hãy thử Jason trong tất cả các chữ thường. Và chúng tôi tiếp tục nhận được buộc vốn. Có một lỗi nhỏ mà tôi loại đã không lường trước được. Chú ý nhắc nhở mới của tôi là kết thúc trên cùng một dòng như tên của họ, mà cảm thấy một chút lộn xộn. 
+
+Vì vậy, tôi sẽ đi đây, và thực sự vào cuối chương trình này in ra một ký tự xuống dòng. Đó là tất cả. Với printf, bạn không cần phải vượt qua trong các biến hoặc mã định dạng. Bạn có thể theo nghĩa đen chỉ in một cái gì đó giống như một dòng mới. 
+
+Vì vậy, chúng ta hãy đi trước và thực hiện tận 0 một lần nữa, chạy lại nó, Zamyla. Và bây giờ nó là một xinh đẹp hơn chút. Bây giờ, nhắc tôi là trên dòng riêng. Vì vậy, đó là tất cả tốt và tốt. Vì vậy, đó là một ví dụ tốt. Nhưng tôi thậm chí không nhất thiết cần cứng mã 32. Bạn biết những gì? Tôi có thể say-- tôi không bao giờ nhớ những gì là sự khác biệt. 
+
+Nhưng tôi biết rằng nếu tôi có một chữ thường, Tôi về cơ bản muốn trừ đi tắt bất cứ điều gì là khoảng cách giữa nhỏ a và lớn A, bởi vì nếu tôi giả định rằng tất cả các chữ cái khác đều giống nhau, rằng sẽ nhận được công việc làm. Nhưng thay vì làm điều đó, bạn biết những gì? Có một cách khác vẫn còn. 
+
+Nếu đó là tận 1.c-- nếu tôi là để đưa vào một tập tin riêng biệt. chúng ta hãy làm tận 2.c như sau. Tôi sẽ thực sự làm sạch này lên đây. Và thay vì thậm chí phải biết hoặc quan tâm về những mức thấp chi tiết thực hiện, tôi thay chỉ cần đi để in một nhân vật, quote unquote, phần trăm C, và sau đó gọi hàm khác mà tồn tại mà có một đối số, mà là một nhân vật, như thế này. 
+
+Hóa ra trong C, có một cuộc gọi chức năng để phía trên, như tên gọi của nó cho thấy có một nhân vật và làm cho nó vào trường hợp trên của nó tương đương, và sau đó trở về để printf mà có thể cắm nó trong đó. Và như vậy để làm được điều này, tuy nhiên, tôi cần phải giới thiệu một tập tin khác. Hóa ra có một tập tin khác rằng bạn sẽ chỉ biết đến lớp, hoặc một cuốn sách giáo khoa, hoặc trực tuyến tài liệu tham khảo, được gọi là C type.h. 
+
+Vì vậy, nếu tôi thêm rằng lên giữa phần đầu của tôi tập tin, và lập lại chương trình này, capitalize2, ./capitalize2 Enter. Hãy gõ Zamyla trong tất cả chữ thường, vẫn làm việc như nhau. Nhưng bạn biết những gì? Nó chỉ ra rằng để trên có một số chức năng khác. 
+
+Và hãy để tôi giới thiệu này chỉ huy ở đây, loại lúng túng đặt tên, nhưng người đàn ông để làm bằng tay. Nó chỉ ra rằng hầu hết các máy tính Linux, như chúng ta đang sử dụng đây-- điều hành Linux system-- có một lệnh gọi là người đàn ông, trong đó nói rằng, hey, máy tính, cho tôi nhãn hiệu của máy tính. Những gì bạn muốn đến tìm trong sách hướng dẫn đó? 
+
+Tôi muốn tìm kiếm các chức năng kêu gọi trên, Enter. Và đó là một chút khó hiểu đọc đôi khi. Nhưng nhận thấy chúng ta đang ở nhãn Linux lập trình viên của. Và đó là tất cả các văn bản. Và nhận thấy rằng có những tên của các chức năng ở đây. Hóa ra nó có một người anh họ gọi là hạ, mà làm ngược lại. Và thông báo theo tóm tắt, sử dụng này chức năng trang người đàn ông, có thể nói, là nói cho tôi rằng tôi cần phải bao gồm c type.h. Và tôi biết rằng từ thực tiễn. 
+
+Ở đây, nó hiển thị cho tôi hai nguyên mẫu cho các chức năng, do đó nếu tôi muốn sử dụng này Tôi biết những gì họ đưa như đầu vào, và những gì họ trở lại như đầu ra. Và sau đó nếu tôi đọc mô tả, tôi thấy chi tiết hơn những gì các chức năng nào. Nhưng quan trọng hơn, nếu Tôi nhìn theo giá trị trả về, nó nói giá trị trả về là rằng các bức thư được chuyển đổi, hoặc C, đầu vào ban đầu, nếu việc chuyển đổi là không thể. 
+
+Nói cách khác, để phía trên sẽ thử để chuyển đổi một bức thư cho trường hợp trên. Và nếu như vậy, nó sẽ trả lại nó. Nhưng nếu nó không thể đối với một số reason-- có lẽ đó là trường hợp đã được phía trên, có lẽ đó là một dấu chấm than hoặc một số punctuation-- khác nó chỉ cần đi trả lại C ban đầu, có nghĩa là tôi có thể làm cho mã của tôi thiết kế tốt hơn như sau. 
+
+Tôi không cần tất cả những dòng darn mã. Tất cả những dòng tôi đã chỉ nhấn mạnh có thể được sụp đổ vào chỉ là một đơn giản dòng, đó là này-- printf phần trăm c để trên khung S i. Và đây sẽ là một ví dụ về thiết kế tốt hơn. 
+
+Tại sao thực hiện trong 7 hoặc 8 dòng mã, bất cứ điều gì đó là tôi chỉ xóa, khi bạn thay vì có thể sụp đổ tất cả các logic và ra quyết định thành một dòng duy nhất, 13 bây giờ, đó dựa trên một thư viện function-- một chức năng mà đi kèm với C, nhưng đó thực hiện chính xác những gì bạn muốn nó làm. Và, thẳng thắn, thậm chí nếu nó đã không đến với C, bạn có thể thực hiện điều đó cho mình, như chúng tôi đã nhìn thấy, với nhận int tiêu cực và nhận được dương int tuần trước là tốt. 
+
+Mã này hiện nay là nhiều hơn nữa có thể đọc được. Và, quả thật vậy, nếu chúng ta di chuyển lên, xem có bao nhiêu nhỏ gọn hơn phiên bản này của chương trình của tôi là. Đó là một chút nặng hàng đầu hiện nay, với tất cả các bao gồm. Nhưng đó là OK, vì bây giờ tôi đang đứng trên vai của các lập trình viên trước tôi. Và ai đó là ai thực hiện để thực sự trên đã làm cho tôi một việc, giống như bất cứ ai thực hiện Stirling thực sự đã làm cho tôi một việc một số thời gian trước đây. Và vì vậy bây giờ chúng ta có một Chương trình thiết kế tốt hơn mà thực hiện cùng một logic chính xác. 
+
+Phát biểu của stirling, hãy tôi đi trước và làm điều này. Hãy để tôi đi trước và tiết kiệm tập tin này như stirling.c. Và hóa ra, chúng ta có thể bóc lại một lớp khác khá đơn giản bây giờ. Tôi sẽ đi trước và roi lên một chương trình khác trong chính ở đây mà chỉ đơn giản tái cụ chuỗi dài như sau. Vì vậy, đây là một dòng mã được tôi một chuỗi từ người sử dụng. Chúng tôi tiếp tục sử dụng này một lần nữa và một lần nữa. Hãy để tôi cung cấp cho bản thân mình một biến gọi là n kiểu int để lưu một số. 
+
+Và hãy để tôi đi trước và làm logic sau đây. Trong khi nhân vật thứ n trong s làm không bằng xuyệc ngược 0, đi trước và tăng n. Và sau đó in ra printf trăm i n. Tôi cho rằng chương trình này ở đây, mà không gọi chiều dài chuỗi, con số ra chiều dài của một chuỗi. 
+
+Và sự kỳ diệu là hoàn toàn gói gọn trong dòng 8 ở đây với những gì trông giống như cú pháp mới, dấu chéo ngược này 0 trong dấu ngoặc đơn. Nhưng tại sao vậy? Vâng, hãy xem xét những gì đang được đi trên tất cả các thời gian này. 
+
+Và như một sang một bên trước khi tôi quên, nhận ra quá, mà thêm vào các trang con người đi kèm với một điển hình hệ thống Linux như CS50 IDE, nhận ra rằng chúng ta, những nhân viên của khóa học, cũng đã thực hiện một phiên bản trang web của ý tưởng này cùng được gọi là reference.cs50.net, trong đó có tất cả các trang cùng một người đàn ông, tất cả điều đó cùng tài liệu, cũng như một hộp nhỏ ở phía trên cho phép bạn chuyển đổi tất cả các khá ngôn ngữ phức tạp vào ít thoải mái chế độ, nơi chúng tôi, đội ngũ giáo viên, đã đi qua và cố gắng đơn giản hóa một số ngôn ngữ để giữ cho mọi thứ tập trung vào những ý tưởng, và không một số các vấn đề chuyên môn. Vì vậy, giữ trong tâm trí, reference.cs50.net như tài nguyên khác là tốt. 
+
+Nhưng tại sao không làm việc chiều dài chuỗi trong cách tôi đề xuất một thời gian trước đây? Dưới đây là tên Zamyla nữa. Và đây là tên của Zamyla đóng hộp, như tôi tiếp tục làm, để vẽ một hình ảnh của nó được, thực sự, chỉ là một chuỗi các ký tự. Nhưng Zamyla không tồn tại cách ly trong một chương trình. 
+
+Khi bạn viết và chạy một chương trình, bạn đang sử dụng máy Mac hoặc máy PC của bạn như bộ nhớ, hoặc bộ nhớ RAM như vậy để nói chuyện. Và bạn có thể nghĩ máy tính của bạn là có nhiều gigabyte bộ nhớ những ngày này. Và một buổi biểu diễn có nghĩa là tỷ, nên tỷ byte. 
+
+Nhưng chúng ta hãy quay lại trong thời gian. Và giả sử rằng chúng ta đang sử dụng một máy tính thực sự cũ chỉ có 32 byte của bộ nhớ. Tôi có thể, trên màn hình máy tính của tôi, chỉ cần vẽ này như sau. 
+
+Tôi chỉ có thể nói rằng tôi máy tính có tất cả các bộ nhớ này. Và điều này cũng giống như một thanh bộ nhớ, nếu bạn nhớ lại hình ảnh của chúng tôi từ lần cuối cùng. Và nếu tôi chỉ chia này trong lần đủ, Tôi cho rằng tôi có 32 byte bộ nhớ trên màn hình. 
+
+Bây giờ, trong thực tế, tôi chỉ có thể vẽ cho đến nay trên màn hình này ở đây. Vì vậy, tôi sẽ đi trước, và chỉ bằng cách quy ước, vẽ bộ nhớ máy tính của tôi như là một lưới, không chỉ là một đường thẳng. Cụ thể, tôi cho rằng bây giờ mà lưới này, 8 4 lưới này, chỉ đại diện cho tất cả 32 byte bộ nhớ có sẵn trong máy Mac của tôi, hoặc có sẵn trong máy tính của tôi. Và họ đang gói vào hai dòng, chỉ cần bởi vì nó phù hợp hơn trên màn hình. Nhưng đây là byte đầu tiên. Đây là byte thứ hai. Đây là byte thứ ba. 
+
+Và đây là lần thứ 32 byte. Hoặc, nếu chúng ta suy nghĩ như một máy tính nhà khoa học, đây là byte 0, 1, 2, 3, 31. Vì vậy, bạn có 0-31, nếu bạn bắt đầu đếm từ 0. 
+
+Vì vậy, nếu chúng ta sử dụng một chương trình các cuộc gọi nhận được chuỗi, và chúng tôi nhận được một chuỗi từ con người như tôi đã gọi Zamyla, Z-A-M-Y-L-A, như thế nào trong thế giới hiện máy tính giữ dấu vết của các byte, mà đoạn bộ nhớ, thuộc mà chuỗi? Nói cách khác, nếu chúng ta tiến hành gõ tên khác vào máy tính, như Andi này, gọi nhận được chuỗi một lần thứ hai, A-N-D-I đã kết thúc trong bộ nhớ của máy tính là tốt. Nhưng bằng cách nào? 
+
+Vâng, nó chỉ ra rằng bên dưới mui xe, những gì C không khi lưu trữ xâu rằng các loại của con người trong, hoặc là đến từ một số nguồn khác, là nó phác họa hết trong số họ với một dấu chéo ngược character-- đặc biệt 0, mà chỉ là một cách đặc biệt nói 80 ​​bit trong một hàng. 
+
+Vì vậy là-- này là số 97 thu hồi. Vì vậy, một số mô hình của 8 bit đại diện cho số thập phân số 97. Đây backslash 0 là thật sự là số 0, còn được gọi là nul, N-U-L, không giống như trước đây, N-U-L-L, mà chúng tôi nói chuyện về. Nhưng bây giờ, chỉ biết rằng đây backslash 0 chỉ là 80 bit trong một hàng. 
+
+Và nó chỉ là dòng này trong cát nói bất cứ điều gì bên trái thuộc về một chuỗi, hoặc một kiểu dữ liệu. Và bất cứ điều gì về bên phải thuộc về một cái gì đó khác. Tên của Andi, trong khi đó, mà chỉ cần trực quan xảy ra để bọc vào đầu dây bên kia, nhưng đó chỉ là một chi tiết thẩm mỹ, tương tự là nul chấm dứt. 
+
+Đó là một chuỗi của một ký tự A-N-D-I, cộng với một nhân vật bí mật thứ năm, tất cả 0 bit, mà chỉ demarcates cuối tên Andi là tốt. Và nếu chúng ta gọi nhận được chuỗi lần thứ ba trong máy tính để có được một chuỗi như thế Maria, M-A-R-I-A, tương tự là Maria Tên nul chấm dứt với dấu chéo ngược 0. 
+
+Điều này về cơ bản là khác nhau từ làm thế nào một máy tính sẽ thường lưu trữ một số nguyên, hoặc một phao, hoặc khác kiểu dữ liệu vẫn còn, vì nhớ lại, một số nguyên thường là 32 bit, hoặc 4 byte, hoặc thậm chí có thể 64 bit, hay tám byte. Nhưng nhiều nguyên thủy trong một máy tính trong một ngôn ngữ lập trình có một số cố định của byte bên dưới hood-- có thể 1, có thể 2, có thể 4, có lẽ 8. 
+
+Nhưng chuỗi, theo thiết kế, có một số năng động của nhân vật. Bạn không biết trước, cho đến khi các loại của con người trong Z-A-M-Y-L-A, hoặc M-A-R-I-A, hoặc A-N-D-I. Bạn không biết bao nhiêu lần người dùng sẽ nhấn bàn phím. Do đó, bạn không biết làm thế nào nhiều nhân vật trước bạn sẽ cần. 
+
+Và do đó, C chỉ loại lá như một mẩu bánh mì bí mật bên dưới mui xe ở phần cuối của chuỗi. Sau khi lưu trữ Z-A-M-Y-L-A trong bộ nhớ, nó cũng chỉ đặt tương đương của một thời kỳ. Vào cuối của một câu, nó đặt 80 bit, do đó như để ghi nhớ nơi Zamyla bắt đầu và kết thúc. 
+
+Vì vậy, các kết nối là những gì, sau đó, để chương trình này? Chương trình này ở đây, Stirling, chỉ đơn giản là một cơ chế để nhận được một chuỗi từ người sử dụng, dòng 6. Dòng 7, tôi tuyên bố một biến gọi n và thiết lập nó bằng 0. 
+
+Và sau đó trong dòng 8, tôi chỉ cần hỏi những câu hỏi, trong khi các nhân vật n-thứ làm không bằng tất cả 0 bits-- nói cách khác, không bình đẳng đặc biệt này nhân vật, dấu chéo ngược 0, Chỉ là character-- nul đặc biệt đi trước và chỉ tăng n. 
+
+Và tiếp tục làm nó, và giữ làm việc đó, và tiếp tục làm nó. Và do đó, mặc dù trong quá khứ, chúng tôi đã sử dụng i, nó hoàn toàn tốt đẹp ngữ nghĩa sử dụng n, nếu bạn chỉ cần cố gắng để đếm thời gian này cố tình, và chỉ muốn gọi nó là n. Vì vậy, điều này chỉ giữ đặt câu hỏi, là nhân vật thứ n của s tất cả các số 0? Nếu không, nhìn vào giao diện tiếp theo, tìm đến tiếp theo, nhìn đến tiếp theo, tìm đến tiếp theo. 
+
+Nhưng ngay khi bạn thấy dấu chéo ngược 0, dòng loop-- này 9 thông qua 11-- dừng. Bạn thoát ra khỏi vòng lặp while, để lại bên trong rằng biến n tổng số của tất cả các ký tự trong chuỗi bạn đã thấy, do đó in nó ra. Vì vậy, hãy cố gắng này. 
+
+Hãy để tôi đi trước và không có bằng cách sử dụng chức năng stirling, nhưng chỉ sử dụng phiên bản cây nhà lá vườn của riêng tôi đây gọi là stirling, hãy để tôi đi trước và chạy stirling, gõ vào một cái gì đó như Zamyla, mà tôi biết trước là sáu ký tự. Hãy xem nếu nó hoạt động. Thật vậy, đó là sáu. Hãy thử với Rob, ba nhân vật, ba nhân vật là tốt, và vân vân. Vì vậy, đó là tất cả những gì đang diễn ra trên dưới mui xe. Và nhận thấy các kết nối, sau đó, với những tuần đầu tiên lớp học, nơi mà chúng tôi đã nói chuyện về một cái gì đó giống như trừu tượng, mà chỉ là lớp này của các ý tưởng, hoặc phức tạp, trên nguyên tắc cơ bản. Ở đây, chúng tôi đang tìm kiếm loại bên dưới mui xe của stirling, vậy để nói chuyện, để tìm ra, làm thế nào nó sẽ được thực hiện? 
+
+Và chúng ta có thể tái thực hiện nó chính mình. Nhưng chúng ta sẽ không bao giờ một lần nữa đi để tái thực hiện stirling. Chúng tôi chỉ đi sử dụng để stirling để thực sự có được một số chiều dài chuỗi. 
+
+Nhưng không có phép thuật bên dưới mui xe. Nếu bạn biết rằng bên dưới mui xe, một chuỗi chỉ là một chuỗi các ký tự. Và đó là chuỗi các ký tự tất cả có thể được giải quyết bằng số với khung 0, khung 1, khung 2, và bạn biết rằng vào cuối của một chuỗi là một ký tự đặc biệt, bạn có thể tìm ra làm thế nào để làm bất cứ điều gì nhất trong một chương trình, bởi vì tất cả nó nắm tới được đọc và viết bộ nhớ. Đó là, thay đổi và tìm kiếm tại bộ nhớ, hoặc di chuyển những thứ xung quanh trong bộ nhớ, mọi thứ in trên màn hình, và vv. 
+
+Vì vậy, bây giờ chúng ta sử dụng mới được phát hiện này sự hiểu biết về những gì thực sự Strings là dưới mui xe, và bóc lại một lớp khác cho đến bây giờ chúng tôi đã được bỏ qua hoàn toàn. Cụ thể, bất cứ lúc nào chúng tôi đã thực hiện một chương trình, chúng tôi đã có dòng mã này gần đầu tuyên bố chính. Và chúng tôi đã chỉ định int void main. 
+
+Và đó void bên trong dấu ngoặc đơn có được nói bao nhiêu thời gian chính tự nó không có bất kỳ đối số. Bất kỳ đầu vào đó chính là sẽ nhận được từ người sử dụng phải đến từ một số khác cơ chế, như get int, hoặc nhận được phao, hoặc nhận được chuỗi, hoặc một số chức năng khác. Nhưng nó chỉ ra rằng khi bạn viết một chương trình, bạn thực sự có thể chỉ định rằng chương trình này thì có đầu vào từ con người tại dòng lệnh riêng của mình. 
+
+Nói cách khác, mặc dù chúng tôi vậy, đến nay có được chạy chỉ ./hello chào hoặc các chương trình tương tự, tất cả các các chương trình khác mà chúng tôi đã sử dụng, mà chính chúng ta đã không viết, có được tham gia, có vẻ như, arguments-- dòng lệnh những thứ như làm. Bạn nói điều gì đó như make, và sau đó một từ thứ hai. Hoặc kêu vang, bạn nói Clang, và sau đó một từ thứ hai, tên của một tập tin. 
+
+Hoặc thậm chí RM hoặc CP, như bạn có thể đã nhìn thấy hoặc sử dụng đã để loại bỏ hoặc sao chép các tập tin. Tất cả những mất cái gọi là arguments-- dòng lệnh Nói cách thêm tại dấu nhắc thiết bị đầu cuối. Nhưng cho đến bây giờ, chúng tôi mình đã không có sang trọng này lấy đầu vào từ người sử dụng khi họ thực sự chạy chương trình chính nó tại dòng lệnh. 
+
+Nhưng chúng ta có thể làm điều đó bằng cách tái tuyên bố chính di chuyển về phía trước, không phải là có làm mất hiệu lực trong dấu ngoặc đơn, nhưng hai đối số này instead-- đầu tiên một số nguyên, và một cái gì đó thứ hai mới, một cái gì đó mà chúng ta sẽ gọi một mảng, một cái gì đó tương tự như trong tinh thần những gì chúng ta đã thấy trong Scratch là một danh sách, nhưng một mảng các chuỗi, như chúng ta sẽ thấy ngay. Nhưng chúng ta thấy điều này bằng một ví dụ, trước khi chúng tôi phân biệt chính xác những gì có nghĩa là. 
+
+Vì vậy, nếu tôi đi vào CS50 IDE ở đây, tôi đã đi trước và tuyên bố trong một tập tin gọi là argv0.c mẫu sau đây. Và nhận thấy điều duy nhất đó là khác nhau cho đến nay được rằng tôi đã thay đổi khoảng trống để int argc chuỗi argv khung mở, đóng giá đỡ. Và thông báo cho bây giờ, có không có gì bên trong những dấu ngoặc đơn. 
+
+Không có con số. Và không có tôi, hoặc n, hoặc bất kỳ thư khác. Tôi chỉ sử dụng các dấu ngoặc vuông cho bây giờ, vì lý do chúng tôi sẽ đến trở lại chỉ trong một khoảnh khắc. 
+
+Và bây giờ những gì tôi sẽ làm được điều này. Nếu argc bằng bằng 2-- và nhớ lại rằng bằng bình đẳng là toán tử bằng cách so sánh bên trái và bên phải bình đẳng. Đó không phải là sự phân công điều hành, đó là các dấu bằng, có nghĩa là bản sao từ bên phải sang bên trái một số giá trị. 
+
+Nếu argc bằng bằng 2, tôi muốn nói, printf, hello, phần trăm, xuống dòng, và sau đó cắm in-- và đây là mới trick-- khung argv 1, vì lý do rằng chúng tôi sẽ trở lại trong một thời điểm. Else if argc không bằng 2, bạn biết những gì? Hãy chỉ cần đi trước và, như thường lệ, in ra hello thế giới có thay thế không. 
+
+Vì vậy, nó sẽ có vẻ rằng nếu argc, mà là viết tắt của số đối số, bằng 2, Tôi sẽ in ra xin chào một cái gì đó hoặc khác. Nếu không, theo mặc định, tôi sẽ in hello thế giới. Vì vậy, điều này có nghĩa là gì? 
+
+Vâng, hãy để tôi đi trước và tiết kiệm tập tin này, và sau đó làm làm argv0, và sau đó ./argv0, Enter. Và nó nói hello thế giới. Bây giờ, tại sao vậy? 
+
+Vâng, nó quay ra bất cứ lúc nào bạn chạy một chương trình tại các dòng lệnh, bạn điền vào những gì chúng tôi sẽ thường gọi một vector tham số. Nói cách khác, tự động máy tính, hệ điều hành, sẽ trao cho chương trình của bạn tự nó là một danh sách của tất cả các từ rằng con người đánh máy ở dấu nhắc, trong trường hợp bạn các lập trình viên muốn làm một cái gì đó với thông tin đó. Và trong trường hợp này, các từ ngữ chỉ Tôi đã gõ tại dấu nhắc là ./argv0. 
+
+Và do đó, số lượng các đối số đó là được truyền cho chương trình của tôi chỉ có một. Nói cách khác, đối số đếm, nếu không được biết đến như argc đây là một số nguyên, chỉ có một. Một, tất nhiên, không bằng hai. Và đây là những gì in, xin chào thế giới. 
+
+Nhưng hãy để tôi đi một nơi nào đó. Hãy để tôi nói, argv0. Và sau đó làm thế nào về Maria? Và sau đó nhấn Enter. 
+
+Và chú ý những gì kỳ diệu xảy ra ở đây. Bây giờ, thay vì chào thế giới, tôi có thay đổi hành vi của các chương trình này bằng cách lấy đầu vào không phải từ get chuỗi hoặc một số chức năng khác, nhưng từ, rõ ràng, chỉ huy của tôi chính nó, những gì tôi ban đầu gõ vào. Và tôi có thể chơi trò chơi này một lần nữa bởi thay đổi nó để Stelios, ví dụ. 
+
+Và bây giờ tôi thấy một tên khác vẫn còn. Và ở đây, tôi có thể nói Andi. Và tôi có thể nói Zamyla. Và chúng tôi có thể chơi trò chơi này cả ngày dài, chỉ cần cắm vào các giá trị khác nhau, chừng nào tôi còn cung cấp chính xác hai chữ tại dấu nhắc, mà argc, lập luận của tôi đếm, là 2. 
+
+Tôi thấy rằng tên cắm vào printf, mỗi tình trạng này đây? Vì vậy, chúng ta dường như có bây giờ khả năng biểu cảm lấy đầu vào từ một cơ chế khác, từ dòng lệnh để gọi là, thay vì phải chờ đợi cho đến khi người dùng chạy các chương trình, và sau đó nhắc anh ta hoặc cô sử dụng một cái gì đó như get chuỗi. 
+
+Vì vậy, đây là những gì? Argc, một lần nữa, chỉ là một số nguyên, số lượng words-- arguments-- mà người sử dụng cung cấp tại nhanh chóng, tại cửa sổ thiết bị đầu cuối, bao gồm cả tên của chương trình. Vì vậy ./argv0 của chúng tôi là, có hiệu quả, Tên của chương trình, hoặc làm thế nào tôi chạy chương trình. 
+
+Mà đếm như một từ. Vì vậy, argc sẽ là 1. Nhưng khi tôi viết Stelios, hoặc Andi, hoặc Zamyla, hoặc Maria, đó có nghĩa là số lượng đối số là hai. Và vì vậy bây giờ có hai từ thông qua tại. 
+
+Và thông báo, chúng tôi có thể tiếp tục logic này. Nếu tôi thực sự nói một cái gì đó giống như Zamyla Chan, tên đầy đủ, do đó đi qua ba đối số trong tổng số, bây giờ nó nói mặc định một lần nữa, bởi vì, tất nhiên, 3 không bằng 2. 
+
+Và vì vậy theo cách này, tôi có truy cập thông qua argv luận mới rằng chúng ta có thể về mặt kỹ thuật gọi bất cứ điều gì chúng ta muốn. Nhưng theo quy ước, đó là argv và argc, tương ứng. Argv, vector tham số, là loại của một từ đồng nghĩa với một lập trình tính năng trong C được gọi là một mảng. 
+
+Một mảng là một danh sách các giá trị tương tự trở lại, trở lại, trở lại, trở lại. Nói cách khác, nếu một người ở ngay trong RAM, tiếp theo là ngay bên cạnh nó, và ngay bên cạnh nó. Chúng không phải tất cả các nơi. Và đó là kịch bản thứ hai, nơi mà mọi thứ là tất cả các nơi trong bộ nhớ, thực sự có thể là một tính năng mạnh mẽ. Nhưng chúng tôi sẽ quay trở lại khi chúng ta nói về cấu trúc dữ liệu fancier. Để bây giờ, một mảng chỉ là đoạn bộ nhớ tiếp giáp, mỗi người có yếu tố này là trở lại, trở lại, trở lại, trở lại, và thường cùng loại. 
+
+Vì vậy, nếu bạn nghĩ về, từ một thời điểm trước đây, một chuỗi là gì? Vâng, một chuỗi, như Zamyla, Z-A-M-Y-L-A, là, về mặt kỹ thuật, chỉ là một mảng. Đây là một mảng ký tự. 
+
+Và như vậy, nếu chúng ta thực sự thu hút này, như tôi đã làm trước đó, như một đoạn bộ nhớ, nó chỉ ra rằng mỗi người trong các nhân vật chiếm một byte. Và sau đó là người đặc biệt nhân vật trọng điểm, dấu chéo ngược 0, hoặc tất cả tám 0 bit, mà demarcates cuối chuỗi. Vì vậy, một chuỗi, nó quay ra, trích dẫn chuỗi unquote, chỉ là một mảng của chara-- char là một kiểu dữ liệu thực tế. 
+
+Và bây giờ argv, meanwhile-- chúng ta hãy quay trở lại với chương trình. Argv, mặc dù chúng ta thấy từ chuỗi ở đây, không phải là một chuỗi chính nó. Argv, vector tham số, là một mảng của chuỗi. 
+
+Vì vậy, cũng giống như bạn có thể có một mảng của ký tự, bạn có thể có mức độ cao hơn, một mảng của strings-- như vậy, ví dụ, khi tôi đánh lúc nãy ./argv0 argv0, không gian Z-A-M-Y-L-A, tôi tuyên bố rằng argv có hai chuỗi trong ./argv0 it--, và Z-A-M-Y-L-A. Trong Nói cách khác, argc là 2. Tại sao vậy? 
+
+Vâng, có hiệu quả, những gì đang diễn ra được rằng mỗi một trong các chuỗi là, tất nhiên, là một mảng ký tự như trước đây, mỗi nhân vật có chiếm một byte. Và đừng nhầm lẫn giữa 0 thực tế trong tên của chương trình với 0, có nghĩa là tất cả 80 bit. Và Zamyla, trong khi đó, vẫn còn cũng là một mảng ký tự. 
+
+Vì vậy, vào cuối ngày, nó thực sự trông như thế này bên dưới mui xe. Nhưng argv, bởi bản chất của cách chính công trình, cho phép tôi để bọc tất cả những điều này thành, nếu bạn sẽ, một mảng lớn hơn rằng, nếu chúng ta hơn một chút đơn giản hóa những hình ảnh trông giống như và không khá vẽ nó để mở rộng quy mô lên ở đó, mảng này là chỉ có kích thước 2, đầu tiên yếu tố trong đó có chứa một chuỗi, yếu tố thứ hai của trong đó có chứa một chuỗi. Và, lần lượt, nếu bạn loại zoom vào từng của những chuỗi, những gì bạn thấy bên dưới mui xe là mỗi chuỗi chỉ là một mảng ký tự. 
+
+Bây giờ, cũng như với các chuỗi, chúng tôi đã có thể để có được quyền truy cập với nhân vật thứ i trong một chuỗi sử dụng mà ký hiệu khung vuông. Tương tự như vậy, với mảng nói chung, có thể chúng tôi sử dụng ký hiệu khung vuông để có được tại bất kỳ số lượng các chuỗi trong một mảng? Ví dụ, hãy để tôi đi trước và làm điều này. 
+
+Hãy để tôi đi trước và tạo argv1.c, mà là một khác nhau chút thời gian này. Thay vì kiểm tra cho argc2, Tôi sẽ thay vì làm điều này. Đối với int tôi nhận được 0, I ít hơn argc, tôi cộng cộng, và sau đó in ra bên trong này, phần trăm s, dòng mới, và sau đó argv khung i. 
+
+Vì vậy, nói cách khác, tôi không phải đối phó với đặc điểm cá nhân tại thời điểm này. Argv, như ngụ ý của những vuông rỗng niềng răng bên phải của tên argv, có nghĩa là argv là một mảng của chuỗi. Và argc chỉ là một int. 
+
+Dòng này ở đây, 6, là nói bộ i bằng 0. Đếm tất cả các con đường lên, nhưng không bao gồm, argc. Và sau đó trên mỗi lần lặp, in ra một chuỗi. chuỗi gì? 
+
+Chuỗi thứ i trong argv. Vì vậy, trong khi trước đó tôi đã bằng cách sử dụng khung vuông ký hiệu để có được thứ i ký tự trong chuỗi, bây giờ Tôi đang sử dụng các ký hiệu khung vuông để có được ở các chuỗi thứ i trong một mảng. Vì vậy, nó là loại một lớp trên, khái niệm. 
+
+Và vì vậy những gì gọn về điều này chương trình bây giờ, nếu tôi lập argv1, và sau đó làm ./argv1, và sau đó gõ trong một cái gì đó giống như foo bar baz, đó là ba chữ mặc định rằng một khoa học máy tính đến cho bất cứ lúc nào em cần một số lời giữ chỗ, và nhấn Enter, mỗi của những từ ngữ, bao gồm cả tên của chương trình, trong đó là trong argv ở vị trí đầu tiên, kết thúc lên được in cùng một lúc. Và nếu tôi thay đổi điều này, và tôi nói một cái gì đó giống như argv1 Zamyla Chan, chúng tôi nhận được tất cả ba trong số những lời nói, mà là argv0, argv1, argv2, bởi vì trong này trường hợp argc, số lượng là 3. 
+
+Nhưng những gì là gọn gàng là nếu bạn hiểu argv đó chỉ là một mảng của chuỗi, và bạn hiểu rằng một chuỗi là một mảng kí tự, chúng ta có thể thực sự sử dụng loại này khung ký hiệu vuông nhiều lần để lựa chọn một chuỗi, và sau đó chọn một ký tự trong chuỗi, lặn sâu hơn như sau. Trong ví dụ này, hãy để tôi đi trước và gọi argv2.c này. Và trong ví dụ này, hãy để tôi đi trước và làm following-- cho int i nhận được 0, i nhỏ hơn argc, tôi cộng cộng, giống như trước đây. Vì vậy, trong words-- khác và bây giờ điều này là nhận được đủ phức tạp. Sau đó, tôi sẽ nói lặp qua chuỗi trong argv, như một bình luận cho bản thân mình. Và sau đó tôi sẽ có một lồng cho vòng lặp, mà có thể bạn đã làm, hoặc xem xét làm, trong Scratch, nơi Tôi sẽ nói int-- tôi không sử dụng tôi một lần nữa, bởi vì tôi không muốn để bóng, hoặc loại ghi đè lên tôi hiện có. 
+
+Tôi sẽ, thay vào đó, nói j, vì đó là đi của tôi để biến sau khi tôi, khi tôi chỉ cố gắng để đếm số đơn giản. Đối với j được 0-- và cũng có, n, sẽ có chiều dài đuôi của khung argv i, miễn là j là ít hơn m, j cộng cộng, làm như sau. Và đây là một phần thú vị. 
+
+In ra một nhân vật và một dòng mới, cắm trong argv khung i, khung j. OK, vậy cho tôi thêm một số ý kiến ​​tại đây. Lặp trên ký tự trong chuỗi hiện tại, in j-thứ nhân vật trong chuỗi thứ i. Vì vậy, bây giờ, chúng ta hãy xem xét những gì những ý kiến ​​có ý nghĩa. 
+
+Lặp qua các chuỗi trong argv-- bao nhiêu dây là trong argv, mà là một mảng? Argc nhiều, vì vậy tôi lặp từ i bằng 0 lên tới argc. Trong khi đó, có bao nhiêu ký tự là trong chuỗi thứ i trong argv? 
+
+Vâng, để có được câu trả lời rằng, Tôi chỉ cần gọi dài chuỗi vào chuỗi hiện chăm sóc tôi về, đó là argv khung i. Và tôi sẽ tạm thời lưu trữ mà giá trị trong n, chỉ cho mục đích bộ nhớ đệm, để ghi nhớ nó cho hiệu quả. Và sau đó tôi sẽ khởi tạo j đến 0, tiếp tục đi miễn là j nhỏ hơn n, và trên mỗi increment lặp j. 
+
+Và sau đó ở đây, mỗi nhận xét của tôi về dòng 12, in ra một nhân vật, theo sau là một dòng mới, khung đặc biệt argv tôi mang lại cho tôi những chuỗi thứ i trong argv-- vậy từ đầu tiên, các Từ thứ hai, từ thứ ba, bất cứ điều gì. Và sau đó lặn j vào sâu hơn, và được tôi nhân vật j-thứ của từ đó. Và như vậy, trong thực tế, bạn có thể điều trị argv là một đa chiều, như là một hai chiều, mảng, theo đó mỗi từ loại hình như thế này trong tâm trí của bạn mắt, và mỗi nhân vật là loại sáng tác một cột, nếu giúp. 
+
+Trong thực tế, khi chúng tôi trêu chọc này ngoài trong tuần tương lai, nó sẽ là một chút phức tạp hơn đó. Nhưng bạn có thể thực sự nghĩ rằng, bây giờ, như chỉ này hai chiều mảng, trong đó một mức độ của nó là tất cả các dây. Và sau đó nếu bạn lặn sâu hơn, bạn có thể có được ở các đặc điểm cá nhân trong đó bằng cách sử dụng ký hiệu này ở đây. 
+
+Vì vậy, ảnh hưởng thực là gì? Hãy để tôi đi trước và làm cho darn argv2-- nó. Tôi đã làm sai ở đây. Ngầm tuyên bố thư viện chức năng stirling. Vì vậy, tất cả các thời gian này, đó là có lẽ thích hợp rằng chúng ta đang loại kết thúc chính xác nơi chúng tôi bắt đầu. 
+
+Tôi hơi say lên, ngầm tuyên bố thư viện chức năng stirling. OK, chờ một phút. Tôi nhớ rằng, đặc biệt vì nó ở ngay đây. Tôi cần phải bao gồm string.h trong phiên bản này của chương trình. 
+
+Hãy để tôi đi trước và bao gồm string.h, tiết kiệm mà, đi trước và biên dịch lại argv2. Và bây giờ, ở đây chúng tôi đi, làm cho argv2, Enter. Và mặc dù nó là một chút khó hiểu ở cái nhìn đầu tiên, nhận thấy rằng, trên thực tế, những gì được in là dấu chấm argv2. 
+
+Nhưng nếu tôi gõ một số từ sau khi nhanh chóng, như argv2 Zamyla Chan, Nhập, cũng là một chút khó hiểu ở cái nhìn đầu tiên. Nhưng nếu chúng ta di chuyển trở lại, ./argv2 Z-A-M-Y-L-A C-H-A-N. Vì vậy, chúng tôi đã lặp qua từng lời. Và, lần lượt, chúng tôi đã lặp hơn mỗi nhân vật trong một từ. 
+
+Bây giờ, sau khi tất cả những điều này, nhận ra rằng có một chi tiết khác mà chúng tôi đã loại bỏ qua toàn bộ thời gian này. Chúng tôi chỉ trêu chọc nhau những gì đầu vào chính có thể được? Còn đầu ra chính của? 
+
+Tất cả thời gian này, chúng tôi đã chỉ cần sao chép và dán int từ trước của chính, mặc dù bạn có thể xem trực tuyến, đôi khi không đúng trong các phiên bản cũ C và trình biên dịch, mà họ cho rằng có hiệu lực, hoặc không có gì cả. Nhưng, thực sự, cho các phiên bản của C mà chúng tôi đang sử dụng, C 11, hoặc 2011, nhận ra rằng nó phải là int. Và nó, hoặc nên trị hoặc argc và argv đây. 
+
+Nhưng tại sao int main? Những gì được nó thực sự trở lại? Vâng, nó quay ra tất cả các thời gian này, bất cứ lúc nào bạn đã viết một chương trình chính luôn luôn trở về một cái gì đó. Nhưng nó được làm như vậy bí mật. 
+
+cái gì đó là một int, như dòng 5 gợi ý. Nhưng những gì int? Vâng, có này ước trong lập trình, theo đó nếu không có gì có đi sai và tất cả là tốt, chương trình và các chức năng thông thường return-- hơi counterintuitively-- 0. 0 thường có nghĩa tất cả là tốt. Vì vậy, ngay cả khi bạn nghĩ nó như là sai trong nhiều ngữ cảnh, nó thực sự thường có nghĩa là một điều tốt 
+
+Trong khi đó, nếu một chương trình trả về 1, hay tiêu cực 1, hoặc 5, hoặc âm 42, hay-0 không giá trị bất kỳ, mà thường có nghĩa cái gì đó đã đi sai. Trong thực tế, trên Mac của bạn hoặc máy tính, bạn có thể đã thực sự nhìn thấy một thông báo lỗi, nhờ đó mà nó nói một cái gì đó hoặc khác, lỗi đang âm 42, hoặc mã lỗi 23, hoặc một cái gì đó như thế. Con số này nói chung chỉ là một gợi ý để các lập trình viên, hoặc công ty mà thực hiện các phần mềm, những gì đã đi sai và tại sao, để họ có thể xem xét thông qua tài liệu hướng dẫn hoặc mã của họ, và tìm ra những gì lỗi thực sự có nghĩa. Nó thường không hữu ích cho chúng tôi người dùng cuối. 
+
+Nhưng khi trở về chính 0, tất cả là tốt. Và nếu bạn không xác định những gì chính nên trở về, nó sẽ chỉ tự động trở về 0 cho bạn. Nhưng trở về một cái gì đó khác là thực sự hữu ích. 
+
+Trong chương trình cuối cùng này, cho tôi đi trước và gọi exit.c này, và giới thiệu cuối cùng của ngày hôm nay chủ đề, được biết đến như là một mã lỗi. Hãy để tôi đi trước và bao gồm của chúng tôi file lên hàng đầu quen thuộc, làm int main. Và lần này, chúng ta hãy làm int argc, chuỗi argv, và với dấu ngoặc của tôi ngụ ý rằng nó là trong mảng. Và sau đó hãy để tôi làm một kiểm tra sự tỉnh táo. Lần này, nếu argc không bằng 2, sau đó bạn biết những gì? Kệ nó. Tôi sẽ nói rằng, hey, người dùng, bạn đang thiếu đối số dòng lệnh n dấu chéo ngược. 
+
+Và sau đó đó là nó. Tôi muốn thoát ra. Tôi sẽ làm việc tạm thời, và sớm thực sự, trở lại một cái gì đó khác hơn là số 1. Việc đi đến giá trị cho các đầu tiên lỗi có thể xảy ra là 1. Nếu bạn có một số khác có sai sót tình hình có thể xảy ra, bạn có thể nói trở lại 2 hoặc trả lại 3, hoặc thậm chí có tiêu cực hay tiêu cực 1 2. 
+
+Đây chỉ là mã lối ra đó là, nói chung, chỉ hữu ích cho các lập trình viên, hoặc công ty nào vận chuyển các phần mềm. Nhưng thực tế là nó không phải 0 là điều quan trọng. Vì vậy, nếu trong chương trình này, tôi muốn đảm bảo rằng chương trình này chỉ hoạt động nếu người sử dụng cung cấp cho tôi với một số đối số của hai, tên của chương trình, và một số khác từ, tôi có thể thực thi nhiều như sau, mắng cho người dùng printf câu nói, thiếu đối số dòng lệnh, trở về 1. Điều đó sẽ chỉ ngay lập tức thoát khỏi chương trình. 
+
+Chỉ khi argc bằng 2, chúng ta sẽ có được xuống ở đây, và lúc đó tôi sẽ nói, xin chào trăm s, dấu chéo ngược n, argv1. Nói cách khác, tôi không đi sau khi argv 0, mà chỉ là tên của chương trình. Tôi muốn in ra chào hỏi, dấu phẩy, từ thứ hai mà con người gõ. Và trong trường hợp này trên dòng 13, tất cả là tốt. 
+
+Tôi biết rằng argc là 2 logic từ chương trình này. Tôi sẽ đi trước và trở về 0. Là một sang một bên, giữ trong tâm trí rằng điều này là đúng trong Scratch là tốt. 
+
+Một cách logic, tôi có thể làm điều này và gói gọn những dòng này các mã trong khác quy định tại khoản này ở đây. Nhưng đó là loại không cần thiết thụt mã của tôi. Và tôi muốn làm siêu rõ ràng rằng không có vấn đề gì, theo mặc định, hello một cái gì đó sẽ được in, miễn là người sử dụng hợp tác. 
+
+Vì vậy, nó rất phổ biến để sử dụng một điều kiện, chỉ cần một khi, để nắm bắt một số sai lầm tình hình, và sau đó thoát ra. Và sau đó, miễn là tất cả tốt, không có một người nào khác, nhưng chỉ có mã bên ngoài mà nếu, bởi vì nó tương đương trong này trường hợp cụ thể, hợp lý. Vì vậy, tôi trở về 0, chỉ để một cách rõ ràng biểu hiện tất cả là tốt. 
+
+Nếu tôi bỏ qua sự trở lại 0, nó sẽ được tự động giả định cho tôi. Nhưng bây giờ tôi trở lại một trong ít nhất là trường hợp này, Tôi sẽ cho các biện pháp tốt và rõ ràng, trở về 0 trong trường hợp này. Vì vậy, bây giờ để tôi đi trước và thực xuất cảnh, mà là một segue hoàn hảo để chỉ để lại. 
+
+Nhưng làm cho lối ra, và cho tôi đi trước và làm ./exit, Enter. Và chương trình mắng tôi, thiếu đối số dòng lệnh. OK, tôi hợp tác. 
+
+Hãy để tôi thay vì làm ./exit, David, Enter. Và bây giờ nó nói, hello David. Và bạn sẽ không bình thường thấy điều này. 
+
+Nhưng nó chỉ ra rằng có một cách đặc biệt trong Linux để thực sự thấy với những gì xuất cảnh mã một chương trình thoát. Đôi khi trong một đồ họa thế giới như Mac OS hay Windows, bạn chỉ nhìn thấy những con số khi một thông báo lỗi hiện lên trên màn hình và các lập trình viên cho bạn thấy con số đó. Nhưng nếu chúng ta muốn nhìn thấy những gì các lỗi tin là, chúng ta có thể làm điều đó đây-- nên ./exit, Enter, in thiếu đối số dòng lệnh. 
+
+Nếu bây giờ tôi làm $ echo ?, đó là ridiculously khó hiểu nhìn. Nhưng $? là câu thần chú ma thuật mà nói, hey, máy tính, cho tôi biết những gì trước đó exit code chương trình là. Và tôi nhấn Enter. Tôi thấy 1, bởi vì đó là những gì tôi nói với chức năng chính của tôi để trở lại. 
+
+Trong khi đó, nếu tôi làm ./exit David, và nhấn Enter, tôi nhìn thấy, xin chào David. Và nếu bây giờ tôi làm $ echo ?, tôi thấy chào 0. Và do đó, điều này sẽ thực sự được thông tin có giá trị trong bối cảnh của các trình gỡ lỗi, không quá nhiều mà bạn, những con người, sẽ quan tâm. Nhưng các trình gỡ lỗi và khác các chương trình, chúng tôi sẽ sử dụng trong học kỳ này thường sẽ nhìn vào con số đó, mặc dù nó loại ẩn đi trừ khi bạn tìm nó, để xác định có hay không một chương trình của thực hiện là đúng hay sai. 
+
+Và vì vậy mà chúng tôi mang đến này, vào cuối ngày. Chúng tôi bắt đầu ngày hôm nay bằng cách nhìn vào gỡ lỗi, và lần lượt tại khóa học chính nó, và sau đó thú vị hơn, kỹ thuật bên dưới mui xe vào những gì là chuỗi, mà kéo dài tuần, chúng tôi chỉ mất cho các cấp, và chắc chắn đã đưa họ cho các cấp trong Scratch. 
+
+Sau đó chúng ta nhìn như thế nào chúng ta có thể truy cập ký tự đặc biệt trong một chuỗi, và sau đó lại mất một mức độ cao hơn nhìn vào những thứ, nhìn vào cách well-- nếu chúng ta muốn nhận được ở cá nhân các yếu tố trong một danh sách như cấu trúc, chúng ta không thể làm điều đó với nhiều dây? Và chúng ta có thể có đối số dòng lệnh. Nhưng hình ảnh này ở đây chỉ hộp là minh chứng của ý tưởng này nói chung của một mảng, hoặc một danh sách, hoặc một vector. Và tùy thuộc vào bối cảnh, tất cả những lời này có nghĩa là những điều hơi khác nhau. Vì vậy, trong C, chúng tôi sẽ chỉ để nói về một mảng. Và một mảng là một đoạn của bộ nhớ, mỗi người trong số đó là yếu tố này là tiếp giáp, trở lại, trở lại, trở lại, trở lại. 
+
+Và những yếu tố này, nói chung, của các kiểu dữ liệu, nhân vật, nhân vật, nhân vật, nhân vật hoặc string, string, string, string, int, int, int, bất kể nó là chúng tôi đang cố gắng để lưu trữ. Nhưng vào cuối ngày, đây là những gì nó trông giống như khái niệm. Bạn đang dùng của bạn bộ nhớ hoặc bộ nhớ RAM của máy tính. Và bạn đang khắc nó ra vào hộp hệt kích thước, tất cả đều đang trở lại, trở lại, để trở lại, để trở lại theo cách này. 
+
+Và những gì tốt đẹp về ý tưởng này, và thực tế chúng tôi có thể thể hiện các giá trị theo cách này với sự đầu tiên của cấu trúc dữ liệu của chúng tôi trong lớp, có nghĩa là chúng ta có thể bắt đầu để giải quyết vấn đề với mã mà đến để trực giác trong tuần 0. Bạn sẽ gọi lại điện thoại ví dụ cuốn sách, nơi chúng tôi sử dụng một phân chia và chinh phục, hoặc một thuật toán tìm kiếm nhị phân, để sàng lọc thông qua một toàn loạt các tên và số. Nhưng chúng tôi cho rằng, thu hồi, mà đó Danh bạ điện thoại đã được sắp xếp, mà người khác đã đã đặn out-- cấp một danh sách các tên và làm thế nào để numbers-- alphabetize họ. Và bây giờ mà trong C chúng ta, quá, có khả năng để đặt những điều trên, không thể chất trong một cuốn sách điện thoại nhưng hầu như trong một máy tính bộ nhớ, chúng ta sẽ có thể vào tuần tới giới thiệu một lần nữa này-- đầu tiên cấu trúc dữ liệu của chúng tôi trong một array-- nhưng quan trọng hơn, máy tính thực tế các thuật toán khoa học thực hiện trong mã, mà chúng ta có thể lưu trữ dữ liệu trong cấu trúc như thế này, và sau đó bắt đầu để vận dụng nó, và để thực sự giải quyết vấn đề với nó, và để xây dựng trên đó, cuối cùng, chương trình trong C, trong Python, JavaScript, truy vấn cơ sở dữ liệu với SQL? 
+
+Và chúng ta sẽ thấy rằng tất cả các ý tưởng khác nhau interlock. Nhưng bây giờ, nhớ lại rằng miền mà chúng tôi giới thiệu hôm nay là điều này ở đây, và thế giới của mật mã. Và trong số những vấn đề tiếp theo bạn mình sẽ giải quyết là nghệ thuật mật mã, xáo trộn và de-xáo trộn thông tin và mã hoá và giải mã văn bản, và giả định cuối cùng mà bây giờ bạn biết những gì là dưới mui xe để khi bạn nhìn thấy hoặc nhận được một tin nhắn như thế này, bạn mình có thể giải mã nó. Tất cả điều này, và lần sau nữa. 
+
+[XEM LẠI VIDEO] 
+
+-Mover Vừa đến. Tôi sẽ đi thăm giáo sư đại học của mình. Vâng. Chào. Đó là bạn. Chờ đợi! David. Tôi chỉ cố gắng tìm ra những gì đã xảy ra với bạn. Xin vui lòng, bất cứ điều gì có thể giúp đỡ. Bạn là đại học của mình bạn cùng phòng, không bạn? Bạn đã có với anh ta khi ông đã hoàn thành dự án CS50? 
+
+[NHẠC] 
+
+-đó Là CS50. 
+
+Tôi yêu nơi này. 
+
+-Ăn nhiều lên. Chúng tôi đang đi ra khỏi kinh doanh. 
+
+[END PLAYBACK] 

@@ -1,0 +1,689 @@
+[RIPRODUZIONE DI BRANI MUSICALI] 
+
+David J. MALAN: Va bene. Questo è CS50 e questo è l'inizio della Settimana 2. E vi ricordate che oltre la ultime due settimane, abbiamo introdotto calcolatore scienza e, a sua volta, programmazione. 
+
+E abbiamo iniziato la storia per mezzo di Scratch, che linguaggio grafico dal MIT Media Lab. E poi, più recentemente, la scorsa settimana, abbiamo fatto noi introdurre un higher-- un lingua di livello inferiore noto come C, qualcosa che è puramente testuale. E, in effetti, l'ultima volta che abbiamo esplorato in tale contesto una serie di concetti. 
+
+Questo, richiamo, era molto primo programma abbiamo guardato. E questo programma, molto semplicemente, stampa fuori, "ciao, mondo". Ma c'è così tanto magia apparente in corso. C'è questo #include con queste parentesi angolari. C'è int. C'è (void). C'è parentesi, parentesi graffe, punto e virgola, e molto altro ancora. 
+
+E così, ricordare che abbiamo introdotto Scratch in modo da poter, idealmente, a vedere oltre che la sintassi, la roba che non è davvero tutto ciò che intellettualmente interessante, ma nella fase iniziale è, assolutamente, un po 'complicato per avvolgere la mente intorno. E, infatti, uno dei più comuni le cose presto in una classe di programmazione, soprattutto per quelli meno comodo, è quello di ottenere frustrati dalla e scattato da certa sintattica errori, per non parlare di errori logici. E così tra i nostri obiettivi Oggi, in realtà, la volontà essere quello di equipaggiare con un po ' tecniche di problem solving per come per risolvere meglio i problemi stessi sotto forma di debug. E vi ricordate, inoltre, che il ambiente che abbiamo introdotto ultima volta che è stato chiamato CS50 IDE. Questo è un software web-based che permette di programmare in the cloud, per così dire, mantenendo tutti i tuoi file insieme, come abbiamo di nuovo sarà oggi. E ricordare che noi rivisitato questi argomenti qui, fra loro funzioni, e loop, e variabili, e le espressioni booleane, e condizioni. E in realtà un po 'di più che abbiamo tradotto dal mondo di Scratch nel mondo di C. 
+
+Ma l'edificio fondamentale blocchi, per così dire, erano in realtà ancora lo stesso della scorsa settimana. In realtà, abbiamo davvero avuto solo un pezzo di puzzle diverso, se si vuole. Invece di che viola salvare blocco, noi invece aveva printf, che è questa funzione in C che consente di stampare qualcosa e formattarla sullo schermo. Abbiamo introdotto il CS50 Biblioteca, dove si hanno ora a vostra disposizione get_char, e get_int, e get_string, e alcune altre funzioni come bene, tramite il quale è possibile ottenere in ingresso dalla propria tastiera dell'utente. E abbiamo anche preso uno sguardo alle cose come these- bool, e char, e doppio, galleggiante, int, string long_long. E ci sono anche altri tipi di dati in C. 
+
+In altre parole, quando si dichiara una variabile per memorizzare un certo valore, o quando si implementa una funzione che restituisce un valore, è possibile specificare quali tipo di valore che è. È una stringa, come un sequenza di caratteri? È un numero, come un intero? Si tratta di una virgola mobile il valore, o simili? Quindi, in C, a differenza di Scratch, abbiamo effettivamente ha cominciato a specificare il tipo di dati eravamo di ritorno o utilizzando. 
+
+Ma, naturalmente, abbiamo anche incontrato alcuni limiti fondamentali dell'informatica. Ed in particolare, questo linguaggio C, richiamo che abbiamo preso uno sguardo integer overflow, la realtà che se avete solo un quantità limitata di memoria o, in particolare, un numero finito di bit, si può contare così in alto solo. E così abbiamo guardato questo esempio qui quale un contatore in un aeroplano,, in realtà, se in esecuzione abbastanza a lungo sarebbe traboccare e tradursi in un software un errore potenziale fisico. 
+
+Abbiamo anche guardato galleggiante punto di imprecisione, la realtà che con solo un numero finito di bit, se è 32 o 64, è possibile specificare solo tanti numeri dopo un punto decimale, dopo di che si cominciare ad ottenere impreciso. Così, per esempio, un terzo nel mondo qui, nel nostro mondo umano, quello che sappiamo è solo un numero infinito di 3 secondi dopo il punto decimale. Ma un computer non può necessariamente rappresentare un numero infinito di numeri se si consente solo un po ' quantità limitata di informazioni. 
+
+Quindi non solo abbiamo si dotare con maggiore potenza in termini di come si potrebbe esprimersi a una tastiera in termini di programmazione, abbiamo anche limitato ciò che si può effettivamente fare. E in effetti, gli insetti e gli errori possono derivare da questi tipi di problemi. E infatti, tra i temi di oggi stanno per essere argomenti come il debug e in realtà guardando sotto il cofano il modo in cui sono state introdotte le cose la scorsa settimana sono in realtà costituiti in modo che è meglio comprendere sia le funzionalità di e i limiti di una lingua come C. 
+
+E infatti, ci sbucciamo gli strati dei più semplici di struttura dati, qualcosa chiamato un array, che Scratch capita di chiamare una "lista". E 'un po' diverso in quel contesto. E poi ci sarà anche introdurre uno dei primo dei nostri problemi specifici del dominio in CS50, il mondo del la crittografia, l'arte di scrambling o in cifratura informazioni in modo che è possibile inviare messaggi segreti e decodificare messaggi segreti tra due persone, A e B. 
+
+Quindi, prima di transizione a quel nuovo mondo, cerchiamo di equipaggiare con un po ' le tecniche con cui è possibile eliminare o ridurre almeno alcuni delle frustrazioni che probabilmente avete incontrato durante la scorsa settimana da solo. In effetti, di fronte a voi sono such-- alcuni dei i primi problemi in C. E le probabilità sono, se siete come me, la prima volta si tenta di digitare un programma, anche se si pensa logicamente il programma è piuttosto semplice, si potrebbe benissimo colpito un muro, e il compilatore non ha intenzione di collaborare. Fare o Clang non sta andando per fare in realtà la vostra offerta. 
+
+E perché sarebbe? Bene, diamo uno sguardo a, forse, un semplice programma. Ho intenzione di andare avanti e salvare questo in un file volutamente chiamato buggy0.c, perché so che a essere viziata in anticipo. Ma potrei non si rendono conto che se questo è il primo o secondo o terzo programma che sto facendo in realtà me stesso. Quindi ho intenzione di andare avanti e tipo out, int main (void). E poi all'interno delle mie parentesi graffe, un molto familiare ( "ciao, world-- backslash, n ") - e un punto e virgola. 
+
+Ho salvato il file. Ora ho intenzione di andare verso il basso alla mia finestra di terminale e tipo make buggy0, perché, di nuovo, il nome del file di oggi è buggy0.c. Così scrivo fare buggy0, Invio. 
+
+E, oh, caspita, ricordare dall'ultima volta che nessun messaggio di errore è una buona cosa. Quindi nessuna uscita è una buona cosa. Ma qui ho chiaramente un numero di errori. 
+
+Quindi la prima linea di uscita dopo aver digitato fare buggy0, richiamo, è uscita piuttosto verboso di Clang. Sotto il cofano, CS50 IDE è configurato di utilizzare tutta una serie di opzioni con questo compilatore in modo che non si dispone di pensare a loro. E questo è tutto ciò che prima linea mezzi che inizia con Clang. 
+
+Ma dopo che, i problemi cominciare a fare la loro comparsa. Buggy0.c sulla linea 3, carattere 5, vi è un grande errore rossa. Cos'è quello? dichiarando implicitamente funzione di libreria printf con tipo int (const char *, ...) [-Werror]. Voglio dire, è molto rapidamente diventa molto arcane. E certamente, a prima sguardo, non ci aspetto che tu capisca la elementi di quel messaggio. E così una delle lezioni per oggi sta andando essere per cercare di notare modelli, o cose simili, per gli errori si potrebbe avere incontrato in passato. Quindi cerchiamo di prendere in giro a parte solo quelle parole che sembrano familiari. Il grande, rosso errore è chiaramente simbolico di qualcosa che è sbagliato. 
+
+implicitamente dichiarando funzione printf biblioteca. Quindi, anche se non ho ben capito cosa dichiarando implicitamente funzione di libreria mezzi, il problema sicuramente si riferisce a printf in qualche modo. E la fonte di tale questione ha a che fare con dichiararla. 
+
+Dichiarare una funzione è menzionare per la prima volta. E abbiamo usato la terminologia della scorsa settimana di dichiarare il prototipo di una funzione, sia con una linea nella parte superiore del vostro file o in un cosiddetto file di intestazione. E in che file di fatto che diciamo la settimana scorsa che printf è citazione, unquote, ha dichiarato? In quale file è il suo prototipo? 
+
+Quindi, se vi ricordate, la prima cosa che ho digitato, quasi tutti i programmi scorso tempo-- e accidentalmente un momento fa ha iniziato digitando myself-- era questo uno qui-- hash-- #include <stio-- per Ingresso / output-- punto h E in effetti, se ora salvare il file, sto andando di andare avanti e cancellare il mio schermo, che si può fare digitando Chiaro, o si può tenere il controllo L, solo per cancellare la finestra del terminale solo per eliminare alcuni disordine. 
+
+Ho intenzione di andare avanti e re-make di tipo buggy0, Invio. E voilà, continuo a vedere che lungo comando da Clang, ma non c'è alcun messaggio di errore questa volta. E in effetti, se lo faccio ./buggy0, proprio come l'ultima volta, dove dot significa che questo directory, Slash significa semplicemente, qui viene il nome del programma e che il nome del programma è buggy0, Invio, "ciao, mondo". 
+
+Ora, come si potrebbe avere raccolte questa soluzione senza necessariamente riconoscendo il maggior numero di parole come ho fatto io, certamente, avendo fatto questo per tanti anni? Ebbene, realizzare per il primo problema set, vi presentiamo a un comando che proprio personale di CS50 ha scritto chiamato help50. E in effetti, C fa specifica per il problema impostato su come utilizzare questo. 
+
+Ma help50 è essenzialmente un programma che lo staff di CS50 Lei ha scritto che permette di eseguire un comando o eseguire un programma, e se non si capisce la sua uscita, di passare la sua uscita help50, a questo punto il software che il personale del corso ha scritto esaminerà uscita del vostro programma riga per riga, carattere per carattere. E se noi, il personale, riconosce il messaggio di errore che si sta sperimentando, cercheremo di provocare con un certo domande retoriche, con qualche consiglio, molto simile a una TF o una CA o di me stesso avrebbe fatto di persona presso l'orario di ufficio. 
+
+Così guardare a help50 se non lo fai necessariamente riconoscere un problema. Ma non si basano su di esso troppo come una stampella. Sicuramente cercare di capire la sua uscita e poi imparare da esso in modo che solo una o due volte si fa mai eseguito help50 per un particolare errore messaggio. Dopo di che, si dovrebbe essere meglio te stesso attrezzata per capire ciò che effettivamente è. 
+
+Facciamo un altro qui. Lasciami andare avanti, e in un altro file che chiameremo questo buggy1.c. E in questo file sono andando a deliberately-- ma finta che non lo faccio Capisco quello che errore ho fatto. 
+
+Ho intenzione di andare avanti e fare questo-- # include, dal momento che ho imparato la lezione da un momento fa. Int main (void), come prima. E poi qui ho intenzione fare stringa s - get_string. E ricordare dall'ultima volta che questo significa, hey, computer, datemi una variabile, chiamata s, e rendere il tipo di quella variabile una stringa in modo da poter memorizzare una o più parole in esso. 
+
+E poi sul destro lato del segno uguale è get_string, che è un funzione nella libreria CS50 che fa esattamente questo. Si ottiene una funzione e poi mani da destra verso sinistra. Quindi questo segno di uguale non significa "Uguale", come si potrebbe pensare in matematica. Significa assegnazione da destra a sinistra. Quindi questo significa, prendere la stringa da l'utente e memorizzare all'interno di s. 
+
+Ora cerchiamo di usarlo. Lasciami andare avanti ora e come secondo la linea, mi permetta di andare avanti e dire "ciao" - Non "mondo", ma "Ciao,% S-- che è il nostro segnaposto, comma s, che è la nostra variabile, e poi una virgola. Quindi, se non mi vite troppo qui, questo appare come codice corretto. 
+
+E il mio istinto ora sono per compilarlo. Il file si chiama buggy1.c. Quindi ho intenzione di fare fare buggy1, Invio. E darn-it, se non c'è anche più errori rispetto a prima. Voglio dire, non c'è più i messaggi di errore che sarebbe Sembra che le linee reali in questo programma. 
+
+Ma l'asporto qui è, anche se sei sopraffatto con due o tre o quattro messaggi di errore di più, sempre concentrarsi sulla molto prima di tali messaggi. Guardando il più in alto uno, scorrere indietro come necessario. Così qui ho digitato make buggy1. Ecco che l'uscita Clang come previsto. 
+
+Ed ecco il primo errore rosso. L'utilizzo di identificatore non dichiarato stringa, ho dire standard? Quindi, in standard è in realtà qualcos'altro. Si riferisce per l'utente del tastiera, essenzialmente. 
+
+Ma non è quello che volevo dire. Intendevo stringa, e volevo dire get_string. Allora che cosa è che io dimenticato di fare questa volta? Ciò che manca questa volta? Ho il mio # include, così ho accesso a printf. 
+
+Ma che cosa non ho l'accesso a appena ancora? Ebbene, proprio come l'ultima volta, Ho bisogno di dire al compilatore Clang quali queste funzioni sono. Get_string non arriva con C. E in particolare, non venire in File di intestazione,. Si tratta invece di qualcosa che il personale ha scritto, che è un file diverso nome ma giustamente chiamato. 
+
+Così semplicemente aggiungendo che una riga di richiamo code-- dall'ultima volta che quando Clang corre, sta andando a guardare il mio superiore del codice a fondo, da sinistra a destra. Sta andando a notare, Oh, vuoi. Lasciami andare e scoprire che, dovunque sia sul server, copia e incolla, in sostanza, nella parte superiore del tuo file in modo che a questo punto della storia, linea 1, il resto del programma può, infatti, utilizzare una delle funzioni in esso, tra i quali get_string. Quindi ho intenzione di ignorare il resto di tali errori, perché, in effetti, il sospetto che solo il primo in realtà importava. E ho intenzione di andare avanti e replica, dopo aver salvato il mio file fare buggy1. E voilà, ha funzionato. E se lo faccio ./buggy1 e digitare, per esempio, Zamyla, ora otterrà ciao, Zamyla, invece di ciao, mondo. 
+
+Tutto ok. Così i take away qui poi sono, uno, cercare di raccogliere quanto più possibile dai messaggi di errore solo, cerco alcune delle parole riconoscibili. A parte ciò, usare help50 per il problema set specifica. Ma il blocco delle chiamate che, anche, sempre guardare Allo Errore unica, almeno inizialmente, per vedere quali informazioni si potrebbe effettivamente cedere. Ma si scopre c'è ancora più funzionalità built nella libreria CS50 per aiutare si presto nel semestre e nelle prime fasi di programmazione capire che cosa sta andando male. Allora, facciamo un altro esempio qui. Ho intenzione di chiamare questo buggy2, che, ancora una volta, sta per essere viziata fuori della porta, alla progettazione. 
+
+E ho intenzione di andare avanti e fare #include. E poi ho intenzione di fare int main (void). E poi ho intenzione di fare un ciclo for. For (int i _ 0. i è minore o uguale a 10. i ++, e poi tra parentesi graffe, sto andando per stampare solo un simbolo hashtag qui e un carattere di nuova riga. 
+
+Quindi il mio intento con questo il programma è semplicemente iterare 10 volte e ad ogni iterazione di quel ciclo di volta in volta attraverso il ciclo, stampare un hashtag, un hashtag, un hashtag. Una linea per perché ho avere la nuova linea di lì. E ricordare che il per cappio, per ultima week-- e si otterrà di più familiarità con la sintassi usandolo con la pratica prima long-- questo mi dà una variabile ho chiamato e lo imposta a 0. 
+
+Questo incrementa i su ogni iterazione di 1. Così ho passa a 1 a 2 a 3. E poi questa condizione nel di mezzo tra i punti e virgola viene controllato su ogni iterazione per fare Assicurarsi che siamo ancora nel raggio d'azione. Quindi voglio iterare 10 volte, così ho avere una sorta di molto intuitivamente solo mettere 10 come il mio limite superiore lì. 
+
+Eppure, quando ho eseguito questo, dopo compilarlo con make buggy2-- e lo fa compilare OK. Quindi non ho un Errore di sintassi questa volta. Lasciami andare avanti ora ed eseguire buggy2, Invio. E ora scorrere verso l'alto. E mi permetta di aumentare la dimensione della finestra. 
+
+Mi sembra di avere 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Quindi c'è 11 hashtag, anche se Ho chiaramente messo 10 all'interno di questo ciclo. Ora, alcuni di voi potrebbero vedere subito ciò l'errore è perché, in effetti, questo Non è un errore molto difficile fare. Ma è molto comunemente fatto molto presto. 
+
+Quello che voglio sottolineare, però, è, come potrei capirlo? Beh, si scopre che la Biblioteca CS50 viene non solo get_string e get_int e get_float e altre funzioni. Inoltre è dotato di una funzione speciale chiamato eprintf, o, errore printf. Ed esiste solamente per fare è un po 'più facile per voi quando il debug del codice a poco stampare un messaggio di errore sullo schermo e sapere da dove proviene. 
+
+Così, per esempio, una cosa che potrebbe fare qui con questa funzione è questo-- eprintf, e poi ho intenzione di andare avanti e dire che è ora% i, backslash, n. E ho intenzione di collegare il valore di i. E fino in alto, perché questo è nella Biblioteca CS50, Ho intenzione di andare avanti e comprendono così ho accesso a questa funzione. Ma prendiamo in considerazione quale linea 9 si suppone di fare. Ho intenzione di cancellare questo fine. Questo non ha nulla a che fare con il mio obiettivo primario. Ma eprintf, errore printf, è solo significato darmi qualche informazioni diagnostiche. Quando eseguo il mio programma, voglio vedere questo sullo schermo temporanea anche solo per capire cosa sta succedendo. 
+
+E, in effetti, su ciascun iterazione qui di linea 9 Voglio vedere, qual è il valore di i? Qual è il valore di i? Qual è il valore di i? E, si spera, ho solo dovrebbe vedere che il messaggio, anche, 10 volte. 
+
+Quindi, mi permetta di andare avanti e ricompilare il mio programma, come devo fare in qualsiasi momento Faccio un cambiamento. ./buggy2. E now-- OK. C'è molto di più in corso. Così mi permetta di scorrere verso l'alto in una finestra di ancora più grande. 
+
+E vedrete che ognuno di l'hashtag sta ancora stampando. Ma tra ciascuno di essi è ora questo uscita diagnostica formattato come segue. Il nome del mio programma qui è buggy2. Il nome del file è buggy2.c. Il numero di riga da cui Questa è stata stampata è la linea 9. E poi a destra che è il messaggio di errore che mi aspetto. 
+
+E ciò che è bello di questo è che ora non ho contare necessariamente nella mia testa quello che il mio programma sta facendo. Posso vedere che sulla prima iterazione i è 0, poi 1, poi 2, poi 3, poi 4, poi 5, poi 6, poi 7, poi 8, poi 9, poi 10. Quindi, aspetta un minuto. Cosa sta succedendo qui? Ho ancora sembra di contare come previsto fino a 10. 
+
+Ma da dove comincio? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10. Così 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- il dito 11 è indicativo del problema. Mi sembra di aver contato in modo non corretto nel mio ciclo. Piuttosto che andare 10 iterazioni, Sto iniziando a 0, Sto finendo in e attraverso 10. Ma poiché, come un computer, Sto iniziando il conteggio a 0, Dovrei essere conteggio , ma non attraverso, 10. 
+
+E così la correzione, alla fine ho realizzato qui, è una delle due cose. Potrei semplicemente dire molto contare fino a meno di 10. Così 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, che è, in effetti, corretto, anche se suona un po 'sbagliato. Oppure avrei potuto fare inferiore o uguale a 9, fino a quando mi metto a 0. Oppure, se proprio non ti piace questo, può contare fino a 10, ma iniziare a 1. Ma ancora una volta, questo proprio non è così comune. In programming-- seppur non tanto in Scratch-- ma in programmazione C e altre lingue, come JavaScript e Python e altri, è solo molto comune per la nostra discussione di binario per iniziare a contare solo al più basso il numero si può, che è 0. Tutto ok. Ecco, questo è eprintf. E di nuovo, ora che ho capito il mio problema, e ho intenzione di tornare a 0 attraverso inferiore a 10, io vado di andare in ed eliminare eprintf. 
+
+Non dovrebbe essere lì quando ho spedire il mio codice o presentare il mio codice o mostrare a chiunque altro. E 'davvero solo significava essere utilizzate temporaneamente. Ma ora ho riparato questo particolare problema pure. 
+
+Bene, facciamo un altro esempio qui che ho intenzione di montare come segue. Ho intenzione di andare avanti e #includere . $ 50 E ho intenzione di andare avanti e # include. 
+
+E ho intenzione di salvare questo file come buggy3.c. E ho intenzione di andare avanti e dichiarare int main (void). E poi dentro di lì Ho intenzione di fare int i _ - Voglio realizzare un programma con un get_negative_int. Questa non è una funzione che esiste ancora. Quindi stiamo andando a implementare in un attimo. Ma andiamo a vedere perché è buggy primo passaggio. E una volta ho ottenuto un int da parte dell'utente, Sto solo andando a stampare% i è negativo intero, backslash, n, virgola, i. In altre parole, tutto ciò che desidera che questo programma per fare è ottenere un int negativo da l'utente e poi stampare che così e così è un int negativo. 
+
+Ora ho bisogno di implementare questa funzione. Così più tardi nel mio file, ho intenzione di andare avanti e dichiarare una funzione chiamata get_negative_int (void) - e faremo tornare a ciò che quella linea vuol dire ancora una volta in un moment-- int n; fare-- Do il following-- printf n è :. E poi ho intenzione di fare n - get_int, e fare questo, mentre n è maggiore di 0. E poi tornare n ;. 
+
+Quindi c'è un sacco di cose in questo, ma nessuno dei quali non abbiamo fatto guarda la scorsa settimana, almeno brevemente. Quindi, sulla linea 10 che ho qui dichiarata funzione chiamata get_negative_int, e ho messo (void), in parentesi, il motivo è questo non prende un input. Io non sto passando nulla a questa funzione. Sto solo ottenere qualcosa di nuovo da esso. 
+
+E quello che sto sperando di tornare è un numero intero. Non vi è alcun tipo di dati in C chiamato negative_int. E 'solo int, quindi sta andando essere a noi per assicurarsi che il valore che in realtà restituito è non solo un int ma è anche negativo. 
+
+Sulla linea 12 Sto dichiarazione di una variabile chiamato n e rendendolo di tipo int. E poi, in linea da 13 a 18 Sono fare qualcosa mentre qualcosa è vero. Io vado avanti e la stampa n è, colon, e quindi uno spazio, come una richiesta per l'utente. 
+
+Sto quindi chiamando get_int e memorizzandone il cosiddetto valore di ritorno in quella variabile n. Ma ho intenzione di continuare a fare questo mentre n è maggiore di 0. In altre parole, se l'utente mi dà un int e che il numero è maggiore di 0, ergo, positivo, ho intenzione di basta tenere reprompting l'utente, mantenere reprompting, costringendoli a collaborare e darmi un int negativo. 
+
+E una volta che è in realtà n negative-- Supponiamo che l'utente infine tipi -50, allora questo ciclo while non è più vero perché -50 non è maggiore di 0. Così noi spezziamo fuori da quella ciclo logicamente e tornare n. 
+
+Ma c'è un altro cosa devo fare. E posso semplicemente fare questo dalla copia e incolla una riga di codice nella parte superiore del file. Ho bisogno di insegnare Clang, o promettere di clang, esplicitamente che io voglio, anzi, andare a implementare questa funzione get_negative_int. Si potrebbe semplicemente essere inferiore nel file. Ancora una volta, ricordare che Clang legge le cose dall'alto verso il basso, da sinistra a destra, quindi non è possibile chiamare una funzione se Clang non sa che sta andando a esistere. 
+
+Ora, purtroppo, questo programma, Come alcuni di voi avranno notato, è già buggy. Mi permetta di andare avanti e fare buggy3. Compila, quindi il mio problema ora non è un errore di sintassi, come un errore di testo, è in realtà sta per essere una logica errore che ho volutamente fatto come un'opportunità per passo attraverso quello che sta succedendo. 
+
+Ho intenzione di andare avanti ora ed eseguire buggy3. E ho intenzione di andare avanti e non cooperare. Ho intenzione di dare il numero 1. Esso non piaceva, così mi sta spingendo di nuovo. 
+
+Come circa 2? 3? 50? Nessuno di coloro che stanno lavorando. Come circa -50? E il programma sembra funzionare. 
+
+Fammi provare ancora una volta. Fammi provare -1, sembra funzionare. Fammi provare -2, sembra funzionare. Fammi provare 0. Eh, questo è corretto. Ora, ci stanno un po 'pedanti qui. Ma è, infatti, il caso che 0 non è né positivo, né negativo. E così il fatto che il mio programma è dicendo che 0 è un numero intero negativo, questo non è tecnicamente corretto. 
+
+Ora, perché sta facendo questo? Ebbene, potrebbe essere evidente. E, in effetti, il programma è vuole essere abbastanza semplice così abbiamo qualcosa da esplorare. 
+
+Ma cerchiamo di introdurre una terza debug tecnica qui chiamato debug50. Quindi, questo è un programma che abbiamo appena creato quest'anno chiamato debug50 che vi permetterà di di utilizzare ciò che è chiamato un built-in debugger grafico in CS50 IDE. E un debugger è solo un programma che generalmente consente di eseguire il programma ma passo dopo passo per passo, la linea dalla riga per riga, pausa, frugando intorno, guardando variabili in modo che il programma non si limita a soffiare oltre voi e rapidamente stampare qualcosa o no stampare qualcosa. Ti dà l'opportunità, a velocità umana, di interagire con esso. 
+
+E per fare questo, semplicemente effettuare le seguenti operazioni. Dopo aver compilato il codice, che ho già fatto, buggy3, di andare avanti e di eseguire debug50 ./buggy. Tanto come help50 ha si esegue help50 e poi il comando, debug50 ha si esegue debug50 e quindi il nome del comando. 
+
+Ora guarda cosa succede sul mio schermo, sul lato destro in particolare. Quando mi ha colpito Esegui, tutte le Pannello improvvisa questa destra apre sullo schermo. E ci sono un sacco di cose su a prima vista. Ma non c'è troppo molto di cui preoccuparsi ancora. 
+
+Questo mi sta mostrando tutto che sta succedendo all'interno del mio programma in questo momento e tramite questi pulsanti sulla parte superiore è poi mi permette di scorrere il mio codice in ultima analisi, passo dopo passo per passo. Ma non ancora. Si noti che cosa accade. Alla mia finestra di terminale Mi viene richiamato per n. E ho intenzione di andare avanti e cooperare questa volta e digitare -1. E anche se un po 'criptico, -1 è un numero intero negativo, come previsto. 
+
+E poi è uscito con bambino stato 0 gdbserver uscire. GDB, GNU Debugger, è il nome del software sottostante che implementa questa debugger. Ma tutto questo significa veramente, il debugger è andato via perché il mio programma di smettere e tutto andava bene. Se voglio eseguire il debug veramente il mio programma, Devo dire preventivamente debug50, dove voglio cominciare passando attraverso il mio codice? 
+
+E forse il modo più semplice per farlo è come segue. Se mi passa il mouse sopra il grondaia del mio editore qui, così in realtà solo nella barra laterale qui, a fianco del numero di linea, Si noti che se ho appena clic una volta, ho messo un po 'punto rosso. E quel piccolo puntino rosso, come un segnale di stop, significa, hey, debug50, l'esecuzione di pausa del mio codice proprio lì quando ho eseguito questo programma. 
+
+Quindi cerchiamo di farlo. Lasciami andare avanti e correre il mio programma di nuovo con debug50 ./buggy3, Invio. E ora, avviso, qualcosa diverso è accaduto. Non sto venga richiesto eppure nella mia finestra del terminale per qualsiasi cosa, perché non ho ottenuto ancora arrivati ​​nel mio programma. Si noti che sulla linea 8 che ora è messo in evidenza, e c'è una piccola freccia a dice di sinistra, si fermò qui. Questa linea di codice, riga 8, non ha ancora eseguita. 
+
+E cosa c'è di curioso, se guardo qui sul lato destro, Noto che i è un locale variabile locale nel senso che è all'interno della funzione corrente. E il suo valore, a quanto pare per impostazione predefinita, e una sorta di comoda, è 0. Ma non ho digitare 0. Ciò avviene solo per essere la sua valore predefinito al momento. 
+
+Quindi, mi permetta di andare avanti e farlo ora. Lasciami andare avanti e su in alto a destra qui, sono intenzione di andare avanti e fare clic su questo prima icona che significa scavalcare il che significa che non saltare ma scavalcare questa riga di codice, esecuzione lungo la strada. 
+
+E ora, si noti, la mia prompt è appena cambiato. Perché? Ho detto debug50, eseguire questa riga di codice. Che cosa significa questa riga di codice fare? mi spinge per un int. OK. Mi permetta di collaborare. Lasciami andare avanti ora e digitare -1, Enter. E ora notare che cosa è cambiato. Sul lato destro, la mia variabile locale i viene indicato come -1 ora. Ed è ancora di tipo int. 
+
+E notate, anche, il mio cosiddetto chiamare pila, dove ho una pausa? Parleremo di più questo in futuro. Ma lo stack di chiamate si riferisce solo a ciò che funzioni sono attualmente in movimento. In questo momento è solo principale. E in questo momento l'unico locale variabile è i con un valore 1. 
+
+E quando finalmente un passo su questa linea qui, con quella stessa icona in alto a destra, -1 È un numero intero negativo. Ora è in pausa su quella parentesi graffa. Lasciamo fare la sua cosa. Faccio un passo su quella linea, e voilà. 
+
+Quindi, non tutto ciò che terribilmente illuminante ancora, ma mi ha lasciato una pausa e pensare attraverso logicamente quello che questo programma sta facendo. Ma non era il caso erronea. Facciamo di nuovo come segue. 
+
+Ho intenzione di lasciare quel punto di interruzione sulla linea 8 con il puntino rosso. Ho intenzione di eseguire nuovamente debug50. E 'in pausa automaticamente qui. Ma questa volta, invece di scavalcando questa linea, mi permetta effettivamente andare all'interno di get_negative_int e capire, perché è accettare 0 come una risposta valida? 
+
+Così, invece di cliccare Step Over. Ho intenzione di andare avanti e fare clic su Esegui istruzione. E si noti che la linea 8 che è ora evidenziata ora improvvisamente diventa la linea 17. 
+
+Ora, non è che il debugger ha saltato le linee 14 e 15 e 16. E 'solo non c'è niente visualizzare lì. Questi sono solo dichiarare le variabili, E poi c'è la parola fare e poi una parentesi graffa aperta. L'unica linea funzionale che è succosa è proprio questo uno qui, 17. Ed è qui che abbiamo in pausa automaticamente. 
+
+Così printf ( "n.is:") ;, così che non è ancora successo. Quindi cerchiamo di andare avanti e fare clic su Step Over. Ora la mia pronta, infatti, cambiato ( "n è:"). Ora get_int, non sto andando preoccuparsi entrare in, perché quella funzione era fatta dal CS50 nella libreria. E 'probabilmente corretto. 
+
+Quindi ho intenzione di andare avanti e sorta di collaborare dandogli un int, ma non un int negativo. Quindi, mi permetta di andare avanti e ha colpito 0. E adesso cosa succede qui quando torno giù per la linea 21? Non ho iterate di nuovo. Non mi sembra di essere bloccato in quel ciclo. In altre parole, questo giallo bar non ha mantenuto andare in giro, e intorno, e dintorni. 
+
+Ora, perché? Ebbene, n, ciò che è n questo momento? Posso guardare il locale variabili nel debugger. n è 0. Va bene, qual era la mia condizione? 
+
+20-- linea 20 è, beh, 0 è maggiore di 0. Quello non è vero. 0 non è maggiore di 0. E così ho rotto fuori da questo. 
+
+Ed ecco perché on line 21, se io in realtà continuo, Ho intenzione di restituire 0, anche anche se avrebbe dovuto respingere 0 come in realtà non essere negativo. Così ora, non lo faccio davvero anche preoccupano il debugger. Capito, non ho bisogno di sapere che cosa altro sta succedendo. 
+
+Quindi ho intenzione di andare avanti e è sufficiente fare clic sul pulsante Play, e lasciare che questa finitura in su. Ora, mi sono reso conto che il mio bug è apparentemente sulla linea 20. Questo è il mio errore logico. 
+
+E così quello che voglio fare per cambiare questo? Se il problema è che io non sono cattura 0, è solo un errore logico. E posso dire, mentre n è maggiore o uguale a 0, mantenere spingendo ancora e ancora l'utente. 
+
+Così, ancora una volta, semplice errore, forse anche evidente quando mi hai visto scriverlo solo pochi minuti fa. Ma l'asporto qui è che con il debug 50, e con il debug software più in generale, si dispone di questo nuovo potere trovato a camminare attraverso il proprio codice, guarda attraverso tale pannello di destra che cosa i valori variabili sono. Quindi non si fa necessariamente è necessario utilizzare qualcosa come si eprintf stampare quei valori. Si può effettivamente vederli visivamente sullo schermo. 
+
+Ora, al di là di questo, vale la pena notare che c'è un'altra tecnica che è in realtà super-comune. E si potrebbe chiedere perché questo piccolo ragazzo qui è stato seduto sul palco. Quindi c'è questa tecnica, in genere conosciuto come il debug papera di gomma, che è in realtà solo un testimonianza del fatto che i programmatori spesso quando sono la scrittura di codice, non sono necessariamente collaborare con gli altri, o lavorare in un ambiente condiviso. 
+
+Sono un po 'a casa. Forse è a tarda notte. Stanno cercando di capire alcuni bug nel loro codice. E stanno semplicemente non vederlo. 
+
+E non c'è compagno di stanza. Non c'è TF. Non c'è CA intorno. Tutto quello che hanno sulla propria piattaforma è questo piccolo paperella di gomma. 
+
+E così il debug papera di gomma è proprio questo invito a pensare a qualcosa di così stupido come questo come una creatura reale, e in realtà camminare attraverso il codice verbalmente a questo oggetto inanimato. Così, per esempio, se questo è il mio esempio qui-- e ricordare che in precedenza il problema era questo, se si elimina questa prima riga di codice, ed io andare avanti e fare buggy 0 ancora una volta, ricordare che ho avuto questi i messaggi di errore qui. Quindi, l'idea qui, anche se ridicola si sentono in questo momento fare questo pubblicamente, è tale errore. 
+
+OK, quindi il mio problema è che ho implicitamente dichiarato una funzione di libreria. E che funzione di libreria è printf. Declare-- OK, dichiarare mi ricorda di prototipi. 
+
+Ciò significa che ho bisogno di realtà dire al compilatore in anticipo cosa la funzione assomiglia. Apetta un minuto. Non ho avuto io.h. di serie Grazie mille. 
+
+Quindi, solo questo processo si di-- non c'è bisogno di avere in realtà una papera. Ma questa idea di camminare se stessi attraverso il proprio codice in modo che anche sentire te stesso, in modo da realizzare omissioni nella vostra osservazioni, è generalmente l'idea. 
+
+E, forse più logico, non è così molto con quello, ma il più coinvolti ad esempio abbiamo appena fatto in 3.c buggy, si potrebbe camminare da soli attraverso di essa Come segue. Quindi tutto bene, in gomma Ducky, DDB, se si vuole. Qui abbiamo nella mia funzione principale, Chiamo ottenere int negativo. 
+
+E io sono sempre il valore di ritorno. Sto riporlo sul lato sinistro sulla linea 8 in una variabile denominata i. OK, ma aspetta, come ha fatto che ottiene quel valore? Fammi vedere la funzione di linea 12. 
+
+In linea 12, abbiamo ottenere int negativo. Non viene compiuta alcuna ingressi, non restituisce un int, OK. Dichiaro on line 14 una variabile n. E 'intenzione di memorizzare un numero intero. È quello che voglio. 
+
+Quindi effettuare le seguenti operazioni mentre n è-- lasciare Mi disfare ciò che la correzione ho già fatto. Così, mentre n è maggiore 0, stampare N è, OK. E quindi chiamare ottenere int memorizzato in n. E quindi verificare se n è 0, n è non-- è così. Così, ancora una volta, non è necessario bisogno l'anatra reale. Ma solo a piedi se stessi attraverso il codice come un esercizio intellettuale spesso vi aiuterà rendersi conto di cosa sta succedendo, in contrasto con appena fare qualcosa in questo modo, a fissare lo schermo, e non parlare se stessi attraverso esso, che onestamente non è quasi come una tecnica efficace. Quindi non lo avete, un numero di tecniche diverse per realtà il debug del codice e ricerca guasti, tutti dovrebbe essere strumenti nel vostro toolkit in modo che non sei a tarda notte, in particolare, si è in sala sale, o in orario di ufficio, sbattere la testa contro il muro, cercando di risolvere qualche problema. Rendetevi conto che ci sono strumenti software. Ci sono strumenti di anatra di gomma. E c'è un intero staff di sostenere in attesa di dare una mano. 
+
+Così ora, una parola sul problema set, e su quello che stiamo sperando che tu uscire di loro, e come andiamo circa la valutazione. Per programma del corso, insiemi di problemi di CS50 sono valutati su quattro assi primari, così a speak-- ambito, la correttezza, la progettazione, e lo stile. E la portata solo si riferisce a quanto del pezzo hai fatto il passo? Quanto di un problema che hai provato? Qual è il livello di sforzo avete manifestato? 
+
+La correttezza è, funziona il programma come si suppone che secondo la specifica CS50 quando si fornisce alcuni ingressi o certe uscite a tornare? Il design è il più personale di loro. Ed è quello che sarà prendere più tempo per imparare e più tempo per insegnare, in misura in cui essa si riduce a, come ben scritto è il codice? 
+
+E 'una cosa per stampare solo la corretta uscite o restituiscono i valori giusti. Ma stai facendo come efficiente possibile? Stai facendo lo divide e conquistare, o binario ricerca come vedremo presto che abbiamo fatto due settimane fa con l'elenco telefonico? ci sono modi migliori per risolvere il problema di quello che attualmente avete qui? Questa è un'opportunità per una migliore progettazione. 
+
+E allora come style-- piuttosto è il codice? Si noterà che sono abbastanza particolare circa rientro il mio codice, e fare in modo mio variabili ragionevolmente chiamato. n, mentre breve, è un buon nome per un numero, i per un intero conteggio, s per una stringa. E siamo in grado di avere più a lungo stile nomi delle variabili. Lo stile è solo quanto è buono non il codice di look? E come leggibile è? 
+
+E nel corso del tempo, quali i tuoi TA e TF faranno nel corso è fornire con tale tipo di feedback qualitativo in modo da ottenere una migliore a quei vari aspetti. E in termini di come noi valutare ciascuno di questi assi, è in genere con poche secchi in modo che, in generale, avere un'idea di quanto bene si sta facendo. E, in effetti, se si riceve un punteggio su una di queste correttezza axes--, disegno e lo stile especially-- quel numero sarà generalmente tra 1 e 5. E, letteralmente, se stai ricevendo 3 del all'inizio del semestre, questa è una cosa molto buona. Significa c'è ancora margini di miglioramento, che si sarebbe sperare in prendere una classe per la prima volta. C'è spera qualche po 'di soffitto a cui si sta aspirando a raggiungere. E in modo da ottenere il 3 di i primi pezzi, se non qualche 2 e di 4 di, è, infatti, una buona cosa. E 'bene nel raggio d'azione, ben all'interno aspettative. 
+
+E se la vostra mente è corsa, attendere un minuto, tre su cinque. Questo è davvero un 6 su 10. Questo è il 60%. Mio Dio, che è una F. 
+
+Non è. Non è, infatti, che. Piuttosto, si tratta di un'opportunità per migliorare nel corso del semestre. E se stai ricevendo un po ' poveri, questi sono un'opportunità per sfruttare le ore di ufficio, certamente sezioni e altre risorse. 
+
+La cosa migliore è la possibilità, in realtà, di cui essere orgogliosi quanto lontano hai venire nel corso del semestre. Quindi realizzare, se non altrimenti, tre è buono. E permette spazio per la crescita nel tempo. 
+
+Per quanto riguarda come quei assi sono ponderata, realisticamente sei intenzione di trascorrere la maggior parte del vostro tempo ottenere cose su cui lavorare, per non parlare correttamente. E così la correttezza tende a essere ponderati di più, come con questo fattore moltiplicativo di tre. Il design è anche importante, ma qualcosa che non si fa necessariamente spendere tutte quelle ore cercando di ottenere le cose solo per lavorare. 
+
+E così è ponderato un po 'più leggera. E poi lo stile è ponderato in meno. Anche se non meno di importante fondamentalmente, è solo, forse, la cosa più facile da fare a destra, imitando gli esempi fare in conferenza e la sezione, con le cose piacevolmente frastagliata, e commentato, e così via è tra i più facili le cose da fare e ottenere il diritto. Così come tale, realizzare che quelli sono i punti che sono relativamente facili da afferrare. 
+
+Ed ora una parola su Questa poi onestà accademico. Quindi per il corso di programma, si vedrà che il corso ha un bel po 'di lingua intorno a questo. E il corso prende la questione della onestà accademico molto seriamente. 
+
+Noi abbiamo la distinzione, nel bene e nel male, di aver inviato ogni anno più gli studenti per azione disciplinare che la maggior parte di qualsiasi altro Naturalmente, che sono a conoscenza. Questo non è necessariamente indicativa del fatto che gli studenti CS, o studenti CS50, sono meno onesti dei tuoi compagni di classe. Ma la realtà che in questo mondo, per via elettronica, che abbiamo appena hanno tecnologica mezzi di rilevamento di questo. 
+
+E 'importante per noi per l'equità attraverso la classe che facciamo rilevare questo, ed aumentare la questione quando vediamo le cose. E proprio per dipingere un quadro, e davvero per contribuire a qualcosa di simile lavandino in, questi i numeri di studenti nel corso degli ultimi 10 anni che sono stati coinvolti in qualche tali questioni di onestà accademica, con circa 32 studenti dalla caduta 2015, che vale a dire che noi prendiamo la questione molto seriamente. E, in ultima analisi, questi numeri comporre, più recentemente, circa il 3%, 4%, oppure della classe. 
+
+Così, per la super-maggioranza degli studenti sembra che le linee sono chiare. Ma tenere questo in mente, particolarmente in ritardo di notte, quando alle prese con qualche soluzione di un problema proposto l'esistenza di meccanismi per farti meglio supporto di quanto si possa pensare, anche a quell'ora. Rendetevi conto che quando riceviamo osservazioni degli studenti, si incrociano confrontare ogni presentazione di quest'anno contro ogni presentazione l'anno scorso, contro ogni sottomissione a partire dal 2007, e poiché, guardando, così, codice repository online, forum di discussione, luoghi di lavoro. E ricordiamo questo, veramente, tutti per il bene di una completa informativa, che se qualcun altro può trovare on-line, Certamente, possiamo farlo anche noi il corso. Ma, in realtà, lo spirito del corso si riduce a questo punto nel programma. E 'davvero solo, essere ragionevole. 
+
+E se abbiamo dovuto elaborare su tale con solo un po 'di più la lingua, conto che l'essenza di tutta lavoro che si presenta a questo corso deve essere il vostro. Ma all'interno di questo, ci sono certamente opportunità, e l'incoraggiamento, e valore pedagogico in rivolgendosi a others-- me stesso, il TF, il CA, i TAS, e altri in classe, per il supporto, e tanto amici da solo e compagni di stanza che hanno studiato CS e programmazione prima. E così c'è un assegno per questo. E la regola generale è questo-- quando chiedere aiuto, si può mostrare il codice per gli altri, ma non si può visualizzare la loro. Quindi, anche se si è in orario d'ufficio, o nella sala D, o da qualche altra parte lavorando su alcuni pezzi, lavorando fianco a fianco un amico, che è totalmente bene, al fine della giornata il vostro lavoro dovrebbe in ultima analisi, appartengono a ciascun di voi, rispettivamente, e non essere qualche sforzo di collaborazione, tranne per il progetto finale dove è consentito e incoraggiato. 
+
+Rendetevi conto che se si è alle prese con qualcosa e il tuo amico succede solo per essere meglio a questo allora si, o meglio a quel problema di te, o un po 'più avanti di te, è del tutto ragionevole a girare al tuo amico e dire, ehi, ti dispiace guardando il mio codice qui, aiutandomi macchio qual è il mio problema è? E, si spera, nel interesse del valore pedagogico che amico non solo dire, oh, fare questo, ma piuttosto, cosa stai perdendo on line 6, o qualcosa del genere? Ma la soluzione non è per l'amico accanto a te per dire, oh, beh, qui, mi permetta di tirare questo in su, e mostrare la mia soluzione per voi. In modo che sia la linea. Si mostra il codice per gli altri, ma non si può visualizzare loro, soggetto all'altro vincoli nel programma del corso. 
+
+Quindi tenere a mente questo cosiddetta clausola di rammarico nel programma del corso e, che se si impegnano qualche atto che Non è ragionevole, ma portarlo a l'attenzione dei capi del corso entro 72 ore, il corso può imporre sanzioni locali che può includere un insoddisfacente o in mancanza di grado per il lavoro presentato. Ma il corso non farà riferimento alla la materia per ulteriori azioni disciplinari, salvo i casi di ripetuti atti. In altre parole, se si fa fare un po ' stupido, soprattutto a tarda notte, la decisione che la mattina successiva o due giorni più tardi, ti svegli e rendersi conto, cosa stavo pensando? Si fa in CS50 avere uno sbocco per fissare questo problema e possedere fino ad esso, in modo da si incontreranno a metà strada e trattare con esso in una questione che è sia educativo e prezioso per voi, ma ancora punitive in qualche modo. E ora, a prendere il bordo al largo, questo. 
+
+[RIPRODUZIONE VIDEO] 
+
+[RIPRODUZIONE DI BRANI MUSICALI] 
+
+[FINE RIPRODUZIONE] David J. MALAN: Va bene, siamo tornati. E ora guardiamo uno dei primo dei nostri domini del mondo reale in CS50, l'arte della crittografia, l'arte di invio e ricezione messaggi segreti, criptato messaggi se si vuole, che può essere decifrato solo se si dispone qualche ingrediente fondamentale che il mittente ha anche. Quindi, per motivare questo prenderemo uno sguardo a questa cosa qui, che è un esempio di un anello decoder segreto che può essere utilizzato per capire quello che un messaggio segreto è in realtà. Infatti, torna in giorno in grado di scuola, se mai inviato messaggi segreti per qualche amico o qualche cotta in classe, si potrebbe pensare si stavano intelligente per il tuo pezzo di carta che cambia, come, da A a B e B a C, e C a D, e così via. Ma che sono stati effettivamente cifrando le informazioni, anche se era un po 'banale, non era così difficile per l'insegnante di realizzare, bene, se basta cambiare B ad A e C a B, in realtà capire ciò che il messaggio era, ma eri nella cifratura delle informazioni. 
+
+Stavi solo facendo semplicemente, molto simile a Ralphie qui in un famoso film che gioca praticamente fino alla nausea ogni inverno. [RIPRODUZIONE VIDEO] -Essere È noto a tutti che Ralph Parker è presente nominato membro del Piccolo Orphan Annie Secret Circle e ha diritto a tutti gli onori e benefici che si verificano ad esso. 
+
+-Signed, Little Orphan Annie, contro-firmato Pierre Andre, in inchiostro. Onori e benefici, già all'età di nove anni. 
+
+[URLANDO] -Dai. Andiamo avanti con lui. Non ho bisogno di tutto quel jazz A proposito di contrabbandieri e pirati. 
+
+domani sera -listen per l'avventura conclusiva della nave pirata nero. Ora, è il momento per messaggio segreto di Annie per voi i membri del Secret Circle. Ricordate, bambini, solo i membri di Secret Circle di Annie in grado di decodificare il messaggio segreto di Annie. 
+
+Ricordate, Annie dipende da te. Impostare i perni di B2. Ecco il messaggio. 12, 11-- 
+
+-Sono In, il mio primo incontro segreto. 
+
+-14, 11, 18, 16. 
+
+-Pierre Era in grande stasera voce. Potrei dire che stasera messaggio è stato davvero importante. 
+
+-3, 25, che è un messaggio da Annie se stessa. Ricordate, non dirlo a nessuno. 
+
+-90 Secondi dopo, io sono l'unico in stanza della casa dove un ragazzo di nove anni potrebbe sedersi in privacy e decodifica. Ah, B! Sono andato al prossimo, E. 
+
+La prima parola è essere. S, che stava arrivando più facile ora, U, 25-- 
+
+Oh, dai, Ralphie, devo andare! 
+
+-Ti Essere di destra verso il basso, Ma! Caspita! 
+
+-T, O, assicurarsi a-- essere sicuri di che cosa? Qual è stato Little Orphan Annie cercando di dire? Essere sicuri di che cosa? 
+
+-Ralphie, Andy ha avuto modo di Go, vi prego di venire fuori? 
+
+-Tutti destra, Ma! Sarò fuori proprio! 
+
+-I Stava avvicinando ora. La tensione era terribile. Cos'era? Il destino del pianeta possono in bilico. 
+
+-Ralphie! devo di Andy andare! 
+
+-Ti Essere di destra fuori, per gridare forte! 
+
+-Quasi Lì, le mie dita volavano, la mia mente era una trappola d'acciaio, tutti i pori vibrare. Era quasi chiaro, sì, sì, sì. 
+
+-Essere Sicuri di bere il tuo Ovaltine. Ovaltine? Uno spot scadente? Figlio di puttana. [FINE RIPRODUZIONE] David J. MALAN: OK, così che era un modo molto lungo di introdurre la crittografia, e anche Ovaltine. Infatti, da questo vecchio annuncio qui, perché è Ovaltine così buono? È un'estrazione concentrata di ripe malto d'orzo, puro latte di mucca cremoso, e appositamente preparati cacao, insieme con fosfatidi naturali e vitamine. Si è ulteriormente fortificato con ulteriori vitamine del gruppo B e D, yum. Ed è ancora possibile ottenere che, a quanto pare, su Amazon, come abbiamo fatto qui. 
+
+Ma la motivazione era quella di introdurre la crittografia, in particolare un tipo di crittografia noto come crittografia a chiave segreta. E come suggerisce il nome, l'intera sicurezza di un sistema di crittografia a chiave segreta, se si vuole, una metodologia solo per scrambling informazioni tra due persone, è che solo il mittente e solo il destinatario conoscere un segreto key-- un certo valore, un po ' frase segreta, un numero segreto, che li permette di crittografare e decifrare le informazioni. E la crittografia, in realtà, è proprio questo a partire dalla settimana 0. 
+
+E 'un problema dove c'è ingressi, come il messaggio effettivo in inglese o qualunque lingua che si desidera inviare a qualcuno in classe, o attraverso la rete internet. Vi è una certa uscita, che sta essere il messaggio criptato che si desidera che il destinatario per ricevere. E anche se qualcuno in mezzo riceve troppo, non li vuole necessariamente essere in grado di decifrarlo, perché all'interno di questo scatola nera, o algoritmo, è qualche meccanismo, qualche passo passo le istruzioni, per l'adozione di tale ingresso e convertirlo in uscita, in spera modo sicuro. 
+
+E, infatti, c'è qualche vocabolario in questo mondo nel modo seguente. Testo normale è la parola di un informatico sarebbe utilizzare per descrivere l'input messaggio, come l'inglese o qualunque linguaggio in realtà desidera inviare a qualche altro essere umano. E poi il testo cifrato è la corsa al cifrato o criptato, la versione della stessa. 
+
+Ma c'è un altro ingrediente qui. C'è un altro ingresso a crittografia a chiave segreta. E questa è la chiave stessa, che è, in generale, come vedremo, un numero, o lettera, o una parola, qualunque l'algoritmo è in realtà aspetta. 
+
+E come si fa a decifrare le informazioni? Come si fa a decifrare esso? Beh, basta invertire il uscite e gli ingressi. 
+
+In altre parole, una volta che qualcuno riceve il messaggio cifrato, lui o lei ha semplicemente sapere lo stesso codice. Hanno ricevuto il testo cifrato. E collegando quei due ingressi nel sistema di crittografia, l'algoritmo, questa scatola nera, fuori dovrebbe venire il testo in chiaro originale. E così questo è il livello molto elevato vista di ciò che la crittografia è effettivamente tutto su. 
+
+Quindi cerchiamo di ottenere lì. Vediamo ora sotto il cofano di qualcosa siamo stati dando per scontato per la scorsa settimana, e per questa sessione qui-- la stringa. Una stringa alla fine della giornata è solo una sequenza di caratteri. 
+
+Potrebbe essere ciao mondo, o ciao Zamyla, o qualsiasi altra cosa. Ma cosa significa per essere una sequenza di caratteri? Infatti, la libreria CS50 dà noi un tipo di dati chiamato stringa. 
+
+Ma vi è in realtà alcuna cosa come una stringa in C. E 'davvero solo una sequenza di carattere, carattere, carattere, carattere, di nuovo, alla parte posteriore, a indietro, alla parte posteriore, alla parte posteriore dentro della memoria del computer, o di RAM. E vedremo più in profondità che in futuro, quando guardiamo memoria stessa, e l'utilizzazione e la le minacce che sono coinvolti. 
+
+Ma prendiamo in considerazione la stringa Zamyla. Quindi, solo il nome di l'umano qui, Zamyla, cioè una sequenza di caratteri, Z-A-M-Y-L-A. E ora supponiamo che il nome di Zamyla viene immagazzinato all'interno di un computer programma. 
+
+Beh, è ​​ovvio che dovremmo essere in grado di guardare a quei caratteri individualmente. Così Sto solo andando a disegnare un po ' box intorno al nome del Zamyla qui. Ed è il caso in C che quando avere una stringa, come Zamyla-- e forse tale stringa è tornato da una funzione come stringa di get, si può effettivamente manipolare carattere che per carattere. 
+
+Ora, questo è germano per la conversazione a portata di mano, perché in crittografia se si desidera modificare A a B e B a C, e C a D, e così via, è necessario essere in grado a guardare i singoli caratteri in una stringa. È necessario essere in grado di cambiare Z a qualcos'altro, la A a qualcosa d'altro, la M per qualcos'altro, e così via. E così abbiamo bisogno di un modo, a livello di codice, in modo da parlare, in C per poter cambiare e guardare le singole lettere. E possiamo farlo in questo modo. 
+
+Lasciatemi andare tornate in CS50 IDE. E mi permetta di andare avanti e creare un nuovo file che chiamerò questa volta stringa0, come il nostro primo esempio del genere, dot c. E ho intenzione di andare avanti e frusta come segue. 
+
+Quindi includere CS50.h, e quindi includere io.h di serie, che ho quasi sempre andando a prevede di utilizzare nei miei programmi, almeno inizialmente. int void main, e poi qui sono andando a fare le stringhe si ottiene stringa. E poi ho intenzione di andare avanti e fare questo. Voglio andare avanti e, come un controllo di integrità, solo dire, ciao, cento s, punto e virgola, rende stringa di 0. Uh oh, che cosa ho fatto qui? Oh, non ho collegarlo. Così lezione appresa, che non era intenzionale. 
+
+Quindi l'errore, più cento conversioni di argomenti di dati. Ed è qui, in Linea 7-- OK, quindi non ho, tra virgolette, che è la mia stringa di printf. Ho un segno di percentuale. Ma mi manca il secondo argomento. 
+
+Mi manca la virgola s, che Ho avuto negli esempi precedenti. Quindi, una buona occasione per fissare un altro errore, accidentalmente. E ora mi permetta di correre stringa0, digitare Zamyla. OK, ciao Zamyla. 
+
+Così abbiamo fatto funzionare questo tipo di programma un paio di volte diverso. Ma cerchiamo di fare qualcosa di un po 'diverso questa volta. Invece di limitarsi a stampare Zamyla di intero nome con printf, facciamolo carattere per carattere. 
+
+Ho intenzione di utilizzare un ciclo for. E ho intenzione di dare a me stesso una variabile di conteggio, chiamato i. E ho intenzione di continuare l'iterazione, in modo da Finché i è inferiore alla lunghezza di s. 
+
+Si scopre, non abbiamo fare l'ultima volta, che c viene fornito con un funzione chiamata Stirling. Indietro nel giorno, e in generale ancora in sede di attuazione funzioni, gli esseri umani spesso scelgono molto I nomi succinta quel tipo di suono come quello che si vuole, anche se è mancano pochi vocali o lettere. Così Stirling è il nome di una funzione che prende un argomento tra parentesi che dovrebbe essere una stringa. Ed è solo restituisce un intero, la lunghezza di tale stringa. 
+
+Quindi questo ciclo for sulla linea 7 sta andando per iniziare il conteggio a I è uguale a 0. E 'intenzione di incrementare i su ogni iterazione da 1, come abbiamo fatto un paio di volte. Ma sta andando a fare solo questo fino al punto quando i è la lunghezza della stringa stessa. 
+
+Quindi questo è un modo di, in ultima analisi, iterare sui caratteri nella stringa come è seguito. Ho intenzione di stampare non è una un'intera stringa, ma cento C, un singolo carattere seguita da una nuova linea. E poi ho intenzione di Vai avanti, e ho bisogno a dire che voglio per la stampa carattere esimo di s. 
+
+Quindi, se i è la variabile che indica l'indice della stringa, dove si è in esso, ho bisogno di essere in grado di dire, dammi il carattere esimo di s. E c ha un modo di fare questo con parentesi quadre. È sufficiente dire il nome del stringa, che in questo caso è s. Poi si utilizza parentesi quadre, che sono di solito appena sopra il vostro capo o Invio tasto sulla tastiera. E poi si mette l'indice del carattere che si desidera stampare. Così l'indice sarà un number-- 0 o 1 o 2 o 3, o dot, dot, dot, un altro numero. 
+
+E ci assicuriamo che sta andando a essere il numero giusto, perché io iniziare il conteggio a 0. E per impostazione predefinita, il primo carattere in una stringa è per convenzione 0. E il secondo carattere è staffa 1. E il terzo personaggio è staffa 2. E non si vuole andare troppo lontano, ma ci sarà non perché siamo andando ad incrementare solo io fino a quando non uguale alla lunghezza della stringa. E a quel punto, questo ciclo for si fermerà. 
+
+Quindi, mi permetta di andare avanti e salvare questo il programma, ed eseguire fare stringa di 0. Ma ho fatto un casino. dichiarando implicitamente funzione di libreria Stirling con il tipo di tale e such-- ora, questo suona familiare. Ma non è printf. E non è ottenere stringa. 
+
+Non ho vite in allo stesso modo questa volta. Ma notare qui un po 'giù inoltre, includere l'intestazione string.h, fornire esplicitamente il Dichiarazione per Stirling. Quindi non vi è in realtà un indizio in là. 
+
+E in effetti si scopre c'è un altro file di intestazione che noi non abbiamo usato nella classe ancora, ma è tra quelli disponibili a te, chiamato string.h. E in quel file, string.h è Stirling dichiarato. Quindi, mi permetta di andare avanti e salvare questo, fare stringa 0-- bello, nessun messaggio di errore questa volta. 
+
+./string0 Zamyla, e Sono in procinto di colpire Invio, a questo punto getString sta andando per restituire la stringa, metterlo in s. Poi che per il ciclo sta per iterare tra i caratteri di S uno alla volta, e stamparli uno per riga, perché Ho avuto che backslash n alla fine. Così ho potuto omettere che backslash n, e poi basta stampare Zamyla tutto nella stessa linea, efficacemente reimplementazione printf, che non è poi così utile. Ma in questo caso, non ho fatto. In realtà ho stampato uno carattere per volta, uno per riga, in modo che in realtà vedere l'effetto. 
+
+Ma Vorrei sottolineare una cosa qui. E torneremo a questo in una settimana futuro. Si scopre che questo il codice è potenzialmente buggy. 
+
+Si scopre che stringa get e altre funzioni vitali Non è necessariamente sempre restituire ciò che vi aspettate. Sappiamo dalla classe scorso tempo in questa che ottengono stringa deve restituire una stringa. Ma cosa succede se l'utente digita tali una parola lunga, o un paragrafo, o un saggio che non c'è solo non basta memoria del computer per adattarlo. 
+
+Come, cosa succede se qualcosa va sbagliato sotto il cofano? Potrebbe non accadere spesso, ma potrebbe accadere una volta in un po ', molto di rado. E così si scopre che stringa get e funzioni come lo fanno non necessariamente tornare sempre stringhe. Potrebbero tornare un valore di errore, qualche valore sentinella così dire, che indica che qualcosa è andato storto. E si sa solo questo da avendo imparato in classe ora, o aver letto un po 'di documentazione. Si scopre che stringa get può restituire un valore chiamato nullo. Null è un valore speciale che faremo tornare in una settimana futuro. Ma per ora, è sufficiente sapere che se voglio per essere veramente corretta in movimento in avanti usando stringhe get, io non deve solo chiamare, e utilizzare ciecamente il suo valore di ritorno, confidando che si tratta di una stringa. 
+
+Dovrei prima dire, Ehi, aspetta un attimo, solo procedere se s non è uguale null, dove nulla, di nuovo, è solo un po 'di valore speciale. Ed è l'unico valore speciale bisogno di preoccuparsi per la stringa GET. Get stringa è o sta per restituire una stringa o nullo. 
+
+E questo punto esclamativo segno di uguale si potrebbe sapere da forse classe di matematica che si potrebbe disegnare un segno di uguale con una linea attraverso di essa per indicare non uguale. Questo non è in genere un carattere è possibile digitare sulla tastiera. E così nella maggior parte dei linguaggi di programmazione, quando si vuole dire non uguale, si utilizza un punto esclamativo, altrimenti noto come Bang. Così dite botto è uguale, che significa non uguale, logicamente. E 'proprio come non c'è una maggiore o uguale a, o inferiore o uguale al tasto sulla tastiera che fa tutto in un unico simbolo. Ecco, questo è il motivo per cui, negli esempi precedenti, hai fatto una parentesi aperta, e poi un segno di uguale, in modo da fare maggiore o, diciamo, meno. 
+
+Allora qual è il takeaway qui? Questo è semplicemente un modo di ora l'introduzione di questa sintassi, questa funzione, iterare su singoli caratteri di una stringa. E proprio come quelli piazza staffe consentono di ottenere a loro, considerare quelle parentesi quadre come tipo di accennare a questo fondo disegno, per cui ogni carattere all'interno di una stringa è una specie di scatola in qualche parte sotto la cappa in memoria del computer. 
+
+Ma facciamo una variante di questo. Si scopre che questo programma è corretta. Quindi, per gli assi del CS50 per la valutazione codice, questo è corretto ora. Soprattutto ora che sto controllando per null, questo programma non dovrebbe mai bloccarsi. E so solo che per esperienza. Ma non c'è niente altro che possiamo davvero sbagliare. Ma non è molto ben progettato, perché torniamo alle origini. 
+
+In primo luogo, principles-- Che cosa fa un ciclo for fare? Un ciclo for fa tre cose. Si inizializza alcuni valore, se chiedete a. Controlla una condizione. E poi, dopo ogni iterazione, dopo ogni ciclo, incrementa un po ' valore o dei valori, qui. 
+
+Che cosa vuol dire? Inizializziamo i per 0. Controlliamo e assicurarsi che i è inferiore la lunghezza di s, che è Z-A-M-Y-L-A, così che è meno di 6. E, in effetti, 0 per meno di 6. 
+
+Stampiamo fuori Z da il nome di Zamyla. Poi viene incrementato i da 0 a 1. Abbiamo poi CHECK, è meno 1 della lunghezza di s? La lunghezza di s è 6. Sì. 
+
+Così stampiamo una a nome di Zamyla, ZA. i viene incrementato da 0, a 1, a 2. Abbiamo poi CHECK, è inferiore a 2 la lunghezza del nome del Zamyla. 6- così 2 è inferiore a 6. Sì, cerchiamo di stampare fuori ora M in Il nome di Zamyla, il terzo personaggio. 
+
+La chiave qui è che su ciascun iterazione della storia, sto controllando, Sono io inferiore alla lunghezza di Zamyla? Ma il problema è che Stirling non è una proprietà. Quelli di voi che hanno programmato prima in Java o altri linguaggi potrebbe sapere la lunghezza di una stringa è una proprietà, solo alcuni di sola lettura valore. 
+
+In C in questo caso, se questo è una funzione che è letteralmente contando il numero di personaggi in Zamyla ogni volta chiamiamo tale funzione. Ogni volta che si chiede il computer per utilizzare Stirling, è dare un'occhiata a Zamyla, e dicendo Z-A-M-Y-L-A, 6. E ritorna 6. La prossima volta che si chiama dentro che per il ciclo, sta andando a guardare Zamyla di nuovo, dice Z-A-M-Y-L-A, 6. E sta andando a tornare 6. Quindi cosa c'è di stupido in questo progetto? 
+
+Perché il mio codice non un 5 su 5 per la progettazione in questo momento, per così dire? Beh, io sto chiedendo un domanda inutilmente. Sto facendo più lavoro di quanto ne ho bisogno. 
+
+Così, anche se il risposta è corretta, io sono chiedendo il computer, ciò che è la lunghezza di Zamyla nuovo, e ancora, e ancora, e ancora? E la risposta è non cambierà mai. Sta andando sempre essere 6. 
+
+Quindi una soluzione migliore di questo sarebbe questa versione successiva. Lasciami andare avanti e mettere in un file separato chiamato string1.c, solo per tenerlo separato. E si scopre una per ciclo, si può effettivamente dichiarare più variabili in una sola volta. 
+
+Quindi ho intenzione di tenere i e impostarlo su 0. Ma sto anche andando a aggiungere una virgola, e dire: datemi una variabile chiamata n, il cui il valore è uguale alla lunghezza della stringa di s. E ora, si prega di fare la mia condizione purché i è minore di n. 
+
+Quindi, in questo modo, la logica è identica alla fine della giornata. Ma mi ricordo il valore 6, in questo caso. Qual è la lunghezza del nome del Zamyla? E sto mettendo al n. 
+
+E sto ancora controllando la condizione ogni volta. È 0 a meno di 6? È 1 meno di 6? È 2 inferiore a 6, e così via? 
+
+Ma io non sto chiedendo il computer ancora, e ancora, ciò che è la lunghezza del nome del Zamyla? Qual è la lunghezza del nome del Zamyla? Qual è la lunghezza del nome di questo Zamyla? Sto letteralmente ricordando che prima e rispondere solo in questa seconda variabile n. Così questo ora sarebbe non solo corretta, ma anche ben progettato. 
+
+Ora, per quanto riguarda lo stile? Ho chiamato il mio variabili abbastanza bene, direi. Sono super succinta in questo momento. E questo è tutto bene. 
+
+Se si dispone di un solo stringa in un programma, si potrebbe anche chiamare s per le stringhe. Se si dispone di una sola variabile per il conteggio in un programma, si potrebbe anche chiamare i. Se si dispone di una lunghezza, n è super comune così. Ma non ho commentato nessun del mio codice. 
+
+Non ho informato il reader-- se questo è il mio TF, o TA, o semplicemente colleague-- ciò che si suppone essere in corso in questo programma. E così per ottenere un buon stile, quello che vorrei fare è qualcosa questo-- come chiedere all'utente per l'input. E potrei riscrivere questo numero qualsiasi di modi. 
+
+Assicurarsi S-- assicurarsi get stringa restituita una stringa. E poi in qui-- e questo è forse il più importante iterate comment-- sui caratteri in s uno alla volta. E potrei usare qualsiasi scelta della lingua inglese qui per descrivere ogni di questi blocchi di codice. 
+
+Si noti che non ho messo un commentare ogni riga di codice, in realtà solo sulla interessa quelli, quelli che hanno un significato che io possa vuole fare super-chiaro a qualcuno leggere il mio codice. E perché sta chiamando ottiene stringa di chiedere all'utente per l'input? Anche questo non è necessariamente tutto questo descrittiva. Ma aiuta raccontare una storia, perché la seconda linea della storia è, assicurarsi ottenere stringa restituita una stringa. 
+
+E la terza linea della storia è, scorrere i caratteri in s uno Al tempo. E ora per buona misura, Ho intenzione di andare avanti e aggiungere un altro commento che solo dice di stampa i-esimo carattere s. Ora, che cosa ho fatto alla fine del giorno? 
+
+Ho aggiunto un po 'di inglese parole in forma di commenti. Il simbolo barra barra significa, hey, calcolatore questo è per l'essere umano, non per voi, il computer. Così stanno ignorati logicamente. Sono solo lì. 
+
+E, in effetti, CS50 IDE mostra loro come grigio, come utili, ma non chiave al programma. Si noti che cosa si può fare ora. Sia che si sa C la programmazione o no, si può solo stare indietro a questo il programma, e sfiorano i commenti. Chiedi all'utente per l'input, assicurarsi ottenere stringa restituita una stringa, scorrere i caratteri in s uno alla volta, stampare il carattere i-esimo carattere in S-- non lo fai hanno nemmeno bisogno di guardare il codice per capire che cosa questo programma fa. E, meglio ancora, se vi guarda in questo programma in una settimana o due, o un mese o un anno, anche voi non avete a guardare il codice, cercando di ricordare, quello che stavo cercando di fare con questo codice? 
+
+Tu stesso hai detto. Hai descritto per te stesso, o qualche collega, o TA, o TF. E così se ora corretta, e il design buono, e, infine, buon stile pure. Quindi, fare tenere a mente. 
+
+Quindi c'è un altro cosa ho intenzione di fare qui che ora può rivelare esattamente ciò che è succedendo sotto il cofano. Quindi c'è questa funzione in C, e altre lingue, chiamato typecasting che o implicitamente o permette esplicitamente di convertire da un tipo ad un altro. Abbiamo avuto a che fare in modo lontano oggi con le stringhe. 
+
+E stringhe sono caratteri. Ma ricordare dalla settimana 0, quali sono i personaggi? I personaggi sono solo un'astrazione in cima numeri decimali numbers--, e numeri decimali sono in realtà solo un astrazione su cima di numeri binari, come lo abbiamo definito. 
+
+Così i personaggi sono numeri. E i numeri sono personaggi, solo a seconda del contesto. E si scopre che al suo interno di un programma per elaboratore, si può specificare come si vuole guardare i bit all'interno di quel programma? 
+
+Richiamo dalla settimana 0 che avevamo Ascii, che è solo il codice lettere di mappatura ai numeri. E abbiamo detto, il capitale A è 65. Capital B è 66, e così via. 
+
+E notate, abbiamo essenzialmente abbiamo caratteri su la riga superiore qui, come C li avrebbe chiamati, personaggi, e poi interi sulla seconda fila. E si scopre è possibile convertire perfettamente tra i due, tipicamente. E se vogliamo fare questo proposito, abbiamo potrebbe desiderare di affrontare qualcosa come questo. 
+
+Potremmo desidera convertire lettere maiuscole a lettere caso, o minuscolo a maiuscolo. E si scopre c'è in realtà un modello qui siamo in grado di abbracciare in un attimo. Ma diamo un'occhiata prima a un Esempio di fare questo in modo esplicito. 
+
+Ho intenzione di tornare in CS50 IDE. Ho intenzione di creare un file chiamato Ascii 0.c. E ho intenzione di andare avanti e aggiungere il mio io.h standard al top, int void main nella parte superiore della mia funzione. E poi sto solo andando a fare la following-- un ciclo for da i pari, diciamo, 65. 
+
+E poi mi sta per essere inferiore a 65, oltre a 26 lettere dell'alfabeto. Così vi svelo il computer fare la matematica per me lì. E poi all'interno di questo ciclo, quello che sto andando per la stampa? 
+
+% C è% i backslash n. E ora voglio collegare due valori. Ho temporaneamente messo domanda segna lì per invitare la domanda. 
+
+Voglio scorrere da 65 in poi per 26 lettere dell'alfabeto, stampando su ogni iterazione che equivalente integrante del personaggio. In altre parole, voglio iterare stampa oltre 26 numeri ciò che il carattere ASCII è, alla lettera, e ciò che il numero corrispondente è-- in realtà solo ricreando il grafico da quella diapositiva. Così che cosa dovrebbero questi punti interrogativi essere? 
+
+Beh, si scopre che il secondo uno dovrebbe essere solo la variabile i. Voglio vedere che come un numero. E l'argomento centrale qui, posso dire al computer per il trattamento di tale intero i come un personaggio, così come per sostituirlo qui per cento C. 
+
+In altre parole, se la programmatore umano, sapere questi sono solo numeri alla fine del giorno. E so che il 65 dovrebbe mappa di qualche personaggio. Con questo cast esplicito, con una parentesi, il nome del tipo di dati che si desidera convertire, e una parentesi chiusa, si può dire la calcolatore, ehi, computer, convertire questo intero in un char. 
+
+Così, quando ho eseguito questo programma dopo la compilazione, vediamo quello che faccio get-- ASCII 0. Maledizione, che cosa ho fatto di sbagliato qui? Utilizzare di identificatore non dichiarato, Va bene, non è intenzionale, ma vediamo se non possiamo ragione per questo. 
+
+Così la linea five-- così non ho avuto molto lontano prima di avvitare. Va bene. Così la linea 5 per i uguale 65-- vedo. Quindi ricorda che in C, a differenza lingue, se si dispone di programmazione precedente esperienza, si ha per dire al computer, a differenza di Scratch, cosa tipo di variabile è. 
+
+E ho dimenticato una frase chiave qui. In linea cinque, ho iniziato ad usare i. Ma io non ho detto C quali dati tipo si tratta. Quindi ho intenzione di andare qui e dire, ah, lo rendono un numero intero. 
+
+Ora ho intenzione di andare avanti e ricompilare. Quello fisso che. ./ascii0 Enter, che è genere di freddo. Non solo è super veloce per chiedere al computer a questa domanda, piuttosto che guardare in su su una diapositiva, è stampato uno per riga, A è 65, B è 66, tutta la strada da quando ho down-- fatto questo 26 times-- alle lettere Z, che è 90. E, infatti, leggermente più intelligente sarebbe sono stati per me non fare affidamento sul computer per aggiungere 26. Avrei potuto appena fatto 90 così, così a lungo come io non faccio lo stesso errore due volte. Voglio andare attraverso z, non solo attraverso y. 
+
+Ecco, questo è un cast esplicito. Si scopre che questo Non è nemmeno necessario. Lasciami andare avanti e di eseguire nuovamente questo compilatore, ed eseguire nuovamente Ascii 0. Si scopre che C è abbastanza intelligente. 
+
+E printf, in particolare, è piuttosto intelligente. Se hai appena passa un i due volte per entrambi i segnaposto, printf si renderà conto, oh, beh io ti conosco mi ha dato un integer-- qualche numero, come 65, o 90, o qualsiasi altra cosa. Ma vedo che mi vuoi formattare quel numero come un personaggio. E così printf può implicitamente espressi int a un char per voi pure. Quindi questo non è affatto un problema. 
+
+Ma bando, a causa di questa equivalenza possiamo effettivamente fare anche questo. Mi permetta di andare avanti e fare una altra versione di questo-- Ascii 1.c. E invece di iterare su interi, può davvero a bocca aperta per iterare su caratteri. Se un char c ottiene maiuscola, ho voglia di andare avanti e fare questo, purché C è inferiore o uguale alla Z. capitale e ad ogni iterazione Voglio incrementare C, posso ora nella mia linea printf qui per esempio, cento C è cento Ho di nuovo, comma C. 
+
+E ora, posso andare nella direzione opposta, gettando il carattere esplicitamente a un numero intero. Così, ancora una volta, perché vorresti fare questo? E 'un po' strano per ordinare di contare in termini di caratteri. 
+
+Ma se si capisce che cosa è succedendo sotto il cofano, non c'è davvero nessuna magia. Stai solo dicendo, hey, computer di dare me una variabile denominata C di tipo char. Inizializzarlo al capitale A. E notare singola materia citazioni. 
+
+Per i caratteri in C, ricordare da la scorsa settimana, è possibile utilizzare le virgolette singole. Per le stringhe, per le parole, frasi, è usare le virgolette. OK, computer, continuare a fare questo, in modo da fino a quando il personaggio è inferiore o uguale a z. E so dalla mia tabella ASCII che tutti di questi codici ASCII sono contigue. 
+
+Ci sono lacune. Quindi è solo da A a Z, separati da un numero ciascuno. E allora posso incrementare un char, se voglio davvero. Alla fine del giorno, è solo un numero. Lo so. Quindi posso solo presumere di aggiungere 1 ad esso. 
+
+E poi questa volta, a stampare C, e poi l'equivalente integrale. E non ho nemmeno bisogno del cast esplicito. Posso lasciare printf e la cose figura computer fuori, così che ora, se corro fare Ascii1./ascii1, Ho la stessa cosa pure. 
+
+programma inutile, though-- nessuno sta per scrivere in realtà il software al fine di capire, quello che era il numero che mappa di A o B o Z? Si sta solo andando a google, o cercarlo on-line, o cercarlo su un vetrino, o simili. Perché allora questa effettivamente ottenere utile? 
+
+Beh, parlando di quel scivolo, notare non c'è un andamento reale qui tra lettere maiuscole e minuscole che non è stata casuale. Si noti che il capitale A è 65. Minuscole a è 97. E quanto lontano si trova un minuscolo? 
+
+Così 65 è il numero di passi da 97? Così 97 meno 65 è 32. Così il capitale a è 65. Se si aggiungono 32 che, si ottiene un minuscole. E, in modo equivalente, se si sottrae 32, si ritorna al capitale A-- stesso con B a poca B, grande C a poco c. 
+
+Tutte queste lacune sono 32 pezzi. Ora, ciò sembrerebbe ci permettono di fare qualcosa come Microsoft Word, o Google Docs caratteristica, in cui si è possibile selezionare tutto e poi dire, cambiare tutto in minuscolo, o cambiare tutto in lettere maiuscole, o modificare solo la prima parola di una frase in lettere maiuscole. Siamo in grado di fare qualcosa di concreto così noi stessi. 
+
+Lasciami andare avanti e salvare un file qui chiamato capitalizzare 0.c. E andiamo avanti e improvvisare un programma che fa esattamente questo come segue. Quindi includere la libreria CS50. E comprende I / O standard. 
+
+E so che questo sarà presto disponibile. Quindi ho intenzione di mettere in c'è già, string.h, così ho accesso a cose come Stirling, quindi int void main, come al solito. E poi ho intenzione di andare avanti e fare le stringhe ottiene ottenere stringa, solo per ottenere una stringa dall'utente. E poi ho intenzione di fare il mio controllo di integrità. Se la stringa non è uguale null, allora è sicuro di procedere. E quello che voglio fare? Io vado a scorrere da i uguale a 0, e n fino alla lunghezza della stringa di s. 
+
+E ho intenzione di fare questo a condizione che i è inferiore a n, e io plus plus. Finora, sono davvero solo prendendo in prestito le idee da prima. E ora ho intenzione di introdurre un ramo. 
+
+Quindi, pensare di nuovo a Scratch, dove abbiamo avuto quei forchette in mezzo alla strada, e la settimana scorsa in C. ho intenzione di dirlo, se il carattere i-esimo in s è maggiore di o pari a minuscole a, e- in Scratch si farebbe letteralmente dici e, ma in C che dici e commerciale, ampersand-- e il carattere i-esimo in s è inferiore o uguale a minuscole z, facciamo qualcosa di interessante. Facciamo in realtà stampare una personaggio senza ritorno a capo che è il carattere della stringa, il carattere i-esimo nella stringa. 
+
+Ma andiamo avanti e sottrarre 32 da esso. Altrimenti, se il personaggio in stringa che stiamo cercando non è tra poco un e poco z, andare avanti e appena stampato fuori invariato. Così abbiamo introdotto questa notazione tra parentesi per le nostre corde per arrivare al i-esimo carattere della stringa. 
+
+Ho aggiunto un po 'di logica condizionale, come Scratch in della scorsa settimana prima settimana, dove Sto solo usando il mio fondamentale comprensione di ciò che è succedendo sotto il cofano. Il personaggio è i-esimo di s maggiore o uguale ad un? Come, è 97, o 98, o 99, e così via? 
+
+Ma è anche minore o uguale al valore di z minuscola? E se è così, che cosa significa questa linea? 14, questa è una sorta di germe di tutta l'idea, maiuscolo la lettera da semplicemente sottraendo 32 da esso, in questo caso, perché so, per quello grafico, come i miei numeri sono rappresentati. Quindi cerchiamo di andare avanti ed eseguire questo, dopo la compilazione capitalizzare 0.c, ed eseguire capitalizzare 0. 
+
+Facciamo digitare qualcosa di simile Zamyla in tutto minuscolo entrare. E ora abbiamo Zamyla in maiuscolo. Facciamo digitare Rob in lettere minuscole. Proviamo Jason in lettere minuscole. E continuiamo ricevendo il capitalizzazione forzata. C'è un bug minore che ho tipo di non anticipare. Il mio nuovo prompt è di finire sulla stessa linea come i loro nomi, che si sente un po 'disordinato. 
+
+Quindi ho intenzione di andare qui, e sino alla fine di questo programma stampare un carattere di nuova riga. È tutto. Con printf, non è necessario per passare variabili o codice del formato. Si può letteralmente stampare qualcosa di simile a una nuova riga. 
+
+Quindi cerchiamo di andare avanti e fare capitalizzare ancora 0, eseguire nuovamente esso, Zamyla. E ora è un po 'più bello. Ora, il mio prompt è sulla propria nuova linea. Ecco, questo è tutto bello e buono. Ecco, questo è un buon esempio. Ma io non so nemmeno necessariamente necessità di codificare il 32. Sai cosa? Potrei say-- non lo faccio mai ricordare quale sia la differenza. 
+
+Ma so che se mi avere una lettera minuscola, Io essenzialmente da sottrarre off qualunque sia la distanza è fra poco un grande e A, perché se suppongo che tutte le altre lettere sono gli stessi, che dovrebbe ottenere il lavoro fatto. Ma piuttosto che farlo, sai una cosa? C'è un altro modo ancora. 
+
+Se questo è capitalizzare 1.c-- se fossi Per mettere in un file separato. Facciamo capitalizzare 2.c come segue. Ho intenzione di pulire davvero questo qui. E invece di dover nemmeno sapere o cura di quelli di basso livello dettagli di implementazione, io sono invece solo andando a stampare un carattere, tra virgolette, per cento C, e quindi chiamare un'altra funzione che esiste che prende un argomento, che è un personaggio, come questo. 
+
+Si scopre in C, non c'è un'altra chiamata di funzione alla tomaia, che come il suo nome suggerisce prende un carattere e rende la sua maiuscolo equivalente, e poi lo restituisce in modo che printf può collegare in là. E così, per fare questo, però, necessità di introdurre un altro file. Si scopre c'è un altro file che si dovrebbe conoscere solo dalla classe, o un libro di testo, o online di riferimento, chiamato type.h. C 
+
+Quindi, se aggiungo che in mezzo il mio colpo di testa file, e ora ri-compilare questo programma, capitalize2, ./capitalize2 Invio. Facciamo digitare in Zamyla in tutta minuscolo, funziona ancora lo stesso. Ma sai una cosa? Si scopre che a superiore ha alcune altre funzionalità. 
+
+E mi permetta di introdurre questo comandare qui, una sorta di maldestramente di nome, ma l'uomo per manuale. Si scopre che la maggior parte dei computer Linux, come stiamo usando qui-- operativo Linux system-- avere un comando chiamato uomo, che dice: Hey, computer, dammi manuale del computer. cosa vuoi guardare in quella manuale? 
+
+Voglio guardare la funzione chiamato a superiore, Invio. Ed è un po 'criptico di leggere a volte. Ma notiamo che siamo in il manuale del programmatore Linux. Ed è tutto il testo. E notare che c'è la nome della funzione qui. Si scopre che ha un cugino chiamato per abbassare, che fa il contrario. E notate sotto sinossi, per utilizzare questo funzionare la pagina man, per così dire, Mi sta dicendo che ho bisogno di includere c type.h. E sapevo che dalla pratica. 
+
+Qui, si sta mostrando me i due prototipi per la funzione, in modo tale che se mai voglio usare questo So quello che prendono come input, e ciò che tornano come output. E poi se ho letto la descrizione, vedo più in dettaglio le operazioni da essa. Ma soprattutto, se Guardo sotto il valore di ritorno, si dice che il valore restituito è quello della lettera convertito, o C, l'ingresso originale, se la conversione non era possibile. 
+
+In altre parole, per superiore cercherà per convertire una lettera in maiuscolo. E se sì, sta andando a restituirlo. Ma se non può per qualche reason-- forse è comunque già alto, forse è un punto esclamativo o qualche altro punctuation-- è solo andare a restituire l'originale C, che significa che posso fare il mio codice meglio progettati come segue. 
+
+Non ho bisogno di tutti queste righe di codice maledettamente. Tutte le linee che ho appena evidenziata può essere collassato in un solo semplice la linea, che è questo-- printf per cento c per S staffa superiore i. E questo sarebbe un esempio di una migliore progettazione. 
+
+Perché implementare in 7 o 8 linee di codice, qualunque cosa fosse ho appena eliminati, quando si può invece collassare tutto questo la logica e il processo decisionale in un'unica linea, 13 oggi, che si basa su una libreria function-- una funzione che viene con C, ma che fa esattamente quello che vuoi che faccia. E, francamente, anche se non è venuto con C, si potrebbe implementare da soli, come abbiamo visto, con get int negativo e ottenere positivi int scorsa settimana pure. 
+
+Questo codice è ora molto più leggibile. E, in effetti, se si scorrere verso l'alto, guardare quanto più compatta questa versione del mio programma è. E 'un po' pesante in alto ora, con tutti questi include. Ma va bene, perché ora sto in piedi sulle spalle dei programmatori prima di me. E chiunque fosse che attuate per davvero superiore mi ha fatto un favore, proprio come chiunque implementato Stirling davvero mi ha fatto un favore a qualche tempo fa. E così ora abbiamo un migliore programma di progettazione che implementa la stessa logica. 
+
+Parlando di Stirling, lascia me andare avanti e fare questo. Lasciami andare avanti e salvare questo file come stirling.c. E si scopre, siamo in grado di buccia indietro un altro strato abbastanza semplice ora. Ho intenzione di andare avanti e frusta un altro programma principale qui che semplicemente ri-attrezzi lunghezza della stringa come segue. Quindi, ecco una riga di codice che mi viene una stringa da parte dell'utente. Noi continuiamo a utilizzare ancora e ancora questo. Permettetemi di fare io stesso una variabile chiamata n di tipo int che memorizza un numero. 
+
+E mi permetta di andare avanti e fare la seguente logica. Mentre il carattere n-esimo s fa è uguale a 0 backslash, andare avanti e incrementare n. E poi stampare printf per cento i n. Io sostengo che questo programma, senza chiamare lunghezza della stringa, le figure la lunghezza di una stringa. 
+
+E la magia è del tutto incapsulato in linea 8 qui con quello che sembra nuova sintassi, questa barra inversa 0 tra apici. Ma perché? Beh, prendere in considerazione ciò che è stato succede tutto questo tempo. 
+
+E come un a parte prima che mi dimentichi, realizzare Anche, che oltre alle pagine man che vengono con un tipico sistema Linux come CS50 IDE, rendersi conto che noi, la il personale del corso, hanno anche fatto una versione del sito di questa stessa idea chiamata reference.cs50.net, che ha tutte quelle stesse pagine man, tutte dello stesso documentazione, nonché una piccola scatola in alto che permette di convertire tutto il abbastanza linguaggio arcano in meno confortevole Modalità, dove, il personale docente, hanno attraversato e cercato di semplificare alcuni di lingua per mantenere le cose focalizzato sulle idee, e non alcuni degli aspetti tecnici. Quindi, tenere a mente, reference.cs50.net come un'altra risorsa come bene. 
+
+Ma perché funziona lunghezza della stringa in il modo in cui ho proposto un momento fa? Ecco di nuovo il nome di Zamyla. Ed ecco il nome di Zamyla inscatolato in, come continuo a fare, a dipingere un quadro di esso che è, in realtà, solo una sequenza di caratteri. Ma Zamyla non esiste in isolamento in un programma. 
+
+Quando si scrive e si esegue un programma, si sta utilizzando il vostro Mac o PC come memoria o RAM per così dire. E si può pensare di il computer come avere un sacco di gigabyte di memoria in questi giorni. E un concerto significa miliardi, così miliardi di byte. 
+
+Ma andiamo riavvolgere nel tempo. E supponiamo che stiamo usando un computer molto vecchio che ha solo 32 byte di memoria. Ho potuto, sullo schermo del computer, semplicemente disegnare questo come segue. 
+
+Potrei semplicemente dire che la mia computer possieda tutto questa memoria. E questo è come un bastone di memoria, se vi ricordate la nostra immagine dall'ultima volta. E se ho appena divido questo in tempi abbastanza, Io affermo che ho 32 byte della memoria sullo schermo. 
+
+Ora, in realtà, posso solo disegnare finora in questa schermata qui. Quindi ho intenzione di andare avanti, e solo per convenzione, tracciare la memoria del mio computer come un griglia, non solo come una linea retta. In particolare, io sostengo che ora questa griglia, questo 8 per 4 griglia, solo rappresenta tutti i 32 byte di memoria disponibile nel mio Mac, o disponibili nel mio PC. E stanno avvolgendo a due linee, basta perché si adatta di più sullo schermo. Ma questo è il primo byte. Questo è il secondo byte. Questo è il terzo byte. 
+
+E questo è il byte 32 °. Oppure, se pensiamo come un computer scienziato, questo è byte 0, 1, 2, 3, 31. In modo da avere da 0 a 31, se si inizia a contare a 0. 
+
+Quindi, se usiamo un programma che le chiamate ottengono stringa, e otteniamo una stringa dall'umano come ho chiamato Zamyla, Z-A-M-Y-L-A, come nel mondo fa la pista computer a evitare di cui Byte, che pezzo di memoria, appartiene alla quale stringa? In altre parole, se si procede a digitare un altro nome al computer, come questo Andi, chiamando ottenere stringa una seconda volta, A-N-D-I deve finire nel memoria del computer come bene. Ma come? 
+
+Beh, si scopre che sotto la Cappuccio, cosa C fa quando la memorizzazione di stringhe che i tipi umani, o che provengono da qualche altra fonte, è delinea la fine del loro una speciale barra rovesciata character-- 0, che è solo un modo speciale di dire 80 bit di fila. 
+
+Così A-- questo è il richiamo il numero 97. Così alcuni reticolo di 8 bit rappresenta numero decimale 97. Questo backslash 0 è letteralmente il numero 0, nul pseudonimo, N-U-L, a differenza di prima, N-U-L-L, di cui abbiamo parlato. Ma per ora, è sufficiente sapere che questo backslash 0 a soli 80 bit di fila. 
+
+Ed è proprio questa riga nel sabbia che dice qualcosa di sinistra appartiene a una stringa o un tipo di dati. E tutto ciò a destra appartiene a qualcos'altro. Andi del nome, nel frattempo, che solo visivamente accade per avvolgere sulla all'altra linea, ma questo è solo un dettaglio estetico, Allo stesso modo è nul terminata. 
+
+Si tratta di una stringa di caratteri a A-N-D-I, più un quinto personaggio segreto, tutti i 0 bit, che delimita solo Alla fine del nome di Andi pure. E se chiamiamo ottenere stringa per la terza volta nel computer per ottenere una stringa come Maria, M-A-R-I-A, similmente è Maria Nome nul terminato con backslash 0. 
+
+Questo è fondamentalmente diverso dal modo in cui un computer sarebbe tipicamente memorizzare un numero intero o un galleggiante, o altro i tipi di dati ancora, perché il richiamo, un intero è di solito 32 bit, o 4 byte, o forse anche 64 bit, o otto byte. Ma molti primitivi in ​​un computer in un linguaggio di programmazione hanno un numero fisso di byte sotto il hood-- forse 1, forse 2, forse 4, forse 8. 
+
+Ma le stringhe, in base alla progettazione, hanno un il numero dinamica di caratteri. Non si sa in anticipo, fino a quando i tipi umani in Z-A-M-Y-L-A, o M-A-R-I-A, o A-N-D-I. Tu non sai quante volte l'utente sta per colpire la tastiera. Pertanto, non si sa come molti personaggi di anticipo si sta andando ad avere bisogno. 
+
+E così C solo tipo di foglie come un breadcrumb segreto sotto il cofano alla fine della stringa. Dopo aver memorizzato Z-A-M-Y-L-A nella memoria, ma anche semplicemente mette l'equivalente di un periodo. Alla fine di una frase, mette 80 bit, in modo da di ricordare dove Zamyla inizia e finisce. 
+
+Allora qual è il collegamento, poi, a questo programma? Questo programma, Stirling, è semplicemente un meccanismo per ottenere una stringa da parte dell'utente, linea 6. Linea 7, dichiaro una variabile chiamato n e impostarlo uguale a 0. 
+
+E poi in linea 8, ho semplicemente chiesto al domanda, mentre il carattere n-esimo fa è uguale a tutto 0 bits-- in altre parole, non lo fa uguali questo speciale carattere, backslash 0, che era solo quella speciale character-- nul andare avanti e basta incrementare n. 
+
+E continuare a farlo, e tenere farlo, e continuare a farlo. E così, anche se in passato ci ho usato, è perfettamente bene semanticamente da usare n, se si sta solo cercando di contare questa volta deliberatamente, e vogliono solo chiamarlo n. Quindi questo continua a porre la domanda, è il carattere n-esimo s tutti 0? In caso contrario, considerare il successivo aspetto, considerare il successivo, considerare il successivo, considerare il successivo. 
+
+Ma non appena si vede backslash 0, questa linea loop-- 9 attraverso 11-- ferma. Si interrompe fuori dal ciclo while, lasciando all'interno di quella variabile n un conteggio totale di tutte le caratteri della stringa che avete visto, stampa così fuori. Quindi proviamo questo. 
+
+Lasciami andare avanti e, senza utilizzando la funzione Stirling, ma usando solo la mia versione homegrown qui chiamato Stirling, mi permetta di andare avanti ed eseguire stirling, digitare qualcosa come Zamyla, che so in anticipo è di sei caratteri. Vediamo se funziona. Infatti, è sei. Proviamo con Rob, tre personaggi, tre caratteri così, e così via. Ecco, questo è tutto quello che sta succedendo sul sotto la cappa. E notare i collegamenti, poi, con la prima settimana di classe, dove abbiamo parlato qualcosa come astrazione, che è proprio questa stratificazione di idee, o complessità, in cima principi fondamentali. Qui, stiamo cercando una sorta di sotto la cappa di Stirling, per così dire, di capire, come sarebbe essere attuata? 
+
+E potremmo re-implementare noi stessi. Ma stiamo mai più andare re-implementare Stirling. Stiamo solo andando a utilizzare stirling in ordine per ottenere effettivamente una certa lunghezza stringhe. 
+
+Ma non c'è nessuna magia sotto la cappa. Se si sa che sotto la cappa, una stringa è solo una sequenza di caratteri. E quella sequenza di caratteri tutti possono essere affrontate numericamente con staffa 0, staffa 1, staffa 2, e si sapere che alla fine di una stringa è un carattere speciale, si può capire come fare più nulla in un programma, perché tutto si riduce a è la lettura e la scrittura della memoria. Cioè, la modifica e alla ricerca a memoria, o in movimento le cose intorno a memoria, le cose da stampa sullo schermo, e così via. 
+
+Quindi cerchiamo di utilizzare questo ora ritrovata comprensione di ciò che realmente stringhe sono sotto la cappa, e sbucciare indietro di un altro livello che fino ad ora abbiamo stato ignorando del tutto. In particolare, in qualsiasi momento abbiamo implementato un programma, abbiamo avuto questa riga di codice vicino alla parte superiore dichiarando principale. E abbiamo specificato int void main. 
+
+E quel vuoto all'interno delle parentesi è stato detto tutto questo tempo che principale sé non richiede alcun argomento. Qualsiasi ingresso che principale è intenzione di ottenere da parte dell'utente deve venire da qualche altra meccanismo, come get int, o ottenere galleggiante, o ottenere stringa, o qualche altra funzione. Ma si scopre che quando si scrive un programma, si può effettivamente indicare che tale programma è prendere ingressi dall'umano nella riga di comando stesso. 
+
+In altre parole, anche se finora sono in corso solo ./ciao ciao o programmi simili, tutti della altri programmi che abbiamo usato, che noi stessi non abbiamo scriviamo, hanno preso, a quanto pare, riga di comando arguments-- cose come fare. Tu dici qualcosa come marca, e poi una seconda parola. Oppure clang, clang che dici, e poi una seconda parola, il nome di un file. 
+
+O anche RM o CP, come si potrebbe hanno visto o già utilizzato per rimuovere o copiare i file. Tutti coloro prendono cosiddetti riga di comando arguments-- parole aggiuntive al prompt del terminale. Ma fino ad ora, abbiamo stessi non hanno avuto questo lusso di prendere input dal utente quando lui o lei corre in realtà il programma stesso nella riga di comando. 
+
+Ma possiamo farlo ri-dichiarando principale andare avanti, non è come avere invalidare tra parentesi, ma questi due argomenti instead-- primo un numero intero, e il secondo qualcosa di nuovo, qualcosa che stiamo andando a chiamare un array, qualcosa di simile nello spirito a quello che abbiamo visto in Scratch come un elenco, ma un array di stringhe, come vedremo tra poco. Ma vediamo da questo A titolo di esempio, prima distinguere esattamente cosa significa. 
+
+Quindi, se vado in CS50 IDE qui, Sono andato avanti e dichiarato in un file chiamato argv0.c il seguente modello. E notare l'unica cosa è diverso finora è che ho cambiato nulla a int stringa argc argv parentesi aperta, vicino staffa. E notate, per ora, non c'è niente dentro di quelle parentesi. 
+
+Non c'è nessun numero. E non c'è io, o n, o qualsiasi altra lettera. Sto solo usando il parentesi quadre per ora, per motivi verremo torna a in un attimo. 
+
+E ora che cosa ho intenzione di fare è questo. Se argc è uguale uguale 2-- e ricordano che è uguale uguale è l'operatore di uguaglianza confrontando destra e sinistra per l'uguaglianza. Non è l'assegnazione operatore, che è il segno di uguale singolo, il che significa che la copia da destra a sinistra un certo valore. 
+
+Se argc è uguale uguale a 2, voglio per esempio, printf, ciao, percentuali, nuova linea, e quindi collegare dentro-- ed ecco il nuovo Staffa argv trick-- 1, per motivi che torneremo a in un attimo. Altrimenti, se non lo fa argc uguale a 2, sai una cosa? Andiamo avanti e, come al solito, la stampa fuori ciao mondo senza sostituzione. 
+
+Quindi sembrerebbe che se argc, che sta per numero di argomenti, è uguale a 2, Ho intenzione di stampare ciao qualcosa o altro. In caso contrario, per impostazione predefinita, sono andare in stampa ciao mondo. Che cosa significa? 
+
+Beh, mi permetta di andare avanti e di risparmio questo file, e poi fare fare argv0, e poi ./argv0, Invio. E dice ciao mondo. Ora, perché? 
+
+Beh, si scopre ogni volta che si eseguire un programma a riga di comando, si sta riempiendo in quello che faremo generalmente chiamare un vettore di argomento. In altre parole, automaticamente la computer, il sistema operativo, sta per consegnare al vostro programma sé un elenco di tutte le parole che l'essere umano digitato la richiesta, nel caso in cui il programmatore vuole fare qualcosa con queste informazioni. E in questo caso, l'unica parola Ho digitato al prompt è ./argv0. 
+
+E così il numero di argomenti che è essere passato per il mio programma è solo uno. In altre parole, l'argomento contare, altrimenti noto come argc qui come un intero, è solo uno. Uno, naturalmente, non è uguale a due. E così questo è ciò che stampa, ciao mondo. 
+
+Ma mi permetta di prendere questo da qualche parte. Lasciatemi dire, argv0. E allora che ne dite di Maria? E poi premere Invio. 
+
+E notare cosa accade magicamente qui. Ora, invece di mondo ciao, ho modificato il comportamento di questo programma prendendo l'input non da get stringa o qualche altra funzione, ma da, a quanto pare, il mio comando in sé, quello che ho inizialmente digitato. E posso giocare a questo gioco nuovamente cambiandolo Stelios, per esempio. 
+
+E ora vedo un altro nome ancora. E qui, potrei dire Andi. E potrei dire Zamyla. E siamo in grado di giocare a questo gioco tutto il giorno, basta collegare valori diversi, fintanto che fornisco esattamente due parole al prompt, in modo tale che argc, conta la mia tesi, è 2. 
+
+Vedo che il nome inserito nella printf, per questa condizione qui? Quindi ci sembra di avere ora la capacità espressiva di prendere input da un altro meccanismo, dalla cosiddetta linea di comando, anziché dover attendere fino a quando l'utente esegue il programma, e poi lui o lei chiederà usando qualcosa come stringa di get. 
+
+Così che cosa è questo? Argc, ancora una volta, è solo un numero intero, il numero di parole-- arguments-- che l'utente fornito al rapida, alla finestra terminale, compreso il nome del programma. Così il nostro ./argv0 è, di fatto, il nome del programma, o come ho eseguito il programma. 
+
+Che conta come una parola. Così argc sarebbe 1. Ma quando scrivo Stelios, o Andi, o Zamyla, o Maria, questo significa che il conteggio argomento è due. E così ora ci sono due parole passati in. 
+
+E notate, possiamo continuare questa logica. Se io in realtà dico qualcosa come Zamyla Chan, un nome completo, passando così tre argomenti in totale, ora si dice di nuovo il default, perché, naturalmente, 3 non è uguale 2. 
+
+E in questo modo, devo accesso tramite argv questo nuovo parametro che abbiamo potuto tecnicamente chiamare tutto ciò che vogliamo. Ma per convenzione, è argv e argc, rispettivamente. Argv, argomento vettore, è una specie di sinonimo di programmazione funzione in C chiamato un array. 
+
+Un array è un elenco di valori simili indietro, alla parte posteriore, alla schiena, alla schiena. In altre parole, se uno è proprio qui a RAM, il prossimo è proprio accanto ad esso, e proprio accanto ad esso. Non sono in tutto il luogo. E quest'ultimo scenario, in cui le cose sono dappertutto in memoria, può effettivamente essere una caratteristica potente. Ma torneremo a che, quando ci parlare di strutture di dati più elaborate. Per ora, un array è solo un pezzo di memoria contigua, ciascuno di cui elementi sono indietro, alla parte posteriore, alla schiena, alla parte posteriore, e generalmente dello stesso tipo. 
+
+Quindi, se ci pensate, da un Poco fa, che cosa è una stringa? Ebbene, una stringa, come Zamyla, Z-A-M-Y-L-A, è, tecnicamente, solo un array. Si tratta di un array di caratteri. 
+
+E così se davvero disegnare questo, come ho fatto in precedenza, come un pezzo di memoria, si scopre che ognuno di questi personaggi occupa un byte. E poi c'è quella speciale carattere sentinella, il backslash 0, o tutti gli otto bit 0, che delimita la fine della stringa. Quindi una stringa, si trasforma fuori, citare stringa unquote, è solo una serie di chara-- char essendo un tipo di dati effettivo. 
+
+E ora argv, meanwhile-- torniamo al programma. Argv, anche se si vede la parola stringa qui, non è una stringa stessa. Argv, argomento vettore, è un array di stringhe. 
+
+Così come si può avere una serie di caratteri, si può avere di più alto livello, un array di strings-- così, per esempio, quando ho scritto poco fa ./argv0 argv0, spazio Z-A-M-Y-L-A, ho sostenuto che argv aveva due stringhe in ./argv0 it--, e Z-A-M-Y-L-A. In altre parole, argc era 2. Perché? 
+
+Beh, in effetti, che cosa sta succedendo on è che ciascuna di queste stringhe è, naturalmente, un array di caratteri Come prima, ciascuna di cui caratteri occupa un byte. E non confondere il reale 0 nel nome del programma con il 0, il che significa che tutti i 80 bit. E Zamyla, nel frattempo, è ancora anche un array di caratteri. 
+
+Così, alla fine della giornata, è veramente sembra che questo sotto la cappa. Ma argv, per sua natura di come principale opere, mi permette di avvolgere tutto questo up in, se si vuole, una matrice più grande che, se poco più di semplificare ciò che l'immagine assomiglia e non abbastanza tirarla per scalare lassù, questa matrice è solo di dimensioni 2, la prima elemento che contiene una stringa, il secondo elemento di che contiene una stringa. E, a sua volta, se si tipo di ingrandire ogni di quelle stringhe, quello che vedi sotto il cofano è che ogni stringa è solo un array di caratteri. 
+
+Ora, così come con le stringhe, siamo stati in grado di ottenere l'accesso al carattere i-esimo in una stringa usando che la notazione parentesi quadra. Allo stesso modo, con gli array in generale, possiamo utilizzare la notazione parentesi quadra per ottenere in qualsiasi numero di stringhe in un array? Per esempio, mi permetta andare avanti e fare questo. 
+
+Lasciami andare avanti e creare argv1.c, che è un po 'diverso questa volta. Invece di controllare per argc2, Ho intenzione di fare, invece questo. Per int ottengo 0, I è meno di argc, mi plus plus, e poi stampare all'interno di questo, cento s, la nuova linea, e poi argv staffa i. 
+
+Quindi, in altre parole, non che fare con singoli caratteri per ora. Argv, come implicita da questi quadrato vuoto bretelle a destra del nome argv, significa argv è un array di stringhe. E argc è solo un int. 
+
+Questa linea qui, 6, è dicendo set ho uguale a 0. Contare tutta la strada fino a, ma non compresi, argc. E poi ad ogni iterazione, stampare una stringa. Cosa stringa? 
+
+La stringa i-esimo in argv. Così mentre prima ero utilizzando la parentesi quadra notazione per arrivare al esimo carattere di una stringa, ora Sto usando la notazione parentesi quadra per ottenere la stringa esimo in un array. Quindi è una specie di uno strato di sopra, concettualmente. 
+
+E così ciò che è pulito su questo programma di oggi, se compilo argv1, e poi fare ./argv1, e quindi digitare in qualcosa di simile a foo bar baz, che sono le tre parole predefinite che un informatico raggiunge per qualsiasi momento lui o lei ha bisogno di qualche parola segnaposto, e premere Invio, ciascuna di quelle parole, tra cui il nome del programma, che è in argv alla prima posizione, finisce per essere stampate una alla volta. E se cambio questo, e lo dico qualcosa come argv1 Zamyla Chan, otteniamo tutti e tre questi parole, che è argv0, argv1, argv2, perché in questo caso argc, il conteggio, è 3. 
+
+Ma ciò che è pulito è se si capisce che argv è solo un array di stringhe, e si capisce che una stringa è un array di caratteri, possiamo in realtà tipo di utilizzare questo Staffa notazione quadrata più volte scegliere una stringa, e scegliere un carattere all'interno della stringa, immersioni in profondo come segue. In questo esempio, lasciami andare avanti e chiamare questo argv2.c. E in questo caso, mi permetta di andare avanti e fare la following-- per int ottengo 0, i è inferiore argc, i Plus Inoltre, proprio come prima. Quindi, in altre parole-- e ora questo è sempre abbastanza complicata. Poi ho intenzione di dire iterare su stringhe in argv, come un commento a me stesso. E poi ho intenzione di avere un nidificato ciclo for, che probabilmente hanno fatto, o considerati facendo, in Scratch, dove Sto per dire che sono int-- Non intenzione di utilizzare i nuovo, perché non voglio ombra, o sorta di sovrascrivere il I esistente. 
+
+Io vado a, invece, dire j, perché questo è il mio andare a variabile dopo che io, quando sto solo cercando di contare semplici numeri. Per j ottiene 0-- e anche, n, sta per ottenere la lunghezza poppa della argv staffa I, purché j è minore m, j plus plus, effettuare le seguenti operazioni. Ed ecco la parte interessante. 
+
+Stampare un carattere e una nuova linea, collegare argv staffa i, j staffa. OK, quindi permettetemi di aggiungere alcuni commenti qui. Iterare su personaggi nella stringa corrente, stampa carattere j-esimo nella stringa i-esimo. Così ora, prendiamo in considerazione ciò che questi commenti significano. 
+
+Iterare le corde in argv-- quanti stringhe sono in argv, che è un array? Argc molti, quindi sto iterazione da i uguale a 0 fino a argc. Nel frattempo, il numero di caratteri sono nella stringa i-esimo in argv? 
+
+Ebbene, per ottenere quella risposta, Ho appena chiamo lunghezza della stringa sulla cura stringa corrente I A proposito, che è argv staffa i. E ho intenzione di memorizzare temporaneamente che valore di n, solo per scopi di caching, da ricordare che per l'efficienza. E poi ho intenzione inizializzare j a 0, andare avanti fino a quando j è minore di n, e ogni j iterazione incremento. 
+
+E poi qui, a il mio commento sulla linea 12, stampare un carattere, seguita da una nuova linea, staffa appositamente argv Io mi dà la stringa i-esima in argv-- così la prima parola, la seconda parola, la terza parola, qualunque cosa. E poi immersioni j in profondità, e ottiene me il carattere j-esima di quella parola. E così, in effetti, si può trattare argv come un multi-dimensionale, come bidimensionale, matrice, per cui ogni parola gentile di sguardi come questo nella vostra mente di occhio, e ogni personaggio è una specie di composto nel una colonna, se questo aiuta. 
+
+In realtà, quando si prendono in giro A parte questo, in futuro, settimane, che sta per essere un po ' più sofisticato di quello. Ma si può veramente pensare che, per ora, come appena questo bidimensionali matrice, in cui un livello di esso è tutte le stringhe. E poi se ci si immerge in profondità, si possono ottenere presso i singoli caratteri ivi utilizzando questa notazione qui. 
+
+Allora, qual è l'effetto netto? Lasciami andare avanti e rendere maledettamente argv2-- esso. Ho fatto un errore qui. Implicitamente dichiarando la funzione di stirling biblioteca. Quindi tutto questo tempo, è forse il caso che stiamo tipo di finitura esattamente dove siamo partiti. 
+
+Ho sbagliato, implicitamente dichiarando funzione di stirling biblioteca. OK, aspetta un attimo. Ricordo che, in particolare dal momento che è proprio qui. Ho bisogno di includere string.h in questa versione del programma. 
+
+Lasciami andare avanti e includo string.h, fermo restando che, andare avanti e ricompilare argv2. Ed ora, qui andiamo, fare argv2, Invio. E anche se è un po ' criptico a prima vista, notare che, in effetti, cosa vengono stampati sono argv2 dot. 
+
+Ma se digito qualche parola dopo la pronta, come argv2 Zamyla Chan, Invio, anche un po ' criptico a prima vista. Ma se scorrere indietro fino, ./argv2 Z-A-M-Y-L-A C-H-A-N. Così abbiamo ripetuti su ogni parola. E, a sua volta, ci siamo ripetuti su ogni personaggio all'interno di una parola. 
+
+Ora, dopo tutto questo, si rendono conto che non c'è un altro dettaglio che siamo stati genere di ignorare tutto questo tempo. Abbiamo solo preso in giro a parte ciò che ingressi di principali possono essere? Che dire di uscita del principale? 
+
+Tutto questo tempo, siamo stati semplicemente copiando e incollando la parola int di fronte al principale, se si può vedere on-line, a volte in modo non corretto nelle versioni più vecchie di C e compilatori, che si dice nulla, o niente del tutto. Ma, in effetti, per la versione di C che stiamo usando, C 11, o 2011, realizzare che dovrebbe essere int. E dovrebbe essere sia nulla o argc e argv qui. 
+
+Ma perché int main? Che cosa è in realtà tornando? Ebbene, si scopre tutto questo tempo, qualsiasi momento hai scritto un principale del programma è sempre il ritorno qualcosa. Ma si sta facendo in modo segreto. 
+
+Che qualcosa è un int, come la linea 5 suggerisce. Ma cosa int? Beh, c'è questo convenzione in programmazione, per cui se non ha andato storto e tutto va bene, programmi e funzioni generalmente return-- po counterintuitively-- 0. 0 significa generalmente va tutto bene. Quindi, anche se si pensa di come falso in molti contesti, in realtà significa generalmente una buona cosa 
+
+Nel frattempo, se un programma restituisce 1, o negativo 1 o 5, o negativo 42, o qualsiasi-0 non valore, che significa in genere che qualcosa è andato storto. In realtà, sul proprio Mac o PC, si potrebbe avere effettivamente visto un messaggio di errore, per cui dice qualcosa o altro, l'errore codice negativo 42, o il codice di errore 23, o qualcosa di simile. Questo numero è generalmente solo un suggerimento al programmatore, o la società che ha reso il software, cosa è andato storto e perché, in modo che possano guardare attraverso loro documentazione o il codice, e capire cosa il errore in realtà significa. Non è in genere utile per noi utenti finali. 
+
+Ma quando principali restituisce 0, tutto va bene. E se non si specifica quello principale dovrebbe restituire, sarà solo automaticamente restituire 0 per voi. Ma tornando qualcosa il resto è effettivamente utile. 
+
+In questo programma definitivo, mi permetta andare avanti e chiamare questo exit.c, e introdurre l'ultima di oggi argomenti, noti come un codice di errore. Lasciami andare avanti e includono la nostra file di familiari fino in alto, fanno int main. E questa volta, facciamolo int argc, argv stringa e con le mie staffe implicare che è nella matrice. E poi vorrei solo fare un controllo di integrità. Questa volta, se non lo fa argc uguale a 2, poi si sa che cosa? Dimenticalo. Sto per dire che, hey, l'utente, vi manca argomento della riga di comando n backslash. 
+
+E poi il gioco è fatto. Voglio uscire. Ho intenzione di preventivamente, e prematuramente in realtà, il ritorno qualcosa diverso dal numero 1. Il via al valore per il primo errore che può accadere è 1. Se avete qualche altro erroneo situazione che potrebbe verificarsi, si potrebbe dire di ritorno 2 o 3 tornare, o forse addirittura negativo 1 o negativo 2. 
+
+Questi sono solo i codici di uscita che sono, in generale, solo utili al programmatore, o società che è la spedizione del software. Ma il fatto che è Non 0 è ciò che è importante. Quindi, se in questo programma, voglio garantire che questo programma solo funziona se l'utente fornisce me con un numero di argomenti di due, il nome del programma e un certo altro parola, può valere tanto quanto segue, urlare l'utente con printf detto, manca argomento della riga di comando, ritornare 1. Che sarà solo subito uscire dal programma. 
+
+Solo se argc è uguale a 2 otterremo giù qui, a quel punto ho intenzione di dire, ciao cento s, backslash n, argv1. In altre parole, io sono Non andare dopo argv 0, che è solo il nome del programma. Voglio stampare ciao, virgola, la seconda parola che l'uomo digitato. E in questo caso sulla linea 13, tutto va bene. 
+
+So che è argc 2 logicamente da questo programma. Ho intenzione di andare avanti e restituire 0. Per inciso, tenere a mente che questo è vero in Scratch pure. 
+
+Logicamente, avrei potuto fare questo e incapsulare queste righe di codice in questa clausola altro qui. Ma questo è una sorta di inutilmente rientro il mio codice. E voglio fare eccellente chiaro che non importa cosa, Per impostazione predefinita, ciao qualcosa otterrà stampata, finché l'utente coopera. 
+
+Quindi è molto comune l'uso una condizione, solo un caso, di catturare qualche erronea situazione, e quindi uscire. E poi, così tutto è bene, non hanno un altro, ma basta avere il codice esterno che se, perché è equivalente in questo caso particolare, logicamente. Così sto tornando 0, solo per esplicitamente significare tutto va bene. 
+
+Se ho omesso il ritorno 0, sarebbe essere assunta automaticamente per me. Ma ora che sto tornando uno in almeno questo caso, Vado a, per buona misura e chiarezza, restituire 0 in questo caso. Così ora mi permetta di andare avanti e fare uscire, che è un segue perfetto per lasciare solo. 
+
+Ma fare uscire, e lasciami andare avanti e fare ./exit, Invio. E il programma zittirmi, manca argomento della riga di comando. OK, mi permetta di collaborare. 
+
+Lasciatemi invece fare ./exit, David, Enter. E ora si dice, ciao David. E che normalmente non vedere questo. 
+
+Ma si scopre che c'è un special modo in Linux per vedere effettivamente con quello che l'uscita del codice di un programma terminato. A volte in una grafica mondo come Mac OS o Windows, si vede solo questi numeri quando un messaggio di errore compare sullo schermo e il programmatore si dimostra che il numero. Ma se vogliamo vedere ciò che l'errore messaggio è, possiamo farlo qui-- così ./exit, Enter, stampa manca argomento della riga di comando. 
+
+Se ora faccio $ echo ?, che è ridicolmente criptico cercando. Ma $? è la formula magica che dice, hey, computer, dirmi che cosa il precedente codice di uscita del programma è stato. E mi ha colpito Invio. Vedo 1, perché è quello che ho ha detto la mia funzione principale di tornare. 
+
+Nel frattempo, se faccio ./exit David, e premere invio, vedo, ciao Davide. E se ora faccio $ echo ?, vedo ciao 0. E così questo in realtà sarà essere preziose informazioni nel contesto del debugger, non così tanto che, l'umano, si cura. Ma il debugger e altro programmi useremo questo semestre spesso guardare a quel numero, anche se è sorta di nascosto a meno che non si guarda per esso, a determinare se un programma di oppure no esecuzione era corretta o errata. 
+
+E così che ci porta a questo, alla fine della giornata. Abbiamo iniziato oggi, cercando in debugging, ed a sua volta al corso stesso, e quindi più interessante, tecnicamente sotto la cappa a ciò che le stringhe sono, che durano settimana abbiamo appena preso per scontato, e certamente li portò per scontato in Scratch. 
+
+Abbiamo poi visto come possiamo accedere singoli caratteri di una stringa, e poi di nuovo preso un livello superiore guardare le cose, guardando a come well-- se vogliamo ottenere a livello individuale elementi di una lista come la struttura, non possiamo farlo con più stringhe? E possiamo con gli argomenti della riga di comando. Ma questa immagine qui di soli scatole è dimostrativo di questa idea generale di un array, o un elenco, o di un vettore. E a seconda del contesto, tutte queste parole significare cose leggermente diverse. Quindi, in C, stiamo solo andando per parlare di un array. E un array è un pezzo della memoria, ciascuno dei quali è elementi sono contigui, di nuovo, to back, to back, to back. 
+
+E questi elementi sono, in generale, dello stesso tipo di dati, carattere, carattere, carattere, carattere, o string, string, string, string, o int, int, int, qualunque essa sia stiamo cercando di negozio. Ma alla fine della giornata, è quello che sembra concettualmente. Si sta prendendo la tua memoria o RAM del computer. E si sta carving fuori in scatole identiche dimensioni, tutte sono tornati, contro schiena, a di nuovo, per sostenere in questo modo. 
+
+E che cosa c'è di bello questa idea, e il fatto che possiamo esprimere valori in questo modo con il primo dei nostri strutture dati nella classe, ci consente di iniziare per risolvere problemi con il codice che è venuto in modo intuitivo in settimana 0. Vi ricorderete il telefono Esempio libro, dove abbiamo usato un divide et impera, o un algoritmo di ricerca binaria, per vagliare un intero mucchio di nomi e numeri. Ma abbiamo ipotizzato, ricordare, che tale libro di telefono è stato già ordinato, che qualcun altro aveva già figurato fuori-- data una lista di nomi e numbers-- come alfabetizzare loro. E ora che in C siamo, Anche, hanno la capacità per gettare le cose, non fisicamente in una rubrica telefonica ma praticamente in un computer la memoria, saremo in grado prossima settimana di introdurre di nuovo il primo questo-- delle nostre strutture di dati in un array-- ma ancora più importante, computer vero e proprio algoritmi di scienze applicate in codice, con il quale possiamo memorizzare i dati in strutture di questo tipo, e poi iniziare a manipolarla, e risolvere effettivamente problemi con esso, e di costruire in cima a quello, infine, programmi in C, in Python, in JavaScript, interrogazione di banche dati con SQL? 
+
+E vedremo che tutti questi idee diverse di blocco. Ma per ora, ricordare che la dominio che abbiamo introdotto oggi era questa cosa qui, e il mondo della crittografia. E tra i prossimi problemi che da soli risolverà è l'arte della crittografia, scrambling e de-scrambling informazioni, e cifratura e decifrare il testo, e assumendo infine che ora si sa che cosa è sotto il cofano in modo che quando si vede o si riceve un messaggio come questo, è te può decifrarlo. Tutto questo, e più la prossima volta. 
+
+[RIPRODUZIONE VIDEO] 
+
+-Mover Appena arrivato. Ho intenzione di andare a visitare il suo professore universitario. Sì. Ciao. Sei tu. Aspetta! David. Sto solo cercando di capire cosa ti è successo. Si prega, nulla potrebbe aiutare. Eri suo collegio compagno di stanza, non è vero? Tu eri lì con lui quando ha finito il progetto CS50? 
+
+[RIPRODUZIONE DI BRANI MUSICALI] 
+
+-Che Era CS50. 
+
+Amo questo posto. 
+
+-Mangia. Stiamo andando fuori mercato. 
+
+[FINE RIPRODUZIONE] 

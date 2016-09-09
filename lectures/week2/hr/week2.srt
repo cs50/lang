@@ -1,0 +1,10093 @@
+1
+00:00:00,000 --> 00:00:02,970
+>> [MUSIC SVIRA]
+
+2
+00:00:02,970 --> 00:00:14,355
+
+3
+00:00:14,355 --> 00:00:15,700
+>> DAVID J. Malan: U redu.
+
+4
+00:00:15,700 --> 00:00:18,832
+To je CS50 i to
+je početak tjedna 2.
+
+5
+00:00:18,832 --> 00:00:21,040
+A vi ćete se sjetiti da je preko
+u posljednjih nekoliko tjedana,
+
+6
+00:00:21,040 --> 00:00:24,490
+mi smo bili uvođenjem računala
+znanost i, zauzvrat, programiranje.
+
+7
+00:00:24,490 --> 00:00:27,640
+>> I počeli smo priču putem
+Blok, koji grafički jezik
+
+8
+00:00:27,640 --> 00:00:28,990
+iz MIT Media Laba.
+
+9
+00:00:28,990 --> 00:00:30,780
+I onda nedavno,
+prošli tjedan, jesmo li
+
+10
+00:00:30,780 --> 00:00:34,450
+uvesti higher-- A
+niže razine jezik poznat
+
+11
+00:00:34,450 --> 00:00:36,770
+kao C, nešto što je čisto tekstualnog.
+
+12
+00:00:36,770 --> 00:00:39,440
+I, doista, posljednji put smo
+istražiti u tom kontekstu
+
+13
+00:00:39,440 --> 00:00:40,450
+broj koncepata.
+
+14
+00:00:40,450 --> 00:00:43,010
+>> To je, podsjetimo, bio je vrlo
+Prvi program smo pogledali.
+
+15
+00:00:43,010 --> 00:00:45,710
+I ovaj program, jednostavno,
+ispisuje "Hello, World".
+
+16
+00:00:45,710 --> 00:00:47,730
+No, postoji toliko
+činilo magija događa.
+
+17
+00:00:47,730 --> 00:00:51,460
+Tu je ovaj #include
+s tim zagrade.
+
+18
+00:00:51,460 --> 00:00:52,170
+Postoji int.
+
+19
+00:00:52,170 --> 00:00:53,020
+Postoji (void).
+
+20
+00:00:53,020 --> 00:00:56,330
+Postoji zagrade, vitičastim zagradama,
+točkom sa zarezom, i tako mnogo više.
+
+21
+00:00:56,330 --> 00:00:58,480
+>> I tako, podsjetiti da je
+uveli smo Scratch
+
+22
+00:00:58,480 --> 00:01:02,110
+tako da bismo mogli, u idealnom slučaju, vidi prošlost
+da sintaksa, stvari koje stvarno ne
+
+23
+00:01:02,110 --> 00:01:04,590
+sve to intelektualno
+zanimljivo, ali rano
+
+24
+00:01:04,590 --> 00:01:07,700
+je, apsolutno, malo zeznuto
+omotati svoje mišljenje oko sebe.
+
+25
+00:01:07,700 --> 00:01:10,860
+I, doista, jedan od najčešćih
+stvari rano u programiranju klasi,
+
+26
+00:01:10,860 --> 00:01:13,443
+pogotovo za one manje
+udoban, je da se frustriran
+
+27
+00:01:13,443 --> 00:01:17,460
+i spotaknula se po određenom sintaktičkih
+pogreške, da ne spominjemo logičke pogreške.
+
+28
+00:01:17,460 --> 00:01:19,800
+I tako među našim ciljevima
+Danas, zapravo, hoće
+
+29
+00:01:19,800 --> 00:01:23,280
+biti da vas opremiti s nekim
+Tehnike rješavanja problema za koliko
+
+30
+00:01:23,280 --> 00:01:26,705
+kako bi se bolje sami rješavaju probleme
+u obliku pogrešaka.
+
+31
+00:01:26,705 --> 00:01:29,330
+A vi ćete se sjetiti, također, da je
+okruženje koje smo uveli
+
+32
+00:01:29,330 --> 00:01:31,780
+Posljednji put bio pozvan CS50 IDE.
+
+33
+00:01:31,780 --> 00:01:34,850
+Ovo je web-temeljen softver koji
+omogućuje programiranje u oblaku,
+
+34
+00:01:34,850 --> 00:01:38,450
+da tako kažemo, a imajući sve svoje
+datoteka zajedno, kao što smo ponovno će se danas.
+
+35
+00:01:38,450 --> 00:01:41,480
+A sjećam da smo
+revisited ove teme ovdje,
+
+36
+00:01:41,480 --> 00:01:44,480
+među njima i funkcije, i petlje, i
+varijable i Boolean izrazi,
+
+37
+00:01:44,480 --> 00:01:45,110
+i stanja.
+
+38
+00:01:45,110 --> 00:01:49,190
+A zapravo malo više da mi
+preveo iz svijeta nule
+
+39
+00:01:49,190 --> 00:01:50,800
+u svijet C.
+
+40
+00:01:50,800 --> 00:01:53,220
+>> No, temeljni zgrada
+blokovi, da tako kažemo,
+
+41
+00:01:53,220 --> 00:01:55,150
+su zaista uvijek isti prošlog tjedna.
+
+42
+00:01:55,150 --> 00:01:57,900
+U stvari, mi zapravo samo imali
+drugačiji puzzle komad, ako hoćete.
+
+43
+00:01:57,900 --> 00:02:00,300
+Umjesto da ljubičasta
+spasiti blok, mi umjesto
+
+44
+00:02:00,300 --> 00:02:02,940
+je printf, što je
+ova funkcija u C koji
+
+45
+00:02:02,940 --> 00:02:05,890
+Omogućuje ispis nešto
+i formatirajte ga na ekranu.
+
+46
+00:02:05,890 --> 00:02:07,950
+Uveli smo CS50
+Knjižnica, gdje vas
+
+47
+00:02:07,950 --> 00:02:11,420
+sada imamo na raspolaganju Vam get_char,
+i get_int i get_string,
+
+48
+00:02:11,420 --> 00:02:14,610
+i nekoliko drugih funkcija
+dobro, preko kojeg možete dobiti ulaz
+
+49
+00:02:14,610 --> 00:02:16,260
+od korisnikove tipkovnici.
+
+50
+00:02:16,260 --> 00:02:20,640
+I mi također uzeo pogledati stvari
+kao these- bool i char,
+
+51
+00:02:20,640 --> 00:02:22,490
+i dvostruko, plutaju,
+int, long_long niz.
+
+52
+00:02:22,490 --> 00:02:25,170
+A tu je još i druge vrste podataka u C
+
+53
+00:02:25,170 --> 00:02:28,560
+>> Drugim riječima, kada se izjasniti
+varijabla za pohranu neku vrijednost,
+
+54
+00:02:28,560 --> 00:02:32,600
+ili kada implementirati funkciju
+koji vraća neku vrijednost,
+
+55
+00:02:32,600 --> 00:02:35,290
+možete odrediti što
+vrsta vrijednosti koja je.
+
+56
+00:02:35,290 --> 00:02:37,310
+Je li to string, poput
+niz znakova?
+
+57
+00:02:37,310 --> 00:02:39,490
+Je li to broj, kao što je cijeli broj?
+
+58
+00:02:39,490 --> 00:02:41,390
+Je li to s pomičnim zarezom
+vrijednosti, ili slično?
+
+59
+00:02:41,390 --> 00:02:46,180
+Tako je u C, za razliku od nule, mi zapravo
+počeo navesti koje sve vrste podataka
+
+60
+00:02:46,180 --> 00:02:48,330
+smo se vraćaju ili korištenjem.
+
+61
+00:02:48,330 --> 00:02:51,910
+>> Ali, naravno, mi također naletio
+neke temeljne granice računarstva.
+
+62
+00:02:51,910 --> 00:02:54,100
+I posebno,
+taj jezik C, opoziv
+
+63
+00:02:54,100 --> 00:02:57,070
+da mi je pogledati
+broj preljeva, stvarnost
+
+64
+00:02:57,070 --> 00:03:00,460
+da, ako imate samo jedan
+konačna količina memorije
+
+65
+00:03:00,460 --> 00:03:04,600
+ili, točnije, konačan broj
+bitova, samo možete računati tako visoka.
+
+66
+00:03:04,600 --> 00:03:08,460
+I tako smo pogledali ovaj primjer ovdje
+pri čemu je brojač u zrakoplovu,,
+
+67
+00:03:08,460 --> 00:03:13,510
+Zapravo, ako se radi dovoljno dugo će
+prelijevati i dovesti u softveru
+
+68
+00:03:13,510 --> 00:03:15,560
+stvarni fizički potencijal pogreška.
+
+69
+00:03:15,560 --> 00:03:18,600
+>> Također smo promatrali pluta
+točka nepreciznosti, stvarnost
+
+70
+00:03:18,600 --> 00:03:22,280
+da samo s konačnim brojem
+bitova, da li je 32 ili 64,
+
+71
+00:03:22,280 --> 00:03:27,330
+možete odrediti samo toliko brojeva
+nakon decimalne točke, nakon čega
+
+72
+00:03:27,330 --> 00:03:29,110
+počinju da se neprecizan.
+
+73
+00:03:29,110 --> 00:03:32,360
+Tako, na primjer, jedna trećina u
+Svijet je ovdje, u našem ljudskom svijetu,
+
+74
+00:03:32,360 --> 00:03:35,360
+znamo samo beskonačan broj
+od 3s nakon decimalne točke.
+
+75
+00:03:35,360 --> 00:03:38,820
+No, računalo ne može nužno
+predstavlja beskonačan broj brojeva
+
+76
+00:03:38,820 --> 00:03:42,590
+ako samo dopustiti da neki
+konačna količina informacija.
+
+77
+00:03:42,590 --> 00:03:45,900
+>> Dakle, ne samo da smo vas opremiti
+s većom snagom u smislu
+
+78
+00:03:45,900 --> 00:03:49,280
+kako se može izraziti sebe na
+tipkovnica u smislu programiranja,
+
+79
+00:03:49,280 --> 00:03:51,430
+mi također ograničen ono
+što zapravo može učiniti.
+
+80
+00:03:51,430 --> 00:03:55,790
+I doista, bugovi i greške mogu
+proizlazi iz one vrste pitanja.
+
+81
+00:03:55,790 --> 00:03:59,900
+I doista, neke od tema danas
+će biti teme kao što su ispravljanje pogrešaka
+
+82
+00:03:59,900 --> 00:04:03,699
+i zapravo izgleda ispod haube
+kako stvari su uvedene prošlog tjedna
+
+83
+00:04:03,699 --> 00:04:05,490
+su zapravo provodi
+tako da bolje
+
+84
+00:04:05,490 --> 00:04:10,530
+razumjeti obje mogućnosti i
+ograničenja na jeziku kao što je C
+
+85
+00:04:10,530 --> 00:04:14,770
+>> A u stvari, mi ćemo ponovno oguliti slojeve
+od najjednostavnijih strukture podataka,
+
+86
+00:04:14,770 --> 00:04:17,756
+nešto što se zove niz, koji je
+Blok se događa nazvati "popis".
+
+87
+00:04:17,756 --> 00:04:19,589
+To je malo
+razlikuje u tom kontekstu.
+
+88
+00:04:19,589 --> 00:04:23,340
+A onda ćemo također predstaviti na jedan od
+Prvi od naših problema određenih područja
+
+89
+00:04:23,340 --> 00:04:26,790
+u CS50, svijet
+kriptografija, umjetnost remećenje
+
+90
+00:04:26,790 --> 00:04:29,650
+ili šifriranje podataka te
+da možete slati tajne poruke
+
+91
+00:04:29,650 --> 00:04:34,520
+i dekodiranje tajnih poruka
+između dvije osobe, A i B.
+
+92
+00:04:34,520 --> 00:04:37,490
+>> Dakle, prije nego što smo tranziciju
+u tom novom svijetu,
+
+93
+00:04:37,490 --> 00:04:42,059
+pokušajmo vas opremiti s nekim
+Tehnike kojima možete eliminirati
+
+94
+00:04:42,059 --> 00:04:43,850
+ili smanjivanje barem neke
+od frustracije
+
+95
+00:04:43,850 --> 00:04:46,630
+da ste vjerojatno naišli
+više samo u posljednjih tjedan dana.
+
+96
+00:04:46,630 --> 00:04:50,830
+Naime, pred vama su neki od such--
+vaši prvi problemi u C, a izgledi su,
+
+97
+00:04:50,830 --> 00:04:54,010
+Ako ste poput mene, prvi put
+pokušate tip iz programa,
+
+98
+00:04:54,010 --> 00:04:57,330
+čak i ako mislite logično
+Program je prilično jednostavan,
+
+99
+00:04:57,330 --> 00:05:01,200
+možda vrlo dobro udario u zid, a
+prevodilac neće surađivati.
+
+100
+00:05:01,200 --> 00:05:03,940
+Napraviti ili zveket ne ide
+zapravo učiniti vaš ponudu.
+
+101
+00:05:03,940 --> 00:05:05,450
+>> A zašto bi to moglo biti?
+
+102
+00:05:05,450 --> 00:05:07,950
+Pa, neka je pogledati,
+možda, jednostavan program.
+
+103
+00:05:07,950 --> 00:05:11,190
+Ja ću ići naprijed i spasiti ovo
+file namjerno zove buggy0.c,
+
+104
+00:05:11,190 --> 00:05:13,590
+jer ja to znam da
+biti pogrešno unaprijed.
+
+105
+00:05:13,590 --> 00:05:17,400
+Ali ne može shvatiti da ako se to
+je prvi ili drugi ili treći program
+
+106
+00:05:17,400 --> 00:05:18,830
+da sam zapravo čineći sebe.
+
+107
+00:05:18,830 --> 00:05:23,820
+Tako ću ići naprijed i
+upišite se, int glavni (prazninu).
+
+108
+00:05:23,820 --> 00:05:28,130
+I onda unutar mojih vitičastim zagradama,
+vrlo poznati ( "Hello, svijet-
+
+109
+00:05:28,130 --> 00:05:30,980
+Obrnuta kosa crta, n ") - i zarez.
+
+110
+00:05:30,980 --> 00:05:32,360
+>> Ja sam spremili datoteku.
+
+111
+00:05:32,360 --> 00:05:34,850
+Sada ću ići dolje
+na moj prozor terminala
+
+112
+00:05:34,850 --> 00:05:40,340
+i tip make buggy0, jer je, opet,
+naziv datoteke je danas buggy0.c.
+
+113
+00:05:40,340 --> 00:05:43,660
+Tako sam tip bi buggy0, Enter.
+
+114
+00:05:43,660 --> 00:05:48,200
+>> I, oh, bože, prisjetiti od zadnjeg puta
+da nema poruka o pogrešci je dobra stvar.
+
+115
+00:05:48,200 --> 00:05:49,740
+Dakle, nema izlaza je dobra stvar.
+
+116
+00:05:49,740 --> 00:05:52,920
+Ali ovdje moram jasno
+neki broj pogrešaka.
+
+117
+00:05:52,920 --> 00:05:56,470
+>> Dakle, prvi red izlaza
+nakon upisivanja bi buggy0, podsjetimo,
+
+118
+00:05:56,470 --> 00:05:59,540
+je zveket je prilično detaljne izlaz.
+
+119
+00:05:59,540 --> 00:06:02,067
+Ispod haube,
+CS50 IDE konfiguriran
+
+120
+00:06:02,067 --> 00:06:04,150
+koristiti hrpu
+opcije s ovim prevodilac
+
+121
+00:06:04,150 --> 00:06:05,941
+tako da se ne morate
+razmišljati o njima.
+
+122
+00:06:05,941 --> 00:06:08,840
+I to je sve što je prva linija
+znači da počinje s jeka.
+
+123
+00:06:08,840 --> 00:06:11,720
+>> Ali nakon toga, problemi
+početi da njihov izgled.
+
+124
+00:06:11,720 --> 00:06:17,390
+Buggy0.c na liniji 3, karaktera
+5, nalazi se velika, crvena pogreška.
+
+125
+00:06:17,390 --> 00:06:18,380
+Što je to?
+
+126
+00:06:18,380 --> 00:06:23,562
+Implicitno proglašenja funkcije knjižnica
+printf s tipa int (const char *,
+
+127
+00:06:23,562 --> 00:06:26,050
+...) [-Werror].
+
+128
+00:06:26,050 --> 00:06:28,379
+Mislim, to se vrlo brzo
+dobiva vrlo kompliciranih.
+
+129
+00:06:28,379 --> 00:06:30,170
+I svakako, na prvi
+pogled, ne bismo
+
+130
+00:06:30,170 --> 00:06:32,380
+očekuju vas razumjeti
+cjelokupnost te poruke.
+
+131
+00:06:32,380 --> 00:06:34,213
+I tako jedna od lekcija
+za danas ide
+
+132
+00:06:34,213 --> 00:06:36,919
+se pokušati uočiti
+uzoraka, ili slične stvari,
+
+133
+00:06:36,919 --> 00:06:38,960
+pogrešaka možete imati
+naišao u prošlosti.
+
+134
+00:06:38,960 --> 00:06:41,335
+Tako ćemo zafrkavati osim samo
+one riječi koje izgledaju poznato.
+
+135
+00:06:41,335 --> 00:06:44,290
+Velika, crvena greška je jasno
+simbol nečega što je krivo.
+
+136
+00:06:44,290 --> 00:06:47,940
+>> implicitno izjavljujući
+Biblioteka funkcija printf.
+
+137
+00:06:47,940 --> 00:06:51,680
+Pa čak i ako ja ne razumijem što
+implicitno izjavljuje funkcije knjižnica
+
+138
+00:06:51,680 --> 00:06:54,900
+znači, problem sigurno
+odnosi se na printf nekako.
+
+139
+00:06:54,900 --> 00:06:59,130
+A izvor tog problema
+ima veze s ga progla.
+
+140
+00:06:59,130 --> 00:07:02,440
+>> Progla funkcija
+spomena po prvi put.
+
+141
+00:07:02,440 --> 00:07:06,210
+I koristili smo terminologiju prošlog tjedna
+proglašavanja funkciju je prototip,
+
+142
+00:07:06,210 --> 00:07:11,860
+ili s jedne linije na vrhu svoje
+vlastite datoteke ili u tzv datoteku zaglavlja.
+
+143
+00:07:11,860 --> 00:07:15,300
+A u ono što datoteku učinili smo rekli
+prošlog tjedna da printf je citat,
+
+144
+00:07:15,300 --> 00:07:17,080
+citat, izjavio?
+
+145
+00:07:17,080 --> 00:07:20,950
+U onome što je datoteka njegov prototip?
+
+146
+00:07:20,950 --> 00:07:24,640
+>> Dakle, ako se sjećate, vrlo prva stvar koju sam
+upisali, gotovo svaki program prošle time--
+
+147
+00:07:24,640 --> 00:07:30,790
+i slučajno trenutak prije počela
+upisivanjem myself-- je to jedan here--
+
+148
+00:07:30,790 --> 00:07:38,630
+hash-- #include <stio-- za
+ulaz / output-- točka h I doista,
+
+149
+00:07:38,630 --> 00:07:41,860
+ako sam sada spremiti datoteku, idem
+ići naprijed i razbistriti zaslon,
+
+150
+00:07:41,860 --> 00:07:44,740
+što možete učiniti tako da upišete
+Vedro, ili možete zadržati kontrolu L,
+
+151
+00:07:44,740 --> 00:07:47,680
+samo očistiti prozor terminala
+samo kako bi se uklonili neki nered.
+
+152
+00:07:47,680 --> 00:07:51,370
+>> Ja ću ići naprijed i
+re-tipa make buggy0, Enter.
+
+153
+00:07:51,370 --> 00:07:53,790
+I voila, još uvijek se vidi da
+dugo naredba iz jeka,
+
+154
+00:07:53,790 --> 00:07:55,470
+ali nema poruka o pogrešci ovaj put.
+
+155
+00:07:55,470 --> 00:07:58,800
+I doista, ako ja to ./buggy0,
+baš kao i zadnji put,
+
+156
+00:07:58,800 --> 00:08:01,860
+gdje je točka znači to
+imenik, Slash samo znači,
+
+157
+00:08:01,860 --> 00:08:05,040
+Ovdje dolazi naziv programa i
+to ime je programa buggy0,
+
+158
+00:08:05,040 --> 00:08:07,340
+Ulaz: "Zdravo, svijet."
+
+159
+00:08:07,340 --> 00:08:09,440
+>> Sada, kako možete imati
+sakupljen ovo rješenje
+
+160
+00:08:09,440 --> 00:08:12,017
+bez nužno
+prepoznavanje što više riječi
+
+161
+00:08:12,017 --> 00:08:14,350
+kao što sam učinio, svakako, ima
+učinio toliko godina?
+
+162
+00:08:14,350 --> 00:08:18,720
+Pa, ostvariti po prvi problem
+set, mi vam predstaviti na naredbe
+
+163
+00:08:18,720 --> 00:08:21,175
+da CS50 vlastitog osoblja
+je napisao pod nazivom help50.
+
+164
+00:08:21,175 --> 00:08:24,300
+I doista, C radi specifikaciju
+problem postaviti kako koristiti ovu značajku.
+
+165
+00:08:24,300 --> 00:08:27,210
+>> Ali help50 je u suštini
+program koji CS50 osoblje
+
+166
+00:08:27,210 --> 00:08:30,850
+napisao da vam omogućuje da pokrenete
+naredba ili pokrenuti program,
+
+167
+00:08:30,850 --> 00:08:36,169
+a ako ne razumije njegova
+izlaz, da prođe svoj izlaz na help50,
+
+168
+00:08:36,169 --> 00:08:38,890
+nakon čega softver
+da osoblje toku je napisao
+
+169
+00:08:38,890 --> 00:08:42,429
+će izgledati na izlazu vašeg programa
+redak po redak, znak po znak.
+
+170
+00:08:42,429 --> 00:08:46,000
+I ako mi, osoblje, prepoznati
+Poruka o pogrešci je što imate,
+
+171
+00:08:46,000 --> 00:08:50,580
+ćemo pokušati isprovocirati sa nekim
+retorička pitanja, s nekim savjetima,
+
+172
+00:08:50,580 --> 00:08:54,890
+slično kao TF ili CA ili sebe
+će učiniti osobno u uredovno vrijeme.
+
+173
+00:08:54,890 --> 00:08:58,320
+>> Dakle, izgleda da help50 ako ne
+nužno prepoznati problem.
+
+174
+00:08:58,320 --> 00:09:00,790
+No, nemojte se oslanjati na njega
+previše kao štaka.
+
+175
+00:09:00,790 --> 00:09:03,990
+Dakako, pokušati razumjeti njegove
+izlaz, a zatim naučiti iz nje
+
+176
+00:09:03,990 --> 00:09:07,571
+tako da je samo jednom ili dva puta vi
+ikada pokrenuti help50 za određenu pogreške
+
+177
+00:09:07,571 --> 00:09:08,070
+poruka.
+
+178
+00:09:08,070 --> 00:09:10,660
+Nakon toga, trebali biste biti u
+Bolje se opremljen
+
+179
+00:09:10,660 --> 00:09:13,180
+shvatiti što je to zapravo.
+
+180
+00:09:13,180 --> 00:09:14,350
+>> Idemo napraviti jedan drugi ovdje.
+
+181
+00:09:14,350 --> 00:09:20,410
+Pusti me naprijed, a drugi
+file ćemo nazvati ovu buggy1.c.
+
+182
+00:09:20,410 --> 00:09:23,110
+I u ovoj datoteci sam
+ide na deliberately--
+
+183
+00:09:23,110 --> 00:09:26,330
+ali se pretvarati da ne znam
+razumjeti ono grešku sam napravio.
+
+184
+00:09:26,330 --> 00:09:31,420
+>> Ja ću ići naprijed i to učinimo
+#include, jer sam
+
+185
+00:09:31,420 --> 00:09:33,660
+saznao moj lekciju od maloprije.
+
+186
+00:09:33,660 --> 00:09:36,220
+Int main (void), kao i prije.
+
+187
+00:09:36,220 --> 00:09:40,880
+I onda se ovdje idem
+učiniti String s - get_string.
+
+188
+00:09:40,880 --> 00:09:43,770
+I sjećam od posljednjeg puta kada
+to znači, hej, računalo,
+
+189
+00:09:43,770 --> 00:09:48,280
+daj mi varijablu, nazovite to je i
+bi tip tu varijablu string
+
+190
+00:09:48,280 --> 00:09:50,150
+tako da mogu spremiti jednu ili više riječi u njemu.
+
+191
+00:09:50,150 --> 00:09:52,191
+>> A onda se na desnoj
+strana znaka jednakosti
+
+192
+00:09:52,191 --> 00:09:54,980
+je get_string, što je
+Funkcija u CS50 knjižnici
+
+193
+00:09:54,980 --> 00:09:55,980
+koji radi upravo to.
+
+194
+00:09:55,980 --> 00:09:59,740
+Ona dobiva funkciju, a zatim
+Ruke ga s desna na lijevo.
+
+195
+00:09:59,740 --> 00:10:02,670
+Dakle, ovaj znak jednakosti ne znači
+"Jednako" kao što smo mogli misliti u matematici.
+
+196
+00:10:02,670 --> 00:10:04,750
+To znači zadatak s desna na lijevo.
+
+197
+00:10:04,750 --> 00:10:09,640
+Dakle, to znači, uzeti string iz
+korisnik i pohraniti unutar sekunde.
+
+198
+00:10:09,640 --> 00:10:10,460
+>> Sada ćemo ga koristiti.
+
+199
+00:10:10,460 --> 00:10:13,820
+Pusti me naprijed i sada kao drugi
+linija, neka mi ići naprijed i reći "bok" -
+
+200
+00:10:13,820 --> 00:10:19,330
+nije "svijet", ali "hello,% S-
+koji je naš rezervirano mjesto, zarez s,
+
+201
+00:10:19,330 --> 00:10:22,030
+koja je naša varijabla,
+a onda je točka-zarez.
+
+202
+00:10:22,030 --> 00:10:26,070
+Dakle, ako nisam zeznuo previše
+ovdje, ovo izgleda kao ispravan kod.
+
+203
+00:10:26,070 --> 00:10:28,090
+>> I moji instinkti sad su ga sastaviti.
+
+204
+00:10:28,090 --> 00:10:30,400
+Datoteka naziva buggy1.c.
+
+205
+00:10:30,400 --> 00:10:33,770
+Tako ću učiniti make buggy1, Enter.
+
+206
+00:10:33,770 --> 00:10:36,377
+I prokleto-to, ako ne postoji
+čak i više grešaka nego prije.
+
+207
+00:10:36,377 --> 00:10:38,210
+Mislim, ima još
+poruke o pogreškama to bi
+
+208
+00:10:38,210 --> 00:10:40,400
+Čini od stvarnih linija u ovom programu.
+
+209
+00:10:40,400 --> 00:10:42,730
+>> Ali takeaway je ovdje,
+čak i ako ste osvaja
+
+210
+00:10:42,730 --> 00:10:45,040
+s dva ili tri ili
+Još četiri poruka o pogrešci,
+
+211
+00:10:45,040 --> 00:10:48,340
+usredotočiti uvijek na vrlo
+Prvi od tih poruka.
+
+212
+00:10:48,340 --> 00:10:52,220
+Gledajući na top-najviše jedan,
+pomicanje natrag kao treba.
+
+213
+00:10:52,220 --> 00:10:53,930
+Dakle, ovdje sam upisao make buggy1.
+
+214
+00:10:53,930 --> 00:10:55,700
+Evo da se zveket izlaz kao što se očekivalo.
+
+215
+00:10:55,700 --> 00:10:57,290
+>> I ovdje je prva crvena greška.
+
+216
+00:10:57,290 --> 00:11:02,370
+Korištenje neprijavljenog identifikatora
+string, jesam mislim standarde u?
+
+217
+00:11:02,370 --> 00:11:04,260
+Tako je standard u je
+zapravo nešto drugo.
+
+218
+00:11:04,260 --> 00:11:06,240
+To se odnosi na korisnikov
+tipkovnica, u suštini.
+
+219
+00:11:06,240 --> 00:11:08,080
+>> Ali to nije ono što sam mislio.
+
+220
+00:11:08,080 --> 00:11:11,770
+Mislio sam niz, a ja mislio get_string.
+
+221
+00:11:11,770 --> 00:11:16,200
+Dakle, što je to što sam
+zaboravio to učiniti ovaj put?
+
+222
+00:11:16,200 --> 00:11:20,230
+Ono što nedostaje u ovo doba?
+
+223
+00:11:20,230 --> 00:11:23,600
+Imam svoj #include,
+tako da imam pristup printf.
+
+224
+00:11:23,600 --> 00:11:26,090
+>> Ali što nisam
+pristup samo još?
+
+225
+00:11:26,090 --> 00:11:29,420
+Pa, baš kao i zadnji put,
+Moram reći prevodilac
+
+226
+00:11:29,420 --> 00:11:31,691
+Jeka što se ove funkcije su.
+
+227
+00:11:31,691 --> 00:11:33,940
+Get_string ne dolazi
+sa C i posebno, to
+
+228
+00:11:33,940 --> 00:11:38,160
+ne dolazi u
+zaglavlje datoteke,.
+
+229
+00:11:38,160 --> 00:11:40,770
+Ona umjesto toga dolazi u
+nešto osoblje napisao,
+
+230
+00:11:40,770 --> 00:11:44,176
+koji je drugačiji datoteka
+ime, ali podesno zove.
+
+231
+00:11:44,176 --> 00:11:46,990
+
+232
+00:11:46,990 --> 00:11:50,861
+>> Tako jednostavno dodajući da jednom redu
+od code-- opozivu od zadnjeg puta
+
+233
+00:11:50,861 --> 00:11:53,610
+da kad zveket radi, to će
+gledati na moj broj vrha do dna,
+
+234
+00:11:53,610 --> 00:11:54,193
+s lijeva na desno.
+
+235
+00:11:54,193 --> 00:11:57,200
+Bit će to primijetiti,
+oh, što želite.
+
+236
+00:11:57,200 --> 00:11:59,900
+Pusti me i da,
+gdje god je to na poslužitelju,
+
+237
+00:11:59,900 --> 00:12:03,090
+kopirati i zalijepiti ga, u suštini,
+na vrh vlastite datoteke
+
+238
+00:12:03,090 --> 00:12:06,820
+tako da je u ovom trenutku u priči,
+linija 1, ostatak programa
+
+239
+00:12:06,820 --> 00:12:11,651
+može, doista, koristiti bilo koji od funkcija
+u njemu, među njima get_string.
+
+240
+00:12:11,651 --> 00:12:13,650
+Zato ću ignorirati
+Ostatak od tih pogrešaka,
+
+241
+00:12:13,650 --> 00:12:17,190
+Zato što sam, doista, sumnjaju da je samo
+prvi je zapravo važno.
+
+242
+00:12:17,190 --> 00:12:20,780
+I ja ću ići naprijed i ponovno,
+nakon spremanja moj dosje bi buggy1.
+
+243
+00:12:20,780 --> 00:12:22,580
+I voila, to je posao.
+
+244
+00:12:22,580 --> 00:12:29,200
+A ako ja ./buggy1 i upišite u za
+Primjerice, Zamyla, sada će dobiti zdravo,
+
+245
+00:12:29,200 --> 00:12:32,000
+Zamyla, umjesto zdravo, svijet.
+
+246
+00:12:32,000 --> 00:12:32,550
+>> U redu.
+
+247
+00:12:32,550 --> 00:12:35,890
+Tako su ponijeti sa sobom ovdje onda su se,
+jedan, pokušati skupljati što više možete
+
+248
+00:12:35,890 --> 00:12:39,140
+od samo poruka o pogrešci, u potrazi
+na neke od prepoznatljivih riječi.
+
+249
+00:12:39,140 --> 00:12:43,070
+Blokiranje da koristite help50 po
+problem postaviti specifikaciju.
+
+250
+00:12:43,070 --> 00:12:46,500
+No, zabrana koja je, također, uvijek traže
+na gornjem pogreške samo barem
+
+251
+00:12:46,500 --> 00:12:50,051
+u početku, da se vidi što informacije
+to bi zapravo prinos.
+
+252
+00:12:50,051 --> 00:12:52,300
+No, ispostavilo se da postoji
+čak i više funkcionalnosti izgrađen
+
+253
+00:12:52,300 --> 00:12:55,030
+u CS50 knjižnice pomoći
+ti rano u semestru
+
+254
+00:12:55,030 --> 00:12:57,580
+i rano u programiranju
+shvatiti što se događa u krivu.
+
+255
+00:12:57,580 --> 00:12:59,840
+Tako ćemo napraviti još jedan primjer.
+
+256
+00:12:59,840 --> 00:13:04,350
+Idem nazvati ovu buggy2, koja je,
+opet će biti manjkav iz
+
+257
+00:13:04,350 --> 00:13:05,650
+od vrata, do dizajna.
+
+258
+00:13:05,650 --> 00:13:09,980
+>> I ja ću ići naprijed
+i to #include.
+
+259
+00:13:09,980 --> 00:13:12,580
+A onda ću to učiniti int glavni (prazninu).
+
+260
+00:13:12,580 --> 00:13:14,840
+A onda ću to učiniti for petlje.
+
+261
+00:13:14,840 --> 00:13:16,690
+Za (int i _ 0.
+
+262
+00:13:16,690 --> 00:13:18,750
+i manji od ili jednak 10.
+
+263
+00:13:18,750 --> 00:13:24,260
+i ++, a zatim u vitičastim zagradama, idem
+ispisati samo hashtag simbol ovdje
+
+264
+00:13:24,260 --> 00:13:25,920
+a nova linija karakter.
+
+265
+00:13:25,920 --> 00:13:29,220
+>> Dakle, moje namjere s tim
+Program je vrlo jednostavno
+
+266
+00:13:29,220 --> 00:13:33,150
+iteraciju 10 puta
+i na svakoj iteraciji
+
+267
+00:13:33,150 --> 00:13:35,260
+tog procesa svaki put
+kroz ciklus,
+
+268
+00:13:35,260 --> 00:13:37,660
+ispisati #oznake,
+s oznakom #, s oznakom #.
+
+269
+00:13:37,660 --> 00:13:40,480
+Jedan po retku, jer sam
+imaju novu liniju tamo.
+
+270
+00:13:40,480 --> 00:13:42,787
+I podsjetiti da je za
+petlje, na zadnjem week--
+
+271
+00:13:42,787 --> 00:13:44,620
+a vi ćete dobiti više
+upoznati sa sintaksom
+
+272
+00:13:44,620 --> 00:13:47,170
+koristeći ga s praksom
+Prije long-- to mi daje
+
+273
+00:13:47,170 --> 00:13:49,740
+varijabla Zvao sam i postavlja se na 0.
+
+274
+00:13:49,740 --> 00:13:52,650
+>> To povećava i na
+svaka iteracija za 1.
+
+275
+00:13:52,650 --> 00:13:54,940
+Tako sam ide na 1 do 2 do 3.
+
+276
+00:13:54,940 --> 00:13:57,690
+I onda ovo stanje u
+sredini između točkom sa zarezom
+
+277
+00:13:57,690 --> 00:14:03,010
+dobiva ček na svakoj iteraciji napraviti
+sigurni da smo još uvijek u dometu.
+
+278
+00:14:03,010 --> 00:14:06,830
+Dakle, želim ponoviti 10 puta, pa sam
+ima vrsta vrlo intuitivno samo
+
+279
+00:14:06,830 --> 00:14:09,070
+stavi 10 kao moja gornja granica postoji.
+
+280
+00:14:09,070 --> 00:14:14,310
+>> Pa ipak, kad sam pokrenuti ovaj, nakon što je
+sastavljanju ga s make buggy2--
+
+281
+00:14:14,310 --> 00:14:15,440
+i to ne sastaviti redu.
+
+282
+00:14:15,440 --> 00:14:17,980
+Pa ja nemam
+sintaktička pogreška ovaj put.
+
+283
+00:14:17,980 --> 00:14:20,940
+Pusti me naprijed sada
+i pokrenuti buggy2, Enter.
+
+284
+00:14:20,940 --> 00:14:22,620
+A sada pomaknite se prema gore.
+
+285
+00:14:22,620 --> 00:14:24,890
+I neka mi se poveća
+veličina prozora.
+
+286
+00:14:24,890 --> 00:14:33,720
+>> Čini mi se da ima 1, 2, 3,
+4, 5, 6, 7, 8, 9, 10, 11.
+
+287
+00:14:33,720 --> 00:14:38,891
+Dakle, tu je 11 #oznake, iako
+Jasno sam stavio 10 unutar te petlje.
+
+288
+00:14:38,891 --> 00:14:42,140
+Sada, neki od vas bi mogli vidjeti odmah
+što je pogreška, jer, doista, ovaj
+
+289
+00:14:42,140 --> 00:14:43,720
+nije jako teško greška napraviti.
+
+290
+00:14:43,720 --> 00:14:46,070
+No, to je vrlo često
+napravio vrlo rano.
+
+291
+00:14:46,070 --> 00:14:49,820
+>> Ono što želim naglasiti, međutim,
+je, kako bih mogao to shvatiti?
+
+292
+00:14:49,820 --> 00:14:52,300
+Pa, ispada da
+CS50 Knjižnica dolazi
+
+293
+00:14:52,300 --> 00:14:55,380
+s ne samo get_string i get_int
+i get_float i druge funkcije.
+
+294
+00:14:55,380 --> 00:14:59,980
+Također dolazi s posebnom funkcijom
+zove eprintf, ili greška printf.
+
+295
+00:14:59,980 --> 00:15:03,270
+I to postoji isključivo kako bi
+to malo jednostavnije za vas
+
+296
+00:15:03,270 --> 00:15:06,310
+kada pogrešaka koda samo
+ispisati poruku o grešci na zaslonu
+
+297
+00:15:06,310 --> 00:15:07,850
+i znam gdje je došao iz.
+
+298
+00:15:07,850 --> 00:15:11,000
+>> Tako, na primjer, jedna stvar koju bi mogao
+učiniti ovdje s ova funkcija učinimo
+
+299
+00:15:11,000 --> 00:15:20,230
+eprintf, a onda ću ići naprijed
+i reći da je sada% i, kosih crta, br.
+
+300
+00:15:20,230 --> 00:15:22,330
+I ja ću se priključiti vrijednosti i.
+
+301
+00:15:22,330 --> 00:15:25,400
+I do vrha, jer je to
+je u CS50 knjižnici
+
+302
+00:15:25,400 --> 00:15:27,580
+Idem samo naprijed
+a uključuju
+
+303
+00:15:27,580 --> 00:15:29,169
+tako da imam pristup ovoj mogućnosti.
+
+304
+00:15:29,169 --> 00:15:31,460
+Ali neka se uzeti u obzir ono linija
+9 je trebao biti događaj.
+
+305
+00:15:31,460 --> 00:15:32,670
+Idem obrisati ovaj na kraju.
+
+306
+00:15:32,670 --> 00:15:34,670
+To nema nikakve veze
+s mojim glavna cilja.
+
+307
+00:15:34,670 --> 00:15:39,090
+Ali eprintf, greška printf, samo se misli
+da mi daju neke dijagnostičke informacije.
+
+308
+00:15:39,090 --> 00:15:42,460
+Kad sam trčanje moj program, želim
+vidjeti na zaslonu privremeno
+
+309
+00:15:42,460 --> 00:15:44,550
+i samo da se razumijemo
+što se događa.
+
+310
+00:15:44,550 --> 00:15:47,330
+>> I doista, na svakom
+iteracija ovdje linije 9
+
+311
+00:15:47,330 --> 00:15:49,260
+Želim vidjeti, što je vrijednost od i?
+
+312
+00:15:49,260 --> 00:15:50,290
+Što je vrijednost od i?
+
+313
+00:15:50,290 --> 00:15:51,280
+Što je vrijednost od i?
+
+314
+00:15:51,280 --> 00:15:55,650
+I, nadam se, samo sam trebao
+vidi tu poruku, takođe, 10 puta.
+
+315
+00:15:55,650 --> 00:15:57,780
+>> Pa neka mi ići naprijed i
+rekompiliranje moj program,
+
+316
+00:15:57,780 --> 00:15:59,905
+što moram učiniti u bilo koje vrijeme
+I napraviti promjenu. ./buggy2.
+
+317
+00:15:59,905 --> 00:16:02,680
+
+318
+00:16:02,680 --> 00:16:03,640
+I now-- OK.
+
+319
+00:16:03,640 --> 00:16:04,820
+Postoji puno više događa.
+
+320
+00:16:04,820 --> 00:16:07,610
+Pa neka mi dođite u
+još veći prozor.
+
+321
+00:16:07,610 --> 00:16:10,190
+>> I vidjet ćete da je svaki od
+izrazi s oznakom # dalje ispisuje.
+
+322
+00:16:10,190 --> 00:16:15,270
+No, između svake od njih je sada ovo
+dijagnostički izlaz oblikovati na sljedeći način.
+
+323
+00:16:15,270 --> 00:16:17,960
+Ime moj program, ovdje je buggy2.
+
+324
+00:16:17,960 --> 00:16:20,432
+Ime datoteke je buggy2.c.
+
+325
+00:16:20,432 --> 00:16:24,080
+Broj linija od kojih
+ovo je tiskana je linija 9.
+
+326
+00:16:24,080 --> 00:16:27,500
+A onda na desnoj strani koji je
+Poruka o pogrešci da sam očekivao.
+
+327
+00:16:27,500 --> 00:16:30,701
+>> A što je lijepo o tome da
+sad ja ne moram nužno računati
+
+328
+00:16:30,701 --> 00:16:32,200
+u glavi ono što moj program radi.
+
+329
+00:16:32,200 --> 00:16:34,240
+Vidim da se na
+prva iteracija sam 0,
+
+330
+00:16:34,240 --> 00:16:39,420
+zatim 1, zatim 2, a zatim 3, te 4, tada
+5, zatim 6, a zatim 7, pa 8, pa 9, a zatim
+
+331
+00:16:39,420 --> 00:16:40,980
+10.
+
+332
+00:16:40,980 --> 00:16:42,050
+Pa čekaj malo.
+
+333
+00:16:42,050 --> 00:16:43,740
+Što se ovdje događa?
+
+334
+00:16:43,740 --> 00:16:48,190
+Ja još uvijek čini se da se računaju
+u skladu s namjenom do 10.
+
+335
+00:16:48,190 --> 00:16:50,550
+>> Ali odakle početi?
+
+336
+00:16:50,550 --> 00:16:53,240
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10,
+
+337
+00:16:53,240 --> 00:16:58,040
+Tako 0, 1, 2, 3, 4, 5, 6, 7,
+8, 9, 10-- 11. prst
+
+338
+00:16:58,040 --> 00:16:59,990
+indikativna problema.
+
+339
+00:16:59,990 --> 00:17:02,850
+Izgleda da sam broji
+netočno u mom petlji.
+
+340
+00:17:02,850 --> 00:17:06,599
+Umjesto da ide 10 iteracija,
+Ja sam početak na 0,
+
+341
+00:17:06,599 --> 00:17:09,550
+Ja sam završio na i do 10.
+
+342
+00:17:09,550 --> 00:17:12,030
+No, budući da, kao i računalo,
+Počinjem brojati na 0,
+
+343
+00:17:12,030 --> 00:17:15,250
+I treba brojati do
+do, ali ne i preko, 10.
+
+344
+00:17:15,250 --> 00:17:18,510
+>> I tako je popraviti, i na kraju
+shvatio ovdje je jedna od dvije stvari.
+
+345
+00:17:18,510 --> 00:17:22,430
+Ja bi vrlo jednostavno reći
+brojati do manje od 10.
+
+346
+00:17:22,430 --> 00:17:27,260
+Tako 0, 1, 2, 3, 4, 5, 6, 7, 8,
+9, koji je, doista, ispravan,
+
+347
+00:17:27,260 --> 00:17:28,900
+iako to zvuči malo krivo.
+
+348
+00:17:28,900 --> 00:17:35,070
+Ili sam mogao učiniti manje ili jednako
+do 9, sve dok sam start na 0.
+
+349
+00:17:35,070 --> 00:17:40,056
+Ili, ako ti stvarno ne sviđa, ti
+može računati kroz 10, ali start na 1.
+
+350
+00:17:40,056 --> 00:17:41,680
+Ali opet, to jednostavno nije to uobičajeno.
+
+351
+00:17:41,680 --> 00:17:43,977
+U programming-- iako
+ne toliko u Scratch--
+
+352
+00:17:43,977 --> 00:17:45,810
+ali u programiranju u
+C i drugim jezicima,
+
+353
+00:17:45,810 --> 00:17:47,670
+kao što su JavaScript i
+Python i drugima, to je
+
+354
+00:17:47,670 --> 00:17:49,880
+Samo vrlo uobičajena za
+naša rasprava o binarnom
+
+355
+00:17:49,880 --> 00:17:53,450
+samo početi odbrojavanje u
+Najmanji broj možete, što je 0.
+
+356
+00:17:53,450 --> 00:17:53,950
+U redu.
+
+357
+00:17:53,950 --> 00:17:55,160
+Dakle, to je eprintf.
+
+358
+00:17:55,160 --> 00:17:58,600
+I opet, sad kad sam shvatio moj
+problem, a ja ću se vratiti na 0
+
+359
+00:17:58,600 --> 00:18:01,470
+kroz manje od 10, idem
+otići i izbrisati eprintf.
+
+360
+00:18:01,470 --> 00:18:04,580
+>> To ne bi trebao biti tamo kad sam
+brod moj broj ili poslati moj broj
+
+361
+00:18:04,580 --> 00:18:05,800
+ili ga pokazati bilo kome drugome.
+
+362
+00:18:05,800 --> 00:18:07,980
+To je zapravo samo znači
+da se privremeno.
+
+363
+00:18:07,980 --> 00:18:11,650
+Ali sada sam fiksni to
+Poseban problem kao dobro.
+
+364
+00:18:11,650 --> 00:18:16,780
+>> Pa, neka je učiniti još jedan primjer ovdje
+da ću ščepati kako slijedi.
+
+365
+00:18:16,780 --> 00:18:22,850
+Ja ću ići naprijed i
+#include. 50 $
+
+366
+00:18:22,850 --> 00:18:25,580
+I ja ću ići naprijed
+i #include.
+
+367
+00:18:25,580 --> 00:18:29,030
+>> I ja ću spasiti
+Na ovu sliku kao buggy3.c.
+
+368
+00:18:29,030 --> 00:18:31,740
+I ja ću ići naprijed
+i proglasiti int glavni (prazninu).
+
+369
+00:18:31,740 --> 00:18:34,186
+I onda unutar tamo
+Ja ću učiniti int i _ -
+
+370
+00:18:34,186 --> 00:18:36,435
+Želim provesti program
+s get_negative_int.
+
+371
+00:18:36,435 --> 00:18:39,146
+
+372
+00:18:39,146 --> 00:18:40,770
+To nije funkcija koja postoji još.
+
+373
+00:18:40,770 --> 00:18:42,870
+Tako ćemo provesti
+to u samo jednom trenutku.
+
+374
+00:18:42,870 --> 00:18:45,541
+No, idemo vidjeti zašto
+to je buggy na prvom prolazu.
+
+375
+00:18:45,541 --> 00:18:47,290
+I jednom sam stečen
+int od korisnika,
+
+376
+00:18:47,290 --> 00:18:53,365
+Samo ću ispisati% i negativna
+broj, kosih crta, n, zarez, ja.
+
+377
+00:18:53,365 --> 00:18:55,240
+Drugim riječima, sve što
+želimo ovaj program za napraviti
+
+378
+00:18:55,240 --> 00:18:58,000
+se dobiti negativan int od
+korisnik, a zatim ispisati
+
+379
+00:18:58,000 --> 00:18:59,980
+da je takva i takva je negativna int.
+
+380
+00:18:59,980 --> 00:19:02,080
+>> Sada mi treba implementirati tu funkciju.
+
+381
+00:19:02,080 --> 00:19:05,740
+Pa kasnije u mojoj datoteci, ja ću ići
+naprijed i proglasiti funkciju pod nazivom
+
+382
+00:19:05,740 --> 00:19:10,670
+get_negative_int (void) - a mi ćemo
+vratiti na ono da je linija opet znači
+
+383
+00:19:10,670 --> 00:19:18,790
+u moment-- int n; do-- učiniti
+following-- printf n :.
+
+384
+00:19:18,790 --> 00:19:26,210
+A onda ću to učiniti n - get_int,
+i to učiniti dok je n veći od 0.
+
+385
+00:19:26,210 --> 00:19:28,310
+A onda se vrati n ;.
+
+386
+00:19:28,310 --> 00:19:31,730
+>> Dakle, postoji mnogo događa u
+to, ali nitko od kojih nismo
+
+387
+00:19:31,730 --> 00:19:33,710
+pogledajte prošli tjedan, barem nakratko.
+
+388
+00:19:33,710 --> 00:19:36,980
+Dakle, na liniji 10, ovdje sam proglašen
+Funkcija se zove get_negative_int,
+
+389
+00:19:36,980 --> 00:19:39,620
+a ja sam stavio (void), u
+zagrade, razlog je to
+
+390
+00:19:39,620 --> 00:19:40,950
+ne uzima ulaz.
+
+391
+00:19:40,950 --> 00:19:42,910
+Ja ne prolazi ništa
+na ovu funkciju.
+
+392
+00:19:42,910 --> 00:19:44,690
+Ja sam samo dobivanje nešto natrag od nje.
+
+393
+00:19:44,690 --> 00:19:47,270
+>> A što se nadam da
+vratiti cijeli broj.
+
+394
+00:19:47,270 --> 00:19:50,040
+Nema vrsta podataka u
+C zove negative_int.
+
+395
+00:19:50,040 --> 00:19:52,880
+To je samo int, tako to ide
+da se na nas kako bi bili sigurni
+
+396
+00:19:52,880 --> 00:19:55,340
+da je vrijednost koja je zapravo
+Vraćeno je ne samo int
+
+397
+00:19:55,340 --> 00:19:56,380
+ali je također negativan.
+
+398
+00:19:56,380 --> 00:20:02,150
+>> On line 12 Ja sam proglašenja varijablu
+zove n i što je tipa int.
+
+399
+00:20:02,150 --> 00:20:07,500
+A onda u redu 13 do 18 sam
+raditi nešto dok je nešto istinito.
+
+400
+00:20:07,500 --> 00:20:11,040
+Idem naprijed i tisak
+n je, debelog crijeva, te razmak
+
+401
+00:20:11,040 --> 00:20:12,800
+kao poticaj za korisnika.
+
+402
+00:20:12,800 --> 00:20:16,410
+>> Ja sam tada zove get_int i
+spremanje svoje tzv povratnu vrijednost
+
+403
+00:20:16,410 --> 00:20:18,130
+u tom promjenjivom n.
+
+404
+00:20:18,130 --> 00:20:22,600
+Ali ja ću nastaviti raditi
+to dok je n veći od 0 ° C.
+
+405
+00:20:22,600 --> 00:20:27,960
+Drugim riječima, ako korisnik mi daje
+int a taj broj je veći od 0,
+
+406
+00:20:27,960 --> 00:20:31,180
+ergo, pozitivna, idem
+samo držati reprompting korisniku,
+
+407
+00:20:31,180 --> 00:20:37,160
+držati reprompting, prisiljavajući ih da se
+surađivati ​​i dati mi negativan int.
+
+408
+00:20:37,160 --> 00:20:41,640
+>> A nakon nje je zapravo negative--
+Pretpostavljam korisniku konačno vrste -50,
+
+409
+00:20:41,640 --> 00:20:46,710
+onda je ovo while petlja se više ne vrijedi
+zato -50 nije veći od 0 ° C.
+
+410
+00:20:46,710 --> 00:20:51,140
+Tako smo pobjeći iz toga
+petlje logično i vratiti n.
+
+411
+00:20:51,140 --> 00:20:53,520
+>> No, postoji još jedna
+što moram učiniti.
+
+412
+00:20:53,520 --> 00:20:56,190
+A ja jednostavno to učiniti
+od kopiranja i lijepljenja
+
+413
+00:20:56,190 --> 00:20:58,540
+jedna linija koda na vrhu datoteke.
+
+414
+00:20:58,540 --> 00:21:01,630
+Moram naučiti zveket,
+ili obećanje da jeka,
+
+415
+00:21:01,630 --> 00:21:04,630
+izričito da ću,
+dapače, ići i provesti
+
+416
+00:21:04,630 --> 00:21:06,020
+ova funkcija get_negative_int.
+
+417
+00:21:06,020 --> 00:21:07,674
+To samo može biti niža u datoteci.
+
+418
+00:21:07,674 --> 00:21:09,840
+Opet, podsjetiti da jeka
+čita stvari vrha do dna,
+
+419
+00:21:09,840 --> 00:21:12,330
+s lijeva na desno, tako da ne mogu
+pozvati funkciju ako jeka
+
+420
+00:21:12,330 --> 00:21:15,330
+ne zna da će postojati.
+
+421
+00:21:15,330 --> 00:21:18,430
+>> Sada, nažalost, ovaj program,
+kao što neki od vas možda primijetili,
+
+422
+00:21:18,430 --> 00:21:19,590
+već je lud.
+
+423
+00:21:19,590 --> 00:21:21,400
+Dopustite mi ići naprijed i učiniti buggy3.
+
+424
+00:21:21,400 --> 00:21:26,904
+Ona sastavlja, tako da je moj problem je sada ne
+pogreška u sintaksa, poput tekstualne pogreške,
+
+425
+00:21:26,904 --> 00:21:29,570
+to je zapravo će biti logičan
+greška da imam namjerno
+
+426
+00:21:29,570 --> 00:21:32,450
+napravio kao priliku za
+korak kroz ono što se događa.
+
+427
+00:21:32,450 --> 00:21:35,540
+>> Idem samo naprijed
+sad i pokrenuti buggy3.
+
+428
+00:21:35,540 --> 00:21:37,490
+I ja ću otići
+naprijed i ne surađuju.
+
+429
+00:21:37,490 --> 00:21:39,494
+Idem mu dati broj 1.
+
+430
+00:21:39,494 --> 00:21:41,410
+To se nije svidjelo, pa
+to me opet upita.
+
+431
+00:21:41,410 --> 00:21:42,147
+>> Kako oko 2?
+
+432
+00:21:42,147 --> 00:21:43,021
+3?
+
+433
+00:21:43,021 --> 00:21:43,520
+50?
+
+434
+00:21:43,520 --> 00:21:44,740
+Nitko od onih koji rade.
+
+435
+00:21:44,740 --> 00:21:46,890
+Kako o -50?
+
+436
+00:21:46,890 --> 00:21:48,560
+A program izgleda kao da rade.
+
+437
+00:21:48,560 --> 00:21:49,970
+>> Dopustite mi da to probati još jednom.
+
+438
+00:21:49,970 --> 00:21:53,400
+Pokušat ću -1, čini se da rade.
+
+439
+00:21:53,400 --> 00:21:56,380
+Pokušat ću -2, izgleda kao da rade.
+
+440
+00:21:56,380 --> 00:21:59,640
+Pokušat ću 0.
+
+441
+00:21:59,640 --> 00:22:01,684
+Huh, to je netočno.
+
+442
+00:22:01,684 --> 00:22:03,350
+Sada smo se malo pedantan ovdje.
+
+443
+00:22:03,350 --> 00:22:07,090
+No, to je, doista, u slučaju da 0
+nije ni pozitivan, ni negativan.
+
+444
+00:22:07,090 --> 00:22:11,150
+I tako je činjenica da je moj program
+rekavši da 0 je negativan cijeli broj,
+
+445
+00:22:11,150 --> 00:22:12,820
+to nije tehnički ispravna.
+
+446
+00:22:12,820 --> 00:22:15,180
+>> Sada, zašto se to radi?
+
+447
+00:22:15,180 --> 00:22:16,270
+Pa, to bi moglo biti očito.
+
+448
+00:22:16,270 --> 00:22:18,110
+I, doista, program je
+trebao biti prilično jednostavan
+
+449
+00:22:18,110 --> 00:22:19,670
+tako da imamo nešto za istraživanje.
+
+450
+00:22:19,670 --> 00:22:25,870
+>> Ali neka je uvesti treću ispravljanje pogrešaka
+Tehnika se ovdje nazivaju debug50.
+
+451
+00:22:25,870 --> 00:22:27,750
+Dakle, ovo je program
+da smo upravo stvorili
+
+452
+00:22:27,750 --> 00:22:30,770
+ove godine pod nazivom debug50
+koji će vam omogućiti
+
+453
+00:22:30,770 --> 00:22:34,130
+koristiti ono što se zove ugrađeni
+grafički debugger u CS50 IDE.
+
+454
+00:22:34,130 --> 00:22:38,400
+I debugger je samo program koji
+Općenito omogućuje pokrenuti program
+
+455
+00:22:38,400 --> 00:22:44,050
+ali korak po korak po korak, linija
+po redak po redak, pauziranje, poking
+
+456
+00:22:44,050 --> 00:22:47,626
+okolo, gleda na varijabli, tako da
+program ne samo puhati prošlosti vas
+
+457
+00:22:47,626 --> 00:22:49,750
+i brzo ispisati nešto
+ili ne ispisati nešto.
+
+458
+00:22:49,750 --> 00:22:53,250
+To vam daje priliku, na
+ljudska brzina, u interakciji s njom.
+
+459
+00:22:53,250 --> 00:22:55,470
+>> I da to učinite,
+jednostavno učinite sljedeće.
+
+460
+00:22:55,470 --> 00:22:58,479
+Nakon sastavljanja koda,
+što sam već učinio, buggy3,
+
+461
+00:22:58,479 --> 00:23:00,020
+ići naprijed i pokrenuti debug50 ./buggy.
+
+462
+00:23:00,020 --> 00:23:03,460
+
+463
+00:23:03,460 --> 00:23:06,760
+Toliko kao help50 ima li pokrenuti
+help50 a zatim naredbu,
+
+464
+00:23:06,760 --> 00:23:10,120
+debug50 ima li pokrenuti debug50 i
+zatim naziv naredbe.
+
+465
+00:23:10,120 --> 00:23:14,440
+>> Sada gledajte što se događa na zaslonu,
+Na desnoj strani posebno.
+
+466
+00:23:14,440 --> 00:23:19,400
+Kad sam udario Run, sve od
+Nagli ova desna ploča
+
+467
+00:23:19,400 --> 00:23:20,419
+otvara na zaslonu.
+
+468
+00:23:20,419 --> 00:23:22,210
+I tu je mnogo događa
+na na prvi pogled.
+
+469
+00:23:22,210 --> 00:23:25,110
+No, tu nije previše
+više brinuti o još.
+
+470
+00:23:25,110 --> 00:23:28,570
+>> To pokazuje mi sve
+što se događa u mojoj programa
+
+471
+00:23:28,570 --> 00:23:31,130
+sada i preko njih
+Tipke do vrha je tada
+
+472
+00:23:31,130 --> 00:23:35,910
+dopuštajući mi da korak kroz moj broj
+u konačnici, korak po korak po korak.
+
+473
+00:23:35,910 --> 00:23:37,140
+Ali ne još.
+
+474
+00:23:37,140 --> 00:23:38,060
+Obavijest što se događa.
+
+475
+00:23:38,060 --> 00:23:40,600
+Na moj prozor terminala
+Ja sam se zatraži n.
+
+476
+00:23:40,600 --> 00:23:44,560
+I ja ću ići naprijed i
+surađuju ovaj put i unesite -1.
+
+477
+00:23:44,560 --> 00:23:48,770
+I mada je malo zagonetno, -1
+je negativan cijeli broj, kao što se očekivalo.
+
+478
+00:23:48,770 --> 00:23:52,020
+>> I onda dijete izašao s
+Status 0 GDBserver izlaska.
+
+479
+00:23:52,020 --> 00:23:55,180
+GDB, GNU Debugger, je naziv
+od temeljne softvera
+
+480
+00:23:55,180 --> 00:23:56,620
+koji implementira ovaj program za ispravljanje pogrešaka.
+
+481
+00:23:56,620 --> 00:24:00,500
+No, sve to zapravo znači, za ispravljanje pogrešaka
+ode jer je moj program za otkaz
+
+482
+00:24:00,500 --> 00:24:01,710
+i sve je dobro.
+
+483
+00:24:01,710 --> 00:24:06,020
+Ako želim da zaista ispravljanje moj program,
+Moram preventivno reći debug50,
+
+484
+00:24:06,020 --> 00:24:08,920
+gdje želim početi
+koračni kroz moj kod?
+
+485
+00:24:08,920 --> 00:24:11,750
+>> A možda je najjednostavniji način
+za to je kao što slijedi.
+
+486
+00:24:11,750 --> 00:24:15,300
+Ako sam lebdjeti iznad
+oluk mog urednika ovdje
+
+487
+00:24:15,300 --> 00:24:19,090
+tako da zapravo samo u sidebar ovdje
+lijevo od broja linije,
+
+488
+00:24:19,090 --> 00:24:21,870
+Uočite da ako sam samo kliknite
+Jednom sam stavio malu crvenu točku.
+
+489
+00:24:21,870 --> 00:24:24,460
+A da se malo crvena točka,
+kao znak stop, znači, hej,
+
+490
+00:24:24,460 --> 00:24:29,430
+debug50, izvršenje stanka mog koda
+tamo kad sam pokrenuti ovaj program.
+
+491
+00:24:29,430 --> 00:24:30,260
+>> Tako ćemo to učiniti.
+
+492
+00:24:30,260 --> 00:24:37,340
+Dopustite mi ići naprijed i pokrenuti svoj program
+opet s debug50 ./buggy3, Enter.
+
+493
+00:24:37,340 --> 00:24:40,110
+A sada, obavijesti, nešto
+drugačije nije dogodilo.
+
+494
+00:24:40,110 --> 00:24:42,440
+Nisam se zatraži
+još u svojoj terminalnoj prozoru
+
+495
+00:24:42,440 --> 00:24:45,430
+za bilo što, jer ja nemam
+stečen još tamo u svom programu.
+
+496
+00:24:45,430 --> 00:24:47,950
+Uočite da na liniji 8
+koji je sada označen,
+
+497
+00:24:47,950 --> 00:24:51,720
+a tu je malo strelica
+lijevi izreka, koju je zastao ovdje.
+
+498
+00:24:51,720 --> 00:24:55,030
+Ova linija koda, linija
+8, još nije izvršen.
+
+499
+00:24:55,030 --> 00:24:58,940
+>> A što je zanima, ako pogledam
+ovamo na desnoj strani,
+
+500
+00:24:58,940 --> 00:25:03,530
+primijetiti da je i lokalna
+varijabla, lokalni u smislu
+
+501
+00:25:03,530 --> 00:25:05,450
+da je u trenutnoj funkciji.
+
+502
+00:25:05,450 --> 00:25:08,920
+A njegova vrijednost, očito po defaultu,
+i vrsta povoljno, 0.
+
+503
+00:25:08,920 --> 00:25:10,260
+Ali nisam tip 0.
+
+504
+00:25:10,260 --> 00:25:13,410
+To se događa samo da bude njegova
+Zadana vrijednost u ovom trenutku.
+
+505
+00:25:13,410 --> 00:25:15,490
+>> Pa neka mi ići naprijed i to sada.
+
+506
+00:25:15,490 --> 00:25:18,680
+Pusti me naprijed i na
+gornji upravo ovdje, ja sam
+
+507
+00:25:18,680 --> 00:25:20,970
+ići naprijed i
+kliknite ovaj prvi simbol koji
+
+508
+00:25:20,970 --> 00:25:25,360
+znači korak više, što znači nemojte preskočiti
+, ali korak po toj liniji koda,
+
+509
+00:25:25,360 --> 00:25:27,770
+njezina izvršenja na putu.
+
+510
+00:25:27,770 --> 00:25:30,710
+>> A sada, primijetiti, moj
+brz je upravo promijenila.
+
+511
+00:25:30,710 --> 00:25:31,380
+Zašto je to?
+
+512
+00:25:31,380 --> 00:25:33,639
+Rekao sam debug50,
+pokrenuti ovu liniju koda.
+
+513
+00:25:33,639 --> 00:25:34,930
+Što to linija koda učiniti?
+
+514
+00:25:34,930 --> 00:25:35,960
+Traži me int.
+
+515
+00:25:35,960 --> 00:25:36,460
+U REDU.
+
+516
+00:25:36,460 --> 00:25:37,400
+Pusti me da surađuju.
+
+517
+00:25:37,400 --> 00:25:41,340
+Pusti me naprijed sada i unesite -1, Enter.
+
+518
+00:25:41,340 --> 00:25:42,920
+A sada primijetiti što se promijenilo.
+
+519
+00:25:42,920 --> 00:25:46,060
+Na desnoj strani,
+moja lokalna varijabla i
+
+520
+00:25:46,060 --> 00:25:48,200
+označen kao -1 sada.
+
+521
+00:25:48,200 --> 00:25:49,810
+I to je još uvijek tipa int.
+
+522
+00:25:49,810 --> 00:25:53,102
+>> I napomena, također, moja takozvana
+pozvati stog, gdje sam pauzu?
+
+523
+00:25:53,102 --> 00:25:54,810
+Mi ćemo govoriti više o
+ovaj u budućnosti.
+
+524
+00:25:54,810 --> 00:25:58,620
+Ali poziv stog samo na ono što
+funkcije su trenutno u pokretu.
+
+525
+00:25:58,620 --> 00:26:00,040
+Upravo sada je samo glavni.
+
+526
+00:26:00,040 --> 00:26:03,590
+I upravo sada jedina lokalna
+promjenjiva je i sa vrijednošću 1.
+
+527
+00:26:03,590 --> 00:26:09,840
+>> I kad sam konačno korak preko te linije
+ovdje, s tom istom ikonom na vrhu desno,
+
+528
+00:26:09,840 --> 00:26:11,410
+-1 Je negativan cijeli broj.
+
+529
+00:26:11,410 --> 00:26:13,580
+Sada je pauziranje tijekom tog kovrčavom braće.
+
+530
+00:26:13,580 --> 00:26:14,740
+Recimo neka to učini svojim stvar.
+
+531
+00:26:14,740 --> 00:26:17,300
+I korak po toj liniji, i voila.
+
+532
+00:26:17,300 --> 00:26:20,240
+>> Dakle, nije sve što je strašno
+rasvijetliti još,
+
+533
+00:26:20,240 --> 00:26:23,550
+ali to nije neka mi pauza
+I razmisliti logički
+
+534
+00:26:23,550 --> 00:26:24,870
+što ovaj program radi.
+
+535
+00:26:24,870 --> 00:26:26,890
+No, to nije bio pogrešan slučaj.
+
+536
+00:26:26,890 --> 00:26:28,510
+Neka je to opet na sljedeći način.
+
+537
+00:26:28,510 --> 00:26:31,340
+>> Idem ostaviti da Kontrolna točka
+na liniji 8, s crvenom točkom.
+
+538
+00:26:31,340 --> 00:26:32,830
+Idem repriza debug50.
+
+539
+00:26:32,830 --> 00:26:34,400
+To automatski je zastao ovdje.
+
+540
+00:26:34,400 --> 00:26:37,660
+No, ovaj put, umjesto
+koračni preko ove linije,
+
+541
+00:26:37,660 --> 00:26:42,290
+neka mi zapravo ide unutar
+get_negative_int i shvatiti,
+
+542
+00:26:42,290 --> 00:26:45,530
+zašto je to prihvaćanje 0 kao valjan odgovor?
+
+543
+00:26:45,530 --> 00:26:47,990
+>> Dakle, umjesto da kliknete korak preko.
+
+544
+00:26:47,990 --> 00:26:50,630
+Idem samo naprijed
+i kliknite korak u.
+
+545
+00:26:50,630 --> 00:26:54,030
+I primijetiti da je linija 8 to je
+Sada je istaknuo sada odjednom
+
+546
+00:26:54,030 --> 00:26:56,900
+postaje linija 17.
+
+547
+00:26:56,900 --> 00:26:59,947
+>> Sada, to ne znači da je za pronalaženje pogrešaka
+je preskočena linije 14 i 15 i 16.
+
+548
+00:26:59,947 --> 00:27:01,780
+To je samo nema ništa
+da vam pokazati tamo.
+
+549
+00:27:01,780 --> 00:27:04,050
+Oni su samo progla varijabli,
+A tu je riječ učiniti
+
+550
+00:27:04,050 --> 00:27:05,390
+a zatim otvorena vitičasta zagrada.
+
+551
+00:27:05,390 --> 00:27:09,227
+Jedina funkcionalna linija koja je
+sočan stvarno je ovaj ovdje, 17.
+
+552
+00:27:09,227 --> 00:27:11,060
+A to je gdje imamo
+Zastao automatski.
+
+553
+00:27:11,060 --> 00:27:13,870
+>> Pa printf ( "n.is:") ;, tako
+koja još nije dogodilo.
+
+554
+00:27:13,870 --> 00:27:18,250
+Dakle idemo naprijed i kliknite korak Over.
+
+555
+00:27:18,250 --> 00:27:20,326
+Sada mi je brz, doista,
+mijenja u ( "n").
+
+556
+00:27:20,326 --> 00:27:22,450
+Sada get_int, ja ne idem
+gnjaviti zakoračiti u,
+
+557
+00:27:22,450 --> 00:27:24,750
+jer je to funkcija bila
+izradio CS50 u knjižnici.
+
+558
+00:27:24,750 --> 00:27:25,750
+To je vjerojatno točno.
+
+559
+00:27:25,750 --> 00:27:28,440
+>> Tako ću ići naprijed i
+vrsta surađivati ​​tako da je davanje
+
+560
+00:27:28,440 --> 00:27:30,590
+int, ali ne i negativna int.
+
+561
+00:27:30,590 --> 00:27:32,870
+Pa neka mi ići naprijed i udario 0.
+
+562
+00:27:32,870 --> 00:27:39,460
+I što se sada događa ovdje
+kad sam se dolje na liniji 21?
+
+563
+00:27:39,460 --> 00:27:40,890
+Nisam opet ponovljena.
+
+564
+00:27:40,890 --> 00:27:43,320
+Ne čini se da se zaglavi u toj petlji.
+
+565
+00:27:43,320 --> 00:27:45,990
+Drugim riječima, ova žuta
+Bar ne zadržati ide okolo,
+
+566
+00:27:45,990 --> 00:27:47,130
+i oko i okolo.
+
+567
+00:27:47,130 --> 00:27:48,340
+>> Sada, zašto je to tako?
+
+568
+00:27:48,340 --> 00:27:49,920
+Pa, n, što je N upravo sada?
+
+569
+00:27:49,920 --> 00:27:53,280
+Ja mogu gledati na lokalnoj
+varijable u ispravljanje pogrešaka.
+
+570
+00:27:53,280 --> 00:27:53,816
+nje 0.
+
+571
+00:27:53,816 --> 00:27:55,190
+U redu, što je bilo moje stanje?
+
+572
+00:27:55,190 --> 00:27:58,700
+>> 20-- linija 20 je, dobro,
+0 je veći od 0 ° C.
+
+573
+00:27:58,700 --> 00:27:59,500
+To nije istina.
+
+574
+00:27:59,500 --> 00:28:01,020
+0 nije veći od 0.
+
+575
+00:28:01,020 --> 00:28:02,820
+I tako sam izbio iz ovoga.
+
+576
+00:28:02,820 --> 00:28:06,370
+>> I to je razlog zašto on line
+21, ako sam zapravo i dalje,
+
+577
+00:28:06,370 --> 00:28:10,370
+Idem se vratiti 0, čak
+iako sam trebao odbiti 0
+
+578
+00:28:10,370 --> 00:28:12,484
+što zapravo nije bio negativan.
+
+579
+00:28:12,484 --> 00:28:14,650
+Pa sad, ne znam stvarno ni
+brigu o ispravljanje pogrešaka.
+
+580
+00:28:14,650 --> 00:28:16,900
+Got to, ne trebaju
+znam što još se događa.
+
+581
+00:28:16,900 --> 00:28:19,233
+>> Tako ću ići naprijed i
+jednostavno kliknite gumb za reprodukciju,
+
+582
+00:28:19,233 --> 00:28:20,240
+i neka ovo završiti.
+
+583
+00:28:20,240 --> 00:28:23,440
+Sada sam shvatio da je moj
+bug je očito na liniji 20.
+
+584
+00:28:23,440 --> 00:28:25,160
+To je moja logička pogreška.
+
+585
+00:28:25,160 --> 00:28:28,100
+>> I ono što želim
+učiniti da se to promijeni?
+
+586
+00:28:28,100 --> 00:28:32,500
+Ako je problem je u tome što ja nisam
+uhvatiti 0, to je samo logička pogreška.
+
+587
+00:28:32,500 --> 00:28:35,910
+I ja mogu reći, dok je n
+veći ili jednak 0,
+
+588
+00:28:35,910 --> 00:28:38,330
+držati i opet je navelo korisniku.
+
+589
+00:28:38,330 --> 00:28:41,050
+>> Dakle, opet, jednostavno pogreška, možda
+čak i očito kad si me vidio
+
+590
+00:28:41,050 --> 00:28:42,410
+pisati prije samo nekoliko minuta.
+
+591
+00:28:42,410 --> 00:28:44,570
+Ali takeaway ovdje
+je da se uz ispravljanje 50,
+
+592
+00:28:44,570 --> 00:28:46,850
+i ispravljanje pogrešaka
+Softver općenitije,
+
+593
+00:28:46,850 --> 00:28:51,370
+Imate li ovaj novi pronašao snage na
+hodati kroz svoj vlastiti kod, izgleda
+
+594
+00:28:51,370 --> 00:28:55,590
+putem tog desnoj ploči ono
+varijable vrijednosti.
+
+595
+00:28:55,590 --> 00:28:57,700
+Tako da to ne mora nužno
+morati koristiti nešto
+
+596
+00:28:57,700 --> 00:29:00,630
+kao da eprintf ispisati te vrijednosti.
+
+597
+00:29:00,630 --> 00:29:04,430
+Vi zapravo možete ih vidjeti
+vizualno na ekranu.
+
+598
+00:29:04,430 --> 00:29:08,920
+>> Sada, iza toga, to je vrijedno napomenuti
+da postoji još jedna tehnika koja je
+
+599
+00:29:08,920 --> 00:29:09,890
+zapravo super čest.
+
+600
+00:29:09,890 --> 00:29:13,120
+A možda se pitate zašto je to malo
+tip ovdje je sjedio na pozornici.
+
+601
+00:29:13,120 --> 00:29:16,490
+Tako da je to tehnika, općenito
+poznat kao gumene patke za ispravljanje pogrešaka,
+
+602
+00:29:16,490 --> 00:29:18,786
+što zapravo je samo
+dokaz tome
+
+603
+00:29:18,786 --> 00:29:20,660
+koji se često kada programera
+su pisanje koda,
+
+604
+00:29:20,660 --> 00:29:22,650
+oni nisu nužno
+suradnju s drugima,
+
+605
+00:29:22,650 --> 00:29:24,030
+ili rade u zajedničkom okruženju.
+
+606
+00:29:24,030 --> 00:29:25,050
+>> Oni su na neki način kod kuće.
+
+607
+00:29:25,050 --> 00:29:25,910
+Možda je kasno u noć.
+
+608
+00:29:25,910 --> 00:29:28,190
+Pokušavaju slici
+iz nekog buga u svom kodu.
+
+609
+00:29:28,190 --> 00:29:29,330
+I oni jednostavno ne vide.
+
+610
+00:29:29,330 --> 00:29:30,329
+>> I nema cimer.
+
+611
+00:29:30,329 --> 00:29:31,250
+Nema TF.
+
+612
+00:29:31,250 --> 00:29:32,680
+Nema CA okolo.
+
+613
+00:29:32,680 --> 00:29:36,440
+Svi oni imaju na polici
+je ovaj mali gumeni ljubak.
+
+614
+00:29:36,440 --> 00:29:39,030
+>> I tako gumena patka za ispravljanje pogrešaka
+samo je ovaj poziv
+
+615
+00:29:39,030 --> 00:29:42,780
+misliti na nešto što je blesav
+jer to kao pravi stvorenje,
+
+616
+00:29:42,780 --> 00:29:46,940
+a zapravo prošetati kodu
+usmeno na ovaj neživog objekta.
+
+617
+00:29:46,940 --> 00:29:49,230
+Tako, na primjer, ako
+ovo je moj primjer here--
+
+618
+00:29:49,230 --> 00:29:52,470
+a podsjećaju da je ranije
+problem je bio u tome,
+
+619
+00:29:52,470 --> 00:29:58,140
+ako sam izbrisati taj prvi redak koda,
+i ja ići naprijed i učiniti lud 0 opet,
+
+620
+00:29:58,140 --> 00:30:01,220
+sjetiti da sam to
+poruke o pogreškama ovdje.
+
+621
+00:30:01,220 --> 00:30:05,997
+Tako je ideja ovdje, smiješan iako sam
+osjećaju u ovom trenutku to je javno,
+
+622
+00:30:05,997 --> 00:30:06,580
+je da je greška.
+
+623
+00:30:06,580 --> 00:30:10,910
+>> OK, moj problem je u tome što imam
+implicitno proglasio funkciju knjižnica.
+
+624
+00:30:10,910 --> 00:30:12,610
+I to biblioteka funkcija printf.
+
+625
+00:30:12,610 --> 00:30:15,290
+Declare-- OK, proglasiti
+podsjeća me prototipa.
+
+626
+00:30:15,290 --> 00:30:18,930
+>> To znači da je potrebno da se zapravo
+reci prevodilac unaprijed što
+
+627
+00:30:18,930 --> 00:30:19,980
+funkcija izgleda.
+
+628
+00:30:19,980 --> 00:30:20,930
+Pričekaj minutu.
+
+629
+00:30:20,930 --> 00:30:23,580
+Nisam imao standardnu ​​io.h.
+
+630
+00:30:23,580 --> 00:30:24,530
+Hvala vam puno.
+
+631
+00:30:24,530 --> 00:30:27,330
+>> Dakle, samo ovaj proces of-- vas
+ne moraju zapravo imaju patku.
+
+632
+00:30:27,330 --> 00:30:29,819
+No, ta ideja o hodanja
+sebe kroz svoj vlastiti kod
+
+633
+00:30:29,819 --> 00:30:31,610
+tako da čak i čuti
+sebe, tako da
+
+634
+00:30:31,610 --> 00:30:35,620
+ostvariti propuste u svoj vlastiti
+primjedbe, općenito ideja.
+
+635
+00:30:35,620 --> 00:30:38,910
+>> I, možda više logično, ne tako
+puno s tom jednom, ali više uključeni
+
+636
+00:30:38,910 --> 00:30:44,220
+Primjer smo upravo učinili u buggy 3.c,
+možda prošetati se kroz njega
+
+637
+00:30:44,220 --> 00:30:45,310
+kako slijedi.
+
+638
+00:30:45,310 --> 00:30:49,190
+Dakle, sve u redu, gumeni
+ljubak, DDB, ako hoćete.
+
+639
+00:30:49,190 --> 00:30:52,350
+Ovdje imamo u svojoj glavnoj funkciji,
+Zovem dobili negativan int.
+
+640
+00:30:52,350 --> 00:30:54,660
+>> I ja sam uzimajući vrijednost povratka.
+
+641
+00:30:54,660 --> 00:31:00,410
+Ja sam spremiti na lijevoj strani
+na liniji 8 u varijablu nazvao sam.
+
+642
+00:31:00,410 --> 00:31:02,380
+U redu, ali čekaj, kako je
+kako dobiti tu vrijednost?
+
+643
+00:31:02,380 --> 00:31:04,130
+Pusti me, pogledajte funkciju u skladu 12.
+
+644
+00:31:04,130 --> 00:31:05,760
+>> U skladu 12, moramo dobiti negativne int.
+
+645
+00:31:05,760 --> 00:31:08,190
+Ne poduzimati nikakve ulaza,
+ne vraća int, OK.
+
+646
+00:31:08,190 --> 00:31:10,929
+Izjavljujem on line 14 varijabla n.
+
+647
+00:31:10,929 --> 00:31:12,220
+To će pohraniti cijeli broj.
+
+648
+00:31:12,220 --> 00:31:13,760
+To je ono što želim.
+
+649
+00:31:13,760 --> 00:31:18,480
+>> Dakle, učinite nešto od sljedećeg, a n is-- neka
+mi poništiti ono što je popravak sam već napravio.
+
+650
+00:31:18,480 --> 00:31:22,710
+Dakle, dok je n veći od
+0, ispisati n je, u redu.
+
+651
+00:31:22,710 --> 00:31:25,170
+A onda zvati se int pohranjena u n.
+
+652
+00:31:25,170 --> 00:31:30,160
+A onda provjeriti da li je n 0,
+n not-- tu je.
+
+653
+00:31:30,160 --> 00:31:31,910
+Dakle, opet, ne
+potreban stvarni patka.
+
+654
+00:31:31,910 --> 00:31:35,650
+No, samo se u šetnji
+Vaš broj kao intelektualni vježbe
+
+655
+00:31:35,650 --> 00:31:37,720
+često će vam pomoći
+shvatiti što se događa,
+
+656
+00:31:37,720 --> 00:31:41,170
+za razliku od samo radi nešto
+ovako, bulji u ekran,
+
+657
+00:31:41,170 --> 00:31:43,720
+a ne govori se kroz
+ona koja iskreno nije
+
+658
+00:31:43,720 --> 00:31:46,270
+gotovo kao djelotvorna tehnika.
+
+659
+00:31:46,270 --> 00:31:48,620
+Tako da ste ga, A
+broj različitih tehnika
+
+660
+00:31:48,620 --> 00:31:52,102
+za stvarno ispravljanje pogrešaka kod
+i prigovora, od kojih su svi
+
+661
+00:31:52,102 --> 00:31:54,810
+bi trebao biti alat u svom alat
+tako da niste kasno u noć,
+
+662
+00:31:54,810 --> 00:31:57,660
+pogotovo, ti si u blagovaonom
+dvorane, ili u radno vrijeme,
+
+663
+00:31:57,660 --> 00:32:00,368
+lupanje glavom o
+zid, pokušavajući riješiti neki problem.
+
+664
+00:32:00,368 --> 00:32:02,020
+Shvatite da postoje softverske alate.
+
+665
+00:32:02,020 --> 00:32:03,720
+Postoje gumena patkica alata.
+
+666
+00:32:03,720 --> 00:32:09,630
+I tu je cijeli osoblje
+podržavaju čekanja pružiti ruku.
+
+667
+00:32:09,630 --> 00:32:13,120
+>> Tako sada, riječ o problemu
+setovi, i na ono što smo vam u nadi
+
+668
+00:32:13,120 --> 00:32:15,620
+dobiti od njih, i kako
+idemo o ocjenjivanju.
+
+669
+00:32:15,620 --> 00:32:17,680
+Po toku je nastavni plan i program,
+CS50 je problematična seta
+
+670
+00:32:17,680 --> 00:32:22,320
+se procjenjuju na četiri osnovne osi, tako da
+da speak-- opseg, točnost, projektiranje,
+
+671
+00:32:22,320 --> 00:32:23,060
+i stil.
+
+672
+00:32:23,060 --> 00:32:25,910
+I opseg upravo odnosi na to koliko
+u kom ste ugriza off?
+
+673
+00:32:25,910 --> 00:32:28,080
+Koliko problema ste pokušali?
+
+674
+00:32:28,080 --> 00:32:30,110
+Koja razina napora
+ste manifestira?
+
+675
+00:32:30,110 --> 00:32:35,750
+>> Ispravnost je li program rada kao
+to je trebao po CS50 specifikaciji
+
+676
+00:32:35,750 --> 00:32:38,640
+kada dati određene inpute
+ili neki izlazi vraća?
+
+677
+00:32:38,640 --> 00:32:41,130
+Dizajn je najviše subjektivno od njih.
+
+678
+00:32:41,130 --> 00:32:43,360
+I to je onaj koji će
+uzeti najduže za naučiti
+
+679
+00:32:43,360 --> 00:32:47,220
+a najduže poučavati u
+utoliko što se svodi na,
+
+680
+00:32:47,220 --> 00:32:49,530
+koliko dobro napisana je tvoj broj?
+
+681
+00:32:49,530 --> 00:32:52,920
+>> To je jedna stvar da se samo ispisati ispravan
+izlazi ili se vratiti prave vrijednosti.
+
+682
+00:32:52,920 --> 00:32:55,400
+Ali to radiš kao
+učinkovitije moguće?
+
+683
+00:32:55,400 --> 00:32:58,210
+To radiš podjelu
+i osvojiti ili binarna
+
+684
+00:32:58,210 --> 00:33:01,500
+Traženje kao što ćemo uskoro vidjeti da smo učinili
+prije dva tjedna s telefonskog imenika?
+
+685
+00:33:01,500 --> 00:33:04,670
+Postoje bolji načini da se riješi
+Problem nego što trenutno imamo ovdje?
+
+686
+00:33:04,670 --> 00:33:06,380
+To je prilika za bolji dizajn.
+
+687
+00:33:06,380 --> 00:33:08,530
+>> I onda style-- kako
+prilično je tvoj broj?
+
+688
+00:33:08,530 --> 00:33:12,370
+Primijetit ćete da sam prilično
+posebno o uvlačenje moj broj,
+
+689
+00:33:12,370 --> 00:33:15,300
+i da se moje varijable
+razumno ime. n,
+
+690
+00:33:15,300 --> 00:33:19,660
+a kratko je dobro ime za
+broj, ja za brojanje cijeli broj,
+
+691
+00:33:19,660 --> 00:33:20,727
+a za niz.
+
+692
+00:33:20,727 --> 00:33:22,560
+I mi možemo imati više
+varijabla imena stilu.
+
+693
+00:33:22,560 --> 00:33:25,500
+Stil je samo koliko je dobra
+vaša šifra izgleda?
+
+694
+00:33:25,500 --> 00:33:26,600
+A kako čitati je to?
+
+695
+00:33:26,600 --> 00:33:29,650
+>> A tijekom vremena, što je vaš TAS
+i TFS će učiniti u tijeku
+
+696
+00:33:29,650 --> 00:33:31,870
+je pružiti vam da
+vrsta kvalitativne povratne informacije
+
+697
+00:33:31,870 --> 00:33:34,330
+tako da ćete dobiti bolje
+na tim različitim aspektima.
+
+698
+00:33:34,330 --> 00:33:37,510
+I u smislu kako smo
+procijeniti svaki od tih osi,
+
+699
+00:33:37,510 --> 00:33:40,080
+to je obično sa vrlo malo
+kante, tako da, u pravilu,
+
+700
+00:33:40,080 --> 00:33:41,680
+dobiti osjećaj koliko dobro radite.
+
+701
+00:33:41,680 --> 00:33:45,680
+I doista, ako primite rezultat na
+bilo koji od tih axes-- ispravnost, dizajn
+
+702
+00:33:45,680 --> 00:33:49,659
+i stil especially-- taj broj
+općenito će biti između 1 i 5 ° C.
+
+703
+00:33:49,659 --> 00:33:52,450
+I doslovno, ako ste uzimajući
+3 je na početku semestra,
+
+704
+00:33:52,450 --> 00:33:53,977
+ovo je jako dobra stvar.
+
+705
+00:33:53,977 --> 00:33:55,810
+To znači da postoji još
+prostora za poboljšanja,
+
+706
+00:33:55,810 --> 00:33:58,490
+koje će se nadati u
+uzimanje klase po prvi put.
+
+707
+00:33:58,490 --> 00:34:01,820
+Postoji nadamo se neki malo strop
+na koje ste težiti postizanju.
+
+708
+00:34:01,820 --> 00:34:03,970
+I tako sve 3 je na
+najraniji komada,
+
+709
+00:34:03,970 --> 00:34:06,550
+ako nije neki 2-a i 4-a,
+je, doista, dobra stvar.
+
+710
+00:34:06,550 --> 00:34:08,880
+To je dobro u dometu,
+dobro u očekivanjima.
+
+711
+00:34:08,880 --> 00:34:11,421
+>> A ako vam je um je utrka, pričekajte
+minute, tri od pet.
+
+712
+00:34:11,421 --> 00:34:12,620
+To je stvarno 6 od 10.
+
+713
+00:34:12,620 --> 00:34:13,560
+To je 60%.
+
+714
+00:34:13,560 --> 00:34:14,830
+Bože moj, to je F.
+
+715
+00:34:14,830 --> 00:34:15,870
+>> Nije.
+
+716
+00:34:15,870 --> 00:34:17,600
+To nije, u stvari, da.
+
+717
+00:34:17,600 --> 00:34:22,710
+Umjesto toga, to je prilika za poboljšanje
+tijekom semestra.
+
+718
+00:34:22,710 --> 00:34:25,580
+A ako ste uzimajući neke
+Poors, to su prilika
+
+719
+00:34:25,580 --> 00:34:29,199
+iskoristiti radnog vremena,
+svakako sekcija i drugih resursa.
+
+720
+00:34:29,199 --> 00:34:32,840
+>> Najbolje je prilika, stvarno,
+biti ponosan na koliko daleko ste
+
+721
+00:34:32,840 --> 00:34:34,520
+doći tijekom semestra.
+
+722
+00:34:34,520 --> 00:34:38,199
+Dakle, ne shvaćaju, ako ništa
+Inače, tri je dobro.
+
+723
+00:34:38,199 --> 00:34:40,179
+I to vam prostora za rast tijekom vremena.
+
+724
+00:34:40,179 --> 00:34:43,090
+>> Kako ti osi
+ponderirani, realno si
+
+725
+00:34:43,090 --> 00:34:46,745
+će provesti većinu svog vremena uzimajući
+stvari na poslu, a kamoli pravilno.
+
+726
+00:34:46,745 --> 00:34:49,120
+I tako ispravnost sklon
+ponderiraju se najviše, kao i sa
+
+727
+00:34:49,120 --> 00:34:51,360
+ovo multiplikativni faktor tri.
+
+728
+00:34:51,360 --> 00:34:54,659
+Dizajn je također važno, ali
+nešto što ne mora nužno
+
+729
+00:34:54,659 --> 00:34:58,220
+provesti sve one sati
+pokušavajući da se stvari samo na posao.
+
+730
+00:34:58,220 --> 00:35:00,019
+>> I tako to je ponderirana
+malo više olako.
+
+731
+00:35:00,019 --> 00:35:01,560
+A onda je stil ponderirana najmanje.
+
+732
+00:35:01,560 --> 00:35:03,710
+Iako to nije ni manje
+važna temelja,
+
+733
+00:35:03,710 --> 00:35:05,990
+to je samo, možda,
+najjednostavnija stvar za napraviti pravo,
+
+734
+00:35:05,990 --> 00:35:08,440
+oponašajući WE primjere
+učiniti u predavanju i odjeljku,
+
+735
+00:35:08,440 --> 00:35:11,080
+sa stvarima vrlo lijepa
+razvedena, a komentirao,
+
+736
+00:35:11,080 --> 00:35:14,320
+i tako dalje je među najlakše
+stvari koje treba učiniti i dobiti pravo.
+
+737
+00:35:14,320 --> 00:35:16,960
+Dakle, kao takav, ostvariti
+da oni su točke
+
+738
+00:35:16,960 --> 00:35:19,000
+koji su relativno lako shvatiti.
+
+739
+00:35:19,000 --> 00:35:22,360
+>> A sada riječ o
+učinimo, akademskog poštenja.
+
+740
+00:35:22,360 --> 00:35:25,150
+Dakle, po naravno a
+nastavni plan i program, vidjet ćete
+
+741
+00:35:25,150 --> 00:35:27,630
+da naravno ima dosta
+Malo jezik oko toga.
+
+742
+00:35:27,630 --> 00:35:31,380
+I naravno uzima pitanje
+akademska iskrenost sasvim ozbiljno.
+
+743
+00:35:31,380 --> 00:35:33,450
+>> Imamo razliku,
+za bolje ili za lošije,
+
+744
+00:35:33,450 --> 00:35:36,570
+da su poslali svake godine više
+studenti za disciplinski postupak
+
+745
+00:35:36,570 --> 00:35:39,670
+od većine bilo koje druge
+Naravno da sam svjestan.
+
+746
+00:35:39,670 --> 00:35:42,580
+To nije nužno
+ukazuje na činjenicu
+
+747
+00:35:42,580 --> 00:35:46,340
+da CS studenti, ili CS50 učenika, su
+ništa manje iskren od vaših kolega.
+
+748
+00:35:46,340 --> 00:35:49,090
+Ali realnost da u ovom
+svijet, elektroničkim putem, samo mi
+
+749
+00:35:49,090 --> 00:35:50,990
+imaju tehnološke
+sredstva za otkrivanje ove.
+
+750
+00:35:50,990 --> 00:35:53,360
+>> Važno je da nam za
+pravičnost po razredu
+
+751
+00:35:53,360 --> 00:35:58,550
+da mi to prepoznati i povećati
+pitanje kada vidimo stvari.
+
+752
+00:35:58,550 --> 00:36:01,980
+I samo slikati sliku, i stvarno
+kako bi se nešto kao što je ovaj sudoper u,
+
+753
+00:36:01,980 --> 00:36:04,600
+To su brojevi
+studenti u proteklih 10 godina
+
+754
+00:36:04,600 --> 00:36:07,610
+koji su bili uključeni u neki
+takva pitanja akademskog poštenja,
+
+755
+00:36:07,610 --> 00:36:10,990
+s nekim 32 studenata
+od jeseni 2015., što
+
+756
+00:36:10,990 --> 00:36:13,760
+jest da mi ne uzimaju
+stvar vrlo ozbiljno.
+
+757
+00:36:13,760 --> 00:36:18,380
+I, na kraju, ti brojevi sastaviti,
+Nedavno, oko 3%, 4%, ili tako
+
+758
+00:36:18,380 --> 00:36:19,120
+klase.
+
+759
+00:36:19,120 --> 00:36:25,220
+>> Tako je za super većini učenika
+Čini se da su linije jasne.
+
+760
+00:36:25,220 --> 00:36:27,940
+Ali nemojte držati to u
+smeta, naročito kasno
+
+761
+00:36:27,940 --> 00:36:32,080
+noću kad se bori sa
+neko rješenje na skup problema,
+
+762
+00:36:32,080 --> 00:36:34,830
+da postoje mehanizmi
+za sebe uzimajući bolje
+
+763
+00:36:34,830 --> 00:36:37,870
+podrška nego što bi mogli
+mislim, čak i na tom satu.
+
+764
+00:36:37,870 --> 00:36:40,514
+Shvatite da kad dobijemo
+student podnesci, prelazimo
+
+765
+00:36:40,514 --> 00:36:43,430
+usporediti svaki podnesak ove godine
+protiv svakog podnošenja prošle godine,
+
+766
+00:36:43,430 --> 00:36:47,590
+protiv svakog podnošenja iz 2007. godine,
+a budući da je, gledajući, kao i,
+
+767
+00:36:47,590 --> 00:36:49,931
+broj repozitorija online,
+forumima, radilištima.
+
+768
+00:36:49,931 --> 00:36:51,806
+I ovo spomenuti,
+Stvarno, sve radi
+
+769
+00:36:51,806 --> 00:36:56,040
+od prikaza, da ako
+netko drugi može pronaći na internetu,
+
+770
+00:36:56,040 --> 00:36:57,880
+sigurno, tako da možemo naravno.
+
+771
+00:36:57,880 --> 00:37:00,100
+Ali, stvarno, duh
+tečaja svodi
+
+772
+00:37:00,100 --> 00:37:01,650
+toj klauzuli u nastavnom planu.
+
+773
+00:37:01,650 --> 00:37:03,670
+To je uistinu jednostavno, biti razumna.
+
+774
+00:37:03,670 --> 00:37:06,680
+>> A ako smo morali razraditi na koji
+sa samo malo više jezika,
+
+775
+00:37:06,680 --> 00:37:09,770
+shvatiti da je bit svega
+djelo koje ste nam poslali na ovaj tečaj
+
+776
+00:37:09,770 --> 00:37:10,954
+Treba biti svoj vlastiti.
+
+777
+00:37:10,954 --> 00:37:13,870
+Ali unutar toga, tu su svakako
+prilike i ohrabrenje,
+
+778
+00:37:13,870 --> 00:37:17,300
+i pedagoško vrijednost u okretanju
+others-- mene, TFS, CAS,
+
+779
+00:37:17,300 --> 00:37:20,760
+u TAS, a drugi u razredu,
+za podršku, a kamoli prijatelje
+
+780
+00:37:20,760 --> 00:37:23,547
+i cimeri koji su proučavali
+CS i programiranje prije.
+
+781
+00:37:23,547 --> 00:37:25,130
+I tako postoji dodatak za to.
+
+782
+00:37:25,130 --> 00:37:28,180
+A opće pravilo
+je učinimo, kada molba za pomoć,
+
+783
+00:37:28,180 --> 00:37:31,470
+možete pokazati svoju šifru drugima,
+ali vam ne mogu vidjeti svoje.
+
+784
+00:37:31,470 --> 00:37:34,880
+Pa čak i ako ste na radno vrijeme,
+ili u D dvorani ili negdje drugdje
+
+785
+00:37:34,880 --> 00:37:37,450
+radi na nekom komadu skupa,
+rade uz prijatelja, koji je
+
+786
+00:37:37,450 --> 00:37:40,160
+je potpuno u redu, u
+Kraj je dana svoga rada
+
+787
+00:37:40,160 --> 00:37:43,034
+konačnici bi trebao pripadati svaki
+od vas pojedinačno, a ne
+
+788
+00:37:43,034 --> 00:37:45,700
+biti neki zajednički napor,
+osim za konačni projekt u kojem
+
+789
+00:37:45,700 --> 00:37:47,410
+to je dozvoljeno i potiču.
+
+790
+00:37:47,410 --> 00:37:49,830
+>> Shvatite da ako ste
+bori s nečim
+
+791
+00:37:49,830 --> 00:37:52,520
+i vaš prijatelj upravo događa
+da bude bolje u ovome onda se,
+
+792
+00:37:52,520 --> 00:37:55,130
+ili bolje na taj problem od tebe,
+ili malo dalje naprijed od tebe,
+
+793
+00:37:55,130 --> 00:37:57,330
+to je potpuno razumna za uključivanje
+za svog prijatelja i reći, hej,
+
+794
+00:37:57,330 --> 00:38:00,480
+Imate li nešto protiv gleda na moj broj ovdje,
+pomaže mi uočiti ono što je moj problem?
+
+795
+00:38:00,480 --> 00:38:03,760
+I, nadam se, u
+Interes pedagoške vrijednosti
+
+796
+00:38:03,760 --> 00:38:07,040
+taj prijatelj, ne samo
+kažu, oh, to učiniti, ali umjesto toga,
+
+797
+00:38:07,040 --> 00:38:09,917
+što ti nedostaje na liniji
+6, ili nešto slično?
+
+798
+00:38:09,917 --> 00:38:12,000
+Ali rješenje nije
+za prijatelja pored vas
+
+799
+00:38:12,000 --> 00:38:15,617
+reći, oh, dobro, evo, neka mi povući
+ovo gore, i pokazati svoje rješenje za vas.
+
+800
+00:38:15,617 --> 00:38:16,450
+Tako da je linija.
+
+801
+00:38:16,450 --> 00:38:18,670
+Vam pokazati svoj kôd
+drugi, ali ne smijete
+
+802
+00:38:18,670 --> 00:38:22,350
+vidjeti njihov, u skladu s drugim
+Ograničenja u toku je nastavni plan i program.
+
+803
+00:38:22,350 --> 00:38:24,760
+>> Dakle, ne imajte na umu ove
+Takozvani žaljenje klauzula
+
+804
+00:38:24,760 --> 00:38:27,560
+U toku je nastavni plan i program, kao i,
+da ako počine neko djelo koje
+
+805
+00:38:27,560 --> 00:38:30,476
+nije razumno, već bi ga
+pozornost glava toku je
+
+806
+00:38:30,476 --> 00:38:34,240
+u roku od 72 sata, naravno
+može izreći lokalne sankcije koje
+
+807
+00:38:34,240 --> 00:38:37,380
+mogu uključivati ​​nezadovoljavajući ili
+negativnu ocjenu za rad podnosi.
+
+808
+00:38:37,380 --> 00:38:41,410
+No, naravno, neće se glede
+važno za daljnje disciplinske mjere,
+
+809
+00:38:41,410 --> 00:38:43,010
+osim u slučaju ponovljenih djela.
+
+810
+00:38:43,010 --> 00:38:46,632
+Drugim riječima, ako ništa napraviti neke
+glupo, pogotovo kasno navečer, odluka
+
+811
+00:38:46,632 --> 00:38:49,340
+da se sljedećeg jutra ili dva dana
+kasnije, što se probuditi i shvatiti,
+
+812
+00:38:49,340 --> 00:38:50,870
+Što sam mislio?
+
+813
+00:38:50,870 --> 00:38:53,890
+Što učiniti u CS50 imaju izlaz
+za pričvršćivanje taj problem
+
+814
+00:38:53,890 --> 00:38:57,170
+i posjedovanje do njega, kako bismo
+Tamo ćete sresti na pola puta i nositi
+
+815
+00:38:57,170 --> 00:39:01,500
+uz to u roku koji je i
+obrazovne i vrijedan za tebe,
+
+816
+00:39:01,500 --> 00:39:04,200
+ali još uvijek kaznenu na neki način.
+
+817
+00:39:04,200 --> 00:39:08,590
+A sada, da se rub off, to.
+
+818
+00:39:08,590 --> 00:39:10,570
+>> [VIDEO PLAYBACK]
+
+819
+00:39:10,570 --> 00:39:13,540
+>> [MUSIC SVIRA]
+
+820
+00:39:13,540 --> 00:39:58,090
+
+821
+00:39:58,090 --> 00:39:58,866
+>> [END PLAYBACK]
+
+822
+00:39:58,866 --> 00:40:00,490
+DAVID J. Malan: U redu, mi smo natrag.
+
+823
+00:40:00,490 --> 00:40:03,680
+A sada ćemo pogledati jedan od
+Prvi od naših stvarnom svijetu domene
+
+824
+00:40:03,680 --> 00:40:08,720
+u CS50, umjetnost kriptografije,
+umijeće slanja i primanja
+
+825
+00:40:08,720 --> 00:40:11,840
+tajna poruka, šifrirana
+Poruke ako će,
+
+826
+00:40:11,840 --> 00:40:17,060
+koji se može dešifrirati samo ako imate
+neki ključni sastojak da pošiljatelj ima
+
+827
+00:40:17,060 --> 00:40:18,030
+također.
+
+828
+00:40:18,030 --> 00:40:22,120
+Tako da motivira to ćemo se
+Pogled na ovu stvar ovdje,
+
+829
+00:40:22,120 --> 00:40:26,750
+što je Primjer za
+Tajna dekoder prsten koji
+
+830
+00:40:26,750 --> 00:40:34,042
+mogu se koristiti kako bi se shvatiti
+kakva tajna poruka zapravo je.
+
+831
+00:40:34,042 --> 00:40:35,750
+Naime, još u
+dan u osnovnoj školi,
+
+832
+00:40:35,750 --> 00:40:38,787
+ako ikad poslao tajne poruke
+neki prijatelj ili neka simpatija u razredu,
+
+833
+00:40:38,787 --> 00:40:40,620
+možda ste mislili
+si biti pametan
+
+834
+00:40:40,620 --> 00:40:46,530
+po na svom komadu mijenjanje papira,
+slično, A do B i B do C i C na D,
+
+835
+00:40:46,530 --> 00:40:47,590
+i tako dalje.
+
+836
+00:40:47,590 --> 00:40:50,300
+Ali, da su zapravo šifriranje
+Vaše informacije, čak i
+
+837
+00:40:50,300 --> 00:40:53,300
+ako je to bio malo trivijalan, nije bilo
+da je teško da nastavnici shvatiti,
+
+838
+00:40:53,300 --> 00:40:55,675
+dobro, ako se samo promijeniti
+B na A i C na B,
+
+839
+00:40:55,675 --> 00:40:57,550
+što zapravo shvatiti
+što je poruka bila,
+
+840
+00:40:57,550 --> 00:40:59,700
+ali ti su bili u šifriranje podataka.
+
+841
+00:40:59,700 --> 00:41:03,420
+>> Samo si to rade
+Jednostavno, baš kao Ralphie ovdje
+
+842
+00:41:03,420 --> 00:41:07,934
+u poznatom film koji igra
+prilično mnogo oglas nauseum svake zime.
+
+843
+00:41:07,934 --> 00:41:08,600
+[VIDEO PLAYBACK]
+
+844
+00:41:08,600 --> 00:41:11,180
+-Be Je poznato da sve što
+Ralph Parker je ovime
+
+845
+00:41:11,180 --> 00:41:14,070
+imenovan član Mala
+Orphan Annie Secret Circle
+
+846
+00:41:14,070 --> 00:41:17,700
+i ima pravo na sve počasti
+i koristi u toj proceduri.
+
+847
+00:41:17,700 --> 00:41:24,340
+>> -Signed, Little Orphan Annie,
+counter-potpisali Pierre Andre, tintom.
+
+848
+00:41:24,340 --> 00:41:27,160
+Priznanja i koristi,
+Već u dobi od devet.
+
+849
+00:41:27,160 --> 00:41:30,490
+
+850
+00:41:30,490 --> 00:41:31,825
+>> [VIČE]
+
+851
+00:41:31,825 --> 00:41:33,750
+
+852
+00:41:33,750 --> 00:41:34,250
+-Ajde.
+
+853
+00:41:34,250 --> 00:41:35,210
+Idemo se s njim.
+
+854
+00:41:35,210 --> 00:41:39,530
+Ne treba sve to jazz
+o krijumčarima i gusarima.
+
+855
+00:41:39,530 --> 00:41:41,660
+>> -Listen Sutra navečer za
+završna avantura
+
+856
+00:41:41,660 --> 00:41:43,880
+crne gusarskom brodu.
+
+857
+00:41:43,880 --> 00:41:46,650
+Sada je vrijeme za
+Annie je tajna poruka
+
+858
+00:41:46,650 --> 00:41:49,840
+za vas članovi Tajnog Kruga.
+
+859
+00:41:49,840 --> 00:41:53,570
+Zapamtite, djeco, samo članove
+Annie Tajna krug
+
+860
+00:41:53,570 --> 00:41:56,140
+može dekodirati Annie je tajnu poruku.
+
+861
+00:41:56,140 --> 00:42:00,340
+>> Zapamtite, Annie ovisi o vama.
+
+862
+00:42:00,340 --> 00:42:02,880
+Postavite svoje igle B2.
+
+863
+00:42:02,880 --> 00:42:05,230
+Ovo je poruka.
+
+864
+00:42:05,230 --> 00:42:06,090
+12, 11--
+
+865
+00:42:06,090 --> 00:42:10,250
+>> -Ja Sam u, moj prvi tajni sastanak.
+
+866
+00:42:10,250 --> 00:42:13,890
+>> -14, 11, 18, 16.
+
+867
+00:42:13,890 --> 00:42:15,780
+>> -Pierre Je u velikoj govornom večeras.
+
+868
+00:42:15,780 --> 00:42:19,000
+Mogao bih reći da je večeras a
+Poruka je stvarno važno.
+
+869
+00:42:19,000 --> 00:42:22,694
+>> -3, 25, to je poruka
+od Annie sama.
+
+870
+00:42:22,694 --> 00:42:23,860
+Zapamtite, ne govori nikome.
+
+871
+00:42:23,860 --> 00:42:28,760
+
+872
+00:42:28,760 --> 00:42:32,930
+>> -90 Sekundi kasnije, ja sam u samo
+prostorija u kući u kojoj je dječak od devet
+
+873
+00:42:32,930 --> 00:42:37,040
+mogao sjediti u privatnost i dekodiranje.
+
+874
+00:42:37,040 --> 00:42:39,730
+Aha, B!
+
+875
+00:42:39,730 --> 00:42:42,360
+Otišao sam do sljedećeg, E.
+
+876
+00:42:42,360 --> 00:42:44,520
+>> Prva riječ je biti.
+
+877
+00:42:44,520 --> 00:42:49,032
+S, to dolazi sada lakše, U, 25--
+
+878
+00:42:49,032 --> 00:42:51,733
+>> Oh, hajde, Ralphie, moram ići!
+
+879
+00:42:51,733 --> 00:42:53,688
+>> -I'll Se desno dolje, mama!
+
+880
+00:42:53,688 --> 00:42:54,188
+Gee čudo!
+
+881
+00:42:54,188 --> 00:42:58,116
+
+882
+00:42:58,116 --> 00:43:04,060
+>> T, O, svakako to-- biti siguran na što?
+
+883
+00:43:04,060 --> 00:43:05,970
+Što je Little Orphan
+Annie pokušava reći?
+
+884
+00:43:05,970 --> 00:43:07,264
+Svakako što?
+
+885
+00:43:07,264 --> 00:43:09,634
+>> -Ralphie, Andy je dobio
+Idi, molim vas izaći?
+
+886
+00:43:09,634 --> 00:43:10,480
+>> -Sve U redu, mama!
+
+887
+00:43:10,480 --> 00:43:12,880
+Odmah ću se!
+
+888
+00:43:12,880 --> 00:43:14,550
+>> -Bio Sam sve bliže sada.
+
+889
+00:43:14,550 --> 00:43:16,620
+Napetost je bila strašna.
+
+890
+00:43:16,620 --> 00:43:17,720
+Što je to bilo?
+
+891
+00:43:17,720 --> 00:43:20,170
+Sudbina planeta
+može držati u ravnoteži.
+
+892
+00:43:20,170 --> 00:43:20,670
+>> -Ralphie!
+
+893
+00:43:20,670 --> 00:43:23,170
+Andy moram ići!
+
+894
+00:43:23,170 --> 00:43:26,890
+>> -I'll Se odmah, za Boga miloga!
+
+895
+00:43:26,890 --> 00:43:32,680
+>> -Almost Tamo, moji prsti letjeli, moj um
+bio je čelik zamka, svaka pora vibrirao.
+
+896
+00:43:32,680 --> 00:43:37,198
+Bilo je gotovo jasno, da, da, da.
+
+897
+00:43:37,198 --> 00:43:43,091
+>> -Be Obavezno popijte ovaltine.
+
+898
+00:43:43,091 --> 00:43:43,590
+Ovaltine?
+
+899
+00:43:43,590 --> 00:43:48,160
+
+900
+00:43:48,160 --> 00:43:49,430
+Bijedan reklamu?
+
+901
+00:43:49,430 --> 00:43:53,046
+
+902
+00:43:53,046 --> 00:43:54,227
+Kurvin sin.
+
+903
+00:43:54,227 --> 00:43:54,810
+[END PLAYBACK]
+
+904
+00:43:54,810 --> 00:43:57,390
+DAVID J. Malan: OK,
+koji je bio vrlo dug put
+
+905
+00:43:57,390 --> 00:44:00,660
+uvođenja kriptografija,
+i ovaltine.
+
+906
+00:44:00,660 --> 00:44:04,470
+U stvari, iz ovog starog oglasa
+ovdje, zašto je ovaltine tako dobar?
+
+907
+00:44:04,470 --> 00:44:09,470
+To je koncentrirana ekstrakcija zrela
+ječma slad, Pure kremasti kravlje mlijeko,
+
+908
+00:44:09,470 --> 00:44:14,360
+a posebno pripremljen kakao zajedno
+s prirodnim fosfatidi i vitaminima.
+
+909
+00:44:14,360 --> 00:44:18,240
+Nadalje je utvrđeno s
+Dodatni vitamini B i D, mljac.
+
+910
+00:44:18,240 --> 00:44:21,600
+A ipak možete ga dobiti, očito,
+na Amazon, kao što smo učinili ovdje.
+
+911
+00:44:21,600 --> 00:44:24,810
+>> No, motivacija ovdje bio
+uvesti kriptografija, posebno
+
+912
+00:44:24,810 --> 00:44:28,340
+vrsta kriptografije poznat
+kao tajnim ključem kriptografije.
+
+913
+00:44:28,340 --> 00:44:34,284
+I kao što ime sugerira, cijela
+sigurnost tajnim ključem kripto sustav,
+
+914
+00:44:34,284 --> 00:44:36,200
+ako hoćete, metodologija
+za samo remećenje
+
+915
+00:44:36,200 --> 00:44:40,960
+informacija između dvoje ljudi, je li to
+samo pošiljatelj i samo primatelj
+
+916
+00:44:40,960 --> 00:44:46,980
+znati tajnu key-- neke vrijednosti, neke
+Tajna fraza, neki tajni broj, koji
+
+917
+00:44:46,980 --> 00:44:50,660
+omogućuje im da oba šifriranje
+i dešifriranje podataka.
+
+918
+00:44:50,660 --> 00:44:53,470
+I kriptografija, zaista,
+samo je to iz tjedna 0.
+
+919
+00:44:53,470 --> 00:44:56,715
+>> To je problem tamo gdje ulaze,
+kao stvarni poruci na engleskom jeziku
+
+920
+00:44:56,715 --> 00:44:59,340
+ili što god jezik da ti
+želite poslati nekome u razredu,
+
+921
+00:44:59,340 --> 00:45:00,580
+ili preko interneta.
+
+922
+00:45:00,580 --> 00:45:03,840
+Tu je neki izlaz, što se događa
+biti kodiranih poruka koja vas
+
+923
+00:45:03,840 --> 00:45:05,250
+Želite primatelj primiti.
+
+924
+00:45:05,250 --> 00:45:07,405
+A čak i ako je netko u
+Srednji ga prima previše,
+
+925
+00:45:07,405 --> 00:45:09,780
+da ih ne želite
+nužno biti u mogućnosti to dešifrirati,
+
+926
+00:45:09,780 --> 00:45:12,840
+zbog toga unutrašnjost
+crne kutije, ili algoritam,
+
+927
+00:45:12,840 --> 00:45:17,650
+neki mehanizam, neki korak po korak
+Upute, za uzimanje ulaz
+
+928
+00:45:17,650 --> 00:45:20,710
+i to pretvorbom u
+izlaz, u nadamo se na siguran način.
+
+929
+00:45:20,710 --> 00:45:23,640
+>> A, u stvari, ima neke
+vokabular u ovom svijetu kako slijedi.
+
+930
+00:45:23,640 --> 00:45:26,100
+Običan tekst je riječ A
+računalni znanstvenik
+
+931
+00:45:26,100 --> 00:45:28,449
+koristiti za opisivanje unos
+Poruka, kao i na engleskom
+
+932
+00:45:28,449 --> 00:45:31,240
+ili bilo kojem jeziku koji je zapravo
+želite poslati na neki drugi ljudi.
+
+933
+00:45:31,240 --> 00:45:35,450
+A onda je šifrirana je jagma
+na šifrirane ili kodiran,
+
+934
+00:45:35,450 --> 00:45:36,520
+njegove verzije.
+
+935
+00:45:36,520 --> 00:45:38,750
+>> No, postoji jedan drugi sastojak ovdje.
+
+936
+00:45:38,750 --> 00:45:43,200
+Postoji još jedan ulaz za
+Tajni ključ kriptografija.
+
+937
+00:45:43,200 --> 00:45:45,200
+I to je sam ključ,
+koji je, u pravilu,
+
+938
+00:45:45,200 --> 00:45:48,930
+kao što ćemo vidjeti, jedan broj ili
+slovo, ili riječ, bez obzira
+
+939
+00:45:48,930 --> 00:45:51,980
+algoritam to je zapravo očekuje.
+
+940
+00:45:51,980 --> 00:45:53,870
+>> I kako dešifrirati podatke?
+
+941
+00:45:53,870 --> 00:45:55,110
+Kako ga dešifrirati?
+
+942
+00:45:55,110 --> 00:45:57,950
+Pa, samo preokrenuti
+izlaza i ulaza.
+
+943
+00:45:57,950 --> 00:46:00,900
+>> Drugim riječima, kada netko
+prima vaš šifrirana poruka,
+
+944
+00:46:00,900 --> 00:46:03,740
+on ili ona jednostavno mora
+znati da isti ključ.
+
+945
+00:46:03,740 --> 00:46:05,700
+Oni su primili šifrirana.
+
+946
+00:46:05,700 --> 00:46:09,530
+I priključivanjem njih dvoje
+Ulazi u kripto sustav,
+
+947
+00:46:09,530 --> 00:46:14,260
+algoritam, ova crna kutija, kako
+trebao doći izvorni otvoreni tekst.
+
+948
+00:46:14,260 --> 00:46:17,830
+I tako je to vrlo visoka razina
+pogled na ono što kriptografija je zapravo
+
+949
+00:46:17,830 --> 00:46:18,590
+sve o.
+
+950
+00:46:18,590 --> 00:46:20,030
+>> Tako ćemo doći.
+
+951
+00:46:20,030 --> 00:46:22,700
+Idemo sada pogledati ispod
+sjenilo za nešto
+
+952
+00:46:22,700 --> 00:46:26,000
+uzimamo zdravo za gotovo za
+prošli tjedan, a za to sesije
+
+953
+00:46:26,000 --> 00:46:27,629
+here-- string.
+
+954
+00:46:27,629 --> 00:46:30,295
+Niz na kraju dan
+je samo niz znakova.
+
+955
+00:46:30,295 --> 00:46:33,610
+>> To bi moglo biti zdravo svijet, ili
+Pozdrav Zamyla, ili bilo što drugo.
+
+956
+00:46:33,610 --> 00:46:37,050
+No, što to znači za
+se niz znakova?
+
+957
+00:46:37,050 --> 00:46:41,520
+U stvari, CS50 knjižnica pruža
+nam vrstu podataka pod nazivom niz.
+
+958
+00:46:41,520 --> 00:46:45,140
+>> Ali zapravo ne postoji
+takva stvar kao znakovni niz u C
+
+959
+00:46:45,140 --> 00:46:49,450
+To stvarno je samo slijed
+lik, lik, lik,
+
+960
+00:46:49,450 --> 00:46:52,180
+karakter, leđa, na leđa, na
+natrag, natrag, natrag unutra
+
+961
+00:46:52,180 --> 00:46:54,650
+memorije računala ili RAM.
+
+962
+00:46:54,650 --> 00:46:58,940
+A mi ćemo gledati dublje u da je u
+Budućnost kada gledamo na samom sjećanju,
+
+963
+00:46:58,940 --> 00:47:02,030
+i korištenja, a
+prijetnje koje su uključene.
+
+964
+00:47:02,030 --> 00:47:04,100
+>> Ali neka se uzeti u obzir niz Zamyla.
+
+965
+00:47:04,100 --> 00:47:07,480
+Tako je samo ime
+ljudski ovdje Zamyla,
+
+966
+00:47:07,480 --> 00:47:12,030
+da je slijed
+znakova, Z-A-M-Y-L-A.
+
+967
+00:47:12,030 --> 00:47:16,020
+A sada pretpostavimo da je ime Zamyla-a
+se pohranjuju unutar računala
+
+968
+00:47:16,020 --> 00:47:16,880
+program.
+
+969
+00:47:16,880 --> 00:47:20,830
+>> Pa, to stoji da je razlog da bismo trebali
+moći gledati na one likove
+
+970
+00:47:20,830 --> 00:47:21,590
+pojedinačno.
+
+971
+00:47:21,590 --> 00:47:24,710
+Pa Samo ću izvući nešto
+okvir oko Zamyla ime ovdje.
+
+972
+00:47:24,710 --> 00:47:31,580
+A što je to slučaj u C da kada vas
+imaju niz, kao što Zamyla-- i možda
+
+973
+00:47:31,580 --> 00:47:34,940
+taj se niz vratila iz
+poput funkcije get niz,
+
+974
+00:47:34,940 --> 00:47:38,540
+zapravo možete manipulirati
+to znak po znak.
+
+975
+00:47:38,540 --> 00:47:42,070
+>> Sada, ovo je tijesnoj za
+razgovor pri ruci, jer
+
+976
+00:47:42,070 --> 00:47:46,420
+u kriptografiji ako želite promijeniti
+A do B i B do C i C na D,
+
+977
+00:47:46,420 --> 00:47:49,650
+i tako dalje, morate biti u mogućnosti
+gledati na pojedine likove
+
+978
+00:47:49,650 --> 00:47:50,190
+u nizu.
+
+979
+00:47:50,190 --> 00:47:52,695
+Morate biti u mogućnosti promijeniti
+Z na nešto drugo, A
+
+980
+00:47:52,695 --> 00:47:55,280
+na nešto drugo, M se
+nešto drugo, i tako dalje.
+
+981
+00:47:55,280 --> 00:47:58,000
+I tako trebamo način,
+programski, tako
+
+982
+00:47:58,000 --> 00:48:03,020
+govoriti, u C da bi mogli promijeniti
+i pogled na pojedinim slovima.
+
+983
+00:48:03,020 --> 00:48:05,690
+A to možemo učiniti na sljedeći način.
+
+984
+00:48:05,690 --> 00:48:08,340
+>> Pusti me da krenemo natrag u CS50 IDE.
+
+985
+00:48:08,340 --> 00:48:11,130
+I neka mi samo naprijed
+i stvoriti novu datoteku
+
+986
+00:48:11,130 --> 00:48:16,134
+da ću pozvati ovaj put string0,
+kao prvi takav primjer, točka c.
+
+987
+00:48:16,134 --> 00:48:18,300
+I ja ću ići naprijed
+i bič ga na sljedeći način.
+
+988
+00:48:18,300 --> 00:48:22,870
+>> Tako su CS50.h i
+onda su standardne io.h,
+
+989
+00:48:22,870 --> 00:48:25,990
+što sam gotovo uvijek ide
+se koristi u mojim programima, barem
+
+990
+00:48:25,990 --> 00:48:26,780
+u početku.
+
+991
+00:48:26,780 --> 00:48:32,180
+int glavni prazninu, a zatim u tu sam
+učiniti konce dobiva dobiti niz.
+
+992
+00:48:32,180 --> 00:48:35,260
+A onda ću
+ići naprijed i učiniti.
+
+993
+00:48:35,260 --> 00:48:37,460
+Želim ići naprijed
+i, kao provjera razum,
+
+994
+00:48:37,460 --> 00:48:43,607
+samo reci, zdravo, posto je,
+-zarez, čini niz 0.
+
+995
+00:48:43,607 --> 00:48:44,690
+Uh, što sam ovdje?
+
+996
+00:48:44,690 --> 00:48:45,930
+Oh, nisam ga priključite.
+
+997
+00:48:45,930 --> 00:48:48,120
+Tako naučena lekcija, koje
+Nije bilo namjerno.
+
+998
+00:48:48,120 --> 00:48:52,480
+>> Dakle, greška, više posto
+pretvorbi od argumenata podataka.
+
+999
+00:48:52,480 --> 00:48:54,940
+A to je, kada je u
+linija 7-- redu, tako da imam,
+
+1000
+00:48:54,940 --> 00:48:56,690
+citat citat, to je
+moj string printf.
+
+1001
+00:48:56,690 --> 00:48:58,151
+Imam posto znak.
+
+1002
+00:48:58,151 --> 00:48:59,650
+Ali ja sam nedostaje drugi argument.
+
+1003
+00:48:59,650 --> 00:49:03,190
+>> Ja nedostaje zarez S, koji
+Ja sam se u prethodnim primjerima.
+
+1004
+00:49:03,190 --> 00:49:06,650
+Dakle, dobra prilika za popravak
+još jedna pogreška, slučajno.
+
+1005
+00:49:06,650 --> 00:49:09,950
+I sad neka mi pokrenuti
+string0, upišite u Zamyla.
+
+1006
+00:49:09,950 --> 00:49:10,970
+OK, zdravo Zamyla.
+
+1007
+00:49:10,970 --> 00:49:14,144
+>> Stoga smo pokrenuti ovu vrstu programa
+nekoliko različitih puta sada.
+
+1008
+00:49:14,144 --> 00:49:16,310
+Ali neka je učiniti nešto
+Malo drugačije ovaj put.
+
+1009
+00:49:16,310 --> 00:49:19,450
+Umjesto da samo tiskanje Zamyla-a
+Cijeli naziv s printf,
+
+1010
+00:49:19,450 --> 00:49:21,350
+Učinimo to znak po znak.
+
+1011
+00:49:21,350 --> 00:49:22,700
+>> Idem na sustav za petlju.
+
+1012
+00:49:22,700 --> 00:49:26,160
+A ja ću osobno dati
+brojanje varijabla, nazvao sam.
+
+1013
+00:49:26,160 --> 00:49:33,530
+I ja ću zadržati ponavljanjem, tako
+Sve dok je i manje od duljine s.
+
+1014
+00:49:33,530 --> 00:49:35,930
+>> Ispostavilo se, nismo
+učiniti posljednji put,
+
+1015
+00:49:35,930 --> 00:49:39,100
+da c dolazi s
+Funkcija se zove Stirling.
+
+1016
+00:49:39,100 --> 00:49:42,690
+Natrag u dan, te općenito
+uvijek pri provedbi funkcija,
+
+1017
+00:49:42,690 --> 00:49:45,405
+ljudi često će odabrati vrlo
+, dat imena koja vrsta zvuka
+
+1018
+00:49:45,405 --> 00:49:48,280
+kao što želite, iako je
+nedostaje nekoliko samoglasnika ili slova.
+
+1019
+00:49:48,280 --> 00:49:50,660
+Dakle, Stirling je
+naziv funkcije koje
+
+1020
+00:49:50,660 --> 00:49:53,880
+traje rasprava između
+zagrade koja bi trebala biti niz.
+
+1021
+00:49:53,880 --> 00:49:56,910
+I to samo vraća cijeli broj,
+duljina toga niza.
+
+1022
+00:49:56,910 --> 00:50:00,580
+>> Dakle, ovo za petlju na liniji 7 ide
+za početak brojanja na sam jednak 0.
+
+1023
+00:50:00,580 --> 00:50:02,530
+To će se povećavati
+ja na svakoj iteraciji
+
+1024
+00:50:02,530 --> 00:50:04,350
+za 1, što smo radili nekoliko puta.
+
+1025
+00:50:04,350 --> 00:50:06,780
+Ali to će učiniti samo
+to sve do točke
+
+1026
+00:50:06,780 --> 00:50:09,660
+kad sam je duljina
+od samog niza.
+
+1027
+00:50:09,660 --> 00:50:14,520
+>> Dakle, ovo je način, u konačnici,
+iterating preko likova
+
+1028
+00:50:14,520 --> 00:50:17,430
+u nizu kako jest slijedi.
+
+1029
+00:50:17,430 --> 00:50:20,670
+Idem isprintati nije
+Cijeli niz, ali posto c,
+
+1030
+00:50:20,670 --> 00:50:22,860
+jedan lik
+nakon čega slijedi novi red.
+
+1031
+00:50:22,860 --> 00:50:24,880
+A onda ću
+ići naprijed i moram
+
+1032
+00:50:24,880 --> 00:50:29,080
+reći da želite ispisati
+ith karakter s.
+
+1033
+00:50:29,080 --> 00:50:33,450
+>> Dakle, ako i je varijabla koja označava
+indeks niza, gdje
+
+1034
+00:50:33,450 --> 00:50:37,230
+vi ste u njoj, moram biti u stanju
+kažem, daj mi-ti karakter s.
+
+1035
+00:50:37,230 --> 00:50:40,390
+I c ima način rada
+ovo s uglatim zagradama.
+
+1036
+00:50:40,390 --> 00:50:43,679
+Jednostavno reci naziv
+niz, koji je u ovom slučaju s.
+
+1037
+00:50:43,679 --> 00:50:46,970
+Tada koristite uglate zagrade, koje su
+obično samo iznad povratka ili Ulaz
+
+1038
+00:50:46,970 --> 00:50:48,110
+tipku na tipkovnici.
+
+1039
+00:50:48,110 --> 00:50:52,410
+I onda se stavi indeksa
+znak koji želite ispisati.
+
+1040
+00:50:52,410 --> 00:50:55,960
+Tako je indeks će biti
+number-- 0, ili 1, ili 2, ili 3, ili točka,
+
+1041
+00:50:55,960 --> 00:50:57,590
+točka, točka, neki drugi broj.
+
+1042
+00:50:57,590 --> 00:51:00,920
+>> I mi bi se osiguralo da će to
+biti pravi broj, jer sam
+
+1043
+00:51:00,920 --> 00:51:02,360
+početi računajući na 0.
+
+1044
+00:51:02,360 --> 00:51:07,020
+I po defaultu, prvi znak
+u nizu je po konvenciji 0.
+
+1045
+00:51:07,020 --> 00:51:09,230
+I drugi lik je nosač 1.
+
+1046
+00:51:09,230 --> 00:51:11,120
+I treći lik je nosač 2.
+
+1047
+00:51:11,120 --> 00:51:13,630
+A vi ne želite ići previše
+daleko, ali nećemo jer smo
+
+1048
+00:51:13,630 --> 00:51:17,780
+će se samo povećavati sam dok ne dođe
+jednaka duljine niza.
+
+1049
+00:51:17,780 --> 00:51:20,210
+I u tom trenutku,
+ovo za petlje će se zaustaviti.
+
+1050
+00:51:20,210 --> 00:51:25,550
+>> Pa neka mi ići naprijed i spasiti ovu
+Program i pokretanje napraviti niz 0.
+
+1051
+00:51:25,550 --> 00:51:28,400
+Ali ja zeznuo.
+
+1052
+00:51:28,400 --> 00:51:35,390
+Implicitno proglašenja funkcije knjižnica
+Stirling s tipom takav i such-- sada,
+
+1053
+00:51:35,390 --> 00:51:36,430
+ovo zvuči poznato.
+
+1054
+00:51:36,430 --> 00:51:37,440
+Ali to nije printf.
+
+1055
+00:51:37,440 --> 00:51:38,540
+I to ne dobiti niz.
+
+1056
+00:51:38,540 --> 00:51:40,480
+>> Nisam zeznuo u
+na isti način kao ovaj put.
+
+1057
+00:51:40,480 --> 00:51:45,100
+No, malo primijetiti ovdje dolje
+nadalje, uključuju zaglavlje string.h,
+
+1058
+00:51:45,100 --> 00:51:47,210
+izričito osigurati
+Izjava za Stirling.
+
+1059
+00:51:47,210 --> 00:51:48,820
+Tako da je zapravo trag tamo.
+
+1060
+00:51:48,820 --> 00:51:51,670
+>> I doista ispada
+postoji još jedan zaglavlje datoteke
+
+1061
+00:51:51,670 --> 00:51:53,970
+da nismo koristili
+u razredu, ali to je
+
+1062
+00:51:53,970 --> 00:51:56,480
+Među onima koji su dostupni
+vama, zove string.h.
+
+1063
+00:51:56,480 --> 00:52:00,930
+I u toj datoteci, string.h
+je Stirling proglašen.
+
+1064
+00:52:00,930 --> 00:52:05,220
+Pa neka mi ići naprijed i
+spasi to, napraviti niz
+
+1065
+00:52:05,220 --> 00:52:08,040
+0-- lijepo, nema poruke o pogreškama i ovaj put.
+
+1066
+00:52:08,040 --> 00:52:12,290
+>> ./string0 Zamyla i
+Ja sam o hit Enter,
+
+1067
+00:52:12,290 --> 00:52:16,710
+na kojem trenutku getstring ide
+da se vrati string, stavi ga u s.
+
+1068
+00:52:16,710 --> 00:52:21,890
+Onda je za petlju će ponoviti
+preko tvrtke S likovi jedan po jedan,
+
+1069
+00:52:21,890 --> 00:52:28,420
+i ispisati ih jedan po retku, jer
+Imao sam tu kosih crta n na kraju.
+
+1070
+00:52:28,420 --> 00:52:34,530
+Tako sam mogao izostaviti tu kosu crtu
+n, i onda samo ispisati Zamyla sve
+
+1071
+00:52:34,530 --> 00:52:37,460
+u istoj liniji,
+učinkovito reimplementing
+
+1072
+00:52:37,460 --> 00:52:38,999
+printf, što nije sve što je korisno.
+
+1073
+00:52:38,999 --> 00:52:40,540
+No, u ovom slučaju, nisam to učinio.
+
+1074
+00:52:40,540 --> 00:52:43,610
+Ja sam zapravo ispisuju jedan
+lik u isto vrijeme, jedan po retku,
+
+1075
+00:52:43,610 --> 00:52:45,400
+tako da smo zapravo vidjeli učinak.
+
+1076
+00:52:45,400 --> 00:52:46,900
+>> Ali moram napomenuti jednu stvar ovdje.
+
+1077
+00:52:46,900 --> 00:52:48,930
+A mi ćemo se vratiti
+to u budućem tjednu.
+
+1078
+00:52:48,930 --> 00:52:52,650
+Ispada da je ovaj
+kod je potencijalno lud.
+
+1079
+00:52:52,650 --> 00:52:56,560
+>> Ispada koje se niz
+i neke druge funkcije u životu
+
+1080
+00:52:56,560 --> 00:53:00,280
+ne moraju nužno uvijek
+povratak što ste očekivali.
+
+1081
+00:53:00,280 --> 00:53:03,010
+Znamo iz klase prošle
+Vrijeme u tome da je mogao
+
+1082
+00:53:03,010 --> 00:53:04,960
+Niz je trebalo da se vrati niz.
+
+1083
+00:53:04,960 --> 00:53:09,900
+No, što ako korisnik upiše takvu
+duga riječ, ili stav ili esej
+
+1084
+00:53:09,900 --> 00:53:13,010
+da postoji samo nije dovoljno
+memorije u računalu da stane.
+
+1085
+00:53:13,010 --> 00:53:15,410
+>> Kao, što ako nešto pođe
+krivo ispod haube?
+
+1086
+00:53:15,410 --> 00:53:18,400
+Nije se moglo dogoditi često,
+ali to bi se moglo dogoditi nakon
+
+1087
+00:53:18,400 --> 00:53:21,520
+s vremena na vrijeme, vrlo rijetko.
+
+1088
+00:53:21,520 --> 00:53:25,460
+I tako ispada koje se niz
+i funkcije kao što su to učinili ne nužno
+
+1089
+00:53:25,460 --> 00:53:26,380
+uvijek vraćaju konce.
+
+1090
+00:53:26,380 --> 00:53:30,680
+Oni mogu vratiti neku vrijednost pogreške,
+neki stražar vrijednost takoreći,
+
+1091
+00:53:30,680 --> 00:53:32,612
+to pokazuje da je
+nešto nije u redu.
+
+1092
+00:53:32,612 --> 00:53:35,320
+A ti bi samo znam iz
+što ga je naučio u klasi danas,
+
+1093
+00:53:35,320 --> 00:53:37,700
+ili što je pročitao malo više dokumentacije.
+
+1094
+00:53:37,700 --> 00:53:43,120
+Ispada koje se niz
+može vratiti vrijednost zove null.
+
+1095
+00:53:43,120 --> 00:53:46,220
+Null je posebna vrijednost da ćemo
+vratiti se u budućem tjednu.
+
+1096
+00:53:46,220 --> 00:53:50,420
+No, za sada, samo znam da ako želim
+da se stvarno pravi u napredovanju
+
+1097
+00:53:50,420 --> 00:53:52,650
+pomoću get niz, ja
+ne bi smjela zvati,
+
+1098
+00:53:52,650 --> 00:53:56,870
+i slijepo koristiti svoje povratnu vrijednost,
+vjerujući da je to niz.
+
+1099
+00:53:56,870 --> 00:53:59,420
+>> Prvo da kažem,
+hej, čekaj malo, samo
+
+1100
+00:53:59,420 --> 00:54:03,380
+postupiti ukoliko nije jednak
+null, gdje je null, opet,
+
+1101
+00:54:03,380 --> 00:54:04,660
+samo neka posebna vrijednost.
+
+1102
+00:54:04,660 --> 00:54:07,770
+I to je jedina posebna vrijednost koju
+morate brinuti o za get niza.
+
+1103
+00:54:07,770 --> 00:54:10,900
+Dobiti string ili ide
+da se vrati niz ili null.
+
+1104
+00:54:10,900 --> 00:54:17,219
+>> A to uskličnik znak jednakosti
+možda znate iz možda sat matematike
+
+1105
+00:54:17,219 --> 00:54:20,510
+da bi moglo privući znak jednakosti s
+linija kroz nju ukazati nisu jednaki.
+
+1106
+00:54:20,510 --> 00:54:23,135
+To nije obično znak
+možete upisati na tipkovnici.
+
+1107
+00:54:23,135 --> 00:54:26,480
+I tako je u većini programskih jezika,
+kada želite reći ne jednaki,
+
+1108
+00:54:26,480 --> 00:54:29,160
+Koristite uskličnik,
+inače poznat kao prasak.
+
+1109
+00:54:29,160 --> 00:54:33,180
+Kažeš bang jednaka, što
+znači ne jednak, logično.
+
+1110
+00:54:33,180 --> 00:54:38,060
+To je isto kao ne postoji veći
+od ili jednaka ili manja od
+
+1111
+00:54:38,060 --> 00:54:41,270
+ili jednaka tipku na tipkovnici
+da to sve u jednom simbolu.
+
+1112
+00:54:41,270 --> 00:54:44,020
+Dakle, to je razlog zašto, u posljednjih primjera,
+jesi otvoren nosač, a zatim
+
+1113
+00:54:44,020 --> 00:54:48,670
+znak jednakosti, kako bi se učiniti
+veći ili, recimo, manje od.
+
+1114
+00:54:48,670 --> 00:54:49,910
+>> Zato što je takeaway ovdje?
+
+1115
+00:54:49,910 --> 00:54:53,880
+To je jednostavno način na koji sad
+Uvođenjem ove sintakse, ova značajka,
+
+1116
+00:54:53,880 --> 00:54:57,390
+iterating preko pojedinca
+znakova u nizu.
+
+1117
+00:54:57,390 --> 00:55:00,260
+I baš kao i one trga
+nosači omogućuju da se u njih,
+
+1118
+00:55:00,260 --> 00:55:03,790
+uzeti u obzir one uglate zagrade kao
+vrsta aludirati na to temeljni
+
+1119
+00:55:03,790 --> 00:55:06,040
+dizajn, pri čemu je svaki
+karakter unutar niza
+
+1120
+00:55:06,040 --> 00:55:10,180
+je vrsta uokvireno negdje ispod
+sjenilo u memoriju računala.
+
+1121
+00:55:10,180 --> 00:55:12,340
+>> Ali neka je napraviti varijantu ovoga.
+
+1122
+00:55:12,340 --> 00:55:14,880
+Ispada da je ovaj
+Program je ispravan.
+
+1123
+00:55:14,880 --> 00:55:18,810
+Dakle, po CS50-a osi za vrednovanje
+kod, to je sada točno.
+
+1124
+00:55:18,810 --> 00:55:22,959
+Pogotovo sada kada sam provjeravati
+null, ovaj program nikada ne bi trebao srušiti.
+
+1125
+00:55:22,959 --> 00:55:24,500
+A ja samo znam da iz iskustva.
+
+1126
+00:55:24,500 --> 00:55:28,040
+Ali nema ništa drugo da
+mi stvarno ne možete pogriješiti ovdje.
+
+1127
+00:55:28,040 --> 00:55:31,860
+No, to nije vrlo dobro osmišljen,
+zato idemo natrag na osnove.
+
+1128
+00:55:31,860 --> 00:55:34,450
+>> Prvo, principles--
+Što for petlje učiniti?
+
+1129
+00:55:34,450 --> 00:55:36,290
+For petlja se tri stvari.
+
+1130
+00:55:36,290 --> 00:55:39,340
+Ona pokreće neki
+vrijednosti, ako ga pitati.
+
+1131
+00:55:39,340 --> 00:55:41,770
+Ona provjerava stanje.
+
+1132
+00:55:41,770 --> 00:55:45,380
+I onda nakon svakog
+iteracija, nakon svakog ciklusa,
+
+1133
+00:55:45,380 --> 00:55:49,330
+to koracima neki
+vrijednost ili vrijednosti, ovdje.
+
+1134
+00:55:49,330 --> 00:55:50,600
+>> Dakle, što to znači?
+
+1135
+00:55:50,600 --> 00:55:52,940
+Mi inicijalizirati sam 0.
+
+1136
+00:55:52,940 --> 00:55:58,610
+Mi smo provjeriti i provjerite da li je i manje od
+duljina s, što je Z-A-M-Y-L-A,
+
+1137
+00:55:58,610 --> 00:55:59,900
+tako što je manje od 6.
+
+1138
+00:55:59,900 --> 00:56:02,590
+I, doista, 0 manje od 6.
+
+1139
+00:56:02,590 --> 00:56:05,580
+>> Mi ispisati Z od Zamyla ime.
+
+1140
+00:56:05,580 --> 00:56:08,080
+Onda smo povećavati I od 0 do 1.
+
+1141
+00:56:08,080 --> 00:56:11,290
+Zatim smo provjeriti je jedan manje
+od duljine s?
+
+1142
+00:56:11,290 --> 00:56:13,270
+Duljina s je 6.
+
+1143
+00:56:13,270 --> 00:56:13,950
+Da je.
+
+1144
+00:56:13,950 --> 00:56:16,880
+>> Tako smo ispisali u Zamyla ime, ZA.
+
+1145
+00:56:16,880 --> 00:56:20,090
+Možemo povećavati ja od 0 do 1, u 2.
+
+1146
+00:56:20,090 --> 00:56:23,720
+Zatim smo provjerili, 2 manje od
+duljina Zamyla ime.
+
+1147
+00:56:23,720 --> 00:56:25,380
+6 pa 2 je manje od 6.
+
+1148
+00:56:25,380 --> 00:56:30,460
+Da, idemo ispisati sad M u
+Ime Zamyla-a, treći lik.
+
+1149
+00:56:30,460 --> 00:56:34,110
+>> Ključ je u tome da se na svaki
+iteracija priče, ja sam provjeru,
+
+1150
+00:56:34,110 --> 00:56:37,810
+je i manja od duljine Zamyla?
+
+1151
+00:56:37,810 --> 00:56:40,350
+No, kvaka je da
+Stirling nije svojstvo.
+
+1152
+00:56:40,350 --> 00:56:43,100
+Oni od vas koji su programirani
+Prije nego u Javi ili drugim jezicima
+
+1153
+00:56:43,100 --> 00:56:46,310
+možda znati duljinu niza je
+imovine, samo su neke samo za čitanje vrijednost.
+
+1154
+00:56:46,310 --> 00:56:50,220
+>> U C, u ovom slučaju, ako je to
+funkcija koja je doslovno
+
+1155
+00:56:50,220 --> 00:56:53,520
+brojenjem
+likovi u Zamyla svaki put
+
+1156
+00:56:53,520 --> 00:56:54,740
+zovemo tu funkciju.
+
+1157
+00:56:54,740 --> 00:56:58,500
+Svaki put kada pitati računalo za korištenje
+Stirling, to je uzimanje pogled na Zamyla,
+
+1158
+00:56:58,500 --> 00:57:01,960
+govoreći Z-A-M-Y-L-A, 6.
+
+1159
+00:57:01,960 --> 00:57:02,962
+I to se vraća 6.
+
+1160
+00:57:02,962 --> 00:57:04,920
+Sljedeći put kad poziv
+je iznutra da je za petlje,
+
+1161
+00:57:04,920 --> 00:57:08,610
+to će pogledati Zamyla
+Ponovno, recimo Z-A-M-Y-L-a, 6.
+
+1162
+00:57:08,610 --> 00:57:10,320
+I to će se vratiti 6.
+
+1163
+00:57:10,320 --> 00:57:12,980
+Zato što je glupo o ovom dizajnu?
+
+1164
+00:57:12,980 --> 00:57:17,700
+>> Zašto je moj broj nije 5 od 5
+za dizajn upravo sada, da se tako izrazim?
+
+1165
+00:57:17,700 --> 00:57:20,600
+Pa, ja tražim
+pitanje nepotrebno.
+
+1166
+00:57:20,600 --> 00:57:23,030
+Radim više posla nego što je potrebno.
+
+1167
+00:57:23,030 --> 00:57:25,370
+>> Dakle, iako je
+odgovor je točan, ja sam
+
+1168
+00:57:25,370 --> 00:57:29,560
+traži računalo, što je
+duljina Zamyla opet
+
+1169
+00:57:29,560 --> 00:57:31,380
+i opet, i opet, i opet?
+
+1170
+00:57:31,380 --> 00:57:33,980
+I to je odgovor
+nikada neće promijeniti.
+
+1171
+00:57:33,980 --> 00:57:35,900
+To je uvijek će biti 6.
+
+1172
+00:57:35,900 --> 00:57:39,730
+>> Pa bolje rješenje od toga
+bio bi to sljedeća verzija.
+
+1173
+00:57:39,730 --> 00:57:43,390
+Pusti me naprijed i stavi ga u
+zasebna datoteka zove string1.c,
+
+1174
+00:57:43,390 --> 00:57:44,990
+samo da bi se odvojili.
+
+1175
+00:57:44,990 --> 00:57:47,260
+I ispada u za
+petlje, možete zapravo
+
+1176
+00:57:47,260 --> 00:57:50,210
+proglasiti više varijabli odjednom.
+
+1177
+00:57:50,210 --> 00:57:53,460
+>> Tako ću zadržati ja i postaviti ga na 0.
+
+1178
+00:57:53,460 --> 00:57:56,190
+Ali ja također idem
+dodati zarez, i reći:
+
+1179
+00:57:56,190 --> 00:58:01,050
+daj mi varijablu nazvanu n, čija
+vrijednost jednaka duljina niza s.
+
+1180
+00:58:01,050 --> 00:58:09,410
+A sada, molim vas provjerite moje stanje
+tako dugo dok je i manje od n.
+
+1181
+00:58:09,410 --> 00:58:14,140
+>> Tako da na taj način, logika je
+identična krajem dana.
+
+1182
+00:58:14,140 --> 00:58:18,280
+Ali ja sam prisjećajući se
+vrijednost 6, u ovom slučaju.
+
+1183
+00:58:18,280 --> 00:58:19,780
+Koja je duljina Zamyla ime?
+
+1184
+00:58:19,780 --> 00:58:20,860
+I ja sam ga staviti na n.
+
+1185
+00:58:20,860 --> 00:58:23,050
+>> A ja sam još uvijek provjerava
+svaki put je stanje.
+
+1186
+00:58:23,050 --> 00:58:24,300
+0 manje od 6?
+
+1187
+00:58:24,300 --> 00:58:25,600
+Je li jedan manje od 6?
+
+1188
+00:58:25,600 --> 00:58:28,600
+Iznosi 2 manje od 6, i tako dalje?
+
+1189
+00:58:28,600 --> 00:58:31,914
+>> Ali ja ne tražim računalo
+opet, i opet, što je
+
+1190
+00:58:31,914 --> 00:58:33,080
+duljina Zamyla ime?
+
+1191
+00:58:33,080 --> 00:58:34,320
+Što je duljina Zamyla ime?
+
+1192
+00:58:34,320 --> 00:58:35,986
+Što je dužina ove Zamyla ime?
+
+1193
+00:58:35,986 --> 00:58:40,440
+Ja sam doslovno imajući na umu da prva i
+jedini odgovor u ovom drugom varijablu n.
+
+1194
+00:58:40,440 --> 00:58:45,280
+Dakle, ovo će sada biti ne samo
+točno, ali i dobro osmišljen.
+
+1195
+00:58:45,280 --> 00:58:46,670
+>> Sada, što je stil?
+
+1196
+00:58:46,670 --> 00:58:48,866
+Ja sam dobio ime moje varijable
+prilično dobro, rekao bih.
+
+1197
+00:58:48,866 --> 00:58:50,240
+Oni su super kratak sada.
+
+1198
+00:58:50,240 --> 00:58:52,090
+I to je sasvim u redu.
+
+1199
+00:58:52,090 --> 00:58:55,120
+>> Ako imate samo jedan
+niz u programu,
+
+1200
+00:58:55,120 --> 00:58:56,860
+možda i nazvati to je za niz.
+
+1201
+00:58:56,860 --> 00:58:59,370
+Ako imate samo jednu varijablu
+za brojanje u programu,
+
+1202
+00:58:59,370 --> 00:59:00,710
+možda i to nazvati i.
+
+1203
+00:59:00,710 --> 00:59:03,500
+Ako imate duljinu, n
+super je uobičajeno, kao dobro.
+
+1204
+00:59:03,500 --> 00:59:05,800
+Ali nisam komentirao bilo koji od mojih koda.
+
+1205
+00:59:05,800 --> 00:59:09,200
+>> Nisam obavijestio reader--
+da li je to moj TF ili TA,
+
+1206
+00:59:09,200 --> 00:59:12,460
+ili samo colleague-- ono što je trebalo
+koji se događa u ovom programu.
+
+1207
+00:59:12,460 --> 00:59:15,760
+I tako da se dobar stil,
+ono što želite učiniti
+
+1208
+00:59:15,760 --> 00:59:24,580
+je učinimo nešto
+kao i pitati korisnika za ulaz.
+
+1209
+00:59:24,580 --> 00:59:26,670
+A mogao sam prepisati
+to bilo koji broj načina.
+
+1210
+00:59:26,670 --> 00:59:35,630
+>> Pobrinite S- bi bili sigurni get
+Niz vratio niz.
+
+1211
+00:59:35,630 --> 00:59:40,280
+A onda u here-- i to je možda
+najvažniji comment-- mijenjajte
+
+1212
+00:59:40,280 --> 00:59:44,450
+više likova u S jedne u isto vrijeme.
+
+1213
+00:59:44,450 --> 00:59:47,060
+I ja sam mogao koristiti bilo
+Izbor engleskom jeziku
+
+1214
+00:59:47,060 --> 00:59:49,650
+Ovdje se opisuju svaku
+tih komade koda.
+
+1215
+00:59:49,650 --> 00:59:52,740
+>> Uočite da nisam stavio
+komentar na svaku liniju koda,
+
+1216
+00:59:52,740 --> 00:59:55,690
+zapravo samo na zanimljiv
+one, one koje
+
+1217
+00:59:55,690 --> 00:59:59,460
+imaju neki smisao, da bi
+želite napraviti super jasno da je netko
+
+1218
+00:59:59,460 --> 01:00:00,460
+čitajući moj broj.
+
+1219
+01:00:00,460 --> 01:00:02,920
+I zašto zovete dobiti
+string pitati korisnika za ulaz?
+
+1220
+01:00:02,920 --> 01:00:05,450
+Čak i da je netko nije nužno
+sve to opisno.
+
+1221
+01:00:05,450 --> 01:00:09,340
+No, to pomaže ispričati priču, jer je
+Drugi redak u priči je, pazite
+
+1222
+01:00:09,340 --> 01:00:10,740
+dobili niz vratio niz.
+
+1223
+01:00:10,740 --> 01:00:14,260
+>> I treći redak u priči je,
+ponoviti više likova u S jedne
+
+1224
+01:00:14,260 --> 01:00:15,380
+u isto vrijeme.
+
+1225
+01:00:15,380 --> 01:00:17,920
+A sada samo za dobru mjeru,
+Ja ću ići naprijed i dodati
+
+1226
+01:00:17,920 --> 01:00:24,560
+još jedan komentar da je upravo
+kaže za ispis i-lik s.
+
+1227
+01:00:24,560 --> 01:00:26,520
+Sada, ono što sam učinio
+na kraju dana?
+
+1228
+01:00:26,520 --> 01:00:29,190
+>> Ja sam dodao neki engleski
+riječi u obliku komentara.
+
+1229
+01:00:29,190 --> 01:00:32,700
+Simbol slash slash znači, hej,
+Računalo je to za čovjeka,
+
+1230
+01:00:32,700 --> 01:00:33,820
+nije za tebe, računalo.
+
+1231
+01:00:33,820 --> 01:00:35,119
+Dakle, oni su ignorirali logično.
+
+1232
+01:00:35,119 --> 01:00:35,910
+Oni su samo tamo.
+
+1233
+01:00:35,910 --> 01:00:39,830
+>> I doista, CS50 IDE ih prikazuje kao
+sivo, kao korisni, ali ne i ključ
+
+1234
+01:00:39,830 --> 01:00:41,000
+programu.
+
+1235
+01:00:41,000 --> 01:00:42,570
+Obavijest što sada možete učiniti.
+
+1236
+01:00:42,570 --> 01:00:44,950
+Da li znate C
+programiranje ili ne,
+
+1237
+01:00:44,950 --> 01:00:47,722
+može samo stajati natrag na ovo
+programa i obrano komentare.
+
+1238
+01:00:47,722 --> 01:00:50,180
+Pitaj korisnika za ulaz, provjerite je li
+dobili niz vratio niz,
+
+1239
+01:00:50,180 --> 01:00:53,009
+ponoviti više likova u sekundi
+jedan po jedan, ispisati karakter
+
+1240
+01:00:53,009 --> 01:00:55,550
+i-lik u S- vi ne
+imaju čak i pogledati koda
+
+1241
+01:00:55,550 --> 01:00:57,270
+razumjeti ono što ovaj program radi.
+
+1242
+01:00:57,270 --> 01:01:00,280
+I, još bolje, ako sami izgledaju
+U ovom programu u tjedan ili dva,
+
+1243
+01:01:00,280 --> 01:01:02,280
+ili mjesec ili godinu,
+vi nemate
+
+1244
+01:01:02,280 --> 01:01:04,420
+zuriti u kodu,
+pokušavajući se sjetiti,
+
+1245
+01:01:04,420 --> 01:01:06,630
+ono što sam pokušava učiniti s ovim kodom?
+
+1246
+01:01:06,630 --> 01:01:07,770
+>> Vi ste rekli sami.
+
+1247
+01:01:07,770 --> 01:01:11,660
+Vi ste ga opisali za sebe,
+ili neki kolega ili TA, ili TF.
+
+1248
+01:01:11,660 --> 01:01:14,860
+I tako će to sada biti
+ispravan i dobar dizajn,
+
+1249
+01:01:14,860 --> 01:01:18,210
+i na kraju dobar stil, kao dobro.
+
+1250
+01:01:18,210 --> 01:01:19,990
+Dakle, ne imajte to na umu.
+
+1251
+01:01:19,990 --> 01:01:22,200
+>> Dakle, postoji jedna druga
+što ću učiniti ovdje
+
+1252
+01:01:22,200 --> 01:01:28,240
+da se sada mogu otkriti točno što je
+događa ispod haube.
+
+1253
+01:01:28,240 --> 01:01:30,390
+Dakle, tu je ova značajka
+u C i drugim jezicima,
+
+1254
+01:01:30,390 --> 01:01:33,010
+zove typecasting
+da ili implicitno
+
+1255
+01:01:33,010 --> 01:01:37,250
+ili eksplicitno omogućuje vam da pretvoriti
+od jedne vrste podataka u drugu.
+
+1256
+01:01:37,250 --> 01:01:39,800
+Mi smo bili bave tako
+koliko je danas sa žicama.
+
+1257
+01:01:39,800 --> 01:01:41,250
+>> A žice su likovi.
+
+1258
+01:01:41,250 --> 01:01:44,910
+Ali sjećam iz tjedna
+0, što su likovi?
+
+1259
+01:01:44,910 --> 01:01:49,334
+Likovi su samo apstrakcija
+na vrhu numbers-- decimalnih brojeva,
+
+1260
+01:01:49,334 --> 01:01:52,500
+i decimalni brojevi su zapravo samo
+apstrakcija na vrhu binarnih brojeva,
+
+1261
+01:01:52,500 --> 01:01:53,720
+kao što smo to definirano.
+
+1262
+01:01:53,720 --> 01:01:55,540
+>> Dakle, likovi su brojevi.
+
+1263
+01:01:55,540 --> 01:01:58,410
+I brojevi su likovi,
+samo ovisno o kontekstu.
+
+1264
+01:01:58,410 --> 01:02:01,250
+I ispada da je unutra
+računalnog programa,
+
+1265
+01:02:01,250 --> 01:02:06,830
+Možete li navesti kako želite da izgleda
+na bitova unutar tog programa?
+
+1266
+01:02:06,830 --> 01:02:10,400
+>> Podsjetimo iz tjedna 0 koje smo imali
+Ascii, što je samo ovaj kod
+
+1267
+01:02:10,400 --> 01:02:11,620
+mapiranja slova u brojeve.
+
+1268
+01:02:11,620 --> 01:02:13,660
+A mi smo, kapital A je 65.
+
+1269
+01:02:13,660 --> 01:02:15,860
+Capital B je 66, i tako dalje.
+
+1270
+01:02:15,860 --> 01:02:20,500
+>> I napomena, mi u suštini ima znakova na
+prvi red ovdje, kao što bi ih C nazvati,
+
+1271
+01:02:20,500 --> 01:02:23,400
+znakova, a zatim
+Ints u drugom redu.
+
+1272
+01:02:23,400 --> 01:02:28,180
+I ispada da možete pretvoriti
+neprimjetno između njih, tipično.
+
+1273
+01:02:28,180 --> 01:02:30,042
+A ako želimo učiniti
+to namjerno, mi
+
+1274
+01:02:30,042 --> 01:02:31,750
+možda žele uhvatiti u koštac
+nešto kao ovo.
+
+1275
+01:02:31,750 --> 01:02:33,590
+>> Možda bismo se mogli pretvoriti
+velika slova na niže
+
+1276
+01:02:33,590 --> 01:02:35,330
+slučaj, i mala slova u velika slova.
+
+1277
+01:02:35,330 --> 01:02:38,000
+I ispada da postoji
+zapravo uzorak ovdje
+
+1278
+01:02:38,000 --> 01:02:39,900
+možemo prihvatiti u samo jednom trenutku.
+
+1279
+01:02:39,900 --> 01:02:44,120
+No, pogledajmo najprije u jednom trenutku
+Primjer za to eksplicitno.
+
+1280
+01:02:44,120 --> 01:02:46,340
+>> Idem se vratiti u CS50 IDE.
+
+1281
+01:02:46,340 --> 01:02:50,640
+Idem za stvaranje
+file Ascii 0.c.
+
+1282
+01:02:50,640 --> 01:02:55,960
+I ja ću ići naprijed i dodati moje
+standardni io.h na vrhu, int glavna void
+
+1283
+01:02:55,960 --> 01:02:57,370
+na vrhu moje funkcije.
+
+1284
+01:02:57,370 --> 01:03:02,700
+A onda Samo ću učiniti
+following-- for petlje od ja jednak,
+
+1285
+01:03:02,700 --> 01:03:04,610
+recimo, 65.
+
+1286
+01:03:04,610 --> 01:03:10,460
+>> I onda ja će biti manje od
+65, plus 26 slova abecede.
+
+1287
+01:03:10,460 --> 01:03:12,640
+Dakle, ja ću pustiti računalo
+učiniti math za mene postoji.
+
+1288
+01:03:12,640 --> 01:03:15,100
+I onda unutar te petlje,
+što ću ispisati?
+
+1289
+01:03:15,100 --> 01:03:19,230
+>> % C% i obrnute kose crte n.
+
+1290
+01:03:19,230 --> 01:03:21,290
+A sada želim priključiti dvije vrijednosti.
+
+1291
+01:03:21,290 --> 01:03:24,530
+Ja sam privremeno stavio pitanje
+označava tu pozvati na pitanje.
+
+1292
+01:03:24,530 --> 01:03:29,940
+>> Želim ponoviti od 65 pa nadalje
+26 slova abecede,
+
+1293
+01:03:29,940 --> 01:03:35,190
+ispis na svakoj iteraciji da
+Sastavni ekvivalent lika.
+
+1294
+01:03:35,190 --> 01:03:38,299
+Drugim riječima, želim
+ponoviti više od 26 brojeva ispis
+
+1295
+01:03:38,299 --> 01:03:41,590
+što ASCII karakter, pismo,
+i što je odgovarajući broj is--
+
+1296
+01:03:41,590 --> 01:03:44,650
+zapravo samo ponovno
+grafikon iz tog slajda.
+
+1297
+01:03:44,650 --> 01:03:47,010
+Tako što bi ovi upitnici biti?
+
+1298
+01:03:47,010 --> 01:03:51,760
+>> Pa, ispada da je u drugom
+jednom samo treba biti promjenjiva ja.
+
+1299
+01:03:51,760 --> 01:03:53,860
+Želim vidjeti da je kao broj.
+
+1300
+01:03:53,860 --> 01:03:58,920
+A srednji argument
+ovdje, ja mogu reći računalo
+
+1301
+01:03:58,920 --> 01:04:03,470
+tretirati taj cijeli broj
+ja kao lik, kako
+
+1302
+01:04:03,470 --> 01:04:05,880
+da ga zamijeni ovdje posto C.
+
+1303
+01:04:05,880 --> 01:04:07,990
+>> Drugim riječima, ako sam ja,
+Ljudski programer, znam
+
+1304
+01:04:07,990 --> 01:04:09,865
+to su samo brojevi
+na kraju dana.
+
+1305
+01:04:09,865 --> 01:04:12,500
+I znam da je 65 trebalo
+map na neki karakter.
+
+1306
+01:04:12,500 --> 01:04:15,310
+Uz ovaj izričitog cast,
+sa zagradama,
+
+1307
+01:04:15,310 --> 01:04:18,840
+naziv vrste podataka koje želite
+pretvoriti u, a zatvorena zagrada,
+
+1308
+01:04:18,840 --> 01:04:21,200
+možete reći
+računalo, hej, računalo,
+
+1309
+01:04:21,200 --> 01:04:24,130
+pretvoriti ovaj cijeli broj u char.
+
+1310
+01:04:24,130 --> 01:04:26,250
+>> Dakle, kada sam pokrenuti ovaj
+Program nakon prikupljanja,
+
+1311
+01:04:26,250 --> 01:04:29,740
+da vidimo što sam get-- napraviti ASCII 0.
+
+1312
+01:04:29,740 --> 01:04:33,020
+Prokleto je to, što sam krivo ovdje?
+
+1313
+01:04:33,020 --> 01:04:35,884
+Koristite neprijavljenog identifikator,
+Sve je u redu, a ne namjerna
+
+1314
+01:04:35,884 --> 01:04:37,800
+ali vidjet ćemo, ako ne možemo
+Razlog kroz ovo.
+
+1315
+01:04:37,800 --> 01:04:41,220
+>> Dakle, linija five-- pa nisam mogao
+daleko prije nego uništava.
+
+1316
+01:04:41,220 --> 01:04:42,140
+To je u redu.
+
+1317
+01:04:42,140 --> 01:04:46,560
+Tako je jednak linija 5 za i 65-- vidim.
+
+1318
+01:04:46,560 --> 01:04:50,130
+Dakle, imajte na umu da u C, za razliku od nekih
+jezici, ako imate prethodnu programiranje
+
+1319
+01:04:50,130 --> 01:04:52,190
+iskustva, imate
+reći računalo,
+
+1320
+01:04:52,190 --> 01:04:55,040
+za razliku od nule, što
+Vrsta varijable je.
+
+1321
+01:04:55,040 --> 01:04:56,860
+>> I zaboravio sam ključnu rečenicu ovdje.
+
+1322
+01:04:56,860 --> 01:04:59,200
+U skladu pet, ja sam počeo koristiti i.
+
+1323
+01:04:59,200 --> 01:05:01,560
+Ali nisam rekao C
+koji su podaci tipa je.
+
+1324
+01:05:01,560 --> 01:05:04,570
+Tako ću ići ovdje i
+reći, ah, čine ga cijeli broj.
+
+1325
+01:05:04,570 --> 01:05:07,050
+>> Sad ću ići naprijed i rekompiliranje.
+
+1326
+01:05:07,050 --> 01:05:08,080
+Taj fiksni to.
+
+1327
+01:05:08,080 --> 01:05:12,660
+./ascii0 Enter, to je vrsta cool.
+
+1328
+01:05:12,660 --> 01:05:15,360
+Ne samo da je super brzo za
+pitati računalo na to pitanje,
+
+1329
+01:05:15,360 --> 01:05:18,885
+umjesto da ga se gleda na slajd,
+Isprintajte jedan po retku, A je 65,
+
+1330
+01:05:18,885 --> 01:05:24,860
+B je 66, pa sve down-- Budući da sam
+je to učinio 26 times-- do slova Z,
+
+1331
+01:05:24,860 --> 01:05:25,630
+što je 90.
+
+1332
+01:05:25,630 --> 01:05:27,790
+I, u stvari, blago
+inteligentniji bi
+
+1333
+01:05:27,790 --> 01:05:31,030
+su za mene da se ne oslanjaju
+na računalu da biste dodali 26.
+
+1334
+01:05:31,030 --> 01:05:34,060
+Mogao sam samo učinio
+90, kao i, tako dugo
+
+1335
+01:05:34,060 --> 01:05:37,390
+kao što ja ne napraviti istu grešku dvaput.
+
+1336
+01:05:37,390 --> 01:05:41,880
+Želim ići kroz
+z, a ne samo kroz y.
+
+1337
+01:05:41,880 --> 01:05:44,000
+>> Dakle, to je izričito cast.
+
+1338
+01:05:44,000 --> 01:05:47,860
+Ispada da je ovaj
+nije ni potrebno.
+
+1339
+01:05:47,860 --> 01:05:52,480
+Pusti me naprijed i ponovno ovu
+prevodilac, i ponovno Ascii 0.
+
+1340
+01:05:52,480 --> 01:05:54,940
+Ispada da je C je prilično pametan.
+
+1341
+01:05:54,940 --> 01:05:57,150
+>> I printf, posebno,
+je prilično pametan.
+
+1342
+01:05:57,150 --> 01:06:01,260
+Ako ste upravo prođe Dvaput sam
+za oba rezerviranih mjesta, printf
+
+1343
+01:06:01,260 --> 01:06:04,510
+shvatit će, oh, dobro te znam
+mi je dao integer-- neki broj,
+
+1344
+01:06:04,510 --> 01:06:06,380
+kao što su 65 ili 90, ili bilo što drugo.
+
+1345
+01:06:06,380 --> 01:06:10,170
+Ali vidim da si me žele
+formatirati taj broj kao lik.
+
+1346
+01:06:10,170 --> 01:06:16,460
+I tako printf implicitno može baciti
+INT na char za vas kao dobro.
+
+1347
+01:06:16,460 --> 01:06:19,360
+Dakle, to nije nikakav problem.
+
+1348
+01:06:19,360 --> 01:06:23,100
+>> Ali primijetiti, zbog ove ekvivalencije
+zapravo možemo učiniti kao dobro.
+
+1349
+01:06:23,100 --> 01:06:26,520
+Pusti me naprijed i napraviti jedan
+druga verzija učinimo ASCII 1.c.
+
+1350
+01:06:26,520 --> 01:06:31,800
+I umjesto da prolazi preko
+cijeli brojevi, zaista može puhati vaš um
+
+1351
+01:06:31,800 --> 01:06:33,610
+ponavljanjem više znakova.
+
+1352
+01:06:33,610 --> 01:06:37,660
+Ako char c dobiva kapitalni A, ja
+žele ići naprijed i učiniti,
+
+1353
+01:06:37,660 --> 01:06:41,740
+tako dugo dok je C manja od ili jednaka
+do grada Z., a na svakoj iteraciji
+
+1354
+01:06:41,740 --> 01:06:45,690
+Želim povećajte C, mogu
+Sada u mom printf liniji ovdje
+
+1355
+01:06:45,690 --> 01:06:51,320
+recimo, posto je C
+posto sam opet, zarez C.
+
+1356
+01:06:51,320 --> 01:06:57,200
+>> A sada, ja mogu otići na drugi smjer,
+lijevanje karakter izričito
+
+1357
+01:06:57,200 --> 01:06:58,500
+u cijeli broj.
+
+1358
+01:06:58,500 --> 01:07:00,560
+Dakle, opet, zašto bi to učinili?
+
+1359
+01:07:00,560 --> 01:07:03,830
+To je malo čudno da se na neki način
+računati u smislu znakova.
+
+1360
+01:07:03,830 --> 01:07:07,430
+>> Ali, ako ste razumjeli što je
+događa ispod haube,
+
+1361
+01:07:07,430 --> 01:07:08,430
+da stvarno nema magije.
+
+1362
+01:07:08,430 --> 01:07:13,060
+Samo si rekao, hej, računalo dati
+ja varijabla zove C tipa char.
+
+1363
+01:07:13,060 --> 01:07:16,520
+inicijalizaciju do glavnog A. A
+primjetiti jednu citati materiju.
+
+1364
+01:07:16,520 --> 01:07:19,580
+>> Za likova u C, podsjećaju iz
+prošli tjedan, koristite jednostruke navodnike.
+
+1365
+01:07:19,580 --> 01:07:23,720
+Za gudače, riječi,
+fraze, koristite navodnike.
+
+1366
+01:07:23,720 --> 01:07:27,210
+OK, računalo, stalno to, pa
+Sve dok lik je manji od
+
+1367
+01:07:27,210 --> 01:07:28,050
+ili jednak z.
+
+1368
+01:07:28,050 --> 01:07:32,640
+I znam da iz mog ASCII tablice da je sve
+tih ASCII kodovi se nastavljaju.
+
+1369
+01:07:32,640 --> 01:07:33,400
+>> Nema praznine.
+
+1370
+01:07:33,400 --> 01:07:36,737
+Dakle, to je samo A do Z,
+odvojeni jednim brojem svakog.
+
+1371
+01:07:36,737 --> 01:07:38,820
+I onda ja mogu povećavati
+ugljen, ako sam stvarno želite.
+
+1372
+01:07:38,820 --> 01:07:40,390
+Na kraju dana,
+to je samo broj.
+
+1373
+01:07:40,390 --> 01:07:41,030
+Znam to.
+
+1374
+01:07:41,030 --> 01:07:43,670
+Dakle, ja mogu samo pretpostaviti da dodate 1 do njega.
+
+1375
+01:07:43,670 --> 01:07:46,940
+>> I onda ovaj put, ja ispisati c,
+a onda je sastavni ekvivalent.
+
+1376
+01:07:46,940 --> 01:07:50,170
+A ja ni ne treba eksplicitan cast.
+
+1377
+01:07:50,170 --> 01:07:52,680
+Mogu pustiti printf a
+Računalo shvatiti stvari,
+
+1378
+01:07:52,680 --> 01:07:57,300
+tako da sada, ako sam pokrenuti
+napraviti Ascii1./ascii1,
+
+1379
+01:07:57,300 --> 01:08:01,520
+JA dobiti točno istu stvar kao dobro.
+
+1380
+01:08:01,520 --> 01:08:04,530
+>> Beskoristan program though-- nikoga
+će zapravo pisanje softvera
+
+1381
+01:08:04,530 --> 01:08:07,549
+kako bi se shvatiti, što je
+broj koji se preslikava na A ili B, ili Z?
+
+1382
+01:08:07,549 --> 01:08:10,340
+Samo si idući u Google ili
+gledati ga online, ili ga potražite
+
+1383
+01:08:10,340 --> 01:08:11,650
+na slajd, ili slično.
+
+1384
+01:08:11,650 --> 01:08:13,520
+Pa gdje se to zaista dobiti korisne?
+
+1385
+01:08:13,520 --> 01:08:15,960
+>> Pa, govoreći o tome
+tobogan, primijetiti da postoji
+
+1386
+01:08:15,960 --> 01:08:20,890
+stvarni uzorak ovdje između velikih
+i mala to nije bilo slučajno.
+
+1387
+01:08:20,890 --> 01:08:23,760
+Uočite da je kapital A je 65.
+
+1388
+01:08:23,760 --> 01:08:25,830
+Mala je a 97.
+
+1389
+01:08:25,830 --> 01:08:29,649
+A koliko je daleko niža slučaju se?
+
+1390
+01:08:29,649 --> 01:08:32,649
+>> Dakle, 65 je koliko je koraka od 97?
+
+1391
+01:08:32,649 --> 01:08:36,210
+Dakle, 97 minus 65 je 32.
+
+1392
+01:08:36,210 --> 01:08:37,910
+Dakle, glavni je a 65.
+
+1393
+01:08:37,910 --> 01:08:39,939
+Ako dodate 32 na to,
+ste dobili mala slova a.
+
+1394
+01:08:39,939 --> 01:08:43,729
+I, ekvivalentno, ako oduzmemo 32,
+li se vratiti u glavni grad A- isto s B
+
+1395
+01:08:43,729 --> 01:08:46,380
+na malo b, veliki C do malog c.
+
+1396
+01:08:46,380 --> 01:08:50,670
+>> Sve ove praznine su 32 apart.
+
+1397
+01:08:50,670 --> 01:08:54,450
+Sada, to čini da bi nam omogućiti da
+nešto kao što su Microsoft Word,
+
+1398
+01:08:54,450 --> 01:08:57,729
+ili Google Docs imaju, gdje vas
+Možete odabrati sve i onda reći:
+
+1399
+01:08:57,729 --> 01:09:00,520
+promijeniti sve u mala slova, ili
+promijeniti sve u velika slova,
+
+1400
+01:09:00,520 --> 01:09:03,840
+ili promijeniti samo prvu riječ
+kazne u gornjem slučaju.
+
+1401
+01:09:03,840 --> 01:09:07,390
+Mi zapravo može učiniti nešto
+kao što je to nama samima.
+
+1402
+01:09:07,390 --> 01:09:12,645
+>> Pusti me naprijed i spremanje datoteke
+ovdje se zove kapitalizirati 0.c.
+
+1403
+01:09:12,645 --> 01:09:15,770
+I idemo naprijed i ščepati program
+koji radi upravo to kako slijedi.
+
+1404
+01:09:15,770 --> 01:09:18,460
+Dakle uključuju CS50 knjižnicu.
+
+1405
+01:09:18,460 --> 01:09:21,430
+A uključuju standardni I / O.
+
+1406
+01:09:21,430 --> 01:09:22,787
+>> I znam da je to uskoro.
+
+1407
+01:09:22,787 --> 01:09:24,870
+Tako ću ga staviti u
+već tamo, string.h,
+
+1408
+01:09:24,870 --> 01:09:26,960
+tako da imam pristup
+stvari kao što su Stirling,
+
+1409
+01:09:26,960 --> 01:09:29,620
+a zatim int glavni prazninu, kao i obično.
+
+1410
+01:09:29,620 --> 01:09:33,420
+A onda ću ići naprijed
+i to konce dobiva dobili niz,
+
+1411
+01:09:33,420 --> 01:09:35,032
+samo da bi dobili niz od korisnika.
+
+1412
+01:09:35,032 --> 01:09:36,740
+A onda ću
+raditi svoj razum ček.
+
+1413
+01:09:36,740 --> 01:09:40,510
+Ako string nije jednak null,
+onda je sigurno nastaviti.
+
+1414
+01:09:40,510 --> 01:09:42,000
+A što ja želim?
+
+1415
+01:09:42,000 --> 01:09:48,700
+Idem ponoviti iz i = 0,
+a nje do duljine niza s.
+
+1416
+01:09:48,700 --> 01:09:51,899
+>> I ja ću to učiniti, tako dugo dok
+je i manje od nje, a ja plus plus.
+
+1417
+01:09:51,899 --> 01:09:55,060
+Do sada, ja sam zapravo samo
+posuđivanje ideja od prije.
+
+1418
+01:09:55,060 --> 01:09:57,010
+A sada ću predstaviti granu.
+
+1419
+01:09:57,010 --> 01:09:59,635
+>> Tako da mislim natrag nule, gdje je
+imali smo one vilice na cesti,
+
+1420
+01:09:59,635 --> 01:10:05,110
+a prošli tjedan u C. idem
+ovo reći, ako je i-lik s
+
+1421
+01:10:05,110 --> 01:10:09,250
+veći ili
+jednaka mala slova a,
+
+1422
+01:10:09,250 --> 01:10:13,340
+and-- u nule što bi doslovno
+reći i, ali u C kažeš znak za struju,
+
+1423
+01:10:13,340 --> 01:10:19,830
+ampersand-- i i-lik s
+je manja od ili jednaka mala slova Z,
+
+1424
+01:10:19,830 --> 01:10:21,780
+neka je učiniti nešto zanimljivo.
+
+1425
+01:10:21,780 --> 01:10:27,020
+Idemo zapravo ispisati
+lik bez novi red
+
+1426
+01:10:27,020 --> 01:10:31,760
+to je znak u nizu,
+i-th znak u nizu.
+
+1427
+01:10:31,760 --> 01:10:37,420
+>> No, idemo naprijed i
+oduzmite 32 od toga.
+
+1428
+01:10:37,420 --> 01:10:42,120
+Inače, ako je znak u
+niz koji tražimo
+
+1429
+01:10:42,120 --> 01:10:45,950
+nije između malog a
+i malo z, samo naprijed
+
+1430
+01:10:45,950 --> 01:10:48,610
+i samo ga ispisati nepromijenjen.
+
+1431
+01:10:48,610 --> 01:10:50,840
+Tako smo uveli
+ovo bracketed zapis
+
+1432
+01:10:50,840 --> 01:10:53,560
+za naše žice da biste dobili na
+i-znak u nizu.
+
+1433
+01:10:53,560 --> 01:10:57,520
+>> Ja sam dodao neke uvjetno logike, kao što su
+Blok u prošlotjednom tjedan jedan, gdje
+
+1434
+01:10:57,520 --> 01:10:59,880
+Ja sam samo pomoću moje temeljno
+razumijevanje onoga što je
+
+1435
+01:10:59,880 --> 01:11:01,130
+događa ispod haube.
+
+1436
+01:11:01,130 --> 01:11:04,190
+Jeli I-og karakter s
+veći ili jednak do?
+
+1437
+01:11:04,190 --> 01:11:08,290
+Kao, je li to 97 ili 98,
+ili 99, i tako dalje?
+
+1438
+01:11:08,290 --> 01:11:11,940
+>> Ali također manja od ili jednaka
+vrijednosti od malih z?
+
+1439
+01:11:11,940 --> 01:11:16,210
+I ako je tako, što to crta znači?
+
+1440
+01:11:16,210 --> 01:11:20,250
+14, to je vrsta od
+klice od cijele ideje,
+
+1441
+01:11:20,250 --> 01:11:23,840
+iskoristiti pismo po
+Jednostavno oduzimanjem 32 od njega,
+
+1442
+01:11:23,840 --> 01:11:29,370
+u ovom slučaju, jer znam, po to
+grafikon, kako su zastupljeni moji brojevi.
+
+1443
+01:11:29,370 --> 01:11:33,925
+Tako ćemo ići naprijed i pokrenuti ovaj,
+Nakon prikupljanja kapitalizirati 0.c,
+
+1444
+01:11:33,925 --> 01:11:36,210
+i trčanje kapitalizirati 0.
+
+1445
+01:11:36,210 --> 01:11:40,300
+>> Idemo upisati nešto slično
+Zamyla u svim malim slovima upisati.
+
+1446
+01:11:40,300 --> 01:11:42,780
+I sada imamo Zamyla u svim velikim slovima.
+
+1447
+01:11:42,780 --> 01:11:45,050
+Idemo upisati Roba u svim malim slovima.
+
+1448
+01:11:45,050 --> 01:11:46,674
+Pokušajmo Jasona u svim malim slovima.
+
+1449
+01:11:46,674 --> 01:11:48,590
+I držimo dobivanje
+prisiljeni kapitalizacije.
+
+1450
+01:11:48,590 --> 01:11:50,960
+Postoji manji bug koji sam
+vrsta nije očekivao.
+
+1451
+01:11:50,960 --> 01:11:54,050
+Obavijest moj novi redak je završio
+na istoj liniji kao i njihova imena,
+
+1452
+01:11:54,050 --> 01:11:55,520
+koji se osjeća malo neuredan.
+
+1453
+01:11:55,520 --> 01:11:59,170
+>> Tako ću ići ovdje i
+zapravo na kraju ovog programa
+
+1454
+01:11:59,170 --> 01:12:02,110
+ispisati novi red karakter.
+
+1455
+01:12:02,110 --> 01:12:03,160
+To je sve.
+
+1456
+01:12:03,160 --> 01:12:06,120
+Uz printf, vi ne morate
+proći varijabli ili format koda.
+
+1457
+01:12:06,120 --> 01:12:08,460
+Vi doslovno možete jednostavno ispisati
+nešto kao novi red.
+
+1458
+01:12:08,460 --> 01:12:13,529
+>> Tako ćemo ići naprijed i učiniti
+kapitalizirati 0 opet ponoviti to, Zamyla.
+
+1459
+01:12:13,529 --> 01:12:14,820
+A sada je malo ljepše.
+
+1460
+01:12:14,820 --> 01:12:17,274
+Sada, moj brz je na svom novom linijom.
+
+1461
+01:12:17,274 --> 01:12:18,440
+Tako da je sve u redu i dobro.
+
+1462
+01:12:18,440 --> 01:12:19,910
+Dakle, to je dobar primjer.
+
+1463
+01:12:19,910 --> 01:12:22,700
+Ali ja uopće ne mora nužno
+potrebno je hard kod 32.
+
+1464
+01:12:22,700 --> 01:12:23,350
+Znaš što?
+
+1465
+01:12:23,350 --> 01:12:26,350
+Mogao sam say-- ja nikada ne
+Sjeti se što je razlika.
+
+1466
+01:12:26,350 --> 01:12:29,330
+>> Ali znam da ako ja
+imaju malim slovom,
+
+1467
+01:12:29,330 --> 01:12:34,430
+Ja u biti želim oduzimati off
+bez obzira na udaljenost između malo
+
+1468
+01:12:34,430 --> 01:12:39,160
+A i jedan veliki, jer ako pretpostavimo da
+sve ostale slovima su isti,
+
+1469
+01:12:39,160 --> 01:12:41,045
+koji bi trebao dobiti posao ispunjavanja.
+
+1470
+01:12:41,045 --> 01:12:42,670
+No, umjesto da to, znaš što?
+
+1471
+01:12:42,670 --> 01:12:44,240
+Postoji drugi način dalje.
+
+1472
+01:12:44,240 --> 01:12:48,090
+>> Ako je to kapitalizirati 1.c-- da sam
+staviti da u zasebnu datoteku.
+
+1473
+01:12:48,090 --> 01:12:51,030
+neka je ne iskoristiti 2.c kako slijedi.
+
+1474
+01:12:51,030 --> 01:12:53,060
+Idem stvarno očistiti ovo ovdje.
+
+1475
+01:12:53,060 --> 01:12:57,420
+I umjesto da čak i da se
+znaju ili briga o tim niskoj razini
+
+1476
+01:12:57,420 --> 01:13:01,090
+pojedinosti provedbe, ja sam umjesto
+samo ide za ispis karakter,
+
+1477
+01:13:01,090 --> 01:13:04,610
+citat citat, posto C, a
+zatim pozvati drugu funkciju koja
+
+1478
+01:13:04,610 --> 01:13:09,950
+postoji koji traje argument,
+koji je lik, kao što je ovaj.
+
+1479
+01:13:09,950 --> 01:13:12,630
+>> Ispada u C, ima
+još jedna funkcija poziva
+
+1480
+01:13:12,630 --> 01:13:15,550
+na gornji, koji je kao svoje ime
+predlaže potrebno slovo
+
+1481
+01:13:15,550 --> 01:13:19,350
+i to čini na njegovu gornjem slučaju
+ekvivalent, a zatim ga vraća
+
+1482
+01:13:19,350 --> 01:13:21,410
+tako da printf može priključiti tamo.
+
+1483
+01:13:21,410 --> 01:13:25,484
+I tako to učiniti, iako sam
+potrebno je uvesti još jednu datoteku.
+
+1484
+01:13:25,484 --> 01:13:28,400
+Ispada postoji još jedan file
+da bi samo znali iz razreda,
+
+1485
+01:13:28,400 --> 01:13:33,020
+ili udžbenik ili online
+referenca, pod nazivom C type.h.
+
+1486
+01:13:33,020 --> 01:13:38,570
+>> Dakle, ako sam dodati da se kod mog napadača
+datoteke, a sada ponovno sastaviti ovaj program,
+
+1487
+01:13:38,570 --> 01:13:43,040
+capitalize2, ./capitalize2 Enter.
+
+1488
+01:13:43,040 --> 01:13:46,690
+Idemo upisati Zamyla u svemu
+mala slova, i dalje radi isto.
+
+1489
+01:13:46,690 --> 01:13:48,040
+Ali znate što?
+
+1490
+01:13:48,040 --> 01:13:55,590
+Ispada da se gornja
+ima neke druge funkcionalnosti.
+
+1491
+01:13:55,590 --> 01:13:58,410
+>> I neka me upoznati ovaj
+zapovijedam ovdje, nekako nespretno
+
+1492
+01:13:58,410 --> 01:14:00,250
+ime, ali čovjek za uporabu.
+
+1493
+01:14:00,250 --> 01:14:03,960
+Ispostavilo se da je većina Linux računala,
+kao što mi koristimo here-- Linux operativni
+
+1494
+01:14:03,960 --> 01:14:06,270
+system-- imaju naredbu
+zvana čovjek, koji kaže:
+
+1495
+01:14:06,270 --> 01:14:08,530
+hej, računalo, daj mi
+računala priručnik.
+
+1496
+01:14:08,530 --> 01:14:10,680
+Što želiš
+gledati u tom priručniku?
+
+1497
+01:14:10,680 --> 01:14:13,840
+>> Želim pogledati funkciju
+pozvani da gornja, Enter.
+
+1498
+01:14:13,840 --> 01:14:16,070
+A to je malo zagonetna
+čitati ponekad.
+
+1499
+01:14:16,070 --> 01:14:18,780
+Ali primijetiti da smo u
+Linux programer priručnik.
+
+1500
+01:14:18,780 --> 01:14:19,530
+I to je sve tekst.
+
+1501
+01:14:19,530 --> 01:14:21,905
+A primijetiti da je
+naziv funkcije ovdje.
+
+1502
+01:14:21,905 --> 01:14:25,030
+Ispada da ima rođaka pod nazivom
+na niže, što čini suprotno.
+
+1503
+01:14:25,030 --> 01:14:29,710
+I obavijest pod sinopsis, koristiti ovu
+funkcionirati stranicu čovjek, da tako kažemo,
+
+1504
+01:14:29,710 --> 01:14:32,220
+govori mi da
+potrebno uključiti c type.h.
+
+1505
+01:14:32,220 --> 01:14:33,630
+I znao sam da je od prakse.
+
+1506
+01:14:33,630 --> 01:14:36,210
+>> Evo, to je da mi pokaže dva
+prototipova za funkciju,
+
+1507
+01:14:36,210 --> 01:14:39,070
+tako da, ako sam ikada želite koristiti ovu
+Znam što su uzeti kao ulaz,
+
+1508
+01:14:39,070 --> 01:14:40,652
+i što su se vratili kao izlaz.
+
+1509
+01:14:40,652 --> 01:14:42,360
+A onda, ako sam pročitao
+opis, vidim
+
+1510
+01:14:42,360 --> 01:14:44,820
+detaljnije što funkcija radi.
+
+1511
+01:14:44,820 --> 01:14:48,100
+No, još važnije, ako
+Gledam u povratnom vrijednosti,
+
+1512
+01:14:48,100 --> 01:14:51,710
+kaže se vrijednost vratio je
+koji je pretvorena pismu,
+
+1513
+01:14:51,710 --> 01:14:57,880
+ili C, originalni ulaz, ako
+pretvorba nije bilo moguće.
+
+1514
+01:14:57,880 --> 01:15:01,992
+>> Drugim riječima, da se gornja će pokušati
+pretvoriti pismo u velika slova.
+
+1515
+01:15:01,992 --> 01:15:03,450
+I ako je tako, to će ga vratiti.
+
+1516
+01:15:03,450 --> 01:15:07,010
+Ali ako to ne može za neke reason--
+možda je već velika slova,
+
+1517
+01:15:07,010 --> 01:15:09,550
+možda je uskličnik
+ili neki drugi punctuation--
+
+1518
+01:15:09,550 --> 01:15:12,200
+to je samo ide
+povratak izvorni C,
+
+1519
+01:15:12,200 --> 01:15:17,340
+što znači da mogu napraviti moj broj
+većoj mjeri kao što slijedi.
+
+1520
+01:15:17,340 --> 01:15:20,580
+>> Ne treba mi sve
+ti prokleto linija koda.
+
+1521
+01:15:20,580 --> 01:15:22,610
+Sve linije sam
+Samo istaknuo mogu
+
+1522
+01:15:22,610 --> 01:15:28,700
+se srušio u samo jednom jednostavnom
+linija, što je učinimo printf posto
+
+1523
+01:15:28,700 --> 01:15:33,510
+c gornje S nosača i.
+
+1524
+01:15:33,510 --> 01:15:36,090
+I to će biti
+Primjer bolji dizajn.
+
+1525
+01:15:36,090 --> 01:15:40,040
+>> Zašto provesti u 7 ili 8 linija
+koda, što god to bilo samo sam
+
+1526
+01:15:40,040 --> 01:15:44,960
+izbrisan, kad umjesto toga može se srušiti
+sve je to logika i odlučivanje
+
+1527
+01:15:44,960 --> 01:15:49,620
+u jednu liniju, 13, koji
+oslanja se na knjižnici function--
+
+1528
+01:15:49,620 --> 01:15:53,430
+funkcija koja dolazi s C, ali to
+radi upravo ono što želite učiniti.
+
+1529
+01:15:53,430 --> 01:15:55,295
+I, iskreno, čak i ako
+nije došao s C,
+
+1530
+01:15:55,295 --> 01:15:58,880
+možete ga provoditi sami, kao što je
+vidjeli smo, uz dobili negativan int
+
+1531
+01:15:58,880 --> 01:16:01,700
+i dobiti pozitivno int prošli tjedan, kao dobro.
+
+1532
+01:16:01,700 --> 01:16:03,470
+>> Ovaj kod je sada puno više čitati.
+
+1533
+01:16:03,470 --> 01:16:06,670
+I doista, ako se pomičite se gore,
+Pogledajte kako je kompaktniji
+
+1534
+01:16:06,670 --> 01:16:08,360
+ova verzija mog programa je.
+
+1535
+01:16:08,360 --> 01:16:11,230
+To je malo teži pri vrhu, i sada,
+uz sve to sadrži.
+
+1536
+01:16:11,230 --> 01:16:14,380
+No, to je u redu, jer sada stojim
+na ramenima programera
+
+1537
+01:16:14,380 --> 01:16:15,300
+prije mene.
+
+1538
+01:16:15,300 --> 01:16:18,440
+I tko god to bio, koji
+provodi se gornja stvarno
+
+1539
+01:16:18,440 --> 01:16:21,470
+nije mi uslugu, slično ko
+provodi Stirling stvarno
+
+1540
+01:16:21,470 --> 01:16:24,790
+nije mi uslugu prije nekog vremena.
+
+1541
+01:16:24,790 --> 01:16:26,970
+I tako sada imamo
+bolji program design
+
+1542
+01:16:26,970 --> 01:16:31,680
+koje provodi isti logiku.
+
+1543
+01:16:31,680 --> 01:16:35,580
+>> Govoreći o Stirling, neka
+mi ići naprijed i učiniti.
+
+1544
+01:16:35,580 --> 01:16:38,320
+Pusti me naprijed i spasiti
+Na ovu sliku kao stirling.c.
+
+1545
+01:16:38,320 --> 01:16:43,255
+I to ispada, mi možemo ponovno oguliti
+još jedan sloj prilično jednostavno sada.
+
+1546
+01:16:43,255 --> 01:16:45,630
+Ja ću ići naprijed i bič
+do drugog programa u glavnom
+
+1547
+01:16:45,630 --> 01:16:49,759
+da se ovdje jednostavno ponovno implementira
+Duljina niza na sljedeći način.
+
+1548
+01:16:49,759 --> 01:16:52,300
+Dakle, ovdje je linija koda koji
+dobiva mi niz od korisnika.
+
+1549
+01:16:52,300 --> 01:16:53,910
+Mi dalje koristiti opet i opet.
+
+1550
+01:16:53,910 --> 01:16:58,900
+Dopustite mi da si dati varijablu naziva
+n tipa int koja pohranjuje broj.
+
+1551
+01:16:58,900 --> 01:17:02,490
+>> I neka mi ići naprijed i
+učinite sljedeće logike.
+
+1552
+01:17:02,490 --> 01:17:15,610
+Dok je n-ti lik s ne
+nije jednako kosih crta 0, samo naprijed
+
+1553
+01:17:15,610 --> 01:17:17,930
+i povećajte n.
+
+1554
+01:17:17,930 --> 01:17:23,506
+A onda ispisati printf posto I n.
+
+1555
+01:17:23,506 --> 01:17:29,200
+Tvrdim da je ovaj program ovdje,
+bez poziva duljinu niza,
+
+1556
+01:17:29,200 --> 01:17:31,150
+figure out duljinu niza.
+
+1557
+01:17:31,150 --> 01:17:34,600
+>> A magija je u cijelosti
+upakiranog u redu 8
+
+1558
+01:17:34,600 --> 01:17:39,830
+Ovdje s onim što izgleda kao novi sintakse,
+ova obrnuta kosa crta 0 u jednostrukim navodnicima.
+
+1559
+01:17:39,830 --> 01:17:41,360
+Ali zašto je to tako?
+
+1560
+01:17:41,360 --> 01:17:44,100
+Pa, razmislite što je bio
+događa sve ovo vrijeme.
+
+1561
+01:17:44,100 --> 01:17:47,990
+>> I kao usput da ne zaboravim, shvatiti
+također, da osim man stranice
+
+1562
+01:17:47,990 --> 01:17:50,920
+koji dolaze s tipično
+Linux sustav kao CS50 IDE,
+
+1563
+01:17:50,920 --> 01:17:53,770
+shvatiti da smo mi,
+Naravno osoblje, imaju također
+
+1564
+01:17:53,770 --> 01:17:56,030
+napravio web verziju
+ove iste ideje pod nazivom
+
+1565
+01:17:56,030 --> 01:17:59,940
+reference.cs50.net, koji je
+sve od tih istih man stranica,
+
+1566
+01:17:59,940 --> 01:18:02,020
+sve to isto
+dokumentacija, kao
+
+1567
+01:18:02,020 --> 01:18:05,730
+malo dragocjenosti na vrhu koji omogućava
+da se pretvoriti sve na relativno
+
+1568
+01:18:05,730 --> 01:18:09,025
+arcane jezik u manje ugodno
+Način rada, gdje smo, nastavno osoblje,
+
+1569
+01:18:09,025 --> 01:18:12,150
+su prošla i pokušao pojednostaviti
+neki od jezika kako bi stvari
+
+1570
+01:18:12,150 --> 01:18:14,830
+usmjerena na idejama, a ne
+neki od tehnikalija.
+
+1571
+01:18:14,830 --> 01:18:20,070
+Dakle, imajte na umu, reference.cs50.net
+kao drugog resursa, kao dobro.
+
+1572
+01:18:20,070 --> 01:18:23,800
+>> Ali zašto duljine niza rada u
+način na koji sam predložio trenutak prije?
+
+1573
+01:18:23,800 --> 01:18:25,160
+Evo Zamyla ime ponovno.
+
+1574
+01:18:25,160 --> 01:18:27,690
+I ovdje je Zamyla ime
+uokvireno u, kao što sam to raditi,
+
+1575
+01:18:27,690 --> 01:18:31,360
+slikati sliku da ga se,
+zapravo, samo niz znakova.
+
+1576
+01:18:31,360 --> 01:18:34,260
+Ali Zamyla ne postoji
+u izolaciji u programu.
+
+1577
+01:18:34,260 --> 01:18:37,420
+>> Kada pišete i pokrenuti program,
+koju koristite Mac ili računalo
+
+1578
+01:18:37,420 --> 01:18:40,010
+što su memorija, ili RAM takoreći.
+
+1579
+01:18:40,010 --> 01:18:42,620
+A možete misliti
+računalo kao vlasništvo
+
+1580
+01:18:42,620 --> 01:18:44,730
+puno gigabajta memorije ovih dana.
+
+1581
+01:18:44,730 --> 01:18:47,700
+A koncert znači milijarde,
+tako milijarde bajtova.
+
+1582
+01:18:47,700 --> 01:18:48,910
+>> Ali neka se unatrag u vremenu.
+
+1583
+01:18:48,910 --> 01:18:51,530
+I pretpostavimo da koristimo
+stvarno staro računalo koje
+
+1584
+01:18:51,530 --> 01:18:55,150
+ima samo 32 bajtova memorije.
+
+1585
+01:18:55,150 --> 01:18:59,310
+Mogao bih, na mom zaslonu računala,
+jednostavno povući to na sljedeći način.
+
+1586
+01:18:59,310 --> 01:19:05,240
+>> Ja jednostavno mogao reći da je moj
+računalo ima sve ove memorije.
+
+1587
+01:19:05,240 --> 01:19:08,830
+A to je kao stick memorije, ako
+li podsjetiti naše slike iz prošlog vremena.
+
+1588
+01:19:08,830 --> 01:19:11,670
+A ako sam podijeliti
+to u dovoljno vremena,
+
+1589
+01:19:11,670 --> 01:19:15,040
+Ja tvrdim da imam 32 bajta
+memorije na ekranu.
+
+1590
+01:19:15,040 --> 01:19:18,239
+>> Sada, u stvarnosti, ja samo mogu
+izvući do sada na ovom ekranu ovdje.
+
+1591
+01:19:18,239 --> 01:19:20,280
+Tako ću ići naprijed,
+i samo po konvenciji,
+
+1592
+01:19:20,280 --> 01:19:24,050
+izvući memoriju mog računala kao
+rešetke, a ne samo kao jedan pravac.
+
+1593
+01:19:24,050 --> 01:19:28,190
+Naime, ja tvrdim da sada
+ova rešetka, to 8 od 4 rešetke,
+
+1594
+01:19:28,190 --> 01:19:31,800
+samo predstavlja sve 32 bajta
+memorije na raspolaganju na mom Macu,
+
+1595
+01:19:31,800 --> 01:19:33,030
+ili dostupan u moj PC.
+
+1596
+01:19:33,030 --> 01:19:34,780
+I oni su umatanje
+na dvije linije, samo
+
+1597
+01:19:34,780 --> 01:19:38,030
+jer se uklapa više na ekranu.
+
+1598
+01:19:38,030 --> 01:19:40,800
+No, ovo je prvi bajt.
+
+1599
+01:19:40,800 --> 01:19:41,990
+Ovo je drugi bajt.
+
+1600
+01:19:41,990 --> 01:19:43,300
+Ovo je treći bajt.
+
+1601
+01:19:43,300 --> 01:19:45,310
+>> I ovo je 32. bajt.
+
+1602
+01:19:45,310 --> 01:19:52,910
+Ili, ako mislimo poput računala
+Znanstvenik to bajtove 0, 1, 2, 3, 31.
+
+1603
+01:19:52,910 --> 01:19:55,950
+Dakle, morate 0 do 31, ako
+početi računajući na 0.
+
+1604
+01:19:55,950 --> 01:19:59,830
+>> Dakle, ako ćemo koristiti program
+da pozivi dobili niz,
+
+1605
+01:19:59,830 --> 01:20:05,280
+i dobili smo niz od čovjeka
+kao da je nazvao Zamyla, Z-A-M-Y-L-A,
+
+1606
+01:20:05,280 --> 01:20:09,430
+kako u svijetu čini
+Računalo pratiti što bajt,
+
+1607
+01:20:09,430 --> 01:20:12,230
+koji komad memorije,
+pripada kojoj string?
+
+1608
+01:20:12,230 --> 01:20:16,270
+Drugim riječima, ako ćemo do
+unesite drugo ime u računalo,
+
+1609
+01:20:16,270 --> 01:20:19,890
+kao što je ovaj Andi, pozivajući
+dobili niz drugi put,
+
+1610
+01:20:19,890 --> 01:20:23,030
+A-N-D-ja mora završiti u
+memorije računala, kao dobro.
+
+1611
+01:20:23,030 --> 01:20:23,850
+Ali kako?
+
+1612
+01:20:23,850 --> 01:20:29,700
+>> Pa, ispada da ispod
+napa, ono C se pri spremanju žice
+
+1613
+01:20:29,700 --> 01:20:35,080
+da ljudski vrste u, ili da
+dolazi iz nekog drugog izvora, je li
+
+1614
+01:20:35,080 --> 01:20:39,190
+ocrtava kraj njih s
+posebna character-- kosih crta
+
+1615
+01:20:39,190 --> 01:20:44,750
+0, što je samo jedan poseban način
+govoreći: 80 bitova u nizu.
+
+1616
+01:20:44,750 --> 01:20:47,950
+>> Dakle, A- ovo je broj 97 opoziv.
+
+1617
+01:20:47,950 --> 01:20:51,770
+Tako su neki uzorak od 8 bitova
+predstavlja decimalni broj 97.
+
+1618
+01:20:51,770 --> 01:20:58,070
+Ova obrnuta kosa crta 0 je doslovno broj
+0, poznatiji NSK, N-U-L, za razliku od ranije,
+
+1619
+01:20:58,070 --> 01:20:59,630
+N-U-L-L, kojima smo razgovarali o tome.
+
+1620
+01:20:59,630 --> 01:21:05,700
+No, za sada, samo znam da je to
+Obrnuta kosa crta 0 je samo 80 bita u nizu.
+
+1621
+01:21:05,700 --> 01:21:09,810
+>> A to je samo ova linija u
+pijesak koji kaže da ništa na lijevo
+
+1622
+01:21:09,810 --> 01:21:12,610
+pripada jednoj žici, ili jedan tip podataka.
+
+1623
+01:21:12,610 --> 01:21:15,480
+I ništa na desno
+spada u nešto drugo.
+
+1624
+01:21:15,480 --> 01:21:17,440
+Andi je ime, u međuvremenu,
+koji je upravo vizualno
+
+1625
+01:21:17,440 --> 01:21:21,310
+događa završiti na drugoj liniji,
+ali to je samo estetski detalj,
+
+1626
+01:21:21,310 --> 01:21:23,990
+Slično se prekida nul.
+
+1627
+01:21:23,990 --> 01:21:29,290
+>> To je niz od A-N-D-i znakova,
+plus jedna petina tajni znak,
+
+1628
+01:21:29,290 --> 01:21:33,560
+sve 0 bita, samo da markira
+kraj Andi ime kao dobro.
+
+1629
+01:21:33,560 --> 01:21:37,120
+A ako mi zovemo dobili STRING po treći put
+u računalo da biste dobili niz kao što je
+
+1630
+01:21:37,120 --> 01:21:44,210
+Maria, M-A-R-I-A, na sličan je Maria je
+Naziv nul prestaje s obrnute kose crte 0.
+
+1631
+01:21:44,210 --> 01:21:47,170
+>> To je bitno drugačija
+od kako računalo će obično
+
+1632
+01:21:47,170 --> 01:21:51,850
+pohraniti cijeli broj, ili plovak ili drugi
+vrste podataka i dalje, jer opoziva,
+
+1633
+01:21:51,850 --> 01:21:57,420
+cijeli je obično 32 bita ili
+4 bajta, ili možda čak i 64 bita,
+
+1634
+01:21:57,420 --> 01:21:59,100
+ili osam bajtova.
+
+1635
+01:21:59,100 --> 01:22:02,620
+No, mnogi primitivci u računalo
+u programskom jeziku
+
+1636
+01:22:02,620 --> 01:22:05,550
+ima fiksni broj
+bajtova ispod hood--
+
+1637
+01:22:05,550 --> 01:22:08,100
+možda jednom, možda dva, možda četiri, možda osam.
+
+1638
+01:22:08,100 --> 01:22:13,250
+>> No strings, po dizajnu, imaju
+dinamičan broj znakova.
+
+1639
+01:22:13,250 --> 01:22:16,980
+Ne znate unaprijed, sve dok
+ljudske vrste u Z-A-M-Y-L-A,
+
+1640
+01:22:16,980 --> 01:22:21,400
+ili M-A-R-I-A ili A-N-D-I. Ne znam
+koliko puta je korisnik će pogoditi
+
+1641
+01:22:21,400 --> 01:22:22,070
+tipkovnica.
+
+1642
+01:22:22,070 --> 01:22:26,490
+Stoga, ne znam kako
+mnogi likovi unaprijed
+
+1643
+01:22:26,490 --> 01:22:27,540
+ti si idući u morati.
+
+1644
+01:22:27,540 --> 01:22:31,840
+>> I tako C samo vrsta ostavlja poput
+Tajna breadcrumb ispod haube
+
+1645
+01:22:31,840 --> 01:22:32,960
+na kraju niza.
+
+1646
+01:22:32,960 --> 01:22:39,280
+Nakon skladištenja Z-A-M-Y-L-a u memoriji,
+to je također samo stavlja u protuvrijednosti
+
+1647
+01:22:39,280 --> 01:22:40,210
+je razdoblju.
+
+1648
+01:22:40,210 --> 01:22:45,060
+Na kraju rečenice,
+stavlja 80 bitova, kako
+
+1649
+01:22:45,060 --> 01:22:49,120
+sjetiti gdje
+Zamyla počinje i završava.
+
+1650
+01:22:49,120 --> 01:22:51,490
+>> Zato što je veza,
+dakle, da se ovaj program?
+
+1651
+01:22:51,490 --> 01:22:55,190
+Ovaj program ovdje, Stirling,
+je jednostavno mehanizam
+
+1652
+01:22:55,190 --> 01:22:57,970
+za dobivanje niza
+od korisnika, linija 6.
+
+1653
+01:22:57,970 --> 01:23:01,160
+Linija 7, izjavljujem varijablu
+zove n i postaviti ga jednak 0.
+
+1654
+01:23:01,160 --> 01:23:08,680
+>> A onda u redu 8, jednostavno sam pitao
+pitanje, dok je n-ti lik ne
+
+1655
+01:23:08,680 --> 01:23:12,120
+nije jednako sve 0 bits--
+drugim riječima, ne
+
+1656
+01:23:12,120 --> 01:23:14,500
+jednaka ovaj poseban
+karakter, kosih crta 0, što
+
+1657
+01:23:14,500 --> 01:23:18,470
+bio je upravo to poseban nul character--
+ići naprijed i samo povećavati n.
+
+1658
+01:23:18,470 --> 01:23:21,460
+>> I imajte to rade, i držati
+to radi, i držati ga radi.
+
+1659
+01:23:21,460 --> 01:23:23,430
+I tako, iako u
+prošlosti smo koristi i,
+
+1660
+01:23:23,430 --> 01:23:25,181
+to je savršeno u redu
+semantički koristiti n,
+
+1661
+01:23:25,181 --> 01:23:27,430
+ako ste samo pokušava
+računati ovaj put namjerno,
+
+1662
+01:23:27,430 --> 01:23:28,720
+i samo želim da ga zovu n.
+
+1663
+01:23:28,720 --> 01:23:34,720
+Dakle, to samo čuva postavlja pitanje,
+je n-ti karakter je sve 0s?
+
+1664
+01:23:34,720 --> 01:23:38,470
+Ako ne, pogledaj na sljedeći izgled,
+gledati na drugu, izgleda na sljedeći,
+
+1665
+01:23:38,470 --> 01:23:39,460
+izgleda na sljedeći.
+
+1666
+01:23:39,460 --> 01:23:45,540
+>> No, čim vidite kosu crtu 0,
+zaustavlja taj loop-- linija od 9 do 11--.
+
+1667
+01:23:45,540 --> 01:23:49,640
+Vi se probiti iz while petlje,
+ostavljajući unutar tog promjenjivog n
+
+1668
+01:23:49,640 --> 01:23:54,530
+ukupno broj od svih
+znakova u nizu koje ste vidjeli,
+
+1669
+01:23:54,530 --> 01:23:55,660
+čime ga ispišete.
+
+1670
+01:23:55,660 --> 01:23:56,760
+Tako ćemo probati ovaj.
+
+1671
+01:23:56,760 --> 01:23:59,500
+>> Pusti me naprijed i bez
+pomoću funkcije Stirling,
+
+1672
+01:23:59,500 --> 01:24:04,240
+ali samo pomoću svoje vlastite domaću verziju
+ovdje se zove Stirling, neka mi samo naprijed
+
+1673
+01:24:04,240 --> 01:24:07,700
+i trčanje Stirling, upišite u nešto
+kao Zamyla, što ja znam unaprijed
+
+1674
+01:24:07,700 --> 01:24:08,670
+je šest znakova.
+
+1675
+01:24:08,670 --> 01:24:10,080
+Idemo vidjeti ako to radi.
+
+1676
+01:24:10,080 --> 01:24:10,920
+Doista, to je šest.
+
+1677
+01:24:10,920 --> 01:24:15,257
+Pokušajmo s Robom, tri znaka,
+tri znaka, kao i, i tako dalje.
+
+1678
+01:24:15,257 --> 01:24:17,340
+Dakle, to je sve što se događa
+na ispod haube.
+
+1679
+01:24:17,340 --> 01:24:19,548
+A primijetiti veze,
+zatim, s prvom tjednu
+
+1680
+01:24:19,548 --> 01:24:22,370
+klase, gdje smo razgovarali o
+nešto poput apstrakcije,
+
+1681
+01:24:22,370 --> 01:24:26,960
+što je samo to raslojavanje ideja ili
+složenost, na vrhu osnovnih principa.
+
+1682
+01:24:26,960 --> 01:24:30,710
+Evo, mi smo na neki način u potrazi
+ispod haube Stirling,
+
+1683
+01:24:30,710 --> 01:24:33,510
+da tako kažemo, shvatiti,
+kako bi se provoditi?
+
+1684
+01:24:33,510 --> 01:24:35,232
+>> A mogli smo ponovno provesti ga sami.
+
+1685
+01:24:35,232 --> 01:24:37,440
+Ali mi nikad ne opet ide
+ponovno provesti Stirling.
+
+1686
+01:24:37,440 --> 01:24:39,780
+Samo ćemo se
+koriste Stirling kako
+
+1687
+01:24:39,780 --> 01:24:42,100
+zapravo dobili neki duljina žice.
+
+1688
+01:24:42,100 --> 01:24:44,200
+>> Ali nema magije
+ispod haube.
+
+1689
+01:24:44,200 --> 01:24:46,716
+Ako znate da je ispod
+sjenilo, niz
+
+1690
+01:24:46,716 --> 01:24:48,090
+je samo niz znakova.
+
+1691
+01:24:48,090 --> 01:24:51,090
+I to niz znakova
+sve se može numerički riješiti
+
+1692
+01:24:51,090 --> 01:24:53,330
+s nosača 0, zagrada
+1, nosač 2, a vi
+
+1693
+01:24:53,330 --> 01:24:57,420
+zna da na kraju niza je
+poseban znak, možete shvatiti
+
+1694
+01:24:57,420 --> 01:25:01,710
+kako napraviti najviše ništa u
+programa, jer sve se svodi na
+
+1695
+01:25:01,710 --> 01:25:03,400
+je čitanje i pisanje memorije.
+
+1696
+01:25:03,400 --> 01:25:06,130
+To je, mijenja i izgleda
+na memoriju, ili se kreće stvari
+
+1697
+01:25:06,130 --> 01:25:10,940
+oko u memoriji, tiskanje stvari
+na zaslonu i tako dalje.
+
+1698
+01:25:10,940 --> 01:25:14,800
+>> Tako ćemo sada koristiti ovaj novootkriveni
+razumijevanje onoga što konce zapravo
+
+1699
+01:25:14,800 --> 01:25:17,910
+su ispod poklopca motora, a
+oguliti jedan drugi sloj
+
+1700
+01:25:17,910 --> 01:25:20,080
+koje do sada imamo
+ignorirala u potpunosti.
+
+1701
+01:25:20,080 --> 01:25:22,650
+Posebno, svako doba
+implementirali smo program,
+
+1702
+01:25:22,650 --> 01:25:25,930
+imali smo tu liniju koda
+pri vrhu progla glavni.
+
+1703
+01:25:25,930 --> 01:25:27,810
+A mi smo naveli int glavni prazninu.
+
+1704
+01:25:27,810 --> 01:25:31,240
+>> I to praznina unutar zagrada
+ima govorim cijelo vrijeme da je glavni
+
+1705
+01:25:31,240 --> 01:25:33,440
+sama po sebi ne poduzimati nikakve argumente.
+
+1706
+01:25:33,440 --> 01:25:36,210
+Svaki ulaz je glavna je
+događa da se od korisnika
+
+1707
+01:25:36,210 --> 01:25:39,020
+je da dolaze iz neke druge
+mehanizam, kao što get int,
+
+1708
+01:25:39,020 --> 01:25:42,040
+ili dobiti plutaju, ili dobiti niz,
+ili neku drugu funkciju.
+
+1709
+01:25:42,040 --> 01:25:44,710
+No, ispada da
+prilikom pisanja programa,
+
+1710
+01:25:44,710 --> 01:25:47,690
+zapravo možete odrediti
+da ovaj program će
+
+1711
+01:25:47,690 --> 01:25:51,730
+uzeti ulaza od čovjeka
+u naredbeni redak sama.
+
+1712
+01:25:51,730 --> 01:25:56,310
+>> Drugim riječima, iako smo do sada
+bio pokrenut samo ./hello zdravo
+
+1713
+01:25:56,310 --> 01:26:00,312
+ili slične programe, sve od
+ostali programi koje smo koristili,
+
+1714
+01:26:00,312 --> 01:26:02,770
+da se mi sami ne pisati,
+su uzimanje, čini se,
+
+1715
+01:26:02,770 --> 01:26:05,210
+naredbenog retka arguments--
+stvari kao što napraviti.
+
+1716
+01:26:05,210 --> 01:26:07,450
+Kažeš nešto slično napraviti,
+a zatim druga riječ.
+
+1717
+01:26:07,450 --> 01:26:10,950
+Ili zveket, kažeš zveket, a zatim
+druga riječ, naziv datoteke.
+
+1718
+01:26:10,950 --> 01:26:14,410
+>> Ili čak RM ili CP, kao možda
+Vidjeli ili se koristi već
+
+1719
+01:26:14,410 --> 01:26:15,880
+ukloniti ili kopiranje datoteka.
+
+1720
+01:26:15,880 --> 01:26:18,920
+Svi oni uzeti tzv
+naredbenog retka arguments--
+
+1721
+01:26:18,920 --> 01:26:21,130
+dodatne riječi na terminalu redak.
+
+1722
+01:26:21,130 --> 01:26:23,260
+No, do sada, mi
+sami nisu imali
+
+1723
+01:26:23,260 --> 01:26:27,080
+ovaj luksuzni uzimanja ulaz iz
+korisnički kada on ili ona zapravo radi
+
+1724
+01:26:27,080 --> 01:26:29,120
+sam program u naredbenom retku.
+
+1725
+01:26:29,120 --> 01:26:33,710
+>> Ali što možemo učiniti da se ponovo progla
+Glavni kreće naprijed, a ne kao vlasništvo
+
+1726
+01:26:33,710 --> 01:26:36,750
+poništiti u zagradi,
+ali ta dva argumenta
+
+1727
+01:26:36,750 --> 01:26:40,600
+instead-- prvi cijeli broj,
+a drugi nešto
+
+1728
+01:26:40,600 --> 01:26:44,170
+novo, nešto što ćemo nazvati
+niz, nešto slično u duhu
+
+1729
+01:26:44,170 --> 01:26:49,220
+na ono što smo vidjeli u nule kao popis, ali
+polje nizova, kao što ćemo uskoro vidjeti.
+
+1730
+01:26:49,220 --> 01:26:51,790
+No, da vidimo to tako
+Na primjer, prije nego
+
+1731
+01:26:51,790 --> 01:26:53,690
+razlikovati točno što to znači.
+
+1732
+01:26:53,690 --> 01:26:56,520
+>> Dakle, ako ja ići u CS50 IDE
+Ovdje sam otišao naprijed
+
+1733
+01:26:56,520 --> 01:27:01,840
+i proglasio u datoteci pod nazivom
+argv0.c sljedeći predložak.
+
+1734
+01:27:01,840 --> 01:27:04,120
+A primijetiti jedino
+da je drugačije dosad
+
+1735
+01:27:04,120 --> 01:27:08,570
+je da sam promijenio void int
+argc niz argv otvorena zagrada, u neposrednoj blizini
+
+1736
+01:27:08,570 --> 01:27:09,070
+zagrada.
+
+1737
+01:27:09,070 --> 01:27:11,730
+A primjetiti za sada, nema
+ništa unutar tih skupina.
+
+1738
+01:27:11,730 --> 01:27:12,620
+>> Nema broja.
+
+1739
+01:27:12,620 --> 01:27:15,070
+I nema ja, ili
+n, ili bilo koji drugi znak.
+
+1740
+01:27:15,070 --> 01:27:17,010
+Ja sam samo pomoću
+uglate zagrade za sada,
+
+1741
+01:27:17,010 --> 01:27:19,510
+iz razloga što će doći
+natrag u samo jednom trenutku.
+
+1742
+01:27:19,510 --> 01:27:21,330
+>> A sada ono što ću učiniti je to.
+
+1743
+01:27:21,330 --> 01:27:26,680
+Ako argc jednak jednak 2--
+a podsjećaju da je jednako jednakima
+
+1744
+01:27:26,680 --> 01:27:30,040
+je operator jednakosti uspoređivanje
+lijevi i desni za jednakost.
+
+1745
+01:27:30,040 --> 01:27:31,790
+To nije zadatak
+operater, koji je
+
+1746
+01:27:31,790 --> 01:27:36,510
+jedini znak jednakosti, što znači kopiju
+s desne strane ulijevo neku vrijednost.
+
+1747
+01:27:36,510 --> 01:27:42,840
+>> Ako argc jednak jednak 2, želim
+recimo, printf, zdravo, postotaka, nova linija,
+
+1748
+01:27:42,840 --> 01:27:47,340
+a zatim ga priključite in-- a evo nova
+trick-- argv nosač 1, iz razloga
+
+1749
+01:27:47,340 --> 01:27:48,840
+da ćemo se vratiti u trenutku.
+
+1750
+01:27:48,840 --> 01:27:52,110
+Inače, ako argc ne
+jednak 2, znate što?
+
+1751
+01:27:52,110 --> 01:27:57,400
+Recimo samo ići naprijed i, kao i obično, tisak
+kako zdravo svijet bez zamjene.
+
+1752
+01:27:57,400 --> 01:28:02,710
+>> Dakle, čini se da, ako argc, što
+stoji za argument count, jednak 2,
+
+1753
+01:28:02,710 --> 01:28:04,740
+Idem ispisati
+zdravo ili nešto drugo.
+
+1754
+01:28:04,740 --> 01:28:07,560
+Inače, po defaultu, ja sam
+tiskanja Pozdrav svijetu.
+
+1755
+01:28:07,560 --> 01:28:08,770
+Dakle, što to znači?
+
+1756
+01:28:08,770 --> 01:28:15,550
+>> Pa, dopustite mi ići naprijed i spasiti
+Na ovu sliku, a zatim učinite napraviti argv0,
+
+1757
+01:28:15,550 --> 01:28:18,940
+a onda ./argv0, Enter.
+
+1758
+01:28:18,940 --> 01:28:20,300
+I to kaže Hello World.
+
+1759
+01:28:20,300 --> 01:28:21,260
+Sada, zašto je to tako?
+
+1760
+01:28:21,260 --> 01:28:24,730
+>> Pa, ispada u bilo koje vrijeme
+pokrenuti program u naredbenom retku,
+
+1761
+01:28:24,730 --> 01:28:29,570
+ti si ispunjavanja što ćemo
+općenito nazvati bajtova vektor.
+
+1762
+01:28:29,570 --> 01:28:33,100
+Drugim riječima, automatski se
+računalo, operativni sustav,
+
+1763
+01:28:33,100 --> 01:28:38,340
+ide na ruku svome programu
+Sam popis sve riječi
+
+1764
+01:28:38,340 --> 01:28:40,850
+da ljudski ispisane na
+brz, u slučaju da
+
+1765
+01:28:40,850 --> 01:28:43,790
+programer želite učiniti
+nešto s tim informacijama.
+
+1766
+01:28:43,790 --> 01:28:48,540
+I u ovom slučaju, samo riječ
+Ja sam upisali u retku je ./argv0.
+
+1767
+01:28:48,540 --> 01:28:55,420
+>> I tako je broj argumenata koji se
+šalje se moj program je samo jedan.
+
+1768
+01:28:55,420 --> 01:28:58,880
+Drugim riječima, argument
+strani, inače poznat kao argc
+
+1769
+01:28:58,880 --> 01:29:00,970
+Ovdje kao cijeli broj, samo je jedan.
+
+1770
+01:29:00,970 --> 01:29:03,000
+Jedan od njih, naravno, nije jednako dva.
+
+1771
+01:29:03,000 --> 01:29:05,980
+I tako to je ono što ispisuje, zdravo svijet.
+
+1772
+01:29:05,980 --> 01:29:08,170
+>> No, dopustite mi da se ovaj negdje.
+
+1773
+01:29:08,170 --> 01:29:09,930
+Dopustite mi da kažem, argv0.
+
+1774
+01:29:09,930 --> 01:29:12,740
+A zatim o tome kako Maria?
+
+1775
+01:29:12,740 --> 01:29:14,990
+A onda pritisnite Enter.
+
+1776
+01:29:14,990 --> 01:29:18,020
+>> A primjetiti ono magično se ovdje događa.
+
+1777
+01:29:18,020 --> 01:29:22,640
+Sada, umjesto da zdravo svijetu, imam
+promijenio ponašanje ovog programa
+
+1778
+01:29:22,640 --> 01:29:26,310
+uzimajući ulaz ne od get
+niz ili neke druge funkcije,
+
+1779
+01:29:26,310 --> 01:29:30,570
+ali od, očito, moju zapovijed
+Sam, ono što sam prvobitno upisali u.
+
+1780
+01:29:30,570 --> 01:29:35,720
+I mogu igrati ovu igru ​​ponovno
+to mijenja na Stelios, na primjer.
+
+1781
+01:29:35,720 --> 01:29:38,400
+>> I sada vidim drugo ime i dalje.
+
+1782
+01:29:38,400 --> 01:29:40,540
+I ovdje, mogao bih reći Andi.
+
+1783
+01:29:40,540 --> 01:29:42,137
+I ja sam mogao reći Zamyla.
+
+1784
+01:29:42,137 --> 01:29:45,220
+I možemo igrati ovu igru ​​tijekom cijelog dana,
+samo uključivanjem u različite vrijednosti,
+
+1785
+01:29:45,220 --> 01:29:49,550
+tako dugo dok sam pružiti upravo
+dvije riječi na upit
+
+1786
+01:29:49,550 --> 01:29:52,260
+tako da argc, moj argument strani, 2.
+
+1787
+01:29:52,260 --> 01:29:57,240
+>> Vidim da je ime priključen na
+printf, po tom stanju ovdje?
+
+1788
+01:29:57,240 --> 01:30:00,550
+Dakle, izgleda da nam se sada
+izražajna sposobnost
+
+1789
+01:30:00,550 --> 01:30:04,410
+uzimanja ulaz iz drugog mehanizma,
+od tzv naredbenog retka,
+
+1790
+01:30:04,410 --> 01:30:07,000
+umjesto da čekaju
+dok korisnik pokreće program,
+
+1791
+01:30:07,000 --> 01:30:10,220
+a onda mu ili joj brz
+korištenjem nešto kao get niza.
+
+1792
+01:30:10,220 --> 01:30:11,230
+>> Pa što je ovo?
+
+1793
+01:30:11,230 --> 01:30:15,010
+Argc, opet, samo je cijeli broj,
+broj words-- arguments--
+
+1794
+01:30:15,010 --> 01:30:18,540
+da korisnik osigurano od
+redak, na prozoru terminala,
+
+1795
+01:30:18,540 --> 01:30:20,110
+uključujući i naziv programa.
+
+1796
+01:30:20,110 --> 01:30:23,340
+Tako je naša ./argv0 je, zapravo,
+Ime programski,
+
+1797
+01:30:23,340 --> 01:30:24,520
+ili kako sam pokrenuti program.
+
+1798
+01:30:24,520 --> 01:30:25,810
+>> To se računa kao riječ.
+
+1799
+01:30:25,810 --> 01:30:27,080
+Dakle argc će biti 1.
+
+1800
+01:30:27,080 --> 01:30:29,750
+Ali kad sam pisati Stelios ili
+Andi, ili Zamyla ili Maria,
+
+1801
+01:30:29,750 --> 01:30:31,660
+to znači da je argument broj je dva.
+
+1802
+01:30:31,660 --> 01:30:33,910
+I tako sada postoji dvije riječi doneseni u.
+
+1803
+01:30:33,910 --> 01:30:36,070
+>> I napomena, možemo nastaviti ovu logiku.
+
+1804
+01:30:36,070 --> 01:30:39,050
+Ako sam zapravo reći
+nešto poput Zamyla Chan,
+
+1805
+01:30:39,050 --> 01:30:42,200
+ime i prezime, a time prolazu
+tri argumenta u ukupnom,
+
+1806
+01:30:42,200 --> 01:30:47,410
+Sada se kaže zadani opet,
+zbog, naravno, 3 nije jednak 2.
+
+1807
+01:30:47,410 --> 01:30:54,080
+>> I tako na ovaj način, moram
+pristup putem argv ovaj novi argument
+
+1808
+01:30:54,080 --> 01:30:56,080
+da bismo mogli tehnički
+nazvati što god želimo.
+
+1809
+01:30:56,080 --> 01:30:58,940
+No, po konvenciji, to je
+argv i argc, respektivno.
+
+1810
+01:30:58,940 --> 01:31:04,470
+Argv, argument vektor, je vrsta
+od sinonim za programiranje
+
+1811
+01:31:04,470 --> 01:31:07,140
+značajka u C zove niz.
+
+1812
+01:31:07,140 --> 01:31:14,410
+>> Niz je popis sličnim vrijednostima
+natrag, natrag, natrag, na leđa.
+
+1813
+01:31:14,410 --> 01:31:17,810
+Drugim riječima, ako je netko ovdje, u
+RAM-a, sljedeći je tik do nje,
+
+1814
+01:31:17,810 --> 01:31:18,800
+a tik do njega.
+
+1815
+01:31:18,800 --> 01:31:20,101
+Nisu sve više mjesta.
+
+1816
+01:31:20,101 --> 01:31:23,100
+I to potonji scenarij, gdje su stvari
+su sve više mjesta u memoriji,
+
+1817
+01:31:23,100 --> 01:31:25,082
+može zapravo biti snažan lik.
+
+1818
+01:31:25,082 --> 01:31:28,040
+No, mi ćemo se vratiti na to kada smo
+govoriti o luksuznijih struktura podataka.
+
+1819
+01:31:28,040 --> 01:31:32,260
+Za sada, niz je samo
+komad memorijskog,
+
+1820
+01:31:32,260 --> 01:31:36,520
+svaki od čiji se elementi
+natrag, natrag, natrag, natrag,
+
+1821
+01:31:36,520 --> 01:31:38,050
+i uglavnom isti tip.
+
+1822
+01:31:38,050 --> 01:31:42,630
+>> Dakle, ako mislite o tome, iz
+Prije trenutak, što je string?
+
+1823
+01:31:42,630 --> 01:31:50,460
+Pa, niz, kao Zamyla,
+Z-A-M-Y-L-A, je tehnički,
+
+1824
+01:31:50,460 --> 01:31:51,400
+samo polje.
+
+1825
+01:31:51,400 --> 01:31:53,700
+To je niz znakova.
+
+1826
+01:31:53,700 --> 01:31:59,250
+>> I tako, ako smo zaista privući toga, kao što sam
+učinili ranije, kao komad memorije,
+
+1827
+01:31:59,250 --> 01:32:04,510
+ispada da je svaki od tih
+likovi zauzima bajt.
+
+1828
+01:32:04,510 --> 01:32:07,630
+A tu je i ona posebna
+sentinel lik, kosih crta 0,
+
+1829
+01:32:07,630 --> 01:32:12,360
+ili svih osam 0 bita, to
+markira kraj tog niza.
+
+1830
+01:32:12,360 --> 01:32:15,090
+Dakle, niz, ispada
+van, citiram citat niz,
+
+1831
+01:32:15,090 --> 01:32:20,580
+je samo niz chara--
+char kao stvarna vrsta podataka.
+
+1832
+01:32:20,580 --> 01:32:24,560
+>> A sada argv, meanwhile--
+Vratimo se na program.
+
+1833
+01:32:24,560 --> 01:32:29,582
+Argv, iako se riječ
+string ovdje nije sama niz.
+
+1834
+01:32:29,582 --> 01:32:33,640
+Argv, argument vektor,
+je niz žice.
+
+1835
+01:32:33,640 --> 01:32:37,620
+>> Dakle, kao što možete imati niz
+znakova, možete imati višu razinu,
+
+1836
+01:32:37,620 --> 01:32:46,279
+niz strings-- tako, na primjer,
+kad sam upisao trenutak prije ./argv0
+
+1837
+01:32:46,279 --> 01:33:00,150
+argv0, prostor Ž-A-M-Y-L-A, tvrdio sam da je
+argv imao dva konce u it-- ./argv0,
+
+1838
+01:33:00,150 --> 01:33:03,185
+i Z-A-M-Y-L-A. U
+Drugim riječima, argc je 2.
+
+1839
+01:33:03,185 --> 01:33:03,980
+Zašto je to?
+
+1840
+01:33:03,980 --> 01:33:08,370
+>> Pa, zapravo, ono što se događa
+na je da svaki od tih nizova
+
+1841
+01:33:08,370 --> 01:33:13,990
+je, naravno, niz znakova
+Kao i prije, od kojih svaki likovi
+
+1842
+01:33:13,990 --> 01:33:15,670
+zauzima jedan bajt.
+
+1843
+01:33:15,670 --> 01:33:19,720
+I ne brkati stvarni 0
+u ime programa s 0,
+
+1844
+01:33:19,720 --> 01:33:22,040
+što znači da svih 80 bita.
+
+1845
+01:33:22,040 --> 01:33:27,140
+I Zamyla, u međuvremenu, i dalje je
+Također niz znakova.
+
+1846
+01:33:27,140 --> 01:33:31,450
+>> Tako je na kraju dana, to je stvarno
+izgleda ovako ispod haube.
+
+1847
+01:33:31,450 --> 01:33:38,800
+Ali argv, po prirodi kako glavni
+djela, mi omogućuje da zamotate sve ovo
+
+1848
+01:33:38,800 --> 01:33:44,810
+gore u, ako hoćete, veći niz
+da, ako smo nešto više pojednostaviti
+
+1849
+01:33:44,810 --> 01:33:48,180
+što je slika izgleda i ne
+dosta ga izvući na ljestvici do tamo,
+
+1850
+01:33:48,180 --> 01:33:56,720
+ovo polje je samo veličina 2, prvi
+element koji sadrži niz,
+
+1851
+01:33:56,720 --> 01:33:59,230
+drugi element
+koji sadrži niz.
+
+1852
+01:33:59,230 --> 01:34:01,687
+A, s druge strane, ako vam se
+vrsta uvećanje na svakoj
+
+1853
+01:34:01,687 --> 01:34:03,770
+od tih nizova, što
+vidi ispod haube
+
+1854
+01:34:03,770 --> 01:34:07,190
+je da svaki niz je samo
+niz znakova.
+
+1855
+01:34:07,190 --> 01:34:11,680
+>> Sada, baš kao i sa žicama,
+bili smo u mogućnosti da biste dobili pristup
+
+1856
+01:34:11,680 --> 01:34:15,260
+do i-tog lika u nizu
+koristiti taj uglata zagrada zapis.
+
+1857
+01:34:15,260 --> 01:34:17,320
+Na sličan način, s polja
+u cjelini, možemo
+
+1858
+01:34:17,320 --> 01:34:22,700
+korištenje uglata zagrada zapis dobiti
+na bilo koji broj nizova u nizu?
+
+1859
+01:34:22,700 --> 01:34:25,100
+Na primjer, neka me
+ići naprijed i učiniti.
+
+1860
+01:34:25,100 --> 01:34:32,420
+>> Pusti me naprijed i stvoriti argv1.c,
+što je malo drugačije ovaj put.
+
+1861
+01:34:32,420 --> 01:34:35,635
+Umjesto provjere argc2,
+Idem umjesto toga učiniti.
+
+1862
+01:34:35,635 --> 01:34:41,270
+Za int mogu dobiti 0, ja manje
+od argc, ja plus plus,
+
+1863
+01:34:41,270 --> 01:34:47,920
+a zatim ispisati unutar toga,
+posto s, nova linija, a zatim
+
+1864
+01:34:47,920 --> 01:34:50,740
+argv nosač ja.
+
+1865
+01:34:50,740 --> 01:34:55,220
+>> Dakle, drugim riječima, neću se bave
+pojedini likovi u ovom trenutku.
+
+1866
+01:34:55,220 --> 01:35:00,190
+Argv, kao što je uz te prazne kvadrat
+aparatić za desno od imena argv,
+
+1867
+01:35:00,190 --> 01:35:03,320
+znači argv je niz žice.
+
+1868
+01:35:03,320 --> 01:35:04,870
+I argc je samo int.
+
+1869
+01:35:04,870 --> 01:35:08,800
+>> Ova linija ovdje, 6, je
+govoreći set i jednaka 0.
+
+1870
+01:35:08,800 --> 01:35:11,980
+Grof sve do,
+ali ne uključujući, argc.
+
+1871
+01:35:11,980 --> 01:35:14,010
+A onda se na svakoj iteraciji,
+ispisati niz.
+
+1872
+01:35:14,010 --> 01:35:14,800
+Što string?
+
+1873
+01:35:14,800 --> 01:35:17,270
+>> I-tog niza u argv.
+
+1874
+01:35:17,270 --> 01:35:19,530
+Dakle, dok je prije nego što sam bio
+pomoću uglata zagrada
+
+1875
+01:35:19,530 --> 01:35:22,180
+zapis dobiti na i-tog
+lik je u nizu, a sada
+
+1876
+01:35:22,180 --> 01:35:27,240
+Ja sam koristeći uglata zagrada zapis
+dobiti na i-tog niza u niz.
+
+1877
+01:35:27,240 --> 01:35:30,310
+Dakle, to je vrsta jednom sloju
+gore, konceptualno.
+
+1878
+01:35:30,310 --> 01:35:35,390
+>> I stoga, što je uredno o tome
+Program sada, ako sam sastaviti argv1,
+
+1879
+01:35:35,390 --> 01:35:42,067
+a zatim učinite ./argv1, a zatim upišite
+u nešto poput foo bar Baz,
+
+1880
+01:35:42,067 --> 01:35:45,400
+koje su tri zadane riječi koje
+računalni znanstvenik poseže za bilo koje vrijeme
+
+1881
+01:35:45,400 --> 01:35:51,010
+on ili ona treba neki rezerviranim riječi,
+i pritisnite Enter, svaki od tih riječi,
+
+1882
+01:35:51,010 --> 01:35:54,980
+uključujući i naziv programa, koji
+u argv na prvom mjestu,
+
+1883
+01:35:54,980 --> 01:35:58,320
+završava se ispisuje jedan po jedan.
+
+1884
+01:35:58,320 --> 01:36:05,290
+A ako se to promijeni, a ja kažem
+nešto kao argv1 Zamyla Chan,
+
+1885
+01:36:05,290 --> 01:36:08,800
+smo dobili sve tri od njih
+riječi, koje je argv0,
+
+1886
+01:36:08,800 --> 01:36:14,400
+argv1, argv2, jer je u to
+Slučaj argc, grof je 3.
+
+1887
+01:36:14,400 --> 01:36:20,020
+>> No, ono što je uredan je ako ste razumjeli
+da argv je samo niz žice,
+
+1888
+01:36:20,020 --> 01:36:24,910
+i ti shvatiti da niz
+je niz znakova,
+
+1889
+01:36:24,910 --> 01:36:29,470
+možemo zapravo vrsta koristiti
+uglata zagrada označavanja više puta
+
+1890
+01:36:29,470 --> 01:36:33,320
+odabrati string, a zatim odaberite
+lik u nizu,
+
+1891
+01:36:33,320 --> 01:36:35,730
+ronjenje u dublje kako slijedi.
+
+1892
+01:36:35,730 --> 01:36:40,100
+U ovom primjeru, pusti me
+naprijed i pozvati ovaj argv2.c.
+
+1893
+01:36:40,100 --> 01:36:43,920
+
+1894
+01:36:43,920 --> 01:36:50,180
+I u ovom primjeru, neka mi samo naprijed
+i učiniti following-- za int ja dobiti 0,
+
+1895
+01:36:50,180 --> 01:36:53,286
+je i manje od argc, i plus
+plus, baš kao i prije.
+
+1896
+01:36:53,286 --> 01:36:55,910
+Tako je u drugom words-- i sada to
+sve je dosta komplicirano.
+
+1897
+01:36:55,910 --> 01:36:59,940
+Onda ću reći
+ponoviti preko žice u argv,
+
+1898
+01:36:59,940 --> 01:37:01,294
+kao komentar na sebe.
+
+1899
+01:37:01,294 --> 01:37:03,960
+A onda ću imati
+uklopljeni za petlju, što vjerojatno
+
+1900
+01:37:03,960 --> 01:37:06,290
+učinio, ili se smatra
+radi, u nule, gdje je
+
+1901
+01:37:06,290 --> 01:37:08,600
+Ja ću reći int-- sam
+neće opet koristiti,
+
+1902
+01:37:08,600 --> 01:37:12,590
+jer ne želim da se sjena, ili
+vrsta prebrisati postojeći i.
+
+1903
+01:37:12,590 --> 01:37:15,780
+>> Idem, umjesto toga, kažu j, jer
+to je moj ići na varijablu nakon I.,
+
+1904
+01:37:15,780 --> 01:37:18,590
+kad sam samo pokušava
+računati jednostavnih brojeva.
+
+1905
+01:37:18,590 --> 01:37:28,850
+Za j dobiva 0-- i, n, ide
+dobiti krmi duljinu argv nosača i,
+
+1906
+01:37:28,850 --> 01:37:36,030
+tako dugo dok je manji od j, m,
+j plus plus, učinite sljedeće.
+
+1907
+01:37:36,030 --> 01:37:37,500
+I ovdje je zanimljiv dio.
+
+1908
+01:37:37,500 --> 01:37:46,330
+>> Ispiši lik i novu liniju,
+priključivanja argv zagrada I, nosača j.
+
+1909
+01:37:46,330 --> 01:37:47,940
+U redu, pa neka mi dodati neke komentare ovdje.
+
+1910
+01:37:47,940 --> 01:37:54,820
+Ponoviti više znakova
+u tekućem nizu,
+
+1911
+01:37:54,820 --> 01:38:02,290
+print j-og lik u i-tom nizu.
+
+1912
+01:38:02,290 --> 01:38:04,630
+Tako sada, razmotrimo
+Što ovi komentari znače.
+
+1913
+01:38:04,630 --> 01:38:06,750
+>> Prolazi preko žice
+u argv-- koliko
+
+1914
+01:38:06,750 --> 01:38:09,300
+žice su u argv, koji je niz?
+
+1915
+01:38:09,300 --> 01:38:13,420
+Argc mnogi, pa sam iterating
+iz i jednaka 0 do argc.
+
+1916
+01:38:13,420 --> 01:38:20,020
+U međuvremenu, koliko znakova
+u i-tog niza u argv?
+
+1917
+01:38:20,020 --> 01:38:22,880
+>> Pa, da se taj odgovor,
+Ja jednostavno nazvati duljine niza
+
+1918
+01:38:22,880 --> 01:38:26,810
+na tekući string me briga
+o, što je argv nosač ja.
+
+1919
+01:38:26,810 --> 01:38:30,090
+A ja ću privremeno pohraniti da
+vrijednost n, samo za caching svrhe,
+
+1920
+01:38:30,090 --> 01:38:31,590
+da ga zapamtiti za učinkovitost.
+
+1921
+01:38:31,590 --> 01:38:36,330
+A onda ću inicijalizirati j 0,
+nastaviti tako dugo dok j je manji od nje,
+
+1922
+01:38:36,330 --> 01:38:38,430
+i na svakoj iteraciji prirasta j.
+
+1923
+01:38:38,430 --> 01:38:41,030
+>> I onda ovdje, po
+moj komentar na liniji 12,
+
+1924
+01:38:41,030 --> 01:38:43,390
+ispisati karakter,
+nakon čega slijedi novi red,
+
+1925
+01:38:43,390 --> 01:38:48,140
+posebno argv nosač
+ja mi daje i-th string
+
+1926
+01:38:48,140 --> 01:38:51,690
+u argv-- tako da je prvi riječju,
+Druga riječ, treća riječ, što god.
+
+1927
+01:38:51,690 --> 01:38:57,370
+A onda j urona u dublje, te dobiva
+mi j-th karakter te riječi.
+
+1928
+01:38:57,370 --> 01:39:02,200
+I tako, u stvari, možete liječiti
+argv kao višedimenzionalan,
+
+1929
+01:39:02,200 --> 01:39:06,050
+kao dvodimenzionalni, polje,
+pri čemu svaka riječ vrsta izgleda
+
+1930
+01:39:06,050 --> 01:39:08,580
+kao što je ovaj u vašem umu
+oka, a svaki lik
+
+1931
+01:39:08,580 --> 01:39:10,930
+je vrsta sastavljena u
+stupac, ako to pomaže.
+
+1932
+01:39:10,930 --> 01:39:13,260
+>> U stvarnosti, kada se zafrkavati
+to osim u budućim tjedana,
+
+1933
+01:39:13,260 --> 01:39:15,580
+to će biti malo
+sofisticiraniji od toga.
+
+1934
+01:39:15,580 --> 01:39:17,800
+No, možete zaista
+misliti da je, za sada,
+
+1935
+01:39:17,800 --> 01:39:22,110
+kao upravo to dvodimenzionalno
+polje, pri čemu jedna razina tome
+
+1936
+01:39:22,110 --> 01:39:23,260
+je sve od žice.
+
+1937
+01:39:23,260 --> 01:39:26,760
+I onda ako zaronite u dublje, vama
+možete dobiti na pojedinim likovima
+
+1938
+01:39:26,760 --> 01:39:29,600
+u njoj pomoću ove oznake ovdje.
+
+1939
+01:39:29,600 --> 01:39:31,620
+>> Dakle, što je neto učinak?
+
+1940
+01:39:31,620 --> 01:39:34,970
+Pusti me naprijed i
+bi argv2-- prokleto je.
+
+1941
+01:39:34,970 --> 01:39:36,210
+Pogriješio sam ovdje.
+
+1942
+01:39:36,210 --> 01:39:40,160
+Implicitno proglašenja
+Biblioteka funkcija Stirling.
+
+1943
+01:39:40,160 --> 01:39:42,190
+Dakle, sve ovo vrijeme, to je
+možda je prikladno
+
+1944
+01:39:42,190 --> 01:39:45,130
+da smo na neki način završavanja
+upravo tamo gdje smo počeli.
+
+1945
+01:39:45,130 --> 01:39:48,160
+>> pijan sam, implicitno izjavljuje
+Biblioteka funkcija Stirling.
+
+1946
+01:39:48,160 --> 01:39:48,987
+OK, čekaj malo.
+
+1947
+01:39:48,987 --> 01:39:51,070
+Sjećam se da je, osobito
+budući da je upravo ovdje.
+
+1948
+01:39:51,070 --> 01:39:54,490
+Trebam uključiti string.h u
+ova verzija programa.
+
+1949
+01:39:54,490 --> 01:40:00,050
+>> Pusti me naprijed i uključuju
+string.h, osim toga, samo naprijed
+
+1950
+01:40:00,050 --> 01:40:04,460
+i rekompiliranje argv2.
+
+1951
+01:40:04,460 --> 01:40:08,390
+A sada, evo, čine argv2, Enter.
+
+1952
+01:40:08,390 --> 01:40:10,590
+I iako je to malo
+grobni na prvi pogled,
+
+1953
+01:40:10,590 --> 01:40:15,690
+primijetiti da je, zaista, ono
+je tiskana je točka argv2.
+
+1954
+01:40:15,690 --> 01:40:19,970
+>> Ali, ako sam tipa neke riječi nakon što se
+brz, kao argv2 Zamyla Chan,
+
+1955
+01:40:19,970 --> 01:40:22,560
+Ulaz, i malo
+grobni na prvi pogled.
+
+1956
+01:40:22,560 --> 01:40:30,540
+Ali ako smo pomicanje natrag gore,
+./argv2 Z-A-M-Y-L-C-H-A-N.
+
+1957
+01:40:30,540 --> 01:40:32,190
+Stoga smo ponovljena tijekom svake riječi.
+
+1958
+01:40:32,190 --> 01:40:37,770
+A, s druge strane, mi smo ponovljena više
+Svaki lik unutar riječi.
+
+1959
+01:40:37,770 --> 01:40:40,040
+>> Sada, nakon svega toga,
+shvatiti da postoji
+
+1960
+01:40:40,040 --> 01:40:43,120
+jedan detalj smo bili ljubazni
+ignoriranje cijelo ovo vrijeme.
+
+1961
+01:40:43,120 --> 01:40:46,180
+Mi smo samo zadirkivali osim što
+glavna-a ulazi mogu biti?
+
+1962
+01:40:46,180 --> 01:40:47,780
+Što je glavna je izlaz?
+
+1963
+01:40:47,780 --> 01:40:50,540
+>> Sve to vrijeme, mi smo bili
+samo kopiranje i lijepljenje
+
+1964
+01:40:50,540 --> 01:40:53,870
+Riječ int ispred glavne,
+iako možete vidjeti na internetu,
+
+1965
+01:40:53,870 --> 01:40:58,340
+ponekad pogrešno u starijim verzijama
+od C i prevodiocima, koji kažu praznina,
+
+1966
+01:40:58,340 --> 01:40:59,410
+ili ništa at svi.
+
+1967
+01:40:59,410 --> 01:41:01,580
+Ali, doista, za verziju
+od C koje koristite,
+
+1968
+01:41:01,580 --> 01:41:06,180
+C 11, ili 2011, ostvariti
+da bi trebalo biti int.
+
+1969
+01:41:06,180 --> 01:41:09,300
+I bilo bi trebao biti
+praznina ili argc i argv ovdje.
+
+1970
+01:41:09,300 --> 01:41:10,790
+>> Ali zašto int main?
+
+1971
+01:41:10,790 --> 01:41:12,480
+Što je to zapravo vraća?
+
+1972
+01:41:12,480 --> 01:41:16,280
+Pa, to ispada sve ovo vrijeme,
+svaki put kad sam napisao Programa Glavni
+
+1973
+01:41:16,280 --> 01:41:18,440
+uvijek vraća nešto.
+
+1974
+01:41:18,440 --> 01:41:19,960
+No, to je bilo to u tajnosti.
+
+1975
+01:41:19,960 --> 01:41:23,350
+>> To nešto je
+int, kao linija 5 sugerira.
+
+1976
+01:41:23,350 --> 01:41:24,225
+No, ono što int?
+
+1977
+01:41:24,225 --> 01:41:26,100
+Pa, tu je to
+Konvencija u programiranju,
+
+1978
+01:41:26,100 --> 01:41:29,790
+pri čemu se ništa nije
+otišao u krivu i sve je dobro,
+
+1979
+01:41:29,790 --> 01:41:34,250
+programi i funkcije općenito
+return-- nešto counterintuitively--
+
+1980
+01:41:34,250 --> 01:41:35,230
+0.
+
+1981
+01:41:35,230 --> 01:41:38,070
+0 općenito označava sve je dobro.
+
+1982
+01:41:38,070 --> 01:41:40,610
+Dakle, iako mislite
+to što je lažno u mnogim kontekstima,
+
+1983
+01:41:40,610 --> 01:41:42,930
+to zapravo obično znači dobra stvar
+
+1984
+01:41:42,930 --> 01:41:49,560
+>> U međuvremenu, ako program vraća 1,
+ili negativan 1, ili 5, ili negativno 42,
+
+1985
+01:41:49,560 --> 01:41:52,941
+ili bilo koji ne-0 vrijednosti,
+koji općenito označava
+
+1986
+01:41:52,941 --> 01:41:54,190
+da nešto nije u redu.
+
+1987
+01:41:54,190 --> 01:41:56,700
+U stvari, na svoju ruku, Mac ili PC,
+možda ste zapravo vidjeli
+
+1988
+01:41:56,700 --> 01:42:01,050
+poruka o pogrešci, pri čemu je
+kaže nešto ili nekog drugog, pogreška
+
+1989
+01:42:01,050 --> 01:42:04,940
+kod negativna 42, ili kod pogreške
+23, ili nešto slično tome.
+
+1990
+01:42:04,940 --> 01:42:08,980
+Taj broj je obično samo nagovještaj
+programer, ili tvrtke
+
+1991
+01:42:08,980 --> 01:42:11,174
+koji je napravio softver,
+što je pošlo po zlu i zašto,
+
+1992
+01:42:11,174 --> 01:42:13,590
+tako da oni mogu gledati kroz
+dokumentaciju ili kod,
+
+1993
+01:42:13,590 --> 01:42:15,465
+i shvatiti što je
+greška zapravo znači.
+
+1994
+01:42:15,465 --> 01:42:18,400
+To obično ne
+korisno za nas krajnje korisnike.
+
+1995
+01:42:18,400 --> 01:42:20,550
+>> No, kada glavni vraća 0, sve je dobro.
+
+1996
+01:42:20,550 --> 01:42:23,770
+A ako ne odredite
+ono glavno trebao vratiti,
+
+1997
+01:42:23,770 --> 01:42:26,950
+to će samo automatski
+povratak 0 za vas.
+
+1998
+01:42:26,950 --> 01:42:30,870
+No, nešto se vraćaju
+drugo je zapravo korisno.
+
+1999
+01:42:30,870 --> 01:42:34,660
+>> U ovom završnom programu, pusti me
+ići naprijed i pozvati ovaj exit.c,
+
+2000
+01:42:34,660 --> 01:42:38,630
+i uvesti posljednji od današnje
+teme, poznat kao koda pogreške.
+
+2001
+01:42:38,630 --> 01:42:42,930
+Pusti me naprijed i uključuju naš
+Poznate datoteke do vrha, da li int main.
+
+2002
+01:42:42,930 --> 01:42:49,500
+I ovaj put, neka je učiniti int argc,
+niz argv, i sa mojim zagradama
+
+2003
+01:42:49,500 --> 01:42:50,836
+impliciraju da je u nizu.
+
+2004
+01:42:50,836 --> 01:42:52,460
+I onda neka mi samo to ček razum.
+
+2005
+01:42:52,460 --> 01:42:56,640
+Ovaj put, ako argc ne
+jednak 2, onda znate što?
+
+2006
+01:42:56,640 --> 01:42:57,520
+Zaboravi.
+
+2007
+01:42:57,520 --> 01:43:03,170
+Ja ću reći da je, hej, korisnik,
+vi ste nedostaje naredbenog retka argumente
+
+2008
+01:43:03,170 --> 01:43:04,210
+Obrnuta kosa crta n.
+
+2009
+01:43:04,210 --> 01:43:05,230
+>> I onda to je to.
+
+2010
+01:43:05,230 --> 01:43:06,130
+Želim izlaz.
+
+2011
+01:43:06,130 --> 01:43:11,030
+Ja ću preventivno,
+i prerano stvarno, povratak
+
+2012
+01:43:11,030 --> 01:43:12,810
+nešto drugo od broja 1.
+
+2013
+01:43:12,810 --> 01:43:15,360
+Go to vrijednosti za prvu
+greška se može dogoditi je 1.
+
+2014
+01:43:15,360 --> 01:43:17,860
+Ako imate neki drugi pogrešna
+Situacija koja se mogu pojaviti,
+
+2015
+01:43:17,860 --> 01:43:21,390
+moglo bi se reći 2 povrat ili vratiti 3, ili
+možda čak i negativna 1 ili negativna 2.
+
+2016
+01:43:21,390 --> 01:43:23,750
+>> To su samo izlazni kodovi
+koji su, u pravilu,
+
+2017
+01:43:23,750 --> 01:43:27,770
+samo korisno za programera, ili
+Tvrtka koja se isporučuje softver.
+
+2018
+01:43:27,770 --> 01:43:30,500
+No, činjenica da je
+Ne 0 je ono što je važno.
+
+2019
+01:43:30,500 --> 01:43:34,310
+Dakle, ako u ovom programu, želim
+jamči da je ovaj program samo
+
+2020
+01:43:34,310 --> 01:43:38,190
+radi ako me korisniku pruža
+uz argument brojem od dva,
+
+2021
+01:43:38,190 --> 01:43:42,880
+naziv programa, a neke druge
+riječ, mogu provoditi onoliko koliko slijedi,
+
+2022
+01:43:42,880 --> 01:43:46,110
+vikati na korisnika s printf govoreći:
+Nedostaje naredbenog retka argumente,
+
+2023
+01:43:46,110 --> 01:43:46,970
+povratak 1.
+
+2024
+01:43:46,970 --> 01:43:49,940
+To će samo odmah
+zatvorite program.
+
+2025
+01:43:49,940 --> 01:43:55,840
+>> Samo ako argc jednak 2 ćemo sići
+Ovdje, na kojem trenutku ću reći,
+
+2026
+01:43:55,840 --> 01:44:00,410
+zdravo posto s, kosih crta n, argv1.
+
+2027
+01:44:00,410 --> 01:44:03,827
+Drugim riječima, ja sam
+Ne ide nakon argv 0,
+
+2028
+01:44:03,827 --> 01:44:05,410
+što je samo ime programa.
+
+2029
+01:44:05,410 --> 01:44:09,450
+Želim ispisati Hello, zarez,
+druga riječ koju ljudski upisali.
+
+2030
+01:44:09,450 --> 01:44:12,580
+I u ovom slučaju na
+linija 13, sve je dobro.
+
+2031
+01:44:12,580 --> 01:44:15,920
+>> Znam da argc 2
+logično iz ovog programa.
+
+2032
+01:44:15,920 --> 01:44:17,770
+Ja ću ići naprijed i povratak 0.
+
+2033
+01:44:17,770 --> 01:44:21,230
+Kao na stranu, imajte na umu da
+To je istina u nule, kao dobro.
+
+2034
+01:44:21,230 --> 01:44:24,760
+>> Logično, što sam mogao učiniti
+i zatvoriti u kućište ove retke
+
+2035
+01:44:24,760 --> 01:44:27,020
+koda u ovom drugom članku ovdje.
+
+2036
+01:44:27,020 --> 01:44:29,420
+Ali, to je neka vrsta
+nepotrebno uvlačenje moj broj.
+
+2037
+01:44:29,420 --> 01:44:31,800
+I želim napraviti super
+jasno da bez obzira što,
+
+2038
+01:44:31,800 --> 01:44:34,670
+po defaultu, zdravo
+nešto će se tiskati,
+
+2039
+01:44:34,670 --> 01:44:36,050
+tako dugo dok korisnik surađuje.
+
+2040
+01:44:36,050 --> 01:44:39,360
+>> Dakle, to je vrlo uobičajena za korištenje
+uvjet, samo ako se,
+
+2041
+01:44:39,360 --> 01:44:41,870
+uhvatiti neki pogrešan
+situaciju, a zatim izlaz.
+
+2042
+01:44:41,870 --> 01:44:45,690
+A onda, sve dok je sve
+dobro, ne imati drugo,
+
+2043
+01:44:45,690 --> 01:44:48,060
+ali samo kod
+vani da ako, jer je to
+
+2044
+01:44:48,060 --> 01:44:51,060
+ekvivalent u ovom
+konkretnom slučaju, logično.
+
+2045
+01:44:51,060 --> 01:44:54,480
+Tako sam vraća 0, samo da
+izričito naznačiti sve je dobro.
+
+2046
+01:44:54,480 --> 01:44:58,480
+>> Ako sam izostavio 0 povratak, to bi
+automatski se pretpostavlja za mene.
+
+2047
+01:44:58,480 --> 01:45:00,890
+Ali sad kad sam povratka
+jedan u najmanje ovom slučaju,
+
+2048
+01:45:00,890 --> 01:45:04,940
+Idem, za dobru mjeru i
+jasnoća, vratite 0 u ovom slučaju.
+
+2049
+01:45:04,940 --> 01:45:09,690
+Pa sad neka mi ići naprijed i učiniti izlaz,
+koja je savršena prikazali samo otići.
+
+2050
+01:45:09,690 --> 01:45:14,401
+>> Ali napraviti izlaz i pusti me
+naprijed i učiniti ./exit, Enter.
+
+2051
+01:45:14,401 --> 01:45:16,900
+A program vikao na mene,
+Nedostaje naredbenog retka argumente.
+
+2052
+01:45:16,900 --> 01:45:18,120
+OK, neka mi surađivati.
+
+2053
+01:45:18,120 --> 01:45:23,810
+>> Dopustite mi da umjesto toga učiniti ./exit, David, Enter.
+
+2054
+01:45:23,810 --> 01:45:25,190
+A sada je, kaže, zdravo David.
+
+2055
+01:45:25,190 --> 01:45:27,300
+A ti ne bi normalno vidjeti.
+
+2056
+01:45:27,300 --> 01:45:30,650
+>> No, ispada da postoji
+poseban način u Linuxu da se zapravo vidjeti
+
+2057
+01:45:30,650 --> 01:45:34,470
+s tim što izlazni kod program zatvara.
+
+2058
+01:45:34,470 --> 01:45:37,184
+Ponekad u grafičkom
+Svijet kao Mac OS ili Windows,
+
+2059
+01:45:37,184 --> 01:45:40,100
+vidite samo ove brojeve kada je
+poruka o pogrešci pops gore na ekranu
+
+2060
+01:45:40,100 --> 01:45:41,940
+i programer
+prikazuje taj broj.
+
+2061
+01:45:41,940 --> 01:45:44,773
+No, ako želimo vidjeti što je greška
+Poruka je, možemo to učiniti here--
+
+2062
+01:45:44,773 --> 01:45:48,100
+tako ./exit, Enter, print
+Nedostaje naredbenog retka argumente.
+
+2063
+01:45:48,100 --> 01:45:54,590
+>> Ako sam to echo $ ?, što je
+smiješno grobni izgleda.
+
+2064
+01:45:54,590 --> 01:45:56,590
+No $?
+
+2065
+01:45:56,590 --> 01:45:59,220
+je čarobni bajanje
+koji kaže, hej, računalo,
+
+2066
+01:45:59,220 --> 01:46:01,900
+reci mi što je prethodna
+Program je izlazni kod bilo.
+
+2067
+01:46:01,900 --> 01:46:03,410
+I ja pritisnite Enter.
+
+2068
+01:46:03,410 --> 01:46:07,520
+Vidim 1, jer to je ono što sam
+rekla moja glavna funkcija da se vrate.
+
+2069
+01:46:07,520 --> 01:46:12,310
+>> U međuvremenu, ako ja ./exit Davida,
+i pritisnite Enter, vidim, zdravo Davida.
+
+2070
+01:46:12,310 --> 01:46:16,800
+I ako ja sad to echo $ ?, vidim zdravo 0.
+
+2071
+01:46:16,800 --> 01:46:19,080
+I tako će se to
+biti vrijedne informacije
+
+2072
+01:46:19,080 --> 01:46:23,420
+u kontekstu debugger, ne tako
+mnogo toga što je ljudsko, ne bi stalo.
+
+2073
+01:46:23,420 --> 01:46:26,060
+No, debugger i druge
+Programi ćemo koristiti ovaj semestar
+
+2074
+01:46:26,060 --> 01:46:29,420
+Često će gledati na taj broj,
+iako je to na neki način skrivena
+
+2075
+01:46:29,420 --> 01:46:32,780
+osim ako ste u potrazi za to, da se
+utvrditi je li program-a ili ne
+
+2076
+01:46:32,780 --> 01:46:37,050
+Izvršenje bile su točne ili netočne.
+
+2077
+01:46:37,050 --> 01:46:40,450
+>> I tako to nas dovodi do
+to, na kraju dana.
+
+2078
+01:46:40,450 --> 01:46:43,917
+Počeli smo se danas gleda na
+ispravljanje pogrešaka, a zauzvrat u tijeku
+
+2079
+01:46:43,917 --> 01:46:46,750
+sama, a onda još zanimljivije,
+tehnički ispod haube
+
+2080
+01:46:46,750 --> 01:46:49,490
+na ono što žice su, koji traje
+tjedan mi samo uzeo zdravo za gotovo,
+
+2081
+01:46:49,490 --> 01:46:51,900
+a sigurno ih je
+zdravo za gotovo nule.
+
+2082
+01:46:51,900 --> 01:46:56,040
+>> onda smo pogledali kako možemo pristupiti
+pojedini likovi u nizu,
+
+2083
+01:46:56,040 --> 01:47:00,310
+a onda opet uzeo višu razinu
+gledati na stvari, gledajući kako well--
+
+2084
+01:47:00,310 --> 01:47:04,226
+ako želimo da se na pojedinca
+elementi u popisu kao što su struktura,
+
+2085
+01:47:04,226 --> 01:47:05,850
+Ne možemo to učiniti s više nizova?
+
+2086
+01:47:05,850 --> 01:47:08,050
+I što možemo s naredbenog retka argumente.
+
+2087
+01:47:08,050 --> 01:47:12,800
+Ali ova slika ovdje od samo kutije
+je demonstrativno ove opće ideje
+
+2088
+01:47:12,800 --> 01:47:14,451
+od niza ili popis ili vektoru.
+
+2089
+01:47:14,451 --> 01:47:16,450
+A ovisno o
+kontekstu, svi ovi riječi
+
+2090
+01:47:16,450 --> 01:47:17,880
+znači malo različite stvari.
+
+2091
+01:47:17,880 --> 01:47:20,060
+Tako je u C, mi smo samo ide
+razgovarati o nizu.
+
+2092
+01:47:20,060 --> 01:47:23,840
+I niz je komad
+memorije, svaki od kojih je
+
+2093
+01:47:23,840 --> 01:47:27,720
+elementi su u dodiru, leđa,
+natrag, natrag, na leđa.
+
+2094
+01:47:27,720 --> 01:47:31,970
+>> A ti su elementi, uglavnom,
+istog tipa podataka, karakter,
+
+2095
+01:47:31,970 --> 01:47:35,966
+lik, lik, lik, ili
+string, string, string, string, ili int,
+
+2096
+01:47:35,966 --> 01:47:38,600
+int, int, što god to bilo
+Pokušavamo trgovine.
+
+2097
+01:47:38,600 --> 01:47:42,540
+Ali na kraju krajeva, to je
+kako to izgleda konceptualno.
+
+2098
+01:47:42,540 --> 01:47:44,530
+Vi ste uzimajući vaše
+memorije ili RAM računala.
+
+2099
+01:47:44,530 --> 01:47:48,590
+A ti si to probijanje u
+jednaki veličine kutije, od kojih su svi
+
+2100
+01:47:48,590 --> 01:47:50,920
+su se vratile, na leđa, na
+natrag, natrag na ovaj način.
+
+2101
+01:47:50,920 --> 01:47:53,200
+>> I što je lijepo o
+ova ideja, kao i činjenica
+
+2102
+01:47:53,200 --> 01:47:58,580
+da možemo izraziti vrijednosti na ovaj način
+s prvom od naših podatkovnih struktura
+
+2103
+01:47:58,580 --> 01:48:02,520
+u razredu, znači da možemo početi
+za rješavanje problema s kodom
+
+2104
+01:48:02,520 --> 01:48:04,079
+koji je došao tako intuitivno u tjednu 0.
+
+2105
+01:48:04,079 --> 01:48:05,870
+Vi ćete se sjetiti telefon
+Knjiga primjer, gdje je
+
+2106
+01:48:05,870 --> 01:48:09,110
+koristili smo podijeli pa vladaj,
+ili binarni algoritam za pretraživanje,
+
+2107
+01:48:09,110 --> 01:48:13,220
+prosijati kroz cjelinu
+hrpa imena i brojeve.
+
+2108
+01:48:13,220 --> 01:48:18,220
+No, pretpostavlja se, podsjetimo, da je to
+telefonski imenik je već riješeno,
+
+2109
+01:48:18,220 --> 01:48:21,630
+da je netko drugi već
+Pomislio out-- dati popis imena
+
+2110
+01:48:21,630 --> 01:48:24,430
+i numbers-- kako ih po abecednom redu.
+
+2111
+01:48:24,430 --> 01:48:26,950
+A sada da u C mi,
+također imaju mogućnost
+
+2112
+01:48:26,950 --> 01:48:30,290
+da stavi stvari, a ne
+fizički u telefonskom imeniku
+
+2113
+01:48:30,290 --> 01:48:34,220
+ali gotovo u računalu,
+memorije, moći ćemo sljedeći tjedan
+
+2114
+01:48:34,220 --> 01:48:38,470
+ponovno uvesti učinimo prvi
+od naših podatkovnih struktura u array--
+
+2115
+01:48:38,470 --> 01:48:43,530
+ali je još važnije, stvarna računala
+znanost algoritmi provode
+
+2116
+01:48:43,530 --> 01:48:47,720
+u kodu, s kojima možemo pohraniti
+Podaci u strukturama kao što je ovaj,
+
+2117
+01:48:47,720 --> 01:48:50,730
+a zatim početi manipulirati, a
+zapravo rješavanje problema s njim,
+
+2118
+01:48:50,730 --> 01:48:53,570
+i graditi na vrhu toga,
+u konačnici, programi u C,
+
+2119
+01:48:53,570 --> 01:48:56,730
+u Python, u JavaScriptu,
+Pretraživanjem baze podataka sa SQL?
+
+2120
+01:48:56,730 --> 01:48:59,980
+>> A mi ćemo vidjeti da sve te
+različite ideje interlock.
+
+2121
+01:48:59,980 --> 01:49:04,100
+No, za sada, podsjetiti da je
+domene koje smo uveli danas
+
+2122
+01:49:04,100 --> 01:49:06,920
+je to stvar ovdje, a
+svijet kriptografije.
+
+2123
+01:49:06,920 --> 01:49:11,200
+A među sljedećih problema vi sami
+će riješiti je umjetnost kriptografije,
+
+2124
+01:49:11,200 --> 01:49:13,630
+remećenje i de-remećenje
+Informacije i šifriranje
+
+2125
+01:49:13,630 --> 01:49:15,930
+i dešifriranja teksta,
+i uz pretpostavku konačnici
+
+2126
+01:49:15,930 --> 01:49:18,970
+da sada znam što
+je ispod haube
+
+2127
+01:49:18,970 --> 01:49:21,860
+tako da kada vidite ili primanja
+poruka poput ove, te
+
+2128
+01:49:21,860 --> 01:49:24,060
+se to može dešifrirati.
+
+2129
+01:49:24,060 --> 01:49:26,740
+Sve to, i još mnogo toga sljedeći put.
+
+2130
+01:49:26,740 --> 01:49:29,890
+
+2131
+01:49:29,890 --> 01:49:30,790
+>> [VIDEO PLAYBACK]
+
+2132
+01:49:30,790 --> 01:49:32,970
+>> -Mover Upravo stigao.
+
+2133
+01:49:32,970 --> 01:49:35,146
+Ja ću ići posjet
+njegov sveučilišni profesor.
+
+2134
+01:49:35,146 --> 01:49:37,611
+Da.
+
+2135
+01:49:37,611 --> 01:49:40,080
+Bok.
+
+2136
+01:49:40,080 --> 01:49:40,660
+Ti si.
+
+2137
+01:49:40,660 --> 01:49:44,125
+
+2138
+01:49:44,125 --> 01:49:45,110
+Čekati!
+
+2139
+01:49:45,110 --> 01:49:45,610
+David.
+
+2140
+01:49:45,610 --> 01:49:53,936
+
+2141
+01:49:53,936 --> 01:49:56,060
+Samo pokušavam shvatiti
+što ti se dogodilo.
+
+2142
+01:49:56,060 --> 01:49:58,130
+Molim vas, bilo što može pomoći.
+
+2143
+01:49:58,130 --> 01:50:05,020
+
+2144
+01:50:05,020 --> 01:50:08,354
+Bili ste njegova koledža
+cimer, zar ne?
+
+2145
+01:50:08,354 --> 01:50:10,770
+Bio si tamo s njim kad
+je završio CS50 projekt?
+
+2146
+01:50:10,770 --> 01:50:13,770
+
+2147
+01:50:13,770 --> 01:50:15,765
+>> [MUSIC SVIRA]
+
+2148
+01:50:15,765 --> 01:50:32,110
+
+2149
+01:50:32,110 --> 01:50:33,150
+>> -To Je CS50.
+
+2150
+01:50:33,150 --> 01:50:42,690
+
+2151
+01:50:42,690 --> 01:50:44,770
+>> Volim ovo mjesto.
+
+2152
+01:50:44,770 --> 01:50:45,854
+>> -Pojesti.
+
+2153
+01:50:45,854 --> 01:50:47,020
+Idemo bez posla.
+
+2154
+01:50:47,020 --> 01:50:52,120
+
+2155
+01:50:52,120 --> 01:50:53,970
+>> [END PLAYBACK]
+

@@ -1,0 +1,10093 @@
+1
+00:00:00,000 --> 00:00:02,970
+>> [MUSIC PLAYBACK]
+
+2
+00:00:02,970 --> 00:00:14,355
+
+3
+00:00:14,355 --> 00:00:15,700
+>> David J. Malan: Dobre.
+
+4
+00:00:15,700 --> 00:00:18,832
+To je CS50 a to
+je začiatok týždňa 2.
+
+5
+00:00:18,832 --> 00:00:21,040
+A budete pripomenúť, že v priebehu
+minulosť pár týždňov,
+
+6
+00:00:21,040 --> 00:00:24,490
+sme sa zavádza počítača
+veda a na oplátku, programovanie.
+
+7
+00:00:24,490 --> 00:00:27,640
+>> Začali sme príbeh cestou
+Scratch, že grafický jazyk
+
+8
+00:00:27,640 --> 00:00:28,990
+z Media Lab MIT.
+
+9
+00:00:28,990 --> 00:00:30,780
+A potom v poslednej dobe,
+minulý týždeň, my sme
+
+10
+00:00:30,780 --> 00:00:34,450
+zaviesť higher-- A
+jazyk nižšej úrovne známe
+
+11
+00:00:34,450 --> 00:00:36,770
+ako C, niečo, čo je čisto textové.
+
+12
+00:00:36,770 --> 00:00:39,440
+A skutočne, naposledy sme
+preskúmal v tomto kontexte
+
+13
+00:00:39,440 --> 00:00:40,450
+množstvo poňatie.
+
+14
+00:00:40,450 --> 00:00:43,010
+>> To, odvolanie, bol veľmi
+Prvý program sme sa zaoberali.
+
+15
+00:00:43,010 --> 00:00:45,710
+A tento program úplne jednoducho,
+vytlačí "Hello, World".
+
+16
+00:00:45,710 --> 00:00:47,730
+Ale je tu toľko
+zdanlivé mágia deje.
+
+17
+00:00:47,730 --> 00:00:51,460
+Tam je to #include
+s týmito hranatých zátvorkách.
+
+18
+00:00:51,460 --> 00:00:52,170
+K dispozícii je int.
+
+19
+00:00:52,170 --> 00:00:53,020
+K dispozícii je (void).
+
+20
+00:00:53,020 --> 00:00:56,330
+Je tu zátvorky, zložené zátvorky,
+bodkočiarkami, a ešte oveľa viac.
+
+21
+00:00:56,330 --> 00:00:58,480
+>> A tak pripomenúť, že
+sme zaviedli Scratch
+
+22
+00:00:58,480 --> 00:01:02,110
+takže sme mohli, v ideálnom prípade vidieť minulosť
+že syntax, veci, ktoré to naozaj nie je
+
+23
+00:01:02,110 --> 00:01:04,590
+všetko, čo intelektuálne
+zaujímavé, ale čoskoro
+
+24
+00:01:04,590 --> 00:01:07,700
+Je absolútne, trochu zložitejšie
+zabaliť svoju myseľ okolo.
+
+25
+00:01:07,700 --> 00:01:10,860
+A skutočne, jedno z najčastejších
+veci čoskoro v programovacom triede,
+
+26
+00:01:10,860 --> 00:01:13,443
+najmä pre tých menej
+pohodlná, je dostať frustrovaní
+
+27
+00:01:13,443 --> 00:01:17,460
+a zakopol zvýšil o určitú syntaktickou
+Chyby, nehovoriac o logické chyby.
+
+28
+00:01:17,460 --> 00:01:19,800
+A tak medzi našimi cieľmi
+Dnes, v skutočnosti, bude
+
+29
+00:01:19,800 --> 00:01:23,280
+bude vybaviť vás s niektorými
+Problém-riešenie techniky, ako
+
+30
+00:01:23,280 --> 00:01:26,705
+lepšie riešiť problémy sami
+vo forme ladenie.
+
+31
+00:01:26,705 --> 00:01:29,330
+A budete pripomenúť tiež, že
+prostredie, ktoré sme uviedli
+
+32
+00:01:29,330 --> 00:01:31,780
+Naposledy bol nazývaný CS50 IDE.
+
+33
+00:01:31,780 --> 00:01:34,850
+To je webový softvér, ktorý
+umožňuje naprogramovať v oblaku,
+
+34
+00:01:34,850 --> 00:01:38,450
+tak povediac, pri zachovaní všetkých vašich
+súbory dohromady, ako sme znovu dnes.
+
+35
+00:01:38,450 --> 00:01:41,480
+A pripomínajú, že sme
+revisited týchto témach tu
+
+36
+00:01:41,480 --> 00:01:44,480
+medzi nimi funkcie, a slučky, a
+premenné a booleovské výrazy,
+
+37
+00:01:44,480 --> 00:01:45,110
+a podmienky.
+
+38
+00:01:45,110 --> 00:01:49,190
+A skutočne málo viac než my
+preložené zo sveta Scratch
+
+39
+00:01:49,190 --> 00:01:50,800
+do sveta C.
+
+40
+00:01:50,800 --> 00:01:53,220
+>> Ale základným stavebným
+bloky, tak povediac,
+
+41
+00:01:53,220 --> 00:01:55,150
+boli naozaj stále rovnaký minulý týždeň.
+
+42
+00:01:55,150 --> 00:01:57,900
+V skutočnosti sme naozaj len mali
+iný kúsok skladačky, ak chcete.
+
+43
+00:01:57,900 --> 00:02:00,300
+Namiesto toho, že fialová
+uložiť blok, my namiesto toho
+
+44
+00:02:00,300 --> 00:02:02,940
+sa printf, ktorá je
+Táto funkcia v C, ktoré
+
+45
+00:02:02,940 --> 00:02:05,890
+umožňuje tlačiť niečo
+a formátovať ho na obrazovke.
+
+46
+00:02:05,890 --> 00:02:07,950
+Zaviedli sme CS50
+Knižnica, kde vás
+
+47
+00:02:07,950 --> 00:02:11,420
+Teraz vám k dispozícii get_char,
+a get_int a get_string,
+
+48
+00:02:11,420 --> 00:02:14,610
+a niekoľko ďalších funguje ako
+No, cez ktorý môžete získať vstup
+
+49
+00:02:14,610 --> 00:02:16,260
+Z užívateľského vlastnej klávesnice.
+
+50
+00:02:16,260 --> 00:02:20,640
+A tiež sme sa pozrieť na veci
+ako these- bool a char,
+
+51
+00:02:20,640 --> 00:02:22,490
+a double, float,
+int, long_long reťazec.
+
+52
+00:02:22,490 --> 00:02:25,170
+A je tu aj iné dátové typy v jazyku C.
+
+53
+00:02:25,170 --> 00:02:28,560
+>> Inými slovami, keď deklarujete
+premenná pre uloženie nejakú hodnotu,
+
+54
+00:02:28,560 --> 00:02:32,600
+alebo pri implementácii funkcie
+ktorý vracia nejakú hodnotu,
+
+55
+00:02:32,600 --> 00:02:35,290
+môžete určiť, aká
+typ hodnotu, ktorá je.
+
+56
+00:02:35,290 --> 00:02:37,310
+Je to reťazec, ako keď
+postupnosť znakov?
+
+57
+00:02:37,310 --> 00:02:39,490
+Je to číslo, ako celé číslo?
+
+58
+00:02:39,490 --> 00:02:41,390
+Je to s pohyblivou rádovou čiarkou
+hodnota, alebo podobne?
+
+59
+00:02:41,390 --> 00:02:46,180
+Takže v jazyku C, narozdiel od nuly, sme vlastne
+začal špecifikovať, aký druh dát
+
+60
+00:02:46,180 --> 00:02:48,330
+sme sa vracali alebo používanie.
+
+61
+00:02:48,330 --> 00:02:51,910
+>> Ale samozrejme sme tiež dostali do
+niektoré základné limity na počítači.
+
+62
+00:02:51,910 --> 00:02:54,100
+A najmä,
+Tento jazyk C, recall
+
+63
+00:02:54,100 --> 00:02:57,070
+že sme si prezreli
+integer overflow, realita
+
+64
+00:02:57,070 --> 00:03:00,460
+že ak máte len
+obmedzené množstvo pamäte
+
+65
+00:03:00,460 --> 00:03:04,600
+alebo konkrétne o konečné číslo
+bitov, môžete počítať tak vysoko iba.
+
+66
+00:03:04,600 --> 00:03:08,460
+A tak sme sa pozreli na tento príklad tu
+pričom čítač v lietadle,
+
+67
+00:03:08,460 --> 00:03:13,510
+v skutočnosti, ak beží dostatočne dlho by
+pretekať a viesť k softvéru
+
+68
+00:03:13,510 --> 00:03:15,560
+skutočný fyzický potenciál chybe.
+
+69
+00:03:15,560 --> 00:03:18,600
+>> Tiež sme sa pozreli na plávajúce
+bod nepresnosť, realita
+
+70
+00:03:18,600 --> 00:03:22,280
+že iba s obmedzeným počtom
+bitov, či už je to 32 alebo 64,
+
+71
+00:03:22,280 --> 00:03:27,330
+môžete zadať iba toľko čísel
+Po desatinnou čiarkou, po ktorej sa
+
+72
+00:03:27,330 --> 00:03:29,110
+začnú sa dostať nepresný.
+
+73
+00:03:29,110 --> 00:03:32,360
+Tak napríklad jedna tretina v
+world tu, v našom ľudskom svete,
+
+74
+00:03:32,360 --> 00:03:35,360
+ako vieme, je len nekonečný počet
+z 3s za desatinnou čiarkou.
+
+75
+00:03:35,360 --> 00:03:38,820
+Ale počítač nemôže byť nutne
+predstavujú nekonečný počet čísel
+
+76
+00:03:38,820 --> 00:03:42,590
+Ak máte povoliť iba to nejaký
+obmedzené množstvo informácií.
+
+77
+00:03:42,590 --> 00:03:45,900
+>> Takže nielen že vám vybaví
+s väčšiu silu, pokiaľ ide
+
+78
+00:03:45,900 --> 00:03:49,280
+o tom, ako by ste mohli vyjadriť sami
+klávesnica, pokiaľ ide o programovaní,
+
+79
+00:03:49,280 --> 00:03:51,430
+sme tiež obmedzená čo
+môžete skutočne robiť.
+
+80
+00:03:51,430 --> 00:03:55,790
+A skutočne, môže chyby a omyly
+vyplývajú z týchto druhov problémov.
+
+81
+00:03:55,790 --> 00:03:59,900
+A skutočne, medzi témami dnes
+sa bude témami, ako je ladenie
+
+82
+00:03:59,900 --> 00:04:03,699
+a vlastne pri pohľade pod kapotu
+na to, ako boli zavedené veci minulého týždňa
+
+83
+00:04:03,699 --> 00:04:05,490
+sú skutočne realizované
+takže si lepšie
+
+84
+00:04:05,490 --> 00:04:10,530
+pochopiť, ako Schopnosti a
+Obmedzenie jazyka ako je C
+
+85
+00:04:10,530 --> 00:04:14,770
+>> A v skutočnosti, budeme olúpte vrstiev
+z najjednoduchších dátové štruktúry,
+
+86
+00:04:14,770 --> 00:04:17,756
+niečo, čo nazýva pole, ktoré
+Scratch stane nazývať "zoznam".
+
+87
+00:04:17,756 --> 00:04:19,589
+Je to trochu
+líši v tejto súvislosti.
+
+88
+00:04:19,589 --> 00:04:23,340
+A potom budeme tiež predstaviť jeden z
+Prvý z našich problémov s konkrétnou doménou
+
+89
+00:04:23,340 --> 00:04:26,790
+V CS50, svet
+kryptografia, umenie zakódovanie
+
+90
+00:04:26,790 --> 00:04:29,650
+alebo šifrovanie informácie,
+ktoré môžete posielať tajné správy
+
+91
+00:04:29,650 --> 00:04:34,520
+a dekódovať tajné správy
+medzi dvoma osobami, A a B.
+
+92
+00:04:34,520 --> 00:04:37,490
+>> Takže predtým, než sme prechodom
+v tomto novom svete,
+
+93
+00:04:37,490 --> 00:04:42,059
+skúsme vybaviť vás s niektorými
+techniky, pomocou ktorého môžete odstrániť
+
+94
+00:04:42,059 --> 00:04:43,850
+alebo zníženie aspoň niektoré
+z frustrácie
+
+95
+00:04:43,850 --> 00:04:46,630
+že ste pravdepodobne stretol
+cez samotnú minulého týždňa.
+
+96
+00:04:46,630 --> 00:04:50,830
+V skutočnosti, pred vami sú niektoré z such--
+vaše prvé problémy v C a šance sú,
+
+97
+00:04:50,830 --> 00:04:54,010
+ak ste rovnako ako ja, prvýkrát
+pokusu o zadanie out program,
+
+98
+00:04:54,010 --> 00:04:57,330
+aj keď si myslíte, že logicky
+Program je veľmi jednoduchý,
+
+99
+00:04:57,330 --> 00:05:01,200
+môžete veľmi dobre narazil do steny, a
+kompilátor nebude spolupracovať.
+
+100
+00:05:01,200 --> 00:05:03,940
+Iniciovať alebo Clang nebude
+skutočne robiť svoju príkazy.
+
+101
+00:05:03,940 --> 00:05:05,450
+>> A prečo by to mohlo byť?
+
+102
+00:05:05,450 --> 00:05:07,950
+Dobre, poďme sa pozrieť na,
+Možno, jednoduchý program.
+
+103
+00:05:07,950 --> 00:05:11,190
+Chystám sa ísť dopredu a uložiť na túto
+Súbor s názvom zámerne buggy0.c,
+
+104
+00:05:11,190 --> 00:05:13,590
+pretože viem, že ju
+byť chybný vopred.
+
+105
+00:05:13,590 --> 00:05:17,400
+Ale ja nemusí uvedomiť, že ak toto
+je prvý, alebo druhý alebo tretí programu
+
+106
+00:05:17,400 --> 00:05:18,830
+že som vlastne robiť sám.
+
+107
+00:05:18,830 --> 00:05:23,820
+Takže ja idem dopredu a
+typ out, int main (void).
+
+108
+00:05:23,820 --> 00:05:28,130
+A potom vnútri mojich zložené zátvorky,
+veľmi povedomý ( "Dobrý deň, world--
+
+109
+00:05:28,130 --> 00:05:30,980
+spätné lomítko n ") - a bodkočiarka.
+
+110
+00:05:30,980 --> 00:05:32,360
+>> Som uloženie súboru.
+
+111
+00:05:32,360 --> 00:05:34,850
+Teraz sa idem dolu
+do môjho okna terminálu
+
+112
+00:05:34,850 --> 00:05:40,340
+a typ make buggy0, pretože, opäť,
+meno súboru je dnes buggy0.c.
+
+113
+00:05:40,340 --> 00:05:43,660
+Tak píšem, aby buggy0, Enter.
+
+114
+00:05:43,660 --> 00:05:48,200
+>> A, ach, bože, prevezme späť od minule
+že žiadne chybové hlásenia je dobrá vec.
+
+115
+00:05:48,200 --> 00:05:49,740
+Takže žiadny výstup je dobrá vec.
+
+116
+00:05:49,740 --> 00:05:52,920
+Ale tu mám jasne
+niektorí množstvo chýb.
+
+117
+00:05:52,920 --> 00:05:56,470
+>> Takže prvom riadku výstupu
+Po zadaní aby buggy0, recall,
+
+118
+00:05:56,470 --> 00:05:59,540
+je pomerne podrobný výstup rinčanie je.
+
+119
+00:05:59,540 --> 00:06:02,067
+pod kapotou
+CS50 IDE je nakonfigurovaný
+
+120
+00:06:02,067 --> 00:06:04,150
+používať veľa
+Možnosti s týmto kompilátorom
+
+121
+00:06:04,150 --> 00:06:05,941
+takže nemáte
+premýšľať o nich.
+
+122
+00:06:05,941 --> 00:06:08,840
+A to je všetko, čo prvý riadok
+znamená, že začína s Clang.
+
+123
+00:06:08,840 --> 00:06:11,720
+>> Ale po tom, problémy
+začať robiť ich vzhľad.
+
+124
+00:06:11,720 --> 00:06:17,390
+Buggy0.c na linke 3, charakter
+5, tam je veľká červená chyba.
+
+125
+00:06:17,390 --> 00:06:18,380
+Čo je to?
+
+126
+00:06:18,380 --> 00:06:23,562
+Implicitne deklarovať funkciu knižnice
+printf s typom int (const char *,
+
+127
+00:06:23,562 --> 00:06:26,050
+...) [-Werror].
+
+128
+00:06:26,050 --> 00:06:28,379
+Myslím, že to veľmi rýchlo
+dostane veľmi tajomný.
+
+129
+00:06:28,379 --> 00:06:30,170
+A iste, sprvu
+pohľad, nebudeme
+
+130
+00:06:30,170 --> 00:06:32,380
+očakávajú, že budete rozumieť
+celistvosť tejto správy.
+
+131
+00:06:32,380 --> 00:06:34,213
+A tak jedna z lekcií
+pre dnes sa deje
+
+132
+00:06:34,213 --> 00:06:36,919
+bude sa snažiť, aby si všimnúť
+vzory, alebo podobné veci,
+
+133
+00:06:36,919 --> 00:06:38,960
+chybám by ste mohli mať
+stretol v minulosti.
+
+134
+00:06:38,960 --> 00:06:41,335
+Tak len nech to šprýmař oddelene
+tie slová, ktoré vyzerajú oboznámený.
+
+135
+00:06:41,335 --> 00:06:44,290
+Veľký, červená chyba je jednoznačne
+symbolický niečo je zle.
+
+136
+00:06:44,290 --> 00:06:47,940
+>> implicitne deklarovanie
+Knižnica funkcie printf.
+
+137
+00:06:47,940 --> 00:06:51,680
+Takže aj keď nemám úplne pochopiť, čo
+implicitne deklarovať funkciu knižnice
+
+138
+00:06:51,680 --> 00:06:54,900
+znamená, že problém iste
+týka printf nejako.
+
+139
+00:06:54,900 --> 00:06:59,130
+A zdroj tohto problému
+má čo do činenia s vyhlásením.
+
+140
+00:06:59,130 --> 00:07:02,440
+>> Deklarovať funkcia je
+zmienku to prvýkrát.
+
+141
+00:07:02,440 --> 00:07:06,210
+A sme použili terminológiu minulý týždeň
+deklarovanie prototyp funkciu je,
+
+142
+00:07:06,210 --> 00:07:11,860
+buď jeden riadok v hornej časti
+vlastný súbor alebo v tzv súbore hlavičky.
+
+143
+00:07:11,860 --> 00:07:15,300
+A v akom súboru urobil hovoríme
+minulý týždeň, že printf je citát,
+
+144
+00:07:15,300 --> 00:07:17,080
+unquote, vyhlásil?
+
+145
+00:07:17,080 --> 00:07:20,950
+V akom súboru je jeho prototyp?
+
+146
+00:07:20,950 --> 00:07:24,640
+>> Takže ak si spomínate, úplne prvá vec, ktorú som
+napísaný, takmer každý program, posledný time--
+
+147
+00:07:24,640 --> 00:07:30,790
+a náhodou pred chvíľou začal
+zadaním myself-- Bol to jeden here--
+
+148
+00:07:30,790 --> 00:07:38,630
+hash-- #include <stio-- pre
+input / output-- dot h A skutočne,
+
+149
+00:07:38,630 --> 00:07:41,860
+keby som teraz tento súbor uložiť, idem
+ísť dopredu a prečistiť displej,
+
+150
+00:07:41,860 --> 00:07:44,740
+ktoré môžete urobiť napísaním
+Clear, alebo môžete držať ovládacie L,
+
+151
+00:07:44,740 --> 00:07:47,680
+Len vyčistiť okno terminálu
+Len odstrániť nejaký neporiadok.
+
+152
+00:07:47,680 --> 00:07:51,370
+>> Chystám sa ísť dopredu a
+re-make typu buggy0, Enter.
+
+153
+00:07:51,370 --> 00:07:53,790
+A voila, stále vidím, že
+dlhý príkaz z Clang,
+
+154
+00:07:53,790 --> 00:07:55,470
+ale nie je žiadna chybové hlásenie tentoraz.
+
+155
+00:07:55,470 --> 00:07:58,800
+A skutočne, keď to urobím ./buggy0,
+rovnako ako minule,
+
+156
+00:07:58,800 --> 00:08:01,860
+kde bodka znamená, že táto
+adresár, Slash jednoducho znamená,
+
+157
+00:08:01,860 --> 00:08:05,040
+tu je názov programu a
+že názov programu je buggy0,
+
+158
+00:08:05,040 --> 00:08:07,340
+Enter "Hello, World".
+
+159
+00:08:07,340 --> 00:08:09,440
+>> Takže, ako môžete mať
+zbierala toto riešenie
+
+160
+00:08:09,440 --> 00:08:12,017
+bez nevyhnutne
+rozpoznávať čo najviac slov,
+
+161
+00:08:12,017 --> 00:08:14,350
+ako ja, samozrejme, majúci
+urobil toľko rokov?
+
+162
+00:08:14,350 --> 00:08:18,720
+No, si uvedomiť, za prvý problém
+set, vám predstavíme príkazu
+
+163
+00:08:18,720 --> 00:08:21,175
+že CS50 vlastným personálom
+napísal s názvom help50.
+
+164
+00:08:21,175 --> 00:08:24,300
+A skutočne, C robí špecifikáciu
+problém nastaviť, ako používať.
+
+165
+00:08:24,300 --> 00:08:27,210
+>> Ale je v podstate help50
+program, ktorý CS50 Personál
+
+166
+00:08:27,210 --> 00:08:30,850
+napísal, že umožňuje spúšťať
+príkaz alebo spustiť program,
+
+167
+00:08:30,850 --> 00:08:36,169
+a ak nechcete pochopiť jeho
+výstup, odovzdať svoj výstup help50,
+
+168
+00:08:36,169 --> 00:08:38,890
+na ktorom mieste softvér
+že zamestnanci v priebehu svojej napísal
+
+169
+00:08:38,890 --> 00:08:42,429
+zameria na výstupe vášho programu
+riadok po riadku, znak po znaku.
+
+170
+00:08:42,429 --> 00:08:46,000
+A ak my, zamestnanci, uznávajú
+chybové hlásenie, že ste sa stretli,
+
+171
+00:08:46,000 --> 00:08:50,580
+pokúsime sa vás vyprovokovať niektoré
+rečnícke otázky, s nejakú radu,
+
+172
+00:08:50,580 --> 00:08:54,890
+podobne ako TF alebo CA alebo sám
+by to osobne v úradných hodinách.
+
+173
+00:08:54,890 --> 00:08:58,320
+>> Tak sa pozrite na help50, ak nemáte
+nutne rozpoznať problém.
+
+174
+00:08:58,320 --> 00:09:00,790
+Ale nespoliehajte na to
+moc ako barle.
+
+175
+00:09:00,790 --> 00:09:03,990
+Určite snažiť sa pochopiť jeho
+Výstup a potom sa z nej poučiť
+
+176
+00:09:03,990 --> 00:09:07,571
+takže len raz alebo dvakrát viď
+niekedy bežať help50 pre konkrétne chyby
+
+177
+00:09:07,571 --> 00:09:08,070
+správa.
+
+178
+00:09:08,070 --> 00:09:10,660
+Za to, že by ste mali byť
+lepšie sami
+
+179
+00:09:10,660 --> 00:09:13,180
+zistiť, čo to vlastne je.
+
+180
+00:09:13,180 --> 00:09:14,350
+>> Urobme jednu ďalšie tu.
+
+181
+00:09:14,350 --> 00:09:20,410
+Nechaj ma ísť dopredu, a v inom
+Súbor zavoláme tento buggy1.c.
+
+182
+00:09:20,410 --> 00:09:23,110
+A v tomto súbore Som
+bude deliberately--
+
+183
+00:09:23,110 --> 00:09:26,330
+ale predstierať, že nemám
+rozumieť tomu, čo som urobil chybu.
+
+184
+00:09:26,330 --> 00:09:31,420
+>> Chystám sa ísť dopredu a robiť tohle--
+#include, pretože som
+
+185
+00:09:31,420 --> 00:09:33,660
+poučil z pred chvíľou.
+
+186
+00:09:33,660 --> 00:09:36,220
+Int main (void), ako predtým.
+
+187
+00:09:36,220 --> 00:09:40,880
+A potom tu idem
+robiť reťazci s - get_string.
+
+188
+00:09:40,880 --> 00:09:43,770
+A odvolávať z posledného okamihu,
+To znamená, že hej, počítač,
+
+189
+00:09:43,770 --> 00:09:48,280
+daj mi premennú, hovoriť to s, a
+aby typ tejto premennej reťazca
+
+190
+00:09:48,280 --> 00:09:50,150
+takže môžem uložiť jedno alebo viac slov v ňom.
+
+191
+00:09:50,150 --> 00:09:52,191
+>> A potom na pravej strane
+strana znamienko rovnosti
+
+192
+00:09:52,191 --> 00:09:54,980
+je get_string, čo je
+Funkcie v knižnici CS50
+
+193
+00:09:54,980 --> 00:09:55,980
+že robí presne to.
+
+194
+00:09:55,980 --> 00:09:59,740
+To dostane funkciu a potom
+odovzdá ho sprava doľava.
+
+195
+00:09:59,740 --> 00:10:02,670
+Takže toto znamienko rovnosti neznamená
+"Rovná sa", ako by sme si mohli myslieť v matematike.
+
+196
+00:10:02,670 --> 00:10:04,750
+To znamená, že priradenie sprava doľava.
+
+197
+00:10:04,750 --> 00:10:09,640
+Takže to znamená, mať reťazec z
+Užívateľ a uložte ho vo vnútri s.
+
+198
+00:10:09,640 --> 00:10:10,460
+>> Teraz poďme ju používať.
+
+199
+00:10:10,460 --> 00:10:13,820
+Nechaj ma ísť dopredu a hneď za sekundu
+linka, nechaj ma ísť dopredu a povedať "ahoj" -
+
+200
+00:10:13,820 --> 00:10:19,330
+nie "world", ale "Dobrý deň,% S-
+čo je náš symbol, čiarka s,
+
+201
+00:10:19,330 --> 00:10:22,030
+čo je naším premennú,
+a potom bodkočiarka.
+
+202
+00:10:22,030 --> 00:10:26,070
+Takže keď som nemal pokaziť príliš veľa
+tu to vyzerá ako správny kód.
+
+203
+00:10:26,070 --> 00:10:28,090
+>> A moje inštinkty sú teraz ku kompilácii.
+
+204
+00:10:28,090 --> 00:10:30,400
+Súbor sa nazýva buggy1.c.
+
+205
+00:10:30,400 --> 00:10:33,770
+Takže budem robiť, aby buggy1, Enter.
+
+206
+00:10:33,770 --> 00:10:36,377
+A látat-it, v prípade, že nie je
+dokonca viac chýb než predtým.
+
+207
+00:10:36,377 --> 00:10:38,210
+Myslím, že je toho viac
+chybové správy, že by
+
+208
+00:10:38,210 --> 00:10:40,400
+Zdá sa, ako skutočné riadky v tomto programe.
+
+209
+00:10:40,400 --> 00:10:42,730
+>> Ale tu je stánok s jedlom,
+aj keď ste zahltení
+
+210
+00:10:42,730 --> 00:10:45,040
+s dvoma alebo troma či
+Štyri ďalšie chybové správy,
+
+211
+00:10:45,040 --> 00:10:48,340
+sústrediť vždy na samotných
+Prvý z týchto správ.
+
+212
+00:10:48,340 --> 00:10:52,220
+Ak sa pozrieme na najvyššiu pozíciu jedna,
+rolovanie späť hore, ako bude potrebné.
+
+213
+00:10:52,220 --> 00:10:53,930
+Tak tu som napísal make buggy1.
+
+214
+00:10:53,930 --> 00:10:55,700
+Tu je Clang výstup podľa očakávania.
+
+215
+00:10:55,700 --> 00:10:57,290
+>> A tu je prvá červenej chyba.
+
+216
+00:10:57,290 --> 00:11:02,370
+Použitie nedeklarovaný identifikátor
+string, som na mysli štandard?
+
+217
+00:11:02,370 --> 00:11:04,260
+Takže štandardom je
+v skutočnosti niečo iné.
+
+218
+00:11:04,260 --> 00:11:06,240
+To sa odkazuje na používateľove
+klávesnica, v podstate.
+
+219
+00:11:06,240 --> 00:11:08,080
+>> Ale to nie je to, čo mám na mysli.
+
+220
+00:11:08,080 --> 00:11:11,770
+Myslel som reťazec, a myslel som get_string.
+
+221
+00:11:11,770 --> 00:11:16,200
+Takže čo je to, že som
+zabudla robiť tentoraz?
+
+222
+00:11:16,200 --> 00:11:20,230
+Čo chýba tentoraz?
+
+223
+00:11:20,230 --> 00:11:23,600
+Mám #include,
+takže mám prístup k printf.
+
+224
+00:11:23,600 --> 00:11:26,090
+>> Ale čo mám nemajú
+Prístup k ešte nie?
+
+225
+00:11:26,090 --> 00:11:29,420
+No, rovnako ako minule,
+Musím povedať kompilátora
+
+226
+00:11:29,420 --> 00:11:31,691
+Clang, čo tieto funkcie sú.
+
+227
+00:11:31,691 --> 00:11:33,940
+Get_string nepríde
+s C a najmä ho
+
+228
+00:11:33,940 --> 00:11:38,160
+neprichádza v
+hlavičky súboru.
+
+229
+00:11:38,160 --> 00:11:40,770
+Namiesto toho prichádza
+niečo, čo personál napísal,
+
+230
+00:11:40,770 --> 00:11:44,176
+ktorý je odlišný súbor
+pomenovať, ale príhodne pomenovanej.
+
+231
+00:11:44,176 --> 00:11:46,990
+
+232
+00:11:46,990 --> 00:11:50,861
+>> Tak jednoducho tým, že jeden riadok
+z code-- stiahnutie od minule
+
+233
+00:11:50,861 --> 00:11:53,610
+že keď Clang beží, bude to
+pozerať sa na mojom kódu odhora až dole,
+
+234
+00:11:53,610 --> 00:11:54,193
+zľava doprava.
+
+235
+00:11:54,193 --> 00:11:57,200
+Bude to si všimnúť,
+oh, chcete.
+
+236
+00:11:57,200 --> 00:11:59,900
+Nechaj ma ísť a nájsť to,
+tam, kde je na serveri,
+
+237
+00:11:59,900 --> 00:12:03,090
+skopírovať a vložiť ho v podstate,
+do hornej časti vášho vlastného súboru
+
+238
+00:12:03,090 --> 00:12:06,820
+tak, že v tomto bode v príbehu,
+riadok 1, zvyšok programu
+
+239
+00:12:06,820 --> 00:12:11,651
+možno skutočne použiť niektorú z funkcií
+v nej, medzi nimi get_string.
+
+240
+00:12:11,651 --> 00:12:13,650
+Takže budem ignorovať
+zvyšok týchto chýb,
+
+241
+00:12:13,650 --> 00:12:17,190
+Pretože ja naozaj podozrenie, že ešte len
+prvá skutočne záležalo.
+
+242
+00:12:17,190 --> 00:12:20,780
+A ja idem dopredu a opakovanie,
+Po uložení svoj súbor robiť buggy1.
+
+243
+00:12:20,780 --> 00:12:22,580
+A voila, to robilo prácu.
+
+244
+00:12:22,580 --> 00:12:29,200
+A keď to urobím ./buggy1 a zadajte pre
+inštancie, Zamyla, teraz dostane Dobrý deň,
+
+245
+00:12:29,200 --> 00:12:32,000
+Zamyla, miesto ahoj, svet.
+
+246
+00:12:32,000 --> 00:12:32,550
+>> Dobre.
+
+247
+00:12:32,550 --> 00:12:35,890
+Takže takeaways tu potom sú,
+jeden, snaží sa zbierať čo najviac, ako môžete
+
+248
+00:12:35,890 --> 00:12:39,140
+Zo samotnej chybové správy, hľadá
+na niektoré z rozpoznateľných slov.
+
+249
+00:12:39,140 --> 00:12:43,070
+Ak nedôjde to, použite help50 za
+Problém set špecifikáciu.
+
+250
+00:12:43,070 --> 00:12:46,500
+Ale blokovanie aj to vždy vyzerať
+hore chyby iba minimálne
+
+251
+00:12:46,500 --> 00:12:50,051
+spočiatku, aby sa zistilo, aké informácie
+ale v skutočnosti môže priniesť.
+
+252
+00:12:50,051 --> 00:12:52,300
+Ale ukazuje sa, je tu
+ešte viac funkcií postavená
+
+253
+00:12:52,300 --> 00:12:55,030
+Do CS50 knižnice na pomoc
+ste na začiatku semestra
+
+254
+00:12:55,030 --> 00:12:57,580
+a čoskoro na v programovaní
+zistiť, čo sa deje zle.
+
+255
+00:12:57,580 --> 00:12:59,840
+Takže poďme urobiť ďalší príklad.
+
+256
+00:12:59,840 --> 00:13:04,350
+Budem volať tento buggy2, ktorý,
+Znovu sa bude chybný von
+
+257
+00:13:04,350 --> 00:13:05,650
+brány, zámerné.
+
+258
+00:13:05,650 --> 00:13:09,980
+>> A ja idem napred
+a robiť #include.
+
+259
+00:13:09,980 --> 00:13:12,580
+A potom budem robiť int main (void).
+
+260
+00:13:12,580 --> 00:13:14,840
+A potom budem robiť cyklu for.
+
+261
+00:13:14,840 --> 00:13:16,690
+For (int i _ 0.
+
+262
+00:13:16,690 --> 00:13:18,750
+i je menšia ako alebo rovný 10.
+
+263
+00:13:18,750 --> 00:13:24,260
+i ++, a potom do zložených zátvoriek, idem
+vytlačiť len symbol hashtag tu
+
+264
+00:13:24,260 --> 00:13:25,920
+a znak nového riadku.
+
+265
+00:13:25,920 --> 00:13:29,220
+>> Takže môj zámer s týmto
+Program je jednoducho
+
+266
+00:13:29,220 --> 00:13:33,150
+iteráciu 10 krát
+a na každom opakovaní
+
+267
+00:13:33,150 --> 00:13:35,260
+tejto slučky zakaždým
+cez cyklu
+
+268
+00:13:35,260 --> 00:13:37,660
+vytlačiť hashtag,
+hashtag hashtag.
+
+269
+00:13:37,660 --> 00:13:40,480
+Jedno na riadok, pretože som
+majú novú radu tam.
+
+270
+00:13:40,480 --> 00:13:42,787
+A pripomenúť, že pre
+slučka, za posledný week--
+
+271
+00:13:42,787 --> 00:13:44,620
+a budete mať viac
+oboznámení s syntax
+
+272
+00:13:44,620 --> 00:13:47,170
+Pomocou to s praxou
+Pred long-- mi to dáva
+
+273
+00:13:47,170 --> 00:13:49,740
+variabilné Zavolal som a nastaví ju na hodnotu 0.
+
+274
+00:13:49,740 --> 00:13:52,650
+>> To zvýši aj na
+každej iterácii o 1.
+
+275
+00:13:52,650 --> 00:13:54,940
+Tak aj prejde na hodnotu 1 až 2 až 3.
+
+276
+00:13:54,940 --> 00:13:57,690
+A potom táto podmienka v
+prostredný medzi bodkočiarkami
+
+277
+00:13:57,690 --> 00:14:03,010
+dostane skontrolovať na každej iterácii, aby sa
+istí, že sme stále v dosahu.
+
+278
+00:14:03,010 --> 00:14:06,830
+Tak som chcel opakovať 10-krát, a tak som
+majú akési veľmi intuitívne len
+
+279
+00:14:06,830 --> 00:14:09,070
+dal 10 ako moja horná hranica tam.
+
+280
+00:14:09,070 --> 00:14:14,310
+>> A napriek tomu, keď som bežať to, po
+zostavovanie to s make buggy2--
+
+281
+00:14:14,310 --> 00:14:15,440
+a to zostaviť OK.
+
+282
+00:14:15,440 --> 00:14:17,980
+Tak som nemajú
+syntaktická chyba tentoraz.
+
+283
+00:14:17,980 --> 00:14:20,940
+Nechaj ma ísť napred teraz
+a spustiť buggy2, Enter.
+
+284
+00:14:20,940 --> 00:14:22,620
+A teraz posúvať nahor.
+
+285
+00:14:22,620 --> 00:14:24,890
+A dovoľte mi zvýšiť
+veľkosť okna.
+
+286
+00:14:24,890 --> 00:14:33,720
+>> Pripadá mi, že majú 1, 2, 3,
+4, 5, 6, 7, 8, 9, 10, 11.
+
+287
+00:14:33,720 --> 00:14:38,891
+Takže je tu 11 hashtag, hoci
+Jasne som dal 10 vnútri tejto slučky.
+
+288
+00:14:38,891 --> 00:14:42,140
+Teraz, niektorí z vás by mohol vidieť okamžite
+to, čo je chyba, pretože v skutočnosti je toto
+
+289
+00:14:42,140 --> 00:14:43,720
+Nie je to veľmi ťažké, aby sa chyba.
+
+290
+00:14:43,720 --> 00:14:46,070
+Ale je to veľmi často
+vyrobený veľmi skoro.
+
+291
+00:14:46,070 --> 00:14:49,820
+>> To, čo chcem zdôrazniť, hoci,
+je, ako by som mohol prísť na to?
+
+292
+00:14:49,820 --> 00:14:52,300
+No, to ukáže, že
+CS50 knižnice prichádza
+
+293
+00:14:52,300 --> 00:14:55,380
+nielen s get_string a get_int
+a get_float a ďalšie funkcie.
+
+294
+00:14:55,380 --> 00:14:59,980
+Je tiež prichádza so špeciálnou funkciou
+volal eprintf, alebo chyba printf.
+
+295
+00:14:59,980 --> 00:15:03,270
+A existuje výhradne na vykonanie
+to trochu jednoduchšie pre vás
+
+296
+00:15:03,270 --> 00:15:06,310
+Pri ladení kódu len
+tlačiť chybovú správu na displeji
+
+297
+00:15:06,310 --> 00:15:07,850
+a vedieť, odkiaľ to prišlo.
+
+298
+00:15:07,850 --> 00:15:11,000
+>> Tak napríklad, jedna vec, ktorú by som mohol
+robiť tu s touto funkciou je tohle--
+
+299
+00:15:11,000 --> 00:15:20,230
+eprintf, a potom budem pokračovať
+a povedať, že som je teraz% i, spätné lomítko n.
+
+300
+00:15:20,230 --> 00:15:22,330
+A ja idem pripojiť v hodnote i.
+
+301
+00:15:22,330 --> 00:15:25,400
+A do vrcholu, pretože to
+Je v knižnici CS50,
+
+302
+00:15:25,400 --> 00:15:27,580
+Chystám sa pokračovať
+a zahŕňajú
+
+303
+00:15:27,580 --> 00:15:29,169
+takže mám prístup k tejto funkcii.
+
+304
+00:15:29,169 --> 00:15:31,460
+Ale uvažujme, čo linka
+9 má robiť.
+
+305
+00:15:31,460 --> 00:15:32,670
+Chystám sa to odstrániť príp.
+
+306
+00:15:32,670 --> 00:15:34,670
+To nemá nič spoločné
+so svojím celkovým cieľom.
+
+307
+00:15:34,670 --> 00:15:39,090
+Ale eprintf, chyba printf, je jednoducho znamenalo
+aby mi dal nejaké diagnostické informácie.
+
+308
+00:15:39,090 --> 00:15:42,460
+Keď som bežať môj program, chcem
+vidieť na obrazovke dočasne
+
+309
+00:15:42,460 --> 00:15:44,550
+rovnako dobre rozumieť
+čo sa deje.
+
+310
+00:15:44,550 --> 00:15:47,330
+>> A skutočne, na každom
+iterácie tu linky 9
+
+311
+00:15:47,330 --> 00:15:49,260
+Chcem vidieť, aká je hodnota i?
+
+312
+00:15:49,260 --> 00:15:50,290
+Aká je hodnota i?
+
+313
+00:15:50,290 --> 00:15:51,280
+Aká je hodnota i?
+
+314
+00:15:51,280 --> 00:15:55,650
+A dúfajme, že by som mal len
+vidieť, že správa, tiež 10-krát.
+
+315
+00:15:55,650 --> 00:15:57,780
+>> Tak nechaj ma ísť dopredu a
+překompilovat svoj program,
+
+316
+00:15:57,780 --> 00:15:59,905
+ako musím urobiť kedykoľvek
+Aj vykonať zmenu. ./buggy2.
+
+317
+00:15:59,905 --> 00:16:02,680
+
+318
+00:16:02,680 --> 00:16:03,640
+A now-- OK.
+
+319
+00:16:03,640 --> 00:16:04,820
+Je tu oveľa viac deje.
+
+320
+00:16:04,820 --> 00:16:07,610
+Dovoľte mi teda posunúť do
+ešte väčšie okno.
+
+321
+00:16:07,610 --> 00:16:10,190
+>> A uvidíte, že každá z
+Hashtag je stále tlačí.
+
+322
+00:16:10,190 --> 00:16:15,270
+Ale medzi každým z nich je teraz toto
+Diagnostický výstup nasledujúci formát.
+
+323
+00:16:15,270 --> 00:16:17,960
+Meno môjho programu je tu buggy2.
+
+324
+00:16:17,960 --> 00:16:20,432
+Názov súboru je buggy2.c.
+
+325
+00:16:20,432 --> 00:16:24,080
+Číslo riadka, z ktorého
+to bola vytlačená je linka 9.
+
+326
+00:16:24,080 --> 00:16:27,500
+A potom na pravej strane, ktorý je
+chybové hlásenie, že som očakával.
+
+327
+00:16:27,500 --> 00:16:30,701
+>> A čo je príjemné na tom je, že
+teraz nemám nutne počítať
+
+328
+00:16:30,701 --> 00:16:32,200
+v mojej hlave, čo môj program robí.
+
+329
+00:16:32,200 --> 00:16:34,240
+Vidím, že na
+prvú iteráciu i je 0,
+
+330
+00:16:34,240 --> 00:16:39,420
+potom 1, potom 2, potom 3, potom 4, potom
+5, potom 6, potom 7, potom 8, potom 9, potom
+
+331
+00:16:39,420 --> 00:16:40,980
+10.
+
+332
+00:16:40,980 --> 00:16:42,050
+Tak počkaj.
+
+333
+00:16:42,050 --> 00:16:43,740
+Čo sa tu deje?
+
+334
+00:16:43,740 --> 00:16:48,190
+Aj napriek tomu sa zdajú byť počítanie
+ako je určené až 10.
+
+335
+00:16:48,190 --> 00:16:50,550
+>> Ale odkiaľ mám začať?
+
+336
+00:16:50,550 --> 00:16:53,240
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+
+337
+00:16:53,240 --> 00:16:58,040
+Tak 0, 1, 2, 3, 4, 5, 6, 7,
+8, 9, 10-- 11. prst
+
+338
+00:16:58,040 --> 00:16:59,990
+svedčí o probléme.
+
+339
+00:16:59,990 --> 00:17:02,850
+Zrejme som počítal
+nesprávne v mojom slučke.
+
+340
+00:17:02,850 --> 00:17:06,599
+Skôr než ísť 10 iterácií,
+Začínam pri 0 ° C,
+
+341
+00:17:06,599 --> 00:17:09,550
+Som končiace v aj napriek 10 rokov.
+
+342
+00:17:09,550 --> 00:17:12,030
+Ale preto, že, rovnako ako v počítači,
+Začínam počítanie pri 0 ° C,
+
+343
+00:17:12,030 --> 00:17:15,250
+I potrebné počítať nahor
+, Ale nie cez 10.
+
+344
+00:17:15,250 --> 00:17:18,510
+>> A tak fix, nakoniec som
+Tu si uvedomil, je jedna z dvoch vecí.
+
+345
+00:17:18,510 --> 00:17:22,430
+Mohol som veľmi jednoducho povedať,
+počítať do menej ako 10 rokov.
+
+346
+00:17:22,430 --> 00:17:27,260
+Tak 0, 1, 2, 3, 4, 5, 6, 7, 8,
+9, ktorý je skutočne správne,
+
+347
+00:17:27,260 --> 00:17:28,900
+aj keď to znie trochu zle.
+
+348
+00:17:28,900 --> 00:17:35,070
+Alebo by som mohol robiť menší alebo rovný
+9, tak dlho, ako som začínajú na 0 ° C.
+
+349
+00:17:35,070 --> 00:17:40,056
+Alebo ak si naozaj nemajú radi, že vás
+možno počítať až po 10, ale začínajú na 1.
+
+350
+00:17:40,056 --> 00:17:41,680
+Ale opäť, to jednoducho nie je tak bežné.
+
+351
+00:17:41,680 --> 00:17:43,977
+V programming-- hoci
+nie toľko v Scratch--
+
+352
+00:17:43,977 --> 00:17:45,810
+ale v programovaní v jazyku
+C a ďalších jazykoch,
+
+353
+00:17:45,810 --> 00:17:47,670
+ako je JavaScript a
+Python a iní, je to
+
+354
+00:17:47,670 --> 00:17:49,880
+Len veľmi bežné pre
+naša diskusia o binárny
+
+355
+00:17:49,880 --> 00:17:53,450
+len začať počítať u
+Najnižšia číslo môžete, čo je 0.
+
+356
+00:17:53,450 --> 00:17:53,950
+Dobre.
+
+357
+00:17:53,950 --> 00:17:55,160
+Tak to je eprintf.
+
+358
+00:17:55,160 --> 00:17:58,600
+A opäť, teraz, keď som prišiel na to my
+problém, a ja idem späť na 0
+
+359
+00:17:58,600 --> 00:18:01,470
+cez menej ako 10, idem
+ísť dovnútra a odstrániť eprintf.
+
+360
+00:18:01,470 --> 00:18:04,580
+>> Nemalo by tam byť, keď som
+loď môj kód alebo predložiť svoj kód
+
+361
+00:18:04,580 --> 00:18:05,800
+alebo ukázať, že na niekoho iného.
+
+362
+00:18:05,800 --> 00:18:07,980
+Je to naozaj len znamenalo
+na účely dočasného použitia.
+
+363
+00:18:07,980 --> 00:18:11,650
+Ale teraz som opravil toto
+Zvláštne problém tiež.
+
+364
+00:18:11,650 --> 00:18:16,780
+>> Dobre, poďme urobiť ešte jeden príklad tu
+že budem vybičovať nasledovne.
+
+365
+00:18:16,780 --> 00:18:22,850
+Chystám sa ísť dopredu a
+#include. $ 50
+
+366
+00:18:22,850 --> 00:18:25,580
+A ja idem napred
+a #include.
+
+367
+00:18:25,580 --> 00:18:29,030
+>> A budem šetriť
+Tento súbor ako buggy3.c.
+
+368
+00:18:29,030 --> 00:18:31,740
+A ja idem napred
+a vyhlasujú, int main (void).
+
+369
+00:18:31,740 --> 00:18:34,186
+A potom tam vnútri
+Idem robiť int i _ -
+
+370
+00:18:34,186 --> 00:18:36,435
+Chcem zaviesť program
+s get_negative_int.
+
+371
+00:18:36,435 --> 00:18:39,146
+
+372
+00:18:39,146 --> 00:18:40,770
+Nejedná sa o funkciu, ktorá zatiaľ neexistuje.
+
+373
+00:18:40,770 --> 00:18:42,870
+Takže budeme realizovať
+to za chvíľu.
+
+374
+00:18:42,870 --> 00:18:45,541
+Ale budeme vidieť, prečo
+to je kočík v prvom prechode.
+
+375
+00:18:45,541 --> 00:18:47,290
+A akonáhle som sa dostal
+int od užívateľa,
+
+376
+00:18:47,290 --> 00:18:53,365
+Práve idem k tlači% i je negatívny
+integer, lomítko, n, čiarka, t j.
+
+377
+00:18:53,365 --> 00:18:55,240
+Inými slovami, všetky I
+chcú tento program robiť
+
+378
+00:18:55,240 --> 00:18:58,000
+je dostať negatívny int od
+Užívateľ a potom vytlačiť
+
+379
+00:18:58,000 --> 00:18:59,980
+že taký a taký je negatívny int.
+
+380
+00:18:59,980 --> 00:19:02,080
+>> Teraz potrebujem na vykonanie tejto funkcie.
+
+381
+00:19:02,080 --> 00:19:05,740
+Tak neskôr v mojom súbore, ja idem
+dopredu a deklarovať funkciu nazvanú
+
+382
+00:19:05,740 --> 00:19:10,670
+get_negative_int (void) - a my
+vrátiť k tomu, čo tá linka opäť znamená,
+
+383
+00:19:10,670 --> 00:19:18,790
+v moment-- int n; do-- kutilov
+following-- printf n je:.
+
+384
+00:19:18,790 --> 00:19:26,210
+A potom budem robiť n - get_int,
+a to urobiť, keď n je väčšie ako 0 ° C.
+
+385
+00:19:26,210 --> 00:19:28,310
+A potom sa vrátiť n;.
+
+386
+00:19:28,310 --> 00:19:31,730
+>> Takže je tu veľa deje v
+to ale žiadny z nich sme nemali
+
+387
+00:19:31,730 --> 00:19:33,710
+pozrieme na minulý týždeň, aspoň stručne.
+
+388
+00:19:33,710 --> 00:19:36,980
+Takže na riadku 10 tady som deklaroval
+Funkcia s názvom get_negative_int,
+
+389
+00:19:36,980 --> 00:19:39,620
+a ja som dal (void), v
+zátvorky, dôvodom je to
+
+390
+00:19:39,620 --> 00:19:40,950
+neberie vstup.
+
+391
+00:19:40,950 --> 00:19:42,910
+Ja neprechádza nič
+pre túto funkciu.
+
+392
+00:19:42,910 --> 00:19:44,690
+Ja len dostať niečo späť od neho.
+
+393
+00:19:44,690 --> 00:19:47,270
+>> A čo ja som dúfal, že
+dostať späť je celé číslo.
+
+394
+00:19:47,270 --> 00:19:50,040
+Neexistuje žiadny dátový typ v
+C volal negative_int.
+
+395
+00:19:50,040 --> 00:19:52,880
+Je to pravý, takže to ide
+že je na nás, aby sa ubezpečil,
+
+396
+00:19:52,880 --> 00:19:55,340
+že hodnota, ktorá je vlastne
+vrátená, je nielen int
+
+397
+00:19:55,340 --> 00:19:56,380
+ale je tiež negatívny.
+
+398
+00:19:56,380 --> 00:20:02,150
+>> Na riadku 12 Som deklarovanie premennej
+volal n a robiť to typu int.
+
+399
+00:20:02,150 --> 00:20:07,500
+A potom v riadku 13 až 18 Som
+robí niečo, keď niečo nie je pravda.
+
+400
+00:20:07,500 --> 00:20:11,040
+Idem do toho a tlač
+n znamená, hrubého čreva, a potom priestor,
+
+401
+00:20:11,040 --> 00:20:12,800
+ako výzvu pre užívateľov.
+
+402
+00:20:12,800 --> 00:20:16,410
+>> Ja potom volá get_int a
+uloženie jeho tzv návratovú hodnotu
+
+403
+00:20:16,410 --> 00:20:18,130
+v tejto premennej n.
+
+404
+00:20:18,130 --> 00:20:22,600
+Ale budem pokračovať v tom
+Tento zatiaľ čo n je väčšia ako 0 ° C.
+
+405
+00:20:22,600 --> 00:20:27,960
+Inými slovami, v prípade, že používateľ mi dáva
+int a toto číslo je väčšie ako 0,
+
+406
+00:20:27,960 --> 00:20:31,180
+ergo, pozitívne, idem
+len držať reprompting užívateľa,
+
+407
+00:20:31,180 --> 00:20:37,160
+zachovať reprompting tým, že núti ich
+spolupracujú a daj mi záporné int.
+
+408
+00:20:37,160 --> 00:20:41,640
+>> A akonáhle n je vlastne negative--
+Predpokladám, že užívateľ konečne typy -50,
+
+409
+00:20:41,640 --> 00:20:46,710
+potom je tento zatiaľ čo slučka už nie je pravda
+pretože -50 nie je väčšia ako 0 ° C.
+
+410
+00:20:46,710 --> 00:20:51,140
+Tak sme sa vymaniť z toho
+slučka logicky a vrátiť n.
+
+411
+00:20:51,140 --> 00:20:53,520
+>> Ale je tu ešte jedna ďalšia
+vec, ktorú musím urobiť.
+
+412
+00:20:53,520 --> 00:20:56,190
+A môžem jednoducho to urobiť
+o kopírovanie a vkladanie
+
+413
+00:20:56,190 --> 00:20:58,540
+jeden riadok kódu v hornej časti súboru.
+
+414
+00:20:58,540 --> 00:21:01,630
+Musím sa učiť Clang,
+alebo sľub zvonenie,
+
+415
+00:21:01,630 --> 00:21:04,630
+výslovne stanovuje, že budem,
+skutočne ísť a realizovať
+
+416
+00:21:04,630 --> 00:21:06,020
+Táto funkcia get_negative_int.
+
+417
+00:21:06,020 --> 00:21:07,674
+To môže byť len nižšia v súbore.
+
+418
+00:21:07,674 --> 00:21:09,840
+Znovu si pripomeňme, že Clang
+číta veci zhora nadol,
+
+419
+00:21:09,840 --> 00:21:12,330
+zľava doprava, takže nemôžete
+volanie funkcií, pokiaľ Clang
+
+420
+00:21:12,330 --> 00:21:15,330
+nevie, že to bude existovať.
+
+421
+00:21:15,330 --> 00:21:18,430
+>> Teraz, bohužiaľ, tento program,
+ako niektorí z vás si možno všimli,
+
+422
+00:21:18,430 --> 00:21:19,590
+Je už buggy.
+
+423
+00:21:19,590 --> 00:21:21,400
+Nechaj ma ísť dopredu a robiť buggy3.
+
+424
+00:21:21,400 --> 00:21:26,904
+To kompiluje, takže môj problém teraz nie je
+syntaktická chyba, ako chyba textové,
+
+425
+00:21:26,904 --> 00:21:29,570
+je to vlastne bude logickým
+chyba, že som úmyselne
+
+426
+00:21:29,570 --> 00:21:32,450
+vyrobený ako príležitosť na
+krokovať, čo sa deje.
+
+427
+00:21:32,450 --> 00:21:35,540
+>> Chystám sa pokračovať
+Teraz a spustiť buggy3.
+
+428
+00:21:35,540 --> 00:21:37,490
+A ja idem
+dopredu a nie spolupracovať.
+
+429
+00:21:37,490 --> 00:21:39,494
+Chystám sa dať číslo 1.
+
+430
+00:21:39,494 --> 00:21:41,410
+Je to nepáčilo, tak
+to ma výzvou znovu.
+
+431
+00:21:41,410 --> 00:21:42,147
+>> Ako sa o 2?
+
+432
+00:21:42,147 --> 00:21:43,021
+3?
+
+433
+00:21:43,021 --> 00:21:43,520
+50?
+
+434
+00:21:43,520 --> 00:21:44,740
+Žiadny z tých pracujú.
+
+435
+00:21:44,740 --> 00:21:46,890
+Ako asi -50?
+
+436
+00:21:46,890 --> 00:21:48,560
+A program sa zdá k práci.
+
+437
+00:21:48,560 --> 00:21:49,970
+>> Nechaj ma to skúsiť ešte raz.
+
+438
+00:21:49,970 --> 00:21:53,400
+Skúsim -1, zdá sa k práci.
+
+439
+00:21:53,400 --> 00:21:56,380
+Skúsim -2, zdá sa k práci.
+
+440
+00:21:56,380 --> 00:21:59,640
+Skúsim 0.
+
+441
+00:21:59,640 --> 00:22:01,684
+Huh, to je nesprávne.
+
+442
+00:22:01,684 --> 00:22:03,350
+Teraz sme tu trochu pedantská.
+
+443
+00:22:03,350 --> 00:22:07,090
+Ale je to skutočne pravda, že 0
+nie je ani pozitívne, ani negatívne.
+
+444
+00:22:07,090 --> 00:22:11,150
+A tak skutočnosť, že môj program je
+hovorí, že 0 je celé záporné číslo,
+
+445
+00:22:11,150 --> 00:22:12,820
+to nie je technicky správna.
+
+446
+00:22:12,820 --> 00:22:15,180
+>> Teraz, prečo to robí?
+
+447
+00:22:15,180 --> 00:22:16,270
+No, mohlo by to byť zrejmé.
+
+448
+00:22:16,270 --> 00:22:18,110
+A naozaj, je program
+má byť pomerne jednoduchý
+
+449
+00:22:18,110 --> 00:22:19,670
+takže máme niečo na preskúmanie.
+
+450
+00:22:19,670 --> 00:22:25,870
+>> Ale poďme predstaviť tretiu ladenie
+Technika tu nazýva debug50.
+
+451
+00:22:25,870 --> 00:22:27,750
+Tak toto je program
+že sme práve vytvorili
+
+452
+00:22:27,750 --> 00:22:30,770
+tento rok nazvaný debug50
+ktorá vám umožní
+
+453
+00:22:30,770 --> 00:22:34,130
+použiť to, čo sa nazýva vstavaný
+grafický debugger v CS50 IDE.
+
+454
+00:22:34,130 --> 00:22:38,400
+A debugger je len program, ktorý
+všeobecne umožňuje spustiť svoj program
+
+455
+00:22:38,400 --> 00:22:44,050
+ale krok za krokom za krokom linky
+o riadok po riadku, pozastavenie strkať
+
+456
+00:22:44,050 --> 00:22:47,626
+okolo, pri pohľade na premenných tak, že
+Program nie je len vyhodiť okolo vás
+
+457
+00:22:47,626 --> 00:22:49,750
+a rýchlo niečo vytlačiť
+alebo nie niečo vytlačiť.
+
+458
+00:22:49,750 --> 00:22:53,250
+To vám dáva príležitosť, pri
+ľudská rýchlosť, k interakcii s ním.
+
+459
+00:22:53,250 --> 00:22:55,470
+>> A aby to vykonať,
+jednoducho postupujte nasledovne.
+
+460
+00:22:55,470 --> 00:22:58,479
+Po kompiláciu kódu,
+čo som už urobil, buggy3,
+
+461
+00:22:58,479 --> 00:23:00,020
+budete pokračovať a spustiť debug50 ./buggy.
+
+462
+00:23:00,020 --> 00:23:03,460
+
+463
+00:23:03,460 --> 00:23:06,760
+Toľko ako help50 má spustiť
+help50 a potom príkaz,
+
+464
+00:23:06,760 --> 00:23:10,120
+debug50 má spustiť debug50 a
+potom názov príkazu.
+
+465
+00:23:10,120 --> 00:23:14,440
+>> Teraz sledujte, čo sa deje na mojej obrazovke,
+Na pravej strane zvlášť.
+
+466
+00:23:14,440 --> 00:23:19,400
+Keď som narazila na príkaz Spustiť, všetky
+náhla to pravý panel
+
+467
+00:23:19,400 --> 00:23:20,419
+otvára na obrazovke.
+
+468
+00:23:20,419 --> 00:23:22,210
+A je tu veľa deje
+o na prvý pohľad.
+
+469
+00:23:22,210 --> 00:23:25,110
+Ale je tu ešte nie je príliš
+veľa sa obávať doteraz.
+
+470
+00:23:25,110 --> 00:23:28,570
+>> To mi ukazuje všetko
+že sa deje vo vnútri môjho programu
+
+471
+00:23:28,570 --> 00:23:31,130
+práve teraz a prostredníctvom nich
+Tlačidlá hore vrchole je potom
+
+472
+00:23:31,130 --> 00:23:35,910
+dovoľovať ma krokovať mojom kódu
+nakoniec krok za krokom za krokom.
+
+473
+00:23:35,910 --> 00:23:37,140
+Ale teraz ešte nie.
+
+474
+00:23:37,140 --> 00:23:38,060
+Všimnite si, čo sa stane.
+
+475
+00:23:38,060 --> 00:23:40,600
+V mojom okne termináli
+Ja som bol vyzvaný na zadanie n.
+
+476
+00:23:40,600 --> 00:23:44,560
+A ja idem dopredu a
+spolupracujú tento čas a typ v -1.
+
+477
+00:23:44,560 --> 00:23:48,770
+A aj keď trochu záhadne, -1
+je záporné celé číslo, ako sa očakávalo.
+
+478
+00:23:48,770 --> 00:23:52,020
+>> A potom dieťa skončil s
+Stav 0 GDBserver ukončenia.
+
+479
+00:23:52,020 --> 00:23:55,180
+GDB, GNU Debugger, je názov
+podkladového softvéru
+
+480
+00:23:55,180 --> 00:23:56,620
+ktorý implementuje tento debugger.
+
+481
+00:23:56,620 --> 00:24:00,500
+Ale to všetko vlastne znamená, ladiaci
+šiel preč, pretože môj program ukončiť
+
+482
+00:24:00,500 --> 00:24:01,710
+a všetko bolo v poriadku.
+
+483
+00:24:01,710 --> 00:24:06,020
+Chcem chcete skutočne ladiť svoj program,
+Musím povedať preventívne debug50,
+
+484
+00:24:06,020 --> 00:24:08,920
+kam chcem začať
+krokovanie mojom kódu?
+
+485
+00:24:08,920 --> 00:24:11,750
+>> A možno najjednoduchší spôsob,
+k tomu, že je nasledujúci.
+
+486
+00:24:11,750 --> 00:24:15,300
+Keby som vznášať nad
+žľab môjho editor tu,
+
+487
+00:24:15,300 --> 00:24:19,090
+takže naozaj len v bočnom paneli tu,
+na ľavej strane na číslo riadku,
+
+488
+00:24:19,090 --> 00:24:21,870
+Všimnite si, že keď stačí kliknúť
+Raz som dal malú červenú bodku.
+
+489
+00:24:21,870 --> 00:24:24,460
+A tá malá červená bodka,
+ako stopke, znamená, hej,
+
+490
+00:24:24,460 --> 00:24:29,430
+debug50, vykonávanie prestávka môj kód
+práve tam, keď som spustenie tohto programu.
+
+491
+00:24:29,430 --> 00:24:30,260
+>> Takže poďme to urobiť.
+
+492
+00:24:30,260 --> 00:24:37,340
+Nechaj ma ísť dopredu a spustiť môj program
+opäť s debug50 ./buggy3, Enter.
+
+493
+00:24:37,340 --> 00:24:40,110
+A teraz, vývesné, niečo
+odlišný stalo.
+
+494
+00:24:40,110 --> 00:24:42,440
+Nie som boli vyzvaní
+Zatiaľ vo svojom okne terminálu
+
+495
+00:24:42,440 --> 00:24:45,430
+za nič, pretože nemám
+dostal tam ešte v mojom programe.
+
+496
+00:24:45,430 --> 00:24:47,950
+Všimnite si, že na linke 8
+ktorý je teraz zvýraznený
+
+497
+00:24:47,950 --> 00:24:51,720
+a tam je malá šípka na
+Ľavá porekadlá, ste tu sa zastavil.
+
+498
+00:24:51,720 --> 00:24:55,030
+Tento riadok kódu, riadok
+8, doteraz vykonaný.
+
+499
+00:24:55,030 --> 00:24:58,940
+>> A čo je zvedavý, či sa pozerám
+tu na pravej strane,
+
+500
+00:24:58,940 --> 00:25:03,530
+Všimnite si, že aj je miestna
+variabilný, miestne v tom zmysle,
+
+501
+00:25:03,530 --> 00:25:05,450
+že je to vo vnútri aktuálnej funkcie.
+
+502
+00:25:05,450 --> 00:25:08,920
+A jeho hodnota, zrejme v predvolenom nastavení,
+a druh pohodlne, je 0.
+
+503
+00:25:08,920 --> 00:25:10,260
+Ale ja som typ 0.
+
+504
+00:25:10,260 --> 00:25:13,410
+Ktorý je zhodou okolností jeho
+Východisková hodnota v tomto okamihu.
+
+505
+00:25:13,410 --> 00:25:15,490
+>> Tak nechaj ma ísť dopredu a to hneď.
+
+506
+00:25:15,490 --> 00:25:18,680
+Nechaj ma ísť dopredu a na
+horný tu, som
+
+507
+00:25:18,680 --> 00:25:20,970
+ísť dopredu a
+kliknutím na túto prvú ikonu, ktorá
+
+508
+00:25:20,970 --> 00:25:25,360
+znamená krok nad čo znamená, nevynechávajte
+to ale prekročiť tento riadok kódu,
+
+509
+00:25:25,360 --> 00:25:27,770
+spustením pozdĺž cesty.
+
+510
+00:25:27,770 --> 00:25:30,710
+>> A teraz si všimnite, my
+výzva práve zmenil.
+
+511
+00:25:30,710 --> 00:25:31,380
+Prečo to tak je?
+
+512
+00:25:31,380 --> 00:25:33,639
+Povedal som debug50,
+spustiť tento riadok kódu.
+
+513
+00:25:33,639 --> 00:25:34,930
+Čo znamená tento riadok kódu robiť?
+
+514
+00:25:34,930 --> 00:25:35,960
+Vyzve ma int.
+
+515
+00:25:35,960 --> 00:25:36,460
+OK.
+
+516
+00:25:36,460 --> 00:25:37,400
+Nechaj ma spolupracovať.
+
+517
+00:25:37,400 --> 00:25:41,340
+Nechaj ma ísť dopredu a hneď typ -1, Enter.
+
+518
+00:25:41,340 --> 00:25:42,920
+A teraz si všimnúť, čo sa zmenilo.
+
+519
+00:25:42,920 --> 00:25:46,060
+Na pravej strane,
+môj lokálne premenná i
+
+520
+00:25:46,060 --> 00:25:48,200
+je označený ako -1 teraz.
+
+521
+00:25:48,200 --> 00:25:49,810
+A je to stále typu int.
+
+522
+00:25:49,810 --> 00:25:53,102
+>> A oznámenia, taky, môj takzvaný
+zásobník volaní, kde som pauzu?
+
+523
+00:25:53,102 --> 00:25:54,810
+Budeme hovoriť o
+v budúcnosti.
+
+524
+00:25:54,810 --> 00:25:58,620
+Ale zásobník volaní len odkazuje sa na čo
+funkcie sú v súčasnej dobe v pohybe.
+
+525
+00:25:58,620 --> 00:26:00,040
+Práve teraz je to len hlavné.
+
+526
+00:26:00,040 --> 00:26:03,590
+A práve teraz jediným miestnym
+Premenná i s hodnotou 1.
+
+527
+00:26:03,590 --> 00:26:09,840
+>> A keď som konečne prekročiť tento riadok
+tu s tou rovnakou ikonou v pravom hornom rohu,
+
+528
+00:26:09,840 --> 00:26:11,410
+-1 Je záporné celé číslo.
+
+529
+00:26:11,410 --> 00:26:13,580
+Teraz je to zastavil sa nad touto zloženou zátvorkou.
+
+530
+00:26:13,580 --> 00:26:14,740
+Nechajme ju robiť svoju vec.
+
+531
+00:26:14,740 --> 00:26:17,300
+Aj cez to krok linky a voila.
+
+532
+00:26:17,300 --> 00:26:20,240
+>> Takže nie všetko, čo strašne
+poučné napriek tomu,
+
+533
+00:26:20,240 --> 00:26:23,550
+ale to, dajte mi pauzu
+a premyslieť logicky
+
+534
+00:26:23,550 --> 00:26:24,870
+Čo tento program robí.
+
+535
+00:26:24,870 --> 00:26:26,890
+Ale to nebol ten chybný prípad.
+
+536
+00:26:26,890 --> 00:26:28,510
+Poďme to urobiť znova nasledujúcim spôsobom.
+
+537
+00:26:28,510 --> 00:26:31,340
+>> Chystám sa nechať túto zarážku
+na linke 8 s červenou bodkou.
+
+538
+00:26:31,340 --> 00:26:32,830
+Idem znova spustiť debug50.
+
+539
+00:26:32,830 --> 00:26:34,400
+Je to automaticky tu sa zastavil.
+
+540
+00:26:34,400 --> 00:26:37,660
+Ale tentoraz, namiesto
+prekračoval tejto línie,
+
+541
+00:26:37,660 --> 00:26:42,290
+nechaj ma skutočne ísť vo vnútri
+get_negative_int a zistiť,
+
+542
+00:26:42,290 --> 00:26:45,530
+prečo je prijatie 0 ako platnú odpoveď?
+
+543
+00:26:45,530 --> 00:26:47,990
+>> Takže namiesto toho, kliknutím na tlačidlo Step Over.
+
+544
+00:26:47,990 --> 00:26:50,630
+Chystám sa pokračovať
+a kliknite na tlačidlo Step Into.
+
+545
+00:26:50,630 --> 00:26:54,030
+A všimnite si, že linka 8, ktorá je
+teraz zvýraznený teraz zrazu
+
+546
+00:26:54,030 --> 00:26:56,900
+stáva linka 17.
+
+547
+00:26:56,900 --> 00:26:59,947
+>> Teraz to nie je tak debuggeru
+vynechal linky 14 a 15 a 16.
+
+548
+00:26:59,947 --> 00:27:01,780
+Je to jednoducho nie je nič
+že sa tam ukázať.
+
+549
+00:27:01,780 --> 00:27:04,050
+Tie sú len deklarovanie premenných,
+a potom je tu slovo robiť
+
+550
+00:27:04,050 --> 00:27:05,390
+a potom otvorený zložená zátvorka.
+
+551
+00:27:05,390 --> 00:27:09,227
+Jediná funkčná linka, ktorá je
+šťavnatý v skutočnosti je to jeden tu, 17.
+
+552
+00:27:09,227 --> 00:27:11,060
+A to je miesto, kde máme
+automaticky pozastavený.
+
+553
+00:27:11,060 --> 00:27:13,870
+>> Takže printf ( "n.is:");, tak
+že sa ešte nestalo.
+
+554
+00:27:13,870 --> 00:27:18,250
+Tak poďme do toho a kliknite na tlačidlo Krok cez.
+
+555
+00:27:18,250 --> 00:27:20,326
+Teraz moja výzva, naozaj,
+zmenená na ( "n").
+
+556
+00:27:20,326 --> 00:27:22,450
+Teraz get_int, nehodlám
+obťažovať vstúpil do,
+
+557
+00:27:22,450 --> 00:27:24,750
+pretože táto funkcia bola
+vyrobený CS50 v knižnici.
+
+558
+00:27:24,750 --> 00:27:25,750
+Je to pravdepodobne správne.
+
+559
+00:27:25,750 --> 00:27:28,440
+>> Takže ja idem dopredu a
+nejako spolupracovať tým, že mu
+
+560
+00:27:28,440 --> 00:27:30,590
+int, ale nie negatívne int.
+
+561
+00:27:30,590 --> 00:27:32,870
+Tak nechaj ma ísť dopredu a narazil 0.
+
+562
+00:27:32,870 --> 00:27:39,460
+A čo sa stane teraz tu
+Keď som sa pustiť do riadku 21?
+
+563
+00:27:39,460 --> 00:27:40,890
+Ja som už zase opakoval.
+
+564
+00:27:40,890 --> 00:27:43,320
+Nechcem sa zdajú byť uviazol v tejto slučke.
+
+565
+00:27:43,320 --> 00:27:45,990
+Inými slovami, tento žltý
+bar nedržala deje okolo,
+
+566
+00:27:45,990 --> 00:27:47,130
+a okolo a okolo.
+
+567
+00:27:47,130 --> 00:27:48,340
+>> A teraz, prečo tomu tak je?
+
+568
+00:27:48,340 --> 00:27:49,920
+No, n, čo sa n práve teraz?
+
+569
+00:27:49,920 --> 00:27:53,280
+Môžem sa pozrieť na miestne
+Premenné v debuggeri.
+
+570
+00:27:53,280 --> 00:27:53,816
+n je 0.
+
+571
+00:27:53,816 --> 00:27:55,190
+Dobre, čo bol môj stav?
+
+572
+00:27:55,190 --> 00:27:58,700
+>> 20-- linka 20 je dobre,
+0 je väčšia ako 0.
+
+573
+00:27:58,700 --> 00:27:59,500
+To nie je pravda.
+
+574
+00:27:59,500 --> 00:28:01,020
+0 nie je väčšia ako 0 ° C.
+
+575
+00:28:01,020 --> 00:28:02,820
+A tak som vypukol z toho.
+
+576
+00:28:02,820 --> 00:28:06,370
+>> A tak to je dôvod, prečo on-line
+21, keď som vlastne pokračovať,
+
+577
+00:28:06,370 --> 00:28:10,370
+Chystám sa vrátiť 0, a to aj
+aj keď som mal zamietnuté 0
+
+578
+00:28:10,370 --> 00:28:12,484
+pretože nie sú skutočne negatívne.
+
+579
+00:28:12,484 --> 00:28:14,650
+Takže teraz, nemám naozaj ani
+starostlivosť o ladiaci nástroj.
+
+580
+00:28:14,650 --> 00:28:16,900
+Got to, nepotrebujem sa
+vedieť, čo viac sa deje.
+
+581
+00:28:16,900 --> 00:28:19,233
+>> Takže ja idem dopredu a
+stačí kliknúť na tlačidlo Play,
+
+582
+00:28:19,233 --> 00:28:20,240
+a nechať toto skončiť.
+
+583
+00:28:20,240 --> 00:28:23,440
+Teraz som si uvedomil, že môj
+chyba je zrejme na linke 20.
+
+584
+00:28:23,440 --> 00:28:25,160
+To je môj logické chybe.
+
+585
+00:28:25,160 --> 00:28:28,100
+>> A tak to, čo robiť chcem
+robiť to zmeniť?
+
+586
+00:28:28,100 --> 00:28:32,500
+V prípade, že problém je, že nie som
+lov 0, je to len logické chybe.
+
+587
+00:28:32,500 --> 00:28:35,910
+A môžem povedať, keď n je
+väčší alebo rovné 0,
+
+588
+00:28:35,910 --> 00:28:38,330
+udržiavať znovu a znovu vyzvania používateľa.
+
+589
+00:28:38,330 --> 00:28:41,050
+>> Takže ešte raz, jednoduchá chyba, možno
+ani zrejmé, keď si ma videl
+
+590
+00:28:41,050 --> 00:28:42,410
+napíš to pred pár minútami.
+
+591
+00:28:42,410 --> 00:28:44,570
+Ale tu stánok s jedlom
+je to, že sa ladenie 50,
+
+592
+00:28:44,570 --> 00:28:46,850
+a ladenie
+softvér všeobecnejšie
+
+593
+00:28:46,850 --> 00:28:51,370
+máte tento novo nájdenú právomoc
+prechádzať vlastným kódom, pozrite sa
+
+594
+00:28:51,370 --> 00:28:55,590
+prostredníctvom tohto pravom paneli, čo
+vaše premenné hodnoty.
+
+595
+00:28:55,590 --> 00:28:57,700
+Takže nemusíte nutne
+musieť použiť niečo
+
+596
+00:28:57,700 --> 00:29:00,630
+ako by ste eprintf k tlači týchto hodnôt.
+
+597
+00:29:00,630 --> 00:29:04,430
+Môžete skutočne vidieť
+vizuálne na obrazovke.
+
+598
+00:29:04,430 --> 00:29:08,920
+>> Teraz, okrem toho je potrebné poznamenať,
+že tam je ďalšia technika, ktorá je
+
+599
+00:29:08,920 --> 00:29:09,890
+v skutočnosti výborný bežné.
+
+600
+00:29:09,890 --> 00:29:13,120
+A možno sa čudujete, prečo tento malý
+chlapík tu bol sedí na javisku.
+
+601
+00:29:13,120 --> 00:29:16,490
+Takže je táto technika, všeobecne
+známy ako gumové kačice ladenie,
+
+602
+00:29:16,490 --> 00:29:18,786
+čo je naozaj len
+svedčí o tom,
+
+603
+00:29:18,786 --> 00:29:20,660
+ktoré často pri programátori
+sú písania kódu,
+
+604
+00:29:20,660 --> 00:29:22,650
+oni nie sú nevyhnutne
+spolupracuje s ostatnými,
+
+605
+00:29:22,650 --> 00:29:24,030
+alebo pracovať v zdieľanom prostredí.
+
+606
+00:29:24,030 --> 00:29:25,050
+>> Sú to akési doma.
+
+607
+00:29:25,050 --> 00:29:25,910
+Možno je to neskoro v noci.
+
+608
+00:29:25,910 --> 00:29:28,190
+Snažia sa postavy
+out nejaké chyby v ich kódu.
+
+609
+00:29:28,190 --> 00:29:29,330
+A oni jednoducho nie je to vidieť.
+
+610
+00:29:29,330 --> 00:29:30,329
+>> A nie je spolubývajúci.
+
+611
+00:29:30,329 --> 00:29:31,250
+Neexistuje žiadna TF.
+
+612
+00:29:31,250 --> 00:29:32,680
+Neexistuje žiadny CA okolo.
+
+613
+00:29:32,680 --> 00:29:36,440
+Jediné, čo majú na poličke
+Je to trochu gumové Drahoušek.
+
+614
+00:29:36,440 --> 00:29:39,030
+>> A tak gumové kačice ladenie
+je práve táto výzva
+
+615
+00:29:39,030 --> 00:29:42,780
+vymyslieť niečo ako hlúpe
+pretože to ako skutočný tvor,
+
+616
+00:29:42,780 --> 00:29:46,940
+a vlastne prejsť kódu
+verbálne k tomuto neživý objekt.
+
+617
+00:29:46,940 --> 00:29:49,230
+Tak napríklad, ak je
+To je môj príklad here--
+
+618
+00:29:49,230 --> 00:29:52,470
+a pripomínajú, že skoršie
+Problém bol ten,
+
+619
+00:29:52,470 --> 00:29:58,140
+keby som zmazať tento prvý riadok kódu,
+a idem do toho a robiť buggy 0 znova
+
+620
+00:29:58,140 --> 00:30:01,220
+Pripomíname, že som mal títo
+chybové správy tu.
+
+621
+00:30:01,220 --> 00:30:05,997
+Takže myšlienka tu, keď som smiešny
+cíti v tejto chvíli robí to verejne,
+
+622
+00:30:05,997 --> 00:30:06,580
+je to chyba.
+
+623
+00:30:06,580 --> 00:30:10,910
+>> OK, takže môj problém je, že som
+implicitne vyhlásená za funkciu knižnice.
+
+624
+00:30:10,910 --> 00:30:12,610
+A to funkcia knižnice je printf.
+
+625
+00:30:12,610 --> 00:30:15,290
+Declare-- OK, vyhlásiť
+Pripomína mi prototypov.
+
+626
+00:30:15,290 --> 00:30:18,930
+>> To znamená, že je potrebné skutočne
+povedať kompilátora vopred, čo
+
+627
+00:30:18,930 --> 00:30:19,980
+Funkcie vyzerá.
+
+628
+00:30:19,980 --> 00:30:20,930
+Počkaj minútu.
+
+629
+00:30:20,930 --> 00:30:23,580
+Nemal som štandardné io.h.
+
+630
+00:30:23,580 --> 00:30:24,530
+Ďakujem veľmi pekne.
+
+631
+00:30:24,530 --> 00:30:27,330
+>> Tak práve tento proces of-- vás
+Nemusíte vlastne mať kačicu.
+
+632
+00:30:27,330 --> 00:30:29,819
+Ale táto myšlienka chôdzu
+sám prostredníctvom svojho vlastného kódu
+
+633
+00:30:29,819 --> 00:30:31,610
+takže ani počuť
+sám, takže vás
+
+634
+00:30:31,610 --> 00:30:35,620
+si uvedomiť, opomenutie vo svojom vlastnom
+poznámky, je všeobecne myšlienka.
+
+635
+00:30:35,620 --> 00:30:38,910
+>> A možno viac logicky, nie tak
+Koľko sa, že jeden, ale viac zapojiť
+
+636
+00:30:38,910 --> 00:30:44,220
+Príkladom sme proste urobili v kočíku 3.C
+môžete prejsť sami cez neho
+
+637
+00:30:44,220 --> 00:30:45,310
+nasledovne.
+
+638
+00:30:45,310 --> 00:30:49,190
+Takže v poriadku, guma
+Drahoušek, DDB, ak chcete.
+
+639
+00:30:49,190 --> 00:30:52,350
+Tu máme vo svojej hlavnej funkcie,
+Volám mať negatívny int.
+
+640
+00:30:52,350 --> 00:30:54,660
+>> A ja stále návratovú hodnotu.
+
+641
+00:30:54,660 --> 00:31:00,410
+Ja ukladá ich na ľavej strane
+na linke 8 do premennej zavolal som.
+
+642
+00:31:00,410 --> 00:31:02,380
+OK, ale počkať, ako robil
+ktoré sa dostanú túto hodnotu?
+
+643
+00:31:02,380 --> 00:31:04,130
+Pozrime sa na funkcie v riadku 12.
+
+644
+00:31:04,130 --> 00:31:05,760
+>> V riadku 12, musíme sa negatívne Int.
+
+645
+00:31:05,760 --> 00:31:08,190
+Neberie žiadne vstupy,
+sa vracia int, OK.
+
+646
+00:31:08,190 --> 00:31:10,929
+Prehlasujem na linke 14 a variabilný n.
+
+647
+00:31:10,929 --> 00:31:12,220
+To bude ukladať celé číslo.
+
+648
+00:31:12,220 --> 00:31:13,760
+To je to čo chcem.
+
+649
+00:31:13,760 --> 00:31:18,480
+>> Takže niektorý z nasledujúcich úkonov, zatiaľ čo n je-- nechať
+me zrušiť, čo bola oprava už som urobil.
+
+650
+00:31:18,480 --> 00:31:22,710
+Takže, keď n je väčšie ako
+0, vytlačiť n znamená, OK.
+
+651
+00:31:22,710 --> 00:31:25,170
+A potom volať dostať int uložené v n.
+
+652
+00:31:25,170 --> 00:31:30,160
+A potom skontrolovať, či n je 0,
+n je ne-- je to tak.
+
+653
+00:31:30,160 --> 00:31:31,910
+Takže znovu, vy nie
+Potrebujeme skutočnú kačicu.
+
+654
+00:31:31,910 --> 00:31:35,650
+Ale len prechádzky sa prostredníctvom
+váš kód ako intelektuálne cvičenie
+
+655
+00:31:35,650 --> 00:31:37,720
+vám často pomôcť
+si uvedomiť, čo sa deje,
+
+656
+00:31:37,720 --> 00:31:41,170
+nie len niečo robiť
+takto, pozeral na obrazovku,
+
+657
+00:31:41,170 --> 00:31:43,720
+a nehovorí sa prostredníctvom
+to, čo úprimne nie je
+
+658
+00:31:43,720 --> 00:31:46,270
+skoro ako účinná technika.
+
+659
+00:31:46,270 --> 00:31:48,620
+Tak tu to máte, je
+rad rôznych techník
+
+660
+00:31:48,620 --> 00:31:52,102
+Pre skutočne ladenie kódu
+a zistení závady, ktoré všetky
+
+661
+00:31:52,102 --> 00:31:54,810
+by mali byť nástroje vo svojom toolkit
+takže nie ste neskoro v noci,
+
+662
+00:31:54,810 --> 00:31:57,660
+zvlášť, ste v jedálni
+haly, alebo v úradných hodinách,
+
+663
+00:31:57,660 --> 00:32:00,368
+búchanie hlavou o
+stena, snaží vyriešiť nejaký problém.
+
+664
+00:32:00,368 --> 00:32:02,020
+Uvedomte si, že existujú softvérové ​​nástroje.
+
+665
+00:32:02,020 --> 00:32:03,720
+Tam sú gumové kačica nástroje.
+
+666
+00:32:03,720 --> 00:32:09,630
+A je tu celý tím
+podporovať čaká na pomocnú ruku.
+
+667
+00:32:09,630 --> 00:32:13,120
+>> Takže teraz, pár slov o probléme
+sety, a na to, čo vás budeme dúfať,
+
+668
+00:32:13,120 --> 00:32:15,620
+dostať von z nich, a ako
+ideme o vyhodnotení.
+
+669
+00:32:15,620 --> 00:32:17,680
+Per Osnova kurzu je,
+CS50 je problém sety
+
+670
+00:32:17,680 --> 00:32:22,320
+sa hodnotí na štyroch základných osiach, takže
+na speak-- rozsah, správnosť, dizajn,
+
+671
+00:32:22,320 --> 00:32:23,060
+a štýl.
+
+672
+00:32:23,060 --> 00:32:25,910
+A rozsah proste sa odkazuje na koľko
+kusu ste odhryzol?
+
+673
+00:32:25,910 --> 00:32:28,080
+Ako veľký problém, skúšali ste?
+
+674
+00:32:28,080 --> 00:32:30,110
+Aké úrovne intenzity
+ste sa prejavuje?
+
+675
+00:32:30,110 --> 00:32:35,750
+>> Korektnosť je, uvedený program pracuje ako
+to má podľa špecifikácie CS50
+
+676
+00:32:35,750 --> 00:32:38,640
+ak poskytujú určité vstupy
+alebo niektoré výstupy vráti?
+
+677
+00:32:38,640 --> 00:32:41,130
+Konštrukcia je veľmi subjektívne z nich.
+
+678
+00:32:41,130 --> 00:32:43,360
+A to je ten, ktorý bude
+trvať najdlhšie sa učiť
+
+679
+00:32:43,360 --> 00:32:47,220
+a najdlhšia učiť, v
+keďže scvrkáva,
+
+680
+00:32:47,220 --> 00:32:49,530
+ako dobre napísané je váš kód?
+
+681
+00:32:49,530 --> 00:32:52,920
+>> To je jedna vec, stačí vytlačiť správny
+výstupy alebo vrátenie správne hodnoty.
+
+682
+00:32:52,920 --> 00:32:55,400
+Ale to robíte as
+efektívne, ako len je to možné?
+
+683
+00:32:55,400 --> 00:32:58,210
+To robíte predel
+a panuj, alebo binárne
+
+684
+00:32:58,210 --> 00:33:01,500
+Hľadanie ako skoro uvidíte, že sme urobili
+Pred dvoma týždňami sa v telefónnom zozname?
+
+685
+00:33:01,500 --> 00:33:04,670
+Existujú lepšie spôsoby, ako riešiť
+Problém, než v súčasnej dobe máte tu?
+
+686
+00:33:04,670 --> 00:33:06,380
+To je príležitosť pre lepší dizajn.
+
+687
+00:33:06,380 --> 00:33:08,530
+>> A potom, ako style--
+pekný je váš kód?
+
+688
+00:33:08,530 --> 00:33:12,370
+Všimnite si, že som celkom
+najmä o odsadenie môj kód,
+
+689
+00:33:12,370 --> 00:33:15,300
+a uistiť sa, moje premenné
+sú primerane menovaný. n,
+
+690
+00:33:15,300 --> 00:33:19,660
+zatiaľ čo v krátkosti, je to dobrý názov pre
+číslo, aj pre počítanie celé číslo,
+
+691
+00:33:19,660 --> 00:33:20,727
+s pre reťazec.
+
+692
+00:33:20,727 --> 00:33:22,560
+A môžeme mať dlhšiu
+variabilné štýl mená.
+
+693
+00:33:22,560 --> 00:33:25,500
+Štýl je to, ako dobre
+robí váš kód vyzerať?
+
+694
+00:33:25,500 --> 00:33:26,600
+A ako je to čitateľné?
+
+695
+00:33:26,600 --> 00:33:29,650
+>> A časom, aké sú vaše TA
+a TFS bude robiť v priebehu
+
+696
+00:33:29,650 --> 00:33:31,870
+je poskytnúť vám, že
+druh kvalitatívne spätnej väzby
+
+697
+00:33:31,870 --> 00:33:34,330
+tak, že dostanete lepšie
+v týchto rôznych aspektov.
+
+698
+00:33:34,330 --> 00:33:37,510
+A čo sa týka toho, ako
+zhodnotiť každý z týchto osí,
+
+699
+00:33:37,510 --> 00:33:40,080
+je to typicky s veľmi málo
+vedierka, takže všeobecne,
+
+700
+00:33:40,080 --> 00:33:41,680
+získať predstavu o tom, ako dobre robíte.
+
+701
+00:33:41,680 --> 00:33:45,680
+A skutočne, ak dostanete skóre na
+ktorýkoľvek z týchto axes-- správnosť, dizajnu
+
+702
+00:33:45,680 --> 00:33:49,659
+a štýl especially-- toto číslo
+je obvykle medzi 1 a 5.
+
+703
+00:33:49,659 --> 00:33:52,450
+A doslova, ak ste stále
+3 je na začiatku semestra,
+
+704
+00:33:52,450 --> 00:33:53,977
+To je veľmi dobrá vec.
+
+705
+00:33:53,977 --> 00:33:55,810
+To znamená, že je tu stále
+priestor na zlepšenie,
+
+706
+00:33:55,810 --> 00:33:58,490
+ktoré by ste dúfať v
+pričom triedu prvýkrát.
+
+707
+00:33:58,490 --> 00:34:01,820
+Je tu snáď nejaký kus stropu
+ku ktorému ste sa uchádzajú o dosiahnutie.
+
+708
+00:34:01,820 --> 00:34:03,970
+A tak stále o 3
+najskoršie kusy,
+
+709
+00:34:03,970 --> 00:34:06,550
+ak nie nejaký 2 je a 4 je,
+je skutočne dobrá vec.
+
+710
+00:34:06,550 --> 00:34:08,880
+Je to dobre v dosahu,
+dobre v očakávaní.
+
+711
+00:34:08,880 --> 00:34:11,421
+>> A ak vaša myseľ je pretekanie, počkajte
+Okamih, tri z piatich.
+
+712
+00:34:11,421 --> 00:34:12,620
+To je naozaj 6 out of 10.
+
+713
+00:34:12,620 --> 00:34:13,560
+To je 60%.
+
+714
+00:34:13,560 --> 00:34:14,830
+Môj bože, to je F.
+
+715
+00:34:14,830 --> 00:34:15,870
+>> To nie.
+
+716
+00:34:15,870 --> 00:34:17,600
+Nie je to v skutočnosti, že.
+
+717
+00:34:17,600 --> 00:34:22,710
+Skôr je to príležitosť na zlepšenie
+v priebehu semestra.
+
+718
+00:34:22,710 --> 00:34:25,580
+A ak ste stále niektoré
+Poors, to sú príležitosťou
+
+719
+00:34:25,580 --> 00:34:29,199
+využiť konzultačných hodín,
+iste profily a iné zdroje.
+
+720
+00:34:29,199 --> 00:34:32,840
+>> Najlepšie je príležitosť, naozaj,
+byť hrdí na to, ako ďaleko ste
+
+721
+00:34:32,840 --> 00:34:34,520
+prísť v priebehu semestra.
+
+722
+00:34:34,520 --> 00:34:38,199
+Takže si uvedomiť, keď už nič
+inde, tri je dobrá.
+
+723
+00:34:38,199 --> 00:34:40,179
+A je tu priestor pre rast v priebehu času.
+
+724
+00:34:40,179 --> 00:34:43,090
+>> Ako tieto osi sú
+vážený, realisticky ste
+
+725
+00:34:43,090 --> 00:34:46,745
+strávi väčšinu svojho času dostať
+veci na prácu, nieto správne.
+
+726
+00:34:46,745 --> 00:34:49,120
+A tak správnosť inklinuje
+váha najviac, rovnako ako u
+
+727
+00:34:49,120 --> 00:34:51,360
+Tento multiplikatívnej faktor tri.
+
+728
+00:34:51,360 --> 00:34:54,659
+Dizajn je tiež dôležitá, ale
+niečo, čo nemusí nutne
+
+729
+00:34:54,659 --> 00:34:58,220
+minúť všetky tieto hodiny na
+sa snaží dostať veci proste do práce.
+
+730
+00:34:58,220 --> 00:35:00,019
+>> A tak je to vážený
+trochu viac na ľahkú váhu.
+
+731
+00:35:00,019 --> 00:35:01,560
+A potom štýl je vážený najmenej.
+
+732
+00:35:01,560 --> 00:35:03,710
+Aj keď je to o nič menej
+dôležitým zásadným spôsobom,
+
+733
+00:35:03,710 --> 00:35:05,990
+je to len, snáď,
+Najjednoduchším spôsobom, ako urobiť správne,
+
+734
+00:35:05,990 --> 00:35:08,440
+napodobňovanie príklady my
+robiť v prednáške a časti,
+
+735
+00:35:08,440 --> 00:35:11,080
+s vecami pekne
+členité, a poznamenal,
+
+736
+00:35:11,080 --> 00:35:14,320
+a tak ďalej, je medzi najjednoduchšie
+čo robiť a dostať pravdu.
+
+737
+00:35:14,320 --> 00:35:16,960
+Tak ako také, realizovať
+že to sú body
+
+738
+00:35:16,960 --> 00:35:19,000
+ktoré sú relatívne ľahko uchopiť.
+
+739
+00:35:19,000 --> 00:35:22,360
+>> A teraz pár slov o
+tohle-- akademickej poctivosti.
+
+740
+00:35:22,360 --> 00:35:25,150
+Takže za kurz je
+osnovy, uvidíte
+
+741
+00:35:25,150 --> 00:35:27,630
+že kurz má pomerne
+bit jazyka okolo tohto.
+
+742
+00:35:27,630 --> 00:35:31,380
+A samozrejme berie otázku
+akademické poctivosť celkom vážne.
+
+743
+00:35:31,380 --> 00:35:33,450
+>> Máme rozdiel,
+k lepšiemu alebo k horšiemu,
+
+744
+00:35:33,450 --> 00:35:36,570
+z toho, že poslal každý rok viac
+Študenti pre disciplinárne konanie
+
+745
+00:35:36,570 --> 00:35:39,670
+než väčšina akékoľvek iné
+Samozrejme, že som si vedomý.
+
+746
+00:35:39,670 --> 00:35:42,580
+To nemusí byť nutne
+svedčí o tom,
+
+747
+00:35:42,580 --> 00:35:46,340
+že CS študentov, alebo CS50 študenti, sú
+o nič menej ako poctivý svojimi spolužiakmi.
+
+748
+00:35:46,340 --> 00:35:49,090
+Ale realita, že v tomto
+world, elektronicky, len sme
+
+749
+00:35:49,090 --> 00:35:50,990
+majú technologický
+prostriedok na odhaľovanie tohto.
+
+750
+00:35:50,990 --> 00:35:53,360
+>> Je dôležité, aby nami
+spravodlivosť cez triedy
+
+751
+00:35:53,360 --> 00:35:58,550
+že budeme robiť to zistí, a zvýšiť
+problém, keď vidíme veci.
+
+752
+00:35:58,550 --> 00:36:01,980
+A len preto, aby namaľovať obraz, a v skutočnosti
+pomáhať niečo také umývadlom,
+
+753
+00:36:01,980 --> 00:36:04,600
+to sú počty
+Študenti v priebehu posledných 10 rokov
+
+754
+00:36:04,600 --> 00:36:07,610
+ktoré boli zapojené do niektorých
+tieto otázky akademické poctivosti,
+
+755
+00:36:07,610 --> 00:36:10,990
+s niektorými 32 študentov
+od jesene 2015, ktorá
+
+756
+00:36:10,990 --> 00:36:13,760
+znamená, že nemáme brať
+záležitosť veľmi vážne.
+
+757
+00:36:13,760 --> 00:36:18,380
+A nakoniec, tieto čísla komponovať,
+v poslednej dobe, asi 3%, 4% alebo tak,
+
+758
+00:36:18,380 --> 00:36:19,120
+triedy.
+
+759
+00:36:19,120 --> 00:36:25,220
+>> Takže pre absolútna väčšina študentov
+Zdá sa, že riadky sú jasné.
+
+760
+00:36:25,220 --> 00:36:27,940
+Ale majte na
+vadiť, najmä neskoré
+
+761
+00:36:27,940 --> 00:36:32,080
+v noci, keď bojuje s
+niektoré riešenia problému set,
+
+762
+00:36:32,080 --> 00:36:34,830
+že existujú mechanizmy
+pre seba dostať lepšiu
+
+763
+00:36:34,830 --> 00:36:37,870
+Podpora, než si možno
+myslím, dokonca aj v túto hodinu.
+
+764
+00:36:37,870 --> 00:36:40,514
+Uvedomujeme si, že keď dostaneme
+študentské podanie, prejdeme
+
+765
+00:36:40,514 --> 00:36:43,430
+porovnať každý podanie tento rok
+proti každému podanie vlani,
+
+766
+00:36:43,430 --> 00:36:47,590
+proti každému podanie od roku 2007,
+a od tej doby, pri pohľade na, ako aj,
+
+767
+00:36:47,590 --> 00:36:49,931
+Kód úložísk online,
+diskusných fór, pracovných miest.
+
+768
+00:36:49,931 --> 00:36:51,806
+A my spomenúť to,
+Naozaj, to všetko v záujme
+
+769
+00:36:51,806 --> 00:36:56,040
+plného sprístupnenie, že ak
+niekto iný ju môže nájsť na internete,
+
+770
+00:36:56,040 --> 00:36:57,880
+iste, takže môžeme priebeh.
+
+771
+00:36:57,880 --> 00:37:00,100
+Ale v skutočnosti, duch
+kurzu sa scvrkáva
+
+772
+00:37:00,100 --> 00:37:01,650
+tohto bodu v osnove.
+
+773
+00:37:01,650 --> 00:37:03,670
+Je to naozaj len, byť rozumná.
+
+774
+00:37:03,670 --> 00:37:06,680
+>> A keby sme museli rozviesť
+sa len trochu viac jazyka,
+
+775
+00:37:06,680 --> 00:37:09,770
+Uvedomujeme si, že podstatou všetkého
+Práca, ktorú predloží tohto kurzu
+
+776
+00:37:09,770 --> 00:37:10,954
+musí mať svoj vlastný.
+
+777
+00:37:10,954 --> 00:37:13,870
+Ale vnútri to, že tam sú určite
+príležitostí a povzbudenie,
+
+778
+00:37:13,870 --> 00:37:17,300
+a pedagogická hodnota obracia na
+others-- sám, TFS, TAS,
+
+779
+00:37:17,300 --> 00:37:20,760
+TAS, a ostatné v triede,
+pre podporu, nieto priatelia
+
+780
+00:37:20,760 --> 00:37:23,547
+a spolubývajúci, ktorí študovali
+SK a programovanie predtým.
+
+781
+00:37:23,547 --> 00:37:25,130
+A tak tam je príspevok za to.
+
+782
+00:37:25,130 --> 00:37:28,180
+A všeobecné pravidlo
+Je tohle--, keď žiadajú o pomoc,
+
+783
+00:37:28,180 --> 00:37:31,470
+môžete ukázať svoj kód s ostatnými,
+ale nemusí zobraziť ich.
+
+784
+00:37:31,470 --> 00:37:34,880
+Takže aj keď ste v úradných hodinách,
+alebo v hale D, alebo niekde inde
+
+785
+00:37:34,880 --> 00:37:37,450
+pracuje na nejakom kuse set,
+po boku priateľa, ktorý
+
+786
+00:37:37,450 --> 00:37:40,160
+Je úplne v poriadku, u
+Koniec dňa vašej práce
+
+787
+00:37:40,160 --> 00:37:43,034
+by v konečnom dôsledku patria k sebe
+vás v tomto poradí, a nie
+
+788
+00:37:43,034 --> 00:37:45,700
+byť nejaké spoločné úsilie,
+s výnimkou konečného projektu, kde
+
+789
+00:37:45,700 --> 00:37:47,410
+je to dovolené a podporované.
+
+790
+00:37:47,410 --> 00:37:49,830
+>> Uvedomte si, že ak ste
+zápasí s niečím
+
+791
+00:37:49,830 --> 00:37:52,520
+a váš priateľ proste stane,
+byť lepší na to potom vy,
+
+792
+00:37:52,520 --> 00:37:55,130
+alebo lepšia u tohto problému než tie,
+alebo o niečo ďalej, než tie,
+
+793
+00:37:55,130 --> 00:37:57,330
+je to absolútne rozumné obrátiť
+svojmu priateľovi a povedať, hej,
+
+794
+00:37:57,330 --> 00:38:00,480
+Vadilo by vám pri pohľade na môj kód tu,
+mi pomohol odhaliť to, čo môj problém je?
+
+795
+00:38:00,480 --> 00:38:03,760
+A dúfajme, že v
+Záujem výchovné hodnoty
+
+796
+00:38:03,760 --> 00:38:07,040
+že priateľ nie je len
+hovoria, oh, to áno, ale skôr,
+
+797
+00:38:07,040 --> 00:38:09,917
+čo ešte chýba na linke
+6, alebo niečo také?
+
+798
+00:38:09,917 --> 00:38:12,000
+Ale riešenie nie je
+pre priateľa vedľa teba
+
+799
+00:38:12,000 --> 00:38:15,617
+povedať, oh, dobre, tu, nechaj ma vytiahnuť
+toto hore, a ukázať svoju riešenie pre vás.
+
+800
+00:38:15,617 --> 00:38:16,450
+Tak to je čiara.
+
+801
+00:38:16,450 --> 00:38:18,670
+Môžete ukázať svoj kód
+iní, ale nemusí
+
+802
+00:38:18,670 --> 00:38:22,350
+zobraziť oni, s výhradou druhej
+obmedzenia v Osnova kurzu je.
+
+803
+00:38:22,350 --> 00:38:24,760
+>> Takže sa majte na pamäti tomto
+takzvaná doložka ľútosť
+
+804
+00:38:24,760 --> 00:38:27,560
+V Osnova kurzu, rovnako,
+že ak sa dopustí nejaké čin, ktorý
+
+805
+00:38:27,560 --> 00:38:30,476
+Nie je rozumné, ale aby bol na
+Pozornosť hláv kurzu je
+
+806
+00:38:30,476 --> 00:38:34,240
+do 72 hodín, kurz
+môžu uložiť miestne sankcie, ktoré
+
+807
+00:38:34,240 --> 00:38:37,380
+môže zahŕňať neuspokojivý alebo
+ak nie je stupeň pre prácu predložené.
+
+808
+00:38:37,380 --> 00:38:41,410
+Ale samozrejme nebude odkazovať
+nezáleží na ďalšie disciplinárne opatrenie,
+
+809
+00:38:41,410 --> 00:38:43,010
+s výnimkou prípadov opakovaných činov.
+
+810
+00:38:43,010 --> 00:38:46,632
+Inými slovami, ak urobíte nejaké
+hlúpy, a to najmä neskoro v noci, rozhodnutie
+
+811
+00:38:46,632 --> 00:38:49,340
+že druhý deň ráno, alebo dva dni
+Neskôr sa prebudíte a uvedomiť si,
+
+812
+00:38:49,340 --> 00:38:50,870
+Čo som si myslel?
+
+813
+00:38:50,870 --> 00:38:53,890
+Robíte vo CS50 majú odbyt
+pre upevnenie tento problém
+
+814
+00:38:53,890 --> 00:38:57,170
+a vlastniť až na to, aby sme
+vám v ústrety a riešiť
+
+815
+00:38:57,170 --> 00:39:01,500
+s ním vo veci, ktorá je zároveň
+vzdelávacie a cenné pre vás,
+
+816
+00:39:01,500 --> 00:39:04,200
+ale stále trestné nejakým spôsobom.
+
+817
+00:39:04,200 --> 00:39:08,590
+A teraz, aby sa zmiernilo toto.
+
+818
+00:39:08,590 --> 00:39:10,570
+>> [Videoprehrávanie]
+
+819
+00:39:10,570 --> 00:39:13,540
+>> [MUSIC PLAYBACK]
+
+820
+00:39:13,540 --> 00:39:58,090
+
+821
+00:39:58,090 --> 00:39:58,866
+>> [END PLAYBACK]
+
+822
+00:39:58,866 --> 00:40:00,490
+David J. Malan: Dobre, sme späť.
+
+823
+00:40:00,490 --> 00:40:03,680
+A teraz sa pozrieme na jeden z
+Prvý z našich reálneho sveta domén
+
+824
+00:40:03,680 --> 00:40:08,720
+V CS50, umenie kryptografie,
+umenie odosielanie a prijímanie
+
+825
+00:40:08,720 --> 00:40:11,840
+tajné správy, zašifrovaný
+Správy ak chcete,
+
+826
+00:40:11,840 --> 00:40:17,060
+ktoré môžu byť rozlúštený iba vtedy, ak máte
+niektorí kľúčovou zložkou, ktorá má odosielateľ
+
+827
+00:40:17,060 --> 00:40:18,030
+tiež.
+
+828
+00:40:18,030 --> 00:40:22,120
+Takže motivovať toto vezmeme
+Pozrite sa na túto vec tu,
+
+829
+00:40:22,120 --> 00:40:26,750
+ktorý je uvedený príklad
+tajný dekodér prsteň, ktorý
+
+830
+00:40:26,750 --> 00:40:34,042
+môžu byť použité, aby sa prísť na to,
+čo tajnú správu v skutočnosti je.
+
+831
+00:40:34,042 --> 00:40:35,750
+V skutočnosti, späť v
+deň na základnej škole,
+
+832
+00:40:35,750 --> 00:40:38,787
+ak ste niekedy poslal tajné správy
+niektoré kamarát alebo nejaký rozdrviť v triede,
+
+833
+00:40:38,787 --> 00:40:40,620
+možno ste si myslel,
+ste bol šikovný
+
+834
+00:40:40,620 --> 00:40:46,530
+by na kus papiera striedanie,
+ako, A do bodu B, a B na C, a C na D,
+
+835
+00:40:46,530 --> 00:40:47,590
+a tak ďalej.
+
+836
+00:40:47,590 --> 00:40:50,300
+Ale tie boli skutočne šifrovanie
+vaše informácie, a to aj
+
+837
+00:40:50,300 --> 00:40:53,300
+ak to bolo trochu triviálne, nebol
+že ťažké učiteľ si uvedomiť,
+
+838
+00:40:53,300 --> 00:40:55,675
+No, ak ste práve zmeniť
+B na A a C na B,
+
+839
+00:40:55,675 --> 00:40:57,550
+ste skutočne zistiť,
+čo bola správa,
+
+840
+00:40:57,550 --> 00:40:59,700
+ale si v šifrovanie informácií.
+
+841
+00:40:59,700 --> 00:41:03,420
+>> Len si to robí
+Jednoducho povedané, podobne ako Ralphie tu
+
+842
+00:41:03,420 --> 00:41:07,934
+v slávnom filme, ktorý hrá
+do značnej miery najmenších podrobností každú zimu.
+
+843
+00:41:07,934 --> 00:41:08,600
+[Videoprehrávanie]
+
+844
+00:41:08,600 --> 00:41:11,180
+-BE Je známe všetkým, že
+Ralph Parker je týmto
+
+845
+00:41:11,180 --> 00:41:14,070
+menovaný za člena Little
+Sirota Annie Secret Circle
+
+846
+00:41:14,070 --> 00:41:17,700
+a má právo na všetky vyznamenania
+a prínos k nim dochádza.
+
+847
+00:41:17,700 --> 00:41:24,340
+>> -Signed, Malý sirota Annie,
+pult-podpísal Pierre Andre, atramentom.
+
+848
+00:41:24,340 --> 00:41:27,160
+Vyznamenania a výhody,
+Už vo veku deviatich rokov.
+
+849
+00:41:27,160 --> 00:41:30,490
+
+850
+00:41:30,490 --> 00:41:31,825
+>> [Krik]
+
+851
+00:41:31,825 --> 00:41:33,750
+
+852
+00:41:33,750 --> 00:41:34,250
+-Poď.
+
+853
+00:41:34,250 --> 00:41:35,210
+Pusťme sa do toho.
+
+854
+00:41:35,210 --> 00:41:39,530
+Nepotrebujem všetok ten jazz
+o pašerákov a pirátov.
+
+855
+00:41:39,530 --> 00:41:41,660
+>> Počúvaj zajtra večer pre
+záverečná dobrodružstvo
+
+856
+00:41:41,660 --> 00:41:43,880
+čierne pirátskej lodi.
+
+857
+00:41:43,880 --> 00:41:46,650
+Teraz je čas na
+Annie tajnú správu
+
+858
+00:41:46,650 --> 00:41:49,840
+pre Vás príslušníci tajnej kruhu.
+
+859
+00:41:49,840 --> 00:41:53,570
+Nezabudnite, že deti len členovia
+Annie Secret Circle
+
+860
+00:41:53,570 --> 00:41:56,140
+vie dekódovať Annie tajnú správu.
+
+861
+00:41:56,140 --> 00:42:00,340
+>> Nezabudnite, že Annie je závislá na vás.
+
+862
+00:42:00,340 --> 00:42:02,880
+Nastavte si kolíky B2.
+
+863
+00:42:02,880 --> 00:42:05,230
+Tu je správa.
+
+864
+00:42:05,230 --> 00:42:06,090
+12, 11--
+
+865
+00:42:06,090 --> 00:42:10,250
+>> -I Am in, svoju prvú tajnú schôdzku.
+
+866
+00:42:10,250 --> 00:42:13,890
+>> -14, 11, 18, 16.
+
+867
+00:42:13,890 --> 00:42:15,780
+>> -Pierre Bol vo veľkom hlasu večer.
+
+868
+00:42:15,780 --> 00:42:19,000
+Mohol by som povedať, že dnes je
+Správa bola naozaj dôležité.
+
+869
+00:42:19,000 --> 00:42:22,694
+>> -3, 25, to je správa
+od Annie sama.
+
+870
+00:42:22,694 --> 00:42:23,860
+Nezabudnite, že nikomu to nehovorte.
+
+871
+00:42:23,860 --> 00:42:28,760
+
+872
+00:42:28,760 --> 00:42:32,930
+>> -90 Sekúnd neskôr, som jediný
+miestnosť v dome, kde chlapec z deviatich
+
+873
+00:42:32,930 --> 00:42:37,040
+mohli sedieť v súkromí a dekódovať.
+
+874
+00:42:37,040 --> 00:42:39,730
+Aha, B!
+
+875
+00:42:39,730 --> 00:42:42,360
+Išiel som do ďalšieho, E.
+
+876
+00:42:42,360 --> 00:42:44,520
+>> Prvé slovo je byť.
+
+877
+00:42:44,520 --> 00:42:49,032
+S, že to príde jednoduchšie teraz, U, 25--
+
+878
+00:42:49,032 --> 00:42:51,733
+>> Oh, no tak, Ralphie, musím ísť!
+
+879
+00:42:51,733 --> 00:42:53,688
+>> -Budem Byť vpravo dole, mami!
+
+880
+00:42:53,688 --> 00:42:54,188
+Gee svišťanie!
+
+881
+00:42:54,188 --> 00:42:58,116
+
+882
+00:42:58,116 --> 00:43:04,060
+>> -T, O, byť istí, že to-- byť istí, k čomu?
+
+883
+00:43:04,060 --> 00:43:05,970
+Čo bolo Malý sirota
+Annie snaží povedať?
+
+884
+00:43:05,970 --> 00:43:07,264
+Uistite sa, k čomu?
+
+885
+00:43:07,264 --> 00:43:09,634
+>> -Ralphie, Andy má na
+Choď, budete prosím vyjsť?
+
+886
+00:43:09,634 --> 00:43:10,480
+>> -Dobre, Mami!
+
+887
+00:43:10,480 --> 00:43:12,880
+Hneď som von!
+
+888
+00:43:12,880 --> 00:43:14,550
+>> -I Bol stále bližšie.
+
+889
+00:43:14,550 --> 00:43:16,620
+Napätie bolo hrozné.
+
+890
+00:43:16,620 --> 00:43:17,720
+Čo to bolo?
+
+891
+00:43:17,720 --> 00:43:20,170
+osud planéty
+môže visieť na vlásku.
+
+892
+00:43:20,170 --> 00:43:20,670
+>> -Ralphie!
+
+893
+00:43:20,670 --> 00:43:23,170
+Andyho musím ísť!
+
+894
+00:43:23,170 --> 00:43:26,890
+>> -Budem Byť hneď po vybalení, preboha!
+
+895
+00:43:26,890 --> 00:43:32,680
+>> -Almost Tam, prsty lietali, moju myseľ
+Bol oceľová pasca, každý pór vibroval.
+
+896
+00:43:32,680 --> 00:43:37,198
+To bolo skoro jasno, áno, áno, áno.
+
+897
+00:43:37,198 --> 00:43:43,091
+>> -BE Uistite sa, že piť Ovaltine.
+
+898
+00:43:43,091 --> 00:43:43,590
+Ovaltine?
+
+899
+00:43:43,590 --> 00:43:48,160
+
+900
+00:43:48,160 --> 00:43:49,430
+Mizerná reklamy?
+
+901
+00:43:49,430 --> 00:43:53,046
+
+902
+00:43:53,046 --> 00:43:54,227
+Zkurvysyn.
+
+903
+00:43:54,227 --> 00:43:54,810
+[END PLAYBACK]
+
+904
+00:43:54,810 --> 00:43:57,390
+David J. Malan: OK, takže
+to je veľmi dlhá cesta
+
+905
+00:43:57,390 --> 00:44:00,660
+zavedenie kryptografiu,
+a tiež Ovaltine.
+
+906
+00:44:00,660 --> 00:44:04,470
+V skutočnosti, z tohto starého inzerátu
+tu, prečo je Ovaltine tak dobrý?
+
+907
+00:44:04,470 --> 00:44:09,470
+To je koncentrovaná extrakcia zrelé
+jačmenný slad, čistá krémová kravské mlieko,
+
+908
+00:44:09,470 --> 00:44:14,360
+a špeciálne pripravené kakao, dohromady
+s prírodnými fosfatidy a vitamíny.
+
+909
+00:44:14,360 --> 00:44:18,240
+Ďalej je opevnené
+ďalšie vitamíny B a D, mňam.
+
+910
+00:44:18,240 --> 00:44:21,600
+A napriek tomu sa môžete dostať to, zdá sa,
+na Amazon, ako sme tu urobili.
+
+911
+00:44:21,600 --> 00:44:24,810
+>> Ale motivácia tu bolo
+zavádzať kryptografiu, konkrétne
+
+912
+00:44:24,810 --> 00:44:28,340
+druh kryptografie poznám
+ako tajný kľúč kryptografie.
+
+913
+00:44:28,340 --> 00:44:34,284
+A ako už názov napovedá, celý
+zabezpečenia tajného kľúča kryptografický systém,
+
+914
+00:44:34,284 --> 00:44:36,200
+ak chcete, metodika
+len za zakódovanie
+
+915
+00:44:36,200 --> 00:44:40,960
+informácií medzi dvoma ľuďmi, je to, že
+iba odosielateľ a iba príjemca
+
+916
+00:44:40,960 --> 00:44:46,980
+poznať tajomstvo key-- nejakú hodnotu, niektoré
+tajné frázy, niektoré tajné číslo, ktoré
+
+917
+00:44:46,980 --> 00:44:50,660
+im umožňuje ako šifrovanie
+a dešifrovanie informácií.
+
+918
+00:44:50,660 --> 00:44:53,470
+A kryptografia, naozaj,
+Práve tento týždeň od 0.
+
+919
+00:44:53,470 --> 00:44:56,715
+>> Je to problém tam, kde je to vstupy,
+ako skutočné správy v angličtine
+
+920
+00:44:56,715 --> 00:44:59,340
+alebo čokoľvek jazyk, ktorý vám
+chcete poslať na niekoho v triede,
+
+921
+00:44:59,340 --> 00:45:00,580
+alebo cez internet.
+
+922
+00:45:00,580 --> 00:45:03,840
+Tam je nejaký výstup, ktorý sa deje
+Ak chcete byť kódovanú správu, ktorá vás
+
+923
+00:45:03,840 --> 00:45:05,250
+chcú, aby príjemca dostane.
+
+924
+00:45:05,250 --> 00:45:07,405
+A aj keby niekto v
+prostredný ju prijíma taky,
+
+925
+00:45:07,405 --> 00:45:09,780
+nechcete im
+nutne byť schopný dešifrovať,
+
+926
+00:45:09,780 --> 00:45:12,840
+pretože vnútornej strane tejto
+black box, alebo algoritmus,
+
+927
+00:45:12,840 --> 00:45:17,650
+Je nejaký mechanizmus, niektoré krok za krokom
+inštrukcie, pre odber že vstup
+
+928
+00:45:17,650 --> 00:45:20,710
+a prevedením do
+výstupná hodnota dúfajme bezpečným spôsobom.
+
+929
+00:45:20,710 --> 00:45:23,640
+>> A v skutočnosti, že je nejaký
+slovná zásoba v tomto svete takto.
+
+930
+00:45:23,640 --> 00:45:26,100
+Obyčajný text je slovo
+počítačový odborník by
+
+931
+00:45:26,100 --> 00:45:28,449
+popísali vstup
+Správa, rovnako ako angličtina
+
+932
+00:45:28,449 --> 00:45:31,240
+alebo akomkoľvek jazyku, ktorý v skutočnosti
+chcete poslať k nejakému inému človeku.
+
+933
+00:45:31,240 --> 00:45:35,450
+A potom ciphertext je scramble
+na zašifrovaný, alebo zašifrované,
+
+934
+00:45:35,450 --> 00:45:36,520
+Verzia z nich.
+
+935
+00:45:36,520 --> 00:45:38,750
+>> Ale je tu ešte jedna ďalšia zložka tu.
+
+936
+00:45:38,750 --> 00:45:43,200
+Je tu ešte jedna ďalšia vstup
+tajný kľúč kryptografia.
+
+937
+00:45:43,200 --> 00:45:45,200
+A to je samo o sebe kľúč,
+ktorý je v zásade
+
+938
+00:45:45,200 --> 00:45:48,930
+ako uvidíme, číslo, alebo
+písmeno alebo slovo, bez ohľadu
+
+939
+00:45:48,930 --> 00:45:51,980
+algoritmus je vlastne očakáva.
+
+940
+00:45:51,980 --> 00:45:53,870
+>> A ako to dešifrovať informácie?
+
+941
+00:45:53,870 --> 00:45:55,110
+Ako to dešifrovať?
+
+942
+00:45:55,110 --> 00:45:57,950
+No, stačí zvrátiť
+výstupy a vstupy.
+
+943
+00:45:57,950 --> 00:46:00,900
+>> Inými slovami, akonáhle niekoho
+prijíma vaše zašifrované správa,
+
+944
+00:46:00,900 --> 00:46:03,740
+on alebo ona jednoducho musí
+vedieť, že rovnaký kľúč.
+
+945
+00:46:03,740 --> 00:46:05,700
+Oni prijali ciphertext.
+
+946
+00:46:05,700 --> 00:46:09,530
+A zapojením tie dva
+vstupy do šifrovacieho systému,
+
+947
+00:46:09,530 --> 00:46:14,260
+algoritmus, to čierna skrinka, von
+by mal prísť na pôvodnú holý.
+
+948
+00:46:14,260 --> 00:46:17,830
+A tak to je veľmi vysokej úrovni
+Pohľad na to, čo je vlastne kryptografie
+
+949
+00:46:17,830 --> 00:46:18,590
+všetko o.
+
+950
+00:46:18,590 --> 00:46:20,030
+>> Takže poďme sa tam dostať.
+
+951
+00:46:20,030 --> 00:46:22,700
+Teraz sa pozrime naspodku
+kapucňa niečoho
+
+952
+00:46:22,700 --> 00:46:26,000
+sme sa brať za samozrejmé
+minulý týždeň, a pre túto reláciu
+
+953
+00:46:26,000 --> 00:46:27,629
+here-- reťazec.
+
+954
+00:46:27,629 --> 00:46:30,295
+Reťazec na konci dňa
+je len postupnosť znakov.
+
+955
+00:46:30,295 --> 00:46:33,610
+>> To by mohlo byť hello world, alebo
+Dobrý deň Zamyla, alebo čokoľvek iného.
+
+956
+00:46:33,610 --> 00:46:37,050
+Ale čo to znamená pre
+je postupnosť znakov?
+
+957
+00:46:37,050 --> 00:46:41,520
+V skutočnosti, knižnica CS50 dáva
+us typ dát s názvom reťazec.
+
+958
+00:46:41,520 --> 00:46:45,140
+>> Ale je tu v skutočnosti nie je
+taká vec ako reťazec v C.
+
+959
+00:46:45,140 --> 00:46:49,450
+Je to naozaj len sled
+znak, znak, znak,
+
+960
+00:46:49,450 --> 00:46:52,180
+znak, späť k sebe, aby
+späť k sebe, aby sa dovnútra
+
+961
+00:46:52,180 --> 00:46:54,650
+pamäte počítača alebo RAM.
+
+962
+00:46:54,650 --> 00:46:58,940
+A pozrieme hlbšie do že v
+Budúce keď sa pozrieme na samotnej pamäti,
+
+963
+00:46:58,940 --> 00:47:02,030
+a využitie, a
+hrozby, ktoré sú zapojené.
+
+964
+00:47:02,030 --> 00:47:04,100
+>> Ale uvažujme reťazec Zamyla.
+
+965
+00:47:04,100 --> 00:47:07,480
+Takže len názov
+ľudský tu, Zamyla,
+
+966
+00:47:07,480 --> 00:47:12,030
+že je postupnosť
+znaky, Z-A-M-Y-L-A.
+
+967
+00:47:12,030 --> 00:47:16,020
+A teraz poďme predpokladať, že názov je Zamyla
+je uložený vnútri počítača
+
+968
+00:47:16,020 --> 00:47:16,880
+program.
+
+969
+00:47:16,880 --> 00:47:20,830
+>> No, to dá rozum, že by sme mali
+byť schopný pozrieť sa na tieto znaky
+
+970
+00:47:20,830 --> 00:47:21,590
+jednotlivo.
+
+971
+00:47:21,590 --> 00:47:24,710
+Takže som jednoducho ísť na to trochu
+rámček okolo názvu Zamyla tu.
+
+972
+00:47:24,710 --> 00:47:31,580
+A to je prípad v C, ktorý keď vás
+majú reťazec, ako je Zamyla-- a možno
+
+973
+00:47:31,580 --> 00:47:34,940
+že reťazec sa vrátil z
+funkcie ako get reťazec,
+
+974
+00:47:34,940 --> 00:47:38,540
+môžete skutočne manipulovať
+to znak po znaku.
+
+975
+00:47:38,540 --> 00:47:42,070
+>> Teraz, to je pre Germaine
+konverzácie po ruke, pretože
+
+976
+00:47:42,070 --> 00:47:46,420
+v kryptografii, ak chcete zmeniť
+A do bodu B, a B na C, a C na D,
+
+977
+00:47:46,420 --> 00:47:49,650
+a tak ďalej, musíte byť schopní
+sa pozerať na jednotlivé znaky
+
+978
+00:47:49,650 --> 00:47:50,190
+v reťazci.
+
+979
+00:47:50,190 --> 00:47:52,695
+Musíte byť schopní zmeniť
+Z k niečomu inému sa A
+
+980
+00:47:52,695 --> 00:47:55,280
+k niečomu inému, M, aby
+niečo iné, a tak ďalej.
+
+981
+00:47:55,280 --> 00:47:58,000
+A preto potrebujeme spôsob,
+programovo, takže
+
+982
+00:47:58,000 --> 00:48:03,020
+hovoriť, v C, aby bolo možné zmeniť
+a pozrieť sa na jednotlivé písmená.
+
+983
+00:48:03,020 --> 00:48:05,690
+A môžeme to urobiť takto.
+
+984
+00:48:05,690 --> 00:48:08,340
+>> Nechaj ma ísť vrátime v CS50 IDE.
+
+985
+00:48:08,340 --> 00:48:11,130
+A nechaj ma ísť napred
+a vytvoriť nový súbor
+
+986
+00:48:11,130 --> 00:48:16,134
+že zavolám tentoraz string0,
+ako naše prvé taký príklad, dot c.
+
+987
+00:48:16,134 --> 00:48:18,300
+A ja idem napred
+a bič to takto.
+
+988
+00:48:18,300 --> 00:48:22,870
+>> Takže zahŕňajú CS50.h, a
+potom zahŕňajú štandardný IO.H,
+
+989
+00:48:22,870 --> 00:48:25,990
+ktorý som takmer vždy bude
+bude používať vo svojich programoch, prinajmenšom
+
+990
+00:48:25,990 --> 00:48:26,780
+spočiatku.
+
+991
+00:48:26,780 --> 00:48:32,180
+int main prázdno, a potom tu nie som
+robiť struny dostane dostať reťazec.
+
+992
+00:48:32,180 --> 00:48:35,260
+A potom idem
+choďte do toho a to dosiahnuť.
+
+993
+00:48:35,260 --> 00:48:37,460
+Chcem ísť dopredu
+a, ako kontrola sanity,
+
+994
+00:48:37,460 --> 00:48:43,607
+len povedať, ahoj, percento s,
+bodkočiarka, činí reťazec: 0.
+
+995
+00:48:43,607 --> 00:48:44,690
+Uh oh, čo som urobil tu?
+
+996
+00:48:44,690 --> 00:48:45,930
+Oh, nemal som ho pripojte.
+
+997
+00:48:45,930 --> 00:48:48,120
+Takže ponaučenie, že
+nebolo úmyselné.
+
+998
+00:48:48,120 --> 00:48:52,480
+>> Takže chyba, viac percent
+Konverzia než dáta argumentov.
+
+999
+00:48:52,480 --> 00:48:54,940
+A to je miesto, kde v
+linka 7-- OK, takže mám,
+
+1000
+00:48:54,940 --> 00:48:56,690
+citát koniec citátu, ktorý je
+môj reťazec printf.
+
+1001
+00:48:56,690 --> 00:48:58,151
+Mám znak percenta.
+
+1002
+00:48:58,151 --> 00:48:59,650
+Ale ja som chýba druhý argument.
+
+1003
+00:48:59,650 --> 00:49:03,190
+>> Som chýba čiarka s, ktorý
+Ja som sa v predchádzajúcich príkladoch.
+
+1004
+00:49:03,190 --> 00:49:06,650
+Tak dobrou príležitosťou k upevneniu
+ešte jedna chyba, omylom.
+
+1005
+00:49:06,650 --> 00:49:09,950
+A teraz mi dovoľte bežať
+string0, zadajte Zamyla.
+
+1006
+00:49:09,950 --> 00:49:10,970
+OK, ahoj Zamyla.
+
+1007
+00:49:10,970 --> 00:49:14,144
+>> Takže sme sa spustiť tento druh programu
+niekoľko inej dobe.
+
+1008
+00:49:14,144 --> 00:49:16,310
+Ale poďme urobiť niečo
+trochu inak tentoraz.
+
+1009
+00:49:16,310 --> 00:49:19,450
+Namiesto jednoduchého tlače Zamyla je
+Celý názov von s printf,
+
+1010
+00:49:19,450 --> 00:49:21,350
+Urobme to znak po znaku.
+
+1011
+00:49:21,350 --> 00:49:22,700
+>> Chystám sa použiť pre sláčiky.
+
+1012
+00:49:22,700 --> 00:49:26,160
+A ja idem dať sám
+počítacie premenná, zavolal som.
+
+1013
+00:49:26,160 --> 00:49:33,530
+A budem držať iterácie, takže
+Kým i je menšia ako dĺžka s.
+
+1014
+00:49:33,530 --> 00:49:35,930
+>> Ukázalo sa, že sme nemali
+robiť toto minule,
+
+1015
+00:49:35,930 --> 00:49:39,100
+že c je dodávaný s
+Funkcia s názvom Stirling.
+
+1016
+00:49:39,100 --> 00:49:42,690
+Späť v deň, a všeobecne
+Stále pri vykonávaní funkcií,
+
+1017
+00:49:42,690 --> 00:49:45,405
+Ľudia sa často vyberajú veľmi
+stručné názvy, ktoré druh zvuku
+
+1018
+00:49:45,405 --> 00:49:48,280
+ako to, čo chcete, aj keď je to
+Chýba niekoľko samohlásky alebo písmen.
+
+1019
+00:49:48,280 --> 00:49:50,660
+Takže Stirling je
+názov funkcie, ktorá
+
+1020
+00:49:50,660 --> 00:49:53,880
+berie argument medzi
+zátvorky, ktoré by mali byť reťazec.
+
+1021
+00:49:53,880 --> 00:49:56,910
+A to len vráti celé číslo,
+dĺžka tohto reťazca.
+
+1022
+00:49:56,910 --> 00:50:00,580
+>> Takže to pre slučku na linke 7 sa deje
+začať počítať od i = 0.
+
+1023
+00:50:00,580 --> 00:50:02,530
+To bude zvyšovať
+aj na každej iterácii
+
+1024
+00:50:02,530 --> 00:50:04,350
+1, ako sme robili niekoľkokrát.
+
+1025
+00:50:04,350 --> 00:50:06,780
+Ale to bude len robiť
+to až do okamihu
+
+1026
+00:50:06,780 --> 00:50:09,660
+keď som ich dĺžka
+samotného reťazca.
+
+1027
+00:50:09,660 --> 00:50:14,520
+>> Takže toto je spôsob, nakoniec,
+iterácie nad postavami
+
+1028
+00:50:14,520 --> 00:50:17,430
+v reťazci, ako je nasledovne.
+
+1029
+00:50:17,430 --> 00:50:20,670
+Chystám sa vytlačiť nie
+Celý reťazec, ale percento c,
+
+1030
+00:50:20,670 --> 00:50:22,860
+jeden znak
+nasleduje nový riadok.
+
+1031
+00:50:22,860 --> 00:50:24,880
+A potom idem
+ísť dopredu a ja potrebujem
+
+1032
+00:50:24,880 --> 00:50:29,080
+hovoriť Chcem vytlačiť
+tý charakter s.
+
+1033
+00:50:29,080 --> 00:50:33,450
+>> Takže ak aj je premenná, ktorá indikuje
+index reťazca, kde
+
+1034
+00:50:33,450 --> 00:50:37,230
+ste v ňom, musím byť schopný
+hovoria, daj mi tý charakter s.
+
+1035
+00:50:37,230 --> 00:50:40,390
+A c má spôsob, ako robiť
+Tento hranatými zátvorkami.
+
+1036
+00:50:40,390 --> 00:50:43,679
+Môžete jednoducho povedať mene
+reťazec, ktorý je v tomto prípade s.
+
+1037
+00:50:43,679 --> 00:50:46,970
+Potom môžete použiť hranaté zátvorky, ktoré sú
+zvyčajne tesne nad vašou Return alebo Enter
+
+1038
+00:50:46,970 --> 00:50:48,110
+kláves na klávesnici.
+
+1039
+00:50:48,110 --> 00:50:52,410
+A potom si dať na index
+znak, ktorý chcete vytlačiť.
+
+1040
+00:50:52,410 --> 00:50:55,960
+Takže index bude byť
+number-- 0, alebo 1, alebo 2, alebo 3, alebo bodka,
+
+1041
+00:50:55,960 --> 00:50:57,590
+dot, dot, nejaké iné číslo.
+
+1042
+00:50:57,590 --> 00:51:00,920
+>> A my sme zistili, že to bude
+bolo správne číslo, pretože ja
+
+1043
+00:51:00,920 --> 00:51:02,360
+začať počítať pri 0 ° C.
+
+1044
+00:51:02,360 --> 00:51:07,020
+A v predvolenom nastavení, prvý znak
+v reťazci sú podľa konvencie 0.
+
+1045
+00:51:07,020 --> 00:51:09,230
+A druhý znak je držiak 1.
+
+1046
+00:51:09,230 --> 00:51:11,120
+A tretí znak je držiak 2.
+
+1047
+00:51:11,120 --> 00:51:13,630
+A nechceš ísť príliš
+Zatiaľ ale nebudeme, pretože sme
+
+1048
+00:51:13,630 --> 00:51:17,780
+bude zvyšovať aj len do neho
+sa rovná dĺžke reťazca.
+
+1049
+00:51:17,780 --> 00:51:20,210
+A na ktorom mieste,
+Tento cyklus for sa zastaví.
+
+1050
+00:51:20,210 --> 00:51:25,550
+>> Tak nechaj ma ísť dopredu a uložiť toto
+Program a beh robiť reťazec: 0.
+
+1051
+00:51:25,550 --> 00:51:28,400
+Ale ja to podelal.
+
+1052
+00:51:28,400 --> 00:51:35,390
+Implicitne deklarovať funkciu knižnice
+Stirling s typom takého a such-- teraz,
+
+1053
+00:51:35,390 --> 00:51:36,430
+to znie povedome.
+
+1054
+00:51:36,430 --> 00:51:37,440
+Ale to nie je printf.
+
+1055
+00:51:37,440 --> 00:51:38,540
+A to nie je dostať reťazec.
+
+1056
+00:51:38,540 --> 00:51:40,480
+>> Nechcel som mhouřit v
+rovnakým spôsobom, tentoraz.
+
+1057
+00:51:40,480 --> 00:51:45,100
+Nevšimnúť tu dole trochu dole
+ďalej zahŕňa hlavičky string.h,
+
+1058
+00:51:45,100 --> 00:51:47,210
+explicitne poskytnúť
+vyhlásenie o Stirling.
+
+1059
+00:51:47,210 --> 00:51:48,820
+Takže tam je vlastne stopa tam.
+
+1060
+00:51:48,820 --> 00:51:51,670
+>> A skutočne to dopadá
+je tu ešte jeden hlavičkový súbor
+
+1061
+00:51:51,670 --> 00:51:53,970
+ktoré sme nepoužíva
+v triede ešte, ale je to
+
+1062
+00:51:53,970 --> 00:51:56,480
+medzi tými, k dispozícii
+tebe, nazvaný string.h.
+
+1063
+00:51:56,480 --> 00:52:00,930
+A v tomto súbore, string.h
+Je Stirling deklarovaný.
+
+1064
+00:52:00,930 --> 00:52:05,220
+Tak nechaj ma ísť dopredu a
+ušetriť toho, aby reťazec
+
+1065
+00:52:05,220 --> 00:52:08,040
+0-- pekný, žiadne chybové hlásenia tentoraz.
+
+1066
+00:52:08,040 --> 00:52:12,290
+>> ./string0 Zamyla, a
+Chystám sa stlačením klávesy Enter,
+
+1067
+00:52:12,290 --> 00:52:16,710
+v tomto bode getString sa deje
+vrátiť reťazec, vložte ho do s.
+
+1068
+00:52:16,710 --> 00:52:21,890
+Potom, že pre slučke sa chystá iterácii
+cez znaky S je jeden po druhom,
+
+1069
+00:52:21,890 --> 00:52:28,420
+a vytlačiť ich na každom riadku jedno, pretože
+Mal som tú spätné lomítko n na konci.
+
+1070
+00:52:28,420 --> 00:52:34,530
+Takže som mohol vynechať, že spätné lomítko
+n, a potom už len vytlačiť Zamyla všetko
+
+1071
+00:52:34,530 --> 00:52:37,460
+v rovnakej línii,
+účinne reimplementing
+
+1072
+00:52:37,460 --> 00:52:38,999
+printf, ktorá nie je tak užitočné.
+
+1073
+00:52:38,999 --> 00:52:40,540
+Ale v tomto prípade som neurobil.
+
+1074
+00:52:40,540 --> 00:52:43,610
+Ja som vlastne vytlačená
+znakoch, po jednom na riadok
+
+1075
+00:52:43,610 --> 00:52:45,400
+takže sme vlastne vidieť efekt.
+
+1076
+00:52:45,400 --> 00:52:46,900
+>> Ale ja by si mali uvedomiť jednu vec tu.
+
+1077
+00:52:46,900 --> 00:52:48,930
+A vrátime sa do
+to v budúcej týždeň.
+
+1078
+00:52:48,930 --> 00:52:52,650
+Ukazuje sa, že toto
+Kód je potenciálne buggy.
+
+1079
+00:52:52,650 --> 00:52:56,560
+>> Ukazuje sa, že get reťazec
+a niektoré ďalšie funkcie v živote
+
+1080
+00:52:56,560 --> 00:53:00,280
+nie vždy nutne
+vrátiť, čo ste očakávali.
+
+1081
+00:53:00,280 --> 00:53:03,010
+Vieme, že od posledného triedy
+Čas v tom, že dostať
+
+1082
+00:53:03,010 --> 00:53:04,960
+Reťazec má vrátiť reťazec.
+
+1083
+00:53:04,960 --> 00:53:09,900
+Ale čo v prípade, že používateľ zadá takú
+dlhé slovo, alebo bod, alebo esej
+
+1084
+00:53:09,900 --> 00:53:13,010
+že tam jednoducho nie je dosť
+pamäte v počítači, aby zapadla.
+
+1085
+00:53:13,010 --> 00:53:15,410
+>> Rovnako ako to, čo keď sa niečo
+zlého pod kapotou?
+
+1086
+00:53:15,410 --> 00:53:18,400
+Mohlo by to nestáva často,
+ale to by sa mohlo stať, akonáhle
+
+1087
+00:53:18,400 --> 00:53:21,520
+vo chvíli, veľmi zriedka.
+
+1088
+00:53:21,520 --> 00:53:25,460
+A tak to dopadá, ktoré sa dostanú reťazec
+a funkcie, ako to nemusí nutne
+
+1089
+00:53:25,460 --> 00:53:26,380
+vždy vrátiť reťazca.
+
+1090
+00:53:26,380 --> 00:53:30,680
+Môžu sa vrátiť nejakú chybovú hodnotu,
+niektorí Sentinel hodnota tak povediac,
+
+1091
+00:53:30,680 --> 00:53:32,612
+ktorá uvádza, že
+niečo sa pokazilo.
+
+1092
+00:53:32,612 --> 00:53:35,320
+A vy by ste vedieť len to od
+keď sa dozvedel to v triede teraz,
+
+1093
+00:53:35,320 --> 00:53:37,700
+alebo po prečítaní nejaké ďalšie dokumentáciu.
+
+1094
+00:53:37,700 --> 00:53:43,120
+Ukazuje sa, že get reťazec
+môže vrátiť hodnotu s názvom null.
+
+1095
+00:53:43,120 --> 00:53:46,220
+Null je zvláštne hodnota, že budeme
+vrátiť sa v budúcom týždni.
+
+1096
+00:53:46,220 --> 00:53:50,420
+Ale teraz, len viem, že keď chcem
+byť skutočne správny v pohybe vpred
+
+1097
+00:53:50,420 --> 00:53:52,650
+použitím get reťazec I
+by nemala len hovoriť,
+
+1098
+00:53:52,650 --> 00:53:56,870
+a slepo používať jeho návratovú hodnotu,
+veriť, že je to reťazec.
+
+1099
+00:53:56,870 --> 00:53:59,420
+>> Mal by som najprv povedať,
+hej, počkaj, len
+
+1100
+00:53:59,420 --> 00:54:03,380
+postupovať, ak to nie je rovné
+null, kde null, opäť,
+
+1101
+00:54:03,380 --> 00:54:04,660
+Je len niektoré osobitnú hodnotu.
+
+1102
+00:54:04,660 --> 00:54:07,770
+A je to jediný zvláštne hodnota, ktorú
+musieť starať o Get reťazec.
+
+1103
+00:54:07,770 --> 00:54:10,900
+Získať reťazec je buď deje
+vrátiť reťazec alebo null.
+
+1104
+00:54:10,900 --> 00:54:17,219
+>> A to výkričník znamienko rovnosti
+možno viete asi z matiku
+
+1105
+00:54:17,219 --> 00:54:20,510
+že by ste mohli kresliť znamienko rovnosti s
+čiara cez to uviesť nerovná.
+
+1106
+00:54:20,510 --> 00:54:23,135
+To nie je všeobecne charakter
+môžete písať na klávesnici.
+
+1107
+00:54:23,135 --> 00:54:26,480
+A tak vo väčšine programovacích jazykov,
+keď chcete povedať nerovná,
+
+1108
+00:54:26,480 --> 00:54:29,160
+budete používať výkričník,
+inak známy ako tresku.
+
+1109
+00:54:29,160 --> 00:54:33,180
+Takže vravíte tresk rovná, čo
+Znamená to rovná, logicky.
+
+1110
+00:54:33,180 --> 00:54:38,060
+Je to ako, že to nie je väčšia
+ako, alebo sa rovná alebo nižšia ako
+
+1111
+00:54:38,060 --> 00:54:41,270
+alebo rovno na klávesnici
+že robí to všetko v jednom symbole.
+
+1112
+00:54:41,270 --> 00:54:44,020
+Takže to je dôvod, prečo v minulých príkladoch
+ste otvorenú konzolu a potom
+
+1113
+00:54:44,020 --> 00:54:48,670
+znamienko rovnosti s cieľom urobiť
+väčšie ako alebo, povedzme, menej ako.
+
+1114
+00:54:48,670 --> 00:54:49,910
+>> Takže to, čo je tu stánok s jedlom?
+
+1115
+00:54:49,910 --> 00:54:53,880
+To je jednoducho spôsob, ako sa z
+zavedením tejto syntax, táto funkcia,
+
+1116
+00:54:53,880 --> 00:54:57,390
+iterácie cez jednotlivé
+znaky v reťazci.
+
+1117
+00:54:57,390 --> 00:55:00,260
+A rovnako ako tie námestia
+zátvorky vám umožní získať na ne,
+
+1118
+00:55:00,260 --> 00:55:03,790
+brať do úvahy hranaté zátvorky sú
+druh naznačuje na to základné
+
+1119
+00:55:03,790 --> 00:55:06,040
+dizajn, pričom každý
+charakter vnútri reťazca
+
+1120
+00:55:06,040 --> 00:55:10,180
+je druh zabalené do niekde naspodku
+kapota v pamäti počítača.
+
+1121
+00:55:10,180 --> 00:55:12,340
+>> Ale poďme urobiť variantu tohto.
+
+1122
+00:55:12,340 --> 00:55:14,880
+Ukazuje sa, že toto
+Program je správne.
+
+1123
+00:55:14,880 --> 00:55:18,810
+Takže per os CS50 pre vyhodnocovanie
+kód, to je teraz správna.
+
+1124
+00:55:18,810 --> 00:55:22,959
+Zvlášť teraz, že som kontrolu
+null, tento program by mal nikdy havárii.
+
+1125
+00:55:22,959 --> 00:55:24,500
+A ja len viem, že z vlastnej skúsenosti.
+
+1126
+00:55:24,500 --> 00:55:28,040
+Ale nie je nič iné,
+môžeme skutočne pokaziť tu.
+
+1127
+00:55:28,040 --> 00:55:31,860
+Ale to nie je moc dobre navrhnutý,
+pretože vráťme sa k základom.
+
+1128
+00:55:31,860 --> 00:55:34,450
+>> Po prvé, principles--
+Čo slučke for robiť?
+
+1129
+00:55:34,450 --> 00:55:36,290
+A pre sláčiky robí tri veci.
+
+1130
+00:55:36,290 --> 00:55:39,340
+To inicializuje niektoré
+hodnota, pokiaľ ju požiadať, aby.
+
+1131
+00:55:39,340 --> 00:55:41,770
+Kontroluje stav.
+
+1132
+00:55:41,770 --> 00:55:45,380
+A potom po každom
+iterácie, po každom cykle,
+
+1133
+00:55:45,380 --> 00:55:49,330
+že zvýši niektoré
+Hodnota alebo hodnoty tu.
+
+1134
+00:55:49,330 --> 00:55:50,600
+>> Tak čo to znamená?
+
+1135
+00:55:50,600 --> 00:55:52,940
+My inicializovať aj na 0.
+
+1136
+00:55:52,940 --> 00:55:58,610
+My skontrolovať a uistite sa, že aj je menšia než
+dĺžka s, čo je Z-A-M-Y-L-A,
+
+1137
+00:55:58,610 --> 00:55:59,900
+takže čo je menej ako 6.
+
+1138
+00:55:59,900 --> 00:56:02,590
+A skutočne, 0 za menej ako 6.
+
+1139
+00:56:02,590 --> 00:56:05,580
+>> My vytlačiť Z. z názvu Zamyla je.
+
+1140
+00:56:05,580 --> 00:56:08,080
+Potom sme zvýšiť aj od 0 do 1.
+
+1141
+00:56:08,080 --> 00:56:11,290
+Potom sme sa zistiť, je jeden menej
+ako dĺžka s?
+
+1142
+00:56:11,290 --> 00:56:13,270
+Dĺžka s je 6.
+
+1143
+00:56:13,270 --> 00:56:13,950
+Áno, je.
+
+1144
+00:56:13,950 --> 00:56:16,880
+>> Tak sme vytlačiť v Zamyla mene, ZA.
+
+1145
+00:56:16,880 --> 00:56:20,090
+Navýšime aj od 0 do 1, k 2.
+
+1146
+00:56:20,090 --> 00:56:23,720
+Potom sme sa zistiť, je menšia ako 2
+dĺžka názvu Zamyla je.
+
+1147
+00:56:23,720 --> 00:56:25,380
+6- tak 2 je menšia ako 6.
+
+1148
+00:56:25,380 --> 00:56:30,460
+Áno, poďme vytlačiť teraz mv
+Zamyla meno, tretí znak.
+
+1149
+00:56:30,460 --> 00:56:34,110
+>> Kľúčom je, že na každom
+iterácie príbehu, som kontrolu,
+
+1150
+00:56:34,110 --> 00:56:37,810
+je aj menšia ako dĺžka Zamyla?
+
+1151
+00:56:37,810 --> 00:56:40,350
+Ale úlovok je, že
+Stirling nie je vlastnosť.
+
+1152
+00:56:40,350 --> 00:56:43,100
+Tí z vás, ktorí ste naprogramovali
+Pred v jazyku Java alebo iných jazykoch
+
+1153
+00:56:43,100 --> 00:56:46,310
+Možno viete o reťazec dĺžky
+vlastnosť, len niektoré len na čítanie hodnoty.
+
+1154
+00:56:46,310 --> 00:56:50,220
+>> V C v tomto prípade, ak je to
+funkcia, ktorá je doslova
+
+1155
+00:56:50,220 --> 00:56:53,520
+spočítaním
+znaky v Zamyla zakaždým
+
+1156
+00:56:53,520 --> 00:56:54,740
+nazývame túto funkciu.
+
+1157
+00:56:54,740 --> 00:56:58,500
+Zakaždým, keď sa spýtate počítača použiť
+Stirling, je to pri pohľade na Zamyla,
+
+1158
+00:56:58,500 --> 00:57:01,960
+a hovorí Z-A-M-Y-L-A, 6.
+
+1159
+00:57:01,960 --> 00:57:02,962
+A vracia 6.
+
+1160
+00:57:02,962 --> 00:57:04,920
+Až sa nabudúce budete volať
+je vnútri, že pre sláčiky,
+
+1161
+00:57:04,920 --> 00:57:08,610
+to bude vyzerať na Zamyla
+opäť povedať, Z-A-M-Y-L-A, 6.
+
+1162
+00:57:08,610 --> 00:57:10,320
+A to bude vracať 6.
+
+1163
+00:57:10,320 --> 00:57:12,980
+Takže to, čo je hlúpe o tento design?
+
+1164
+00:57:12,980 --> 00:57:17,700
+>> Prečo je môj kód nie je 5 z 5
+pre konštrukciu práve teraz, tak povediac?
+
+1165
+00:57:17,700 --> 00:57:20,600
+No, ja položenie
+otázka zbytočne.
+
+1166
+00:57:20,600 --> 00:57:23,030
+Robím viac práce, než musím.
+
+1167
+00:57:23,030 --> 00:57:25,370
+>> Takže aj keď
+odpoveď je správna, som
+
+1168
+00:57:25,370 --> 00:57:29,560
+žiada počítač, čo je
+dĺžka Zamyla znova
+
+1169
+00:57:29,560 --> 00:57:31,380
+a znova a znova a znova?
+
+1170
+00:57:31,380 --> 00:57:33,980
+A to je odpoveď
+nikdy nezmení.
+
+1171
+00:57:33,980 --> 00:57:35,900
+Je to vždy bude 6.
+
+1172
+00:57:35,900 --> 00:57:39,730
+>> Takže lepšie riešenie ako toto
+by to ďalšie verzie.
+
+1173
+00:57:39,730 --> 00:57:43,390
+Nechaj ma ísť dopredu a dať to v
+samostatný súbor s názvom string1.c,
+
+1174
+00:57:43,390 --> 00:57:44,990
+len aby to oddeliť.
+
+1175
+00:57:44,990 --> 00:57:47,260
+A to dopadá v for
+slučky, môžete skutočne
+
+1176
+00:57:47,260 --> 00:57:50,210
+deklarovať viac premenných naraz.
+
+1177
+00:57:50,210 --> 00:57:53,460
+>> Takže budem držať aj a nastavte ju na hodnotu 0.
+
+1178
+00:57:53,460 --> 00:57:56,190
+Ale ja tiež bude
+pridať čiarku, a hovoria,
+
+1179
+00:57:56,190 --> 00:58:01,050
+daj mi premennú s názvom n, ktorého
+hodnota sa rovná dĺžka reťazca s.
+
+1180
+00:58:01,050 --> 00:58:09,410
+A teraz, prosím, aby môj stav
+tak dlho, ako som ich menšie ako n.
+
+1181
+00:58:09,410 --> 00:58:14,140
+>> Takže týmto spôsobom je logika
+identický na konci dňa.
+
+1182
+00:58:14,140 --> 00:58:18,280
+Ale ja som si spomenul na
+hodnota 6, v tomto prípade.
+
+1183
+00:58:18,280 --> 00:58:19,780
+Aká je dĺžka názvu Zamyla je?
+
+1184
+00:58:19,780 --> 00:58:20,860
+A dávam ju pri n.
+
+1185
+00:58:20,860 --> 00:58:23,050
+>> A ja som stále kontrolu
+zakaždým, keď je podmienka.
+
+1186
+00:58:23,050 --> 00:58:24,300
+0 menej ako 6?
+
+1187
+00:58:24,300 --> 00:58:25,600
+Je jeden menej ako 6?
+
+1188
+00:58:25,600 --> 00:58:28,600
+Je dva menej ako 6, a tak ďalej?
+
+1189
+00:58:28,600 --> 00:58:31,914
+>> Ale nežiadam počítač
+znovu a znovu, čo je
+
+1190
+00:58:31,914 --> 00:58:33,080
+dĺžka názvu Zamyla je?
+
+1191
+00:58:33,080 --> 00:58:34,320
+Aká je dĺžka mena Zamyla je?
+
+1192
+00:58:34,320 --> 00:58:35,986
+Aká je dĺžka názvu tohto Zamyla je?
+
+1193
+00:58:35,986 --> 00:58:40,440
+Som doslova na pamäti, že prvý a
+Jedinou odpoveďou v tejto druhej premennej n.
+
+1194
+00:58:40,440 --> 00:58:45,280
+Takže to teraz bude nielen
+správne, ale tiež dobre navrhnutý.
+
+1195
+00:58:45,280 --> 00:58:46,670
+>> A teraz, čo o štýle?
+
+1196
+00:58:46,670 --> 00:58:48,866
+Ja som pomenoval svoje premenné
+celkom dobre, povedal by som.
+
+1197
+00:58:48,866 --> 00:58:50,240
+Sú to práve teraz mimoriadne stručné.
+
+1198
+00:58:50,240 --> 00:58:52,090
+A to je úplne v poriadku.
+
+1199
+00:58:52,090 --> 00:58:55,120
+>> Ak máte iba jeden
+Reťazec v programe,
+
+1200
+00:58:55,120 --> 00:58:56,860
+môžete tiež volať, že to pre reťazec.
+
+1201
+00:58:56,860 --> 00:58:59,370
+Ak máte iba jednu premennú
+pre počítanie v programe,
+
+1202
+00:58:59,370 --> 00:59:00,710
+môžete tiež volať to nie som ja.
+
+1203
+00:59:00,710 --> 00:59:03,500
+Ak máte dĺžku, n
+je super bežné rovnako.
+
+1204
+00:59:03,500 --> 00:59:05,800
+Ale ja som komentoval niektorý z mojich kódu.
+
+1205
+00:59:05,800 --> 00:59:09,200
+>> Ja som neoznámil reader--
+či už je to moja TF, alebo TA,
+
+1206
+00:59:09,200 --> 00:59:12,460
+alebo len colleague-- čo má
+sa deje v tomto programe.
+
+1207
+00:59:12,460 --> 00:59:15,760
+A tak sa dostať dobrý štýl,
+čo by som chcel robiť
+
+1208
+00:59:15,760 --> 00:59:24,580
+Je tohle-- niečo
+ako pýtať používateľa pre vstup.
+
+1209
+00:59:24,580 --> 00:59:26,670
+A ja mohol prepísať
+Tento ľubovoľný počet spôsobov.
+
+1210
+00:59:26,670 --> 00:59:35,630
+>> Uistite sa, že S- uistil get
+reťazec vrátený reťazec.
+
+1211
+00:59:35,630 --> 00:59:40,280
+A potom v here-- a toto je možno
+Najdôležitejšie comment-- ITERATE
+
+1212
+00:59:40,280 --> 00:59:44,450
+cez znaky v to jeden naraz.
+
+1213
+00:59:44,450 --> 00:59:47,060
+A ja som mohol použiť niektorý
+Voľba anglického jazyka
+
+1214
+00:59:47,060 --> 00:59:49,650
+tu popisovať každý
+tieto kusy kódu.
+
+1215
+00:59:49,650 --> 00:59:52,740
+>> Všimnite si, že som sa polož
+komentovať každý riadok kódu,
+
+1216
+00:59:52,740 --> 00:59:55,690
+naozaj len na zaujímavé
+ones, tie, ktoré
+
+1217
+00:59:55,690 --> 00:59:59,460
+majú nejaký zmysel, že by som mohol
+chcú, aby sa super jasný s niekým
+
+1218
+00:59:59,460 --> 01:00:00,460
+čítať môj kód.
+
+1219
+01:00:00,460 --> 01:00:02,920
+A prečo voláš dostať
+Reťazec pýtať užívateľa na vstup?
+
+1220
+01:00:02,920 --> 01:00:05,450
+Aj, že jeden nemusí byť nutne
+všetko, čo popisná.
+
+1221
+01:00:05,450 --> 01:00:09,340
+Ale pomáha rozprávať, pretože
+Druhý riadok v príbehu je, uistite sa,
+
+1222
+01:00:09,340 --> 01:00:10,740
+dostať reťazec vrátený reťazec.
+
+1223
+01:00:10,740 --> 01:00:14,260
+>> A tretí riadok v príbehu je,
+iterovat cez znaky v y jednom
+
+1224
+01:00:14,260 --> 01:00:15,380
+v tom čase.
+
+1225
+01:00:15,380 --> 01:00:17,920
+A teraz len na správnu mieru,
+Chystám sa ísť dopredu a pridať
+
+1226
+01:00:17,920 --> 01:00:24,560
+A ešte jedna poznámka, že práve
+hovorí, že tlač i-ty znak v s.
+
+1227
+01:00:24,560 --> 01:00:26,520
+A teraz, čo som urobil
+na konci dňa?
+
+1228
+01:00:26,520 --> 01:00:29,190
+>> Pridal som nejaká angličtina
+Slová vo forme komentára.
+
+1229
+01:00:29,190 --> 01:00:32,700
+Symbol lomítko lomítko znamená, hej,
+Počítač je pre človeka,
+
+1230
+01:00:32,700 --> 01:00:33,820
+Nie je pre vás počítač.
+
+1231
+01:00:33,820 --> 01:00:35,119
+Takže sú ignorované logicky.
+
+1232
+01:00:35,119 --> 01:00:35,910
+Sú to práve tam.
+
+1233
+01:00:35,910 --> 01:00:39,830
+>> A skutočne, CS50 IDE ukazuje ich ako
+šedá, ako užitočné, ale nie kľúč
+
+1234
+01:00:39,830 --> 01:00:41,000
+do programu.
+
+1235
+01:00:41,000 --> 01:00:42,570
+Všimnite si, čo sa dá robiť teraz.
+
+1236
+01:00:42,570 --> 01:00:44,950
+Či už viete C
+programovanie alebo nie,
+
+1237
+01:00:44,950 --> 01:00:47,722
+stačí postaviť späť na to
+Program a zbierať pripomienky.
+
+1238
+01:00:47,722 --> 01:00:50,180
+Spýtajte sa užívateľ pre vstup, uistite sa,
+dostať reťazec vrátený reťazec,
+
+1239
+01:00:50,180 --> 01:00:53,009
+iteráciu cez charaktery v S
+jeden po druhom, vytlačiť znak
+
+1240
+01:00:53,009 --> 01:00:55,550
+i-ty znak v S- tak neurobíte
+dokonca sa pozrieť na kód
+
+1241
+01:00:55,550 --> 01:00:57,270
+pochopiť, čo tento program robí.
+
+1242
+01:00:57,270 --> 01:01:00,280
+A ešte lepšie, keď sa pozriete sami
+V tomto programe za týždeň alebo dva,
+
+1243
+01:01:00,280 --> 01:01:02,280
+alebo za mesiac alebo za rok,
+vy nemusíte
+
+1244
+01:01:02,280 --> 01:01:04,420
+zízať na kód,
+snaží sa spomenúť,
+
+1245
+01:01:04,420 --> 01:01:06,630
+čo som sa snaží robiť s týmto kódom?
+
+1246
+01:01:06,630 --> 01:01:07,770
+>> Vy ste povedal sám.
+
+1247
+01:01:07,770 --> 01:01:11,660
+Vy ste popísal to pre seba,
+alebo nejaký kolega, alebo TA, alebo TF.
+
+1248
+01:01:11,660 --> 01:01:14,860
+A tak to teraz bude
+správne a dobrý dizajn,
+
+1249
+01:01:14,860 --> 01:01:18,210
+a nakoniec dobrý štýl rovnako.
+
+1250
+01:01:18,210 --> 01:01:19,990
+Tak to majte na pamäti.
+
+1251
+01:01:19,990 --> 01:01:22,200
+>> Takže je tu ešte jedna ďalšia
+čo budem robiť tu
+
+1252
+01:01:22,200 --> 01:01:28,240
+že teraz môžu odhaliť presne to, čo je
+deje pod kapotou.
+
+1253
+01:01:28,240 --> 01:01:30,390
+Takže je tu táto funkcia
+v C a iných jazykov,
+
+1254
+01:01:30,390 --> 01:01:33,010
+volal Obsadiť
+že buď implicitne
+
+1255
+01:01:33,010 --> 01:01:37,250
+alebo výslovne umožňuje prevádzať
+z jedného dátového typu na iný.
+
+1256
+01:01:37,250 --> 01:01:39,800
+Boli sme zaoberajúca tak
+ak dnes s reťazcami.
+
+1257
+01:01:39,800 --> 01:01:41,250
+>> A slučke sú znaky.
+
+1258
+01:01:41,250 --> 01:01:44,910
+Ale spomínam z týždňa
+0, aké sú znaky?
+
+1259
+01:01:44,910 --> 01:01:49,334
+Znaky sú len abstrakcie
+na vrchole numbers-- jedno desatinné miesto,
+
+1260
+01:01:49,334 --> 01:01:52,500
+a desatinné čísla sú naozaj len
+abstrakcie v hornej časti binárnych čísel,
+
+1261
+01:01:52,500 --> 01:01:53,720
+ako ju definovať.
+
+1262
+01:01:53,720 --> 01:01:55,540
+>> Takže znaky sú čísla.
+
+1263
+01:01:55,540 --> 01:01:58,410
+A čísla sú znaky,
+Len v závislosti od kontextu.
+
+1264
+01:01:58,410 --> 01:02:01,250
+A ukázalo sa, že vo vnútri
+počítačového programu,
+
+1265
+01:02:01,250 --> 01:02:06,830
+môžete určiť, ako chcete vyzerať
+u bitov vnútri tohto programu?
+
+1266
+01:02:06,830 --> 01:02:10,400
+>> Pripomeňme, že týždni 0, ktorú sme mali
+ASCII, čo je práve tento kód
+
+1267
+01:02:10,400 --> 01:02:11,620
+mapovanie listy na čísla.
+
+1268
+01:02:11,620 --> 01:02:13,660
+A my sme povedali, kapitál A je 65.
+
+1269
+01:02:13,660 --> 01:02:15,860
+Kapitál B je 66, a tak ďalej.
+
+1270
+01:02:15,860 --> 01:02:20,500
+>> A upozornenie, máme v podstate majú znaky na
+horný rad tu, ako C by im hovoríme,
+
+1271
+01:02:20,500 --> 01:02:23,400
+znaky, a potom
+ints na druhom riadku.
+
+1272
+01:02:23,400 --> 01:02:28,180
+A ukázalo sa, môžete previesť
+plynulo medzi nimi, typicky.
+
+1273
+01:02:28,180 --> 01:02:30,042
+A ak chceme urobiť
+to zámerne, my
+
+1274
+01:02:30,042 --> 01:02:31,750
+chcieť riešiť
+niečo také.
+
+1275
+01:02:31,750 --> 01:02:33,590
+>> Mohli by sme chcieť previesť
+veľkými a malými
+
+1276
+01:02:33,590 --> 01:02:35,330
+Prípad, alebo malé písmená na veľké písmená.
+
+1277
+01:02:35,330 --> 01:02:38,000
+A ukázalo sa, je tu
+v skutočnosti tu vzor
+
+1278
+01:02:38,000 --> 01:02:39,900
+môžeme prijať za chvíľu.
+
+1279
+01:02:39,900 --> 01:02:44,120
+Ale pozrime sa najprv pri
+Príkladom toho dosiahnuť explicitne.
+
+1280
+01:02:44,120 --> 01:02:46,340
+>> Chystám sa vrátiť do CS50 IDE.
+
+1281
+01:02:46,340 --> 01:02:50,640
+Idem k vytvoreniu
+Súbor nazvaný ASCII 0.c.
+
+1282
+01:02:50,640 --> 01:02:55,960
+A ja idem dopredu a pridať svoje
+Štandardné IO.H hore, int main void
+
+1283
+01:02:55,960 --> 01:02:57,370
+v hornej časti svojej funkcie.
+
+1284
+01:02:57,370 --> 01:03:02,700
+A potom som jednoducho ísť robiť
+following-- cyklus for zo aj rovná,
+
+1285
+01:03:02,700 --> 01:03:04,610
+povedzme, 65.
+
+1286
+01:03:04,610 --> 01:03:10,460
+>> A potom som bude nižšia ako
+65 plus 26 písmen v abecede.
+
+1287
+01:03:10,460 --> 01:03:12,640
+Takže nechám počítač
+to spočítajte tam na mňa.
+
+1288
+01:03:12,640 --> 01:03:15,100
+A potom vnútri tejto slučky,
+čo budem tlačiť?
+
+1289
+01:03:15,100 --> 01:03:19,230
+>> % C je aj spätná lomky% n.
+
+1290
+01:03:19,230 --> 01:03:21,290
+A teraz chcem pripojiť dve hodnoty.
+
+1291
+01:03:21,290 --> 01:03:24,530
+Ja som dočasne umiestniť otázku
+označí tam pozvať na otázku.
+
+1292
+01:03:24,530 --> 01:03:29,940
+>> Chcem iteráciu od 65 vpred
+pre 26 písmen abecedy,
+
+1293
+01:03:29,940 --> 01:03:35,190
+tlač na každej iterácii, že
+Neoddeliteľnou ekvivalent postavy.
+
+1294
+01:03:35,190 --> 01:03:38,299
+Inými slovami, chcem
+iteráciu cez 26 čísla tlač
+
+1295
+01:03:38,299 --> 01:03:41,590
+čo je ASCII znak je písmeno,
+a čo je zodpovedajúci počet je--
+
+1296
+01:03:41,590 --> 01:03:44,650
+naozaj len znovuvytvorenie
+graf z tohto snímku.
+
+1297
+01:03:44,650 --> 01:03:47,010
+Takže to, čo by mali byť tieto otázniky byť?
+
+1298
+01:03:47,010 --> 01:03:51,760
+>> Tak to dopadá, že druhý
+jeden by mal byť len premenná i.
+
+1299
+01:03:51,760 --> 01:03:53,860
+Chcem vidieť, že ako číslo.
+
+1300
+01:03:53,860 --> 01:03:58,920
+A stredná argumentom
+Tu môžem povedať počítač
+
+1301
+01:03:58,920 --> 01:04:03,470
+na liečbu že číslo
+aj ako charakter, tak ako
+
+1302
+01:04:03,470 --> 01:04:05,880
+ho nahradiť tú percent C.
+
+1303
+01:04:05,880 --> 01:04:07,990
+>> Inými slovami, ak je ja,
+ľudský programátor, viem,
+
+1304
+01:04:07,990 --> 01:04:09,865
+to sú len čísla
+na konci dňa.
+
+1305
+01:04:09,865 --> 01:04:12,500
+A viem, že by 65
+mapa k nejakému charakteru.
+
+1306
+01:04:12,500 --> 01:04:15,310
+S týmto explicitné obsadenie,
+s zátvorke,
+
+1307
+01:04:15,310 --> 01:04:18,840
+názov dátového typu, ktorý chcete
+previesť, a uzavreté zátvorka,
+
+1308
+01:04:18,840 --> 01:04:21,200
+môžete povedať
+počítač, hej, počítač,
+
+1309
+01:04:21,200 --> 01:04:24,130
+previesť tento integer na char.
+
+1310
+01:04:24,130 --> 01:04:26,250
+>> Takže keď som spustenie tohto
+Program po kompiláciu,
+
+1311
+01:04:26,250 --> 01:04:29,740
+pozrieme sa, čo mám robiť get-- ASCII 0.
+
+1312
+01:04:29,740 --> 01:04:33,020
+Látat to, čo som urobil zle?
+
+1313
+01:04:33,020 --> 01:04:35,884
+Využitie nedeklarovaný identifikátor,
+v poriadku, nebolo úmyselné,
+
+1314
+01:04:35,884 --> 01:04:37,800
+ale uvidíme, či nemôžeme
+Dôvodom cez to.
+
+1315
+01:04:37,800 --> 01:04:41,220
+>> Takže linka five-- a tak som nedostal
+veľmi ďaleko pred skrutkovanie nahor.
+
+1316
+01:04:41,220 --> 01:04:42,140
+To je v poriadku.
+
+1317
+01:04:42,140 --> 01:04:46,560
+Takže linka 5 pre i rovná 65-- vidím.
+
+1318
+01:04:46,560 --> 01:04:50,130
+Takže nezabudnite, že v jazyku C, na rozdiel od niektorých
+jazyky, ak máte predchádzajúce programovanie
+
+1319
+01:04:50,130 --> 01:04:52,190
+skúseností, máte
+oznámiť počítač,
+
+1320
+01:04:52,190 --> 01:04:55,040
+Na rozdiel od Scratch, čo
+typ premennej to je.
+
+1321
+01:04:55,040 --> 01:04:56,860
+>> A ja zabudol kľúčovú frázu tu.
+
+1322
+01:04:56,860 --> 01:04:59,200
+V súlade päť, som začal používať aj.
+
+1323
+01:04:59,200 --> 01:05:01,560
+Ale ja som nepovedal C
+aký typ dát je.
+
+1324
+01:05:01,560 --> 01:05:04,570
+Takže ja idem sem a
+hovoria, ach, aby to celé číslo.
+
+1325
+01:05:04,570 --> 01:05:07,050
+>> Teraz budem pokračovať a překompilovat.
+
+1326
+01:05:07,050 --> 01:05:08,080
+Že fixné to.
+
+1327
+01:05:08,080 --> 01:05:12,660
+./ascii0 Enter, to je paráda.
+
+1328
+01:05:12,660 --> 01:05:15,360
+Je to nielen super rýchly, aby
+požiadať počítač, na túto otázku,
+
+1329
+01:05:15,360 --> 01:05:18,885
+skôr ako hľadať to na snímke,
+je vytlačený na každý riadok jednu, A 65,
+
+1330
+01:05:18,885 --> 01:05:24,860
+B je 66, celá cesta down--, pretože som
+to urobil 26 times-- na listy z,
+
+1331
+01:05:24,860 --> 01:05:25,630
+čo je 90.
+
+1332
+01:05:25,630 --> 01:05:27,790
+A v skutočnosti, mierne
+inteligentnejšie by
+
+1333
+01:05:27,790 --> 01:05:31,030
+boli pre mňa, aby sa nespoliehali
+na počítači pre pridanie 26.
+
+1334
+01:05:31,030 --> 01:05:34,060
+Mohol som práve urobil
+90, rovnako tak dlho
+
+1335
+01:05:34,060 --> 01:05:37,390
+Ako som nerobia rovnakú chybu dvakrát.
+
+1336
+01:05:37,390 --> 01:05:41,880
+Chcem ísť hore cez
+z, a to nielen hore cez y.
+
+1337
+01:05:41,880 --> 01:05:44,000
+>> Tak to je explicitný obsadenie.
+
+1338
+01:05:44,000 --> 01:05:47,860
+Ukazuje sa, že toto
+nie je ani nutné.
+
+1339
+01:05:47,860 --> 01:05:52,480
+Nechaj ma ísť dopredu a spustite tento
+kompilátor, a opakovanie ASCII 0.
+
+1340
+01:05:52,480 --> 01:05:54,940
+Ukazuje sa, že C je celkom šikovný.
+
+1341
+01:05:54,940 --> 01:05:57,150
+>> A printf, najmä
+Je dosť šikovný.
+
+1342
+01:05:57,150 --> 01:06:01,260
+Ak ste práve zložiť aj dvakrát
+pre oba zástupné symboly, printf
+
+1343
+01:06:01,260 --> 01:06:04,510
+si uvedomí, oh, dobre ťa poznám
+dal ja a integer-- určitý počet,
+
+1344
+01:06:04,510 --> 01:06:06,380
+ako je 65 alebo 90, alebo čokoľvek iného.
+
+1345
+01:06:06,380 --> 01:06:10,170
+Ale vidím, že chceš, aby som
+formátovať toto číslo ako postava.
+
+1346
+01:06:10,170 --> 01:06:16,460
+A tak printf môže implicitne cast
+int na char pre vás rovnako.
+
+1347
+01:06:16,460 --> 01:06:19,360
+Takže to nie je problém vôbec.
+
+1348
+01:06:19,360 --> 01:06:23,100
+>> Ale nevšimol, pretože tejto rovnocennosti
+môžeme skutočne to urobiť rovnako.
+
+1349
+01:06:23,100 --> 01:06:26,520
+Nechaj ma ísť dopredu a urobiť jednu
+iné verzie tohle-- Ascii 1.c.
+
+1350
+01:06:26,520 --> 01:06:31,800
+A miesto iterácie cez
+celé čísla, môže skutočne vyhodiť svoju myseľ
+
+1351
+01:06:31,800 --> 01:06:33,610
+iterácií cez znaky.
+
+1352
+01:06:33,610 --> 01:06:37,660
+Ak je char c dostane na základnom imaní, I
+chcem ísť dopredu a to,
+
+1353
+01:06:37,660 --> 01:06:41,740
+ak C je menšia ako alebo rovné
+s kapitálovou Z. A na každej iterácii
+
+1354
+01:06:41,740 --> 01:06:45,690
+Chcem zvýšiť C, môžem
+Teraz v mojom printf riadku tu
+
+1355
+01:06:45,690 --> 01:06:51,320
+povedzme, percento C
+percent aj znova, čiarka C.
+
+1356
+01:06:51,320 --> 01:06:57,200
+>> A teraz môžem ísť opačným smerom,
+odlievanie charakter výslovne
+
+1357
+01:06:57,200 --> 01:06:58,500
+na celé číslo.
+
+1358
+01:06:58,500 --> 01:07:00,560
+Takže znovu, prečo by ste to urobiť?
+
+1359
+01:07:00,560 --> 01:07:03,830
+Je to trochu divné Druh
+počítať, pokiaľ ide o znaky.
+
+1360
+01:07:03,830 --> 01:07:07,430
+>> Ale ak ste pochopili, čo je
+deje pod kapotou
+
+1361
+01:07:07,430 --> 01:07:08,430
+je to naozaj žiadna mágia.
+
+1362
+01:07:08,430 --> 01:07:13,060
+To hovoríš len, hej, počítač dať
+me premenná s názvom C typu char.
+
+1363
+01:07:13,060 --> 01:07:16,520
+Inicializovať ho do hlavného A. A
+Všimnite si, apostrofy záležitosť.
+
+1364
+01:07:16,520 --> 01:07:19,580
+>> Pre postavy v C, prevezme späť od
+minulý týždeň, môžete použiť apostrofy.
+
+1365
+01:07:19,580 --> 01:07:23,720
+Pre slučke, slová,
+frázy, môžete použiť úvodzoviek.
+
+1366
+01:07:23,720 --> 01:07:27,210
+OK, počítač, stále robí to tak,
+Kým znak je menšia ako
+
+1367
+01:07:27,210 --> 01:07:28,050
+alebo rovné z.
+
+1368
+01:07:28,050 --> 01:07:32,640
+A viem, že z môjho ASCII tabuľky, že všetky
+z týchto kódov ASCII sú súvislé.
+
+1369
+01:07:32,640 --> 01:07:33,400
+>> Neexistuje žiadne medzery.
+
+1370
+01:07:33,400 --> 01:07:36,737
+Takže je to len A až Z,
+oddelené jedným číslom každého.
+
+1371
+01:07:36,737 --> 01:07:38,820
+A potom môžem zvýšiť
+char, či naozaj chcem.
+
+1372
+01:07:38,820 --> 01:07:40,390
+Na konci dňa,
+je to len číslo.
+
+1373
+01:07:40,390 --> 01:07:41,030
+Viem to.
+
+1374
+01:07:41,030 --> 01:07:43,670
+Takže môžem len predpokladať, pridať 1 až neho.
+
+1375
+01:07:43,670 --> 01:07:46,940
+>> A potom tentoraz, tlačiť c,
+a potom integrálne ekvivalent.
+
+1376
+01:07:46,940 --> 01:07:50,170
+A ja ani nemusíte explicitné obsadenie.
+
+1377
+01:07:50,170 --> 01:07:52,680
+Môžem nechať printf a
+Počítač veciam na kĺb,
+
+1378
+01:07:52,680 --> 01:07:57,300
+takže teraz, keď spustím
+aby Ascii1./ascii1,
+
+1379
+01:07:57,300 --> 01:08:01,520
+Mám presne to isté rovnako.
+
+1380
+01:08:01,520 --> 01:08:04,530
+>> Zbytočný program though-- nikoho
+bude vlastne písať softvér
+
+1381
+01:08:04,530 --> 01:08:07,549
+aby sa prísť na to, čo bolo
+číslo, ktoré mapuje A alebo B, alebo Z?
+
+1382
+01:08:07,549 --> 01:08:10,340
+Len sa to google, alebo
+pozrite sa do on-line, alebo ho vyhľadajte
+
+1383
+01:08:10,340 --> 01:08:11,650
+na snímke, alebo podobne.
+
+1384
+01:08:11,650 --> 01:08:13,520
+Takže tam, kde to skutočne získať užitočné?
+
+1385
+01:08:13,520 --> 01:08:15,960
+>> No, keď už hovoríme o ktoré
+šmykľavka, Všimnite si, že je
+
+1386
+01:08:15,960 --> 01:08:20,890
+skutočný vzor tu medzi veľkými písmenami
+a malé písmená, ktorá nebola náhodná.
+
+1387
+01:08:20,890 --> 01:08:23,760
+Všimnite si, že kapitál A je 65.
+
+1388
+01:08:23,760 --> 01:08:25,830
+Malé písmená a je 97.
+
+1389
+01:08:25,830 --> 01:08:29,649
+A ako ďaleko je nižšia prípade sa?
+
+1390
+01:08:29,649 --> 01:08:32,649
+>> Takže 65 je to, koľko krokov od 97?
+
+1391
+01:08:32,649 --> 01:08:36,210
+Tak 97 mínus 65 je 32.
+
+1392
+01:08:36,210 --> 01:08:37,910
+Takže kapitál a je 65.
+
+1393
+01:08:37,910 --> 01:08:39,939
+Ak pridáte 32 k tomu,
+dostanete malé písmená a.
+
+1394
+01:08:39,939 --> 01:08:43,729
+A ekvivalentne, ak si odpočítať 32,
+dostanete späť do hlavného mesta je-- to isté s B
+
+1395
+01:08:43,729 --> 01:08:46,380
+k malým b, veľký C k malému C.
+
+1396
+01:08:46,380 --> 01:08:50,670
+>> Všetky tieto medzery sú 32 od seba.
+
+1397
+01:08:50,670 --> 01:08:54,450
+Teraz by to zdá sa nám umožňujú
+niečo ako Microsoft Word,
+
+1398
+01:08:54,450 --> 01:08:57,729
+alebo Dokumenty Google sú vybavené, kde vás
+si môžu vybrať všetko a potom hovoria,
+
+1399
+01:08:57,729 --> 01:09:00,520
+všetko zmeniť na malé písmená, alebo
+všetko zmeniť na veľké písmená,
+
+1400
+01:09:00,520 --> 01:09:03,840
+alebo zmeniť iba prvé slovo
+vety na veľké písmená.
+
+1401
+01:09:03,840 --> 01:09:07,390
+Môžeme niečo robiť
+takhle sami.
+
+1402
+01:09:07,390 --> 01:09:12,645
+>> Nechaj ma ísť dopredu a uložiť súbor
+Tu volal zarábať 0.c.
+
+1403
+01:09:12,645 --> 01:09:15,770
+A poďme do toho a vybičovať program
+že robí presne to takto.
+
+1404
+01:09:15,770 --> 01:09:18,460
+Takže zahŕňajú knižnicu CS50.
+
+1405
+01:09:18,460 --> 01:09:21,430
+A zahŕňajú Standard I / O.
+
+1406
+01:09:21,430 --> 01:09:22,787
+>> A viem, že to bude čoskoro.
+
+1407
+01:09:22,787 --> 01:09:24,870
+Takže idem dať do
+tam už string.h,
+
+1408
+01:09:24,870 --> 01:09:26,960
+takže mám prístup k
+veci, ako je Stirling,
+
+1409
+01:09:26,960 --> 01:09:29,620
+a potom int main prázdno, ako obvykle.
+
+1410
+01:09:29,620 --> 01:09:33,420
+A potom budem pokračovať
+a robiť reťazca dostane dostať reťazec
+
+1411
+01:09:33,420 --> 01:09:35,032
+len preto, aby reťazec od užívateľa.
+
+1412
+01:09:35,032 --> 01:09:36,740
+A potom idem
+robiť svoju kontrolu zdravý rozum.
+
+1413
+01:09:36,740 --> 01:09:40,510
+Ak reťazec nerovná null,
+potom je to bezpečné pokračovať.
+
+1414
+01:09:40,510 --> 01:09:42,000
+A čo chcem robiť?
+
+1415
+01:09:42,000 --> 01:09:48,700
+Idem k iterácii z i = 0,
+a n až do dĺžky reťazca sprinklerního.
+
+1416
+01:09:48,700 --> 01:09:51,899
+>> A budem to robiť tak dlho, kým
+i je menšie ako n a i a a.
+
+1417
+01:09:51,899 --> 01:09:55,060
+Zatiaľ som naozaj len
+požičiavať si nápady z skôr.
+
+1418
+01:09:55,060 --> 01:09:57,010
+A teraz idem predstaviť pobočku.
+
+1419
+01:09:57,010 --> 01:09:59,635
+>> Takže myslíte, že späť do nuly, kedy
+sme mali tie vidličky na ceste,
+
+1420
+01:09:59,635 --> 01:10:05,110
+a minulý týždeň v C. Idem
+povedať, ak je i-ty znak s
+
+1421
+01:10:05,110 --> 01:10:09,250
+je väčší alebo
+rovnajúcu sa malé písmená A,
+
+1422
+01:10:09,250 --> 01:10:13,340
+a-- v Scratch by ste doslova
+hovoria a, ale v C hovoríte ampersand,
+
+1423
+01:10:13,340 --> 01:10:19,830
+ampersand-- a charakter i-ty v S
+je menšia než alebo sa rovná malé písmená Z,
+
+1424
+01:10:19,830 --> 01:10:21,780
+poďme urobiť niečo zaujímavé.
+
+1425
+01:10:21,780 --> 01:10:27,020
+Poďme vlastne vytlačiť
+Znak s žiadnym riadkom
+
+1426
+01:10:27,020 --> 01:10:31,760
+to je znak v reťazci,
+i-ty znak v reťazci.
+
+1427
+01:10:31,760 --> 01:10:37,420
+>> Ale poďme ďalej a
+odrátame 32 z neho.
+
+1428
+01:10:37,420 --> 01:10:42,120
+Else if charakter v
+Reťazec, ktorý sa pozeráme
+
+1429
+01:10:42,120 --> 01:10:45,950
+Nie je medzi málo, čo
+a len málo z, pokračuj
+
+1430
+01:10:45,950 --> 01:10:48,610
+a len vytlačiť ju bez zmeny.
+
+1431
+01:10:48,610 --> 01:10:50,840
+Takže sme zaviedli
+Tento zápis v zátvorkách
+
+1432
+01:10:50,840 --> 01:10:53,560
+Pre naše struny získať u
+i-ty znak v reťazci.
+
+1433
+01:10:53,560 --> 01:10:57,520
+>> Pridal som nejaké podmienené logiky, ako
+Scratch minulý týždeň týždeň jeden, kde
+
+1434
+01:10:57,520 --> 01:10:59,880
+Ja len pomocou môj zásadný
+pochopenie toho, čo je
+
+1435
+01:10:59,880 --> 01:11:01,130
+deje pod kapotou.
+
+1436
+01:11:01,130 --> 01:11:04,190
+Je i-tý charakter s
+väčšia než alebo rovná?
+
+1437
+01:11:04,190 --> 01:11:08,290
+Rovnako ako je to 97 alebo 98,
+alebo 99, a tak ďalej?
+
+1438
+01:11:08,290 --> 01:11:11,940
+>> Ale je to tiež menej ako alebo rovné
+na hodnotu malým Z?
+
+1439
+01:11:11,940 --> 01:11:16,210
+A ak áno, čo to čiara znamená?
+
+1440
+01:11:16,210 --> 01:11:20,250
+14, to je niečo z
+Zárodok celej myšlienke,
+
+1441
+01:11:20,250 --> 01:11:23,840
+zarábať listu
+jednoducho odpočíta 32 z nej,
+
+1442
+01:11:23,840 --> 01:11:29,370
+V tomto prípade, pretože viem, že za
+graf, ako sú zastúpené moje čísla.
+
+1443
+01:11:29,370 --> 01:11:33,925
+Tak poďme do toho a spustiť to,
+po kompiláciu zarábať 0.c,
+
+1444
+01:11:33,925 --> 01:11:36,210
+a beh zarábať 0.
+
+1445
+01:11:36,210 --> 01:11:40,300
+>> Poďme písať niečo podobné
+Zamyla vo všetkých malými písmenami vstúpiť.
+
+1446
+01:11:40,300 --> 01:11:42,780
+A teraz máme Zamyla vo všetkých veľkých písmen.
+
+1447
+01:11:42,780 --> 01:11:45,050
+Poďme písať Roba v celej malými písmenami.
+
+1448
+01:11:45,050 --> 01:11:46,674
+Skúsme Jasona vo všetkých malými písmenami.
+
+1449
+01:11:46,674 --> 01:11:48,590
+A my Dostávam
+nútený kapitalizácie.
+
+1450
+01:11:48,590 --> 01:11:50,960
+K dispozícii je menšia chyba, že som
+druh nepredpokladal.
+
+1451
+01:11:50,960 --> 01:11:54,050
+Všimnite si, moja nová výzva skončí
+Na rovnakej linke ako ich mená,
+
+1452
+01:11:54,050 --> 01:11:55,520
+ktorý sa cíti trochu chaotický.
+
+1453
+01:11:55,520 --> 01:11:59,170
+>> Takže ja idem sem, a
+v skutočnosti na konci tohto programu
+
+1454
+01:11:59,170 --> 01:12:02,110
+vytlačiť znak nového riadku.
+
+1455
+01:12:02,110 --> 01:12:03,160
+To je všetko.
+
+1456
+01:12:03,160 --> 01:12:06,120
+S printf, vy nemusíte
+odovzdať premenné alebo formátu kódu.
+
+1457
+01:12:06,120 --> 01:12:08,460
+Môžete si doslova len vytlačiť
+niečo ako nový riadok.
+
+1458
+01:12:08,460 --> 01:12:13,529
+>> Tak poďme do toho a robiť
+zarábať 0 znova, spustite ho, Zamyla.
+
+1459
+01:12:13,529 --> 01:12:14,820
+A teraz je to trochu krajší.
+
+1460
+01:12:14,820 --> 01:12:17,274
+A teraz, moja výzva je na svoje vlastné nový riadok.
+
+1461
+01:12:17,274 --> 01:12:18,440
+Takže to je všetko v poriadku a dobre.
+
+1462
+01:12:18,440 --> 01:12:19,910
+Tak to je dobrý príklad.
+
+1463
+01:12:19,910 --> 01:12:22,700
+Ale ja ani nutne
+musieť pevný kód 32.
+
+1464
+01:12:22,700 --> 01:12:23,350
+Vieš čo?
+
+1465
+01:12:23,350 --> 01:12:26,350
+Mohol by som say-- nemám vôbec
+spomenúť, aký je rozdiel.
+
+1466
+01:12:26,350 --> 01:12:29,330
+>> Ale viem, že keby som
+majú malé písmeno,
+
+1467
+01:12:29,330 --> 01:12:34,430
+Ja v podstate chcete odpočítať off
+bez ohľadu na vzdialenosť medzi málo
+
+1468
+01:12:34,430 --> 01:12:39,160
+A veľký, pretože keď predpokladám, že
+všetky ostatné písmená sú rovnaké,
+
+1469
+01:12:39,160 --> 01:12:41,045
+že by mal dostať prácu.
+
+1470
+01:12:41,045 --> 01:12:42,670
+Ale skôr než robiť to, vieš čo?
+
+1471
+01:12:42,670 --> 01:12:44,240
+Je tu ešte jeden spôsob, ako stále.
+
+1472
+01:12:44,240 --> 01:12:48,090
+>> V prípade, že je zarábať 1.c-- keby som
+dať, že do samostatného súboru.
+
+1473
+01:12:48,090 --> 01:12:51,030
+poďme si zarábať 2.C takto.
+
+1474
+01:12:51,030 --> 01:12:53,060
+Chystám sa skutočne vyčistiť to tu.
+
+1475
+01:12:53,060 --> 01:12:57,420
+A namiesto toho sa museli
+vedia alebo starostlivosť o tých nízkej úrovni
+
+1476
+01:12:57,420 --> 01:13:01,090
+Implementačné detaily, som namiesto
+Len do tlače charakter,
+
+1477
+01:13:01,090 --> 01:13:04,610
+citát koniec citátu, percento C, a
+potom volať ďalšie funkcie, ktorá
+
+1478
+01:13:04,610 --> 01:13:09,950
+Existuje ktorý berie argument,
+čo je znak, ako je tento.
+
+1479
+01:13:09,950 --> 01:13:12,630
+>> Ukazuje sa, že v C, je tu
+ďalšie funkcie volania
+
+1480
+01:13:12,630 --> 01:13:15,550
+na hornej, ktorý ako jeho meno
+navrhuje berie znak
+
+1481
+01:13:15,550 --> 01:13:19,350
+a robí ju do hornej prípade
+rovnocenné, a potom ju vráti
+
+1482
+01:13:19,350 --> 01:13:21,410
+takže printf možno ho pripojiť tam.
+
+1483
+01:13:21,410 --> 01:13:25,484
+A tak, ako to urobiť, aj keď, ja
+je potrebné zaviesť jeden ďalší súbor.
+
+1484
+01:13:25,484 --> 01:13:28,400
+Ukazuje sa, že je tu iný súbor
+že by ste len to, z triedy,
+
+1485
+01:13:28,400 --> 01:13:33,020
+alebo učebnice, alebo on-line
+referencie, nazvaný C type.h.
+
+1486
+01:13:33,020 --> 01:13:38,570
+>> Takže ak pridám, že sa medzi moje hlavičke
+Súbory, a teraz znovu zostaviť tento program,
+
+1487
+01:13:38,570 --> 01:13:43,040
+capitalize2, ./capitalize2 Enter.
+
+1488
+01:13:43,040 --> 01:13:46,690
+Poďme písať Zamyla vo všetkých
+malé písmená, stále funguje rovnako.
+
+1489
+01:13:46,690 --> 01:13:48,040
+Ale viete čo?
+
+1490
+01:13:48,040 --> 01:13:55,590
+Ukazuje sa, že na hornej
+má niektoré ďalšie funkcie.
+
+1491
+01:13:55,590 --> 01:13:58,410
+>> A dovoľte mi predstaviť toto
+velenie tu, tak nejako nešikovne
+
+1492
+01:13:58,410 --> 01:14:00,250
+pomenovaný, ale človek na manuálu.
+
+1493
+01:14:00,250 --> 01:14:03,960
+Ukazuje sa, že väčšina počítačov Linux,
+ako sme pomocou here-- prevádzkové Linux
+
+1494
+01:14:03,960 --> 01:14:06,270
+system-- majú príkaz
+volal muž, ktorý hovorí,
+
+1495
+01:14:06,270 --> 01:14:08,530
+hej, počítač, daj mi
+počítače manuál.
+
+1496
+01:14:08,530 --> 01:14:10,680
+čo chceš
+vyhľadať v tejto príručke?
+
+1497
+01:14:10,680 --> 01:14:13,840
+>> Chcem sa pozrieť do funkcie
+zavolal na hornej, Enter.
+
+1498
+01:14:13,840 --> 01:14:16,070
+A je to trochu záhadný
+čítať občas.
+
+1499
+01:14:16,070 --> 01:14:18,780
+Nevšimnúť, že sme v
+Linux programátorský manuál.
+
+1500
+01:14:18,780 --> 01:14:19,530
+A to všetko textu.
+
+1501
+01:14:19,530 --> 01:14:21,905
+A všimnite si, že je tu
+Názov funkcie tu.
+
+1502
+01:14:21,905 --> 01:14:25,030
+Ukazuje sa, že má bratranca menom
+znížiť, čo robí opak.
+
+1503
+01:14:25,030 --> 01:14:29,710
+A oznámenia podľa osnovy, používať túto
+fungujú v man stránke, tak povediac,
+
+1504
+01:14:29,710 --> 01:14:32,220
+Je mi povedať, že ja
+musieť obsahovať c type.h.
+
+1505
+01:14:32,220 --> 01:14:33,630
+A vedel som, že z praxe.
+
+1506
+01:14:33,630 --> 01:14:36,210
+>> Tu, to som ja, zobrazujúci dva
+prototypy pre funkciu,
+
+1507
+01:14:36,210 --> 01:14:39,070
+takže keď som niekedy chcieť použiť
+Viem, čo berú ako vstup,
+
+1508
+01:14:39,070 --> 01:14:40,652
+a to, čo sa vráti ako výstup.
+
+1509
+01:14:40,652 --> 01:14:42,360
+A potom, ak som čítal
+opis, vidím
+
+1510
+01:14:42,360 --> 01:14:44,820
+podrobnejšie čo funkcia robí.
+
+1511
+01:14:44,820 --> 01:14:48,100
+Ale čo je dôležitejšie, ak je
+Pozerám sa pod návratovej hodnoty,
+
+1512
+01:14:48,100 --> 01:14:51,710
+hovorí, že vrátená hodnota je
+že z prevedeného listu,
+
+1513
+01:14:51,710 --> 01:14:57,880
+alebo C, pôvodný vstup, ak
+konverzie nebolo možné.
+
+1514
+01:14:57,880 --> 01:15:01,992
+>> Inými slovami, horná pokúsime
+previesť list na veľké písmená.
+
+1515
+01:15:01,992 --> 01:15:03,450
+A ak áno, bude to vrátiť.
+
+1516
+01:15:03,450 --> 01:15:07,010
+Ale ak to tak nie je pre niektorých reason--
+Možno je to už veľké písmená,
+
+1517
+01:15:07,010 --> 01:15:09,550
+Možno je to výkričník
+alebo nejaký iný punctuation--
+
+1518
+01:15:09,550 --> 01:15:12,200
+je to len bude
+vrátiť pôvodné C,
+
+1519
+01:15:12,200 --> 01:15:17,340
+čo znamená, že môžem robiť môj kód
+lepšiu nasledujúce štruktúru.
+
+1520
+01:15:17,340 --> 01:15:20,580
+>> nepotrebujem všetky
+Tieto látat riadkov kódu.
+
+1521
+01:15:20,580 --> 01:15:22,610
+Všetky riadky som si
+len zvýrazní môže
+
+1522
+01:15:22,610 --> 01:15:28,700
+sa zrútila do jediného simple
+linka, ktorá je tohle-- printf percenta
+
+1523
+01:15:28,700 --> 01:15:33,510
+c na hornej konzole S i.
+
+1524
+01:15:33,510 --> 01:15:36,090
+A to by bolo
+Príkladom lepšieho dizajnu.
+
+1525
+01:15:36,090 --> 01:15:40,040
+>> Prečo zavádzať v 7 alebo 8 riadkov
+kódu, bez ohľadu na to, že som len
+
+1526
+01:15:40,040 --> 01:15:44,960
+vymazané, keď môžete namiesto toho zbaliť
+všetky uvedené logiky a rozhodovanie
+
+1527
+01:15:44,960 --> 01:15:49,620
+do jedného riadku, 13 teraz, že
+spolieha na knižnice function--
+
+1528
+01:15:49,620 --> 01:15:53,430
+funkcia, ktorá prichádza s C, ale že
+robí presne to, čo chcete robiť.
+
+1529
+01:15:53,430 --> 01:15:55,295
+A úprimne povedané, aj keď
+to neprišiel s C,
+
+1530
+01:15:55,295 --> 01:15:58,880
+Dalo by sa realizovať sami, as
+sme videli, sa dostať záporné int
+
+1531
+01:15:58,880 --> 01:16:01,700
+a získať pozitívne int minulý týždeň rovnako.
+
+1532
+01:16:01,700 --> 01:16:03,470
+>> Tento kód je teraz oveľa čitateľnejší.
+
+1533
+01:16:03,470 --> 01:16:06,670
+A skutočne, ak budeme posúvať nahor,
+pozrite sa, ako oveľa kompaktnejšie
+
+1534
+01:16:06,670 --> 01:16:08,360
+Táto verzia môjho programu je.
+
+1535
+01:16:08,360 --> 01:16:11,230
+Teraz je to trochu top ťažký,
+sa všetky tieto obsahuje.
+
+1536
+01:16:11,230 --> 01:16:14,380
+Ale to je v poriadku, pretože teraz stojím
+na bedrách programátorov
+
+1537
+01:16:14,380 --> 01:16:15,300
+predo mnou.
+
+1538
+01:16:15,300 --> 01:16:18,440
+A ten, kto to bol, kto
+implementovaná do hornej naozaj
+
+1539
+01:16:18,440 --> 01:16:21,470
+urobil mi láskavosť, podobne ako ten, kto
+realizovaný Stirling naozaj
+
+1540
+01:16:21,470 --> 01:16:24,790
+urobil pre mňa niečo pred časom.
+
+1541
+01:16:24,790 --> 01:16:26,970
+A tak teraz máme
+lepšie návrhu programu
+
+1542
+01:16:26,970 --> 01:16:31,680
+ktorá implementuje presne rovnakú logiku.
+
+1543
+01:16:31,680 --> 01:16:35,580
+>> Keď už hovoríme o Stirling, nech
+ma ísť dopredu a to urobiť.
+
+1544
+01:16:35,580 --> 01:16:38,320
+Nechaj ma ísť dopredu a uložiť
+Tento súbor ako stirling.c.
+
+1545
+01:16:38,320 --> 01:16:43,255
+A ukázalo sa, môžeme zlúpnite
+jedna ďalšia vrstva celkom jednoducho teraz.
+
+1546
+01:16:43,255 --> 01:16:45,630
+Chystám sa ísť dopredu a bič
+up inom programe v hlavnom
+
+1547
+01:16:45,630 --> 01:16:49,759
+tu to proste re-náradie
+Dĺžka reťazca nasledujúcim spôsobom.
+
+1548
+01:16:49,759 --> 01:16:52,300
+Takže tu je riadok kódu, ktorý
+dostane mi reťazec od užívateľa.
+
+1549
+01:16:52,300 --> 01:16:53,910
+Stále to s použitím znova a znova.
+
+1550
+01:16:53,910 --> 01:16:58,900
+Uvediem sám premennú s názvom
+n typu int, ktorá ukladá číslo.
+
+1551
+01:16:58,900 --> 01:17:02,490
+>> A nechaj ma ísť dopredu a
+vykonajte nasledujúce logiku.
+
+1552
+01:17:02,490 --> 01:17:15,610
+Kým n-tý znak v s robí
+nerovná spätné lomítko 0, pokračuj
+
+1553
+01:17:15,610 --> 01:17:17,930
+a zvýšiť n.
+
+1554
+01:17:17,930 --> 01:17:23,506
+A potom vytlačiť printf percenta I n.
+
+1555
+01:17:23,506 --> 01:17:29,200
+Tvrdím, že tu tento program,
+bez volania dĺžka reťazca,
+
+1556
+01:17:29,200 --> 01:17:31,150
+zistí dĺžku reťazca.
+
+1557
+01:17:31,150 --> 01:17:34,600
+>> A kúzlo je úplne
+zapuzdrené v súlade 8
+
+1558
+01:17:34,600 --> 01:17:39,830
+tu s tým, čo vyzerá ako novú syntaxou,
+toto spätné lomítko 0 do jednoduchých úvodzoviek.
+
+1559
+01:17:39,830 --> 01:17:41,360
+Ale prečo to tak je?
+
+1560
+01:17:41,360 --> 01:17:44,100
+No, zvážte, čo je to
+deje celú túto dobu.
+
+1561
+01:17:44,100 --> 01:17:47,990
+>> A ako stranou predtým, ako som zabudol, realizovať
+tiež, že okrem manuálových stránok
+
+1562
+01:17:47,990 --> 01:17:50,920
+ktoré prichádzajú s typickým
+Systém Linux ako CS50 IDE
+
+1563
+01:17:50,920 --> 01:17:53,770
+Uvedomujeme si, že my,
+štábny kurz, musia tiež
+
+1564
+01:17:53,770 --> 01:17:56,030
+robil verziu webové stránky
+z toho istého nápadu
+
+1565
+01:17:56,030 --> 01:17:59,940
+reference.cs50.net, ktorý má
+Zo všetkých týchto rovnakých manuálových stránok,
+
+1566
+01:17:59,940 --> 01:18:02,020
+to všetko rovnaké
+dokumentácie, ako aj
+
+1567
+01:18:02,020 --> 01:18:05,730
+trochu box v hornej časti, ktorý umožňuje
+previesť všetky spravodlivo
+
+1568
+01:18:05,730 --> 01:18:09,025
+tajomný jazyk do menej pohodlné
+mód, kde sme sa pedagogickí pracovníci,
+
+1569
+01:18:09,025 --> 01:18:12,150
+prešli a snažil zjednodušiť
+niektoré z jazyka, aby veci
+
+1570
+01:18:12,150 --> 01:18:14,830
+zameraná na nápady, a nie
+niektoré z technických.
+
+1571
+01:18:14,830 --> 01:18:20,070
+Takže majte na pamäti, reference.cs50.net
+ako ďalší zdroj aj.
+
+1572
+01:18:20,070 --> 01:18:23,800
+>> Ale prečo sa dĺžka reťazca prácu
+ako som navrhoval pred chvíľou?
+
+1573
+01:18:23,800 --> 01:18:25,160
+Tu je opäť meno Zamyla je.
+
+1574
+01:18:25,160 --> 01:18:27,690
+A tu je Zamyla meno
+boxoval dovnútra, ako som pokračovať v tom,
+
+1575
+01:18:27,690 --> 01:18:31,360
+maľovať obraz by bolo,
+Naozaj, len postupnosť znakov.
+
+1576
+01:18:31,360 --> 01:18:34,260
+Ale Zamyla neexistuje
+v izolácii v programe.
+
+1577
+01:18:34,260 --> 01:18:37,420
+>> Keď píšete a spustiť program,
+používate počítač Mac alebo PC
+
+1578
+01:18:37,420 --> 01:18:40,010
+ako pamäť RAM, alebo tak povediac.
+
+1579
+01:18:40,010 --> 01:18:42,620
+A môžete myslieť
+počítač ako majúce
+
+1580
+01:18:42,620 --> 01:18:44,730
+kopa GB pamäte v týchto dňoch.
+
+1581
+01:18:44,730 --> 01:18:47,700
+A koncert znamená miliardy,
+takže miliardy bajtov.
+
+1582
+01:18:47,700 --> 01:18:48,910
+>> Ale poďme vzad v čase.
+
+1583
+01:18:48,910 --> 01:18:51,530
+A predpokladám, že používame
+naozaj starý počítač, ktorý
+
+1584
+01:18:51,530 --> 01:18:55,150
+Má iba 32 bajtov pamäte.
+
+1585
+01:18:55,150 --> 01:18:59,310
+Mohol by som, na mojej obrazovke počítača,
+jednoducho kresliť na to takto.
+
+1586
+01:18:59,310 --> 01:19:05,240
+>> Mohol som jednoducho povedať, že my
+Počítač má všetky tieto pamäte.
+
+1587
+01:19:05,240 --> 01:19:08,830
+A to je ako tyč pamäti, ak
+Spomínate si náš snímka z poslednej doby.
+
+1588
+01:19:08,830 --> 01:19:11,670
+A keby som len rozdeliť
+To už toľkokrát,
+
+1589
+01:19:11,670 --> 01:19:15,040
+Tvrdím, že mám 32 bajtov
+pamäte na obrazovke.
+
+1590
+01:19:15,040 --> 01:19:18,239
+>> Teraz, v skutočnosti, môžem len
+čerpať doposiaľ na tejto obrazovke tu.
+
+1591
+01:19:18,239 --> 01:19:20,280
+Takže budem pokračovať,
+a len konvencií,
+
+1592
+01:19:20,280 --> 01:19:24,050
+kresliť pamäti môjho počítača ako
+mriežky, a to nielen ako jedna priamka.
+
+1593
+01:19:24,050 --> 01:19:28,190
+Konkrétne Tvrdím teraz, že
+Tento rošt, tento 8 o 4 mriežka,
+
+1594
+01:19:28,190 --> 01:19:31,800
+Len zastupuje všetkých 32 bajtov
+dostupnej pamäte v počítači Mac,
+
+1595
+01:19:31,800 --> 01:19:33,030
+alebo k dispozícii v mojom PC.
+
+1596
+01:19:33,030 --> 01:19:34,780
+A oni baliace
+na dva riadky, len
+
+1597
+01:19:34,780 --> 01:19:38,030
+preto sa hodí viac na obrazovke.
+
+1598
+01:19:38,030 --> 01:19:40,800
+Ale toto je prvý byte.
+
+1599
+01:19:40,800 --> 01:19:41,990
+Ide o druhý byte.
+
+1600
+01:19:41,990 --> 01:19:43,300
+Ide o tretí bajt.
+
+1601
+01:19:43,300 --> 01:19:45,310
+>> A to je 32. byte.
+
+1602
+01:19:45,310 --> 01:19:52,910
+Alebo, ak si myslíme, že ako počítač
+vedec, to je bajt 0, 1, 2, 3, 31.
+
+1603
+01:19:52,910 --> 01:19:55,950
+Takže máte 0 až 31, ak
+začnete počítať pri 0 ° C.
+
+1604
+01:19:55,950 --> 01:19:59,830
+>> Takže ak budeme používať program
+že hovory dostať reťazec,
+
+1605
+01:19:59,830 --> 01:20:05,280
+a dostaneme reťazec z ľudského
+ako som volal Zamyla, Z-A-M-Y-L-A,
+
+1606
+01:20:05,280 --> 01:20:09,430
+how v oblasti svet robí
+Počítač sledovať, ktoré byte,
+
+1607
+01:20:09,430 --> 01:20:12,230
+ktorý kus pamäti,
+Patrí ku ktorému reťazec?
+
+1608
+01:20:12,230 --> 01:20:16,270
+Inými slovami, ak budeme pokračovať
+zadajte iný názov do počítača,
+
+1609
+01:20:16,270 --> 01:20:19,890
+takhle Andi, volanie
+dostať reťazec druhýkrát,
+
+1610
+01:20:19,890 --> 01:20:23,030
+A-N-D-I má skončiť v
+Pamäť počítača rovnako.
+
+1611
+01:20:23,030 --> 01:20:23,850
+Ale ako?
+
+1612
+01:20:23,850 --> 01:20:29,700
+>> No, to ukáže, že Naspodku
+kapucňa, čo robí C pri ukladaní reťazcov
+
+1613
+01:20:29,700 --> 01:20:35,080
+že ľudská typov v, alebo tým, že
+pochádzajú z nejakého iného zdroja, to je
+
+1614
+01:20:35,080 --> 01:20:39,190
+vymedzuje koniec nich
+špeciálna character-- spätné lomítko
+
+1615
+01:20:39,190 --> 01:20:44,750
+0, čo je len špeciálny spôsob,
+hovoriť 80 bitov v rade.
+
+1616
+01:20:44,750 --> 01:20:47,950
+>> Takže je-- to je číslo 97 recall.
+
+1617
+01:20:47,950 --> 01:20:51,770
+Takže niektoré vzor 8 bitov
+predstavuje desiatkové číslo 97.
+
+1618
+01:20:51,770 --> 01:20:58,070
+Toto spätné lomítko 0 je doslova číslo
+0, alias núl, N-U-L, na rozdiel od predtým,
+
+1619
+01:20:58,070 --> 01:20:59,630
+N-U-L-L, ktoré sme hovorili.
+
+1620
+01:20:59,630 --> 01:21:05,700
+Ale teraz, len viem, že toto
+lomítko 0 je len 80 bitov v rade.
+
+1621
+01:21:05,700 --> 01:21:09,810
+>> A je to práve táto linka v
+piesok, ktorý hovorí niečo na ľavej strane
+
+1622
+01:21:09,810 --> 01:21:12,610
+patrí do jedného reťazca, alebo jeden typ dát.
+
+1623
+01:21:12,610 --> 01:21:15,480
+A čokoľvek doprava
+Patrí k niečomu inému.
+
+1624
+01:21:15,480 --> 01:21:17,440
+Andi meno je medzitým
+ktorá sa práve vizuálne
+
+1625
+01:21:17,440 --> 01:21:21,310
+sa stane zábal na druhej linke,
+ale to je len estetický detail,
+
+1626
+01:21:21,310 --> 01:21:23,990
+Podobne je NUL ukončený.
+
+1627
+01:21:23,990 --> 01:21:29,290
+>> Je to reťazec niekoľkých postáv A-N-D-I,
+navyše pätina tajný charakter,
+
+1628
+01:21:29,290 --> 01:21:33,560
+všetky 0 bitov, ktorý práve vymedzuje
+koniec názvu andi tiež.
+
+1629
+01:21:33,560 --> 01:21:37,120
+A ak hovoríme dostať String tretíkrát
+v počítači, aby sa reťazec v tvare
+
+1630
+01:21:37,120 --> 01:21:44,210
+Mária, M-A-R-I-A, podobne ako je to Mária
+Názov núl bola ukončená s lomkou 0.
+
+1631
+01:21:44,210 --> 01:21:47,170
+>> To je zásadne odlišný
+z toho, ako počítač by typicky
+
+1632
+01:21:47,170 --> 01:21:51,850
+ukladať celé číslo, alebo float, alebo iný
+dátové typy stále, pretože odvolanie,
+
+1633
+01:21:51,850 --> 01:21:57,420
+celé číslo je zvyčajne 32 bitov, alebo
+4 bajty, alebo dokonca 64 bitov,
+
+1634
+01:21:57,420 --> 01:21:59,100
+alebo osem bajtov.
+
+1635
+01:21:59,100 --> 01:22:02,620
+Ale mnoho primitív v počítači
+v programovacom jazyku
+
+1636
+01:22:02,620 --> 01:22:05,550
+majú pevný počet
+bytov pod hood--
+
+1637
+01:22:05,550 --> 01:22:08,100
+Možno jeden, možno dva, možno štyri, možno 8.
+
+1638
+01:22:08,100 --> 01:22:13,250
+>> Ale reťazca podľa návrhu, majú
+Dynamická počet znakov.
+
+1639
+01:22:13,250 --> 01:22:16,980
+Vy neviete dopredu, kým
+ľudské druhy uvedené v Z-A-M-Y-L-A,
+
+1640
+01:22:16,980 --> 01:22:21,400
+alebo M-A-R-I-A, alebo A-N-D-I. ty nevieš
+koľkokrát sa používateľ chystá zasiahnuť
+
+1641
+01:22:21,400 --> 01:22:22,070
+klávesnice.
+
+1642
+01:22:22,070 --> 01:22:26,490
+Preto neviete, ako
+mnoho znakov vopred
+
+1643
+01:22:26,490 --> 01:22:27,540
+budete potrebovať.
+
+1644
+01:22:27,540 --> 01:22:31,840
+>> A tak C tak nejako necháva sa ako
+tajný strúhanka pod kapotou
+
+1645
+01:22:31,840 --> 01:22:32,960
+na konci reťazca.
+
+1646
+01:22:32,960 --> 01:22:39,280
+Po uložení Z-A-M-Y-L-A v pamäti,
+to tiež len stavia ekvivalent
+
+1647
+01:22:39,280 --> 01:22:40,210
+z obdobia.
+
+1648
+01:22:40,210 --> 01:22:45,060
+Na konci vety,
+kladie 80 bitov, aby sa tak
+
+1649
+01:22:45,060 --> 01:22:49,120
+si spomenúť, kde
+Zamyla začína a končí.
+
+1650
+01:22:49,120 --> 01:22:51,490
+>> Takže to, čo je spojenie,
+Potom, na tento program?
+
+1651
+01:22:51,490 --> 01:22:55,190
+Tento program tu, Stirling,
+je jednoducho mechanizmus
+
+1652
+01:22:55,190 --> 01:22:57,970
+pre získanie reťazec
+od užívateľa, linka 6.
+
+1653
+01:22:57,970 --> 01:23:01,160
+Linka 7, I deklarované premennú
+s názvom n a nastaviť ju na hodnotu 0 ° C.
+
+1654
+01:23:01,160 --> 01:23:08,680
+>> A potom v súlade 8, som jednoducho požiadala
+Otázkou, zatiaľ čo n-té charakteru robí
+
+1655
+01:23:08,680 --> 01:23:12,120
+nerovná všetky 0 bits--
+inými slovami, nie je
+
+1656
+01:23:12,120 --> 01:23:14,500
+rovný tento osobitný
+znak, lomítko 0, čo
+
+1657
+01:23:14,500 --> 01:23:18,470
+bol len zvláštne, že núl character--
+ísť dopredu a len zvýšiť n.
+
+1658
+01:23:18,470 --> 01:23:21,460
+>> A aby robil to, a udržať
+to robí, a aby robil to.
+
+1659
+01:23:21,460 --> 01:23:23,430
+A tak, aj keď v
+minulosť sme použili aj,
+
+1660
+01:23:23,430 --> 01:23:25,181
+je to úplne v poriadku
+sémanticky použitia n,
+
+1661
+01:23:25,181 --> 01:23:27,430
+ak ste len snaží
+počítať tentoraz úmyselne,
+
+1662
+01:23:27,430 --> 01:23:28,720
+a chcem, aby to nazvať n.
+
+1663
+01:23:28,720 --> 01:23:34,720
+Tak to jednoducho stále pýtať na otázku,
+je n-tý charakter to všetko 0s?
+
+1664
+01:23:34,720 --> 01:23:38,470
+Ak nie, pozrite sa na ďalšie vzhľad,
+pozerať sa na ďalšie, pozrite sa na ďalšie,
+
+1665
+01:23:38,470 --> 01:23:39,460
+pozerať sa na ďalšie.
+
+1666
+01:23:39,460 --> 01:23:45,540
+>> Ale akonáhle vidíte spätné lomítko 0,
+Tento loop-- linka 9 až 11-- zastaví.
+
+1667
+01:23:45,540 --> 01:23:49,640
+Vy vymaniť sa z cyklu while,
+opustenie vnútri tejto premennej n
+
+1668
+01:23:49,640 --> 01:23:54,530
+celkový počet všetkých
+znaky v reťazci ste videli,
+
+1669
+01:23:54,530 --> 01:23:55,660
+čím tlače to.
+
+1670
+01:23:55,660 --> 01:23:56,760
+Tak skúsme to.
+
+1671
+01:23:56,760 --> 01:23:59,500
+>> Nechaj ma ísť dopredu, a bez toho,
+pomocou funkcie Stirling,
+
+1672
+01:23:59,500 --> 01:24:04,240
+ale len pomocou svojej vlastnej homegrown verziu
+Tu volal Stirling, nechaj ma ísť napred
+
+1673
+01:24:04,240 --> 01:24:07,700
+a beh Stirling, typ v niečom
+ako Zamyla, ktoré som vedeli vopred,
+
+1674
+01:24:07,700 --> 01:24:08,670
+je šesť znakov.
+
+1675
+01:24:08,670 --> 01:24:10,080
+Uvidíme, či to funguje.
+
+1676
+01:24:10,080 --> 01:24:10,920
+V skutočnosti je to šesť.
+
+1677
+01:24:10,920 --> 01:24:15,257
+Skúsme s Robom, tri znaky,
+tri znaky tiež, a tak ďalej.
+
+1678
+01:24:15,257 --> 01:24:17,340
+Tak to je všetko, čo sa deje
+Na pod kapotou.
+
+1679
+01:24:17,340 --> 01:24:19,548
+A všimnite si pripojenie,
+Potom sa počas prvého týždňa
+
+1680
+01:24:19,548 --> 01:24:22,370
+triedy, kde sme hovorili o
+niečo ako abstrakcie,
+
+1681
+01:24:22,370 --> 01:24:26,960
+čo je práve toto vrstvenie nápadov, alebo
+zložitosť, na hornej strane základných princípov.
+
+1682
+01:24:26,960 --> 01:24:30,710
+Tu sme tak nejako hľadá
+Pod kapotou Stirling,
+
+1683
+01:24:30,710 --> 01:24:33,510
+tak povediac, aby zistili,
+ako by malo byť realizovaný?
+
+1684
+01:24:33,510 --> 01:24:35,232
+>> A mohli by sme opätovne zaviesť ju sami.
+
+1685
+01:24:35,232 --> 01:24:37,440
+Ale my sme nikdy ísť
+re-implementovať Stirling.
+
+1686
+01:24:37,440 --> 01:24:39,780
+Sme len tak
+použitie Stirling, aby
+
+1687
+01:24:39,780 --> 01:24:42,100
+aby skutočne získať nejaké reťazcov dĺžku.
+
+1688
+01:24:42,100 --> 01:24:44,200
+>> Ale nie je mágia
+pod kapotou.
+
+1689
+01:24:44,200 --> 01:24:46,716
+Ak viete, že pod ním
+digestor, reťazec
+
+1690
+01:24:46,716 --> 01:24:48,090
+je len postupnosť znakov.
+
+1691
+01:24:48,090 --> 01:24:51,090
+A že postupnosť znakov
+všetko možno riešiť numericky
+
+1692
+01:24:51,090 --> 01:24:53,330
+s držiakom 0, držiak
+1, držiak 2, a vy
+
+1693
+01:24:53,330 --> 01:24:57,420
+vedia, že na konci reťazca je
+špeciálny znak, môžete zistiť,
+
+1694
+01:24:57,420 --> 01:25:01,710
+ako to urobiť takmer všetko v režime A
+Program, pretože všetko, čo sa scvrkáva na
+
+1695
+01:25:01,710 --> 01:25:03,400
+je čítanie a písanie pamäte.
+
+1696
+01:25:03,400 --> 01:25:06,130
+To znamená, že meniace sa a pri pohľade
+na pamäti, alebo presúvaním
+
+1697
+01:25:06,130 --> 01:25:10,940
+okolo v pamäti, tlačiarenské veci
+Na obrazovke, a tak ďalej.
+
+1698
+01:25:10,940 --> 01:25:14,800
+>> Takže poďme teraz používať túto novo nájdenú
+pochopenie toho, čo vlastne struny
+
+1699
+01:25:14,800 --> 01:25:17,910
+sú pod kapotou, a
+zlúpnite jednu ďalšiu vrstvu
+
+1700
+01:25:17,910 --> 01:25:20,080
+že až do teraz máme
+ignoruje úplne.
+
+1701
+01:25:20,080 --> 01:25:22,650
+Najmä, kedykoľvek
+Vytvorili sme program,
+
+1702
+01:25:22,650 --> 01:25:25,930
+sme mali tento riadok kódu
+v hornej deklarovať hlavnej.
+
+1703
+01:25:25,930 --> 01:25:27,810
+A my sme sa uvádza int main neplatné.
+
+1704
+01:25:27,810 --> 01:25:31,240
+>> A to void v zátvorkách
+Má to hovoril celý čas, že hlavné
+
+1705
+01:25:31,240 --> 01:25:33,440
+Samotná neberie žiadne argumenty.
+
+1706
+01:25:33,440 --> 01:25:36,210
+Akýkoľvek vstup, ktorý je hlavným
+dostane od užívateľa
+
+1707
+01:25:36,210 --> 01:25:39,020
+musia pochádzať z iného
+Mechanizmus, ako get int,
+
+1708
+01:25:39,020 --> 01:25:42,040
+alebo si plavák, alebo získať reťazec,
+alebo iné funkcie.
+
+1709
+01:25:42,040 --> 01:25:44,710
+Ale ukazuje sa, že
+keď píšete program,
+
+1710
+01:25:44,710 --> 01:25:47,690
+môžete skutočne špecifikovať
+že uvedený program
+
+1711
+01:25:47,690 --> 01:25:51,730
+prijímať vstupy od človeka
+na príkazovom riadku sám.
+
+1712
+01:25:51,730 --> 01:25:56,310
+>> Inými slovami, aj keď doteraz
+majú bol spustený len ./hello ahoj
+
+1713
+01:25:56,310 --> 01:26:00,312
+alebo podobné programy, všetci
+ďalšie programy, ktoré sme používali,
+
+1714
+01:26:00,312 --> 01:26:02,770
+že my sami nepísal,
+majú užíval, ako sa zdá,
+
+1715
+01:26:02,770 --> 01:26:05,210
+príkazového riadku arguments--
+veci, ako je make.
+
+1716
+01:26:05,210 --> 01:26:07,450
+Hovoríte, že niečo ako značku,
+a potom druhé slovo.
+
+1717
+01:26:07,450 --> 01:26:10,950
+Alebo zvonenie, hovoríte zvoniť, a potom
+druhý slovo, názov súboru.
+
+1718
+01:26:10,950 --> 01:26:14,410
+>> Alebo dokonca RM alebo CP, ako by ste si mohli
+videli alebo využívať už
+
+1719
+01:26:14,410 --> 01:26:15,880
+odstrániť alebo kopírovať súbory.
+
+1720
+01:26:15,880 --> 01:26:18,920
+Všetky z nich sa tzv
+príkazového riadku arguments--
+
+1721
+01:26:18,920 --> 01:26:21,130
+ďalšie slová na termináli riadku.
+
+1722
+01:26:21,130 --> 01:26:23,260
+Ale až do teraz, máme
+sami sme nemali
+
+1723
+01:26:23,260 --> 01:26:27,080
+Tento luxus mať vstup z
+Užívateľ keď on alebo ona vlastne beží
+
+1724
+01:26:27,080 --> 01:26:29,120
+samotný program na príkazovom riadku.
+
+1725
+01:26:29,120 --> 01:26:33,710
+>> Ale môžeme to urobiť znova deklarovať
+Hlavné dopredu, nie ako majúci
+
+1726
+01:26:33,710 --> 01:26:36,750
+stratu v zátvorkách
+ale tieto dva argumenty
+
+1727
+01:26:36,750 --> 01:26:40,600
+instead-- prvé celé číslo,
+a druhý niečo
+
+1728
+01:26:40,600 --> 01:26:44,170
+Nový, niečo, čo budeme nazývať
+poľa, niečo podobné v duchu
+
+1729
+01:26:44,170 --> 01:26:49,220
+s tým, čo sme videli v Scratch ako zoznam, ale
+Pole reťazcov, ako budeme čoskoro vidieť.
+
+1730
+01:26:49,220 --> 01:26:51,790
+Ale pozrime sa tým,
+Ako príklad, než my
+
+1731
+01:26:51,790 --> 01:26:53,690
+rozlíšiť presne to, čo to znamená.
+
+1732
+01:26:53,690 --> 01:26:56,520
+>> Takže keď idem do CS50 IDE
+Odtiaľ som išiel napred
+
+1733
+01:26:56,520 --> 01:27:01,840
+a deklarované v súbore nazvanom
+argv0.c nasledujúce šablóny.
+
+1734
+01:27:01,840 --> 01:27:04,120
+A všimnite si jedinú vec,
+to je niečo iné tak ďaleko
+
+1735
+01:27:04,120 --> 01:27:08,570
+je, že som sa zmenil void int
+argc reťazec argv otvorený držiak, v blízkom okolí
+
+1736
+01:27:08,570 --> 01:27:09,070
+držiak.
+
+1737
+01:27:09,070 --> 01:27:11,730
+A všimnite si pre túto chvíľu, je tu
+nič vnútri týchto držiakov.
+
+1738
+01:27:11,730 --> 01:27:12,620
+>> Neexistuje žiadne číslo.
+
+1739
+01:27:12,620 --> 01:27:15,070
+A nie je aj, alebo
+n, alebo akékoľvek iné písmeno.
+
+1740
+01:27:15,070 --> 01:27:17,010
+Ja som len pomocou
+hranaté zátvorky teraz,
+
+1741
+01:27:17,010 --> 01:27:19,510
+z dôvodov, my prídeme
+späť za chvíľu.
+
+1742
+01:27:19,510 --> 01:27:21,330
+>> A teraz, čo budem robiť, je to.
+
+1743
+01:27:21,330 --> 01:27:26,680
+Ak argc rovná rovná 2--
+a pripomínajú, že sa rovná rovná
+
+1744
+01:27:26,680 --> 01:27:30,040
+je operátor rovnosti nákupný
+ľavý a pravý pre rovnosť.
+
+1745
+01:27:30,040 --> 01:27:31,790
+Nie je to úloha
+Operátor, ktorý je
+
+1746
+01:27:31,790 --> 01:27:36,510
+jeden znamienko rovnosti, čo znamená, že kópia
+sprava doľava nejakú hodnotu.
+
+1747
+01:27:36,510 --> 01:27:42,840
+>> Ak argc rovná sa rovná 2, chcem
+povedzme, printf, ahoj, percentá, nová linka,
+
+1748
+01:27:42,840 --> 01:27:47,340
+a potom pripojte in-- a tu je nová
+trick-- argv držiak jeden z dôvodov,
+
+1749
+01:27:47,340 --> 01:27:48,840
+že vrátime za chvíľu.
+
+1750
+01:27:48,840 --> 01:27:52,110
+Else if argc nie je
+rovná 2, vieš čo?
+
+1751
+01:27:52,110 --> 01:27:57,400
+Povedzme jednoducho ísť dopredu a ako obvykle, tlač
+out hello world bez substitúcie.
+
+1752
+01:27:57,400 --> 01:28:02,710
+>> Takže sa zdá, že ak argc, ktorý
+znamená počet argumentov, sa rovná 2,
+
+1753
+01:28:02,710 --> 01:28:04,740
+Chystám sa vytlačiť
+Dobrý deň niečo alebo iný.
+
+1754
+01:28:04,740 --> 01:28:07,560
+V opačnom prípade, v predvolenom nastavení, som
+do tlače ahoj svet.
+
+1755
+01:28:07,560 --> 01:28:08,770
+Čo to teda znamená?
+
+1756
+01:28:08,770 --> 01:28:15,550
+>> No, nechaj ma ísť dopredu a uložiť
+tento súbor, a potom to robiť argv0,
+
+1757
+01:28:15,550 --> 01:28:18,940
+a potom ./argv0, Enter.
+
+1758
+01:28:18,940 --> 01:28:20,300
+A to hovorí hello world.
+
+1759
+01:28:20,300 --> 01:28:21,260
+A teraz, prečo tomu tak je?
+
+1760
+01:28:21,260 --> 01:28:24,730
+>> Tak to dopadá, kedykoľvek budete
+spustiť program na príkazovom riadku,
+
+1761
+01:28:24,730 --> 01:28:29,570
+plníte v čo budeme
+všeobecne požadujú argument vektor.
+
+1762
+01:28:29,570 --> 01:28:33,100
+Inými slovami, automaticky
+počítače, operačný systém,
+
+1763
+01:28:33,100 --> 01:28:38,340
+sa chystá odovzdať do svojho programu
+Samotný zoznam všetky slová
+
+1764
+01:28:38,340 --> 01:28:40,850
+že ľudský zadali pri
+výzvu, v prípade, že ste
+
+1765
+01:28:40,850 --> 01:28:43,790
+programátor chcú robiť
+čo s týmito informáciami.
+
+1766
+01:28:43,790 --> 01:28:48,540
+A v tomto prípade je iba slovo
+Som napísal v riadku je ./argv0.
+
+1767
+01:28:48,540 --> 01:28:55,420
+>> A tak sa počet argumentov, ktoré je
+boli prenesené do môjho programu je len jedna.
+
+1768
+01:28:55,420 --> 01:28:58,880
+Inými slovami, tento argument
+počítať, inak známy ako argc
+
+1769
+01:28:58,880 --> 01:29:00,970
+Tu ako celé číslo, je len jedna.
+
+1770
+01:29:00,970 --> 01:29:03,000
+Jeden z nich, samozrejme, nie je rovné dvom.
+
+1771
+01:29:03,000 --> 01:29:05,980
+A tak to je to, čo tlačí, ahoj svet.
+
+1772
+01:29:05,980 --> 01:29:08,170
+>> Ale dovoľte mi, aby som to niekde.
+
+1773
+01:29:08,170 --> 01:29:09,930
+Dovoľte mi povedať, argv0.
+
+1774
+01:29:09,930 --> 01:29:12,740
+A potom, ako o Maria?
+
+1775
+01:29:12,740 --> 01:29:14,990
+A potom stlačte Enter.
+
+1776
+01:29:14,990 --> 01:29:18,020
+>> A všimnite si, čo sa deje tu magicky.
+
+1777
+01:29:18,020 --> 01:29:22,640
+Teraz, namiesto toho, Hello World, mám
+zmenilo správanie tohto programu
+
+1778
+01:29:22,640 --> 01:29:26,310
+tým, že vstup nie je z get
+reťazec alebo iné funkcie,
+
+1779
+01:29:26,310 --> 01:29:30,570
+ale z zdá sa, môj povel
+samo o sebe to, čo som pôvodne zadali.
+
+1780
+01:29:30,570 --> 01:29:35,720
+A môžem hrať túto hru znova
+zmenou na Stelios, napr.
+
+1781
+01:29:35,720 --> 01:29:38,400
+>> A teraz vidím iný názov aj naďalej.
+
+1782
+01:29:38,400 --> 01:29:40,540
+A tu, mohol by som povedať Andi.
+
+1783
+01:29:40,540 --> 01:29:42,137
+A mohol by som povedať Zamyla.
+
+1784
+01:29:42,137 --> 01:29:45,220
+A môžeme hrať túto hru po celý deň,
+Stačí pripojiť v rôznych hodnotách,
+
+1785
+01:29:45,220 --> 01:29:49,550
+tak dlho, ako som poskytnúť presne
+Dve slová na príkazovom riadku,
+
+1786
+01:29:49,550 --> 01:29:52,260
+taká, že argc, počítať môj argument je 2.
+
+1787
+01:29:52,260 --> 01:29:57,240
+>> Musím vidieť, že názov zapojený do
+printf, za tohto stavu tu?
+
+1788
+01:29:57,240 --> 01:30:00,550
+Takže sa zdá, že majú teraz
+expresívne schopnosť
+
+1789
+01:30:00,550 --> 01:30:04,410
+pricestovať vstup z iného mechanizmu,
+z takzvaného príkazového riadku,
+
+1790
+01:30:04,410 --> 01:30:07,000
+skôr než by museli čakať
+kým používateľ spustí program,
+
+1791
+01:30:07,000 --> 01:30:10,220
+a potom ho vyzve
+pomocou niečo podobné get reťazec.
+
+1792
+01:30:10,220 --> 01:30:11,230
+>> Takže čo je to?
+
+1793
+01:30:11,230 --> 01:30:15,010
+Argc, opäť je len číslo,
+počet words-- arguments--
+
+1794
+01:30:15,010 --> 01:30:18,540
+že používateľ za predpokladu, u
+prompt, pri okne terminálu,
+
+1795
+01:30:18,540 --> 01:30:20,110
+vrátane názvu programu.
+
+1796
+01:30:20,110 --> 01:30:23,340
+Takže naša ./argv0 je, v skutočnosti,
+názov programu,
+
+1797
+01:30:23,340 --> 01:30:24,520
+alebo ako som spustiť program.
+
+1798
+01:30:24,520 --> 01:30:25,810
+>> Že sa počíta ako slovo.
+
+1799
+01:30:25,810 --> 01:30:27,080
+Takže argc by byť 1.
+
+1800
+01:30:27,080 --> 01:30:29,750
+Ale keď som písať Stelios, alebo
+Andi, alebo Zamyla, alebo Maria,
+
+1801
+01:30:29,750 --> 01:30:31,660
+to znamená, že počet argument je dva.
+
+1802
+01:30:31,660 --> 01:30:33,910
+A tak teraz je tu dve slová, uplynulo v.
+
+1803
+01:30:33,910 --> 01:30:36,070
+>> A oznámenia, môžeme pokračovať v tejto logiky.
+
+1804
+01:30:36,070 --> 01:30:39,050
+Ak mám skutočne povedať,
+niečo ako Zamyla Chan,
+
+1805
+01:30:39,050 --> 01:30:42,200
+plné meno, a tým absolvovaní
+tri argumenty celkom,
+
+1806
+01:30:42,200 --> 01:30:47,410
+Teraz sa hovorí, že opäť ako predvolené,
+pretože, samozrejme, 3 sa nerovná 2.
+
+1807
+01:30:47,410 --> 01:30:54,080
+>> A tak týmto spôsobom, mám
+Prístup cez argv tento nový argument
+
+1808
+01:30:54,080 --> 01:30:56,080
+že sme mohli technicky
+zavolať, čo chceme.
+
+1809
+01:30:56,080 --> 01:30:58,940
+Ale konvencií, to je
+argv a argc, resp.
+
+1810
+01:30:58,940 --> 01:31:04,470
+Argv argument vektor, je láskavý
+o synonymum pre programovanie
+
+1811
+01:31:04,470 --> 01:31:07,140
+Funkcia v C nazýva pole.
+
+1812
+01:31:07,140 --> 01:31:14,410
+>> Pole je zoznam podobnými hodnotami
+späť k sebe, k sebe, k sebe.
+
+1813
+01:31:14,410 --> 01:31:17,810
+Inými slovami, ak je tu v
+RAM, ďalší z nich je hneď vedľa neho,
+
+1814
+01:31:17,810 --> 01:31:18,800
+a hneď vedľa neho.
+
+1815
+01:31:18,800 --> 01:31:20,101
+Nie sú to všade možne.
+
+1816
+01:31:20,101 --> 01:31:23,100
+A že druhý scenár, kde sa veci
+sú všade v pamäti,
+
+1817
+01:31:23,100 --> 01:31:25,082
+môže byť v skutočnosti silný rys.
+
+1818
+01:31:25,082 --> 01:31:28,040
+Ale vrátime sa, že keď sme
+hovoriť o milovník dátových štruktúr.
+
+1819
+01:31:28,040 --> 01:31:32,260
+Pre túto chvíľu, pole je len
+kus súvislej pamäte,
+
+1820
+01:31:32,260 --> 01:31:36,520
+ktorých jednotlivé prvky sú
+späť k sebe, dozadu, dozadu,
+
+1821
+01:31:36,520 --> 01:31:38,050
+a všeobecne rovnakého typu.
+
+1822
+01:31:38,050 --> 01:31:42,630
+>> Takže ak sa nad tým zamyslíte, od A
+Pred okamihom, čo je reťazec?
+
+1823
+01:31:42,630 --> 01:31:50,460
+No, reťazec, ako Zamyla,
+Z-A-M-Y-L-A, je technicky
+
+1824
+01:31:50,460 --> 01:31:51,400
+Len poľa.
+
+1825
+01:31:51,400 --> 01:31:53,700
+Je to rad znakov.
+
+1826
+01:31:53,700 --> 01:31:59,250
+>> A tak ak naozaj kresliť to, ako som
+urobil skôr, ako kus pamäti,
+
+1827
+01:31:59,250 --> 01:32:04,510
+Ukazuje sa, že každý z nich
+znaky zaberá byte.
+
+1828
+01:32:04,510 --> 01:32:07,630
+A potom je tu ten zvláštny
+Sentinel charakter, spätné lomítko 0,
+
+1829
+01:32:07,630 --> 01:32:12,360
+alebo všetkých osem bitov 0, ktoré
+vymedzuje koniec tohto reťazca.
+
+1830
+01:32:12,360 --> 01:32:15,090
+Takže reťazec, to dopadá
+out, citovať koniec citátu reťazec,
+
+1831
+01:32:15,090 --> 01:32:20,580
+je len rad chara--
+char bytia aktuálny dátový typ.
+
+1832
+01:32:20,580 --> 01:32:24,560
+>> A teraz argv, meanwhile--
+Vráťme sa do programu.
+
+1833
+01:32:24,560 --> 01:32:29,582
+Argv, aj keď vidíme slovo
+Reťazec tu, nie je samo o sebe reťazec.
+
+1834
+01:32:29,582 --> 01:32:33,640
+Argv argument vektor,
+je pole reťazcov.
+
+1835
+01:32:33,640 --> 01:32:37,620
+>> Takže rovnako ako môžete mať celý rad
+znaky, môžete mať vyššiu úroveň,
+
+1836
+01:32:37,620 --> 01:32:46,279
+rad strings-- tak, napríklad,
+Keď som napísal pred chvíľou ./argv0
+
+1837
+01:32:46,279 --> 01:33:00,150
+argv0, priestor Z-A-M-Y-L-A, I tvrdil, že
+argv mal dva reťazce v to-- ./argv0,
+
+1838
+01:33:00,150 --> 01:33:03,185
+a Z-A-M-Y-L-A. v
+Inými slovami, argc bolo 2.
+
+1839
+01:33:03,185 --> 01:33:03,980
+Prečo to tak je?
+
+1840
+01:33:03,980 --> 01:33:08,370
+>> No, efektívne, čo sa deje
+na je, že každý z týchto reťazcov
+
+1841
+01:33:08,370 --> 01:33:13,990
+je samozrejme rad znakov
+Rovnako ako predtým, ktorých jednotlivé znaky
+
+1842
+01:33:13,990 --> 01:33:15,670
+zaberá jeden bajt.
+
+1843
+01:33:15,670 --> 01:33:19,720
+A nepleťte skutočný 0
+v názve programu s 0,
+
+1844
+01:33:19,720 --> 01:33:22,040
+čo znamená, že všetkých 80 bitov.
+
+1845
+01:33:22,040 --> 01:33:27,140
+A Zamyla, zatiaľ, je stále
+tiež rad znakov.
+
+1846
+01:33:27,140 --> 01:33:31,450
+>> Takže na konci dňa, je to naozaj
+vyzerá to pod kapotou.
+
+1847
+01:33:31,450 --> 01:33:38,800
+Ale argv, od prírody, ako hlavný
+práce, mi umožňuje zabaliť to všetko
+
+1848
+01:33:38,800 --> 01:33:44,810
+až do, ak chcete, väčšie pole
+že, ak sa o niečo viac ako zjednodušiť
+
+1849
+01:33:44,810 --> 01:33:48,180
+aký obraz vyzerá a čo nie
+docela čerpať ju možno škálovať až tam,
+
+1850
+01:33:48,180 --> 01:33:56,720
+Toto pole je len o veľkosti 2, prvá
+prvok, ktorý obsahuje reťazec,
+
+1851
+01:33:56,720 --> 01:33:59,230
+druhým prvkom
+ktorý obsahuje reťazec.
+
+1852
+01:33:59,230 --> 01:34:01,687
+A, podľa poradia, ak ste
+druh priblížiť na každom
+
+1853
+01:34:01,687 --> 01:34:03,770
+z týchto reťazcov, čo si
+pozri pod kapotou
+
+1854
+01:34:03,770 --> 01:34:07,190
+je, že každý reťazec je len
+rad znakov.
+
+1855
+01:34:07,190 --> 01:34:11,680
+>> Teraz, rovnako ako s reťazcami,
+sme boli schopní získať prístup
+
+1856
+01:34:11,680 --> 01:34:15,260
+charakteru i-teho v reťazci
+pomocou tohto hranatú zátvorku notácie.
+
+1857
+01:34:15,260 --> 01:34:17,320
+Podobne, s poľami
+všeobecne môžeme
+
+1858
+01:34:17,320 --> 01:34:22,700
+použiť hranatú zátvorku notáciu dostať
+na ľubovoľný počet reťazcov v poli?
+
+1859
+01:34:22,700 --> 01:34:25,100
+Napríklad, dovoľte mi, aby som
+choďte do toho a to dosiahnuť.
+
+1860
+01:34:25,100 --> 01:34:32,420
+>> Nechaj ma ísť dopredu a vytvoriť argv1.c,
+čo je trochu iný tentoraz.
+
+1861
+01:34:32,420 --> 01:34:35,635
+Namiesto toho, aby sa kontrola argc2,
+Chystám sa namiesto toho dosiahnuť.
+
+1862
+01:34:35,635 --> 01:34:41,270
+Pre int získam 0, I je menej
+než argc, ja navyše plus,
+
+1863
+01:34:41,270 --> 01:34:47,920
+a potom vytlačiť vnútri toho,
+percent s, nový riadok, a potom
+
+1864
+01:34:47,920 --> 01:34:50,740
+argv držiak i.
+
+1865
+01:34:50,740 --> 01:34:55,220
+>> Takže inými slovami, ja nezaoberáme
+Jednotlivé znaky v okamihu.
+
+1866
+01:34:55,220 --> 01:35:00,190
+Argv, ako vyplýva z týchto prázdnom námestí
+traky na pravej strane názvu argv,
+
+1867
+01:35:00,190 --> 01:35:03,320
+znamená, že argv je pole reťazcov.
+
+1868
+01:35:03,320 --> 01:35:04,870
+A argc je len int.
+
+1869
+01:35:04,870 --> 01:35:08,800
+>> Táto linka tu, 6, je
+povediac set i rovná 0.
+
+1870
+01:35:08,800 --> 01:35:11,980
+Počítať celú cestu až do,
+ale nie vrátane, argc.
+
+1871
+01:35:11,980 --> 01:35:14,010
+A potom sa na každom opakovaní,
+vytlačiť reťazec.
+
+1872
+01:35:14,010 --> 01:35:14,800
+Čo string?
+
+1873
+01:35:14,800 --> 01:35:17,270
+>> I-tý reťazec v argv.
+
+1874
+01:35:17,270 --> 01:35:19,530
+Takže zatiaľ čo pred rokom som bol
+pomocou hranatú zátvorku
+
+1875
+01:35:19,530 --> 01:35:22,180
+notácie, aby sa dostali i-teho
+znak v reťazci, teraz
+
+1876
+01:35:22,180 --> 01:35:27,240
+Ja používam notáciu hranatú zátvorku
+sa dostať na i-tej reťazec v poli.
+
+1877
+01:35:27,240 --> 01:35:30,310
+Takže je to trochu z jednej vrstvy
+vyššie, koncepčne.
+
+1878
+01:35:30,310 --> 01:35:35,390
+>> A tak to, čo je pekné o tom
+Program teraz, keď som kompilovať argv1,
+
+1879
+01:35:35,390 --> 01:35:42,067
+a potom robiť ./argv1 a zadajte
+v niečo ako foo bar Baz,
+
+1880
+01:35:42,067 --> 01:35:45,400
+čo sú tri predvolené slová, ktoré o
+počítačový vedec siahne kedykoľvek
+
+1881
+01:35:45,400 --> 01:35:51,010
+on alebo ona potrebuje nejaké zástupné slovo,
+a stlačte klávesu Enter, každý z týchto slov,
+
+1882
+01:35:51,010 --> 01:35:54,980
+vrátane menom programu, ktorý
+je v argv na prvom mieste,
+
+1883
+01:35:54,980 --> 01:35:58,320
+skončí tlačený jeden po druhom.
+
+1884
+01:35:58,320 --> 01:36:05,290
+A ak je to zmeniť, a ja hovorím
+niečo ako argv1 Zamyla Chan,
+
+1885
+01:36:05,290 --> 01:36:08,800
+dostaneme všetky tri z tých,
+Slová, čo je argv0,
+
+1886
+01:36:08,800 --> 01:36:14,400
+argv1, argv2, pretože v tomto
+Prípad argc, gróf, je 3.
+
+1887
+01:36:14,400 --> 01:36:20,020
+>> Ale čo je pekné je, ak ste pochopili
+že argv je len pole reťazcov,
+
+1888
+01:36:20,020 --> 01:36:24,910
+a chápete, že reťazec
+je rad znakov,
+
+1889
+01:36:24,910 --> 01:36:29,470
+môžeme skutočne trochu použiť
+hranatú zátvorku notácie viackrát
+
+1890
+01:36:29,470 --> 01:36:33,320
+zvoliť reťazec, a potom vyberte
+znak vnútri reťazca,
+
+1891
+01:36:33,320 --> 01:36:35,730
+potápanie v hlbšej takto.
+
+1892
+01:36:35,730 --> 01:36:40,100
+V tomto príklade, nechaj ma ísť
+vpred a volať túto argv2.c.
+
+1893
+01:36:40,100 --> 01:36:43,920
+
+1894
+01:36:43,920 --> 01:36:50,180
+A v tomto prípade, nechaj ma ísť napred
+a robiť following-- za int i získať 0,
+
+1895
+01:36:50,180 --> 01:36:53,286
+i je menšia ako argc, ja navyše
+plus, rovnako ako predtým.
+
+1896
+01:36:53,286 --> 01:36:55,910
+Takže inými words-- a teraz toto
+je stále dosť komplikovaná.
+
+1897
+01:36:55,910 --> 01:36:59,940
+Potom budem hovoriť
+iteráciu cez reťazcov v argv,
+
+1898
+01:36:59,940 --> 01:37:01,294
+ako poznámka pre seba.
+
+1899
+01:37:01,294 --> 01:37:03,960
+A potom budem mať
+vnorené pre sláčiky, ktorá vás pravdepodobne
+
+1900
+01:37:03,960 --> 01:37:06,290
+urobil, alebo zvážil
+Pritom vo Scratch, kde
+
+1901
+01:37:06,290 --> 01:37:08,600
+Chystám sa povedať, že som int--
+nebude znovu použiť aj,
+
+1902
+01:37:08,600 --> 01:37:12,590
+pretože nechcem do tieňa, alebo
+druh prepísať existujúci i.
+
+1903
+01:37:12,590 --> 01:37:15,780
+>> Idem miesto, povedzme j, pretože
+to je môj Choď na premennú potom, čo som,
+
+1904
+01:37:15,780 --> 01:37:18,590
+keď som len snaží
+počítať jednoduché počty.
+
+1905
+01:37:18,590 --> 01:37:28,850
+Pre j dostane 0-- aj, n, bude
+ten prísny dĺžku argv držiaku i,
+
+1906
+01:37:28,850 --> 01:37:36,030
+tak dlho, kým j je menšia než m,
+j navyše plus, vykonajte nasledujúce kroky.
+
+1907
+01:37:36,030 --> 01:37:37,500
+A tu je zaujímavá časť.
+
+1908
+01:37:37,500 --> 01:37:46,330
+>> Vytlačiť znak a nový riadok,
+zapojením argv držiaku i, j konzolou.
+
+1909
+01:37:46,330 --> 01:37:47,940
+OK, tak nech mi sem nejaké pripomienky.
+
+1910
+01:37:47,940 --> 01:37:54,820
+Iteráciu cez znaky
+V súčasnej reťazci,
+
+1911
+01:37:54,820 --> 01:38:02,290
+print j-tý znak v i-tom reťazca.
+
+1912
+01:38:02,290 --> 01:38:04,630
+Takže teraz, uvažujme
+Čo znamenajú tieto pripomienky.
+
+1913
+01:38:04,630 --> 01:38:06,750
+>> Iteráciu cez struny
+v argv-- koľko
+
+1914
+01:38:06,750 --> 01:38:09,300
+Reťazce sú v argv, ktorý je pole?
+
+1915
+01:38:09,300 --> 01:38:13,420
+Argc veľa, takže som iterácie
+z i presne 0 až argc.
+
+1916
+01:38:13,420 --> 01:38:20,020
+Medzitým, koľko znakov
+sú v reťazci i-teho v argv?
+
+1917
+01:38:20,020 --> 01:38:22,880
+>> No, dostať túto odpoveď,
+Len hovorím dĺžka reťazca
+
+1918
+01:38:22,880 --> 01:38:26,810
+na ktorých mi záleží prúdu stringov
+o, čo je argv držiak i.
+
+1919
+01:38:26,810 --> 01:38:30,090
+A ja idem k dočasnému uloženiu, ktoré
+hodnota n, len na účely caching,
+
+1920
+01:38:30,090 --> 01:38:31,590
+pamätať si to pre efektivitu.
+
+1921
+01:38:31,590 --> 01:38:36,330
+A potom budem inicializovať j 0,
+pokračovať tak dlho, kým j je menšie ako n,
+
+1922
+01:38:36,330 --> 01:38:38,430
+a na každej iterácie prírastok j.
+
+1923
+01:38:38,430 --> 01:38:41,030
+>> A potom tu, na
+môj komentár na riadku 12,
+
+1924
+01:38:41,030 --> 01:38:43,390
+vytlačiť znak,
+nasleduje nový riadok,
+
+1925
+01:38:43,390 --> 01:38:48,140
+špecificky argv držiak
+aj mi dáva reťazec i-ty
+
+1926
+01:38:48,140 --> 01:38:51,690
+V argv-- takže prvé slovu,
+Druhé slovo, tretie slovo, čokoľvek.
+
+1927
+01:38:51,690 --> 01:38:57,370
+A potom j ponory v hlbšie, a dostane
+me j-tý charakter tohto slova.
+
+1928
+01:38:57,370 --> 01:39:02,200
+A tak v skutočnosti, môžete liečiť
+argv ako multi-dimenzionálnej,
+
+1929
+01:39:02,200 --> 01:39:06,050
+ako dvojrozmerné pole ,,
+pričom každý druh slovo vzhľad
+
+1930
+01:39:06,050 --> 01:39:08,580
+ako je to v vaša myseľ je
+oko, a každá postava
+
+1931
+01:39:08,580 --> 01:39:10,930
+je druh zložený
+stĺpec, v prípade, že pomôže.
+
+1932
+01:39:10,930 --> 01:39:13,260
+>> V skutočnosti, keď sme dráždiť
+Tento rozdiel v najbližších týždňoch,
+
+1933
+01:39:13,260 --> 01:39:15,580
+to bude trochu
+sofistikovanejšie než to.
+
+1934
+01:39:15,580 --> 01:39:17,800
+Ale môžete naozaj
+myslieť na to, že pre túto chvíľu,
+
+1935
+01:39:17,800 --> 01:39:22,110
+ako je to len dvojrozmerný
+poľa, pričom jedna úroveň z toho
+
+1936
+01:39:22,110 --> 01:39:23,260
+sa všetky struny.
+
+1937
+01:39:23,260 --> 01:39:26,760
+A potom, keď sa ponoriť do hlbšej vás
+môže dostať na jednotlivé znaky
+
+1938
+01:39:26,760 --> 01:39:29,600
+v ňom pomocou tejto notácie tu.
+
+1939
+01:39:29,600 --> 01:39:31,620
+>> Takže to, čo je čistý efekt?
+
+1940
+01:39:31,620 --> 01:39:34,970
+Nechaj ma ísť dopredu a
+aby argv2-- látat to.
+
+1941
+01:39:34,970 --> 01:39:36,210
+Urobil som tú chybu.
+
+1942
+01:39:36,210 --> 01:39:40,160
+Implicitne aj vyhlásením, že
+Knižnica funkčných Stirling.
+
+1943
+01:39:40,160 --> 01:39:42,190
+Takže celú tú dobu, je to
+možno to vhodné
+
+1944
+01:39:42,190 --> 01:39:45,130
+že sme nejako dokončovacie
+presne tam, kde sme začali.
+
+1945
+01:39:45,130 --> 01:39:48,160
+>> skrutkované som sa implicitne deklarovať
+Knižnica funkčných Stirling.
+
+1946
+01:39:48,160 --> 01:39:48,987
+OK, počkaj.
+
+1947
+01:39:48,987 --> 01:39:51,070
+Spomínam si, že najmä
+pretože je to tu.
+
+1948
+01:39:51,070 --> 01:39:54,490
+Musím zahrnúť do string.h
+táto verzia programu.
+
+1949
+01:39:54,490 --> 01:40:00,050
+>> Nechaj ma ísť dopredu a zahŕňajú
+string.h, okrem toho, že, pokračuj
+
+1950
+01:40:00,050 --> 01:40:04,460
+a překompilovat argv2.
+
+1951
+01:40:04,460 --> 01:40:08,390
+A teraz je to tu, aby argv2, Enter.
+
+1952
+01:40:08,390 --> 01:40:10,590
+A aj keď je to trochu
+mystické na prvý pohľad,
+
+1953
+01:40:10,590 --> 01:40:15,690
+Všimnite si, že skutočne to, čo
+je vytlačená je bodka argv2.
+
+1954
+01:40:15,690 --> 01:40:19,970
+>> Ale keď som typ niektoré slová po tom, čo
+prompt, ako argv2 Zamyla Chan,
+
+1955
+01:40:19,970 --> 01:40:22,560
+Vstúpiť, tiež trochu
+mystické na prvý pohľad.
+
+1956
+01:40:22,560 --> 01:40:30,540
+Ale ak budeme posúvať späť hore,
+./argv2 Z-A-M-Y-L-A C-H-A-N.
+
+1957
+01:40:30,540 --> 01:40:32,190
+Tak sme zopakovali nad každým slovom.
+
+1958
+01:40:32,190 --> 01:40:37,770
+A zase sme zopakovali v priebehu
+každá postava vnútri slova.
+
+1959
+01:40:37,770 --> 01:40:40,040
+>> Teraz, po tom všetkom
+Uvedomujeme si, že je tu
+
+1960
+01:40:40,040 --> 01:40:43,120
+jeden ďalší detail sme boli láskavý
+ignorovanie celú túto dobu.
+
+1961
+01:40:43,120 --> 01:40:46,180
+Práve sme sa odtrhnú, čo
+vstupy Hlavným môže byť?
+
+1962
+01:40:46,180 --> 01:40:47,780
+Čo výstup hlavného jeho?
+
+1963
+01:40:47,780 --> 01:40:50,540
+>> Všetky tej doby sme boli
+len kopírovanie a vkladanie
+
+1964
+01:40:50,540 --> 01:40:53,870
+Slovo int pred hlavné,
+keď môžete vidieť on-line,
+
+1965
+01:40:53,870 --> 01:40:58,340
+niekedy nesprávne v starších verziách
+C a prekladačov, ktoré hovoria neplatné,
+
+1966
+01:40:58,340 --> 01:40:59,410
+alebo vôbec nič.
+
+1967
+01:40:59,410 --> 01:41:01,580
+Ale naozaj, pre verzie
+C, ktoré používame,
+
+1968
+01:41:01,580 --> 01:41:06,180
+C 11, alebo 2011, si uvedomiť,
+že by malo byť int.
+
+1969
+01:41:06,180 --> 01:41:09,300
+A to by malo byť buď
+neplatné alebo argc a argv tu.
+
+1970
+01:41:09,300 --> 01:41:10,790
+>> Ale prečo int main?
+
+1971
+01:41:10,790 --> 01:41:12,480
+Čo je to vlastne vracia?
+
+1972
+01:41:12,480 --> 01:41:16,280
+No, to dopadá celý tento čas,
+kedykoľvek ste napísal Program Hlavný
+
+1973
+01:41:16,280 --> 01:41:18,440
+je vždy vracať niečo.
+
+1974
+01:41:18,440 --> 01:41:19,960
+Ale to bolo pritom tajne.
+
+1975
+01:41:19,960 --> 01:41:23,350
+>> To niečo je
+int, as línie 5 naznačuje.
+
+1976
+01:41:23,350 --> 01:41:24,225
+Ale čo int?
+
+1977
+01:41:24,225 --> 01:41:26,100
+No, tam je to
+Konvencie pri programovaní,
+
+1978
+01:41:26,100 --> 01:41:29,790
+čím by sa nič
+pokazilo a všetko je v poriadku,
+
+1979
+01:41:29,790 --> 01:41:34,250
+Programy a funkcie všeobecne
+return-- trochu counterintuitively--
+
+1980
+01:41:34,250 --> 01:41:35,230
+0.
+
+1981
+01:41:35,230 --> 01:41:38,070
+0 zvyčajne znamená, je všetko v poriadku.
+
+1982
+01:41:38,070 --> 01:41:40,610
+Takže aj keď si myslíte,
+to ako falošný v mnohých kontextoch,
+
+1983
+01:41:40,610 --> 01:41:42,930
+to vlastne všeobecne znamená dobrú vec
+
+1984
+01:41:42,930 --> 01:41:49,560
+>> Medzitým, ak sa program vráti 1,
+alebo negatívne 1, alebo 5, alebo záporné 42,
+
+1985
+01:41:49,560 --> 01:41:52,941
+alebo akékoľvek iné ako hodnota 0,
+že vo všeobecnosti označuje
+
+1986
+01:41:52,941 --> 01:41:54,190
+že sa niečo pokazilo.
+
+1987
+01:41:54,190 --> 01:41:56,700
+V skutočnosti, na vlastnom PC alebo Mac,
+ste mohli vidieť v skutočnosti
+
+1988
+01:41:56,700 --> 01:42:01,050
+chybové hlásenie, pričom ju
+niečo povie alebo iná chyba
+
+1989
+01:42:01,050 --> 01:42:04,940
+Kód záporné 42, alebo chybový kód
+23, alebo niečo také.
+
+1990
+01:42:04,940 --> 01:42:08,980
+Toto číslo je zvyčajne len náznak
+programátor, alebo spoločnosti
+
+1991
+01:42:08,980 --> 01:42:11,174
+ktorý robil softvér,
+čo sa stalo a prečo,
+
+1992
+01:42:11,174 --> 01:42:13,590
+aby si mohli prezrieť
+ich dokumentácie alebo kód,
+
+1993
+01:42:13,590 --> 01:42:15,465
+a zistiť, čo
+Chyba v skutočnosti znamená.
+
+1994
+01:42:15,465 --> 01:42:18,400
+Je to vo všeobecnosti nie je
+užitočné pre nás koncovým užívateľom.
+
+1995
+01:42:18,400 --> 01:42:20,550
+>> Ale keď hlavný vracia 0, je všetko v poriadku.
+
+1996
+01:42:20,550 --> 01:42:23,770
+A ak nezadáte
+Aké hlavné by mal vrátiť,
+
+1997
+01:42:23,770 --> 01:42:26,950
+to bude len automaticky
+return 0 pre vás.
+
+1998
+01:42:26,950 --> 01:42:30,870
+Ale vracať niečo
+inak je vlastne užitočný.
+
+1999
+01:42:30,870 --> 01:42:34,660
+>> V tomto poslednom programe, dovoľte mi, aby som
+pokračovať a volať túto exit.c,
+
+2000
+01:42:34,660 --> 01:42:38,630
+a zaviesť posledný dnešných
+tém, známy ako chybový kód.
+
+2001
+01:42:38,630 --> 01:42:42,930
+Nechaj ma ísť dopredu a patrí naša
+Známe súbory až top, robiť int main.
+
+2002
+01:42:42,930 --> 01:42:49,500
+A tentoraz, poďme robiť int argc,
+Reťazec argv, a so svojimi konzolami
+
+2003
+01:42:49,500 --> 01:42:50,836
+naznačiť, že je to v poli.
+
+2004
+01:42:50,836 --> 01:42:52,460
+A potom mi dovoľte urobiť kontrolu zdravý rozum.
+
+2005
+01:42:52,460 --> 01:42:56,640
+Tento čas, ak nie je argc
+rovná 2, potom viete, čo?
+
+2006
+01:42:56,640 --> 01:42:57,520
+Zabudni na to.
+
+2007
+01:42:57,520 --> 01:43:03,170
+Chystám sa povedať, že hej, užívateľ,
+vám chýba riadok argumentu príkazu
+
+2008
+01:43:03,170 --> 01:43:04,210
+lomítko n.
+
+2009
+01:43:04,210 --> 01:43:05,230
+>> A potom to je všetko.
+
+2010
+01:43:05,230 --> 01:43:06,130
+Chcem ukončiť.
+
+2011
+01:43:06,130 --> 01:43:11,030
+Idem preventívne,
+a predčasne naozaj, návrat
+
+2012
+01:43:11,030 --> 01:43:12,810
+niečo iné, než je číslo 1.
+
+2013
+01:43:12,810 --> 01:43:15,360
+Choď na hodnotu pre prvú
+Chyba sa môže stať je 1.
+
+2014
+01:43:15,360 --> 01:43:17,860
+Ak máte nejaký iný chybný
+Situácia, ktorá by mohla nastať,
+
+2015
+01:43:17,860 --> 01:43:21,390
+dalo by sa povedať návratnosti 2 alebo 3 vráti, alebo
+možno aj negatívne 1 alebo záporné 2.
+
+2016
+01:43:21,390 --> 01:43:23,750
+>> To sú len výstupné kódy
+ktoré sú, všeobecne,
+
+2017
+01:43:23,750 --> 01:43:27,770
+užitočné iba pre programátora, alebo
+Spoločnosť, ktorá je lodná softvér.
+
+2018
+01:43:27,770 --> 01:43:30,500
+Ale skutočnosť, že je to
+Nie je 0 je to, čo je dôležité.
+
+2019
+01:43:30,500 --> 01:43:34,310
+Takže ak v tomto programe, chcem
+zaručiť, že tento program iba
+
+2020
+01:43:34,310 --> 01:43:38,190
+funguje, ak mi poskytuje užívateľovi
+s počtom argumentov dvoch,
+
+2021
+01:43:38,190 --> 01:43:42,880
+názov programu, a niektoré ďalšie
+Slovo, môžem presadiť toľko takto,
+
+2022
+01:43:42,880 --> 01:43:46,110
+kričať na užívateľov s printf porekadlá,
+Chýba riadok argumentu príkazu,
+
+2023
+01:43:46,110 --> 01:43:46,970
+vráti 1.
+
+2024
+01:43:46,970 --> 01:43:49,940
+Ktorá sama od seba okamžite
+ukončite program.
+
+2025
+01:43:49,940 --> 01:43:55,840
+>> Iba v prípade, argc rovná 2 dostaneme dole
+Tu, na ktorom mieste budem hovoriť,
+
+2026
+01:43:55,840 --> 01:44:00,410
+Dobrý deň percent s, lomítko n, argv1.
+
+2027
+01:44:00,410 --> 01:44:03,827
+Inými slovami, ja som
+nebude po argv 0,
+
+2028
+01:44:03,827 --> 01:44:05,410
+ktorý je len názov programu.
+
+2029
+01:44:05,410 --> 01:44:09,450
+Chcem vytlačiť Dobrý deň, čiarka,
+druhé slovo, že ľudský zadali.
+
+2030
+01:44:09,450 --> 01:44:12,580
+A v tomto prípade na
+riadok 13, je všetko v poriadku.
+
+2031
+01:44:12,580 --> 01:44:15,920
+>> Viem, že je argc 2
+logicky z tohto programu.
+
+2032
+01:44:15,920 --> 01:44:17,770
+Chystám sa ísť dopredu a return 0.
+
+2033
+01:44:17,770 --> 01:44:21,230
+Ako stranou, majte na pamäti, že
+To je pravda, v Scratch rovnako.
+
+2034
+01:44:21,230 --> 01:44:24,760
+>> Logicky, mohol by som to urobiť
+a zapouzdřit tieto riadky
+
+2035
+01:44:24,760 --> 01:44:27,020
+kódu v tomto iného klauzula tu.
+
+2036
+01:44:27,020 --> 01:44:29,420
+Ale to je tak nejako
+zbytočne odsadenie môj kód.
+
+2037
+01:44:29,420 --> 01:44:31,800
+A ja chcem, aby sa Super
+zrejmé, že bez ohľadu na to,
+
+2038
+01:44:31,800 --> 01:44:34,670
+V predvolenom nastavení, ahoj
+niečo dostane vytlačené,
+
+2039
+01:44:34,670 --> 01:44:36,050
+tak dlho, kým používateľ spolupracuje.
+
+2040
+01:44:36,050 --> 01:44:39,360
+>> Takže je to veľmi časté použitie
+podmienkou, len v prípade,
+
+2041
+01:44:39,360 --> 01:44:41,870
+chytiť niektoré chybné
+Situácia, a potom skončí.
+
+2042
+01:44:41,870 --> 01:44:45,690
+A potom, ak je všetko
+no, nie mať inde,
+
+2043
+01:44:45,690 --> 01:44:48,060
+ale jednoducho kód
+vonku, že v prípade, že je to preto,
+
+2044
+01:44:48,060 --> 01:44:51,060
+ekvivalent v tomto
+Najmä prípad, logicky.
+
+2045
+01:44:51,060 --> 01:44:54,480
+Takže Vraciam 0, len preto, aby
+výslovne znamenať všetko je v poriadku.
+
+2046
+01:44:54,480 --> 01:44:58,480
+>> Keby som vynechal return 0, bolo by to
+sa automaticky predpokladať, pre mňa.
+
+2047
+01:44:58,480 --> 01:45:00,890
+Ale teraz, keď sa vraciam
+jeden z aspoň tomto prípade
+
+2048
+01:45:00,890 --> 01:45:04,940
+Idem, pre správnu mieru a
+jasnosť, vráti 0, v tomto prípade.
+
+2049
+01:45:04,940 --> 01:45:09,690
+Takže teraz nechaj ma ísť dopredu a robiť exit
+čo je perfektné segue sa len tak odísť.
+
+2050
+01:45:09,690 --> 01:45:14,401
+>> Ale aby exit a nechajte ma ísť
+a urob ./exit, Enter.
+
+2051
+01:45:14,401 --> 01:45:16,900
+A program kričal na mňa,
+Chýba argument príkazového riadku.
+
+2052
+01:45:16,900 --> 01:45:18,120
+OK, dovoľte mi spolupracovať.
+
+2053
+01:45:18,120 --> 01:45:23,810
+>> Chcem namiesto toho robiť ./exit, David, Enter.
+
+2054
+01:45:23,810 --> 01:45:25,190
+A teraz sa hovorí, ahoj David.
+
+2055
+01:45:25,190 --> 01:45:27,300
+A tie by za normálnych okolností vidieť.
+
+2056
+01:45:27,300 --> 01:45:30,650
+>> Ale ukazuje sa, že je tu
+Zvláštny spôsob, ako v Linuxe skutočne vidieť
+
+2057
+01:45:30,650 --> 01:45:34,470
+s tým, čo exit code program ukončený.
+
+2058
+01:45:34,470 --> 01:45:37,184
+Niekedy v grafickom
+svet ako Mac OS alebo Windows,
+
+2059
+01:45:37,184 --> 01:45:40,100
+uvidíte iba tieto čísla, keď
+chybové hlásenie sa objaví na obrazovke
+
+2060
+01:45:40,100 --> 01:45:41,940
+a programátor
+zobrazuje toto číslo.
+
+2061
+01:45:41,940 --> 01:45:44,773
+Ale ak chceme vidieť, čo je chyba
+Správa znamená, že môžeme robiť to here--
+
+2062
+01:45:44,773 --> 01:45:48,100
+tak ./exit, Enter, tlač
+Chýba argument príkazového riadku.
+
+2063
+01:45:48,100 --> 01:45:54,590
+>> Ak mám teraz robiť echo $?, Ktorá je
+smiešne vyzerajúce mystický.
+
+2064
+01:45:54,590 --> 01:45:56,590
+Ale $?
+
+2065
+01:45:56,590 --> 01:45:59,220
+je magické zaklínadlo
+ktorý hovorí, hej, počítač,
+
+2066
+01:45:59,220 --> 01:46:01,900
+povedz mi, čo predchádzajúca
+Kód ukončenia programu bolo.
+
+2067
+01:46:01,900 --> 01:46:03,410
+A ja stlačte Enter.
+
+2068
+01:46:03,410 --> 01:46:07,520
+Vidím 1, pretože to je to, čo som
+povedal môj hlavné funkcie vrátiť.
+
+2069
+01:46:07,520 --> 01:46:12,310
+>> Medzitým, keď to urobím ./exit Davida,
+a stlačte klávesu Enter, vidím, Ahoj Davide.
+
+2070
+01:46:12,310 --> 01:46:16,800
+A či mám teraz robiť echo $?, Vidím Dobrý deň 0.
+
+2071
+01:46:16,800 --> 01:46:19,080
+A tak to bude v skutočnosti
+byť cenné informácie
+
+2072
+01:46:19,080 --> 01:46:23,420
+V súvislosti s debugger, nie tak
+moc, že ​​vy, človek by bolo jedno.
+
+2073
+01:46:23,420 --> 01:46:26,060
+Ale debugger a ďalšie
+Programy budeme používať tento semester
+
+2074
+01:46:26,060 --> 01:46:29,420
+bude často vyzerajú v tomto čísle,
+aj keď je to niečo schované
+
+2075
+01:46:29,420 --> 01:46:32,780
+ak sa pozriete na to, aby
+určiť, či program je alebo nie je
+
+2076
+01:46:32,780 --> 01:46:37,050
+Prevedenie bolo správne alebo nesprávne.
+
+2077
+01:46:37,050 --> 01:46:40,450
+>> A tak to nás privádza k
+Tento, na konci dňa.
+
+2078
+01:46:40,450 --> 01:46:43,917
+Začali sme dnes pri pohľade na
+ladenie, a následne v priebehu
+
+2079
+01:46:43,917 --> 01:46:46,750
+sama o sebe, a potom ďalšie zaujímavé,
+technicky pod kapotou
+
+2080
+01:46:46,750 --> 01:46:49,490
+v akej sú reťazce, ktoré trvajú
+týždeň sme si vzal za samozrejmosť,
+
+2081
+01:46:49,490 --> 01:46:51,900
+a iste vzal
+za samozrejmosť Scratch.
+
+2082
+01:46:51,900 --> 01:46:56,040
+>> Potom sme sa pozreli na to, ako môžeme pristupovať
+Jednotlivé znaky v reťazci,
+
+2083
+01:46:56,040 --> 01:47:00,310
+a potom zase vzal vyššiu úroveň
+pozerať sa na veci, pri pohľade na to, ako well--
+
+2084
+01:47:00,310 --> 01:47:04,226
+ak sa chceme dostať na jednotlivé
+prvky v zozname, ako je štruktúra,
+
+2085
+01:47:04,226 --> 01:47:05,850
+nemôžeme robiť, že s viacerými reťazcami?
+
+2086
+01:47:05,850 --> 01:47:08,050
+A môžeme s argumentmi príkazového riadku.
+
+2087
+01:47:08,050 --> 01:47:12,800
+Ale tento obraz tu púhych krabíc
+je demonštratívny tohto všeobecnú predstavu
+
+2088
+01:47:12,800 --> 01:47:14,451
+z poľa, alebo zo zoznamu, alebo vektora.
+
+2089
+01:47:14,451 --> 01:47:16,450
+A v závislosti na
+kontext, všetky tieto slová
+
+2090
+01:47:16,450 --> 01:47:17,880
+znamenať nepatrne odlišné veci.
+
+2091
+01:47:17,880 --> 01:47:20,060
+Takže v jazyku C, ideme len
+hovoriť o pole.
+
+2092
+01:47:20,060 --> 01:47:23,840
+A pole je kus
+pamäte, z ktorých každý je
+
+2093
+01:47:23,840 --> 01:47:27,720
+prvky sú súvislé, späť,
+dozadu, dozadu, do chrbta.
+
+2094
+01:47:27,720 --> 01:47:31,970
+>> A tieto prvky sú všeobecne
+rovnakého typu dát, znak,
+
+2095
+01:47:31,970 --> 01:47:35,966
+znak, znak, znak, alebo
+string, string, string, string, alebo int,
+
+2096
+01:47:35,966 --> 01:47:38,600
+int, int, nech je to čokoľvek
+sa snažíme obchode.
+
+2097
+01:47:38,600 --> 01:47:42,540
+Ale na konci dňa, to je
+ako to vyzerá koncepčne.
+
+2098
+01:47:42,540 --> 01:47:44,530
+berieš svoj
+Pamäť RAM alebo počítača.
+
+2099
+01:47:44,530 --> 01:47:48,590
+A vy carvingové ju do
+rovnako veľké škatule, z ktorých všetky
+
+2100
+01:47:48,590 --> 01:47:50,920
+sú späť, k sebe, k
+späť k sebe týmto spôsobom.
+
+2101
+01:47:50,920 --> 01:47:53,200
+>> A čo je pekné o
+táto myšlienka a skutočnosť,
+
+2102
+01:47:53,200 --> 01:47:58,580
+že môžeme vyjadriť hodnoty týmto spôsobom
+pričom prvý z dátových štruktúr
+
+2103
+01:47:58,580 --> 01:48:02,520
+v triede, znamená, že môžeme začať
+riešiť problémy s kódom
+
+2104
+01:48:02,520 --> 01:48:04,079
+ktorá prišla tak intuitívne v týždni 0.
+
+2105
+01:48:04,079 --> 01:48:05,870
+Spomeňte si telefón
+Kniha príklad, kde
+
+2106
+01:48:05,870 --> 01:48:09,110
+sme použili rozdeľ a panuj,
+alebo binárne vyhľadávanie,
+
+2107
+01:48:09,110 --> 01:48:13,220
+preosiať cez celok
+banda mien a čísel.
+
+2108
+01:48:13,220 --> 01:48:18,220
+Ale sme predpokladali, spomínam, že
+telefónny zoznam bol už je zoradený,
+
+2109
+01:48:18,220 --> 01:48:21,630
+že niekto iný už
+Figurálna out-- daný zoznam mien
+
+2110
+01:48:21,630 --> 01:48:24,430
+a numbers-- ako ich abecedy.
+
+2111
+01:48:24,430 --> 01:48:26,950
+A teraz, keď v C my,
+Tiež majú schopnosť
+
+2112
+01:48:26,950 --> 01:48:30,290
+položiť veci, nie
+fyzicky v telefónnom zozname
+
+2113
+01:48:30,290 --> 01:48:34,220
+ale prakticky v počítači
+pamäť, budeme môcť budúci týždeň
+
+2114
+01:48:34,220 --> 01:48:38,470
+zaviesť znova tohle-- prvý
+z našich dátových štruktúr, ktoré by array--
+
+2115
+01:48:38,470 --> 01:48:43,530
+ale čo je dôležitejšie, aktuálny výpočtovej
+vedy algoritmy implementované
+
+2116
+01:48:43,530 --> 01:48:47,720
+v kóde, s ktorým môžeme uložiť
+Údaje v štruktúrach, ako je táto,
+
+2117
+01:48:47,720 --> 01:48:50,730
+a spustite ho manipulovať, a
+skutočne riešiť problémy s tým,
+
+2118
+01:48:50,730 --> 01:48:53,570
+a stavať na vrchole toho,
+nakoniec, programy v jazyku C,
+
+2119
+01:48:53,570 --> 01:48:56,730
+v Pythone, v JavaScripte,
+dotazovanie databázy s SQL?
+
+2120
+01:48:56,730 --> 01:48:59,980
+>> A uvidíme, že všetky tieto
+rôzne názory blokovanie.
+
+2121
+01:48:59,980 --> 01:49:04,100
+Ale teraz, pripomenúť, že
+domény, ktorý dnes predstavila
+
+2122
+01:49:04,100 --> 01:49:06,920
+Bola to vec tú, a
+svet kryptografie.
+
+2123
+01:49:06,920 --> 01:49:11,200
+A medzi ďalšie problémy, ktoré sami
+vyrieši je umenie kryptografia,
+
+2124
+01:49:11,200 --> 01:49:13,630
+miešať a de-zakódovanie
+Informácie a šifrovanie
+
+2125
+01:49:13,630 --> 01:49:15,930
+a dešifrovanie textu,
+a za predpokladu, že v konečnom dôsledku
+
+2126
+01:49:15,930 --> 01:49:18,970
+že teraz už viete, čo
+je pod kapotou
+
+2127
+01:49:18,970 --> 01:49:21,860
+takže keď vidíte alebo prijímať
+správa takhle vás
+
+2128
+01:49:21,860 --> 01:49:24,060
+sami ju rozlúštiť.
+
+2129
+01:49:24,060 --> 01:49:26,740
+To všetko a viac nabudúce.
+
+2130
+01:49:26,740 --> 01:49:29,890
+
+2131
+01:49:29,890 --> 01:49:30,790
+>> [Videoprehrávanie]
+
+2132
+01:49:30,790 --> 01:49:32,970
+>> -Mover Práve dorazil.
+
+2133
+01:49:32,970 --> 01:49:35,146
+Chystám sa ísť návštevu
+Jeho vysokoškolský profesor.
+
+2134
+01:49:35,146 --> 01:49:37,611
+Hej.
+
+2135
+01:49:37,611 --> 01:49:40,080
+Ahoj.
+
+2136
+01:49:40,080 --> 01:49:40,660
+To si ty.
+
+2137
+01:49:40,660 --> 01:49:44,125
+
+2138
+01:49:44,125 --> 01:49:45,110
+Počkaj!
+
+2139
+01:49:45,110 --> 01:49:45,610
+Dávid.
+
+2140
+01:49:45,610 --> 01:49:53,936
+
+2141
+01:49:53,936 --> 01:49:56,060
+Len sa snažím prísť
+čo sa ti stalo.
+
+2142
+01:49:56,060 --> 01:49:58,130
+Prosím, niečo mohlo pomôcť.
+
+2143
+01:49:58,130 --> 01:50:05,020
+
+2144
+01:50:05,020 --> 01:50:08,354
+Bola ste jeho kolega
+spolubývajúci, nie?
+
+2145
+01:50:08,354 --> 01:50:10,770
+Bol ste tam s ním, keď
+on dokončil projekt CS50?
+
+2146
+01:50:10,770 --> 01:50:13,770
+
+2147
+01:50:13,770 --> 01:50:15,765
+>> [MUSIC PLAYBACK]
+
+2148
+01:50:15,765 --> 01:50:32,110
+
+2149
+01:50:32,110 --> 01:50:33,150
+>> -To Bol CS50.
+
+2150
+01:50:33,150 --> 01:50:42,690
+
+2151
+01:50:42,690 --> 01:50:44,770
+>> Milujem toto miesto.
+
+2152
+01:50:44,770 --> 01:50:45,854
+>> -Zjesť.
+
+2153
+01:50:45,854 --> 01:50:47,020
+Ideme von obchodu.
+
+2154
+01:50:47,020 --> 01:50:52,120
+
+2155
+01:50:52,120 --> 01:50:53,970
+>> [END PLAYBACK]
+

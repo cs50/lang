@@ -1,0 +1,689 @@
+[MUSIC PŘEHRÁVÁNÍ] 
+
+David J. Malan: Dobře. To je CS50 a to je začátek týdne 2. A budete připomenout, že v průběhu minulost pár týdnů, jsme se zavádí počítače věda a na oplátku, programování. 
+
+Začali jsme příběh cestou Scratch, že grafický jazyk z Media Lab MIT. A pak v poslední době, minulý týden, my jsme zavést higher-- A jazyk nižší úrovně známo jako C, něco, co je čistě textové. A skutečně, naposledy jsme prozkoumal v tomto kontextu množství pojetí. 
+
+To, odvolání, byl velmi První program jsme se zabývali. A tento program zcela jednoduše, vytiskne "Hello, World". Ale je tu tolik zdánlivé magie děje. Tam je to #include s těmito hranatých závorkách. K dispozici je int. K dispozici je (void). Je tu závorky, složené závorky, středníky, a ještě mnohem více. 
+
+A tak připomenout, že jsme zavedli Scratch takže jsme mohli, v ideálním případě vidět minulost že syntax, věci, které to opravdu není vše, co intelektuálně zajímavé, ale brzy Je absolutně, trochu složitější zabalit svou mysl kolem. A skutečně, jedno z nejčastějších věci brzy v programovacím třídě, zejména pro ty méně pohodlná, je dostat frustrovaný a zakopl zvýšil o určitou syntaktickou Chyby, nemluvě o logické chyby. A tak mezi našimi cíli Dnes, ve skutečnosti, bude bude vybavit vás s některými Problém-řešení techniky, jak lépe řešit problémy sami ve formě ladění. A budete připomenout také, že prostředí, které jsme uvedli Naposledy byl nazýván CS50 IDE. To je webový software, který umožňuje naprogramovat v oblaku, tak říkajíc, při zachování všech vašich soubory dohromady, jak jsme znovu dnes. A připomínají, že jsme revisited těchto tématech zde mezi nimi funkce, a smyčky, a proměnné a booleovské výrazy, a podmínky. A skutečně málo více než my přeloženo ze světa Scratch do světa C. 
+
+Ale základním stavebním bloky, tak říkajíc, byly opravdu stále stejný minulý týden. Ve skutečnosti jsme opravdu jen měli jiný kousek skládačky, chcete-li. Místo toho, že fialová uložit blok, my místo toho se printf, která je Tato funkce v C, které umožňuje tisknout něco a formátovat ho na obrazovce. Zavedli jsme CS50 Knihovna, kde vás Nyní vám k dispozici get_char, a get_int a get_string, a několik dalších funguje jako No, přes který můžete získat vstup Z uživatelského vlastní klávesnice. A také jsme se podívat na věci jako these- bool a char, a double, float, int, long_long řetězec. A je tu i jiné datové typy v jazyce C. 
+
+Jinými slovy, když deklarujete proměnná pro uložení nějakou hodnotu, nebo při implementaci funkce který vrací nějakou hodnotu, můžete určit, jaká typ hodnotu, která je. Je to řetězec, jako když posloupnost znaků? Je to číslo, jako celé číslo? Je to s pohyblivou řádovou čárkou hodnota, nebo podobně? Takže v jazyce C, narozdíl od nuly, jsme vlastně začal specifikovat, jaký druh dat jsme se vraceli nebo používání. 
+
+Ale samozřejmě jsme také dostali do některé základní limity na počítači. A zejména, Tento jazyk C, recall že jsme si prohlédli integer overflow, realita že pokud máte jen omezené množství paměti nebo konkrétně o konečné číslo bitů, můžete počítat tak vysoko pouze. A tak jsme se podívali na tento příklad zde přičemž čítač v letadle, ve skutečnosti, pokud běží dostatečně dlouho by přetékat a vést k softwaru skutečný fyzický potenciál chybě. 
+
+Také jsme se podívali na plovoucí bod nepřesnost, realita že pouze s omezeným počtem bitů, ať už je to 32 nebo 64, můžete zadat pouze tolik čísel Po desetinnou čárkou, po které se začnou se dostat nepřesný. Tak například jedna třetina v world tady, v našem lidském světě, jak víme, je jen nekonečný počet z 3s za desetinnou čárkou. Ale počítač nemůže být nutně představují nekonečný počet čísel Máte-li povolit pouze to nějaký omezené množství informací. 
+
+Takže nejen že vám vybaví s větší sílu, pokud jde o tom, jak byste mohli vyjádřit sami klávesnice, pokud jde o programování, jsme také omezena co můžete skutečně dělat. A skutečně, může chyby a omyly vyplývají z těchto druhů problémů. A skutečně, mezi tématy dnes se bude tématy, jako je ladění a vlastně při pohledu pod kapotu na to, jak byly zavedeny věci minulého týdne jsou skutečně realizovány takže si lépe pochopit, jak Schopnosti a Omezení jazyka jako je C 
+
+A ve skutečnosti, budeme oloupejte vrstev z nejjednodušších datové struktury, něco, co nazývá pole, které Scratch stane nazývat "seznam". Je to trochu liší v této souvislosti. A pak budeme také představit jeden z První z našich problémů s konkrétní doménou V CS50, svět kryptografie, umění zakódování nebo šifrování informace, které můžete posílat tajné zprávy a dekódovat tajné zprávy mezi dvěma osobami, A a B. 
+
+Takže předtím, než jsme přechodem v tomto novém světě, zkusme vybavit vás s některými techniky, pomocí kterého můžete odstranit nebo snížení alespoň některé z frustrace že jste pravděpodobně setkal přes samotnou minulého týdne. Ve skutečnosti, před vámi jsou některé z such-- vaše první problémy v C a šance jsou, pokud jste stejně jako já, poprvé pokusu o zadání out program, i když si myslíte, že logicky Program je velmi jednoduchý, můžete velmi dobře narazil do zdi, a kompilátor nebude spolupracovat. Iniciovat nebo Clang nebude skutečně dělat svou příkazy. 
+
+A proč by to mohlo být? Dobře, pojďme se podívat na, Možná, jednoduchý program. Chystám se jít dopředu a uložit na tuto Soubor s názvem záměrně buggy0.c, protože vím, že ji být vadný předem. Ale já nemusí uvědomit, že pokud toto je první, nebo druhý nebo třetí programu že jsem vlastně dělat sám. Takže já jdu dopředu a typ out, int main (void). A pak uvnitř mých složené závorky, velmi povědomý ( "Dobrý den, world-- zpětné lomítko n ") - a středník. 
+
+Jsem uložení souboru. Teď se jdu dolů do mého okna terminálu a typ make buggy0, protože, opět, jméno souboru je dnes buggy0.c. Tak píšu, aby buggy0, Enter. 
+
+A, ach, bože, převezme zpět od minule že žádné chybové zprávy je dobrá věc. Takže žádný výstup je dobrá věc. Ale tady mám jasně někteří množství chyb. 
+
+Takže prvním řádku výstupu Po zadání aby buggy0, recall, je poměrně podrobný výstup řinčení je. Pod kapotou CS50 IDE je konfigurován používat spoustu Možnosti s tímto kompilátorem takže nemáte přemýšlet o nich. A to je vše, co první řádek znamená, že začíná s Clang. 
+
+Ale po tom, problémy začít dělat jejich vzhled. Buggy0.c na lince 3, charakter 5, tam je velká červená chyba. Co to je? Implicitně deklarovat funkci knihovny printf s typem int (const char *, ...) [-Werror]. Myslím, že to velmi rychle dostane velmi tajemný. A jistě, zprvu pohled, nebudeme očekávají, že budete rozumět celistvost této zprávy. A tak jedna z lekcí pro dnes se děje bude se snažit, aby si všimnout vzory, nebo podobné věci, chybám byste mohli mít setkal v minulosti. Tak jen ať to šprýmaři odděleně ta slova, která vypadají obeznámen. Velký, červená chyba je jednoznačně symbolický něco je špatně. 
+
+implicitně deklarování Knihovna funkce printf. Takže i když nemám úplně pochopit, co implicitně deklarovat funkci knihovny znamená, že problém jistě týká printf nějak. A zdroj tohoto problému má co do činění s prohlášením. 
+
+Deklarovat funkce je zmínku to poprvé. A jsme použili terminologii minulý týden deklarování prototyp funkci je, buď jeden řádek v horní části vlastní soubor nebo v tzv souboru záhlaví. A v jakém souboru udělal říkáme minulý týden, že printf je citát, unquote, prohlásil? V jakém souboru je jeho prototyp? 
+
+Takže pokud si vzpomínáte, úplně první věc, kterou jsem napsaný, téměř každý program, poslední time-- a náhodou před chvílí začal zadáním myself-- Byl to jeden here-- hash-- #include <stio-- pro input / output-- dot h A skutečně, kdybych teď tento soubor uložit, jdu jít dopředu a pročistit displej, které můžete udělat napsáním Clear, nebo můžete držet ovládací L, Jen vyčistit okno terminálu Jen odstranit nějaký nepořádek. 
+
+Chystám se jít dopředu a re-make typu buggy0, Enter. A voila, stále vidím, že dlouhý příkaz z Clang, ale není žádná chybová zpráva tentokrát. A skutečně, když to udělám ./buggy0, stejně jako minule, kde tečka znamená, že tato adresář, Slash prostě znamená, tady je název programu a že název programu je buggy0, Enter "Hello, World". 
+
+Takže, jak můžete mít sbírala toto řešení aniž by nutně rozpoznávat co nejvíce slov, jako já, samozřejmě, mající udělal tolik let? No, si uvědomit, za první problém set, vám představíme příkazu že CS50 vlastním personálem napsal s názvem help50. A skutečně, C dělá specifikaci problém nastavit, jak používat. 
+
+Ale je v podstatě help50 program, který CS50 Personál napsal, že umožňuje spouštět příkaz nebo spustit program, a pokud nechcete pochopit jeho výstup, předat svůj výstup help50, na kterém místě software že zaměstnanci v průběhu své napsal zaměří na výstupu vašeho programu řádek po řádku, znak po znaku. A pokud my, zaměstnanci, uznávají chybová zpráva, že jste se setkali, pokusíme se vás vyprovokovat některé řečnické otázky, s nějakou radu, podobně jako TF nebo CA nebo sám by to osobně v úředních hodinách. 
+
+Tak se podívejte na help50, pokud nemáte nutně rozpoznat problém. Ale nespoléhejte na to moc jako berle. Určitě snažit se pochopit jeho Výstup a pak se z ní poučit takže jen jednou nebo dvakrát viď někdy běžet help50 pro konkrétní chyby zpráva. Za to, že byste měli být lépe sami zjistit, co to vlastně je. 
+
+Udělejme jednu další zde. Nech mě jít dopředu, a v jiném Soubor zavoláme tento buggy1.c. A v tomto souboru Jsem bude deliberately-- ale předstírat, že nemám rozumět tomu, co jsem udělal chybu. 
+
+Chystám se jít dopředu a dělat tohle-- #include, protože jsem poučil z před chvílí. Int main (void), jako předtím. A pak tady jdu dělat řetězci s - get_string. A odvolávat z posledního okamžiku, To znamená, že hej, počítač, dej mi proměnnou, říkat to s, a aby typ této proměnné řetězce takže mohu uložit jedno nebo více slov v něm. 
+
+A pak na pravé straně strana rovnítko je get_string, což je Funkce v knihovně CS50 že dělá přesně to. To dostane funkci a poté předá jej zprava doleva. Takže tohle rovnítko neznamená "Rovná se", jak bychom si mohli myslet v matematice. To znamená, že přiřazení zprava doleva. Takže to znamená, mít řetězec z Uživatel a uložte jej uvnitř s. 
+
+Nyní pojďme ji používat. Nech mě jít dopředu a hned za sekundu linka, nech mě jít dopředu a říct "ahoj" - ne "world", ale "Dobrý den,% S- což je náš symbol, čárka s, což je naším proměnnou, a pak středník. Takže když jsem neměl zkazit příliš mnoho tady to vypadá jako správný kód. 
+
+A moje instinkty jsou nyní ke kompilaci. Soubor se nazývá buggy1.c. Takže budu dělat, aby buggy1, Enter. A látat-it, v případě, že není dokonce více chyb než předtím. Myslím, že je toho víc chybové zprávy, že by Zdá se, než skutečné řádky v tomto programu. 
+
+Ale tady je stánek s jídlem, i když jste zahlceni se dvěma nebo třemi či Čtyři další chybové zprávy, soustředit vždy na samotných První z těchto zpráv. Podíváme-li se na nejvyšší pozici jedna, rolování zpět nahoru, jak bude zapotřebí. Tak tady jsem napsal make buggy1. Tady je Clang výstup podle očekávání. 
+
+A tady je první červené chyba. Použití nedeklarovaný identifikátor string, jsem na mysli standard? Takže standardem je ve skutečnosti něco jiného. To se odkazuje na uživatelovy klávesnice, v podstatě. 
+
+Ale to není to, co mám na mysli. Myslel jsem řetězec, a myslel jsem get_string. Takže co je to, že jsem zapomněla dělat tentokrát? Co chybí tentokrát? Mám #include, takže mám přístup k printf. 
+
+Ale co mám nemají Přístup k ještě ne? No, stejně jako minule, Musím říci kompilátoru Clang, co tyto funkce jsou. Get_string nepřijde s C a zejména jej nepřichází v záhlaví souboru. Namísto toho přichází něco, co personál napsal, který je odlišný soubor pojmenovat, ale příhodně pojmenované. 
+
+Tak jednoduše tím, že jeden řádek z code-- stažení od minule že když Clang běží, bude to dívat se na mém kódu odshora až dolů, zleva do prava. Bude to si všimnout, oh, chcete. Nech mě jít a najít to, tam, kde je na serveru, zkopírovat a vložit jej v podstatě, do horní části vašeho vlastního souboru tak, že v tomto bodě v příběhu, řádek 1, zbytek programu lze skutečně použít některou z funkcí v ní, mezi nimi get_string. Takže budu ignorovat zbytek těchto chyb, Protože já opravdu podezření, že teprve první skutečně záleželo. A já jdu dopředu a opakování, Po uložení svůj soubor dělat buggy1. A voila, to dělalo práci. A když to udělám ./buggy1 a zadejte pro instance, Zamyla, teď dostane Dobrý den, Zamyla, místo ahoj, svět. 
+
+Dobře. Takže takeaways zde pak jsou, jeden, snaží se sbírat co nejvíce, jak můžete Ze samotné chybové zprávy, hledá na některé z rozpoznatelných slov. Nedojde-li to, použijte help50 za Problém set specifikaci. Ale blokování i to vždy vypadat nahoře chyby pouze minimálně zpočátku, aby se zjistilo, jaké informace ale ve skutečnosti může přinést. Ale ukazuje se, je tu ještě více funkcí postavena Do CS50 knihovny na pomoc jste na počátku semestru a brzy na v programování zjistit, co se děje špatně. Takže pojďme udělat další příklad. Budu volat tento buggy2, který, Znovu se bude vadný ven brány, záměrné. 
+
+A já jdu napřed a dělat #include. A pak budu dělat int main (void). A pak budu dělat cyklu for. For (int i _ 0. i je menší než nebo roven 10. i ++, a pak do složených závorek, jdu vytisknout jen symbol hashtag zde a znak nového řádku. 
+
+Takže můj záměr s tímto Program je jednoduše iteraci 10 krát a na každém opakování této smyčky pokaždé přes cyklu vytisknout hashtag, hashtag Hashtag. Jedno na řádek, protože jsem mají novou řadu tam. A připomenout, že pro smyčka, za poslední week-- a budete mít víc obeznámeni s syntaxe Pomocí to s praxí Před long-- mi to dává variabilní Zavolal jsem a nastaví ji na hodnotu 0. 
+
+To zvýší i na každé iteraci o 1. Tak i přejde na hodnotu 1 až 2 až 3. A pak tato podmínka v prostřední mezi středníky dostane zkontrolovat na každé iteraci, aby se jisti, že jsme stále v dosahu. Tak jsem chtěl opakovat 10krát, a tak jsem mají jakési velmi intuitivně jen dal 10 jako moje horní mez tam. 
+
+A přesto, když jsem běžet to, po sestavování to s make buggy2-- a to sestavit OK. Tak jsem nemají syntaktická chyba tentokrát. Nech mě jít napřed nyní a spustit buggy2, Enter. A teď posouvat nahoru. A dovolte mi zvýšit velikost okna. 
+
+Připadá mi, že mají 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Takže je tu 11 Hashtagy, přestože Jasně jsem dal 10 uvnitř této smyčky. Nyní, někteří z vás by mohl vidět okamžitě to, co je chyba, protože ve skutečnosti je toto Není to velmi těžké, aby se chyba. Ale je to velmi často vyrobený velmi brzy. 
+
+To, co chci zdůraznit, ačkoli, je, jak bych mohl přijít na to? No, to ukáže, že CS50 knihovny přichází nejen s get_string a get_int a get_float a další funkce. Je také přichází se speciální funkcí volal eprintf, nebo chyba printf. A existuje výhradně k provedení to trochu jednodušší pro vás Při ladění kódu jen tisknout chybovou zprávu na displeji a vědět, odkud to přišlo. 
+
+Tak například, jedna věc, kterou bych mohl dělat tady s touto funkcí je tohle-- eprintf, a pak budu pokračovat a říct, že jsem je nyní% i, zpětné lomítko n. A já jdu připojit v hodnotě i. A do vrcholu, protože to Je v knihovně CS50, Chystám se pokračovat a zahrnují takže mám přístup k této funkci. Ale uvažujme, co linka 9 má dělat. Chystám se to odstranit příp. To nemá nic společného se svým celkovým cílem. Ale eprintf, chyba printf, je prostě znamenalo aby mi dal nějaké diagnostické informace. Když jsem běžet můj program, chci vidět na obrazovce dočasně stejně dobře rozumět co se děje. 
+
+A skutečně, na každém iterace zde linky 9 Chci vidět, jaká je hodnota i? Jaká je hodnota i? Jaká je hodnota i? A doufejme, že bych měl jen vidět, že zpráva, také 10krát. 
+
+Tak nech mě jít dopředu a překompilovat svůj program, jak musím udělat kdykoliv I provést změnu. ./buggy2. A now-- OK. Je tu mnohem víc děje. Dovolte mi tedy posunout do ještě větší okno. 
+
+A uvidíte, že každá z Hashtagy je stále tiskne. Ale mezi každým z nich je nyní toto Diagnostický výstup následující formát. Jméno mého programu je zde buggy2. Název souboru je buggy2.c. Číslo řádku, ze kterého to byla vytištěna je linka 9. A pak na pravé straně, který je chybové hlášení, že jsem očekával. 
+
+A co je příjemné na tom je, že teď nemám nutně počítat v mé hlavě, co můj program dělá. Vidím, že na první iteraci i je 0, pak 1, pak 2, pak 3, pak 4, pak 5, pak 6, pak 7, pak 8, pak 9, poté 10. Tak počkej. Co se tam děje? I přesto se zdají být počítání jak je určeno až 10. 
+
+Ale odkud mám začít? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Tak 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- 11. prst svědčí o problému. Zřejmě jsem počítal nesprávně v mém smyčce. Spíše než jít 10 iterací, Začínám při 0 ° C, Jsem končící v i přes 10 let. Ale proto, že, stejně jako v počítači, Začínám počítání při 0 ° C, I třeba počítat nahoru , ale ne přes 10. 
+
+A tak fix, nakonec jsem Zde si uvědomil, je jedna ze dvou věcí. Mohl jsem velmi jednoduše říci, počítat do méně než 10 let. Tak 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, který je skutečně správné, i když to zní trochu špatně. Nebo bych mohl dělat menší nebo roven 9, tak dlouho, jak jsem začínají na 0 ° C. Nebo pokud si opravdu nemají rádi, že vás lze počítat až po 10, ale začínají na 1. Ale opět, to prostě není tak běžné. V programming-- byť ne tolik v Scratch-- ale v programování v jazyce C a dalších jazycích, jako je JavaScript a Python a jiní, je to Jen velmi běžné pro naše diskuse o binární jen začít počítat u Nejnižší číslo můžete, což je 0. Dobře. Tak to je eprintf. A opět, teď, když jsem přišel na to my problém, a já jdu zpět na 0 přes méně než 10, jdu jít dovnitř a odstranit eprintf. 
+
+Nemělo by tam být, když jsem loď můj kód nebo předložit svůj kód nebo ukázat, že na někoho jiného. Je to opravdu jen znamenalo používány k dočasnému použití. Ale teď jsem opravil toto Zvláštní problém také. 
+
+Dobře, pojďme udělat ještě jeden příklad zde že budu vybičovat následovně. Chystám se jít dopředu a #zahrnout . $ 50 A já jdu napřed a #include. 
+
+A budu šetřit Tento soubor jako buggy3.c. A já jdu napřed a prohlašují, int main (void). A pak tam uvnitř Jdu dělat int i _ - Chci zavést program s get_negative_int. Nejedná se o funkci, která zatím neexistuje. Takže budeme realizovat to za chvíli. Ale budeme vidět, proč to je kočárek v prvním průchodu. A jakmile jsem se dostal int od uživatele, Právě jdu k tisku% i je negativní integer, lomítko, n, čárka, t j. Jinými slovy, všechny I chtějí tento program dělat je dostat negativní int od Uživatel a poté vytisknout že takový a takový je negativní int. 
+
+Teď potřebuji k provedení této funkce. Tak později v mém souboru, já jdu dopředu a deklarovat funkci nazvanou get_negative_int (void) - a my vrátit k tomu, co ta linka opět znamená, v moment-- int n; do-- kutily following-- printf n je :. A pak budu dělat n - get_int, a to udělat, když n je větší než 0 ° C. A pak se vrátit n ;. 
+
+Takže je tu spousta děje v to ale žádný z nich jsme neměli podíváme na minulý týden, alespoň stručně. Takže na řádku 10 tady jsem deklaroval Funkce s názvem get_negative_int, a já jsem dal (void), v závorky, důvodem je to nebere vstup. Já neprochází nic pro tuto funkci. Já jen dostat něco zpět od něj. 
+
+A co já jsem doufal, že dostat zpět je celé číslo. Neexistuje žádný datový typ v C volal negative_int. Je to pravý, takže to jde že je na nás, aby se ujistil, že hodnota, která je vlastně vrácena, je nejen int ale je rovněž negativní. 
+
+Na řádku 12 Jsem deklarování proměnné volal n a dělat to typu int. A pak v řádce 13 až 18 Jsem dělá něco, když něco není pravda. Jdu do toho a tisk n znamená, tlustého střeva, a pak prostor, jako výzvu pro uživatele. 
+
+Já pak volá get_int a uložení jeho tzv návratovou hodnotu v této proměnné n. Ale budu pokračovat v tom Tento zatímco n je větší než 0 ° C. Jinými slovy, v případě, že uživatel mi dává int a toto číslo je větší než 0, ergo, pozitivní, jdu jen držet reprompting uživatele, zachovat reprompting tím, že nutí je spolupracují a dej mi záporné int. 
+
+A jakmile n je vlastně negative-- Předpokládám, že uživatel konečně typy -50, pak je tento zatímco smyčka již není pravda protože -50 není větší než 0 ° C. Tak jsme se vymanit z toho smyčka logicky a vrátit n. 
+
+Ale je tu ještě jedna další věc, kterou musím udělat. A můžu jednoduše to udělat o kopírování a vkládání jeden řádek kódu v horní části souboru. Musím se učit Clang, nebo slib zvonění, výslovně stanoví, že budu, skutečně jít a realizovat Tato funkce get_negative_int. To může být jen nižší v souboru. Znovu si připomeňme, že Clang čte věci shora dolů, zleva doprava, takže nemůžete volání funkcí, pokud Clang neví, že to bude existovat. 
+
+Nyní, bohužel, tento program, jak někteří z vás si možná všimli, Je již buggy. Nech mě jít dopředu a dělat buggy3. To kompiluje, takže můj problém teď není syntaktická chyba, jako chyba textové, je to vlastně bude logickým chyba, že jsem úmyslně vyrobený jako příležitost k krokovat, co se děje. 
+
+Chystám se pokračovat Nyní a spustit buggy3. A já jdu dopředu a ne spolupracovat. Chystám se dát číslo 1. Je to nelíbilo, tak to mě výzvou znovu. 
+
+Jak se o 2? 3? 50? Žádný z těch pracují. Jak asi -50? A program se zdá k práci. 
+
+Nech mě to zkusit ještě jednou. Zkusím -1, zdá se k práci. Zkusím -2, zdá se k práci. Zkusím 0. Huh, to je nesprávné. Teď jsme tady trochu pedantský. Ale je to skutečně pravda, že 0 není ani pozitivní, ani negativní. A tak skutečnost, že můj program je říká, že 0 je záporné celé číslo, to není technicky správná. 
+
+Teď, proč to dělá? No, mohlo by to být zřejmé. A opravdu, je program má být poměrně jednoduchý takže máme něco k prozkoumání. 
+
+Ale pojďme představit třetí ladění Technika zde nazývá debug50. Tak tohle je program že jsme právě vytvořili letos nazvaný debug50 která vám umožní použít to, co se nazývá vestavěný grafický debugger v CS50 IDE. A debugger je jen program, který obecně umožňuje spustit svůj program ale krok za krokem za krokem linky o řádek po řádku, pozastavení strkat kolem, při pohledu na proměnných tak, že Program není jen vyhodit kolem vás a rychle něco vytisknout nebo ne něco vytisknout. To vám dává příležitost, při lidská rychlost, k interakci s ním. 
+
+A aby to provést, jednoduše postupujte následovně. Po kompilaci kódu, což jsem již udělal, buggy3, budete pokračovat a spustit debug50 ./buggy. Tolik jako help50 má spustit help50 a pak příkaz, debug50 má spustit debug50 a pak název příkazu. 
+
+Nyní sledujte, co se děje na mé obrazovce, Na pravé straně zvlášť. Když jsem narazila na příkaz Spustit, všechny náhlá to pravý panel otevírá na obrazovce. A je tu spousta děje o na první pohled. Ale je tu ještě není příliš hodně se obávat dosud. 
+
+To mi ukazuje vše že se děje uvnitř mého programu právě teď a prostřednictvím nich Tlačítka nahoru vrcholu je pak dovolovat mě krokovat mém kódu nakonec krok za krokem za krokem. Ale teď ještě ne. Všimněte si, co se stane. V mém okně terminálu Já jsem byl vyzván k zadání n. A já jdu dopředu a spolupracují tento čas a typ v -1. A i když trochu záhadně, -1 je záporné celé číslo, jak se očekávalo. 
+
+A pak dítě skončil s Stav 0 GDBserver ukončení. GDB, GNU Debugger, je název podkladového softwaru který implementuje tento debugger. Ale to všechno vlastně znamená, ladicí šel pryč, protože můj program ukončit a vše bylo v pořádku. Chci-li skutečně ladit svůj program, Musím říci preventivně debug50, kam chci začít krokování mém kódu? 
+
+A možná nejjednodušší způsob, k tomu, že je následující. Kdybych vznášet nad žlab mého editor tady, takže opravdu jen v postranním panelu tady, na levé straně na číslo řádku, Všimněte si, že když stačí kliknout Jednou jsem dal malou červenou tečku. A ta malá červená tečka, jako stopce, znamená, hej, debug50, provádění přestávka můj kód právě tam, když jsem spuštění tohoto programu. 
+
+Takže pojďme to udělat. Nech mě jít dopředu a spustit můj program opět s debug50 ./buggy3, Enter. A teď, vývěsní, něco odlišný stalo. Nejsem byli vyzváni Zatím ve svém okně terminálu za nic, protože nemám dostal tam ještě v mém programu. Všimněte si, že na lince 8 který je nyní zvýrazněn a tam je malá šipka na Levá rčení, jste tady se zastavil. Tento řádek kódu, řádek 8, dosud proveden. 
+
+A co je zvědavý, jestli se dívám tady na pravé straně, Všimněte si, že i je místní variabilní, místní v tom smyslu, že je to uvnitř aktuální funkce. A jeho hodnota, zřejmě ve výchozím nastavení, a druh pohodlně, je 0. Ale já jsem typ 0. Který je shodou okolností jeho Výchozí hodnota v tomto okamžiku. 
+
+Tak nech mě jít dopředu a to hned. Nech mě jít dopředu a na horní tady, jsem jít dopředu a klepnutím na tuto první ikonu, která znamená krok nad což znamená, nevynechávejte to ale překročit tento řádek kódu, spuštěním podél cesty. 
+
+A teď si všimněte, my výzva právě změnil. Proč tomu tak je? Řekl jsem debug50, spustit tento řádek kódu. Co znamená tento řádek kódu dělat? Vyzve mě int. OK. Nech mě spolupracovat. Nech mě jít dopředu a hned typ -1, Enter. A teď si všimnout, co se změnilo. Na pravé straně, můj lokální proměnná i je označen jako -1 nyní. A je to pořád typu int. 
+
+A oznámení, taky, můj takzvaný zásobník volání, kde jsem pauzu? Budeme hovořit o v budoucnu. Ale zásobník volání jen odkazuje se na co funkce jsou v současné době v pohybu. Právě teď je to jen hlavní. A právě teď jediným místním Proměnná i s hodnotou 1. 
+
+A když jsem konečně překročit tento řádek tady s tou stejnou ikonou v pravém horním rohu, -1 Je záporné celé číslo. Teď je to zastavil se nad touto složenou závorkou. Nechme ji dělat svou věc. I přes to krok linky a voila. 
+
+Takže ne všechno, co strašlivě poučné přesto, ale to, dejte mi pauzu a promyslet logicky Co tento program dělá. Ale to nebyl ten chybný případ. Pojďme to udělat znovu následujícím způsobem. 
+
+Chystám se nechat tuto zarážku na lince 8 s červenou tečkou. Jdu znovu spustit debug50. Je to automaticky tady se zastavil. Ale tentokrát, namísto překračoval této linie, nech mě skutečně jít uvnitř get_negative_int a zjistit, proč je přijetí 0 jako platnou odpověď? 
+
+Takže místo toho, klepnutím na tlačítko Step Over. Chystám se pokračovat a klepněte na tlačítko Step Into. A všimněte si, že linka 8, která je nyní zvýrazněn teď najednou stává linka 17. 
+
+Teď to není tak debuggeru vynechal linky 14 a 15 a 16. Je to prostě není nic že se tam ukázat. Ty jsou jen deklarování proměnných, a pak je tu slovo dělat a pak otevřený složená závorka. Jediná funkční linka, která je šťavnatý ve skutečnosti je to jeden tady, 17. A to je místo, kde máme automaticky pozastaven. 
+
+Takže printf ( "n.is:") ;, tak že se ještě nestalo. Tak pojďme do toho a klepněte na tlačítko Krok přes. Teď moje výzva, opravdu, změněna na ( "n"). Nyní get_int, nehodlám obtěžovat vstoupil do, protože tato funkce byla vyroben CS50 v knihovně. Je to pravděpodobně správné. 
+
+Takže já jdu dopředu a nějak spolupracovat tím, že mu int, ale ne negativní int. Tak nech mě jít dopředu a narazil 0. A co se stane teď tady Když jsem se pustit do řádku 21? Já jsem už zase opakoval. Nechci se zdají být uvízl v této smyčce. Jinými slovy, tento žlutý bar nedržela děje kolem, a kolem a kolem. 
+
+A teď, proč tomu tak je? No, n, co se n právě teď? Můžu se podívat na místní Proměnné v debuggeru. n je 0. Dobře, co byl můj stav? 
+
+20-- linka 20 je dobře, 0 je větší než 0. To není pravda. 0 není větší než 0 ° C. A tak jsem vypukl z toho. 
+
+A tak to je důvod, proč on-line 21, když jsem vlastně pokračovat, Chystám se vrátit 0, a to i i když jsem měl zamítnuty 0 protože nejsou skutečně negativní. Takže teď, nemám opravdu ani péče o ladicí program. Got to, nepotřebuji se vědět, co více se děje. 
+
+Takže já jdu dopředu a stačí kliknout na tlačítko Play, a nechat toto skončit. Teď jsem si uvědomil, že můj chyba je zřejmě na lince 20. To je můj logické chybě. 
+
+A tak to, co dělat chci dělat to změnit? V případě, že problém je, že nejsem lov 0, je to jen logické chybě. A mohu říci, když n je větší než nebo rovno 0, udržovat znovu a znovu vyzvání uživatele. 
+
+Takže ještě jednou, jednoduchá chyba, možná ani zřejmé, když jsi mě viděl napiš to před pár minutami. Ale tady stánek s jídlem je to, že se ladění 50, a ladění software obecněji máte tento nově nalezenou pravomoc procházet vlastním kódem, podívejte se prostřednictvím tohoto pravém panelu, co vaše proměnné hodnoty. Takže nemusíte nutně muset použít něco jako byste eprintf k tisku těchto hodnot. Můžete skutečně vidět vizuálně na obrazovce. 
+
+Nyní, kromě toho je třeba poznamenat, že tam je další technika, která je ve skutečnosti výborný běžné. A možná se divíte, proč tento malý chlápek tady byl sedí na jevišti. Takže je tato technika, obecně známý jako gumové kachny ladění, což je opravdu jen svědčí o tom, které často při programátoři jsou psaní kódu, oni nejsou nutně spolupracuje s ostatními, nebo pracovat ve sdíleném prostředí. 
+
+Jsou to jakési doma. Možná je to pozdě v noci. Snaží se postavy out nějaké chyby v jejich kódu. A oni prostě není to vidět. 
+
+A není spolubydlící. Neexistuje žádná TF. Neexistuje žádný CA kolem. Jediné, co mají na poličce Je to trochu gumové drahoušek. 
+
+A tak gumové kachny ladění je právě tato výzva vymyslet něco jako hloupé protože to jako skutečný tvor, a vlastně projít kódu verbálně k tomuto neživý objekt. Tak například, je-li To je můj příklad here-- a připomínají, že dřívější Problém byl ten, kdybych smazat tento první řádek kódu, a jdu do toho a dělat buggy 0 znovu Připomínáme, že jsem měl tito chybové zprávy zde. Takže myšlenka tady, když jsem směšný cítí v tuto chvíli dělá to veřejně, je to chyba. 
+
+OK, takže můj problém je, že jsem implicitně prohlášena za funkci knihovny. A to funkce knihovny je printf. Declare-- OK, prohlásit Připomíná mi prototypů. 
+
+To znamená, že je třeba skutečně říci kompilátoru předem, co Funkce vypadá. Počkej chvíli. Neměl jsem standardní io.h. Děkuji mnohokrát. 
+
+Tak právě tento proces of-- vás Nemusíte vlastně mít kachnu. Ale tato myšlenka chůzi sám prostřednictvím svého vlastního kódu takže ani slyšet sám, takže vás si uvědomit, opomenutí ve svém vlastním poznámky, je obecně myšlenka. 
+
+A možná více logicky, ne tak Kolik se, že jeden, ale více zapojit Příkladem jsme prostě udělali v kočárku 3.C můžete projít sami přes něj jak následuje. Takže v pořádku, guma drahoušek, DDB, chcete-li. Zde máme ve své hlavní funkce, Volám mít negativní int. 
+
+A já stále návratovou hodnotu. Já ukládá je na levé straně na lince 8 do proměnné zavolal jsem. OK, ale počkat, jak dělal které se dostanou tuto hodnotu? Podívejme se na funkce v řádku 12. 
+
+V řádku 12, musíme se negativní Int. Nebere žádné vstupy, se vrací int, OK. Prohlašuji na lince 14 a variabilní n. To bude ukládat celé číslo. To je to co chci. 
+
+Takže některý z následujících úkonů, zatímco n je-- nechat me zrušit, co byla oprava už jsem udělal. Takže, když n je větší než 0, vytisknout n znamená, OK. A pak volat dostat int uloženy v n. A pak zkontrolovat, zda n je 0, n je ne-- je to tak. Takže znovu, vy ne Potřebujeme skutečnou kachnu. Ale jen procházky se prostřednictvím váš kód jako intelektuální cvičení vám často pomoci si uvědomit, co se děje, ne jen něco dělat takhle, zíral na obrazovku, a nemluví se prostřednictvím to, což upřímně není skoro jako účinná technika. Tak tady to máte, je řada různých technik Pro skutečně ladění kódu a zjištění závady, které všechny by měly být nástroje ve svém toolkit takže nejste pozdě v noci, zvláště, jste v jídelně haly, nebo v úředních hodinách, bouchání hlavou o stěna, snaží vyřešit nějaký problém. Uvědomte si, že existují softwarové nástroje. Tam jsou gumové kachna nástroje. A je tu celý tým podporovat čeká na pomocnou ruku. 
+
+Takže teď, pár slov o problému sety, a na to, co vás budeme doufat, dostat ven z nich, a jak jdeme o vyhodnocení. Per Osnova kurzu je, CS50 je problém sety se hodnotí na čtyřech základních osách, takže na speak-- rozsah, správnost, design, a styl. A rozsah prostě se odkazuje na kolik kusu jste ukousl? Jak velký problém, zkoušeli jste? Jaké úrovně intenzity jste se projevuje? 
+
+Korektnost je, uvedený program pracuje jako to má dle specifikace CS50 pokud poskytují určité vstupy nebo některé výstupy vrátí? Konstrukce je velmi subjektivní z nich. A to je ten, který bude trvat nejdéle se učit a nejdelší učit, v jelikož scvrkává, jak dobře napsané je váš kód? 
+
+To je jedna věc, stačí vytisknout správný výstupy nebo vrácení správné hodnoty. Ale to děláte as efektivně, jak jen je to možné? To děláte předěl a panuj, nebo binární Hledání jak brzy uvidíte, že jsme udělali Před dvěma týdny se v telefonním seznamu? Existují lepší způsoby, jak řešit Problém, než v současné době máte tady? To je příležitost pro lepší design. 
+
+A pak, jak style-- pěkný je váš kód? Všimněte si, že jsem docela zejména o odsazení můj kód, a ujistit se, mé proměnné jsou přiměřeně jmenován. n, zatímco v krátkosti, je to dobrý název pro číslo, i pro počítání celé číslo, s pro řetězec. A můžeme mít delší variabilní styl jména. Styl je to, jak dobře dělá váš kód vypadat? A jak je to čitelné? 
+
+A časem, jaké jsou vaše TA a TFS bude dělat v průběhu je poskytnout vám, že druh kvalitativní zpětné vazby tak, že dostanete lepší v těchto různých aspektů. A co se týče toho, jak zhodnotit každý z těchto os, je to typicky s velmi málo kbelíky, takže obecně, získat představu o tom, jak dobře děláte. A skutečně, pokud obdržíte skóre na kterýkoli z těchto axes-- správnost, designu a styl especially-- toto číslo je obvykle mezi 1 a 5. A doslova, pokud jste stále 3 je na začátku semestru, To je velmi dobrá věc. To znamená, že je tu stále prostor pro zlepšení, které byste doufat v přičemž třídu poprvé. Je tu snad nějaký kus stropu ke kterému jste se ucházejí o dosažení. A tak stále o 3 nejčasnější kusy, ne-li nějaký 2 je a 4 je, je skutečně dobrá věc. Je to dobře v dosahu, dobře v očekávání. 
+
+A pokud vaše mysl je závodění, vyčkejte Okamžik, tři z pěti. To je opravdu 6 out of 10. To je 60%. Můj bože, to je F. 
+
+To není. Není to ve skutečnosti, že. Spíše je to příležitost ke zlepšení v průběhu semestru. A pokud jste stále některé Poors, to jsou příležitostí využít konzultačních hodin, jistě profily a jiné zdroje. 
+
+Nejlepší je příležitost, opravdu, být hrdí na to, jak daleko jste přijít v průběhu semestru. Takže si uvědomit, když už nic jinde, tři je dobrá. A je zde prostor pro růst v průběhu času. 
+
+Jak tyto osy jsou vážený, realisticky jste stráví většinu svého času dostat věci na práci, natož správně. A tak správnost inklinuje váha nejvíce, stejně jako u Tento multiplikativní faktor tři. Design je také důležitá, ale něco, co nemusí nutně utratit všechny tyto hodiny na se snaží dostat věci prostě do práce. 
+
+A tak je to vážený trochu více na lehkou váhu. A pak styl je vážený nejméně. I když je to o nic méně důležitým zásadním způsobem, je to jen, snad, Nejjednodušším způsobem, jak udělat správně, napodobování příklady my dělat v přednášce a části, s věcmi pěkně členité, a poznamenal, a tak dále, je mezi nejjednodušší co dělat a dostat pravdu. Tak jako takové, realizovat že to jsou body které jsou relativně snadno uchopit. 
+
+A nyní pár slov o tohle-- akademické poctivosti. Takže za kurz je osnovy, uvidíte že kurz má poměrně bit jazyka kolem tohoto. A samozřejmě bere otázku akademické poctivost docela vážně. 
+
+Máme rozdíl, k lepšímu nebo k horšímu, z toho, že poslal každý rok více Studenti pro disciplinární řízení než většina jakékoliv jiné Samozřejmě, že jsem si vědom. To nemusí být nutně svědčí o tom, že CS studentů, nebo CS50 studenti, jsou o nic méně než poctivý svými spolužáky. Ale realita, že v tomto world, elektronicky, jen jsme mají technologický prostředek k odhalování tohoto. 
+
+Je důležité, aby námi spravedlnost přes třídy že budeme dělat to zjistí, a zvýšit problém, když vidíme věci. A jen proto, aby namalovat obraz, a ve skutečnosti pomáhat něco takového umyvadlem, to jsou počty Studenti v průběhu posledních 10 let které byly zapojeny do některých tyto otázky akademické poctivosti, s některými 32 studentů od podzimu 2015, která znamená, že nemáme brát záležitost velmi vážně. A nakonec, tato čísla komponovat, v poslední době, asi 3%, 4% nebo tak, třídy. 
+
+Takže pro absolutní většina studentů Zdá se, že řádky jsou jasné. Ale mějte na vadit, zejména pozdní v noci, když bojuje s některá řešení problému set, že existují mechanismy pro sebe dostat lepší Podpora, než si možná myslím, dokonce i v tuto hodinu. Uvědomujeme si, že když dostaneme studentské podání, přejedeme porovnat každý podání letos proti každému podání loni, proti každému podání od roku 2007, a od té doby, při pohledu na, jakož i, Kód úložišť online, diskusních fór, pracovních míst. A my zmínit to, Opravdu, to vše v zájmu plného zpřístupnění, že pokud někdo jiný ji může najít na internetu, jistě, takže můžeme průběh. Ale ve skutečnosti, duch kurzu se scvrkává tohoto bodu v osnově. Je to opravdu jen, být rozumná. 
+
+A kdybychom museli rozvést se jen trochu víc jazyka, Uvědomujeme si, že podstatou všeho Práce, kterou předloží tohoto kurzu musí mít svůj vlastní. Ale uvnitř to, že tam jsou jistě příležitostí a povzbuzení, a pedagogická hodnota obrací na others-- sám, TFS, TAS, TAS, a ostatní ve třídě, pro podporu, natož přátelé a spolubydlící, kteří studovali CS a programování předtím. A tak tam je příspěvek za to. A obecné pravidlo Je tohle--, když žádají o pomoc, můžete ukázat svůj kód s ostatními, ale nemusí zobrazit jejich. Takže i když jste v úředních hodinách, nebo v hale D, nebo někde jinde pracuje na nějakém kusu set, po boku přítele, který Je naprosto v pořádku, u Konec dne vaší práce by v konečném důsledku patří k sobě vás v tomto pořadí, a nikoli být nějaké společné úsilí, s výjimkou konečného projektu, kde je to dovoleno a podporováno. 
+
+Uvědomte si, že pokud jste zápasí s něčím a váš přítel prostě stane, být lepší na to pak vy, nebo lepší u tohoto problému než ty, nebo o něco dál, než ty, je to naprosto rozumné obrátit svému příteli a říct, hej, Vadilo by vám při pohledu na můj kód zde, mi pomohl odhalit to, co můj problém je? A doufejme, že v Zájem výchovné hodnoty že přítel není jen říkají, oh, to ano, ale spíše, co ještě chybí na lince 6, nebo něco takového? Ale řešení není pro přítele vedle tebe říci, oh, dobře, tady, nech mě vytáhnout toto nahoru, a ukázat svou řešení pro vás. Tak to je čára. Můžete ukázat svůj kód jiní, ale nemusí zobrazit oni, s výhradou druhé omezení v Osnova kurzu je. 
+
+Takže se mějte na paměti tomto takzvaná doložka lítost V Osnova kurzu, stejně, že pokud se dopustí nějaké čin, který Není rozumné, ale aby byl na Pozornost hlav kurzu je do 72 hodin, kurz mohou uložit místní sankce, které může zahrnovat neuspokojivý nebo není-li stupeň pro práci předloženy. Ale samozřejmě nebude odkazovat nezáleží na další disciplinární opatření, s výjimkou případů opakovaných činů. Jinými slovy, pokud uděláte nějaké hloupý, a to zejména pozdě v noci, rozhodnutí že druhý den ráno, nebo dva dny Později se probudíte a uvědomit si, Co jsem si myslel? Děláte ve CS50 mají odbyt pro upevnění tento problém a vlastnit až na to, abychom vám vstříc a řešit s ním ve věci, která je zároveň vzdělávací a cenné pro vás, ale stále trestní nějakým způsobem. A teď, aby se zmírnilo toto. 
+
+[VIDEOPŘEHRÁVÁNÍ] 
+
+[MUSIC PŘEHRÁVÁNÍ] 
+
+[END PŘEHRÁVÁNÍ] David J. Malan: Dobře, jsme zpátky. A teď se podíváme na jeden z První z našich reálného světa domén V CS50, umění kryptografie, umění odesílání a přijímání tajné zprávy, zašifrovaný Zprávy chcete-li, které mohou být rozluštěn pouze tehdy, pokud máte někteří klíčovou složkou, která má odesílatel také. Takže motivovat toto vezmeme Podívejte se na tuto věc tady, který je uveden příklad tajný dekodér prsten, který mohou být použity, aby se přijít na to, co tajnou zprávu ve skutečnosti je. Ve skutečnosti, zpět v den na základní škole, pokud jste někdy poslal tajné zprávy některé kamarád nebo nějaký rozdrtit ve třídě, možná jste si myslel, jste byl chytrý by na kus papíru střídání, jako, A do bodu B, a B na C, a C na D, a tak dále. Ale ty byly skutečně šifrování vaše informace, a to i pokud to bylo trochu triviální, nebyl že těžké učitel si uvědomit, No, pokud jste právě změnit B na A a C na B, jste skutečně zjistit, co byla zpráva, ale jsi v šifrování informací. 
+
+Jenom jsi to dělá Jednoduše řečeno, podobně jako Ralphie zde ve slavném filmu, který hraje do značné míry ad nauseum každou zimu. [VIDEOPŘEHRÁVÁNÍ] -BE Je známo všem, že Ralph Parker je tímto jmenován členem Little Sirotek Annie Secret Circle a má právo na všechny vyznamenání a přínos k nim dochází. 
+
+-Signed, Malý sirotek Annie, pult-podepsal Pierre Andre, inkoustem. Vyznamenání a výhody, Již ve věku devíti let. 
+
+[Křik] No tak. Pusťme se do toho. Nepotřebuji všechen ten jazz o pašeráky a piráty. 
+
+Poslouchej zítra večer pro závěrečná dobrodružství černé pirátské lodi. Nyní je čas na Annie tajnou zprávu pro Vás příslušníci tajné kruhu. Nezapomeňte, že děti pouze členové Annie Secret Circle umí dekódovat Annie tajnou zprávu. 
+
+Nezapomeňte, že Annie je závislá na vás. Nastavte si kolíky B2. Zde je zpráva. 12, 11-- 
+
+-I Am in, svou první tajnou schůzku. 
+
+-14, 11, 18, 16. 
+
+-Pierre Byl ve velkém hlasu večer. Mohl bych říct, že dneska je Zpráva byla opravdu důležité. 
+
+-3, 25, to je zpráva od Annie sama. Nezapomeňte, že nikomu to neříkejte. 
+
+-90 Vteřin později, jsem jediný místnost v domě, kde chlapec z devíti mohli sedět v soukromí a dekódovat. Aha, B! Šel jsem do dalšího, E. 
+
+První slovo je být. S, že to přijde jednodušší teď, U, 25-- 
+
+Oh, no tak, Ralphie, musím jít! 
+
+-Budu Být vpravo dole, mami! Gee svist! 
+
+-T, O, být jisti, že to-- být jisti, k čemu? Co bylo Malý sirotek Annie snaží říct? Ujistěte se, k čemu? 
+
+-Ralphie, Andy má na Jdi, budete prosím vyjít? 
+
+-Dobře, Mami! Hned jsem ven! 
+
+-I Byl stále blíž. Napětí bylo hrozné. Co to bylo? Osud planety může viset na vlásku. 
+
+-Ralphie! Andyho musím jít! 
+
+-Budu Být hned po vybalení, proboha! 
+
+-Almost Tam, prsty létaly, mou mysl Byl ocelová past, každý pór vibroval. To bylo skoro jasno, ano, ano, ano. 
+
+-BE Ujistěte se, že pít Ovaltine. Ovaltine? Mizerná reklamy? Zkurvysyn. [END PŘEHRÁVÁNÍ] David J. Malan: OK, takže to je velmi dlouhá cesta zavedení kryptografii, a také Ovaltine. Ve skutečnosti, z tohoto starého inzerátu tady, proč je Ovaltine tak dobrý? To je koncentrovaná extrakce zralé ječný slad, čistá krémová kravské mléko, a speciálně připravené kakao, dohromady s přírodními fosfatidy a vitamíny. Dále je opevněno další vitaminy B a D, mňam. A přesto se můžete dostat to, zdá se, na Amazon, jak jsme tady udělali. 
+
+Ale motivace tady bylo zavádět kryptografii, konkrétně druh kryptografie znám jako tajný klíč kryptografie. A jak již název napovídá, celý zabezpečení tajného klíče šifrovací systém, chcete-li, metodika jen za zakódování informací mezi dvěma lidmi, je to, že pouze odesílatel a pouze příjemce znát tajemství key-- nějakou hodnotu, některé tajné fráze, některé tajné číslo, které jim umožňuje jak šifrování a dešifrování informací. A kryptografie, opravdu, Právě tento týden od 0. 
+
+Je to problém tam, kde je to vstupy, jako skutečné zprávy v angličtině nebo cokoliv jazyk, který vám chcete poslat na někoho ve třídě, nebo přes internet. Tam je nějaký výstup, který se děje Chcete-li být kódovanou zprávu, která vás chtějí, aby příjemce obdrží. A i kdyby někdo v prostřední ji přijímá taky, Nechcete jim nutně být schopen dešifrovat, protože vnitřní straně této black box, nebo algoritmus, Je nějaký mechanismus, některé krok za krokem instrukce, pro odběr že vstup a převedením do výstupní hodnota doufejme bezpečným způsobem. 
+
+A ve skutečnosti, že je nějaký slovní zásoba v tomto světě takto. Prostý text je slovo počítačový odborník by popsali vstup Zpráva, stejně jako angličtina nebo jakémkoli jazyce, který ve skutečnosti chcete poslat k nějakému jinému člověku. A pak ciphertext je scramble na zašifrován, nebo zašifrované, Verze z nich. 
+
+Ale je tu ještě jedna další složka zde. Je tu ještě jedna další vstup tajný klíč kryptografie. A to je samo o sobě klíč, který je v zásadě jak uvidíme, číslo, nebo písmeno nebo slovo, bez ohledu algoritmus je vlastně očekává. 
+
+A jak to dešifrovat informace? Jak to dešifrovat? No, stačí zvrátit výstupy a vstupy. 
+
+Jinými slovy, jakmile někoho přijímá vaše zašifrovaná zpráva, on nebo ona prostě musí vědět, že stejný klíč. Oni přijali ciphertext. A zapojením ty dva vstupy do šifrovacího systému, algoritmus, to černá skříňka, ven by měl přijít na původní holý. A tak to je velmi vysoké úrovni Pohled na to, co je vlastně kryptografie vše kolem. 
+
+Takže pojďme se tam dostat. Nyní se podívejme vespod kapuce něčeho jsme se brát za samozřejmé minulý týden, a pro tuto relaci here-- řetězec. Řetězec na konci dne je jen posloupnost znaků. 
+
+To by mohlo být hello world, nebo Dobrý den Zamyla, nebo cokoliv jiného. Ale co to znamená pro je posloupnost znaků? Ve skutečnosti, knihovna CS50 dává us typ dat s názvem řetězec. 
+
+Ale je tu ve skutečnosti není taková věc jako řetězec v C. Je to opravdu jen sled znak, znak, znak, znak, zpět k sobě, aby zpět k sobě, aby se dovnitř paměti počítače nebo RAM. A podíváme hlouběji do že v Budoucí když se podíváme na samotné paměti, a využití, a hrozby, které jsou zapojeny. 
+
+Ale uvažujme řetězec Zamyla. Takže jen název lidský tady, Zamyla, že je posloupnost znaky, Z-A-M-Y-L-A. A teď pojďme předpokládat, že název je Zamyla je uložen uvnitř počítače program. 
+
+No, to dá rozum, že bychom měli být schopen podívat se na tyto znaky jednotlivě. Takže jsem prostě jít k tomu trochu rámeček kolem názvu Zamyla zde. A to je případ v C, který když vás mají řetězec, jako je Zamyla-- a možná že řetězec se vrátil z funkce jako get řetězec, můžete skutečně manipulovat to znak po znaku. 
+
+Nyní, to je pro germaine konverzace po ruce, protože v kryptografii, chcete-li změnit A do bodu B, a B na C, a C na D, a tak dále, musíte být schopni se dívat na jednotlivé znaky v řetězci. Musíte být schopni změnit Z k něčemu jinému se A k něčemu jinému, M, aby něco jiného, ​​a tak dále. A proto potřebujeme způsob, programově, takže mluvit, v C, aby bylo možné změnit a podívat se na jednotlivá písmena. A můžeme to udělat takto. 
+
+Nech mě jít vrátíme v CS50 IDE. A nech mě jít napřed a vytvořit nový soubor že zavolám tentokrát string0, jako naše první takový příklad, dot c. A já jdu napřed a bič to takto. 
+
+Takže zahrnují CS50.h, a pak zahrnují standardní io.h, který jsem téměř vždy bude bude používat ve svých programech, přinejmenším zpočátku. int main prázdno, a pak tady nejsem dělat struny dostane dostat řetězec. A pak jdu jděte do toho a toho dosáhnout. Chci jít dopředu a, jako kontrola sanity, jen říct, ahoj, procento s, středník, činí řetězec: 0. Uh oh, co jsem udělal tady? Oh, neměl jsem jej připojte. Takže ponaučení, že nebylo úmyslné. 
+
+Takže chyba, více procent Konverze než data argumentů. A to je místo, kde v linka 7-- OK, takže mám, citát konec citátu, který je můj řetězec printf. Mám znak procenta. Ale já jsem chybí druhý argument. 
+
+Jsem chybí čárka s, který Já jsem se v předchozích příkladech. Tak dobrou příležitostí k upevnění ještě jedna chyba, omylem. A teď mi dovolte běžet string0, zadejte Zamyla. OK, ahoj Zamyla. 
+
+Takže jsme se spustit tento druh programu několik jiné době. Ale pojďme udělat něco trochu jinak tentokrát. Namísto pouhého tisku Zamyla je Celý název ven s printf, Udělejme to znak po znaku. 
+
+Chystám se použít pro smyčce. A já jdu dát sám počítací proměnná, zavolal jsem. A budu držet iterace, takže Dokud i je menší než délka s. 
+
+Ukázalo se, že jsme neměli dělat toto minule, že c je dodáván s Funkce s názvem Stirling. Zpět v den, a obecně Stále při provádění funkcí, Lidé se často vybírají velmi stručné názvy, které druh zvuku jako to, co chcete, i když je to Chybí několik samohlásky nebo písmen. Takže Stirling je název funkce, která bere argument mezi závorky, které by měly být řetězec. A to jen vrátí celé číslo, délka tohoto řetězce. 
+
+Takže to pro smyčku na lince 7 se děje začít počítat od i = 0. To bude zvyšovat i na každé iteraci 1, jak jsme dělali několikrát. Ale to bude jen dělat to až do okamžiku když jsem je délka samotného řetězce. 
+
+Takže tohle je způsob, nakonec, iterace nad postavami v řetězci, jak je následovně. Chystám se vytisknout ne Celý řetězec, ale procento c, jeden znak následuje nový řádek. A pak jdu jít dopředu a já potřebuji říkat Chci vytisknout tý charakter s. 
+
+Takže pokud i je proměnná, která indikuje index řetězce, kde jste v něm, musím být schopen říkají, dej mi tý charakter s. A c má způsob, jak dělat Tento hranatými závorkami. Můžete jednoduše říci jménu řetězec, který je v tomto případě s. Pak můžete použít hranaté závorky, které jsou obvykle těsně nad vaší Return nebo Enter klávesu na klávesnici. A pak si dát na index znak, který chcete vytisknout. Takže index bude být number-- 0, nebo 1, nebo 2, nebo 3, nebo tečka, dot, dot, nějaké jiné číslo. 
+
+A my jsme zjistili, že to bude bylo správné číslo, protože já začít počítat při 0 ° C. A ve výchozím nastavení, první znak v řetězci jsou podle konvence 0. A druhý znak je držák 1. A třetí znak je držák 2. A nechceš jít příliš Zatím ale nebudeme, protože jsme bude zvyšovat i jen do něj se rovná délce řetězce. A na kterém místě, Tento cyklus for se zastaví. 
+
+Tak nech mě jít dopředu a uložit toto Program a běh dělat řetězec: 0. Ale já to podělal. Implicitně deklarovat funkci knihovny Stirling s typem takového a such-- teď, to zní povědomě. Ale to není printf. A to není dostat řetězec. 
+
+Nechtěl jsem mhouřit v stejným způsobem, tentokrát. Nevšimnout tady dole trochu dolů dále zahrnuje záhlaví string.h, explicitně poskytnout prohlášení o Stirling. Takže tam je vlastně stopa tam. 
+
+A skutečně to dopadá je tu ještě jeden hlavičkový soubor které jsme nepoužívá ve třídě ještě, ale je to mezi těmi, k dispozici tobě, nazvaný string.h. A v tomto souboru, string.h Je Stirling deklarován. Tak nech mě jít dopředu a ušetřit toho, aby řetězec 0-- hezký, žádné chybové zprávy tentokrát. 
+
+./string0 Zamyla, a Chystám se stiskem klávesy Enter, v tomto bodě getString se děje vrátit řetězec, vložte jej do s. Pak, že pro smyčce se chystá iteraci přes znaky S je jeden po druhém, a vytisknout je na každém řádku jedno, protože Měl jsem tu zpětné lomítko n na konci. Takže jsem mohl vynechat, že zpětné lomítko n, a pak už jen vytisknout Zamyla vše ve stejné linii, účinně reimplementing printf, která není tak užitečné. Ale v tomto případě jsem neudělal. Já jsem vlastně vytištěna znacích, po jednom na řádek takže jsme vlastně vidět efekt. 
+
+Ale já by si měli uvědomit jednu věc zde. A vrátíme se do to v budoucí týden. Ukazuje se, že toto Kód je potenciálně buggy. 
+
+Ukazuje se, že get řetězec a některé další funkce v životě ne vždy nutně vrátit, co jste očekávali. Víme, že od posledního třídy Čas v tom, že dostat Řetězec má vrátit řetězec. Ale co v případě, že uživatel zadá takovou dlouhé slovo, nebo bod, nebo esej že tam prostě není dost paměti v počítači, aby zapadla. 
+
+Stejně jako to, co když se něco špatného pod kapotou? Mohlo by to nestává často, ale to by se mohlo stát, jakmile ve chvíli, velmi zřídka. A tak to dopadá, které se dostanou řetězec a funkce, jako to nemusí nutně vždy vrátit řetězce. Mohou se vrátit nějakou chybovou hodnotu, někteří Sentinel hodnota tak říkajíc, která označuje, že něco se pokazilo. A vy byste vědět jen to od když se dozvěděl to ve třídě teď, nebo po přečtení nějaké další dokumentaci. Ukazuje se, že get řetězec může vrátit hodnotu s názvem null. Null je zvláštní hodnota, že budeme vrátit se v budoucím týdnu. Ale teď, jen vím, že když chci být skutečně správný v pohybu vpřed použitím get řetězec I by neměla jen říkat, a slepě používat jeho návratovou hodnotu, věřit, že je to řetězec. 
+
+Měl bych nejprve říci, hej, počkej, jen postupovat, pokud to není rovno null, kde null, opět, Je jen některé zvláštní hodnotu. A je to jediný zvláštní hodnota, kterou muset starat o Get řetězec. Získat řetězec je buď děje vrátit řetězec nebo null. 
+
+A to vykřičník rovnítko možná víte asi z matiku že byste mohli kreslit rovnítko s čára přes to uvést nerovná. To není obecně charakter můžete psát na klávesnici. A tak ve většině programovacích jazyků, když chcete říci nerovná, budete používat vykřičník, jinak známý jako třesku. Takže říkáte třesk rovná, což Znamená to rovná, logicky. Je to jako, že to není větší než, nebo rovna nebo nižší než nebo rovnou na klávesnici že dělá to vše v jednom symbolu. Takže to je důvod, proč v minulých příkladech jste otevřenou konzolu a poté rovnítko s cílem učinit větší než nebo, řekněme, méně než. 
+
+Takže to, co je tady stánek s jídlem? To je prostě způsob, jak se z zavedením této syntaxi, tato funkce, iterace přes jednotlivé znaky v řetězci. A stejně jako ty náměstí závorky vám umožní získat na ně, brát v úvahu hranaté závorky jsou druh naznačuje na to základní design, přičemž každý charakter uvnitř řetězce je druh zabaleny do někde vespod kapota v paměti počítače. 
+
+Ale pojďme udělat variantu tohoto. Ukazuje se, že toto Program je správné. Takže per os CS50 pro vyhodnocování kód, to je nyní správná. Zvlášť teď, že jsem kontrolu null, tento program by měl nikdy havárii. A já jen vím, že z vlastní zkušenosti. Ale není nic jiného, můžeme skutečně pokazit zde. Ale to není moc dobře navržen, protože vraťme se k základům. 
+
+Za prvé, principles-- Co smyčce for dělat? A pro smyčce dělá tři věci. To inicializuje některé hodnota, pokud ji požádat, aby. Kontroluje stav. A pak po každém iterace, po každém cyklu, že zvýší některé Hodnota nebo hodnoty zde. 
+
+Tak co to znamená? My inicializovat i na 0. My zkontrolovat a ujistěte se, že i je menší než délka s, což je Z-A-M-Y-L-A, takže což je méně než 6. A skutečně, 0 za méně než 6. 
+
+My vytisknout Z. z názvu Zamyla je. Pak jsme zvýšit i od 0 do 1. Pak jsme se zjistit, je jeden méně než délka s? Délka s je 6. Ano to je. 
+
+Tak jsme vytisknout v Zamyla jménu, ZA. Navýšíme i od 0 do 1, k 2. Pak jsme se zjistit, je menší než 2 délka názvu Zamyla je. 6- tak 2 je menší než 6. Ano, pojďme vytisknout nyní mv Zamyla jméno, třetí znak. 
+
+Klíčem je, že na každém iterace příběhu, jsem kontrolu, je i menší než délka Zamyla? Ale úlovek je, že Stirling není vlastnost. Ti z vás, kteří jste naprogramovali Před v jazyce Java nebo jiných jazycích Možná víte o řetězec délky vlastnost, jen některé pouze pro čtení hodnoty. 
+
+V C v tomto případě, pokud je to funkce, která je doslova spočítáním znaky v Zamyla pokaždé nazýváme tuto funkci. Pokaždé, když se zeptáte počítače použít Stirling, je to při pohledu na Zamyla, a říká Z-A-M-Y-L-A, 6. A vrací 6. Až se příště budete volat je uvnitř, že pro smyčce, to bude vypadat na Zamyla opět říci, Z-A-M-Y-L-A, 6. A to bude vracet 6. Takže to, co je hloupé o tento design? 
+
+Proč je můj kód není 5 z 5 pro konstrukci právě teď, tak říkajíc? No, já položení otázka zbytečně. Dělám více práce, než musím. 
+
+Takže i když odpověď je správná, jsem žádá počítač, co je délka Zamyla znovu a znovu a znovu a znovu? A to je odpověď nikdy nezmění. Je to vždycky bude 6. 
+
+Takže lepší řešení než toto by to další verze. Nech mě jít dopředu a dát to v samostatný soubor s názvem string1.c, jen aby to oddělit. A to dopadá v for smyčky, můžete skutečně deklarovat více proměnných najednou. 
+
+Takže budu držet i a nastavte ji na hodnotu 0. Ale já také bude přidat čárku, a říkají, dej mi proměnnou s názvem n, jehož hodnota se rovná délka řetězce s. A teď, prosím, aby můj stav tak dlouho, jak jsem je menší než n. 
+
+Takže tímto způsobem je logika identický na konci dne. Ale já jsem si vzpomněl na hodnota 6, v tomto případě. Jaká je délka názvu Zamyla je? A dávám ji při n. 
+
+A já jsem stále kontrolu pokaždé, když je podmínka. 0 méně než 6? Je jeden méně než 6? Je dva méně než 6, a tak dále? 
+
+Ale nežádám počítač znovu a znovu, co je délka názvu Zamyla je? Jaká je délka jména Zamyla je? Jaká je délka názvu tohoto Zamyla je? Jsem doslova na paměti, že první a Jedinou odpovědí v této druhé proměnné n. Takže to teď bude nejenom správné, ale také dobře navržen. 
+
+A teď, co o stylu? Já jsem pojmenoval své proměnné docela dobře, řekl bych. Jsou to právě teď mimořádně stručné. A to je naprosto v pořádku. 
+
+Pokud máte pouze jeden Řetězec v programu, můžete také volat, že to pro řetězec. Pokud máte pouze jednu proměnnou pro počítání v programu, můžete také volat to nejsem já. Máte-li délku, n je super běžné stejně. Ale já jsem komentoval některý z mých kódu. 
+
+Já jsem neoznámil reader-- ať už je to moje TF, nebo TA, nebo jen colleague-- co má se děje v tomto programu. A tak se dostat dobrý styl, co bych chtěl dělat Je tohle-- něco jako ptát uživatele pro vstup. A já mohl přepsat Tento libovolný počet způsobů. 
+
+Ujistěte se, že S- ujistil get řetězec vrácený řetězec. A pak v here-- a toto je možná Nejdůležitější comment-- iterate přes znaky v to jeden najednou. A já jsem mohl použít některý Volba anglického jazyka zde popisovat každý tyto kusy kódu. 
+
+Všimněte si, že jsem se polož komentovat každý řádek kódu, opravdu jen na zajímavé ones, ty, které mají nějaký smysl, že bych mohl chtějí, aby se super jasný s někým číst můj kód. A proč voláš dostat Řetězec ptát uživatele na vstup? I, že jeden nemusí být nutně vše, co popisná. Ale pomáhá vyprávět, protože Druhý řádek v příběhu je, ujistěte se, dostat řetězec vrácený řetězec. 
+
+A třetí řádek v příběhu je, iterovat přes znaky v y jednom včas. A teď jen na správnou míru, Chystám se jít dopředu a přidat A ještě jedna poznámka, že právě říká, že tisk i-tý znak v s. A teď, co jsem udělal na konci dne? 
+
+Přidal jsem nějaká angličtina Slova ve formě komentáře. Symbol lomítko lomítko znamená, hej, Počítač je pro člověka, Není pro vás počítač. Takže jsou ignorovány logicky. Jsou to právě tam. 
+
+A skutečně, CS50 IDE ukazuje je jako šedá, jako užitečné, ale ne klíč do programu. Všimněte si, co se dá dělat teď. Ať už víte C programování nebo ne, stačí postavit zpátky na to Program a sbírat připomínky. Zeptejte se uživatel pro vstup, ujistěte se, dostat řetězec vrácený řetězec, iteraci přes charaktery v S jeden po druhém, vytisknout znak i-tý znak v S- tak neučiníte dokonce se podívat na kód pochopit, co tento program dělá. A ještě lépe, když se podíváte sami V tomto programu za týden nebo dva, nebo za měsíc nebo za rok, vy nemusíte zírat na kód, snaží se vzpomenout, co jsem se snaží dělat s tímto kódem? 
+
+Vy jste řekl sám. Vy jste popsal to pro sebe, nebo nějaký kolega, nebo TA, nebo TF. A tak to teď bude správné a dobrý design, a nakonec dobrý styl stejně. Tak to mějte na paměti. 
+
+Takže je tu ještě jedna další co budu dělat tady že nyní mohou odhalit přesně to, co je děje pod kapotou. Takže je tu tato funkce v C a jiných jazyků, volal Obsadit že buď implicitně nebo výslovně umožňuje převádět z jednoho datového typu na jiný. Byli jsme zabývající tak pokud dnes s řetězci. 
+
+A smyčce jsou znaky. Ale vzpomínám z týdne 0, jaké jsou znaky? Znaky jsou jen abstrakce na vrcholu numbers-- jedno desetinné místo, a desetinná čísla jsou opravdu jen abstrakce v horní části binárních čísel, jak ji definovat. 
+
+Takže znaky jsou čísla. A čísla jsou znaky, Jen v závislosti na kontextu. A ukázalo se, že uvnitř počítačového programu, můžete určit, jak chcete vypadat u bitů uvnitř tohoto programu? 
+
+Připomeňme, že týdnu 0, kterou jsme měli ASCII, což je právě tento kód mapování dopisy na čísla. A my jsme řekli, kapitál A je 65. Kapitál B je 66, a tak dále. 
+
+A upozornění, máme v podstatě mají znaky na horní řada tady, jak C by jim říkáme, znaky, a poté ints na druhém řádku. A ukázalo se, můžete převést plynule mezi nimi, typicky. A pokud chceme udělat to záměrně, my chtít řešit něco takového. 
+
+Mohli bychom chtít převést velkými a malými Případ, nebo malá písmena na velká písmena. A ukázalo se, je tu ve skutečnosti zde vzor můžeme přijmout za chvíli. Ale podívejme se nejprve při Příkladem toho dosáhnout explicitně. 
+
+Chystám se vrátit do CS50 IDE. Jdu k vytvoření Soubor nazvaný ASCII 0.c. A já jdu dopředu a přidat své Standardní io.h nahoře, int main void v horní části své funkce. A pak jsem prostě jít dělat following-- cyklus for ze i rovná, řekněme, 65. 
+
+A pak jsem bude nižší než 65 plus 26 písmen v abecedě. Takže nechám počítač to spočítejte tam na mě. A pak uvnitř této smyčky, co budu tisknout? 
+
+% C je i zpětná lomítka% n. A teď chci připojit dvě hodnoty. Já jsem dočasně umístit otázku označí tam pozvat na otázku. 
+
+Chci iteraci od 65 kupředu pro 26 písmen abecedy, tisk na každé iteraci, že Nedílnou ekvivalent postavy. Jinými slovy, chci iteraci přes 26 čísla tisk co je ASCII znak je písmeno, a co je odpovídající počet je-- opravdu jen znovuvytvoření graf z tohoto snímku. Takže to, co by měly být tyto otazníky být? 
+
+Tak to dopadá, že druhý jeden by měl být jen proměnná i. Chci vidět, že jako číslo. A střední argumentem Zde mohu říci počítač k léčbě že číslo i jako charakter, tak jako jej nahradit tu procent C. 
+
+Jinými slovy, je-li já, lidský programátor, vím, to jsou jen čísla na konci dne. A vím, že by 65 mapa k nějakému charakteru. S tímto explicitní obsazení, s závorce, název datového typu, který chcete převést, a uzavřené závorka, Můžete říct počítač, hej, počítač, převést tento integer na char. 
+
+Takže když jsem spuštění tohoto Program po kompilaci, podíváme se, co mám dělat get-- ASCII 0. Látat to, co jsem udělal špatně? Využití nedeklarovaný identifikátor, v pořádku, nebylo úmyslné, ale uvidíme, jestli nemůžeme Důvodem přes to. 
+
+Takže linka five-- a tak jsem nedostal velmi daleko před šroubování nahoru. To je v pořádku. Takže linka 5 pro i rovná 65-- vidím. Takže nezapomeňte, že v jazyce C, na rozdíl od některých jazyky, pokud máte předchozí programování zkušeností, máte sdělit počítač, Na rozdíl od Scratch, co typ proměnné to je. 
+
+A já zapomněl klíčovou frázi zde. V souladu pět, jsem začal používat i. Ale já jsem neřekl C jaký typ dat je. Takže já jdu sem a říkají, ach, aby to celé číslo. 
+
+Teď budu pokračovat a překompilovat. Že fixní to. ./ascii0 Enter, to je paráda. Je to nejenom super rychlý, aby požádat počítač, na tuto otázku, spíše než hledat to na snímku, je vytištěn na každý řádek jednu, A 65, B je 66, celá cesta down--, protože jsem to udělal 26 times-- na dopisy z, což je 90. A ve skutečnosti, mírně inteligentnější by byly pro mě, aby se nespoléhali na počítači pro přidání 26. Mohl jsem právě udělal 90, stejně tak dlouho Jak jsem nedělají stejnou chybu dvakrát. Chci jít nahoru přes z, a to nejen nahoru přes y. 
+
+Tak to je explicitní obsazení. Ukazuje se, že toto není ani nutné. Nech mě jít dopředu a spusťte tento kompilátor, a opakování ASCII 0. Ukazuje se, že C je docela chytrý. 
+
+A printf, zejména Je dost chytrý. Pokud jste právě složit i dvakrát pro oba zástupné symboly, printf si uvědomí, oh, dobře tě znám dal já a integer-- určitý počet, jako je 65 nebo 90, nebo cokoliv jiného. Ale vidím, že chceš, abych formátovat toto číslo jako postava. A tak printf může implicitně cast int na char pro vás stejně. Takže to není problém vůbec. 
+
+Ale nevšiml, protože této rovnocennosti můžeme skutečně to udělat stejně. Nech mě jít dopředu a udělat jednu jiné verze tohle-- Ascii 1.c A místo iterace přes celá čísla, může skutečně vyhodit svou mysl iterací přes znaky. Je-li char c dostane na základním kapitálu, I chci jít dopředu a to, pokud C je menší než nebo rovno s kapitálovou Z. A na každé iteraci Chci zvýšit C, mohu Nyní v mém printf řádku zde řekněme, procento C procent i znovu, čárka C. 
+
+A teď můžu jít opačným směrem, odlévání charakter výslovně na celé číslo. Takže znovu, proč byste to udělat? Je to trochu divné Druh počítat, pokud jde o znaky. 
+
+Ale pokud jste pochopili, co je děje pod kapotou je to opravdu žádná magie. To říkáš jen, hej, počítač dát me proměnná s názvem C typu char. Inicializovat jej do hlavního A. A Všimněte si, apostrofy záležitost. 
+
+Pro postavy v C, převezme zpět od minulý týden, můžete použít apostrofy. Pro smyčce, slova, fráze, můžete použít uvozovek. OK, počítač, pořád dělá to tak, Dokud znak je menší než nebo rovno z. A vím, že z mého ASCII tabulky, že všechny z těchto kódů ASCII jsou souvislé. 
+
+Neexistuje žádné mezery. Takže je to jen A až Z, odděleny jedním číslem každého. A pak mohu zvýšit char, jestli opravdu chci. Na konci dne, je to jen číslo. Tohle znám. Takže můžu jen předpokládat, přidat 1 až něj. 
+
+A pak tentokrát, tisknout c, a potom integrální ekvivalent. A já ani nemusíte explicitní obsazení. Mohu nechat printf a Počítač věcem na kloub, takže teď, když spustím aby Ascii1./ascii1, Mám přesně to samé stejně. 
+
+Zbytečný program though-- nikoho bude vlastně psát software aby se přijít na to, co bylo číslo, které mapuje A nebo B, nebo Z? Jenom se to google, nebo podívejte se do on-line, nebo jej vyhledejte na snímku, nebo podobně. Takže tam, kde to skutečně získat užitečné? 
+
+No, když už mluvíme o které skluzavka, Všimněte si, že je skutečný vzor zde mezi velkými písmeny a malá písmena, která nebyla náhodná. Všimněte si, že kapitál A je 65. Malá písmena a je 97. A jak daleko je nižší případě se? 
+
+Takže 65 je to, kolik kroků od 97? Tak 97 minus 65 je 32. Takže kapitál a je 65. Přidáte-li 32 k tomu, dostanete malá písmena a. A ekvivalentně, pokud si odečíst 32, dostanete zpět do hlavního města je-- to samé s B k malým b, velký C k malému C. 
+
+Všechny tyto mezery jsou 32 od sebe. Teď by to zdá se nám umožňují něco jako Microsoft Word, nebo Dokumenty Google jsou vybaveny, kde vás si mohou vybrat vše a pak říkají, všechno změnit na malá písmena, nebo všechno změnit na velká písmena, nebo změnit pouze první slovo věty na velká písmena. Můžeme něco dělat takhle sami. 
+
+Nech mě jít dopředu a uložit soubor Zde volal vydělávat 0.c. A pojďme do toho a vybičovat program že dělá přesně to takto. Takže zahrnují knihovnu CS50. A zahrnují Standard I / O. 
+
+A vím, že to bude brzy. Takže jdu dát do tam už string.h, takže mám přístup k věci, jako je Stirling, a pak int main prázdno, jako obvykle. A pak budu pokračovat a dělat řetězce dostane dostat řetězec jen proto, aby řetězec od uživatele. A pak jdu dělat svou kontrolu zdravý rozum. Pokud řetězec nerovná null, pak je to bezpečné pokračovat. A co chci dělat? Jdu k iteraci z i = 0, a n až do délky řetězce sprinklerního. 
+
+A budu to dělat tak dlouho, dokud i je menší než n a i a a. Zatím jsem opravdu jen půjčovat si nápady z dříve. A teď jdu představit pobočku. 
+
+Takže myslíte, že zpět do nuly, kdy jsme měli ty vidličky na silnici, a minulý týden v C. Jdu říci, je-li i-tý znak s je větší než nebo rovnající se malá písmena A, a-- v Scratch byste doslova říkají a, ale v C říkáte ampersand, ampersand-- a charakter i-tý v S je menší než nebo se rovná malá písmena Z, pojďme udělat něco zajímavého. Pojďme vlastně vytisknout Znak s žádným řádkem to je znak v řetězci, i-tý znak v řetězci. 
+
+Ale pojďme dál a odečteme 32 z něj. Else if charakter v Řetězec, který se díváme Není mezi málo, co a jen málo z, pokračuj a jen vytisknout ji beze změny. Takže jsme zavedli Tento zápis v závorkách Pro naše struny získat u i-tý znak v řetězci. 
+
+Přidal jsem nějaké podmíněné logiky, jako Scratch minulý týden týden jeden, kde Já jen pomocí můj zásadní pochopení toho, co je děje pod kapotou. Je i-tý charakter s větší než nebo rovna? Stejně jako je to 97 nebo 98, nebo 99, a tak dále? 
+
+Ale je to také méně než nebo rovno na hodnotu malým Z? A pokud ano, co to čára znamená? 14, to je něco z Zárodek celé myšlence, vydělávat dopisu jednoduše odečte 32 z ní, V tomto případě, protože vím, že za graf, jak jsou zastoupeny moje čísla. Tak pojďme do toho a spustit to, po kompilaci vydělávat 0.c, a běh vydělávat 0. 
+
+Pojďme psát něco podobného Zamyla ve všech malými písmeny vstoupit. A teď máme Zamyla ve všech velkých písmen. Pojďme psát Roba v celé malými písmeny. Zkusme Jasona ve všech malými písmeny. A my Dostávám nucený kapitalizace. K dispozici je menší chyba, že jsem druh nepředpokládal. Všimněte si, moje nová výzva skončí Na stejné lince jako jejich jména, který se cítí trochu chaotický. 
+
+Takže já jdu sem, a ve skutečnosti na konci tohoto programu vytisknout znak nového řádku. To je vše. S printf, vy nemusíte předat proměnné nebo formátu kódu. Můžete si doslova jen vytisknout něco jako nový řádek. 
+
+Tak pojďme do toho a dělat vydělávat 0 znovu, spusťte jej, Zamyla. A teď je to trochu hezčí. A teď, moje výzva je na své vlastní nový řádek. Takže to je všechno v pořádku a dobře. Tak to je dobrý příklad. Ale já ani nutně muset pevný kód 32. Víš co? Mohl bych say-- nemám vůbec vzpomenout, jaký je rozdíl. 
+
+Ale vím, že kdybych mají malé písmeno, Já v podstatě chcete odečíst off bez ohledu na vzdálenost mezi málo A velký, protože když předpokládám, že všechny ostatní písmena jsou stejné, že by měl dostat práci. Ale spíše než dělat to, víš co? Je tu ještě jeden způsob, jak pořád. 
+
+V případě, že je vydělávat 1.c-- kdybych dát, že do samostatného souboru. pojďme si vydělávat 2.C takto. Chystám se skutečně vyčistit to tady. A místo toho se museli vědí nebo péči o těch nízké úrovni Implementační detaily, jsem namísto Jen do tisku charakter, citát konec citátu, procento C, a pak volat další funkce, která Existuje který bere argument, což je znak, jako je tento. 
+
+Ukazuje se, že v C, je tu další funkce volání na horní, který jako jeho jméno navrhuje bere znak a činí ji do horní případě rovnocenné, a pak ji vrátí takže printf lze jej připojit tam. A tak, jak to udělat, i když, já je třeba zavést jeden další soubor. Ukazuje se, že je tu jiný soubor že byste jen to, ze třídy, nebo učebnice, nebo on-line reference, nazvaný C type.h. 
+
+Takže pokud přidám, že se mezi mé hlavičce Soubory, a nyní znovu sestavit tento program, capitalize2, ./capitalize2 Enter. Pojďme psát Zamyla ve všech malá písmena, stále funguje stejně. Ale víte co? Ukazuje se, že na horní má některé další funkce. 
+
+A dovolte mi představit toto velení tady, tak nějak nešikovně pojmenovaný, ale člověk na manuálu. Ukazuje se, že většina počítačů Linux, jak jsme pomocí here-- provozní Linux system-- mají příkaz volal muž, který říká, hej, počítač, dej mi počítače manuál. co chceš vyhledat v této příručce? 
+
+Chci se podívat do funkce zavolal na horní, Enter. A je to trochu záhadný číst občas. Nevšimnout, že jsme v Linux programátorský manuál. A to vše textu. A všimněte si, že je tu Název funkce tady. Ukazuje se, že má bratrance jménem snížit, což dělá opak. A oznámení podle osnovy, používat tuto fungují v man stránce, tak říkajíc, Je mi říct, že já muset obsahovat c type.h. A věděl jsem, že z praxe. 
+
+Tady, to jsem já, zobrazující dva prototypy pro funkci, takže když jsem někdy chtít použít Vím, co berou jako vstup, a to, co se vrátí jako výstup. A pak, pokud jsem četl popis, vidím podrobněji co funkce dělá. Ale co je důležitější, je-li Dívám se pod návratové hodnoty, říká, že vrácená hodnota je že z převedeného dopisu, nebo C, původní vstup, pokud konverze nebylo možné. 
+
+Jinými slovy, horní pokusíme převést dopis na velká písmena. A pokud ano, bude to vrátit. Ale pokud tomu tak není pro některé reason-- Možná je to už velká písmena, Možná je to vykřičník nebo nějaký jiný punctuation-- je to jen bude vrátit původní C, což znamená, že mohu dělat můj kód lepší následující strukturu. 
+
+Nepotřebuju všechny Tyto látat řádků kódu. Všechny řádky jsem si jen zvýrazní může se zhroutila do jediného simple linka, která je tohle-- printf procenta c na horní konzole S i. A to by bylo Příkladem lepšího designu. 
+
+Proč zavádět v 7 nebo 8 řádků kódu, bez ohledu na to, že jsem jen vymazány, když můžete místo toho sbalit všechny uvedené logiky a rozhodování do jednoho řádku, 13 nyní, že spoléhá na knihovny function-- funkce, která přichází s C, ale že dělá přesně to, co chcete dělat. A upřímně řečeno, i když to nepřišel s C, Dalo by se realizovat sami, as jsme viděli, se dostat záporné int a získat pozitivní int minulý týden stejně. 
+
+Tento kód je nyní mnohem čitelnější. A skutečně, pokud budeme posouvat nahoru, podívejte se, jak mnohem kompaktnější Tato verze mého programu je. Teď je to trochu top těžký, se všechny tyto obsahuje. Ale to je v pořádku, protože teď stojím na bedrech programátorů přede mnou. A ten, kdo to byl, kdo implementována do horní opravdu udělal mi laskavost, podobně jako ten, kdo realizován Stirling opravdu udělal pro mě něco před časem. A tak teď máme lépe návrhu programu která implementuje přesně stejnou logiku. 
+
+Když už mluvíme o Stirling, ať mě jít dopředu a to udělat. Nech mě jít dopředu a uložit Tento soubor jako stirling.c. A ukázalo se, můžeme sloupněte jedna další vrstva docela jednoduše teď. Chystám se jít dopředu a bič up jiném programu v hlavním tady to prostě re-nářadí Délka řetězce následujícím způsobem. Takže tady je řádek kódu, který dostane mi řetězec od uživatele. Stále to s použitím znovu a znovu. Uvedu sám proměnnou s názvem n typu int, která ukládá číslo. 
+
+A nech mě jít dopředu a proveďte následující logiku. Zatímco n-tý znak v s dělá nerovná zpětné lomítko 0, pokračuj a zvýšit n. A pak vytisknout printf procenta I n. Tvrdím, že zde tento program, bez volání délka řetězce, zjistí délku řetězce. 
+
+A kouzlo je zcela zapouzdřené v souladu 8 zde s tím, co vypadá jako novou syntaxí, toto zpětné lomítko 0 do jednoduchých uvozovek. Ale proč tomu tak je? No, zvažte, co je to děje celou tuto dobu. 
+
+A jak stranou předtím, než jsem zapomněl, realizovat také, že kromě manuálových stránek které přicházejí s typickým Systém Linux jako CS50 IDE Uvědomujeme si, že my, štábní kurz, musejí rovněž dělal verzi webové stránky z téhož nápadu reference.cs50.net, který má Ze všech těchto stejných manuálových stránek, to vše stejné dokumentace, jakož i trochu box v horní části, který umožňuje převést všechny spravedlivě tajemný jazyk do méně pohodlné mód, kde jsme se pedagogičtí pracovníci, prošly a snažil zjednodušit některé z jazyka, aby věci zaměřena na nápady, a nikoliv některé z technických. Takže mějte na paměti, reference.cs50.net jako další zdroj i. 
+
+Ale proč se délka řetězce práci jak jsem navrhoval před chvílí? Zde je opět jméno Zamyla je. A tady je Zamyla jméno boxoval dovnitř, jak jsem pokračovat v tom, malovat obraz by bylo, Opravdu, jen posloupnost znaků. Ale Zamyla neexistuje v izolaci v programu. 
+
+Když píšete a spustit program, používáte počítač Mac nebo PC jako paměť RAM, nebo tak říkajíc. A můžete myslet počítač jako mající spousta GB paměti v těchto dnech. A koncert znamená miliardy, takže miliardy bajtů. 
+
+Ale pojďme vzad v čase. A předpokládám, že používáme opravdu starý počítač, který Má pouze 32 bajtů paměti. Mohl bych, na mé obrazovce počítače, jednoduše kreslit na to takto. 
+
+Mohl jsem jednoduše říci, že my Počítač má všechny tyto paměti. A to je jako tyč paměti, pokud Vzpomínáte si náš snímek z poslední doby. A kdybych jen rozdělit To už tolikrát, Tvrdím, že mám 32 bajtů paměti na obrazovce. 
+
+Nyní, ve skutečnosti, mohu jen čerpat dosud na této obrazovce zde. Takže budu pokračovat, a jen konvencí, kreslit paměti mého počítače jako mřížky, a to nejen jako jedna přímka. Konkrétně Tvrdím nyní, že Tento rošt, tento 8 o 4 mřížka, Jen zastupuje všech 32 bajtů dostupné paměti v počítači Mac, nebo k dispozici v mém PC. A oni balicí na dva řádky, jen proto se hodí více na obrazovce. Ale toto je první byte. Jedná se o druhý byte. Jedná se o třetí bajt. 
+
+A to je 32. byte. Nebo, pokud si myslíme, že jako počítač vědec, to je bajt 0, 1, 2, 3, 31. Takže máte 0 až 31, pokud začnete počítat při 0 ° C. 
+
+Takže pokud budeme používat program že hovory dostat řetězec, a dostaneme řetězec z lidského jako jsem volal Zamyla, Z-A-M-Y-L-A, how v oblasti svět dělá Počítač sledovat, které byte, který kus paměti, Patří k němuž řetězec? Jinými slovy, pokud budeme pokračovat zadejte jiný název do počítače, takhle Andi, volání dostat řetězec podruhé, A-N-D-I má skončit v Paměť počítače stejně. Ale jak? 
+
+No, to ukáže, že Vespod kapuce, co dělá C při ukládání řetězců že lidská typů v, nebo tím, že pocházejí z nějakého jiného zdroje, to je vymezuje konec nich speciální character-- zpětné lomítko 0, což je jen speciální způsob, říkat 80 bitů v řadě. 
+
+Takže je-- to je číslo 97 recall. Takže některé vzor 8 bitů představuje desítkové číslo 97. Toto zpětné lomítko 0 je doslova číslo 0, alias nul, N-U-L, na rozdíl od dříve, N-U-L-L, které jsme mluvili. Ale teď, jen vím, že toto lomítko 0 je jen 80 bitů v řadě. 
+
+A je to právě tato linka v písek, který říká něco na levé straně patří do jednoho řetězce, nebo jeden typ dat. A cokoli doprava Patří k něčemu jinému. Andi jméno je mezitím která se právě vizuálně se stane zábal na druhé lince, ale to je jen estetický detail, Podobně je NUL ukončen. 
+
+Je to řetězec několika postav A-N-D-I, navíc pětina tajný charakter, všechny 0 bitů, který právě vymezuje konec názvu andi také. A pokud říkáme dostat String potřetí v počítači, aby se řetězec ve tvaru Maria, M-A-R-I-A, podobně jako je to Maria Název nul byla ukončena s lomítkem 0. 
+
+To je zásadně odlišný z toho, jak počítač by typicky ukládat celé číslo, nebo float, nebo jiný datové typy stále, protože odvolání, celé číslo je obvykle 32 bitů, nebo 4 bajty, nebo dokonce 64 bitů, nebo osm bajtů. Ale mnoho primitiv v počítači v programovacím jazyce mají pevný počet bytů pod hood-- Možná jeden, možná dva, možná čtyři, možná 8. 
+
+Ale řetězce podle návrhu, mají Dynamická počet znaků. Vy nevíte dopředu, dokud lidské druhy uvedené v Z-A-M-Y-L-A, nebo M-A-R-I-A, nebo A-N-D-I. Ty nevíš kolikrát se uživatel chystá zasáhnout klávesnice. Proto nevíte, jak mnoho znaků předem budete potřebovat. 
+
+A tak C tak nějak nechává se jako tajný strouhanka pod kapotou na konci řetězce. Po uložení Z-A-M-Y-L-A v paměti, to také jen staví ekvivalent z období. Na konci věty, klade 80 bitů, aby se tak si vzpomenout, kde Zamyla začíná a končí. 
+
+Takže to, co je spojení, Pak, na tento program? Tento program zde, Stirling, je jednoduše mechanismus pro získání řetězec od uživatele, linka 6. Linka 7, I deklarovat proměnnou s názvem n a nastavit ji na hodnotu 0 ° C. 
+
+A pak v souladu 8, jsem prostě požádala Otázkou, zatímco n-tého charakteru dělá nerovná všechny 0 bits-- jinými slovy, není rovný tento zvláštní znak, lomítko 0, což byl jen zvláštní, že nul character-- jít dopředu a jen zvýšit n. 
+
+A aby dělal to, a udržet to dělá, a aby dělal to. A tak, i když v minulost jsme použili i, je to naprosto v pořádku sémanticky použití n, pokud jste jen snaží počítat tentokrát úmyslně, a chci, aby to nazvat n. Tak to prostě pořád ptát na otázku, je n-tý charakter to všechno 0s? Pokud ne, podívejte se na další vzhled, dívat se na další, podívejte se na další, dívat se na další. 
+
+Ale jakmile vidíte zpětné lomítko 0, Tento loop-- linka 9 až 11-- zastaví. Vy vymanit se z cyklu while, opuštění uvnitř této proměnné n celkový počet všechny znaky v řetězci jste viděli, čímž tisku to. Tak zkusme to. 
+
+Nech mě jít dopředu, a aniž pomocí funkce Stirling, ale jen pomocí své vlastní homegrown verzi Zde volal Stirling, nech mě jít napřed a běh Stirling, typ v něčem jako Zamyla, které jsem věděli předem, je šest znaků. Uvidíme, jestli to funguje. Ve skutečnosti je to šest. Zkusme s Robem, tři znaky, tři znaky také, a tak dále. Tak to je vše, co se děje Na pod kapotou. A všimněte si připojení, Pak se během prvního týdne třídy, kde jsme hovořili o něco jako abstrakce, což je právě toto vrstvení nápadů, nebo složitost, na horní straně základních principů. Zde jsme tak nějak hledá Pod kapotou Stirling, tak říkajíc, aby zjistili, jak by mělo být realizován? 
+
+A mohli bychom znovu zavést ji sami. Ale my jsme nikdy jít re-implementovat Stirling. Jsme jen tak použití Stirling, aby aby skutečně získat nějaké řetězců délku. 
+
+Ale není magie pod kapotou. Pokud víte, že pod ním digestoř, řetězec je jen posloupnost znaků. A že posloupnost znaků vše lze řešit numericky s držákem 0, držák 1, držák 2, a vy vědí, že na konci řetězce je speciální znak, můžete zjistit, jak to udělat téměř všechno v režimu A Program, protože vše, co se scvrkává na je čtení a psaní paměti. To znamená, že měnící se a při pohledu na paměti, nebo presunováním kolem v paměti, tiskařské věci Na obrazovce, a tak dále. 
+
+Takže pojďme nyní používat tuto nově nalezenou pochopení toho, co vlastně struny jsou pod kapotou, a sloupněte jednu další vrstvu že až do teď máme ignoruje úplně. Zejména, kdykoliv Vytvořili jsme program, jsme měli tento řádek kódu v horní deklarovat hlavní. A my jsme je uvedeno int main neplatné. 
+
+A to void v závorkách Má to říkal celou tu dobu, že hlavní Samotná nebere žádné argumenty. Jakýkoliv vstup, který je hlavním dostane od uživatele musí pocházet z jiného Mechanismus, jako get int, nebo si plovák, nebo získat řetězec, nebo jiné funkce. Ale ukazuje se, že když píšete program, můžete skutečně specifikovat že uvedený program přijímat vstupy od člověka na příkazovém řádku sám. 
+
+Jinými slovy, i když dosud mají byl spuštěn jen ./hello ahoj nebo podobné programy, všichni další programy, které jsme používali, že my sami nepsal, mají užíval, jak se zdá, příkazového řádku arguments-- věci, jako je make. Říkáte, že něco jako značku, a pak druhé slovo. Nebo zvonění, říkáte zvonit, a poté druhý slovo, název souboru. 
+
+Nebo dokonce RM nebo CP, jak byste si mohli viděli nebo využívat již odstranit nebo kopírovat soubory. Všechny z nich se tzv příkazového řádku arguments-- další slova na terminálu řádku. Ale až do teď, máme sami jsme neměli Tento luxus mít vstup z Uživatel když on nebo ona vlastně běží samotný program na příkazovém řádku. 
+
+Ale můžeme to udělat znovu deklarovat Hlavní kupředu, nikoli jako mající ztrátu v závorkách ale tyto dva argumenty instead-- první celé číslo, a druhý něco Nový, něco, co budeme nazývat pole, něco podobného v duchu s tím, co jsme viděli v Scratch jako seznam, ale Pole řetězců, jak budeme brzy vidět. Ale podívejme se tím, Jako příklad, než my rozlišit přesně to, co to znamená. 
+
+Takže když jdu do CS50 IDE Odtud jsem šel napřed a deklarované v souboru nazvaném argv0.c následující šablony. A všimněte si jedinou věc, to je něco jiného tak daleko je, že jsem se změnil void int argc řetězec argv otevřený držák, v blízkém okolí Závorka. A všimněte si pro tuto chvíli, je tu nic uvnitř těchto držáků. 
+
+Neexistuje žádné číslo. A není i, nebo n, nebo jakékoliv jiné písmeno. Já jsem jen pomocí hranaté závorky teď, z důvodů, my přijdeme zpět za chvíli. 
+
+A teď, co budu dělat, je to. Pokud argc rovná rovná 2-- a připomínají, že se rovná rovná je operátor rovnosti porovnání levý a pravý pro rovnost. Není to úkol Operátor, který je jeden rovnítko, což znamená, že kopie zprava doleva nějakou hodnotu. 
+
+Pokud argc rovná se rovná 2, chci řekněme, printf, ahoj, procenta, nová linka, a pak připojte in-- a tady je nová trick-- argv držák jeden z důvodů, že vrátíme za chvíli. Else if argc není rovna 2, víš co? Řekněme prostě jít dopředu a jako obvykle, tisk out hello world bez substituce. 
+
+Takže se zdá, že pokud argc, který znamená počet argumentů, se rovná 2, Chystám se vytisknout Dobrý den něco nebo jiný. V opačném případě, ve výchozím nastavení, jsem do tisku ahoj svět. Co to tedy znamená? 
+
+No, nech mě jít dopředu a uložit tento soubor, a pak to dělat argv0, a pak ./argv0, Enter. A to říká hello world. A teď, proč tomu tak je? 
+
+Tak to dopadá, kdykoli budete spustit program na příkazovém řádku, plníte v co budeme obecně požadují argument vektor. Jinými slovy, automaticky počítače, operační systém, se chystá předat do svého programu Samotný seznam všechna slova že lidský zadali při výzvu, v případě, že jste programátor chtějí dělat co s těmito informacemi. A v tomto případě je pouze slovo Jsem napsal v řádku je ./argv0. 
+
+A tak se počet argumentů, které je byly přeneseny do mého programu je jen jedna. Jinými slovy, tento argument počítat, jinak známý jako argc Zde jako celé číslo, je jen jedna. Jeden z nich, samozřejmě, není rovno dvěma. A tak to je to, co tiskne, ahoj svět. 
+
+Ale dovolte mi, abych to někde. Dovolte mi říci, argv0. A pak, jak o Maria? A poté stiskněte klávesu Enter. 
+
+A všimněte si, co se děje tady magicky. Nyní, místo toho, Hello World, mám změnilo chování tohoto programu tím, že vstup není z get řetězec nebo jiné funkce, ale z zdá se, můj povel samo o sobě to, co jsem původně zadali. A můžu hrát tuto hru znovu změnou na Stelios, např. 
+
+A teď vidím jiný název i nadále. A tady, mohl bych říct Andi. A mohl bych říci Zamyla. A můžeme hrát tuto hru po celý den, Stačí připojit v různých hodnotách, tak dlouho, jak jsem poskytnout přesně Dvě slova na příkazovém řádku, taková, že argc, počítat můj argument je 2. 
+
+Musím vidět, že název zapojen do printf, za tohoto stavu zde? Takže se zdá, že mají nyní expresivní schopnost přijet vstup z jiného mechanismu, z takzvaného příkazového řádku, spíše než by museli čekat dokud uživatel spustí program, a pak ho vyzve pomocí něco podobného get řetězec. 
+
+Takže co je to? Argc, opět je jen číslo, počet words-- arguments-- že uživatel za předpokladu, u prompt, u ​​okna terminálu, včetně názvu programu. Takže naše ./argv0 je, ve skutečnosti, název programu, nebo jak jsem spustit program. 
+
+Že se počítá jako slovo. Takže argc by být 1. Ale když jsem psát Stelios, nebo Andi, nebo Zamyla, nebo Maria, to znamená, že počet argument je dva. A tak teď je tu dvě slova, uplynulo v. 
+
+A oznámení, můžeme pokračovat v této logiky. Mám-li skutečně říci, něco jako Zamyla Chan, plné jméno, a tím absolvování tři argumenty celkem, Nyní se říká, že opět jako výchozí, protože, samozřejmě, 3 se nerovná 2. 
+
+A tak tímto způsobem, mám Přístup přes argv tento nový argument že jsme mohli technicky zavolat, co chceme. Ale konvencí, to je argv a argc, resp. Argv argument vektor, je laskavý o synonymum pro programování Funkce v C nazývá pole. 
+
+Pole je seznam podobnými hodnotami zpět k sobě, k sobě, k sobě. Jinými slovy, pokud je tady v RAM, další z nich je hned vedle něho, a hned vedle něj. Nejsou to všude možně. A že druhý scénář, kde se věci jsou všude v paměti, může být ve skutečnosti silný rys. Ale vrátíme se, že když jsme mluvit o milovník datových struktur. Pro tuto chvíli, pole je jen kus souvislé paměti, jejichž jednotlivé prvky jsou zpět k sobě, dozadu, dozadu, a obecně stejného typu. 
+
+Takže pokud se nad tím zamyslíte, od A Před okamžikem, co je řetězec? No, řetězec, jako Zamyla, Z-A-M-Y-L-A, je technicky Jen pole. Je to řada znaků. 
+
+A tak pokud opravdu kreslit to, jak jsem udělal dříve, jako kus paměti, Ukazuje se, že každý z nich znaky zabírá byte. A pak je tu ten zvláštní Sentinel charakter, zpětné lomítko 0, nebo všech osm bitů 0, které vymezuje konec tohoto řetězce. Takže řetězec, to dopadá out, citovat konec citátu řetězec, je jen řada chara-- char bytí aktuální datový typ. 
+
+A teď argv, meanwhile-- Vraťme se do programu. Argv, i když vidíme slovo Řetězec tady, není samo o sobě řetězec. Argv argument vektor, je pole řetězců. 
+
+Takže stejně jako můžete mít celou řadu znaky, můžete mít vyšší úroveň, řada strings-- tak, například, Když jsem napsal před chvílí ./argv0 argv0, prostor Z-A-M-Y-L-A, I tvrdil, že argv měl dva řetězce v to-- ./argv0, a Z-A-M-Y-L-A. v Jinými slovy, argc bylo 2. Proč tomu tak je? 
+
+No, efektivně, co se děje na je, že každý z těchto řetězců je samozřejmě řada znaků Stejně jako dříve, jejichž jednotlivé znaky zabírá jeden bajt. A nepleťte skutečný 0 v názvu programu s 0, což znamená, že všech 80 bitů. A Zamyla, zatím, je stále také řada znaků. 
+
+Takže na konci dne, je to opravdu vypadá to pod kapotou. Ale argv, od přírody, jak hlavní práce, mi umožňuje zabalit to všechno až do, chcete-li, větší pole že, pokud se o něco více než zjednodušit jaký obraz vypadá a co ne docela čerpat ji lze škálovat až tam, Toto pole je jen o velikosti 2, první prvek, který obsahuje řetězec, Druhým prvkem který obsahuje řetězec. A, podle pořadí, pokud jste druh přiblížit na každém z těchto řetězců, co si viz pod kapotou je, že každý řetězec je jen řada znaků. 
+
+Nyní, stejně jako s řetězci, jsme byli schopni získat přístup charakteru i-tého v řetězci pomocí tohoto hranatou závorku notace. Podobně, s poli Obecně můžeme použít hranatou závorku notaci dostat na libovolný počet řetězců v poli? Například, dovolte mi, abych jděte do toho a toho dosáhnout. 
+
+Nech mě jít dopředu a vytvořit argv1.c, což je trochu jiný tentokrát. Místo toho, aby kontrola argc2, Chystám se namísto toho dosáhnout. Pro int získám 0, I je méně než argc, já navíc plus, a pak vytisknout uvnitř toho, procent s, nový řádek, a poté argv držák i. 
+
+Takže jinými slovy, já nezabýváme Jednotlivé znaky v okamžiku. Argv, jak vyplývá z těchto prázdném náměstí šle na pravé straně názvu argv, znamená, že argv je pole řetězců. A argc je jen int. 
+
+Tato linka tady, 6, je řka set i rovná 0. Počítat celou cestu až do, ale ne včetně, argc. A pak se na každém opakování, vytisknout řetězec. Co string? 
+
+I-tý řetězec v argv. Takže zatímco před rokem jsem byl pomocí hranatou závorku notace, aby se dostali i-tého znak v řetězci, nyní Já používám notaci hranatou závorku se dostat na i-té řetězec v poli. Takže je to trochu z jedné vrstvy výše, koncepčně. 
+
+A tak to, co je hezké o tom Program nyní, když jsem kompilovat argv1, a pak dělat ./argv1 a zadejte v něco jako foo bar Baz, což jsou tři výchozí slova, která o počítačový vědec sáhne kdykoliv on nebo ona potřebuje nějaké zástupné slovo, a stiskněte klávesu Enter, každý z těchto slov, včetně jménem programu, který je v argv na prvním místě, skončí tištěn jeden po druhém. A je-li to změnit, a já říkám něco jako argv1 Zamyla Chan, dostaneme všechny tři z těch, Slova, což je argv0, argv1, argv2, protože v tomto Případ argc, hrabě, je 3. 
+
+Ale co je hezké je, pokud jste pochopili že argv je jen pole řetězců, a chápete, že řetězec je řada znaků, můžeme skutečně trochu použít hranatou závorku notace vícekrát zvolit řetězec, a pak zvolte znak uvnitř řetězce, potápění v hlubší takto. V tomto příkladu, nech mě jít vpřed a volat tuto argv2.c. A v tomto případě, nech mě jít napřed a dělat following-- za int i získat 0, i je menší než argc, já navíc plus, stejně jako předtím. Takže jinými words-- a teď tohle je stále dost komplikovaná. Pak budu říkat iteraci přes řetězců v argv, jako poznámka pro sebe. A pak budu mít vnořené pro smyčce, která vás pravděpodobně udělal, nebo zvážil Přitom ve Scratch, kde Chystám se říct, že jsem int-- nebude znovu použít i, protože nechci do stínu, nebo druh přepsat existující i. 
+
+Jdu místo, řekněme j, protože to je můj Jdi na proměnnou poté, co jsem, když jsem jen snaží počítat jednoduché počty. Pro j dostane 0-- i, n, bude ten přísný délku argv držáku i, tak dlouho, dokud j je menší než m, j navíc plus, proveďte následující kroky. A tady je zajímavá část. 
+
+Vytisknout znak a nový řádek, zapojením argv držáku i, j konzolou. OK, tak ať mi sem nějaké připomínky. Iteraci přes znaky V současné řetězci, print j-tý znak v i-tém řetězce. Takže teď, uvažujme Co znamenají tyto připomínky. 
+
+Iteraci přes struny v argv-- kolik Řetězce jsou v argv, který je pole? Argc mnoho, takže jsem iterace z i rovno 0 až argc. Mezitím, kolik znaků jsou v řetězci i-tého v argv? 
+
+No, dostat tuto odpověď, Jen říkám délka řetězce na kterých mi záleží proudu stringů o, což je argv držák i. A já jdu k dočasnému uložení, které hodnota n, jen pro účely ukládání do mezipaměti, pamatovat si to pro efektivitu. A pak budu inicializovat j 0, pokračovat tak dlouho, dokud j je menší než n, a na každé iterace přírůstek j. 
+
+A pak tady, na můj komentář na řádku 12, vytisknout znak, následuje nový řádek, specificky argv držák i mi dává řetězec i-tý V argv-- takže první slovu, Druhé slovo, třetí slovo, cokoliv. A pak j ponory v hlouběji, a dostane me j-tý charakter tohoto slova. A tak ve skutečnosti, můžete léčit argv jako multi-dimenzionální, jako dvourozměrné pole,, přičemž každý druh slovo vzhled jako je to v vaše mysl je oko, a každá postava je druh složen sloupec, v případě, že pomůže. 
+
+Ve skutečnosti, když jsme dráždit Tento rozdíl v příštích týdnech, to bude trochu sofistikovanější než to. Ale můžete opravdu myslet na to, že pro tuto chvíli, jak je to jen dvojrozměrný pole, přičemž jedna úroveň z toho se všechny struny. A pak, když se ponořit do hlubší vás může dostat na jednotlivé znaky v něm pomocí této notace zde. 
+
+Takže to, co je čistý efekt? Nech mě jít dopředu a aby argv2-- látat to. Udělal jsem tu chybu. Implicitně i prohlášením, že Knihovna funkčních Stirling. Takže celou tu dobu, je to možná to vhodné že jsme nějak dokončovací přesně tam, kde jsme začali. 
+
+šroubované jsem se implicitně deklarovat Knihovna funkčních Stirling. OK, počkej. Vzpomínám si, že zejména protože je to tady. Musím zahrnout do string.h tato verze programu. 
+
+Nech mě jít dopředu a zahrnují string.h, kromě toho, že, pokračuj a překompilovat argv2. A teď je to tady, aby argv2, Enter. A i když je to trochu mystické na první pohled, Všimněte si, že skutečně to, co je vytištěna je tečka argv2. 
+
+Ale když jsem typ některá slova poté, co prompt, jako argv2 Zamyla Chan, Vstoupit, také trochu mystické na první pohled. Ale pokud budeme posouvat zpět nahoru, ./argv2 Z-A-M-Y-L-A C-H-A-N. Tak jsme zopakovali nad každým slovem. A zase jsme zopakovali v průběhu každá postava uvnitř slova. 
+
+Nyní, po tom všem Uvědomujeme si, že je tu jeden další detail jsme byli laskavý ignorování celou tuto dobu. Právě jsme se odtrhnou, co vstupy Hlavním může být? Co výstup hlavního jeho? 
+
+Všechny té doby jsme byli jen kopírování a vkládání Slovo int před hlavní, když můžete vidět on-line, někdy nesprávně ve starších verzích C a překladačů, které říkají neplatné, nebo vůbec nic. Ale opravdu, pro verze C, které používáme, C 11, nebo 2011, si uvědomit, že by mělo být int. A to by mělo být buď neplatné nebo argc a argv zde. 
+
+Ale proč int main? Co je to vlastně vrací? No, to dopadá celý tento čas, kdykoli jste napsal Program Hlavní je vždy vracet něco. Ale to bylo přitom tajně. 
+
+To něco je int, as linie 5 naznačuje. Ale co int? No, tam je to Konvence při programování, čímž by se nic pokazilo a všechno je v pořádku, Programy a funkce obecně return-- poněkud counterintuitively-- 0. 0 obvykle znamená, je vše v pořádku. Takže i když si myslíte, to jak falešný v mnoha kontextech, to vlastně obecně znamená dobrou věc 
+
+Mezitím, pokud se program vrátí 1, nebo negativní 1, nebo 5, nebo záporné 42, nebo jakékoliv jiné než hodnota 0, že obecně označuje že se něco pokazilo. Ve skutečnosti, na vlastním PC nebo Mac, jste mohli vidět ve skutečnosti chybové hlášení, přičemž ji něco řekne nebo jiná chyba Kód záporné 42, nebo chybový kód 23, nebo něco takového. Toto číslo je obvykle jen náznak programátor, nebo společnosti který dělal software, co se stalo a proč, aby si mohli prohlédnout jejich dokumentace nebo kód, a zjistit, co Chyba ve skutečnosti znamená. Je to obecně není užitečné pro nás koncovým uživatelům. 
+
+Ale když hlavní vrací 0, je vše v pořádku. A pokud nezadáte Jaké hlavní by měl vrátit, to bude jen automaticky return 0 pro vás. Ale vracet něco jinak je vlastně užitečný. 
+
+V tomto posledním programu, dovolte mi, abych pokračovat a volat tuto exit.c, a zavést poslední dnešních témat, známý jako chybový kód. Nech mě jít dopředu a patří naše Známé soubory až top, dělat int main. A tentokrát, pojďme dělat int argc, Řetězec argv, a se svými konzolami naznačit, že je to v poli. A pak mi dovolte provést kontrolu zdravý rozum. Tento čas, pokud není argc rovna 2, pak víte, co? Zapomeň na to. Chystám se říci, že hej, uživatel, vám chybí řádek argumentu příkazu lomítko n. 
+
+A pak to je vše. Chci ukončit. Jdu preventivně, a předčasně opravdu, návrat něco jiného, ​​než je číslo 1. Jdi na hodnotu pro první Chyba se může stát je 1. Máte-li nějaký jiný chybný Situace, která by mohla nastat, dalo by se říct návratnosti 2 nebo 3 vrátí, nebo možná i negativní 1 nebo záporné 2. 
+
+To jsou jen výstupní kódy které jsou, obecně, užitečné pouze pro programátora, nebo Společnost, která je lodní software. Ale skutečnost, že je to Není 0 je to, co je důležité. Takže pokud v tomto programu, chci zaručit, že tento program pouze funguje, pokud mi poskytuje uživateli s počtem argumentů dvou, název programu, a některé další Slovo, mohu prosadit tolik takto, křičet na uživatele s printf rčení, Chybí řádek argumentu příkazu, vrátí 1. Která sama od sebe okamžitě ukončete program. 
+
+Pouze v případě, argc rovná 2 dostaneme dolů Zde, na kterém místě budu říkat, Dobrý den procent s, lomítko n, argv1. Jinými slovy, já jsem nebude po argv 0, který je jen název programu. Chci vytisknout Dobrý den, čárka, druhé slovo, že lidský zadali. A v tomto případě na řádek 13, je vše v pořádku. 
+
+Vím, že je argc 2 logicky z tohoto programu. Chystám se jít dopředu a return 0. Jako stranou, mějte na paměti, že To je pravda, v Scratch stejně. 
+
+Logicky, mohl bych to udělat a zapouzdřit tyto řádky kódu v tomto jiného klauzule zde. Ale to je tak nějak zbytečně odsazení můj kód. A já chci, aby se Super zřejmé, že bez ohledu na to, Ve výchozím nastavení, ahoj něco dostane vytištěny, tak dlouho, dokud uživatel spolupracuje. 
+
+Takže je to velmi časté použití podmínkou, jen v případě, chytit některé chybné Situace, a pak skončí. A pak, pokud je vše no, ne mít jinde, ale prostě kód venku, že v případě, že je to proto, ekvivalent v tomto Zejména případ, logicky. Takže Vracím 0, jen proto, aby výslovně znamenat všechno je v pořádku. 
+
+Kdybych vynechal return 0, bylo by to se automaticky předpokládat, pro mě. Ale teď, když se vracím jeden z alespoň tomto případě Jdu, pro správnou míru a jasnost, vrátí 0, v tomto případě. Takže teď nech mě jít dopředu a dělat exit což je perfektní segue se jen tak odejít. 
+
+Ale aby exit a nechte mě jít a udělej ./exit, Enter. A program křičel na mě, Chybí argument příkazového řádku. OK, dovolte mi spolupracovat. 
+
+Chci místo toho dělat ./exit, David, Enter. A teď se říká, ahoj David. A ty by za normálních okolností vidět. 
+
+Ale ukazuje se, že je tu Zvláštní způsob, jak v Linuxu skutečně vidět s tím, co exit code program ukončen. Někdy v grafickém svět jako Mac OS nebo Windows, uvidíte pouze tato čísla, když chybové hlášení se objeví na obrazovce a programátor zobrazuje toto číslo. Ale pokud chceme vidět, co je chyba Zpráva znamená, že můžeme dělat to here-- tak ./exit, Enter, tisk Chybí argument příkazového řádku. 
+
+Pokud mám teď dělat echo $ ?, která je směšně vypadající mystický. Ale $? je magické zaklínadlo který říká, hej, počítač, řekni mi, co předchozí Kód ukončení programu bylo. A já stiskněte klávesu Enter. Vidím 1, protože to je to, co jsem řekl můj hlavní funkce vrátit. 
+
+Mezitím, když to udělám ./exit Davida, a stiskněte klávesu Enter, vidím, Ahoj Davide. A jestli mám teď dělat echo $ ?, vidím Dobrý den 0. A tak to bude ve skutečnosti být cenné informace V souvislosti s debugger, ne tak moc, že ​​vy, člověk by bylo jedno. Ale debugger a další Programy budeme používat tento semestr bude často vypadají v tomto čísle, i když je to něco schované pokud se podíváte na to, aby určit, zda program je nebo není Provedení bylo správné nebo nesprávné. 
+
+A tak to nás přivádí k Tento, na konci dne. Začali jsme dnes při pohledu na ladění, a následně v průběhu sama o sobě, a pak další zajímavé, technicky pod kapotou v jaké jsou řetězce, které trvají týden jsme si vzal za samozřejmost, a jistě vzal za samozřejmost Scratch. 
+
+Pak jsme se podívali na to, jak můžeme přistupovat Jednotlivé znaky v řetězci, a pak zase vzal vyšší úroveň dívat se na věci, při pohledu na to, jak well-- pokud se chceme dostat na jednotlivé prvky v seznamu, jako je struktura, nemůžeme dělat, že s více řetězci? A můžeme s argumenty příkazového řádku. Ale tento obraz zde pouhých krabic je demonstrativní tohoto obecnou představu z pole, nebo ze seznamu, nebo vektoru. A v závislosti na kontext, všechna tato slova znamenat nepatrně odlišné věci. Takže v jazyce C, jdeme jen mluvit o pole. A pole je kus paměti, z nichž každý je prvky jsou souvislé, zpět, dozadu, dozadu, do zad. 
+
+A tyto prvky jsou obecně stejného typu dat, znak, znak, znak, znak, nebo string, string, string, string, nebo int, int, int, ať je to cokoli se snažíme obchodě. Ale na konci dne, to je jak to vypadá koncepčně. Bereš svůj Paměť RAM nebo počítače. A vy carvingové ji do stejně velké krabice, z nichž všechny jsou zpět, k sobě, k zpět k sobě tímto způsobem. 
+
+A co je hezké o tato myšlenka a skutečnost, že můžeme vyjádřit hodnoty tímto způsobem přičemž první z datových struktur ve třídě, znamená, že můžeme začít řešit problémy s kódem která přišla tak intuitivně v týdnu 0. Vzpomeňte si telefon Kniha příklad, kde jsme použili rozděl a panuj, nebo binární vyhledávání, prosít přes celek banda jmen a čísel. Ale jsme předpokládali, vzpomínám, že telefonní seznam byl již řazeno, že někdo jiný už Figurální out-- daný seznam jmen a numbers-- jak je abecedy. A teď, když v C my, Také mají schopnost položit věci, nikoli fyzicky v telefonním seznamu ale prakticky v počítači paměť, budeme moci příští týden zavést znovu tohle-- první z našich datových struktur, které by array-- ale co je důležitější, aktuální výpočetní vědy algoritmy implementovány v kódu, s nímž můžeme uložit Údaje ve strukturách, jako je tato, a spusťte jej manipulovat, a skutečně řešit problémy s tím, a stavět na vrcholu toho, nakonec, programy v jazyce C, v Pythonu, v JavaScriptu, dotazování databáze s SQL? 
+
+A uvidíme, že všechny tyto různé názory blokování. Ale teď, připomenout, že domény, který dnes představila Byla to věc tu, a svět kryptografie. A mezi další problémy, které sami vyřeší je umění kryptografie, míchat a de-zakódování Informace a šifrování a dešifrování textu, a za předpokladu, že v konečném důsledku že nyní již víte, co je pod kapotou takže když vidíte nebo přijímat zpráva takhle vás sami ji rozluštit. To vše a více příště. 
+
+[VIDEOPŘEHRÁVÁNÍ] 
+
+-Mover Právě dorazil. Chystám se jít návštěvu Jeho vysokoškolský profesor. Ano. Ahoj. To jsi ty. Počkejte! David. Jen se snažím přijít co se ti stalo. Prosím, něco mohlo pomoci. Byla jste jeho kolega spolubydlící, ne? Byl jste tam s ním, když on dokončil projekt CS50? 
+
+[MUSIC PŘEHRÁVÁNÍ] 
+
+-To Byl CS50. 
+
+Miluji toto místo. 
+
+-Sníst. Jdeme ven obchodu. 
+
+[END PŘEHRÁVÁNÍ] 

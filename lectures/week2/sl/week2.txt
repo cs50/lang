@@ -1,0 +1,689 @@
+[GLASBA] 
+
+DAVID J. Malan: V redu. To je CS50 in to je začetek 2 tedna. In se spomnite, da se je zadnjih nekaj tednov, smo jih uvaja računalnik znanosti in, po drugi strani, programiranje. 
+
+In smo začeli zgodbo s pomočjo Scratch, da grafični jezik iz Media Lab MIT. In potem nazadnje, prejšnji teden, si mi uvesti higher-- a jezika na nižji ravni znana kot C, nekaj, kar je zgolj tekstovno. In res, zadnjič, ko smo raziskati v tem kontekstu več konceptov. 
+
+To, odpoklic, je bil zelo Prvi program smo iskali. In ta program, preprosto, natisne, "Zdravo, svet." Ampak tam je tudi veliko Navidezna magic dogaja. Tam je to #include s temi kotnih oklepajih. Tam je int. Tam je (ničen). Tam je oklepaji, zaviti oklepaji, podpičji, in še veliko več. 
+
+In tako opozarjajo, da smo uvedli praske tako da bi lahko v idealnem primeru, glej preteklost da skladnja, stvari, ki v resnici ni vse to razumsko zanimivo, vendar že na začetku je nujno, malce zapleteno zaviti vaš um okoli. In seveda eden izmed najpogostejših stvari že na začetku v programskem razredu, predvsem za tiste manj udobno, je, da se razočarane in spotaknil jih nekatere skladenjskopomenske napake, da ne omenjam logičnih napak. In tako med našimi cilji Danes, v resnici, bo je, da vas opremili z nekaterimi reševanje težav tehnike, kako za boljše reševanje težav sami v obliki odpravljanje napak. In se spomnite tudi, da je okolje, ki smo uvedli Zadnjič, ko je bil imenovan CS50 IDE. To je spletno programsko opremo, ki vam omogoča, da program v oblaku, tako rekoč, držeč vse vaše datotek skupaj, saj smo spet bo danes. In spomnim, da smo revisited te teme tukaj, med njimi funkcije in zank, in spremenljivke, in Boolove izrazi, in pogoji. In dejansko nekaj več, da smo prevedena iz sveta Scratch v svet C. 
+
+Toda temeljna zgradba bloki, tako rekoč, so bili res še vedno isto prejšnji teden. Dejansko smo res samo imeli drugačna puzzle kos, če hočete. Namesto tega vijolično shrani blok, smo namesto je printf, ki je ta funkcija v C, ki vam omogoča, da natisnete nekaj in ga oblikujte na zaslonu. Smo uvedli CS50 Knjižnica, kjer vas imajo zdaj na vaši get_char odstranjevanje, in get_int in get_string, in še nekaj drugih funkcij, kot dobro, prek katerega lahko dobite vhod od uporabnika lastno tipkovnico. In smo tudi pogled na stvari kot these- bool in char, in double, float, int, long_long niz. In tam je tudi druge vrste podatkov v C. 
+
+Z drugimi besedami, ko se prijavijo spremenljivka za shranjevanje določeno vrednost, ali ko izvajajo funkcijo da vrne neko vrednost, lahko določite, kaj tip vrednosti, ki je. Je niz, kot je zaporedje znakov? Ali je to število, kot celo število? Je to plavajočo vejico Vrednost ali podobno? Torej, v C, za razliko od nič, smo dejansko začel navesti kakšne podatkov smo se vračajo ali uporabo. 
+
+Ampak, seveda, smo naleteli tudi na nekatere temeljne meje računalništva. In predvsem, ta jezik C, odpoklic da smo si na celo preliv, realnost da, če imate le končna količina pomnilnika ali, natančneje, končna številka bitov, lahko računate tako visoko samo. In tako smo iskali v tem primeru tukaj pri čemer števec na letalu, pravzaprav, če deluje dovolj dolgo bi preliva in povzroči programske opreme dejansko fizično možna napaka. 
+
+Ogledali smo si tudi plavajoče točka nenatančnost, realnost da le končno število bitov, ali je to 32 ali 64, lahko določite le toliko številk Po decimalno vejico, po katerem začeli, da bi dobili nenatančno. Tako, na primer, ena tretjina v svet tukaj, v našem človeškem svetu, vemo, je samo neskončno število od 3 let vejico. Vendar računalnik ne more nujno predstavljajo neskončno število številk če le dovolite, da nekateri končna količina informacij. 
+
+Torej, ne le, da smo vas opremili z večjo močjo v smislu o tem, kako bi lahko izraziti sebe na tipkovnice v smislu načrtovanja, smo omejeni tudi kaj lahko dejansko narediti. In res, lahko hroščev in napak izhajajo iz teh vrst vprašanj. In res, med tem danes se bodo teme, kot so odpravljanje napak in dejansko je videti pod pokrovom kako so bile uvedene stvari zadnjem tednu dejansko izvajajo tako da boste bolje razumeti obe zmogljivosti in omejitve jeziku, kot je C. 
+
+In v resnici, bomo lupine nazaj plasti od najpreprostejših strukture podatkov, nekaj, kar se imenuje matrika, ki Scratch se zgodi, da klic "seznam". To je malo razlikuje v tem kontekstu. In potem bomo uvesti tudi eno izmed Prvi od naših domensko specifičnih problemov v CS50, svet kriptografija, umetnost kodiranja ali šifriranje podatkov tako ki ga lahko pošljete skrivna sporočila in dekodiranje skrivna sporočila med dvema osebama, A in B. 
+
+Torej, preden smo prehodom v tem novem svetu, poskusimo vas opremili z nekaterimi tehnike, s katerimi boste lahko odpravili ali zmanjšanje vsaj nekaj od frustracij da ste verjetno naleteli več kot samo v zadnjem tednu. Dejstvo je, pred vami so such-- nekaj svoje prve težave v C. In kvote so, Če ste kot jaz, prvič poskusite vnesti iz programa, tudi če logično razmišljati Program je zelo preprosta, bi lahko zelo dobro zadel zid, in prevajalnik ne bo sodelovala. Znamka ali Zvoka ne bo dejansko opravljate svoje ponudbe. 
+
+In zakaj bi to lahko bilo? No, pa si oglejte, morda preprost program. Bom, da gredo naprej in shranite to datoteka namenoma imenuje buggy0.c, ker vem, da pomanjkljiva vnaprej. Ampak jaz ne bi spoznala, da če je to je prvi ali drugi ali tretji program da sem pravzaprav kar sam. Tako da sem šel naprej in tip ven, int main (praznino). In potem znotraj mojih zavitih oklepajev, zelo pozna ( "zdravo, world-- Nagibnica, n ') - in podpičjem. 
+
+Sem shranili datoteko. Zdaj bom šel dol na mojo terminalsko okno in vrsta make buggy0, ker, še enkrat, ime datoteke je danes buggy0.c. Torej, sem tip, da buggy0, Enter. 
+
+In, oh, bog, odpoklic od zadnjega obiska da ni sporočil o napakah, je dobra stvar. Tako da ni izhoda, je dobra stvar. Ampak tukaj imam jasno nekateri število napak. 
+
+Torej, v prvi vrstici proizvodnje Ko vtipkate da buggy0, odpoklic, je precej verbose Jek je. Pod pokrovom, CS50 IDE je nastavljen uporabiti cel kup možnosti s tem prevajalnik tako da nimate da razmišljajo o njih. In to je vse, kar v prvi vrstici pomeni, da se začne s Jek. 
+
+Vendar po tem, težave začeli, da bi njihov videz. Buggy0.c na progi 3, značaj 5, je velika, rdeča napake. Kaj je to? Implicitno razglasitvi knjižnica funkcijo printf s tipa int (const char *, ...) [-Werror]. Mislim, da zelo hitro postane zelo Skrivnosten. In seveda, v prvi pogled, da ne bi Pričakujemo, da boste razumeli celota tega sporočila. In tako ena od lekcij Za danes se dogaja da je, da bi poskušali obvestilo vzorci ali podobne stvari, za napake, boste morda morali s katerimi se srečujejo v preteklosti. Torej, kaj je draži samo narazen te besede, ki so videti poznajo. Velika, rdeča napaka je jasno simbol nečesa pa narobe. 
+
+implicitno razglasi knjižnica funkcijo printf. Torej, tudi če ne razumem povsem, kaj implicitno razglasitvi knjižnica funkcijo sredstva, problem zagotovo nanaša na nekako printf. In vir tega vprašanja ima opraviti z razglasitev. 
+
+Razglasitev funkcija je jo omenjajo prvič. In smo uporabili terminologijo prejšnji teden o razglasitvi funkcija je prototip, bodisi z eno vrstico na vrhu lastne datoteke ali v tako imenovanem glavi datoteki. In v kakšnem datoteke naredil rečemo prejšnji teden, da je printf citat, konec citata, je izjavil? V kakšnem datoteka je njegov prototip? 
+
+Torej, če se spomnimo, zelo prva stvar, ki sem vnesenih, skoraj vsak program za zadnji time-- in po nesreči pred nekaj trenutki se je začela myself-- tipkanje je bil to eden here-- hash-- #include <stio-- za vhodno / output-- dot h In res, če sem sedaj shranite to datoteko, da bom da gredo naprej in jasno mi zaslon, ki jih lahko naredite z vnosom Jasno, ali lahko držite Control L, samo, da počistite terminalsko okno Samo za odpravo nekaj nereda. 
+
+Bom, da gredo naprej in re-vrste make buggy0, Enter. In voila, še vedno vidim, da Dokler ukaz iz Jek, vendar ni sporočilo o napaki tokrat. In res, če to storim ./buggy0, tako kot zadnjič, kjer je pika pomeni, da ta imenik, Slash samo pomeni, tukaj prihaja ime programa in to ime programa je buggy0, Vstopi, "Zdravo, svet." 
+
+Zdaj, kako bi si morali naberejo to rešitev ni nujno priznava, toliko besed, kot sem storil, seveda ob to naredil toliko let? No, spoznali na prvi problem set, vam predstavil ukaz da lastno osebje CS50 je napisal imenovano help50. In res, C pa specifikacije problem določiti, kako to uporabiti. 
+
+Toda help50 je v bistvu program, ki osebje CS50 je si napisal, ki omogoča, da delujejo ukaz ali zaženete program, in če ne razumejo svoje izhod, da prenese svoj izhod na help50, na kateri točki programsko opremo da osebje Tečaj je napisal se bo osredotočil na proizvodnjo svojega programa vrstico za vrstico, znak za znakom. In če mi, osebje, priznavajo sporočilo o napaki, ki ste doživlja, bomo poskušali izzvati z nekaterimi retoričnih vprašanj, z nekaj nasvetov, podobno kot TF ali CA ali sam bi naredil osebno ob uradnih ur. 
+
+Torej, poglej help50 če ne nujno prepoznati težavo. Vendar se ne zanašajte na to Preveč kot bergle. Vsekakor poskušali razumeti svoje proizvodnja in potem učijo od njega tako da ti le enkrat ali dvakrat storiti kdaj teči help50 za določeno napako sporočilo. Po tem, bi morali biti bolje opremljeni sami ugotoviti, kaj je v resnici. 
+
+Naredimo eno drugo tukaj. Naj gredo naprej, in v drugi datoteka bomo to imenujemo buggy1.c. In v tej datoteki sem bo deliberately-- ampak se pretvarjamo, da jaz ne razumeti, kaj napako sem naredil. 
+
+Bom, da gredo naprej in ne this-- #include, odkar sem naučil moj nauk od pred nekaj trenutki. Int main (void), kot prej. In potem sem jaz grem narediti niz s - get_string. In spomnim iz zadnjega časa, ki To pomeni, hej, računalnik, daj mi spremenljivko, imenujemo to je to, in da tip te spremenljivke niza tako da lahko shranite eno ali več besed v njem. 
+
+In nato na desni strani strani enačaja je get_string, ki je Funkcija v CS50 knjižnici da ne točno to. To postane funkcijo in nato IT roke od desne proti levi. Torej, to enačaj ne pomeni, "Enaka", kot bi si lahko mislili v matematiki. To pomeni odstop od desne proti levi. Torej to pomeni, da niz iz uporabnik in ga shranite znotraj s. 
+
+Sedaj pa ga uporabljajo. Naj gredo naprej zdaj in kot drugi linija, naj gredo naprej in reči "zdravo" - ni "svet", ampak "Pozdravljeni,% S- ki je naša ogrado, vejica s, ki je naša spremenljivka, in nato podpičjem. Torej, če nisem zamočil preveč tukaj, to izgleda pravilno kodo. 
+
+In moj instinkt zdaj so za njihovo zbiranje. Datoteka se imenuje buggy1.c. Tako bom naredil, da buggy1, Enter. In darn-it, če ni celo več napak kot prej. Mislim, da je več sporočila o napakah, da bi Zdi se od dejanskih vrstic v tem programu. 
+
+Toda takeaway tukaj je, tudi če ste preobremenjeni z dvema ali tremi ali štiri več sporočil o napakah, osredotočajo vedno na zelo Prvi od teh sporočil. Če pogledamo na zgornjem najbolj eno, pomikati nazaj, kot je to potrebno. Torej, tukaj sem tipkal make buggy1. Tukaj je, da je Jek izhod, kot je bilo pričakovano. 
+
+In tukaj je prvi red do napake. Uporaba črno identifikatorja niz, si mislim standarda v? Torej, standardna je dejansko nekaj drugega. To se nanaša na uporabnikov tipkovnica, v bistvu. 
+
+Ampak to ni tisto, kar sem mislil. Mislil sem vrvico, in sem mislil get_string. Torej, kaj je to, da sem pozabil narediti ta čas? Kaj manjka tokrat? Imam #include, tako da imam dostop do printf. 
+
+Toda kaj mi ni treba dostop do samo še? No, tako kot zadnjič, Moram povedati prevajalniku Jek kaj te funkcije. Get_string ne pride s C. In predvsem to ne pride v Glava datoteke. Namesto tega je na voljo v Nekaj ​​osebje zapisal, ki je drugačna datoteka ime, ampak primerno ime. 
+
+Torej, preprosto tako, da doda eno vrstico od code-- odpoklica zdravila iz zadnjega časa da ko Jek teče, da se dogaja pogled na mojo kodo vrha do dna, od leve proti desni. To se dogaja, da obvestilo, oh, hočeš. Naj gredo in ugotovili, da je povsod, kjer je na strežniku, kopirajte in prilepite v bistvu v vrhu svojega datoteke tako da na tej točki v zgodbo, linijo 1, preostali del programa Lahko, seveda, uporabite katero koli od funkcij tam, med njimi get_string. Torej bom prezreti preostanek teh napak ker I, seveda, sumijo, da je le prva dejansko pomembno. In bom, da gredo naprej in ponovitev, po shranjevanju mojo kartoteko da buggy1. In voila, je to storila delo. In če jaz ./buggy1 in vpišite, za primer, Zamyla, zdaj bo dobil zdravo, Zamyla, namesto zdravo, svet. 
+
+V redu. Torej takeaways tukaj pa so, ena, poskusite toliko, kot si lahko naberete samo iz sporočila o napakah, ki iščejo na nekaj prepoznavnih besed. Zapore, da uporabite help50 na problem je določeno specifikacijo. Ampak zapore, da je tudi vedno videti V zgornjem napake samo, vsaj najprej, da bi videli, katere informacije da bi dejansko dobili. Vendar se izkaže, tam je še več funkcionalnosti zgrajena v CS50 knjižnico za pomoč si že na začetku v semestru in zgodaj v programiranju ugotoviti, kaj je šlo narobe. Torej, naredimo še en primer tukaj. Bom poklical ta buggy2, ki spet se bo pomanjkljiva ven skozi vrata, pri načrtovanju. 
+
+In bom, da gredo naprej in ne #include. In potem bom naredil int main (praznino). In potem bom naredil za zanke. Za (int i _ 0. i je manjša ali enaka 10. i ++, nato pa v zavitih oklepajih, jaz grem natisniti samo simbol hashtag tukaj in nova linija znak. 
+
+Torej, moje namere s tem Program je preprosto Ponovil 10-krat in na vsaki ponovitvi te zanke vsakokrat skozi cikel, natisniti oznako teme, hashtag, hashtag. Ena na linijo, ker I imajo novo linijo tam. In opozarjajo, da je za zanke, na zadnjem week-- in boste dobili več seznanjeni s sintakso z njegovo uporabo v praksi Pred long-- mi to daje spremenljivka se imenuje i in ga nastavi na 0. 
+
+Ta korakih i na vsako ponovitev do 1. Tako i gre za 1 do 2 do 3. In potem ta pogoj v sredina med podpičji dobi preverja na vsaki ponovitvi, da bi prepričani, da smo še vedno v dosegu. Torej, želim Ponovil 10-krat, tako da sem imajo neke vrste zelo intuitivno samo dal 10, kot je moja zgornja meja tam. 
+
+In vendar, ko sem to teči, ko je sestavljanje z znamko buggy2-- in to ne pripravijo OK. Zato sem nimajo skladenjske napake tokrat. Naj gredo naprej zdaj in vodijo buggy2, Enter. In zdaj se pomaknite navzgor. In mi povečanje velikost okna. 
+
+Mi zdi, da imajo 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Torej je 11 oznake tem, čeprav Jasno sem dal 10 znotraj te zanke. Zdaj, nekateri od vas bi lahko takoj videli kaj je napaka, saj res, to ni zelo težko napaka narediti. Ampak to je zelo pogosto je zelo zgodaj. 
+
+Kaj želim poudariti, čeprav, se, kako sem lahko to ugotovite? No, se izkaže, da CS50 knjižnica prihaja z ne samo get_string in get_int in get_float in druge funkcije. Prav tako prihaja s posebno funkcijo imenuje eprintf, ali napake printf. In obstaja le, da bi je malo lažje za vas ko debugging kodo samo natisniti sporočilo o napaki na zaslonu in vedo, od kod prihaja. 
+
+Tako, na primer, da bi lahko ena stvar storiti tukaj s to funkcijo this-- eprintf, nato pa bom šel naprej in rekel, da sem zdaj% i, poševnica nazaj, n. In bom priključite v vrednosti i. In do vrha, ker je to je v CS50 knjižnici, Bom, da gredo naprej in vključujejo tako da imam dostop do te funkcije. Ampak kaj je razmisliti, kaj vrstica 9 naj bi počel. Bom to izbrisati sčasoma. To nima nič opraviti s svojim glavnim ciljem. Ampak eprintf, napaka printf, je samo mišljeno da bi mi nekaj diagnostične informacije. Ko sem teči svoj program, želim videti na zaslonu začasno kakor tudi samo za razumevanje kaj se dogaja. 
+
+In seveda na vsakem ponovitev tukaj linije 9 Rad bi videl, kaj je vrednost i? Kakšna je vrednost i? Kakšna je vrednost i? In upam, da sem samo naj glej to sporočilo, prav tako 10-krat. 
+
+Zato naj gredo naprej in prevedem program saj moram narediti kadarkoli Naredim spremembo. ./buggy2. In now-- OK. Tam je veliko več dogaja. Zato mi dovolite, da se pomaknete v še večja okna. 
+
+In videli boste, da je vsak od Oznake teme je še vedno tiska. Vmes pa je vsak od njih je sedaj to diagnostični izhod oblikovano kot sledi. Ime mojega programa tukaj je buggy2. Ime datoteke je buggy2.c. Številka vrstice, iz katere To je bila natisnjena vrstica 9. In nato na desni strani, ki je sporočilo o napaki, da sem pričakoval. 
+
+In kaj je lepo, o tem, je, da Zdaj mi ne bi bilo treba nujno računati v moji glavi, kaj je moj program dela. Vidim, da na Prva ponovitev i 0, nato 1, nato 2, nato 3, nato 4, nato 5, nato pa 6, nato 7, potem 8, nato 9, nato 10. Torej, počakaj malo. Kaj se tukaj dogaja? Še vedno se zdi, da se štetje kot je bilo predvideno do 10. 
+
+Toda, kje naj začnem? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10. Torej 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- 11. prst indikativna problema. Zdi se mi, da so prešteti napačno v moji zanki. Namesto da bi šel 10 iteracij, Začenjam na 0, Sem se konča na in do 10. Ampak ker, kot je računalnik, Jaz sem z začetkom štetja na 0, I je treba štetje navzgor , vendar ne skozi, 10. 
+
+In tako pritrditi, sem na koncu spoznal tu, je ena od dveh stvari. I bi bilo zelo preprosto reči štetje do manj kot 10. Torej 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ki je, seveda, pravilna, čeprav se sliši malo narobe. Ali sem lahko naredil je manjša ali enaka do 9, dokler začnem pri 0. Ali pa, če res ni všeč, da vas mogoče prešteti do 10, vendar začnejo pri 1. Ampak spet, to le ni tako pogosta. V programming-- pa čeprav ne toliko v Scratch-- ampak v programiranje v C in drugih jezikih, kot JavaScript in Python in druge, to je samo zelo pogosto za Naša razprava o binarni samo začetek štetja Na Najmanj si lahko, kar je 0. V redu. Tako da je eprintf. In še enkrat, zdaj sem pogruntal moj problem, in sem šel nazaj na 0 z manj kot 10, se bom da gredo v in brisanje eprintf. 
+
+To ne bi smelo biti tam, ko sem ladja svojo kodo ali pošljete svojo kodo ali pokazati nikomur. To je res samo mišljeno ki se začasno uporablja. Zdaj pa sem to določen Poseben problem, kot dobro. 
+
+No, naredimo še en primer tukaj da bom bič, kot sledi. Bom, da gredo naprej in #include. 50 $ In bom, da gredo naprej in #include. 
+
+In bom rešil sliko kot buggy3.c. In bom, da gredo naprej in ugotovi, int main (praznino). In potem v notranjosti pa Bom naredil int i _ - Želim izvajati program z get_negative_int. To ni funkcija, ki obstaja še. Tako bomo za izvajanje je vsak trenutek. Ampak bomo videli, zakaj je buggy na prvi priložnost. In ko sem prišel int od uporabnika, Jaz sem le, da bo tiskanje% i negativna celo, poševnica nazaj, n, vejica, i. Z drugimi besedami, vsi I želijo ta program storiti je dobil negativen int iz uporabnik in nato natisnete da je ta in ta negativna int. 
+
+Zdaj moram za izvajanje te funkcije. Torej, kasneje v svojem spisu, bom šel naprej in razglasi funkcijo imenovano get_negative_int (ničen) - in bomo pridejo nazaj na tisto, da je linija spet pomeni v moment-- int n; do-- naredi following-- printf n :. In potem bom naredil n - get_int, in to stori, medtem ko je n večji kot 0. In se nato vrnite n ;. 
+
+Torej obstaja veliko dogaja v to, ampak nobeden od katerih nismo poglej prejšnji teden, vsaj na kratko. Torej on line 10 tukaj sem razglašena za Funkcija se imenuje get_negative_int, in sem dal (ničen), v oklepajev, razlog pa je ta ne bo vhod. Jaz ne gre nič te funkcije. Jaz sem ravno nekaj nazaj od njega. 
+
+In kaj sem v upanju, da dobili nazaj, je celo število. Ni podatkovni tip v C se imenuje negative_int. To je samo int, tako da bo da je na nas, da se prepričajte, da je vrednost, ki je dejansko vrnjeno ne samo int ampak je tudi negativen. 
+
+On line 12 sem razglasitvi spremenljivko imenuje n in zaradi česar je tipa int. In potem v vrstice 13 do 18 let, da sem delaš nekaj, medtem ko je nekaj res. Grem naprej in tiskanje n je, debelega črevesa in nato prostor, kot poziv za uporabnika. 
+
+Jaz sem potem kliče get_int in shranjevanje svojo tako imenovano vrednost donosa V tem spremenljivo n. Ampak bom vztrajati početje To medtem ko je n večji kot 0. Z drugimi besedami, če uporabnik mi je daje int in to število je večje od 0, ergo, pozitivno, bom kar naprej reprompting uporabnika, da reprompting, da jih prisili, da sodelovati in mi negativno int. 
+
+In ko je n dejansko negative-- Predvidevam, da uporabnik na koncu vrste -50, potem je to, ko zanka ni več res ker -50 ni večja od 0. Tako smo iztrgajo iz da zanka logično in vrne n. 
+
+Toda obstaja še ena kar moram narediti. In lahko samo to storiti s kopiranjem in lepljenjem ena vrstica kode na vrhu datoteke. Moram naučiti Jek, ali obljubo, da Jek, izrecno, da bom, res, pojdi in izvajati ta funkcija get_negative_int. To je lahko samo nižje v datoteki. Spet opozarjajo, da Jek bere stvari od zgoraj navzdol, od leve proti desni, tako da ne more klic funkcije, če Jek ne ve, da se dogaja, da obstaja. 
+
+Zdaj pa, žal, ta program, kot bi nekateri ste opazili, je že buggy. Naj gredo naprej in da buggy3. Sestavlja, tako da moj problem sedaj ni napaka sintakso, kot napak tekstovnih, to je dejansko dogaja, da je logična napake, ki sem jih namenoma ki kot priložnost za korak skozi kaj se dogaja. 
+
+Bom, da gredo naprej zdaj in vodijo buggy3. In sem šel naprej in ne sodelujejo. Bom dal to številko 1. To ni bilo všeč, zato pa me je spet spodbudilo. 
+
+Kako približno 2? 3? 50? Nihče od tistih, ki delajo. Kako približno -50? In program zdi, da dela. 
+
+Naj poskusi še enkrat. Naj poskusim -1, se zdi, da deluje. Naj poskusim -2, se zdi, da deluje. Naj poskusim 0. Huh, to je napačna. Zdaj smo pa malo občutljiv tukaj. Ampak to je, seveda, v primeru, da 0 niti pozitivno niti negativno. In tako je dejstvo, da je moj program, pravi, da je 0 negativno celo število, to ni tehnično pravilno. 
+
+Zdaj, zakaj je ta način? No, bi bilo očitno. In res, da je program usojeno dokaj preprost tako da imamo nekaj za raziskovanje. 
+
+Ampak kaj je uvesti tretjo razhroščevanje Tehnika tukaj imenujejo debug50. Torej to je program ki smo ga pravkar ustvarili letos imenuje debug50 ki vam bo omogočilo za uporabo, kar se imenuje vgrajen grafični razhroščevalnik v CS50 IDE. In razhroščevalnik je le program, ki na splošno vam omogoča poganjanje svoj program ampak korak za korakom za korakom, skladno po liniji s strani linije, premori, pikal okrog, gledamo na spremenljivke, tako da program ne samo udarec mimo tebe in hitro natisniti nekaj ali ne natisne nekaj. To vam daje priložnost, na človeški hitrosti, za interakcijo z njim. 
+
+In za to si preprosto naredite naslednje. Po zbiranju kodo, ki sem ga že naredil, buggy3, greš naprej in zagon debug50 ./buggy. Toliko kot help50 ima zaženete help50 in nato ukaz, debug50 ima zaženete debug50 in Nato ime ukaza. 
+
+Zdaj pa glej, kaj se dogaja na mojem zaslonu, na desni strani še posebej. Ko sem udaril Run, vse nenadno ta desna plošča odpira na zaslonu. In tam je veliko dogaja na na prvi pogled. Vendar pa ni preveč veliko skrbeti še. 
+
+To se mi je pokazal vse ki se dogaja znotraj mojega programa prav zdaj, in prek njih Gumbi up top je potem mi omogoča, da stopite skozi moje kodo končno korak po korak za korakom. Ampak ne še zdaj. Opazili, kaj se dogaja. Na mojo terminalsko okno Jaz pa sem poziv za n. In bom, da gredo naprej in sodeluje ta čas in tip v -1. In čeprav malo cryptically, -1 je negativno celo število, kot je bilo pričakovano. 
+
+In potem otrok izstopilo z Stanje 0 GDBserver izhodu. GDB, GNU Debugger, je ime od osnovnega opreme da izvaja to iskanje in odpravljanje napak. Ampak vse to v resnici pomeni, razhroščevalnik odšel, ker je moj program, prenehati in vse je bilo dobro. Če hočem resnično debug moj program, Moram preemptively povedati debug50, kadar ne želim, da začnete poglobitvi skozi mojo kodo? 
+
+In morda najpreprostejši način za to je, kot sledi. Če sem hover nad žleb mojega urednika tukaj, tako da res samo v stranski vrstici tukaj, levo števila linije, opazijo, da če sem samo kliknite ko sem dal malo rdečo piko. In da malo red dot, kot znak stop, pomeni, hej, debug50, izvedba premor moje kode tam, ko sem teči ta program. 
+
+Torej, kaj je to. Naj gredo naprej in vodijo svoj program spet z debug50 ./buggy3, Enter. In zdaj, obvestilo, kaj razlikuje se je zgodilo. Jaz se ne pozove Še v mojem terminalskem oknu za nič, ker nisem je prišel še v mojem programu. Obvestilo, da je na liniji 8 ki je danes poudaril, in tam je malo puščico na levo pregovor, ki ga tukaj zaustavili. Ta linija kode, linije 8, še ni izveden. 
+
+In kaj je radoveden, če gledam tu čez na desni strani, opazili, da je i lokalna spremenljivka, lokalno v smislu da je znotraj trenutnega delovanja. In njegova vrednost, očitno privzeto, in nekako prikladno, je 0. Ampak nisem tip 0. Da samo zgodi, da bo svoje Privzeta vrednost v tem trenutku. 
+
+Zato naj gredo naprej in to storite zdaj. Naj gredo naprej in na top tukaj, sem dogaja, da gredo naprej in kliknite to prvo ikono, ki pomeni korak več, kar pomeni, ne preskočite pa vendar korak nad to vrstico kode, bi mogla na poti. 
+
+In sedaj opazili, moj hitro se je pravkar spremenili. Zakaj je tako? Povedal sem debug50, zagnati to vrstico kode. Kaj to vrstico kode storiti? me vpraša za notr. V REDU. Naj sodelujejo. Naj gredo naprej zdaj in tip -1, Enter. In sedaj opazili, kaj se je spremenilo. Na desni strani, moja lokalna spremenljivka i je označen kot -1 zdaj. In to je še vedno tipa int. 
+
+In obvestilo, tudi moj tako imenovani klic kup, kjer sem premor? Bomo govorili več o tem To v prihodnosti. Vendar sklad tik nanaša na to, kar funkcije so trenutno v gibanju. Zdaj je samo glavni. In zdaj samo lokalna spremenljivka je i z vrednostjo 1. 
+
+In ko sem končno stopiti čez to črto tukaj z enako ikono v zgornjem desnem kotu, -1 Je negativno število. Zdaj je premori nad tem kodraste opornico. Poglejmo kaj to naredil svoje stvari. Stopim nad to linijo, in voila. 
+
+Torej ni vse tako strašno prosveti še, vendar pa se mi premor in mislim skozi logično kaj ta program počne. Toda to ni bila napačna zadeva. Naredimo to še enkrat, kot sledi. 
+
+Bom zapustil ta odmerka v 8. vrstici z rdečo piko. Bom ponovila debug50. To je samodejno zaustavljen tukaj. Vendar tokrat namesto prestopanja v tej vrstici, Naj dejansko šel notranjost get_negative_int in ugotoviti, zakaj je sprejemanje 0 kot veljaven odgovor? 
+
+Torej, namesto da kliknete Step Over. Bom, da gredo naprej in kliknite Step Into. In opazil, da je linija 8, ki je zdaj izpostavil zdaj nenadoma postane linija 17. 
+
+Zdaj, to ni tako razhroščevalnik je preskočila linije 14 in 15 in 16. To je samo ni nič da vas ni pokazal. Tisti, ki so samo razglasitvi spremenljivke, in potem je beseda Ali in nato odprto kodrasti brace. Edina funkcionalna linija, ki je sočno je to res ena tu, 17. In to je, če smo jih samodejno zaustavljen. 
+
+Torej printf ( "n.is:") ;, tako da se še ni zgodilo. Torej, gremo naprej in kliknite Step Over. Zdaj moj poziv, v resnici, spremenila ( "n:"). Zdaj get_int, ne bom moti stopil, ker je ta funkcija je bila ki jo CS50 v knjižnici. To je verjetno pravilna. 
+
+Tako da sem šel naprej in nekako sodelujejo tako, da ga daje int, ne pa negativno int. Zato naj gredo naprej in udaril 0. In zdaj, kaj se dogaja tukaj ko pridem dol na linijo 21? Nisem več ponovitvami. Mi ne zdi, da je zaljubljen v to zanko. Z drugimi besedami, ta rumeni bar ni nadaljuj okoli, in okrog in okrog. 
+
+Zdaj, zakaj je to? No, n, kaj je n prav zdaj? Jaz lahko ogledate na lokalni spremenljivke v iskanje in odpravljanje napak. n je 0. V redu, kaj je bil moj pogoj? 
+
+20-- linija 20 je dobro, 0 večja od 0. To ni res. 0 ni večja od 0. In zato sem izbruhnila tega. 
+
+In da je, zakaj na spletu 21, če sem dejansko še naprej, Bom vrnil 0, čeprav čeprav bi moral sem zavrnila 0 saj dejansko ni negativna. Zdaj sem v resnici ne celo skrbi razhroščevalnik. Got it, mi ni treba vedeti, kaj več se dogaja. 
+
+Tako da sem šel naprej in kliknite gumb Predvajaj, in naj gre ta končal. Zdaj pa sem spoznal, da je moj bug je očitno na liniji 20. To je moja logična napaka. 
+
+In kaj storiti, hočem storiti, da bi to spremenili? Če problem je, da nisem lov 0, to je samo logična napaka. In lahko rečem, medtem ko je n večja ali enaka 0, da znova in znova poziva uporabniku. 
+
+Torej, še enkrat, preprosta napaka, morda tudi očitno, ko si me videl napisati le nekaj minut nazaj. Toda takeaway tukaj je, da z razhroščevanje 50 in odpravljanje napak Programska oprema bolj splošno, imate to novo najti moč, da sprehod skozi svoje kode, poglej prek tega desnem oknu, kaj vaše spremenljivke vrednosti. Torej vam ni nujno morali uporabiti nekaj kot si eprintf natisniti te vrednote. Lahko jih dejansko videli vizualno na zaslonu. 
+
+Zdaj, poleg tega pa je treba omeniti, da obstaja še en tehniko, ki je dejansko zelo pogosti. In morda, zakaj je to malo sprašujem fant tukaj je sedel na odru. Tako da je ta tehnika, splošno znan kot gume raca odpravljanje napak, ki je res samo dokaz, da je dejstvo, da pogosto, ko programerji se pisanje kode, oni niso nujno sodelovanje z drugimi, ali delajo v skupnem okolju. 
+
+Oni so nekako doma. Mogoče je pozno ponoči. Poskušajo sliki iz neke napake v njihove kode. In oni enostavno ne vidim. 
+
+In ni sostanovalka. Ni TF. Ni CA okoli. Vse, kar imajo na svojem pasu je to malo gume ducky. 
+
+In tako gumijasta račka debugging je prav to povabilo razmišljati o nečem, kot je neumno saj kot pravi bitje, in dejansko hodi po kodi verbalna tem nežive predmeta. Tako, na primer, če to je moj primer here-- in opozarjajo, da prej problem je bil ta, Če sem izbrisati to prvo vrstico kode, in sem šel naprej in da vozičkom 0 spet, spomnil, da sem imel to sporočila o napakah tukaj. Torej ideja tukaj, smešno, čeprav I občutek v trenutku tem javno, je, da je prišlo do napake. 
+
+OK, tako da moj problem je, da nimam implicitno razglasi funkcijo knjižnice. In to funkcijo knjižnice printf. Declare-- OK, razglasi me spominja na prototipov. 
+
+To pomeni, da je treba dejansko povej prevajalnik vnaprej, kaj funkcija izgleda. Počakaj minuto. Nisem imel standardno io.h. Najlepša hvala. 
+
+Torej samo ta proces of-- vas ni treba, da dejansko imajo raca. Toda ta ideja hoje sami s svojo lastno kodo tako da boste tudi slišali sami, tako da vas uresničiti opustitve v svoje pripombe, je na splošno ideja. 
+
+In, morda bolj logično, ni tako veliko s to eno, vendar je bolj vključen Primer smo pravkar storili v Otroški voziček 3.c, morda hodite sami skozi njo kot sledi. Torej vse v redu, gume ducky, DDB, če hočete. Tukaj imamo v moji glavno funkcijo, Kličem dobil negativno int. 
+
+In sem že vrne vrednost. Jaz shranjevanje na levi strani na liniji 8 v spremenljivko imenovano i. OK, vendar počakajte, kako se je da je dobil to vrednost? Naj pogled na funkcijo v skladu 12. 
+
+V skladu 12., smo dobili negativno int. Ne sprejme nobenih vložkov, ne vrne int, OK. on line 14 spremenljivka n izjavljam. To se dogaja, da shranite celo število. To je tisto, kar hočem. 
+
+Torej, naredite naslednje medtem ko n is-- naj me razveljaviti kaj popraviti sem že. Torej, medtem ko je n večji kot 0 izpiše n je, OK. In potem klic se int shranjeni v n. In nato preveri, če je n 0, n not-- tam je. Torej, še enkrat, ne boste Potrebujemo dejansko raco. Ampak samo hojo sebe skozi kodo kot intelektualni vaje vam bo pogosto pomaga zavedajo, kaj se dogaja, v nasprotju s samo delaš nekaj kot je ta, strmel v zaslon, in ne govorimo sami s pomočjo to, kar pošteno ni Skoraj kot učinkovito tehniko. Torej, tam ga imate, A število različnih tehnik za dejansko debugging kodo in ugotavljanje motenj, ki so vse mora biti orodje v vaši orodij tako da nisi pozno v noč, še posebej, ko ste v jedilnico dvorane, ali na uradnih ur, tolkel glavo proti zid, ki poskušajo rešiti nekaj težav. Zavedam se, da je programska orodja. Obstajajo gume raca orodja. In tam je celotno osebje podpira čakajo na pomoč. 
+
+Zdaj, beseda na problemu sklopov, in o tem, kaj smo vam v upanju, ven iz njih, in kako gremo o ocenjevanju. Po učnem načrtu predmeta je, problem kompleti CS50 je se ocenjujejo na štirih glavnih osi, tako da speak-- področje, pravilnost, design, in slog. In obseg le nanaša na to, koliko kosa ste odgrizne? Koliko problem ste že poskusili? Kaj je stopnja napora ste se kaže? 
+
+Pravilnost je, ali delovanje programa, kot To naj bi po specifikaciji CS50 ko zagotoviti določene inpute ali določene izhode prihaja nazaj? Zasnova je najbolj subjektiven izmed njih. In to je tisti, ki bo bo najdlje za učenje in najdlje za poučevanje, v kolikor izvira na, kako dobro napisana, je svojo kodo? 
+
+To je ena stvar, da samo tiskanje pravilno izhoda ali vrniti prave vrednote. Vendar so jo počne, ko čim bolj učinkovito? Ali ste početje razkoraka in vladaj, ali binarni Iskanje saj bomo kmalu videli, da smo naredili pred dvema tednoma v telefonskem imeniku? Ali obstajajo boljši načini za reševanje Problem, kot ga trenutno imamo tukaj? To je priložnost za boljše načrtovanje. 
+
+In potem style-- kako Precej je svojo kodo? Opazili boste, da sem precej zlasti o Feed svojo kodo, in pazite, moje spremenljivke so upravičeno poimenovali. n, medtem ko je kratko, je dobro ime za število, i za štetje celo število, i za niz. In bomo lahko imeli več spremenljivka imena slog. Style je le, kako dobro vaša koda videti? In kako berljiv je to? 
+
+In več časa, kaj vaši TAS in TFS bo naredil v letu se vam s tem vrsta kvalitativne povratne informacije tako da ti ne bo bolje na teh različnih vidikov. In glede na to, kako mi ovrednoti vsak od teh oseh to je običajno z zelo malo žlice, tako da ti na splošno, dobili občutek, kako dobro delaš. In, seveda, če ste prejeli oceno o vsaka od teh axes-- pravilnost, oblikovanje in slog especially-- to število bo praviloma med 1 in 5. In, dobesedno, če ste dobili 3 je na začetku semestra, To je zelo dobra stvar. To pomeni, da je še vedno prostora za izboljšave, ki bi upanje v ob razreda prvič. Tam je, upajmo, nekaj malo stropa na katerega si prizadevajo, da bi dosegli. In tako dobili 3 na najzgodnejši kosov, če ni nekaj 2 in 4-ih, je pravzaprav dobra stvar. To je tudi v območju, tudi v okviru pričakovanj. 
+
+In če je vaš um dirke, počakajte minuto, tri od petih. To je res 6 od 10. To je 60%. Moj Bog, To pa je v F. 
+
+Ni. To ni, v resnici, da je. Nasprotno, to je priložnost za izboljšanje tekom semestra. In če ste dobili nekaj Poors, to so priložnost izkoristiti uradnih ur, zagotovo profili in drugih virov. 
+
+Najboljše je priložnost, res, lahko ponosni, kako daleč ste pridi teku polovice. Torej se zavedaš, če nič ostali trije so dobra. In omogoča prostor za rast v daljšem časovnem obdobju. 
+
+O tem, kako so ti osi ponderirana, realno si dogaja, da preživijo večino svojega časa pridobivanje stvari za delo, kaj šele pravilno. In tako pravilnost nagiba k temu ponderirajo najbolj, tako kot pri To multiplikativni faktor tri. Zasnova je tudi pomembna, vendar nekaj, kar ne nujno preživeli vse te ure na poskuša priti stvari samo na delo. 
+
+In tako je to prilagojenih malo bolj rahlo. In potem je slog tehtajo najmanj. Čeprav to ni nič manj Pomembno bistveno, to je samo, morda, Najlažje prav, posnemanjem primere smo storiti v predavanju in oddelku, s stvarmi, se lepo zamaknjen, in pripomnil, in tako naprej, je med najlažje stvari za početi in dobili pravico. Tako kot tak, realizirati da so tiste točke da so relativno enostavno za razumevanje. 
+
+In sedaj beseda o this-- akademsko poštenost. Torej na tečaj je učni načrt, boste videli da je seveda zelo bit jezika okrog tega. In seveda je vprašanje akademsko poštenost zelo resno. 
+
+Imamo razliko, za boljše ali slabše, o poslanem vsako leto več študentov za disciplinsko kot večina katera koli druga Seveda, da sem seznanjen. To ni nujno kažejo na dejstvo da so CS študenti ali CS50 študentov, nič manj pošten od svojih sošolcev. Ampak dejstvo, da je v tem svet, v elektronski obliki, smo samo imajo tehnološko sredstvo za odkrivanje te. 
+
+Pomembno je, da nas pravičnosti po razredu da bomo odkriti to, in dvig vprašanje, ko vidimo stvari. In samo slikati sliko, in res da bi nekaj podobnega temu potonejo v, To so številke študentov v zadnjih 10 letih ki so bili vključeni v nekatere takšna vprašanja akademske poštenosti, z nekaj 32 študentov od jeseni 2015, ki se pravi, da nam bo zadeva zelo resno. In, konec koncev, te številke sestaviti, nazadnje, približno 3%, 4% ali razreda. 
+
+Torej za super večino študentov se zdi, da so črte jasne. Ampak, da to v moti, še posebej pozno ponoči, ko borijo z nekaj rešitev problema nizu, da obstajajo mehanizmi za pridobivanje sebe bolje podpore, kot si morda mislim, tudi pri tej uri. Zavedaj se, da ko bomo prejeli študent stališča, prečkamo letos pa jih primerjati med vsako oddajo pred vsako oddajo lani, pred vsako oddajo od leta 2007, in ker gledaš, kot tudi, koda sklenjenih poslov na spletu, forumi, delovnih mestih. In omenimo to, Res, vse zavoljo za popolno razkritje, da če nekdo drug lahko najdete na spletu, Vsekakor, tako da lahko tudi mi seveda. Ampak, res, duh od seveda izvira te klavzule v učni načrt. Res je le, da so smiselne. 
+
+In če smo morali pripraviti na to z le malo več jezikov, Zavedam se, da je bistvo vsega Delo, ki ga predloži v ta tečaj morajo biti sami. Ampak od tega, gotovo obstajajo priložnosti in spodbude, in pedagoško vrednost obrača others-- sam je TFS se CA, TAS, in drugi v razredu, podpore, kaj šele prijateljev in sostanovalci, ki so študirali CS in programiranje prej. In tako je nadomestilo za to. In splošno pravilo je this-- ko prosi za pomoč, lahko pokažejo svojo kodo za drugim, vendar pa ne sme videti svoje. Torej, tudi če ste na uradnih ur, ali v D dvorani, ali nekje drugje delajo na neki kos set, deluje skupaj s prijateljem, ki je popolnoma v redu v spodnjem konec dneva vašega dela naj bi na koncu pripada vsakemu vas v tem zaporedju, in ne neka skupno prizadevanje, razen za končni projekt, kjer je to je dovoljeno in spodbujati. 
+
+Zavedaj se, da si, če bori z nečim in tvoj prijatelj samo zgodi bolje na to potem, ali še bolje na ta problem kot ti, ali malo dlje naprej od tebe, to je popolnoma smiselno, da se obrnejo svojemu prijatelju in rekel, hej, Vas moti gledaš moje kodo tukaj, mi pomagali prepoznati, kaj je moja težava je? In upam, da v Interes pedagoški vrednosti da prijatelj ne samo pravijo, oh, to storiti, temveč, kaj še manjka na spletu 6, ali kaj podobnega? Vendar pa rešitev ni za prijatelja, poleg vas reči, oh, no, tukaj, mi potegnite to gor, in kažejo svojo rešitev za vas. Tako, da je linija. Pokažete svojo kodo drugi, vendar pa ne sme ogled njihovih pristojnosti, ob upoštevanju drugih omejitve v učnem načrtu predmeta je. 
+
+Torej, ne pozabite, to tako imenovana klavzula obžalovanje V učnem načrtu predmeta, kot tudi, da če stori nekaj dejanje, ni smiselno, ampak da bi jo pozornost vodij tečaja je v 72 urah, potek lahko naloži lokalne sankcije, ki jih lahko vključujejo nezadovoljiva ali ni razred za delo predložil. Ampak seveda ne preda pomembno za nadaljnji disciplinski ukrep, razen v primerih ponavljajočih se dejanj. Z drugimi besedami, če ne bi nekaj neumno, še posebej pozno ponoči, odločitev da naslednje jutro ali dva dni kasneje, se zbudiš in zavedaš, kaj sem mislil? Vam v CS50 ima izhod za določitev, da je problem in ima v lasti do tega, da bomo boste srečali na pol poti in se ukvarjajo z njo v zadevi, ki je tako izobraževalne in dragoceno za vas, vendar še vedno kaznovalna na nek način. In zdaj, da bo rob off to. 
+
+[VIDEO PREDVAJANJE] 
+
+[GLASBA] 
+
+[END PREDVAJANJE] DAVID J. Malan: Dobro, mi smo nazaj. In zdaj gledamo na enem od Prvi od naših realnih domen v CS50, umetnost kriptografiji umetnost pošiljanje in prejemanje tajna sporočila, šifrirana sporočila, če hočete, ki jih je mogoče dešifrirati samo, če imate nekatera ključna sestavina, da je pošiljatelj kot dobro. Torej, to motivira, da bomo sprejeti poglej na te stvari tukaj, kar je primer skrivnost dekoder obroč, ki lahko uporabimo, da ugotovimo kaj je pravzaprav skrivnost sporočilo. V bistvu, nazaj v dan v osnovni šoli, če si kdaj poslal skrivna sporočila nekateri prijatelj ali nekaj simpatij v razredu, ste morda mislili si pa pameten ki ga na svojem kosu menjava papirja, podobno A do B in B do C in C D, in tako naprej. Ampak ti so bili dejansko šifriranje vaše podatke, čeprav če je bilo malo nepomembna, ni bilo da težko učitelj zavedati, tudi, če si spremeniti B A in C, B, ste dejansko ugotovimo, kaj je sporočilo je bilo, vendar pa so v šifriranje podatkov. 
+
+Pravkar ste to počeli preprosto, podobno kot Ralphie tukaj v znameniti film, ki igra precej ad nauseum vsako zimo. [VIDEO PREDVAJANJE] Bodi znano vsem, ki Ralph Parker je s tem imenovan za člana Mali Orphan Annie Secret krog in je upravičen do uživanja vseh časti in koristi, ki se pojavljajo z njo. 
+
+-Signed Little Orphan Annie, -Števec podpisal Pierre Andre, s črnilom. Priznanja in koristi, že pri devetih letih. 
+
+[Kričanje] -Daj no. Pojdimo na z njim. Ne potrebujem vse, da jazz o tihotapcev in pirati. 
+
+Poslušajte jutri zvečer za zaključni pustolovščina črne piratske ladje. Zdaj je čas za Annie je skrivnost sporočilo za vas člani tajne kroga. Ne pozabite, otroci, samo člani od Secret Circle, Annie je mogoče dekodirati Annie je skrivno sporočilo. 
+
+Ne pozabite, Annie je odvisno od vas. Nastavite zatiči za B2. Tu je sporočilo. 12, 11-- 
+
+-Jaz Sem v, moj prvi skrivni sestanek. 
+
+-14, 11, 18, 16. 
+
+-Pierre Je bil v veliki glasovno nocoj. Videl sem, da je nocoj je Sporočilo je bilo zelo pomembno. 
+
+-3, 25, da je sporočilo od Annie sama. Ne pozabite, ne povej nikomur. 
+
+-90 Sekund kasneje, sem v edini soba v hiši, kjer je fant devet bi sedel v zasebnost in dekodiranje. Aha, B! Šla sem na naslednjo, E. 
+
+Prva beseda je lahko. S, da prihaja lažje zdaj, U, 25-- 
+
+Oh, daj no, Ralphie, moram iti! 
+
+Bom takoj dol, mama! Gee čarovnik! 
+
+-T, O, se prepričajte, to-- se prepričajte, kaj? Kaj je bilo malo Orphan Annie povedati? Bodite prepričani, da kaj? 
+
+-Ralphie Je Andy dobil go, prosim pridi ven? 
+
+V redu, mama! Takoj bom ven! 
+
+-I Je vse bližje zdaj. Napetost je bilo grozno. Kaj je bilo? Usoda planeta lahko visi na nitki. 
+
+-Ralphie! Andy moram iti! 
+
+Bom takoj ven, za zjokat! 
+
+-Almost Tam, moji prsti letel, moj um je jeklena past, vse pore vibrira. Bilo je jasno, ja, ja, ja. 
+
+Bodi prepričan, da popij Ovaltine. Ovaltine? Crummy komercialno? Kurbin sin. [END PREDVAJANJE] DAVID J. Malan: OK, tako da je to zelo daleč uvajanja kriptografijo, in tudi Ovaltine. V bistvu, od tega starega oglasa tukaj, zakaj je Ovaltine tako dobro? Je koncentrirana ekstrakcijo zrelih ječmenov slad, Pure kremna kravjega mleka, in posebej pripravljen kakav, skupaj z naravnimi fosfatidov in vitaminov. To je dodatno utrjeno z dodatne vitamine B in D, yum. In še vedno lahko dobite, je očitno, na Amazon, kot smo tukaj. 
+
+Ampak motivacija tukaj je bil uvede kriptografijo, natančneje tip šifriranja znan kot tajni kriptografiji. In kot že ime pove, celotno varnost tajnega ključa sistema šifrirnega, če hočete, metodologija za samo kodiranja Podatki med dve osebi, je to le pošiljatelj in edini prejemnik vedeti skrivnost key-- nekaj vrednosti, nekateri skrivnost stavek, nekateri skrivnost številka, ki jim omogoča, da tako šifriranje in dešifriranje podatkov. In kriptografija, res, je le ta od 0 tedna. 
+
+To je problem, kjer je vložkov, kot dejanski sporočilo v angleščini ali katerem koli jeziku, ki vas želite poslati nekoga v razredu, ali preko interneta. Obstaja nekaj izhod, ki se dogaja da so kodirani sporočilo, ki vas želijo prejemnik prejemati. In tudi če je nekdo v srednji prejme tudi jih ne želijo nujno mogli dešifrirati, ker notranjosti tega črna skrinjica, ali algoritem, nekateri mehanizem, nekateri korak za korakom navodila, ki so pri tem, da je vhod in ga pretvorijo v izhod, v upajmo na varen način. 
+
+In, v resnici obstaja besednjak na tem svetu, kot sledi. Navadno besedilo je beseda računalniški znanstvenik bi opisale vhod Sporočilo, kot angleški ali katerem koli jeziku vas dejansko želite poslati na drug človek. In potem šifropisom je Izokrenuti na šifrirane ali šifrirana, njegovo različico. 
+
+Ampak tam je ena sestavina tukaj. Tam je ena prispevek k skrivni ključ kriptografija. In da je ključ sam ki je na splošno kot bomo videli, je več, ali črko ali besedo, karkoli algoritem je dejansko pričakuje. 
+
+In kako dešifrirati podatke? Kako ga Razmrsiti? No, si pola izhodi in vhodi. 
+
+Z drugimi besedami, ko nekomu prejme šifrirano sporočilo, on ali ona je preprosto vedeti, da isti ključ. So prejeli šifropisom. In s priklopom ti dve vhodi v sistem šifrirnega, algoritem, to black box, od mora priti prvotno čistim. In tako, da je visoka raven pogled na to, kaj kriptografija je dejansko vse o. 
+
+Torej, kaj je tja. Zdaj pa poglej pod pokrov nečesa smo bili ob samoumevnega za pretekli teden, in za to sejo here-- niz. Niz ob koncu dneva je samo zaporedje znakov. 
+
+Morda bi bilo zdravo svet, ali zdravo Zamyla, ali karkoli. Kaj pa to pomeni, da je zaporedje znakov? Dejstvo je, knjižnica CS50 daje nam podatkovni tip se imenuje niz. 
+
+Vendar pravzaprav ni taka stvar kot niz v C. Res je samo zaporedje znak, znak, znak, značaj, nazaj, nazaj, da nazaj, nazaj, nazaj v notranjosti pomnilnika računalnika ali RAM. In bomo pogledati globlje, da je v prihodnosti, če pogledamo samo spomin, in uporaba ter grožnje, ki so udeležene. 
+
+Ampak kaj menijo niz Zamyla. Torej samo ime človek tukaj, Zamyla, da je zaporedje znaki, Z-A-M-Y-L-A. In zdaj recimo, da je ime Zamyla je se shranijo v notranjosti računalnika Program. 
+
+No, je razumljivo, da bi morali biti sposoben gledati teh znakov posamično. Tako da sem šele tekoč, da pripravi malo polje okrog imena Zamyla je tukaj. In to velja za C, ko vas imajo niz, kot Zamyla-- in morda da niz se je vrnil iz funkcija kot get niz, lahko dejansko manipulira je znak za znakom. 
+
+Zdaj, to je germane za pogovor na roki, ker V kriptografiji, če želite spremeniti A B in B do C in C D, in tako naprej, morate biti sposobni pogled na posameznih znakov V nizu. Morate biti sposobni spremeniti Z nekaj drugega je A nekaj drugega je M za nekaj drugega, in tako naprej. In zato moramo način, programsko, zato rekoč v C, da se lahko spremenijo in pogled na posameznih črk. In to lahko naredimo na naslednji način. 
+
+Naj grem pa nazaj v CS50 IDE. In mi gredo naprej in ustvariti novo datoteko da bom poklical ta časovni string0, kot je naš prvi tak primer, pika c. In bom, da gredo naprej in bič, kot sledi. 
+
+Torej vključujejo CS50.h, in potem vsebuje standardne io.h, ki sem skoraj vedno dogaja, da uporabljali v svojih programih, vsaj na začetku. int glavni praznino, in potem tukaj sem naredili strune dobi dobili niz. In potem bom gredo naprej in to. Rad bi šel naprej in kot kontrola razumnosti, samo reči, zdravo, odstotek je, podpičje, naredi niz 0. Uh oh, kaj sem naredil tukaj? Oh, nisem ga priključite. Torej izkušnja, ki ni bilo namerno. 
+
+Torej napaka, več odstotkov pretvorbe od argumentov podatkov. In to je, če je v linija 7-- OK, tako da imam, quote citata, ki je moj niz do printf. Imam znak za odstotek. Ampak mi manjka drugo trditev. 
+
+Mi manjka vejico s, ki Sem imel v prejšnjih primerih. Torej dobra priložnost, da se določi še ena napaka, po naključju. In zdaj mi teče string0, tip v Zamyla. OK, zdravo Zamyla. 
+
+Tako smo teči to vrsto programa nekaj različnih časih zdaj. Ampak kaj je naredil nekaj, kar malo tokrat drugače. Namesto samo tiskanje Zamyla je Celoten naziv ven z printf, naredimo to znak za znakom. 
+
+Bom uporabiti za zanke. In bom dal sam štetje spremenljivka, ki se imenuje i. In bom, da ponavljanjem, tako Dokler i manjša od dolžine s. 
+
+Izkazalo se je, nismo storiti to zadnjič, da c prihaja z Funkcija se imenuje Stirling. Nazaj v dan, in na splošno Še vedno pri izvajanju nalog, ljudje pogosto izberejo zelo jedrnato imena te vrste zvoka kot tisto, kar želite, čeprav je manjka nekaj samoglasnike ali pisma. Tako Stirling je ime funkcije, ki traja prepir med oklepaje, da bi moral biti niz. In to samo vrne celo število, dolžina tega niza. 
+
+Torej, to zanko na liniji 7 se dogaja da začnemo na i enak 0. To se dogaja, da prirastek i na vsaki ponovitvi z 1, kot smo počeli nekajkrat. Ampak to se dogaja, da samo, da to do točke kadar je i dolžina samega niza. 
+
+Torej, to je način, na koncu, ponavljanjem preko znake v nizu, kot se pravi sledi. Bom natisniti ni cel niz, vendar odstotkov c en sam znak čemur sledi novo vrstico. In potem bom pojdi naprej, in moram reči hočem natisniti i-značaj s. 
+
+Torej, če i je spremenljivka, ki označuje indeks vrvice, kjer ste v njem, moram biti sposoben reči, da mi i-značaj s. In c je način dela to z oglatimi oklepaji. Vi preprosto izgovorite ime niz, ki je v tem primeru pobrati. Nato uporabite oglate oklepaje, ki so ponavadi samo nad Return ali Enter tipko na tipkovnici. In potem si dal indeks znak, ki ga želite natisniti. Tako da je indeks dogaja, da se number-- 0 ali 1 ali 2 ali 3, ali pika, dot, dot, kakšno drugo številko. 
+
+In smo zagotovili, da se bo je pravo število, ker I začnemo na 0. In privzeto, prvi znak v nizu po dogovoru 0. In drugi znak je nosilec 1. In tretji znak je nosilec 2. In ne želite iti preveč daleč, vendar pa ne bo, ker smo bo le prirastek i do njega enako dolžino niza. In na kateri točki, to zanko se bo ustavil. 
+
+Zato naj gredo naprej in shranite to Program in tek se niz 0. Ampak sem zamočil. Implicitno razglasitvi knjižnica funkcijo Stirling z vrsto takšne in such-- zdaj, to zveni znano. Ampak to ni printf. In to ni dobil niz. 
+
+Nisem zamočil v na enak način tokrat. Ampak obvestilo tukaj malo dol poleg tega vključujejo glave string.h, izrecno navedena Izjava za Stirling. Torej je dejansko namig tam. 
+
+In res se je izkazalo tam je ena datoteka z glavo da smo ne uporablja v razredu še ni, vendar je Med tistimi, ki so za vas, ki se imenuje string.h. In v tej datoteki, string.h je Stirling razglašena. Zato naj gredo naprej in shranite to, da niz 0-- lepo, nobenih sporočil o napakah tokrat. 
+
+./string0 Zamyla, in Jaz sem na tem, da zadeti nastopiti, na kateri točki getstring se dogaja da se vrne niz, ga v s. Potem je za zanke bo ponovitev več znakov podjetja S je eden naenkrat, in jih natisnete eno v vsako vrstico, saj Sem imel, da poševnica nazaj n na koncu. Tako sem lahko izpustijo, da poševnico n, nato pa samo tiskanje Zamyla vse v isti liniji, učinkovito reimplementing printf, ki ni tako uporabna. Toda v tem primeru nisem storil. Sem dejansko natisnejo lik hkrati, eno na vrstico, tako da smo dejansko videli učinek. 
+
+Vendar naj navedem eno stvar tukaj. In se bomo vrnili k to v prihodnjem tednu. Izkaže se, da je to koda je potencialno buggy. 
+
+Izkazalo se je, da je dobil niz in nekatere druge funkcije v življenju ne nujno vedno vrniti, kar ste pričakovali. Vemo iz razreda zadnje čas, v tem, da je dobil Niz se naj bi vrnil niz. Kaj pa, če uporabnik vnese takšno dolgo besedo, ali odstavka, ali esej da je samo ni dovolj pomnilnika v računalniku, tako da bo. 
+
+Kot, kaj če gre kaj Napačna pod pokrovom? Morda ne zgodi pogosto, vendar pa bi se lahko zgodilo, ko v nekaj časa, zelo redko. In tako se je izkazalo, da je dobil niz in funkcije, kot so to storili, ne nujno vedno vrne nize. Morda vrne neko vrednost napake, nekaj kontrolnih vrednost tako rekoč ki nakazuje, da kaj je šlo narobe. In bi vedel samo to iz ko ga je naučil v razredu zdaj, ali so prebrali nekaj več dokumentacije. Izkazalo se je, da je dobil niz lahko vrne vrednost, imenovano null. Null je posebna vrednota, ki jo bom pridejo nazaj v prihodnjem tednu. Ampak za zdaj, samo vem, da če želim biti res pravilno pri napredovanju uporabo get niz, sem ne bi samo poklicati, in slepo uporabi svoj vrne vrednost, zaupamo, da je niz. 
+
+Naj najprej povem, hej, počakaj malo, le nadaljuje, kadar je ni enaka null, kjer null, še enkrat, je le nekaj posebno vrednost. In to je edina posebno vrednost, ki jo treba skrbeti za get niz. Get niz je prenehalo, da se vrnejo niz ali null. 
+
+In to klicaj enačaj morda veste iz morda matematičnem razredu ki jih lahko pripravi enačaj z črto skozi to navesti ni enaka. To običajno ni znak lahko vnesete na tipkovnici. In tako je v večini programskih jezikov, če hočeš povedati ni enako, uporabljate klicaj, sicer znan kot pok. Torej praviš bang enaka, kar ne pomeni enako, logično. To je tako kot da ni večje kot ali enaka ali manjša od ali enake tipke na tipkovnici da ne vse v en simbol. Torej, to je, zakaj je v zadnjih primerov, si odprt nosilec, nato pa enako znamenje, da se stori večja ali, recimo, manj kot. 
+
+Torej, kaj je takeaway tukaj? To je preprosto tako zdaj za uvedbo te skladnje, ta funkcija, ponavljanjem kot posameznik znakov v nizu. In tako kot tiste kvadrat nosilci vam omogočajo, da se na njih, upoštevati tistih oklepajev kot nekako namiguje na to osnovno Zasnova, pri čemer vsak karakter znotraj niza je vrsta boxed nekje pod napa v spomin računalnika. 
+
+Ampak kaj je narediti različico tega. Izkaže se, da je to Program je pravilen. Torej na osi CS50 za ocenjevanje kodo, to je prav zdaj. Še posebej zdaj, ko sem iskal null, ta program ne bi bilo nesreče. In sem vedel, da iz izkušenj. Vendar pa ni nič drugega, res lahko gre tukaj narobe. Vendar to ni zelo dobro zasnovan, ker gremo nazaj k osnovam. 
+
+Prvič, principles-- kaj za zanke storiti? A za zanke pa tri stvari. To inicializira nekaj vrednost, če ga prosim, da. Preveri stanje. In potem po vsakem ponovitev, po vsakem ciklu da korakih nekaj vrednost ali vrednosti, tukaj. 
+
+Torej, kaj naj bi to pomenilo? Mi inicializacijo i na 0. Mi preverite in se prepričajte, i je manj kot dolžina s, kjer je Z-A-M-Y-L-A, tako, ki je manjša od 6. In, seveda, 0, kot je manj kot 6. 
+
+Tiskamo iz Z. iz imena Zamyla je. Potem smo prirastek i od 0 do 1. Nato smo preveriti, je 1 manj od dolžine s? Dolžina s 6. Ja, res je. 
+
+Tako smo natisniti v imenu Zamyla je, ZA. Smo prirastek i od 0 do 1 do 2. Nato smo preveriti, je 2 manj kot dolžina imena Zamyla je. 6- do 2, je manjša od 6. Ja, kaj je natisnete zdaj M v Zamyla ime, tretji znak. 
+
+Ključno je, da na vsaki ponovitev zgodbe, sem preverjanje, je i manjša od dolžine Zamyla? Ampak ulov je, da Stirling ni lastnina. Tisti, ki so programirani prej v Java ali drugih jezikih Morda veš, katerih dolžina je niz lastnost, le nekaj samo za branje vrednosti. 
+
+V C v tem primeru, če je to funkcija, ki je dobesedno štetje števila znaki v Zamyla vsakič pravimo, da je funkcija. Vsakič, ko zahteva od računalnika za uporabo Stirling, to je ob pogled na Zamyla, in pravijo, Z-A-M-Y-L-A, 6. In se vrne 6. Naslednjič, ko vas pokliče je notri, da je za zanke, to se dogaja, poglej Zamyla spet pravijo Z-A-M-Y-L-A, 6. In to se dogaja, da se vrnete 6. Torej, kaj je neumen glede tega modela? 
+
+Zakaj je moja koda ni na 5 od 5 za načrtovanje zdaj, tako rekoč? No, jaz sem prosi vprašanje po nepotrebnem. Delam več dela, kot moram. 
+
+Torej, čeprav Odgovor je pravilen, sem prosi računalnik, kaj je dolžina Zamyla spet, znova in znova in znova? In ta odgovor je nikoli ne bo spremenilo. To je vedno bo 6. 
+
+Torej, boljša rešitev od tega bo to naslednja različica. Naj gredo naprej in prenesemo v ločena datoteka z imenom string1.c, samo, da se ločita. In se izkaže, je z za zanka, lahko dejansko razglasi več spremenljivk hkrati. 
+
+Tako bom, da bo i in jo nastavite na 0. Vendar sem tudi dogaja, da dodamo vejico, in pravijo, daj mi spremenljivko n, katerega vrednost je enaka dolžini niza s. In zdaj, prosim, da moje stanje dokler i manj kot n. 
+
+Tako da na ta način, je logika identična ob koncu dneva. Vendar sem spominjajo vrednost 6, v tem primeru. Kakšna je dolžina imena Zamyla je? In jo bom na n. 
+
+In sem še vedno preverjanje pogoj vsakič. 0 manj kot 6? 1 manj kot 6? Je 2 manj kot 6, in tako naprej? 
+
+Ampak jaz ne sprašuje računalnika še enkrat in še enkrat, kaj je dolžina imena Zamyla je? Kakšna je dolžina imena Zamyla je? Kakšna je dolžina imena tega Zamyla je? Sem dobesedno spomniti, da je prva in Samo odgovoriti na tem drugem spremenljivo n. Torej, to zdaj ne bi bila le pravilna, ampak tudi dobro zasnovan. 
+
+Zdaj, kaj je stil? Sem poimenoval moje spremenljivke zelo dobro, bi rekel. Oni so super jedrnato zdaj. In to je povsem v redu. 
+
+Če imate le eno niz v programu si lahko tudi imenujemo to je to za niz. Če imate le eno spremenljivko za štetje v programu, si lahko tudi to imenujemo i. Če imate dolžino, n je zelo pogosta, kot dobro. Ampak nisem komentiral katerokoli moje kode. 
+
+Nisem obvestila reader-- ali da je moj TF, ali TA, ali pa samo colleague-- kaj naj ki se dogaja v tem programu. In zato, da bi dobili dober slog, kaj bi želeli delati je this-- nekaj kot vprašati uporabnika za vnos. In sem lahko znova To poljubno število načinov. 
+
+Poskrbite, S- prepričajte get Niz je vrnil niz. In potem v here-- in to je morda najpomembnejši comment-- ponovitev več znakov v ih eno naenkrat. In sem lahko uporabite katero koli Izbira angleškem jeziku tukaj opisati vsako teh koščkih kode. 
+
+Obvestilo, da nisem dal pripombe na vsako vrstico kode, res samo na zanimiv tisti, tisti, ki imajo nek smisel, da sem morda želite super jasno, da nekdo branje svojo kodo. In zakaj kličeš dobili Niz vprašati uporabnika za vnos? Tudi to ena ni nujno vse to opisna. Ampak to pomaga povedati zgodbo, saj je Druga vrstica v zgodbi je, se prepričajte, dobili niz vrnil niz. 
+
+In tretja vrstica v zgodbi je, Ponovil več znakov v e eno ob času. In zdaj samo za dober ukrep, Bom, da gredo naprej in dodamo še en komentar, da je le pravi print i-ti znak v s. Zdaj, kaj sem naredil Na koncu dneva? 
+
+sem dodal nekaj angleški besede v obliki pripomb. Simbol slash slash pomeni, hej, Računalnik je to za človeka, ni za vas, računalnik. Torej oni logično prezreti. Oni so samo tam. 
+
+In, seveda, CS50 IDE jih prikazuje kot siva, kot koristno, vendar ne ključ s programom. Obvestilo, kaj lahko sedaj storite. Ali ste vedeli, C programiranje ali ne, lahko samo stati nazaj na to programa, in posneto pripombe. Vprašaj uporabnika za vnos, se prepričajte, dobili niz vrnil niz, Ponovil nad znakov s enega po enega, tiskanje značaja i-ti znak v S- jih ne celo gledati kodo razumeti, kaj ta program počne. In, še bolje, če si videti v tem programu v tednu ali dveh, ali mesec ali leto, tudi vi nimate strmeti na kodo, poskuša spomniti, kaj sem poskušal narediti s to kodo? 
+
+Vi ste povedali sami. Ste ga opisali sami, ali kakšen kolega, ali TA, ali TF. In tako bi to zdaj pravilen in dober design, in na koncu dober slog, kot dobro. Torej, ali da se vodijo v mislih. 
+
+Tako da je ena stvar, bom na tem mestu da lahko zdaj pokažejo, kaj je dogaja pod pokrovom. Torej je ta funkcija v C, in drugih jezikih, imenuje Typecasting da implicitno ali eksplicitno vam omogoča pretvorbo iz ene vrste podatkov v drugo. Smo bili, ki se ukvarjajo tako če danes s strunami. 
+
+In so nizi znakov. Toda spomnite iz tedna 0, kakšni so znaki? Znaki so samo abstrakcija na vrhu numbers-- decimalnih števil, in decimalna številke so res samo abstrakcija na vrhu binarnih števil, kot smo ga opredeljuje. 
+
+Torej znaki so številke. In številke so znaki, Samo odvisno od konteksta. In se izkaže, da je v notranjosti računalniškega programa, lahko določite, kako želite videti na bitov znotraj tega programa? 
+
+Spomnimo od 0 tednu, ki smo ga imeli Ascii, ki je le ta oznaka kartiranje pisma številke. In smo rekli, kapital A je 65. Kapitalsko B je 66, in tako naprej. 
+
+In obvestilo, smo v bistvu imeli znakov na V prvi vrstici tukaj, saj bi C jim pravimo, znakov, in nato Ints na drugi vrsti. In se izkaže, lahko pretvorite neopazno med njima, običajno. In če želimo narediti to namerno, smo morda želeli obravnavati nekaj podobnega. 
+
+Mi morda želeli spremeniti Zgornji primer nižje primer, ali male črke v velike. In se izkaže, tam je pravzaprav vzorec tukaj moremo sprejeti vsak trenutek. Toda poglejmo najprej na Primer za to izrecno. 
+
+Bom šel nazaj v CS50 IDE. Bom ustvariti datoteka z imenom ASCII 0.c. In bom, da gredo naprej in dodamo moj Standard io.h na vrhu, int main nična Na vrhu mojega delovanja. In potem sem šele tekoč, da storijo following-- za zanke iz i je enak, recimo, 65. 
+
+In potem sem se bo manj kot 65, plus 26 črk v abecedi. Torej bom pustil računalnik math me tam. In potem znotraj tega zanke, kaj bom za tiskanje? 
+
+% C% i poševnice nazaj n. In zdaj bi rad, da bi zapolnili v dveh vrednosti. Sem začasno postaviti vprašanje označuje pa povabiti na vprašanje. 
+
+Želim Ponovil od 65 dalje za 26 črk abecede, tiskanje na vsaki ponovitvi, ki lik integral enakovredni. Z drugimi besedami, želim Ponovil več kot 26 številk tiskanje kaj je ASCII znak je črka, in kaj ustreznega števila is-- res samo vnovično grafikon iz tega diapozitiva. Torej, kaj naj ti vprašaji biti? 
+
+No, se izkaže, da drugi eden bi smela biti zgolj spremenljivka i. Rad bi videl, da je kot številka. In srednji argument tukaj, lahko povem računalnik za zdravljenje te celo i kot znak, da se jo nadomestiti tukaj odstotkov C. 
+
+Z drugimi besedami, če je človeški programer, veš to so le številke Na koncu dneva. In vem, da 65 naj karto do neke značaja. S tem eksplicitno cast, z oklepaju, ime podatkovnega tipa, ki ga želite pretvoriti, in zaprt oklepaj, lahko povedal računalnik, hej, računalnik, pretvoriti to celo v char. 
+
+Torej, ko sem to v Program po zbiranju, da vidimo, kaj sem get-- da ASCII 0. Darn to, kaj sem naredil narobe? Uporabite črno identifikatorja, Vse je v redu, ne namerno, ampak da vidimo, če ne moremo Razlog skozi to. 
+
+Torej linija five-- tako da nisem dobil zelo daleč pred vijačenje gor. V redu je. Torej enaka linija 5 za i 65-- vidim. Torej, ne pozabite, da je v C, za razliko od nekaterih jeziki, če imajo predhodno načrtovanje izkušnje, ki jih imajo povedati računalnik, za razliko od nič, kar tip spremenljivke je. 
+
+In sem pozabil ključni stavek tukaj. V skladu pet, sem začel uporabljati i. Ampak nisem povedal C kateri podatki tip je. Torej bom šel noter in pravijo, ah, da je celo število. 
+
+Zdaj bom šel naprej in prevedem. Ki je določena, da. ./ascii0 Enter, da je nekako kul. Ne samo, da je to super hitro zaprosi računalnik to vprašanje, namesto da bi gledal na stekelce se natisne eno na vrstico, A 65, B je 66, vse tja down-- od I Ta 26 times-- naredil črkami z, kar je 90. In dejansko rahlo bolj inteligentni bi so bili za mene ne zanašajo na računalniku dodati 26. Lahko bi preprosto naredili 90 kot tudi, tako dolgo saj jaz ne bi iste napake dvakrat. Rad bi šel skozi z, ne samo skozi y. 
+
+Torej, to je izrecno cast. Izkaže se, da je to sploh ni potrebna. Naj gredo naprej in ponovite to prevajalnik, in ponovitev ASCII 0. Izkazalo se je, da je C zelo pameten. 
+
+In printf, zlasti je zelo pameten. Če ste pravkar opraviti i dvakrat tako za ogradami, printf bodo spoznali, oh, tudi jaz poznam dal mi integer-- določeno število, kot 65, ali 90, ali karkoli. Ampak vidim, da si me želiš format to število, kot znak. In tako printf lahko implicitno odda int v char za vas, kot tudi. Tako, da to ni problem sploh. 
+
+Ampak obvestilo, ker te enakovrednosti lahko dejansko to storite tudi. Naj gredo naprej in narediti eno druga različica this-- Ascii 1.C. In namesto ponavljanjem preko cela števila, lahko res blow your mind s ponavljanjem več znakov. Če char c dobi kapitala A, I želijo, da gredo naprej in to, dokler C manjše ali enako kapitalske Z. In na vsaki ponovitvi Rad bi prirastek C, sem lahko zdaj v moji printf skladu tukaj recimo odstotkov C odstotkov i spet vejica C. 
+
+In zdaj lahko grem v drugo smer, litje značaj izrecno k celo število. Torej, še enkrat, zakaj bi to naredili? To je malo čudno, da nekako računajo glede znakov. 
+
+Ampak, če boste razumeli, kaj je dogaja pod pokrovom, pa je res ni magija. Ti si samo rekel, hej, računalnik daje mi spremenljivka imenovan C tipa char. inicializacijo kapitalske A. In Opazili enojnih narekovajih zadevo. 
+
+Za znakov v C, prikličite iz prejšnji teden, uporabite enojne narekovaje. Za godala, besede, fraze, uporabite dvojne narekovaje. OK, računalnik, vedno tem, da Dokler znak manj kot ali enako z. In vem iz mojega Ascii tabele, da so vsi te kode ASCII so stikata. 
+
+Tukaj ni vrzeli. Torej, to je samo od A do Ž, ločeni z eno številko vsakega. In potem sem lahko prirastek char, če res želim. Na koncu dneva, to je samo številka. To vem. Tako da sem lahko samo predvidevam, da dodate 1 do nje. 
+
+In potem je to čas, tiskam c, in nato integral enakovredni. In sploh ne potrebujete izrecno zasedbo. Lahko pustite printf in Računalnik ugotoviti nekatere stvari, tako da zdaj, če sem teči da Ascii1./ascii1, Dobim točno isto stvar kot dobro. 
+
+Neuporaben program though-- nihče se dogaja, da dejansko napisati programsko opremo da ugotovimo, kaj je bilo številka, ki se preslika v A ali B, ali Z? Ste šele tekoč, da ga Google, ali poglej na spletu, ali da si jo gor na stekelce ali podobno. Torej, če to dejansko dobili koristno? 
+
+No, ko govorimo o da slide, opazili, da je dejanski vzorec tukaj med velikimi in male črke, ki ni bila naključna. Opazimo, da kapital A je 65. Male črke a = 97. In kako daleč je nižja primer primeren? 
+
+Torej, 65 je, koliko korakov od 97? Torej 97 minus 65 je 32. Torej kapital je a 65. Če dodate 32 na to, dobiš male črke a. In enakovredno, če odštejemo 32, dobiš nazaj kapitala A-- isto s B za malo b, big C do malo c. 
+
+Vse te vrzeli so 32 narazen. Zdaj, bi to se zdi, da nam omogočajo, da narediti nekaj podobnega Microsoft Word, ali Google Docs funkcija, kjer vas lahko izberete vse in nato reči, spremeniti vse v male črke, ali spremeniti vse na velike črke, ali spremeniti le prvo besedo iz stavka v zgornjem primeru. Mi lahko dejansko nekaj storiti kot da sami. 
+
+Naj gredo naprej in shranite datoteko tukaj se imenuje izkoristiti 0.c. In gremo naprej in bič gor program da ne točno, da je, kot sledi. Tako vključuje knjižnico CS50. In vsebuje standardne I / O. 
+
+In vem, da bo kmalu. Tako bom, da ga v že tam, string.h, tako da imajo dostop do stvari, kot so Stirling, in nato int glavni praznino, kot ponavadi. In potem bom šel naprej in ne nize dobi dobili niz, samo da bi dobili niz s strani uporabnika. In potem bom opravljam svoje preverjanje razumnosti. Če niz ni enak null, potem je varno nadaljevati. In kaj bi rad naredil? Bom Ponovil je i enak 0, in n do dolžine niza na s. 
+
+In bom, da to storijo, dokler i je manj kot n in i plus plus. Do sedaj sem res samo zadolževanje ideje od prej. In zdaj bom uvesti vejo. 
+
+Torej, mislim nazaj na nič, kjer smo imeli te vilice v cestnem prometu, in prejšnji teden v C. vam bom pravim, če i-znakov vs je večje ali enako male črke a, in-- v Scratch bi jih dobesedno pravijo, in vendar v C rečeš ampersand, ampersand-- in i-ti znak vs je manjša ali enaka znižati primeru Z, naredimo nekaj zanimivega. Poglejmo dejansko natisnete ven znakov brez nove vrstice da je znak v nizu, i-ti znak v nizu. 
+
+Ampak gremo naprej in odštejemo 32 od njega. Else, če je znak v Niz, ki ga iščemo ni med malo a in malo z, gremo naprej in šele natisne nespremenjena. Tako smo uvedli to oklepajih zapis za naše strune, da bi dobili na i-znak v nizu. 
+
+Sem dodal nekaj pogojno logiko, kot Praske na prejšnji teden teden enega, kjer Jaz sem samo s pomočjo moje temeljno razumevanje tega, kaj je dogaja pod pokrovom. Je i-ti značaj s večja ali enaka k? Kot je bilo 97 ali 98, ali 99, in tako naprej? 
+
+Vendar pa je tudi manjša ali enaka vrednosti malimi zv? In če je tako, kaj pomeni ta vrstica? 14, to je nekako od kalčki celotne ideje, začetnico pismo preprosto odšteje 32 iz njega, v tem primeru, ker vem, na da grafikon, kako so zastopani moje številke. Torej, gremo naprej in vodijo to, Po zbiranju izkoristiti 0.c, in tek izkoristiti 0. 
+
+Naj je tip v nekaj podobnega Zamyla v vseh male enter. In zdaj imamo Zamyla v vseh velikimi črkami. Kaj je tip v Robu v vseh malimi črkami. Poskusimo Jasona v vseh malimi črkami. In smo dobili prisilno kapitalizacije. Tam je majhen hrošč, ki sem nekako ni predvidel. Obvestilo moj novi hitro se konča na isti liniji kot njihova imena, ki se počuti malo grdo. 
+
+Tako da sem šel tu, in dejansko na koncu tega programa izpisal znak za novo vrstico. To je vse. Z printf, ki jih ne potrebujete prenese v spremenljivk ali formatu kodo. Lahko dobesedno samo tiskanje nekaj podobnega nove vrstice. 
+
+Torej, gremo naprej in da izkoristiti 0 znova, ga ponovite, Zamyla. In zdaj je malo lepši. Zdaj, moj poziv je na svojo novo linijo. Tako, da je vse v redu in prav. Torej, to je dober primer. Ampak jaz ne celo nujno morali trdo kodo 32. Veš kaj? Lahko bi say-- ne vem kdaj se spomnite, kakšna je razlika. 
+
+Ampak vem, da če bom imajo malo črko, Sem v bistvu želijo odšteti off kar je razdalja med malo A in velik A, ker če predpostavimo, da vsi drugi pisem sta enaka, da naj bi dobili delo opravljeno. Toda namesto da bi to naredil, veš kaj? Obstaja še en način še vedno. 
+
+Če to je izkoriščanja 1.c--, če bi bil naj da v ločeno datoteko. Naredimo izkoristiti 2.c, kot sledi. Bom res čist ta tukaj. In namesto da bi morali vedeti, ali skrbi tistih nizki ravni Podrobnosti o izvajanju, sem namesto le, da bo tiskanje znak, quote citata, odstotka C, in potem klic drugo funkcijo, ki obstaja, da je argument, kar je znak, kot je ta. 
+
+Izkazalo se je v C, tam je en klic funkcije na zgornji, ki je kot njegovo ime kaže, je znak in omogoča, da svojem zgornjem primeru enakovredni, nato pa ga vrne tako da se lahko printf priključite tam. Tako, da to stori, čeprav sem treba uvesti še eno datoteko. Izkazalo se je, da je ena datoteka da bi vedel le iz razreda, ali učbenik, ali na spletu reference, ki se imenuje C type.h. 
+
+Torej, če dodam, da se med moji glavi datotek, in zdaj ponovno zbere ta program, capitalize2, ./capitalize2 Enter. Kaj je tip v Zamyla v vseh male, še vedno deluje enako. Ampak veš kaj? Izkazalo se je, da zgornja ima nekatere druge funkcije. 
+
+In naj vam predstavim to ukaz tukaj, nekako nerodno poimenujejo, toda človek za priročnik. Izkazalo se je, da je večina računalnikov Linux, saj smo z here-- delovati Linux system-- imajo ukaz imenuje človek, ki pravi, hej, računalnik, daj mi uporabo računalnika. Kaj želite poglej v tem priročniku? 
+
+Želim poiskati funkcijo poklicani, da zgornji del, Enter. In to je malo skrivnosten včasih brati. Ampak obvestilo, da smo v Navodilo za Linux programer je. In to je vse besedilo. In opazil, da je ime funkcije tukaj. Izkazalo se je, da ima bratranca, ki se imenuje nižje, kar pa nasprotno. In obvestilo na podlagi sinopsisa, za uporabo tega delovanje strani man, tako rekoč, se mi je povedal, da sem morajo vključevati c type.h. In vedel sem, da iz prakse. 
+
+Tukaj pa je mi pokazala dva prototipi za funkcijo, tako da če bom kdaj želite uporabiti to Vem, kaj vzeti kot vhod, in kaj se vrnejo kot proizvodnja. In potem, če sem prebral opis, vidim podrobneje, kaj funkcija počne. Toda še bolj pomembno, če Gledam na podlagi vrednosti donosa, se pravi, da je vrednost vrnjeno da pretvorjene pisma, ali C, prvotni vhod, če pretvorba ni bilo mogoče. 
+
+Z drugimi besedami, na zgornji bodo poskušali pretvoriti pismo zgornjem primeru. In če je tako, gre za njegovo vrnitev. Če pa ne more za nekatere reason-- Mogoče je že z velikimi črkami, Mogoče je klicaj ali kakšno drugo punctuation-- to je le, da bo vrne izvirnik C, kar pomeni, da lahko svojo kodo Bolje zasnovan kot sledi. 
+
+Ne potrebujem vseh Ti darn vrstic kode. Vse proge sem Samo izpostavil lahko se zgrudil v samo enim samim linija, ki je this-- printf odstotkov c na zgornjem S nosilec i. In to bi bilo Primer boljše zasnove. 
+
+Zakaj izvajati v 7 ali 8 vrstic kode, kar je bilo sem izbrisani, ko lahko namesto propad vse te logike in odločanje v eno samo linijo, 13 zdaj, da temelji na knjižnici function-- funkcija, ki prihaja s C, vendar počne točno tisto, kar želite, da narediti. In, odkrito povedano, tudi če ni prišel s C, bi lahko to izvedete sami, saj smo videli, s dobili negativno int in dobili pozitiven int prejšnji teden, kot tudi. 
+
+Ta koda je zdaj veliko bolj berljiva. In, seveda, če se premikate navzgor, poglej koliko bolj kompakten ta različica mojega programa. To je malo top težko zdaj, z vsemi temi vključuje. Ampak to je v redu, ker zdaj stojim na ramenih programerjev pred mano. In kdo je bil kdo izvajajo na zgornji res si mi uslugo, podobno kot tisti, izvaja Stirling res si mi uslugo nekaj časa nazaj. In zdaj imamo boljše oblikovanje programa da izvaja točno isto logiko. 
+
+Ko že govorimo o Stirling, naj grem naprej in to. Naj gredo naprej in shranite sliko kot stirling.c. In se je izkazalo, da lahko lupine nazaj eno drugo plast zelo enostavno zdaj. Bom, da gredo naprej in bič do drug program v glavnem tu se preprosto ponovni orodij Dolžina niz kot sledi. Torej, tukaj je vrstica kode, ki me dobi niz od uporabnika. Hranimo to z uporabo znova in znova. Naj dam spremenljivko n tipa int, ki shranjuje številko. 
+
+In mi gredo naprej in naredite naslednje logiko. Medtem ko n-karakter vs ne ni enako poševnica nazaj 0, gredo naprej in prirastek n. In potem izpisal printf odstotkov i n. Trdim, da ta program tukaj ne pristanejo dolžine niza, številke od dolžine niza. 
+
+In čarovnija je v celoti vdelane v 8. vrstici tukaj z Izgleda novo sintakso, To poševnica nazaj 0 v enojnih narekovajih. Toda zakaj je to? No, razmisli, kaj je bilo dogaja vsem tem času. 
+
+In kot stran, preden pozabim, zavedati tudi, da poleg man strani ki prihajajo s tipično Linux sistem, kot CS50 IDE, Zavedam se, da mi je Osebje Seveda je, tudi je različico spletnega mesta te iste ideje imenovano reference.cs50.net, ki ima vse te iste strani man, vse to isto dokumentacije, kakor tudi malo polje na vrhu, ki omogoča vi v spremeniti vse dokaj Skrivnosten jezik v manj udoben Način, kjer smo, učno osebje, so šli skozi in poskušala poenostaviti nekaj jezika, da se stvari osredotočila na ideje, in ne nekaj tehničnih podrobnosti. Torej, imejte v mislih, reference.cs50.net kot drugi vir, kot tudi. 
+
+Toda zakaj ne dolžine nizov delo tako, kot sem predlagal trenutek nazaj? Tukaj je spet ime Zamyla je. In tukaj je ime Zamyla je boxed, ko sem vztrajati početje, slikati sliko, da bi jo, Res, le zaporedje znakov. Toda Zamyla ne obstaja ločeno v programu. 
+
+Ko pišete in zaženete program, boste uporabljali Mac ali računalnik kot spomin ali RAM tako rekoč. In si lahko zamislite računalnik, da imajo veliko gigabajtov spomina v teh dneh. In koncert pomeni milijarde, tako milijard bajtov. 
+
+Ampak kaj je previjanje v času. In domnevam, da smo s pomočjo res star računalnik, ki Ima le 32 bajtov pomnilnika. Lahko bi, na mojem računalniškem zaslonu, preprosto sestaviti to takole. 
+
+Lahko bi preprosto rekel, da moj Računalnik ima vse to spomin. In to kot palico spomina, če se spomnite naše slike iz zadnjega časa. In če sem razdeliti to dovolj časa, Trdim, da imam 32 bajtov spomina na zaslonu. 
+
+Zdaj, v resnici, sem lahko samo pripraviti doslej na tem zaslonu tukaj. Tako da sem šel naprej, in samo po dogovoru, pripraviti spomin mojega računalnika kot omrežje, ne le kot ena premica. Natančneje, Trdim zdaj, ta mreža, to 8 s 4 omrežje, samo predstavlja vseh 32 bajtov pomnilnika na voljo na mojem Mac, ali na voljo v mojem računalniku. In oni zavijanje na dve vrstici, samo ker se prilega bolj na zaslonu. Toda to je prvi bajt. To je drugi bajt. To je tretji bajt. 
+
+In to je 32. bajt. Ali pa, če mislimo kot računalnik znanstvenik, to je bajt 0, 1, 2, 3, 31. Torej imate 0 do 31, če začnete štetje na 0. 
+
+Torej, če bomo uporabili program da se pri pozivih dobili niz, in smo dobili niz s človeka kot sem poklical Zamyla, Z-A-M-Y-L-A, kako je v svetu počne Računalnik Spremljajte ki bajt, ki je kos pomnilnika, pripada kateri niz? Z drugimi besedami, če bomo nadaljevali vnesite drugo ime v računalnik, kot je ta Andi, kliče dobili niz drugič, A-N-D-I je na koncu v pomnilnik računalnika, kot tudi. Ampak kako? 
+
+No, se izkaže, da pod napa, kaj C pa pri skladiščenju nize da človeške vrste v, ali da prihajajo iz nekega drugega vira, je zarisuje konec njih s posebna character-- poševnica nazaj 0, ki je prav poseben način rekel 80 bitov v vrsti. 
+
+Torej A-- je to odpoklic številka 97. Torej nekaj vzorec 8 bitov predstavlja decimalno številko 97. To poševnica nazaj 0 dobesedno številka 0, alias nul, N-U-L, za razliko od prej, N-U-L-L, ki smo se pogovarjali o tem. Ampak za zdaj, samo vem, da je to poševnica nazaj 0 je le 80 bitov v vrsti. 
+
+In to je samo ta vrstica v pesek, ki pravi, da nič v levo pripada en niz, ali eno vrsto podatkov. In kaj na desno pripada nekaj drugega. Andi je ime, medtem, ki samo vizualno zgodi, da zaviti na drugi strani linije, ampak to je samo estetska podrobnosti, Podobno je zaključen. 
+
+Je niz a znakov A-N-D-I, plus petina skrivnost character, vsi 0 bitov, ki so pravkar razmejuje konec imena Andi, kot tudi. In če pravimo dobili niza tretjič v računalnik, da bi dobili niz, kot je Maria, M-A-R-I-A, podobno je maria je Ime zaključen s poševnico 0. 
+
+To je bistveno drugačna od tega, kako bi računalnik običajno shranjevanje celo število ali plovec, ali druga podatkovni tipi še vedno, saj odpoklic, celo običajno 32 bitov ali 4 bajte, ali morda celo 64 bitov, ali osem bajtov. Toda mnogi primitivnih v računalniku v programskem jeziku imajo določeno število bajti pod hood-- Mogoče 1, morda 2, mogoče 4, mogoče 8. 
+
+Ampak strune, z zasnovo, imajo dinamično število znakov. Ti ne veš vnaprej, dokler človekovih vrste v Z-A-M-Y-L-A, ali M-A-R-I-A ali A-N-D-I. Ti ne veš kolikokrat je uporabnik bo hit tipkovnico. Torej, ne veš, kako veliko znakov vnaprej boste potrebovali. 
+
+In tako C le nekako pušča Like Skrivnost Pasica pod pokrovom Na koncu niza. Po shranjevanju Z-A-M-Y-L-A v spominu, pa tudi samo postavlja enakovredno iz obdobja. Na koncu stavka, postavlja 80 bitov, tako da se spomnimo, kjer Zamyla začne in konča. 
+
+Torej, kaj je povezava, potem, da ta program? Ta program je tukaj, Stirling, je le mehanizem za pridobivanje niz od uporabnika, linija 6. Line 7, izjavljam spremenljivko imenuje n in ga postavi na 0. 
+
+In potem v 8. vrstici, sem samo vprašal Vprašanje, medtem ko n-karakter ne ni enaka vse 0 bits-- z drugimi besedami, ne enako ta posebna značaj, poševnica nazaj 0, kar je samo, da je posebna nul character-- iti naprej in samo prirastek n. 
+
+In ne delam, in obdržati to počne, in da to počne. In to čeprav je v preteklosti smo i uporabljajo, to je popolnoma v redu pomensko uporabiti n, Če ste samo poskušam šteje tokrat namenoma, in samo želim, da ga pokličete n. Torej to kar naprej spraševali, je n-ti značaj s vsi 0s? Če ne, poglej na naslednjo videz, poglej na naslednjo, poglej v drugo, poglej na naslednjo. 
+
+Toda takoj, ko vidite poševnico 0, ustavi ta loop-- linija 9 do 11--. Zlomil si iz while, zaustavi znotraj navedene variabilne n skupno število vseh izmed znakov v nizu, ki ga je videl, s čimer je tiskanje. Torej, poskusimo to. 
+
+Naj gredo naprej in brez uporabo funkcije Stirling, ampak z mojo lastno domač različico tukaj se imenuje stirling, naj gredo naprej in tek stirling, tip v nekaj kot Zamyla, kar vem vnaprej je šest znakov. Poglejmo, če deluje. Pravzaprav, to je šest. Poskusimo z Rob, trije znaki, trije znaki, kot tudi, in tako naprej. Tako, da je vse, kar se dogaja na pod pokrovom. In opazili povezave, nato pa s prvim tednom razreda, kjer smo se pogovarjali o nekaj podobnega abstrakcije, ki je le ta Plastenje idej, ali kompleksnosti, na vrhu temeljnih načel. Tukaj smo nekako iščejo Pod pokrovom Stirling, tako rekoč, da ugotovimo, kako bi se to izvaja? 
+
+In lahko bi ga ponovno izvesti sami. Ampak mi nikoli ne bo spet ponovno izvesti Stirling. Mi smo le, da bo uporabo Stirling da dejansko dobil nekaj nizov dolžine. 
+
+Vendar ni magic pod pokrovom. Če veste, da pod pokrov, niz je samo zaporedje znakov. In to zaporedje znakov Vse lahko številčno obravnavati z nosilcem 0, nosilec 1, nosilec 2, in si vedo, da je na koncu niza posebni znak, lahko ugotovimo, kako narediti najbolj ničesar v Program, saj vse to izvira na je branje in pisanje spomin. To pomeni, da se spreminja in išče v spomin, ali se premika stvari okrog v spomin, tiskanje stvari na zaslonu, in tako naprej. 
+
+Torej, kaj je zdaj uporabljajo to novo pridobljeno razumevanje tega, kaj Strune dejansko so pod pokrovom, in lupino nazaj eno drugo plast da do sedaj smo jih je ignoriranje v celoti. Še posebej, kadar koli smo izvajali program, smo imeli to vrstico kode Na vrhu razglasitvi glavni. In smo določeno int glavni praznino. 
+
+In ta praznina znotraj oklepajev bil je pravi, ves ta čas, da je glavna sama po sebi ne bo nobenih argumentov. Vsako vhod, ki je glavni bo dobil od uporabnika mora priti iz nekaterih drugih mehanizem, kot get int ali pa plovec, ali pa niz, ali kakšno drugo funkcijo. Vendar se je izkazalo, da je ko pišete program, lahko dejansko določite da je ta program se sprejme prispevke iz človeka Na samem ukazno vrstico. 
+
+Z drugimi besedami, čeprav smo doslej še poteka samo ./hello zdravo ali podobni programi, vse od druge programe, ki smo jih uporabljali, da sami ne pisati, so imeli pri tem, se zdi, ukazni vrstici arguments-- stvari, kot narediti. Pravite, da nekaj podobnega narediti, in nato druga beseda. Ali Jek, da ste Jek, nato pa druga beseda, ime datoteke. 
+
+Ali celo RM ali CP, kot si morda Videli ali uporabljati že odstraniti ali kopirati datoteko. Vse tiste sprejme tako imenovani ukazni vrstici arguments-- dodatna stavka terminala poziv. Toda do sedaj, smo sami niso imeli to razkošje ob vhod iz Uporabnik, ko on ali ona dejansko deluje sam program v ukazni vrstici. 
+
+Vendar pa lahko storimo, da jo ponovno izjavlja, Glavni napreduje, ne da imajo razveljavi v oklepaju, razen teh dveh argumentov instead-- prvo celo število, in drugi nekaj novo, nekaj, kar bomo klic niz, nekaj podobnega v duhu s tem, kar smo videli v Scratch kot seznam, vendar niz nizov, kot bomo kmalu videli. Toda poglejmo to z Na primer, preden smo razlikovati, kaj to pomeni. 
+
+Torej, če sem šel v CS50 IDE Tukaj sem šel naprej in prijavljeni v datoteki argv0.c naslednjo predlogo. In opazil, edina stvar, da je drugačen doslej je, da sem se spremenila nična int argc niz argv odprt nosilec, blizu nosilec. In opazil, za zdaj pa je nič znotraj teh razredov. 
+
+Ni številka. In ni i, ali n, ali katerokoli drugo črko. Jaz sem samo z uporabo oglati oklepaji za zdaj, zaradi bomo prišli nazaj čez nekaj trenutkov. 
+
+In zdaj, kaj bom storiti, je to. Če argc enaka enaka 2-- in opozarjajo, da je enaka pogoja je enako je upravljavec enakost primerjavo levo in desno za enakost. To ni naloga subjekt, ki je enotni enačaj, kar pomeni kopijo z desne na levo neko vrednost. 
+
+Če argc enak enak 2, hočem recimo, printf, zdravo, procenti, nova vrstica, in nato priključite in-- in tukaj je nova trick-- argv nosilec 1, iz razlogov, da se bomo vrnili v trenutku. Sicer če argc ne enako 2, veš kaj? Kaj je samo iti naprej in, kot ponavadi, tiskanje ven zdravo svet brez zamenjave. 
+
+Tako se zdi, da če argc, ki stojala za štetje argument, enaka 2, Bom natisniti zdravo nekaj ali drugi. V nasprotnem primeru, ki ga privzeto, da sem tiskanjem zdravo svet. Torej, kaj to pomeni? 
+
+No, naj gredo naprej in shranite ta datoteka, nato pa naredite, da argv0, in potem ./argv0, Enter. In pravi, zdravo svet. Zdaj, zakaj je to? 
+
+No, se izkaže, kadarkoli zagnati program v ukazni vrstici, ste polnjenje, kaj bomo običajno zahtevajo argumenta vektor. Z drugimi besedami, se samodejno računalnik, operacijski sistem, se bo pri roki, da vaš program Sam seznam vseh besed da človeško vpisali poziv, v primeru, da programer želite storiti nekaj s teh informacij. In v tem primeru, le beseda Sem tipkal na poziv je ./argv0. 
+
+In tako se je število argumentov, da je prevalili na mojem programu je samo eden. Z drugimi besedami, argument računajo, sicer znan kot argc Tukaj kot celo število, je le ena. Ena, seveda, ne enako dve. In zato je to tisto, kar natisne, zdravo svet. 
+
+Ampak naj bo to nekje. Naj povem, argv0. In potem kako približno Maria? In nato pritisnite tipko Enter. 
+
+In opazil, kaj se čudežno zgodi tukaj. Zdaj, namesto Hello World, imam spremenili obnašanje programa tako, da se vložek ne od get niz ali kakšno drugo funkcijo, ampak, očitno, moj ukaz sama, kar sem prvotno vnesli. In lahko igram to igro znova jo spremeniti na Stelios, na primer. 
+
+In zdaj vidim še drugo ime. In tukaj, lahko rečem Andi. In lahko rečem Zamyla. In lahko igra to igro ves dan, le priključiti v različnih vrednostih, tako dolgo, kot sem zagotavlja natančno dve besedi na poziv, tako da argc, štetje moj argument, je 2. 
+
+Vidim, da je ime priključen v printf, na ta pogoj tukaj? Tako se zdi, da imajo sedaj izrazna sposobnost sprejemanja vhod iz drugega mehanizma, Iz tako imenovanega ukazno vrstico, namesto da bi morali čakati dokler uporabnik zažene program, in potem mu poziv nekako takole: get niz. 
+
+Torej, kaj je to? Argc, še enkrat, je samo celo število, število words-- arguments-- da uporabnik predložijo na hitro, na oknu terminala, vključno z imenom programa. Torej naš ./argv0 je učinkovito, ime programa, ali kako zagnati program. 
+
+To šteje kot beseda. Zato bi argc bilo 1. Toda, ko pišem Stelios, ali Andi, ali Zamyla ali Maria, to pomeni, da je število argument je dva. In tako zdaj je dve besedi minilo v. 
+
+In obvestilo, lahko nadaljujemo to logiko. Če dejansko rečem nekaj podobnega Zamyla Chan, polno ime, s tem pa poteka tri argumente v celoti, Zdaj pa pravi, privzeti še enkrat, ker je seveda 3 ni enaka 2. 
+
+In to na ta način, moram dostop preko argv ta nov argument da smo lahko tehnično kaj želimo poklicati. Toda po dogovoru, da je argv in argc oz. Argv, argument vector, je nekako za sinonim za programiranje funkcija v C se imenuje niz. 
+
+Množica je seznam podobnih vrednot nazaj, nazaj, nazaj, na hrbet. Z drugimi besedami, če je tukaj v RAM, naslednjič je tik ob njem, in zraven njega. Oni niso povsod. In da ta scenarij, kjer se stvari so po vsem mestu v spomin, lahko dejansko močna funkcija. Vendar se bomo vrnili na to, ko smo govorimo o luksuznih podatkovnih struktur. Za zdaj, niz je le kos zveznega pomnilnika, vsak od katerih elementi nazaj, nazaj, nazaj, nazaj, in na splošno istega tipa. 
+
+Torej, če pomislite, od A Malo prej, kar je niz? No, niz, kot Zamyla, Z-A-M-Y-L-A, je tehnično, samo polje. To je niz znakov. 
+
+In zato, če res pripraviti to, kot sem niti prej kot kos spomina, se izkaže, da je vsak od teh znaki zavzema bajt. In potem je tukaj še, da posebni sentinel lik je poševnica nazaj 0, ali vseh osem 0 bitov, da razmejuje konec tega niza. Torej niz, se je izkazalo ven, citiram konec citata niz, je samo niz chara-- char pa dejansko tip podatkov. 
+
+In zdaj argv, meanwhile-- vrnimo k programu. Argv, čeprav smo videli besedo Niz tu ni niz sama. Argv, argument vektor, je niz nizov. 
+
+Torej, tako kot lahko imate niz znakov, ki jih lahko imajo višjo stopnjo, niz strings-- tako, na primer, ko sem tipkal trenutek pred ./argv0 argv0, prostor Z-A-M-Y-L-A, sem trdil, da argv dve nizov v it-- ./argv0, in Z-A-M-Y-L-A. v Z drugimi besedami, argc: 2. Zakaj je tako? 
+
+No, dejansko, kaj se dogaja o je, da je vsak od teh nizov je seveda niz znakov kot prej, vsak od katerih znakov prevzame enega bita. In ne mešaj dejanskega 0 v imenu programa z 0, kar pomeni, da vse 80 bitov. In Zamyla, medtem, je še vedno tudi niz znakov. 
+
+Tako da ob koncu dneva, res Izgleda da je ta pod pokrovom. Ampak argv, po svoji naravi, kako glavni dela, mi omogoča, da se ovije vse to pripravo, če hočete, večji niz da če smo nekoliko nad poenostaviti kakšna slika izgleda in ne prav tako pripravi na lestvici tam, To zaporedje je le velikosti 2, prvi element, ki vsebuje niz, Drugi element ki vsebuje niz. In po drugi strani, če vas nekako povečati na vsaki od teh nizov, kar si glej pod pokrovom je, da je vsak niz pravkar niz znakov. 
+
+Zdaj pa, tako kot pri strune, smo lahko, da bi dobili dostop za i-ti znak v nizu uporabo tega oglati oklepaj zapis. Podobno z nizi na splošno, lahko uporabiti kvadratni nosilec zapisa, da bi dobili na poljubnem številu nizov v matrike? Na primer, kaj me gredo naprej in to. 
+
+Naj gredo naprej in ustvariti argv1.c, ki je malo drugačna tokrat. Namesto preverjanje argc2, Bom to namesto tega narediti. Za int dobim 0, mi je manj kot argc sem plus plus, in nato natisnete znotraj tega, odstotkov s, nova vrstica, in nato argv nosilec i. 
+
+Torej, z drugimi besedami, ne bom se ukvarjajo s Posamezni liki v tem trenutku. Argv, kot je predvideno s temi praznega kvadrata naramnice na desni strani imena argv, pomeni argv je niz nizov. In argc je samo int. 
+
+Ta linija tukaj, 6, je rekoč niz i, enako 0. Preštejte vse do, vendar ne vključno s, argc. In potem na vsaki ponovitvi izpisal niz. Kaj niz? 
+
+Niz i-ti v argv. Torej, ker je, preden sem bil uporabo kvadratni nosilec Zapis, da bi dobili na i- znak v nizu, ki je zdaj Jaz sem z uporabo kvadratni nosilec zapisa v priti na i-niza v niz. Torej, to je nekako eno plast zgoraj, konceptualno. 
+
+In kaj je gladka o tem Program sedaj, če sem sestaviti argv1, in naredite ./argv1 in nato vnesite nekaj podobnega foo bar Baz, ki so tri privzete besede, a računalniški znanstvenik doseže v vsakem trenutku on ali ona potrebuje nekaj ogradami besed, in pritisnite tipko Enter, vsaka od teh besed, vključno z imenom programa, ki V argv na prvem mestu, konča se natisne ena naenkrat. In če se to spremeni, in pravim nekaj podobnega argv1 Zamyla Chan, smo dobili vsi trije tistih besede, ki je argv0, argv1, argv2, saj v tem Primer argc, število, je 3. 
+
+Toda kaj je lepo je, če ste razumeli da argv je le niz nizov, in boste razumeli, da niz je niz znakov, lahko dejansko nekako uporabiti to oglati oklepaj za zapis večkrat izbrati niz, nato pa izberite znak v nizu, potapljanje globlje, kot sledi. V tem primeru, naj grem naprej in to imenujemo argv2.c. In v tem primeru, naj gredo naprej in narediti following-- za int dobim 0, i manj kot argc, i plus plus, tako kot prej. Torej, v drugih words-- in zdaj to je že dovolj zapleteno. Potem bom povedal Ponovil več nizov v argv, kot komentar k sebi. In potem bom imela ugnezdeni zanko, ki vas verjetno naredili, ali velja tem, v Scratch, kjer Bom povedal int-- sem ne bo i ponovno uporabiti, zato, ker ne želim, da v senci, ali nekako prepisati obstoječo i. 
+
+Bom, namesto da bi, recimo j, ker to je moj pojdite na spremenljivko po i, ko sem samo poskušam štejejo preproste številke. Za j dobi 0-- in tudi, n, se bo dobili krmno dolžino argv nosilca i, dokler jje manj kot m, j plus plus, naredite naslednje. In tukaj je zanimiv del. 
+
+Natisnite znak in novo linijo, priklopom v argv nosilec i, nosilec j. OK, tako da naj dodam nekaj pripomb tukaj. Ponovil več znakov V sedanjem nizu, print j-ti znak v i-niz. Torej sedaj, kaj menijo kaj te pripombe pomeni. 
+
+Ponovil čez strune V argv-- koliko strune so v argv, ki je matrika? Argc veliko, tako da sem sem ponavljanjem od i enaka 0 do argc. Medtem, koliko znakov so v nizu i-tega v argv? 
+
+No, da bi dobili ta odgovor, Pravkar sem poklical dolžino niza o negi I trenutni niz o tem, kar je argv nosilec i. In bom za začasno shranjevanje, ki vrednost n, samo za namene, za predpomnjenje, da jo shranimo za učinkovitost. In potem bom inicializacijo j 0, nadaljuj dokler jje manj kot n, in na vsako ponovitev prirastek j. 
+
+In potem je tukaj, na moj komentar na liniji 12, izpisal znak, čemur sledi novo vrstico, posebej argv nosilec i mi daje niz i-ti V argv-- tako prvo besedo, druga beseda, tretja beseda, karkoli. In potem j potopi v globlje, in dobi me j-ti značaj te besede. In tako, v smislu, da lahko zdravljenje argv kot večdimenzionalni, kot dvodimenzionalno, matrike, pri čemer vsaka beseda nekako izgleda kot je to v vaš um je oči, in vsak lik je nekako sestavljen stolpec, če to pomaga. 
+
+V resnici, ko se draži To narazen v prihodnjih tednih, to se dogaja, da se malo bolj zapletena kot. Ampak lahko res pomislite, da je za zdaj, kot samo to dvodimenzionalna matrika, ena stopnja njej, pri čemer je vse strune. In potem, če se potopite v globljem, vas lahko dobite na posameznih znakov v njej z uporabo te zapis tukaj. 
+
+Torej, kaj je neto učinek? Naj gredo naprej in da argv2-- darn ga. Naredil sem napako tukaj. Implicitno razglasitvi Knjižnica funkcija stirling. Torej, ves ta čas, to je morda je to primerno da smo nekako dodelavo točno tam, kjer smo začeli. 
+
+Zajebal sem, implicitno razglasi Knjižnica funkcija stirling. OK, počakaj malo. Spomnim se, da so zlasti saj je prav tukaj. Moram vključiti string.h v Ta različica programa. 
+
+Naj gredo naprej in vključujejo string.h, razen, da gredo naprej in prevesti argv2. In zdaj, gremo, da argv2, Enter. In čeprav je malo Grobni na prvi pogled, opazili, da je res, kar natisnjena je pika argv2. 
+
+Ampak, če sem tip nekaj besed po hitro, kot argv2 Zamyla Chan, Vnesite tudi malo Grobni na prvi pogled. Ampak, če se pomaknete nazaj gor, ./argv2 Z-A-M-Y-L-A C-H-A-N. Tako smo poudarili, nad vsako besedo. In po drugi strani, smo poudarili, preko vsak znak v besedi. 
+
+Zdaj, po vsem tem, Zavedam se, da obstaja še ena podrobnost smo bili nekako ignorirali to ves čas. Pravkar smo smo ga raztrgali, kar Glavna je vhodi so lahko? Kaj pa izhod glavne stranke? 
+
+Vsi tem času smo bili samo s kopiranjem in lepljenjem beseda int pred glavno, čeprav lahko vidite na spletu, včasih napačno v starejših različicah C in prevajalniki, ki pravijo nična, ali pa sploh nič. Ampak, seveda, za različico C, ki jih uporabljate, C 11 ali 2011, uresničiti da mora biti int. In bi moralo bodisi ničen ali argc in argv tukaj. 
+
+Ampak zakaj int main? Kaj je pravzaprav vrača? No, se izkaže, vse od takrat, koli ste napisali programski main se vedno vrača nekaj. Toda to je bilo to na skrivaj. 
+
+To nekaj je int, kot črte 5 kaže. Toda kaj int? No, tam je to konvencija v programiranju, čemer se, če je nič narobe in je vse v redu, Programi in funkcije na splošno return-- nekoliko counterintuitively-- 0. 0 na splošno pomeni, da je vse dobro. Torej, čeprav misliš je kot napačna v številnih kontekstih, pravzaprav na splošno pomeni dobra stvar 
+
+Medtem, če program vrne 1, ali negativno 1 ali 5, ali negativen 42, ali ne-0 vrednost, ki na splošno označuje da nekaj je narobe. Dejstvo je, na svoj Mac ali PC, ste morda dejansko videli sporočilo o napaki, jo katerim kaj reče ali drugo, napaka koda negativen 42 ali koda napake 23, ali nekaj takega. To število je običajno le namig programer ali družba da je programsko opremo, kaj je šlo narobe in zakaj, tako da lahko odmisliti njihovo dokumentacijo ali koda, in ugotoviti, kaj je Napaka pravzaprav pomeni. To običajno ni koristno za nas končne uporabnike. 
+
+Toda, ko je vse v redu glavni vrne 0. In če ne podate kaj glavna mora vrniti, To bo šele samodejno vrne 0 za vas. Ampak vrača nekaj ostalo je dejansko uporaben. 
+
+V tem zadnjem programu, naj me gredo naprej in to imenujemo exit.c, in uvesti zadnji današnji teme, znane kot kodo napake. Naj gredo naprej in vključujejo naše znane datoteke up top, delati int main. In ta čas, naredimo int argc, niz argv, in s svojimi nosilci bi pomenilo, da je v matriki. In potem mi pač preverjanje razumnosti. Tokrat, če argc ne enako 2, potem veš kaj? Pozabi. Bom rekel, da, hej, uporabnik, ste manjka argument ukazne vrstice poševnica nazaj n. 
+
+In potem to je to. Hočem, da zaprete. Bom preemptively, in prezgodaj res, vrnitev nekaj drugega kot število 1. Go, da vrednosti za prvo napaka, ki se lahko zgodi je 1. Če imate kakšna druga napačna stanje, ki se lahko pojavijo, bi lahko rekli vrnitev 2 ali vrne 3, ali morda celo negativna 1 ali negativno 2. 
+
+To so le izhodne kode da so na splošno uporaben le za programer ali Podjetje, ki je plovba programsko opremo. Toda dejstvo, da je ne 0 je tisto, kar je pomembno. Torej, če je v tem programu, želim zagotoviti, da ta program le deluje, če me uporabnik vnese s štetjem argument dveh, ime programa, in nekatere druge beseda, lahko uveljavljajo toliko, kot sledi, kričati na uporabnika z printf pregovor, manjka argument ukazne vrstice, vrne 1. To bo samo takoj zaprete program. 
+
+Samo če argc enak 2 bomo dol Tukaj, na kateri točki bom povedal, zdravo odstotkov s, poševnica nazaj n, argv1. Z drugimi besedami, sem ne bo po argv 0, ki je samo ime programa. Želim natisniti zdravo, vejica, druga beseda, da človek vnesli. In v tem primeru odvisna linija 13, vse je dobro. 
+
+Vem, da je argc 2 logično iz tega programa. Bom, da gredo naprej in vrne 0. Naj omenim, da ne pozabite, da to velja Scratch kot dobro. 
+
+Logično je, da lahko to storite in zajame te vrstice kode v tej določbi drugega tukaj. Ampak to je nekako nepotrebnem Feed svojo kodo. In želim, da bi super jasno, da ni važno kaj, privzeto, zdravo kaj bo dobil natisnjen, dokler uporabnik sodeluje. 
+
+Torej, to je zelo pogosta uporaba pogoj, samo če ujeti nekaj napačna stanje, nato pa izhod. In potem, tako dolgo je vse dobro, ne imeti drugega, ampak samo še kodo zunaj, da če, ker je to enakovredni v tem poseben primer, logično. Tako da sem se vračajo 0, samo da bi izrecno pomeni, je vse v redu. 
+
+Če bi izpusti vrnitev 0, bi bilo samodejno domneva zame. Toda zdaj, ko sem sem se vračajo ena vsaj tem primeru Bom, za dobro mero in jasnost, vrne 0 v tem primeru. Torej, zdaj pa grem naprej in da izhod, ki je odlična segue samo oditi. 
+
+Vendar se izhod, in pusti me naprej in to ./exit, Enter. In program vpil name, manjka ukazno vrstico argumenta. OK, naj sodelujejo. 
+
+Naj mi namesto storiti ./exit, David, Enter. In zdaj pravi, zdravo David. In ti običajno ne bi videli tega. 
+
+Vendar se izkaže, da obstaja poseben način v Linux dejansko videli s tem, kar izhodna koda program izstopilo. Včasih v grafični svet kot Mac OS ali Windows, vidiš samo te številke, ko an pojavi sporočilo o napaki na zaslonu in programer prikazuje to številko. Toda, če želite videti, kaj je napaka Sporočilo je, da lahko to storite here-- tako ./exit, Enter, print manjka ukazno vrstico argumenta. 
+
+Če bi sedaj naredil echo $ ?, ki je smešno Grobni videti. Toda $? je čarobno zaklinjanje ki pravi, hej, računalnik, povej mi, kaj je prejšnji izhodna koda programa je bilo. In sem zadeti nastopiti. Vidim 1, ker to je tisto, kar sem povedal svojo glavno funkcijo, da se vrnejo. 
+
+Medtem, če naredim ./exit Davida, in pritisnite tipko Enter, vidim, zdravo Davida. In če bi zdaj naredil echo $ ?, vidim zdravo 0. In tako bo to dejansko biti dragocene informacije V okviru razhroščevalniku, ni tako toliko, da si je človek, bi skrbi. Toda razhroščevalnik in drugi Programi bomo uporabili ta semester pogosto pogled na to številko, čeprav je to nekako skrit razen če si za to, da se ugotoviti, ali program je ali ni izvedba je bila pravilna ali napačna. 
+
+In zato, da nas pripelje do To ob koncu dneva. Danes smo začeli z opazovanjem odpravljanje napak, in posledično pri teku Sam in nato bolj zanimivo, tehnično pod pokrovom kaj so strune, ki je trajala teden smo pravkar vzel za samoumevno, in jih prav gotovo vzel za samoumevno v Scratch. 
+
+Nato smo pogledali, kako lahko dostopate posameznih znakov v nizu, in potem spet vzel višjo raven pogled na stvari, ki je videti, kako well-- Če želimo, da se na individualni Elementi v seznamu podobno strukturo, ne moremo narediti s številnimi strune? In bomo lahko z argumenti ukazne vrstice. Toda ta slika tu le iz škatle je demonstrativen tega splošnega ideje za array, ali na seznamu, ali vektor. In glede na kontekst, vse te besede pomeni nekoliko drugačne stvari. Torej, v C, bomo le govoriti o matrike. In množica je kos spomina, vsak od njih pa je elementi so sosednje, nazaj, nazaj, nazaj, na hrbet. 
+
+In ti elementi so, na splošno, istega tipa podatkov, karakter, znak, znak, znak, ali niz, niz, niz, niz, ali int int, int, karkoli že je poskušamo trgovini. Vendar ob koncu dneva, to je kako izgleda konceptualno. Ste ob vašem pomnilnik ali RAM računalnika. In ste ga izločijo v enako velika polja, ki so vse so nazaj, nazaj, da nazaj, nazaj na ta način. 
+
+In kaj je lepo o ta ideja, in dejstvo, da lahko izrazimo vrednosti na ta način s prvim naših podatkovnih struktur v razredu, pomeni, da lahko začnemo za reševanje problemov s kodo ki je prišel tako intuitivno v 0. tednu. Boste opozarjajo na telefon Knjiga primer, kjer smo uporabili deli in vladaj, ali binarno iskanje, odbirati skozi celotno kup imen in številk. Vendar smo predpostavili, odpoklic, da je ta imenik je že razporejene, da drug ni nekdo že Mislil out-- dal seznam imen in numbers-- kako jih po abecedi. In zdaj, v C smo, Tudi imajo sposobnost postaviti stvari, ne fizično v imeniku vendar praktično v računalnik je spomin, bomo naslednji teden spet uvesti this-- prvi naših podatkovnih struktur v za array-- vendar je še pomembneje, dejansko računalnik znanost algoritmi izvajajo kodo, s katero lahko shranite Podatki v strukturah, kot je ta, in nato začne manipulirati, in dejansko reševanje problemov z njim, in graditi na vrhu, da, na koncu, programi v C, v Python, v JavaScript, poizvedovanju po podatkovnih zbirkah z SQL? 
+
+In bomo videli, da je vse to različne ideje povezujejo. Ampak za zdaj, se spomni, da je domene, ki smo uvedli danes je to stvar tukaj, in svet kriptografije. In med vas se naslednjih težav bo rešilo je umetnost kriptografiji kodiranja in de-kodiranja Informacije in šifriranje in dešifriranja besedilo, in ob predpostavki, da na koncu da zdaj veš, kaj je pod pokrovom tako da, ko boste videli, ali prejmete sporočilo, kot je ta, vas sami lahko dešifrirati. Vse to in še več naslednjič. 
+
+[VIDEO PREDVAJANJE] 
+
+-Mover Pravkar prispel. Bom šel obisk njegov kolegij profesor. Ja. Hi. To je ti. Počakajte! David. Poskušam ugotoviti kaj se je zgodilo s tabo. Prosimo, bi kaj pomagalo. Bili ste njegov kolegij cimra, niso bili vi? Tam ste bili z njim, ko je končal projekt CS50? 
+
+[GLASBA] 
+
+-To Je CS50. 
+
+Obožujem ta kraj. 
+
+-Pojej. Gremo iz poslovanja. 
+
+[END PREDVAJANJE] 

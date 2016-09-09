@@ -1,0 +1,689 @@
+[MUZIK Bermain] 
+
+DAVID J. MALAN: Baiklah. Ini adalah CS50 dan ini adalah permulaan Minggu 2. Dan anda akan ingat bahawa lebih pasangan yang lalu minggu, kita telah memperkenalkan komputer sains dan, seterusnya, pengaturcaraan. 
+
+Dan kami mula cerita dengan cara Awal, bahawa bahasa grafik dari Media Lab MIT'S. Dan kemudian yang paling baru-baru ini, minggu lepas, adakah kita memperkenalkan higher-- yang bahasa peringkat rendah dikenali sebagai C, sesuatu yang semata-mata teks. Dan, sememangnya, kita masa lalu diterokai dalam konteks yang beberapa konsep. 
+
+Ini, ingat, adalah sangat Program pertama kita melihat. Dan program ini, cukup mudah, mencetak, "hello, dunia." Tetapi ada begitu banyak seolah-olah ajaib berlaku. Ada #include ini dengan kurungan sudut. Ada int. Ada (tidak sah). Ada kurungan, pendakap kerinting, koma bertindih, dan banyak lagi. 
+
+Dan sebagainya, ingat bahawa kami memperkenalkan Scratch supaya kita boleh, ideal, melihat masa lalu bahawa sintaks, barangan yang benar-benar tidak semua yang intelek menarik tetapi awal adalah, benar-benar, agak sukar untuk membalut fikiran anda di sekitar. Dan, sememangnya, salah satu yang paling biasa perkara yang awal dalam kelas pengaturcaraan, terutama bagi mereka yang kurang selesa, adalah untuk kecewa dengan dan tersandung oleh sintaksis tertentu kesilapan, apatah lagi kesilapan logik. Dan demikian di antara matlamat kita hari ini, sebenarnya, akan adalah untuk melengkapkan anda dengan beberapa teknik penyelesaian masalah untuk bagaimana untuk lebih menyelesaikan masalah sendiri dalam bentuk debugging. Dan anda akan ingat, terlalu, bahawa persekitaran yang diperkenalkan Kali terakhir dipanggil CS50 IDE. Ini adalah perisian berasaskan web yang membolehkan anda untuk program dalam awan, jadi untuk bercakap, sambil mengekalkan semua anda fail bersama-sama, seperti yang kita akan sekali lagi hari ini. Dan ingat kita yang semula topik ini di sini, antaranya fungsi, dan gelung, dan pembolehubah, dan ungkapan Boolean, dan syarat-syarat. Dan sebenarnya beberapa lagi yang kita diterjemahkan dari dunia Scratch ke dunia C. 
+
+Tetapi bangunan asas blok, boleh dikatakan, benar-benar masih minggu lepas yang sama. Malah, kita benar-benar hanya mempunyai sekeping teka-teki yang berbeza, jika anda akan. Daripada yang ungu menyimpan blok, kita bukannya telah printf, yang fungsi ini dalam C yang membolehkan anda untuk mencetak sesuatu dan format ia pada skrin. Kami memperkenalkan CS50 Perpustakaan, di mana anda ada sekarang di get_char pelupusan anda, dan get_int dan get_string, dan beberapa fungsi lain yang dengan baik, melalui mana anda boleh mendapatkan input dari papan kekunci pengguna sendiri. Dan kami juga mengambil melihat pada perkara seperti bool these-, dan char, dan dua, float, int, tali long_long. Dan ada juga jenis data lain dalam C. 
+
+Dalam erti kata lain, apabila anda mengisytiharkan pembolehubah untuk menyimpan beberapa nilai, atau apabila anda melaksanakan fungsi yang mengembalikan beberapa nilai, anda boleh menentukan apa jenis nilai iaitu. Adakah tali, seperti jujukan aksara? Adakah nombor, seperti integer? Adakah ia satu titik terapung nilai, atau sebagainya? Jadi dalam C, tidak seperti calar, kita sebenarnya mula menentukan jenis data kami kembali atau menggunakan. 
+
+Tetapi, sudah tentu, kita juga berlari ke beberapa had asas pengkomputeran. Dan khususnya, ini bahasa C, ingat bahawa kami mengambil lihat pada limpahan integer, realiti bahawa jika anda hanya mempunyai jumlah terhingga memori atau, khususnya, beberapa terhingga bit, anda hanya boleh mengira begitu tinggi. Dan supaya kita melihat contoh ini di sini mana kaunter dalam kapal terbang, sebenarnya, jika berjalan cukup lama akan melimpah dan menyebabkan perisian kesilapan yang berpotensi fizikal sebenar. 
+
+Kami juga melihat terapung titik ketakpersisan, realitinya bahawa dengan hanya beberapa terhingga bit, sama ada 32 atau 64, anda hanya boleh menentukan pelbagai nombor selepas titik perpuluhan, selepas itu anda mula mendapat tidak tepat. Jadi misalnya, satu pertiga dalam dunia di sini, dalam dunia manusia, kita tahu hanya nombor terhingga daripada 3 yang selepas titik perpuluhan. Tetapi komputer tidak boleh semestinya mewakili nombor terhingga nombor jika anda hanya membenarkan ia beberapa jumlah terhingga maklumat. 
+
+Jadi bukan sahaja kita melengkapkan anda dengan kuasa yang lebih besar dari segi bagaimana anda boleh meluahkan diri anda papan kekunci dari segi pengaturcaraan, kami juga terhad apa anda sebenarnya boleh lakukan. Dan sesungguhnya, pepijat dan kesilapan boleh timbul daripada orang-orang jenis isu. Dan sesungguhnya, antara topik hari ini akan menjadi topik-topik seperti debugging dan sebenarnya mencari di bawah hood bagaimana perkara yang telah diperkenalkan minggu lepas sebenarnya dilaksanakan supaya anda lebih baik memahami kedua-dua keupayaan dan batasan bahasa seperti C. 
+
+Dan sebenarnya, kami akan mengupas kembali lapisan yang paling mudah struktur data, sesuatu yang dinamakan array, yang Scratch berlaku untuk memanggil "senarai." Ia adalah sedikit yang berbeza dalam konteks itu. Dan kemudian kami juga akan memperkenalkan salah satu daripada pertama masalah domain khusus kami dalam CS50, dunia kriptografi, seni berebut atau dalam ciphering maklumat supaya bahawa anda boleh menghantar mesej rahsia dan menyahkod mesej rahsia antara dua orang, A dan B. 
+
+Jadi sebelum peralihan kita ke dunia baru, mari kita cuba untuk melengkapkan anda dengan beberapa teknik yang anda boleh menghapuskan atau mengurangkan sekurang-kurangnya beberapa daripada kekecewaan bahawa anda mungkin dihadapi sepanjang minggu lepas sahaja. Malah, lebih awal daripada anda such-- beberapa masalah pertama anda dalam C. Dan kemungkinan adalah, jika anda seperti saya, kali pertama anda cuba untuk menaip program, walaupun anda berfikir secara logik program ini adalah agak mudah, anda sangat baik mungkin melanda dinding, dan pengkompil tidak akan bekerjasama. Membuat atau dilafaz tidak akan untuk benar-benar melakukan bidaan anda. 
+
+Dan mengapa yang mungkin? Nah, mari kita lihat pada, mungkin, satu program yang mudah. Saya akan pergi ke hadapan dan menyimpan ini dalam fail yang sengaja dipanggil buggy0.c, kerana saya tahu ia dapat dipercayai sama sekali terlebih dahulu. Tetapi saya mungkin tidak sedar bahawa jika ini merupakan program pertama atau kedua atau ketiga bahawa saya benar-benar membuat diri saya sendiri. Jadi, saya akan pergi ke hadapan dan menaip, int utama (tidak sah). Dan kemudian di dalam pendakap kerinting saya, yang sangat biasa ( "hello, world-- garis sendeng terbalik, n ") - dan koma bertitik. 
+
+Saya telah menyimpan fail. Sekarang saya akan turun ke bawah ke tetingkap terminal saya dan jenis make buggy0, kerana, sekali lagi, nama fail hari ini adalah buggy0.c. Jadi saya menaip membuat buggy0, Enter. 
+
+Dan, oh, Astaga, ingat dari masa lalu yang tiada mesej ralat adalah satu perkara yang baik. Jadi tiada output adalah satu perkara yang baik. Tetapi di sini saya mempunyai jelas beberapa beberapa kesilapan. 
+
+Jadi baris pertama output selepas menaip membuat buggy0, ingat, output agak berjela-jela yang dilafaz itu. Di bawah hood, CS50 IDE dikonfigurasi untuk menggunakan sejumlah besar pilihan dengan pengkompil ini supaya anda tidak perlu untuk berfikir tentang mereka. Dan itu semua yang baris pertama cara yang bermula dengan dilafaz. 
+
+Tetapi selepas itu, masalah mula membuat penampilan mereka. Buggy0.c pada baris 3, watak 5, ada yang besar, kesilapan merah. Apakah itu? Tersirat mengisytiharkan fungsi perpustakaan printf dengan jenis int (const char *, ...) [-Werror]. Maksud saya, ia dengan cepat mendapat sangat sukar difahami. Dan sesungguhnya, pada mulanya sepintas lalu, kita tidak akan mengharapkan anda untuk memahami keseluruhan daripada mesej itu. Dan sebagainya salah satu pelajaran untuk hari ini akan untuk adalah untuk cuba untuk notis corak, atau perkara yang sama, kepada kesilapan anda mungkin mempunyai dihadapi pada masa lalu. Jadi mari kita mengusik selain hanya kata-kata yang kelihatan biasa. Besar, ralat berwarna merah jelas simbolik sesuatu yang salah. 
+
+tersirat mengisytiharkan perpustakaan fungsi printf. Jadi, walaupun saya tidak begitu faham apa tersirat mengisytiharkan fungsi perpustakaan cara, masalah itu pasti berkaitan dengan printf entah bagaimana. Dan sumber isu yang mempunyai kaitan dengan mengisytiharkan ia. 
+
+Mengisytiharkan fungsi adalah menyebutkan itu buat kali pertama. Dan kami sentiasa istilah minggu lepas mengisytiharkan prototaip fungsi ini, sama ada dengan satu baris di bahagian atas anda fail sendiri atau dalam fail header dipanggil. Dan dalam apa fail lakukan kita katakan minggu lepas bahawa printf adalah quote, unquote, diisytiharkan? Dalam apa fail adalah prototaip? 
+
+Jadi, jika anda masih ingat, perkara yang pertama saya ditaip, hampir setiap program time-- lalu dan secara tidak sengaja sebentar tadi bermula menaip myself-- adalah salah sini-- ini hash-- #include <stio-- untuk input / output-- dot h Dan sesungguhnya, jika saya kini menyimpan fail ini, saya akan pergi ke hadapan dan mengosongkan skrin saya, mana anda boleh melakukan dengan menaip Jelas, atau anda boleh memegang Kawalan L, hanya untuk membersihkan tetingkap terminal anda hanya untuk menghapuskan beberapa kekusutan. 
+
+Saya akan pergi ke hadapan dan semula jenis make buggy0, Enter. Dan Voilà, saya masih melihat bahawa arahan panjang dari dilafaz, tetapi tidak ada mesej ralat masa ini. Dan sesungguhnya, jika saya lakukan ./buggy0, seperti masa lalu, mana dot bermakna ini direktori, Slash hanya bermaksud, di sini datang nama program dan bahawa nama program ini adalah buggy0, Enter, "hello, dunia." 
+
+Sekarang, bagaimana anda mungkin mempunyai dikumpulkan penyelesaian ini tanpa semestinya mengiktiraf sebagai banyak perkataan seperti yang saya lakukan, sudah tentu, mempunyai melakukan ini selama bertahun-tahun lamanya? Well, menyedari setiap masalah pertama set, kita memperkenalkan anda kepada perintah bahawa kakitangan CS50 sendiri menulis dipanggil help50. Dan sesungguhnya, C tidak spesifikasi untuk masalah yang ditetapkan tentang bagaimana untuk menggunakan ini. 
+
+Tetapi help50 asasnya satu program yang kakitangan CS50 menulis yang membolehkan anda untuk menjalankan perintah atau menjalankan program, dan jika anda tidak memahami yang output, meluluskan pengeluarannya ke help50, di mana titik perisian bahawa kakitangan kursus ini menulis akan melihat output program anda baris demi baris, watak oleh watak. Dan jika kita, kakitangan, mengiktiraf mesej ralat yang anda alami, kami akan cuba untuk memprovokasi anda dengan beberapa soalan retorik, dengan nasihat, sama seperti TF atau CA atau diri saya akan melakukan sendiri di waktu pejabat. 
+
+Oleh itu, mencari untuk help50 jika anda tidak semestinya mengenali masalah. Tetapi jangan bergantung kepada ia terlalu banyak sebagai topang. Sudah tentu cuba memahami yang output dan kemudian belajar daripadanya supaya hanya sekali atau dua kali adakah anda pernah menjalankan help50 untuk ralat tertentu mesej. Selepas itu, anda perlu lebih bersedia diri untuk mencari tahu apa yang sebenarnya. 
+
+Mari kita buat satu lain di sini. Biar saya pergi ke hadapan, dan lain fail yang kita akan memanggil buggy1.c ini. Dan dalam fail ini Saya akan deliberately-- tetapi berpura-pura bahawa saya tidak memahami apa kesilapan yang saya telah buat. 
+
+Saya akan pergi ke hadapan dan melakukan this-- #include, kerana saya telah belajar pelajaran saya dari masa yang lalu. Int utama (tidak sah), seperti dahulu. Dan kemudian di sini saya akan lakukan rentetan s - get_string. Dan ingat dari masa lalu yang cara ini, hey, komputer, memberi saya berubah-ubah, memanggilnya s, dan membuat jenis pembolehubah yang rentetan jadi saya boleh menyimpan satu atau lebih perkataan di dalamnya. 
+
+Dan kemudian di kanan sisi tanda 'sama adalah get_string, yang merupakan fungsi di Perpustakaan CS50 yang melakukan perkara tersebut. Ia mendapat fungsi dan kemudian tangan dari kanan ke kiri. Jadi tanda sama ini tidak bermakna "Sama" seperti yang kita mungkin berfikir dalam matematik. Ini bermakna tugasan dari kanan ke kiri. Jadi ini bermakna, mengambil tali dari pengguna dan menyimpan ia di dalam s. 
+
+Sekarang mari kita menggunakannya. Biar saya pergi ke hadapan sekarang dan sebagai satu saat line, biarlah saya pergi ke hadapan dan berkata "hello" - tidak "dunia," tetapi "hello,% s-- yang merupakan pemegang tempat kami, koma s, yang berubah-ubah kita, dan kemudian koma bertitik. Jadi, jika saya tidak skru sehingga terlalu banyak di sini, ini kelihatan seperti kod yang betul. 
+
+Dan naluri saya sekarang adalah untuk menyusun ia. fail ini dipanggil buggy1.c. Jadi, saya akan melakukan make buggy1, Enter. Dan darn-it, jika tidak ada walaupun lebih banyak kesilapan daripada sebelum ini. Maksud saya, ada lagi mesej ralat ia akan seolah-olah daripada garis sebenar dalam program ini. 
+
+Tetapi bisa dibesarkan di sini adalah, walaupun anda terharu dengan dua atau tiga atau empat lagi mesej ralat, tumpuan sentiasa yang pertama mesej tersebut. Melihat paling atas satu, menatal kembali sebagai perlu. Jadi di sini saya menaip make buggy1. Berikut adalah yang output dilafaz seperti yang diharapkan. 
+
+Dan di sini adalah ralat berwarna merah yang pertama. Penggunaan pengecam yang tidak diisytiharkan tali, yang saya maksudkan standard dalam? Jadi dalam standard sebenarnya sesuatu yang lain. Ia merujuk kepada ini pengguna keyboard, pada asasnya. 
+
+Tetapi itu bukan apa yang saya maksudkan. Saya maksudkan tali, dan saya maksudkan get_string. Jadi apa yang saya terlupa untuk melakukan masa ini? Apa yang hilang masa ini? Saya mempunyai #include saya, jadi saya mempunyai akses kepada printf. 
+
+Tetapi apa yang saya tidak mempunyai akses kepada hanya lagi? Well, seperti masa lalu, Saya perlu memberitahu pengkompil Dilafaz apa fungsi-fungsi ini. Get_string tidak datang dengan C. Dan khususnya, ia tidak datang dalam header fail. Ia bukannya datang dalam sesuatu kakitangan menulis, yang merupakan fail yang berbeza menamakan tetapi dinamakan. 
+
+Jadi hanya dengan menambah bahawa satu baris penarikan balik code-- dari masa lalu bahawa apabila dilafaz berjalan, ia akan melihat bahagian kod saya ke bawah, kiri ke kanan. Ia akan notis, oh, yang anda mahu. Biar saya pergi dan mendapati bahawa, mana saja ia berada pada pelayan, copy dan paste, pada dasarnya, ke bahagian atas fail anda sendiri supaya pada ketika ini dalam cerita, baris 1, yang lain daripada program ini boleh, sesungguhnya, menggunakan mana-mana fungsi di dalamnya, di antara mereka get_string. Jadi, saya akan mengabaikan seluruh orang-orang kesilapan, kerana saya, sesungguhnya, mengesyaki bahawa hanya yang pertama sebenarnya penting. Dan saya akan pergi ke hadapan dan jalankan lagi, selepas menyimpan fail saya membuat buggy1. Dan Voilà, ia melakukan kerja-kerja. Dan jika saya melakukan ./buggy1 dan taip, untuk contoh, Zamyla, saya kini akan mendapat hello, Zamyla, bukan hello, dunia. 
+
+Baiklah. Jadi bawa pulang di sini maka adalah untuk, satu, cuba untuk memungut seberapa banyak yang anda boleh daripada mesej ralat bersendirian, mencari di beberapa perkataan yang dikenali. Jika tidak berlaku itu, gunakan help50 per masalah yang ditetapkan spesifikasi. Tetapi sekatan itu juga, sentiasa kelihatan di ralat bahagian sahaja, sekurang-kurangnya pada mulanya, untuk melihat apa maklumat ia sebenarnya mungkin menghasilkan. Tetapi ternyata ada yang lebih banyak fungsi yang dibina ke dalam Perpustakaan CS50 untuk membantu anda pada awal semester dan awal di dalam pengaturcaraan memikirkan apa yang berlaku salah. Jadi mari kita buat contoh yang lain di sini. Saya akan memanggil buggy2 ini, yang, sekali lagi, akan menjadi cacat keluar pintu gerbang, dengan reka bentuk. 
+
+Dan saya akan pergi ke hadapan dan melakukan #include. Dan kemudian saya akan melakukan int utama (tidak sah). Dan kemudian saya akan lakukan untuk gelung. Untuk (int i _ 0. i adalah kurang daripada atau sama dengan 10. i ++, dan kemudian dalam pendakap kerinting, saya akan untuk mencetak hanya satu simbol hashtag sini dan watak barisan baru. 
+
+Jadi niat saya dengan ini program cukup sekadar untuk melelar 10 kali dan pada setiap lelaran gelung bahawa setiap kali melalui kitaran, mencetak hashtag, hashtag, hashtag a. Satu bagi setiap baris kerana saya mempunyai garis baru di sana. Dan ingat bahawa untuk gelung, setiap week-- lalu dan anda akan mendapat lebih biasa dengan sintaks dengan menggunakannya dengan amalan sebelum long-- ini memberikan saya pembolehubah yang dipanggil i dan menetapkan ia ke 0. 
+
+Ini menokok i pada setiap lelaran oleh 1. Jadi saya pergi ke 1 hingga 2 hingga 3. Dan kemudian keadaan ini dalam tengah antara koma bertindih mendapat diperiksa pada setiap lelaran untuk membuat memastikan bahawa kita masih dalam liputan. Jadi saya mahu melelar 10 kali, jadi saya mempunyai jenis yang sangat intuitif hanya meletakkan 10 sebagai had atas saya di sana. 
+
+Namun, apabila saya menjalankan ini, selepas menyusun dengan make buggy2-- dan ia menyusun OK. Jadi, saya tidak mempunyai ralat sintaks masa ini. Biar saya pergi ke hadapan sekarang dan menjalankan buggy2, Enter. Dan sekarang tatal ke atas. Dan biarlah saya meningkatkan saiz tetingkap. 
+
+Saya seolah-olah ada 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Jadi ada 11 hashtags, walaupun Saya dengan jelas meletakkan 10 dalam gelung ini. Sekarang, sebahagian daripada anda mungkin melihat dengan serta-merta apa kesilapan adalah kerana, sesungguhnya, ini tidak adalah satu kesilapan yang sangat sukar untuk dilupakan. Tetapi ia adalah sangat biasa dibuat sangat awal. 
+
+Apa yang saya ingin menunjukkan, walaupun, adalah, bagaimana saya boleh memikirkan ini? Nah, ternyata bahawa Perpustakaan CS50 datang dengan bukan sahaja get_string dan get_int dan get_float dan fungsi lain. Ia juga dilengkapi dengan fungsi khas dipanggil eprintf, atau, ralat printf. Dan ia wujud semata-mata untuk membuat ia sedikit lebih mudah untuk anda apabila debugging kod anda untuk hanya mencetak mesej ralat pada skrin dan tahu di mana ia datang dari. 
+
+Jadi misalnya, satu perkara yang saya mungkin lakukan di sini dengan fungsi ini adalah this-- eprintf, dan kemudian saya akan pergi ke hadapan dan katakan sekarang i ialah% i, garis sendeng terbalik, n. Dan saya akan pasangkan nilai i. Dan sehingga atas, kerana ini adalah di Perpustakaan CS50, Saya akan pergi ke hadapan dan termasuk jadi saya mempunyai akses kepada fungsi ini. Tetapi mari kita mempertimbangkan apa talian 9 sepatutnya lakukan. Saya akan memadam ini akhirnya. Ini tidak ada kena mengena dengan matlamat paling utama saya. Tetapi eprintf, kesilapan printf, hanya bertujuan untuk memberi saya beberapa maklumat diagnostik. Apabila saya menjalankan program saya, saya mahu melihat ini pada skrin sementara serta hanya untuk memahami apa yang sedang berlaku. 
+
+Dan, sememangnya, pada setiap lelaran sini barisan 9 Saya mahu melihat, apakah nilai i? Apakah nilai i? Apakah nilai i? Dan, mudah-mudahan, saya hanya perlu melihat bahawa mesej, juga, 10 kali. 
+
+Jadi biarlah saya pergi ke hadapan dan susun semula program saya, seperti yang saya perlu lakukan bila-bila masa Saya membuat perubahan. ./buggy2. Dan sekarang-- OK. Ada banyak lagi berlaku di. Jadi biarlah saya tatal ke atas dalam tetingkap yang lebih besar. 
+
+Dan anda akan melihat bahawa setiap hashtags masih percetakan. Tetapi di antara setiap daripada mereka adalah sekarang ini output diagnostik diformatkan sebagai berikut. Nama program saya di sini adalah buggy2. Nama fail adalah buggy2.c. Nombor talian yang ini telah dicetak adalah line 9. Dan kemudian di sebelah kanan itu adalah mesej ralat yang saya menjangkakan. 
+
+Dan apa yang baik tentang ini adalah bahawa sekarang saya tidak perlu semestinya mengira dalam kepala saya apa program saya lakukan. Saya dapat melihat bahawa pada lelaran pertama i adalah 0, maka 1, kemudian 2, kemudian 3, kemudian 4, kemudian 5, kemudian 6, kemudian 7, kemudian 8, kemudian 9, kemudian 10. Jadi tunggu satu minit. Apa yang berlaku di sini? Saya masih seolah-olah dapat mengira sebagaimana dimaksud sehingga 10. 
+
+Tetapi di mana saya bermula? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10. Jadi 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- jari-11 adalah menunjukkan masalah. Saya seolah-olah telah dikira salah dalam gelung saya. Bukannya pergi 10 lelaran, Saya bermula pada 0, Saya berakhir di dan melalui 10. Tetapi kerana, seperti komputer, Saya mula mengira pada 0, Saya perlu mengira sehingga , tetapi tidak melalui, 10. 
+
+Dan sebagainya fix, saya akhirnya sedar di sini, adalah salah satu daripada dua perkara. Saya sangat mudah boleh mengatakan mengira sehingga kurang daripada 10. Jadi 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, yang, sememangnya, betul, walaupun ia kedengaran yang salah sedikit. Atau saya boleh melakukan kurang daripada atau sama hingga 9, selagi aku bermula pada 0. Atau jika anda benar-benar tidak suka itu, anda boleh mengira sehingga melalui 10 tetapi bermula 1. Tetapi sekali lagi, ini hanya tidak yang biasa. Dalam programming-- walaupun tidak begitu banyak dalam Scratch-- tetapi dalam pengaturcaraan C dan bahasa lain, seperti JavaScript dan Python dan lain-lain, ia adalah hanya sangat biasa bagi perbincangan kita tentang binari hanya mula mengira pada jumlah terendah yang anda boleh, yang adalah 0. Baiklah. Jadi itulah eprintf. Dan sekali lagi, sekarang bahawa saya telah anda ketahui saya masalah, dan saya akan kembali ke 0 melalui kurang daripada 10, saya akan untuk masuk dan memadam eprintf. 
+
+Ia tidak sepatutnya berada di sana apabila saya menghantar kod saya atau menyerahkan kod saya atau menunjukkan kepada orang lain. Ia benar-benar hanya bermakna yang akan digunakan buat sementara waktu. Tetapi sekarang saya tetap ini masalah tertentu juga. 
+
+Nah, mari kita buat satu lagi contoh di sini bahawa saya akan menyiapkan seperti berikut. Saya akan pergi ke hadapan dan #include. $ 50 Dan saya akan pergi ke hadapan dan #include. 
+
+Dan saya akan menyelamatkan fail ini sebagai buggy3.c. Dan saya akan pergi ke hadapan dan mengisytiharkan int utama (tidak sah). Dan kemudian di dalam sana Saya akan melakukan int i _ - Saya mahu untuk melaksanakan program yang dengan get_negative_int a. Ini bukan satu fungsi yang wujud lagi. Jadi, kita akan melaksanakan dalam hanya seketika. Tetapi kita akan melihat mengapa ia kereta di pas pertama. Dan apabila saya telah mendapat int dari pengguna, Saya hanya akan mencetak% i adalah negatif integer, garis sendeng terbalik, n, koma, i. Dalam erti kata lain, apa yang saya mahu program ini untuk melakukan adalah mendapat int negatif daripada pengguna dan kemudian mencetak yang ini dan itu adalah int negatif. 
+
+Sekarang saya perlu melaksanakan fungsi ini. Jadi kemudian dalam fail saya, saya akan pergi ke hadapan dan mengisytiharkan fungsi yang dipanggil get_negative_int (tidak sah) - dan kami akan kembali kepada apa garis yang bermakna lagi dalam moment-- int n; do-- do yang following-- printf n adalah :. Dan kemudian saya akan lakukan n - get_int, dan melakukan ini ketika n lebih besar daripada 0. Dan kemudian kembali n ;. 
+
+Jadi ada banyak berlaku di tiada ini tetapi yang mana kami tidak melihat minggu lalu, sekurang-kurangnya secara ringkas. Maka pada line 10 di sini saya telah mengisytiharkan fungsi dipanggil get_negative_int, dan saya telah meletakkan (tidak sah), dalam kurungan, sebab yang ini tidak mengambil input. Saya tidak melepasi untuk fungsi ini. Saya hanya mendapat sesuatu kembali daripadanya. 
+
+Dan apa yang saya berharap untuk kembali adalah integer. Tiada jenis data dalam C dipanggil negative_int. Ia hanya int, jadi ia akan menjadi kepada kami untuk memastikan bahawa nilai yang sebenarnya Dikembalikan bukan sahaja int tetapi juga negatif. 
+
+On line 12 saya mengisytiharkan pembolehubah yang dipanggil n dan menjadikannya jenis int. Dan kemudian dalam talian 13 hingga 18 Saya melakukan sesuatu ketika sesuatu itu benar. Saya pergi ke hadapan dan percetakan n iaitu, kolon, dan kemudian ruang, seperti gesaan untuk pengguna. 
+
+Saya kemudian memanggil get_int dan menyimpan nilai yang dipanggil pulangan dalam pembolehubah n. Tetapi saya akan terus melakukan ini manakala n adalah lebih besar daripada 0. Dalam erti kata lain, jika pengguna memberi saya int dan jumlah itu adalah lebih besar daripada 0, ergo, positif, saya akan hanya menyimpan reprompting pengguna, menjaga reprompting, dengan memaksa mereka untuk bekerjasama dan memberi saya int negatif. 
+
+Dan sekali n sebenarnya negative-- andaikan pengguna akhirnya jenis -50, kemudian gelung sementara ini tidak lagi benar kerana -50 tidak lebih besar daripada 0. Oleh itu, kita keluar daripada yang gelung secara logik dan kembali n. 
+
+Tetapi ada satu yang lain Perkara yang saya perlu lakukan. Dan saya hanya boleh melakukan ini dengan menyalin dan menampal satu baris kod di bahagian atas fail. Saya perlu mengajar dilafaz, atau berjanji untuk dilafaz, jelas bahawa saya akan, sesungguhnya, pergi dan melaksanakan ini get_negative_int fungsi. Ia hanya mungkin menjadi lebih rendah dalam fail. Sekali lagi, ingat bahawa dilafaz membaca perkara yang atas ke bawah, kiri ke kanan, jadi anda tidak boleh memanggil fungsi jika dilafaz tidak tahu ia akan wujud. 
+
+Sekarang, malangnya, program ini, sebagai sebahagian daripada anda mungkin akan melihat, sudah kereta. Biar saya pergi ke hadapan dan membuat buggy3. Ia menyusun, jadi masalah saya sekarang tidak ralat sintaks, seperti ralat teks, ia sebenarnya akan menjadi logik kesilapan yang saya telah sengaja dibuat sebagai satu peluang untuk melangkah melalui apa yang sedang berlaku. 
+
+Saya akan pergi ke hadapan sekarang dan menjalankan buggy3. Dan saya akan pergi ke ke hadapan dan tidak bekerjasama. Saya akan memberikan nombor 1. Ia tidak suka, jadi ia menyebabkan saya lagi. 
+
+Bagaimana kira-kira 2? 3? 50? Tiada seorang pun daripada mereka yang bekerja. Bagaimana kira-kira -50? Dan program ini seolah-olah bekerja. 
+
+Biar saya cuba sekali lagi. Biar saya cuba -1, seolah-olah bekerja. Biar saya cuba -2, seolah-olah bekerja. Biar saya cuba 0. Huh, itu tidak betul. Sekarang, kita menjadi sedikit bengah sini. Tetapi ia adalah, sesungguhnya, kes yang 0 adalah bukan positif mahupun negatif. Dan jadi hakikat bahawa program saya ialah mengatakan bahawa 0 adalah integer negatif, itu bukan teknikal betul. 
+
+Sekarang, mengapa ia berbuat demikian? Well, ia mungkin menjadi jelas. Dan sesungguhnya, program ini adalah bertujuan untuk menjadi agak mudah jadi kami mempunyai sesuatu untuk meneroka. 
+
+Tetapi mari kita memperkenalkan debugging ketiga teknik sini dipanggil debug50. Jadi ini adalah program yang bahawa kita baru sahaja dicipta tahun dipanggil ini debug50 yang akan membolehkan anda untuk menggunakan apa yang dipanggil terbina dalam penyahpepijat grafik dalam CS50 IDE. Dan penyahpepijat hanya program yang umumnya membolehkan anda menjalankan program anda tetapi langkah demi langkah demi langkah, talian oleh baris demi baris, berhenti, poking sekitar, melihat pembolehubah supaya program ini tidak hanya meniup melepasi anda dan cepat mencetak sesuatu atau tidak mencetak sesuatu. Ia memberikan anda peluang, di kelajuan manusia, untuk berinteraksi dengannya. 
+
+Dan untuk melakukan ini, anda hanya melakukan yang berikut. Selepas menyusun kod anda, yang saya telah lakukan, buggy3, anda pergi ke hadapan dan menjalankan ./buggy debug50. Begitu banyak seperti help50 mempunyai anda menjalankan help50 dan kemudian arahan, debug50 mempunyai anda menjalankan debug50 dan kemudian nama arahan. 
+
+Sekarang menonton apa yang berlaku pada skrin saya, di sebelah kanan khususnya. Apabila saya tekan Run, semua tiba-tiba panel kanan ini membuka pada skrin. Dan ada banyak berlaku pada pada pandangan pertama. Tetapi tidak terlalu banyak bimbang tentang lagi. 
+
+Ini menunjukkan saya segala-galanya perkara yang berlaku di dalam program saya sekarang dan melalui ini butang sehingga atas maka membenarkan saya untuk melangkah melalui kod saya akhirnya langkah demi langkah demi langkah. Tetapi tidak lagi. Perhatikan apa yang berlaku. Pada tetingkap terminal saya Saya diminta untuk n. Dan saya akan pergi ke hadapan dan bekerjasama kali ini dan taip -1. Dan walaupun sedikit cryptically, -1 ialah integer negatif, seperti yang diharapkan. 
+
+Dan kemudian anak keluar dengan status 0 GDBserver keluar. GDB, GNU Debugger, adalah nama perisian yang mendasari yang melaksanakan penyahpepijat ini. Tetapi semua ini benar-benar bermakna, penyahpepijat pergi kerana program saya berhenti dan semua baik. Jika saya ingin benar-benar debug program saya, Saya perlu preemptively memberitahu debug50, di mana saya ingin memulakan melangkah melalui kod saya? 
+
+Dan mungkin cara yang paling mudah untuk berbuat demikian adalah seperti berikut. Jika saya pergi ke atas longkang editor saya di sini, supaya benar-benar hanya dalam bar sisi sini, sebelah kiri nombor talian, notis bahawa jika saya hanya klik sekali, saya meletakkan satu titik merah kecil. Dan bahawa titik merah kecil, seperti tanda berhenti, bermakna, hey, debug50, pelaksanaan jeda kod saya di sana apabila saya menjalankan program ini. 
+
+Jadi mari kita buat itu. Biar saya pergi ke hadapan dan menjalankan program saya lagi dengan debug50 ./buggy3, Enter. Dan kini, notis, sesuatu yang berbeza yang telah berlaku. Saya tidak diminta namun dalam tetingkap terminal saya untuk apa-apa, kerana saya tidak mempunyai mendapat ada lagi dalam program saya. Perhatikan bahawa pada baris 8 yang kini diserlahkan, dan ada anak panah kecil di kata kiri, anda dijeda sini. Ini baris kod, garis 8, belum lagi dilaksanakan. 
+
+Dan apa yang ingin tahu, jika saya melihat di sini di sebelah kanan, notis bahawa saya merupakan anak tempatan berubah-ubah, tempatan dalam erti kata bahawa itu dalam fungsi semasa. Dan nilai, nampaknya secara lalai, dan jenis mudah, adalah 0. Tetapi saya tidak menaip 0. Yang hanya berlaku untuk menjadi yang nilai lalai pada masa ini. 
+
+Jadi biarlah saya pergi ke hadapan dan melakukan ini sekarang. Biar saya pergi ke hadapan dan ke atas bahagian yang betul di sini, Saya akan pergi ke hadapan dan klik ikon pertama ini yang bermakna langkah lebih yang bermaksud jangan skip tetapi melangkah lebih garisan ini kod, menyempurnakannya di sepanjang jalan. 
+
+Dan kini, notis, saya segera baru sahaja berubah. Kenapa begitu? Saya telah diberitahu debug50, menjalankan baris ini kod. Apa baris ini kod lakukan? Menggesa saya untuk int. OKEY. Biar saya bekerjasama. Biar saya pergi ke hadapan sekarang dan taip -1, Enter. Dan kini melihat apa yang telah berubah. Pada sebelah kanan, pembolehubah tempatan saya i ditunjukkan sebagai -1 sekarang. Dan ia masih jenis int. 
+
+Dan notis, juga, saya dipanggil memanggil timbunan, di mana saya berhenti seketika? Kami akan bercakap lebih lanjut mengenai ini pada masa akan datang. Tetapi timbunan panggilan hanya merujuk kepada apa Fungsi sedang berada di dalam gerakan. Buat masa ini ia hanya utama. Dan sekarang satu-satunya tempatan pembolehubah adalah i dengan nilai 1. 
+
+Dan apabila saya akhirnya melangkah lebih garisan ini di sini, dengan icon yang sama di sebelah kanan atas, -1 Ialah integer negatif. Kini ia berhenti atas bahawa pendakap kerinting. Mari kita biarkan ia melakukan perkara. Saya melangkah bahawa garis, dan Voilà. 
+
+Jadi tidak semua yang betul-betul menyedarkan lagi, tetapi ia biarlah saya berhenti seketika dan berfikir melalui logik apa yang program ini lakukan. Tetapi itu tidak berlaku salah. Mari kita buat ini lagi seperti berikut. 
+
+Saya akan meninggalkan breakpoint yang pada baris 8 dengan titik merah. Saya akan menjalankan semula debug50. Ia secara automatik berhenti di sini. Tetapi kali ini, bukan melangkah lebih garisan ini, biarlah saya benar-benar pergi di dalam get_negative_int dan memikirkan, mengapa ia menerima 0 sebagai jawapan yang sah? 
+
+Jadi, daripada klik Step Over. Saya akan pergi ke hadapan dan klik Step Into. Dan perhatikan bahawa garis 8 itulah kini menekankan kini tiba-tiba menjadi garis 17. 
+
+Kini, ia bukan yang penyahpepijat telah dilangkau baris 14 dan 15 dan 16. Ia hanya tiada apa-apa untuk menunjukkan kepada anda di sana. Mereka hanya mengisytiharkan pembolehubah, Dan kemudian ada perkataan Adakah dan kemudian satu pendakap kerinting terbuka. Satu-satunya garis berfungsi itulah berair benar-benar adalah salah satu ini di sini, 17. Dan itulah di mana kami telah berhenti secara automatik. 
+
+Jadi printf ( "n.is:") ;, supaya yang tidak berlaku lagi. Jadi mari kita teruskan dan klik Datang. Sekarang segera saya, sesungguhnya, ditukar kepada ( "n ialah:"). Sekarang get_int, saya tidak akan mengganggu melangkah ke dalam, kerana fungsi itu adalah dibuat oleh CS50 di Perpustakaan. Ia mungkin betul. 
+
+Jadi, saya akan pergi ke hadapan dan jenis bekerjasama dengan memberi int, tetapi tidak int negatif. Jadi biarlah saya pergi ke hadapan dan tekan 0. Dan sekarang apa yang berlaku di sini apabila saya turun ke beratur 21? Saya tidak terlelar lagi. Saya seolah-olah tidak terperangkap dalam gelung itu. Dalam erti kata lain, ini kuning bar tidak terus pergi sekitar, dan di sekeliling, dan sekitar. 
+
+Sekarang, mengapa? Well, n, apa yang adalah n sekarang? Saya boleh melihat tempatan pembolehubah dalam penyahpepijat. n ialah 0. Baiklah, apa yang keadaan saya? 
+
+20-- talian 20 adalah, baik, 0 adalah lebih besar daripada 0. Itu tidak benar. 0 tidak lebih besar daripada 0. Oleh itu, saya tercetus daripada ini. 
+
+Dan itulah sebabnya mengapa di talian 21, jika saya benar-benar terus, Saya akan kembali 0, walaupun walaupun saya sepatutnya ditolak 0 tidak benar-benar berada negatif. Oleh sebab itu, saya tidak benar-benar walaupun mengambil berat tentang penyahpepijat. Tidak perlu lagi, saya tidak perlu tahu, apakah yang sedang berlaku. 
+
+Jadi, saya akan pergi ke hadapan dan hanya klik butang Main, dan membiarkan penamat ini sehingga. Sekarang, saya sedar bahawa saya bug nampaknya pada baris 20. Itulah ralat logik saya. 
+
+Dan supaya apa yang saya mahu lakukan untuk mengubah ini? Jika masalahnya ialah bahawa saya tidak menangkap 0, ia hanya satu ralat logik. Dan saya boleh katakan manakala n adalah lebih besar daripada atau sama dengan 0, menjaga mendorong pengguna lagi dan lagi. 
+
+Jadi, sekali lagi, kesilapan mudah, mungkin walaupun jelas apabila anda melihat saya menulis hanya beberapa minit yang lalu. Tetapi bisa dibesarkan di sini adalah bahawa dengan debug 50, dan dengan debugging perisian lebih umum, anda mempunyai kuasa ini mendapati baru untuk berjalan melalui kod anda sendiri, melihat melalui panel tangan kanan apa nilai-nilai pembolehubah anda berada. Jadi, anda tidak semestinya perlu menggunakan sesuatu seperti anda eprintf untuk mencetak nilai-nilai. Anda sebenarnya boleh melihat mereka visual pada skrin. 
+
+Sekarang, di luar ini, ia adalah diperhatikan bahawa terdapat satu lagi teknik itulah sebenarnya super biasa. Dan anda mungkin tertanya-tanya mengapa ini sedikit Lelaki sini telah duduk di atas pentas. Jadi ada teknik ini, secara amnya dikenali sebagai getah itik debugging, yang benar-benar hanya bukti kepada hakikat bahawa pengaturcara kerap apabila menulis kod, mereka tidak semestinya bekerjasama dengan orang lain, atau bekerja dalam persekitaran yang dikongsi. 
+
+Mereka semacam di rumah. Mungkin ia adalah lewat malam. Mereka cuba untuk angka beberapa bug dalam kod mereka. Dan mereka tidak melihatnya. 
+
+Dan tidak ada rakan sebilik. Tiada TF. Tiada CA sekitar. Apa yang mereka ada di rak mereka adalah bebek ini getah sedikit. 
+
+Dan sebagainya itik getah debugging hanya jemputan ini untuk memikirkan sesuatu yang bodoh kerana ini sebagai makhluk sebenar, dan sebenarnya berjalan melalui kod anda secara lisan kepada objek tidak bernyawa ini. Jadi, sebagai contoh, jika ini adalah contoh saya sini-- dan ingat bahawa sebelum ini masalah itu ini, jika saya memadam baris pertama kod ini, dan saya pergi ke hadapan dan membuat kereta 0 lagi, ingat bahawa saya mempunyai ini mesej ralat di sini. Jadi idea di sini, tidak masuk akal walaupun saya rasa pada masa ini melakukan ini secara terbuka, kesilapan itu. 
+
+OK, jadi masalah saya adalah bahawa saya telah tersirat mengisytiharkan fungsi perpustakaan. Dan fungsi perpustakaan adalah printf. Declare-- OK, mengisytiharkan mengingatkan saya kepada prototaip. 
+
+Ini bermakna saya perlu untuk benar-benar memberitahu pengkompil terlebih dahulu apa majlis itu kelihatan seperti. Tunggu sebentar. Saya tidak mempunyai io.h. standard Terima kasih banyak - banyak. 
+
+Jadi hanya proses ini daripada- anda tidak perlu untuk benar-benar mempunyai itik. Tetapi idea ini berjalan diri anda melalui kod anda sendiri supaya anda juga mendengar diri sendiri, supaya kamu menyedari ketinggalan dalam anda sendiri kata-kata, biasanya idea. 
+
+Dan, mungkin lebih logik, tidak begitu banyak dengan yang satu tetapi lebih terlibat contoh kita lakukan dalam 3.C kereta, anda mungkin berjalan diri melaluinya seperti berikut. Jadi semua hak, getah bebek, DDB, jika anda akan. Di sini kita mempunyai dalam fungsi utama saya, Saya menyeru mendapatkan int negatif. 
+
+Dan saya semakin nilai pulangan. Saya menyimpan ia di sebelah kiri pada baris 8 dalam pembolehubah yang dipanggil i. OK, tetapi menunggu, bagaimana yang mendapat nilai itu? Biar saya melihat fungsi dalam talian 12. 
+
+Selaras 12, kita telah mendapatkan int negatif. Tidak mengambil apa-apa input, tidak kembali int, OK. Saya mengaku pada baris 14 a n berubah-ubah. Ia akan menyimpan integer. Itulah yang saya mahu. 
+
+Jadi lakukan perkara berikut manakala n is-- biarlah saya membatalkan apa yang menetapkan saya sudah dibuat. Oleh itu, sambil n lebih besar daripada 0, mencetak n iaitu, OK. Dan kemudian memanggil mendapatkan int disimpan dalam n. Dan kemudian memeriksa jika n adalah 0, n adalah tidak-- ada ia. Jadi, sekali lagi, anda tidak perlu itik yang sebenar. Tetapi hanya berjalan diri anda melalui kod anda sebagai latihan intelektual kerap akan membantu anda sedar apa yang berlaku, berbanding dengan hanya melakukan sesuatu seperti ini, merenung skrin, dan tidak bercakap diri anda melalui ia, yang jujur ​​tidak hampir yang teknik yang berkesan. Jadi ada anda mempunyai ia, beberapa teknik yang berbeza untuk benar-benar debugging kod anda dan mencari kesalahan, semua yang harus menjadi alat dalam Kit anda supaya anda tidak lewat malam, terutamanya, anda berada dalam makan dewan, atau pada waktu pejabat, terhantuk kepala anda terhadap dinding, cuba untuk menyelesaikan beberapa masalah. Sedar bahawa terdapat alat perisian. Terdapat alat itik getah. Dan ada kakitangan keseluruhan menyokong menunggu untuk menghulurkan bantuan. 
+
+Oleh sebab itu, satu perkataan pada masalah set, dan kepada apa yang kami berharap anda keluar dari mereka, dan bagaimana kita pergi tentang menilai. Setiap sukatan pelajaran kursus ini, set masalah CS50 dinilai pada empat paksi utama, jadi untuk speak-- skop, ketepatan, reka bentuk, dan gaya. Dan skop hanya merujuk kepada berapa banyak sekeping yang telah anda digigit? Berapa banyak masalah yang telah anda cuba? Apa tahap usaha telah anda dijelmakan? 
+
+Kebenaran adalah, adakah kerja program ini sebagai ia sepatutnya mengikut spesifikasi CS50 apabila anda memberikan input tertentu atau output tertentu datang kembali? Design adalah yang paling subjektif mereka. Dan ia adalah salah satu yang akan mengambil yang paling lama untuk belajar dan yang paling lama untuk mengajar, dalam setakat yang disimpulkan di sini bagaimana yang ditulis dengan baik adalah kod anda? 
+
+Ia satu perkara untuk hanya mencetak yang betul output atau kembali nilai-nilai yang betul. Tetapi yang anda lakukan sebagai cekap yang mungkin? Adakah anda melakukan ia jurang dan menakluk, atau binari carian seperti yang kita tidak lama lagi akan melihat bahawa kita lakukan dua minggu lalu dengan buku telefon? Adakah terdapat cara yang lebih baik untuk menyelesaikan masalah daripada apa yang anda kini ada di sini? Itu satu peluang untuk reka bentuk yang lebih baik. 
+
+Dan kemudian style-- bagaimana cantik adalah kod anda? Anda akan melihat bahawa saya cukup tertentu mengenai mengensotkannya kod saya, dan memastikan pembolehubah saya dengan munasabah yang dinamakan. n, Tidak lama, adalah nama yang baik untuk nombor, i untuk integer mengira, kerana rentetan. Dan kita boleh mempunyai lagi gaya nama-nama pembolehubah. Style ialah betapa baik fungsi kod anda kelihatan? Dan bagaimana boleh dibaca itu? 
+
+Dan dari masa ke masa, apa TA anda dan TFS akan lakukan dalam perjalanan adalah menyediakan anda dengan itu jenis maklum balas kualitatif supaya anda menjadi lebih baik pada mereka pelbagai aspek. Dan dari segi bagaimana kita menilai setiap paksi ini, ia biasanya dengan sedikit baldi supaya anda, secara amnya, mendapatkan rasa bagaimana yang anda lakukan. Dan, ya, jikalau engkau menerima skor pada mana-mana kebenaran axes--, reka bentuk dan gaya especially-- jumlah itu biasanya akan mengandungi antara 1 dan 5. Dan, secara literal, jika anda mendapat 3 pada permulaan semester, ini adalah satu perkara yang sangat baik. Ini bermakna masih ada ruang untuk penambahbaikan, yang anda akan berharap dalam mengambil kelas untuk kali pertama. Ada mudahan beberapa sedikit siling yang anda bercita-cita untuk mencapai. Dan supaya mendapat pada 3 ini keping terawal, jika tidak beberapa 2 dan 4 ini, adalah, sememangnya, satu perkara yang baik. Ia cukup dalam liputan, baik dalam jangkaan. 
+
+Dan jika fikiran anda berlumba-lumba, tunggu satu minit, tiga daripada lima. Itu benar-benar keluar 6 10. Itulah 60%. Allahku, itulah F. 
+
+Ianya bukan. Tidak, sebenarnya, bahawa. Sebaliknya, ia adalah satu peluang untuk meningkatkan sepanjang semester. Dan jika anda mendapat beberapa Poors, ini adalah peluang untuk mengambil kesempatan daripada waktu pejabat, pasti bahagian dan sumber-sumber lain. 
+
+Best peluang, benar-benar, yang boleh dibanggakan sejauh mana anda telah datang sepanjang semester. Jadi jangan sedar, jika apa-apa lain, tiga adalah baik. Dan ia membolehkan ruang untuk pertumbuhan masa ke masa. 
+
+Iaitu bagaimana paksi adalah wajaran, realistik anda berada akan menghabiskan sebahagian besar masa anda mendapat perkara yang perlu bekerja, apatah lagi dengan betul. Dan supaya kebenaran cenderung untuk akan diberatkan yang paling, seperti faktor pendaraban ini tiga. Design juga penting, tetapi sesuatu yang anda tidak semestinya menghabiskan semua waktu-waktu di cuba untuk mendapatkan perkara yang hanya untuk bekerja. 
+
+Dan jadi ia berwajaran sedikit lebih ringan. Dan kemudian gaya wajaran sekurang-kurangnya. Walaupun ia tidak kurang penting asasnya, ia hanya, mungkin, Perkara yang paling mudah untuk berbuat baik, meniru contoh kita lakukan dalam kuliah dan seksyen, dengan perkara-perkara baik tersusun, dan berkata, dan sebagainya adalah antara yang paling mudah perkara yang perlu dilakukan dan mendapatkan hak. Jadi oleh itu, menyedari bahawa mereka adalah mata yang agak mudah untuk memahami. 
+
+Dan kini satu perkataan pada this-- kejujuran akademik. Jadi setiap kursus ini sukatan pelajaran, anda akan melihat bahawa kursus ini mempunyai cukup sedikit bahasa sekitar ini. Dan kursus ini mengambil isu kejujuran akademik agak serius. 
+
+Kami mempunyai perbezaan, untuk lebih baik atau untuk lebih teruk, kerana telah dihantar setiap tahun lebih pelajar untuk tindakan tatatertib daripada kebanyakan yang lain Sudah tentu, bahawa saya sedar. Ini tidak semestinya menunjukkan hakikat pelajar CS, atau pelajar CS50, adalah apa-apa kurang jujur ​​daripada rakan sekelas anda. Tetapi realiti bahawa dalam ini dunia, elektronik, kita hanya mempunyai teknologi bermakna mengesan ini. 
+
+Ia adalah penting kepada kami untuk keadilan seluruh kelas yang kita lakukan mengesan ini, dan meningkatkan isu ini apabila kita melihat sesuatu. Dan hanya untuk melukis sekeping gambar, dan benar-benar untuk membantu sesuatu seperti sink ini, Inilah jumlah daripada pelajar dalam tempoh 10 tahun yang lalu yang telah terlibat dalam beberapa isu-isu seperti kejujuran akademik, dengan kira-kira 32 pelajar daripada kejatuhan 2015, yang untuk mengatakan bahawa kita mengambil perkara itu dengan serius. Dan, akhirnya, nombor-nombor mengarang, Yang baru, kira-kira 3%, 4% atau lebih kelas. 
+
+Jadi untuk super majoriti pelajar ia seolah-olah bahawa garis-garis yang jelas. Tetapi jangan menyimpan ini dalam keberatan, terutama lewat pada waktu malam apabila bergelut dengan beberapa penyelesaian kepada masalah set, bahawa terdapat mekanisme untuk mendapatkan diri anda lebih baik sokongan daripada anda mungkin berfikir, walaupun pada ketika itu juga. Sedarlah bahawa apabila kita menerima penyerahan pelajar, kita menyeberang membandingkan setiap penyerahan tahun ini terhadap setiap penyerahan tahun lepas, terhadap setiap penyerahan dari tahun 2007, dan sejak, melihat, dan juga, kod repositori dalam talian, forum perbincangan, tapak kerja. Dan kita sebut ini, benar-benar, semua demi kepentingan pendedahan sepenuhnya, bahawa jika orang lain boleh mencari dalam talian, pasti, jadi boleh kita kursus. Tetapi, benar-benar, semangat sudah tentu ini berkisar klausa ini dalam sukatan pelajaran. Ia benar-benar adil, munasabah. 
+
+Dan jika kita terpaksa mengulas lanjut mengenai yang dengan hanya satu bahasa yang agak lanjut, sedar bahawa intipati semua kerja-kerja yang anda serahkan kepada kursus ini mesti anda sendiri. Tetapi dalam masa itu, tentunya ada peluang dan galakan, dan nilai pedagogi dalam beralih kepada others-- diri saya sendiri, yang TFS, CA yang, Tas, dan lain-lain di dalam kelas, untuk sokongan, membiarkan rakan-rakan sahaja dan rakan sebilik yang mengkaji CS manakala program sebelum ini. Dan sebagainya ada peruntukan untuk itu. Dan peraturan am ibu jari adalah this-- ketika meminta bantuan, anda boleh menunjukkan kod anda kepada orang lain, tetapi anda tidak boleh melihat mereka. Jadi, walaupun anda berada di waktu pejabat, atau di dalam dewan D, atau di tempat lain bekerja di beberapa set piece, bekerjasama dengan rakan, yang adalah betul-betul halus, pada akhir hari kerja anda akhirnya harus dimiliki oleh setiap di antara kamu masing-masing, dan tidak ada beberapa usaha sama, kecuali projek akhir di mana ia dibenarkan dan digalakkan. 
+
+Sedar bahawa jika anda bergelut dengan sesuatu dan rakan anda hanya berlaku untuk menjadi lebih baik pada ini maka anda, atau lebih baik pada masalah itu daripada kamu, atau sedikit lebih jauh ke hadapan daripada kamu, ia benar-benar munasabah untuk menghidupkan kepada rakan anda dan berkata, hey, adakah anda keberatan melihat kod saya di sini, membantu saya mengesan apa isu saya adalah? Dan, mudah-mudahan, dalam kepentingan nilai pedagogi rakan yang tidak hanya berkata, oh, melakukan ini, tetapi sebaliknya, apa yang kau hilang di talian 6, atau sesuatu seperti itu? Tetapi penyelesaian tidak untuk rakan di sebelah anda berkata, oh, baik, di sini, saya ingin menarik ini, dan menunjukkan penyelesaian saya kepada anda. Jadi itulah garis. Anda menunjukkan kod anda untuk orang lain, tetapi anda tidak boleh melihat mereka, tertakluk kepada yang lain kekangan dalam sukatan pelajaran kursus ini. 
+
+Jadi jangan ingat ini apa yang dipanggil fasal penyesalan dalam sukatan pelajaran kursus ini juga, bahawa jika anda melakukan beberapa perbuatan yang tidak munasabah, tetapi membawa kepada perhatian ketua kursus ini dalam masa 72 jam, kursus ini boleh mengenakan sekatan tempatan yang boleh termasuk yang tidak memuaskan atau gagal gred untuk kerja-kerja yang dikemukakan. Tetapi tentu tidak akan merujuk kira untuk tindakan tatatertib selanjutnya, kecuali dalam kes-kes tindakan berulang. Dalam erti kata lain, jika anda membuat beberapa bodoh, terutama lewat malam, keputusan yang pagi esok atau dua hari kemudian, anda bangun dan sedar, apa yang saya fikirkan? Anda lakukan dalam CS50 mempunyai jalan keluar untuk menetapkan masalah yang dan memiliki sehingga ia, supaya kita akan bertemu dengan kamu separuh ke bawah dan menangani dengannya dalam suatu perkara yang kedua-dua pendidikan dan berharga untuk anda, tetapi masih punitif dalam beberapa cara. Dan kini, untuk menghilangkan kegembiraan, ini. 
+
+[VIDEO MAIN SEMULA] 
+
+[MUZIK Bermain] 
+
+[AKHIR MAIN SEMULA] DAVID J. MALAN: Baiklah, kita kembali. Dan sekarang kita melihat salah satu daripada pertama domain dunia sebenar kita dalam CS50, seni kriptografi, seni menghantar dan menerima mesej rahsia, disulitkan mesej jika anda akan, yang hanya boleh ditafsirkan jika anda mempunyai beberapa bahan utama bahawa pengirim mempunyai juga. Jadi untuk memberi motivasi ini kami akan mengambil yang melihat perkara ini di sini, yang merupakan satu contoh cincin penyahkod rahsia yang boleh digunakan untuk memikirkan apa mesej rahsia sebenarnya. Malah, kembali dalam hari di sekolah gred, jika anda pernah menghantar mesej rahsia kepada beberapa rakan atau beberapa menghancurkan di dalam kelas, anda mungkin berfikir anda pandai oleh pada sekeping anda berubah kertas, seperti, A ke B, dan B kepada C, dan C untuk D, dan sebagainya. Tetapi anda sebenarnya menyulitkan maklumat anda, walaupun jika ia adalah remeh sedikit, tidak sukar bagi guru untuk sedar, baik, jika anda hanya menukar B ke A dan C kepada B, anda sebenarnya memikirkan apa mesej itu, tetapi anda berada dalam ciphering maklumat. 
+
+Anda hanya melakukannya semata-mata, sama seperti Ralphie sini dalam filem terkenal yang memainkan cukup banyak iklan nauseum setiap musim sejuk. [VIDEO MAIN SEMULA] -Be Ia diketahui oleh semua bahawa Ralph Parker adalah dengan ini dilantik sebagai ahli Little Orphan Annie Secret Circle dan adalah berhak kepada semua penghormatan dan faedah yang berlaku kepadanya. 
+
+-Signed, Little Orphan Annie, ditandatangan balas Pierre Andre, dengan dakwat. Kepujian dan faedah, sudah pada usia sembilan tahun. 
+
+[Menjerit] -Ayuh. Mari kita pada dengannya. Saya tidak memerlukan semua jazz yang mengenai penyeludup dan lanun. 
+
+-Listen Malam esok pengembaraan penutup kapal lanun hitam. Kini, sudah tiba masanya untuk mesej rahsia Annie untuk anda ahli-ahli Secret Circle. Ingat, kanak-kanak, hanya ahli Annie rahsia Circle boleh decode mesej rahsia Annie. 
+
+Ingat, Annie adalah bergantung kepada anda. Tetapkan PIN anda untuk B2. Berikut adalah mesej. 12, 11-- 
+
+-Saya Saya sedang dalam, mesyuarat rahsia pertama saya. 
+
+14, 11, 18, 16. 
+
+Pierre adalah besar malam ini suara. Saya boleh memberitahu bahawa malam ini mesej adalah benar-benar penting. 
+
+-3, 25, itu mesej dari Annie dirinya. Ingat, jangan beritahu sesiapa. 
+
+-90 Saat kemudian, saya dalam satu-satunya bilik di dalam rumah di mana seorang budak sembilan boleh duduk dalam privasi dan decode. Aha, B! Saya pergi ke depan, E. 
+
+Perkataan pertama adalah menjadi. S, ia akan datang lebih mudah sekarang, U, 25-- 
+
+-Oh, Datang, Ralphie, aku harus pergi! 
+
+-I'll Betul ke bawah, Ma! Gee jagoan! 
+
+-T, O, pastikan supaya- pastikan untuk apa? Apa Little Orphan Annie cuba katakan? Pastikan anda apa? 
+
+-Ralphie, Andy telah mendapat pergi, akan anda sila keluar? 
+
+hak -Semua, Ma! Saya akan keluar betul! 
+
+-Saya Telah semakin hampir sekarang. ketegangan adalah dahsyat. Apakah maklumat itu? Nasib planet ini boleh meragukan. 
+
+-Ralphie! Harus Andy kita pergi! 
+
+-I'll Betul keluarlah, menangis dengan kuat! 
+
+-Almost Sana, jari saya terbang, fikiran saya adalah perangkap keluli, setiap liang digetarkan. Ia adalah hampir jelas, ya, ya, ya. 
+
+-Be Pastikan anda minum Ovaltine anda. Ovaltine? A komersial yg tdk memuaskan? Bedebah. [AKHIR MAIN SEMULA] DAVID J. MALAN: OK, jadi itu adalah cara yang sangat panjang memperkenalkan kriptografi, dan juga Ovaltine. Malah, dari iklan lama ini di sini, mengapa Ovaltine begitu baik? Ia adalah pengeluaran pekat masak barli malt, susu lembu berkrim murni ini, dan khas disediakan koko, bersama-sama dengan phosphatides semula jadi dan vitamin. Ia dikuatkan lagi dengan vitamin tambahan B dan D, yum. Dan anda masih boleh mendapatkannya, nampaknya, di Amazon, seperti yang kita lakukan di sini. 
+
+Tetapi motivasi di sini adalah untuk memperkenalkan kriptografi, khususnya sejenis kriptografi dikenali sebagai kriptografi kunci rahsia. Dan seperti namanya, keseluruhan keselamatan sistem kripto kunci rahsia, jika anda akan, kaedah yang hanya berebut maklumat antara dua orang, ialah hanya penghantar dan hanya penerima tahu key-- rahsia beberapa nilai, beberapa frasa rahsia, beberapa nombor rahsia, yang membolehkan mereka untuk kedua-dua encrypt dan menyahsulit maklumat. Dan kriptografi, benar-benar, hanya ini dari minggu 0. 
+
+Ia adalah satu masalah di mana ada input, seperti mesej sebenar dalam bahasa Inggeris atau apa sahaja bahasa yang anda ingin menghantar kepada seseorang di dalam kelas, atau seluruh internet. Terdapat beberapa output, yang akan menjadi mesej yang hancur bahawa anda mahu penerima menerima. Dan jika seseorang di pertengahan menerimanya juga, anda tidak mahu mereka semestinya dapat menyahsulit, kerana di dalam ini kotak hitam, atau algoritma, beberapa mekanisme, beberapa langkah demi langkah arahan, untuk mengambil input yang dan ditukarkan ke dalam output, dalam mudah-mudahan cara yang selamat. 
+
+Dan, sebenarnya, terdapat beberapa perbendaharaan kata dalam dunia ini seperti berikut. teks biasa adalah perkataan yang saintis komputer akan gunakan untuk menggambarkan input mesej, seperti Inggeris atau apa sahaja bahasa yang anda sebenarnya ingin menghantar kepada beberapa manusia lain. Dan kemudian tulisan rahsia adalah perebutan untuk enciphered, atau disulitkan, versinya. 
+
+Tetapi ada satu ramuan lain di sini. Ada satu input lain untuk kriptografi kunci rahsia. Dan itu adalah kunci itu sendiri, yang, secara amnya, seperti yang kita akan lihat, nombor, atau surat, atau perkataan, apa sahaja algoritma ia sebenarnya menjangka. 
+
+Dan bagaimana anda menyahsulit maklumat? Bagaimana anda menguraikan ia? Nah, anda hanya membalikkan output dan input. 
+
+Dalam erti kata lain, apabila seseorang menerima mesej disulitkan anda, dia hanya mempunyai untuk mengetahui kunci yang sama. Mereka telah menerima tulisan rahsia. Dan dengan memasang kedua-dua input ke dalam sistem kripto itu, algoritma, kotak ini hitam, keluar harus datang plaintext asal. Dan supaya tahap yang sangat tinggi memandangkan apa kriptografi sebenarnya semua tentang. 
+
+Jadi mari kita sampai ke sana. Sekarang mari kita lihat di bawah bonet sesuatu kita telah mengambil untuk diberikan untuk minggu lalu, dan untuk sesi ini sini-- tali. Rentetan pada akhir hari hanya jujukan aksara. 
+
+Ia mungkin menjadi dunia hello, atau hello Zamyla, atau apa sahaja. Tetapi apa maksudnya untuk menjadi jujukan aksara? Malah, perpustakaan CS50 memberikan kita satu jenis data yang dipanggil tali. 
+
+Tetapi ada sebenarnya tidak perkara seperti rentetan dalam C. Ia benar-benar hanya satu urutan watak, watak, watak, watak, belakang, ke belakang, ke belakang, ke belakang, ke belakang dalam memori komputer anda, atau RAM. Dan kita akan melihat secara lebih mendalam bahawa dalam masa depan apabila kita melihat memori sendiri, dan penggunaan, dan ancaman yang terlibat. 
+
+Tetapi mari kita mempertimbangkan rentetan Zamyla itu. Jadi hanya nama manusia di sini, Zamyla, yang merupakan urutan watak-watak, Z-A-M-Y-L-A. Dan sekarang mari kita andaikan bahawa nama Zamyla ini sedang disimpan di dalam komputer program. 
+
+Nah, dengan alasan bahawa kita harus dapat melihat mereka watak-watak secara individu. Jadi saya hanya akan menarik sedikit kotak sekitar nama Zamyla di sini. Dan ia adalah kes dalam C yang apabila anda mempunyai tali, seperti Zamyla-- dan mungkin rentetan yang telah kembali dari fungsi seperti mendapatkan tali, anda sebenarnya boleh memanipulasi ia watak oleh watak. 
+
+Sekarang, ini adalah germane untuk perbualan di tangan, kerana dalam bidang kriptografi jika anda mahu menukar A ke B, dan B kepada C, dan C untuk D, dan sebagainya, anda perlu berupaya untuk melihat watak-watak individu dalam rentetan. Anda perlu berupaya untuk mengubah Z untuk sesuatu yang lain, A kepada sesuatu yang lain, M untuk sesuatu yang lain, dan sebagainya. Dan dengan itu kita memerlukan satu cara, pengaturcaraan, jadi dikatakan, dalam C dapat mengubah dan melihat huruf individu. Dan yang boleh kita lakukan ini seperti berikut. 
+
+Biar saya pergi pulang dalam CS50 IDE. Dan biarlah saya pergi ke hadapan dan mencipta fail baru bahawa saya akan memanggil masa string0 ini, sebagai contoh seperti kita yang pertama, dot c. Dan saya akan pergi ke hadapan dan cambuk sebagai berikut. 
+
+Jadi termasuk CS50.h, dan kemudian termasuk io.h standard, yang saya hampir sentiasa akan akan menggunakan dalam program saya, sekurang-kurangnya pada mulanya. int tidak sah utama, dan kemudian di sini Saya akan melakukan tali mendapat mendapatkan tali. Dan kemudian saya akan teruskan niat ini. Saya mahu pergi ke depan dan, seperti cek kewarasan, hanya mengatakan, hello, peratus s, koma bertitik, membuat tali 0. Uh oh, apa yang saya lakukan di sini? Oh, saya tidak palamkan ia. Jadi pengajaran belajar, bahawa tidak disengajakan. 
+
+Jadi kesilapan, lebih peratus penukaran daripada hujah-hujah data. Dan ini adalah di mana, dalam garis 7-- OK, jadi saya perlu, quote unquote, itu rentetan saya untuk printf. Saya telah mendapat tanda peratus. Tetapi saya tiada argumen kedua. 
+
+Saya hilang s koma, yang Aku ada dalam contoh sebelumnya. Jadi peluang yang baik untuk menetapkan satu lagi kesilapan, tidak sengaja. Dan sekarang mari aku berlari string0, taip Zamyla. OK, hello Zamyla. 
+
+Oleh itu, kita telah menjalankan jenis ini program beberapa kali berbeza sekarang. Tetapi mari kita buat sesuatu yang sedikit berbeza kali ini. Bukan hanya mencetak Zamyla ini nama keseluruhan dengan printf, mari kita melakukannya watak oleh watak. 
+
+Saya akan menggunakan untuk gelung. Dan saya akan memberikan diri saya pembolehubah kiraan, yang dipanggil i. Dan saya akan terus mengulanginya, jadi selagi i adalah kurang daripada panjang s. 
+
+Ternyata, kita tidak melakukan masa terakhir ini, yang c dilengkapi dengan fungsi dipanggil Stirling. Kembali pada hari itu, dan secara umum masih dalam melaksanakan fungsi, manusia sering akan memilih sangat nama ringkas yang jenis bunyi seperti apa yang anda mahu, walaupun ia hilang satu vokal atau beberapa huruf. Jadi Stirling adalah menamakan fungsi yang mengambil hujah antara kurungan yang perlu rentetan. Dan ia hanya mengembalikan integer, panjang tali itu. 
+
+Jadi ini untuk gelung pada baris 7 akan untuk mula mengira pada i sama dengan 0. Ia akan kenaikan i pada setiap lelaran sebanyak 1, seperti yang kita telah melakukan beberapa kali. Tetapi ia akan hanya melakukan sehingga ini sehingga titik ketika saya ialah panjang tali itu sendiri. 
+
+Jadi ini adalah satu cara, akhirnya, iterating atas watak-watak dalam rentetan sebagai adalah berikut. Saya akan mencetak bukan seluruh tali, tetapi peratus c, yang bersifat tunggal diikuti oleh barisan baru. Dan kemudian saya akan pergi ke hadapan, dan saya perlu untuk mengatakan saya ingin mencetak engan watak s. 
+
+Jadi, jika i adalah pembolehubah yang menunjukkan indeks tali, di mana anda sedang di dalamnya, saya perlu dapat berkata, memberi saya watak-i s. Dan c mempunyai cara melakukan ini dengan tanda kurung siku. Anda hanya mengatakan nama tali, yang dalam kes ini adalah s. Kemudian anda menggunakan kurungan persegi, yang biasanya di atas Kembali atau Enter anda kekunci pada papan kekunci. Dan kemudian anda meletakkan indeks daripada watak yang anda ingin cetak. Jadi indeks akan menjadi number-- 0, atau 1, atau 2, atau 3, atau dot, dot, dot, beberapa nombor lain. 
+
+Dan kita memastikan bahawa ia akan menjadi nombor yang betul, kerana saya mula mengira pada 0. Dan secara lalai, watak pertama dalam rentetan adalah dengan konvensyen 0. Dan watak kedua kurungan 1. Dan watak ketiga kurungan 2. Dan anda tidak mahu pergi terlalu ini, tetapi kita tidak akan kerana kami akan hanya kenaikan i sehingga ia sama dengan panjang tali. Dan di mana titik, ini untuk gelung akan berhenti. 
+
+Jadi biarlah saya pergi ke hadapan dan menyimpan ini program, dan jangka membuat rentetan 0. Tetapi saya kacau sehingga. Tersirat mengisytiharkan fungsi perpustakaan Stirling dengan apa-apa jenis dan such-- sekarang, ini bunyi biasa. Tetapi ia tidak printf. Dan ia tidak mendapatkan tali. 
+
+Saya tidak skru sehingga dalam cara yang sama kali ini. Tetapi melihat ke bawah di sini sedikit ke bawah lanjut, termasuk string.h kepala, jelas memberikan deklarasi untuk Stirling. Jadi sebenarnya ada petunjuk di sana. 
+
+Dan sesungguhnya ia ternyata terdapat satu lagi fail header bahawa kita telah tidak digunakan di dalam kelas lagi, tetapi ia kalangan orang yang ada kepada anda, yang dipanggil string.h. Dan dalam fail, string.h adalah Stirling diisytiharkan. Jadi biarlah saya pergi ke hadapan dan menyelamatkan ini, membuat tali 0-- bagus, tiada mesej ralat masa ini. 
+
+./string0 Zamyla, dan Saya akan tekan Enter, di mana titik getstring akan untuk kembali tali, memasukkannya ke dalam s. Maka itu untuk gelung akan melelar terhadap watak-watak S satu demi satu, dan mencetak mereka satu per baris, kerana Saya mempunyai bahawa garis sendeng terbalik n pada akhir. Jadi saya boleh meninggalkan garis sendeng terbalik yang n, dan kemudian hanya mencetak Zamyla semua dalam baris yang sama, berkesan reimplementing printf, yang tidak semua yang berguna. Tetapi dalam kes ini, saya tidak melakukannya. Saya sebenarnya dicetak satu aksara pada satu masa, satu setiap baris, supaya kita sebenarnya melihat kesan. 
+
+Tetapi saya perlu ambil perhatian satu perkara di sini. Dan kita akan kembali kepada ini dalam minggu akan datang. Ia ternyata bahawa ini kod berpotensi kereta. 
+
+Ia ternyata bahawa mendapatkan tali dan beberapa fungsi lain dalam kehidupan tidak semestinya sentiasa kembali apa yang anda jangkakan. Kita tahu dari kelas lepas masa ini yang mendapat rentetan sepatutnya kembali rentetan. Tetapi bagaimana jika jenis pengguna menyatakan apa-apa perkataan yang panjang, atau perenggan, atau esei bahawa terdapat hanya tidak cukup memori dalam komputer untuk memasukkannya. 
+
+Seperti, bagaimana jika ada masalah salah di bawah hood? Ia mungkin tidak berlaku sering, tetapi ia boleh berlaku sekali pada masa ini, sangat jarang. Dan maka ia ternyata bahawa mendapatkan tali dan fungsi seperti itu tidak semestinya sentiasa kembali tali. Mereka kembali beberapa nilai ralat, beberapa nilai sentinel boleh dikatakan, yang menunjukkan bahawa sesuatu yang telah berlaku. Dan anda hanya akan tahu ini dari telah belajar di dalam kelas sekarang, atau setelah membaca beberapa dokumentasi lanjut. Ia ternyata bahawa mendapatkan tali boleh kembali nilai yang dipanggil null. Null ialah nilai khas yang kita akan kembali ke dalam seminggu akan datang. Tetapi untuk sekarang, hanya tahu bahawa jika saya mahu menjadi benar-benar betul dalam bergerak ke hadapan menggunakan mendapatkan tali, saya tidak seharusnya hanya memanggilnya, dan secara membuta tuli menggunakan nilai pulangan, mempercayai bahawa itu rentetan. 
+
+Saya mula-mula boleh berkata: hey, tunggu satu minit, hanya diteruskan jika s tidak sama null, di mana null, sekali lagi, hanya beberapa nilai khas. Dan ia adalah satu-satunya nilai istimewa anda perlu bimbang tentang untuk mendapatkan tali. Mendapatkan tali sama ada akan untuk kembali rentetan atau null. 
+
+Dan tanda seru ini tanda sama dengan anda mungkin tahu dari mungkin kelas matematik bahawa anda mungkin menarik tanda sama dengan garis melaluinya untuk menunjukkan tidak sama. Bukan itu umumnya watak anda boleh menaip pada papan kekunci anda. Dan sebagainya dalam kebanyakan bahasa pengaturcaraan, apabila anda mahu untuk mengatakan tidak sama, anda menggunakan tanda seru, atau dikenali sebagai bang. Jadi anda mengatakan bang sama, yang bermakna tidak sama, secara logik. Ia seperti tidak ada yang lebih besar daripada, atau sama dengan, atau kurang daripada atau sama dengan memasukkan pada papan kekunci anda yang melakukan semuanya dalam satu simbol. Jadi sebab itu, dalam contoh-contoh yang lalu, anda melakukan satu kurungan terbuka, dan kemudian tanda sama, untuk melakukan lebih besar daripada atau, berkata, kurang daripada. 
+
+Jadi apa yang bisa dibesarkan di sini? Ini adalah hanya satu cara sekarang daripada memperkenalkan sintaks ini, ciri-ciri ini, iterating ke atas individu watak-watak dalam rentetan. Dan seperti persegi mereka kurungan membolehkan anda untuk mendapatkan mereka, menganggap mereka kurungan persegi sebagai jenis mengisyaratkan pada ini mendasari reka bentuk, di mana setiap watak dalam rentetan adalah jenis berkotak di suatu tempat di bawah hud dalam ingatan komputer anda. 
+
+Tetapi mari kita membuat varian ini. Ia ternyata bahawa ini program adalah betul. Jadi setiap paksi CS50 untuk menilai kod, ini betul sekarang. Terutama sekarang bahawa saya memeriksa untuk null, program ini tidak boleh crash. Dan saya tahu bahawa dari pengalaman. Tetapi tiada apa-apa yang lain yang kita benar-benar boleh berlaku di sini. Tetapi ia tidak sangat direka dengan baik, kerana mari kita kembali kepada asas. 
+
+Pertama, principles-- apakah untuk gelung lakukan? A untuk gelung melakukan tiga perkara. Ia initializes beberapa nilai, jika anda bertanya kepada. Ia memeriksa syarat. Dan kemudian selepas setiap lelaran, selepas setiap kitaran, ia menokok beberapa nilai, atau nilai-nilai, di sini. 
+
+Jadi apa maksudnya? Kita memulakan i kepada 0. Kami memeriksa dan memastikan i adalah kurang daripada panjang s, yang Z-A-M-Y-L-A, supaya yang kurang daripada 6. Dan, sememangnya, 0 sebagai kurang daripada 6. 
+
+Kami mencetak Z dari nama Zamyla ini. Kemudian kita kenaikan i 0-1. Kami kemudian memeriksa, adalah 1 kurang daripada panjang s? Panjang s adalah 6. Ya, itulah. 
+
+Oleh itu, kita mencetak nama Zamyla ini, ZA. Kita kenaikan i dari 0, 1, 2. Kami kemudian memeriksa, adalah kurang daripada 2 panjang nama Zamyla ini. 6- jadi 2 adalah kurang daripada 6. Ya, mari kita mencetak sekarang M dalam nama Zamyla ini, watak ketiga. 
+
+Kunci di sini adalah bahawa pada setiap lelaran cerita, saya memeriksa, adalah i kurang daripada panjang Zamyla? Tetapi tangkapan adalah bahawa Stirling bukan harta. Orang-orang yang telah diprogramkan sebelum di Jawa atau bahasa-bahasa lain mengetahui panjang tali adalah harta, hanya beberapa bacaan sahaja nilai. 
+
+Dalam C dalam kes ini, jika ini adalah satu fungsi yang secara literal mengira bilangan watak-watak dalam Zamyla setiap kali kita panggil fungsi itu. Setiap kali anda bertanya kepada komputer menggunakan Stirling, ia mengambil melihat Zamyla, dan berkata Z-A-M-Y-L-A, 6. Dan ia mengembalikan 6. Lain kali anda memanggil ia di dalam bahawa untuk gelung, ia akan melihat Zamyla sekali lagi, mengatakan Z-A-M-Y-L-A, 6. Dan ia akan kembali 6. Jadi apa yang bodoh tentang reka bentuk ini? 
+
+Mengapa kod saya bukan 5 daripada 5 untuk reka bentuk sekarang, jadi untuk bercakap? Well, saya meminta seorang soalan tidak perlu. Saya melakukan kerja yang lebih daripada apa yang saya perlu. 
+
+Jadi walaupun jawapan adalah betul, saya meminta komputer, apa yang panjang Zamyla lagi, dan lagi, dan lagi, dan lagi? Dan jawapan yang tidak akan berubah. Ia sentiasa akan menjadi 6. 
+
+Jadi penyelesaian yang lebih baik daripada ini akan menjadi versi ini akan datang. Biar saya pergi ke hadapan dan memasukkannya ke dalam fail berasingan yang dipanggil string1.c, hanya untuk memastikan ia memisahkan. Dan ternyata in untuk gelung, anda boleh sebenarnya mengisytiharkan beberapa pembolehubah sekaligus. 
+
+Jadi, saya akan terus i dan menetapkannya untuk 0. Tetapi saya juga akan menambah koma, dan berkata, memberi saya pembolehubah yang dipanggil n, yang nilai sama panjang tali s. Dan sekarang, sila membuat keadaan saya selagi i adalah kurang daripada n. 
+
+Jadi dengan cara ini, logik adalah sama pada akhir hari. Tetapi saya mengingati nilai 6, dalam kes ini. Apakah Panjang nama Zamyla ini? Dan saya meletakkan ia di n. 
+
+Dan saya masih memeriksa syarat setiap kali. 0 kurang daripada 6? 1 kurang daripada 6? 2 kurang daripada 6, dan sebagainya? 
+
+Tetapi saya tidak meminta komputer sekali lagi, dan sekali lagi, apa yang panjang nama Zamyla ini? Apa yang panjang nama Zamyla ini? Apa yang panjang nama ini Zamyla ini? Saya betul-betul mengingati bahawa pertama dan hanya menjawab dalam n pembolehubah kedua ini. Jadi ini kini akan bukan sahaja betul, tetapi juga direka dengan baik. 
+
+Sekarang, bagaimana pula dengan gaya? Saya telah dinamakan pembolehubah saya dengan baik, saya akan berkata. Mereka super ringkas sekarang. Dan itu betul-betul halus. 
+
+Jika anda hanya mempunyai satu rentetan dalam program, anda juga mungkin memanggilnya s untuk tali. Jika anda hanya mempunyai satu pembolehubah untuk mengira dalam program, anda juga mungkin memanggilnya i. Jika anda mempunyai panjang, n adalah super biasa juga. Tetapi saya tidak mengulas apa-apa kod saya. 
+
+Saya tidak memaklumkan kepada reader-- sama ada itu TF saya, atau TA, atau hanya colleague-- apa yang sepatutnya yang akan berlaku dalam program ini. Dan sebagainya untuk mendapatkan gaya yang baik, apa yang saya mahu lakukan adalah sesuatu this-- seperti meminta pengguna untuk input. Dan saya boleh menulis semula ini apa-apa bilangan kali. 
+
+Pastikan s-- membuat get pasti rentetan kembali rentetan. Dan kemudian di sini-- dan ini mungkin Itekadar comment-- yang paling penting atas watak-watak dalam s satu demi satu. Dan saya boleh menggunakan mana-mana pilihan bahasa Inggeris di sini untuk menerangkan setiap daripada ketulan kod. 
+
+Perhatikan bahawa saya tidak meletakkan komen pada setiap baris kod, benar-benar hanya pada yang menarik orang-orang, orang-orang yang mempunyai beberapa makna, sehingga aku dapat ingin super jelas kepada seseorang membaca kod saya. Dan mengapa kamu memanggil mendapatkan rentetan meminta pengguna untuk input? Walaupun satu yang tidak semestinya semua deskriptif itu. Tetapi ia membantu bercerita, kerana Barisan kedua dalam cerita itu, pastikan mendapatkan tali kembali rentetan. 
+
+Dan garis ketiga dalam cerita ini adalah, melelar atas watak-watak dalam s satu pada satu masa. Dan kini hanya untuk langkah yang baik, Saya akan pergi ke hadapan dan menambah satu lagi komen yang hanya kata cetak watak i-ke dalam s. Kini, apa yang telah kuperbuat pada akhir hari? 
+
+Saya telah menambah beberapa English kata-kata dalam bentuk komen. Simbol slash slash bermakna, hey, komputer ini adalah untuk manusia, bukan kerana anda, komputer. Jadi mereka diabaikan secara logik. Mereka hanya ada di sana. 
+
+Dan, sememangnya, CS50 IDE menunjukkan mereka sebagai kelabu, kerana menjadi seorang yang berguna, tetapi tidak utama kepada program ini. Perhatikan apa yang anda kini boleh dilakukan. Sama ada anda tahu C pengaturcaraan atau tidak, anda hanya boleh berdiri kembali pada ini program, dan mengimbas komen. Minta pengguna untuk input, pastikan mendapatkan tali kembali rentetan, melelar atas watak-watak dalam s satu demi satu, mencetak watak watak i-ke-dalam s-- anda tidak walaupun perlu melihat kod di untuk memahami apa yang program ini tidak. Dan, lebih baik lagi, jika anda sendiri melihat di program ini dalam satu atau dua minggu, atau sebulan, atau setahun, anda juga tidak mempunyai merenung kod, cuba ingat, apa yang saya cuba lakukan dengan kod ini? 
+
+Anda telah memberitahu diri sendiri. Anda telah diterangkan untuk diri sendiri, atau beberapa rakan sekerja, atau TA, atau TF. Dan sebagainya ini kini akan betul, dan reka bentuk yang baik, dan akhirnya baik gaya juga. Begitu menyimpan bahawa dalam fikiran. 
+
+Jadi ada satu yang lain Perkara yang saya akan lakukan di sini yang kini boleh mendedahkan dengan tepat apa yang berlaku di bawah hood. Jadi ada ciri-ciri ini dalam C, dan bahasa-bahasa lain, dipanggil typecasting yang sama ada secara tersirat atau jelas membolehkan anda untuk menukar dari satu jenis data yang lain. Kami telah berurusan supaya jauh hari ini dengan tali. 
+
+Dan rentetan aksara. Tetapi ingat dari minggu 0, apakah watak-watak? Watak-watak yang hanya abstraksi yang di atas nombor perpuluhan numbers--, dan nombor perpuluhan adalah benar-benar hanya satu abstraksi di atas nombor perduaan, seperti yang kita ditakrifkan ia. 
+
+Jadi watak-watak yang nombor. Dan nombor adalah watak-watak, hanya bergantung kepada konteks. Dan ternyata bahawa dalam program komputer, anda boleh menentukan bagaimana anda mahu melihat di bit bahagian dalam program itu? 
+
+Ingat dari 0 minggu bahawa kita mempunyai Ascii, yang hanya kod ini surat pemetaan untuk nombor. Dan kita berkata, modal adalah 65. Capital B adalah 66, dan sebagainya. 
+
+Dan notis, kita pada dasarnya mempunyai aksara pada baris atas di sini, kerana C akan memanggil mereka, watak-watak, dan kemudian ints di barisan kedua. Dan ternyata anda boleh menukar dengan lancar di antara kedua-dua, biasanya. Dan jika kita mahu lakukan ini sengaja, kita mungkin mahu untuk menangani sesuatu seperti ini. 
+
+Kita mungkin mahu untuk menukar huruf besar yang lebih rendah kes atau kes yang lebih rendah kepada huruf besar. Dan ternyata di luar sana yang sebenarnya corak di sini kita boleh menerima dalam hanya seketika. Tetapi mari kita lihat pertama pada contoh untuk melakukan ini dengan jelas. 
+
+Saya akan kembali ke dalam CS50 IDE. Saya akan membuat file dipanggil Ascii 0.c. Dan saya akan pergi ke hadapan dan menambah saya io.h standard di bahagian atas, int tidak sah utama di bahagian atas fungsi saya. Dan kemudian saya hanya akan melakukan perkara yang following-- untuk gelung dari i sama, katakan, 65. 
+
+Dan kemudian saya akan menjadi kurang daripada 65, ditambah 26 huruf dalam abjad. Jadi saya akan membiarkan komputer matematik aku di sana. Dan kemudian di dalam gelung ini, apa yang saya akan mencetak? 
+
+% C% i garis sendeng terbalik n. Dan sekarang saya mahu pasangkan dua nilai. Saya telah meletakkan soalan buat sementara waktu menandakan sana untuk menjemput soalan. 
+
+Saya hendak melelar dari 65 seterusnya untuk 26 huruf abjad, mencetak pada setiap lelaran yang bersamaan penting watak itu. Dalam erti kata lain, saya mahu melelar lebih 26 nombor percetakan apa watak Ascii adalah, surat itu, dan apa nombor yang sepadan is-- benar-benar hanya mencipta carta daripada penurunan itu. Jadi apa yang perlu ini tanda tanya boleh? 
+
+Nah, ternyata bahawa kedua satu hanya perlu i yang berubah-ubah. Saya mahu melihat bahawa sebagai nombor. Dan hujah pertengahan di sini, saya boleh memberitahu komputer untuk merawat integer yang i sebagai watak, supaya untuk menggantikan sini untuk peratus C. 
+
+Dalam erti kata lain, jika saya, yang programmer manusia, tahu ini adalah hanya nombor pada akhir hari. Dan saya tahu bahawa 65 perlu peta untuk beberapa watak. Dengan pelakon yang jelas ini, dengan kurungan, nama jenis data yang anda hendak memeluk dan kurungan tertutup, anda boleh memberitahu komputer, hey, komputer, menukar integer ini kepada char. 
+
+Oleh itu, apabila saya menjalankan ini program selepas menyusun, mari kita lihat apa yang saya get-- membuat Ascii 0. Darn ia, apa yang saya lakukan salah di sini? Gunakan pengecam tidak diisytiharkan, semua hak, tidak sengaja, tetapi mari kita lihat jika kita tidak boleh sebab melalui ini. 
+
+Jadi garis five-- jadi saya tidak mendapat jauh sebelum merenyukkan. Tidak mengapa. Jadi garis 5 untuk i sama 65-- saya lihat. Jadi ingat bahawa dalam C, tidak seperti beberapa bahasa jika anda mempunyai pengaturcaraan terlebih dahulu pengalaman, anda perlu untuk memberitahu komputer, tidak seperti calar, apa jenis pembolehubah itu. 
+
+Dan saya terlupa frasa utama di sini. Selaras lima, saya telah mula menggunakan i. Tetapi saya tidak memberitahu C apa data jenis itu. Jadi, saya akan pergi di sini dan berkata, ah, membuat ia integer. 
+
+Sekarang saya akan pergi ke hadapan dan susun semula. Yang tetap itu. ./ascii0 Enter, itulah jenis sejuk. Bukan sahaja ia super cepat untuk meminta komputer soalan ini, bukannya mencari ia di atas slaid, ia dicetak satu setiap baris, A ialah 65, B 66, sepanjang jalan down-- sejak saya melakukan ini 26 times-- untuk huruf z, iaitu 90. Dan, sebenarnya, sedikit lebih bijak akan telah bagi saya tidak bergantung pada komputer untuk menambah 26. Saya boleh sahaja dilakukan 90 juga, selagi kerana saya tidak membuat kesilapan yang sama dua kali. Saya hendak pergi melalui z, bukan sahaja menerusi y. 
+
+Jadi itulah pelakon yang jelas. Ia ternyata bahawa ini tidak walaupun perlu. Biar saya pergi ke hadapan dan menjalankan semula ini pengkompil, dan jalankan lagi Ascii 0. Ia ternyata bahawa C adalah cukup bijak. 
+
+Dan printf, khususnya, agak pintar. Jika anda hanya lulus i dua kali untuk kedua-dua ruang letak, printf akan sedar, oh, baik saya tahu anda memberikan saya integer-- beberapa nombor, seperti 65 atau 90, atau apa sahaja. Tetapi saya melihat bahawa anda mahu saya memformatkan nombor yang seperti watak. Dan sebagainya printf tersirat boleh membuang yang int kepada char untuk anda juga. Jadi itu bukan masalah sama sekali. 
+
+Tetapi notis, kerana kesetaraan ini kita sebenarnya boleh melakukan ini juga. Biar saya pergi ke hadapan dan membuat satu versi lain this-- 1.c. Ascii Dan bukannya iterating lebih integer, benar-benar boleh meniup fikiran anda oleh iterating lebih watak-watak. Jika char c mendapat modal A, saya mahu pergi ke depan dan melakukan ini, selagi C adalah kurang daripada atau sama ke Z. modal Dan pada setiap lelaran Saya mahu untuk kenaikan C, saya boleh kini dalam talian printf saya di sini berkata, peratus C peratus i lagi, koma C. 
+
+Dan sekarang, saya boleh pergi ke arah yang lain, pemutus watak jelas kepada integer. Jadi, sekali lagi, mengapa anda melakukan ini? Ia adalah pelik sedikit untuk menyusun mengira dari segi watak. 
+
+Tetapi jika anda memahami apa yang berlaku di bawah hood, ada benar-benar ada sihir. Anda hanya berkata, hey, komputer memberi saya pembolehubah yang dipanggil C jenis char. Memulakan ia ke ibu A. Dan melihat perkara petikan tunggal. 
+
+Untuk watak-watak dalam C, ingat dari minggu lepas, anda menggunakan petikan tunggal. Untuk tali, kata-kata, frasa, anda menggunakan tanda petikan berganda. OK, komputer, terus melakukan ini, jadi selagi watak adalah kurang daripada atau sama dengan z. Dan saya tahu dari meja Ascii saya bahawa semua ini Kod Ascii yang berdampingan. 
+
+Tidak ada jurang. Jadi ia hanya A hingga Z, dipisahkan oleh satu nombor setiap satu. Dan kemudian saya boleh kenaikan char, jika saya benar-benar mahu. Pada akhir hari, ia hanya nombor. Saya tahu ini. Jadi saya hanya boleh menganggap untuk menambah 1 kepadanya. 
+
+Dan kemudian masa ini, saya mencetak c, dan kemudian bersamaan kamiran. Dan saya tidak perlu cast yang jelas. Saya boleh membiarkan printf dan angka komputer perkara keluar, supaya sekarang sekiranya saya membuat Ascii1./ascii1, Saya mendapat perkara yang sama juga. 
+
+program yang tidak berguna, tidak ada yang though-- akan sebenarnya menulis perisian untuk memikirkan, apa yang nombor yang memetakan kepada A, atau B, atau Z? Anda hanya akan di Google, atau melihat ia dalam talian, atau melihat ia pada slaid, atau sebagainya. Oleh itu, bagaimana ini benar-benar mendapatkan berguna kepada anda? 
+
+Well, bercakap tentang yang slaid, perasan ada corak yang sebenar di sini antara huruf besar dan huruf kecil yang tidak sengaja. Perhatikan bahawa modal adalah 65. Huruf kecil 97. Dan berapa jauh adalah kes yang lebih rendah yang? 
+
+Jadi 65 adalah berapa banyak langkah dari 97? Jadi 97 tolak 65 adalah 32. Jadi modal ialah 65. Jika anda menambah 32 itu, anda huruf kecil a. Dan, setara, jika anda tolak 32, anda kembali ke ibu A-- sama dengan B untuk sedikit b, C besar untuk sedikit c. 
+
+Semua jurang ini adalah 32 selain. Sekarang, ini seolah-olah untuk membolehkan kita untuk melakukan sesuatu seperti Microsoft Word, atau Google Docs menampilkan, di mana anda boleh memilih segala-galanya dan kemudian berkata, menukar semua kepada huruf kecil, atau menukar semua ke huruf besar, atau menukar hanya perkataan pertama sesuatu hukuman kepada huruf besar. Kami benar-benar boleh melakukan sesuatu seperti itu diri kita sendiri. 
+
+Biar saya pergi ke hadapan dan menyimpan fail di sini dipanggil kesempatan 0.c. Dan mari kita pergi ke depan dan menyiapkan program yang tidak tepat itu seperti berikut. Jadi termasuk perpustakaan CS50. Dan termasuk standard I / O. 
+
+Dan saya tahu ini akan datang tidak lama lagi. Jadi saya akan memasukkannya ke dalam ada sudah, string.h, jadi saya mempunyai akses kepada perkara seperti Stirling, dan kemudian int tidak sah utama, seperti biasa. Dan kemudian saya akan pergi ke hadapan dan melakukan tali mendapat mendapatkan tali, hanya untuk mendapatkan rentetan daripada pengguna. Dan kemudian saya akan melakukan cek kewarasan saya. Jika rentetan tidak null sama, maka ia adalah selamat untuk meneruskan. Dan apa yang saya mahu lakukan? Saya akan melelar dari i sama dengan 0, dan n sehingga panjang tali s. 
+
+Dan saya akan melakukan ini selagi i adalah kurang daripada n, dan i plus plus. Setakat ini, saya benar-benar hanya meminjam idea daripada sebelum ini. Dan sekarang saya akan memperkenalkan cawangan. 
+
+Jadi berfikir kembali kepada calar, di mana kita mempunyai orang-orang garpu di jalan raya, dan minggu terakhir di dalam C. saya akan mengatakan ini, jika watak i-ke-dalam s adalah lebih besar daripada atau sama dengan huruf kecil a, dan- dalam Scratch yang anda lakukan betul-betul katakan dan, tetapi dalam C anda mengatakan ampersand, ampersand-- dan watak i-ke-dalam s adalah kurang daripada atau sama dengan huruf kecil z, mari kita buat sesuatu yang menarik. Mari kita sebenarnya mencetak watak tanpa newline iaitu watak dalam tali, watak i-ke-dalam rentetan. 
+
+Tetapi mari kita pergi ke hadapan dan tolak 32 daripadanya. Lain jika watak dalam rentetan kita mencari yang sedang bukan antara sedikit yang dan sedikit z, teruskan dan hanya dicetak keluar tidak berubah. Oleh itu, kita telah memperkenalkan notasi kurungan ini untuk tali kami untuk mendapatkan di i-ke-watak dalam rentetan. 
+
+Saya telah menambah beberapa logik bersyarat, seperti Scratch pada minggu satu minggu lepas, di mana Saya hanya menggunakan asas saya memahami apa yang berlaku di bawah hood. Adalah watak i-ke-s lebih besar daripada atau sama dengan yang? Seperti, ia 97, atau 98, atau 99, dan sebagainya? 
+
+Tetapi adakah ia juga kurang daripada atau sama dengan nilai z huruf kecil? Dan jika ya, apakah garis ini bermakna? 14, ini adalah jenis yang kuman keseluruhan idea, mengambil kesempatan surat oleh hanya menolak 32 daripadanya, dalam kes ini, kerana saya tahu, setiap yang carta, bagaimana nombor saya diwakili. Jadi mari kita pergi ke hadapan dan menjalankan ini, selepas menyusun kesempatan 0.c, dan jangka kesempatan 0. 
+
+Mari menaip sesuatu seperti Zamyla dalam semua huruf kecil masuk. Dan sekarang kita mempunyai Zamyla dalam semua huruf besar. Mari kita menaip Rob dalam semua huruf kecil. Mari kita cuba Jason dalam semua huruf kecil. Dan kita terus mendapat permodalan paksa. Ada bug kecil yang saya jenis tidak menjangka. Perhatikan segera baru saya berakhir pada baris yang sama sebagai nama-nama mereka, yang berasa tidak kemas sedikit. 
+
+Jadi saya akan pergi ke sini, dan sebenarnya pada akhir program ini mencetak watak newline. Itu sahaja. Dengan printf, anda tidak perlu lulus dalam pembolehubah atau kod format. Anda benar-benar boleh hanya mencetak sesuatu seperti newline a. 
+
+Jadi mari kita pergi ke hadapan dan membuat mengambil kesempatan 0 lagi, jalankan ia, Zamyla. Dan kini ia adalah yang lebih cantik sedikit. Sekarang, segera saya ialah pada baris sendiri baru. Jadi itu semua baik dan baik. Jadi itulah contoh yang baik. Tetapi saya tidak walaupun semestinya perlu kod keras 32. Awak tahu tak? Saya boleh iaitu- saya tidak pernah ingat apa perbezaan. 
+
+Tetapi saya tahu bahawa jika saya mempunyai surat kes yang lebih rendah, Saya pada dasarnya mahu tolak off apa sahaja jarak adalah antara sedikit dan besar A, kerana jika saya menganggap bahawa semua huruf lain adalah sama, yang perlu mendapatkan pekerjaan yang dilakukan. Tetapi bukannya berbuat demikian, anda tahu apa? Ada cara lain masih. 
+
+Jika itu mengambil kesempatan 1.c-- jika saya untuk meletakkan itu ke dalam fail yang berasingan. mari kita jangan mengambil kesempatan 2.c seperti berikut. Saya akan benar-benar membersihkan ini di sini. Dan bukannya juga perlu tahu atau mengambil berat tentang tahap yang rendah butir-butir pelaksanaan, Saya bukannya hanya akan mencetak watak, quote unquote, peratus C, dan kemudian memanggil fungsi lain yang wujud yang mengambil hujah, yang merupakan watak, seperti ini. 
+
+Ternyata dalam C, ada satu lagi panggilan fungsi ke atas, yang seperti namanya mencadangkan mengambil watak dan menjadikannya untuk kes atasnya setara, dan kemudian kembali ia supaya printf yang boleh palamkan ia di sana. Dan sebagainya untuk melakukan ini, walaupun, saya perlu memperkenalkan satu fail lain. Ia ternyata ada fail lain bahawa anda hanya akan tahu dari kelas, atau buku teks, atau dalam talian yang rujukan, yang dipanggil C type.h. 
+
+Jadi, jika saya menambah bahawa di kalangan header saya fail, dan kini semula menyusun program ini, capitalize2, ./capitalize2 Enter. Mari kita menaip Zamyla dalam semua huruf kecil, masih bekerja yang sama. Tetapi anda tahu apa? Ia ternyata bahawa untuk atas mempunyai beberapa fungsi lain. 
+
+Dan biarlah saya memperkenalkan ini perintah di sini, jenis canggung dinamakan, tetapi manusia untuk manual. Ia ternyata bahawa kebanyakan komputer Linux, kerana kami menggunakan sini-- operasi Linux system-- mempunyai arahan yang memanggil orang, yang berkata, hey, komputer, memberi saya manual komputer. apa yang awak mahu melihat dalam manual itu? 
+
+Saya mahu melihat ke atas fungsi dipanggil untuk atas, Enter. Dan ia sedikit samar untuk membaca kadang-kadang. Tetapi melihat kita berada dalam manual Linux pengaturcara. Dan itu semua teks. Dan perhatikan bahawa ada yang menamakan fungsi di sini. Ternyata ia mempunyai sepupu yang dipanggil yang lebih rendah, yang tidak sebaliknya. Dan notis di bawah sinopsis, untuk menggunakan ini berfungsi halaman lelaki itu, boleh dikatakan, memberitahu saya bahawa saya perlu untuk memasukkan c type.h. Dan saya tahu bahawa daripada amalan. 
+
+Di sini, ia menunjukkan kepadaku kedua prototaip untuk fungsi, supaya jika saya mahu menggunakan ini Saya tahu apa yang mereka ambil input, dan apa yang mereka kembali sebagai output. Dan kemudian jika saya membaca keterangan, saya melihat dengan lebih terperinci apa fungsi tidak. Tetapi yang lebih penting, jika Saya lihat di bawah nilai pulangan, ia berkata nilai yang dikembalikan adalah bahawa surat yang ditukar, atau C, input asal, jika penukaran tidak mungkin. 
+
+Dalam erti kata lain, untuk atas akan cuba untuk menukar surat kepada huruf besar. Dan jika demikian, ia akan mengembalikannya. Tetapi jika ia tidak boleh untuk beberapa reason-- mungkin ia kes sudah atas, mungkin ia tanda seru atau beberapa punctuation-- lain ia hanya akan kembali C asal, yang bermakna saya boleh membuat kod saya direka lebih baik seperti berikut. 
+
+Saya tidak memerlukan semua ayat-ayat ini darn kod. Semua garisan saya telah hanya menekankan boleh runtuh ke dalam hanya satu yang mudah line, yang this-- printf peratus c pendakap S atas i. Dan ini akan menjadi satu contoh reka bentuk yang lebih baik. 
+
+Mengapa melaksanakan dalam 7 atau 8 baris kod, walau apa pun ia saya dipadam, apabila anda sebaliknya boleh runtuh semua itu logik dan membuat keputusan ke dalam satu baris tunggal, 13, supaya bergantung kepada perpustakaan function-- fungsi yang datang dengan C, tetapi itu tidak betul-betul apa yang anda mahu ia lakukan. Dan, terus terang, walaupun ia tidak datang dengan C, anda boleh melaksanakan sendiri, kerana kita lihat, dengan mendapatkan int negatif dan mendapatkan positif int minggu lepas juga. 
+
+Kod ini sekarang jauh lebih mudah dibaca. Dan, sememangnya, jika kita tatal ke atas, melihat berapa banyak yang lebih padat versi program saya. Ia adalah satu berat atas sedikit sekarang, dengan semua ini termasuk. Tetapi itu OK, kerana sekarang saya berdiri di bahu pengaturcara sebelum saya. Dan sesiapa yang ia yang dilaksanakan untuk atas benar-benar tidak membantu aku, sama seperti orang yang dilaksanakan Stirling benar-benar tidak membantu aku sedikit masa lalu. Dan sekarang kita mempunyai program reka bentuk yang lebih baik yang melaksanakan logik yang sama. 
+
+Bercakap stirling, mari saya pergi ke hadapan dan melakukan ini. Biar saya pergi ke hadapan dan menyimpan fail ini sebagai stirling.c. Dan ternyata, kita boleh mengupas kembali satu lapisan lain cukup hanya sekarang. Saya akan pergi ke hadapan dan cambuk program lain di utama di sini bahawa hanya semula alat panjang tali seperti berikut. Jadi di sini adalah satu baris kod yang mendapat saya rentetan daripada pengguna. Kami terus menggunakan ini lagi dan lagi. Biar saya memberikan diri saya pembolehubah yang dipanggil n jenis int yang menyimpan nombor. 
+
+Dan biarlah saya pergi ke hadapan dan melakukan logik berikut. Walaupun watak n-ke-dalam s tidak tidak sama garis sendeng terbalik 0, teruskan dan kenaikan n. Dan kemudian mencetak printf peratus i n. Saya mendakwa bahawa program ini di sini, tanpa dipanggil panjang tali, angka panjang rentetan. 
+
+Dan sihir sepenuhnya terkandung dalam talian 8 di sini dengan apa yang kelihatan seperti sintaks baru, garis sendeng terbalik ini 0 dalam petikan tunggal. Tetapi mengapa itu? Well, pertimbangkan apa yang telah berlaku selama ini. 
+
+Dan sebagai diketepikan sebelum saya lupa, menyedari juga, bahawa sebagai tambahan kepada halaman man yang datang dengan yang biasa sistem Linux seperti CS50 IDE, menyedari bahawa kita, kakitangan kursus ini, mempunyai juga membuat versi laman web idea ini sama dipanggil reference.cs50.net, yang mempunyai semua orang-orang halaman man sama, semua yang sama dokumentasi, serta kotak kecil di bahagian atas yang membolehkan anda untuk menukar semua agak bahasa yang sukar difahami menjadi kurang selesa mod, di mana kita, tenaga pengajar, telah melalui dan cuba untuk memudahkan beberapa bahasa untuk menjaga perkara-perkara memberi tumpuan kepada idea-idea, dan tidak beberapa perkara teknikal. Jadi ingat, reference.cs50.net sebagai sumber lain juga. 
+
+Tetapi mengapa kerja panjang rentetan dalam cara saya mencadangkan masa lalu? Berikut adalah nama Zamyla sekali lagi. Dan di sini adalah nama Zamyla ini berkotak dalam, kerana saya terus melakukan, untuk memberi gambaran yang ia menjadi, benar-benar, hanya jujukan aksara. Tetapi Zamyla tidak wujud secara berasingan dalam program. 
+
+Apabila anda menulis dan menjalankan program, anda menggunakan Mac atau PC anda sebagai ingatan, atau RAM jadi untuk bercakap. Dan anda boleh berfikir komputer anda sebagai mempunyai banyak gigabait memori hari ini. Dan gig yang bermakna berbilion-bilion, jadi berbilion bait. 
+
+Tetapi mari kita putar balik dalam masa. Dan andaikan bahawa kita menggunakan komputer benar-benar lama yang hanya mempunyai 32 bait memori. Saya boleh, pada skrin komputer saya, hanya menarik ini seperti berikut. 
+
+Saya hanya boleh mengatakan bahawa saya komputer mempunyai kesemua memori ini. Dan ini adalah seperti batang memori, jika anda masih ingat gambar kami dari masa lalu. Dan jika saya bahagikan ini pada masa-masa yang cukup, Saya menuntut bahawa saya mempunyai 32 bytes memori pada skrin. 
+
+Sekarang, pada hakikatnya, saya hanya boleh menarik setakat ini pada skrin ini di sini. Jadi, saya akan pergi ke hadapan, dan hanya dengan konvensyen, menarik memori komputer saya sebagai grid, bukan sahaja sebagai satu garis lurus. Secara khusus, saya menuntut sekarang bahawa grid ini, ini 8 oleh 4 grid, hanya mewakili semua 32 bytes memori yang terdapat dalam Mac saya, atau terdapat di PC saya. Dan mereka membungkus ke dua baris, hanya kerana sesuai lebih pada skrin. Tetapi ini adalah bait pertama. Ini adalah bait kedua. Ini adalah bait ketiga. 
+
+Dan ini adalah bait-32. Atau, jika kita berfikir seperti komputer saintis, ini adalah bait 0, 1, 2, 3, 31. Jadi, anda perlu 0-31, jika anda mula mengira pada 0. 
+
+Jadi, jika kita menggunakan program bahawa panggilan mendapatkan tali, dan kami mendapatkan rentetan daripada manusia seperti aku dipanggil Zamyla, Z-A-M-Y-L-A, bagaimana di dunia melakukan trek komputer keep yang bait, yang sebahagian memori, tergolong dalam rentetan? Dalam erti kata lain, jika kita teruskan untuk menaip nama lain ke dalam komputer, seperti Andi ini, menyeru mendapatkan tali kali kedua, A-N-D-I telah berakhir di memori komputer juga. Tetapi bagaimana? 
+
+Nah, ternyata bahawa di bawah yang hud, apa yang C tidak apabila menyimpan rentetan bahawa jenis manusia dalam, atau yang datang dari beberapa sumber lain, adakah menggariskan akhir mereka dengan satu garis sendeng terbalik character-- khas 0, yang hanya cara yang khas untuk mengatakan 80 bit berturut-turut. 
+
+Jadi A-- ini adalah nombor 97 ingat. Jadi beberapa corak 8 bit mewakili nombor perpuluhan 97. garis sendeng terbalik ini 0 literal bilangan 0, nul turut dikenali sebagai, N-U-L, tidak seperti sebelum ini, N-U-L-L, yang kita bercakap tentang. Tetapi untuk sekarang, hanya tahu bahawa ini garis sendeng terbalik 0 hanya 80 bit berturut-turut. 
+
+Dan ia hanya garis ini dalam pasir yang menegor kiri tergolong dalam salah satu tali, atau satu jenis data. Dan apa-apa ke kanan tergolong dalam sesuatu yang lain. Andi nama, sementara itu, yang hanya visual berlaku untuk membalut ke baris lain, tetapi itu hanya satu perincian yang estetik, sama adalah nul ditamatkan. 
+
+Ia adalah rentetan daripada watak-watak A-N-D-I, ditambah dengan watak rahsia kelima, semua 0 bit, yang hanya demarcates akhir nama Andi juga. Dan jika kita memanggil mendapatkan tali kali ketiga dalam komputer untuk mendapatkan rentetan seperti Maria, M-A-R-I-A, begitu juga adalah Maria nama nul ditamatkan dengan garis sendeng terbalik 0. 
+
+Ini adalah berbeza dari bagaimana komputer akan biasanya menyimpan integer, atau apungan, atau lain-lain jenis data masih, kerana ingat, integer biasanya 32 bit, atau 4 bait, atau mungkin juga 64 bit, atau lapan bait. Tetapi ramai primitif dalam komputer dalam bahasa pengaturcaraan mempunyai nombor tetap bait di bawah hood-- yang mungkin 1, mungkin 2, mungkin 4, mungkin 8. 
+
+Tetapi tali, dengan reka bentuk, mempunyai nombor dinamik watak-watak. Anda tidak tahu terlebih dahulu, sehingga jenis-jenis manusia dalam Z-A-M-Y-L-A, atau M-A-R-I-A atau A-N-D-I. Anda tidak tahu berapa kali pengguna akan melanda papan kekunci. Oleh itu, anda tidak tahu bagaimana banyak watak terlebih dahulu anda akan perlukan. 
+
+Dan sebagainya C hanya jenis daun seperti breadcrumb rahsia di bawah hood pada akhir tali. Selepas menyimpan Z-A-M-Y-L-A dalam ingatan, ia juga hanya meletakkan bersamaan tempoh. Pada akhir ayat, ia meletakkan 80 bit, supaya ingat di mana Zamyla bermula dan berakhir. 
+
+Jadi apa sambungan, maka, untuk program ini? program ini di sini, Stirling, adalah semata-mata satu mekanisme untuk mendapatkan rentetan daripada pengguna, line 6. Line 7, saya mengisytiharkan pembolehubah dipanggil n dan menetapkan ia sama dengan 0. 
+
+Dan kemudian dalam talian 8, saya hanya bertanya kepada soalan, manakala watak n-ke-tidak tidak sama semua 0 bits-- dalam erti kata lain, tidak sama istimewa ini watak, garis sendeng terbalik 0, yang adalah hanya itu character-- nul khas pergi ke depan dan hanya kenaikan n. 
+
+Dan perlu melakukannya, dan menjaga melakukannya, dan terus melakukannya. Dan sebagainya walaupun dalam Sebelum ini, kami telah menggunakan i, ia adalah betul-betul halus semantik untuk menggunakan n, jika anda hanya cuba untuk mengira masa ini sengaja, dan hanya mahu memanggilnya n. Jadi ini hanya menyimpan bertanya soalan, adalah watak n-ke-s semua 0-an? Jika tidak, melihat kepada wajah yang akan datang, melihat ke depan, melihat ke depan, melihat ke depan. 
+
+Tetapi sebaik sahaja anda melihat garis sendeng terbalik 0, garis ini loop-- 9 melalui 11-- berhenti. Anda keluar daripada gelung sementara, meninggalkan bahagian dalam yang n pembolehubah jumlah kiraan semua watak-watak dalam rentetan yang anda lihat, dengan itu mencetak ia keluar. Jadi mari kita cuba ini. 
+
+Biar saya pergi ke hadapan dan, tanpa menggunakan fungsi stirling itu, tetapi hanya menggunakan versi tempatan saya sendiri di sini dipanggil stirling, biarlah saya pergi ke hadapan dan jangka stirling, jenis dalam sesuatu seperti Zamyla, yang saya tahu terlebih dahulu enam aksara. Mari kita lihat jika ia berfungsi. Sesungguhnya, ia adalah enam. Mari kita cuba dengan Rob, tiga watak, tiga watak juga, dan sebagainya. Jadi itu sahaja yang akan di bawah hood. Dan notis sambungan, kemudian, dengan minggu pertama kelas, di mana kita bercakap tentang sesuatu seperti pengambilan, yang hanya lapisan ini idea, atau kerumitan, di atas prinsip-prinsip asas. Di sini, kita semacam mencari di bawah bonet stirling, jadi untuk bercakap, untuk memikirkan, bagaimana akan ia akan dilaksanakan? 
+
+Dan kita boleh melaksanakan semula diri kita sendiri. Tetapi kita tidak lagi akan semula melaksanakan stirling. Kami hanya akan menggunakan stirling agar untuk benar-benar mendapatkan beberapa panjang tali. 
+
+Tetapi tidak ada sihir bawah hood. Jika anda tahu bahawa di bawah hood, rentetan hanya jujukan aksara. Dan bahawa jujukan aksara semua boleh berangka ditangani dengan pendakap 0, kurungan 1, kurungan 2, dan anda tahu bahawa pada akhir rentetan ialah aksara khas, anda boleh memikirkan bagaimana untuk melakukan sebahagian apa-apa dalam program, kerana semua itu bermuara pada membaca dan menulis ingatan. Iaitu, berubah dan mencari di ingatan, atau sesuatu yang bergerak sekitar dalam ingatan, perkara percetakan pada skrin, dan sebagainya. 
+
+Jadi mari kita kini menggunakan baru ditemui ini memahami apa yang sebenarnya tali adalah di bawah hood, dan mengupas kembali satu lapisan lain yang sehingga kini kami telah telah mengabaikan sama sekali. Khususnya masa, mana-mana kami telah melaksanakan program, kita mempunyai baris ini kod berhampiran mengisytiharkan utama. Dan kami telah dinyatakan tidak sah utama int. 
+
+Dan itu tidak sah di dalam kurungan mempunyai telah berkata selama ini yang utama itu sendiri tidak mengambil apa-apa hujah. Mana-mana input yang utama adalah akan dapat daripada pengguna perlu datang dari beberapa yang lain mekanisme, seperti mendapatkan int, atau mendapatkan apungan, atau mendapatkan tali, atau beberapa fungsi lain. Tetapi ternyata bahawa apabila anda menulis program, anda sebenarnya boleh menentukan bahawa program ini hendaklah mengambil input daripada manusia pada baris arahan itu sendiri. 
+
+Dengan kata lain, walaupun kita setakat ini mempunyai telah berjalan hanya ./hello hello atau program yang sama, semua program lain yang kita telah gunakan, yang kita sendiri tidak menulis, mempunyai telah mengambil, ia seolah-olah, baris arahan arguments-- perkara seperti make. Anda mengatakan sesuatu seperti membuat, dan kemudian perkataan kedua. Atau dilafaz, anda mengatakan dilafaz, dan kemudian perkataan kedua, nama fail. 
+
+Atau RM atau CP, kerana anda mungkin telah melihat atau digunakan sudah untuk menghapuskan atau menyalin fail. Semua mereka mengambil apa yang dipanggil baris arahan arguments-- perkataan tambahan di prompt terminal. Tetapi sehingga kini, kita diri kita tidak mempunyai ini mewah mengambil input daripada pengguna apabila dia sebenarnya berjalan program itu sendiri pada baris arahan. 
+
+Tetapi kita boleh melakukannya dengan semula mengisytiharkan utama dan seterusnya, bukan sebagai mempunyai tidak sah dalam kurungan, tetapi kedua-dua hujah instead-- pertama integer yang, dan sesuatu yang kedua baru, sesuatu yang kita akan memanggil pelbagai, sesuatu yang sama dalam semangat dengan apa yang kita lihat dalam Scratch sebagai satu senarai, tetapi pelbagai rentetan, kerana kita tidak lama lagi akan melihat. Tetapi mari kita lihat ini dengan Sebagai contoh, sebelum kita membezakan dengan tepat apa yang bermakna. 
+
+Jadi, jika saya pergi ke CS50 IDE di sini, saya telah pergi ke hadapan dan diisytiharkan dalam fail yang dipanggil argv0.c template berikut. Dan perhatikan satu-satunya perkara itu berbeza setakat ini adalah bahawa saya telah mengubah terbatal int argc tali argv kurungan terbuka, berhampiran kurungan. Dan notis buat masa ini, ada apa-apa dalam orang-orang kurungan. 
+
+Tidak ada nombor. Dan tidak ada i, atau n, atau apa-apa surat yang lain. Saya hanya menggunakan tanda kurung siku buat masa ini, atas sebab-sebab kami akan datang kembali ke dalam hanya seketika. 
+
+Dan sekarang apa yang saya akan lakukan ialah ini. Jika argc sama sama 2-- dan ingat bahawa sama sama adalah pengendali kesamaan membandingkan kiri dan kanan untuk kesaksamaan. Ia bukan tugasan pengendali, yang tanda sama tunggal, yang bermaksud salinan dari kanan ke kiri beberapa nilai. 
+
+Jika argc bersamaan bersamaan 2, saya mahu berkata, printf, hello, peratus, barisan baru, dan kemudian palam dalam- dan di sini baru trick-- argv kurungan 1, atas alasan bahawa kita akan kembali ke dalam seketika. Lain jika argc tidak sama 2, anda tahu apa? Mari kita pergi ke hadapan dan, seperti biasa, cetak keluar hello dunia tanpa penggantian. 
+
+Jadi ia akan kelihatan seolah-olah jika argc, yang bermaksud kiraan hujah, bersamaan 2, Saya akan mencetak hello sesuatu atau lain-lain. Jika tidak, secara lalai, Saya akan mencetak hello dunia. Jadi apa maknanya? 
+
+Baiklah, biar saya pergi ke hadapan dan menyimpan fail ini, dan kemudian melakukan make argv0, dan kemudian ./argv0, Enter. Dan ia berkata hello dunia. Sekarang, mengapa? 
+
+Nah, ternyata bila-bila masa anda menjalankan program pada baris arahan, anda mengisi dalam apa yang kita akan umumnya panggil vektor hujah. Dengan kata lain, secara automatik komputer, sistem operasi, akan menyerahkan kepada program anda sendiri senarai semua perkataan bahawa manusia yang ditaip di segera, dalam kes anda programmer menghendaki hal sesuatu dengan maklumat tersebut. Dan dalam kes ini, satu-satunya perkataan Saya telah ditaip di prompt adalah ./argv0. 
+
+Dan supaya bilangan hujah yang yang diluluskan untuk program saya adalah hanya satu. Dalam erti kata lain, hujah mengira, atau dikenali sebagai argc di sini sebagai integer, adalah hanya satu. Satu, sudah tentu, tidak sama dua. Dan hal ini adalah apa yang mencetak, hello dunia. 
+
+Tetapi biarlah saya mengambil tempat ini. Biar saya katakan, argv0. Dan maka bagaimana dengan Maria? Dan kemudian tekan Enter. 
+
+Dan perhatikan apa yang ajaib berlaku di sini. Sekarang, bukan dunia hello, saya mempunyai mengubah tingkah laku program ini dengan mengambil input yang bukan dari get tali atau beberapa fungsi lain, tetapi dari, nampaknya, arahan saya sendiri, apa yang saya asalnya ditaip. Dan saya boleh bermain permainan ini sekali lagi dengan menukar kepada Stelios, misalnya. 
+
+Dan sekarang saya dapat melihat nama lagi yang masih. Dan di sini, saya mungkin berkata Andi. Dan saya mungkin berkata Zamyla. Dan kita boleh bermain permainan ini sepanjang hari, hanya memasang dalam nilai-nilai yang berbeza, selagi aku menyediakan tepat dua perkataan di segera, seperti yang argc, hujah saya mengira, ialah 2. 
+
+Adakah saya melihat bahawa nama dipasang ke dalam printf, setiap keadaan ini di sini? Oleh itu, kita seolah-olah mempunyai sekarang keupayaan ekspresif mengambil input daripada mekanisme lain, daripada baris arahan yang dipanggil, bukannya perlu menunggu sehingga pengguna menjalankan program ini, dan kemudian meminta dia atau dia menggunakan sesuatu seperti mendapatkan tali. 
+
+Jadi apa ini? Argc, sekali lagi, hanya integer, bilangan words-- arguments-- bahawa pengguna disediakan di segera, di tingkap terminal, termasuk nama program. Jadi ./argv0 kita, berkesan, nama program ini, atau bagaimana saya menjalankan program ini. 
+
+Yang dikira sebagai satu perkataan. Jadi argc akan menjadi 1. Tetapi apabila saya menulis Stelios, atau Andi, atau Zamyla, atau Maria, yang bermaksud kiraan hujah adalah dua. Dan sekarang ada dua perkataan yang diluluskan pada. 
+
+Dan notis, kita boleh terus logik ini. Jika saya benar-benar mengatakan sesuatu seperti Zamyla Chan, nama penuh, sekali gus lulus tiga hujah dalam jumlah, kini ia berkata lalai lagi, kerana, sudah tentu, 3 tidak sama 2. 
+
+Jadi dengan cara ini, adakah saya perlu akses melalui argv hujah baru ini yang kita dapat dari segi teknikal memanggil apa-apa yang kita mahu. Tetapi oleh konvensyen, ia argv dan argc, masing-masing. Argv, hujah vektor, adalah jenis satu sinonim untuk pengaturcaraan ciri dalam C dipanggil array. 
+
+Pelbagai adalah senarai nilai sama belakang, ke belakang, ke belakang, ke belakang. Dalam erti kata lain, jika seseorang adalah di sini di RAM, yang seterusnya adalah betul-betul bersebelahan kepadanya, dan kanan sebelahnya. Mereka tidak di seluruh tempat. Dan bahawa senario kedua, mana perkara-perkara berada di seluruh tempat dalam ingatan, sebenarnya boleh menjadi ciri yang kuat. Tetapi kita akan kembali kepada itu apabila kita bercakap mengenai struktur data pelamun. Buat masa ini, array hanya sebahagian memori berdampingan, setiap yang unsur-unsur yang belakang, ke belakang, ke belakang, ke belakang, dan secara amnya jenis yang sama. 
+
+Jadi, jika anda berfikir tentang, dari masa lalu, apa yang rentetan? Well, tali, seperti Zamyla, Z-A-M-Y-L-A, adalah, dari segi teknikal, hanya pelbagai. Ia adalah pelbagai watak. 
+
+Dan jadi jika kita benar-benar menarik, kerana saya lakukan sebelum ini, sebagai sebahagian memori, ternyata bahawa setiap Watak mengambil satu bait. Dan kemudian ada yang istimewa sentinel watak, garis sendeng terbalik 0, atau lapan 0 bit, yang demarcates akhir tali itu. Jadi rentetan, ternyata keluar, memetik tali unquote, adalah hanya pelbagai chara-- char yang jenis data yang sebenar. 
+
+Dan sekarang argv, meanwhile-- mari kita kembali kepada program ini. Argv, walaupun kita melihat perkataan string di sini, tidak adalah rentetan sendiri. Argv, hujah vektor, adalah pelbagai tali. 
+
+Jadi hanya kerana anda boleh mempunyai pelbagai aksara, anda boleh mempunyai tahap yang lebih tinggi, pelbagai strings-- jadi, misalnya, apabila saya menaip sebentar tadi ./argv0 argv0, ruang Z-A-M-Y-L-A, saya mendakwa argv mempunyai dua tali di ./argv0 it--, dan Z-A-M-Y-L-A. dalam erti kata lain, argc adalah 2. Kenapa begitu? 
+
+Well, berkesan, apa yang berlaku pada adalah bahawa setiap rentetan ini adalah, sudah tentu, pelbagai watak seperti sebelum ini, setiap yang watak-watak mengambil satu bait. Dan tidak mengelirukan 0 sebenar nama program ini dengan 0, yang bermaksud semua 80 bit. Dan Zamyla, sementara itu, masih juga pelbagai watak. 
+
+Jadi, pada akhir hari, ia benar-benar kelihatan seperti ini di bawah hood. Tetapi argv, dengan sifat bagaimana utama kerja-kerja, membolehkan saya untuk membalut semua ini ke dalam, jika anda akan, pelbagai yang lebih besar bahawa, jika kita sedikit lebih memudahkan apa gambar kelihatan seperti dan tidak agak menarik ia untuk meningkatkan sana, pelbagai ini hanya saiz 2, yang pertama unsur yang mengandungi rentetan, elemen kedua yang mengandungi rentetan. Dan, seterusnya, jika anda jenis mengezum masuk pada setiap mereka tali, apa yang anda melihat di bawah hood adalah bahawa setiap rentetan hanya pelbagai watak. 
+
+Sekarang, sama seperti dengan tali, kita mampu untuk mendapatkan akses kepada watak i-ke-dalam rentetan menggunakan bahawa notasi kurungan persegi. Begitu juga, dengan pameran secara umum, boleh kita menggunakan persegi notasi kurungan untuk mendapatkan di mana-mana beberapa rentetan dalam array? Sebagai contoh, mari saya teruskan niat ini. 
+
+Biar saya pergi ke hadapan dan mencipta argv1.c, yang sedikit berbeza kali ini. Daripada memeriksa argc2, Saya akan sebaliknya melakukan ini. Untuk int saya mendapat 0, saya kurang daripada argc, saya plus plus, dan kemudian mencetak di dalam ini, peratus s, barisan baru, dan kemudian argv kurungan i. 
+
+Jadi dalam erti kata lain, saya tidak berurusan dengan watak individu pada masa ini. Argv, seperti yang dibayangkan oleh ini persegi kosong pendakap di sebelah kanan argv nama, bermakna argv adalah pelbagai tali. Dan argc hanya int. 
+
+garis ini di sini, 6, berkata set i sama dengan 0. Kira semua jalan sehingga, tetapi tidak termasuk, argc. Dan kemudian pada setiap lelaran, mencetak rentetan. Apa rentetan? 
+
+Rentetan i-ke-dalam argv. Jadi sedangkan sebelum saya menggunakan kurungan persegi notasi untuk mendapatkan sekurang-i watak dalam rentetan, sekarang Saya menggunakan notasi persegi kurungan untuk mendapatkan sekurang-string engan dalam array. Jadi ia adalah jenis satu lapisan di atas, dari segi konsep. 
+
+Dan supaya apa yang kemas mengenai ini program sekarang, jika saya menyusun argv1, dan kemudian melakukan ./argv1, dan kemudian taip dalam sesuatu seperti foo bar baz, yang merupakan tiga perkataan lalai bahawa saintis komputer sampai untuk bila-bila masa dia perlu beberapa perkataan pemegang tempat, dan tekan Enter, setiap kata-kata, termasuk nama program, yang di argv di lokasi pertama, berakhir yang dicetak satu demi satu. Dan jika saya menukar ini, dan saya katakan sesuatu seperti argv1 Zamyla Chan, kita akan mendapat semua tiga daripada kata-kata, yang argv0, argv1, argv2, kerana dalam ini kes argc, kiraan, ialah 3. 
+
+Tetapi apa yang kemas jika anda memahami argv yang hanya pelbagai rentetan, dan anda memahami bahawa rentetan adalah pelbagai watak-watak, kita boleh sebenarnya jenis menggunakan ini persegi notasi kurungan beberapa kali untuk memilih tali, dan kemudian pilih watak dalam tali, menyelam di lebih mendalam seperti berikut. Dalam contoh ini, saya pergi hadapan dan memanggil argv2.c ini. Dan dalam contoh ini, biarlah saya pergi ke hadapan dan melakukan following-- untuk int i mendapatkan 0, i adalah kurang daripada argc, i plus plus, sama seperti sebelum ini. Jadi dalam words-- lain dan sekarang ini mendapat susu yang cukup rumit. Kemudian saya akan berkata melelar atas tali dalam argv, sebagai komen kepada diri saya sendiri. Dan kemudian saya akan mempunyai bersarang untuk gelung, yang anda mungkin telah dilakukan, atau dianggap lakukan, dalam Scratch, di mana Saya akan mengatakan int-- Saya tidak akan menggunakan i lagi, kerana saya tidak mahu bayangan, atau semacam menimpa i yang sedia ada. 
+
+Saya akan, sebaliknya, berkata j, kerana itulah go saya untuk berubah selepas i, apabila saya hanya cuba untuk mengira nombor mudah. Untuk j mendapat 0-- dan juga, n, akan mendapatkan panjang buritan kurungan argv i, selagi j kurang daripada m, j plus plus, lakukan yang berikut. Dan di sini adalah bahagian yang menarik. 
+
+Mencetak watak dan barisan baru, memasang pendakap argv i, kurungan j. OK, jadi biarlah saya menambah beberapa komen di sini. Melelar aksara dalam rentetan semasa, cetak watak j-ke dalam rentetan i-ke. Oleh sebab itu, mari kita mempertimbangkan apa komen-komen ini maksudkan. 
+
+Melelar atas tali dalam argv-- berapa banyak rentetan dalam argv, yang array? Argc banyak, jadi saya iterating dari i menyamai 0 sehingga argc. Sementara itu, berapa banyak aksara adalah dalam rentetan i-ke-dalam argv? 
+
+Nah, untuk mendapatkan jawapan itu, Saya hanya memanggil panjang tali pada penjagaan saya rentetan semasa kira-kira, yang kurungan argv i. Dan saya akan menyimpan buat sementara waktu yang menghargai dalam n, hanya untuk tujuan caching, ingat untuk kecekapan. Dan kemudian saya akan memulakan j kepada 0, terus pergi selagi j kurang daripada n, dan pada setiap lelaran j kenaikan. 
+
+Dan kemudian di sini, semalam komen saya pada baris 12, mencetak watak, diikuti oleh barisan baru, pendakap khusus argv i memberikan saya rentetan i-ke- dalam argv-- jadi perkataan yang pertama, Perkataan kedua, perkataan ketiga, apa sahaja. Dan kemudian selaman j dalam lebih mendalam, dan mendapat saya watak j-ke-perkataan itu. Dan sebagainya, pada hakikatnya, anda boleh merawat argv sebagai pelbagai dimensi, sebagai dua dimensi, pelbagai, di mana setiap jenis perkataan kelihatan seperti ini dalam fikiran anda mata, dan setiap watak adalah jenis terdiri dalam lajur, jika yang membantu. 
+
+Pada hakikatnya, apabila kita mengusik ini selain dalam beberapa minggu akan datang, ia akan menjadi sedikit lebih canggih daripada itu. Tetapi anda boleh benar-benar berfikir itu, buat masa ini, kerana hanya ini dua dimensi pelbagai, di mana satu tahap ia adalah semua daripada tali-tali. Dan kemudian jika anda menyelam lebih mendalam, anda boleh mendapatkan pada watak-watak individu Di surga itu dengan menggunakan notasi ini di sini. 
+
+Jadi apa kesan bersih? Biar saya pergi ke hadapan dan membuat darn argv2-- ia. Saya telah membuat kesilapan di sini. Tersirat mengisytiharkan perpustakaan fungsi stirling. Jadi selama ini, ia mungkin sesuai bahawa kita jenis kemasan tepat di mana kita bermula. 
+
+Saya diskru, tersirat mengisytiharkan perpustakaan fungsi stirling. OK, tunggu satu minit. Saya masih ingat bahawa, terutama kerana ia adalah di sini. Saya perlu untuk memasukkan string.h dalam versi program ini. 
+
+Biar saya pergi ke hadapan dan termasuk string.h, kecuali bahawa, teruskan dan susun semula argv2. Dan sekarang, di sini kita pergi, membuat argv2, Enter. Dan walaupun ia sedikit samar pada pandangan pertama, perhatian bahawa, sesungguhnya, apa yang dicetak adalah argv2 dot. 
+
+Tetapi jika saya menaip beberapa perkataan selepas segera, seperti argv2 Zamyla Chan, Enter, juga sedikit samar pada pandangan pertama. Tetapi jika kita tatal kembali ke atas, ./argv2 Z-A-M-Y-L-A C-H-A-N. Oleh itu, kita telah terlelar atas setiap perkataan. Dan, seterusnya, kami telah terlelar lebih setiap watak dalam perkataan. 
+
+Kini, selepas semua ini, sedar bahawa ada satu terperinci lain yang kami telah jenis mengabaikan masa ini keseluruhan. Kami hanya mengusik selain apa input utama yang boleh? Bagaimana pula dengan output utama ini? 
+
+Semua masa ini, kami telah hanya menyalin dan menampal int perkataan di hadapan utama, walaupun anda boleh melihat dalam talian, kadang-kadang salah dalam versi yang lebih lama C dan penyusun, bahawa mereka mengatakan tidak sah, atau apa-apa. Tetapi, sesungguhnya, untuk versi C yang kita gunakan, C 11, atau 2011, menyedari bahawa ia harus int. Dan sama ada perlu tidak sah atau argc dan argv sini. 
+
+Tetapi mengapa int utama? Apa yang ia benar-benar kembali? Nah, ternyata semua masa ini, bila-bila masa anda menulis utama program sentiasa kembali sesuatu. Tetapi ada pihak yang berbuat demikian secara rahsia. 
+
+sesuatu yang merupakan int, sebagai garis 5 mencadangkan. Tetapi apa int? Nah, ada ini konvensyen dalam pengaturcaraan, di mana jika tiada mempunyai silapnya dan semuanya berjalan dengan lancar, program dan fungsi umumnya return-- agak counterintuitively-- 0. 0 umumnya menandakan semuanya berjalan dengan lancar. Jadi, walaupun anda fikirkan sebagai salah di dalam berbagai konteks, ia sebenarnya secara amnya bermaksud satu perkara yang baik 
+
+Sementara itu, jika program kembali 1, atau negatif 1, atau 5, atau negatif 42, atau mana-mana bukan 0 nilai, yang biasanya melambangkan sesuatu yang telah berlaku. Malah, pada Mac anda sendiri atau PC, anda telah benar-benar melihat mesej ralat, di mana ia mengatakan sesuatu atau lain-lain, kesilapan kod negatif 42, atau kod ralat 23, atau sesuatu seperti itu. Jumlah itu biasanya hanya petunjuk kepada pengaturcara, atau syarikat yang membuat perisian, apa yang salah dan mengapa, supaya mereka dapat melihat melalui dokumentasi atau kod mereka, dan memikirkan apa yang ralat sebenarnya bermaksud. Ia biasanya tidak berguna kepada kita pengguna akhir. 
+
+Tetapi apabila pulangan utama 0, semuanya berjalan dengan lancar. Dan jika anda tidak menentukan apa yang utama perlu kembali, ia akan hanya secara automatik kembali 0 untuk anda. Tetapi dengan kembali sesuatu lagi yang sebenarnya berguna. 
+
+Dalam program akhir ini, biarlah saya pergi ke depan dan memanggil exit.c ini, dan memperkenalkan terakhir hari ini topik, yang dikenali sebagai kod ralat. Biar saya pergi ke hadapan dan memasukkan kami fail biasa sehingga atas, melakukan int utama. Dan kali ini, mari kita buat int argc, tali argv, dan dengan kurungan saya membayangkan bahawa itu dalam array. Dan kemudian biar saya buat cek kewarasan. Kali ini, jika argc tidak sama 2, maka anda tahu apa? Lupakan ia. Saya akan mengatakan bahawa, hey, pengguna, anda telah hilang baris arahan hujah n garis sendeng terbalik. 
+
+Dan kemudian itu sahaja. Saya mahu keluar. Saya akan preemptively, dan awal benar-benar, pulangan sesuatu yang lain daripada nombor 1. Go untuk nilai untuk pertama ralat yang boleh berlaku ialah 1. Jika anda mempunyai beberapa lain yang salah keadaan yang mungkin berlaku, anda mungkin berkata pulangan 2 atau kembali 3, atau mungkin juga negatif 1 atau negatif 2. 
+
+Ini hanya kod keluar yang, secara amnya, hanya berguna untuk pengaturcara, atau syarikat yang yang penghantaran perisian. Tetapi hakikat bahawa ia tidak 0 adalah apa yang penting. Jadi, jika program ini, saya mahu menjamin bahawa program ini hanya berfungsi jika pengguna menyediakan saya dengan kiraan hujah dua, nama program ini, dan beberapa yang lain perkataan, saya boleh menguatkuasakan sebanyak berikut, menjerit pada pengguna dengan printf pepatah, hilang baris arahan hujah, kembali 1. Yang akan hanya segera berhenti program. 
+
+Hanya jika argc bersamaan 2 kita akan turun di sini, di mana titik saya akan berkata, hello peratus s, garis sendeng terbalik n, argv1. Dalam erti kata lain, saya tidak akan selepas argv 0, yang hanya nama program. Saya hendak mencetak hello, koma, perkataan kedua yang manusia ditaip. Dan dalam kes ini di line 13, semuanya berjalan dengan lancar. 
+
+Saya tahu bahawa argc adalah 2 secara logik dari program ini. Saya akan pergi ke hadapan dan kembali 0. Sebagai mengetepikan, perlu diingat bahawa ini adalah benar dalam Scratch juga. 
+
+Secara logiknya, saya boleh melakukan ini dan merangkumi ayat-ayat ini kod dalam klausa pun ini di sini. Tetapi itulah jenis tidak perlu mengensotkannya kod saya. Dan saya ingin super jelas bahawa tidak kira apa, secara lalai, hello sesuatu yang akan mendapat dicetak, selagi pengguna bekerjasama. 
+
+Jadi ia amat biasa untuk menggunakan keadaan, hanya jika, untuk menangkap beberapa salah keadaan, dan kemudian keluar. Dan kemudian, selagi semua adalah baik, tidak mempunyai lagi, tetapi hanya mempunyai kod luar bahawa jika, kerana ia adalah setara dalam ini hal tertentu, secara logik. Jadi saya kembali 0, hanya untuk jelas menandakan semuanya berjalan dengan lancar. 
+
+Jika saya ditinggalkan pulangan 0, ia akan secara automatik diandaikan untuk saya. Tetapi sekarang bahawa saya kembali satu dalam sekurang-kurangnya kes ini, Saya akan, untuk menjadikannya lebih menarik dan kejelasan, kembali 0 dalam kes ini. Jadi sekarang mari saya pergi ke hadapan dan membuat keluar, yang segue yang sempurna untuk hanya meninggalkan. 
+
+Tetapi membuat keluar, dan biarlah saya pergi hadapan dan melakukan ./exit, Enter. Dan program ini menjerit kepada saya, hilang baris arahan hujah. OK, saya bekerjasama. 
+
+Biar saya bukannya melakukan ./exit, David, Enter. Dan kini ia berkata, hello David. Dan anda biasanya tidak akan melihat ini. 
+
+Tetapi ternyata bahawa ada cara yang khas dalam Linux untuk benar-benar melihat dengan apa yang keluar kod program yang keluar. Kadang-kadang dalam grafik yang dunia seperti Mac OS atau Windows, anda hanya melihat nombor-nombor ini apabila mesej ralat muncul pada skrin dan pengaturcara menunjukkan anda nombor itu. Tetapi jika kita mahu melihat apa kesilapan mesej, kita boleh melakukannya sini-- supaya ./exit, Masukkan, cetak hilang baris arahan hujah. 
+
+Jika saya kini melakukan $ echo ?, yang sungguh samar mencari. Tetapi $? adalah mantera ajaib yang mengatakan, hey, komputer, beritahu saya apa yang sebelumnya kod keluar program ini adalah. Dan saya tekan Enter. Saya lihat 1, kerana itulah yang saya kepada fungsi utama saya untuk kembali. 
+
+Sementara itu, jika saya lakukan ./exit David, dan tekan Enter, saya lihat, hello David. Dan jika saya kini melakukan $ echo ?, saya melihat hello 0. Dan sebagainya ini akan sebenarnya menjadi maklumat berharga dalam konteks penyahpepijat, tidak begitu banyak yang anda, manusia, akan menjaga. Tetapi penyahpepijat dan lain-lain program kami akan menggunakan semester ini sering akan melihat jumlah itu, walaupun ia semacam disembunyikan melainkan jika anda mencarinya, untuk menentukan sama ada atau tidak program ini pelaksanaan adalah betul atau tidak betul. 
+
+Dan supaya membawa kita kepada ini, pada akhir hari. Kami memulakan hari ini dengan melihat debugging, dan seterusnya di padang sendiri, dan kemudian lebih menarik lagi, teknikal di bawah hood apa rentetan, yang bertahan minggu kita hanya mengambil untuk diberikan, dan sudah tentu membawa mereka untuk diberikan dalam Scratch. 
+
+Kami kemudian melihat bagaimana kita boleh mengakses watak individu dalam rentetan, dan kemudian sekali lagi mengambil tahap yang lebih tinggi melihat perkara-perkara, melihat bagaimana well-- jika kita mahu untuk mendapatkan sekurang-individu elemen dalam senarai seperti struktur, kita tidak boleh berbuat demikian dengan pelbagai rentetan? Dan kita boleh dengan hujah baris arahan. Tetapi gambar ini di sini hanya kotak demikian menggambarkan idea umum ini daripada pelbagai, atau senarai, atau vektor. Dan bergantung kepada konteks, semua kata-kata ini membawa maksud yang sedikit berbeza. Jadi dalam C, kita hanya akan untuk bercakap tentang array. Dan array adalah sebahagian yang memori, yang masing-masing yang unsur-unsur yang berdampingan, belakang, ke belakang, ke belakang, ke belakang. 
+
+Dan orang-elemen ini, secara amnya, jenis data yang sama, watak, watak, watak, watak, atau tali, tali, tali, tali, atau int, int, int, apa sahaja kami cuba untuk menyimpan. Tetapi pada akhir hari, ini adalah apa yang kelihatan seperti konsep. Anda mengambil anda memori atau RAM komputer. Dan anda ukiran ia keluar ke peti sepercaman bersaiz, semua yang kembali, ke belakang, ke belakang, ke belakang dengan cara ini. 
+
+Dan apa yang baik tentang idea ini, dan hakikat yang kita boleh meluahkan nilai-nilai dengan cara ini dengan yang pertama struktur data kami dalam kelas, ertinya kita boleh mula untuk menyelesaikan masalah dengan kod yang datang begitu intuitif pada minggu 0. Anda akan ingat telefon contoh buku, di mana kami menggunakan jurang dan menakluk, atau algoritma carian binari, untuk menapis melalui keseluruhannya sekumpulan nama dan nombor. Tetapi kita mengandaikan, ingat, bahawa buku telefon telah sudah disusun, bahawa orang lain telah pun bercorak out-- diberikan satu senarai nama-nama dan numbers-- bagaimana untuk mengikut abjad mereka. Dan kini bahawa dalam C kita, juga, mempunyai keupayaan untuk meletakkan perkara keluar, tidak fizikal dalam buku telefon tetapi hampir dalam ini komputer memori, kita akan dapat minggu depan untuk memperkenalkan lagi this-- pertama struktur data kami di array-- yang tetapi yang lebih penting, komputer yang sebenar algoritma sains dilaksanakan kod, yang kita boleh menyimpan data dalam struktur seperti ini, dan kemudian mula untuk memanipulasi, dan untuk benar-benar menyelesaikan masalah dengan itu, dan untuk membina di atas itu, akhirnya, program dalam C, dalam Python, dalam JavaScript, pertanyaan pangkalan data dengan SQL? 
+
+Dan kita akan melihat bahawa semua ini idea-idea yang berbeza interlock. Tetapi untuk sekarang, ingat bahawa domain yang diperkenalkan hari ini adalah perkara ini di sini, dan dunia kriptografi. Dan antara masalah yang akan datang anda sendiri akan menyelesaikan adalah seni kriptografi, berebut dan de-berebut maklumat, dan ciphering dan mentafsir teks, dan menganggap akhirnya bahawa anda kini tahu apa yang adalah di bawah hood supaya apabila anda melihat atau menerima mesej seperti ini, anda sendiri boleh mentafsirkan ia. Semua ini, dan lebih banyak masa akan datang. 
+
+[VIDEO MAIN SEMULA] 
+
+-Mover Sahaja tiba. Saya akan pergi ke lawatan profesor kolej. Yep. Hi. Ia anda. Tunggu! David. Saya hanya cuba untuk memikirkan mengetahui apa yang berlaku kepada anda. Sila, apa sahaja boleh membantu. Anda berada di kolej rakan sebilik, tidak anda? Anda berada di sana dengan dia apabila dia selesai projek CS50? 
+
+[MUZIK Bermain] 
+
+-Itu Adalah CS50. 
+
+Saya suka tempat ini. 
+
+-Memakan. Kami akan keluar dari perniagaan. 
+
+[AKHIR MAIN SEMULA] 

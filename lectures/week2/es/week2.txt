@@ -1,0 +1,689 @@
+[REPRODUCIENDO MÚSICA] 
+
+DAVID J. MALAN: Está bien. Esto es CS50 y esto es el inicio de la Semana 2. Y te recuerdo que durante el último par de semanas, hemos sido la introducción de la computadora la ciencia y, a su vez, la programación. 
+
+Y empezamos la historia por medio de Scratch, que lenguaje gráfico del Laboratorio de Medios del MIT. Y luego, más recientemente, la semana pasada, ¿verdad introducir un higher-- una lenguaje de bajo nivel conocido como C, algo que es puramente textual. Y, de hecho, la última vez que explorado dentro de ese contexto una serie de conceptos. 
+
+Esto, recuerdo, fue el primer programa miramos. Y este programa, simplemente, imprime, "hola, mundo". Pero hay tanto magia aparente pasando. Hay esta #include con estos soportes de ángulo. Hay int. Hay (void). Hay paréntesis, corchetes, punto y coma, y ​​mucho más. 
+
+Y así, recordar que introdujimos los arañazos para que pudiéramos, a ser posible, ver más allá que la sintaxis, las cosas que en realidad no es todo lo que intelectualmente interesante, pero desde el principio es, en absoluto, un poco complicado para envolver su mente alrededor. Y, de hecho, uno de los más comunes las cosas desde el principio en una clase de programación, especialmente para los menos cómodo y sentirse frustrado por y disparado por cierto sintáctica errores, por no hablar de los errores lógicos. Y así entre nuestros objetivos hoy en día, de hecho, la voluntad ser para equiparlo con un poco técnicas de resolución de problemas para saber cómo para resolver mejor los problemas propios en forma de depuración. Y como se recordará, también, que el ambiente que introdujimos última vez que se llama CS50 IDE. Este es un software basado en web que Le permite programar en la nube, por así decirlo, mientras se mantiene la totalidad de su archivos juntos, ya que nuevamente será hoy. Y recordar que nos revisited estos temas aquí, entre ellos, las funciones y bucles, y variables y expresiones booleanas, y condiciones. Y en realidad un poco más que nosotros traducido del mundo de los arañazos al mundo de la C. 
+
+Pero la construcción fundamental bloques, por así decirlo, eran realmente sigue siendo el mismo la semana pasada. De hecho, en realidad sólo tuvimos una diferentes pieza del rompecabezas, si se quiere. En lugar de que púrpura guardar bloque, que en vez había printf, que es esta función en C que le permite imprimir algo y el formato de la pantalla. Introdujimos el CS50 Biblioteca, donde se tienen ahora a su disposición get_char, y get_int, y get_string, y algunas otras funciones como así, a través del cual se puede obtener de entrada de propio teclado del usuario. Y también echamos un vistazo a las cosas como estas: bool, y la carbonilla, y el doble, flotador, int, string LONG_LONG. Y hay incluso otros tipos de datos en C. 
+
+En otras palabras, cuando se declara una variable para almacenar algún valor, o cuando se implementa una función que devuelve algún valor, puede especificar qué tipo de valor que es. Es una cadena, como una secuencia de caracteres? ¿Es un número, como un entero? ¿Es un punto flotante valor, o similar? Así que en C, a diferencia de los arañazos, que en realidad comenzó a especificar qué tipo de datos estábamos regresando o el uso. 
+
+Pero, por supuesto, también nos encontramos con algunos límites fundamentales de la computación. Y en particular, este lenguaje C, el recuerdo que nos dimos un vistazo a desbordamiento de enteros, la realidad que si sólo tiene una cantidad finita de memoria o, específicamente, un número finito de bits, sólo se puede contar tan alto. Y así nos fijamos en este ejemplo aquí por el que un contador en un avión,, En realidad, si se ejecuta el tiempo suficiente se desbordarse y resultar en un software un error potencial físico real. 
+
+También nos fijamos en flotante punto de imprecisión, la realidad que con sólo un número finito de bits, ya sea 32 o 64, sólo puede especificar tantos números después de un punto decimal, tras lo cual se comenzar a tener imprecisa. Así, por ejemplo, un tercio en el mundo aquí, en nuestro mundo humano, sabemos que es sólo un número infinito de 3s después del punto decimal. Sin embargo, un equipo no puede necesariamente representar un número infinito de números si únicamente permite que algunos cantidad finita de información. 
+
+Así que no sólo tenemos que equipar con mayor poder en términos de cómo puede expresarse en un teclado en términos de programación, También nos limitamos lo en realidad se puede hacer. Y de hecho, los errores y los errores pueden surgir de este tipo de cuestiones. Y, en efecto, uno de los temas de hoy van a ser temas como la depuración y en realidad mirando debajo del capó la forma en que se introdujeron las cosas la semana pasada están efectivamente en práctica de manera que es mejor entender tanto las capacidades de las y las limitaciones de un lenguaje como C 
+
+Y de hecho, vamos a pelar las capas de la más simple de estructura de datos, algo que se llama una matriz, la cual De cero pasa a llamar una "lista". Es un poco diferente en ese contexto. Y entonces también introduciremos una de las primero de nuestros problemas específicos de dominio en CS50, el mundo de criptografía, el arte de la aleatorización o en la información de cifrado por lo que puede enviar mensajes secretos y decodificar mensajes secretos entre dos personas, A y B. 
+
+Así que antes de que la transición a ese nuevo mundo, vamos a tratar de equiparlo con un poco técnicas con las que se pueden eliminar o reducir al menos algunos de las frustraciones que es probable que haya encontrado durante la última semana solamente. De hecho, antes de que se tal-- algunos de sus primeros problemas en C. Y las probabilidades son, Si eres como yo, la primera vez intenta escribir un programa, incluso si usted piensa lógicamente el programa es bastante simple, Es muy posible que golpear una pared, y el compilador no va a cooperar. Hacer o no va Clang para hacer realidad su hacer una oferta. 
+
+Y por qué podría ser? Bueno, vamos a echar un vistazo a, tal vez, un programa sencillo. Voy a seguir adelante y guardar esto en un archivo llamado deliberadamente buggy0.c, porque sé que a viciado de antemano. Pero podría no darse cuenta de que si esto es la primera o segunda o tercera programa que en realidad estoy haciendo a mí mismo. Así que voy a seguir adelante y escribir a máquina, int main (void). Y luego dentro de mis llaves, una muy familiar ( "hola, mundo-- barra invertida, n ") - y un punto y coma. 
+
+He guardado el archivo. Ahora voy a bajar a mi ventana de terminal y el tipo de maquillaje buggy0, porque, de nuevo, el nombre del archivo de hoy es buggy0.c. Así que escribo hacer buggy0, Intro. 
+
+Y, oh, Dios, recordar de la última vez que no hay mensajes de error es una buena cosa. Así que no hay salida es una buena cosa. Pero aquí tengo claramente cierto número de errores. 
+
+Así que la primera línea de salida después de escribir hace buggy0, recuerdo, se emite bastante detallado de Sonido metálico. Debajo del capó, IDE CS50 está configurado utilizar un montón de opciones con este compilador de modo que usted no tiene pensar en ellos. Y eso es todo lo que la primera línea de medios que se inicia con Clang. 
+
+Pero después de eso, los problemas comienzan a hacer su aparición. Buggy0.c en la línea 3, carácter 5, hay un gran error, rojo. ¿Que es eso? Declarando implícitamente función de biblioteca printf con el tipo int (const char *, ...) [-Werror]. Es decir, es muy rápido se pone muy arcano. Y, desde luego, en un primer momento vista, que no lo haría espero que lo entienda el totalidad de ese mensaje. Y lo que una de las lecciones hoy va a ser tratar de notar patrones, o cosas similares, a los errores que pueda tener encontrado en el pasado. Así que vamos a desmenuzar solamente esas palabras que parecen familiares. El grande, rojo de error es claramente simbólico de que algo anda mal. 
+
+declarando implícitamente printf función de biblioteca. Así que incluso si yo no entiendo muy bien lo declarando implícitamente función de biblioteca medios, el problema seguramente se refiere a printf de alguna manera. Y la fuente de esa cuestión tiene que ver con lo que se declara. 
+
+La declaración de una función es mencionar que para la primera vez. Y se utilizó la terminología de la semana pasada de declarar el prototipo de una función, ya sea con una línea en la parte superior de su archivo o incorporada a un fichero de cabecera llamada. Y en lo que hizo que decimos archivo la semana pasada que printf es cita, Fin de la cita, declarada? ¿En qué archivo es su prototipo? 
+
+Así que si usted recuerda, la primera cosa que me con tipo, casi todos los programas última vez-- y accidentalmente hace un momento comenzó escribiendo myself-- era éste aquí-- hash-- # include <stio-- de entrada / h output-- punto Y, en efecto, si ahora puedo guardar este archivo, voy para seguir adelante y limpiar mi pantalla, que se puede hacer escribiendo Claro, o puede mantener control L, sólo para aclarar la ventana de terminal sólo para eliminar algunos obstáculos. 
+
+Voy a seguir adelante y Tipo de re-make buggy0, Intro. Y listo, todavía veo que comando largo de Sonido metálico, pero no hay ningún mensaje de error esta vez. Y de hecho, si lo hago ./buggy0, como la última vez, donde los puntos que esto significa directorio, Slash sólo significa, aquí viene el nombre del programa y que el nombre del programa es buggy0, Introducir, "hola, mundo". 
+
+Ahora, ¿cómo podría tener esta solución obtenida sin necesariamente reconociendo tantas palabras como lo hice, sin duda, tener este hecho durante tantos años? Bueno, darse cuenta por el primer problema conjunto, le presentamos un comando que el propio personal del CS50 escribió llamada help50. Y de hecho, lo hace C pliego de condiciones de el problema establecido en cuanto a cómo usar esto. 
+
+Pero help50 es esencialmente un programa que el personal del CS50 escribió que le permite ejecutar un comando o ejecutar un programa, y si usted no entiende su de salida, pase a su salida a help50, en cuyo punto el software que el personal del supuesto escribió se verá en la salida de su programa línea por línea, carácter por carácter. Y si nosotros, el personal, reconoce el mensaje de error que está experimentando, vamos a tratar de provocarlo con alguna preguntas retóricas, con algunos consejos, al igual que un TF o una CA o yo haría en persona en horario de oficina. 
+
+Así que mira a help50 si no lo hace necesariamente reconocer un problema. Pero no confíe en él demasiado como una muleta. Desde luego tratar de comprender su de salida y luego aprender de ella de modo que lo hacen sólo una vez o dos veces help50 vez se ha quedado a un error particular mensaje. Después de eso, usted debe estar mejor a ti mismo equipado para averiguar lo que realmente es. 
+
+Vamos a hacer otra aquí. Déjame ir por delante, y en otro archivo que llamaremos este buggy1.c. Y en este archivo que soy ir a deliberately-- pero pretender que no lo hago entiendo lo error que he cometido. 
+
+Voy a seguir adelante y hacer esto- # include, ya que he aprendido la lección de hace un momento. Int principal (void), como antes. Y entonces aquí voy hacer cuerdas s - get_string. Y recordar la última vez que este medio, bueno, equipo, dame una variable, lo llaman S y hacer que el tipo de esa variable de una cadena por lo que puede almacenar una o más palabras en el mismo. 
+
+Y luego en el de la derecha lado del signo igual se get_string, que es una función en la biblioteca CS50 que hace exactamente eso. Se pone una función y luego manos de derecha a izquierda. Por lo que este signo igual no significa "Iguales" como podríamos pensar en matemáticas. Esto significa que la asignación de derecha a izquierda. Así que esto significa, tomar la cadena de el usuario y la almacena en el interior del s. 
+
+Ahora vamos a utilizar la misma. Déjame ir adelante ahora y como segundo línea, déjame ir por delante y decir "hola" - No "mundo", pero "Hola,% s-- que es nuestro marcador de posición, coma s, que es nuestra variable, y luego un punto y coma. Así que si no me equivoco demasiado aquí, esto se ve como código correcto. 
+
+Y mis instintos son ahora para compilarlo. El archivo se llama buggy1.c. Así que voy a hacer que buggy1, Intro. Y darn-it, si no hay incluso más errores que antes. Es decir, hay más Sería mensajes de error Parece que las líneas reales en este programa. 
+
+Pero la comida para llevar es aquí, incluso si usted está abrumado con dos o tres o cuatro más mensajes de error, centrarse siempre en el mismo primero de esos mensajes. En cuanto a la parte superior más uno, desplazándose hacia atrás hasta que es necesario. Así que aquí he escrito maquillaje buggy1. Así es que la producción Clang como se esperaba. 
+
+Y aquí está el primer error rojo. El uso del identificador no declarado cadena, lo que quiero decir estándar en? Así que en estándar es de en realidad otra cosa. Se refiere al usuario de teclado, esencialmente. 
+
+Pero eso no es lo que quería decir. Me refiero a la secuencia, y lo decía get_string. Entonces, ¿qué es lo que me se olvidó de hacer esta vez? Lo que falta en esta ocasión? Tengo mi # include, así que no tengo acceso a printf. 
+
+Pero qué es lo que no tengo el acceso a por el momento? Pues bien, al igual que la última vez, Tengo que decirle al compilador CLANG lo que estas funciones son. Get_string no viene con C. Y en particular, se no entra en el archivo de cabecera, . En su lugar, se presenta en algo que el personal escribió, que es un archivo diferente nombrar pero bien llamado. 
+
+Así que simplemente añadiendo una línea code-- de recuerdo de la última vez Clang que cuando se ejecuta, se va para mirar mi parte superior de código a abajo, de izquierda a derecha. Se va a notar, oh, que desea. Déjame ir y encontrar que, siempre que sea en el servidor, copiar y pegar, en esencia, en la parte superior de su propio archivo de manera que en este momento de la historia, línea 1, el resto del programa puede, de hecho, utilizar cualquiera de las funciones en la misma, entre ellos get_string. Así que voy a ignorar el resto de los errores, porque, de hecho, sospecho que sólo el primero de ellos en realidad importaba. Y voy a seguir adelante y volver a ejecutar, después de guardar mi archivo que buggy1. Y listo, lo hizo el trabajo. Y si lo hago ./buggy1 y escriba, por ejemplo, Zamyla, ahora obtendrá hola, Zamyla, en lugar de hola, mundo. 
+
+Todo bien. Así que la comida para llevar aquí a continuación son para, uno, tratar de recoger tanto como sea posible a partir de los mensajes de error por sí solas, mirando En algunas de las palabras reconocibles. Aparte de eso, utilice por help50 el problema conjunto de especificaciones. Pero salvo eso, también, siempre se ven en la parte superior de error solamente, al menos inicialmente, para ver qué información que en realidad podría ceder. Pero resulta que hay aún más funcionalidad integrada en la Biblioteca CS50 para ayudar que desde el principio en el semestre y al comienzo de la programación averiguar lo que va mal. Así que vamos a hacer aquí otro ejemplo. Voy a llamar a este buggy2, que, de nuevo, va a ser defectuoso a cabo de la puerta, por diseño. 
+
+Y voy a seguir adelante y hacer # include. Y luego voy a hacer int main (void). Y entonces me voy a hacer un bucle. For (int i _ 0. i es menor que o igual a 10. i ++, y luego entre llaves, voy imprimir sólo un símbolo hashtag aquí y un carácter de nueva línea. 
+
+Así que mi intención con este programa es, sencillamente, para repetir 10 veces y en cada iteración de ese bucle cada vez a través del ciclo, imprimir un hashtag, un hashtag, un hashtag. Una línea por porque tener la nueva línea allí. Y para recordar que la lazo, por última semana-- y obtendrá más familiarizado con la sintaxis usándolo con la práctica antes de esto me da long-- una variable que se llama y lo establece en 0. 
+
+Esto incrementa i en cada iteración por 1. Así que va a 1 a 2 a 3. Y entonces esta condición en el medio entre los puntos y comas consigue comprobado en cada iteración para hacer Seguro que todavía estamos dentro del alcance. Por eso quiero repetir 10 veces, por lo que tienen una especie de manera muy intuitiva solo puesto 10 como mi límite superior allí. 
+
+Y, sin embargo, cuando ejecuto esto, después de compilarlo con maquillaje buggy2-- y se compila en Aceptar. Así que no tengo una error de sintaxis en esta ocasión. Déjame ir por delante ahora y ejecutar buggy2, Intro. Y ahora desplazarse hacia arriba. Y permítanme aumento el tamaño de la ventana. 
+
+Me parece que tienen 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Así que hay 11 hashtags, aunque Pongo claramente 10 en el interior de este bucle. Ahora, algunos de ustedes podrían ver inmediatamente lo que el error es debido a que, de hecho, esta No es un error muy difícil de hacer. Pero es muy comúnmente hecho muy temprano. 
+
+Lo que quiero señalar, sin embargo, Es decir, cómo podría yo a resolver esto? Pues bien, resulta que la Biblioteca CS50 viene no sólo con get_string y get_int y get_float y otras funciones. También viene con una función especial EPRINTF llamada, o, printf error. Y es que existe solamente para hacer es un poco más fácil para usted al depurar el código para simplemente imprimir un mensaje de error en la pantalla y saber de dónde vino. 
+
+Así, por ejemplo, una cosa que podría hacer aquí con esta función es esto- EPRINTF, y luego voy a seguir adelante y decir que ahora es de% i, la barra invertida, n. Y voy a enchufar en el valor de i. Y en lo alto, ya que este está en la Biblioteca CS50, Voy a seguir adelante e incluir así que no tengo acceso a esta función. Pero vamos a considerar qué línea 9 se supone que deben hacer. Voy a borrar este tiempo. Esto no tiene nada que ver con mi objetivo primordial. Pero EPRINTF, printf error, es sólo la intención darme alguna información de diagnóstico. Cuando ejecuto mi programa, quiero ver esto en la pantalla temporalmente que también acaba de entender que esta pasando. 
+
+Y, de hecho, en cada iteración aquí de la línea 9 Quiero ver, ¿cuál es el valor de i? ¿Cuál es el valor de i? ¿Cuál es el valor de i? Y, con suerte, sólo debe ver ese mensaje, también, 10 veces. 
+
+Así que permítanme seguir adelante y recompilar mi programa, ya que tengo que hacer en cualquier momento Hago un cambio. ./buggy2. Y ahora-- OK. Hay mucho más en juego. Así que permítanme desplazarse hacia arriba en una ventana aún más grande. 
+
+Y verá que cada uno de la hashtags está imprimiendo. Pero entre cada uno de ellos es ahora esto salida de diagnóstico el siguiente formato. El nombre de mi programa aquí es buggy2. El nombre del archivo es buggy2.c. El número de línea de la que este fue impreso es la línea 9. Y luego a la derecha que es la mensaje de error que estoy esperando. 
+
+Y lo bueno de esto es que Ahora no tengo que contar necesariamente en mi cabeza lo que mi programa está haciendo. Puedo ver que en el primera iteración i es 0, luego 1, luego 2, luego 3, luego 4, a continuación, 5, a continuación, 6, a continuación, 7, a continuación, 8, 9 a continuación, a continuación, 10. Así que espere un minuto. ¿Que está pasando aqui? Todavía me parece estar contando según lo previsto hasta 10. 
+
+Pero ¿de dónde empiezo? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10. Así 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- el dedo 11 es indicativo del problema. Me parece que han contado incorrectamente en mi bucle. En lugar de ir 10 iteraciones, Estoy empezando a 0, Estoy terminando en ya través de 10. Pero debido a que, como una computadora, Estoy empezando a contar a 0, Debería estar contando hasta a, pero no a través de, 10. 
+
+Y así, la solución, que finalmente dado cuenta de que aquí, es una de dos cosas. Podría decir simplemente muy contar hasta menos de 10. Así 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, que es, de hecho, correcta, aunque suene un poco mal. O podría hacer menos que o igual a 9, siempre y cuando empiezo a 0. O si realmente no le gusta eso, puede contar hacia arriba a través de 10 pero empiezan en 1. Pero, de nuevo, esto no es tan común. En programming-- aunque no tanto en Scratch-- pero en la programación en C y otros idiomas, como JavaScript y Python y otros, es simplemente muy común para nuestra discusión sobre binaria que acaba de empezar a contar en el número más bajo que pueda, que es 0. Todo bien. Así que eso es EPRINTF. Y de nuevo, ahora que he descubierto mi problema, y ​​lo voy a volver a 0 a través de menos de 10, voy para entrar y eliminar EPRINTF. 
+
+No debería ser allí cuando enviar mi código o enviar mi código o mostrarla a nadie más. Es realmente sólo la intención para ser utilizadas temporalmente. Pero ahora me he fijado este en particular problema también. 
+
+Bueno, vamos a hacer un ejemplo más aquí que voy a azotar encima de la siguiente manera. Voy a seguir adelante y # include. $ 50 Y voy a seguir adelante y # include. 
+
+Y voy a ahorrar este archivo como buggy3.c. Y voy a seguir adelante y declarar int main (void). Y luego dentro de allí Voy a hacer int i _ - Quiero poner en práctica un programa de con un get_negative_int. Esto no es una función que existe todavía. Así que vamos a poner en práctica en un momento. Pero vamos a ver por qué es con errores en la primera pasada. Y una vez que he recibido un int del usuario, Yo sólo voy a imprimir% i es un negativo número entero, la barra invertida, n, coma, i. En otras palabras, todo lo desea que este programa para hacer se obtendrá una int negativa de el usuario y luego imprima que tal y tal es un int negativo. 
+
+Ahora necesito para implementar esta función. Así que más adelante en mi archivo, voy a ir adelante y declarar una función llamada get_negative_int (void) - y vamos a volver a lo que significa una vez más que la línea en un moment-- int n; hacer-- do la following-- printf n es :. Y luego voy a hacer n - get_int, y hacer esto mientras que n es mayor que 0. Y luego regresar n ;. 
+
+Así que hay mucho que hacer en esto, pero ninguno de los cuales no lo hicimos mirar a la semana pasada, al menos brevemente. Así que en la línea 10 aquí he declarado una función llamada get_negative_int, y yo he puesto (void), en paréntesis, la razón de ser de este no tiene una entrada. No estoy pasando nada a esta función. Me estoy haciendo algo a cambio de ella. 
+
+Y lo que estoy esperando volver es un número entero. No hay ningún tipo de datos en C llama negative_int. Es sólo int, así que va para estar en nosotros para asegurarse que el valor que en realidad devuelta es no sólo un int pero también es negativo. 
+
+En la línea 12 que estoy declarando una variable n llamada y lo que es de tipo int. Y luego, en la línea 13 hasta el 18 de Soy hacer algo, mientras que algo es verdad. Voy por delante e impresión n es decir, colon, y luego un espacio, como un indicador para el usuario. 
+
+entonces yo estoy llamando y get_int almacenar su denominado valor de retorno en esa variable n. Pero voy a seguir haciendo esto mientras que n es mayor que 0. En otras palabras, si el usuario da una me int y ese número es mayor que 0, ergo, positivo, voy a sólo mantener reprompting el usuario, mantener reprompting, obligándoles a cooperar y dame un int negativo. 
+
+Y una vez que n es en realidad negative-- Supongamos que el usuario finalmente tipos -50, entonces este bucle while ya no es cierto porque -50 no es mayor que 0. Así que salir de ese lógicamente bucle y volver n. 
+
+Pero hay otra Lo que tengo que hacer. Y yo simplemente puedo hacer esto por copiar y pegar una línea de código en la parte superior del archivo. Tengo que enseñar a Clang, o promesa de sonido metálico, explícitamente que yo quiero, de hecho, ir y poner en práctica esta función get_negative_int. Tal vez sólo sea inferior en el archivo. Una vez más, recordar que Clang lee cosas de arriba a abajo, de izquierda a derecha, por lo que no puede llamar a una función si Clang no sabe que va a existir. 
+
+Ahora, por desgracia, este programa, como algunos de ustedes se habrán dado cuenta, Ya es buggy. Déjame seguir adelante y hacer buggy3. Compila, por lo que mi problema ahora no es un error de sintaxis, como un error textual, que es en realidad va a ser una lógica error que he deliberadamente hecho como una oportunidad para paso a través de lo que está pasando. 
+
+Voy a seguir adelante ahora y funcionamiento buggy3. Y voy a ir delante y no cooperar. Voy a darle el número 1. Que no le gustó, por lo me está provocando de nuevo. 
+
+¿Qué hay de 2? 3? 50? Ninguno de los que están trabajando. ¿Qué hay de -50? Y el programa parece funcionar. 
+
+Déjame intentarlo una vez más. Permítanme tratar -1, parece que funciona. Permítanme tratar -2, parece que funciona. Permítanme tratar de 0. Eh, eso es incorrecto. Ahora, estamos siendo un poco pedante aquí. Pero es, de hecho, el caso de que 0 no es ni positivo ni negativo. Y así, el hecho de que mi programa es diciendo que 0 es un entero negativo, eso no es técnicamente correcto. 
+
+Ahora, ¿por qué está haciendo esto? Bueno, puede ser que sea obvio. Y, de hecho, el programa es destinado a ser bastante sencillo así que tenemos algo para explorar. 
+
+Pero vamos a introducir un tercer depuración aquí se llama técnica de debug50. Así que este es un programa que simplemente hemos creado este año se llama debug50 que le permitirá utilizar lo que se llama un built-in depurador gráfico en IDE CS50. Y un depurador es simplemente un programa que en general, le permite ejecutar su programa pero paso a paso a paso, la línea por línea por línea, haciendo una pausa, hurgando alrededor, mirando a las variables de manera que el programa no se limita a soplar más allá de usted e imprimir rápidamente algo o no imprimir algo. Se le da una oportunidad, por lo la velocidad humana, para interactuar con él. 
+
+Y para ello, simplemente hacer lo siguiente. Después de compilar el código, que ya hice, buggy3, seguir adelante y ejecutar debug50 ./buggy. Tanto como help50 tiene que ejecutar help50 y entonces el comando, debug50 tiene que ejecutar y debug50 entonces el nombre del comando. 
+
+Ahora observen lo que sucede en mi pantalla, en el lado derecho en particular. Cuando golpeo Ejecutar, toda la panel de repente este derecho se abre en la pantalla. Y hay mucho que hacer en a primera vista. Pero no hay demasiado mucho de qué preocuparse todavía. 
+
+Esto me está mostrando todo que está pasando dentro de mi programa en este momento ya través de éstos botones encima de la tapa es entonces lo que me permite el paso a través de mi código en última instancia, paso a paso a paso. Pero no por el momento. Observe lo que ocurre. En mi ventana de terminal Yo estoy siendo incitado para n. Y voy a seguir adelante y cooperar en esta ocasión y tipo de -1. Y aunque un poco crípticamente, -1 es un entero negativo, como se esperaba. 
+
+Y entonces hijo terminó con estado 0 gdbserver salir. BGF, depurador de GNU, es el nombre del software subyacente que implementa este depurador. Pero todo esto significa en realidad, el depurador se fue porque mi programa de dejar de fumar y todo estaba bien. Si quiero depurar realmente mi programa, Tengo que decirle preventivamente debug50, dónde quiero para empezar pasando a través de mi código? 
+
+Y tal vez la forma más sencilla hacer esto es como sigue. Si se ciernen sobre el canaleta de mi editor de aquí, por lo que en realidad sólo en la barra lateral aquí, a la izquierda del número de línea, Tenga en cuenta que si sólo clic una vez, puse un pequeño punto rojo. Y ese pequeño punto rojo, como una señal de alto, medio, bueno, debug50, pausa en la ejecución de mi código justo allí cuando ejecuto este programa. 
+
+Así que vamos a hacer eso. Déjame ir por delante y correr mi programa de nuevo con debug50 ./buggy3, Intro. Y ahora, aviso, algo diferente ha sucedido. No estoy que se le pida sin embargo, en mi ventana de terminal para nada, porque yo no tengo llegado allí todavía en mi programa. Nótese que en la línea 8 que ahora se pone de relieve, y hay una pequeña flecha en dicho izquierda, que se detuvo aquí. Esta línea de código, la línea 8, aún no se ha ejecutado. 
+
+Y lo que es curioso, si miro aquí en el lado derecho, cuenta de que i es un local de variable local en el sentido que hay dentro de la función actual. Y su valor, al parecer, de forma predeterminada, y en cierto modo convenientemente, es 0. Pero no me escriba 0. Eso sólo pasa a ser su valor por defecto en el momento. 
+
+Así que permítanme seguir adelante y hacer esto ahora. Déjame ir adelante y en la parte superior derecha aquí, estoy va a seguir adelante y haga clic en este icono de los primeros cuales significa pasar por encima de lo que significa no se salte pero pasar por encima de esta línea de código, ejecutarlo en el camino. 
+
+Y ahora, cuenta, mi pronta acaba de cambiar. ¿Porqué es eso? Le he dicho a debug50, ejecutar esta línea de código. ¿Qué hace esta línea de código hace? me lleva a un int. DE ACUERDO. Permítanme cooperar. Déjame ir adelante ahora y escriba -1, ENTER. Y ahora cuenta de lo que ha cambiado. Al lado derecho, mi variable local i se indica como -1 ahora. Y sigue siendo de tipo int. 
+
+Y aviso, también, mi llamado la pila de llamadas, donde hice una pausa? Hablaremos más sobre esto en el futuro. Pero la pila de llamadas simplemente se refiere a lo funciones están actualmente en movimiento. En este momento es simplemente principal. Y en este momento el único local de variable es i con un valor de 1. 
+
+Y cuando finalmente pasar por encima de esta línea aquí, con ese mismo icono en la parte superior derecha, -1 Es un entero negativo. Ahora se está haciendo una pausa durante ese corchete. Vamos a dejar que haga su cosa. Doy un paso más de esa línea, y listo. 
+
+Así que no todo lo que terriblemente esclarecedor sin embargo, pero me dejó una pausa y pensar con lógica lo que este programa está haciendo. Pero ese no fue el caso errónea. Vamos a hacer esto de nuevo de la siguiente manera. 
+
+Voy a salir de ese punto de interrupción en la línea 8 con el punto rojo. Voy a volver a ejecutar debug50. Se hizo una pausa automáticamente aquí. Pero esta vez, en lugar de pasando por encima de esta línea, déjame ir en realidad dentro de get_negative_int y averiguar, ¿por qué está aceptando 0 como una respuesta válida? 
+
+Así que en lugar de hacer clic en Paso a paso por. Voy a seguir adelante y haga clic en Paso a paso. Y observe que la línea 8 que es Ahora resaltado ahora de repente se convierte en la línea 17. 
+
+Ahora, no es que el depurador ha saltado las líneas 14 y 15 y 16. Es que no hay nada para mostrarle allí. Estas son sólo la declaración de variables, Y luego está la palabra hacer y luego una llave de apertura. La única línea que es funcional jugosa realmente es este de aquí, 17. Y ahí es donde nos hemos una pausa automáticamente. 
+
+Así printf ( "n.is:") ;, por lo que aún no ha sucedido. Así que vamos a seguir adelante y haga clic en Paso a paso por. Ahora mi sistema, de hecho, cambiado a ( "n es:"). Ahora get_int, no voy molestar a entrar en, porque que la función era hecha por CS50 en la Biblioteca. Es presumiblemente correcta. 
+
+Así que voy a seguir adelante y tipo de cooperar dándole un int, pero no es un int negativo. Así que déjame ir por delante y golpeó 0. Y ahora lo que sucede aquí cuando llegue hasta la línea 21? No he iterado de nuevo. No parece que haya atascado en este bucle. En otras palabras, este amarillo bar no seguir adelante alrededor, y alrededor y alrededor. 
+
+Ahora, ¿por qué? Bueno, n, lo que está n en este momento? Puedo mirar a nivel local variables en el depurador. n es 0. Muy bien, ¿cuál era mi condición? 
+
+20-- línea 20 es, así, 0 es mayor que 0. Eso no es verdad. 0 no es mayor que 0. Y por lo que salió de esto. 
+
+Y por eso es que en la línea 21, si realmente continúo, Voy a devolver 0, incluso a pesar de que debería haber rechazado 0 que no sea negativo. Así que ahora, realmente no tiene ni se preocupan por el depurador. Tengo, lo que no es necesario saber qué más está pasando. 
+
+Así que voy a seguir adelante y basta con hacer clic en el botón Reproducir, y dejar que este acabado para arriba. Ahora, me he dado cuenta de que mi insecto es al parecer en la línea 20. Esa es mi error lógico. 
+
+Y así lo quiero que hacer para cambiar esto? Si el problema es que no estoy la captura de 0, que es sólo un error lógico. Y puedo decir, mientras que n es mayor que o igual a 0, mantener a preguntar al usuario una y otra vez. 
+
+Así, de nuevo, simple error, tal vez incluso obvia cuando me viste escribirlo hace tan sólo unos minutos. Pero aquí la comida para llevar es que con depuración 50, y con la depuración software de manera más general, usted tiene este nuevo poder de caminar a través de su propio código, mira a través de ese panel de la derecha lo los valores de las variables son. Por lo que no necesariamente tener que usar algo como si EPRINTF para imprimir esos valores. En realidad se puede verlos visualmente en la pantalla. 
+
+Ahora, más allá de esto, vale la pena señalar que no es otra técnica que es en realidad muy común. Y uno se pregunta por qué esta pequeña tipo aquí se ha sentado en el escenario. Así que hay esta técnica, en general, conocido como caucho depuración de pato, que en realidad es sólo una testimonio del hecho de que a menudo cuando los programadores está escribiendo código, que no son necesariamente colaborar con los demás, o trabajar en un entorno compartido. 
+
+Son una especie de en casa. Tal vez sea tarde por la noche. Están tratando de figura a cabo algunos errores en su código. Y no sólo están viendo. 
+
+Y no hay ningún compañero de cuarto. No hay TF. No hay CA alrededor. Todo lo que tienen en su plataforma es este pequeño patito de goma. 
+
+Y así depuración pato de goma es sólo esta invitación pensar en algo tan tonto ya que esto como una criatura real y, de hecho caminar a través de su código verbalmente a este objeto inanimado. Así, por ejemplo, si este es mi ejemplo aquí-- y recordar que antes el problema era esto, si elimino esta primera línea de código, y yo seguir adelante y hacer buggy de 0 de nuevo, recordar que tenía estos mensajes de error aquí. Así que la idea aquí, aunque ridícula sentir en el momento de hacer esto públicamente, es que el error. 
+
+Aceptar, por lo que mi problema es que tengo declarado implícitamente una función de biblioteca. Y que la función de biblioteca es printf. Declare-- bien, declarar me recuerda de prototipos. 
+
+Eso significa que necesito en realidad indicar al compilador de antemano lo la función se parece. Espera un minuto. No tenía io.h. norma Muchas gracias. 
+
+Por lo que sólo este proceso se de-- no es necesario tener en realidad un pato. Pero esta idea de caminar a sí mismo a través de su propio código por lo que incluso se oye usted mismo, de modo que usted darse cuenta omisiones en su propio observaciones, es en general la idea. 
+
+Y, quizá más lógicamente, no tan con mucho que uno, pero el más implicado ejemplo que acabamos de hacer en 3.c con errores, puede caminar a sí mismo a través de él como sigue. Así bien, el caucho patito, DDB, si se quiere. Aquí tenemos en mi función principal, Voy a llamar a conseguir int negativo. 
+
+Y estoy consiguiendo el valor de retorno. Estoy almacenando en el lado izquierdo en la línea 8 en una variable llamada i. OK, pero espera, ¿cómo que reciben ese valor? Deja que te mire la función en la línea 12. 
+
+En la línea 12, tenemos que conseguir int negativo. No se necesita ningún insumo, no devolver un int, OK. Declaro en la línea 14 una variable n. Se va a almacenar un número entero. Eso es lo que quiero. 
+
+Lo mismo ocurre con la siguiente, mientras que n es-- dejó Me deshacer lo que el punto de referencia que ya hizo. Así, mientras que n es mayor que 0, imprima n es, en Aceptar. Y luego llamar a quedar almacenado int n. Y a continuación, comprobar si n es 0, n es no-- ahí está. Así, de nuevo, no lo hace necesitará el pato real. Pero sólo caminar usted mismo a través su código como un ejercicio intelectual a menudo le ayudará darse cuenta de lo que está pasando, en lugar de sólo hacer algo así, mirando a la pantalla, y no hablar a sí mismo a través él, que sinceramente no es casi como una técnica eficaz. Así que ahí lo tienen, una número de diferentes técnicas de hecho la depuración de su código y la búsqueda de fallos, todos los cuales deben ser herramientas en su caja de herramientas de modo que usted no es tarde en la noche, sobre todo, que estás en el comedor pasillos, o en horario de oficina, golpearse la cabeza contra la pared, tratando de resolver algún problema. Se dan cuenta de que existen herramientas de software. Existen herramientas de pato de goma. Y hay toda una plantilla de apoyar a la espera de dar una mano. 
+
+Así que ahora, unas palabras sobre el problema conjuntos, y en lo que usted está esperando salir de ellos, y cómo nos ocupamos de la evaluación. Por programa del curso, boletines de problemas de CS50 son evaluados en cuatro ejes primarios, por lo speak-- al ámbito de aplicación, corrección, diseño, y el estilo. Y alcance solo se refiere a la cantidad de de la pieza que ha mordido? ¿Cuánto de un problema ha intentado? ¿Qué nivel de esfuerzo ¿ha manifestado? 
+
+La corrección es, funciona el programa como se supone que según la especificación CS50 cuando se proporciona ciertas entradas o ciertas salidas a volver? El diseño es el más subjetivo de ellos. Y es el que se que más tardan en aprender y el más largo para enseñar, en la medida en que se reduce a, lo bien escrito es el código? 
+
+Es una cosa que acaba de imprimir la correcta salidas o devuelven los valores correctos. Pero lo haces como eficientemente como sea posible? ¿Lo está haciendo brecha y conquistar, o binario búsqueda como pronto veremos que hicimos Hace dos semanas, con la guía telefónica? ¿Hay mejores maneras de resolver el problema que actualmente tiene aquí? Eso es una oportunidad para un mejor diseño. 
+
+Y entonces style-- cómo bonito es el código? Se dará cuenta de que estoy bastante en particular sobre la sangría mi código, y asegurándose de que mi variables se nombran razonable. norte, mientras resumen, es un buen nombre para una número, i por un número entero de conteo, s para una cadena. Y podemos tener más largo estilo de los nombres de variables. El estilo es lo bueno Cómo se ve el código? Y cómo legible es? 
+
+Y con el tiempo, cuál es su TA y TFS van a hacer en el curso que se proporcionará con ese tipo de retroalimentación cualitativa de manera que se obtiene una mejor en esos diversos aspectos. Y en cuanto a la forma en que evaluar cada uno de estos ejes, que es típicamente con muy pocos cubos para que, en general, tener una idea de lo bien que está haciendo. Y, de hecho, si recibe una puntuación en cualquiera de los axes-- corrección, diseño y el estilo especially-- ese número generalmente será de entre 1 y 5. Y, literalmente, si usted está recibiendo 3 de al inicio del semestre, Esta es una cosa muy buena. Esto significa que todavía hay margen de mejora, la cual es de esperar en el tomar una clase por primera vez. No es de esperar algún fragmento de techo a la que está aspirando a alcanzar. Y así conseguir el de 3 las primeras piezas, si no un 2 y de 4 de, es, de hecho, una buena cosa. Es también dentro del alcance, bien dentro de lo esperado. 
+
+Y si su mente está corriendo, espere un minuto, tres de cada cinco. Eso es realmente una salida 6 de 10. Eso es 60%. Dios mío, que es una F. 
+
+No es. No es, de hecho, que. Más bien, es una oportunidad para mejorar en el transcurso del semestre. Y si usted está recibiendo alguna Poors, se trata de una oportunidad para aprovechar las horas de oficina, ciertamente, secciones y otros recursos. 
+
+Lo mejor es la oportunidad, de verdad, para estar orgullosos de lo lejos que ha llegado en el transcurso del semestre. Así que darse cuenta, si nada lo demás, tres es buena. Y permite espacio para el crecimiento en el tiempo. 
+
+En cuanto a la forma en que esos ejes son ponderada, de manera realista que estés va a pasar la mayor parte de su tiempo conseguir cosas para trabajar, por no hablar correctamente. Y así tiende a la corrección ponderar el más, como con este factor multiplicativo de tres. El diseño también es importante, pero algo que no necesariamente pasar todas esas horas en tratando de conseguir cosas para trabajar. 
+
+Y así se pondera un poco más ligera. Y a continuación, el estilo se pondera lo menos. A pesar de que no es menos fundamentalmente importante, Es que, tal vez, el Lo más fácil de hacer el bien, imitando los ejemplos que hacer en la conferencia y la sección, con las cosas Nicely sangría, y comentó: y así sucesivamente está entre los más fáciles cosas que hacer y hacerlo bien. Así que, como tal, se dan cuenta que esas son puntos que son relativamente fáciles de entender. 
+
+Y ahora una palabra de esto-- honestidad académica. Así por el curso de programa, verá que el curso tiene un buen poco de lenguaje de evitar esto. Y el curso se lleva a la cuestión de la honestidad académica muy en serio. 
+
+Tenemos la distinción, Para bien o para mal, de haber enviado cada año más estudiantes para tomar medidas disciplinarias que la mayoría de cualquier otro Por supuesto, que yo sepa. Esto no es necesariamente indicativo del hecho que los estudiantes CS, o los estudiantes, son CS50 menos honesto que sus compañeros de clase. Pero la realidad de que en este mundo, por vía electrónica, sólo tienen tecnológica medios de detección de este. 
+
+Es importante para nosotros para equidad a través de la clase lo que hacemos detectar esto, y elevar la cuestión cuando vemos cosas. Y sólo para pintar un cuadro, y realmente para ayudar a algo como esto en el fregadero, estos son los números de estudiantes en los últimos 10 años que han estado involucrados en algunos estas cuestiones de honestidad académica, con unos 32 estudiantes desde el otoño de 2015, que es decir que nosotros tomamos el asunto muy en serio. Y, en última instancia, estos números componen, más recientemente, alrededor de 3%, 4% o menos de la clase. 
+
+Así que para la mayoría absoluta de los estudiantes parece que las líneas están claras. Pero tenga esto en mente, particularmente tarde por la noche cuando lucha con alguna solución a un conjunto de problemas, la existencia de mecanismos para llegar mejor a sí mismo el apoyo de lo que se pensar, incluso a esa hora. Darse cuenta de que cuando recibimos envíos de los estudiantes, que se cruzan comparar cada presentación este año en contra de cada presentación el año pasado, contra todos los envíos a partir de 2007, y desde, mirando, así, código de los repositorios en línea, foros de discusión, sitios de trabajo. Y mencionamos esto, Realmente, todo en aras de la divulgación completa, que si otra persona puede encontrar en línea, sin duda, por lo que puede que el curso. Pero, en realidad, el espíritu del curso se reduce a esta cláusula en el programa de estudios. Realmente es justo, sea razonable. 
+
+Y si tuviéramos que elaborar en eso con sólo un poco más la lengua, darse cuenta de que la esencia de todo el trabajo que envíe a este curso debe ser la suya. Pero dentro de eso, sin duda hay oportunidades y el estímulo, y el valor pedagógico en la transformación de otros-- mí mismo, el TFS, las entidades emisoras, las AT, y otros en la clase, para el apoyo, que sus amigos solos y compañeros que han estudiado CS y programación antes. Y por lo que hay un margen para eso. Y la regla general del pulgar se esto- cuando se pide ayuda, usted puede mostrar su código a los demás, pero usted no puede ver la suya. Así que incluso si usted está en horario de oficina, o en la sala D, o en otro lugar trabajando en algún conjunto pieza, trabajando junto a un amigo, que es totalmente bien, en el final del día su trabajo en última instancia, deben pertenecer a cada de que, respectivamente, y no haber algún esfuerzo de colaboración, excepto para el proyecto final donde se permite y se anima. 
+
+Darse cuenta de que si estás luchando con algo y su amigo sólo pasa para ser mejor en esto, entonces, o mejor en ese problema que tú, o un poco más adelante que usted, que es totalmente razonable para activar a su amigo y decir, hey, ¿Le importa mirando mi código aquí, ayudarme diviso lo que mi problema es? Y, con suerte, en el interés del valor pedagógico ese amigo lo hace no sólo decir, oh, hacer esto, sino más bien, lo que le falta en la línea 6, o algo por el estilo? Sin embargo, la solución no es para el amigo a tu lado decir, oh, bueno, aquí, deja, echaré esto, y mostrar mi solución para usted. Así que esa es la línea. Usted muestra su código de otros, pero no se puede ver los suyos, sin perjuicio de la otra restricciones en el curso del programa. 
+
+Así que tener en cuenta esta así llamada cláusula de arrepentimiento en el programa del curso, así, que si comete algún acto que No es razonable, pero llevarlo a la atención de los jefes del curso dentro de las 72 horas, el curso puede imponer sanciones locales que puede incluir un insatisfactorio o el grado de fall para el trabajo presentado. Pero el curso no se referirá al materia de nuevas medidas disciplinarias, excepto en los casos de actos repetidos. En otras palabras, si usted hace algunos estúpida, noche especialmente al final, la decisión que a la mañana siguiente o dos días más tarde, se despierta y se da cuenta, ¿Qué estaba pensando? Usted puede hacer en CS50 tener una salida para la fijación de ese problema y ser dueño de la altura, de modo que le esperará hasta la mitad y tratar con él en un asunto que es a la vez educativo y valioso para usted, pero todavía punitivo de alguna manera. Y ahora, al llegar al límite, esto. 
+
+[REPRODUCCIÓN DE VÍDEO] 
+
+[REPRODUCIENDO MÚSICA] 
+
+[FIN DE REPRODUCCIÓN] DAVID J. MALAN: Muy bien, estamos de vuelta. Y ahora nos fijamos en una de las primero de nuestros dominios del mundo real en CS50, el arte de la criptografía, el arte de enviar y recibir mensajes secretos, cifrada mensajes si se quiere, que sólo puede ser descifrado si tiene algunos ingrediente clave que el remitente tiene así como. Así que para motivar a esto vamos a tomar Un vistazo a esta cosa aquí, que es un ejemplo de una anillo decodificador que secreta se puede utilizar con el fin de averiguar lo que es un mensaje secreto en realidad es. De hecho, de vuelta en el día en la escuela primaria, si alguna vez has enviado mensajes secretos a algún amigo o algún aplastamiento en clase, que podría haber pensado estabas siendo inteligente por el cambio de su pedazo de papel, al igual que, de A a B y de B a C y C a D, Etcétera. Pero ya han sido realmente cifrando su información, incluso si era un poco trivial, no era que dura para que el profesor se da cuenta, así, si usted acaba de cambiar B a A y C a B, que en realidad averiguar lo que el mensaje era, pero estabas en la información de cifrado. 
+
+Sólo estabas haciendo Simplemente, al igual que Ralphie aquí en una famosa película que juega más o menos hasta la saciedad cada invierno. [REPRODUCCIÓN DE VÍDEO] -ya Sea sabido por todos que Ralph Parker está presente nombrado miembro de la Pequeña Orphan Annie círculo secreto y tiene derecho a todos los honores y beneficios se producen a la misma. 
+
+-firmado, Little Orphan Annie, refrendado Pierre Andre, en tinta. Honores y beneficios, Ya a la edad de nueve años. 
+
+[GRITOS] -Venga. Vamos a seguir adelante con ella. No necesito todo ese jazz sobre contrabandistas y piratas. 
+
+mañana por la noche para -listen la aventura de conclusión del barco pirata negro. Ahora, es el momento de mensaje secreto de Annie para vosotros, los miembros del Círculo Secreto. Recuerde, los niños, los únicos miembros del círculo secreto de Annie puede decodificar el mensaje secreto de Annie. 
+
+Recuerde, Annie depende de ti. Establecer sus pasadores a B2. Aquí está el mensaje. 12, 11-- 
+
+-Estoy En mi primera reunión secreta. 
+
+-14, 11, 18, 16. 
+
+-Pierre Fue en gran voz esta noche. Podría decir que esta noche mensaje era realmente importante. 
+
+-3, 25, eso es un mensaje Annie de sí misma. Recuerde, no decirle a nadie. 
+
+-90 Segundos más tarde, estoy en el único habitación de la casa donde un niño de nueve años podría sentarse en la privacidad y la decodificación. Aha, B! Fui a la siguiente, E. 
+
+La primera palabra es ser. S, que iba a venir más fácil ahora, U, 25-- 
+
+Oh, vamos, Ralphie, me tengo que ir! 
+
+-Voy A estar bien abajo, Ma! ¡Caramba! 
+
+-T, O, asegúrese a-- estar seguro de qué? ¿Cuál fue la huerfanita Annie tratando de decir? Asegúrese de que? 
+
+-Ralphie, Andy tiene que GO, haga el favor de salir? 
+
+-Todos derecha, Ma! Voy a estar bien! 
+
+-I Estaba más cerca ahora. La tensión era terrible. ¿Qué era? El destino del planeta puede colgar de un hilo. 
+
+-Ralphie! Tiene que ir de Andy! 
+
+-Voy A estar a la derecha, por amor de Dios! 
+
+-casi Allí, mis dedos volaban, mi mente Era una trampa de acero, cada poro vibró. Era casi clara, sí, sí, sí. 
+
+-Asegúrese de tomar su Ovaltine. Ovaltine? Un comercial de mala muerte? Hijo de puta. [FIN DE REPRODUCCIÓN] DAVID J. MALAN: OK, entonces que era un camino muy largo de la introducción de la criptografía, y también ovaltine. De hecho, a partir de este anuncio de edad aquí, ¿por qué es tan bueno ovaltine? Es una extracción concentrada de maduro malta de cebada, leche pura de vaca cremoso, y especialmente preparado de cacao, junto con fosfátidos naturales y vitaminas. Está fortificada con mayor vitaminas adicionales B y D, ñam. Y todavía se puede conseguir que, al parecer, en Amazon, como lo hicimos aquí. 
+
+Pero la motivación aquí era introducir la criptografía, en concreto un tipo de criptografía conocida como criptografía de clave secreta. Y como su nombre indica, el conjunto la seguridad de un sistema de criptografía de clave secreta, si se quiere, una metodología por sólo aleatorización información entre dos personas, es que sólo el remitente y sólo el destinatario saber un secreto key-- algún valor, algunos frase secreta, un número secreto, que les permite cifrar y descifrar la información. Y la criptografía, en realidad, es sólo esto desde la semana 0. 
+
+Es un problema donde no hay entradas, al igual que el mensaje real en Inglés o cualquier otro idioma que se desee enviar a alguien de la clase, oa través de internet. Hay un poco de salida, que se va siendo el mensaje codificado que quiere que el destinatario recibir. E incluso si alguien en el medio recibe también, usted no quiere que se necesariamente será capaz de descifrarlo, porque dentro de este cuadro negro, o algoritmo, es algún mecanismo, algunos paso a paso instrucciones, para tomar esa entrada y convertirlo en el de salida, es de esperar en una forma segura. 
+
+Y, de hecho, hay una cierta Vocabulario en este mundo de la siguiente manera. El texto plano es la palabra de una Informático haría utilizar para describir la entrada mensaje, como el Inglés o cualquier idioma que en realidad querer enviar a algún otro ser humano. Y a continuación, el texto cifrado es la lucha al cifrada o encriptada, versión de la misma. 
+
+Pero hay otro ingrediente aquí. Hay otra entrada al La criptografía de clave secreta. Y esa es la clave, que es, en general, como veremos, un número, o letra o palabra, cualquiera que sea el algoritmo que es en realidad espera. 
+
+Y ¿cómo descifrar la información? ¿Cómo se puede descifrarlo? Bueno, sólo invierte el las salidas y las entradas. 
+
+En otras palabras, una vez que alguien recibe el mensaje cifrado, él o ella simplemente tiene conocer la misma clave. Han recibido el texto cifrado. Y conectando los dos entradas en el sistema de cifrado, el algoritmo, esta caja de negro, fuera debe venir del texto claro original. Y eso es el muy alto nivel Habida cuenta de lo que es en realidad la criptografía todo sobre. 
+
+Así que vamos a llegar allí. Veamos ahora por debajo el capó de algo nos hemos dado por hecho de la semana pasada, y para esta sesión aquí-- la cadena. Una cadena en el extremo del día es simplemente una secuencia de caracteres. 
+
+Puede ser que sea hola mundo, o hola Zamyla, o lo que sea. Pero, ¿qué significa eso para ser una secuencia de caracteres? De hecho, la biblioteca CS50 da nosotros un tipo de datos llamado cadena. 
+
+Pero en realidad no hay tal cosa como una cadena en C. Realmente es una secuencia de carácter, caracteres, carácter, carácter, hacia atrás, hacia atrás, a hacia atrás, hacia atrás, hacia atrás en el interior de la memoria del ordenador, o RAM. Y vamos a ver más en que en el futuro, cuando nos fijamos en la memoria misma, y la utilización, y el amenazas que están involucrados. 
+
+Pero vamos a considerar la cadena Zamyla. Por lo que sólo el nombre de el ser humano aquí, Zamyla, que es una secuencia de caracteres, Z-A-M-Y-L-A. Y ahora vamos a suponer que el nombre de Zamyla está siendo almacenado en el interior de un ordenador programa. 
+
+Bueno, es lógico pensar que deberíamos ser capaz de mirar a esos personajes individualmente. Así que sólo voy a dibujar un poco caja alrededor el nombre de Zamyla aquí. Y es el caso en C que cuando se tener una cadena, como Zamyla-- y tal vez esa cadena ha vuelto de una función como cadena GET, en realidad se puede manipular que carácter por carácter. 
+
+Ahora, esto es pertinente para la conversación en parte, porque en la criptografía si desea cambiar De A a B y de B a C y C a D, y así sucesivamente, lo que necesita para poder mirar los caracteres individuales en una cadena. Tienes que ser capaz de cambiar la Z a otra cosa, la A a otra cosa, el M de otra cosa, y así sucesivamente. Y por lo que necesitamos una manera, programación, por lo para hablar, en C para ser capaz de cambiar y mirar las letras individuales. Y podemos hacer esto de la siguiente manera. 
+
+Déjame ir la cabeza hacia atrás en el IDE CS50. Y déjame ir por delante y crear un nuevo archivo que voy a llamar a este tiempo string0, como nuestro primer ejemplo de ello, punto c. Y voy a seguir adelante y el látigo de la siguiente manera. 
+
+Por lo que incluyen CS50.h, y a continuación, incluir io.h estándar, el cual casi siempre voy a a utilizar en mis programas, al menos inicialmente. int vacío principal, y luego aquí estoy va a hacer cuerdas consigue llegar cadena. Y luego voy a seguir adelante y hacerlo. Quiero ir por delante y, como una comprobación de validez, acaba de decir, hola, s por ciento, punto y coma, hace que la cadena 0. Uh oh, ¿qué he hecho aquí? Oh, no me conecto. Así lección aprendida, que No fue intencional. 
+
+Así error, más ciento conversiones que los argumentos de datos. Y aquí es donde, en 7-- línea OK, por lo que tengo, entre comillas, eso es mi cadena de printf. Tengo un signo de porcentaje. Pero me falta el segundo argumento. 
+
+Me falta la coma s, que Yo tenía en los ejemplos anteriores. Así que una buena oportunidad de corregir una más error, por accidente. Y ahora me deja correr string0, el tipo de Zamyla. OK, hola Zamyla. 
+
+Así que nos hemos quedado este tipo de programa un par de veces diferentes ahora. Pero vamos a hacer algo una poco diferente esta vez. En lugar de sólo la impresión de Zamyla Nombre del conjunto con printf, vamos a hacerlo carácter por carácter. 
+
+Voy a utilizar un bucle. Y voy a entregarme una variable de conteo, llamado i. Y voy a mantener la iteración, por lo siempre y cuando i es menor que la longitud de s. 
+
+Resulta, no lo hicimos hacer esta última vez, que c viene con una función llamada Stirling. De vuelta en el día, y en general aún cuando la aplicación de funciones, los seres humanos a menudo se elige muy nombres sucintas ese tipo de sonido al igual que lo que quiere, aunque es faltan algunas vocales o letras. Así Stirling es el el nombre de una función que toma una discusión entre paréntesis que debe ser una cadena. Y que sólo se devuelve un entero, la longitud de esa cadena. 
+
+Por lo que este bucle en la línea 7 que está pasando para empezar a contar a i es igual a 0. Se va a incrementar i en cada iteración por 1, tal como lo hemos estado haciendo un par de veces. Pero va a hacer solamente esto hasta el punto cuando i es la longitud de la propia cadena. 
+
+Así que este es un modo de, en última instancia, iterar sobre los caracteres en la cadena como es la siguiente. Voy a imprimir no es una cadena entera, pero por ciento c, un solo carácter seguido de una nueva línea. Y luego voy a vaya por delante, y necesito decir Quiero imprimir carácter de orden i del s. 
+
+Así que si i es la variable que indica el índice de la cadena, donde que está en ella, necesita ser capaz de decir, dame el carácter de orden i del s. Y c tiene una forma de hacer esto con corchetes. Basta con que diga el nombre de la cadena, que en este caso es s. A continuación, utilice corchetes, que son por lo general justo por encima del Retorno o Intro tecla en el teclado. Y a continuación, poner el índice de la carácter que desea imprimir. Así que el índice se va a ser una number-- 0, o 1, o 2, o 3, o de punto, punto, punto, algún otro número. 
+
+Y nos aseguramos de que se va a ser el número correcto, porque yo empezará a contar a 0. Y por defecto, el primer carácter en una cadena es por convención 0. Y el segundo carácter es el soporte 1. Y el tercero es el soporte 2. Y usted no quiere ir demasiado ahora, pero no vamos porque somos ir sólo para incrementar i hasta que se es igual a la longitud de la cadena. Y en ese momento, Este bucle se detendrá. 
+
+Así que déjame ir adelante y guardar esta programa y ejecuta make cadena de 0. Pero la he cagado. Declarando implícitamente función de biblioteca Stirling con tal tipo y tal-- ahora, esto suena familiar. Pero no es printf. Y no es llegar cadena. 
+
+No me equivoco en de la misma manera este tiempo. Pero notar aquí un poco más abajo además, incluir la cabecera string.h, proporcionar explícitamente el declaración de Stirling. Así que en realidad hay una pista en ese país. 
+
+Y de hecho resulta hay otro archivo de cabecera que nosotros no hemos usado sin embargo, en la clase, pero es entre los disponibles a usted, llamada string.h. Y en ese archivo, string.h Stirling es declarada. Así que permítanme seguir adelante y guardar esta, hacer cuerdas 0-- agradable, no hay mensajes de error esta vez. 
+
+./string0 Zamyla, y Estoy a punto de golpear Enter, momento en el cual se va getString para devolver la cadena, lo puso en s. Luego de que para el bucle se va a repetir sobre los personajes de S de una en una, y les imprima una por línea, porque Tenía que n barra invertida al final. Así que podría omitir que la barra invertida n, y luego simplemente imprimir toda Zamyla en la misma línea, reimplementar con eficacia printf, que no es del todo útil. Pero en este caso, yo no he hecho eso. De hecho, he impreso una carácter a la vez, uno por línea, por lo que vemos en realidad el efecto. 
+
+Sin embargo, debo señalar una cosa aquí. Y vamos a volver a esto en una semana futuro. Resulta que este código es potencialmente defectuoso. 
+
+Resulta que la cadena get y algunas otras funciones en la vida no necesariamente siempre regrese lo que estás esperando. Sabemos por última clase en este momento que llegar cadena se supone que debe devolver una cadena. Pero lo que si el usuario escribe a cabo tales una palabra larga, o un párrafo, o un ensayo que simplemente no hay suficiente memoria en el ordenador para adaptarse a ella. 
+
+Al igual, ¿y si algo va mal debajo de la campana? Puede que no sucede a menudo, pero podría suceder una vez desde hace tiempo, con muy poca frecuencia. Y así resulta que la cadena get y funciona como lo hacen no necesariamente siempre devuelven cadenas. Podrían volver algún valor de error, algún valor centinela por así decirlo, que indica que algo ha ido mal. Y sólo se sabría esto desde después de haber aprendido en clase ahora, o de haber leído algunas más documentación. Resulta que la cadena get puede devolver un valor llamado nulo. Nulo es un valor especial que vamos a volver en una semana futuro. Pero por ahora, sólo sé que si quiero a ser muy adecuado para avanzar utilizando cadena GET, me No sólo debe llamarlo, y ciegamente utilizar su valor de retorno, confiando en que se trata de una cadena. 
+
+Debo decir en primer lugar, Hey, espera un minuto, sólo se proceder si s no es igual null, donde null, de nuevo, es sólo un valor especial. Y es el único valor especial tiene que preocuparse de conseguir para la cadena. Obtener cadena es bien va para devolver una cadena o nula. 
+
+Y este punto de exclamación signo de igual es posible saber de tal clase de matemáticas que puede dibujar con un signo igual una línea a través de él para indicar no es igual. Eso no es por lo general un carácter puede escribir en su teclado. Y así, en la mayoría de los lenguajes de programación, cuando se quiere decir que no es igual, se utiliza un signo de exclamación, también conocido como explosión. Así que usted dice es igual a la explosión, la cual significa que no es igual, lógicamente. Es igual que no hay un mayor que, o igual a, o menos de o igual a la clave en el teclado que lo hace todo en un solo símbolo. Por eso es que, en los ejemplos anteriores, que hizo un paréntesis abierto, y luego un signo de igualdad, con el fin de hacer mayor que o, por ejemplo, menos de. 
+
+¿Cuál es la comida para llevar en esta lista? Esto es simplemente una manera de ahora la introducción de esta sintaxis, esta característica, iteración en persona caracteres de una cadena. Y al igual que los cuadrados soportes le permiten obtener en ellos, considerar los corchetes de la manera tipo de alusión a este subyacente diseño, de modo que cada carácter dentro de una cadena es una especie de caja en algún lugar debajo la campana en la memoria del equipo. 
+
+Pero vamos a hacer una variante de este. Resulta que este programa es correcto. Así por ejes de CS50 para evaluar código, esto es correcto ahora. Sobre todo ahora que estoy comprobando null, este programa nunca debe bloquearse. Y yo sólo sé que a partir de la experiencia. Pero no hay nada más que realmente podemos equivocar aquí. Pero no es muy bien diseñado, porque vamos a volver a lo básico. 
+
+Primeros principios-- lo que hace un bucle for hacer? Un bucle hace tres cosas. Se inicializa algunos valor, si se le pregunta a. Se comprueba una condición. Y a continuación, después de cada iteración, después de cada ciclo, se incrementa algunos valor o valores, aquí. 
+
+¿Así que qué significa eso? Inicializamos i a 0. Comprobamos y nos aseguramos i es menor que la longitud de s, que es Z-A-M-Y-L-A, por lo que es menos de 6. Y, de hecho, 0 cuando menos de 6. 
+
+Imprimimos Z del nombre de Zamyla. Entonces incrementamos i 0-1. A continuación, comprobar, es menos 1 que la longitud de s? La longitud de s es 6. Sí lo es. 
+
+Así es la impresión de una a nombre de Zamyla, ZA. Incrementamos i desde 0, a 1, a 2. A continuación, comprobar, es inferior a 2 la longitud del nombre de Zamyla. 6- 2 es por lo menos de 6. Sí, vamos a imprimir ahora en M El nombre de Zamyla, el tercer personaje. 
+
+La clave aquí es que en cada iteración de la historia, estoy comprobando, es i menor que la longitud de Zamyla? Pero el problema es que Stirling no es una propiedad. Aquellos de ustedes que han programado antes en Java o en otros idiomas puede conocer la longitud de una cadena es una propiedad, sólo algunas de sólo lectura valor. 
+
+En C, en este caso, si esto es una función que es, literalmente, contando el número de personajes de Zamyla cada vez llamamos a esa función. Cada vez que se pida el equipo para utilizar Stirling, que es echar un vistazo a Zamyla, y diciendo Z-A-H-Y-L-A, 6. Y devuelve 6. La próxima vez que llame que dentro de ese bucle, que va a mirar a Zamyla de nuevo, por ejemplo Z-A-M-Y-L-A, 6. Y se va a volver 6. ¿Cuál es tan estúpida acerca de este diseño? 
+
+¿Por qué mi código no un 5 sobre 5 para el diseño en este momento, por así decirlo? Bueno, yo estoy haciendo una pregunta innecesariamente. Estoy haciendo más trabajo de lo que necesito. 
+
+Así que, aunque la respuesta es correcta, estoy pidiendo a la computadora, lo que es la longitud de Zamyla de nuevo, y otra vez, y otra vez, y otra vez? Y la respuesta es nunca va a cambiar. Siempre va a ser 6. 
+
+Así que una solución mejor que esto sería esta próxima versión. Déjame ir por delante y lo puso en una archivo separado llamado string1.c, sólo para mantenerlo separado. Y resulta que en una de lazo, en realidad se puede declarar múltiples variables a la vez. 
+
+Así que voy a seguir I y ponerlo a 0. Pero también voy a añadir una coma, y ​​decir: dame una variable llamada n, cuya valor es igual a la longitud de la cadena del s. Y ahora, por favor haga mi condición siempre que i es menor que n. 
+
+Así de esta manera, la lógica es idénticos al final del día. Pero estoy recordando la valor 6, en este caso. ¿Cuál es la longitud del nombre de Zamyla? Y lo estoy poniendo en el n. 
+
+Y todavía estoy comprobando la condición cada vez. Es de 0 a menos de 6? 1 es inferior a 6? Es de 2 a menos de 6, y así sucesivamente? 
+
+Pero yo no estoy pidiendo al equipo de nuevo, y otra vez, lo que es la longitud del nombre de Zamyla? ¿Cuál es la longitud del nombre de Zamyla? ¿Cuál es la longitud del nombre de esta Zamyla? Estoy literalmente, recordando que el primero y Sólo responder en esta segunda variable n. Así que esto ahora sería no sólo correcta, sino también bien diseñado. 
+
+Ahora, ¿qué pasa con el estilo? He nombrado mi variables bastante bien, diría yo. Son súper sucinta en este momento. Y eso es totalmente bien. 
+
+Si sólo tiene una cadena en un programa, que también podría llamarlo s para cadenas. Si sólo tiene una variable para contar en un programa, que también podría llamarlo i. Si usted tiene una longitud, n es super comunes también. Pero no he comentado nada de mi código. 
+
+No he informado a la reader-- si ese es mi TF, o TA, o simplemente colleague-- lo que se supone a estar pasando en este programa. Y así conseguir un buen estilo, lo que yo quiero hacer es algo esto- como pedir usuario para la entrada. Y podría reescribir esta cualquier número de maneras. 
+
+Asegúrese de s-- asegurarse get string devuelve una cadena. Y luego, en aquí-- y esto es quizás la iterate comment-- más importante sobre los personajes de s uno a la vez. Y podría utilizar cualquier elección del idioma Inglés aquí para describir cada de estos trozos de código. 
+
+Nótese que no he puesto una observaciones sobre cada línea de código, en realidad sólo en la interesante unos, los que tener algún sentido de que podría querer hacer muy claro para alguien la lectura de mi código. Y ¿por qué llama llegar pregunta al usuario por la cadena de entrada? Incluso que uno no es necesariamente todo lo que descriptivo. Pero ayuda a contar una historia, porque el segunda línea de la historia es, asegúrese obtener una cadena de devuelve una cadena. 
+
+Y la tercera línea de la historia es, iterar sobre los personajes de uno s a la vez. Y ahora sólo por si acaso, Voy a seguir adelante y añadir un comentario más que simplemente dice impresión carácter i-ésimo en el s. Ahora, ¿qué he hecho ¿al final del día? 
+
+He añadido un poco de Inglés palabras en forma de comentarios. significa el símbolo de barra barra, hey, ordenador es para el ser humano, no para usted, su equipo. Así que, lógicamente, son ignorados. Ellos están ahí. 
+
+Y, de hecho, CS50 IDE los muestra como gris, que son útiles, pero no clave al programa. Observe lo que puede hacer ahora. Si usted sabe C programación o no, simplemente se ponen de espalda en este programa y descremada los comentarios. Preguntar al usuario para la entrada, asegúrese llegar cadena devuelve una cadena, iterar sobre los personajes de s uno a la vez, imprimir el carácter i-ésimo carácter en s-- no lo hace incluso tener que mirar el código para entender lo que hace este programa. Y, mejor aún, si usted mira en este programa de una semana o dos, o un mes, o un año, usted también no tiene para mirar al código, tratando de recordar, ¿Qué estaba tratando de hacer con este código? 
+
+Usted mismo ha dicho. Lo has descrito por sí mismo, o algún colega, o TA, o TF. Y así, este sería ahora correcta, y el buen diseño, y, finalmente, un buen estilo también. Lo mismo ocurre con tener eso en mente. 
+
+Así que hay otra Lo que voy a hacer aquí que ahora pueden revelar exactamente lo que está pasando por debajo del capó. Así que hay esta característica en C, y otros idiomas, llamada encasillamiento que, o bien implícitamente o explícitamente permite convertir de un tipo de datos a otro. Hemos estado tratando por lo la fecha de hoy con cuerdas. 
+
+Y las secuencias son caracteres. Pero recordar desde la semana 0, ¿cuáles son los caracteres? Los personajes son simplemente una abstracción en la parte superior de los números decimales numbers--, y los números decimales son en realidad una la abstracción en la parte superior de los números binarios, como lo definimos. 
+
+Así caracteres son números. Y los números son caracteres, simplemente en función del contexto. Y resulta que en el interior de un programa de ordenador, se puede especificar la forma en que desea buscar en los bits dentro de ese programa? 
+
+Recuerde que en la semana 0 que teníamos Ascii, que es sólo el código cartas de asignación a los números. Y dijimos, el capital A es 65. Capital B es 66, y así sucesivamente. 
+
+Y aviso, que esencialmente tenemos en caracteres la fila superior aquí, como los llamaría C, caracteres, y luego enteros en la segunda fila. Y resulta que se puede convertir sin problemas entre los dos, por lo general. Y si queremos hacer esto deliberadamente, se puede ser que desee para hacer frente algo como esto. 
+
+Lo que se quiere convertir mayúscula para bajar caso, o minúsculas a mayúsculas. Y resulta que no hay en realidad un patrón aquí podemos abarcar en un momento. Pero vamos a ver por primera vez en una ejemplo de hacer esto explícitamente. 
+
+Voy a volver al IDE CS50. Voy a crear una archivo llamado ASCII 0.c. Y voy a seguir adelante y añadir mi io.h estándar en la parte superior, nula principal int en la parte superior de mi función. Y a continuación, sólo voy a hacer lo following-- un bucle de i es igual, digamos, 65. 
+
+Y entonces va a ser inferior a 65, además de 26 letras en el alfabeto. Así que voy a dejar que el ordenador hacer los cálculos para mí no. Y luego dentro de este bucle, lo voy a imprimir? 
+
+% C es n% i barra invertida. Y ahora quiero enchufar dos valores. He puesto temporalmente pregunta marca allí para invitar a la pregunta. 
+
+Quiero repetir desde el 65 en adelante durante 26 letras del alfabeto, impresión de que en cada iteración equivalente integrante del carácter. En otras palabras, quiero iterar impresión de más de 26 números lo que es el carácter ASCII, la carta, y lo es-- el número correspondiente en realidad sólo recreando el gráfico de esa diapositiva. Entonces, ¿qué deberían ser estos signos de interrogación? 
+
+Pues bien, resulta que el segundo uno solo debe ser la variable i. Quiero ver que a medida que un número. Y el argumento de media aquí, puedo decirle a la computadora para tratar ese entero i como un carácter, de modo que para sustituirlo aquí por ciento C. 
+
+En otras palabras, si yo, el programador humano, saber estos son sólo números al final del día. Y sé que el 65 debe asignar a un poco de carácter. Con esta conversión explícita, con un paréntesis, el nombre del tipo de datos que desea convertir a, y un paréntesis cerrado, usted puede decir la equipo, hey, ordenador, convertir este entero en un char. 
+
+Así que cuando corro esta programa después de compilar, vamos a ver lo que hago get-- ASCII 0. Maldita sea, ¿qué he hecho mal? Utilice de identificador no declarado, bien, no intencional, pero vamos a ver si no podemos razón por esto. 
+
+Así five-- línea, así que no entiendo muy lejos antes de meter la pata. Está bien. Así la línea 5 para i es igual a 65-- veo. Así que recuerda que en C, a diferencia de algunos idiomas si usted tiene la programación previa experiencia, usted tiene para indicar al ordenador, a diferencia de los arañazos, lo tipo de variable que es. 
+
+Y se me olvidó una frase clave aquí. En la línea cinco, He empezado a utilizar i. Pero no le he dicho C los datos que tipo es. Así que me voy a ir de aquí y decir, ah, hacen que sea un número entero. 
+
+Ahora voy a seguir adelante y volver a compilar. Que fija que. ./ascii0 Enter, sería una especie de fresco. No sólo es súper rápido a pedirle a la computadora esta pregunta, en lugar de mirar hacia arriba sobre un portaobjetos, se imprime una por línea, A es 65, B es 66, todo el camino desde que down-- hizo esto 26 veces-- de las letras Z, que es 90. Y, de hecho, ligeramente más inteligente haría han sido para mí no confiar en el ordenador para añadir 26. Me podría haber hecho 90, así, siempre ya que no cometer el mismo error dos veces. Quiero ir hacia arriba a través z, no sólo a través de y. 
+
+Así que esa es una conversión explícita. Resulta que este Ni siquiera es necesario. Déjame ir por delante y volver a ejecutar este compilador, y vuelva a ejecutar ASCII 0. Resulta que C es muy inteligente. 
+
+Y printf, en particular, es muy inteligente. Si usted sólo tiene que pasar un i dos veces para ambos marcadores de posición, printf se dará cuenta, oh, así que te conozco me dio un integer-- algún número, al igual que 65, o 90, o lo que sea. Pero veo que usted me quiere dar formato a ese número como un personaje. Y así implícitamente printf puede lanzar el int a char para usted también. Así que eso no es un problema en absoluto. 
+
+Pero note, debido a esta equivalencia que realmente podemos hacer esto también. Déjame seguir adelante y hacer una otra versión de esto- 1.c ASCII Y en vez de una iteración enteros, realmente puede volar tu mente iterando sobre los personajes. Si un char c consigue el capital A, I desee seguir adelante y hacer esto, siempre y cuando C es menor que o igual A a la Z. capital y en cada iteración Quiero incrementar C, que pueda Ahora en mi línea printf aquí por ejemplo, el porcentaje de C es i por ciento más, coma C. 
+
+Y ahora, puedo ir a la otra dirección, fundición el carácter explícitamente a un entero. Así, de nuevo, ¿por qué haces esto? Es un poco raro para ordenar de contar en términos de caracteres. 
+
+Pero si usted entiende lo que está pasando por debajo de la campana, en realidad no hay magia. Sólo lo dices, bueno, equipo dan me una variable llamada C de tipo char. Inicializarlo al capital A. Y notar única cuestión comillas. 
+
+Para los caracteres en C, retirar de la la semana pasada, se utilizan comillas simples. Para cadenas, para las palabras, frases, se utilizan comillas dobles. OK, ordenador, seguir haciendo esto, por lo siempre y cuando el personaje es menor que o igual a z. Y sé de mi tabla ASCII que todos de estos códigos ASCII son contiguas. 
+
+No hay ningún hueco. Así que es sólo la A a la Z, separados por un número cada uno. Y entonces puedo incrementar un char, si realmente quiero. Al final del día, es sólo un número. Yo se esto. Así que sólo puedo suponer añadir 1 a la misma. 
+
+Y después de este tiempo, puedo imprimir c, y luego el equivalente integral. Y ni siquiera necesita la conversión explícita. Puedo dejar printf y la Figura ordenador las cosas, de modo que ahora si me quedo hacer Ascii1./ascii1, Me sale exactamente lo mismo también. 
+
+programa inútil, nadie aunque-- en realidad se va a escribir software con el fin de averiguar, lo que fue el número que se asigna a A, o B, o Z? Sólo vas a Google, o buscarla en línea, o búsquelo en una diapositiva, o similares. Entonces, ¿dónde esta realidad obtener útil? 
+
+Bueno, hablando de ese diapositiva, observe que hay un patrón real aquí entre mayúsculas y minúsculas que no fue accidental. Observe que el capital A es 65. A minúscula es 97. Y a qué distancia es menor caso una? 
+
+Así que 65 es el número de pasos de 97? Por lo menos el 97 65 es 32. Así que el capital es un 65. Si se agrega 32 a que, se obtiene a minúscula. Y, lo que es equivalente, si se resta 32, a volver al capital A-- mismo con B a poco B, C grande a poco c. 
+
+Todas estas deficiencias son 32 aparte. Ahora, esto parecería que nos permita hacer algo como Microsoft Word, o Google Docs cuentan, donde puede seleccionar todo y luego decir, cambiar todo en minúsculas, o cambiar todo en mayúsculas, o cambiar sólo la primera palabra de una oración a mayúsculas. De hecho, podemos hacer algo al igual que a nosotros mismos. 
+
+Déjame ir por delante y guardar un archivo aquí se llama capitalizar 0.c. Y vamos a seguir adelante y preparar rápidamente un programa que hace exactamente eso de la siguiente manera. Por lo que incluyen la biblioteca CS50. E incluyen E / S estándar. 
+
+Y sé que esto es muy pronto. Así que voy a ponerlo en ya, string.h, así que no tengo acceso a cosas como Stirling, y luego int vacío principal, como de costumbre. Y luego voy a seguir adelante y hacer cuerdas consigue obtener la secuencia, sólo para obtener una cadena del usuario. Y luego voy a hacer mi comprobación de validez. Si cadena no es igual a un valor nulo, entonces es seguro proceder. Y qué es lo que quiero hacer? Voy a repetir desde i es igual a 0, y n hasta la longitud de cadena del s. 
+
+Y voy a hacer esto, siempre y cuando i es menor que n, y yo y más. Hasta el momento, estoy realmente sólo préstamos ideas de antes. Y ahora voy a introducir una rama. 
+
+Así que pensar en volver a los arañazos, donde tuvimos esas bifurcaciones en el camino, y la semana pasada en C. voy a decir esto, si el carácter i-ésimo en s es mayor o igual a minúsculas a, y- en Scratch que, literalmente, lo haría dice y, pero en C dices signo, ampersand-- y el carácter i-ésimo en s es menor que o igual a minúsculas z, vamos a hacer algo interesante. Vamos a imprimir una realidad carácter de nueva línea sin ese es el carácter de la cadena, el carácter i-ésimo en la cadena. 
+
+Pero vamos a seguir adelante y restar 32 de ella. Porque si el personaje de la cadena que estamos buscando No está entre un poco y poco z, adelante y acaba de imprimir a cabo sin cambios. Así que hemos introducido esta notación entre corchetes para nuestros hilos para que en el i-ésimo carácter de la cadena. 
+
+He añadido un poco de lógica condicional, al igual Cero en la primera semana de la semana pasada, donde Sólo estoy usando mi fundamental comprensión de lo que es pasando por debajo del capó. Es el carácter i de s mayor o igual a un? Al igual, que es 97 o 98, o 99, y así sucesivamente? 
+
+Pero es también menor que o igual al valor de z en minúsculas? Y si es así, ¿qué significa esta línea? 14, esto es una especie de la germen de la idea, capitalizar la carta simplemente restando 32 de ella, en este caso, porque sé, por eso carta, cómo se representan mis números. Así que vamos a seguir adelante y ejecutar este, después de compilar capitalizar 0.c, y correr capitalizar 0. 
+
+Vamos a escribir algo así como Zamyla entrar en minúsculas. Y ahora tenemos Zamyla en mayúsculas. Vamos escriba en Rob en minúsculas. Vamos a tratar de Jason en minúsculas. Y seguimos conseguir el capitalización forzada. Hay un error menor que yo tipo de no anticipar. Observe mi nuevo símbolo es terminar en la misma línea que sus nombres, que se siente un poco desordenado. 
+
+Así que voy a ir allí, y en realidad al final de este programa imprimir un carácter de nueva línea. Eso es todo. Con printf, que no es necesario pasar variables o código de formato. Usted puede, literalmente, sólo imprimir algo así como una nueva línea. 
+
+Así que vamos a seguir adelante y hacer 0 capitalizar de nuevo, volver a ejecutarlo, Zamyla. Y ahora es un poco más bonito. Ahora, mi indicador está en su propia línea nueva. Así que eso es todo fino y bueno. Así que es un buen ejemplo. Pero no lo sé siquiera necesariamente necesitará codificar el 32. ¿Sabes que? Podría decir-- no lo hago nunca recuerde cuál es la diferencia. 
+
+Pero sé que si yo tener una letra minúscula, Yo quiero restar esencialmente fuera cualquiera que sea la distancia es de entre poco una grande y A, porque si yo supongo que todas las otras cartas son los mismos, que debe hacer el trabajo. Pero en lugar de hacer eso, ¿sabes qué? Hay otra manera aún. 
+
+Si eso es capitalizar 1.c-- si fuera para poner esto en un archivo separado. Vamos a hacer capitalizar 2.c de la siguiente manera. Voy a limpiar realmente esta aquí. Y en vez de tener que sabe ni le importa acerca de aquellos bajo nivel detalles de implementación, soy vez sólo va a imprimir un carácter, entre comillas, C ciento, y a continuación, llamar a otra función que existen de que toma un argumento, que es un personaje, como este. 
+
+Resulta que en C, hay otra llamada a la función a superior, que como su nombre sugiere toma un carácter y lo hace a su mayúsculas equivalente, y luego lo devuelve de manera que printf puede conectarlo allí. Y así, para hacer esto, sin embargo, me que tenga que introducir otro archivo. Resulta que hay otro archivo que sólo se sabría de la clase, o un libro de texto o una línea referencia, llamado type.h. C 
+
+Así que si añado que hasta entre los de mi cabecera archivos, y ahora volver a compilar este programa, capitalize2, ./capitalize2 Intro. Vamos escriba en Zamyla en todo minúscula, sigue funcionando de la misma. ¿Pero sabes que? Resulta que a la parte superior tiene alguna otra funcionalidad. 
+
+Y voy a presentar esta comandar aquí, una especie de torpeza llamado, pero el hombre para el manual. Resulta que la mayoría de los sistemas Linux, como estamos utilizando aquí-- operativo Linux system-- tener un dominio llamado hombre, que dice: Hey, ordenador, dame el manual del equipo. ¿Qué es lo que desea mirar hacia arriba en ese manual? 
+
+Quiero ver la función llamados a superior, Intro. Y es un poco críptico leer a veces. Pero Tenga en cuenta que estamos en el Manual del Programador de Linux. Y es todo el texto. Y el aviso de que existe la nombre de la función aquí. Resulta que tiene un primo llamado para bajar, lo que hace lo contrario. Y la notificación mencionada en resumen, para utilizar esta funcionar la página del manual, por así decirlo, Me está diciendo que yo que incluir c type.h. Y sabía que a partir de la práctica. 
+
+Aquí, me está mostrando los dos prototipos para la función, por lo que si alguna vez quiero utilizar este Yo sé lo que toman como entrada, y lo regresan como salida. Y entonces si leo la descripción, veo con más detalle lo que hace la función. Pero lo más importante, si Miro bajo valor de retorno, se dice que el valor devuelto es la de la letra convertido, o C, la entrada original, si la conversión no era posible. 
+
+En otras palabras, a superior a tratar para convertir una letra en mayúsculas. Y si es así, que va a devolverlo. Pero si no puede por alguna reason-- tal vez es el caso ya superior, tal vez es un signo de exclamación o alguna otra punctuation-- que sólo va a devolver el C original, que significa que puedo hacer que mi código mejor diseñado de la siguiente manera. 
+
+No necesito todos estas líneas de código maldito. Todas las líneas que he Sólo puede resaltado colapsarse en un sencillo línea, que es esto- ciento printf c para soporte superior S i. Y esto sería una ejemplo de un mejor diseño. 
+
+¿Por qué implementar en 7 u 8 líneas de código, lo que fuera que acabo suprimido, cuando en su lugar puede colapsar todos los que la lógica y la toma de decisiones en una sola línea, ahora 13, que se basa en una biblioteca function-- una función que viene con C, pero que hace exactamente lo que quiere que haga. Y, francamente, incluso si que no vino con C, se podría aplicar a mano como se que hemos visto, con llegar int negativo y obtener positivos int la semana pasada también. 
+
+Este código ahora es mucho más fácil de leer. Y, de hecho, si nos desplazamos hacia arriba, mira cómo mucho más compacto esta versión de mi programa es. Es un poco pesado encima ahora, Con todo esto incluye. Pero eso está bien, porque ahora estoy de pie sobre los hombros de los programadores antes de mí. Y quienquiera que implementado para realmente superior me hizo un favor, al igual que cualquiera implementado realmente Stirling me hizo un favor hace algún tiempo. Y por lo que ahora tenemos una mejor programa de diseño que implementa exactamente la misma lógica. 
+
+Hablando de Stirling, dejó Me seguir adelante y hacer esto. Déjame ir por delante y guardar este archivo como stirling.c. Y resulta que, podemos pelar otra capa bastante simple ahora. Voy a seguir adelante y látigo otro programa en el principal aquí que simplemente re-aperos longitud de la cadena de la siguiente manera. Así que aquí hay una línea de código que Me para crear una cadena del usuario. Seguimos usando una y otra vez. Déjame ponerme una variable llamada n de tipo int que almacena un número. 
+
+Y me dejó ir adelante y hacer lo siguiente lógica. Mientras que el personaje hace enésimo en s es igual a 0 barra invertida, adelante e incrementar n. Y luego imprimir printf ciento i n. Yo reclamo que este programa aquí, sin llamar la longitud de la cadena, se da cuenta de la longitud de una cadena. 
+
+Y la magia es enteramente encapsulado en la línea 8 aquí con lo que parece ser una nueva sintaxis, esta barra invertida 0 comillas simples. Pero ¿por qué es eso? Bueno, tenga en cuenta lo que ha sido pasando todo este tiempo. 
+
+Y como un lado antes de que me olvide, se dan cuenta también, que, además de las páginas man que vienen con un típico sistema Linux como CS50 IDE, darse cuenta de que nosotros, los El personal del supuesto, también hecho un sitio Versión de esta misma idea llamada reference.cs50.net, que tiene todas esas mismas páginas del manual, todo de ese mismo documentación, así como una pequeña caja en la parte superior que permite a convertir toda la justa lenguaje arcano en menos cómodo el modo, en el que, el profesorado, han pasado por y tratado de simplificar algo de la lengua para mantener las cosas centrado en las ideas, y no algunos de los aspectos técnicos. Así que tener en cuenta, reference.cs50.net como otro recurso también. 
+
+Pero ¿por qué funciona la longitud de la cadena de la forma en que propuse hace un momento? Aquí está el nombre de Zamyla nuevo. Y aquí está el nombre de Zamyla encajonado, como sigo haciendo, para pintar un cuadro de él que es, en realidad, sólo una secuencia de caracteres. Pero Zamyla no existe en el aislamiento en un programa. 
+
+Cuando se escribe y ejecuta un programa, usted está utilizando su Mac o PC como la memoria, o RAM por así decirlo. Y que se pueda imaginar el ordenador como tener una gran cantidad de gigabytes de memoria en estos días. Y un concierto significa miles de millones, por lo que miles de millones de bytes. 
+
+Pero vamos a retroceder en el tiempo. Y supongamos que estamos utilizando un equipo muy viejo que sólo tiene 32 bytes de memoria. Pude, en mi pantalla de ordenador, simplemente dibujar esto de la siguiente manera. 
+
+Yo podría simplemente decir que mi equipo tiene toda esta memoria. Y esto es como un palo de memoria, si Recuerdas nuestra imagen de la última vez. Y si me divido en este número suficiente de veces, Puedo reclamar que tengo 32 bytes de la memoria en la pantalla. 
+
+Ahora, en realidad, sólo puedo dibujar hasta el momento en esta pantalla aquí. Así que voy a seguir adelante, y justo por convención, llamar la memoria del ordenador como rejilla, no sólo como una línea recta. En concreto, reclamo ahora que esta rejilla, este 8 por 4 rejilla, simplemente representa los 32 bytes de memoria disponible en mi Mac, o disponer de un PC. Y están envolviendo en dos líneas, justo porque se ajusta más en la pantalla. Pero este es el primer byte. Este es el segundo byte. Esta es la tercera byte. 
+
+Y este es el byte número 32. O bien, si pensamos como una computadora científico, esto es byte 0, 1, 2, 3, 31. Por lo que tiene de 0 a 31, si se empieza a contar a 0. 
+
+Así que si usamos un programa que las llamadas quedan cadena, y obtenemos una cadena humana desde la como yo lo hice llamado Zamyla, Z-A-H-Y-L-A, cómo en el mundo hace lo no perder la computadora de los cuales bytes, el cual trozo de memoria, pertenece a qué secuencia? En otras palabras, si se procede a escribir otro nombre en el ordenador, como esto Andi, llamando obtener una cadena de una segunda vez, A-N-D-I tiene que terminar en el la memoria de la computadora también. ¿Pero cómo? 
+
+Pues bien, resulta que por debajo de la capó, lo que hace C al almacenar cadenas que los tipos humanos en, o que provienen de alguna otra fuente, que es delinea el fin de ellos con una barra invertida character-- especial 0, que es sólo una forma especial de decir 80 bits en una fila. 
+
+Así A-- este es el recuerdo el número 97. Así algún patrón de 8 bits representa el número decimal 97. Esta barra invertida 0 es, literalmente, el número 0, nul alias, N-U-L, a diferencia de antes, N-U-L-L, que hemos hablado. Pero por ahora, sólo sé que este 0 barra invertida se halla a 80 bits en una fila. 
+
+Y es sólo esta línea en el arena que se dice nada a la izquierda pertenece a una cadena, o un tipo de datos. Y cualquier cosa a la derecha pertenece a otra cosa. Nombre de Andi, por su parte, que acaba visualmente sucede para envolver a la otra línea, pero eso es sólo un detalle estético, Del mismo modo se termina nul. 
+
+Es una cadena de caracteres de un A-N-D-I, además de un quinto carácter secreto, todos los bits 0, que simplemente demarca al final del nombre de Andi también. Y si llamamos a obtener una cadena de una tercera vez en el ordenador para obtener una cadena como Maria, H-A-R-I-A, de manera similar es María de nul nombre termina con una barra invertida 0. 
+
+Esta es fundamentalmente diferente desde cómo un ordenador haría normalmente almacenar un número entero o un flotador u otro tipos de datos tranquilos, en el recuerdo, un entero es por lo general de 32 bits, o 4 bytes, o tal vez incluso 64 bits, u ocho bytes. Sin embargo, muchos primitivas en un ordenador en un lenguaje de programación tener un número fijo de bytes debajo de la hood-- quizás 1, 2 tal vez, quizás 4, tal vez 8. 
+
+Pero las cadenas, por diseño, tienen una Número dinámica de caracteres. Usted no sabe de antemano, hasta los tipos humanos en Z-A-M-Y-L-A, o M-A-R-I-A, o A-N-D-I. Usted no sabe el número de veces que el usuario va a golpear el teclado. Por lo tanto, usted no sabe cómo muchos personajes de antelación vas a necesitar. 
+
+Y lo que C sólo tipo de hojas como una miga de pan secreta debajo de la campana al final de la cadena. Después de almacenar Z-A-M-Y-L-A en la memoria, también sólo pone el equivalente de un período. Al final de una frase, que pone 80 bits, con el fin de recordar dónde Zamyla comienza y termina. 
+
+Entonces, ¿cuál es la conexión, entonces, para este programa? Este programa aquí, Stirling, es simplemente un mecanismo para conseguir una cadena por parte del usuario, la línea 6. Línea 7, declaro una variable n llamada y la puso igual a 0. 
+
+Y luego, en la línea 8, simplemente le pregunté la cuestión, mientras que el carácter n-ésimo hace no es igual todo 0 bits-- en otras palabras, no hace igualdad de este especial carácter, la barra invertida 0, que era sólo que character-- nul especial seguir adelante y sólo se incrementa n. 
+
+Y seguir haciéndolo, y mantener haciéndolo, y seguir haciéndolo. Y así, a pesar de que en el pasado hemos utilizado i, que está perfectamente bien semánticamente utilizar n, si usted está tratando de contar este tiempo deliberadamente, y sólo quieren llamarlo n. Así que esto sólo sigue haciendo la pregunta, es el carácter de orden n de s todos 0s? Si no es así, busque en el aspecto, mirar hacia el lado, mira a la siguiente, mirar a la siguiente. 
+
+Pero tan pronto como usted ve barra invertida 0, esta línea loop-- 9 a 11-- se detiene. Se rompe fuera del bucle while, dejando en el interior de esa variable n un recuento total de toda la caracteres de la cadena que lo vio, de esta manera la impresión hacia fuera. Así que vamos a probar esto. 
+
+Déjame ir por delante y, sin utilizando la función de stirling, pero sólo usando mi propia versión de cosecha propia aquí se llama stirling, déjame ir por delante y correr stirling, escriba algo como Zamyla, que sé de antemano es de seis caracteres. Vamos a ver si funciona. De hecho, son las seis. Vamos a probar con Rob, tres personajes, tres caracteres, así, y así sucesivamente. Así que eso es todo lo que está pasando de debajo del capó. Y notar las conexiones, Luego, con la primera semana de la clase, donde hablamos sobre algo así como la abstracción, el cual es sólo esta estratificación de las ideas, o complejidad, en la parte superior de los principios básicos. En este caso, estamos buscando una especie de debajo del capó de Stirling, por así decirlo, de averiguar, cómo sería puesto en práctica? 
+
+Y podríamos ejecutarla de nuevo nosotros mismos. Pero estamos nunca más va para volver a poner en práctica Stirling. Sólo vamos a stirling utilizar con el fin para conseguir realmente cierta extensión cuerdas. 
+
+Pero no hay magia debajo de la campana. Si sabe que debajo el capó, una cadena es simplemente una secuencia de caracteres. Y esa secuencia de caracteres todos pueden ser tratados numéricamente 0 con el soporte, soporte 1, soporte 2, y saber que al final de una cadena es una carácter especial, se puede averiguar cómo hacer casi cualquier cosa en una programa, porque todo se reduce a es la lectura y escritura de la memoria. Es decir, el cambio y mirando en la memoria, o mover cosas alrededor de la memoria, cosas de impresión en la pantalla, y así sucesivamente. 
+
+Así que ahora vamos a utilizar esta recién descubierta comprensión de lo que en realidad cuerdas están debajo de la campana, y pelar otra capa que hasta ahora hemos estado ignorando por completo. En particular, cualquier momento hemos implementado un programa, que hemos tenido esta línea de código cerca de la parte superior declarando principal. Y hemos especificado int void main. 
+
+Y ese vacío dentro de los paréntesis ha estado diciendo todo este tiempo que la principal por sí mismo no tiene ningún argumento. Cualquier entrada que el principal es va a obtener de los usuarios tiene que venir de alguna otra mecanismo, como get int, o conseguir flotador, u obtener la secuencia, o alguna otra función. Pero resulta que cuando se escribe un programa, en realidad se puede especificar que este programa está tomar las entradas de la humana en la propia línea de comandos. 
+
+En otras palabras, a pesar de que hasta el momento han estado funcionando solo ./hola hola o programas similares, todos de la otros programas que hemos estado usando, que nosotros mismos no escribimos, ha estado tomando, al parecer, arguments-- línea de comandos cosas como el maquillaje. Usted dice algo así como maquillaje, y luego una segunda palabra. O sonido metálico, dices sonido metálico, y luego una segunda palabra, el nombre de un archivo. 
+
+O incluso RM o CP, como se puede han visto o ya utilizado para eliminar o copiar archivos. Todos los que toman los llamados arguments-- línea de comandos palabras adicionales en la línea de órdenes. Pero hasta ahora, nos nosotros mismos no han tenido este lujo de tomar la entrada de la usuario cuando él o ella realmente funciona el propio programa en la línea de comandos. 
+
+Pero podemos hacer que al volver a declarar principal hacia adelante, no como tener anular entre paréntesis, pero estos dos argumentos instead-- el primero un número entero, y la segunda algo nuevo, algo que vamos a llamar una matriz, algo similar en espíritu a lo que vimos en Scratch como una lista, pero una matriz de cadenas, como pronto veremos. Pero vamos a ver esto A modo de ejemplo, antes de que distinguir exactamente lo que eso significa. 
+
+Así que si entro en CS50 IDE aquí, me he ido por delante y declaró en un archivo llamado argv0.c la siguiente plantilla. Y note lo único eso es diferente en lo que va es que he cambiado vacío a int argc cadena argv soporte de abrir, cerrar soporte. Y el aviso por ahora, no hay nada dentro de esos soportes. 
+
+No hay un número. Y no hay i, o n, o cualquier otra letra. Sólo estoy usando el corchetes, por ahora, por razones vamos a venir volver en un momento. 
+
+Y ahora lo que voy a hacer es lo siguiente. Si argc es igual a igual 2-- y recuerdan que es igual a los iguales es el operador de igualdad comparar la izquierda y la derecha por la igualdad. No es la asignación operador, que es el signo igual única, lo que significa que la copia desde la derecha a la izquierda un cierto valor. 
+
+Si argc es igual a igual a 2, quiero por ejemplo, printf, hola, porcentajes, nueva línea, y luego conecte en-- y aquí está la nueva soporte de argv trick-- 1, por razones que vamos a volver en un momento. Porque si no lo hace argc igual a 2, ¿sabes qué? Vamos a seguir adelante y, como de costumbre, imprimir cabo hola mundo sin sustitución. 
+
+Por lo tanto, parecería que si argc, que representa el número de argumentos, es igual a 2, Voy a imprimir hola una cosa u otra. De lo contrario, por defecto, estoy va a imprimir hola mundo. Entonces, ¿qué significa esto? 
+
+Bueno, déjame ir por delante y guardar este archivo y, a continuación, hacer que argv0, y luego ./argv0, Intro. Y dice hola mundo. Ahora, ¿por qué? 
+
+Pues bien, resulta que en cualquier momento que ejecutar un programa en la línea de comandos, se está llenando en lo que vamos a en general, llamar a un vector de argumento. En otras palabras, de forma automática la ordenador, el sistema operativo, se va a entregar a su programa sí mismo una lista de todas las palabras que el ser humano ha tecleado en el símbolo, en caso de que el programador quiere hacer algo con esa información. Y en este caso, la única palabra Me he tecleado en el indicador es ./argv0. 
+
+Y por lo que el número de argumentos que se se pasa a mi programa es sólo uno. En otras palabras, el argumento contar, también conocido como argc aquí como un entero, es sólo uno. Uno, por supuesto, no es igual a dos. Y así que esto es lo que imprime, hola mundo. 
+
+Pero déjame tomar esto en alguna parte. Permítanme decir, argv0. Y entonces ¿qué hay de María? Y a continuación, pulse la tecla Enter. 
+
+Y darse cuenta de lo que ocurre aquí mágicamente. Ahora, en vez de hola mundo, no tengo cambiado el comportamiento de este programa mediante la adopción de la entrada no desde get cadena o alguna otra función, pero a partir de, al parecer, mi mando en sí, lo que originalmente escrito en. Y puedo jugar a este juego de nuevo por el cambiándola a Stelios, por ejemplo. 
+
+Y ahora veo otro nombre todavía. Y aquí, podría decir Andi. Y podría decir Zamyla. Y podemos jugar a este juego durante todo el día, acaba de conectar diferentes valores, siempre que proporciono exactamente dos palabras en el indicador, de tal manera que argc, cuente mi argumento, es 2. 
+
+¿Veo que el nombre enchufado en printf, por esta condición en esta lista? Por lo tanto, parece que tenemos ahora la capacidad expresiva de tomar el aporte de otro mecanismo, desde la línea de comandos llamada, en lugar de tener que esperar hasta que el usuario ejecuta el programa, y luego le pedirá usando algo como cadena GET. 
+
+Así que ¿qué es esto? Argc, de nuevo, es sólo un número entero, el número de palabras- arguments-- que el usuario proporcionada en el símbolo, en la ventana de terminal, incluyendo el nombre del programa. Así que nuestra ./argv0 es, efectivamente, el nombre del programa, o cómo ejecutar el programa. 
+
+Eso cuenta como una palabra. Así argc sería 1. Pero cuando escribo Stelios, o Andi, o Zamyla, o María, eso significa que el número de argumentos es de dos. Y por lo que ahora hay dos palabras se ha pasado. 
+
+Y aviso, podemos continuar con esta lógica. Si en realidad digo algo así como Zamyla Chan, un nombre completo, pasando de ese modo tres argumentos en total, Ahora se dice que el defecto de nuevo, porque, por supuesto, 3 no es igual a 2. 
+
+Y así, de esta manera, ¿tengo acceso a través de este nuevo argumento argv que técnicamente podría llamar a cualquier cosa que queramos. Sin embargo, por convención, es argv y argc, respectivamente. Argv, vector argumento, es una especie de un sinónimo de una programación característica de C llama una matriz. 
+
+Una matriz es una lista de valores similares hacia atrás, hacia atrás, hacia atrás, hacia atrás. En otras palabras, si uno es justo aquí, en RAM, el siguiente es justo al lado de ella, y justo al lado de ella. No son por todo el lugar. Y que este último escenario, donde las cosas son por todo el lugar en la memoria, en realidad puede ser una característica de gran alcance. Pero vamos a volver a eso cuando nos hablar de estructuras de datos más elegantes. Por ahora, una matriz es sólo una trozo de memoria contigua, cada uno de cuyos elementos son hacia atrás, hacia atrás, hacia atrás, hacia atrás, y generalmente del mismo tipo. 
+
+Así que si se piensa, a partir de una Hace momento, lo que es una cadena? Bueno, una cadena, como Zamyla, Z-A-H-Y-L-A, es, técnicamente, simplemente una matriz. Es un conjunto de caracteres. 
+
+Y así, si es que realmente sacamos esto, como he lo hizo antes, como un trozo de memoria, resulta que cada uno de estos personajes retoma un byte. Y luego está ese especial carácter centinela, la barra invertida 0, o los ocho bits de 0, que se demarca el final de esa cadena. Así que una cadena, se convierte cabo, citar cadena de cierre de comillas, es simplemente un conjunto de chara-- charla ser un tipo de datos real. 
+
+Y ahora argv, meanwhile-- vamos a ir de nuevo al programa. Argv, a pesar de que vemos la palabra cadena aquí, no es una cadena en sí. Argv, el argumento del vector, es una matriz de cadenas. 
+
+Así mismo modo que puede tener una gran variedad de caracteres, que pueden tener un nivel más alto, una matriz de strings-- así, por ejemplo, cuando escribí hace un momento ./argv0 argv0, el espacio Z-A-H-Y-L-A, que afirmó que argv tenía dos cadenas en ./argv0 it--, y Z-A-M-Y-L-A. En otras palabras, argc era 2. ¿Porqué es eso? 
+
+Bueno, efectivamente, lo que está pasando es en que cada una de estas cadenas es, por supuesto, una matriz de caracteres Como antes, cada uno de cuyos personajes ocupa un byte. Y no hay que confundir el 0 real en el nombre del programa con el 0, lo que significa que los 80 bits. Y Zamyla, por su parte, sigue siendo También una serie de caracteres. 
+
+Así que al final del día, lo que realmente parece que esta debajo de la campana. Pero argv, por la naturaleza de la forma principal obras, me permite envolver todo esto por obtener, si se quiere, un arreglo más grande que, si un poco más de simplificar lo que la imagen se parece y no hacer bastante dibujar a escala allí, esta matriz es solamente de tamaño 2, la primera elemento de los cuales contiene una cadena, el segundo elemento de que contiene una cadena. Y, a su vez, si tipo de zoom en cada de esas cadenas, lo que ver debajo de la campana es que cada cadena es sólo una matriz de caracteres. 
+
+Ahora, al igual que con las cadenas, hemos sido capaces de conseguir el acceso al carácter i-ésimo de una serie usando esa notación de corchetes. Del mismo modo, con matrices en general, podemos utilizar notación de corchetes para obtener en cualquier número de cadenas en una matriz? Por ejemplo, me dejó seguir adelante y hacerlo. 
+
+Déjame seguir adelante y crear argv1.c, que es un poco diferente esta vez. En lugar de la comprobación de argc2, Voy a hacer esto en su lugar. Para int consigo 0, i es menor que argc, yo y además, y luego imprimir en el interior de esta, ciento s, nueva línea, y luego argv soporte de i. 
+
+Así, en otras palabras, no estoy tratando con caracteres individuales en el momento. Argv, como se deduce de estos casilla vacía los apoyos a la derecha del nombre de argv, significa argv es una matriz de cadenas. Y argc es sólo un int. 
+
+Esta línea aquí, 6, es diciendo conjunto i igual a 0. Contar todo el camino hasta, pero no incluyendo, argc. Y a continuación, en cada iteración, imprimir una cadena. Lo cuerda? 
+
+La cadena de orden i en argv. Así que, antes de que fuera utilizando el corchete notación para llegar a la i-ésima carácter de una cadena, ahora Estoy usando la notación de corchetes para llegar a la cadena i-ésima de una matriz. Así que es algo de una capa anteriormente, conceptualmente. 
+
+Y así, lo que es bueno de este programa de ahora, si puedo compilar argv1, y luego hacer ./argv1 y escriba en algo así como foo bar baz, que son las tres palabras que un defecto Informático alcanza para cualquier momento él o ella necesita algunas palabras de marcador de posición, y pulse la tecla Enter, cada una de esas palabras, incluyendo el nombre del programa, el cual está en argv en la primera ubicación, termina siendo impresas de una en una. Y si cambio de esto, y digo algo así como argv1 Zamyla Chan, obtenemos los tres de los palabras, que es argv0, argv1, argv2, ya que en este argc caso, el recuento, es 3. 
+
+Pero lo que es interesante es si se entiende argv que es sólo una matriz de cadenas, y usted entiende que una cadena es un conjunto de caracteres, en realidad podemos utilizar este tipo de notación de corchetes varias veces para elegir una cadena, y luego elegir un carácter dentro de la cadena, buceo en el más profundo de la siguiente manera. En este ejemplo, me dejó ir adelante y llamar a este argv2.c. Y en este ejemplo, déjame ir por delante y hacer lo following-- para int i obtener 0, i es menor que argc, i plus además, al igual que antes. Así, en otra palabras-- y ahora esto está consiguiendo bastante complicado. A continuación voy a decir iterar sobre cadenas en argv, como un comentario a mí mismo. Y luego voy a tener una anidado para el lazo, que es probable lo han hecho, o se considera haciendo, en Scratch, donde Voy a decir que soy int-- no se va a utilizar de nuevo i, porque yo no quiero a la sombra, o tipo de sobrescribir el i existente. 
+
+Voy a, en lugar de, digamos j, porque eso es mi ir a la variable después de que, cuando yo sólo trato de contar números simples. Para j consigue 0-- y también, n, va a obtener la longitud de popa del soporte de argv i, siempre y cuando j es inferior a m, j plus plus, haga lo siguiente. Y aquí está la parte interesante. 
+
+Imprimir un carácter y una nueva línea, enchufar el soporte argv i, j soporte. OK, así que permítanme añadir algunos comentarios aquí. Iterar sobre personajes en la cadena actual, impresión de caracteres j-ésimo en la cadena de orden i. Así que ahora, vamos a considerar lo que significan estos comentarios. 
+
+Iterar sobre las cuerdas en argv-- cuántos cadenas están en argv, que es una matriz? Argc muchos, así que estoy iterando desde i es igual a 0 hasta argc. Mientras tanto, el número de caracteres se encuentran en la cadena de orden i en argv? 
+
+Pues bien, para obtener esa respuesta, Acabo de llamar longitud de la cadena en el cuidado de cadena actual I aproximadamente, que es argv soporte de i. Y voy a almacenar temporalmente que valor de n, sólo para fines de almacenamiento en caché, recordar que para la eficiencia. Y luego voy inicializar j a 0, seguir adelante, siempre y cuando j es menor que n, y en cada incremento iteración j. 
+
+Y entonces aquí, por mi comentario en la línea 12, imprimir un carácter, seguido de una nueva línea, soporte específicamente argv i me da la cadena i-ésimo en argv-- por lo que la primera palabra, la segunda palabra, la tercera palabra, lo que sea. Y cae en picado en j más profundo, y obtiene yo el carácter j-ésimo de la palabra. Y así, en efecto, se puede tratar argv como un multi-dimensional, como una de dos dimensiones, matriz, de modo que cada palabra amable de miradas como este en su mente de ojo, y cada personaje es una especie de compuesto en una columna, si eso ayuda. 
+
+En realidad, cuando nos burlamos esta separación, en las semanas siguientes, que va a ser un poco más sofisticado que eso. Pero lo que realmente puede pensar en que, por ahora, tan sólo por esta bidimensional matriz, por lo que un nivel de ella es todo de las cuerdas. Y entonces si buceo en el más profundo, puede llegar a los caracteres individuales en ella mediante el uso de esta notación aquí. 
+
+Entonces, ¿cuál es el efecto neto? Déjame ir adelante y hacer rematadamente argv2-- ella. He cometido un error aquí. Declarando implícitamente la stirling función de biblioteca. Así que todo este tiempo, es quizá apropiada que estamos tipo de acabado exactamente donde empezamos. 
+
+Cometí un error, declarando implícitamente stirling función de biblioteca. OK, espera un minuto. Recuerdo que, sobre todo ya que está justo aquí. Necesito incluir en string.h esta versión del programa. 
+
+Déjame ir adelante y incluyo string.h, salvo que, adelante y recompilar argv2. Y ahora, aquí vamos, que argv2, Intro. Y aunque es un poco críptica a primera vista, notar que, en efecto, lo se imprime es argv2 punto. 
+
+Pero si escribo algunas palabras después de la símbolo, como argv2 Zamyla Chan, Introduce, también un poco críptica a primera vista. Pero si nos desplazamos hacia arriba, ./argv2 Z-A-M-Y-L-A C-H-A-N. Para ello hemos repiten a lo largo de cada palabra. Y, a su vez, hemos repiten a lo largo todos los personajes dentro de una palabra. 
+
+Ahora, después de todo esto, se dan cuenta de que hay otro detalle que hemos estado especie haciendo caso omiso de todo este tiempo. Simplemente, se separan lo las entradas del principal puede ser? ¿Qué pasa con la producción del principal? 
+
+Todo este tiempo, hemos sido sólo copiar y pegar la palabra int frente principal, aunque es posible ver en línea, a veces incorrectamente en las versiones anteriores de C y compiladores, que dicen vacío, o nada en absoluto. Pero, de hecho, para la versión de C que estamos utilizando, C 11, o 2011, cuenta que debe ser int. Y debe ser o bien nula o argc y argv aquí. 
+
+Pero ¿por qué int main? ¿Cómo es en realidad regresando? Pues bien, resulta que todo este tiempo, cualquier momento usted ha escrito un programa principal Siempre está volviendo algo. Pero ha estado haciendo en secreto. 
+
+Ese algo es una int, como sugiere la línea 5. Pero lo int? Bueno, hay una convención en la programación, por lo que si no tiene salido mal y todo está bien, programas y funciones en general return-- algo counterintuitively-- 0. 0 significa generalmente que todo está bien. Así que, aunque se piensa en como falsa en muchos contextos, que en realidad significa generalmente una buena cosa 
+
+Mientras tanto, si un programa vuelve 1, o negativo 1, o 5, o negativo 42, o cualquier valor que no sea 0, eso significa generalmente que algo ha ido mal. De hecho, en su propio Mac o PC, es posible que haya visto realmente un mensaje de error, mediante la cual dice una cosa u otra, el error código negativo 42, o código de error 23, o algo por el estilo. Ese número es por lo general sólo un toque para el programador, o la empresa Eso hizo que el software, lo que salió mal y por qué, de modo que puedan mirar a través su documentación o código, y averiguar cuál es el de error realmente significa. Por lo general, no es útil para nosotros los usuarios finales. 
+
+Pero cuando principales devuelve 0, todo está bien. Y si no se especifica lo principal debe devolver, se acaba de forma automática devolver 0 para usted. Pero volviendo algo lo demás es realmente útil. 
+
+En este programa final, me dejó seguir adelante y llamar a este exit.c, e introducir el último de hoy temas, conocido como un código de error. Déjame ir por delante e incluye nuestra archivos conocidos hasta la parte superior, hacen int principal. Y esta vez, vamos a hacer int argc, argv cadena, y con mis soportes dar a entender que está en la matriz. Y entonces me dejaron de hacer una comprobación de validez. Esta vez, si no lo hace argc igual a 2, entonces sabes qué? Olvídalo. Voy a decir que, bueno, usuario, se echa en falta el argumento de línea de comandos n barra invertida. 
+
+Y entonces eso es todo. Deseo salir. Voy a manera preventiva, y prematuramente realmente, el regreso algo que no sea el número 1. El sitio al que ir para el primer valor error que puede ocurrir es 1. Si tiene alguna otra errónea situación que pueda producirse, se podría decir de retorno de 2 o devolver 3, o tal vez incluso negativo o negativo 1 2. 
+
+Estos son sólo los códigos de salida que son, en general, sólo es útil para el programador, o el compañía que ha de enviar el software. Pero el hecho de que es No 0 es lo importante. Así que si en este programa, quiero garantizar que este programa sólo funciona si el usuario me ofrece con un número de argumentos de dos, el nombre del programa, y ​​algún otro palabra, que puede valer tanto como sigue, gritar al usuario con dicho printf, faltan argumentos de línea de comandos, volver 1. Que se acaba de inmediato salir del programa. 
+
+Sólo si argc es igual a 2 habrá que bajar aquí, en ese momento me voy a decir, hola ciento s, la barra invertida n, argv1. En otras palabras, estoy No va después de argv 0, que es sólo el nombre del programa. Quiero imprimir hola, coma, la segunda palabra que escribió el ser humano. Y en este caso en línea 13, todo está bien. 
+
+Sé que argc es 2 lógicamente de este programa. Voy a seguir adelante y volver 0. Dicho sea de paso, tener en cuenta que esto es cierto en Scratch también. 
+
+Lógicamente, podría hacer esto y encapsular estas líneas del código de esta otra cláusula aquí. Pero eso es una especie de innecesariamente sangría mi código. Y quiero hacer súper claro que no importa qué, de forma predeterminada, hola algo va a conseguir impreso, siempre que el usuario coopera. 
+
+Así que es muy común el uso de una condición, sólo un caso, para coger un poco errónea situación, y luego salir. Y luego, siempre es todo así, no tener una cosa, pero sólo tienen el código fuera de que si, porque es equivalentes en este Caso particular, lógicamente. Así que estoy devolviendo un 0, sólo para significan explícitamente que todo está bien. 
+
+Si he omitido el retorno 0, lo haría ser asumida de forma automática para mí. Pero ahora que estoy volviendo uno por lo menos en este caso, Voy a, por si acaso, y claridad, devuelven 0 en este caso. Así que ahora quiero seguir adelante y hacer la salida, que es una transición perfecta para dejar sólo. 
+
+Pero hacer la salida, y me dejó ir adelante y hacer ./exit, Intro. Y el programa me gritó, falta argumento de línea de comandos. OK, déjame cooperar. 
+
+Permítanme hacer lugar ./exit, David, Enter. Y ahora se dice, hola David. Y que normalmente no ver esto. 
+
+Pero resulta que hay una de manera especial en Linux para ver realmente con lo que la salida código de un programa se cierra. A veces en una gráfica mundo como Mac OS o Windows, sólo se ve estos números cuando una mensaje de error aparece en la pantalla y el programador que muestra que el número. Pero si queremos ver lo que el error el mensaje es, podemos hacerlo aquí-- por lo ./exit, Enter, imprimir falta argumento de línea de comandos. 
+
+Si ahora lo hago eco $ ?, que es ridículamente críptica buscando. Pero $? es el encantamiento mágico que dice, oye, ordenador, dime lo que el anterior código de salida del programa era. Y llegué a Enter. Veo a 1, porque eso es lo que yo dicho a mi función principal para volver. 
+
+Mientras tanto, si hago ./exit David, y pulsa enter, veo, hola David. Y si ahora lo hago eco $ ?, veo hola 0. Y así esto va ser información valiosa en el contexto de el depurador, no tan tanto que, el ser humano, le importaría. Sin embargo, el depurador y otra los programas que vamos a usar en este semestre a menudo mirar a ese número, a pesar de que es una especie de escondido a menos que usted lo busca, a determinar si un programa de o no ejecución fue correcta o incorrecta. 
+
+Y por lo que nos lleva a esto, al final del día. Empezamos hoy examinado depuración, ya su vez en el curso sí, y luego más interesante, técnicamente debajo de la campana en qué cadenas son, que duró semana nos lo tomamos por sentado, y desde luego los llevó por sentado en Scratch. 
+
+Seguidamente, examinamos cómo podemos acceder caracteres individuales en una cadena, y luego volvió a tomar un nivel más alto mirar las cosas, mirando cómo bien-- Si queremos llegar a nivel individual elementos de una lista como la estructura, no podemos hacer eso con varias cadenas? Y que podemos con los argumentos de línea de comandos. Pero esta imagen de aquí sólo cajas es demostrativa de esta idea general de una matriz o una lista o un vector. Y dependiendo de la contexto, todas estas palabras significados ligeramente diferentes. Así que en C, sólo vamos hablar de una matriz. Y una matriz es un trozo de la memoria, cada uno de los cuales es elementos son contiguos, de nuevo, hacia atrás, hacia atrás, hacia atrás. 
+
+Y esos elementos son, por lo general, del mismo tipo de datos, carácter, carácter, caracteres, carácter, o cadena, cadena, cadena, cadena, o int, int, int, sea lo que sea estamos tratando de almacenar. Pero al final del día, esto es lo que parece conceptualmente. Usted está tomando su memoria o RAM del ordenador. Y que está tallado a cabo en cajas de idéntico tamaño, todos los cuales están de vuelta, hacia atrás, a de nuevo, a la parte posterior de esta manera. 
+
+Y lo que es bueno de esta idea, y el hecho de que podemos expresar los valores de esta manera con la primera de nuestras estructuras de datos en la clase, significa que podemos empezar para resolver problemas con el código que llegaron de manera intuitiva en la semana 0. Usted recordará el teléfono ejemplo libro, donde se utilizó un divide y vencerás, o un algoritmo de búsqueda binario, para tamizar a través de un conjunto montón de nombres y números. Pero hemos supuesto, recordar, que esa libreta de teléfonos que ya se solucionó, que otra persona ya tenía Robusto out-- dado una lista de nombres y numbers-- cómo alfabéticamente ellos. Y ahora que estamos en C, también, tener la capacidad para poner las cosas, no se físicamente en una libreta de teléfonos pero prácticamente en un ordenador de memoria, seremos capaces próxima semana introducir de nuevo la primera esto-- de nuestras estructuras de datos en un array-- pero lo más importante, equipo real algoritmos implementados ciencia en el código, con el que podemos almacenar los datos en las estructuras de este tipo, y luego empezar a manipularla, y para resolver efectivamente los problemas con ella, y construir encima de eso, en última instancia, los programas en C, en Python, en JavaScript, la consulta de bases de datos con SQL? 
+
+Y veremos que todos estos ideas diferentes de enclavamiento. Pero por ahora, recordar que la dominio que presentamos hoy Fue esta cosa aquí, y el mundo de la criptografía. Y entre los siguientes problemas que usted mismo va a resolver es el arte de la criptografía, aleatorización y desaleatorización información, y de cifrado y descifrar el texto, y suponiendo que en última instancia que ahora sabe lo que hay debajo del capó de manera que cuando se ve o recibe un mensaje como este, usted mismo puede descifrarlo. Todo esto, y más la próxima vez. 
+
+[REPRODUCCIÓN DE VÍDEO] 
+
+-Mover Acaba de llegar. Voy a ir a visitar su profesor de la universidad. Sí. Hola. Eres tu. ¡Espere! David. Sólo estoy tratando de entender lo que le pasó. Por favor, cualquier cosa podría ayudar. Eras su universidad compañero de piso, ¿verdad? Usted estaba allí con él cuando terminó el proyecto CS50? 
+
+[REPRODUCIENDO MÚSICA] 
+
+Eso fue CS50. 
+
+Amo este lugar. 
+
+-Comer hasta. Vamos a salir de los negocios. 
+
+[FIN DE REPRODUCCIÓN] 

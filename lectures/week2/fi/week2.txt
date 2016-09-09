@@ -1,0 +1,689 @@
+[MUSIIKKIA] 
+
+DAVID J. MALAN: Selvä. Tämä on CS50 ja tämän on alku Viikko 2. Ja te muistaa, että yli parin viime viikon aikana, olemme esitelleet tietokoneella tiede ja puolestaan ​​ohjelmointi. 
+
+Ja aloitimme tarinan Poiketen Scratch, että graafinen kieli MIT: N Media Lab. Ja sitten viimeksi viime viikolla, teki meidän käyttöön higher-- alemman tason kieli tiedossa kuten C, jotain, joka on puhtaasti tekstimuodossa. Ja todellakin, viimeinen kerta tutkia niihin liittyvistä useita käsitteitä. 
+
+Tämä muistuttaa, oli hyvin Ensimmäinen ohjelma tarkastelimme. Ja tämä ohjelma, yksinkertaisesti, tulostaa, "hei, maailma." Mutta on niin paljon näennäisestä magic meneillään. Ei tämä include Näiden Kulmasulkeet. On int. On (void). On sulkuja, aaltosulkeita, puolipistettä, ja niin paljon enemmän. 
+
+Ja niin, muistaa, että otimme käyttöön Scratch jotta voisimme ihannetapauksessa nähdä ohi että syntaksi, tavaraa, joka ei todellakaan ole kaikki että älyllisesti mielenkiintoinen, mutta jo varhain on, ehdottomasti, vähän hankala kääriä mielesi ympärille. Ja, todellakin, yksi yleisimmistä asiat varhaisessa ohjelmointi luokan, erityisesti niille vähemmän mukava, on saada turhautuvat katkaisemaan jopa tiettyjen syntaktinen virheet, puhumattakaan loogisia virheitä. Ja niin keskuudessa tavoitteemme tänään, todella, tulee olla varustaa sinulle joitakin ongelmanratkaisu tekniikoita, miten paremmin ratkaista ongelmia itse muodossa virheenkorjaus. Ja voit muistaa myös, että ympäristö että otimme käyttöön Edellisen kerran kutsuttiin CS50 IDE. Tämä on web-pohjainen ohjelmisto, joka voidaan ohjelmoida pilvessä, niin sanotusti, pitäen kaikki tiedostot yhteen, kuten olemme jälleen tulee tänään. Ja muistaa, että me revisited näistä aiheista täällä, joukossa toimintoja, ja silmukoita, ja muuttujia, ja Boolen operaattoreilla, ja olosuhteet. Ja itse asiassa vielä muutama että olemme käännetty maailmasta Scratch maailmaan C. 
+
+Mutta perusongelma rakennus lohkot, niin sanotusti, olivat todella edelleen sama viime viikolla. Itse asiassa olemme todella vain oli eri palapelin pala, jos haluatte. Sen sijaan, että violetti tallentaa lohko, me sen sijaan oli printf, joka on Tätä toimintoa C että voit tulostaa jotain ja alustaa sen ruudulla. Otimme CS50 Kirjasto, jossa on nyt käytettävissänne get_char, ja get_int, ja get_string, ja muutamia muita toimintoja hyvin, jonka kautta voi saada syöttää käyttäjän omalla näppäimistöllä. Ja me myös katsoimme asioita kuten these- bool, ja nieriä, ja kaksinkertainen, kellua, int, long_long merkkijono. Ja siellä on jopa muita tietotyyppejä C. 
+
+Toisin sanoen, kun julistaa muuttuja tallentaa jotain arvoa, tai kun toteuttaa funktion joka palauttaa jotain arvoa, voit määrittää, mitä tyyppinen arvo on. Onko se merkkijono, kuten merkkijono? Onko se numero, kuten kokonaisluku? Onko se liukuluku arvo, tai vastaavaa? Joten C, toisin kuin Scratch, me todellakin alkoi määrittää, millaisia ​​tietoja olimme palaamassa tai käyttämällä. 
+
+Mutta tietysti myös törmäsi joitakin perustavanlaatuisia rajoja computing. Ja erityisesti, tällä kielellä C, recall että me katsoimme kokonaisluvun ylivuoto, todellisuus että jos sinulla on vain rajallinen määrä muistia tai, erityisesti, rajallinen määrä bittejä, voi vain laskea niin korkea. Ja niin me katsoimme tätä esimerkkiä tästä jolloin laskuri lentokoneella, todella, jos käynnissä tarpeeksi kauan olisi ylivuoto ja johtaa ohjelmistojen todelliseen fyysiseen mahdollinen virhe. 
+
+Me tarkasteltiin myös kelluva piste epätäsmällisyys, todellisuus että vain rajallinen määrä bittien, onko se 32 tai 64, voit vain määrittää niin monta numeroa jälkeen desimaalierottimen jonka jälkeen alkaa saada epätarkka. Niinpä esimerkiksi kolmasosa on maailma täällä, meidän ihmisten maailmassa, tiedämme vain ääretön määrä 3s desimaalipisteen jälkeen. Mutta tietokone ei voi välttämättä edustavat ääretön määrä numeroita jos vain antaa sille joitakin rajallinen määrä tietoa. 
+
+Joten ei ainoastaan ​​me varustaa voit enemmän valtaa suhteen miten voit ilmaista itseäsi näppäimistö ohjelmatyön, me myös rajoitettu mitä voit itse tehdä. Ja todellakin, bugeja ja virheitä voi syntyvät tuollaiset asiat. Ja todellakin, joukossa aiheista tänään tulevat olemaan aiheita kuten virheenkorjaus ja todella etsivät alla huppu kuinka asiat esiteltiin viime viikolla todella toteutetaan jotta voit paremmin ymmärtää sekä ominaisuuksia ja rajoitukset kielen kuten C. 
+
+Ja itse asiassa, me kuori takaisin kerroksia yksinkertaisin tietorakenne, jotain kutsutaan joukko, joka Scratch sattuu soittaa "lista." Se on hieman Eri tässä yhteydessä. Ja sitten me myös esitellä yksi Ensimmäinen meidän domain-erityisongelmat in CS50, maailma salaus, taidetta muokkaamisella tai salausinformaatioon niin että voit lähettää salaisia ​​viestejä ja purkaa salaisia ​​viestejä kahden henkilön välillä, A ja B. 
+
+Joten ennen kuin siirtyminen kyseiseen uuteen maailmaan, koetamme varustaa sinulle joitakin tekniikoita, jolla voit poistaa tai vähentää ainakin joitakin turhautumista että olet todennäköisesti kohdannut viime viikon yksin. Itse asiassa, ennen olet such-- joitakin ensimmäinen ongelmat C. Ja kertoimet ovat, jos olet kuten minä, ensimmäistä kertaa yrität kirjoittaa ulos ohjelma, vaikka luulet loogisesti ohjelma on melko yksinkertainen, saatat hyvinkin osui seinään, ja kääntäjä ei aio tehdä yhteistyötä. Tee tai Clang ei aio todella tehdä oman hinnoittelu. 
+
+Ja miksi se voisi olla? No, katsomaan, ehkä yksinkertainen ohjelma. Aion mennä eteenpäin ja tallenna tämä Tiedoston tarkoituksella nimeltä buggy0.c, koska tiedän sen olla virheellinen etukäteen. Mutta en ehkä ymmärtää, että jos tämä on ensimmäinen tai toinen tai kolmas ohjelma että olen todella tehdä itse. Joten aion mennä eteenpäin ja kirjoittamiseen, int main (void). Ja sitten sisällä minun aaltosulkeita, hyvin tuttu ( "Hei, world-- backslash, n ") - ja puolipisteellä. 
+
+Olen tallentanut tiedoston. Nyt aion mennä alas minun pääteikkuna ja tyyppi tehdä buggy0, koska, jälleen, nimi tiedoston nykyään buggy0.c. Joten kirjoitan tehdä buggy0, Enter. 
+
+Ja oi, gosh, muistaa viime kerran että ei virheilmoitukset on hyvä asia. Joten ei ulostulo on hyvä asia. Mutta täällä minulla on selvästi jotkut määrä virheitä. 
+
+Joten ensimmäinen rivi ulostulo kirjoittamisen jälkeen tehdä buggy0, recall, on Clang n melko laveasti. Alapuolella huppu, CS50 IDE on konfiguroitu käyttää koko joukko vaihtoehtoja tämän kääntäjä jotta sinun ei tarvitse ajatella niitä. Ja siinä kaikki, että ensimmäinen rivi keinot, joka alkaa Clang. 
+
+Mutta sen jälkeen, ongelmia alkaa tehdä niiden ulkonäköä. Buggy0.c rivillä 3, character 5, on suuri, punainen virhe. Mikä tuo on? Epäsuorasti julistaa kirjaston funktion printf tyypin int (const char *, ...) [-Werror]. Siis, se hyvin nopeasti saa hyvin vaikeaselkoisia. Ja varmasti, ensin silmäyksellä, me emme tahdo odottavat sinua ymmärtämään kokonaisuudessaan kyseisen viestin. Ja niin yksi opetuksista tänään on menossa olla yrittää huomata kuvioita, tai samanlaisia ​​asioita, virheisiin saatat olla kohdannut aikaisemmin. Joten kiusaa toisistaan ​​vain ne sanat, jotka tutulta. Suuri punainen virhe on selvästi symbolinen jotain on vialla. 
+
+epäsuorasti julistamisesta kirjaston funktion printf. Joten vaikka en oikein ymmärrä, mitä epäsuorasti julistaa kirjaston funktion keinoin, ongelma varmasti koskee printf jotenkin. Ja lähde tästä asiasta on tekemistä julistaa sen. 
+
+Julistamisesta toiminto on mainita sitä ensimmäistä kertaa. Ja käytimme terminologiaa viime viikolla julistaa funktion prototyyppi, joko yhden rivin yläreunassa oma tiedosto tai ns header-tiedosto. Ja mitä tiedostoa teki sanomme viime viikolla, että printf on lainaus, lainaus, julisti? Missä tiedosto on sen prototyyppi? 
+
+Joten jos muistatte, aivan ensimmäinen asia, I konekirjoitettu, lähes jokainen ohjelma viime time-- ja vahingossa hetki sitten alkanut kirjoittamalla myself-- oli tämä here-- hash-- #include <stio-- varten tulo / output-- piste h Ja todellakin, kun nyt tallentaa tämän tiedoston, aion mennä eteenpäin ja tyhjentää näytön, joka voi tehdä kirjoittamalla Kirkas, tai voit pitää Ohjaus L, vain tyhjentää pääteikkunaan vain poistamaan joitakin sotkua. 
+
+Aion mennä eteenpäin ja re-tyyppinen merkki buggy0, Enter. Ja voila, olen edelleen nähdä, että pitkä komento Clang, mutta ei ole mitään virheilmoitusta tällä kertaa. Ja todellakin, jos en ./buggy0, aivan kuten viime kerralla, missä piste tarkoittaa tämä hakemisto, Slash vain tarkoittaa, tässä tulee ohjelman nimi ja että ohjelman nimi on buggy0, Enter, "hei, maailma." 
+
+Nyt miten voisi olet poimittu tämä ratkaisu ilman välttämättä tunnustaa niin monta sanaa kuten tein, varmasti, joilla tehnyt tämän niin monta vuotta? No, ymmärtää per ensimmäinen ongelma set, esittelemme komentoon että CS50 oma henkilökunta kirjoitti kutsutaan help50. Ja todellakin, C tekee määrittelyn ongelma asetettu, miten käyttää tätä. 
+
+Mutta help50 on olennaisesti ohjelma, joka CS50 henkilöstö kirjoitti, että voit ajaa komennon tai suorita ohjelma, ja jos et ymmärrä sen ulostulo, siirtää tuotannostaan ​​help50, jolloin ohjelmisto että kurssin henkilökunta kirjoitti tarkastellaan ohjelman ulostulo rivi riviltä, ​​merkki kerrallaan. Ja jos me, henkilökunta, tunnistaa virheilmoituksen, joka sinulla on, yritämme provosoida teille joitakin retorisia kysymyksiä, joitakin neuvoja, paljon kuin TF tai CA tai itse tekisi henkilökohtaisesti virka. 
+
+Niin katso help50 jos et välttämättä tunnista ongelma. Mutta eivät ole riippuvaisia ​​siitä liian paljon kuin kainalosauva. Varmasti yrittää ymmärtää sen lähtö ja sitten oppia siitä niin että vain kerran tai kahdesti sinä koskaan ajaa help50 tietylle virhe viesti. Tämän jälkeen sinun pitäisi olla paremmat itse selvittää, mitä se todellisuudessa on. 
+
+Tehdään yksi muu täällä. Anna minun mennä eteenpäin, ja toiseen tiedosto me kutsumme tätä buggy1.c. Ja tähän tiedostoon olen menossa deliberately-- mutta teeskennellä että en ymmärtää, mitä virheen olen tehnyt. 
+
+Aion mennä eteenpäin ja tehdä this-- # include, koska olen oppinut läksynsä hetki sitten. Int main (void), kuten aiemmin. Ja sitten täällä aion tehdä string s - get_string. Ja muistaa viime kerran Tämä tarkoittaa, hei, tietokone, antaa minulle muuttuja, soita se s, ja tehdä tyypin muuttujan merkkijonon joten en voi tallentaa yhden tai useamman sanan sitä. 
+
+Ja sitten oikeanpuoleisessa puolella yhtäläisyysmerkin on get_string, joka on toiminto CS50 kirjastosta että juuri näin. Se saa funktio ja sitten käsiä sen oikealta vasemmalle. Joten tämä yhtäläisyysmerkki ei tarkoita "On yhtä kuin" kuten voisi luulla matematiikasta. Se tarkoittaa toimeksianto oikealta vasemmalle. Joten tämä tarkoittaa, ottaa merkkijonon käyttäjä ja tallentaa sen sisällä s. 
+
+Nyt käyttää sitä. Anna minun mennä eteenpäin nyt ja toisena line, anna minun mennä eteenpäin ja sanoa "hei" - ei "maailman", mutta "Hei,% S-- joka on meidän paikkamerkki, pilkku s, joka on meidän vaihteleva, ja sitten puolipisteellä. Joten jos en tyriä liikaa täällä, tämä näyttää oikean koodin. 
+
+Ja vaistoni ovat nyt niiden keräämiseksi. Tiedosto on nimeltään buggy1.c. Joten aion tehdä tehdä buggy1, Enter. Ja hiton-, jos se ei ole vieläkin enemmän virheitä kuin ennen. Siis, ei enempää virheilmoituksia se olisi näyttävät kuin todellinen riviä tässä ohjelmassa. 
+
+Mutta takeaway tässä, vaikka olet hukkua joissa on kaksi tai kolme tai neljä enemmän virheilmoituksia, keskittyvät aina hyvin Ensimmäinen näistä viesteistä. Tarkasteltaessa Ylimmässä yksi, rullata takaisin ylös kuin tarvetta on. Joten tässä olen kirjoittanut make buggy1. Tässä että Clang tuotanto odotetusti. 
+
+Ja tässä on ensimmäinen punainen virhe. Käytä pimeän tunnisteen string, minä tarkoitan vakiona? Joten standardi on todella jotain muuta. Se viittaa käyttäjän näppäimistö, lähinnä. 
+
+Mutta se ei ole mitä tarkoitin. Tarkoitin merkkijono, ja tarkoitin get_string. Mikä siis on se, että minä unohti tehdä tällä kertaa? Mitä puuttuu tällä kertaa? Minulla on # include, joten Olen pääsy printf. 
+
+Mutta mitä minä ole pääsy vain vielä? No, aivan kuten viime kerralla, Minun täytyy kertoa kääntäjä Kalahtaa mitä nämä toiminnot ovat. Get_string ei tule C. Ja erityisesti, se ei tulla header tiedosto,. Se sijaan tulee jotain henkilökunta kirjoitti, joka on eri tiedosto nimetä mutta osuvasti nimetty. 
+
+Joten yksinkertaisesti lisäämällä, että yhdellä rivillä of code-- hae viimeksi että kun Clang kulkee, se tulee katsomaan minun koodi ylhäältä alas, vasemmalta oikealle. Se tulee huomata, oh, haluat. Anna minun mennä ja huomaavat, missä se on palvelimella, Kopioi ja liitä se pääasiallisesti, yläosaan oman tiedoston jotta tässä vaiheessa tarinan, rivi 1, loput ohjelman voi todellakin käyttää mitä tahansa toimintoja siinä joukossa get_string. Joten aion sivuuttaa loput näistä virheistä, koska olen todellakin epäillä, että vain ensimmäinen todella väliä. Ja aion mennä eteenpäin ja uusinta, tallennuksen jälkeen minun arkistoida tehdä buggy1. Ja voila, se teki työtä. Ja jos en ./buggy1 ja kirjoita varten Esimerkiksi Zamyla, en nyt saa hei, Zamyla sijasta hei, maailma. 
+
+Selvä. Joten takeaways täällä sitten ovat, yksi, yrittää poimia niin paljon kuin voit alkaen virheilmoitukset yksin, etsii joitakin tunnistettavia sanoja. Esto, että käyttävät help50 per ongelma asettaa erittely. Mutta esto että myös aina etsiä yläosassa virhe vain, vähintään aluksi, mitä tietoja se voisi todella tuottaa. Mutta näyttää siltä siellä n vieläkin enemmän toimintoja rakennettu osaksi CS50 Library auttaa te varhaisessa lukukausi ja varhaisessa vaiheessa ohjelmointi selvittää, mitä on vialla. Tehdäänpä toinen esimerkki tästä. Aion kutsua tätä buggy2, joka, taas aiotaan virheellinen ulos portin suunnittelun. 
+
+Ja aion mennä eteenpäin ja tehdä # include. Ja sitten aion tehdä int main (void). Ja sitten aion tehdä silmukka. For (int i _ 0. i on pienempi tai yhtä suuri kuin 10. i ++, ja sitten aaltosulkeita, aion tulostaa vain hashtagia symboli täällä ja uusi rivi merkki. 
+
+Joten tahallisuus tämän Ohjelma on yksinkertaisesti kerrata 10 kertaa ja jokaisen iteraation Tämän silmukan kerta läpi sykli, tulostaa hashtagia, hashtagia, hashtagia. Yksi per rivi, koska olen on uusi linja siellä. Ja muistuttaa, että varten silmukka, kohti viime week-- ja saat enemmän perehtynyt syntaksia käyttämällä sitä käytäntöä ennen long-- tämä antaa minulle muuttuja nimeltä i ja asettaa sen 0. 
+
+Tämä kasvattaa i päälle jokainen iteraatio 1. Joten i menee 1-2 ja 3 vastaan. Ja sitten tästä ehdosta keskimmäinen välillä puolipisteet saa tarkastaa jokaisen iteraation tekemään Varmista, että olemme edelleen kuuluvuusalueella. Joten haluan kerrata 10 kertaa, joten en on eräänlainen hyvin intuitiivisesti juuri laittaa 10 minun yläraja siellä. 
+
+Ja kuitenkin, kun käytän tämän jälkeen kokoamisessa make buggy2-- ja se koota OK. Joten en ole syntaksivirhe tällä kertaa. Anna minun mennä eteenpäin nyt ja ajaa buggy2, Enter. Nyt selaa ylöspäin. Ja haluaisin lisätä koko ikkunan. 
+
+Olen ilmeisesti on 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Joten ei 11 hashtags, vaikka Olen selvästi laittaa 10 sisälle tämän silmukan. Nyt jotkut teistä ehkä nähdä heti mikä virhe johtuu siitä, että itse asiassa, tämä ei ole kovin vaikea virhe tehdä. Mutta se on hyvin yleisesti teki hyvin varhain. 
+
+Haluan huomauttaa kuitenkin, on, miten voisi minä kuva tästä? No, käy ilmi, että CS50 kirjasto tulee ei ainoastaan ​​get_string ja get_int ja get_float ja muita toimintoja. Sen mukana tulee myös erityinen toiminto nimeltään eprintf, tai virhe printf. Ja se on olemassa ainoastaan ​​tehdä se hieman helpompaa kun virheenkorjaus koodi vain tulosta virheilmoitus ruudulla ja tietää, mistä se tuli. 
+
+Niinpä esimerkiksi yksi asia voisin tehdä täällä tällä toiminnolla on this-- eprintf, ja sitten aion mennä eteenpäin ja sanoa i on nyt% i, kenoviiva n. Ja aion kytkeä arvon i. Ja ylös, koska tämä on CS50 Library, Aion mennä eteenpäin ja sisältävät joten minun täytyy käyttää tätä toimintoa. Mutta Tarkastellaan mitä linjaa 9 on tarkoitus olla tekemässä. Aion poistaa tämän lopulta. Tällä ei ole mitään tekemistä minun yleisenä tavoitteena. Mutta eprintf, virhe printf, on vain tarkoitus antaa minulle joitakin diagnostisia tietoja. Kun olen suorittanut minun ohjelma, haluan nähdä tämän näytön väliaikaisesti yhtä hyvin ymmärtää mitä tapahtuu. 
+
+Ja, todellakin, kullakin iterointia here linjan 9 Haluan nähdä, mikä on arvo i? Mikä on arvo i? Mikä on arvo i? Ja toivottavasti minun pitäisi vain nähdä, että viestin, myös 10 kertaa. 
+
+Joten anna minun mennä eteenpäin ja kääntää minun ohjelma, koska minun täytyy tehdä tahansa I tehdä muutoksia. ./buggy2. Ja now-- OK. Siellä on paljon enemmän tekeillä. Haluan siis vierittää ylöspäin vielä suurempi ikkuna. 
+
+Ja näet, että jokainen hashtags on edelleen tulostuksen. Mutta jokaisen niistä on nyt tämä diagnostiikkalähtö muotoiltu seuraavasti. Nimi minun ohjelma tässä buggy2. Nimi tiedosto on buggy2.c. Linjan numero, josta tämä painettiin on viiva 9. Ja sitten oikealla joka on virheilmoituksen, Odotan. 
+
+Ja mitä mukavaa tästä on, että nyt en tarvitse välttämättä laskea päähäni mitä minun ohjelma tekee. Näen, että on ensimmäinen iterointi i on 0, Sitten 1, sitten 2, sitten 3 ja sitten 4, niin 5, sitten 6, sitten 7, niin 8, sitten 9, sitten 10. Joten odota hetki. Mitä täällä tapahtuu? Olen edelleen näyttävät laskenta aiotulla jopa 10. 
+
+Mutta mistä aloittaa? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Joten 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- 11. sormi on osoitus ongelmasta. Olen ilmeisesti lasketa virheellisesti minun silmukka. Eikä mennä 10 toistojen, Olen alkaen 0, Olen päättyy ja kautta 10. Mutta koska, kuten tietokone, Olen alkanut laskenta 0, Olisin laskemalla ylös sen, mutta ei läpi, 10. 
+
+Ja niin korjata, I lopulta toteutunut täällä, on yksi kaksi asiaa. Voisin hyvin yksinkertaisesti sanoa laskea jopa alle 10. Joten 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, joka on todellakin oikea, vaikka se kuulostaa vähän väärin. Tai sitten voisi tehdä pienempi tai yhtä suuri 9, niin kauan kuin minä alkavat 0. Tai jos todella eivät pidä siitä, et laskea läpi 10 mutta alkavat 1. Mutta jälleen kerran, tämä vain ei ole kovin yleistä. In programming-- vaikkakin ei niinkään Scratch-- mutta ohjelmointi C ja muita kieliä, kuten JavaScript ja Python ja muut, se on vain hyvin yleinen keskustelumme binary vain alkaa laskea tällä pienin määrä voit, joka on 0. Selvä. Niin, että eprintf. Ja vielä, nyt kun olen tajunnut minun ongelma, ja aion palata 0 kautta alle 10, aion mennä ja poistaa eprintf. 
+
+Sen ei pitäisi olla siellä, kun alus minun koodi tai lähetä oma koodi tai näyttää sitä kenellekään muulle. Se on oikeastaan ​​vain tarkoitti voidaan käyttää väliaikaisesti. Mutta nyt olen korjannut Erityisenä ongelmana samoin. 
+
+No, tehdään yksi esimerkki tästä että aion lietsoa seuraavasti. Aion mennä eteenpäin ja #sisältää . $ 50 Ja aion mennä eteenpäin ja # include. 
+
+Ja aion säästää tämä kuva buggy3.c. Ja aion mennä eteenpäin ja julistaa int main (void). Ja sitten sisällä siellä Aion tehdä int i _ - Haluan toteuttaa ohjelman kanssa get_negative_int. Tämä ei ole funktio, joka on olemassa vielä. Joten aiomme toteuttaa se vain hetken. Mutta me tulemme näkemään miksi se viallisista ensin omille. Ja kun olen saanut int käyttäjältä, Olen juuri menossa painoon% i on negatiivinen kokonaisluku, kenoviiva, n, pilkku, i. Toisin sanoen, kaikki I haluavat ohjelman tehdä on saada negatiivinen int alkaen käyttäjä ja sitten tulostaa että tällainen ja tällainen on negatiivinen int. 
+
+Nyt minun täytyy toteuttaa tätä toimintoa. Joten myöhemmin minun tiedoston, aion mennä eteenpäin ja julistaa toiminto nimeltään get_negative_int (void) - ja me palata mitä tämä linja tarkoittaa jälleen joka moment-- int n; do-- do following-- printf n on :. Ja sitten aion tehdä n - get_int, ja tehdä tämä, kun n on suurempi kuin 0. Ja palata sitten n ;. 
+
+Joten siellä on paljon meneillään Tässä mutta mikään jota emme katsokaa viime viikolla, ainakin hetkeksi. Joten rivillä 10 täällä olen julistettu toiminto nimeltään get_negative_int, ja Laitoin (void), vuonna sulkuja, syy on tähän ei ota tulo. En ohimennen mitään Tämän toiminnon. Olen vain saada jotain takaisin siitä. 
+
+Ja mitä olen haluavat saada takaisin on kokonaisluku. Ei ole tietoa tyyppi C kutsutaan negative_int. Se on vain int, joten se menee olla meille varmista että arvo, joka on itse asiassa Palautetut on paitsi int mutta on myös negatiivinen. 
+
+On line 12 Olen julistaa muuttuja nimeltään n ja tehden tyyppiä int. Ja sitten linjan 13 kautta 18 Olen tekemässä jotain vaikka jokin on totta. Aion eteenpäin ja tulostus n on, paksusuoli, ja sitten tilaan, kuten nopea käyttäjälle. 
+
+Olen silloin kutsuvan get_int ja tallentamiseen sen niin sanottu palautusarvo että muuttujan n. Mutta aion pitää tehdä Tämän kun n on suurempi kuin 0. Toisin sanoen, jos käyttäjä antaa minulle int ja että määrä on suurempi kuin 0, ergo, positiivinen, aion vain pitää reprompting käyttäjälle, pitää reprompting, pakottamalla yhteistyötä ja antaa minulle negatiivinen int. 
+
+Ja kun n on todella negative-- Oletetaan käyttäjä lopulta tyyppejä -50, niin tämä taas silmukka ei ole enää totta koska -50 ei ole suurempi kuin 0. Joten me murtautua ulos että loop loogisesti ja palauttaa n. 
+
+Mutta on olemassa yksi muu asia minun täytyy tehdä. Ja voin vain tehdä tämän kopioimalla ja liittämällä yhtä riviä koodia yläreunassa tiedoston. Minun täytyy opettaa Clang, tai lupaus kalahtaa, nimenomaisesti, että minä, todellakin, mene ja toteuttaa Tämän toiminnon get_negative_int. Voisi vain pienempi tiedosto. Jälleen muistaa, että Clang lukee asioita ylhäältä alas, vasemmalta oikealle, joten et voi soittaa toiminto, jos Clang ei tiedä sitä tulee olla olemassa. 
+
+Nyt valitettavasti tätä ohjelmaa, kuten jotkut teistä ehkä huomannut, on jo buginen. Anna minun mennä eteenpäin ja tehdä buggy3. Se kokoaa, joten minun ongelmani nyt ei ole syntaksivirhe, kuten sanallisesti virhe, se todella tulee olemaan looginen virhe, että olen tarkoituksella teki mahdollisuutena selata mitä tapahtuu. 
+
+Aion mennä eteenpäin nyt ja ajaa buggy3. Ja aion mennä eteenpäin ja tee yhteistyötä. Aion antaa sen numero 1. Se ei pidä siitä, niin se kehotukset minua uudelleen. 
+
+Miten noin 2? 3? 50? Mikään näistä toimivat. Miten noin -50? Ja ohjelma näyttää toimivan. 
+
+Yritän vielä kerran. Yritän -1, tuntuu toimivan. Yritän -2, tuntuu toimivan. Yritän 0. Huh, se on virheellinen. Nyt olemme nyt hieman pikkutarkka täällä. Mutta se on todellakin niin, että 0 ei ole myönteinen eikä kielteinen. Ja niin, että minun ohjelma on sanomalla, että 0 on negatiivinen kokonaisluku, se ei ole teknisesti oikein. 
+
+Nyt miksi se tekee näin? No, se voisi olla ilmeinen. Ja, todellakin, ohjelma on tarkoitus olla melko yksinkertainen joten meillä on jotain tutkia. 
+
+Mutta perehdymme kolmannen virheenkorjaus tekniikkaa tässä kutsutaan debug50. Eli tämä on ohjelma että olemme juuri luonut tänä vuonna nimeltään debug50 jonka avulla voit käyttää mitä kutsutaan sisäänrakennettu graafinen debuggeri CS50 IDE. Ja debugger on vain ohjelma, joka yleensä voit ajaa ohjelmaa mutta askel askeleelta askeleelta, linja jonka rivi riviltä, ​​tauot, tönäisi noin, katsomalla muuttujia, jotta ohjelma ei ole vain puhaltaa ohi ja nopeasti tulostaa jotain tai ei tulosta jotain. Se antaa sinulle mahdollisuuden, at ihmisen nopeus, olla vuorovaikutuksessa sen kanssa. 
+
+Ja tehdä tämän, sinun yksinkertaisesti toimi seuraavasti. Sen jälkeen koota koodin, joka Olen jo tehnyt, buggy3, mennä eteenpäin ja ajaa debug50 ./buggy. Niin paljon kuin help50 on juokset help50 ja sitten komento, debug50 on juokset debug50 ja Sitten nimi komennon. 
+
+Nyt katsoa mitä tapahtuu tietokoneen näytöllä, oikealla puolella erityisesti. Kun osuin Run, kaikki äkillinen tämä oikeanpuoleinen paneeli avaa näytölle. Ja siellä on paljon menossa on ensi silmäyksellä. Mutta ei ole liian paljon murehtia vielä. 
+
+Tämä osoittaa minulle kaiken joka on meneillään sisällä minun ohjelman nyt ja kautta nämä painikkeet ylös sitten että saan selata minun koodi lopulta askel askel askeleelta. Mutta ei aivan vielä. Huomaa, mitä tapahtuu. Minun pääteikkuna Minua kehotetaan n. Ja aion mennä eteenpäin ja yhteistyöhön tällä kertaa ja kirjoita -1. Ja vaikkakin hieman arvoituksellisesti, -1 on negatiivinen kokonaisluku, kuten odotettua. 
+
+Ja sitten lapsi poistui tila 0 GDBserver poistumista. GDB, GNU Debugger, on nimi perustana olevien ohjelmistojen joka toteuttaa tämän debugger. Mutta kaikki tämä todella tarkoittaa, debuggeri meni pois, koska minun ohjelma lopettaa ja kaikki oli hyvin. Jos haluan todella testaan ​​ohjelma, Minun täytyy ennaltaehkäisevästi kertoa debug50, minne haluan aloittaa askelletaan läpi koodia? 
+
+Ja ehkä yksinkertaisin tapa tehdä se on seuraava. Jos minä viemällä hiiri kouru minun toimittaja täällä, joten oikeastaan ​​vain sivupalkissa täällä, vasemmalle linjan numero, Huomaa että jos minä klikkaa kerran, Laitoin pieni punainen piste. Ja että pieni punainen piste, kuten stop-merkin, tarkoittaa, hei, debug50, tauko suorittamisen minun koodi tuolla kun olen ohjelman suorittamiseen. 
+
+Joten tehdään se. Anna minun mennä eteenpäin ja ajaa minun ohjelma jälleen debug50 ./buggy3, Enter. Ja nyt, ilmoitusta, jotain eri on tapahtunut. En sitä pyydettäessä vielä omassa pääteikkunaan mitään, koska en ole saanut siellä vielä omassa ohjelmassa. Huomaa, että rivillä 8 joka on nyt korostettu, ja siellä on pieni nuoli vasen sanonta, olet keskeytetty täällä. Koodirivin, linja 8, ei ole vielä toteutettu. 
+
+Ja mikä utelias, jos katson tänne oikealla puolella, huomaa, että i on paikallinen muuttuja, paikallinen siinä mielessä että se on sisällä olevan toiminnon. Ja sen arvo, ilmeisesti oletuksena, ja tavallaan sopivasti, on 0. Mutta en kirjoita 0. Se vain sattuu olemaan sen oletusarvo tällä hetkellä. 
+
+Joten anna minun mennä eteenpäin ja tehdä tätä nyt. Anna minun mennä eteenpäin ja yläkulmassa täällä, olen menossa eteenpäin ja valitse tämä ensimmäinen kuvake, joka tarkoittaa askel yli, mikä tarkoittaa, älä ohita se kuitenkin askel yli koodirivin, suorittamalla se matkan varrella. 
+
+Ja nyt, huomaa, minun nopea juuri muuttunut. Miksi niin? Olen kertonut debug50, suorita koodirivin. Mitä tämä rivi koodia tehdä? Kysyy minua int. OK. Saanen yhteistyötä. Anna minun mennä eteenpäin nyt ja kirjoita -1, Enter. Ja nyt huomaa, mikä on muuttunut. Oikealla puolella, oman paikallisen muuttujan i arvellaan olevan noin -1 nyt. Ja se on edelleen tyyppiä int. 
+
+Ja ilmoitus, myös minun niin kutsuttu soittaa pino, missä minä keskeyttää? Me puhua enemmän tätä tulevaisuudessa. Mutta kutsupino juuri viittaa mihin toiminnot ovat tällä hetkellä liikkeessä. Juuri nyt se on vain tärkeimmät. Ja juuri nyt ainoa paikallinen muuttuja on i, jonka arvo on 1. 
+
+Ja kun lopulta askel yli tämän linjan täällä, että sama kuvake oikeassa yläkulmassa, -1 On negatiivinen kokonaisluku. Nyt se on pysähtyen yli että kihara ahdin. Annetaan sen tehdä sen asian. Astun yli että linja, ja voila. 
+
+Joten kaikki, että hirveän valaiseva vielä, mutta se ei anna minun keskeyttää ja miettiä loogisesti mitä tämä ohjelma tekee. Mutta se ei ollut virheellinen asia. Tehdään tämä uudelleen seuraavasti. 
+
+Aion lähteä että keskeytyskohta rivillä 8 kanssa red dot. Aion uusintana debug50. Se automaattisesti keskeytetty täällä. Mutta tällä kertaa sen sijaan, tehostamalla tämän rajan yläpuolella, anna minun itse mennä sisälle get_negative_int ja selvittää, miksi se hyväksyä 0 kelvolliseksi vastaus? 
+
+Joten sen sijaan klikkaamalla Step Over. Aion mennä eteenpäin ja valitse Step Into. Ja huomaa, että linja 8, joka on nyt korostettu nyt yhtäkkiä tulee linja 17. 
+
+Nyt, se ei ole niin debugger on ohitettu linjat 14 ja 15 ja 16. Se on vain ei ole mitään näyttämään siellä. Ne ovat vain julistaa muuttujia, Ja sitten on sana Do ja sitten avoin kihara ahdin. Ainoa toimiva linja, joka on mehukas todella on tämä yksi täällä, 17. Ja siellä olemme keskeytetty automaattisesti. 
+
+Niin printf ( "n.is:") ;, niin joka ei ole vielä tapahtunut. Joten mene eteenpäin ja valitse Step Over. Nyt nopea, todellakin, muutettu ( "n on:"). Nyt get_int, en ole menossa vaivata astumassa, koska toiminta oli tekemät CS50 kirjastossa. Se on oletettavasti oikein. 
+
+Joten aion mennä eteenpäin ja tavallaan yhteistyötä antamalla sille int, mutta ei negatiivinen int. Joten anna minun mennä eteenpäin ja osui 0. Ja nyt, mitä tapahtuu täällä kun saan alas linja 21? En ole iteroidaan uudelleen. En näytä olevan jumissa, että silmukka. Toisin sanoen, tämä keltainen bar ei jatka ympärillä, ja ympäri ja ympäri. 
+
+Nyt Miksi? No, n, mikä on n juuri nyt? Voin katsoa paikallisen muuttujat virheenkorjauksen. n on 0. Selvä, mikä oli tilani? 
+
+20-- linja 20 on hyvin, 0 on suurempi kuin 0. Tuo ei ole totta. 0 ei ole suurempi kuin 0. Ja niin minä puhkesi tästä. 
+
+Ja joten siksi linjalla 21, jos olen itse edelleen, Aion palata 0, jopa vaikka en olisi pitänyt hylätä 0 sillä ei oikeastaan ​​ole negatiivisia. Joten nyt, en oikein edes välitä virheenkorjauksen. Sain sen, en tarvitse tietävät, mitä enemmän on tekeillä. 
+
+Joten aion mennä eteenpäin ja klikkaa Play-painiketta, ja olkoon tämä viimeistely ylös. Nyt olen ymmärtänyt, että minun bug on ilmeisesti linjalla 20. Se on minun looginen virhe. 
+
+Ja niin mitä haluanko tehdä muuttaa tätä? Jos ongelma on että en ole pyydystämiseen 0, se on vain looginen virhe. Ja voin sanoa, kun n on suurempi tai yhtä suuri kuin 0, pitää kehottaa käyttäjää uudestaan ​​ja uudestaan. 
+
+Joten, jälleen, yksinkertainen virhe, ehkä vaikka esiin, kun näit minut kirjoittaa se vain muutama minuutti sitten. Mutta takeaway täällä on, että debug 50, ja virheenkorjaus ohjelmisto yleisemmin olet tämän uuden löytyi voimaa käydä läpi oman koodin, katso kautta, että oikea käsi paneeli mitä muuttujia arvot. Joten et välttämättä täytyy käyttää jotain kuten sinä eprintf tulostaa näitä arvoja. Voit itse nähdä ne visuaalisesti näytöllä. 
+
+Nyt pidemmälle, on syytä huomata, että on olemassa toinen tekniikka, joka on todella Super yhteinen. Ja ehkä ihmetellä, miksi tämä pieni kaveri täällä on istunut lavalla. Joten on tämä tekniikka, yleensä tunnetaan kumiankka virheenkorjaus, joka oikeastaan ​​on vain osoitus siitä, että usein kun ohjelmoijat kirjoittavat koodia, he eivät välttämättä yhteistyössä muiden kanssa, tai työskentelevät jaetussa ympäristössä. 
+
+He tavallaan kotona. Ehkä se on myöhään illalla. He yrittävät hahmo joitakin vian koodiaan. Ja he vain näe sitä. 
+
+Ja ei ole kämppäkaveri. Ei ole mitään TF. Ei ole CA ympärillä. Kaikki ne on heidän hyllylle on tämä pieni kumiankalla. 
+
+Ja niin kumiankka virheenkorjaus on juuri tämä kutsu ajatella jotain niin typerä koska tämä on todellinen olento, ja itse kävellä läpi koodin suullisesti tämän eloton objekti. Niinpä esimerkiksi, jos tämä on minun esimerkki here-- ja muistuttavat, että aikaisemmin ongelma oli tämä, jos en poistaa tämän ensimmäisen rivin koodia, ja minä mennä eteenpäin ja tehdä buginen 0 jälleen, muistaa, että sain nämä virheilmoitukset täällä. Joten ajatus täällä, naurettava vaikka en tuntea tällä hetkellä teet tämän julkisesti, on, että virhe. 
+
+OK, joten minun ongelmani on, että olen epäsuorasti julisti kirjaston funktion. Ja että kirjaston funktion on printf. Declare-- OK, julistaa mieleeni prototyyppejä. 
+
+Se tarkoittaa, että minun täytyy itse kertoa kääntäjä etukäteen, mitä toiminto näyttää. Odota hetki. En ole vakio io.h. Paljon kiitoksia. 
+
+Joten tässä prosessissa soita näin te ei tarvitse itse olla ankka. Mutta tämä ajatus kävely itse kautta oman koodin niin että te edes kuulla itse, jotta voit ymmärtää puutteita omassa huomautukset, on yleensä ajatus. 
+
+Ja ehkä enemmän loogisesti, ei niin paljoa, että yksi, mutta enemmän mukana Esimerkiksi me vain teki buginen 3.c, saatat kävellä itse läpi seuraavasti. Joten kunnossa, kumia ducky, DDB, jos haluatte. Tässä meillä on minun päätehtävä, Soitan saada negatiivinen int. 
+
+Ja Saan palauttaa arvon. Olen tallentamalla sen vasemmalla puolella rivillä 8 muuttujaan nimeltä i. OK, mutta odottaa, kuinka teki että tuon arvon? Saanen tarkastella toiminto linjassa 12. 
+
+Linjassa 12, meillä on saada negatiivinen int. Ei ota mitään tuloa, ei palaa int, OK. Vakuutan linjan 14 muuttujan n. Se tulee tallentaa kokonaisluku. Se on, mitä haluan. 
+
+Joten tee alla n is-- let minulle kumoa mitä fix olen jo tehnyt. Joten kun n on suurempi kuin 0, tulostaa N, OK. Ja sitten soittaa saada int tallennettu n. Ja sitten tarkistaa, jos n on 0, n on not-- siellä se on. Joten, jälleen, et tarvitsevat todellinen ankka. Mutta vain kävely itseäsi koodi kuin henkinen harjoitus usein auttaa ymmärtää, mitä on tekeillä, toisin kuin juuri tekemässä jotain näin, tuijottaen näyttöä, ja ei puhu itseäsi se, mikä rehellisesti ei ole lähes yhtä tehokas tekniikka. Siinäpä se, joka on useita erilaisia ​​tekniikoita kapasiteetin varsinaisen virheenkorjaus koodi ja löytää vika, jotka kaikki pitäisi olla välineitä oman työkalupakin niin että et ole myöhään illalla, varsinkin, olet ruokailu hallit, tai toimistossa tuntia, hakkaa päätäsi seinä, yrittää ratkaista joitakin ongelmia. Ymmärtää, että on olemassa ohjelmistotyökaluja. On kumiankka työkaluja. Ja siellä on koko henkilökunta tukea odottaa lainata käsi. 
+
+Joten nyt, sana ongelmasta asetetaan, ja mitä toivomme teille päästä ulos niistä, ja miten osaamme arvioida. Per kurssin oppimäärän, CS50 ongelma sarjaa arvioidaan neljän ensisijaisen akseleilla, niin ja speak-- laajuus, oikeellisuudesta, suunnittelu, ja tyyli. Ja laajuus vain tarkoittaa sitä, kuinka paljon pala olet purrut pois? Kuinka suuri ongelma olet kokeillut? Mikä rasitustaso olet ilmenee? 
+
+Oikeellisuutta on, tekee ohjelma työtä sen pitäisi per CS50 toiveiden Kun annat tiettyjä panoksia tai tietyt lähtöihin? Suunnittelu on kaikkein subjektiivinen niistä. Ja se on se, joka tulee ottaa pisin oppia ja pisin opettaa, vuonna sikäli kuin se kuihtuu, kuinka hyvin kirjoitettu on koodi? 
+
+Se on yksi asia vain tulostaa oikea lähtöjen tai palauttaa oikeat arvot. Mutta teet sen mahdollisimman tehokkaasti? Teetkö sitä kuilua ja valloittaa, tai binary search kuten tulemme pian nähdä, että me teimme kaksi viikkoa sitten kanssa puhelinluettelosta? Onko parempia tapoja ratkaista ongelma kuin sinulla on täällä? Se mahdollisuus parempaan suunnitteluun. 
+
+Ja sitten style-- miten aika on koodi? Huomaat, että olen aika erityisesti siitä sisennys oma koodi, ja varmista minun muuttujat kohtuudella nimetty. n, vaikka lyhyt, on hyvä nimi varten numero, i laskenta kokonaisluku, s merkkijono. Ja voimme olla pidempi muuttujanimiin tyyli. Tyyli on, kuinka hyvä ei koodin näyttää? Ja miten luettavissa on se? 
+
+Ja ajan mittaan, mitä avustajat ja TF: t tekevät kurssin on tarjota sinulle, että sellaista laadullista palautetta jotta saat paremman noita eri näkökohtia. Ja siinä, miten me arvioi jokaisen näistä akseleista, se on tyypillisesti hyvin vähän kauhat niin että te, yleensä, Saat käsityksen siitä, miten hyvin teet. Ja todellakin, jos saat pisteet mitään näistä axes-- oikeellisuuden, suunnittelu ja tyyli especially-- että määrä on yleensä välillä 1 ja 5. Ja kirjaimellisesti, jos saat 3: n alussa lukukauden, tämä on erittäin hyvä asia. Se tarkoittaa, että on vielä tilaa parannuksille, johon voisi toivoa vuonna ottaen luokan ensimmäistä kertaa. On toivottavasti joitakin vähän katto johon olet pyrkivä pääsemiseksi. Ja niin saaminen 3: n päälle aikaisintaan kappaletta, jos ei joitakin 2: n ja 4: n, on todellakin hyvä asia. Se on hyvin ulottuvilla, reilusti odotukset. 
+
+Ja jos mielesi on kilpa, odota minuutti, kolme viidestä. Se on todella 6 10. Se on 60%. Luoja, tuo on F. 
+
+Se ei ole. Se ei ole, itse asiassa, että. Pikemminkin se mahdollisuuden parantaa aikana lukukauden. Ja jos saat joitakin Poors, nämä ovat mahdollisuus hyödyntää virka, varmasti kohdat ja muita resursseja. 
+
+Paras on mahdollisuus, todella, olla ylpeä, kuinka pitkälle olet tulevat aikana lukukauden. Joten älä ymmärrä, jos mitään muuten, kolme on hyvä. Ja se mahdollistaa tilaa kasvulle ajan. 
+
+Siitä, miten nämä akselit ovat painotettu, realistisesti olet aikoo viettää suurimman osan aikaa saada asioita työtä, puhumattakaan oikein. Ja niin oikeellisuus on taipumus painotetaan eniten, kuten tämä monikertaisesti kolme. Design on myös tärkeää, mutta jotain, et välttämättä viettävät kaikki nämä tuntia yrittää saada asiat vain töihin. 
+
+Ja niin se on painotettu hieman kevyemmin. Ja sitten tyyli painotetaan vähiten. Vaikka se ei ole yhtä tärkeä pohjimmiltaan, se on vain, kenties helpointa oikealle, matkien esimerkeissä do luento ja osassa, asioita mukavasti sisennetty ja kommentoi, ja niin edelleen on yksi helpoin asioita ja saada oikea. Joten sinänsä, ymmärtää että ne ovat pistettä jotka ovat suhteellisen helppo ymmärtää. 
+
+Ja nyt muutaman sanan this-- akateemisen rehellisyys. Joten kohti kurssin oppimäärä, näet että kurssi on melko bittinen kielen ympärillä. Ja tietenkin ottaa kysymys akateeminen rehellisyys melko vakavasti. 
+
+Meillä on eroa, parempaan tai huonompaan, että on lähettänyt vuosittain enemmän opiskelijat kurinpitotoimista kuin useimmat muita Tietenkin, että olen tietoinen. Tämä ei välttämättä ole osoituksena siitä, että CS opiskelijoita, tai CS50 opiskelijoita, ovat mitään vähemmän rehellinen kuin luokkatoverit. Mutta tosiasia, että tässä maailma, sähköisesti, me vain on teknologinen keino havaita tämän. 
+
+On tärkeää meille oikeudenmukaisuus poikki luokka että teemme tunnistaa tämän, ja nosta ongelma kun näemme asiat. Ja vain maalata kuvan, ja oikeastaan auttamaan jotain tällaista uppoavat, nämä ovat ne opiskelijat yli viimeisten 10 vuoden aikana jotka ovat olleet mukana joissakin tällaiset asiat akateemisen rehellisyys, joidenkin 32 opiskelijoille syksystä 2015, mikä on sanoa, että otamme asiaan erittäin vakavasti. Ja lopulta, nämä luvut säveltää, viimeksi noin 3%, 4% tai niin luokan. 
+
+Joten määräenemmistö opiskelijoiden näyttää siltä, ​​että viivat ovat selkeitä. Mutta älä pitää tämä välitä, varsinkin myöhään yöllä, kun kamppailee Joissakin ratkaisu ongelmaan asettaa, että käytössä on mekanismit saada itseäsi paremmin tukea kuin voisi ajatella, vaikka sillä hetkellä. Ymmärtää, että kun saamme opiskelija väittää, ylitämme vertailla kaikkia lähetyksiä tänä vuonna vastaan ​​kaikkia lähetyksiä viime vuonna, vastaan ​​kaikkia lähetyksiä vuodesta 2007, ja koska, katsomalla, samoin, koodi -tietovarastoja verkossa, keskustelufoorumit, työmailla. Ja me mainita, todella, kaikki vuoksi kaikkien tietojen, että jos joku muu voi löytää sen verkossa, varmasti, joten voimme kurssin. Mutta, todella, henki Kurssin kuihtuu Tämän lausekkeen oppimäärän. Se on todellakin vain, kohtuullinen. 
+
+Ja jos meidän oli tarkentaa, että vain hieman kieltä, ymmärtää, että pohjimmiltaan kaikki teoksesta, jota esittää tämän kurssin täytyy olla oma. Mutta sisällä, että on varmasti mahdollisuuksia, ja rohkaisua, ja pedagoginen arvo kääntyen others-- itse, TF: ien, CAS, TAS, ja muut luokassa, tukea, saati ystäviä ja kämppäkaverini jotka ovat opiskelleet CS ja ohjelmointi ennen. Ja niin on olemassa korvaus siitä. Ja Nyrkkisääntönä on this-- kun pyytää apua, voit näyttää koodin muille, mutta et voi katsella omaansa. Joten vaikka olet toimistossa tuntia, tai D sali, tai jossain muualla työskennellyt joitakin osainen sarja, yksiköiden kanssa ystävä, joka on täysin hieno, klo Lopussa päivän työsi olisi viime kädessä kuuluvat kunkin teistä vastaavasti, eikä jonkin verran yhteistä ponnistusta, paitsi opinnäytetyön jossa se on sallittua ja suositeltavaa. 
+
+Tiedä, että jos olet kamppailevat jotain ja ystäväsi vain sattuu paremmaksi tässä sinun, tai parempi tuohon ongelma kuin te, tai vähän kauemmaksi eteenpäin kuin te, se on täysin järkevää kääntyä ystäväsi ja sanoa, hei, Haittaako katsot minun koodi täällä, auttaa minua spot mitä minun ongelma on? Ja toivottavasti vuonna edun pedagogista arvoa että ystävä ei ole vain sanovat, oi, tee tätä, vaan pikemminkin, mitä puuttuu verkossa 6, tai jotain? Ratkaisu ei kuitenkaan ole että ystävä vieressäsi sanoa, No, täällä, anna minun vetää tähän asti, ja näyttää minun ratkaisu sinulle. Niin, että on linja. Näytät koodia toiset, mutta et saa katsella omaansa, jollei muuta rajoitteet kurssin oppimäärän. 
+
+Joten älä pitää mielessä tämä niin sanottu pahoillani lauseke in kurssin oppimäärän samoin, että jos sitoutua joitakin asiakirjalla ei ole järkevää, vaan tuo se huomiota kurssin päät 72 tunnin kuluessa, kurssin voivat asettaa paikallisia seuraamuksia että voi kuulua epätyydyttävä tai muussa arvosana työstä toimitettu. Mutta tietenkään ei viitata asia edelleen kurinpitotoimia, lukuun ottamatta toistuvia tekoja. Toisin sanoen, jos et tehdä joitakin tyhmä, varsinkin myöhään yöllä, päätös että seuraavana aamuna tai kaksi päivää myöhemmin, heräät ja ymmärtää, mitä minä ajattelin? Teet CS50 näillä on markkinat vahvistamisesta, että ongelma ja omistavat jopa se, että me tavata puolitiehen ja käsitellä sen kanssa asiassa, joka on sekä koulutus- ja arvokkaita sinulle, mutta silti rankaiseva jollakin tavalla. Ja nyt, ottaa terän, tämä. 
+
+[VIDEOTOISTOSTA] 
+
+[MUSIIKKIA] 
+
+[END TOISTO] DAVID J. MALAN: Selvä, olemme takaisin. Nyt katsomme yhdessä Ensimmäinen meidän reaalimaailman verkkotunnuksia in CS50, taiteen salakirjoituksen, taiteen lähettävän ja vastaanottavan salaisuus viestejä, salattu viestit, jos haluatte, joita voidaan deciphered jos olet joitakin keskeisiä ainesosa, että lähettäjä on yhtä hyvin. Joten motivoida tähän otamme Katso tämä asia täällä, joka on esimerkki salaisuus dekooderi rengas, joka voidaan käyttää, jotta selvittää mitä salaista todellisuudessa on. Itse takaisin päivä alakoulussa, jos koskaan lähettänyt salaisia ​​viestejä jotkut ystävä tai jonkin murskaa luokassa, saattaisi kuvitella olitte taitava by oman paperille muuttuvat, kuten A-B, ja B C ja C D, ja niin edelleen. Mutta olit todella salaamalla tietosi, vaikka jos se oli hieman triviaali, ei ollut että vaikea opettaja ymmärtää, hyvin, jos vain vaihtaa B ja C B, todella selvittää mitä viesti oli, mutta olit salausinformaatioon. 
+
+Olit juuri tekemässä sitä yksinkertaisesti, aivan kuten Ralphie täällä kuuluisassa elokuvan, joka toimii melko paljon loputtomiin joka talvi. [VIDEOTOISTOSTA] -Ole Se tiedetään kaiken Ralph Parker on täten nimitetty jäseneksi Little Orphan Annie Secret Circle ja on oikeutettu kaikkiin kunnianosoitukset ja hyödyt ilmenevät siihen. 
+
+-Signed, Little Orphan Annie, counter-allekirjoitettu Pierre Andre, musteella. Honors ja hyödyt, jo yhdeksän vuoden iässä. 
+
+[HUUTAMINEN] -Come Päälle. Mennään sen kanssa. En tarvitse kaikki muu noin salakuljettajia ja merirosvoja. 
+
+: Kuuntele huomenna yö solmittaessa seikkailu musta merirosvolaiva. Nyt on aika Annien salainen viesti sinulle jäsenille Secret Circle. Muista, lapset, vain jäsenille Annie Secret Circle pystyy purkamaan Annien salainen viesti. 
+
+Muista, Annie on riippuvainen teitä. Aseta nastat B2. Tässä on viesti. 12, 11-- 
+
+-Olen In, ensimmäinen salainen kokous. 
+
+-14, 11, 18, 16. 
+
+-Pierre Oli suuren äänen tänään. Voisin sanoa, että illan Viesti oli todella tärkeä. 
+
+-3, 25, joka on viesti alkaen Annie itse. Muista, älä kerro kenellekään. 
+
+-90 Sekuntia myöhemmin, olen ainoa huoneeseen, jossa poika yhdeksän voisi istua rauhassa ja purkaa. Aha, B! Menin seuraavaan, E. 
+
+Ensimmäinen sana on olla. S, mitä oli tulossa helpompaa nyt, U, 25-- 
+
+-Voi, Tule, Ralphie, minun täytyy mennä! 
+
+-Otan Olla alas, Ma! Jannu hurahtaa! 
+
+-T, O, varmista to-- varmasti mitä? Mikä oli pieni Orphan Annie yrittää sanoa? Muista mitä? 
+
+-Ralphie, Andy on saanut mennä, voisitko tulla ulos? 
+
+-Kaikki Oikea, Ma! Tulen ulos! 
+
+-I Lähestyi nyt. Jännitys oli kauhea. Mitä se oli? Kohtalo planeetan voi vaakalaudalla. 
+
+-Ralphie! Andyn mentävä! 
+
+-Otan Olla oikealle ulos, itkeä ääneen! 
+
+Muodostaen miltei siellä, sormet lensi, mieleni oli teräs ansa, joka huokosten vibrated. Se oli melkein selvä, kyllä, kyllä, kyllä. 
+
+-Ole Muista juoda Ovaltine. Ovaltine? Crummy kaupallinen? Paskiainen. [END TOISTO] DAVID J. MALAN: OK, niin että oli hyvin pitkä matka ottaa käyttöön salakirjoituksen, ja myös Ovaltine. Itse asiassa tästä vanha mainos täällä, miksi Ovaltine niin hyvä? Se on keskittynyt louhinta kypsiä ohramallas, puhdas kermaista lehmänmaito, ja erityisesti valmistettu kaakao, yhdessä luonnon fosfatidien ja vitamiineja. Se on lisäksi täydennetty lisävitamiineja B ja D, yum. Ja voit silti saada sen, ilmeisesti, Amazon, kuten teimme täällä. 
+
+Mutta motivaatio täällä oli esitellä salakirjoitusta, erityisesti eräänlainen salakirjoituksen tiedossa salaisiksi avaimen salausta. Ja kuten nimestä voi päätellä, koko turvallisuus salainen avain salakirjoitusjärjestelmä, jos haluatte, menetelmää vain muokkaamisella tiedot kahden ihmisen välillä, on se, että vain lähettäjä ja vain vastaanottaja tietää salaisuuden key-- jotain arvoa, jotkut salainen lause, jotkut salainen numero, joka ansiosta ne molemmat salata ja purkaa tiedot. Ja salaus, oikeastaan, on vain tällä viikolla 0. 
+
+Se on ongelma, missä on tuloa, kuten todelliset viestisi Englanti tai mitä kielen mukaan haluat lähettää jollekulle luokassa, tai Internetin kautta. On olemassa jonkin verran lähtö, joka on menossa olla salattu viesti, jota haluat vastaanottajan vastaan. Ja vaikka joku keskimmäinen saa sitä liian, et halua niitä välttämättä voi purkaa sen, koska sisällä tätä musta laatikko, tai algoritmi, on jonkinlainen järjestelmä, jotkut askel askeleelta ohjeet, ottamiseen että panos ja muuntamalla se osaksi tulos on toivottavasti turvallisella tavalla. 
+
+Ja itse asiassa, on jonkin verran sanastoa tässä maailmassa seuraavasti. Vain teksti on sanaan tietojenkäsittelytieteessä olisi käyttää kuvaamaan tuloon sanoma, kuten Englanti tai mitä kieltä sitten itse haluaa lähettää jollekin toiselle ihmiselle. Ja sitten salakieli on scramble että salakoodattu, tai salattu, versio siitä. 
+
+Mutta on yksi muu ainesosa täällä. On yksi muu tulo salainen avaimen salausta. Ja se on avain itse, joka on yleensä kuten näemme, useita, tai kirjain tai sana riippumatta algoritmi on todella odottaa. 
+
+Ja miten purkaa tietoa? Miten purkaa sitä? No, juuri kääntää lähdöt ja tulot. 
+
+Toisin sanoen, kun joku vastaanottanut salatun viestin, hänellä yksinkertaisesti on tietää, että sama avain. He ovat saaneet salakieli. Ja kytkemällä näiden kahden panoksina salakirjoitusjärjestelmä, algoritmi, tämä musta laatikko, ulos pitäisi tulla alkuperäisen selväkielisenä. Ja niin se on erittäin korkea näkemys siitä, mikä salaustekniikan on oikeastaan kaikki. 
+
+Joten sinne. Tarkastellaan alla huppu jotain olemme saaneet selvinä viime viikolla, ja tässä istunnossa here-- merkkijono. Merkkijono lopussa päivän on vain joukko merkkejä. 
+
+Voisi olla Hello World, tai hei Zamyla, tai mitä tahansa. Mutta mitä se merkitsee olla jono merkkejä? Itse asiassa, CS50 kirjasto antaa meille tietotyyppiä kutsutaan merkkijono. 
+
+Mutta ei oikeastaan ​​ole sellaista kuin merkkijono C. Se on todellakin vain jono merkki, merkki, merkki, merkki, takaisin, takaisin, jotta takaisin, takaisin, takaisin sisälle tietokoneen muistiin, tai RAM. Ja me katsoa syvemmälle, että tulevaisuudessa kun katsomme muistin itse, ja hyödyntäminen, ja uhat, jotka ovat mukana. 
+
+Mutta Tarkastellaan merkkijonon Zamyla. Joten vain nimi ihmisen täällä, Zamyla, joka on sekvenssi merkkiä, Z-A-M-Y-L-A. Nyt oletetaan, että Zamyla nimi on tallennettu tietokoneen ohjelmoida. 
+
+No, on aivan selvää, että meidän pitäisi pystyä katsomaan ne merkit erikseen. Joten olen juuri menossa vetää hieman box noin Zamyla nimi tähän. Ja se on asia C että kun on merkkijono, kuten Zamyla-- ja ehkä että jono on palannut funktio kuin get merkkijonon, voit itse manipuloida se merkki kerrallaan. 
+
+Nyt tämä on germane varten keskustelu käsillä, koska salakirjoituksessa jos haluat muuttaa A B, ja B C ja C D, ja niin edelleen, sinun täytyy pystyä tarkastella yksittäisten merkkien merkkijono. Sinun täytyy pystyä muuttamaan Z jotain muuta, A jotain muuta, M jotain muuta, ja niin edelleen. Ja niin me tarvitaan tapa, ohjelmallisesti, joten puhua, C pystyä muuttamaan ja tarkastella yksittäisiä kirjaimia. Ja voimme tehdä tämän seuraavasti. 
+
+Anna minun mennä suunnata takaisin CS50 IDE. Ja anna minun mennä eteenpäin ja luoda uuden tiedoston että Soitan tällä kertaa string0, koska meidän ensimmäinen esimerkki, piste c. Ja aion mennä eteenpäin ja piiska sitä seuraavasti. 
+
+Joten kuuluvat CS50.h, ja Sitten ovat standardin io.h, joka Olen melkein aina menossa käyttää minun ohjelmia, ainakin ensin. int main mitätön, ja sitten täällä olen aikoo tehdä jouset saa päästä merkkijono. Ja sitten aion mennä eteenpäin ja tehdä tätä. Haluan mennä eteenpäin ja, kuten järki tarkistaa, vain sanoa, hei, prosenttia s, puolipisteitä tekee merkkijono 0. Ohoh, mitä teen täällä? Voi, en kytke se. Joten opetus, että ollut tarkoituksellista. 
+
+Joten virhe, enemmän prosenttia tuloksia kuin data argumentteja. Ja tämä on, vuonna line 7-- ok, joten minulla on, lainaus lainaus päättyy, se minun merkkijono printf. Minulla on prosenttimerkki. Mutta olen puuttuu toinen argumentti. 
+
+Olen puuttuu pilkku s, mikä En ole aiemmissa esimerkeissä. Joten hyvä tilaisuus korjata yksi virhe, vahingossa. Ja nyt minä juoksen string0, kirjoita Zamyla. OK, hei Zamyla. 
+
+Joten olemme ajaa tällaista ohjelmaa muutamia eri kertaa nyt. Mutta Tehdään jotain hieman erilainen tällä kertaa. Sen sijaan vain tulostus Zamyla n Koko nimi ulos printf, Tehdään se merkki kerrallaan. 
+
+Aion käyttää silmukka. Ja aion antaa itselleni laskenta muuttuja, nimeltään i. Ja aion pitää iteroimalla, niin kunhan i on pienempi kuin pituus s. 
+
+On käynyt ilmi, emme Tätä viimeistä kertaa, että c mukana toiminto nimeltään Stirling. Takaisin seuraavana päivänä, ja yleensäkin edelleen toteutettaessa toimintoja, ihmisillä usein valita hyvin ytimekäs nimet tuollainen ääni kuten mitä haluat, vaikka se on puuttuu muutamia vokaaleja tai kirjaimia. Joten Stirling on nimi on toiminto, vie argumentti välillä Suluissa että pitäisi olla merkkijono. Ja se vain palauttaa kokonaisluvun, pituus merkkijonon. 
+
+Joten tämä silmukka rivillä 7 on menossa aloittaa laskemisen i on yhtä suuri kuin 0. Se tulee kasvattaa i on jokaisen iteraation 1, kun olemme tehneet muutaman kerran. Mutta se tulee vain tehdä Tämän asti pisteeseen kun i on pituus merkkijonon itse. 
+
+Joten tämä on tapa, lopulta, iteroimalla yli merkkiä merkkijono sellaisenaan seuraavasti. Aion tulostaa ole Koko merkkijono, mutta prosenttia c, yhden merkin jonka jälkeen uusi rivi. Ja sitten aion mennä eteenpäin, ja tarvitsen sanoa haluat tulostaa nteen luonnetta s. 
+
+Joten jos i on muuttuja, joka ilmaisee indeksi merkkijono, jossa olet siinä, minun täytyy pystyä sanoa, anna minulle nnen luonnetta s. Ja c on tapa tehdä Tämän hakasulkeilla. Sinä yksinkertaisesti sanoa nimen merkkijono, joka tässä tapauksessa on s. Sitten käytät hakasulkeita, jotka ovat yleensä vain yläpuolella rivinvaihtonäppäintä näppäintä. Ja sitten laitat indeksi merkki, että haluat tulostaa. Joten indeksin olemaan number-- 0 tai 1, tai 2, tai 3, tai piste, piste, piste, joitakin muita numero. 
+
+Ja voimme varmistaa, että se tulee olla oikea määrä, koska olen alkaa laskea 0. Ja oletuksena, ensimmäinen merkki merkkijono on sovitun käytännön 0. Ja toinen merkki on teline 1. Ja kolmas merkki on kiinnike 2. Ja et halua mennä liian pitkälle, mutta emme, koska olemme menossa vain kasvattaa i kunnes se on yhtä suuri kuin langan pituutta. Ja jossa vaiheessa, Tämän silmukan pysähtyy. 
+
+Joten anna minun mennä eteenpäin ja tallentaa tämän ohjelma, ja ajaa tehdä jono 0. Mutta minä mokasin. Epäsuorasti julistaa kirjaston funktion Stirling tyypin niin ja such-- nyt, tämä kuulostaa tutulta. Mutta se ei ole printf. Ja se ei saa merkkijono. 
+
+En tyriä vuonna samalla tavalla tällä kertaa. Mutta huomaa täällä hieman alaspäin lisäksi, kuuluu otsikon string.h, määräyksiä tarvittavista ilmoitus Stirling. Joten on todella vihje siellä. 
+
+Ja todellakin se osoittautuu on toinen otsikkotiedoston että olemme ei käytetä luokassa vielä, mutta se on joukossa käytettävissä teille, nimeltään string.h. Ja kyseisen tiedoston, string.h on Stirling ilmoitettu. Joten anna minun mennä eteenpäin ja tallentaa, tehdä jono 0-- mukava, ei virheilmoitukset tällä kertaa. 
+
+./string0 Zamyla, ja Olen aikeissa Enter, jossa vaiheessa getstring on menossa palauttaa merkkijonon, laita se s. Sitten, että silmukka on menossa kerrata yli S: n merkit yksi kerrallaan, ja tulostaa ne yksi per rivi, koska Jouduin että kenoviiva n lopussa. Joten en voinut jättää että kenoviiva n, ja sitten vain tulostaa Zamyla kaikki samassa linjassa, tehokkaasti reimplementing printf, joka ei ole kovin hyödyllistä. Mutta tässä tapauksessa, en ole tehnyt sitä. Olen itse painettu yksi merkin kerrallaan, yksi per rivi, jotta voimme itse nähdä vaikutuksen. 
+
+Mutta minun pitäisi huomata yksi asia täällä. Ja me palaamme Tässä tulevassa viikossa. Osoittautuu, että tämä koodi on mahdollisesti buginen. 
+
+On käynyt ilmi, että get merkkijono ja joitakin muita toimintoja elämässä eivät välttämättä aina palata mitä odotat. Tiedämme luokan viimeinen kerran tässä, jotka saavat merkkijono on tarkoitus palauttaa merkkijono. Mutta mitä jos käyttäjä kirjoittaa tällaista pitkä sana, tai kohta, tai essee että ei vain ole tarpeeksi tietokoneen muistin sopivaksi sitä. 
+
+Kuten, mitä jos jotain menee väärä alla huppu? Se ei ehkä tapahdu usein, mutta se voisi tapahtua kerran tällöin, hyvin harvoin. Ja niin käy ilmi, että get merkkijono ja toimintoja, kuten se ei välttämättä aina palata jouset. He saattavat palauttaa jokin virhe arvo, Joissakin Sentinel arvo niin sanotusti, joka osoittaa, että jotain on mennyt vikaan. Ja te vain tiedä tätä maasta on oppinut sen luokassa nyt, tai ovat lukea lisää asiakirjoja. On käynyt ilmi, että get merkkijono voi palauttaa arvon nimeltä null. Null on erityinen arvo, että me will palata tulevassa viikossa. Mutta nyt, juuri tietää, että jos haluan olla todella asiallista eteenpäin käyttäen get string, I ei pitäisi vain kutsua sitä, ja sokeasti käyttää paluuarvon, luottaen siihen, että se on merkkijono. 
+
+Haluan ensin sanoa, hei, hetkinen, vain toteuttaa, jos s ei ole sama kuin null, jos null, jälleen, on vain joitakin erityisiä arvoa. Ja se on ainoa erityinen arvon tarvitse pelätä varten get merkkijono. Hanki merkkijonon joko menossa palauttaa merkkijono tai null. 
+
+Ja tämä huutomerkki yhtäläisyysmerkki saatat tietää ehkä matematiikka luokka että saatat piirtää yhtäläisyysmerkki kanssa linjan läpi osoittamaan ole samanarvoisia. Se ei ole yleensä luonteeltaan voit kirjoittaa näppäimistöllä. Ja niin useimmissa ohjelmointikieliä, kun haluat sanoa erisuuri, käytät huutomerkki, muuten kutsutaan Bang. Joten sanot bang yhtä kuin, mikä ei tarkoita yhtä kuin loogisesti. Se on aivan kuin siellä ei ole suurempi kuin, tai yhtä suuri tai pienempi kuin tai yhtä näppäimistön joka tekee kaiken yhdessä symbolin. Joten siksi, aikaisemmissa esimerkeissä, teit avoin teline, ja sitten yhtäläisyysmerkki, voidakseen tehdä suurempi tai vaikkapa alle. 
+
+Joten mitä takeaway täällä? Tämä on yksinkertaisesti tapa nyt on Kyseisellä syntaksi, tämä ominaisuus, iteroimalla yksilöllisiin merkkijonon merkkien. Ja aivan kuten ne neliö suluissa voit saada niitä, pitää näitä neliö suluissa Tällainen vihjaten tämän taustalla suunnittelu, jolloin jokainen luonnetta sisällä merkkijono on eräänlainen pakattuna jossain alla huppu tietokoneen muistiin. 
+
+Mutta Tehdään muunnelmaa. Osoittautuu, että tämä Ohjelma on oikea. Joten per CS50 kirveille arvioimiseksi koodi, tämä on oikea nyt. Erityisesti nyt, että olen tarkistanut null, tämä ohjelma pitäisi koskaan kaatua. Ja minä vain tiedän, että kokemuksesta. Mutta ei ole mitään muuta, voimme todella mennä pieleen. Mutta se ei ole kovin hyvin suunniteltu, koska mennään takaisin perusasioihin. 
+
+Ensimmäinen, principles-- Mitä for-silmukka tehdä? A silmukka tekee kolme asiaa. Se alustaa joitakin arvoa, jos kysyt sitä. Se tarkistaa ehdon. Ja sitten jokaisen iteraation, jokaisen jakson, se kasvattaa joitakin arvo tai arvot, täällä. 
+
+Mitä tämä tarkoittaa? Me alustaa i 0. Tarkistamme ja varmista i on pienempi kuin pituus s, joka on Z-A-M-Y-L-A, niin, joka on pienempi kuin 6. Ja, todellakin, 0, kun vähemmän kuin 6. 
+
+Me tulostaa Z päässä Zamyla nimi. Sitten kasvattaa i 0-1. Me sitten tarkistaa, on 1 vähemmän kuin pituus s? Pituus s on 6. Kyllä se on. 
+
+Joten me tulostaa in Zamyla nimi, ZA. Me kasvattaa i 0, 1, 2. Me sitten tarkistaa, on 2 alle pituus Zamyla nimi. 6- joten 2 on alle 6. Kyllä, nyt tulostaa nyt M Zamyla nimi, kolmas merkki. 
+
+Tärkeintä tässä on, että kullakin iterointia tarina, olen tarkkailun, on i pienempi kuin pituus Zamyla? Mutta saalis on, että Stirling ei ole omaisuutta. Ne teistä, jotka ovat ohjelmoitu ennen Java tai muilla kielillä tunteakseen merkkijonon pituuden on ominaisuus, vain joitakin lukea vain arvoa. 
+
+C tässä tapauksessa, jos tämä on funktio, joka on kirjaimellisesti lukumäärän laskemisen merkkiä Zamyla joka kerta kutsumme tätä toiminnallisuutta. Joka kerta kun pyytää tietokoneen käyttämään Stirling, se vilkaisemalla Zamyla, ja sanomalla Z-A-M-Y-L-A, 6. Ja se palaa 6. Seuraavan kerran kun soittaa se sisällä että silmukka, se tulee katsomaan Zamyla jälleen, sanovat Z-A-M-Y-L-A, 6. Ja se tulee palauttaa 6. Joten mitä tyhmä tästä suunnittelu? 
+
+Miksi koodia ole 5 out of 5 suunnittelu juuri nyt, niin sanotusti? No, minä kysyy kysymys tarpeettomasti. Teen enemmän työtä kuin minun täytyy. 
+
+Joten vaikka vastaus on oikea, olen kysyy tietokone, mikä on pituus Zamyla uudelleen, ja uudestaan, ja uudestaan, ja uudestaan? Ja vastaus on koskaan muutu. Se on aina olemaan 6. 
+
+Joten parempi ratkaisu kuin tämä olisi tämän seuraavan version. Anna minun mennä eteenpäin ja laita se erillinen tiedosto nimeltä string1.c, vain pitää se erillään. Ja se osoittautuu on varten silmukka, voit itse julistaa useita muuttujia kerralla. 
+
+Joten aion pitää i ja aseta se 0. Mutta minä myös menossa lisätä pilkku, ja sanoa, antaa minulle muuttuja nimeltä n, jonka arvo on merkkijonon pituus s. Ja nyt, tee tilani kunhan i on pienempi kuin n. 
+
+Joten tällä tavalla, logiikka on identtiset lopussa päivän. Olen kuitenkin muistaen arvo 6, tässä tapauksessa. Mikä on pituus Zamyla nimi? Ja olen laskemisesta sitä n. 
+
+Ja olen edelleen tarkkailun ehto joka kerta. On 0 vähintään 6? On 1 vähemmän kuin 6? On 2 alle 6, ja niin edelleen? 
+
+Mutta en pyydä tietokonetta uudestaan, ja uudestaan, mikä pituus Zamyla nimi? Mitä pituus Zamyla nimi? Mitä pituus tämän Zamyla nimi? Olen kirjaimellisesti muistaa, että ensimmäinen ja vain vastata tässä toisessa muuttujan n. Joten tämä nyt olisi paitsi oikea, mutta myös hyvin suunniteltu. 
+
+Nyt entä tyyli? Olen Nimesin muuttujat melko hyvin, sanoisin. He Super ytimekäs juuri nyt. Ja se on täysin kunnossa. 
+
+Jos sinulla on vain yksi merkkijono ohjelmassa, voit yhtä hyvin kutsua sitä s jousikvartetille. Jos sinulla on vain yksi muuttuja laskemiseksi ohjelmassa, voit yhtä hyvin kutsua sitä i. Jos on pituus, n on super yhteinen samoin. Mutta en ole kommentoinut mitään minun koodia. 
+
+En ole ilmoittanut reader-- onko se minun TF, tai TA, tai vain colleague-- mitä on oletettu on käynnissä tässä ohjelmassa. Ja niin saada hyvä tyyli, mitä haluaisi tehdä on this-- jotain kuten pyytää käyttäjältä syötettä. Voisin kirjoittaa Tämän monin tavoin. 
+
+Varmista S-- varmista get merkkijono palautetaan merkkijono. Ja sitten here-- ja tämä on ehkä tärkein comment-- toistaa yli merkkiä s kerrallaan. Ja voisin käyttää mitä tahansa valikoima Englanti kielen tässä kuvaamaan kukin Näiden paloina koodia. 
+
+Huomaa, että en ole laittaa kommentoida jokainen rivi koodia, oikeastaan ​​vain on mielenkiintoinen niitä, ne jotka on joitakin merkitys etten tekisi haluamme tehdä Super selväksi jonkun käsittelyssä minun koodi. Ja miksi soitat saat string pyytää käyttäjältä syöttää? Jopa, että yksi ei välttämättä kaiken kuvaileva. Mutta se auttaa kertoa tarinan, koska toinen rivi tarina on, varmista saada merkkijono palautetaan merkkijono. 
+
+Ja kolmas rivi tarina on, kerrata yli merkkiä s yhteen kerrallaan. Ja nyt vain hyvä toimenpide, Aion mennä eteenpäin ja lisätä yhden huomautuksen, että vain sanoo print i: nnen hahmo s. Nyt, mitä olen tehnyt päivän päätteeksi? 
+
+Olen lisännyt joitakin Englanti sanojen muodossa kommentteja. Kautta-slash symboli tarkoittaa, hei, tietokone tämä on ihmisen, ei teille, tietokone. Niinpä he huomiotta loogisesti. Ne ovat vain siellä. 
+
+Ja todellakin, CS50 IDE näyttää niitä harmaa, koska ne ovat hyödyllisiä, mutta ei avain ohjelmaan. Huomaa mitä voit nyt tehdä. Onko tiedät C ohjelmointi tai ei, voi vain seistä takaisin tähän ohjelma, ja kuoria kommentteja. Pyydä käyttäjä syöttää, varmista saada merkkijono palautetaan merkkijono, kerrata yli merkkiä s yksi kerrallaan, tulostaa merkki i: nnen merkin S-- et edes tarvitse katsoa koodia ymmärtää, mitä tämä ohjelma tekee. Ja mikä vielä parempaa, jos itse näyttää Tämän ohjelman viikon tai kaksi, tai kuukauden tai vuoden, tekin ei ole tuijottaa koodia, yrittää muistaa, mitä minä yrittänyt tehdä tätä koodia? 
+
+Sinä olet kertonut itse. Olet kuvattu sitä itse, tai jotkut kollegansa, tai TA tai TF. Ja niin tämä olisi nyt oikea, ja hyvä muotoilu, ja lopulta hyvä tyyli samoin. Niin pitää tämä mielessä. 
+
+Joten on olemassa yksi muu asia aion tehdä täällä joka voi nyt paljastaa, mitä on meneillään alla huppu. Joten ei tätä ominaisuutta C, ja muita kieliä, kutsutaan tyypittely että joko epäsuorasti tai eksplisiittisesti voit muuntaa yhdestä tietotyyppi toiseen. Olemme tekemisissä niin pitkälle tänään jousille. 
+
+Ja jouset ovat merkkejä. Mutta muistaa viikosta 0, mitä merkkejä? Merkit ovat vain abstraktio päälle numbers-- desimaalin numeroita, ja desimaaliluvuilla ovat todella vain abstraktio päälle binääriluvut, koska me määritelty sitä. 
+
+Joten merkit ovat numeroita. Ja numerot ovat merkkejä, vain asiayhteydestä riippuen. Ja käy ilmi, että sisällä tietokoneohjelman, voit määrittää, miten haluat etsiä at bitit sisällä kyseisen ohjelman? 
+
+Recall viikolla 0, että meillä oli Ascii, joka on vain tämän koodin kartoitus kirjeitä numeroita. Ja sanoimme, pääoma A on 65. Pääoma B on 66, ja niin edelleen. 
+
+Ja ilmoitus, meillä lähinnä on merkkiä siitä ylärivin täällä, kuten C kutsuisi heitä, merkkejä, ja sitten ints toisella rivillä. Ja se osoittautuu voit muuntaa saumattomasti välillä, tyypillisesti. Ja jos me haluamme tehdä Tämän tarkoituksella, me kannattaa puuttua jotain tällaista. 
+
+Meidän kannattaa muuntaa isoja alentaa tapauksessa, tai pienet kirjaimet isoiksi. Ja se osoittautuu siellä n oikeastaan ​​kuvio täällä voimme omaksua vain hetken. Mutta Katsotaanpa ensin klo Esimerkkinä Näin yksiselitteisesti. 
+
+Aion mennä takaisin CS50 IDE. Aion luoda tiedosto nimeltä Ascii 0.c. Ja aion mennä eteenpäin ja lisätä minun standardi io.h huipulla, int main void yläreunassa tehtäväni. Ja sitten olen juuri menossa tekemään following-- for-silmukka i on yhtä suuri kuin, sanokaamme, 65. 
+
+Ja sitten minä tulee olemaan pienempi kuin 65, plus 26 kirjaimia. Joten minä anna tietokoneen tehdä matematiikka minua siellä. Ja sitten sisälle silmukan, mitä olen menossa tulostaa? 
+
+% C on% i backslash n. Ja nyt haluan kytkeä kaksi arvoa. Olen tilapäisesti laittaa kysymyksen merkitsee siellä kutsua kysymykseen. 
+
+Haluan kerrata 65 lähtien 26 kirjaimet, tulostus pois jokaisen iteraation että hahmon kiinteä vastaava. Toisin sanoen, haluan kerrata yli 26 numerot tulostus mitä ASCII on, kirjain, ja mitä vastaava määrä is-- oikeastaan ​​vain uudestaan kaaviota että dia. Joten mitä pitäisi nämä kysymysmerkkejä olla? 
+
+No, käy ilmi, että toinen pitäisi olla vain muuttuja i. Haluan nähdä, että lukuna. Ja keskellä argumentti täällä, voin kertoa tietokoneen hoitoon että kokonaisluku i kuten merkki, niin kuin korvata sen tästä prosenttia C. 
+
+Toisin sanoen, jos minä, ihmisen ohjelmoija, tietää nämä ovat vain numeroita päivän päätteeksi. Ja tiedän, että 65 olisi karttaa joitakin luonnetta. Tämän nimenomaisen valettu, jossa on suluissa, nimi tietotyypin haluat muuntaa, ja suljettu suluissa, voit kertoa tietokone, hei, tietokone, muuntaa tämän kokonaisluku char. 
+
+Joten kun käytän tätä Ohjelman jälkeen kokoamiseen, katsotaanpa mitä minä get-- tehdä ASCII 0. Hiivatti, mitä tein väärin täällä? Käytä pimeän tunnisteen, kunnossa, ei tahallinen, mutta katsotaan, jos emme voi Syy kautta. 
+
+Joten viiva five-- joten en saanut kovin pitkälle ennen ruuvaamalla ylöspäin. Se on okei. Joten linja 5 i on yhtä kuin 65-- näen. Niin muista, että C, toisin kuin jotkut kieliä jos olet etukäteen ohjelmointi kokemus, olet kertoa tietokoneen, toisin Scratch, mitä tyyppinen muuttuja on. 
+
+Ja unohdin hokeman täällä. Linjassa viisi, olen alkanut käyttää i. Mutta en ole kertonut C mitä tietotyyppi se on. Joten aion mennä täällä ja sanovat, ah, tee se kokonaisluku. 
+
+Nyt aion mennä eteenpäin ja kääntää. Tämä kiinteänä. ./ascii0 Anna, joka on eräänlainen jäähtyä. Ei vain se huippunopea kysyä tietokone tätä kysymystä, ennemmin kuin sen nyt dia, se tulostaa yksi per rivi, A on 65, B on 66, aina down-- koska olen teki tämän 26 times-- kirjaimia z, joka on 90. Ja, itse asiassa, hieman älykkäämpiä olisi ovat olleet minulle ei luottaa tietokoneen lisätä 26. Voisin juuri tehneet 90 samoin, niin kauan sillä en tee samaa virhettä kahdesti. Haluan mennä läpi z, ei vain läpi y. 
+
+Niin, että nimenomainen valettu. Osoittautuu, että tämä ei ole edes tarpeen. Anna minun mennä eteenpäin ja uusintana tämän kääntäjä, ja suorita ASCII 0. On käynyt ilmi, että C on aika fiksu. 
+
+Ja printf, erityisesti, on aika fiksu. Jos vain läpäistävä i kahdesti molemmille paikkamerkit, printf huomaavat, oi, hyvin Tiedän antoi minulle integer-- joitakin numero, kuten 65, tai 90, tai mitä tahansa. Mutta näen, että haluat minun muotoilla että määrä kuin merkin. Ja niin printf voi epäsuorasti heittää Int char sinulle samoin. Joten se ei ole ongelma lainkaan. 
+
+Mutta huomaa, koska tämä vastaavuus voimme itse tehdä tämän myös. Anna minun mennä eteenpäin ja tehdä yhden muut versio this-- Ascii 1.c. Ja sen sijaan iteroimalla yli kokonaislukuja, voi todella puhaltaa mieltäsi iteroimalla yli merkkiä. Jos char c saa pääomaa A, I haluavat mennä eteenpäin ja tehdä tämän, niin kauan kuin C on pienempi tai yhtä suuri kuin pääoman Z. Ja jokaisen iteraation Haluan kasvattaa C, voin Nyt minun Printf linjan täällä vaikkapa prosenttia C on prosenttia uudelleen i, pilkku C. 
+
+Ja nyt, voin mennä toiseen suuntaan, valu merkki nimenomaisesti kokonaisluvuksi. Joten jälleen, miksi teet tämän? Se on vähän outo tavallaan laskea kannalta merkkiä. 
+
+Mutta jos ymmärrät mitä meneillään alla huppu, siellä oikeastaan ​​mitään taikuutta. Sinä vain sanoa, hei, tietokone antaa minulle muuttuja nimeltä C tyypin char. Alustaa sen pääoman A. And huomaa heittomerkkeihin asia. 
+
+Sillä merkkejä C, muistan viime viikolla, käytät heittomerkkien. Jousille, sanoja, lauseita, käytät lainausmerkkejä. OK, tietokone, pitää tehdä tämä, niin kunhan merkki on alle tai yhtä suuri kuin z. Ja tiedän ASCII taulukosta että kaikki Näiden ASCII-koodit ovat vierekkäin. 
+
+Ei ole aukkoja. Joten se on vain A-Z, erottaa yksi numero kunkin. Ja sitten voin kasvattaa char, jos en todellakaan halua. Päivän päätteeksi, se on vain numero. Tiedän tämän. Voin siis vain olettaa lisätä 1 siihen. 
+
+Ja sitten tällä kertaa, voin tulostaa c, ja sitten kiinteä vastaava. Enkä edes tarvitse nimenomaista valettu. Voin antaa printf ja tietokone selvittää asioita, niin että nyt jos juoksen tehdä Ascii1./ascii1, Saan täsmälleen sama asia kuin hyvin. 
+
+Hyödytön ohjelma, though-- kukaan tulee todella kirjoittaa ohjelmisto jotta selvittää, mikä oli numero, joka kuvaa A, B, tai Z? Olet juuri menossa googlettaa, tai etsiä sen verkossa, tai etsi se levyllä, tai vastaavalla. Joten mistä tämä itse saada hyötyä? 
+
+No, puhutaan että dia, huomaa siellä todellinen kuvio täällä isojen ja pienet joka ei ollut sattumaa. Huomaa, että pääoma A on 65. Lowercase a on 97. Ja kuinka kaukana on alempi tapauksessa? 
+
+Joten 65 on, kuinka monta askeleen päässä 97? Joten 97 miinus 65 on 32. Joten pääoma a on 65. Jos lisäät 32 että, saat pienet kirjaimet a. Ja vastaavasti, jos vähennä 32, saat takaisin pääomaa A-- sama B pikku b, iso C pikku c. 
+
+Kaikki nämä puutteet ovat 32 toisistaan. Nyt tämä näyttäisi jotta voisimme tehdä jotain Microsoft Word, tai Google Docs ominaisuus, jossa voi valita kaiken ja sitten sanoa, muuttaa kaikki pieniksi, tai muuttaa kaikki isoiksi, tai muuttaa vain ensimmäinen sana lauseen isoiksi. Voimme todella tehdä jotain niin itse. 
+
+Anna minun mennä eteenpäin ja tallentaa tiedostoa tässä kutsutaan hyödyntää 0.c. Ja mennään eteenpäin ja lietsoa ohjelma että juuri näin seuraavasti. Joten sisältävät CS50 kirjasto. Ja kuuluu vakio I / O. 
+
+Ja tiedän tämä on tulossa pian. Joten aion laittaa sen siellä jo, string.h, joten Olen pääsy asioita, kuten Stirling, ja sitten int main mitätön, kuten tavallista. Ja sitten aion mennä eteenpäin ja tehdä jouset saa päästä string, vain saada merkkijonon käyttäjältä. Ja sitten aion teen järki tarkistaa. Jos jono ei ole sama null, niin se on turvallista jatkaa. Ja mitä haluan tehdä? Aion kerrata välillä i on yhtä suuri kuin 0, ja n asti merkkijonon pituus s. 
+
+Ja aion tehdä niin kauan kuin i on pienempi kuin n, ja i plus plus. Toistaiseksi olen oikeastaan ​​vain lainanotto ideoita ennen. Ja nyt aion esitellä haara. 
+
+Joten muistelen Scratch, missä meillä oli nuo haarautuu tie, ja viime viikolla C. aion sanoa, jos i: nnen hahmo s on suurempi tai yhtäläinen alentaa tapauksessa, and-- Scratch olisit kirjaimellisesti sanoa ja, mutta C sanot et-merkki, ampersand-- ja i: nnen merkki s on pienempi tai yhtä suuri kuin alempi tapauksessa z, Tehdään jotain mielenkiintoista. Katsotaan todella tulostaa merkki ilman rivinvaihto että on merkin merkkijono, i: nnen merkin merkkijonon. 
+
+Mutta mennään eteenpäin ja vähennä 32 siitä. Else jos hahmo merkkijonon etsimme ei välillä pikku ja pikku z, mennä eteenpäin ja vain tulostaa sen ulos muuttumattomana. Niinpä olemme ottaneet käyttöön Tämän haarukoitua merkintätapa meidän jousille saada aikaa i: nnen merkin merkkijonon. 
+
+Olen lisännyt joitakin ehdollinen logiikka, kuten Scratch viime viikon viikolla yksi, jossa Olen vain käyttää minun perustavanlaatuinen käsitys siitä, mitä on meneillään alla huppu. On i: nnen luonne s suurempi tai yhtä suuri kuin? Kuten, on se 97 tai 98, tai 99, ja niin edelleen? 
+
+Mutta se on myös pienempi tai yhtä suuri kuin arvoon pieniä z? Ja jos on, mitä tämä linja tarkoittaa? 14, tämä on tavallaan alkiot koko ajatus, isolla kirje yksinkertaisesti vähentämällä 32 siitä, Tässä tapauksessa, koska tiedän, per se kaavio, miten omat numerot ovat edustettuina. Joten mene eteenpäin ja suorittaa tämän, jälkeen kootaan hyödyntää 0.c, ja ajaa isolla 0. 
+
+Katsotaan kirjoita jotain Zamyla in pienillä tulevat. Ja nyt meillä on Zamyla isoilla. Katsotaan kirjoita Rob pienillä. Yritetään Jason pienillä. Ja pidämme saada pakko-arvo. On pieni vika, että olen Tällainen ei ennakoida. Huomatkaa uusi nopea päätyy samalla rivillä kuin heidän nimensä, joka tuntuu hieman sotkuinen. 
+
+Joten aion mennä täällä, ja todella lopussa tämän ohjelman tulostaa Rivinvaihtomerkkiä. Siinä kaikki. Kanssa printf, sinun ei tarvitse pass muuttujia tai muodossa koodin. Voit kirjaimellisesti vain tulostaa jotain rivinvaihto. 
+
+Joten mene eteenpäin ja tehdä hyötymään 0 jälleen, uusintana se, Zamyla. Ja nyt se on hieman kauniimpi. Nyt minun nopea on omalla uuden rivin. Niin, että kaikki hyvä ja hieno. Niin se on hyvä esimerkki. Mutta en edes välttämättä täytyy kovaa koodia 32. Tiedätkö mitä? Voisin say-- en koskaan muistaa, mikä ero on. 
+
+Mutta tiedän, että jos olen on pientä, En olennaisesti halua vähentää pois riippumatta etäisyys vaihtelee hieman A ja iso, sillä jos oletan, että kaikki muut kirjaimet ovat samat, että pitäisi saada työtä tehnyt. Mutta sen sijaan tehdä sitä, tiedätkö mitä? On toinenkin tapa edelleen. 
+
+Jos tämä on hyödyntää 1.c-- jos olisin esittää, että erilliseen tiedostoon. Tehdään hyödyntää 2.c seuraavasti. Aion todella puhdista täällä. Ja sen sijaan, että edes tietää tai välitä niistä alhainen toteutuksen yksityiskohdat, olen sen sijaan juuri menossa tulostaa merkin, lainaus lainaus, prosenttia C, ja soita toinen toiminto, olemassa joka vie argumentti, joka on luonteeltaan, kuten tämä. 
+
+On käynyt ilmi C, siellä toinen toiminto puhelun ylä-, joka nimensä ehdottaa vie hahmo ja tekee sen isoiksi vastaava, ja sitten palauttaa sen jotta printf voi ampua sitä siellä. Ja niin tehdä tämän, vaikka olen otettava käyttöön yksi muu tiedosto. On käynyt ilmi, on olemassa toinen tiedosto että te vain tietää luokasta, tai oppikirja tai online viite, jota kutsutaan C type.h. 
+
+Jos siis lisätä, että kesken minun header tiedostoja, ja nyt uudelleen kääntää ohjelman, capitalize2, ./capitalize2 Enter. Katsotaan kirjoita Zamyla kaikissa pieniä, toimii edelleen sama. Mutta tiedätkö mitä? On käynyt ilmi, että ylemmän on joitakin muita toimintoja. 
+
+Ja haluan esitellä tämän komento täällä, tavallaan kangerrellen nimeltään, mutta ihminen manuaaliseen. On käynyt ilmi, että useimmat Linux-tietokoneet, koska käytämme here-- Linux-käyttöjärjestelmä system-- hallitse nimeltään mies, joka sanoo, hei, tietokone, anna minulle tietokoneen käsikirja. Mitä haluat etsiä että opasta? 
+
+Haluan etsiä toiminnon kutsuttu ylempi, Enter. Ja se on hieman arvoituksellisesti lukea joskus. Mutta huomaa me olemme Linux ohjelmoijan käsikirja. Ja kaikki teksti. Ja huomaa, että siellä on toiminnon nimi täällä. On käynyt ilmi siinä on serkku nimeltään alentaa, mikä tekee päinvastoin. Ja ilmoituksen alle synopsis, käyttää tätä toimivat miehen sivun, niin sanotusti, kertoo minulle, että minä täytyy sisällyttää c type.h. Ja tiesin, että käytäntöön. 
+
+Täällä, se osoitti minulle kaksi prototyyppejä toiminto, niin että jos joskus haluat käyttää tätä En tiedä, mitä he ottaa syötteenä ja mitä he palaavat tuotokseksi. Ja sitten jos luen kuvausta, näen tarkemmin mitä toiminto tekee. Mutta vielä tärkeämpää, jos Odotan alle tuottoarvo, se sanoo palautettu arvo on vaihdettavien kirjeen, tai C, alkuperäisen tulo, jos muuntaminen ei ollut mahdollista. 
+
+Toisin sanoen ylempi yrittää muuntaa kirjeen isoiksi. Ja jos on, se tulee palauttaa sen. Mutta jos se ei voi jostain reason-- ehkä se on jo isoiksi, ehkä se on huutomerkki tai jokin muu punctuation-- se juuri menossa palauttaa alkuperäisen C, mikä tarkoittaa, että voin tehdä minun koodi parempi rakenne on seuraavanlainen. 
+
+En tarvitse kaikkia nämä hiton riviä koodia. Kaikki linjat olen vain korosti voi luhistuneilta osaksi vain yksi yksinkertainen linja, joka on this-- printf prosenttia c ylempään S kiinnikkeen i. Ja tämä olisi Esimerkkinä paremman suunnittelun. 
+
+Miksi toteuttaa 7 tai 8 riviä koodia, mitä se oli Sain poistetaan, kun voit sen sijaan romahtaa kaikki tämä logiikka ja päätöksenteko yhdeksi linja, 13 nyt, että tukeutuu kirjasto function-- toiminnon, joka tulee C, mutta se tekee mitä haluat sen tehdä. Ja rehellisesti, vaikka se ei tullut C, voit toteuttaa sen itse, koska olemme nähneet, jossa saat negatiivinen int ja saada positiivinen int viime viikolla samoin. 
+
+Tämä koodi on nyt paljon enemmän luettavissa. Ja todellakin, jos selaa ylöspäin, katso kuinka paljon kompaktimpi Tämä versio minun ohjelma on. Se on vähän ylhäältä raskas nyt, kaikki nämä kuuluvat. Mutta se on OK, koska nyt seison harteille ohjelmoijat ennen minua. Ja joka se oli joka toteutetaan ylempi todella teki minulle palveluksen, aivan kuten kuka täytäntöön Stirling todella teki minulle palveluksen jokin aika sitten. Ja niin nyt meillä on parempi suunnitteluohjelma joka toteuttaa täsmälleen samaa logiikkaa. 
+
+Puhuminen Stirling, anna minun mennä eteenpäin ja tehdä tätä. Anna minun mennä eteenpäin ja tallenna tämä kuva stirling.c. Ja se osoittautuu, voimme kuoria takaisin yksi toinen kerros melko yksinkertaisesti nyt. Aion mennä eteenpäin ja piiska up toinen ohjelma main tässä että yksinkertaisesti uudelleen työkoneiden merkkijonon pituus seuraavasti. Joten tässä on koodiriviä että saa minut merkkijono käyttäjältä. Pidämme käyttämällä tätä uudestaan ​​ja uudestaan. Annan itselleni muuttuja nimeltä n tyyppiä int, joka tallentaa useita. 
+
+Ja anna minun mennä eteenpäin ja tee seuraava logiikka. Vaikka nnen hahmo s tekee erisuuri backslash 0, mennä eteenpäin ja kasvu n. Ja sitten tulostaa printf prosenttia i n. Väitän, että tämä ohjelma täällä, käymättä merkkijonon pituus, keksii pituus merkkijono. 
+
+Ja taika on täysin kapseloitu linja 8 täällä mitä näyttää uudet syntaksin, Tämän kenoviiva 0 heittomerkkeihin. Mutta miksi? No, miettiä, mitä on ollut jatkunut koko tämän ajan. 
+
+Ja Sivuhuomautuksena ennen kuin unohdan, ymmärtää myös, että sen lisäksi, että ihminen sivuille jotka tulevat tyypillinen Linux-järjestelmän kuten CS50 IDE, ymmärtää, että me, kurssin henkilökunta, on myös teki verkkosivusto versio Tämän saman ajatuksen nimeltään reference.cs50.net, joka on kaikki nämä samassa man-sivuja, kaikki saman dokumentointi, sekä pieni laatikko huipulla, joka mahdollistaa voit muuntaa kaikki melko arcane Kielestä vähemmän mukavaksi tilassa, jossa, opetushenkilöstön, ovat menneet läpi ja pyrkinyt yksinkertaistamaan jotkut kielen pitää asiat keskittyi ajatuksia, eikä joitakin teknisiä. Joten pitää mielessä, reference.cs50.net kuin toinen resurssi samoin. 
+
+Mutta miksi merkkijonon pituus työtä Muuten olen ehdottanut hetki sitten? Tässä Zamyla nimi uudelleen. Ja tässä Zamyla nimi boxed, kuten minä pitää tehdä, maalata kuvan siitä että, oikeastaan ​​vain merkkijono. Mutta Zamyla ei ole olemassa eristyksissä ohjelmassa. 
+
+Kun kirjoittaa ja käynnistää ohjelman käytät Mac tai PC muistin tai RAM niin sanotusti. Ja voit ajatella tietokoneen olevan paljon gigatavua muistia näinä päivinä. Ja keikka tarkoittaa miljardeja, joten miljardeja tavua. 
+
+Mutta katsotaan taaksepäin ajassa. Ja olettaa, että käytämme todella vanha tietokone, joka vain 32 tavua muistia. Voisin, minun tietokoneen näytöllä, yksinkertaisesti vetää tätä seuraavasti. 
+
+Voisin vain sanoa, että tietokone on kaikki tämä muisti. Ja tämä on kuin tikku muistia, jos muistatte meidän kuva edellisen kerran. Ja jos vain jakaa tätä riittävän monta kertaa, Väitän, että minulla on 32 tavua muistin ruudulla. 
+
+Nyt todellisuudessa, voin vain piirtää toistaiseksi tällä näytöllä täällä. Joten aion mennä eteenpäin, ja vain sopimuksen mukaan, kiinnittää tietokoneeni muistissa ruudukko, eikä vain yksi suora viiva. Erityisesti Väitän nyt ruudukkoon, tämä 8 4 ruudukko, vain edustaa kaikkia 32 tavua muistia saatavilla Mac, tai saatavilla tietokoneeseen. Ja he kääre on kaksi riviä, vain koska se sopii paremmin ruudulle. Mutta tämä on ensimmäinen tavu. Tämä on toinen tavu. Tämä on kolmas tavu. 
+
+Ja tämä on 32. tavu. Tai, jos ajattelemme kuin tietokone tutkija, tämä on tavu 0, 1, 2, 3, 31. Joten sinun täytyy 0-31, jos te alkaa laskea 0. 
+
+Jos siis käyttää ohjelmaa että puhelut saavat merkkijono, ja saamme merkkijono ihmisen kuten tein kutsutaan Zamyla, Z-A-M-Y-L-A, miten maailmassa tekee tietokone seurata joka tavun, joka kimpale muistia, kuuluu mihinkin merkkijono? Toisin sanoen, jos siirrymme Kirjoita toinen nimi tietokoneeseen, näin Andi kutsuen saada merkkijono toisen kerran, A-N-D-I on päätyä tietokoneen muistiin samoin. Mutta miten? 
+
+No, käy ilmi, että alla huppu, mitä C tekee säilytettäessä jouset että ihmisen tyypit, tai että tulevat muusta lähteestä, on se rajataan lopussa niitä erityinen character-- kenoviiva 0, joka on vain erityinen tapa sanomalla 80 bittiä peräkkäin. 
+
+Joten A-- tämä on numero 97 muistaa. Siksi jotkut kuvio 8 bittiä edustaa desimaaliluku 97. Tämä kenoviiva 0 on kirjaimellisesti määrä 0, alias nul, N-U-L, toisin kuin aikaisemmin, N-U-L-L, joka puhuttiin. Mutta nyt, vain tietää, että tämä kenoviiva 0 on vain 80 bittiä peräkkäin. 
+
+Ja se on vain tämä rivi hiekka, joka sanoo mitään vasemmalle kuuluu yksi merkkijono, tai yksi tietotyyppi. Ja kaiken oikealla kuuluu jotain muuta. Andi nimi puolestaan joka vain visuaalisesti sattuu kääriä kiinni toisella linjalla, mutta se on vain esteettinen yksityiskohta, Samoin on NUL lopetetaan. 
+
+Se on merkkijono A-N-D-I merkkejä, plus viidesosa salainen luonne, kaikki 0 bitit, että vain rajataan lopussa Andi nimi samoin. Ja jos me kutsumme saada merkkijono kolmannen kerran tietokone saada kielen kaltaisen Maria, M-A-R-I-A, samoin on Marian name nul lopetettiin kenoviivaan 0. 
+
+Tämä on täysin erilainen siitä, miten tietokone tyypillisesti tallentaa kokonaisluku tai float, tai muita tietotyypit edelleen, koska muistaa, kokonaisluku on yleensä 32 bittiä, tai 4 tavua, tai ehkä jopa 64 bittiä, tai kahdeksan tavua. Mutta monet primitives tietokoneella ohjelmointikielellä on kiinteä määrä tavua alla hood-- ehkä 1, ehkä 2, ehkä 4, ehkä 8. 
+
+Mutta jouset, jonka muotoilu, on dynaaminen määrän merkkejä. Et tiedä etukäteen, kunnes Ihmisen tyypit Z-A-M-Y-L-A, tai M-A-R-I-A tai A-N-D-I. Et tiedä kuinka monta kertaa käyttäjä tulee iskemään näppäimistö. Siksi et tiedä miten monta merkkiä etukäteen olet menossa tarvitsevat. 
+
+Ja niin C juuri sellainen lähtee kuin salainen linkkipolku alla huppu lopussa merkkijonon. Tallennettuasi Z-A-M-Y-L-A muistiin, se myös vain asettaa vastaava ajanjaksolta. Lopussa lauseen, se asettaa 80 bittiä, niin kuin muistaa, missä Zamyla alkaa ja loppuu. 
+
+Mikä siis yhteys, Sitten, tämän ohjelman? Tämä ohjelma täällä, Stirling, on yksinkertaisesti mekanismi saada merkkijono käyttäjältä, rivi 6. Linja 7, julistan muuttuja nimeltään n ja aseta se yhtä suuri kuin 0. 
+
+Ja sitten linjassa 8, en yksinkertaisesti pyytänyt kysymys, kun taas n: nnen merkki ei erisuuri kaikki 0 bits-- Toisin sanoen, ei ole yhtäläiset tämä erityinen merkki, kenoviivan 0, joka oli vain, että erityistä nul character-- mennä eteenpäin ja vain kasvattaa n. 
+
+Ja pitää tehdä se, ja pitää tee sitä, ja pitää tehdä se. Ja niin vaikka Aiemmin olemme käyttäneet i, se on täysin kunnossa semanttisesti käyttää n, jos olet vain yrittää laskea tällä kertaa tarkoituksella, ja haluavat vain kutsua sitä n. Joten tämä vain pitää kysyvät, on n: nnen luonne on kaikki 0s? Jos ei, katso seuraavaan ilmeen, katso seuraavaan, katso seuraavaan, katso seuraavaan. 
+
+Mutta heti kun näet backslash 0, Tämän loop-- linjan 9 kautta 11-- pysähtyy. Rikot ulos samalla silmukka, jättäen sisällä että muuttujan n yhteen laskettu kaikkien merkkejä merkkijonon näit, siten tulostamalla. Joten kokeile tätä. 
+
+Anna minun mennä eteenpäin ja ilman käyttämällä Stirling toimintoa, mutta vain käyttämällä omaa paljasjalkainen versio tässä kutsutaan Stirling, anna minun mennä eteenpäin ja ajaa Stirling, kirjoita jotain kuten Zamyla, jonka tiedän etukäteen on kuusi merkkiä. Katsotaan, se toimii. Itse asiassa se on kuusi. Yritetään Rob kolme merkkiä, kolme merkkiä samoin, ja niin edelleen. Niin, että kaikki se menee on alla huppu. Ja huomaa yhteydet, Sitten, jossa ensimmäisellä viikolla luokan, jossa puhuimme jotain abstraktio, joka on juuri tämä Kerrostaa ideoita, tai monimutkaisuus, päälle perusperiaatteista. Täällä, me tavallaan etsivät alla huppu Stirling, niin sanotusti selvittää, miten se voidaan toteuttaa? 
+
+Ja voisimme uudestaan ​​toteuttaa sen itse. Mutta emme koskaan menossa uudelleen toteuttaa Stirling. Olemme juuri menossa käyttää Stirling järjestyksessä todella saada joitakin jouset pituus. 
+
+Mutta ei ole maaginen alla huppu. Jos tiedät, että alla huppu, merkkijono on vain joukko merkkejä. Ja että merkkijono kaikki voidaan numeerisesti käsiteltävä jossa kannatin 0, kannatin 1, kannatin 2, ja te tietävät, että lopussa merkkijono on erikoismerkki, voit selvittää miten useimmat mitä vain ohjelma, koska kaikki se kiehuu lukee ja kirjoittaa muistiin. Eli muuttumassa ja etsimässä at muisti, tai liikkuvat asiat noin muistiin, tulostus asiat ruudulla, ja niin edelleen. 
+
+Joten nyt käyttää tätä newfound ymmärtäminen mitä kieliä tosiasiassa ovat alla huppu, ja Taitat yksi toinen kerros että tähän asti olemme ollut välittämättä kokonaan. Erityisesti tahansa Olemme toteuttaneet ohjelman, meillä on ollut koodirivin yläosassa julistaa tärkein. Olemme myös määritelty int main mitätön. 
+
+Ja että mitätön sisällä suluissa on sanonut koko ajan, että tärkeimmät itse ei ota argumentteja. Kaikki tulo että tärkein on menossa käyttäjälle on tultava muulla mekanismi, kuten get int, tai saada float tai saada merkkijono, tai jokin muu toiminto. Mutta käy ilmi, että kun kirjoittaa ohjelma, voit itse määrittää että tämä ohjelma on ottaa tuotantopanokset ihmisen komentoriviltä itse. 
+
+Toisin sanoen, vaikka me tähän mennessä on ollut käynnissä vain ./hello hei tai vastaavia ohjelmia, kaikki muut ohjelmat, jotka olemme käyttäneet, että me itse ei kirjoittanut, ovat saaneet, näyttää siltä, komentorivi arguments-- asioita, kuten make. Sanot jotain tehdä, ja sitten toinen sana. Tai kalahtaa, sanot clang, ja sitten toinen sana, nimi tiedoston. 
+
+Tai jopa RM tai CP, kuten saatat nähnyt tai käytetty jo poistaa tai kopioida tiedostoja. Kaikki nämä ottaa niin sanottuja komentorivi arguments-- lisäsanoja terminaalissa nopea. Mutta tähän asti, me itse ei ole ollut tämä ylellisyys ottaa panosta käyttäjä kun hän todella toimii itse ohjelman komentoriviltä. 
+
+Mutta voimme tehdä sen uudestaan ​​ilmoittamalla Tärkein eteenpäin, ei olevan mitätöidä suluissa, mutta nämä kaksi argumenttia instead-- ensimmäinen kokonaisluku, ja toinen jotain uusi, jota me aiomme soittaa array, jotain vastaavaa hengessä mitä näimme Scratch luettelona, ​​mutta merkkijonojen joukko, kuten tulemme pian nähdä. Mutta katsotaanpa tämän Esimerkiksi, ennen kuin erottaa mitä se tarkoittaa. 
+
+Joten jos menen CS50 IDE täällä, olen mennyt eteenpäin ja ilmoitettu niminen tiedosto argv0.c seuraavat mallin. Ja huomaa ainoa asia se on erilaista toistaiseksi on, että olen muuttunut mitätön int argc string argv alkusulkumerkki lähellä kiinnike. Ja huomaa nyt, siellä mitään sisällä näistä suluissa. 
+
+Ei ole numero. Eikä ole i, tai n, tai mikä tahansa muu kirjain. Olen vain käyttämällä hakasulkeissa nyt, syistä tulemme takaisin vain hetken. 
+
+Ja nyt, mitä aion tehdä, on tämä. Jos argc yhtä kuin yhtä kuin 2-- ja muistuttavat, että on yhtä tasavertaisia on yhtäsuuruusoperaattorin vertaamalla vasen ja oikea tasa-arvoa. Se ei ole toimeksianto operaattori, joka on yhden yhtäläisyysmerkki, mikä tarkoittaa kopio oikealta vasemmalle jotain arvoa. 
+
+Jos argc yhtä kuin yhtä kuin 2, haluan vaikkapa printf, hei, prosentteja, uusi linja, ja sitten kytke in-- ja tässä uudessa trick-- argv kiinnike 1 syistä että me palaamme hetken. Else if argc ei equal 2, tiedätkö mitä? Mennään eteenpäin ja, kuten tavallista, tulostaa out Hello World ilman korvaamista. 
+
+Joten näyttää siltä, ​​että jos argc, joka sanoista argumentti count, on 2, Aion tulostaa hei jotain tai muuta. Muussa tapauksessa oletuksena, olen menossa painoon Hello World. Mitä tämä tarkoittaa? 
+
+No, anna minun mennä eteenpäin ja tallenna tämän tiedoston, ja sitten eivät tee argv0, ja sitten ./argv0, Enter. Ja se sanoo Hello World. Nyt Miksi? 
+
+No, se kääntyy pois milloin vain suorittaa ohjelman komentoriviltä, täytät Mitä me yleensä soittaa argumenttivektorin. Toisin sanoen, automaattisesti tietokone, käyttöjärjestelmä, on menossa käsi ohjelmaasi itse listan kaikista sanoista että ihmisen kirjoitettuna kehotteen siltä varalta, ohjelmoija haluavat tehdä jotain tämän tiedon. Ja tässä tapauksessa ainoa sana Olen kirjoittanut kehoitteessa on ./argv0. 
+
+Ja niin useita väitteitä, jotka on siirrellään minun ohjelma on vain yksi. Toisin sanoen, argumentti count, joka tunnetaan myös argc täällä kokonaisluku, on vain yksi. Yksi tietenkään ei ole sama kahden. Ja niin tämä on mitä tulostaa, Hello World. 
+
+Mutta minäpä ottaa tämän jonnekin. Saanen sanoa, argv0. Ja sitten miten Maria? Ja sitten Enter. 
+
+Ja huomaa, mitä maagisesti tapahtuu täällä. Nyt sen sijaan Hello World, olen muuttanut käyttäytymistä ohjelman ottamalla tulo eikä get merkkijono tai jokin muu toiminto, mutta ilmeisesti minun komento itse, mitä alun perin kirjoitettu. Ja voin pelata tätä peliä uudelleen muuttamalla sen Stelios, esimerkiksi. 
+
+Ja nyt näen toinen nimi vielä. Ja tässä, sanoisin Andi. Ja voisin sanoa Zamyla. Voimme pelata tätä peliä koko päivän, vain kytkemällä eri arvoja, niin kauan kuin minä antaa tarkalleen kaksi sanaa kehotteeseen, niin että argc, minun argumentti laskea, on 2. 
+
+Näen että nimi kytketty printf, per tämä ehto täällä? Joten meillä näyttää nyt ilmaisuvoimainen ominaisuus ottaa panos toinen mekanismi, alkaen ns komentorivin, eikä tarvitse odottaa kunnes käyttäjä käynnistää ohjelman, ja kehottaa sitten hänelle käyttämällä jotain get merkkijono. 
+
+Joten mitä tämä on? Argc, jälleen, on vain kokonaisluku, määrä words-- arguments-- että käyttäjä on aikaansaatu nopea kello pääteikkunaa mukaan lukien ohjelman nimen. Joten meidän ./argv0 on tehokkaasti, ohjelman nimen, tai miten ajaa ohjelman. 
+
+Se lasketaan sana. Joten argc olisi 1. Mutta kun kirjoitan Stelios, tai Andi, tai Zamyla tai Maria, se tarkoittaa, että väite määrä on kaksi. Ja niin nyt on kaksi sanaa hyväksyttiin. 
+
+Ja ilmoitus, voimme jatkaa tätä logiikkaa. Jos minä oikeastaan ​​sanoa jotain Zamyla Chan, täydellinen nimi, näin ohimennen kolme väitettä yhteensä, Nyt se sanoo oletuksena uudelleen, koska tietenkin, 3 ei ole sama 2. 
+
+Ja niin tällä tavalla, minulla on tulotie argv tämä uusi väite että voisimme teknisesti soittaa mitä haluamme. Mutta sopimuksen mukaan, se on argv ja argc, vastaavasti. Argv, argumenttivektorin, on eräänlainen of synonyymi ohjelmointi ominaisuus C kutsutaan jono. 
+
+Valikoima on luettelo vastaavista arvoista takaisin, takaisin, takaisin, takaisin. Toisin sanoen, jos yksi on täällä RAM, seuraava on aivan sen vieressä, ja aivan sen vieressä. Ne eivät ole koko paikka. Ja että viimeksi mainittu skenaario, jossa asiat ovat koko paikka muistiin, voi todella olla tehokas ominaisuus. Mutta palaamme asiaan, kun me puhua harrastaja tietorakenteita. Nyt joukko on vain kimpale yhtenäistä muistia, jokainen jonka alkiot ovat takaisin, takaisin, takaisin, takaisin, ja yleensä samaa tyyppiä. 
+
+Joten jos ajattelee, mistä hetki sitten, mikä on merkkijono? No, merkkijono, kuten Zamyla, Z-A-M-Y-L-A, on teknisesti, vain joukko. Se on joukko merkkejä. 
+
+Ja niin jos todella vetää tämän, koska olen aiemminkin, koska kimpale muistia, käy ilmi, että jokainen näistä merkkiä vie tavu. Ja sitten on, että erityistä Sentinel luonne, kenoviivan 0, tai kaikki kahdeksan 0 bittiä, että rajataan loppuun merkkijonon. Joten merkkijono, se muuttuu out, lainata lainaus päättyy merkkijono, on vain joukko chara-- char on todellinen tietotyyppi. 
+
+Ja nyt argv, meanwhile-- mennään takaisin ohjelmaan. Argv, vaikka näemme sanan string täällä, ei ole merkkijono itse. Argv, argumenttivektorin, on joukko merkkijonoja. 
+
+Joten kun voit olla erilaisia merkkiä, voit olla korkeampi, joukko strings-- niin, esimerkiksi, kun olen kirjoittanut hetki sitten ./argv0 argv0, tila Z-A-M-Y-L-A, I väitti, että argv oli kaksi jousille it-- ./argv0, ja Z-A-M-Y-L-A. Sisään Toisin sanoen, argc oli 2. Miksi niin? 
+
+No, tehokkaasti, mitä tapahtuu siitä, että kukin näistä jouset on tietenkin joukko merkkejä kuten ennen, jonka jokainen merkkiä vie yhden tavun. Ja älä sekoita todellista 0 ohjelman nimen kanssa 0, mikä tarkoittaa kaikkia 80 bittiä. Ja Zamyla puolestaan ​​on edelleen myös joukko merkkejä. 
+
+Joten lopussa päivä, se todella näyttää tältä alla huppu. Mutta argv, luonteeltaan kuinka tärkeimmistä työt, avulla voin paketoida kaikki tämä ylös, jos haluatte, isompi array että jos me hieman yksinkertaistaa mitä kuva näyttää eivätkä melko piirtää mittakaavassa jopa siellä, Tämä joukko on vain koko 2, ensimmäinen elementti, joka sisältää merkkijonon, toinen elementti joka sisältää merkkijonon. Ja puolestaan ​​jos Tällainen zoomata kussakin näistä jouset, mitä katso alla huppu on, että jokainen merkkijono on vain erilaisia ​​merkkejä. 
+
+Nyt aivan kuten jouset, pystyimme päästä käsiksi on i: nnen merkin merkkijono käyttämällä että hakasulku merkintätapa. Vastaavasti, paneelit yleensä, voimme käyttää hakasulje merkintää saada milloin tahansa määrän merkkijonojen joukko? Esimerkiksi haluan mennä eteenpäin ja tehdä tätä. 
+
+Anna minun mennä eteenpäin ja luoda argv1.c, joka on hieman erilainen tällä kertaa. Sen sijaan, että tarkistamalla argc2, Aion sen sijaan tehdä tämän. Sillä int saan 0, I on vähemmän kuin argc, I plus plus, ja sitten tulostaa sisällä tästä, prosentin s, uusi rivi, ja sitten argv kiinnike i. 
+
+Eli toisin sanoen, en ole tekemisissä yksittäisiä merkkejä tällä hetkellä. Argv, kuten epäsuorasti tyhjään ruutuun olkaimet oikealla nimen argv, tarkoittaa argv on Merkkijonotaulukko. Ja argc on vain int. 
+
+Tämä linja täällä, 6, on sanomalla asettaa i yhtä suuri kuin 0. Laske kaikki asti, mutta ei, argc. Ja sitten jokaisen iteraation, tulostaa merkkijonon. Mikä merkkijono? 
+
+I: nnen merkkijono argv. Joten kun ennen olin käyttäen hakasulku merkintätapa saada i: nnessä merkin merkkijono, nyt Olen käyttäen hakasulku merkintätapa saada aikaa nnen merkkijonon array. Joten se on eräänlainen yhden kerroksen edellä, käsitteellisesti. 
+
+Ja niin mitä siisti tästä ohjelma nyt, jos en koota argv1, ja sitten tehdä ./argv1, ja kirjoita sitten moisesta foo bar baz, jotka ovat kolme oletuksena sanaa, että tietojenkäsittelytieteessä kurottaa tahansa hän tarvitsee jonkin paikkamerkki sanoja, ja Enter, kullakin sanalla, kuten ohjelman nimen, joka on argv ensimmäisessä paikassa, päätyy painetaan yksi kerrallaan. Ja jos minä muuttaa tätä, ja sanon jotain argv1 Zamyla Chan, saamme kaikki kolme näistä sanoja, joka on argv0, argv1, argv2, koska tässä tapauksessa argc, count, on 3. 
+
+Mutta mikä on siisti on jos ymmärrät että argv on vain joukko jouset, ja ymmärrät, että merkkijono on joukko merkkejä, voimme todella sellaista käyttävät tätä hakasulje merkintätapa useita kertoja valita merkkijono ja valitse merkin sisällä merkkijono, sukellus syvemmälle seuraavasti. Tässä esimerkissä anna minun mennä eteenpäin ja kutsuvat tätä argv2.c. Ja tässä esimerkissä, anna minun mennä eteenpäin ja tehdä following-- varten int saan 0, i on pienempi kuin argc, i plus plus, aivan kuten ennenkin. Eli toisin words-- ja nyt tämä on saada monimutkainen tarpeeksi. Sitten aion sanoa kerrata yli jousille argv, kommenttina itselleni. Ja sitten aion olla sisäkkäisiä silmukka, joka luultavasti ovat tehneet, tai katsotaan teet, Scratch, jossa Aion sanoa int-- olen aio käyttää i uudelleen, koska en halua varjo, tai tavallaan korvata olemassa olevan i. 
+
+Aion sen sijaan, sanovat j, koska se on minun mennä muuttuja jälkeen i, kun olen vain yrittää laskea yksinkertaisen numeroita. J saa 0-- ja myös, n, on menossa saada perä pituus argv kiinnike i, kunhan j on pienempi kuin m, j plus plus, toimi seuraavasti. Ja tässä on mielenkiintoinen osa. 
+
+Tulosta merkin ja uusi linja, kytkemällä argv kannatin i, kannatin j. OK, joten haluan lisätä joitakin kommentteja täällä. Kerrata yli merkkiä nykyisessä string, print j: nnen hahmo i: nnelle merkkijono. Joten nyt Tarkastellaan mitä nämä kommentit tarkoittaa. 
+
+Kerrata yli jouset in argv-- montako jouset ovat argv, joka on taulukko? Argc monta, joten olen iteroimalla alkaen i = 0, jopa argc. Samaan aikaan, kuinka monta merkkiä ovat i: nnen merkkijonon argv? 
+
+No, saada, että vastaus, Olen juuri soittaa merkkijonon pituus nykyisestä string I care noin, mikä on argv kiinnike i. Ja aion väliaikaisesti varastoida että arvo n, vain välimuistiin tarkoituksiin, muistaa sen tehokkuutta. Ja sitten aion alustaa j 0, pitää käynnissä niin kauan kuin j on pienempi kuin n, ja jokaisen iteraation lisäyksen j. 
+
+Ja sitten täällä, kohti minun kommentoida linja 12, tulostaa merkin, jonka jälkeen uusi rivi, Erityisesti argv kiinnike i antaa minulle i: nnen string in argv-- joten ensimmäinen sanaa, toinen sana, kolmas sana riippumatta. Ja sitten j sukellusta syvemmälle, ja saa me j: nnen luonne tuo sana. Ja niin, itse asiassa, voit hoitaa argv niin moniulotteinen, kuten kaksiulotteinen, array, jolloin jokainen sana sellainen näyttää kuten tämä mielesi silmä, ja jokainen merkki on sellainen muodostetaan sarake, jos se auttaa. 
+
+Todellisuudessa kun kiusaa Tämän lisäksi tulevaisuudessa viikkoja, se tulee olemaan hieman kehittyneempiä kuin. Mutta voit todella ajatella, että nyt, koska juuri tämä kaksiulotteinen array, jolloin yksi taso sen on kaikki jouset. Ja sitten jos sukeltaa syvemmälle, te voi saada aikaa yksittäisten merkkien taavaa käyttämällä tätä merkintää täällä. 
+
+Joten mikä on nettovaikutus? Anna minun mennä eteenpäin ja tehdä argv2-- hiton sitä. Tein virheen täällä. Epäsuorasti ilmoittamisessa kirjaston funktion Stirling. Joten koko tämän ajan, se on ehkä aiheellista että olemme tavallaan viimeistely missä aloitimme. 
+
+Mokasin implisiittisesti julistaa kirjaston funktion Stirling. OK, odota hetki. Muistan, että varsinkin koska se on täällä. Minun täytyy sisällyttää string.h vuonna tämä versio ohjelmasta. 
+
+Anna minun mennä eteenpäin ja sisältävät string.h, paitsi että, mennä eteenpäin ja kääntää argv2. Ja nyt, tässä sitä mennään, tee argv2, Enter. Ja vaikka se on hieman arvoituksellinen ensi silmäyksellä, huomata, todellakin, mitä tulostetaan on piste argv2. 
+
+Mutta jos kirjoitan joitakin sanoja jälkeen nopea, kuten argv2 Zamyla Chan, Anna, myös hieman arvoituksellinen ensi silmäyksellä. Mutta jos me vierittää takaisin ylös, ./argv2 Z-A-M-Y-L-A C-H-A-N. Siksi olemme iterated yli jokaista sanaa. Ja puolestaan ​​olemme iterated yli jokainen kirjaimen sanan. 
+
+Nyt, kun kaikki tämä, ymmärtää, että on olemassa yksi muu yksityiskohtaisesti olemme olleet eräänlainen unohdetaan koko tämän ajan. Me vain kiusoitteli toisistaan ​​mitä Tärkeimmät n tulot voivat olla? Entä tärkeimmät tuotannosta? 
+
+Kaikki tämä aika, olemme olleet vain kopioimalla sana int edessä tärkein, vaikka et voi nähdä verkossa, joskus virheellisesti vanhemmissa versioissa C ja kääntäjät, että he sanovat mitätön, tai ei mitään. Mutta todellakin, että version C, että käytämme, C 11, tai 2011, ymmärtää että sen pitäisi olla int. Ja sen pitäisi olla joko mitätön tai argc ja argv täällä. 
+
+Mutta miksi int main? Mikä on se todella palaamassa? No, se kääntyy pois kaiken tämän ajan, tahansa olet kirjoittanut ohjelman pääasiallinen on aina palaa jotain. Mutta se on ollut näin salaa. 
+
+Se jokin on int, koska rivi 5 ehdottaa. Mutta mitä int? No, on tämä sopimus ohjelmointi, jolloin jos mitään on mennyt pieleen ja kaikki on hyvin, ohjelmat ja toiminnot yleisesti return-- hieman counterintuitively-- 0. 0 yleensä merkitsee kaikki on hyvin. Joten vaikka ajatella se väärinä monissa yhteyksissä, se itse asiassa tarkoittaa yleensä hyvä asia 
+
+Samaan aikaan, jos ohjelma palauttaa 1, tai negatiivinen 1, tai 5, tai negatiivinen 42, tai ei-0-arvo, että yleensä merkitsee että jotain on mennyt vikaan. Itse omalla Mac- tai PC, olet ehkä nähneet virheilmoituksen, jolloin se sanoo jotain tai muuta, virhe koodi negatiivinen 42 tai virhekoodi 23, tai jotain sellaista. Tämä numero on yleensä vain aavistuksen ohjelmoija tai yritys joka teki ohjelmisto, mikä meni pieleen ja miksi, jotta he voivat käydä läpi asiakirjansa tai koodi, ja selvittää, mitä virhe todella tarkoittaa. Se on yleensä ole hyödyllistä meille loppukäyttäjille. 
+
+Mutta kun tärkein palauttaa 0, kaikki on hyvin. Ja jos et määritä mitä tärkein pitäisi palata, se vain automaattisesti palata 0 sinulle. Mutta palaavat jotain muu on todella hyödyllinen. 
+
+Tässä lopullinen ohjelma, haluan mennä eteenpäin ja kutsuvat tätä exit.c, ja ottaa viimeisen päivän aiheita, tunnettu virhekoodi. Anna minun mennä eteenpäin ja sisältää myös tuttu tiedostoja ylös, tee int main. Ja tällä kertaa, tehdään int argc, string argv, ja minun suluissa vihjata, että se on jono. Ja sitten haluan vain tehdä järki tarkistaa. Tällä kertaa, jos argc ei equal 2, niin tiedät mitä? Unohda. Aion sanoa, hei, käyttäjä, olet puuttuu komentorivillä backslash n. 
+
+Ja sitten se on siinä. Haluan poistua. Aion ennaltaehkäisevästi, ja ennenaikaisesti todella, paluu jotain muuta kuin numero 1. Go to arvoa ensimmäistä virhe, joka voi tapahtua on 1. Jos sinulla on jokin muu virheellinen tilanne, joka saattaa ilmetä, voisi sanoa paluu 2 tai palauttaa 3, tai ehkä jopa negatiivinen 1 tai negatiivinen 2. 
+
+Nämä ovat vain exit koodeja jotka ovat yleensä hyötyä vain ohjelmoija, tai yritys, joka on merenkulun ohjelmisto. Mutta se, että se on ei 0 on, mikä on tärkeää. Joten jos tässä ohjelmassa, haluan taata, että tässä ohjelmassa ainoastaan toimii, jos käyttäjä antaa minulle argumenttia lasken kaksi, nimi ohjelman, ja joitakin muita sana, voin valvoa niin paljon kuin seuraava, Yell käyttäjälle printf sanonta, puuttuva komentorivillä, palata 1. Se tulee vain välittömästi lopettaa ohjelman. 
+
+Vain jos argc = 2 saamme alas täällä, jossa vaiheessa aion sanoa, hei prosenttia s, kenoviiva n, argv1. Toisin sanoen, olen aio jälkeen argv 0, joka on vain ohjelman nimi. Haluan tulostaa hei, pilkku, toinen sana, että ihmisen kirjoitetaan. Ja tässä tapauksessa linja 13, kaikki on hyvin. 
+
+Tiedän, että argc on 2 loogisesti tästä ohjelmasta. Aion mennä eteenpäin ja palauttaa 0. Sivuhuomautuksena, pitää mielessä, että Tämä pätee Scratch samoin. 
+
+Loogisesti, voisin tehdä tätä ja kiteyttää nämä rivit koodia tässä muu lauseke täällä. Mutta se on eräänlainen tarpeettomasti sisennys minun koodi. Ja Haluan tehdä Super selvää, että mitä tahansa, oletuksena, hei jotain saavat painettu, niin kauan kuin käyttäjä tekee yhteistyötä. 
+
+Joten on hyvin tavallista käyttää ehdon, vain jos, pyydystämään virheellinen tilanne, ja sitten poistu. Ja sitten, niin kauan kaikki on hyvin, ei ole muuta, mutta vain koodia ulkopuolella että jos, koska se on vastaava tässä erityistapauksessa, loogisesti. Joten olen palaamassa 0, vain nimenomaisesti merkitsevät kaikki on hyvin. 
+
+Jos minä pois paluuta 0, se olisi automaattisesti olettaa minulle. Mutta nyt kun palaan yksi ainakin tässä tapauksessa Aion, kaupanpäällisiksi ja selkeys, palauttaa 0 tässä tapauksessa. Nyt anna minun mennä eteenpäin ja tehdä exit, joka on täydellinen segue vain lähteä. 
+
+Mutta varmista exit, ja anna minun mennä eteenpäin ja tehdä ./exit, Enter. Ja ohjelma huusi minulle, puuttuva komentorivillä. OK, anna minun tehdä yhteistyötä. 
+
+Saanen sen sijaan tehdä ./exit, David, Enter. Ja nyt se sanoo, hei David. Ja et normaalisti näe tätä. 
+
+Mutta näyttää siltä, ​​että on olemassa erityisellä tavalla Linux todella nähdä mitä exit koodin ohjelma poistui. Joskus graafinen maailmaa, kuten Mac OS tai Windows, näet vain näitä numeroita, kun virheilmoitus ponnahtaa näytölle ja ohjelmoija näyttää, että numeron. Mutta jos haluamme nähdä, mitä virhe viesti on, voimme tehdä sen here-- niin ./exit, Enter, tulostaa puuttuva komentorivillä. 
+
+Jos minä nyt tehdä echo $ ?, joka on naurettavan arvoituksellinen näköinen. Mutta $? on maaginen loitsu joka sanoo, hei, tietokone, kerro mitä edellisessä Ohjelman exit-koodi oli. Ja osuin Enter. Näen 1, koska se mitä kertonut päätehtävä palata. 
+
+Samaan aikaan, jos en ./exit David, ja Enter, näen, hei David. Ja jos minä nyt tehdä echo $ ?, näen hei 0. Ja niin tämä todella olla arvokasta tietoa yhteydessä debuggeri, ei niin paljon, että te, ihmisen, ei välittäisi. Mutta debuggerin ja muut ohjelmat käytämme tämän lukukauden usein tarkastellaan, että määrä, vaikka se tavallaan piilossa ellet etsiä sitä, määrittää, onko ohjelman suorittamisen oikea vai väärä. 
+
+Ja niin tämä tuo meidät Tämän lopussa päivän. Aloitimme tänään katsomalla virheenkorjaus, ja vuorotellen kurssin itse, ja sitten enemmän kiinnostavaa, Teknisesti alla huppu mitä jouset ovat, jotka kestävät viikolla vain otti itsestäänselvyytenä, ja varmasti vei heidät selvänä Scratch. 
+
+Sitten tarkasteltiin, kuinka voimme käyttää yksittäisiä merkkejä merkkijonon, ja sitten taas otti korkeammalle tasolle katsomaan asioita, katsomalla miten well-- jos haluamme saada yksittäisiä elementtiä yhdessä listassa kuten rakenne, ei voi teemme että useita jouset? Ja voimme kanssa komentoriviargumentteja. Mutta tämä kuva täällä vain laatikoiden on demonstratiivipronominit tämä yleinen ajatus array, tai lista, tai vektori. Ja riippuen yhteydessä, kaikki nämä sanat tarkoittaa hieman eri asioita. Joten C, olemme vain menossa puhua array. Ja joukko on murikka muistia, joista kukin on elementit ovat vierekkäisiä, takaisin, takaisin, takaisin, takaisin. 
+
+Ja nämä seikat ovat yleensä samat tiedot tyyppi, merkki, merkki, merkki, merkki, tai string, string, string, string, tai int, int, int, mitä se on yritämme säilyttää. Mutta lopussa päivä, tämä on miltä se näyttää käsitteellisesti. Olet ottaen oman tietokoneen muistin tai RAM. Ja olet veistämällä sen ulos samankokoisia laatikoita, jotka kaikki takaisin, takaisin, jotta takaisin, takaisin tällä tavalla. 
+
+Ja mitä mukavaa noin Tämä ajatus, ja se että voimme ilmaista arvoja tällä tavoin ensimmäisen meidän tietorakenteiden luokassa, tarkoittaa voimme aloittaa ongelmien ratkaisemiseksi koodilla joka tuli niin intuitiivisesti viikolla 0. Saat muistaa puhelimen kirjaesimerkkiin, jossa käytimme hajoita ja hallitse, tai puolitushaku, käydä läpi koko nippu nimiä ja numeroita. Mutta oletimme, muistuttaa, että puhelinluettelo on jo järjestetty, että joku muu oli jo tajunnut out-- annetaan luettelo nimiä ja numbers-- miten aakkostaa niitä. Ja nyt, että C me, Myös on kyky antaa asioita, ei fyysisesti puhelinluettelosta mutta käytännössä on tietokoneen muisti, voimme ensi viikolla esitellä uudelleen this-- ensimmäisen meidän tietorakenteiden käytettäessä array-- mutta vielä tärkeämpää, todellinen tietokone tiede algoritmit toteutetaan koodin, jolla voimme varastoida data rakenteissa, kuten tämä, ja sitten alkaa käsitellä sitä, ja todella ratkaista ongelmia sen kanssa, ja rakentaa sen päälle, lopulta, ohjelmia C, Python, JavaScript, kyselyitä tietokantoja SQL? 
+
+Ja näemme, että kaikki nämä erilaisia ​​ajatuksia lukitus. Mutta nyt, muistaa, että verkkotunnuksen että otimme käyttöön tänään oli tämä asia täällä, ja maailmaan salakirjoituksen. Ja joukossa seuraavan ongelmat itse ratkaisee on taidetta salakirjoituksen, scrambling ja vastahajotus tietoa, ja salauksen ja deciphering tekstiä, ja olettaen lopulta että te nyt tietää, mitä on alla huppu niin että kun näet tai vastaanottaa tällaisen viestin, te itse voi tulkita sitä. Kaikki tämä, ja enemmän ensi kerralla. 
+
+[VIDEOTOISTOSTA] 
+
+-Mover Juuri saapunut. Aion mennä vierailun hänen yliopiston professori. Jep. Moi. Se olet sinä. Odota! David. Olen vain yrittänyt selvittää mitä sinulle tapahtui. Ole hyvä, mitä tahansa voi auttaa. Olit hänen college kämppäkaveri, vai mitä? Olit siellä hänen kanssaan, kun hän sijoittui CS50 hanke? 
+
+[MUSIIKKIA] 
+
+-Se Oli CS50. 
+
+Rakastan tätä paikkaa. 
+
+-Syödä. Menemme ulos liiketoimintaa. 
+
+[END TOISTO] 

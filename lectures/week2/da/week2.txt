@@ -1,0 +1,689 @@
+[MUSIK AFSPILLER] 
+
+DAVID J. MALAN: Okay. Dette er CS50 og dette er starten af ​​uge 2. Og du vil huske, at over de sidste par uger, Vi har været at indføre computer videnskab og til gengæld programmering. 
+
+Og vi begyndte historien i form af Scratch, at grafisk sprog fra MIT Media Lab. Og derefter senest sidste uge, gjorde vi indføre en higher-- a lavere niveau sprog kendt som C, noget, der er rent tekstmæssige. Og, ja, sidste gang vi udforsket i denne sammenhæng en række begreber. 
+
+Dette, tilbagekaldelse, var den meget første program vi kiggede på. Og dette program, ganske enkelt, udskriver, "Hej, verden." Men der er så meget tilsyneladende magi foregår. Der er denne #include med disse vinkelbeslag. Der er int. Der er (void). Der er parenteser, krøllede parenteser, semikolon, og så meget mere. 
+
+Og ja, minde om, at vi indførte Scratch så vi kunne ideelt set se forbi at syntaks, de ting, der er virkelig ikke alt, intellektuelt interessant men tidligt er, absolut, lidt tricky at pakke dit sind omkring. Og faktisk en af ​​de mest almindelige ting tidligt i en programmering klasse, især for de mindre komfortable, er at få frustreret over og udløst op af visse syntaktiske fejl, for ikke at nævne logiske fejl. Og så blandt vores mål dag, faktisk, vil være at udstyre dig med nogle problemløsning teknikker til, hvordan for bedre at løse problemerne selv i form af debugging. Og du vil huske, også, at den miljø, som vi introduceret sidste gang blev kaldt CS50 IDE. Dette er webbaseret software, der giver dig mulighed for at programmere i skyen, så at sige, og samtidig holde alle dine filer sammen, som vi igen vil i dag. Og minde om, at vi revisited disse emner her, blandt dem funktioner og loops, og variabler og booleske udtryk, og betingelser. Og faktisk et par mere, at vi oversat fra verden af ​​Scratch til en verden af ​​C. 
+
+Men det grundlæggende bygning blokke, så at sige, var virkelig stadig den samme sidste uge. Faktisk, vi virkelig bare havde en anderledes brik, hvis du vil. I stedet for at lilla spare blok, vi i stedet havde printf, som er denne funktion i C, der giver dig mulighed for at udskrive noget og formatere det på skærmen. Vi introducerede CS50 Bibliotek, hvor du har nu til din rådighed get_char, og get_int, og get_string, og et par andre funktioner som godt, via hvilken du kan få input fra brugerens eget tastatur. Og vi tog også et kig på tingene ligesom disse-bool, og fjeldørred, og dobbelt, flyde, int, long_long streng. Og der er endda andre datatyper i C. 
+
+Med andre ord, når du erklærer en variabel til at gemme en vis værdi, eller når du implementerer en funktion der returnerer en vis værdi, du kan angive, hvad type værdi, der er. Er det en streng, som en sekvens af tegn? Er det et nummer, som et heltal? Er det en floating point værdi, eller lignende? Så i C, i modsætning Scratch, vi faktisk begyndte at angive, hvilken slags data vi tilbage eller bruger. 
+
+Men selvfølgelig, vi løb også ind i nogle fundamentale grænser for computing. Og i særdeleshed, dette sprog C, tilbagekaldelse at vi tog et kig på heltalsoverløb, virkeligheden at hvis du kun har en begrænset mængde hukommelse eller specifikt et endeligt antal af bits, kan du kun regne så højt. Og så vi kiggede på dette eksempel her hvorved en tæller i et fly,, faktisk, hvis der kører længe nok ville overløb og resultere i en software et virkeligt fysiske potentiale fejl. 
+
+Vi så også på flydende punkt unøjagtighed, virkeligheden at med kun et endeligt antal af bits, uanset om det er 32 eller 64, du kan kun angive så mange numre efter et komma, hvorefter du begynder at få upræcis. Så for eksempel, en tredjedel i verden her, i vores menneskelige verden, vi ved er blot et uendeligt antal af 3s efter kommaet. Men en computer kan ikke nødvendigvis repræsenterer et uendeligt antal numre hvis du kun tillader det nogle endelig mængde information. 
+
+Så ikke kun vi udstyre dig med større kraft i form af, hvordan du kan udtrykke dig selv på et tastatur i form af programmering, vi også begrænset hvad du rent faktisk kan gøre. Og ja, bugs og fejl kan skyldes den slags spørgsmål. Og ja, blandt de emner i dag vil være emner som debugging og faktisk ser under kølerhjelmen på, hvordan tingene blev indført i sidste uge faktisk implementeres så du bedre forstå både funktionerne i og begrænsningerne af et sprog som C. 
+
+Og i virkeligheden, vil vi skrælle lagene af de enkleste af datastruktur, noget, der hedder et array, som Scratch sker for at kalde en "liste." Det er en lille smule forskellige i denne sammenhæng. Og så vil vi også indføre en af ​​de første af vores domænespecifikke problemer i CS50, en verden af kryptografi, kunsten at forvanske eller chifrere oplysninger, så at du kan sende hemmelige beskeder og afkode hemmelige beskeder mellem to personer, A og B. 
+
+Så før vi overgang til den nye verden, lad os prøve at udstyre dig med nogle teknikker, som du kan fjerne eller reducere i det mindste nogle af de frustrationer at du sandsynligvis er stødt løbet alene den seneste uge. Faktisk foran dig er such-- nogle af dine første problemer i C. Og odds er, Hvis du ligesom mig, første gang du forsøger at skrive et program, selvom du tror logisk programmet er ret enkel, du kan meget vel ramme en mur, og compileren ikke kommer til at samarbejde. Lav eller Dunk ikke vil til rent faktisk at gøre dit bud. 
+
+Og hvorfor kan det være? Nå, lad os tage et kig på, måske, et simpelt program. Jeg har tænkt mig at gå videre og gemme denne i en fil bevidst kaldet buggy0.c, fordi jeg ved det til være fejlbehæftet på forhånd. Men jeg måske ikke klar over, at hvis dette er den første eller anden eller tredje program at jeg faktisk gør mig selv. Så jeg har tænkt mig at gå videre og skrive ud, int main (void). Og så indersiden af ​​mine krøllede parenteser, en meget velkendt ( "Hej, verden- backslash, n ") - og et semikolon. 
+
+Jeg har gemt filen. Nu vil jeg gå ned til min terminal vindue og type make buggy0, fordi igen, navnet på filen dag buggy0.c. Så jeg skriver gøre buggy0, Enter. 
+
+Og, åh, gosh, husker fra sidste gang at ingen fejlmeddelelser er en god ting. Så ingen output er en god ting. Men her har jeg tydeligt nogle antal fejl. 
+
+Så den første linje af output efter indtastning gøre buggy0, tilbagekaldelse, er Dunk er temmelig detaljeret output. Under kølerhjelmen, CS50 IDE er konfigureret at bruge en hel masse valgmuligheder med dette compiler så du ikke behøver at tænke over dem. Og det er alt, første linje midler, der starter med Dunk. 
+
+Men efter det, de problemer begynde at gøre deres udseende. Buggy0.c på linje 3, karakter 5, er der en stor, rød fejl. Hvad er det? Implicit erklære biblioteksfunktionen printf med type int (const char *, ...) [-Werror]. Jeg mener, det er meget hurtigt bliver meget mystiske. Og helt sikkert, ved første blik, ville vi ikke forventer, at du forstå helhed af dette budskab. Og så en af ​​de erfaringer, for i dag går at være at forsøge at lægge mærke mønstre eller lignende ting, fejl, du måtte have stødt i fortiden. Så lad os drille hinanden kun disse ord, der ser bekendt. Den store, røde fejl er klart symbol på noget at tage fejl. 
+
+implicit erklære biblioteksfunktionen printf. Så selv om jeg ikke helt forstår, hvad implicit erklære biblioteksfunktionen midler, problemet sikkert angår printf eller anden måde. Og kilden til dette spørgsmål har at gøre med at erklære det. 
+
+Erklære en funktion er nævne det for første gang. Og vi brugte terminologi sidste uge erklære en funktion prototype, enten med en linje i toppen af ​​din egen fil eller i en såkaldt header fil. Og i hvilken fil gjorde vi siger sidste uge, at printf er tilbud, citat slut, erklærede? I hvilken fil er dens prototype? 
+
+Så hvis du husker, den allerførste ting, jeg maskinskrevet, næsten hver program sidste time-- og ved et uheld et øjeblik siden startede skrive myself-- var denne ene her-- hash-- #include <stio-- for input / output-- dot h Og ja, hvis jeg nu gemme denne fil, vil jeg at gå videre og rydde min skærm, som du kan gøre ved at skrive Klar, eller du kan holde Kontrol L, bare for at rydde din terminalvindue blot at eliminere nogle rod. 
+
+Jeg har tænkt mig at gå videre og re-typen make buggy0, Enter. Og voila, jeg ser stadig, at lange kommando fra Dunk, men der er ingen fejlmeddelelse denne gang. Og ja, hvis jeg gør ./buggy0, ligesom sidste gang, hvor prik betyder dette bibliotek, Slash betyder blot, her kommer navnet på programmet og at navnet på det program er buggy0, Enter, "Hej, verden." 
+
+Nu, hvordan kan du have forstået denne opløsning uden nødvendigvis anerkende så mange ord som jeg gjorde, i hvert fald, at have gjort i så mange år? Nå, indser per det første problem sæt, vi præsentere dig for en kommando at CS50 egne medarbejdere skrev kaldet help50. Og ja, C gør specifikation for problemet indstillet, hvordan man bruger dette. 
+
+Men help50 det væsentlige et program, der CS50 personale skrev der tillader dig at køre en kommando eller køre et program, og hvis du ikke forstår sin output, til at videregive sin produktion til help50, ved hvilket punkt software at kurset personale skrev vil se på dit program output linje for linje, tegn for tegn. Og hvis vi, personalet, genkende fejlmeddelelse, du oplever, Vi vil forsøge at provokere dig med nogle retoriske spørgsmål, med nogle råd, meget gerne en TF eller en CA eller mig selv ville gøre personligt i kontortiden. 
+
+Så se at help50 hvis du ikke gør nødvendigvis genkende et problem. Men du behøver ikke stole på det for meget som en krykke. Bestemt forsøge at forstå dens output og derefter lære af det således at kun én eller to gange har du nogensinde køre help50 til en bestemt fejl besked. Efter dette, skal du være bedre rustet dig selv at finde ud af, hvad det egentlig er. 
+
+Lad os lave en anden her. Lad mig gå videre, og i et andet fil vi vil kalde denne buggy1.c. Og i denne fil er jeg vil deliberately-- men lade som om jeg ikke forstå, hvad fejl jeg har lavet. 
+
+Jeg har tænkt mig at gå videre og gøre denne-- #include, da jeg har lært min lektie fra et øjeblik siden. Int main (void), som før. Og så herinde jeg har tænkt mig at gøre string s - get_string. Og husker fra sidste gang, at denne måde, hey, computer, give mig en variabel, kalder det s, og gøre den type pågældende variabel en streng så jeg kan gemme et eller flere ord i det. 
+
+Og så på højre hånd side af lighedstegnet er get_string, som er en funktion i CS50 Bibliotek der gør netop dette. Det bliver en funktion og derefter hænder det fra højre til venstre. Så denne lighedstegn betyder ikke "Lig" som vi måske tror i matematik. Det betyder overdragelse fra højre mod venstre. Så dette betyder, tage snoren fra brugeren og gemme det inde i s. 
+
+Lad os bruge den. Lad mig gå videre nu, og som en anden line, lad mig gå videre og sige "Hej" - ikke "verden", men "Hej,% S-- som er vores pladsholder, komma s, som er vores variabel, og derefter et semikolon. Så hvis jeg ikke skrue op for meget her, det ligner rigtige kode. 
+
+Og mine instinkter nu er at kompilere den. Filen hedder buggy1.c. Så jeg har tænkt mig at gør buggy1, Enter. Og darn-det, hvis der ikke er endnu flere fejl end før. Jeg mener, der er mere fejlmeddelelser det ville synes end faktiske linjer i dette program. 
+
+Men takeaway her er, selv om du er overvældet med to eller tre eller fire flere fejlmeddelelser, fokus altid på den meget første af disse meddelelser. Ser man på den øverste mest en, rulle tilbage op som nødvendigt. Så her har skrevet jeg make buggy1. Her er der Dunk output som forventet. 
+
+Og her er den første røde fejl. Anvendelse af sort identifikator snor, jeg mener standard i? Så standard in er faktisk noget andet. Det refererer til brugerens tastatur, i det væsentlige. 
+
+Men det er ikke det, jeg mente. Jeg mente streng, og jeg mente get_string. Så hvad er det, at jeg glemte at gøre denne gang? Hvad mangler denne gang? Jeg har min #include, så jeg har adgang til printf. 
+
+Men hvad har jeg ikke adgang til endnu? Nå, ligesom sidste gang, Jeg har brug for at fortælle compileren Klang, hvad disse funktioner er. Get_string kommer ikke med C. Og i særdeleshed, det ikke kommer i header fil,. Det i stedet kommer i noget personalet skrev, som er en anden fil navn, men rammende navngivet. 
+
+Så blot ved at tilføje, at en linje af code-- tilbagekaldelse fra sidste gang at når Dunk kører, går det til at se på min kode top til bund, venstre til højre. Det kommer til at lægge mærke til, Åh, du ønsker. Lad mig gå ud og finde det, hvor det er på serveren, kopiere og indsætte det væsentlige, i toppen af ​​din egen fil så på dette tidspunkt i historien, linie 1, resten af ​​programmet kan, ja, bruge nogen af ​​de funktioner deri, blandt dem get_string. Så jeg har tænkt mig at ignorere resten af ​​disse fejl, fordi jeg, ja, har mistanke om, at kun den første faktisk betød noget. Og jeg har tænkt mig at gå videre og gentagelsen, efter at redde mit fil gør buggy1. Og voila, det virkede. Og hvis jeg gør ./buggy1 og skriv, for Eksempelvis Zamyla, jeg nu vil få goddag, Zamyla, i stedet for hej, verden. 
+
+Okay. Så grillbarer her så skal, en, så prøv at indsamle så meget som du kan fra fejlmeddelelser alene, ser på nogle af de genkendelige ord. Spærring at bruge help50 pr problemet indstillet specifikation. Men spærring, at også, altid ser øverst fejlen kun, i det mindste i første omgang, for at se, hvilke oplysninger det kan faktisk give. Men det viser sig at der er endnu mere funktionalitet bygget i CS50 Bibliotek til at hjælpe du tidligt i semesteret og tidligt i programmering regne ud hvad der går galt. Så lad os gøre et andet eksempel her. Jeg har tænkt mig at kalde denne buggy2, som, igen, vil være behæftet med fejl ud af porten, ved design. 
+
+Og jeg har tænkt mig at gå videre og gøre #include. Og så jeg har tænkt mig at gøre int main (void). Og så jeg har tænkt mig at lave en for-løkke. For (int i _ 0. i er mindre end eller lig med 10. Jeg ++, og derefter i krøllede parenteser, vil jeg at udskrive bare en hashtag symbol her og en ny linje karakter. 
+
+Så min hensigt med dette Programmet er ganske enkelt at gentage 10 gange og på hver iteration af denne løkke hver gang gennem cyklussen, udskrive en hashtag, et hashtag, et hashtag. En pr linje, fordi jeg har den nye linje der. Og minde om, at for loop, per sidste week-- og du får mere bekendt med syntaksen ved at bruge det med praksis før long-- det giver mig en variabel kaldet jeg og sætter den til 0. 
+
+Dette intervaller jeg på hver iteration af en. Så jeg går til 1 til 2 til 3. Og derefter denne tilstand i midten mellem semikolon bliver kontrolleret på hver iteration for at gøre sikker på, at vi stadig er inden for rækkevidde. Så jeg vil gerne gentage 10 gange, så jeg har slags meget intuitivt bare sætte 10 som min øvre grænse der. 
+
+Og dog, når jeg kører dette, efter kompilere den med make buggy2-- og det gør kompilere OK. Så jeg har ikke en syntaksfejl denne gang. Lad mig gå videre nu og køre buggy2, Enter. Og nu rulle op. Og lad mig øge størrelsen af ​​vinduet. 
+
+Jeg synes at have 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Så der er 11 hashtags, selvom Jeg klart sætte 10 inde i denne sløjfe. Nu kan nogle af jer se straks hvad fejlen skyldes, ja, dette er ikke en meget hård fejl at gøre. Men det er meget almindeligt gjort meget tidligt. 
+
+Hvad jeg vil påpege, selv om, er, hvordan kan jeg regne det ud? Tja, det viser sig, at Den CS50 Bibliotek kommer med ikke kun get_string og get_int og get_float og andre funktioner. Det leveres også med en speciel funktion kaldet eprintf, eller, fejl printf. Og det udelukkende eksisterer for at gøre det lidt nemmere for dig når fejlfinding din kode til bare udskrive en fejlmeddelelse på skærmen og vide, hvor det kom fra. 
+
+Så for eksempel, en ting jeg kunne gøre her med denne funktion er denne-- eprintf, og så jeg har tænkt mig at gå videre og sige, at jeg nu er% i, omvendt skråstreg, n. Og jeg har tænkt mig at sætte i værdien af ​​i. Og op top, fordi dette er i CS50 Bibliotek, Jeg har tænkt mig at gå videre og indbefatter så jeg har adgang til denne funktion. Men lad os overveje, hvad linje 9 formodes at gøre. Jeg har tænkt mig at slette denne i sidste ende. Dette har intet at gøre med min overordnede mål. Men eprintf, fejl printf er bare ment at give mig nogle diagnostisk information. Når jeg kører mit program, jeg ønsker at se på skærmen midlertidigt så godt bare at forstå hvad sker der. 
+
+Og endog på hver iteration her for linje 9 Jeg ønsker at se, hvad er værdien af ​​i? Hvad er værdien af ​​jeg? Hvad er værdien af ​​jeg? Og forhåbentlig skal jeg kun se, at budskabet, også, 10 gange. 
+
+Så lad mig gå videre og kompilere mit program, som jeg er nødt til at gøre nogen tid Jeg foretager en ændring. ./buggy2. Og nu-- OK. Der er meget mere foregår. Så lad mig rulle op i en endnu større vindue. 
+
+Og du vil se, at hver af den hashtags stadig udskrives. Men i mellem hver af dem er nu dette diagnostisk output formateret som følger. Navnet på mit program her er buggy2. Navnet på filen er buggy2.c. Linjenummeret hvorfra dette blev trykt, er linie 9. Og derefter til højre for dette er fejlmeddelelse, jeg forventer. 
+
+Og hvad er nice om dette er, at nu har jeg ikke nødvendigvis regne i mit hoved, hvad mit program gør. Jeg kan se, at på første iteration i er 0, derefter 1, derefter 2, derefter 3, så 4, så 5 og derefter 6 og derefter 7, så 8, derefter 9, derefter 10. Så vent et øjeblik. Hvad sker der her? Jeg synes stadig at være tælle som tilsigtet op til 10. 
+
+Men hvor har jeg starte? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10. Så 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- det 11. finger er indikativ for problemet. Jeg synes at have talt forkert i mit loop. Snarere end at gå 10 iterationer, Jeg starter ved 0, Jeg slutter ved og gennem ti. Men fordi, som en computer, Jeg begynder at tælle ved 0, Jeg skal tælle op til, men ikke gennem, 10. 
+
+Og så rettelsen, jeg til sidst realiseres her, er en af ​​to ting. Jeg kunne meget enkelt sige tælle op til mindre end 10. Så 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, som er faktisk korrekt, selv om det lyder lidt forkert. Eller jeg kunne gøre mindre end eller lig til 9, så længe jeg starter ved 0. Eller hvis du virkelig ikke kan lide det, du kan tælle op til 10, men starter på en. Men igen, dette er bare ikke det fælles. I programming-- omend ikke så meget i Scratch-- men i programmering i C og andre sprog, ligesom JavaScript og Python og andre, det er bare meget almindeligt for vores diskussion af binære at bare begynde at tælle på laveste antal du kan, hvilket er 0. Okay. Så det er eprintf. Og igen, nu hvor jeg har fundet ud af min problem, og jeg har tænkt mig at gå tilbage til 0 gennem mindre end 10, vil jeg at gå ind og slette eprintf. 
+
+Det bør ikke være der, når jeg skib min kode eller sende min kode eller vise det til nogen anden. Det er virkelig bare betød kan anvendes foreløbigt. Men nu har jeg løst dette særligt problem samt. 
+
+Nå, lad os gøre endnu et eksempel her at jeg har tænkt mig at piske op som følger. Jeg har tænkt mig at gå videre og #include. $ 50 Og jeg har tænkt mig at gå videre og #include. 
+
+Og jeg har tænkt mig at spare denne fil som buggy3.c. Og jeg har tænkt mig at gå videre og erklære int main (void). Og derefter inderside der Jeg har tænkt mig at gøre int i _ - Jeg ønsker at gennemføre et program med en get_negative_int. Dette er ikke en funktion, der eksisterer endnu. Så vi kommer til at gennemføre det på blot et øjeblik. Men vi kommer til at se, hvorfor det er buggy ved første passage. Og når jeg har fået en int fra brugeren, Jeg skal bare udskrive% i er en negativ heltal, omvendt skråstreg, n, komma, i. Med andre ord, alle I ønsker dette program til at gøre er at få en negativ int fra brugeren og derefter udskrive at den og den er en negativ int. 
+
+Nu har jeg brug for at gennemføre denne funktion. Så senere i min fil, vil jeg gå videre og erklære en funktion kaldet get_negative_int (void) - og vi vil komme tilbage til hvad denne linje betyder igen i en moment-- int n; do-- do den following-- printf n er :. Og så jeg har tænkt mig at gøre n - get_int, og gøre dette, mens n er større end 0. Og derefter vende tilbage n ;. 
+
+Så der er en masse i gang i dette, men ingen af ​​dem vi ikke se på i sidste uge, i det mindste kortvarigt. Så på linje 10 her har jeg erklæret funktion kaldet get_negative_int, og jeg har lagt (void), i parenteser, årsagen er dette tager ikke en indgang. Jeg er ikke passerer noget til denne funktion. Jeg er bare at få noget tilbage fra den. 
+
+Og hvad jeg håber at få tilbage er et helt tal. Der er ingen datatype i C kaldes negative_int. Det er bare int, så det vil at være på os for at sikre at den værdi, der er faktisk Returneret er ikke kun en int men er også negativ. 
+
+På linje 12 jeg erklære en variabel kaldet n og gøre det af typen int. Og så i linje 13 til 18 jeg er gør noget, mens noget er sandt. Jeg har tænkt mig videre og udskrivning n er, colon, og derefter et mellemrum, som en prompt for brugeren. 
+
+Jeg derefter ringer get_int og lagring sin såkaldte returværdi i denne variabel n. Men jeg har tænkt mig at holde gør dette, mens n er større end 0. Med andre ord, hvis brugeren giver mig en int og at antallet er større end 0, ergo, positive, jeg har tænkt mig at bare holde reprompting brugeren, holde reprompting, ved at tvinge dem til samarbejde og give mig en negativ int. 
+
+Og når n er faktisk negative-- Antag brugeren endelig typer -50, så dette, mens loop er ikke længere sandt fordi -50 ikke er større end 0. Så vi bryde ud af det loop logisk og vende tilbage n. 
+
+Men der er et andet ting jeg skal gøre. Og jeg kan simpelthen gøre dette ved at kopiere og indsætte én linje kode i toppen af ​​filen. Jeg har brug for at lære Dunk, eller lover at clang, udtrykkeligt, at jeg vil, ja, gå og implementere denne funktion get_negative_int. Det kunne bare være lavere i filen. Igen, minde om, at Dunk læser tingene top til bund, venstre til højre, så kan du ikke kalde en funktion, hvis Dunk ved det ikke kommer til at eksistere. 
+
+Nu desværre dette program, som nogle af jer måske har bemærket, er allerede buggy. Lad mig gå videre og gøre buggy3. Det samler, så mit problem nu ikke er en syntaksfejl, ligesom en tekstuel fejl, Det er faktisk kommer til at være en logisk fejl, som jeg har med vilje lavet som en mulighed for at gå gennem hvad der foregår. 
+
+Jeg har tænkt mig at gå videre nu og køre buggy3. Og jeg har tænkt mig at gå fremad og ikke samarbejder. Jeg har tænkt mig at give det nummer 1. Det kunne ikke lide det, så det er at spørge mig igen. 
+
+Hvad med 2? 3? 50? Ingen af ​​dem arbejder. Hvad med -50? Og programmet synes at virke. 
+
+Lad mig prøve det en gang mere. Lad mig prøve -1, synes at virke. Lad mig prøve -2, synes at virke. Lad mig prøve 0. Huh, det er forkert. Nu er vi er lidt pedantisk her. Men det er faktisk sådan, at 0 hverken positiv eller negativ. Og så det faktum, at mit program er sige, at 0 er et negativt heltal, det er ikke teknisk korrekt. 
+
+Nu, hvorfor er det at gøre dette? Nå, kan det være indlysende. Og faktisk er programmet beregnet til at være forholdsvis enkel så vi har noget at udforske. 
+
+Men lad os indføre en tredje debugging teknik her kaldet debug50. Så dette er et program at vi netop har oprettet i år kaldet debug50 som vil give dig at bruge, hvad der kaldes en indbygget grafisk debugger i CS50 IDE. Og en debugger er bare et program, generelt kan du køre dit program men skridt for skridt for skridt, linje ved linje for linje, pause, stikke rundt, ser på variabler, således at programmet ikke bare blæse forbi dig og hurtigt udskrive noget eller ikke udskrive noget. Det giver dig en mulighed, på human hastighed, til at interagere med den. 
+
+Og for at gøre dette, du blot gøre følgende. Efter kompilere din kode, som jeg allerede gjorde, buggy3, du gå videre og køre debug50 ./buggy. Så meget som help50 har du løber help50 og derefter kommandoen, debug50 har du kører debug50 og derefter navnet på kommandoen. 
+
+Nu se hvad der sker på min skærm, på højre side i særdeleshed. Da jeg ramte Run, alle af pludselig denne højre panel åbner op på skærmen. Og der er en masse i gang på ved første øjekast. Men der er ikke er for meget at bekymre sig om endnu. 
+
+Dette viser mig alt der foregår inde i mit program lige nu, og via disse knapper op toppen er derefter tillader mig at gå gennem min kode i sidste ende trin for trin for trin. Men ikke endnu. Læg mærke til, hvad der sker. På mit terminalvindue Jeg bliver bedt om n. Og jeg har tænkt mig at gå videre og samarbejde denne gang og skrive i -1. Og omend lidt kryptisk, -1 er et negativt heltal, som forventet. 
+
+Og så barn afsluttede med status 0 GDBserver spændende. GDB, GNU Debugger, er navnet af den underliggende software der implementerer denne debugger. Men alt dette egentlig betyder, fejlsøgeren gik væk, fordi mit program afslutte og alt var godt. Hvis jeg vil virkelig debug mit program, Jeg er nødt til forebyggende fortælle debug50, hvor skal jeg ønsker at starte stepping gennem min kode? 
+
+Og måske den enkleste måde at gøre det er som følger. Hvis jeg svæve over tagrende af min redaktør her, så virkelig bare i sidebjælken her, til venstre for linje nummer, Bemærk, at hvis jeg bare klikke gang, jeg satte en lille rød prik. Og den lille røde prik, ligesom et stopskilt, betyder, hey, debug50, pause udførelse af min kode lige der, når jeg kører dette program. 
+
+Så lad os gøre det. Lad mig gå videre og køre mit program igen med debug50 ./buggy3, Enter. Og nu, varsel, noget anderledes er sket. Jeg er ikke blevet bedt om men i mit terminalvindue til noget, fordi jeg har ikke fået der endnu i mit program. Bemærk, at på linje 8 som nu fremhæves, og der er en lille pil på venstre ordsprog, du er sat på pause her. Denne linje kode, linje 8, er endnu ikke gennemført. 
+
+Og hvad er nysgerrig, hvis jeg ser her på den højre side, bemærke, at jeg er en lokal variabel, lokal i den forstand at det er inde i aktuelle funktion. Og dens værdi, tilsyneladende som standard, og sortering af bekvemt, er 0. Men jeg havde ikke skrive 0. Det bare sker for at være sin standardværdi i øjeblikket. 
+
+Så lad mig gå videre og gøre det nu. Lad mig gå videre og på Øverst til højre her, jeg er kommer til at gå videre og klik på denne første ikon, som betyder trin over hvilke betyder ikke springe det men trin over denne linje kode, udfører den undervejs. 
+
+Og nu, mærke, min prompt har lige ændret. Hvorfor det? Jeg har fortalt debug50, køre denne linje kode. Hvad betyder denne linje kode gøre? Spørger mig for en int. OKAY. Lad mig samarbejde. Lad mig gå videre nu og skriv -1, Enter. Og nu mærke til, hvad der har ændret sig. På den højre side, min lokale variabel i er angivet som værende -1 nu. Og det er stadig af typen int. 
+
+Og varsel, også, min såkaldte kalder stakken, hvor har jeg pause? Vi taler mere om dette i fremtiden. Men kaldstakkens henviser blot til, hvad funktioner er i øjeblikket i bevægelse. Lige nu er det bare main. Og lige nu er den eneste lokale variabel er i med en værdi på 1. 
+
+Og når jeg endelig træde over denne linje her, med den samme ikon øverst til højre, -1 Er et negativt heltal. Nu er det pause over den krøllede tandbøjle. Lad os lade det gøre sit ting. Jeg træde over denne linje, og voila. 
+
+Så ikke alt, frygtelig oplysende endnu, men det lod mig pause og tænke igennem logisk hvad dette program gør. Men det var ikke den fejlagtige tilfældet. Lad os gøre det igen som følger. 
+
+Jeg har tænkt mig at forlade denne breakpoint på linje 8 med den røde prik. Jeg har tænkt mig at kør debug50. Det er automatisk sat på pause her. Men denne gang, i stedet for stepping over denne linje, lad mig faktisk gå inde i get_negative_int og finde ud af, hvorfor er det at acceptere 0 som en gyldig svar? 
+
+Så i stedet for at klikke Step Over. Jeg har tænkt mig at gå videre og klik Step Into. Og bemærk, at linje 8, der er nu fremhævet nu pludselig bliver ledning 17. 
+
+Nu er det ikke, at debugger har sprunget linjer 14 og 15 og 16. Det er bare der ikke er noget at vise dig der. De er bare erklære variabler, og så er der ordet Do og derefter en åben krøllet brace. Det eneste funktionelle linje, der er saftig virkelig denne ene her, 17. Og det er, hvor vi har standsede automatisk. 
+
+Så printf ( "n.is:") ;, så der er ikke sket endnu. Så lad os gå videre og klik Step Over. Nu er min prompt, ja, ændret til ( "n er:"). Nu get_int, jeg har ikke tænkt mig at genere træde ind, fordi denne funktion var lavet af CS50 i biblioteket. Det er formentlig korrekt. 
+
+Så jeg har tænkt mig at gå videre og slags samarbejde ved at give det en int, men ikke en negativ int. Så lad mig gå videre og ramte 0. Og nu, hvad der sker her når jeg kommer ned til linje 21? Jeg har ikke gentages igen. Jeg synes ikke at blive hængende i den løkke. Med andre ord, denne gule bar holde ikke går rundt, og omkring, og omkring. 
+
+Nu, hvorfor er det? Nå, n, hvad er N lige nu? Jeg kan se på det lokale variabler i debugger. n er 0. Okay, hvad var min tilstand? 
+
+20-- linje 20 er, godt, 0 er større end 0. Det er ikke sandt. 0 er ikke større end 0. Og så jeg brød ud af dette. 
+
+Og så derfor på linje 21, hvis jeg rent faktisk fortsætter, Jeg har tænkt mig at vende tilbage 0, selv selvom jeg burde have afvist 0 som ikke rent faktisk at være negativ. Så nu gør jeg ikke virkelig selv bekymrer sig om debugger. Fik det, behøver jeg ikke at ved, hvad mere der foregår. 
+
+Så jeg har tænkt mig at gå videre og blot klikke på knappen Afspil, og lad denne færdig op. Nu har jeg indset, at min bug er tilsyneladende på linje 20. Det er min logiske fejl. 
+
+Og så hvad ønsker jeg at gøre for at ændre dette? Hvis problemet er, at jeg ikke er fange 0, det er bare en logisk fejl. Og jeg kan sige, mens n er større end eller lig med 0, holde spørge brugeren igen og igen. 
+
+Så igen, simpel fejl, måske selv indlysende, når du så mig skrive det blot et par minutter siden. Men takeaway her er, at med debug 50, og med debugging software mere generelt, du har denne nyfundne magt til gå gennem din egen kode, se via denne højre panel hvad dine variabler værdier er. Så du ikke nødvendigvis nødt til at bruge noget ligesom du eprintf at udskrive disse værdier. Du kan faktisk se dem visuelt på skærmen. 
+
+Nu, ud over dette, er det værd at bemærke, at der er en anden teknik, der er faktisk super almindelige. Og du måske spekulerer på, hvorfor denne lille fyr her har siddet på scenen. Så der er denne teknik, generelt kendt som gummi and debugging, som virkelig er blot en bevis på det faktum, der ofte når programmører skriver kode, de er ikke nødvendigvis samarbejde med andre, eller arbejder i et fælles miljø. 
+
+De er en slags hjemme. Måske er det sent om natten. De forsøger at figur nogle fejl i deres kode. Og de er bare ikke se det. 
+
+Og der er ingen værelseskammerat. Der er ingen TF. Der er ingen CA rundt. Alt, hvad de har på deres hylde er denne lille gummi ducky. 
+
+Og så rubber duck debugging er netop denne invitation at tænke på noget så fjollet da dette som en reel skabning, og faktisk gå gennem din kode mundtligt til denne livløs genstand. Så, for eksempel, hvis dette er mit eksempel her-- og huske, at tidligere problemet var dette, hvis jeg sletter denne første linje kode, og jeg gå videre og gøre buggy 0 igen, minde om, at jeg havde disse fejlmeddelelser her. Så ideen her, latterlig selvom jeg føler i øjeblikket gør dette offentligt, er, at fejl. 
+
+OK, så mit problem er, at jeg har implicit erklæret en biblioteksfunktion. Og at biblioteksfunktionen er printf. Declare-- OK, erklærer minder mig om prototyper. 
+
+Det betyder, at jeg har brug for at faktisk fortælle compileren på forhånd, hvad funktionen ser ud. Vent et øjeblik. Jeg havde ikke standard io.h. Mange tak. 
+
+Så bare denne proces of-- du behøver ikke at faktisk har en and. Men denne idé om Walking dig selv gennem din egen kode så du endda høre dig selv, så du realisere udeladelser i din egen bemærkninger, er generelt den idé. 
+
+Og måske mere logisk, ikke så meget med at én, men mere involveret eksempel vi lige gjorde i buggy 3.c, du kan gå dig selv gennem det som følger. Så okay, gummi ducky, DDB, hvis du vil. Her har vi i min primære funktion, Jeg ringer få negativ int. 
+
+Og jeg får returværdien. Jeg opbevare det på venstre side på linje 8 i en variabel kaldet i. OK, men vent, hvordan gjorde at få denne værdi? Lad mig se på den funktion på linje 12. 
+
+På linje 12, vi har få negativ int. Tager ikke nogen indgange, vender tilbage en int, OK. Jeg erklærer på linie 14 en variabel n. Det kommer til at gemme et heltal. Det er hvad jeg vil have. 
+
+Så skal du gøre følgende, mens n is-- lade mig fortryde hvad rettelsen jeg allerede gjort. Så mens n er større end 0, udskrive n er, OK. Og derefter kalde få int gemt i n. Og derefter kontrollere hvis n er 0, n er not-- der er det. Så, igen, ikke gøre dig brug for det faktiske duck. Men bare gå dig selv gennem din kode som en intellektuel øvelse vil ofte hjælpe dig indse, hvad der foregår, i modsætning til blot at gøre noget som denne og stirrede på skærmen, og taler ikke dig selv gennem det, som ærligt ikke næsten som en effektiv teknik. Så der har du det, en række forskellige teknikker for faktisk debugging din kode og finde fejl, som alle bør være værktøjer i din værktøjskasse så du ikke er sent om natten, især, er du i spisesalen haller eller i kontortid, banke hovedet mod væg, forsøger at løse et problem. Indse at der er software-værktøjer. Der er gummi duck værktøjer. Og der er en hel stab af støtte venter på at give en hånd. 
+
+Så nu, et ord på problemet sæt, og hvad vi håber du komme ud af dem, og hvordan vi går om at vurdere. Per kursets pensum, CS50 problemområder sæt evalueres fire primære akser, så at speak-- omfang, korrekthed, design, og stil. Og omfanget henviser bare til, hvor meget af stykket har du bidt? Hvor meget af et problem har du prøvet? Hvilket niveau af indsats har du manifesteret? 
+
+Korrekthed er, gør programmet arbejde som det er meningen at pr CS50 specifikation når du giver visse input eller visse udgange kommer tilbage? Design er den mest subjektive af dem. Og det er den, der vil tage længst tid at lære og den længste til at undervise i så vidt det kan koges ned til, hvor godt skrevet, er din kode? 
+
+Det er én ting at bare udskrive den korrekte udgange eller returnere de rigtige værdier. Men gør du det som effektivt som muligt? Gør du det kløft og erobre, eller binær søgning som vi snart vil se, at vi gjorde to uger siden med telefonbogen? Er der bedre måder at løse problem, end du har i øjeblikket her? Det er en mulighed for bedre design. 
+
+Og så style-- hvordan temmelig er din kode? Du vil opdage, at jeg er temmelig særlig om indrykning min kode, og sikre mine variabler er rimeligt navngivet. n, mens korte, er et godt navn til en nummer, i for en optælling heltal, s for en streng. Og vi kan have længere variabel navne stil. Style er bare hvor god gør din kode ud? Og hvor læsbar er det? 
+
+Og over tid, hvad din TAs og TF'er vil gøre i løbet er at give dig med det slags kvalitativ feedback så du får bedre ved disse forskellige aspekter. Og med hensyn til, hvordan vi evaluere hver af disse akser, det er typisk med meget få spande, så du generelt få en fornemmelse af, hvor godt du laver. Og, ja, hvis du modtager en score på enhver af de axes-- korrekthed, design og stil especially-- dette nummer vil generelt være mellem 1 og 5. Og, bogstaveligt, hvis du får 3 s i starten af ​​semesteret, dette er en meget god ting. Det betyder, at der er stadig plads til forbedring, som du ville håbe på i tage en klasse for første gang. Der er forhåbentlig nogle lidt af loftet som du stræber efter at nå. Og så at få 3 s på de tidligste stykker, hvis ikke nogle 2s og 4 s, er faktisk en god ting. Det er godt inden for rækkevidde, godt inden forventninger. 
+
+Og hvis dit sind er racing, vente et minut, tre ud af fem. Det er virkelig en 6 ud af 10. Det er 60%. Min Gud, det er en F. 
+
+Det er ikke. Det er ikke i virkeligheden, at. Snarere er det en mulighed for at forbedre i løbet af semestret. Og hvis du får nogle Poors, disse er en mulighed at drage fordel af kontortid, sikkert sektioner og andre ressourcer. 
+
+Bedste er en mulighed, virkelig, at være stolt af, hvor langt du har kommer i løbet af semestret. Så indser, hvis intet andet, tre er god. Og det giver plads til vækst over tid. 
+
+Med hensyn til hvordan disse akser er vægtet, realistisk er du kommer til at tilbringe det meste af din tid på at få ting til arbejde, endsige korrekt. Og så korrekthed tendens til vægtes mest, som med denne multiplikativ faktor tre. Design er også vigtigt, men noget, som du ikke nødvendigvis bruge alle disse timer på forsøger at få tingene bare for at arbejde. 
+
+Og så det er vægtet lidt mere let. Og så stil er vægtet mindst. Selvom det er ikke mindre vigtigt fundamentalt, det er bare, måske den letteste ting at gøre det rette, efterligne de eksempler, vi gøre i foredrag og afsnit, med ting pænt indrykket, og kommenteret, og så videre er blandt de letteste ting at gøre og få ret. Så som sådan, indser at de er punkter der er relativt lette at forstå. 
+
+Og nu et ord om denne-- akademisk ærlighed. Så pr kursets pensum, vil du se at kurset har en ganske bit af sprog omkring dette. Og kurset tager spørgsmålet om akademisk ærlighed ganske alvorligt. 
+
+Vi har den sondring, for bedre eller værre, for at have sendt hvert år mere studerende til disciplinære foranstaltninger end de fleste andre selvfølgelig, at jeg er klar over. Dette er ikke nødvendigvis tegn på, at CS studerende, eller CS50 studerende, er mindre ærlig end dine klassekammerater. Men den virkelighed, at i dette verden, elektronisk, vi bare har teknologisk middel til påvisning af dette. 
+
+Det er vigtigt for os for fairness tværs klassen at vi gør opdage dette, og hæve spørgsmålet, når vi ser tingene. Og bare for at male et billede, og virkelig at hjælpe noget som dette vask i, disse er antallet af studerende i løbet af de seneste 10 år der har været involveret i nogle sådanne spørgsmål for akademisk ærlighed, med nogle 32 elever fra efteråret 2015, som vil sige, at vi tager sagen meget alvorligt. Og i sidste ende, disse tal komponere, senest ca. 3%, 4%, eller af klassen. 
+
+Så for kvalificeret flertal af studerende ser det ud til, at linjerne er klare. Men du skal holde dette i noget imod, især sent om natten, når kæmper med nogle løsning på et problem sæt, at der findes ordninger for at få dig selv bedre støtte end du måske tror, ​​selv i denne time. Indse, at når vi modtager studerende redegørelser, vi krydser sammenligne hvert indsendelse i år imod enhver indsendelse sidste år, mod hver indsendelse fra 2007, og da, ser på, så godt, kode opbevaringssteder online, diskussionsfora, jobsites. Og vi nævner dette, virkelig, alle af hensyn af fuld åbenhed, at hvis en anden kan finde den online, sikkert, så kan vi kurset. Men virkelig, ånden af kurset koges ned til denne klausul i pensum. Det er virkelig bare, være rimelig. 
+
+Og hvis vi skulle uddybe det med blot en smule mere sprog, indse, at essensen af ​​alle arbejde, som du sender til dette kursus skal være din egen. Men inden for det, der er helt sikkert muligheder og opmuntring, og pædagogisk værdi i at dreje til others-- mig, TFS, CAS, TAS, og andre i klassen, for støtte, endsige venner og roommates der har studeret CS og programmering før. Og så er der en godtgørelse for det. Og den generelle tommelfingerregel er denne-- når beder om hjælp, du kan vise din kode til andre, men du kan ikke se deres. Så selv om du er på kontortid, eller i D hal, eller et andet sted arbejder på nogle stykke sæt, arbejder sammen med en ven, der er helt fint, på slutningen af ​​dagen dit arbejde skal i sidste ende hører til hver af jer henholdsvis og ikke være nogle fælles indsats, bortset fra den afsluttende projekt, hvor det er tilladt og opmuntret. 
+
+Indse, at hvis du er kæmper med noget og din ven bare sker være bedre til dette, så du, eller bedre til dette problem end du, eller lidt længere frem end dig, det er helt rimeligt at vende til din ven og sige, hey, Har du noget imod at kigge på min kode her, hjælpe mig spotte hvad mit problem er? Og forhåbentlig i interesse pædagogisk værdi denne ven ikke bare sige, åh, gør dette, men snarere, hvad du mangler på nettet 6, eller sådan noget? Men løsningen er ikke for den ven, ved siden af ​​dig at sige, åh, ja, her, lad mig trække dette op, og vise min løsning til dig. Så det er den linje. Du viser din kode til andre, men du ikke kan se deres, med forbehold af den anden begrænsninger i kursets pensum. 
+
+Så du huske dette såkaldte beklagelse klausul i kursets pensum så godt, at hvis du begår en handling, som er ikke rimeligt, men bringe det til opmærksomhed kursets hoveder inden for 72 timer, forløbet kan pålægge de lokale sanktioner, kan omfatte en utilfredsstillende eller dumpekarakter for arbejdet indgivet. Men kurset vil ikke henvise noget for yderligere disciplinære foranstaltninger, undtagen i tilfælde af gentagne handlinger. Med andre ord, hvis du gør nogle dum, især sent nat, beslutning at den næste morgen eller to dage senere, du vågner op og indser, hvad tænkte jeg? Du gør i CS50 har en stikkontakt for fastsættelse dette problem og eje op til det, så vi vil møde dig halvvejs og håndtere med det i et spørgsmål, der både uddannelsesmæssige og værdifuldt for dig, men stadig straffende på en eller anden måde. Og nu, til at tage brodden, dette. 
+
+[VIDEO PLAYBACK] 
+
+[MUSIK AFSPILLER] 
+
+[END AFSPIL] DAVID J. MALAN: Okay, vi er tilbage. Og nu ser vi på en af ​​de første af vores virkelige verden domæner i CS50, kunsten kryptografi, kunsten at sende og modtage hemmelige beskeder, krypteret meddelelser om du vil, som kun kan tydes hvis du har nogle vigtigste ingrediens at afsenderen har såvel. Så for at motivere denne vi vil tage et kig på denne ting her, som er et eksempel på en hemmelig dekoder ring, kan anvendes for at finde ud af hvad en hemmelig besked faktisk er. Faktisk tilbage i dag i folkeskolen, hvis du nogensinde sendt hemmelige beskeder til nogle ven eller nogle crush i klassen, du måske har troet du var at være klog ved på din stykke papir skiftende, lignende, A til B, og B til C, og C til D, og så videre. Men du var faktisk kryptere dine oplysninger, selv hvis det var lidt triviel, var ikke at hårdt for læreren til at indse, godt, hvis du bare ændre B til A og C til B, du faktisk regne ud hvad budskabet var, men du var i chifrere oplysninger. 
+
+Du var bare gør det simpelthen, ligesom Ralphie her i en berømt film, der spiller temmelig meget ad nauseam hver vinter. [VIDEO PLAYBACK] -Vær Det kendt for alle, at Ralph Parker er hermed udnævnes til medlem af den lille Orphan Annie Secret Circle og har ret til alle de æresbevisninger og fordele forekommende dertil. 
+
+-Signed, Little Orphan Annie, counter-signeret Pierre Andre, med blæk. Honors og fordele, allerede i en alder af ni. 
+
+[RÅBE] -Kom nu. Lad os komme videre med det. Jeg behøver ikke alt det jazz om smuglere og pirater. 
+
+Lyt morgen aften for den afsluttende eventyr af den sorte pirat skib. Nu er det tid til Annies hemmelig besked for dig medlemmer af Secret Circle. Husk, børn, kun medlemmer af Annies Secret Circle kan afkode Annies hemmelig besked. 
+
+Husk, er Annie afhængig af dig. Sæt dine ben til B2. Her er budskabet. 12, 11-- 
+
+-Jeg Er i min første hemmeligt møde. 
+
+-14, 11, 18, 16. 
+
+-Pierre Var i stor stemme i aften. Jeg kunne fortælle, at aftenens budskab var virkelig vigtigt. 
+
+-3, 25, der er et budskab fra Annie selv. Husk, ikke fortælle nogen. 
+
+-90 Sekunder senere, jeg er i den eneste rum i huset, hvor en dreng på ni kunne sidde i fred og afkode. Aha, B! Jeg gik til den næste, E. 
+
+Det første ord er være. S, blev det kommer lettere nu, U, 25-- 
+
+Ĺh, kom nu, Ralphie, jeg skal gå! 
+
+-Jeg Være rigtigt ned, Ma! Gee whiz! 
+
+-T, O, skal du sørge for at-- være sikker på hvad? Hvad var lille Orphan Annie prøver at sige? Vær sikker på at hvad? 
+
+-Ralphie, Andy har fået til gå, vil du venligst komme ud? 
+
+-Alle Højre, Ma! Jeg kommer lige ud! 
+
+-Jeg Var at komme tættere nu. Spændingen var forfærdeligt. Hvad var det? Den skæbne af planeten kan hænge i balance. 
+
+-Ralphie! Andy mĺ gå! 
+
+-Jeg Være lige ud, for skriger højt! 
+
+-Næsten der, mine fingre fløj, mit sind var en stål fælde, hver pore vibrerede. Det var næsten klar, ja, ja, ja. 
+
+-Vær Sikker på at drikke din ovaltine. Ovaltine? En mærkværdige kommerciel? Søn af en tæve. [END AFSPIL] DAVID J. MALAN: OK, så det var en meget lang vej indføre kryptografi, og også Ovaltine. Faktisk fra denne gamle annonce her, hvorfor er Ovaltine så godt? Det er en koncentreret ekstraktion af modne bygmalt, ren cremet komælk, og specielt tilberedt kakao, sammen med naturlige phosphatider og vitaminer. Det er yderligere forstærket med yderligere vitaminer B og D, yum. Og du kan stadig få det, tilsyneladende, på Amazon, som vi gjorde her. 
+
+Men motivationen her var at indføre kryptografi, specielt en type kryptografi kendt som hemmelige nøgle kryptografi. Og som navnet antyder, det hele sikkerhed af en hemmelig nøgle kryptosystem, hvis du vil, en metode for bare scrambling information mellem to mennesker, er, at kun afsenderen og modtageren kun kender en hemmelig key-- vis værdi, nogle hemmelige sætning, nogle hemmeligt nummer, at tillader dem at både kryptere og dekryptere information. Og kryptografi, virkelig, er netop dette fra uge 0. 
+
+Det er et problem, hvor der er input, ligesom selve besked på engelsk eller hvad sprog, du ønsker at sende til en person i klassen, eller på tværs af internettet. Der er en vis output, som vil at være den krypterede besked, du ønsker, at modtageren til at modtage. Og selv hvis nogen i midten modtager det også, du ikke vil have dem til nødvendigvis være i stand til at dekryptere det, fordi indersiden af ​​denne sort boks, eller algoritme, er en mekanisme, nogle trin for trin instruktioner, for at tage det input og omdanne den til den output, i forhåbentlig en sikker måde. 
+
+Og i virkeligheden er der en vis ordforråd i denne verden som følger. Almindelig tekst er ordet et datalog ville bruge til at beskrive input besked, ligesom den engelske eller hvad sprog du rent faktisk ønsker at sende til en anden menneske. Og så ciphertext er kapløbet til indkodede, eller krypteret, udgave heraf. 
+
+Men der er én anden ingrediens her. Der er en anden indgang til hemmelig nøgle kryptografi. Og det er selve nøglen, der er generelt som vi skal se, et tal, eller brev, eller ord, uanset algoritmen er det faktisk forventer. 
+
+Og hvordan kan du dekryptere oplysninger? Hvordan unscramble det? Nå, du bare vende den udgange og indgange. 
+
+Med andre ord, når først der modtager dit krypteret meddelelse, han eller hun har simpelthen at vide, at samme nøgle. De har modtaget ciphertext. Og ved at tilslutte de to input i den krypto-system, algoritmen, denne sorte boks, ud bør komme den oprindelige klartekst. Og så er det meget høje niveau opfattelse af, hvad kryptografi er faktisk alt om. 
+
+Så lad os komme der. Lad os nu se nedenunder hætten af ​​noget vi har taget for givet for den seneste uge, og for denne session her-- strengen. En streng i slutningen af ​​dagen er blot en sekvens af tegn. 
+
+Det kan være hej verden, eller hej Zamyla, eller hvad. Men hvad betyder det for være en sekvens af tegn? Faktisk CS50 biblioteket giver os en datatype kaldet streng. 
+
+Men der er faktisk ikke noget sådan noget som en streng i C. Det er virkelig bare en sekvens af karakter, karakter, karakter, karakter, ryg, til tilbage, til tilbage, til tilbage, til tilbage inde af computerens hukommelse, eller RAM. Og vi vil se dybere ind i, at der i fremtiden, når vi ser på selve hukommelse, og udnyttelsen, og trusler, der er involveret. 
+
+Men lad os overveje strengen Zamyla. Så bare navnet på mennesket her, Zamyla, der er en sekvens af tegn, Z-A-M-Y-L-A. Og lad os nu antage, at Zamyla navn der opbevares inde i en computer program. 
+
+Tja, det er indlysende, at vi bør kunne se på disse figurer individuelt. Så jeg bare at trække lidt kasse omkring Zamyla navn her. Og det er tilfældet i C, at når man har en streng, ligesom Zamyla-- og måske denne streng er kommet tilbage fra en funktion som get streng, du rent faktisk kan manipulere det tegn for tegn. 
+
+Nu, dette er germane for samtale ved hånden, fordi i kryptografi, hvis du ønsker at ændre A til B, og B til C, og C til D, og så videre, er du nødt til at være i stand til at se på de enkelte tegn i en streng. Du skal være i stand til at ændre Z til noget andet, A til noget andet, M til noget andet, og så videre. Og så har vi brug for en måde, programmeringsmæssigt, så at tale, i C for at kunne ændre og se på de enkelte bogstaver. Og vi kan gøre det på følgende måde. 
+
+Lad mig gå hovedet tilbage i CS50 IDE. Og lad mig gå videre og oprette en ny fil at jeg vil kalde denne gang string0, som vores første sådant eksempel, dot c. Og jeg har tænkt mig at gå videre og pisk det op som følger. 
+
+Så omfatte CS50.h, og så omfatter standard io.h, som jeg næsten altid vil være hjælp i mine programmer, mindst i første omgang. int vigtigste tomrum, og derefter i her er jeg vil gøre strengene får få streng. Og så jeg har tænkt mig at gå videre og gøre dette. Jeg ønsker at gå videre og, som en sanity check, bare sige, hej, procent s, semikolon, gør streng 0. Uh oh, hvad gjorde jeg her? Åh, jeg ikke sætte den i. Så lektion lærte, at var ikke tilsigtet. 
+
+Så fejl, mere procent konverteringer end data argumenter. Og det er her, i line 7-- OK, så jeg har, citat Citat slut, det er min streng til printf. Jeg har fået et procenttegn. Men jeg mangler det andet argument. 
+
+Jeg mangler komma s, som Jeg havde i de foregående eksempler. Så en god mulighed for at løse endnu en fejl, ved et uheld. Og lad mig køre string0, type i Zamyla. OK, hej Zamyla. 
+
+Så vi har kørt denne form for program et par forskellige gange nu. Men lad os gøre noget lidt anderledes denne gang. I stedet for bare at udskrive Zamyla s hele navnet ud med printf, lad os gøre det tegn for tegn. 
+
+Jeg har tænkt mig at bruge en for-løkke. Og jeg har tænkt mig at give mig selv en optælling variabel, kaldet i. Og jeg har tænkt mig at holde iteration, så længe i er mindre end længden af ​​s. 
+
+Det viser sig, gjorde vi ikke gøre denne sidste gang, at C kommer med en funktion kaldet Stirling. Tilbage i dag, og generelt stadig, når de gennemfører funktioner, mennesker vil ofte vælger meget præcise navne, slags lyd ligesom hvad du vil, selv om det er mangler et par vokaler eller bogstaver. Så Stirling er navn på en funktion, tager et argument mellem parenteser, der bør være en streng. Og det bare returnerer et heltal, længden af ​​denne streng. 
+
+Så dette for loop på linje 7 går at begynde at tælle på I lig 0. Det kommer til at forøge I på hver iteration med 1, som vi har gjort et par gange. Men det vil kun gøre dette indtil det punkt når jeg er længden af selve strengen. 
+
+Så dette er en måde, i sidste ende, iteration over tegn i strengen som den er følger. Jeg har tænkt mig at udskrive ikke en Hele snor, men procent c, et enkelt tegn efterfulgt af en ny linje. Og så jeg har tænkt mig at gå videre, og jeg har brug for at sige, at jeg ønsker at udskrive i'te karakter s. 
+
+Så hvis i er variabel, der angiver indekset af strengen, hvor du er i det, jeg har brug for at være i stand til sige, giv mig den i'te karakter s. Og c har en måde at gøre dette med firkantede parenteser. Du skal blot sige navnet på den streng, som i dette tilfælde er s. Så du bruger firkantede parenteser, som er normalt lige over din Return eller Enter tasten på tastaturet. Og så skal du sætte indekset for den tegn, du vil udskrive. Så indekset vil være en number-- 0 eller 1, eller 2, eller 3, eller prik, prik, prik, et andet nummer. 
+
+Og vi sikrer, at det vil være det rigtige antal, fordi jeg begynde at tælle på 0. Og som standard, det første tegn i en streng er konventionelt 0. Og det andet tegn er beslag 1. Og den tredje karakter er beslag 2. Og du ikke ønsker at gå alt for langt, men vi vil ikke, fordi vi er vil kun forøge jeg indtil det lig med længden af ​​strengen. Og på hvilket tidspunkt, dette for løkke vil stoppe. 
+
+Så lad mig gå videre og gemme denne program, og køre gør snor 0. Men jeg skruet op. Implicit erklære biblioteksfunktionen Stirling med type sådan og such-- nu, det lyder bekendt. Men det er ikke printf. Og det er ikke få streng. 
+
+Jeg har ikke skrue op i på samme måde denne gang. Men mærke hernede lidt ned yderligere, omfatter header string.h, udtrykkeligt give den angivelse til Stirling. Så der er faktisk en anelse derinde. 
+
+Og faktisk viser det sig der er en anden header fil at vi ikke har brugt i klassen endnu, men det er blandt de disponible til dig, der kaldes string.h. Og i denne fil, string.h er Stirling erklæret. Så lad mig gå videre og gemme denne, gør streng 0-- nice, ingen fejlmeddelelser denne gang. 
+
+./string0 Zamyla, og Jeg er ved at trykke Enter, på hvilket tidspunkt getString går at returnere strengen, sætte det i s. Så at for-løkke vil iterere i S 'tegn en ad gangen, og udskrive dem én pr linje, fordi Jeg havde at backslash n i slutningen. Så jeg kunne udelade at backslash n, og derefter bare udskrive Zamyla alle i samme linje, effektivt reimplementing printf, hvilket ikke er så nyttige. Men i dette tilfælde, har jeg ikke gjort. Jeg har faktisk udskrives en tegn ad gangen, én pr linje, så vi faktisk se effekten. 
+
+Men jeg bør bemærke en ting her. Og vi vil vende tilbage til dette i en kommende uge. Det viser sig, at denne kode er potentielt buggy. 
+
+Det viser sig, get streng og nogle andre funktioner i livet ikke nødvendigvis altid tilbage, hvad du forventer. Vi ved fra klassen sidste tid i dette, der får streng formodes at returnere en streng. Men hvad hvis brugeren skriver sådan et langt ord, eller afsnit eller essay at der er bare ikke nok hukommelse i computeren til at passe det. 
+
+Ligesom, hvad hvis noget går forkert under kølerhjelmen? Det kan ikke ske ofte, men det kunne ske, når i et stykke tid, meget sjældent. Og så viser det sig at komme snor og funktioner som det gør ikke nødvendigvis altid returnere strenge. De kan returnere nogle fejl værdi, nogle sentinel værdi så at sige, der angiver, at noget er gået galt. Og du vil kun kender det fra have lært det i klassen nu, eller have læst nogle mere dokumentation. Det viser sig, get streng kan returnere en værdi, der hedder nul. Null er en særlig værdi, som vi får komme tilbage til i en kommende uge. Men for nu, bare vide, at hvis jeg vil at være virkelig korrekt i at bevæge sig fremad hjælp get streng, jeg skal ikke bare kalde det, og blindt bruge sin returværdi, tillid til, at det er en streng. 
+
+Jeg skal først sige, hey, vent et øjeblik, kun fortsætte, hvis s ikke er lig null, hvor null, igen, er blot nogle særlig værdi. Og det er den eneste særlige værdi, du at bekymre sig om for get streng. Få strengen enten går til at returnere en streng eller nul. 
+
+Og denne udråbstegn lighedstegn du måske kender fra måske matematik klasse at du måske tegne et lighedstegn med en linje gennem det at angive ikke lige. Det er generelt ikke et tegn du kan skrive på tastaturet. Og så i de fleste programmeringssprog, når du ønsker at sige ikke lige, du bruger et udråbstegn, ellers kendt som bang. Så du siger bang lig, som betyder ikke lig, logisk. Det er bare som om der ikke er en større end, eller lig med eller mindre end eller lig med tasten på tastaturet der kan det hele i ét symbol. Så det er derfor, i tidligere eksempler, du gjorde en åben konsol, og derefter et lighedstegn, for at gøre større end eller, siger, mindre end. 
+
+Så hvad er takeaway her? Dette er blot en måde nu af indføre denne syntaks, denne funktion, iteration frem for individuelle tegn i en streng. Og ligesom dem pladsen parentes tillader dig at få på dem, overveje disse kantede parenteser som slags antyde denne underliggende design, hvorved hver karakter indersiden af ​​en streng er slags boxed i et eller andet sted under hætten i computerens hukommelse. 
+
+Men lad os lave en variant af denne. Det viser sig, at denne Programmet er korrekt. Så pr CS50 akser til evaluering kode, dette er korrekt nu. Især nu, at jeg tjekker for null, bør dette program aldrig gå ned. Og jeg ved bare, at fra erfaring. Men der er ikke noget andet, der vi kan virkelig gå galt her. Men det er ikke meget veltilrettelagt, fordi lad os gå tilbage til basics. 
+
+Første, principles-- hvad betyder en for-løkke gøre? En for-løkke gør tre ting. Det initialiserer nogle værdi, hvis du beder den om. Den kontrollerer en betingelse. Og så efter hver iteration, efter hver cyklus, det forøger nogle værdi eller værdier, her. 
+
+Så hvad betyder det? Vi initialisere jeg til 0. Vi kontrollere og sørge for jeg er mindre end længden af ​​s, som er Z-A-M-Y-L-A, så der er mindre end 6. Og, ja, 0 som mindre end 6. 
+
+Vi udskrive Z fra Zamyla navn. Derefter tilvækst vi i fra 0 til 1. Vi derefter kontrollere, er en mindre end længden af ​​s? Længden af ​​s er 6. Ja det er. 
+
+Så vi udskrive en i Zamyla navn, ZA. Vi tilvækst i fra 0 til 1, til to. Vi derefter kontrollere, er to mindre end længden af ​​Zamyla navn. 6- så 2 er mindre end 6. Ja, lad os udskrive nu M i Zamyla navn, den tredje karakter. 
+
+Det centrale her er, at hver iteration af historien, jeg tjekker, er jeg mindre end længden af ​​Zamyla? Men fangsten er, at Stirling er ikke en egenskab. De af jer, der har programmeret før i Java eller andre sprog måske kender længden af ​​en streng er en ejendom, blot nogle read only værdi. 
+
+I C i dette tilfælde, hvis det er en funktion, der er bogstaveligt tælling af antallet af tegn i Zamyla hver gang vi kalder denne funktion. Hver gang du beder computeren til at bruge Stirling, er det at tage et kig på Zamyla, og siger Z-A-M-Y-L-A, 6. Og den returnerer 6. Næste gang du ringer det indeni, der for-løkke, det kommer til at se på Zamyla atter siger Z-A-M-Y-L-A, 6. Og det kommer til at vende tilbage 6. Så hvad er dumt om dette design? 
+
+Hvorfor er min kode ikke en 5 ud af 5 for design lige nu, så at sige? Nå, jeg spørger en spørgsmål unødigt. Jeg gør mere arbejde, end jeg har brug for. 
+
+Så selvom svar er korrekt, er jeg beder computeren, hvad der er længden af ​​Zamyla igen, og igen, og igen, og igen? Og svaret er aldrig kommer til at ændre sig. Det er altid vil være 6. 
+
+Så en bedre løsning end dette ville være denne næste version. Lad mig gå videre og sætte det i en separat fil kaldet string1.c, bare for at holde det adskilt. Og det viser sig i en for loop, kan du faktisk erklære flere variabler på én gang. 
+
+Så jeg har tænkt mig at holde i og sæt den til 0. Men jeg vil også tilføje et komma, og sige, give mig en variabel kaldet n, hvis værdi svarer strengen længde s. Og nu skal du gøre min tilstand så længe jeg er mindre end n. 
+
+Så på denne måde, logikken er identisk i slutningen af ​​dagen. Men jeg huske værdi 6, i dette tilfælde. Hvad er længden af ​​Zamyla navn? Og jeg sætte det på n. 
+
+Og jeg er stadig kontrol tilstanden hver gang. Er 0 mindre end 6? Er 1 mindre end 6? Er 2 mindre end 6, og så videre? 
+
+Men jeg beder ikke computeren igen og igen, hvad er længden af ​​Zamyla navn? Hvad er længden på Zamyla navn? Hvad er længden af ​​denne Zamyla navn? Jeg bogstaveligt huske, at første og kun svare i denne anden variabel n. Så det nu ville være ikke blot korrekt, men også veldesignede. 
+
+Nu, hvad stil? Jeg har navngivet mine variabler temmelig godt, vil jeg sige. De er super kortfattet lige nu. Og det er helt fint. 
+
+Hvis du kun har én streng i et program, du kan lige så godt kalde det s for streng. Hvis du kun har en variabel til tælling i et program, du kan lige så godt kalde det i. Hvis du har en længde, n er super almindeligt. Men jeg har ikke kommenteret nogen af ​​min kode. 
+
+Jeg har ikke informeret reader-- hvorvidt det er min TF eller TA, eller bare colleague-- hvad formodes at være foregår i dette program. Og så for at få god stil, hvad jeg ønsker at gøre er denne-- noget ligesom bede brugeren om input. Og jeg kunne omskrive dette en række forskellige måder. 
+
+Sørg S-- sørg get streng returneres en streng. Og så i her-- og det er måske det vigtigste comment-- iterate over tegn i s én ad gangen. Og jeg kunne bruge nogen valg af engelsk sprog her for at beskrive hver af disse klumper af kode. 
+
+Bemærk, at jeg ikke har lagt et kommentere på hver linje kode, egentlig bare på det interessante dem, dem, der har en mening, som jeg kunne ønsker at gøre super klar til en person læse min kode. Og hvorfor kalder du få snor bede brugeren om input? Selv at man ikke nødvendigvis alt det beskrivende. Men det hjælper at fortælle en historie, fordi den anden linje i historien er, skal du sørge få strengen returneres en streng. 
+
+Og den tredje linje i historien er, gentage over personerne i s én på et tidspunkt. Og nu bare for god foranstaltning, Jeg har tænkt mig at gå videre og tilføje endnu en kommentar, der bare siger print i'te tegn i s. Nu, hvad har jeg gjort i sidste ende? 
+
+Jeg har tilføjet nogle engelsk ord i form af kommentarer. Den skråstreg skråstreg symbol betyder, hey, computer er for den menneskelige, ikke for dig, computeren. Så de er ignoreret logisk. De er der bare. 
+
+Og, ja, CS50 IDE viser dem som grå, som nyttige, men ikke nøgle til programmet. Læg mærke til hvad du nu kan gøre. Uanset om du kender C programmering eller ej, du kan bare stå tilbage på dette program, og skimme kommentarerne. Spørg brugeren om input, så sørg få strengen returneres en streng, gentage over personerne i s en ad gangen, udskrive tegnet i'te tegn i S-- du ikke engang at se på koden at forstå, hvad dette program gør. Og, endnu bedre, hvis man selv ser på dette program i en uge eller to, eller en måned eller et år, du også ikke har at stirre på den kode, forsøge at huske, hvad var jeg forsøger at gøre med denne kode? 
+
+Du har fortalt dig selv. Du har beskrevet det for dig selv, eller nogle kollega, eller TA, eller TF. Og så det ville nu være korrekt, og godt design, og i sidste ende god stil så godt. Så gør holder det i tankerne. 
+
+Så der er en anden ting jeg har tænkt mig at gøre her der kan nu afsløre præcis, hvad der er foregår under kølerhjelmen. Så der er denne funktion i C, og andre sprog, kaldet typecasting at enten implicit eller eksplicit tillader dig at konvertere fra en datatype til en anden. Vi har været der beskæftiger sig så langt i dag med strenge. 
+
+Og strenge er tegn. Men huske fra uge 0, hvad er tegn? Tegn er blot en abstraktion oven på numbers-- decimaltal, og decimaltal er egentlig bare en abstraktion oven på binære tal, som vi definerede det. 
+
+Så tegn er tal. Og tal er tegn, bare afhængigt af sammenhængen. Og det viser sig, at der inde af et edb-program, kan du angive, hvordan du ønsker at se på de bits inde i det program? 
+
+Recall fra uge 0, som vi havde Ascii, som er lige denne kode kortlægning breve til tal. Og vi sagde, kapital A er 65. Kapital B er 66, og så videre. 
+
+Og varsel, vi hovedsageligt har chars på den øverste række her, som C ville kalde dem, tegn og derefter ints på den anden række. Og det viser sig, du kan konvertere problemfrit mellem de to, typisk. Og hvis vi ønsker at gøre dette bevidst, vi måske ønsker at tackle noget som dette. 
+
+Vi vil måske konvertere store bogstaver for at sænke tilfælde, eller små bogstaver til store bogstaver. Og det viser sig at der er faktisk et mønster her vi kan omfavne på bare et øjeblik. Men lad os først se på en eksempel på at gøre dette eksplicit. 
+
+Jeg har tænkt mig at gå tilbage til CS50 IDE. Jeg har tænkt mig at skabe en fil kaldet Ascii 0.c. Og jeg har tænkt mig at gå videre og tilføje min standard io.h foroven, int main void på toppen af ​​min funktion. Og så er jeg bare at gøre det following-- en for-løkke fra i lig, lad os sige, 65. 
+
+Og så er jeg kommer til at være mindre end 65, plus 26 bogstaver i alfabetet. Så jeg vil lade computeren gøre det math for mig der. Og derefter inde i denne løkke, hvad skal jeg printe? 
+
+% C er% i omvendt skråstreg n. Og nu vil jeg tilslutte to værdier. Jeg har midlertidigt sat spørgsmål markerer der for at invitere spørgsmålet. 
+
+Jeg ønsker at gentage fra 65 og fremefter i 26 bogstaver i alfabetet, udskrivning ud på hver iteration, som figurs integreret tilsvarende. Med andre ord, jeg ønsker at gentage over 26 numre udskrivning hvad Ascii karakter er, brevet, og hvad det tilsvarende antal is-- virkelig bare genskabe diagrammet fra dias. Så hvad skal disse spørgsmålstegn være? 
+
+Tja, det viser sig, at den anden man skal bare være variablen i. Jeg ønsker at se det som et tal. Og den midterste argument her, kan jeg fortælle computeren at behandle, at heltal i som et tegn, så som at erstatte det her for procent C. 
+
+Med andre ord, hvis I, menneskelig programmør, vide disse er blot tal i sidste ende. Og jeg ved, at 65 skulle kort til nogle tegn. Med denne eksplicit konvertering, med en parentes, navnet på den datatype, du ønsker at konvertere til, og en lukket parentes, du kan fortælle computer, hey, computer, konvertere dette heltal til en char. 
+
+Så når jeg køre dette program efter kompilering, lad os se, hvad jeg get-- gøre Ascii 0. Darn det, hvad gjorde jeg forkert her? Anvendelse af sort identifikator, okay, ikke tilsigtet, men lad os se om vi ikke kan Grunden gennem dette. 
+
+Så linje five-- så jeg ikke får meget langt, før skrue op. Det er ok. Så linje 5 for jeg lig 65-- jeg ser. Så husk at i C, i modsætning til nogle sprog, hvis du har forudgående programmering erfaring, du har at fortælle computeren, modsætning Scratch, hvad type variabel det er. 
+
+Og jeg glemte en central sætning her. På linje fem, har jeg begyndte at bruge i. Men jeg har ikke fortalt C hvad datatype det er. Så jeg har tænkt mig at gå ind her og sige, ah, gør det et heltal. 
+
+Nu vil jeg gå videre og kompilere. Det faste det. ./ascii0 Enter, der er slags cool. Ikke alene er det super hurtigt til bede computeren dette spørgsmål, snarere end at se det op på et dias, det udskrives én pr linje, A er 65, B er 66, hele vejen down-- da jeg gjorde dette 26 gange-- til bogstaverne z, hvilket er 90. Og i virkeligheden, let mere intelligent ville har været for mig ikke at stole på computeren for at tilføje 26. Jeg kunne bare have gjort 90 så godt, så længe da jeg ikke begå den samme fejl to gange. Jeg ønsker at gå op gennem z, ikke bare op gennem y. 
+
+Så det er en udtrykkelig cast. Det viser sig, at denne er ikke engang nødvendigt. Lad mig gå videre og gentag dette compiler, og gentagelsen Ascii 0. Det viser sig, at C er temmelig smart. 
+
+Og printf, i særdeleshed, er temmelig smart. Hvis du bare bestå en jeg to gange for begge pladsholdere, printf vil indse, oh, godt jeg kender dig gav mig en integer-- nogle tal, ligesom 65 eller 90, eller hvad. Men jeg kan se, at du vil have mig til formatere dette nummer som et tegn. Og så printf kan implicit støbt den int til en char for dig så godt. Så det er ikke et problem overhovedet. 
+
+Men varsel, på grund af denne ækvivalens vi faktisk kan gøre det så godt. Lad mig gå videre og gøre en anden version af denne-- Ascii 1.c. Og i stedet for iteration løbet heltal, kan virkelig blæse dit sind ved iteration løbet tegn. Hvis en char c får kapital A, jeg ønsker at gå videre og gøre det, så længe C er mindre end eller lig til kapital Z. Og på hver iteration Jeg ønsker at forøge C, jeg kan nu i min printf linje her sige, procent C er procent i igen, komma C. 
+
+Og nu kan jeg gå den anden retning, støbning tegnet udtrykkeligt til et heltal. Så igen, hvorfor skulle du gøre det? Det er lidt underligt at sortere af tæller i form af tegn. 
+
+Men hvis du forstår, hvad der er foregår under emhætten, der er virkelig ingen magi. Du siger bare, hey, computer giver mig en variabel kaldet C af typen char. Initialiser den til kapital A. Og bemærke enkelt citater sagen. 
+
+For tegn i C, husker fra sidste uge, du bruger enkelte anførselstegn. For strenge, efter ord, sætninger, du bruger dobbelte anførselstegn. OK, computer, holde gør dette, så længe karakter er mindre end eller lig med z. Og jeg ved fra min Ascii tabel, alle af disse ASCII-koder er sammenhængende. 
+
+Der er ingen huller. Så det er bare A til Z, adskilt af ét nummer hver. Og så kan jeg tilvækst en char, hvis jeg virkelig ønsker. I sidste ende, det er bare et tal. Det ved jeg. Så jeg kan bare antage at føje en til det. 
+
+Og så denne gang, jeg udskriver c, og derefter integralet tilsvarende. Og jeg behøver ikke engang den eksplicitte cast. Jeg kan lade printf og computer finde ud af ting, så nu, hvis jeg løber gøre Ascii1./ascii1, Jeg får præcis det samme som godt. 
+
+Ubrugelig program, though-- ingen vil faktisk skrive software med henblik på at finde ud af, hvad der var den nummer, der til A eller B, eller Z? Du er bare kommer til at Google det, eller slå det op online, eller slå det op på et dias, eller lignende. Så hvor dette rent faktisk få nyttige? 
+
+Nå, taler om, at dias, bemærke at der er en faktiske mønster her mellem store og små bogstaver, der var ikke tilfældig. Bemærk, at kapital A er 65. Små bogstaver a er 97. Og hvor langt væk er lavere tilfælde en? 
+
+Så 65 er, hvor mange skridt væk fra 97? Så 97 minus 65 er 32. Så kapital a er 65. Hvis du tilføjer 32 til det, du får små bogstaver a. Og, ækvivalent, hvis du trækker 32, du kommer tilbage til kapital en-- samme med B til lille b, big C til lille c. 
+
+Alle disse huller er 32 fra hinanden. Nu, dette synes at tillade os at gøre noget som Microsoft Word, eller Google Docs funktionen, hvor man kan vælge alt og derefter sige, ændre alle til små bogstaver, eller ændre alle til store bogstaver, eller ændre kun det første ord af en sætning til store bogstaver. Vi kan faktisk gøre noget ligesom os selv. 
+
+Lad mig gå videre og gemme en fil her kaldet kapitalisere 0.c. Og lad os gå videre og pisk op et program der gør netop dette som følger. Så omfatte CS50 bibliotek. Og inkluderer standard I / O. 
+
+Og jeg ved, at dette kommer snart. Så jeg har tænkt mig at sætte det i der allerede, string.h, så jeg har adgang til ting som Stirling, og derefter int vigtigste tomrum, som sædvanlig. Og så jeg har tænkt mig at gå videre og gøre strengene får få strengen, bare for at få en streng fra brugeren. Og så jeg har tænkt mig at gøre mit sanity check. Hvis strengen ikke er lig nul, så er det sikkert at fortsætte. Og hvad gør jeg ønsker at gøre? Jeg har tænkt mig at gentage fra jeg lig 0, og n op til strengen længde s. 
+
+Og jeg har tænkt mig at gøre det, så længe Jeg er mindre end n, og jeg plus plus. Indtil videre, jeg er virkelig bare låne ideer fra før. Og nu vil jeg præsentere en gren. 
+
+Så tænker tilbage på Scratch, hvor vi havde disse gafler i vejen, og i sidste uge i C. Jeg har tænkt mig at sige dette, hvis den i'te tegn i s er større end eller lig til små bogstaver a, og-- i Scratch du ville bogstaveligt siger og, men i C du siger ét-tegn, ampersand-- og den i'te tegn i s er mindre end eller lig med små bogstaver z, lad os gøre noget interessant. Lad os faktisk udskrive en karakter uden ny linje der er tegnet i strengen, den i'te tegn i strengen. 
+
+Men lad os gå videre og trække 32 fra den. Else hvis tegnet i streng, som vi leder efter ikke er mellem lille en og lidt z, gå videre og lige udskrives det uændret. Så vi har introduceret denne parentes notation for vores strenge at komme på i'te tegn i strengen. 
+
+Jeg har tilføjet nogle betinget logik, ligesom Scratch i sidste uges uge en, hvor Jeg er bare bruge min grundlæggende forståelse af, hvad der er foregår under kølerhjelmen. Er den i'te karakter s større end eller lig med en? Ligesom, er det 97 eller 98, eller 99, og så videre? 
+
+Men det er også mindre end eller lig til værdien af ​​små bogstaver z? Og hvis ja, hvad betyder denne linje betyder? 14, dette er sortering af kim af hele idéen, kapitalisere brevet af simpelthen at trække 32 fra det, i dette tilfælde, fordi jeg ved, pr, at diagram, hvordan mine tal er repræsenteret. Så lad os gå videre og køre dette, efter kompilering kapitalisere 0.c, og køre kapitalisere 0. 
+
+Lad os skrive noget lignende Zamyla i små bogstaver ind. Og nu har vi Zamyla i alle store bogstaver. Lad os skrive i Rob i små bogstaver. Lad os prøve Jason i små bogstaver. Og vi holder få tvungen aktivering. Der er en mindre fejl, som jeg slags ikke forudse. Læg mærke min nye prompt slutter op på samme linje som deres navne, som føles lidt rodet. 
+
+Så jeg har tænkt mig at gå her, og faktisk i slutningen af ​​dette program udskrive en ny linje karakter. Det er alt. Med printf, behøver du ikke at passere i variabler eller format kode. Du kan bogstaveligt talt bare udskrive noget som en ny linje. 
+
+Så lad os gå videre og gøre kapitalisere 0 igen, gentages det, Zamyla. Og nu er det lidt pænere. Nu er min prompt er på sin egen nye linje. Så det er alt fint og godt. Så det er et godt eksempel. Men jeg ikke selv nødvendigvis nødt til at indkode de 32. Du ved hvad? Jeg kunne say-- jeg ikke nogensinde huske, hvad forskellen er. 
+
+Men jeg ved, at hvis jeg har en lille bogstav, Jeg hovedsagelig vil trække off uanset afstand er mellem lidt et og store A, fordi hvis jeg antager, at alle de andre bogstaver er de samme, der bør få arbejdet gjort. Men i stedet for at gøre det, ved du hvad? Der er en anden måde stadig. 
+
+Hvis der er kapitalisere 1.c-- hvis jeg var at sætte det ind i en separat fil. Lad os gøre kapitalisere 2.c som følger. Jeg har tænkt mig at virkelig rydde det op her. Og i stedet for selv at skulle kender eller bekymrer sig om dem, lavt niveau implementeringsdetaljer, jeg er i stedet bare at udskrive en karakter, citat Citat slut, procent C, og derefter kalde en anden funktion, som eksisterer der tager et argument, hvilket er et tegn, som denne. 
+
+Det viser sig i C, er der en anden funktion opkald til øvre, der som navnet foreslår tager en karakter og gør det til sin store bogstaver tilsvarende, og derefter vender tilbage det så printf kan tilslutte det der. Og så for at gøre det, selv om, jeg nødt til at indføre en anden fil. Det viser sig, at der er en anden fil at du kun ville vide fra klassen, eller en lærebog, eller en online reference, kaldet C type.h. 
+
+Så hvis jeg tilføje, at op blandt min header filer, og nu re-kompilere dette program, capitalize2, ./capitalize2 Enter. Lad os skrive i Zamyla i alt små bogstaver, fungerer stadig den samme. Men ved du hvad? Det viser sig, at øvre har nogle andre funktioner. 
+
+Og lad mig introducere dette befaler her, slags akavet navngivet, men mennesket til manuel. Det viser sig, at de fleste Linux computere, som vi bruger her-- Linux operativsystem system-- have en kommando kaldet mand, som siger, hey, computer, giv mig computerens manual. hvad vil du ser op i den manual? 
+
+Jeg ønsker at se op funktionen kaldet til øverste, Enter. Og det er lidt kryptisk at læse nogle gange. Men bemærker vi er i Linux programmør manual. Og det er al tekst. Og bemærke, at der er den navn på funktionen heroppe. Det viser sig, det har en fætter kaldet at sænke, hvilket gør det modsatte. Og varsel under synopsis, at bruge denne fungere manden siden, så at sige, fortæller mig, at jeg nødt til at omfatte c type.h. Og jeg vidste, at fra praksis. 
+
+Her er det viser mig de to prototyper til funktionen, så hvis jeg nogensinde vil bruge denne Jeg ved, hvad de tager som input, og hvad de vender tilbage som output. Og så hvis jeg læser beskrivelsen, jeg ser mere detaljeret, hvad funktionen gør. Men endnu vigtigere, hvis Jeg ser under returværdi, det siger den returnerede værdi er den af ​​den konverterede brev, eller C, den oprindelige input, hvis omdannelsen var ikke muligt. 
+
+Med andre ord, at øvre vil forsøge at konvertere et brev til store bogstaver. Og hvis ja, vil det returnere det. Men hvis det ikke kan for nogle reason-- måske er det allerede store bogstaver, måske er det et udråbstegn eller en anden punctuation-- det bare at gå til returnerer originalen C, hvilket betyder, at jeg kan gøre min kode bedre udformet som følger. 
+
+Jeg har ikke brug for alle disse darn linjer kode. Alle de linjer, jeg har netop fremhævet kan foldes sammen i kun et enkelt linje, som er denne-- printf procent C til øvre S beslag i. Og det ville være en eksempel på bedre design. 
+
+Hvorfor gennemføre i 7 eller 8 linjer kode, hvad det var jeg bare slettet, når du i stedet kan kollapse alt dette logik og beslutningstagning i en enkelt linje, 13 nu, at afhængig af et bibliotek function-- en funktion, der kommer med C, men gør præcis, hvad du vil have den til at gøre. Og helt ærligt, selv om det kom ikke med C, du kunne gennemføre det selv, som vi har set, med få negativ int og få positiv int sidste uge så godt. 
+
+Denne kode nu er meget mere læsbar. Og, ja, hvis vi rulle op, se, hvor meget mere kompakt denne version af mit program er. Det er lidt top tung nu, med alle disse omfatter. Men det er OK, fordi nu er jeg stående på skuldrene af programmører før mig. Og hvem var det, der implementeret til øvre virkelig gjorde mig en tjeneste, ligesom hvem implementeret Stirling virkelig gjorde mig en tjeneste for nogen tid siden. Og så nu har vi en bedre design program som gennemfører den præcis samme logik. 
+
+Apropos stirling, lad mig gå videre og gøre dette. Lad mig gå videre og spare denne fil som stirling.c. Og det viser sig, kan vi skrælle et andet lag temmelig simpelthen nu. Jeg har tænkt mig at gå videre og pisk op et andet program i main her, der blot re-redskaber snor længde som følger. Så her er en linje kode, der får mig en streng fra brugeren. Vi bliver ved at bruge det igen og igen. Lad mig give mig selv en variabel kaldet n af typen int, der gemmer et nummer. 
+
+Og lad mig gå videre og gøre følgende logik. Mens det n'te tegn i s gør ikke lige omvendt skråstreg 0, gå videre og tilvækst n. Og så udskrive printf procent i n. Jeg hævder, at dette program her, uden at strengen længde, tal ud længden af ​​en streng. 
+
+Og magien er helt indkapslet i linje 8 her med hvad der ligner ny syntaks, denne backslash 0 i enkelte anførselstegn. Men hvorfor er det? Nå, overveje, hvad der er blevet foregår al denne tid. 
+
+Og som en sidebemærkning, før jeg glemmer, indser også, at der ud over man-siderne der kommer med en typisk Linux system som CS50 IDE, indse, at vi, den Selvfølgelig personale, også har lavet en hjemmeside-version af denne samme idé kaldet reference.cs50.net, der har alle de samme man-sider, alt dette samme dokumentation, samt en lille boks i toppen, der giver mulighed at konvertere alle de forholdsvis mystiske sprog i mindre behagelig tilstand, hvor vi, lærergruppen, har gennemgået og forsøgt at forenkle nogle af sproget til at holde tingene fokuseret på ideer, og ikke nogle af de tekniske detaljer. Så husk, reference.cs50.net som en anden ressource samt. 
+
+Men hvorfor gør strengen længde arbejde i den måde, jeg foreslog for et øjeblik siden? Her er Zamyla navn igen. Og her er Zamyla navn boxed i, da jeg holde gør, at male et billede af det er, virkelig, bare en sekvens af tegn. Men Zamyla eksisterer ikke isoleret i et program. 
+
+Når du skriver og køre et program, du bruger din Mac eller din PC som hukommelse, eller RAM så at sige. Og du kan tænke på computeren som havende masser af gigabyte hukommelse i disse dage. Og en koncert betyder milliarder, så milliarder af bytes. 
+
+Men lad os spole tilbage i tiden. Og formoder, at vi bruger en rigtig gammel computer, kun har 32 bytes hukommelse. Jeg kunne, på min computerskærm, blot trække det ud som følger. 
+
+Jeg kunne simpelthen sige, at min computer har hele denne hukommelse. Og det er ligesom en pind af hukommelse, hvis du husker vores billede fra sidste gang. Og hvis jeg bare dividere dette i nok gange, Jeg hævder, at jeg har 32 bytes hukommelse på skærmen. 
+
+Nu, i virkeligheden, kan jeg kun trække så langt på denne skærm her. Så jeg har tænkt mig at gå videre, og bare ved konvention, henlede min computers hukommelse som en grid, ikke blot som en lige linje. Specifikt Jeg hævder nu, at dette gitter, denne 8 ved 4 gitter, blot repræsenterer alle 32 bytes tilgængelige hukommelse i min Mac, eller tilgængelige i min PC. Og de er indpakning på to linjer, bare fordi det passer mere på skærmen. Men dette er den første byte. Dette er den anden byte. Dette er den tredje byte. 
+
+Og det er den 32. byte. Eller, hvis vi tænker som en computer videnskabsmand, er dette byte 0, 1, 2, 3, 31. Så du har 0 til 31, hvis du begynde at tælle på 0. 
+
+Så hvis vi bruger et program at opkald får streng, og vi får en streng fra det menneskelige ligesom jeg gjorde kaldet Zamyla, Z-A-M-Y-L-A, hvordan i verden gør computer holde styr på, hvilke byte, hvilken klump hukommelse, hører til hvilken streng? Med andre ord, hvis vi går over til skriv et andet navn i computeren, som denne Andi, kalder få snor anden gang, A-N-D-I har at ende i den computerens hukommelse så godt. Men hvordan? 
+
+Tja, det viser sig, at under hætte, hvad C gør, når opbevaring af strenge at de menneskelige typer i, eller at komme fra en anden kilde, er det afgrænser enden af ​​dem med en særlig character-- backslash 0, som er blot en særlig måde sige 80 bit i en række. 
+
+Så en-- dette er nummer 97 tilbagekaldelse. Så nogle mønster af 8 bit repræsenterer decimaltal 97. Denne backslash 0 er bogstaveligt talt det antal 0, alias nul, N-U-L modsætning tidligere, N-U-L-L, som vi talte om. Men for nu, bare vide, at denne backslash 0 er kun 80 bits i træk. 
+
+Og det er bare denne linje i sand, der siger noget til venstre hører til en streng, eller en datatype. Og noget til højre hører til noget andet. Andi navn, i mellemtiden, som netop visuelt sker for at ombryde på den anden linje, men det er bare en æstetisk detalje, tilsvarende er nul afsluttes. 
+
+Det er en streng af en A-N-D-I figurer, plus en femte hemmelig karakter, alle 0 bits, der bare afgrænser slutningen af ​​Andi navn så godt. Og hvis vi kalder får strengen en tredje gang i computeren for at få en streng som Maria, M-A-R-I-A, ligeledes er Marias navn nul termineret med backslash 0. 
+
+Dette er fundamentalt forskellige fra hvordan en computer ville typisk lagre et heltal eller en flyder, eller andre datatyper stadig, fordi tilbagekaldelse, et helt tal er normalt 32 bits, eller 4 byte, eller måske endda 64 bit, eller otte bytes. Men mange primitiver i en computer i et programmeringssprog har et fast antal bytes under hood-- måske en, måske to, måske 4, måske 8. 
+
+Men strygere, ved design, har en dynamisk antal tegn. Du ved ikke på forhånd, indtil de humane typer i Z-A-M-Y-L-A, eller M-A-R-I-A, eller A-N-D-I. Du kender ikke hvor mange gange brugeren vil ramme tastaturet. Derfor behøver du ikke ved, hvordan mange tegn i forvejen du får brug for. 
+
+Og så C bare lidt blade som en hemmelig brødkrumme under kølerhjelmen ved slutningen af ​​strengen. Efter lagring Z-A-M-Y-L-A i hukommelsen, det også bare sætter ækvivalent af en periode. Ved slutningen af ​​en sætning, det sætter 80 bit, så at huske, hvor Zamyla begynder og slutter. 
+
+Så hvad er forbindelsen, derefter, til dette program? Dette program her, Stirling, er simpelthen en mekanisme for at få en streng fra brugeren, linie 6. Linje 7, erklærer jeg en variabel kaldet n og sæt den lig med 0. 
+
+Og så i linje 8, simpelthen spurgte jeg spørgsmål, mens det n'te karakter gør ikke lig alle 0 bits-- med andre ord, ikke lig denne særlige karakter, omvendt skråstreg 0, som var bare at særlige nul character-- gå videre og bare tilvækst n. 
+
+Og holde gør det, og holde gør det, og holde gør det. Og så selvom i fortiden, vi har brugt i, det er helt fint semantisk at bruge n, hvis du bare prøver at tælle denne gang bevidst, og bare ønsker at kalde det n. Så dette blot holder stille spørgsmålet, er den n'te karakter s alle 0'er? Hvis ikke, se til næste look, se på den næste, se på den næste, se til den næste. 
+
+Men så snart du ser omvendt skråstreg 0, denne loop-- linje 9 gennem 11-- stopper. Du bryder ud af while-løkken, forlader indersiden af ​​denne variabel n en samlet optælling af alle de tegn i strengen du så, derved printe det ud. Så lad os prøve dette. 
+
+Lad mig gå videre og uden ved hjælp af stirling funktion, men blot ved hjælp af min egen hjemmelavede udgave her kaldet stirling, lad mig gå videre og køre stirling, type i noget ligesom Zamyla, som jeg på forhånd ved er seks tegn. Lad os se om det virker. Faktisk er det seks. Lad os prøve med Rob, tre tegn, tre figurer samt, og så videre. Så det er alt, der foregår på under kølerhjelmen. Og mærke tilslutningerne, derefter, med den første uge af klasse, hvor vi talte om noget som abstraktion, som er lige denne lagdeling af ideer, eller kompleksitet, oven på grundlæggende principper. Her er vi slags leder under kølerhjelmen af ​​stirling, så at sige, at finde ud af, hvordan ville det blive gennemført? 
+
+Og vi kunne re-implementere det selv. Men vi aldrig igen vil at re-implementere stirling. Vi er lige at gå til bruge stirling for til rent faktisk at få nogle strings længde. 
+
+Men der er ingen magi under emhætten. Hvis du ved, at under hætten, en streng er blot en sekvens af tegn. Og at sekvens af tegn alle kan numerisk rettet med beslag 0, beslag 1, beslag 2, og du ved, at ved afslutningen af ​​en streng er en specialtegn, kan du regne ud hvordan man gør de fleste noget i en program, fordi alle det koges ned til læser og skriver hukommelse. Det vil sige, skiftende og leder på hukommelsen, eller flytte ting rundt i hukommelsen, trykning ting på skærmen, og så videre. 
+
+Så lad os nu bruge denne nyfundne forståelse af, hvad strings faktisk er under kølerhjelmen, og skrælle et andet lag at indtil nu vi har været ignorerer helt. Navnlig helst Vi har implementeret et program, vi har haft denne linje kode nær toppen erklære vigtigste. Og vi har specificeret int main tomrum. 
+
+Og det tomrum i parentes har sagt hele tiden, at main selv tager ikke nogen argumenter. Enhver input, vigtigste er vil få fra brugeren skal komme fra en anden mekanisme, ligesom get int, eller få float, eller få strengen, eller en anden funktion. Men det viser sig, at når du skriver et program, du rent faktisk kan angive at dette program skal tage input fra det menneskelige på kommandolinjen selv. 
+
+Med andre ord, selvom vi hidtil har kørt lige ./hello hej eller lignende programmer, alle af andre programmer, som vi har brugt, at vi selv ikke skrive, har taget, synes det, kommandolinje arguments-- ting som make. Du siger noget i retning af fabrikat, og derefter en anden ord. Eller klang, siger du clang, og derefter et andet ord, navnet på en fil. 
+
+Eller endda RM eller CP, som du måske har set eller brugt allerede at fjerne eller kopiere filer. Alle de tager såkaldte kommandolinje arguments-- yderligere ord i terminalen prompt. Men indtil nu, vi selv har ikke haft denne luksus at tage input fra brugeren, når han eller hun faktisk løber selve programmet på kommandolinjen. 
+
+Men vi kan gøre det ved at re-erklære vigtigste bevæger sig fremad, ikke at have ugyldig i parentes, men disse to argumenter instead-- den første et heltal, og den anden noget nyt, noget, som vi kommer til at kalde et array, noget lignende i ånden til hvad vi så i Scratch som en liste, men en vifte af strenge, som vi vil snart se. Men lad os se dette ved Eksempelvis inden vi skelne præcist, hvad det betyder. 
+
+Så hvis jeg går ind i CS50 IDE her, jeg har gået fremad og erklærede i en fil kaldet argv0.c følgende skabelon. Og bemærke den eneste der er anderledes hidtil er, at jeg har ændret ugyldig til int argc snor argv åben konsol, tæt beslag. Og mærke til nu, er der intet inde af disse konsoller. 
+
+Der er ingen tal. Og der er ingen i, eller n, eller enhver anden brev. Jeg er bare ved hjælp af firkantede parenteser til nu, af årsager, vi vil komme tilbage til om et øjeblik. 
+
+Og nu, hvad jeg har tænkt mig at gøre, er dette. Hvis argc lig lig 2-- og minde om, at lig ligemænd er operatør lighed sammenligne venstre og højre for ligestilling. Det er ikke opgaven operatør, som er enkelt lighedstegn, hvilket betyder kopi fra højre til venstre en vis værdi. 
+
+Hvis argc lig lig med 2, vil jeg siger, printf, hallo, procenter, ny linje, og sæt in-- og her er den nye trick-- argv beslag 1, af grunde at vi vil vende tilbage til om et øjeblik. Else hvis argc ikke gør lige 2, ved du hvad? Lad os bare gå videre og, som sædvanlig, print ud hello world uden substitution. 
+
+Så det ser ud til, at hvis argc, som står for argument tæller, er lig med 2, Jeg har tænkt mig at udskrive hej et eller andet. Ellers som standard, jeg er kommer til at udskrive hej verden. Så hvad betyder det? 
+
+Nå, lad mig gå videre og spare denne fil, og derefter gør argv0, og derefter ./argv0, Enter. Og det siger hej verden. Nu, hvorfor er det? 
+
+Tja, det viser sig når som helst du køre et program på kommandolinjen, du udfylde hvad vi får generelt kalder et argument vektor. Med andre ord, automatisk computer, operativsystemet, kommer til at aflevere til dit program selv en liste over alle ordene at det menneskelige indtastet på prompt, hvis du programmøren ønsker at gøre noget med disse oplysninger. Og i dette tilfælde, det eneste ord Jeg har indtastet ved prompten er ./argv0. 
+
+Og så antallet af argumenter, der er gives videre til mit program er blot én. Med andre ord, det argument noget ud, også kendt som argc her som et helt tal, er blot én. Et naturligvis ikke lig to. Og så dette er hvad udskriver, hej verden. 
+
+Men lad mig tage dette sted. Lad mig sige, argv0. Og så hvad med Maria? Og så tryk Enter. 
+
+Og mærke til, hvad magisk sker her. Nu, i stedet for hej verden, jeg har ændret adfærd af dette program ved at tage inputtet ikke fra get snor eller en anden funktion, men fra tilsyneladende min kommando selv, hvad jeg oprindeligt skrevet i. Og jeg kan spille dette spil igen ved ændre det til Stelios, f.eks. 
+
+Og nu ser jeg et andet navn stadig. Og her, kan jeg sige Andi. Og jeg kan sige Zamyla. Og vi kan spille dette spil hele dagen lang, bare tilslutte forskellige værdier, så længe jeg levere præcis to ord på prompt, sådan at argc, mit argument tæller, er to. 
+
+Skal jeg se, at navnet tilsluttet printf, pr denne betingelse her? Så vi synes at have nu den ekspressive kapacitet tage input fra en anden mekanisme, fra den såkaldte kommandolinjen, snarere end at skulle vente indtil brugeren kører programmet, og derefter bede ham eller hende bruge noget lignende get streng. 
+
+Så hvad er det? Argc, igen, er bare et heltal, antallet af words-- arguments-- at brugeren tilvejebragt ved prompt på terminalvinduet, herunder programmets navn. Så vores ./argv0 er effektivt, programmets navn, eller hvordan jeg køre programmet. 
+
+Det tæller som et ord. Så argc ville være en. Men når jeg skriver Stelios, eller Andi, eller Zamyla, eller Maria, det betyder, at argumentet tæller er to. Og så nu er der to ord bestået i. 
+
+Og varsel, kan vi fortsætte med denne logik. Hvis jeg faktisk sige noget som Zamyla Chan, et fuldt navn, og dermed passerer tre argumenter i alt, nu står standard igen, fordi, selvfølgelig, 3 ikke er lig 2. 
+
+Og så på den måde, har jeg adgang via argv dette nye argument at vi kunne teknisk kalde noget, vi ønsker. Men ved konvention, det er argv og argc hhv. Argv, argument vektor, er en slags af et synonym for en programmering funktion i C kaldes et array. 
+
+Et array er en liste over lignende værdier tilbage, til tilbage, til tilbage, mod ryg. Med andre ord, hvis man er lige her i RAM, den næste er lige ved siden af ​​det, og lige ved siden af ​​den. De er ikke over det hele. Og sidstnævnte scenarie, hvor tingene er over det hele i hukommelsen, kan faktisk være en effektiv funktion. Men vi vil vende tilbage til, at når vi tale om amatør datastrukturer. For nu, et array er blot en luns af sammenhængende hukommelse, hver af hvis elementer tilbage, til tilbage, til tilbage, til at bakke, og generelt den samme type. 
+
+Så hvis du tænker over, fra en øjeblik siden, hvad er en streng? Tja, en streng, ligesom Zamyla, Z-A-M-Y-L-A, er teknisk set blot et array. Det er et array af tegn. 
+
+Og så hvis vi virkelig trække dette, da jeg gjorde tidligere, da en luns af hukommelse, viser det sig, at hver af disse tegn fylder en byte. Og så er der det særlige sentinel karakter, omvendt skråstreg 0, eller alle otte 0 bits, at afgrænser udgangen af ​​denne streng. Så en streng, viser det sig ud, citerer citat slut streng, er bare en vifte af chara-- char at være en egentlige datatype. 
+
+Og nu argv, meanwhile-- lad os gå tilbage til programmet. Argv, selv om vi ser ordet snor her, er ikke en streng selv. Argv, argument vektor, er et array af strenge. 
+
+Så ligesom du kan have en bred vifte af tegn, kan du få højere niveau, en matrix af strings-- så, for eksempel, når jeg har skrevet et øjeblik siden ./argv0 argv0, space Z-A-M-Y-L-A, I hævdede, at argv havde to strenge i it-- ./argv0, og Z-A-M-Y-L-A. I andre ord argc var 2. Hvorfor det? 
+
+Nå, effektivt, hvad der foregår på er, at hver af disse strenge er naturligvis et array af tegn som før, hver af hvis tegn fylder en byte. Og ikke forveksle den faktiske 0 i programmets navn med 0, hvilket betyder alle 80 bit. Og Zamyla, i mellemtiden, er stadig også et array af tegn. 
+
+Så ved slutningen af ​​dagen, er det virkelig ser sådan ud under motorhjelmen. Men argv, i kraft af hvordan vigtigste værker, tillader mig at ombryde alt dette op i, hvis du vil, en større vifte at hvis vi lidt over forenkle hvad billedet ser ud, og ikke helt trække det til at skalere op der, dette array er kun af størrelse 2, den første element, som indeholder en streng, det andet element af som indeholder en streng. Og til gengæld, hvis du slags zoome ind på hver af disse strenge, hvad du se under kølerhjelmen er, at hver streng er lige et array af tegn. 
+
+Nu, ligesom med strygere, vi var i stand til at få adgang til det i'te karakter i en streng ved hjælp af denne firkantede beslag notation. Ligeledes med arrays Generelt kan vi bruge firkantede beslag notation for at få på et vilkårligt antal strenge i et array? For eksempel, lad mig gå videre og gøre dette. 
+
+Lad mig gå videre og skabe argv1.c, som er lidt anderledes denne gang. I stedet for at kontrollere for argc2, Jeg har tænkt mig at i stedet gøre det. For int jeg får 0, jeg er mindre end argc, jeg plus plus, og derefter printe ud inde i dette, procent s, ny linje, og derefter argv beslag i. 
+
+Så med andre ord, jeg ikke beskæftiger sig med enkelte tegn i øjeblikket. Argv, som det fremgår af disse tomme firkant seler til højre for navnet argv, betyder argv er et array af strenge. Og argc er bare en int. 
+
+Denne linje her, 6, er siger sæt jeg lig med 0. Tæl hele vejen op til, men ikke inklusive, argc. Og så på hver iteration, udskrive en streng. Hvad snor? 
+
+Den i'te streng i argv. Så mens før jeg var ved hjælp af den firkantede beslag notation at få ram på den i'te karakter i en streng, nu Jeg bruger den firkantede beslag notation at få på den i'te streng i et array. Så det er lidt et lag ovenfor, konceptuelt. 
+
+Og så hvad er pæn om dette program nu, hvis jeg kompilere argv1, og derefter gøre ./argv1, og derefter skrive i noget lignende foo bar baz, som er de tre standard ord, en datalog rækker ud efter noget tidspunkt han eller hun har brug for nogle pladsholder ord, og tryk på Enter, hvert af disse ord, herunder programmets navn, som er i argv ved den første placering, ender med at blive udskrevet en ad gangen. Og hvis jeg ændre dette, og jeg siger noget som argv1 Zamyla Chan, vi får alle tre af disse ord, hvilket er argv0, argv1, argv2, fordi der i dette tilfælde argc, optællingen, er tre. 
+
+Men hvad er pæn er, hvis du forstår at argv er bare en vifte af strenge, og du forstår, at en streng er en vifte af tegn, Vi kan faktisk slags bruge denne firkantet beslag notation flere gange at vælge en streng, og vælg derefter en karakter inden for streng, dykning i dybere som følger. I dette eksempel, lad mig gå videre og kalder det argv2.c. Og i dette eksempel, lad mig gå videre og gøre det following-- for int jeg får 0, Jeg er mindre end argc, jeg plus plus, ligesom før. Så i anden words-- og nu denne bliver kompliceret nok. Så jeg har tænkt mig at sige gentage over strenge i argv, som en kommentar til mig selv. Og så jeg har tænkt mig at have en indlejret for løkke, som du sikkert har gjort, eller anses gør, i Scratch, hvor Jeg har tænkt mig at sige int-- jeg er ikke kommer til at bruge i igen, fordi jeg ikke ønsker at skygge, eller slags overskrive den eksisterende i. 
+
+Jeg har tænkt mig at i stedet, siger j, fordi det er min gå til variabel efter jeg, når jeg prøver bare at tælle simple numre. For j får 0-- og også, n, vil få agterstavnen længde argv beslag I, så længe j er mindre end m, j plus plus, skal du gøre følgende. Og her er den interessante del. 
+
+Udskriv en karakter og en ny linje, tilslutte argv beslag i, beslag j. OK, så lad mig tilføje nogle kommentarer her. Gentage over tegn i aktuelle streng, print j-th tegn i i'te streng. Så nu, lad os overveje hvad disse bemærkninger betyder. 
+
+Gentage over strengene i argv-- hvor mange strenge er i argv, hvilket er et array? Argc mange, så jeg iteration fra i lig 0 op til argc. I mellemtiden, hvor mange tegn er i den i'te streng i argv? 
+
+Nå, for at få det svar, Jeg bare kalde snor længde på den aktuelle snor I pleje om, hvilket er argv beslag i. Og jeg har tænkt mig at midlertidigt at gemme, at værdi i n, bare for caching formål, at huske det for effektivitet. Og så jeg har tænkt mig initialisere j til 0, holde ud, så længe j er mindre end n, og på hver iteration tilvækst j. 
+
+Og så i her, per min kommentar på linje 12, udskrive en karakter, efterfulgt af en ny linje, specifikt argv beslag Jeg giver mig den i'te snor i argv-- så det første ord, den andet ord, den tredje ord, uanset hvad. Og så j dyk i dybere og får mig j-th karakter af dette ord. Og så i realiteten kan du behandle argv som en multi-dimensional, som et todimensionalt, array, hvorved hvert ord slags udseende som denne i dit sind s øje, og hvert tegn er slags sammensat i en søjle, hvis det hjælper. 
+
+I virkeligheden, når vi drille denne afstand i fremtidige uger, det kommer til at være lidt mere sofistikeret end det. Men du kan virkelig tænke på, at for nu, som netop dette todimensionale matrix, hvorved et niveau af det er alle strengene. Og så hvis du dykke i dybere, du kan få på de enkelte tegn deri ved hjælp af denne notation her. 
+
+Så hvad er nettoeffekten? Lad mig gå videre og gøre argv2-- darn det. Jeg lavet en fejl her. Implicit erklære biblioteksfunktionen stirling. Så alt denne gang, er det måske passende at vi slags efterbehandling præcis hvor vi startede. 
+
+Jeg skruet op, implicit erklære biblioteksfunktionen stirling. OK, vent et øjeblik. Jeg husker, at især da det er lige her. Jeg har brug for at inkludere string.h i denne version af programmet. 
+
+Lad mig gå videre og inkludere string.h, bortset fra at gå videre og kompilere argv2. Og nu, her går vi, gør argv2, Enter. Og selvom det er lidt kryptiske ved første øjekast, Bemærk at, ja, hvad udskrives er dot argv2. 
+
+Men hvis jeg skriver nogle ord efter prompt, ligesom argv2 Zamyla Chan, Indtast, også lidt kryptiske ved første øjekast. Men hvis vi rulle tilbage op, ./argv2 Z-A-M-Y-L-A C-H-A-N. Så vi har gentaget i løbet af hvert ord. Og til gengæld har vi gentog løbet hver karakter inden et ord. 
+
+Nu, efter alt dette, indse, at der er en anden detalje, vi har været så venlige for at ignorere denne hele tiden. Vi har lige drilles hinanden hvad vigtigste input kan være? Hvad vigtigste produktion? 
+
+Alt dette tidspunkt, har vi været bare kopiere og indsætte Ordet int foran vigtigste, selvom du måske se online, undertiden forkert i ældre versioner af C og compilere, at de siger ugyldig eller slet ingenting. Men, ja, for den version C, som vi bruger, C 11, eller 2011, indser at det skal være int. Og det bør enten være ugyldig eller argc og argv her. 
+
+Men hvorfor int main? Hvad er det egentlig tilbage? Tja, det viser sig al den tid, helst du har skrevet et program main altid returnere noget. Men det har været at gøre det hemmeligt. 
+
+At noget er en int, som linje 5 antyder. Men hvad int? Tja, der er det konvention i programmering, hvorved hvis intet har gået galt og alt er godt, programmer og funktioner generelt return-- noget counterintuitively-- 0. 0 generelt betyder alt er godt. Så selv om du tænker på det som falsk i mange sammenhænge, det faktisk betyder generelt en god ting 
+
+I mellemtiden, hvis et program returnerer 1, eller negativ 1 eller 5, eller negativ 42, eller enhver ikke-0 værdi, der generelt betegner at noget er gået galt. Faktisk på din egen Mac eller pc, du måske har faktisk set en fejlmeddelelse, hvorved den siger et eller andet, fejl kode negativ 42, eller fejlkode 23, eller noget lignende. Dette antal er generelt bare en antydning til programmøren, eller virksomheden der gjorde softwaren, hvad der gik galt og hvorfor, så de kan se gennem deres dokumentation eller kode, og regne ud, hvad den fejl betyder faktisk. Det er generelt ikke nyttig for os slutbrugere. 
+
+Men når vigtigste afkast 0, alt er godt. Og hvis du ikke angiver hvad vigtigste skal returnere, det vil bare automatisk returnere 0 for dig. Men returnere noget ellers er faktisk nyttigt. 
+
+I denne sidste program, lad mig gå videre og kalde dette exit.c, og introducere den sidste af dagens emner, der er kendt som en fejlkode. Lad mig gå videre og inkludere vores velkendte filer op top, gør int main. Og denne gang, lad os gøre int argc, string argv, og med mine konsoller at antyde, at det er i array. Og så lad mig bare gøre et sanity check. Denne gang, hvis argc ikke gør lige to, så ved du hvad? Glem det. Jeg vil sige, at, hey, bruger, du mangler kommandolinje argument backslash n. 
+
+Og så er det. Jeg ønsker at afslutte. Jeg vil forebyggende, og tidligt virkelig, afkast noget andet end nummer 1. Gå til værdi for den første fejl, der kan ske, er en. Hvis du har nogle andre fejlagtige situation, der kan forekomme, du kan sige afkast 2 eller returnere 3, eller måske endda negativ 1 eller negativ 2. 
+
+Disse er blot afslutningskoder der er generelt kun nyttig for programmøren, eller selskab, der er forsendelse af softwaren. Men det faktum, at det er ikke 0 er hvad der er vigtigt. Så hvis i dette program, vil jeg garantere, at dette program kun virker, hvis brugeren giver mig med et argument optælling af to, navnet på det program, og nogle andre ord, kan jeg håndhæve så meget som følger, yell på brugeren med printf ordsprog, mangler kommandolinje argument, returnere en. Det vil bare straks afslutte programmet. 
+
+Kun hvis argc lig 2 vil vi komme ned her, på hvilket tidspunkt jeg har tænkt mig at sige, hej procent s, omvendt skråstreg n, argv1. Med andre ord, er jeg ikke går efter argv 0, som er lige navnet på programmet. Jeg ønsker at udskrive hej, komma, det andet ord, at den menneskelige indtastet. Og i dette tilfælde på linje 13, alt er godt. 
+
+Jeg ved, at argc er 2 logisk fra dette program. Jeg har tænkt mig at gå videre og returnere 0. Som en sidebemærkning, huske på, at dette er sandt i Scratch så godt. 
+
+Logisk, jeg kunne gøre dette og indkapsle disse linjer af koden i denne ellers klausul her. Men det er slags unødigt indrykning min kode. Og jeg vil gerne gøre super klart, at uanset hvad, som standard, hej noget vil blive udskrevet, så længe brugeren samarbejder. 
+
+Så det er meget almindeligt at bruge en tilstand, blot en if, at fange nogle fejlagtige situationen, og derefter afslutte. Og så, så længe alt er godt, ikke have en anden, men bare har koden uden at såfremt, for det er ækvivalente i denne særlige tilfælde, logisk. Så jeg vender tilbage 0, bare for at udtrykkeligt tilkendegiver alt er godt. 
+
+Hvis jeg udeladt tilbagevenden 0, ville det automatisk antages for mig. Men nu, at jeg vender tilbage en i det mindste dette tilfælde Jeg har tænkt mig at, for god foranstaltning og klarhed, returnere 0 i dette tilfælde. Så lad mig gå videre og gøre exit, som er en perfekt Overgang til bare forlade. 
+
+Men gør exit, og lade mig gå videre og gøre ./exit, Enter. Og programmet råbte på mig, mangler kommandolinje argument. OK, lad mig samarbejder. 
+
+Lad mig i stedet gøre ./exit, David, Enter. Og nu siger goddag David. Og du normalt ikke ville se dette. 
+
+Men det viser sig, at der er en særlig måde i Linux faktisk se med, hvad exit kode et program forlades. Nogle gange i en grafisk verden som Mac OS eller Windows, du kun se disse tal, når en fejlmeddelelse popper op på skærmen og programmøren viser dig dette nummer. Men hvis vi ønsker at se, hvad fejlen budskab er, at vi kan gøre det her-- så ./exit, Enter, print mangler kommandolinje argument. 
+
+Hvis jeg nu gøre echo $ ?, der er latterligt kryptisk leder. Men $? er den magiske besværgelse der siger, hey, computer, fortælle mig, hvad den tidligere program exit kode var. Og jeg ramte Enter. Jeg ser en, fordi det er hvad jeg fortalte min vigtigste funktion til at vende tilbage. 
+
+I mellemtiden, hvis jeg gør ./exit David, og tryk på Enter, jeg ser, hej David. Og hvis jeg nu gør echo $ ?, jeg ser hej 0. Og så dette vil faktisk være værdifuld information i forbindelse med debugger, ikke så meget, at du som menneske, ville pleje. Men debugger og andre programmer vi vil bruge dette semester vil ofte se på dette nummer, selvom det er slags gemt væk medmindre du kigge efter det, til afgøre, om et programs eller ej henrettelse var korrekt eller forkert. 
+
+Og så bringer os til dette, ved slutningen af ​​dagen. Vi startede i dag ved at se på debugging, og til gengæld på kurset selv, og derefter mere interessant, teknisk under kølerhjelmen på, hvad strenge er, som vare uge vi bare tog for givet, og helt sikkert tog dem for givet i Scratch. 
+
+Vi kiggede derefter på, hvordan vi kan få adgang til enkelte tegn i en streng, og derefter igen tog et højere niveau se på tingene, ser på, hvordan well-- hvis vi ønsker at komme på individuelt elementer i en liste som struktur, kan vi ikke gøre det med flere strenge? Og vi kan med kommandolinjeargumenter. Men dette billede her for bare kasser er demonstrative af denne generelle idé af et array, eller en liste, eller en vektor. Og afhængigt af sammenhæng alle disse ord betyde lidt forskellige ting. Så i C, er vi kun vil at tale om et array. Og et array er en luns hukommelse, som hver især er elementer er sammenhængende, tilbage, til tilbage, til at bakke, til ryggen. 
+
+Og disse elementer er generelt af samme datatype, karakter, karakter, karakter, karakter, eller streng, snor, snor, snor, eller int, int, int, hvad det er vi forsøger at gemme. Men i slutningen af ​​dagen, er dette hvad det ligner begrebsmæssigt. Du tager din computerens hukommelse eller RAM. Og du skære det ud i identisk størrelse æsker, som alle er tilbage, til tilbage, til tilbage, til tilbage på denne måde. 
+
+Og hvad er rart om denne idé, og det faktum, at vi kan udtrykke værdier på denne måde med den første af vores datastrukturer i klassen, betyder, at vi kan begynde til at løse problemer med kode der kom så intuitivt i uge 0. Du husker telefonen bog eksempel hvor vi brugte en del og hersk, eller en binær søgealgoritme, at finkæmme gennem en hel bundt af navne og numre. Men vi antog, husker, at der telefonbog blev allerede sorteret, at nogen havde ellers allerede regnede out-- givet en liste over navne og numbers-- hvordan alphabetize dem. Og nu, at i C vi, Også har evnen at lægge tingene ud, ikke fysisk i en telefonbog men næsten i en computers hukommelse, vil vi være i stand næste uge at indføre igen denne-- den første af vores datastrukturer i en array-- men endnu vigtigere, faktiske computer videnskab algoritmer implementeret i koden, som vi kan gemme data i strukturer som dette, og derefter begynde at manipulere det, og til faktisk at løse problemer med det, og at bygge videre på toppen af ​​det, i sidste ende, programmer i C, i Python, i JavaScript, forespørge databaser med SQL? 
+
+Og vi vil se, at alle disse forskellige ideer interlock. Men for nu, minde om, at domæne, som vi introducerede i dag var denne ting her, og verden af ​​kryptografi. Og blandt de næste problemer, du selv vil løse er kunsten kryptografi, scrambling og de-scrambling information, og krypteringsydelsesinformationen og decifrere tekst, og under antagelse sidste ende at du nu ved, hvad er under kølerhjelmen så når du ser eller modtage en besked som denne, du selv kan tyde det. Alt dette, og mere næste gang. 
+
+[VIDEO PLAYBACK] 
+
+-Mover Lige ankommet. Jeg har tænkt mig at gå besøg hans college professor. Yep. Hej. Det er dig. Vente! David. Jeg prøver bare at regne ud af, hvad der skete med dig. Please, noget kunne hjælpe. Du var hans college værelseskammerat, var du ikke? Du var der med ham, når han færdig med CS50 projektet? 
+
+[MUSIK AFSPILLER] 
+
+-Det Var CS50. 
+
+Jeg elsker dette sted. 
+
+-Spise op. Vi kommer ud af markedet. 
+
+[END AFSPIL] 

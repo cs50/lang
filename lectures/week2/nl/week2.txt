@@ -1,0 +1,689 @@
+[Muziek] 
+
+DAVID J. MALAN: Oké. Dit is CS50 en deze is het begin van week 2. En je zult zien dat meer dan herinneren de afgelopen paar weken, we hebben de introductie van de computer wetenschap en op zijn beurt de programmering. 
+
+En we begonnen met het verhaal door middel van Scratch, dat grafische taal van MIT Media Lab. En dan het meest recent, vorige week, hebben we invoering van een higher-- een lager niveau taal bekend zoals C, iets dat puur tekstueel. En inderdaad, de laatste keer dat we verkend in dat kader een aantal begrippen. 
+
+Dit, rappel, was de eerste programma keken we naar. En dit programma, heel eenvoudig, afgedrukt, "hallo, wereld." Maar er is zo veel schijnbare magie er aan de hand. Er is dit #include met deze punthaken. Er is int. Er is (void). Er is tussen haakjes, accolades, puntkomma, en nog veel meer. 
+
+En zo, herinneren dat introduceerden we Scratch zodat we konden, idealiter, zie verleden dat syntax, het spul dat is echt niet alles wat intellectueel interessant maar vroeg is, absoluut, een beetje lastig te wikkelen je gedachten rond. En inderdaad, een van de meest voorkomende dingen vroeg in een programmeertaal klasse, vooral voor degenen die minder comfortabel, is om zich te gefrustreerd door en struikelen door bepaalde syntactische fouten, niet logische fouten noemen. En zo onder onze doelen vandaag de dag, in feite, zal zijn om u uit te rusten met een aantal probleemoplossende technieken voor de manier waarop zichzelf beter lossen problemen in de vorm van debuggen. En je zult herinneren, ook dat de omgeving die we geïntroduceerd laatste keer heette CS50 IDE. Dit is web-based software die kunt u programmeren in de cloud, zogezegd, terwijl al uw bestanden samen, zoals we zullen weer vandaag. En herinner me dat we revisited deze onderwerpen hier, waaronder functies en loops, en variabelen en Booleaanse uitdrukkingen, en voorwaarden. En eigenlijk nog een paar dat we vertaald uit de wereld van Scratch in de wereld van C. 
+
+Maar de fundamentele bouwsteen blokken, zo te zeggen, waren echt nog steeds hetzelfde vorige week. In feite hebben we echt net een verschillende puzzelstukje, als je wil. In plaats daarvan paarse opslaan blok, we in plaats daarvan had printf, dat is Deze functie C dat stelt u in staat om iets af te drukken en formatteren op het scherm. We introduceerden de CS50 Bibliotheek, waar u nu tot uw beschikking get_char, en get_int en get_string, en een paar andere functies zoals nou ja, via welke je kunt krijgen invoeren uit eigen toetsenbord van de gebruiker. En we namen ook een kijkje nemen op de dingen als deze-Bool en char, en dubbele, vlotter, int, long_long string. En er is zelfs andere soorten gegevens in C. 
+
+Met andere woorden, als je verklaren een variabele enkele waarde op te slaan, of wanneer u implementeren van een functie dat geeft een zekere waarde, kunt u aangeven wat type waarde dat is. Is het een koord, zoals een opeenvolging van karakters? Is het een getal, als een integer? Is het een floating point waarde, of iets dergelijks? Dus in C, in tegenstelling tot Scratch, we eigenlijk begon aan te geven wat voor soort data we waren terug te keren of het gebruik. 
+
+Maar natuurlijk, we liepen ook naar een aantal fundamentele beperkingen van de informatica. En in het bijzonder, deze taal C, recall dat we nam een ​​kijkje op integer overflow, de realiteit dat als je alleen maar een eindige hoeveelheid geheugen of specifiek een eindig aantal bits, kunt u alleen rekenen zo hoog. En dus hebben we gekeken naar dit voorbeeld hier waarbij een teller in een vliegtuig, Eigenlijk, als lang genoeg loopt zou overlopen en resulteren in een software een daadwerkelijke fysieke potentieel fout. 
+
+We hebben ook gekeken naar drijvende point onnauwkeurigheid, de realiteit dat slechts een eindig aantal bits, of het 32 ​​of 64, je kunt alleen opgeven zo veel nummers na een komma, waarna u beginnen onnauwkeurig te krijgen. Dus bijvoorbeeld een derde in de wereld hier, in onze menselijke wereld, we weten is slechts een oneindig aantal van 3s na de komma. Maar een computer kan niet per se vormen een oneindig aantal getallen Als u alleen toestaan ​​sommige eindige hoeveelheid informatie. 
+
+Dus niet alleen hebben wij u uitrusten met een grotere macht in termen van hoe je zou uiten op een toetsenbord op het gebied van programmering, beperkten we ook wat kun je eigenlijk doen. En inderdaad, bugs en fouten kunnen voortvloeien uit dit soort kwesties. En inderdaad, een van de thema's van vandaag gaan om onderwerpen als debuggen en eigenlijk kijken onder de motorkap hoe dingen waren die vorig week daadwerkelijk worden geïmplementeerd zodat je beter begrijpen zowel de capaciteiten en de beperkingen van een taal als C. 
+
+En in feite, zullen we schil de rug van de lagen van de eenvoudigste gegevensstructuur, zoiets als een array, die Scratch toevallig een te bellen "lijst." Het is een beetje verschillend in die context. En dan zullen we introduceren ook een van de eerste van onze domein-specifieke problemen in CS50, de wereld van de cryptografie, de kunst van het klauteren of coderen Zo dat je geheime boodschappen kunt verzenden en decoderen van geheime boodschappen tussen twee personen, A en B. 
+
+Dus voordat we overgang naar die nieuwe wereld, laten we proberen om u uit te rusten met een aantal technieken waarmee je kunt elimineren of verminderen ten minste sommige van de frustraties dat je waarschijnlijk hebben ondervonden van de afgelopen week alleen. In feite, met een voorsprong van jullie such-- een aantal van uw eerste problemen in C. En kansen zijn, Als je net als ik, de eerste keer je probeert te typen van een programma, zelfs als u denkt logisch het programma is vrij eenvoudig, je zou heel goed tegen een muur, en de compiler is niet van plan om mee te werken. Bellen of Clang is niet van plan eigenlijk doe je bieden. 
+
+En waarom zou dat zijn? Nou, laten we een kijkje nemen op, misschien een eenvoudig programma. Ik ga om te gaan en op te slaan deze in Een bestand met opzet genaamd buggy0.c, omdat ik weet dat het worden ontsierd op voorhand. Maar ik misschien niet beseffen dat als deze is de eerste of tweede of derde programma dat ik ben eigenlijk het maken van mezelf. Dus ik ga om te gaan en uittypen, int main (void). En dan is de binnenkant van mijn accolades, een zeer vertrouwd ( "hallo, wereld-- backslash, n ") - en een puntkomma. 
+
+Ik heb het bestand opgeslagen. Nu ga ik naar beneden te gaan aan mijn terminal venster en het type make buggy0, want, nogmaals, de naam van het bestand is vandaag buggy0.c. Dus ik typ maken buggy0, Enter. 
+
+En, oh, gosh, herinneren van de vorige keer dat er geen foutmeldingen is een goede zaak. Dus geen output is een goede zaak. Maar hier heb ik duidelijk bepaald aantal fouten. 
+
+Dus de eerste regel van de output na het typen maken buggy0, rappel, is vrij uitgebreide uitvoer Clang's. Onder de kap, CS50 IDE is geconfigureerd een hele hoop te gebruiken opties met deze compiler zodat u niet hoeft om na te denken over hen. En dat is alles dat de eerste lijn middelen die begint met Clang. 
+
+Maar daarna problemen beginnen hun verschijning. Buggy0.c op lijn 3, karakter 5, is er een grote, rode error. Wat is dat? Impliciet verklaren bibliotheekfunctie printf met type int (const char *, ...) [-Werror]. Ik bedoel, het zeer snel erg mysterieus. En zeker, op het eerste blik, zouden we niet verwachten dat je het begrijpt geheel van die boodschap. En zo een van de lessen voor vandaag gaat om te proberen het bericht patronen of soortgelijke dingen, om fouten die u zou kunnen hebben in het verleden ondervonden. Dus laten we alleen plagen elkaar die woorden die bekend voor. De grote, rode fout is duidelijk symbolisch dat iets mis is. 
+
+impliciet verklaren bibliotheek functie printf. Dus zelfs als ik niet helemaal begrijpen wat impliciet verklaren bibliotheekfunctie middelen, het probleem toch heeft betrekking op een of andere manier printf. En de bron van die kwestie heeft te maken met aangifte te doen. 
+
+Het uitroepen van een functie met vermelding van het voor de eerste keer. En we gebruikten de terminologie van vorige week verklaren prototype van een functie, hetzij met één lijn aan de bovenkant van uw eigen bestand of in een zogenaamde header file. En in welke file deden we zeggen vorige week dat printf is citaat, unquote, verklaarde? In welk bestand is het prototype? 
+
+Dus als u zich herinneren, het allereerste wat ik getypte, bijna elk programma afgelopen tijd-- en per ongeluk even geleden begonnen typen myself-- was dit een hier-- hash-- #include <stio-- voor input / output-- dot h En inderdaad, Als ik nu dit bestand op te slaan, ga ik om verder te gaan en mijn scherm te wissen, die je kunt doen door het intikken Heldere, of u kunt houden Control L, alleen maar om je terminal venster te wissen gewoon om wat rommel te elimineren. 
+
+Ik ga om te gaan en re-type make buggy0, Enter. En voila, ik zie nog steeds dat lange commando van Clang, maar er is geen foutmelding deze tijd. En inderdaad, als ik dat doe ./buggy0, net als de vorige keer, waar de stip betekent dit directory, Slash betekent gewoon, Hier komt de naam van het programma en dat de naam van het programma is buggy0, Enter, "hello, world." 
+
+Nu, hoe zou je hebt deze oplossing verzameld zonder dat het herkennen van zo veel mogelijk woorden zoals ik heb gedaan, zeker, met dit gedaan voor zo vele jaren? Nou, realiseren per het eerste probleem set, introduceren wij u een opdracht dat eigen medewerkers CS50's schreef genaamd help50. En inderdaad, C doet specificatie voor het probleem stellen hoe dit te gebruiken. 
+
+Maar help50 hoofdzaak een programma dat het personeel CS50's schreef die u toelaat om te draaien een opdracht of uitvoeren van een programma, en als je niet begrijpt haar output, naar de uitgang door te geven aan help50, waarna de software dat het personeel van de cursus schreef zal kijken naar de uitgang van uw programma regel voor regel, teken voor teken. En als we, het personeel, erkennen de foutmelding die je ervaart, we zullen proberen om u te lokken met een aantal retorische vragen, met wat advies, net als een TF of een CA of ikzelf zou doen in persoon op kantooruren. 
+
+Dus kijk naar help50 als je dat niet doet per se een probleem te herkennen. Maar niet op vertrouwen te veel als een kruk. Zeker proberen te begrijpen zijn output en vervolgens van leren zodat slechts één of twee keer heb je ooit lopen help50 voor een bepaalde fout bericht. Daarna moet u beter uitgerust jezelf om erachter te komen wat het eigenlijk is. 
+
+Laten we een ander hier. Laat me gaan, en in een ander bestand zullen we deze buggy1.c noemen. En in dit bestand Ik ben gaat deliberately-- maar doen alsof dat ik niet begrijpen wat fout die ik heb gemaakt. 
+
+Ik ga om te gaan en te doen dit-- # include, want ik heb leerde mijn les van daarnet. Int main (void), zoals voorheen. En dan hier ga ik te doen tekenreeks s - get_string. En herinneren van de vorige keer dat Dit betekent, hey, computer, geef me een variabele, noem het is, en maken de aard van die variabele een string dus ik kan één of meer woorden in te bewaren. 
+
+En dan op de rechter kant van het isgelijkteken get_string is, dat een functie in de CS50 Bibliotheek dat doet precies dat. Het wordt een functie en handen is van rechts naar links. Dus dit gelijk-teken betekent niet "Gelijk", zoals we zouden kunnen denken in wiskunde. Het betekent opdracht van rechts naar links. Dus dit betekent, neemt de string uit de gebruiker en bewaar het binnenkant van s. 
+
+Laten we nu gebruiken. Laat me nu en ga je gang als tweede lijn, laat me ga je gang en zeg "hallo" - niet "wereld", maar "hello,% S-- dat is onze placeholder, komma's, die ons variabel, en vervolgens een puntkomma. Dus als ik niet verpesten teveel Hier, dit ziet eruit als de code juist is. 
+
+En mijn instincten nu zijn om het te compileren. Het bestand heet buggy1.c. Dus ik ga doen maken buggy1, Enter. En stopt-het, als er geen nog meer fouten dan voorheen. Ik bedoel, er is meer foutmeldingen het zou lijken dan de werkelijke regels in dit programma. 
+
+Maar de afhaalmaaltijd is hier, zelfs als je overweldigd bent met twee of drie of vier meer foutmeldingen, altijd gericht op de eerste van deze berichten. Kijkend naar de bovenste één, scrolling back-up als het nodig is. Dus hier Ik typte make buggy1. Hier is dat Clang uitgevoerd als verwacht. 
+
+En hier is de eerste rode fout. Het gebruik van niet-aangegeven identifier koord, heb ik bedoel standaard in? Dus standaard is eigenlijk iets anders. Het verwijst naar de gebruiker toetsenbord wezen. 
+
+Maar dat is niet wat ik bedoelde. Ik bedoelde touwtje, en ik bedoelde get_string. Dus wat is het dat ik vergat deze keer doen? Wat ontbreekt deze keer? Ik heb mijn # include, dus ik heb toegang tot printf. 
+
+Maar wat heb ik niet toegang tot gewoon nog niet? Nou, net als de vorige keer, Ik moet de compiler te vertellen Clang wat deze functies zijn. Get_string komt niet met C en in het bijzonder komt niet in de header bestand. Het komt in plaats daarvan in iets wat het personeel heeft geschreven, dat is een ander bestand noem maar toepasselijke naam. 
+
+Dus gewoon door het toevoegen van die ene lijn van code-- recall van de vorige keer dat wanneer Clang wordt uitgevoerd, gaat het om te kijken naar mijn code boven naar beneden, van links naar rechts. Het gaat om op te merken, oh, je wilt. Laat me gaan en vinden dat, waar het ook is op de server, kopiëren en plakken, in wezen, in de bovenkant van je eigen bestand zodat op dit punt in het verhaal, lijn 1, de rest van het programma kan inderdaad gebruik gemaakt van de functies daarin, onder hen get_string. Dus ik ga om te negeren de rest van deze fouten, omdat ik inderdaad vermoeden dat alleen de eerste echt toe deed. En ik ga je gang en herhaling te gaan, na mijn bestand op te slaan maken buggy1. En voila, het werkte. En als ik dat doe ./buggy1 en typ in, voor Zo Zamyla, ik nu zal hello krijgen, Zamyla, in plaats van hello, wereld. 
+
+Okee. Dus de afhaalrestaurants hier dan zijn om, een, probeer zoveel als je kunt achterhalen alleen op grond van de foutmeldingen, op zoek op enkele van de herkenbare woorden. Behoudens dat, gebruiken help50 per het probleem set specificaties. Maar behoudens dat ook altijd kijken bovenaan fout, minstens in eerste instantie, om te zien welke informatie het zou eigenlijk opleveren. Maar het blijkt er's nog meer functionaliteit ingebouwd in de CS50 Library te helpen je vroeg in het semester en in het begin van de programmering erachter te komen wat er mis gaat. Dus laten we een ander voorbeeld hier. Ik ga dit buggy2 noemen, die, weer, zal worden ontsierd uit van de poort, door het ontwerp. 
+
+En ik ga om verder te gaan en doe #include. En dan ga ik int main (void) te doen. En dan ga ik een te doen voor lus. For (int i _ 0. i kleiner is dan of gelijk aan 10. i ++, en vervolgens in accolades, ik ga om uit te printen op een hashtag symbool hier en een nieuwe lijn karakter. 
+
+Dus mijn bedoeling met deze programma is gewoonweg tot 10 keer herhalen en elke iteratie van die lus telkens door de cyclus, afdrukken van een hashtag, een hashtag, een hashtag. Één per regel, omdat ik hebben de nieuwe lijn daar. En herinneren dat de voor lus, per laatste week-- en je zult meer krijgen vertrouwd met de syntax door het te gebruiken met de praktijk voordat long-- geeft dit me een variabele genaamd i en zet het aan 0. 
+
+Dit verhoogt op i iedere iteratie door 1. Dus gaat i 1 tot 2-3. En dan is deze voorwaarde in de midden tussen de puntkomma wordt gecontroleerd op elke iteratie te maken er zeker van dat we nog steeds binnen bereik. Dus ik wil 10 keer herhalen, dus ik hebben een soort van zeer intuïtief net zet 10 als mijn bovengrens daar. 
+
+En toch, toen ik dit run, na compilatie met make buggy2-- en het doet compileren OK. Dus ik heb geen syntax error deze tijd. Laat me nu ga je gang en lopen buggy2, Enter. En nu gaat u omhoog. En laat me te verhogen de grootte van het venster. 
+
+Ik lijken te hebben 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. Dus er is 11 hashtags, alhoewel Ik heb duidelijk zet 10 binnenkant van deze lus. Nu, sommigen van u misschien meteen wat de fout is dat inderdaad deze is een hardwarefout te maken. Maar het is zeer vaak heel vroeg gemaakt. 
+
+Wat ik wil erop wijzen, hoewel, is, hoe kan ik dit uit? Nou, het blijkt dat de CS50 Bibliotheek komt met niet alleen get_string en get_int en get_float en andere functies. Het komt ook met een speciale functie genaamd eprintf, of fout printf. En het bestaat uitsluitend te maken het een beetje makkelijker voor u bij het oplossen van uw code om gewoon afdrukken een foutmelding op het scherm en weten waar het vandaan kwam. 
+
+Dus bijvoorbeeld, een ding dat ik zou hier doen met deze functie is dit-- eprintf, en dan ga ik om verder te gaan en zeggen dat ik nu% i, backslash, n. En ik ga om aan te sluiten in de waarde van i. En tot boven, want dit in het CS50 Library, Ik ga om verder te gaan en omvatten dus ik heb toegang tot deze functie. Maar laten we eens kijken welke lijn 9 is zou moeten doen. Ik ga dit uiteindelijk te verwijderen. Dit heeft niets te maken met mijn overkoepelende doel. Maar eprintf, fout printf, is alleen bedoeld voor mij sommige diagnostische informatie te geven. Toen ik mijn programma uit te voeren, wil ik Bekijk dit op het scherm tijdelijk net zo goed te begrijpen wat gebeurd er. 
+
+En inderdaad op elke iteratie hier van lijn 9 Ik wil zien, wat is de waarde van i? Wat is de waarde van i? Wat is de waarde van i? En hopelijk, zou ik alleen maar zien die boodschap ook, 10 keer. 
+
+Dus laat me ga je gang en recompile mijn programma, als ik elk moment doen Ik maak een verandering. ./buggy2. En now-- OK. Er is veel meer aan de hand. Dus laat me scroll omhoog in een nog groter venster. 
+
+En je zult zien dat elk van de hashtags is nog steeds afdrukken. Maar tussen elk van hen is nu dit diagnostische uitvoer opgemaakt als volgt. De naam van mijn programma is hier buggy2. De naam van het bestand is buggy2.c. Het lijnnummer van waaruit Dit werd gedrukt is lijn 9. En vervolgens naar rechts daarvan is de foutmelding dat ik verwachtte. 
+
+En wat er leuk is aan dit is dat Nu heb ik niet per se te tellen in mijn hoofd wat mijn programma aan het doen is. Ik kan zien dat op de eerste iteratie i is 0, dan 1, dan 2, dan 3, dan 4, dan 5, dan 6, dan 7, dan 8, dan 9, dan 10. Dus wacht een minuut. Wat is hier aan de hand? Ik meen mij nog te tellen zoals bedoeld tot 10. 
+
+Maar waar heb ik beginnen? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10. Dus 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 10-- vinger is indicatief voor het probleem. Ik lijken te hebben geteld verkeerd in mijn loop. In plaats van naar 10 herhalingen, Ik begin op 0, Ik eindigt bij en door 10. Maar omdat, zoals een computer, Ik ben beginnen te tellen bij 0, Ik zou moeten tellen , maar niet door, 10. 
+
+En dus is de fix, ik uiteindelijk hier gerealiseerd, is een van twee dingen. Ik zou heel gewoon zeggen tellen tot minder dan 10. Dus 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, die inderdaad correct, hoewel het klinkt een beetje verkeerd. Of ik kon doen kleiner dan of gelijk tot 9, zolang ik vanaf 0. Of als je echt niet wilt dat u kan tellen tot en met 10, maar beginnen bij 1. Maar nogmaals, dit is gewoon niet zo vaak voor. In programming-- zij niet zozeer in Scratch-- maar in de programmering in C en andere talen, zoals JavaScript en Python en anderen, het is gewoon heel vaak voor onze bespreking van binaire gewoon beginnen te tellen bij de laagste aantal je kunt, dat is 0. Okee. Dus dat is eprintf. En nogmaals, nu heb ik bedacht mijn probleem, en ik ga terug naar 0 door middel van minder dan 10, ik ga te gaan en eprintf verwijderen. 
+
+Het zou er niet zijn als ik het schip mijn code of mijn code in te dienen laten zien of aan iemand anders. Het is eigenlijk alleen maar bedoeld voor tijdelijk gebruik. Maar nu heb ik dit vast bijzonder probleem. 
+
+Nou, laten we nog een voorbeeld hier dat ik ga om zweep als volgt. Ik ga om te gaan en #include. $ 50 En ik ga om verder te gaan en #include. 
+
+En ik ga op te slaan dit bestand als buggy3.c. En ik ga om verder te gaan en verklaar int main (void). En dan de binnenkant van daar Ik ga doen int i _ - Ik wil een programma uit te voeren met get_negative_int. Dit is niet een functie die nog bestaat. Dus we gaan uit te voeren in slechts een moment. Maar we zullen zien waarom het is buggy op het eerste pass. En zodra ik heb gekregen een int van de gebruiker, Ik ga gewoon naar% i te drukken is een negatief integer, backslash, n, komma, i. Met andere woorden, ik wil dit programma te doen is krijgen een negatief int uit de gebruiker en vervolgens uitprinten dat die en die een negatief int. 
+
+Nu moet ik deze functie uit te voeren. Dus later in mijn dossier, ga ik om te gaan vooruit en verklaren een functie genaamd get_negative_int (void) - en we zullen terug te komen op wat die lijn weer betekent in een moment-- int n; doen-- do de following-- printf n is :. En dan ga ik n doen - get_int, en dit doet bij n groter is dan 0. En dan terug n ;. 
+
+Dus er is veel gaande in dit, maar geen van die we niet deden kijk naar de afgelopen week, op zijn minst kort. Dus op lijn 10 hier Ik heb verklaard functie genaamd get_negative_int, en ik heb gezet (void), in haakjes, de reden hiervoor is deze geen input nemen. Ik doe niets passeren deze functie. Ik ben gewoon om iets terug uit het. 
+
+En wat ik hoop te terug te krijgen is een integer. Er is geen enkele vorm van gegevens in C genoemd negative_int. Het is gewoon int, dus het gaat om op ons om ervoor te zorgen dat de waarde die is eigenlijk Teruggekeerde is niet alleen een int maar is ook negatief. 
+
+Op lijn 12 Ik ben declareren van een variabele riep n en maakt het van het type int. En dan in de lijn 13 tot 18 Ik ben iets te doen terwijl iets waar is. Ik ga vooruit en afdrukken gaan n is, dikke darm, en dan een spatie, als een aanwijzing voor de gebruiker. 
+
+Ik ben dan bellen get_int en het opslaan van de zogenaamde return waarde dat variabele n. Maar ik ga blijven doen Dit terwijl n groter is dan 0. Met andere woorden, als de gebruiker kijkt me int en dat aantal groter is dan 0, ergo, positief, ik ga gewoon blijven reprompting de gebruiker, houden reprompting, door hen te dwingen samen te werken en geef me een negatieve int. 
+
+En zodra n is eigenlijk negative-- veronderstel dat de gebruiker eindelijk types -50, dan is deze while-lus is niet langer waar want -50 niet groter is dan 0. Dus breken we uit die lus logisch en terug te keren n. 
+
+Maar er is een andere wat ik moet doen. En ik kan gewoon doen door kopiëren en plakken een regel code aan het begin van het bestand. Ik moet Clang te onderwijzen, of beloven Clang, uitdrukkelijk dat ik wil, inderdaad, ga en uit te voeren Deze functie get_negative_int. Het zou wel eens lager in het bestand. Nogmaals, herinneren dat Clang leest dingen boven naar beneden, van links naar rechts, zodat u niet bel een functie als Clang niet weet dat het gaat om te bestaan. 
+
+Nu helaas het programma, Zoals sommigen van jullie misschien gemerkt hebben, is al buggy. Laat me ga je gang en maak buggy3. Het compileert, dus mijn probleem is nu niet een syntax error, als een tekstuele fout, het eigenlijk gaat om een ​​logisch fout die ik heb met opzet maakte als een kans om stap door wat er gaande is. 
+
+Ik ga om verder te gaan nu en voer buggy3. En ik ga om te gaan vooruit en niet meewerken. Ik ga om het te geven het nummer 1. Hij vond het niet leuk, dus het is weer gevraagd me. 
+
+Hoe zit het met 2? 3? 50? Geen van deze werken. Hoe zit het met -50? En het programma lijkt te werken. 
+
+Laat ik probeer het nog eens. Laat me proberen -1, lijkt te werken. Laat me proberen -2, lijkt te werken. Laat me proberen 0. Huh, dat is onjuist. Nu, we zijn hier een beetje pedant. Maar het is inderdaad zo dat 0 is noch positief, noch negatief. En dus het feit dat mijn programma is te zeggen dat 0 is een negatief getal is, Dat is technisch niet correct. 
+
+Nu, waarom is het om dit te doen? Nou, zou het duidelijk zijn. En inderdaad, het programma bedoeld vrij eenvoudig te dus we hebben iets om te verkennen. 
+
+Maar laten we introduceren een derde debugging techniek die hier genoemd debug50. Dit is dus een programma dat we net hebben gemaakt dit jaar riep debug50 die u zal toestaan te gebruiken wat wordt genoemd een ingebouwde grafische debugger in CS50 IDE. En een debugger is gewoon een programma dat over het algemeen kunt u uw programma uit te voeren maar stap voor stap voor stap, lijn per lijn per lijn, pauzeren, porren rond, op zoek naar variabelen, zodat het programma niet alleen blazen je voorbij en snel iets af te drukken of niet iets afgedrukt. Het geeft je een kans, op menselijke snelheid, om te communiceren met het. 
+
+En om dit te doen, je gewoon het volgende doen. Na het opstellen van de code, die heb ik al gedaan, buggy3, ga je gang en lopen debug50 ./buggy. Zoveel als help50 heeft u loopt help50 en vervolgens de opdracht, debug50 heeft u debug50 rennen en dan is de naam van de opdracht. 
+
+Nu, let op wat er gebeurt op mijn scherm, aan de rechterzijde in het bijzonder. Toen ik hit Run, alle van de plotselinge dit rechterpaneel opent op het scherm. En er is veel te doen op het eerste gezicht. Maar er is niet al te veel zorgen te maken over het nog niet. 
+
+Dit toont me alles dat is er aan de binnenkant van mijn programma op dit moment en via deze knoppen up top is dan waardoor ik stap door mijn code uiteindelijk stap voor stap voor stap. Maar niet gewoon nog niet. Let op wat er gebeurt. Op mijn terminal venster Ik word gevraagd om n. En ik ga om verder te gaan en samen deze tijd en typ -1. En zij het een beetje cryptisch, -1 een negatief geheel getal is, zoals verwacht. 
+
+En dan kind verlaten met status van 0 GDBserver verlaten. GDB, GNU Debugger, is de naam van de onderliggende software dat implementeert deze debugger. Maar dit alles betekent eigenlijk, de debugger ging weg omdat mijn programma af te sluiten en alles was goed. Als ik wil echt debuggen mijn programma, Ik moet preventief vertellen debug50, waar wil ik beginnen het doorlopen van mijn code? 
+
+En misschien wel de eenvoudigste manier om dat te doen is als volgt. Als ik de muisaanwijzer op de goot van mijn redacteur hier, dus echt alleen in de zijbalk hier, links van het regelnummer, Merk op dat als ik klik gewoon een keer, heb ik een kleine rode stip. En dat kleine rode stip, als een stopteken, betekent, hey, debug50, pauzeren uitvoering van mijn code daar wanneer ik dit programma. 
+
+Dus laten we dat doen. Laat me ga je gang en voer mijn programma opnieuw met debug50 ./buggy3, Enter. En nu, bericht, iets anders is gebeurd. Ik ben niet gevraagd maar in mijn terminal venster voor iets, want ik heb niet gotten er in mijn programma. Merk op dat op lijn 8 die nu is gemarkeerd, en er is een kleine pijl bij links gezegde, je bent hier onderbroken. Deze lijn van code, lijn 8, is nog niet uitgevoerd. 
+
+En wat is nieuwsgierig, als ik kijk hier aan de rechterzijde, merken dat ik een lokale variabele lokale in de zin dat het in de huidige functie. En de waarde, blijkbaar standaard, en sorteren van gunstig, is 0. Maar ik heb niet het type 0. Dat gebeurt alleen maar om haar default waarde op het ogenblik. 
+
+Dus laat me ga je gang en doe dit nu. Laat me gaan en op de top hier, ik ben gaan om verder te gaan en Klik op deze eerste pictogram dat betekent stap waarover betekent niet overslaan het, maar stap over deze lijn van code, het uitvoeren van het langs de weg. 
+
+En nu, ziet, mijn prompt heeft zojuist veranderd. Waarom is dat? Ik heb debug50 verteld, run deze regel code. Wat betekent deze lijn van code doen? Vraagt ​​me om een ​​int. OK. Laat me samenwerken. Laat me nu ga je gang en type-1, Enter. En let nu op wat er is veranderd. Aan de rechterkant, mijn lokale variabele i wordt aangegeven als zijnde -1 nu. En het is nog steeds van het type int. 
+
+En let op, ook, mijn zogenaamde noemen stack, waar heb ik pauze? We zullen meer over praten dit in de toekomst. Maar de call stack net verwijst naar wat functies zijn nog in beweging. Op dit moment is het gewoon de belangrijkste. En op dit moment de enige lokale variabele i met de waarde 1. 
+
+En toen ik eindelijk stap over deze lijn Hier, met datzelfde icoontje bovenaan rechts, -1 Is een negatief getal. Nu is het pauzeren over die accolade. Laten we laat het zijn ding te doen. Ik stap over die lijn, en voila. 
+
+Dus niet zo vreselijk verhelderend nog, maar het deed laat me pauzeren en doordenken logisch wat dit programma doet. Maar dat was niet het geval onjuist. Laten we dit doen weer als volgt. 
+
+Ik ga dat breekpunt te verlaten op lijn 8 met de rode stip. Ik ga debug50 opnieuw uit te voeren. Het wordt hier automatisch gepauzeerd. Maar deze keer in plaats van intensivering over deze lijn, laat me ook daadwerkelijk te gaan binnenkant van get_negative_int en erachter te komen, waarom is het aanvaarden van 0 als een geldig antwoord? 
+
+Dus in plaats van te klikken Step Over. Ik ga om verder te gaan en klik Step Into. En merk op dat de lijn 8 dat is nu gemarkeerd nu opeens wordt lijn 17. 
+
+Nu, het is niet zo dat de debugger heeft overgeslagen lijnen 14 en 15 en 16. Het is gewoon dat er niets u daar te zien. Die zijn gewoon te verklaren variabelen, En dan is er het woord doen en dan een open accolade. De enige functionele lijn die is sappige is echt dit hier, 17. En dat is waar we hebben automatisch gepauzeerd. 
+
+Dus printf ( "n.is:") ;, zo dat is nog niet gebeurd. Dus laten we gaan door en klik op Stap Over. Nu is mijn prompt, inderdaad, veranderd ( "n"). Nu get_int, ik ga niet lastig te vallen stappen in, omdat die functie was door CS50 in de bibliotheek. Het is waarschijnlijk correct. 
+
+Dus ik ga om te gaan en soort van werken door het geven van het een int, maar geen negatieve int. Dus laat me ga je gang en sloeg 0. En nu, wat gebeurt hier als ik naar beneden op lijn 21? Ik heb niet meer herhaald. Ik weet niet lijken vast te zitten in die lus. Met andere woorden, deze gele bar niet te gaan rond, en rond en rond. 
+
+Nu, waarom is dat? Nou, n, wat n op dit moment? Ik kan kijken naar de lokale variabelen in de debugger. n 0 is. Oké, wat was mijn conditie? 
+
+20-- lijn 20 is, nou ja, 0 is groter dan 0. Dat is niet waar. 0 niet groter is dan 0. En dus ik brak uit deze. 
+
+En dus dat is waarom on line 21, als ik eigenlijk voort te zetten, Ik ga om terug te keren 0, zelfs hoewel ik zou hebben verworpen 0 zo niet echt negatief. Dus nu, ik niet echt eens zorg over de debugger. Kreeg het, ik hoef niet te weet wat er nog meer aan de hand is. 
+
+Dus ik ga om te gaan en klikt u op de knop Afspelen, en laat deze eindigen. Nu, heb ik besefte dat mijn bug is blijkbaar op lijn 20. Dat is mijn denkfout. 
+
+En dus wat wil ik te doen om dit te veranderen? Als het probleem is dat ik niet het vangen van 0, het is gewoon een denkfout. En ik kan zeggen, terwijl n groter dan of gelijk aan 0, houden opnieuw en opnieuw vragen aan de gebruiker. 
+
+Dus nogmaals, eenvoudig fout, misschien zelfs voor de hand als je me zag schrijf het maar een paar minuten geleden. Maar de afhaalmaaltijd hier is dat met debug 50, en debugging software algemeen, you have this nieuw gevonden macht aan wandeling door uw eigen code, kijk via die rechts paneel wat variabelen waarden zijn. Zodat je niet per se hebben om iets te gebruiken alsof je eprintf om die waarden te drukken. Je kunt ze eigenlijk zien visueel op het scherm. 
+
+Nu, meer dan dit, het is vermeldenswaard dat er een andere techniek die is eigenlijk super gemeen. En je kunt je afvragen waarom dit kleine guy here is zittend op het podium. Dus er is deze techniek, in het algemeen bekend als rubber duck debuggen, dat is eigenlijk gewoon een bewijs van het feit dat vaak als programmeurs het schrijven van code, ze zijn niet per se samenwerken met anderen, of werken in een gedeelde omgeving. 
+
+Ze zijn een soort van thuis. Misschien is het 's avonds laat. Ze proberen cijfer enkele bug in hun code. En ze zijn gewoon niet te zien. 
+
+En er is geen kamergenoot. Er is geen TF. Er is geen CA omgeving. Alles wat ze hebben op hun plank is dit kleine rubber ducky. 
+
+En dus badeend debugging is gewoon deze uitnodiging te denken aan iets zo dom aangezien dit als een echte wezen, en eigenlijk wandeling door uw code verbaal op deze levenloos voorwerp. Dus, bijvoorbeeld, indien dit is mijn voorbeeld hier-- en herinneren eraan dat eerder het probleem was dat, als ik dit eerste regel van de code te verwijderen, en ik ga je gang en maak buggy 0 weer, herinneren dat ik had deze foutmeldingen hier. Dus het idee hier, belachelijk hoewel ik voelen op het moment dat dit te doen in het openbaar, is dat fout. 
+
+OK, dus mijn probleem is dat ik heb impliciet verklaarde een functie uit de bibliotheek. En die bibliotheek functie printf. Declare-- OK, verklaren doet me denken aan prototypes. 
+
+Dat betekent dat ik moet eigenlijk vertel de compiler van tevoren wat de functie eruit ziet. Wacht even. Ik had geen standaard io.h. Veel dank. 
+
+Dus dit proces van-- u niet nodig om daadwerkelijk een eend. Maar dit idee van het lopen uzelf via uw eigen code zodat je zelfs horen jezelf, zodat je realiseren omissies in uw eigen opmerkingen, doorgaans het idee. 
+
+En, misschien wel meer logisch, niet zo veel met die ene, maar de meer betrokken voorbeeld dat we net deed in buggy 3.c, je zou je er doorheen lopen als volgt. Zo goed, rubber ducky, DDB, als je wil. Hier hebben we in mijn belangrijkste functie, Ik bel krijg negatief int. 
+
+En ik krijg de return waarde. Ik doe het opslaan aan de linkerkant op lijn 8 in een variabele met de naam i. OK, maar wacht, hoe heeft die krijgen die waarde? Laat me kijken naar de functie in de lijn 12. 
+
+In lijn 12, we hebben krijgen negatieve int. Heeft geen inputs te nemen, retourneert een int, OK. Ik verklaar op lijn 14 een variabele n. Het gaat om een ​​geheel getal op te slaan. Dat is wat ik wil. 
+
+Dus doe het volgende terwijl n is-- laten me ongedaan maken wat de moeilijke situatie ik al gemaakt. Dus terwijl n groter is dan 0, uitprinten n is, OK. En dan noemen krijgen int opgeslagen in n. En dan controleren of n 0, n is niet-- daar is het. Dus nogmaals, doe je niet moet de werkelijke eend. Maar gewoon wandelen jezelf door uw code als een intellectuele oefening zal vaak u helpen beseffen wat er gaande is, in tegenstelling tot net iets te doen als dit, staren naar het scherm, en niet praten jezelf door is, die niet eerlijk bijna als een effectieve techniek. Dus daar heb je het, een aantal verschillende technieken voor het daadwerkelijk debuggen uw code en het vinden van fouten, die moet gereedschappen in uw toolkit zodat je niet 's avonds laat, vooral, je bent in de eetzaal zalen, of op kantooruren bonzen je hoofd tegen de muur, in een poging om een ​​probleem op te lossen. Realiseer je dat er software tools. Er zijn rubber duck gereedschappen. En er is een hele staf van ondersteuning te wachten om een ​​handje te helpen. 
+
+Dus nu, een woord over het probleem sets, en op wat we u hopen eruit te komen van hen, en hoe we gaan evalueren. Per syllabus van de cursus, CS50's probleem sets worden beoordeeld op vier primaire assen, dus om de reikwijdte speak--, correctheid, ontwerp, en stijl. En reikwijdte gewoon verwijst naar hoe veel van het stuk heb je gebeten? Hoeveel van een probleem heb je geprobeerd? Wat is het niveau van de inspanning heb je gemanifesteerd? 
+
+Correctheid is, doet het programma werk als het zou moeten per CS50 specificatie wanneer u bepaalde ingangen of bepaalde uitgangen terug te komen? Design is de meest subjectieve van hen. En het is degene die zal neem de langste om te leren en de langste om les te geven, in voor zover het op neer komt, hoe goed geschreven is je code? 
+
+Het is één ding om alleen af ​​te drukken op de juiste uitgangen of de terugkeer van de juiste waarden. Maar doe je het als efficiënt mogelijk? Doe je het verdelen en heers, of binaire zoekopdracht als we binnenkort zullen zien dat we dat deden twee weken geleden met het telefoonboek? Zijn er betere manieren om het op te lossen probleem dan u op dit moment hier? Dat is een kans voor een beter ontwerp. 
+
+En dan style-- hoe mooie is je code? U zult merken dat ik ben er vrij bijzonder over inspringen mijn code, en ervoor te zorgen dat mijn variabelen zijn redelijk genoemd. n, terwijl de korte, is een goede naam voor een nummer, i een geheel getal tellen, s voor een string. En we kunnen meer hebben variabelennamen stijl. Style is gewoon hoe goed doet uw code eruit? En hoe leesbaar is het? 
+
+En na verloop van tijd, wat uw TA en TF's zal doen in de loop wordt u met dat soort kwalitatieve feedback zodat je beter op deze verschillende aspecten. En in termen van hoe we evalueren elk van deze assen, Het is typisch met zeer weinig emmers zodat u, in het algemeen, krijg je een gevoel van hoe goed je het doet. En inderdaad, als je krijgt een score op een van deze axes-- correctheid, ontwerp en de stijl especially-- dat nummer zal in het algemeen tussen 1 en 5. En, letterlijk, als je krijgt 3 bij het begin van het semester dit is een zeer goede zaak. Het betekent dat er nog steeds ruimte voor verbetering, die je zou hopen in nemen van een klasse voor het eerst. Er is hopelijk een aantal beetje plafond waarop je streven naar het bereiken van. En zo krijgen 3 op vroegste stukken, zo niet enige 2 en 4 is, is inderdaad een goede zaak. Het is goed binnen het bereik, valt binnen de verwachtingen. 
+
+En als je geest is racen, wacht een minuut, drie van de vijf. Dat is echt een 6 op 10. Dat is 60%. Mijn God, dat is een F. 
+
+Het is niet. Het is niet, in feite, dat. Integendeel, het is een kans om te verbeteren in de loop van het semester. En als je het krijgen van een aantal poors, deze zijn een kans om te profiteren van de kantooruren, zeker secties en andere hulpmiddelen. 
+
+Best is een kans, echt, trots op hoe ver je hebt te zijn komen in de loop van het semester. Dus beseffen, als er niets anders, drie is goed. En het laat ruimte voor groei in de tijd. 
+
+Met betrekking tot hoe die assen gewogen, realistisch ben je gaat om de meeste van uw tijd te besteden krijgen dingen om te werken, laat staan ​​correct. En zo juist neigt gewogen de, zoals bij Deze vermenigvuldigingsfactor van drie. Het ontwerp is ook belangrijk, maar iets dat je per se niet besteden al die uren op proberen om dingen gewoon aan het werk. 
+
+En dus het is gewogen een beetje meer licht. En dan is de stijl is het minst gewogen. Ook al is het niet minder belangrijk fundamenteel, het is gewoon misschien de makkelijkste om te goed te doen, nabootsen voorbeelden we doen in college en sectie, met de dingen mooi ingesprongen, en becommentarieerd, enzovoort is de gemakkelijkst dingen te doen en goed te krijgen. Dus als zodanig te realiseren dat deze punten zijn die relatief eenvoudig te begrijpen. 
+
+En nu een woord over dit-- academische eerlijkheid. Dus per de cursus syllabus, zul je zien dat de cursus heeft nogal een bit van de taal rond dit. En de cursus neemt de kwestie van de academische eerlijkheid heel serieus. 
+
+We hebben het onderscheid, in voor-en tegenspoed, te hebben verzonden elk jaar meer studenten voor disciplinaire maatregelen dan de meeste andere Natuurlijk, dat ik ben me bewust van. Dit is niet noodzakelijk indicatief voor het feit dat CS studenten, of CS50 studenten, zijn minder eerlijk dan je klasgenoten. Maar de realiteit dat deze wereld, elektronisch, we gewoon hebben technologische middelen voor het detecteren van deze. 
+
+Het is belangrijk voor ons eerlijkheid over de klas dat we op te sporen dit, en verhogen de vraag wanneer we dingen zien. En alleen maar om een ​​beeld te schetsen, en echt om iets te helpen als dit wastafel in, dit zijn de aantallen studenten in de afgelopen 10 jaar die betrokken zijn bij sommige dergelijke kwesties van de academische eerlijkheid, met ongeveer 32 leerlingen vanaf najaar 2015, die is om te zeggen dat we doen nemen de zaak zeer serieus. En uiteindelijk deze nummers samen, laatstelijk ongeveer 3%, 4% of zo van de klas. 
+
+Dus voor de super meerderheid van de studenten het lijkt erop dat de lijnen duidelijk. Maar houd dit in geest, in het bijzonder late 's nachts wanneer worstelen met enkele oplossing voor een probleem set, dat er mechanismen voor het krijgen van jezelf beter ondersteuning dan je misschien denken, zelfs op dat uur. Realiseer je dat wanneer we ontvangen student inzendingen, steken we Vergelijk elke inzending dit jaar tegen elke inzending van vorig jaar, tegen elke inzending van 2007, en omdat, op zoek naar, maar ook, code repositories online, discussiefora, jobsites. En we noemen dit, echt, allemaal ter wille van volledige openbaarmaking, dat als iemand anders kan het online vinden, zeker, dus kunnen we de cursus. Maar, echt, de geest van de cursus neer om deze clausule in de syllabus. Het is eigenlijk gewoon, wees redelijk. 
+
+En als we moesten werken op die met slechts een beetje meer taal, beseffen dat de essentie van alle werk dat u aan deze cursus moet uw eigen zijn. Maar binnen dat, er zijn zeker kansen en aanmoediging, en pedagogische waarde in het draaien aan others-- mezelf, de TF's, de CA's, de TAS, en anderen in de klas, voor steun, laat staan ​​vrienden en huisgenoten die hebben gestudeerd CS en programmering voor. En dus is er een vergoeding voor. En de algemene vuistregel wordt dit-- bij zijn verzoek om hulp, kunt u uw code te laten zien aan anderen, maar je mag hen niet zien. Dus zelfs als je toch bezig bent kantooruren, of D zaal of elders werken aan een aantal delige set, werken samen met een vriend, die is helemaal prima, op de einde van de dag op uw werk Uiteindelijk moet behoren tot elke van jullie respectievelijk, en niet een aantal gezamenlijke inspanning, met uitzondering van het afstudeerproject, waar het is toegestaan ​​en wordt aangemoedigd. 
+
+Realiseer je dat als je worstelen met iets en uw vriend toevallig beter in deze zijn dan u, of beter dat probleem dan jij, of een beetje verder vooruit dan jij, het is volstrekt redelijk om te draaien aan uw vriend en zeggen: hey, Vind je het erg naar mijn code hier, helpt me herkennen wat mijn probleem is? En hopelijk in de belang van de pedagogische waarde die vriend niet alleen zeggen, oh, doe dit, maar eerder, Wat mist u op de lijn 6, of iets dergelijks? Maar de oplossing is niet voor de vriend naast je te zeggen, oh, nou ja, hier, laat me trekken dit, en toon mijn oplossing voor jou. Dus dat is de lijn. U toont uw code te anderen, maar je mag niet bekijken van hen, onder voorbehoud van de andere beperkingen in syllabus van de cursus. 
+
+Dus maak je in gedachten houden deze zogenaamde spijt clausule in syllabus van de cursus zo goed, dat als je commit enkele handeling die is niet redelijk, maar breng het naar de aandacht van de hoofden van de cursus binnen 72 uur, de cursus eventueel sancties op te leggen dat kan een onbevredigende omvatten of falende cijfer voor het ingediende werk. Maar de cursus zal niet verwijzen zaak voor verdere disciplinaire maatregelen, behalve in gevallen van herhaalde handelingen. Met andere woorden, als je zelf een dom, vooral 's avonds laat, besluit dat de volgende ochtend of twee dagen later, je wordt wakker en beseffen, Wat dacht ik? Je doet in CS50 hebben een stopcontact voor de vaststelling van dat probleem en bezit er naar toe, zodat we zul je halverwege ontmoeten en aan te pakken met in een zaak die zowel educatieve en waardevol voor u, maar nog steeds bestraffend op een bepaalde manier. En nu, aan de rand opstijgen, dit. 
+
+[VIDEO AFSPELEN] 
+
+[Muziek] 
+
+[END AFSPELEN] DAVID J. MALAN: Oké, we zijn terug. En nu kijken we naar één van de eerste van onze echte wereld domeinen in CS50, de kunst van cryptografie, de kunst van het verzenden en ontvangen geheime boodschappen, versleutelde berichten als je wil, dat kan alleen worden ontcijferd als u een aantal belangrijke ingrediënt dat de afzender heeft ook. Dus om dit te motiveren we zullen nemen Een blik op dit ding hier, dat een voorbeeld van een geheime decoder ring die kan worden gebruikt om te achterhalen wat een geheime boodschap eigenlijk is. In feite, terug in de dag op de lagere school, als je ooit geheime boodschappen verzonden naar sommige vriend of een oogje in de klas, je zou hebben gedacht dat je slim zijn door op uw stuk papier veranderen, zoals, A naar B en B naar C en C naar D, enzovoorts. Maar je was eigenlijk versleutelen uw informatie, zelfs als het een beetje triviaal, was niet dat moeilijk voor de leraar om te beseffen, Nou, als je gewoon veranderen B naar A en C naar B, je eigenlijk uitzoeken wat de boodschap was, maar je was in het coderen van gegevens. 
+
+Je was gewoon doen gewoon, net als Ralphie hier in een beroemde film die speelt vrij veel tot vervelens toe elke winter. [VIDEO AFSPELEN] -Wees Bekend om al dat Ralph Parker is hierbij benoemd tot lid van de Kleine Orphan Annie Secret Circle en heeft recht op alle eer en voordelen welke ontstaan. 
+
+-Signed, Little Orphan Annie, -Counter ondertekend Pierre Andre, met inkt. Eer en voordelen, al op de leeftijd van negen. 
+
+[SCHREEUWEN] -Kom op. Laten we aan de slag gaan. Ik geloof niet alles wat jazz nodig over smokkelaars en piraten. 
+
+-listen Morgenavond voor de afsluitende avontuur van de zwarte piratenschip. Nu is het tijd voor geheime boodschap Annie's voor u de leden van de Secret Circle. Vergeet niet, kinderen, alleen voor leden van Annie's Secret Circle kan Annie's geheime boodschap te ontcijferen. 
+
+Vergeet niet, Annie is afhankelijk van je. Stel je pinnen om B2. Hier is de boodschap. 12, 11-- 
+
+-Ik Ben, mijn eerste geheime vergadering. 
+
+-14, 11, 18, 16. 
+
+-Pierre Was in grote stem vanavond. Ik kon vertellen dat vanavond boodschap was heel belangrijk. 
+
+-3, 25, dat is een boodschap van Annie zichzelf. Vergeet niet, niet verder vertellen. 
+
+-90 Seconden later, ik ben in de enige kamer in het huis, waar een jongetje van negen in privacy en decoderen kon zitten. Aha, B! Ik ging naar de volgende, E. 
+
+Het eerste woord is. S, werd het aankomen makkelijker nu, U, 25-- 
+
+Oh, kom op, Ralphie, ik moet gaan! 
+
+-Ik Recht naar beneden, Ma! Gee whiz! 
+
+-T, O, zeker to-- moet u wat? Wat was Little Orphan Annie probeer te zeggen? Zorg ervoor dat u wat? 
+
+-Ralphie, Andy heeft te gaan, wilt u alstublieft naar buiten komen? 
+
+-Alle Recht, Ma! Ik kom uit zijn! 
+
+-Ik Was nu dichterbij krijgt. De spanning was verschrikkelijk. Wat was het? Het lot van de planeet kan hangen in de balans. 
+
+-Ralphie! Andy's gotta go! 
+
+-Ik Rechts uit, voor schreeuwt luid! 
+
+-bijna Er, vloog mijn vingers, mijn geest was een stalen val, elke porie getrild. Het was bijna duidelijk, ja, ja, ja. 
+
+-Zorg Ervoor dat u uw Ovaltine drinken. Ovaltine? Een slordig uit commercieel? Klootzak. [END AFSPELEN] DAVID J. MALAN: OK, dus dat was een zeer lange weg invoering cryptografie, en ook Ovaltine. In feite, van deze oude advertentie hier, waarom is ovaltine zo goed? Het is een geconcentreerde extractie van rijpe gerstemout, melk pure romig koe, en speciaal geprepareerde cacao, samen met natuurlijke fosfatiden en vitaminen. Verder wordt verrijkt met extra vitamine B en D, yum. En je kunt nog steeds het, blijkbaar, op Amazon, zoals wij deden hier. 
+
+Maar de motivatie was de bedoeling invoering van cryptografie, in het bijzonder een type cryptografie bekende als geheime sleutel cryptografie. En zoals de naam al doet vermoeden, de hele veiligheid van een geheime sleutel crypto-systeem, als je wil, een methodologie voor slechts versluiering informatie tussen twee mensen, is dat alleen de zender en alleen de ontvanger weet een geheim key-- wat waarde, wat geheime zin, een geheim nummer, dat kunnen ze allebei coderen en decoderen van informatie. En cryptografie, echt, is alleen deze vanaf week 0. 
+
+Het is een probleem waar er inputs, als de werkelijke boodschap in het Engels of welke taal die u wilt sturen naar iemand in de klas, of via het internet. Er is enige uitgang die gaat om de gecodeerde boodschap zijn dat u willen de ontvanger te ontvangen. En zelfs als iemand in de midden krijgt het ook, je ze niet willen noodzakelijkerwijs in staat zijn om het te ontcijferen, want binnen dit black box, of algoritme, is een mechanisme, wat stapsgewijs instructies voor het nemen van die ingang en om te zetten in de output, in hopelijk een veilige manier. 
+
+En in feite is er een aantal woordenschat in deze wereld als volgt. Platte tekst is het woord een computer wetenschapper zou om de input beschrijven bericht, zoals het Engels of welke taal je eigenlijk wilt verzenden naar een ander mens. En dan is de cijfertekst is de scramble de vercijferde of versleuteld, versie ervan. 
+
+Maar er is een ander ingrediënt hier. Er is nog een andere ingang te geheime sleutel cryptografie. En dat is de sleutel zelf, die algemeen zoals we zullen zien, een getal, of letter of woord, ongeacht het algoritme is eigenlijk verwacht. 
+
+En hoe krijg je informatie te ontcijferen? Hoe krijg je het decoderen? Nou, je gewoon achteruit de uitgangen en ingangen. 
+
+Met andere woorden, zodra iemand ontvangt uw gecodeerd bericht, hij of zij moet gewoon diezelfde sleutel kennen. Zij hebben de versleutelde tekst ontvangen. En door de stekker die twee input in het crypto-systeem, het algoritme, deze zwarte doos, uit moet de oorspronkelijke plaintext komen. En dat is dus de zeer hoog niveau Gezien wat cryptografie is eigenlijk alles over. 
+
+Dus laten we daar te komen. Laten we nu eens kijken eronder de kap van iets we hebben als vanzelfsprekend voor de afgelopen week, en voor deze sessie hier-- de string. Een tekenreeks aan het einde van de dag is gewoon een reeks tekens. 
+
+Het is misschien hello wereld, of hello Zamyla, of wat dan ook. Maar wat betekent dat voor zijn een reeks tekens? In feite is de CS50 bibliotheek geeft ons een datatype genaamd string. 
+
+Maar er is eigenlijk geen zoiets als een string in C. Het is eigenlijk gewoon een opeenvolging van karakter, karakter, karakter, karakter, terug, naar achter, naar terug, naar achter, naar binnen te steunen van het geheugen van uw computer, of RAM. En we dieper in dat er in de toekomst, wanneer we kijken naar het geheugen zelf, en het gebruik en de bedreigingen die betrokken zijn. 
+
+Maar laten we eens kijken naar de string Zamyla. Dus gewoon de naam van de mens hier, Zamyla, dat een reeks karakters, Z-A-M-Y-L-A. En laten we nu eens veronderstellen dat de naam Zamyla's wordt opgeslagen in een computer programma. 
+
+Nou, is het logisch dat we moeten in staat zijn om te kijken naar deze tekens individueel. Dus ik ga gewoon om een ​​beetje te trekken box rond de naam Zamyla's hier. En het is het geval in C dat bij hebben een string, zoals Zamyla-- en misschien die string is terug uit te komen een functie als get koord, je kunt eigenlijk te manipuleren Het teken voor teken. 
+
+Nu is dit germane de gesprek bij de hand, want in cryptografie als je wilt veranderen A naar B en B naar C en C naar D, enzovoort, moet je in staat zijn te kijken naar de individuele personages in een koord. Je moet in staat zijn om te veranderen de Z iets anders, de A om iets anders, de M te iets anders, enzovoort. En dus moeten we een manier, programmatisch, dus spreken in C te kunnen veranderen en kijk naar de afzonderlijke letters. En we kunnen dit als volgt doen. 
+
+Laat me gaan hoofd terug in CS50 IDE. En laat me ga je gang en maak een nieuw bestand dat ik deze keer string0 zullen noemen, als onze eerste voorbeeld daarvan, punt c. En ik ga om verder te gaan en zweep het als volgt. 
+
+Zo zijn onder andere CS50.h, en dan zijn standaard io.h, die ik ben bijna altijd gaat om worden met behulp van in mijn programma's, op zijn minst aanvankelijk. int main leegte, en dan hier ben ik gaat strings doen krijgt krijgen string. En dan ga ik ga je gang en dit te doen. Ik wil doorgaan en, als een sanity check, gewoon zeggen, hello, procent s, puntkomma, maakt snaar 0. Uh oh, wat heb ik hier doen? Oh, ik heb niet stekker in het stopcontact. Dus les geleerd, dat was niet opzettelijk. 
+
+Dus fout, meer procent conversies dan data argumenten. En dit is waar, in lijn 7-- OK, dus ik heb, citaat unquote, dat is mijn string printf. Ik heb een procent teken. Maar ik ben het tweede argument ontbreekt. 
+
+Ik mis de komma's, die Ik had in de voorgaande voorbeelden. Dus een goede gelegenheid om vast te stellen nog een fout, ongeluk. En nu laat me lopen string0, typ Zamyla. OK, hello Zamyla. 
+
+Dus we hebben dit soort programma uit te voeren een paar verschillende keren. Maar laten we iets doen een beetje anders deze keer. In plaats van alleen het afdrukken van Zamyla's hele naam met printf, laten we het teken voor teken. 
+
+Ik ga een te gebruiken voor lus. En ik ga mezelf te geven een telling variabele, genaamd i. En ik ga iteratie te houden, zodat zolang i kleiner is dan de lengte van s. 
+
+Het blijkt, hebben we niet doe dit laatste keer, dat c wordt geleverd met een functie genaamd Stirling. Terug in de dag, en in het algemeen nog steeds bij de uitvoering van functies, mensen zullen kiezen vaak zeer beknopte namen die soort geluid als wat je wilt, zelfs al is het het missen van een paar klinkers of letters. Dus is de Stirling de naam van een functie die neemt een ruzie tussen haakjes een tekenreeks moet zijn. En het net retourneert een integer, de lengte van deze draad. 
+
+Dus deze lus op lijn 7 gaat om te beginnen met het tellen van i gelijk is aan 0. Het zal verhogen i op elke iteratie met 1, zoals we hebben gedaan een paar keer. Maar het gaat om alleen te doen dit tot het moment toen ik de lengte van het koord zelf. 
+
+Dit is dus een manier uiteindelijk itereren over de personages in de string als volgt zeggen. Ik ga niet uit te drukken een hele reeks, maar procent c, een enkel teken gevolgd door een nieuwe regel. En dan ga ik ga je gang, en ik moet te zeggen dat ik wil afdrukken ide karakter van s. 
+
+Dus als ik is de variabele die aangeeft de index van de tekenreeks, waarbij u bent in het, moet ik in staat zijn om zeggen, geef mij de i-karakter van s. En c heeft een manier van doen dit met vierkante haken. Je zegt gewoon de naam van de tekenreeks, die in dit geval is s. Dan vierkante haakjes, welke gebruikt u meestal net boven uw Return of Enter toets op het toetsenbord. En dan zet je de index van de teken dat u wilt afdrukken. Dus de index gaat om een ​​te zijn number-- 0 of 1 of 2 of 3 of dot dot, dot, een ander nummer. 
+
+En zorgen we ervoor dat het gaat om zijn het juiste aantal, want ik beginnen te tellen bij 0. En door gebrek, het eerste teken in een string is volgens afspraak 0. En de tweede personage is beugel 1. En het derde teken is beugel 2. En je wilt niet te gaan ver, maar we zullen niet omdat we zal alleen i incrementeren totdat gelijk aan de lengte van de snaar. En op welk punt, Deze lus zal stoppen. 
+
+Dus laat me ga je gang en bewaar deze programma en run te maken snaar 0. Maar Ik heb het verknald. Impliciet verklaren bibliotheekfunctie Stirling met type zodanig en such-- nu, dit klinkt bekend. Maar het is niet printf. En het is niet snaar te krijgen. 
+
+Ik heb niet verpest in net ditmaal. Maar let hier beneden een beetje naar beneden verder, onder de kop string.h, uitdrukkelijk de verklaring voor Stirling. Er is dus eigenlijk een aanwijzing in. 
+
+En inderdaad, het blijkt er is nog een header-bestand dat we niet hebben gebruikt in de klas nog niet, maar het is Onder de beschikbare aan u, de zogenaamde string.h. En in dat bestand, string.h Stirling is verklaard. Dus laat me ga je gang en bewaar deze, maken koord 0-- nice, geen foutmeldingen deze tijd. 
+
+./string0 Zamyla, en Ik ben over te druk op Enter, op welk punt getString gaat om de string terug, zet het in 's. Dan is dat voor de lus gaat herhalen meer dan S personages een voor een, en print ze één per regel, omdat Ik had dat backslash n aan het eind. Dus ik kon dat backslash weglaten n, en dan gewoon afdrukken Zamyla alle in dezelfde lijn, effectief herimplementeren printf, dat niet alles nuttig. Maar in dit geval heb ik niet gedaan. Ik heb eigenlijk afgedrukt, karakter per keer, één per regel, zodat we eigenlijk zien het effect. 
+
+Maar ik moet één ding hier rekening mee. En we zullen terugkomen naar dit in een toekomstige week. Het blijkt dat deze code is potentieel buggy. 
+
+Het blijkt dat get snaar en enkele andere functies in het leven niet per se altijd terug wat je verwacht. We weten uit de klas laatste tijd in deze, dat krijgen snaar wordt verondersteld om een ​​string terug te keren. Maar wat als de gebruiker typt dergelijke een lang woord, of paragraaf of essay dat er gewoon niet genoeg geheugen in de computer te passen. 
+
+Net als, wat als er iets verkeerde onder de motorkap? Het is misschien niet vaak, maar het kan een keer gebeuren in een tijd, zeer zelden. En zo blijkt dat get snaar en functies als het niet per se altijd terugkeren strings. Ze kunnen terugkeren een fout waarde, sommige sentinel waarde om zo te zeggen, die aangeeft dat er is iets misgegaan. En je zou alleen dit weten uit zij hebben geleerd in de klas nu, of wat meer documentatie gelezen. Het blijkt dat get snaar kan een waarde genaamd null terug te keren. Null is een speciale waarde die we zullen terug te komen in een toekomstige week. Maar voor nu, weet alleen dat als ik wil echt een goede in vooruit te zijn met behulp get koord, I moet niet alleen het noemen, en blindelings gebruik maken van haar return waarde, vertrouwend dat het een string. 
+
+Ik moet eerst zeggen, Hé, wacht eens even, alleen verder als s niet gelijk null, waarbij null, nogmaals, is slechts enkele bijzondere waarde. En het is de enige bijzondere waarde die u hoeft te maken over voor te krijgen string. Krijg snaar is ofwel gaat naar een string of null terug te keren. 
+
+En dit uitroepteken gelijk-teken u misschien kent van misschien mathklasse dat je een isgelijkteken zou kunnen tekenen met een streep erdoor om niet gelijk te geven. Dat is over het algemeen niet een personage u kunt typen op het toetsenbord. En dus in de meeste programmeertalen, wanneer u wilt niet gelijk zeggen, u gebruik maken van een uitroepteken, oftewel knal. Dus je zegt bang is gelijk aan die betekent niet gelijk, logisch. Het is net alsof er geen grotere dan, of gelijk aan, of kleiner dan of gelijk in te toetsen op je toetsenbord dat doet het allemaal in één symbool. Dus dat is de reden waarom, in het verleden voorbeelden, je hebt een open beugel, en dan een isgelijkteken, om te doen groter dan of, zeg, minder dan. 
+
+Dus wat is het hier mee te nemen? Dit is gewoon een manier om nu uit de introductie van deze syntax, deze functie, itereren voor individuele tekens in een tekenreeks. En net als die square beugels kunt u bij hen te krijgen, rekening te houden met vierkante haken als soort zinspeelde op deze onderliggende ontwerp, waarbij elke karakter binnen van een string is een beetje ingesloten ergens onderaan de kap in het geheugen van uw computer. 
+
+Maar laten we een variant van dit. Het blijkt dat deze programma correct. Dus per assen CS50's voor het evalueren code, dit is nu juist. Zeker nu dat ik het controleren op null, dit programma moet nooit crashen. En ik weet gewoon dat uit ervaring. Maar er is niets anders dat we mis kan hier echt gaan. Maar het is niet erg goed ontworpen, want laten we terug gaan naar de basis. 
+
+Eerst, principles-- wat doet een lus doen? Een lus doet drie dingen. Het initialiseert sommige waarde, als je het vraagt. Het controleert een voorwaarde. En vervolgens na elke iteratie na elke cyclus, Het verhoogt een aantal waarde of waarden, hier. 
+
+Dus wat betekent dat? We initialiseren i op 0. We controleren en ervoor zorgen dat ik minder dan de lengte van s, die Z-A-M-Y-L-A, zodat die minder dan 6. En inderdaad 0 minder dan 6. 
+
+We uitprinten Z van de naam Zamyla's. Dan verhogen we i 0-1. Vervolgens hebben we controleren, is 1 minder dan de lengte van s? De lengte van s is 6. Ja dat is zo. 
+
+Dus een afdruk van een in naam Zamyla's, ZA. Wij verhogen i van 0 tot 1 tot 2. Vervolgens hebben we controleren, 2 minder dan de lengte van de naam Zamyla's. 6- dus 2 minder dan 6. Ja, laten we uitprinten nu M in Zamyla naam, het derde teken. 
+
+Het belangrijkste is dat op elke iteratie van het verhaal, ik ben het controleren, i is kleiner dan de lengte van Zamyla? Maar de vangst is dat Stirling is geen eigenschap. Degenen onder jullie die hebben geprogrammeerd eerder in Java of andere talen kan de lengte ken een string een eigenschap, slechts enkele alleen-lezen waarde. 
+
+In C in dit geval als dit een functie die letterlijk tellen van het aantal personages in Zamyla telkens we noemen die functie. Elke keer dat u vragen de computer te gebruiken Stirling, is het nemen van een blik op Zamyla, en zeggen Z-A-M-Y-L-A, 6. En keert terug 6. De volgende keer dat u belt het binnen die lus, het gaat om te kijken naar Zamyla voorts zeg Z-A-M-Y-L-A, 6. En het gaat om terug te keren 6. Dus wat is dom over dit ontwerp? 
+
+Waarom is mijn code niet een 5 op 5 voor het ontwerp op dit moment, om zo te zeggen? Nou, ik vraag een vraag onnodig. Ik doe meer werk dan ik nodig is. 
+
+Dus hoewel de antwoord is juist, ben ik vraagt ​​de computer, wat de lengte van Zamyla weer, en opnieuw, en opnieuw, en opnieuw? En dat antwoord is nooit zal veranderen. Het is altijd gaat worden 6. 
+
+Dus een betere oplossing dan dit zou dit de volgende versie. Laat me ga je gang en zet het in een apart bestand met de naam string1.c, gewoon te houden scheiden. En het blijkt in een voor lus, kun je eigenlijk verklaren meerdere variabelen tegelijk. 
+
+Dus ik ga i te houden en zet deze op 0. Maar ik ga ook voeg een komma, en zeggen: geef me een variabele n genaamd, wiens waarde is gelijk aan de lengte van de string van s. En nu, maak mijn conditie zolang i kleiner is dan n. 
+
+Dus op deze manier, is de logica identiek aan het eind van de dag. Maar ik herinneren van de waarde 6, in dit geval. Wat is de lengte van de naam Zamyla's? En ik zet het op n. 
+
+En ik ben nog steeds het controleren de toestand elke keer. 0 is minder dan 6? 1 is minder dan 6? 2 is minder dan 6, enzovoorts? 
+
+Maar ik ben niet het stellen van de computer opnieuw, en opnieuw, wat is de lengte van de naam Zamyla's? Wat is de lengte van de naam Zamyla's? Wat is de lengte van de naam van deze Zamyla? Ik ben letterlijk te beseffen dat de eerste en alleen beantwoorden in deze tweede variabele n. Dus dit nu niet alleen zou zijn correct, maar ook goed ontworpen. 
+
+Nu, hoe zit het met stijl? Ik heb mijn variabelen vernoemd vrij goed, zou ik zeggen. Ze zijn op dit moment super beknopt. En dat is helemaal prima. 
+
+Als u slechts één tekenreeks in een programma, je net zo goed noemen is voor string. Als u slechts één variabele voor het tellen in een programma, je net zo goed noemen i. Als u een lengte, n is super vaak ook. Maar ik heb niet gereageerd geen van mijn code. 
+
+Ik heb niet de reader-- hoogte of dat is mijn TF of TA, of gewoon colleague-- wat verondersteld worden er aan de hand in dit programma. En zo te goede stijl te krijgen, wat ik zou willen doen is dit-- iets zoals vragen de gebruiker om input. En ik kon herschrijven dit een aantal manieren. 
+
+Zorg ervoor dat S-- ervoor get maken snaar terug een string. En vervolgens in hier-- en dit is misschien wel de belangrijkste comment-- iterate via tekens en een voor een. En ik kon geen gebruik maken van keuze van het Engels taal hier te beschrijven elk van deze stukjes code. 
+
+Merk op dat ik niet heb zet een commentaar op elke regel code, eigenlijk alleen maar op de interessante degenen, degenen die hebben een betekenis die ik zou kunnen willen super duidelijk om iemand te maken het lezen van mijn code. En waarom bel je krijgt koord vraagt ​​de gebruiker om input? Zelfs dat men niet per se al dat beschrijvend. Maar het helpt een verhaal vertellen, omdat de tweede lijn in het verhaal is, zorg ervoor dat krijgen snaar terug een string. 
+
+En de derde lijn in het verhaal is, itereren over de personages in 's één tegelijk. En nu slechts voor een goede maatregel, Ik ga om te gaan en toe te voegen nog een opmerking die net zegt printen i-ste karakter in s. Nu, wat heb ik gedaan aan het einde van de dag? 
+
+Ik heb een aantal Engels toegevoegd woorden in de vorm van opmerkingen. De slash slash symbool betekent, hey, computer dit is voor de mens, niet voor u, de computer. Dus ze logischerwijs genegeerd. Ze zijn er gewoon. 
+
+En, inderdaad, CS50 IDE toont ze als grijs, als nuttig, maar niet belangrijke het programma. Let op wat je nu kunt doen. Of je weet C programmeren of niet, je kan gewoon staan ​​terug op deze programma, en afgeroomde de commentaren. Vraag gebruiker om invoer, zorg ervoor dat krijgen snaar terug een string, itereren over de personages in 's een voor een, print de karakter i-de teken in S-- je niet zelfs om te kijken naar de code om te begrijpen wat het programma doet. En beter nog, als je jezelf ziet Dit programma in een week of twee, of een maand of per jaar je ook niet hoeft te staren naar de code, proberen te herinneren, wat ik probeerde te doen met deze code? 
+
+Je hebt jezelf verteld. Je hebt het beschreven voor jezelf, of een collega, of TA of TF. En dus dit zou nu correct, en een goed ontwerp, en uiteindelijk een goede stijl ook. Dus doe dat in gedachten houden. 
+
+Dus er is een ander wat ik ga doen hier dat kan nu onthullen precies wat er er aan de hand onder de motorkap. Dus er is deze functie in C, en andere talen, riep typecasting dat impliciet of expliciet stelt u in staat om te zetten van het ene gegevenstype naar het andere. We hebben beziggehouden, zodat Wat vandaag met strijkers. 
+
+En strijkers zijn personages. Maar herinneren vanaf week 0, wat zijn personages? Personages zijn onder abstractie op de top van numbers-- decimale getallen, en decimale getallen zijn eigenlijk alleen maar een abstractie bovenop binaire getallen, we definieerde. 
+
+Dus tekens cijfers. En nummers zijn personages, alleen afhankelijk van de context. En het blijkt dat binnen van een computerprogramma, kunt u opgeven hoe je wilt kijken de bits in dat programma? 
+
+Recall vanaf week 0 die we hadden Ascii, dat is gewoon deze code mapping letters naar cijfers. En wij zeiden, de hoofdstad A 65. Kapitaal B 66, enzovoort. 
+
+En let op, we hebben in wezen chars op de bovenste rij hier, zoals C hen zou noemen, karakters, en dan ints op de tweede rij. En het blijkt dat je kunt omzetten naadloos tussen de twee, typisch. En als we willen doen dit met opzet, we zou willen aanpakken iets zoals dit. 
+
+We zouden willen omzetten hoofdletters naar kleine geval is, of kleine letters naar hoofdletters. En het blijkt dat er's eigenlijk een patroon hier we kunnen omarmen in slechts een moment. Maar laten we eerst kijken naar een voorbeeld om dit te doen expliciet. 
+
+Ik ga terug te gaan in CS50 IDE. Ik ga naar het creëren van een bestand genaamd Ascii 0.c. En ik ga om verder te gaan en voeg mijn standaard io.h aan de top, int main leegte bovenaan mijn functie. En dan ga ik gewoon naar de doen following-- een lus van i gelijk is aan, laten we zeggen, 65. 
+
+En dan wordt ik zal minder zijn dan 65, plus 26 letters in het alfabet. Dus ik zal de computer te laten doen de wiskunde voor mij daar. En vervolgens binnen deze lus, wat ga ik om af te drukken? 
+
+% C% i Backslash n. En nu wil ik de stekker in twee waarden. Ik heb tijdelijk in vraag markeert er om de vraag uit te nodigen. 
+
+Ik wil verder herhalen vanaf 65 26 letters van het alfabet, printen op elke iteratie dat personage integraal equivalent. Met andere woorden, ik wil itereren over 26 nummers afdrukken wat het ASCII-teken is, de brief, en wat de bijbehorende nummer is-- eigenlijk gewoon recreëren het schema van die dia. Dus wat moeten deze vraagtekens zijn? 
+
+Nou, het blijkt dat de tweede men moet alleen de variabele i zijn. Ik wil zien dat als een getal. En de middelste argument hier kan ik de computer vertellen behandeling die integer i als aard geleidelijk deze hier vervangen procent C. 
+
+Met andere woorden, als I, menselijke programmeur, weet dit zijn slechts cijfers aan het einde van de dag. En ik weet dat 65 moet toewijzen aan één of ander karakter. Met deze expliciete cast, met een haakje, de naam van het type data die u wilt converteren, en een gesloten haakjes U kunt vertellen dat de computer, hey, computer, omzetten dit integer naar een char. 
+
+Dus wanneer ik deze programma na het compileren, laten we eens kijken wat ik Ascii 0 get-- maken. Verdorie, wat heb ik verkeerd hier? Gebruik van niet-aangegeven identifier, oke, niet opzettelijk, maar laten we eens kijken of we kunnen niet reden doorheen. 
+
+Dus lijn five-- dus ik niet krijgen heel ver voor verknalt. Dat is geen probleem. Dus lijn 5 voor i is gelijk aan 65-- ik zie. Dus vergeet niet dat in C, in tegenstelling tot sommige talen als u vóór de programmering ervaring, je hebt de computer instrueren, in tegenstelling tot Scratch, wat type variabele is. 
+
+En ik vergat een sleutelzin hier. In lijn vijf, heb ik begonnen met behulp van i. Maar ik heb niet verteld C welke gegevens het type het is. Dus ik ga hier in te gaan en zeggen, ah, maken het een integer. 
+
+Nu ga ik om verder te gaan en opnieuw te compileren. Dat loste dat. ./ascii0 Enter, dat is wel cool. Niet alleen is het super snel vraagt ​​de computer deze vraag, in plaats van op te zoeken op een dia, Het uitgeprint één per regel, A is 65, B is 66, de hele weg down-- omdat ik deed dit 26 times-- om de letters z, die 90. En in feite enigszins intelligenter zou zijn voor mij niet te vertrouwen op de computer 26 te voegen. Ik kon gewoon hebben gedaan 90 zo goed, zo lang omdat ik niet twee keer dezelfde fout te maken. Ik wil om omhoog te gaan door middel van z, niet alleen omhoog door y. 
+
+Dus dat is een expliciete cast. Het blijkt dat deze niet eens nodig. Laat me ga je gang en voer deze compiler en herhaling Ascii 0. Het blijkt dat C is behoorlijk slim. 
+
+En printf, in het bijzonder, is behoorlijk slim. Als je gewoon slagen voor een i tweemaal voor zowel tijdelijke aanduidingen, printf zullen beseffen, oh, nou ik weet dat je gaf me een integer-- een getal, zoals 65, of 90, of wat dan ook. Maar ik zie dat je me wilt opmaken dat nummer als een karakter. En dus printf kan impliciet gegoten de int naar een klusje voor je net zo goed. Dus dat is geen probleem. 
+
+Maar let op, als gevolg van deze gelijkwaardigheid we kunnen dit eigenlijk doen ook. Laat me ga je gang en maak een andere versie van dit-- Ascii 1.c. En in plaats van meer dan itereren integers, kan echt blow your mind door het itereren dan karakters. Als een char c krijgt hoofdletter A, I wil om vooruit te gaan en dit te doen, mits C kleiner dan of gelijk om kapitaal Z. En op elke iteratie Ik wil C verhogen, kan ik nu in mijn printf lijn hier laten we zeggen, procent C is percent ik opnieuw, komma C. 
+
+En nu kan ik de andere richting, gieten van het karakter uitdrukkelijk naar een integer. Dus nogmaals, waarom zou je dat doen? Het is een beetje raar om te sorteren van rekenen in termen van karakters. 
+
+Maar als je begrijpt wat er er aan de hand onder de motorkap, er is echt geen magie. Je bent gewoon te zeggen, hey, computer geven me een variabele met de naam C van het type char. Initialiseren om kapitaal A. And opmerken enkele aanhalingstekens materie. 
+
+Voor karakters in C, ophalen uit vorige week, gebruik je enkele aanhalingstekens. Voor strijkers, naar woorden, zinnen, dubbele aanhalingstekens gebruikt u. OK, computer, blijven doen, dus Zolang het karakter dan of gelijk aan z. En ik weet uit mijn Ascii tafel dat alle Deze ASCII codes opeenvolgend. 
+
+Er is geen hiaten. Dus het is gewoon A tot Z, elk gescheiden door een nummer. En dan kan ik verhogen een char, als ik echt wil. Aan het einde van de dag, het is gewoon een nummer. Ik weet dit. Dus ik kan alleen maar veronderstellen om toe te voegen 1 aan. 
+
+En dan deze keer, ik afdrukken c, en vervolgens de integraal equivalent. En ik weet niet eens de expliciete cast nodig. Ik kan printf en laat computer figuur dingen uit, zodat nu als ik zonder maken Ascii1./ascii1, Ik krijg het precies hetzelfde als goed. 
+
+Nutteloos programma hoewel-- niemand gaat eigenlijk software te schrijven om erachter te komen, wat was de nummer dat wordt toegewezen aan A of B, of Z? Je bent gewoon gaan om het Google, of opzoeken online, of zoek het op op een dia, of dergelijke. Dus waar gaat dit eigenlijk nuttig? 
+
+Nou, spreken van die glijbaan, ziet er een echte patroon hier tussen hoofdletters en kleine letters dat was niet toevallig. Merk op dat het kapitaal A 65. Kleine letters a 97. En hoe ver is lager geval een? 
+
+Dus 65 is hoeveel een steenworp afstand van 97? Dus 97 min 65 is 32. Dus hoofdstad een is 65. Als u 32 aan toevoegen, je krijgt een kleine letters. En, equivalent, als je 32 aftrekken, je terug naar de hoofdstad A-- hetzelfde met B tot kleine b, grote C tot kleine c. 
+
+Al deze gaten zijn 32 elkaar. Nu, dit lijkt ons laten doe iets zoals Microsoft Word, of Google Docs-functie, waar u kan alles selecteren en dan zeggen: verandert alles in kleine letters, of verander alle naar hoofdletters, of verander alleen het eerste woord van een zin naar hoofdletters. We kunnen eigenlijk iets te doen als dat onszelf. 
+
+Laat me ga je gang en een bestand op te slaan hier genoemd kapitaliseren 0.c. En laten we ga je gang en zweep een programma die precies doet dat als volgt. Zo zijn onder andere de CS50 bibliotheek. En zijn standaard I / O. 
+
+En ik weet dat dit is binnenkort beschikbaar. Dus ik ga het in te zetten is er al, string.h, dus ik heb toegang tot dingen zoals Stirling, en dan int belangrijkste leegte, zoals gebruikelijk. En dan ga ik om verder te gaan en doe strings krijgt krijgen koord, alleen maar om een ​​string van de gebruiker te krijgen. En dan ga ik doe mijn sanity check. Als touwtje niet gelijk is aan nul, dan is het veilig om door te gaan. En wat wil ik doen? Ik ga herhalen van i gelijk is aan 0, en n tot de string lengte van s. 
+
+En ik ga dit doen zolang i is kleiner dan n, en ik plus plus. Tot nu toe, ik ben echt gewoon lenen ideeën van voor. En nu ga ik aan een tak te introduceren. 
+
+Dus denk terug aan Scratch, waarbij we hadden die vork in de weg, en de laatste week in C. Ik ga zeggen dat, indien de ie karakter s groter of gelijk aan kleine letters a, en-- in Scratch zou je letterlijk te zeggen en, maar in C zeg je ampersand, ampersand-- en de i-ste karakter in s kleiner is dan of gelijk aan case z verlagen, laten we iets interessants te doen. Laten we eigenlijk uitprinten een karakter zonder newline dat het teken in de tekenreeks, de ie teken in de reeks. 
+
+Maar laten we verder gaan en aftrekken 32 van. Indien echter het teken in het string die we zoeken is niet tussen een kleine en weinig z, ga je gang en gewoon uitgeprint ongewijzigd. Dus we hebben geïntroduceerd deze tussen haakjes notatie voor onze strings te krijgen op de i-ste karakter in de string. 
+
+Ik heb een aantal conditionele logica toegevoegd, zoals Scratch in de laatste week van de week één, waarbij Ik ben gewoon met mijn fundamentele begrip van wat er er aan de hand onder de motorkap. Is de ie karakter s groter dan of gelijk aan? Zoals, is het ook 97 of 98, of 99, enzovoorts? 
+
+Maar is het ook minder dan of gelijk om de waarde van kleine letters z? En zo ja, wat betekent dit lijn betekenen? 14 Dit is een soort van de kiem van het hele idee, kapitaliseren de brief van eenvoudigweg aftrekken 32 ervan, in dit geval, omdat ik weet, dat per grafiek, hoe mijn nummers zijn vertegenwoordigd. Dus laten we gaan vooruit en uitvoeren van deze, na het compileren kapitaliseren 0.c, en run kapitaliseren 0. 
+
+Laten we type in iets als Zamyla in kleine letters in te voeren. En nu hebben we Zamyla in hoofdletters. Laten we type in Rob in alle kleine letters. Laten we proberen Jason in kleine letters. En we houden het krijgen van de gedwongen kapitalisatie. Er is een kleine bug die ik soort niet anticiperen. Let op mijn nieuwe prompt wordt belanden op dezelfde lijn als hun namen, die voelt een beetje rommelig. 
+
+Dus ik ga hier te gaan, en daadwerkelijk aan het einde van het programma afdrukken van een nieuwe regel. Dat is alles. Met printf, hoeft u niet hoeft te pas in variabelen of formaat code. Je kunt letterlijk gewoon uitprinten zoiets als een nieuwe regel. 
+
+Dus laten we gaan door en maak kapitaliseren 0 weer, opnieuw uit te voeren is, Zamyla. En nu is het een beetje mooier. Nu, mijn aanwijzing is op zijn eigen nieuwe regel. Dus dat is allemaal prima en goed. Dus dat is een goed voorbeeld. Maar ik heb niet eens per se moeten harde code van de 32. Weet je wat? Ik kon say-- ik niet ooit herinneren wat het verschil is. 
+
+Maar ik weet dat als ik hebben een kleine letter, Ik wil in wezen af ​​aftrekken ongeacht de afstand is tussen de kleine een en grote A, want als ik neem aan dat alle andere letters hetzelfde, dat moet de klus te klaren. Maar in plaats van dat te doen, weet je wat? Er is een andere manier nog steeds. 
+
+Als dat kapitaliseren 1.c-- als ik te zetten dat in een apart bestand. Laten we profiteren 2.c als volgt. Ik ga dit echt schoon te maken hier. En in plaats van te hoeven weten of de zorg over die lage niveau implementatie details, ik ben in plaats gewoon gaan om een ​​teken af ​​te drukken, citaat unquote, procent C, en bel dan een andere functie die bestaat dat neemt een argument, dat is een karakter, zoals deze. 
+
+Het blijkt in C, is er een andere functie aan te roepen de bovenste, met als naam suggereert neemt een personage en maakt het haar hoofdletters equivalent, en vervolgens stuurt het terug zodat printf kan inpluggen daar. En zo te doen, hoewel ik moet een ander bestand in te voeren. Het blijkt dat er een ander bestand dat u alleen zou weten uit de klas, of een leerboek, of een online verwijzing, de zogenaamde C type.h. 
+
+Dus als ik toevoegen dat in Mijn header bestanden, en nu opnieuw te compileren dit programma, capitalize2, ./capitalize2 Enter. Laten we type in Zamyla in alle kleine letters, werkt nog steeds hetzelfde. Maar weet je wat? Het blijkt dat de bovenste heeft een aantal andere functies. 
+
+En laat me dit te introduceren commando hier, een soort van onhandig genoemd, maar de mens voor het handmatig. Het blijkt dat de meeste Linux-computers, als we met behulp van hier-- Linux besturingssysteem system-- hebben een opdracht genaamd man, die zegt: hey, computer, geef me handleiding van de computer. Wat wil je opzoeken in dit handboek? 
+
+Ik wil kijken de functie geroepen om de bovenste, Enter. En het is een beetje cryptisch soms te lezen. Maar let op dat we in de handmatige Linux programmeur. En het is allemaal tekst. En merk op dat er de naam van de functie hier. Het blijkt dat het heeft een neef genaamd te verlagen, waarbij het tegenovergestelde doet. En let onder synopsis, om dit te gebruiken functioneren van de man-pagina, om zo te zeggen, vertelt me ​​dat ik moeten c type.h. omvatten En ik wist dat uit de praktijk. 
+
+Hier, het toont me de twee prototypes voor de functie, dus dat als ik ooit willen om dit te gebruiken Ik weet wat ze te nemen als input, en wat ze terugkeren als output. En dan, als ik lees de beschrijving, zie ik meer in detail wat de functie doet. Maar nog belangrijker, Ik kijk onder return waarde, zegt de geretourneerde waarde is dat van de omgezette letter, of C, de originele ingang als de conversie niet mogelijk. 
+
+Met andere woorden, de bovenste proberen een brief omzetten in hoofdletters. En zo ja, het gaat om het terug te keren. Maar als het niet kan voor sommige reason-- misschien is het al hoofdletters, misschien is het een uitroepteken of een andere punctuation-- het is gewoon gaat om geeft het origineel C, wat betekent dat ik kan mijn code maken beter ontworpen als volgt. 
+
+Ik heb niet alle nodig deze darn regels code. Alle lijnen die ik heb gewoon gemarkeerd kan worden samengevoegd in één eenvoudige lijn, dat is dit-- printf procent c naar de bovenste S beugel i. En dit zou zijn voorbeeld van een beter ontwerp. 
+
+Waarom implementeren in 7 of 8 lijnen code, wat het ook was ik gewoon verwijderd, als je in plaats daarvan kan instorten al die logica en besluitvorming in één enkele lijn, 13 nu, dat is gebaseerd op een bibliotheek function-- een functie die wordt geleverd met C, maar dat doet precies wat je wilt doen. En, eerlijk gezegd, zelfs als het kwam niet met C, je zou het zelf uit te voeren, zoals we hebben gezien, krijgen met negatieve int en krijg positieve int vorige week ook. 
+
+Deze code is nu veel beter leesbaar. En inderdaad, als we bladert u omhoog, kijk eens hoe veel compacter Deze versie van mijn programma. Het is een beetje topzwaar nu, al deze omvat. Maar dat is OK, want nu sta ik op de schouders van programmeurs voor mij. En wie het ook was, die geïmplementeerd bovenste echt deed me een plezier, net als degene die geïmplementeerd Stirling echt deed me een plezier enige tijd geleden. En nu hebben we een beter ontwerp programma dat implementeert exact dezelfde logica. 
+
+Spreken van Stirling, laat ik ga je gang en dit te doen. Laat me ga je gang en op te slaan dit bestand als stirling.c. En het blijkt, kunnen we terug pellen een andere laag gewoon nu mooi. Ik ga je gang en zweep gaan een ander programma in de belangrijkste hier dat gewoon opnieuw werktuigen stringlengte als volgt. Dus hier is een regel code die krijgt me een string van de gebruiker. We blijven het gebruik van dit opnieuw en opnieuw. Ik geef mezelf een variabele genaamd n type int dat verscheidene opslaat. 
+
+En laat me ga je gang en doe dan het volgende logica. Terwijl de n-de teken in s doet niet gelijk backslash 0, ga je gang en verhogen n. En dan uitprinten printf procent i n. Ik eis dat het programma hier, zonder dat lengte van de string, berekent de lengte van een string. 
+
+En de magie is volledig ingekapseld in lijn 8 hier met wat lijkt op nieuwe syntaxis, Dit backslash 0 in enkele aanhalingstekens. Maar waarom is dat? Nou, overwegen wat is geweest gaande al die tijd. 
+
+En als een terzijde voordat ik het vergeet, realiseer Ook dat naast de man pagina die komen met een typische Linux-systeem zoals CS50 IDE, beseffen dat wij, de personeel cursus, hebben ook maakte een website versie deze zelfde gedachte genaamd reference.cs50.net, die moet al die zelfde man pagina's, al diezelfde documentatie alsmede een kleine doos op de top die het mogelijk maakt u al de vrij te zetten geheimzinnige taal in minder comfortabel modus, waarin we, het onderwijzend personeel, hebben doorgemaakt en probeerde te vereenvoudigen een aantal van de taal om de dingen te houden gericht op de ideeën en niet een deel van de technische aspecten. Dus hou in het achterhoofd, reference.cs50.net als een andere hulpbron. 
+
+Maar waarom doet tekenreekslengte werk in de manier waarop ik even geleden voorgesteld? Hier is de naam Zamyla's weer. En hier is de naam Zamyla's boxed in, zoals ik blijven doen, om een ​​beeld te schetsen van het feit dat, echt, maar een reeks tekens. Maar Zamyla bestaat niet afzonderlijk in een programma. 
+
+Als je schrijft en uitvoeren van een programma, je gebruikt je Mac of pc als het geheugen, of RAM om zo te zeggen. En je kunt bedenken uw computer als het hebben veel gigabyte geheugen deze dagen. En een optreden betekent miljarden, dus miljarden bytes. 
+
+Maar laten we terugspoelen in de tijd. En stel dat we gebruiken echt een oude computer dat slechts 32 bytes geheugen. Ik kon op mijn computerscherm, dit is gewoon trekken uit als volgt. 
+
+Ik kon alleen maar zeggen dat mijn computer beschikt over alle van dit geheugen. En dit is als een staaf geheugen, indien Herinnert u zich onze foto van de vorige keer. En als ik gewoon te verdelen Deze in voldoende tijd, Ik beweer dat ik 32 bytes geheugen op het scherm. 
+
+Nu, in de werkelijkheid, kan ik alleen maar trekken tot nu toe op dit scherm hier. Dus ik ga om verder te gaan, en gewoon volgens afspraak, trek het geheugen van mijn computer als een raster, niet alleen als een rechte lijn. In het bijzonder, ik beweren nu dat dit raster, deze 8 bij 4 raster, gewoon vertegenwoordigt alle 32 bytes geheugen beschikbaar in mijn Mac, of beschikbaar in mijn PC. En ze omwikkelen op twee lijnen, net omdat het past meer op het scherm. Maar dit is de eerste byte. Dit is de tweede byte. Dit is de derde byte. 
+
+En dit is de 32 byte. Of, als we denken als een computer wetenschapper, dit is byte 0, 1, 2, 3, 31. Dus je moet 0-31, indien je begint te tellen bij 0. 
+
+Dus als we een programma gebruiken Gesprekken krijgen koord, en we krijgen een string uit de menselijke zoals ik heb Zamyla genoemd, Z-A-M-Y-L-A, hoe in de wereld doet het computer bijhouden welke byte, die brok van geheugen, hoort bij welke snaar? Met andere woorden, als we verder naar typ andere naam in de computer, als dit Andi, bellen krijg reeks een tweede keer, A-N-D-I moet eindigen in de computer het geheugen ook. Maar hoe? 
+
+Nou, het blijkt dat onder de kap, wat C doet bij het opslaan van strings dat de humane in of die afkomstig van een andere bron, is het ook bakent eind hen een speciale character-- backslash 0, dat is gewoon een speciale manier zeggen 80 bits in een rij. 
+
+Dus A-- is dit de nummer 97 recall. Dus sommige patroon van 8 bits vertegenwoordigt decimaal getal 97. Dit backslash 0 is letterlijk het aantal 0, alias nul, N-U-L, in tegenstelling tot vroeger, N-U-L-L, die we gesproken over. Maar voor nu, weet alleen dat dit backslash 0 ligt op slechts 80 bits in een rij. 
+
+En het is juist deze lijn in de zand dat zegt iets naar links behoort tot één snaar, of een data type. En iets naar rechts maakt deel uit van iets anders. Andi's naam, ondertussen, die net visueel gebeurt er op te wikkelen naar de andere lijn, maar dat is slechts een esthetische detail, evenzo is nul beëindigd. 
+
+Het is een string van een A-N-D-I tekens, plus een vijfde geheim karakter, Alle 0 bits, die net bakent Eind naam Andi eveneens. En als we noemen krijgen snaar een derde keer in de computer naar een string zoals krijgen Maria M-A-R-I-A, die gelijk is Maria naam nul afgesloten met backslash 0. 
+
+Dit verschilt fundamenteel van hoe een computer zou typisch slaan een geheel getal of een float of andere data types nog steeds, omdat de recall, een geheel getal is meestal 32 bits, of 4 bytes, of misschien zelfs 64 bits, of acht bytes. Maar veel primitieven in een computer in een programmeertaal een vast aantal bytes onder de hood-- misschien 1, misschien 2, misschien 4, misschien 8. 
+
+Maar strings, door het ontwerp, hebben een dynamische aantal karakters. Je weet niet van tevoren, totdat menselijke soorten van Z-A-M-Y-L-A, of M-A-R-I-A of A-N-D-I. Je weet het niet hoe vaak de gebruiker gaat raken het toetsenbord. Daarom, weet je niet hoe vele personages van tevoren je gaat nodig hebben. 
+
+En dus C gewoon een soort van bladeren als een geheime broodkruimel onder de motorkap Aan het einde van de string. Na het opslaan Z-A-M-Y-L-A geheugen, ook zet gewoon het equivalent van een periode. Aan het einde van een zin, het zet 80 bits, om zo te onthouden waar Zamyla begint en eindigt. 
+
+Dus wat is het verband, dan, om dit programma? Dit programma hier, Stirling, is gewoon een mechanisme om betere koord van de gebruiker, lijn 6. Lijn 7, verklaar ik een variabele riep n en zet deze gelijk is aan 0. 
+
+En vervolgens in lijn 8, ik gewoon vroeg de vraag, terwijl de n-de teken is niet gelijk Alle 0 bits-- met andere woorden, niet gelijk deze speciale karakter, backslash 0, die was alleen dat speciale nul character-- ga je gang en gewoon verhogen n. 
+
+En blijven doen, en houden doen en blijven doen. En dus zelfs al in het verleden hebben we i gebruikt, het is perfect in orde semantisch te n te gebruiken, als je gewoon proberen te tellen deze keer met opzet, en wil gewoon het n noemen. Dus dit blijft gewoon de vraag te stellen, is het n-ste karakter van allemaal 0s? Zo niet, kijk naar de volgende look, kijken naar de volgende, kijk naar de volgende, kijken naar de volgende. 
+
+Maar zodra je ziet backslash 0, Dit loop-- lijn 9 tot 11-- stopt. Je breekt uit de while lus, waardoor binnenkant van die variabele n een totaal aantal van alle tekens in de string je zag, waardoor het uitprinten. Dus laten we proberen dit. 
+
+Laat me ga je gang en zonder met de stirling functie, maar alleen met behulp van mijn eigen bodem versie hier genoemd Stirling, laat me ga je gang en run Stirling, typ in iets zoals Zamyla, waarvan ik weet van tevoren is zes karakters. Laten we eens kijken of het werkt. Inderdaad, het is zes. Laten we proberen met Rob, drie letters, drie karakters ook, enzovoort. Dus dat is alles wat er aan de hand op onder de motorkap. En let op de verbindingen, Vervolgens, met de eerste week van klasse, waar we spraken over zoiets als abstractie, dat is gewoon de gelaagdheid van ideeën, of complexiteit bovenop basisprincipes. Hier zijn we een soort van kijken onder de motorkap van Stirling, zo te zeggen, om erachter te komen, hoe zou het ten uitvoer worden gelegd? 
+
+En we konden re-implementeren onszelf. Maar we nooit meer gaan opnieuw te implementeren stirling. We gaan gewoon naar Gebruik Stirling in orde om daadwerkelijk te krijgen aan wat touwtjes lengte. 
+
+Maar er is geen magische onder de motorkap. Als je weet dat eronder de motorkap, een string is gewoon een reeks tekens. En dat reeks tekens allemaal kunnen numeriek worden aangepakt met beugel 0, bracket 1, 2 beugel, en u dat aan het einde van een string is een speciaal karakter, kunt u uitzoeken hoe je bijna alles in een te doen programma, want al komt het neer op leest en schrijft geheugen. Dat is, veranderen en kijken in het geheugen, of bewegende dingen rond in het geheugen, printen dingen op het scherm, enzovoorts. 
+
+Dus laten we dit nu pas ontdekte gebruiken begrip van wat er werkelijk snaren zijn onder de motorkap, en schil terug een andere laag dat tot nu toe hebben we genegeerd helemaal. In het bijzonder, op elk moment We hebben een programma uitgevoerd, We hebben deze regel code had in de buurt van de top te verklaren belangrijkste. En we hebben int main leegte gespecificeerd. 
+
+En die leegte tussen de haakjes heeft gezegd al die tijd dat de belangrijkste zelf heeft geen argumenten nemen. Elke input die de belangrijkste is gaande van de gebruiker te krijgen heeft van een andere te komen mechanisme, zoals get int, of krijgen float, of om koord, of een andere functie. Maar het blijkt dat wanneer u een programma schrijven, je kunt eigenlijk opgeven dat dit programma wordt nemen input van het menselijk op de opdrachtregel zelf. 
+
+Met andere woorden, hoewel we tot nu toe hebben zojuist loopt ./hello hello en dergelijke meer, alle andere programma's die we geweest zijn gebruikt, dat we onszelf niet schrijven, hebben genomen, zo lijkt het, command line arguments-- dingen zoals make. Je zegt iets als merk, en vervolgens een tweede woord. Of Clang, zeg je kletteren, en vervolgens een tweede woord, de naam van een bestand. 
+
+Of zelfs RM of CP, zoals je misschien hebben gezien of al gebruikt te verwijderen of bestanden kopiëren. Al deze nemen zogenoemde command line arguments-- extra woorden op de terminal prompt. Maar tot nu toe hebben we onszelf niet hebben gehad Dit luxe van het nemen van de inbreng van de gebruiker wanneer hij of zij eigenlijk loopt het programma zelf op de opdrachtregel. 
+
+Maar we kunnen dat doen door opnieuw te verklaren hoofd vooruit, niet als het hebben van ongeldig tussen haakjes, maar deze twee argumenten instead-- de eerste een integer, en de tweede iets nieuws, iets dat we gaan om te bellen een array iets dergelijks geest met wat we zagen in Scratch als een lijst, maar een array van strings, zoals we zullen snel te zien. Maar laten we dit zien door Als voorbeeld voor we onderscheiden precies wat dat betekent. 
+
+Dus als ik ga in CS50 IDE hier heb ik vooruit gegaan en verklaarde in een bestand met de naam argv0.c de volgende template. En let op de enige dat anders tot nu toe is dat ik nietig heeft gewijzigd in int argc snaar argv geopend beugel dicht haakje. En merk voor nu, is er niets binnen van de haakjes. 
+
+Er is geen nummer. En er is geen i, of n of andere letters. Ik ben gewoon met behulp van de vierkante haken voor nu, om redenen die we zullen komen terug in slechts een moment. 
+
+En nu, wat ik ga doen is het volgende. Als argc gelijk gelijk 2-- en herinneren dat gelijken gelijk is de operator gelijkheid vergelijken de linker en rechter voor gelijkheid. Het is niet de opdracht operator, die de enige isgelijkteken, wat betekent dat een kopie van rechts naar links een bepaalde waarde. 
+
+Als argc gelijk gelijk is aan 2, ik wil zeg, printf, hello, procenten, nieuwe regel, en steek in-- en hier is de nieuwe trick-- argv beugel 1, om redenen dat we terug naar in een moment zal komen. Anders als argc niet doet gelijk 2, weet je wat? Laten we gewoon doorgaan en, zoals gebruikelijk, print out hello wereld zonder substitutie. 
+
+Dus het lijkt erop dat als argc, die staat voor argument tellen, gelijk aan 2, Ik ga om uit te printen hello het een of ander. Anders, standaard, ben ik gaan om hallo te drukken wereld. Dus wat betekent dit? 
+
+Nou, laat me ga je gang en op te slaan dit bestand, en dan doen maken argv0, en dan ./argv0, Enter. En het zegt hallo wereld. Nu, waarom is dat? 
+
+Nou, het blijkt dat wanneer je uitvoeren van een programma op de opdrachtregel u bent het invullen van wat we zullen over het algemeen noemen een argument vector. Met andere woorden, automatisch computer, het besturingssysteem, zal bij de hand om uw programma zelf een lijst van alle woorden dat het menselijk getypt op de prompt voor het geval u de programmeur willen doen iets met die informatie. En in dit geval, het enige woord Ik heb getypt in de prompt is ./argv0. 
+
+En zo het aantal argumenten dat is wordt doorgegeven aan mijn programma is slechts een. Met andere woorden, het argument tellen, ook wel bekend als argc hier als een geheel getal, is slechts een. Eén, natuurlijk, is niet gelijk aan twee. En dus dit is wat wordt afgedrukt, hello wereld. 
+
+Maar laat mij dit ergens nemen. Laat ik zeggen, argv0. En vervolgens hoe over Maria? En dan druk op Enter. 
+
+En let op wat magisch gebeurt hier. Nu, in plaats van Hallo wereld, ik heb veranderde het gedrag van het programma door het nemen van de ingang niet uit get koord of een andere functie, maar van, blijkbaar, mijn bevel zelf, wat ik oorspronkelijk getypt. En ik kan dit spel opnieuw te spelen door veranderen Stelios, bijvoorbeeld. 
+
+En nu zie ik nog een andere naam. En hier, zou ik zeggen Andi. En ik zou kunnen zeggen Zamyla. En we kunnen dit spel spelen de hele dag lang, gewoon inpluggen in verschillende waarden, zolang ik precies bieden twee woorden op de prompt, zodanig dat argc, mijn betoog te tellen, is 2. 
+
+Zie ik die naam aangesloten op printf, per deze aandoening hier? Dus lijken we nu hebben de expressieve mogelijkheden nemen input van een ander mechanisme, van de zogenaamde command line, in plaats van te moeten wachten totdat de gebruiker het programma loopt, en dan vraagt ​​hem of haar met behulp van iets als get string. 
+
+Dus wat is dit? Argc, nogmaals, is gewoon een integer, het aantal words-- arguments-- dat de gebruiker verschaft in de prompt, bij het raam terminal, waaronder de naam van het programma. Dus onze ./argv0 is, effectief, de naam van het programma, of hoe ik uitvoeren van het programma. 
+
+Dat telt als een woord. Dus zou argc 1. Maar als ik schrijf Stelios, of Andi of Zamyla, of Maria, dat betekent het argument telling twee. En nu zijn er twee woorden doorgegeven. 
+
+En let op, kunnen we deze logica voort te zetten. Als ik eigenlijk zeggen zoiets als Zamyla Chan, een volledige naam, waardoor het passeren drie argumenten in totaal, Nu zegt de standaard weer, omdat natuurlijk 3 is niet gelijk aan 2. 
+
+En dus op deze manier, heb ik toegang via argv deze nieuwe argument dat we konden technisch roepen wat we willen. Maar volgens afspraak, het is argv en argc, respectievelijk. Argv argument vector, is een soort of een synoniem voor een uitvergroting feature C in een array genoemd. 
+
+Een array is een lijst met vergelijkbare waarden terug, aan rug, aan rug, terug. Met andere woorden, wanneer men hier in is RAM, de volgende is er vlak naast, en rechts ernaast. Ze zijn niet all over the place. En dat laatste scenario, waar dingen zijn all over the place in het geheugen, kan eigenlijk een krachtige functie. Maar we zullen terug te komen op dat wanneer we praten over liefhebber datastructuren. Voor nu, een array is gewoon een brok van aaneengesloten geheugen, elk waarvan de elementen terug, aan rug, aan rug, aan rug, en in het algemeen hetzelfde type. 
+
+Dus als je erover nadenkt, vanuit een ogenblik geleden, wat is een string? Nou ja, een string, zoals Zamyla, Z-A-M-Y-L-A, is technisch gezien gewoon een array. Het is een reeks tekens. 
+
+En dus als we dit echt trekken, zoals ik deed eerder, als een stuk van het geheugen, Het blijkt dat elk van deze karakters neemt een byte. En dan is er die speciale sentinel karakter, de backslash 0, of alle acht 0 bits, dat markeert het einde van die string. Dus een string, blijkt out, citeer unquote koord, is slechts een array van chara-- char wordt een actuele gegevens type. 
+
+En nu argv, meanwhile-- Laten we teruggaan naar het programma te gaan. Argv, hoewel we het woord te zien snaar hier, is niet een string zelf. Argv, argument vector, is een array van strings. 
+
+Dus net zoals je een scala aan kan hebben tekens, kunt u een hoger niveau hebben, een reeks strings-- dus bijvoorbeeld toen ik typte een ogenblik geleden ./argv0 argv0, space Z-A-M-Y-L-A, I beweerd dat argv had twee strings in het-- ./argv0, en Z-A-M-Y-L-A. In Anders gezegd, argc was 2. Waarom is dat? 
+
+Nou, effectief, wat er gaande on is dat elk van deze reeksen is uiteraard een reeks karakters als voorheen, waarvan elk karakters neemt één byte. En niet te verwarren met de feitelijke 0 in de naam van het programma met de 0, wat betekent dat alle 80 bits. En Zamyla, ondertussen, is nog steeds ook een scala aan personages. 
+
+Dus aan het eind van de dag, het echt ziet er als volgt onder de motorkap. Maar argv, door de aard van de manier waarop de belangrijkste werken, kan ik dit alles wrap omhoog in, als je wil, een groter scala dat als wij iets meer dan vereenvoudigen hoe het beeld eruit ziet en niet doen vrij tekenen op schaal daarboven, deze array slechts de grootte 2, de eerste element waarvan een tekenreeks, het tweede element van die is voorzien van een string. En op hun beurt, als je soort inzoomen op elke van die strings, wat je zie onder de motorkap is dat elke snaar is gewoon een reeks tekens. 
+
+Nu, net als bij strijkers, we waren in staat om toegang te krijgen de i-de teken in een string met behulp van dat plein haakjesnotering. Ook met arrays In het algemeen kunnen we Gebruik vierkante haakjesnotering te krijgen er talrijke strings in een array? Bijvoorbeeld, laat me ga je gang en dit te doen. 
+
+Laat me ga je gang en maak argv1.c, dat is een beetje anders deze keer. In plaats van het controleren van argc2, Ik ga dit doen in plaats. Voor int Ik krijg 0, I minder dan argc, ik plus plus, en vervolgens uitprinten binnenkant van deze, procent s, nieuwe regel, en dan argv beugel i. 
+
+Dus met andere woorden, ik ben niet te maken met afzonderlijke tekens op het moment. Argv, zoals gesuggereerd door deze lege plein bretels aan de rechterkant van de naam argv, betekent argv is een array van strings. En argc is slechts een int. 
+
+Deze lijn hier, 6, is zeggende set i gelijk aan 0. Tel alle de heenweg naar, maar niet inclusief, argc. En dan op elke iteratie, afdrukken van een string. Wat touwtje? 
+
+De i-de tekenreeks in argv. Dus terwijl ik was met behulp van de vierkante haak notatie te krijgen op de i teken in een tekenreeks, nu Ik gebruik de beugel vierkante notatie om bij de i-tekenreeks in een array. Dus het is een soort van een laag hierboven, conceptueel. 
+
+En dus wat is netjes over dit programma nu, als ik het compileren argv1, en dan doen ./argv1 en typ in iets als foo bar baz, waarin de drie standaardwoorden dat zijn computer wetenschapper bereikt voor elk moment hij of zij heeft wat placeholder woorden, en druk op Enter, elk van die woorden, waaronder de naam van het programma, dat argv is op de eerste locatie, uiteindelijk worden afgedrukt, tegelijkertijd. En als ik dit te veranderen, en ik zeg zoiets als argv1 Zamyla Chan, krijgen we alle drie van die woorden die argv0, argv1, argv2, omdat in dit geval argc, de telling, is 3. 
+
+Maar wat is netjes is als je begrijpt dat argv is slechts een array van strings, en u begrijpt dat een string een reeks karakters, we kunnen eigenlijk wel dit te gebruiken square haakjesnotering meerdere keren naar een string te kiezen en kies vervolgens een teken in de string, duiken in diepere als volgt. In dit voorbeeld, laat me gaan vooruit en noemen dit argv2.c. En in dit voorbeeld, laat me ga je gang en doe de following-- voor int krijg ik 0, i minder dan argc, i plus plus, net als vroeger. Dus met andere words-- en nu dit krijgt al ingewikkeld genoeg. Dan ga ik om te zeggen itereren over strings in argv, als een reactie op mezelf. En dan ga ik een hebben geneste lus, die je waarschijnlijk hebben gedaan, of geacht doen, in Scratch, waarbij Ik ga zeggen int-- ik ben niet van plan om i opnieuw te gebruiken, want ik wil geen schaduw, of soort van overschrijven de bestaande i. 
+
+Ik ga, in plaats daarvan, zeg j, omdat dat is mijn ga naar variabele nadat ik, wanneer ik probeer gewoon tellen nummertjes. Voor j krijgt 0-- en, n, gaat krijgen de achtersteven lengte van argv beugel i, zolang j is dan m, j plus plus, doet u het volgende. En hier is het interessante deel. 
+
+Druk een karakter en een nieuwe lijn, inpluggen in argv beugel i, beugel j. OK, dus laat ik enkele opmerkingen hier toevoegen. Itereren over personages in de huidige reeks, afdruk j-ste karakter in i-de string. Dus nu, laten we eens kijken wat deze opmerkingen betekenen. 
+
+Itereren over de snaren in argv-- hoeveel snaren zijn in argv, die een array? Argc veel, dus ik ben itereren van i gelijk 0 tot argc. Ondertussen, hoeveel tekens in de ie tekenreeks in argv? 
+
+Nou, om dat antwoord te krijgen, Ik bel tekenreekslengte op de huidige reeks I care over, dat is argv beugel i. En ik ga tijdelijk op te slaan dat waarde in n, alleen voor caching doeleinden, om het te onthouden voor efficiency. En dan ga ik initialiseren van j naar 0, doorgaan zolang j kleiner dan n, en elke iteratie increment j. 
+
+En dan hier, per mijn commentaar op lijn 12, afdrukken van een karakter, gevolgd door een nieuwe regel, specifiek argv bracket i geeft me de i-de snaar in argv-- dus het eerste woord, de tweede woord, het derde woord, wat dan ook. En dan j duiken in dieper, en krijgt me de j-de aard van dat woord. En dus, in feite, kunt u behandelen argv als een multidimensionaal, als een tweedimensionale, matrix, waarbij elk woord soort looks als dit in uw geest oog, en elk karakter is een soort van samengesteld een kolom, als dat helpt. 
+
+In werkelijkheid, als we plagen deze apart in de toekomst weken, het gaat om een ​​beetje te zijn geavanceerder dan dat. Maar kan je echt denk dat, voor nu, als alleen deze tweedimensionale matrix, waarbij één niveau ervan is alle snaren. En dan als je duikt in diepere, u kunnen krijgen op de afzonderlijke tekens vermeen door het gebruik van deze notatie hier. 
+
+Dus wat is het netto-effect? Laat me ga je gang en maken argv2-- verdorie. Ik heb een fout gemaakt hier. Impliciet verklaren de bibliotheekfunctie Stirling. Dus al die tijd, is het misschien geschikt dat we een soort van afwerking precies waar we begonnen zijn. 
+
+Ik heb het verknald, impliciet te verklaren bibliotheekfunctie Stirling. Oké, wacht eens even. Ik herinner me dat, in het bijzonder want het is hier. Ik moet string.h onder meer in Deze versie van het programma. 
+
+Laat me ga je gang en omvatten string.h, behalve dat, ga je gang en opnieuw compileren argv2. En nu, hier gaan we, maken argv2, Enter. En al is het een beetje cryptische op het eerste gezicht, merkt dat, inderdaad, wat wordt gedrukt is dot argv2. 
+
+Maar als ik typ enkele woorden na de prompt, zoals argv2 Zamyla Chan, Enter, ook een beetje cryptische op het eerste gezicht. Maar als we schuiven back-up, ./argv2 Z-A-M-Y-L-AC-H-A-N. Dus we hebben herhaald over elk woord. En, op zijn beurt, we hebben herhaald op elk karakter binnen een woord. 
+
+Nu, na dit alles, beseffen dat er een ander detail dat we aardig geweest van het negeren van deze hele tijd. We geplaagd net uit elkaar wat ingangen belangrijkste kan zijn? Hoe zit het met de uitgang main's? 
+
+Al die tijd hebben we geweest gewoon kopiëren en plakken het woord int in de voorkant van de belangrijkste, hoewel je online kunt zien, soms ten onrechte in oudere versies van C en compilers, dat zeggen ze leegte, of helemaal niets. Maar inderdaad de versie van C die we gebruiken, C 11, of 2011, te realiseren dat int moet zijn. En het moet ofwel nietig of argc en argv hier. 
+
+Maar waarom int main? Wat is het eigenlijk terug te keren? Nou, het blijkt dat dit alles tijd, elke keer dat je een programma centraal schriftelijke is altijd iets terug. Maar het is zo in het geheim gedaan. 
+
+Dat iets een int, zoals lijn 5 suggereert. Maar wat int? Nou, er is dit conventie in de programmering, waarbij er niets aan heeft misgegaan en alles is goed, programma's en functies algemeen return-- enigszins counterintuitively-- 0. 0 betekent over het algemeen is alles goed. Dus zelfs als je denkt aan als valse het dikwijls, het eigenlijk betekent over het algemeen een goede zaak 
+
+Ondertussen, als een programma terug 1, of negatief 1 of 5, of negatief 42, of een niet-waarde 0, dat algemeen betekent dat er iets is misgegaan. In feite, op je eigen Mac of pc, je zou eigenlijk hebben gezien een foutmelding, waardoor het zegt dat het een of ander, fout code negatieve 42, of foutcode 23, of iets dergelijks. Dat aantal is in het algemeen slechts een hint de programmeur of het bedrijf dat de software gemaakt, wat er mis ging en waarom, zodat ze kunnen kijken door hun documentatie of code, en erachter te komen wat de fout betekent eigenlijk. Het is over het algemeen niet nuttig voor ons eindgebruikers. 
+
+Maar als belangrijkste rendement 0, alles is goed. En als je niet opgeeft wat belangrijkste moet terugkeren, het zal gewoon automatisch 0 terug voor jou. Maar terug te keren iets anders is werkelijk nuttig. 
+
+In dit laatste programma, laat me ga je gang en noemen dit exit.c, en de invoering van de laatste van vandaag onderwerpen, die bekend staat als een foutcode. Laat me ga je gang en beschikken over ons vertrouwd bestanden up top, doen int main. En deze keer, laten we het doen int argc, snaar argv, en met mijn beugels te impliceren dat het in de array. En dan laat ik gewoon een sanity check. Deze keer, als argc niet doet gelijk 2, dan weet je wat? Laat maar. Ik ga om te zeggen dat, hey, gebruiker, je mist opdrachtregelargument backslash n. 
+
+En dan is dat het. Ik wil om af te sluiten. Ik ga naar preventief, en voortijdig echt, terugkeer iets anders dan het getal 1. De go om waarde voor de eerste error dat kan gebeuren is 1. Als u nog een andere foutieve situatie die zou kunnen optreden, je zou kunnen zeggen return 2 of 3 terug te keren, of misschien zelfs negatief 1 of negatief 2. 
+
+Dit zijn slechts exit codes die algemeen alleen handig voor de programmeur, of bedrijf dat de verzending van de software. Maar het feit dat het niet 0 is wat belangrijk is. Dus als in dit programma, wil ik garanderen dat dit programma alleen werkt als de gebruiker me biedt met een argument telling van twee, de naam van het programma, en andere woord, ik kan zo veel als volgt af te dwingen, schreeuwen tegen de gebruiker met printf zeggen, ontbrekende command line argument, terugkeren 1. Dat zal alleen maar onmiddellijk stoppen met het programma. 
+
+Alleen als argc gelijk is aan 2 zullen we get down hier, op welk punt ik ga zeggen, hello procent s, backslash n, argv1. Met andere woorden, ik ben niet gaan na argv 0, dat is gewoon de naam van het programma. Ik wil afdrukken hello, komma, het tweede woord dat het menselijk getypt. En in dit geval op lijn 13, alles is goed. 
+
+Ik weet dat argc is 2 logisch uit dit programma. Ik ga om verder te gaan en terug te keren 0. Even terzijde, in gedachten houden dat dit geldt in Scratch ook. 
+
+Logisch, zou ik dit doen en kapselt deze lijnen van de code in dit anders clausule hier. Maar dat is een soort van onnodig inspringen mijn code. En ik wil super maken duidelijk dat het niet uitmaakt wat, standaard, hello iets wordt afgedrukt, zolang de gebruiker werkt. 
+
+Dus het is heel gebruikelijk om te gebruiken een voorwaarde, maar een if, enkele foutieve vangen situatie, en vervolgens de afslag. En dan, zo lang al is nou ja, niet een anders hebben, maar gewoon de code buiten dat, als omdat het equivalent in deze specifieke geval, logisch. Dus ik ben terug te keren 0, gewoon om te expliciet betekenen alles goed is. 
+
+Als ik de return 0 weggelaten, het zou automatisch worden aangenomen voor mij. Maar nu dat ik terugkeer een in althans casu Ik ga voor een goede maatregel en helderheid, 0 terug in dit geval. Dus laat me nu ga je gang en maak exit, dat is een perfecte segue om gewoon vertrekken. 
+
+Maar zorg exit, en laat me gaan gang en doe ./exit, Enter. En het programma schreeuwde naar me, ontbrekende command line argument. Oké, laat me samenwerken. 
+
+Laat me doen in plaats ./exit, David, Enter. En nu zegt: hello David. En je normaal niet zou zien. 
+
+Maar het blijkt dat er een speciale manier in Linux eigenlijk zien wat exit code van een programma afgesloten. Soms in een grafische wereld zoals Mac OS of Windows, zie je alleen deze nummers wanneer een foutmelding verschijnt op het scherm en de programmeur laat zien dat nummer. Maar als we willen wat de fout te zien boodschap is, kunnen we het doen hier-- dus ./exit, Enter, print ontbrekende command line argument. 
+
+Als ik nu doen echo $ ?, dat is belachelijk cryptische kijken. Maar $? is de magische bezwering dat zegt: hey, computer, vertel me wat de vorige programma exit code was. En ik druk op Enter. Ik zie 1, want dat is wat ik vertelde mijn belangrijkste functie om terug te keren. 
+
+Ondertussen, als ik dat doe ./exit David, en druk op Enter, zie ik, hallo David. En als ik nu doe echo $ ?, Ik zie hello 0. En dus dit ook daadwerkelijk waardevol informatie in het kader van de debugger, niet veel dat je, de mens, zou schelen. Maar de debugger en andere programma's die we zullen dit semester gebruiken zal vaak kijken naar dat nummer, ook al is het een soort van verborgen tenzij je voor het kijken, naar bepalen of een programma executie was juist of onjuist. 
+
+En dat brengt ons bij dit, aan het eind van de dag. We vandaag de dag begonnen door te kijken naar debuggen, en op zijn beurt op de cursus zelf, en dan meer interessant, technisch gezien onder de motorkap wat snaren zijn, die duren week namen we gewoon voor lief, en zeker nam ze als vanzelfsprekend in Scratch. 
+
+Vervolgens hebben we gekeken hoe we kunnen openen afzonderlijke tekens in een string, en dan weer namen een hoger niveau kijken naar dingen, op zoek naar hoe goed-- als we willen op individueel te krijgen elementen in een lijst achtige structuur, kunnen we dat niet doen met meerdere snaren? En we kunnen met command line argumenten. Maar deze foto hier van slechts dozen is demonstratieve van deze algemene idee van een array, of een lijst of een vector. En afhankelijk van de context, al deze woorden bedoel iets andere dingen. Dus in C, we alleen maar om te praten over een array. En een array is een brok van het geheugen, elk van hen is elementen aaneengesloten zijn rug, aan rug, aan rug, terug. 
+
+En die elementen zijn, in het algemeen, van hetzelfde gegevenstype, karakter, karakter, karakter, karakter, of Zeen, Zeen, Zeen, Zeen, of int, int, int, wat het ook is we proberen te slaan. Maar aan het eind van de dag, is hoe het eruit ziet conceptueel. Je neemt je geheugen of RAM computer. En je carving it out in even grote dozen, die zijn terug, naar achter, naar terug aan rug op deze manier. 
+
+En wat is er leuk is aan dit idee en het feit dat we waarden zo kunnen uitdrukken de eerste van onze datastructuren in de klas, betekent dat we kunnen beginnen om problemen met de code op te lossen dat kwam zo intuïtief in week 0. U vindt de telefoon te roepen boek bijvoorbeeld, waar We gebruikten een verdeel en heers, of een binaire zoekalgoritme, te ziften door middel van een hele bos van namen en nummers. Maar we zijn ervan uitgegaan, rappel, dat telefoonboek was al naargelang, dat iemand anders had al dacht out-- gegeven een lijst met namen en numbers-- hoe ze alfabetisch. En nu dat in C we, Ook hebben de mogelijkheid om dingen lay-out, niet fysiek in een telefoonboek maar vrijwel in een computer geheugen, zullen we in staat volgende week om opnieuw te introduceren dit-- de eerste van onze data structuren in een array-- maar nog belangrijker, werkelijke computer science algoritmen geïmplementeerd in de code, waarmee we kunnen opslaan data in structuren zoals deze, en dan beginnen te manipuleren, en daadwerkelijk problemen mee, en voort te bouwen op de top van dat, uiteindelijk programma in C, in Python, in JavaScript, bevragen van databases met SQL? 
+
+En we zullen zien dat al deze verschillende ideeën interlock. Maar voor nu, herinneren dat de domein dat we vandaag geïntroduceerd was dit ding hier, en de wereld van cryptografie. En een van de volgende problemen die u zelf zal oplossen is de kunst van cryptografie, klauteren en de-klauteren informatie en ciphering en ontcijferen tekst, en uitgaande uiteindelijk dat je nu weet wat is onder de motorkap zodat wanneer je ziet of ontvangt een bericht als dit, je je kan ontcijferen. Dit alles, en nog veel meer de volgende keer. 
+
+[VIDEO AFSPELEN] 
+
+-Mover Net aangekomen. Ik ga om te gaan bezoeken zijn college professor. Yep. Hoi. Jij bent het. Wacht! David. Ik probeer alleen maar te achterhalen wat er met je gebeurd. Gelieve, om het even wat zou kunnen helpen. Je was zijn college kamergenoot, was je niet? Je was er bij hem toen Hij eindigde de CS50-project? 
+
+[Muziek] 
+
+-dat Was CS50. 
+
+Ik hou van deze plek. 
+
+-Eet op. We gaan uit van het bedrijfsleven. 
+
+[END AFSPELEN] 

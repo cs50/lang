@@ -1,0 +1,689 @@
+[MUSIC PLAYING] 
+
+DAVID J. MALAN: All right. This is CS50 and this is the start of Week 2. And you'll recall that over the past couple of weeks, we've been introducing computer science and, in turn, programming. 
+
+And we started the story by way of Scratch, that graphical language from MIT'S Media Lab. And then most recently, last week, did we introduce a higher-- a lower-level language known as C, something that's purely textual. And, indeed, last time we explored within that context a number of concepts. 
+
+This, recall, was the very first program we looked at. And this program, quite simply, prints out, "hello, world." But there's so much seeming magic going on. There's this #include  with these angle brackets. There's int. There's (void). There's parentheses, curly braces, semi-colons, and so much more. 
+
+And so, recall that we introduced Scratch so that we could, ideally, see past that syntax, the stuff that's really not all that intellectually interesting but early on is, absolutely, a bit tricky to wrap your mind around. And, indeed, one of the most common things early on in a programming class, especially for those less comfortable, is to get frustrated by and tripped up by certain syntactic errors, not to mention logical errors. And so among our goals today, actually, will be to equip you with some problem-solving techniques for how to better solve problems themselves in the form of debugging. And you'll recall, too, that the environment that we introduced last time was called CS50 IDE. This is web-based software that allows you to program in the cloud, so to speak, while keeping all of your files together, as we again will today. And recall that we revisited these topics here, among them functions, and loops, and variables, and Boolean expressions, and conditions. And actually a few more that we translated from the world of Scratch to the world of C. 
+
+But the fundamental building blocks, so to speak, were really still the same last week. In fact, we really just had a different puzzle piece, if you will. Instead of that purple save block, we instead had printf, which is this function in C that allows you to print something and format it on the screen. We introduced the CS50 Library, where you have now at your disposal get_char, and get_int, and get_string, and a few other functions as well, via which you can get input from the user's own keyboard. And we also took a look at things like these- bool, and char, and double, float, int, long_long string. And there's even other data types in C. 
+
+In other words, when you declare a variable to store some value, or when you implement a function that returns some value, you can specify what type of value that is. Is it a string, like a sequence of characters? Is it a number, like an integer? Is it a floating point value, or the like? So in C, unlike Scratch, we actually began to specify what kind of data we were returning or using. 
+
+But, of course, we also ran into some fundamental limits of computing. And in particular, this language C, recall that we took a look at integer overflow, the reality that if you only have a finite amount of memory or, specifically, a finite number of bits, you can only count so high. And so we looked at this example here whereby a counter in an airplane, , actually, if running long enough would overflow and result in a software an actual physical potential error. 
+
+We also looked at floating point imprecision, the reality that with only a finite number of bits, whether it's 32 or 64, you can only specify so many numbers after a decimal point, after which you begin to get imprecise. So for instance, one-third in the world here, in our human world, we know is just an infinite number of 3s after the decimal point. But a computer can't necessarily represent an infinite number of numbers if you only allow it some finite amount of information. 
+
+So not only did we equip you with greater power in terms of how you might express yourself at a keyboard in terms of programming, we also limited what you can actually do. And indeed, bugs and mistakes can arise from those kinds of issues. And indeed, among the topics today are going to be topics like debugging and actually looking underneath the hood at how things were introduced last week are actually implemented so that you better understand both the capabilities of and the limitations of a language like C. 
+
+And in fact, we'll peel back the layers of the simplest of data structure, something called an array, which Scratch happens to call a "list." It's a little bit different in that context. And then we'll also introduce one of the first of our domain-specific problems in CS50, the world of cryptography, the art of scrambling or in ciphering information so that you can send secret messages and decode secret messages between two persons, A and B. 
+
+So before we transition to that new world, let's try to equip you with some techniques with which you can eliminate or reduce at least some of the frustrations that you have probably encountered over the past week alone. In fact, ahead of you are such-- some of your first problems in C. And odds are, if you're like me, the first time you try to type out a program, even if you think logically the program is pretty simple, you might very well hit a wall, and the compiler is not going to cooperate. Make or Clang is not going to actually do your bidding. 
+
+And why might that be? Well, let's take a look at, perhaps, a simple program. I'm going to go ahead and save this in a file deliberately called buggy0.c, because I know it to be flawed in advance. But I might not realize that if this is the first or second or third program that I'm actually making myself. So I'm going to go ahead and type out, int main(void). And then inside of my curly braces, a very familiar ("hello, world-- backslash, n")-- and a semi-colon. 
+
+I've saved the file. Now I'm going to go down to my terminal window and type make buggy0, because, again, the name of the file today is buggy0.c. So I type make buggy0, Enter. 
+
+And, oh, gosh, recall from last time that no error messages is a good thing. So no output is a good thing. But here I have clearly some number of mistakes. 
+
+So the first line of output after typing make buggy0, recall, is Clang's fairly verbose output. Underneath the hood, CS50 IDE is configured to use a whole bunch of options with this compiler so that you don't have to think about them. And that's all that first line means that starts with Clang. 
+
+But after that, the problems begin to make their appearance. Buggy0.c on line 3, character 5, there is a big, red error. What is that? Implicitly declaring library function printf with type int (const char *, ...) [-Werror]. I mean, it very quickly gets very arcane. And certainly, at first glance, we wouldn't expect you to understand the entirety of that message. And so one of the lessons for today is going to be to try to notice patterns, or similar things, to errors you might have encountered in the past. So let's tease apart only those words that look familiar. The big, red error is clearly symbolic of something being wrong. 
+
+Implicitly declaring library function printf. So even if I don't quite understand what implicitly declaring library function means, the problem surely relates to printf somehow. And the source of that issue has to do with declaring it. 
+
+Declaring a function is mentioning it for the first time. And we used the terminology last week of declaring a function's prototype, either with one line at the top of your own file or in a so-called header file. And in what file did we say last week that printf is quote, unquote, declared? In what file is its prototype? 
+
+So if you recall, the very first thing I typed, almost every program last time-- and accidentally a moment ago started typing myself-- was this one here-- hash-- #include <stio-- for input/output-- dot h And indeed, if I now save this file, I'm going to go ahead and clear my screen, which you can do by typing Clear, or you can hold Control L, just to clear your terminal window just to eliminate some clutter. 
+
+I'm going to go ahead and re-type make buggy0, Enter. And voila, I still see that long command from Clang, but there's no error message this time. And indeed, if I do ./buggy0, just like last time, where dot means this directory, Slash just means, here comes the name of the program and that name of the program is buggy0, Enter, "hello, world." 
+
+Now, how might you have gleaned this solution without necessarily recognizing as many words as I did, certainly, having done this for so many years? Well, realize per the first problem set, we introduce you to a command that CS50's own staff wrote called help50. And indeed, C does specification for the problem set as to how to use this. 
+
+But help50 is essentially a program that CS50's staff wrote that allows you to run a command or run a program, and if you don't understand its output, to pass its output to help50, at which point the software that the course's staff wrote will look at your program's output line by line, character by character. And if we, the staff, recognize the error message that you're experiencing, we will try to provoke you with some rhetorical questions, with some advice, much like a TF or a CA or myself would do in person at office hours. 
+
+So look to help50 if you don't necessarily recognize a problem. But don't rely on it too much as a crutch. Certainly try to understand its output and then learn from it so that only once or twice do you ever run help50 for a particular error message. After that, you should be better equipped yourself to figure out what it actually is. 
+
+Let's do one other here. Let me go ahead, and in another file we'll call this buggy1.c. And in this file I'm going to deliberately-- but pretend that I don't understand what mistake I've made. 
+
+I'm going to go ahead and do this-- #include , since I've learned my lesson from a moment ago. Int main(void), as before. And then in here I'm going to do string s - get_string. And recall from last time that this means, hey, computer, give me a variable, call it s, and make the type of that variable a string so I can store one or more words in it. 
+
+And then on the right-hand side of the equal sign is get_string, which is a function in the CS50 Library that does exactly that. It gets a function and then hands it from right to left. So this equal sign doesn't mean "equals" as we might think in math. It means assignment from right to left. So this means, take the string from the user and store it inside of s. 
+
+Now let's use it. Let me go ahead now and as a second line, let me go ahead and say "hello"-- not "world," but "hello,%s-- which is our placeholder, comma s, which is our variable, and then a semi-colon. So if I didn't screw up too much here, this looks like correct code. 
+
+And my instincts now are to compile it. The file is called buggy1.c. So I'm going to do make buggy1, Enter. And darn-it, if there isn't even more errors than before. I mean, there's more error messages it would seem than actual lines in this program. 
+
+But the takeaway here is, even if you're overwhelmed with two or three or four more error messages, focus always on the very first of those messages. Looking at the top-most one, scrolling back up as need be. So here I typed make buggy1. Here's that Clang output as expected. 
+
+And here's the first red error. Use of undeclared identifier string, did I mean standard in? So standard in is actually something else. It refers to the user's keyboard, essentially. 
+
+But that's not what I meant. I meant string, and I meant get_string. So what is it that I forgot to do this time? What's missing this time? I have my #include , so I have access to printf. 
+
+But what do I not have access to just yet? Well, just like last time, I need to tell the compiler Clang what these functions are. Get_string does not come with C. And in particular, it doesn't come in the  header file, . It instead comes in something the staff wrote, which is a different file name but aptly named . 
+
+So simply by adding that one line of code-- recall from last time that when Clang runs, it's going to look at my code top to bottom, left to right. It's going to notice, oh, you want . Let me go and find that, wherever it is on the server, copy and paste it, essentially, into the top of your own file so that at this point in the story, line 1, the rest of the program can, indeed, use any of the functions therein, among them get_string. So I'm going to ignore the rest of those errors, because I, indeed, suspect that only the first one actually mattered. And I'm going to go ahead and rerun, after saving my file make buggy1. And voila, it did work. And if I do ./buggy1 and type in, for instance, Zamyla, I now will get hello, Zamyla, instead of hello, world. 
+
+All right. So the takeaways here then are to, one, try to glean as much as you can from the error messages alone, looking at some of the recognizable words. Barring that, use help50 per the problem set specification. But barring that, too, always look at the top error only, at least initially, to see what information it might actually yield. But it turns out there's even more functionality built into the CS50 Library to help you early on in the semester and early on in programming figure out what's going wrong. So let's do another example here. I'm going to call this buggy2, which, again, is going to be flawed out of the gate, by design. 
+
+And I'm going to go ahead and do #include . And then I'm going to do int main(void). And then I'm going to do a for loop. For (int i _ 0. i is less than or equal to 10. i++, and then in curly braces, I'm going to print out just a hashtag symbol here and a new line character. 
+
+So my intent with this program is quite simply to iterate 10 times and on each iteration of that loop each time through the cycle, print out a hashtag, a hashtag, a hashtag. One per line because I have the new line there. And recall that the for loop, per last week-- and you'll get more familiar with the syntax by using it with practice before long-- this gives me a variable called i and sets it to 0. 
+
+This increments i on every iteration by 1. So i goes to 1 to 2 to 3. And then this condition in the middle between the semi-colons gets checked on every iteration to make sure that we are still within range. So I want to iterate 10 times, so I have sort of very intuitively just put 10 as my upper bound there. 
+
+And yet, when I run this, after compiling it with make buggy2-- and it does compile OK. So I don't have a syntax error this time. Let me go ahead now and run buggy2, Enter. And now scroll up. And let me increase the size of the window. 
+
+I seem to have 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. So there's 11 hashtags, even though I clearly put 10 inside of this loop. Now, some of you might see immediately what the error is because, indeed, this isn't a very hard error to make. But it's very commonly made very early on. 
+
+What I want to point out, though, is, how might I figure this out? Well, it turns out that the CS50 Library comes with not only get_string and get_int and get_float and other functions. It also comes with a special function called eprintf, or, error printf. And it exists solely to make it a little bit easier for you when debugging your code to just print an error message on the screen and know where it came from. 
+
+So for instance, one thing I might do here with this function is this-- eprintf, and then I'm going to go ahead and say i is now %i, backslash, n. And I'm going to plug in the value of i. And up top, because this is in the CS50 Library, I'm going to go ahead and include  so I have access to this function. But let's consider what line 9 is supposed to be doing. I'm going to delete this eventually. This has nothing to do with my overarching goal. But eprintf, error printf, is just meant to give me some diagnostic information. When I run my program, I want to see this on the screen temporarily as well just to understand what's going on. 
+
+And, indeed, on each iteration here of line 9 I want to see, what is the value of i? What is the value of i? What is the value of i? And, hopefully, I should only see that message, also, 10 times. 
+
+So let me go ahead and recompile my program, as I have to do any time I make a change. ./buggy2. And now-- OK. There's a lot more going on. So let me scroll up in an even bigger window. 
+
+And you'll see that each of the hashtags is still printing. But in between each of them is now this diagnostic output formatted as follows. The name of my program here is buggy2. The name of the file is buggy2.c. The line number from which this was printed is line 9. And then to the right of that is the error message that I'm expecting. 
+
+And what's nice about this is that now I don't have to necessarily count in my head what my program is doing. I can see that on the first iteration i is 0, then 1, then 2, then 3, then 4, then 5, then 6, then 7, then 8, then 9, then 10. So wait a minute. What's going on here? I still seem to be counting as intended up to 10. 
+
+But where did I start? 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 10. So 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10-- the 11th finger is indicative of the problem. I seem to have counted incorrectly in my loop. Rather than go 10 iterations, I'm starting at 0, I'm ending at and through 10. But because, like a computer, I'm starting counting at 0, I should be counting up to, but not through, 10. 
+
+And so the fix, I eventually realized here, is one of two things. I could very simply say count up to less than 10. So 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, which is, indeed, correct, even though it sounds a little wrong. Or I could do less than or equal to 9, so long as I start at 0. Or if you really don't like that, you can count up through 10 but start at 1. But again, this just isn't that common. In programming-- albeit not so much in Scratch-- but in programming in C and other languages, like JavaScript and Python and others, it's just very common for our discussion of binary to just start counting at the lowest number you can, which is 0. All right. So that's eprintf. And again, now that I've figured out my problem, and I'm going to go back to 0 through less than 10, I'm going to go in and delete eprintf. 
+
+It should not be there when I ship my code or submit my code or show it to anyone else. It's really just meant to be used temporarily. But now I've fixed this particular problem as well. 
+
+Well, let's do one more example here that I'm going to whip up as follows. I'm going to go ahead and #include . $50 And I'm going to go ahead and #include . 
+
+And I'm going to save this file as buggy3.c. And I'm going to go ahead and declare int main(void). And then inside of there I'm going to do int i _ -- I want to implement a program with a get_negative_int. This is not a function that exists yet. So we're going to implement it in just a moment. But we're going to see why it's buggy at first pass. And once I've gotten an int from the user, I'm just going to print %i is a negative integer, backslash, n, comma, i. In other words, all I want this program to do is get a negative int from the user and then print out that such and such is a negative int. 
+
+Now I need to implement this function. So later in my file, I'm going to go ahead and declare a function called get_negative_int(void)-- and we'll come back to what that line means again in a moment-- int n; do-- do the following-- printf n is:. And then I'm going to do n - get_int, and do this while n is greater than 0. And then return n;. 
+
+So there's a lot going on in this but none of which we didn't look at last week, at least briefly. So on line 10 here I've declared a function called get_negative_int, and I've put (void), in parentheses, the reason being this does not take an input. I'm not passing anything to this function. I'm just getting something back from it. 
+
+And what I'm hoping to get back is an integer. There is no data type in C called negative_int. It's just int, so it's going to be on us to make sure that the value that's actually returned is not only an int but is also negative. 
+
+On line 12 I'm declaring a variable called n and making it of type int. And then in line 13 through 18 I'm doing something while something is true. I'm going ahead and printing n is, colon, and then a space, like a prompt for the user. 
+
+I'm then calling get_int and storing its so-called return value in that variable n. But I'm going to keep doing this while n is greater than 0. In other words, if the user gives me an int and that number is greater than 0, ergo, positive, I'm going to just keep reprompting the user, keep reprompting, by forcing them to cooperate and give me a negative int. 
+
+And once n is actually negative-- suppose the user finally types -50, then this while loop is no longer true because -50 is not greater than 0. So we break out of that loop logically and return n. 
+
+But there's one other thing I have to do. And I can simply do this by copying and pasting one line of code at the top of the file. I need to teach Clang, or promise to Clang, explicitly that I will, indeed, go and implement this function get_negative_int. It might just be lower in the file. Again, recall that Clang reads things top to bottom, left to right, so you can't call a function if Clang doesn't know it's going to exist. 
+
+Now, unfortunately, this program, as some of you might have noticed, is already buggy. Let me go ahead and make buggy3. It compiles, so my problem now is not a syntax error, like a textual error, it's actually going to be a logical error that I've deliberately made as an opportunity to step through what's going on. 
+
+I'm going to go ahead now and run buggy3. And I'm going to go ahead and not cooperate. I'm going to give it the number 1. It didn't like it, so it's prompting me again. 
+
+How about 2? 3? 50? None of those are working. How about -50? And the program seems to work. 
+
+Let me try it once more. Let me try -1, seems to work. Let me try -2, seems to work. Let me try 0. Huh, that's incorrect. Now, we're being a little pedantic here. But it's, indeed, the case that 0 is neither positive nor negative. And so the fact that my program is saying that 0 is a negative integer, that's not technically correct. 
+
+Now, why is it doing this? Well, it might be obvious. And, indeed, the program is meant to be fairly simple so we have something to explore. 
+
+But let's introduce a third debugging technique here called debug50. So this is a program that we've just created this year called debug50 that will allow you to use what's called a built-in graphical debugger in CS50 IDE. And a debugger is just a program that generally lets you run your program but step by step by step, line by line by line, pausing, poking around, looking at variables so that the program doesn't just blow past you and quickly print something or not print something. It gives you an opportunity, at human speed, to interact with it. 
+
+And to do this, you simply do the following. After compiling your code, which I already did, buggy3, you go ahead and run debug50 ./buggy. So much like help50 has you run help50 and then the command, debug50 has you run debug50 and then the name of the command. 
+
+Now watch what happens on my screen, on the right-hand side in particular. When I hit Run, all of the sudden this right-hand panel opens up on the screen. And there's a lot going on at first glance. But there's not too much to worry about yet. 
+
+This is showing me everything that's going on inside of my program right now and via these buttons up top is then allowing me to step through my code ultimately step by step by step. But not just yet. Notice what happens. At my terminal window I'm being prompted for n. And I'm going to go ahead and cooperate this time and type in -1. And albeit a little cryptically, -1 is a negative integer, as expected. 
+
+And then child exited with status 0 GDBserver exiting. GDB, GNU Debugger, is the name of the underlying software that implements this debugger. But all this really means, the debugger went away because my program quit and all was well. If I want to truly debug my program, I have to preemptively tell debug50, where do I want to start stepping through my code? 
+
+And perhaps the simplest way to do that is as follows. If I hover over the gutter of my editor here, so really just in the sidebar here, to the left of the line number, notice that if I just click once, I put a little red dot. And that little red dot, like a stop sign, means, hey, debug50, pause execution of my code right there when I run this program. 
+
+So let's do that. Let me go ahead and run my program again with debug50 ./buggy3, Enter. And now, notice, something different has happened. I'm not being prompted yet in my terminal window for anything, because I haven't gotten there yet in my program. Notice that on line 8 which is now highlighted, and there's a little arrow at left saying, you are paused here. This line of code, line 8, has not yet executed. 
+
+And what's curious, if I look over here on the right-hand side, notice that i is a local variable, local in the sense that it's inside the current function. And its value, apparently by default, and sort of conveniently, is 0. But I didn't type 0. That just happens to be its default value at the moment. 
+
+So let me go ahead and do this now. Let me go ahead and on the top right here, I'm going to go ahead and click this first icon which means step over which means don't skip it but step over this line of code, executing it along the way. 
+
+And now, notice, my prompt has just changed. Why is that? I've told debug50, run this line of code. What does this line of code do? Prompts me for an int. OK. Let me cooperate. Let me go ahead now and type -1, Enter. And now notice what has changed. On the right-hand side, my local variable i is indicated as being -1 now. And it's still of type int. 
+
+And notice, too, my so-called call stack, where did I pause? We'll talk more about this in the future. But the call stack just refers to what functions are currently in motion. Right now it's just main. And right now the only local variable is i with a value of 1. 
+
+And when I finally step over this line here, with that same icon at top right, -1 is a negative integer. Now it's pausing over that curly brace. Let's let it do its thing. I step over that line, and voila. 
+
+So not all that terribly enlightening yet, but it did let me pause and think through logically what this program is doing. But that wasn't the erroneous case. Let's do this again as follows. 
+
+I'm going to leave that breakpoint on line 8 with the red dot. I'm going to rerun debug50. It's automatically paused here. But this time, instead of stepping over this line, let me actually go inside of get_negative_int and figure out, why is it accepting 0 as a valid answer? 
+
+So instead of clicking Step Over. I'm going to go ahead and click Step Into. And notice that the line 8 that's now highlighted now suddenly becomes line 17. 
+
+Now, it's not that the debugger has skipped lines 14 and 15 and 16. It's just there's nothing to show you there. Those are just declaring variables, and then there's the word Do and then an open curly brace. The only functional line that's juicy really is this one here, 17. And that's where we've paused automatically. 
+
+So printf("n.is: ");, so that hasn't happened yet. So let's go ahead and click Step Over. Now my prompt, indeed, changed to ("n is: "). Now get_int, I'm not going to bother stepping into, because that function was made by CS50 in the Library. It's presumably correct. 
+
+So I'm going to go ahead and sort of cooperate by giving it an int, but not a negative int. So let me go ahead and hit 0. And now what happens here when I get down to line 21? I've not iterated again. I don't seem to be stuck in that loop. In other words, this yellow bar did not keep going around, and around, and around. 
+
+Now, why is that? Well, n, what is n right now? I can look at the local variables in the debugger. n is 0. All right, what was my condition? 
+
+20-- line 20 is, well, 0 is greater than 0. That is not true. 0 is not greater than 0. And so I broke out of this. 
+
+And so that's why on line 21, if I actually continue, I'm going to return 0, even though I should have rejected 0 as not actually being negative. So now, I don't really even care about the debugger. Got it, I don't need to know what more is going on. 
+
+So I'm going to go ahead and just click the Play button, and let this finish up. Now, I've realized that my bug is apparently on line 20. That's my logical error. 
+
+And so what do I want to do to change this? If the problem is that I'm not catching 0, it's just a logical error. And I can say while n is greater than or equal to 0, keep prompting the user again and again. 
+
+So, again, simple mistake, perhaps even obvious when you saw me write it just a few minutes ago. But the takeaway here is that with debug 50, and with debugging software more generally, you have this new found power to walk through your own code, look via that right hand panel what your variables values are. So you don't necessarily have to use something like you eprintf to print those values. You can actually see them visually on the screen. 
+
+Now, beyond this, it's worth noting that there's another technique that's actually super common. And you might wonder why this little guy here has been sitting on the stage. So there's this technique, generally known as rubber duck debugging, which really is just a testament to the fact that often when programmers are writing code, they're not necessarily collaborating with others, or working in a shared environment. 
+
+They're sort of at home. Maybe it's late at night. They're trying to figure out some bug in their code. And they're just not seeing it. 
+
+And there's no roommate. There is no TF. There is no CA around. All they have on their shelf is this little rubber ducky. 
+
+And so rubber duck debugging is just this invitation to think of something as silly as this as a real creature, and actually walk through your code verbally to this inanimate object. So, for instance, if this is my example here-- and recall that earlier the problem was this, if I delete this first line of code, and I go ahead and make buggy 0 again, recall that I had these error messages here. So the idea here, ridiculous though I feel at the moment doing this publicly, is that error. 
+
+OK, so my problem is that I've implicitly declared a library function. And that library function is printf. Declare-- OK, declare reminds me of prototypes. 
+
+That means I need to actually tell the compiler in advance what the function looks like. Wait a minute. I didn't have standard io.h. Thank you very much. 
+
+So just this process of-- you don't need to actually have a duck. But this idea of walking yourself through your own code so that you even hear yourself, so that you realize omissions in your own remarks, is generally the idea. 
+
+And, perhaps more logically, not so much with that one but the more involved example we just did in buggy 3.c, you might walk yourself through it as follows. So all right, rubber ducky, DDB, if you will. Here we have in my main function, I'm calling get negative int. 
+
+And I am getting the return value. I'm storing it on the left hand side on line 8 in a variable called i. OK, but wait, how did that get that value? Let me look at the function in line 12. 
+
+In line 12, we have get negative int. Doesn't take any inputs, does return an int, OK. I declare on line 14 a variable n. It's going to store an integer. That's what I want. 
+
+So do the following while n is-- let me undo what the fix I already made. So while n is greater than 0, print out n is, OK. And then call get int stored in n. And then check if n is 0, n is not-- there it is. So, again, you don't need the actual duck. But just walking yourself through your code as an intellectual exercise will often help you realize what's going on, as opposed to just doing something like this, staring at the screen, and not talking yourself through it, which honestly is not nearly as an effective technique. So there you have it, a number of different techniques for actually debugging your code and finding fault, all of which should be tools in your toolkit so that you're not late at night, especially, you're in the dining halls, or at office hours, banging your head against the wall, trying to solve some problem. Realize that there are software tools. There are rubber duck tools. And there's a whole staff of support waiting to lend a hand. 
+
+So now, a word on the problem sets, and on what we're hoping you get out of them, and how we go about evaluating. Per the course's syllabus, CS50's problem sets are evaluated on four primary axes, so to speak-- scope, correctness, design, and style. And scope just refers to how much of the piece have you bitten off? How much of a problem have you tried? What level of effort have you manifested? 
+
+Correctness is, does the program work as it's supposed to per CS50 specification when you provide certain inputs or certain outputs coming back? Design is the most subjective of them. And it's the one that will take the longest to learn and the longest to teach, in so far as it boils down to, how well written is your code? 
+
+It's one thing to just print the correct outputs or return the right values. But are you doing it as efficiently as possible? Are you doing it divide and conquer, or binary search as we'll soon see that we did two weeks ago with the phone book? Are there better ways to solve the problem than you currently have here? That's an opportunity for better design. 
+
+And then style-- how pretty is your code? You'll notice that I'm pretty particular about indenting my code, and making sure my variables are reasonably named. n, while short, is a good name for a number, i for a counting integer, s for a string. And we can have longer variable names style. Style is just how good does your code look? And how readable is it? 
+
+And over time, what your TAs and TFs will do in the course is provide you with that kind of qualitative feedback so that you get better at those various aspects. And in terms of how we evaluate each of these axes, it's typically with very few buckets so that you, generally, get a sense of how well you're doing. And, indeed, if you receive a score on any of those axes-- correctness, design and style especially-- that number will generally be between 1 and 5. And, literally, if you're getting 3's at the start of the semester, this is a very good thing. It means there's still room for improvement, which you would hope for in taking a class for the first time. There's hopefully some bit of ceiling to which you're aspiring to reaching. And so getting 3's on the earliest pieces, if not some 2's and 4's, is, indeed, a good thing. It's well within range, well within expectations. 
+
+And if your mind is racing, wait a minute, three out of five. That's really a 6 out of 10. That's 60%. My God, that's an F. 
+
+It's not. It's not, in fact, that. Rather, it's an opportunity to improve over the course of the semester. And if you're getting some poors, these are an opportunity to take advantage of office hours, certainly sections and other resources. 
+
+Best is an opportunity, really, to be proud of just how far you've come over the course of the semester. So do realize, if nothing else, three is good. And it allows room for growth over time. 
+
+As to how those axes are weighted, realistically you're going to spend most of your time getting things to work, let alone correctly. And so correctness tends to be weighted the most, as with this multiplicative factor of three. Design is also important, but something that you don't necessarily spend all of those hours on trying to get things just to work. 
+
+And so it's weighted a little more lightly. And then style is weighted the least. Even though it's no less important fundamentally, it's just, perhaps, the easiest thing to do right, mimicking the examples we do in lecture and section, with things nicely indented, and commented, and so forth is among the easiest things to do and get right. So as such, realize that those are points that are relatively easy to grasp. 
+
+And now a word on this-- academic honesty. So per the course's syllabus, you will see that the course has quite a bit of language around this. And the course takes the issue of academic honesty quite seriously. 
+
+We have the distinction, for better or for worse, of having sent each year more students for disciplinary action than most any other course, that I am aware of. This is not necessarily indicative of the fact that CS students, or CS50 students, are any less honest than your classmates. But the reality that in this world, electronically, we just have technological means of detecting this. 
+
+It is important to us for fairness across the class that we do detect this, and raise the issue when we see things. And just to paint a picture, and really to help something like this sink in, these are the numbers of students over the past 10 years that have been involved in some such issues of academic honesty, with some 32 students from fall 2015, which is to say that we do take the matter very seriously. And, ultimately, these numbers compose, most recently, about 3%, 4% or so of the class. 
+
+So for the super majority of students it seems that the lines are clear. But do keep this in mind, particularly late at night when struggling with some solution to a problem set, that there are mechanisms for getting yourself better support than you might think, even at that hour. Realize that when we receive student submissions, we cross compare every submission this year against every submission last year, against every submission from 2007, and since, looking at, as well, code repositories online, discussion forums, job sites. And we mention this, really, all for the sake of full disclosure, that if someone else can find it online, certainly, so can we the course. But, really, the spirit of the course boils down to this clause in the syllabus. It really is just, be reasonable. 
+
+And if we had to elaborate on that with just a bit more language, realize that the essence of all work that you submit to this course must be your own. But within that, there are certainly opportunities, and encouragement, and pedagogical value in turning to others-- myself, the TFs, the CAs, the TAs, and others in the class, for support, let alone friends and roommates who have studied CS and programming before. And so there is an allowance for that. And the general rule of thumb is this-- when asking for help, you may show your code to others, but you may not view theirs. So even if you're at office hours, or in the D hall, or somewhere else working on some piece set, working alongside a friend, which is totally fine, at the end of the day your work should ultimately belong to each of you respectively, and not be some collaborative effort, except for the final project where it's allowed and encouraged. 
+
+Realize that if you are struggling with something and your friend just happens to be better at this then you, or better at that problem than you, or a little farther ahead than you, it's totally reasonable to turn to your friend and say, hey, do you mind looking at my code here, helping me spot what my issue is? And, hopefully, in the interest of pedagogical value that friend doesn't just say, oh, do this, but rather, what are you missing on line 6, or something like that? But the solution is not for the friend next to you to say, oh, well, here, let me pull this up, and show my solution to you. So that is the line. You show your code to others, but you may not view theirs, subject to the other constraints in the course's syllabus. 
+
+So do keep in mind this so-called regret clause in the course's syllabus as well, that if you commit some act that is not reasonable, but bring it to the attention of the course's heads within 72 hours, the course may impose local sanctions that may include an unsatisfactory or failing grade for the work submitted. But the course will not refer the matter for further disciplinary action, except in cases of repeated acts. In other words, if you do make some stupid, especially late night, decision that the next morning or two days later, you wake up and realize, what was I thinking? You do in CS50 have an outlet for fixing that problem and owning up to it, so that we will meet you halfway and deal with it in a matter that is both educational and valuable for you, but still punitive in some way. And now, to take the edge off, this. 
+
+[VIDEO PLAYBACK] 
+
+[MUSIC PLAYING] 
+
+[END PLAYBACK] DAVID J. MALAN: All right, we are back. And now we look at one of the first of our real world domains in CS50, the art of cryptography, the art of sending and receiving secret messages, encrypted messages if you will, that can only be deciphered if you have some key ingredient that the sender has as well. So to motivate this we'll take a look at this thing here, which is an example of a secret decoder ring that can be used in order to figure out what a secret message actually is. In fact, back in the day in grade school, if you ever sent secret messages to some friend or some crush in class, you might have thought you were being clever by on your piece of paper changing, like, A to B, and B to C, and C to D, and so forth. But you were actually encrypting your information, even if it was a little trivial, wasn't that hard for the teacher to realize, well, if you just change B to A and C to B, you actually figure out what the message was, but you were in ciphering information. 
+
+You were just doing it simply, much like Ralphie here in a famous movie that plays pretty much ad nauseum each winter. [VIDEO PLAYBACK] -Be it known to all that Ralph Parker is hereby appointed a member of the Little Orphan Annie Secret Circle and is entitled to all the honors and benefits occurring thereto. 
+
+-Signed, Little Orphan Annie, counter-signed Pierre Andre, in ink. Honors and benefits, already at the age of nine. 
+
+[SHOUTING] -Come on. Let's get on with it. I don't need all that jazz about smugglers and pirates. 
+
+-Listen tomorrow night for the concluding adventure of the black pirate ship. Now, it's time for Annie's secret message for you members of the Secret Circle. Remember, kids, only members of Annie's Secret Circle can decode Annie's secret message. 
+
+Remember, Annie is depending on you. Set your pins to B2. Here is the message. 12, 11-- 
+
+-I am in, my first secret meeting. 
+
+-14, 11, 18, 16. 
+
+-Pierre was in great voice tonight. I could tell that tonight's message was really important. 
+
+-3, 25, that's a message from Annie herself. Remember, don't tell anyone. 
+
+-90 seconds later, I'm in the only room in the house where a boy of nine could sit in privacy and decode. Aha, B! I went to the next, E. 
+
+The first word is be. S, it was coming easier now, U, 25-- 
+
+-Oh, come on, Ralphie, I gotta go! 
+
+-I'll be right down, Ma! Gee whiz! 
+
+-T, O, be sure to-- be sure to what? What was Little Orphan Annie trying to say? Be sure to what? 
+
+-Ralphie, Andy has got to go, will you please come out? 
+
+-All right, Ma! I'll be right out! 
+
+-I was getting closer now. The tension was terrible. What was it? The fate of the planet may hang in the balance. 
+
+-Ralphie! Andy's gotta go! 
+
+-I'll be right out, for crying out loud! 
+
+-Almost there, my fingers flew, my mind was a steel trap, every pore vibrated. It was almost clear, yes, yes, yes. 
+
+-Be sure to drink your ovaltine. Ovaltine? A crummy commercial? Son of a bitch. [END PLAYBACK] DAVID J. MALAN: OK, so that was a very long way of introducing cryptography, and also ovaltine. In fact, from this old advert here, why is ovaltine so good? It is a concentrated extraction of ripe barley malt, pure creamy cow's milk, and specially prepared cocoa, together with natural phosphatides and vitamins. It is further fortified with additional vitamins B and D, yum. And you can still get it, apparently, on Amazon, as we did here. 
+
+But the motivation here was to introduce cryptography, specifically a type of cryptography known as secret key cryptography. And as the name suggests, the whole security of a secret key crypto system, if you will, a methodology for just scrambling information between two people, is that only the sender and only the recipient know a secret key-- some value, some secret phrase, some secret number, that allows them to both encrypt and decrypt information. And cryptography, really, is just this from week 0. 
+
+It's a problem where there's inputs, like the actual message in English or whatever language that you want to send to someone in class, or across the internet. There is some output, which is going to be the scrambled message that you want the recipient to receive. And even if someone in the middle receives it too, you don't want them to necessarily be able to decrypt it, because inside of this black box, or algorithm, is some mechanism, some step by step instructions, for taking that input and converting it into the output, in hopefully a secure way. 
+
+And, in fact, there is some vocabulary in this world as follows. Plain text is the word a computer scientist would use to describe the input message, like the English or whatever language you actually want to send to some other human. And then the ciphertext is the scramble to the enciphered, or encrypted, version thereof. 
+
+But there's one other ingredient here. There's one other input to secret key cryptography. And that is the key itself, which is, generally, as we'll see, a number, or letter, or word, whatever the algorithm it is actually expects. 
+
+And how do you decrypt information? How do you unscramble it? Well, you just reverse the outputs and the inputs. 
+
+In other words, once someone receives your encrypted message, he or she simply has to know that same key. They have received the ciphertext. And by plugging those two inputs into the crypto system, the algorithm, this black box, out should come the original plaintext. And so that's the very high level view of what cryptography is actually all about. 
+
+So let's get there. Let's now look underneath the hood of something we've been taking for granted for the past week, and for this session here-- the string. A string at the end of the day is just a sequence of characters. 
+
+It might be hello world, or hello Zamyla, or whatever. But what does that mean to be a sequence of characters? In fact, the CS50 library gives us a data type called string. 
+
+But there is actually no such thing as a string in C. It really is just a sequence of character, character, character, character, back, to back, to back, to back, to back inside of your computer's memory, or RAM. And we'll look deeper into that in the future when we look at memory itself, and the utilization, and the threats that are involved. 
+
+But let's consider the string Zamyla. So just the name of the human here, Zamyla, that is a sequence of characters, Z-A-M-Y-L-A. And now let's suppose that Zamyla's name is being stored inside of a computer program. 
+
+Well, it stands to reason that we should be able to look at those characters individually. So I'm just going to draw a little box around Zamyla's name here. And it is the case in C that when you have a string, like Zamyla-- and maybe that string has come back from a function like get string, you can actually manipulate it character by character. 
+
+Now, this is germane for the conversation at hand, because in cryptography if you want to change A to B, and B to C, and C to D, and so forth, you need to be able to look at the individual characters in a string. You need to be able to change the Z to something else, the A to something else, the M to something else, and so on. And so we need a way, programmatically, so to speak, in C to be able to change and look at individual letters. And we can do this as follows. 
+
+Let me go head back in CS50 IDE. And let me go ahead and create a new file that I'll call this time string0, as our first such example, dot c. And I'm going to go ahead and whip it up as follows. 
+
+So include CS50.h, and then include standard io.h, which I'm almost always going to be using in my programs, at least initially. int main void, and then in here I'm going to do strings gets get string. And then I'm going to go ahead and do this. I want to go ahead and, as a sanity check, just say, hello, percent s, semi-colon, makes string 0. Uh oh, what did I do here? Oh, I didn't plug it in. So lesson learned, that was not intentional. 
+
+So error, more percent conversions than data arguments. And this is where, in line 7-- OK, so I have, quote unquote, that's my string to printf. I've got a percent sign. But I'm missing the second argument. 
+
+I'm missing the comma s, which I did have in previous examples. So a good opportunity to fix one more mistake, accidentally. And now let me run string0, type in Zamyla. OK, hello Zamyla. 
+
+So we've run this kind of program a few different times now. But let's do something a little different this time. Instead of just printing Zamyla's whole name out with printf, let's do it character by character. 
+
+I'm going to use a for loop. And I'm going to give myself a counting variable, called i. And I'm going to keep iterating, so long as i is less than the length of s. 
+
+It turns out, we didn't do this last time, that c comes with a function called Stirling. Back in the day, and in general still when implementing functions, humans will often choose very succinct names that kind of sound like what you want, even though it's missing a few vowels or letters. So Stirling is the name of a function that takes an argument between parentheses that should be a string. And it just returns an integer, the length of that string. 
+
+So this for loop on line 7 is going to start counting at i equals 0. It's going to increment i on each iteration by 1, as we've been doing a few times. But it's going to only do this up until the point when i is the length of the string itself. 
+
+So this is a way of, ultimately, iterating over the characters in the string as is follows. I'm going to print out not a whole string, but percent c, a single character followed by a new line. And then I'm going to go ahead, and I need to say I want to print ith character of s. 
+
+So if i is the variable that indicates the index of the string, where you are in it, I need to be able to say, give me the ith character of s. And c has a way of doing this with square brackets. You simply say the name of the string, which in this case is s. Then you use square brackets, which are usually just above your Return or Enter key on the keyboard. And then you put the index of the character that you want to print. So the index is going to be a number-- 0, or 1, or 2, or 3, or dot, dot, dot, some other number. 
+
+And we ensure that it's going to be the right number, because I start counting at 0. And by default, the first character in a string is by convention 0. And the second character is bracket 1. And the third character is bracket 2. And you don't want to go too far, but we won't because we're going to only increment i until it equals the length of the string. And at which point, this for loop will stop. 
+
+So let me go ahead and save this program, and run make string 0. But I screwed up. Implicitly declaring library function Stirling with type such and such-- now, this sounds familiar. But it's not printf. And it's not get string. 
+
+I didn't screw up in the same way this time. But notice down here a little down further, include the header string.h, explicitly provide the declaration for Stirling. So there is actually a clue in there. 
+
+And indeed it turns out there's another header file that we've not used in class yet, but it's among those available to you, called string.h. And in that file, string.h is Stirling declared. So let me go ahead and save this, make string 0-- nice, no error messages this time. 
+
+./string0 Zamyla, and I'm about to hit Enter, at which point getstring is going to return the string, put it in s. Then that for loop is going to iterate over S's characters one at a time, and print them one per line, because I had that backslash n at the end. So I could omit that backslash n, and then just print Zamyla all in the same line, effectively reimplementing printf, which isn't all that useful. But in this case, I've not done that. I've actually printed one character at a time, one per line, so that we actually see the effect. 
+
+But I should note one thing here. And we'll come back to this in a future week. It turns out that this code is potentially buggy. 
+
+It turns out that get string and some other functions in life don't necessarily always return what you're expecting. We know from class last time in this that get string is supposed to return a string. But what if the user types out such a long word, or paragraph, or essay that there's just not enough memory in the computer to fit it. 
+
+Like, what if something goes wrong underneath the hood? It might not happen often, but it could happen once in a while, very infrequently. And so it turns out that get string and functions like it don't necessarily always return strings. They might return some error value, some sentinel value so to speak, that indicates that something has gone wrong. And you would only know this from having learned it in class now, or having read some more documentation. It turns out that get string can return a value called null. Null is a special value that we'll come back to in a future week. But for now, just know that if I want to be really proper in moving forward using get string, I shouldn't just call it, and blindly use its return value, trusting that it's a string. 
+
+I should first say, hey, wait a minute, only proceed if s does not equal null, where null, again, is just some special value. And it's the only special value you need to worry about for get string. Get string is either going to return a string or null. 
+
+And this exclamation point equals sign you might know from maybe math class that you might draw an equal sign with a line through it to indicate not equal. That's not generally a character you can type on your keyboard. And so in most programming languages, when you want to say not equal, you use an exclamation point, otherwise known as bang. So you say bang equals, which means not equals, logically. It's just like there's not a greater than, or equal to, or less than or equal to key on your keyboard that does it all in one symbol. So that's why, in past examples, you did an open bracket, and then an equal sign, in order to do greater than or, say, less than. 
+
+So what's the takeaway here? This is simply a way now of introducing this syntax, this feature, iterating over individual characters in a string. And just like those square brackets allow you to get at them, consider those square brackets as kind of hinting at this underlying design, whereby every character inside of a string is kind of boxed in somewhere underneath the hood in your computer's memory. 
+
+But let's make a variant of this. It turns out that this program is correct. So per CS50's axes for evaluating code, this is correct now. Especially now that I'm checking for null, this program should never crash. And I just know that from experience. But there's nothing else that we can really go wrong here. But it's not very well-designed, because let's go back to basics. 
+
+First, principles-- what does a for loop do? A for loop does three things. It initializes some value, if you ask it to. It checks a condition. And then after each iteration, after each cycle, it increments some value, or values, here. 
+
+So what does that mean? We initialize i to 0. We check and make sure i is less than the length of s, which is Z-A-M-Y-L-A, so which is less than 6. And, indeed, 0 as less than 6. 
+
+We print out Z from Zamyla's name. Then we increment i from 0 to 1. We then check, is 1 less than the length of s? The length of s is 6. Yes, it is. 
+
+So we print a in Zamyla's name, ZA. We increment i from 0, to 1, to 2. We then check, is 2 less than the length of Zamyla's name. 6- so 2 is less than 6. Yes, let's print out now M in Zamyla's name, the third character. 
+
+The key here is that on each iteration of the story, I'm checking, is i less than the length of Zamyla? But the catch is that Stirling is not a property. Those of you who have programmed before in Java or other languages might know the length of a string is a property, just some read only value. 
+
+In C in this case, if this is a function that is literally counting the number of characters in Zamyla every time we call that function. Every time you ask the computer to use Stirling, it's taking a look at Zamyla, and saying Z-A-M-Y-L-A, 6. And it returns 6. The next time you call it inside that for loop, it's going to look at Zamyla again, say Z-A-M-Y-L-A, 6. And it's going to return 6. So what's stupid about this design? 
+
+Why is my code not a 5 out of 5 for design right now, so to speak? Well, I'm asking a question unnecessarily. I'm doing more work than I need to. 
+
+So even though the answer is correct, I am asking the computer, what is the length of Zamyla again, and again, and again, and again? And that answer is never going to change. It's always going to be 6. 
+
+So a better solution than this would be this next version. Let me go ahead and put it in a separate file called string1.c, just to keep it separate. And it turns out in a for loop, you can actually declare multiple variables at once. 
+
+So I'm going to keep i and set it to 0. But I'm also going to add a comma, and say, give me a variable called n, whose value equals the string length of s. And now, please make my condition so long as i is less than n. 
+
+So in this way, the logic is identical at the end of the day. But I am remembering the value 6, in this case. What is the length of Zamyla's name? And I'm putting it at n. 
+
+And I'm still checking the condition every time. Is 0 less than 6? Is 1 less than 6? Is 2 less than 6, and so forth? 
+
+But I'm not asking the computer again, and again, what's the length of Zamyla's name? What's the length of Zamyla's name? What's the length of this Zamyla's name? I'm literally remembering that first and only answer in this second variable n. So this now would be not only correct, but also well-designed. 
+
+Now, what about style? I've named my variables pretty well, I would say. They're super succinct right now. And that's totally fine. 
+
+If you only have one string in a program, you might as well call it s for string. If you only have one variable for counting in a program, you might as well call it i. If you have a length, n is super common as well. But I haven't commented any of my code. 
+
+I've not informed the reader-- whether that's my TF, or TA, or just colleague-- what is supposed to be going on in this program. And so to get good style, what I would want to do is this-- something like ask user for input. And I could rewrite this any number of ways. 
+
+Make sure s-- make sure get string returned a string. And then in here-- and this is perhaps the most important comment-- iterate over the characters in s one at a time. And I could use any choice of English language here to describe each of these chunks of code. 
+
+Notice that I haven't put a comment on every line of code, really just on the interesting ones, the ones that have some meaning that I might want to make super clear to someone reading my code. And why are you calling get string ask user for input? Even that one is not necessarily all that descriptive. But it helps tell a story, because the second line in the story is, make sure get string returned a string. 
+
+And the third line in the story is, iterate over the characters in s one at a time. And now just for good measure, I'm going to go ahead and add one more comment that just says print i-th character in s. Now, what have I done at the end of the day? 
+
+I have added some English words in the form of comments. The slash slash symbol means, hey, computer this is for the human, not for you, the computer. So they're ignored logically. They're just there. 
+
+And, indeed, CS50 IDE shows them as gray, as being useful, but not key to the program. Notice what you can now do. Whether you know C programming or not, you can just stand back at this program, and skim the comments. Ask user for input, make sure get string returned a string, iterate over the characters in s one at a time, print the character i-th character in s-- you don't even have to look at the code to understand what this program does. And, better yet, if you yourself look at this program in a week or two, or a month, or a year, you too don't have to stare at the code, trying to remember, what was I trying to do with this code? 
+
+You've told yourself. You've described it for yourself, or some colleague, or TA, or TF. And so this would now be correct, and good design, and ultimately good style as well. So do keep that in mind. 
+
+So there's one other thing I'm going to do here that can now reveal exactly what's going on underneath the hood. So there's this feature in C, and other languages, called typecasting that either implicitly or explicitly allows you to convert from one data type to another. We've been dealing so far today with strings. 
+
+And strings are characters. But recall from week 0, what are characters? Characters are just an abstraction on top of numbers-- decimal numbers, and decimal numbers are really just an abstraction on top of binary numbers, as we defined it. 
+
+So characters are numbers. And numbers are characters, just depending on the context. And it turns out that inside of a computer program, can you specify how you want to look at the bits inside of that program? 
+
+Recall from week 0 that we had Ascii, which is just this code mapping letters to numbers. And we said, capital A is 65. Capital B is 66, and so forth. 
+
+And notice, we essentially have chars on the top row here, as C would call them, characters, and then ints on the second row. And it turns out you can convert seamlessly between the two, typically. And if we want to do this deliberately, we might want to tackle something like this. 
+
+We might want to convert upper case to lower case, or lower case to upper case. And it turns out there's actually a pattern here we can embrace in just a moment. But let's look first at an example of doing this explicitly. 
+
+I'm going to go back into CS50 IDE. I'm going to create a file called Ascii 0.c. And I'm going to go ahead and add my standard io.h at the top, int main void at the top of my function. And then I'm just going to do the following-- a for loop from i equals, let's say, 65. 
+
+And then i is going to be less than 65, plus 26 letters in the alphabet. So I'll let the computer do the math for me there. And then inside this loop, what am I going to print? 
+
+%c is % i backslash n. And now I want to plug in two values. I've temporarily put question marks there to invite the question. 
+
+I want to iterate from 65 onward for 26 letters of the alphabet, printing out on each iteration that character's integral equivalent. In other words, I want to iterate over 26 numbers printing what the Ascii character is, the letter, and what the corresponding number is-- really just recreating the chart from that slide. So what should these question marks be? 
+
+Well, it turns out that the second one should just be the variable i. I want to see that as a number. And the middle argument here, I can tell the computer to treat that integer i as a character, so as to substitute it here for percent C. 
+
+In other words, if I, the human programmer, know these are just numbers at the end of the day. And I know that 65 should map to some character. With this explicit cast, with a parenthesis, the name of the data type you want to convert to, and a closed parenthesis, you can tell the computer, hey, computer, convert this integer to a char. 
+
+So when I run this program after compiling, let's see what I get-- make Ascii 0. Darn it, what did I do wrong here? Use of undeclared identifier, all right, not intentional, but let's see if we can't reason through this. 
+
+So line five-- so I didn't get very far before screwing up. That's OK. So line 5 for i equals 65-- I see. So remember that in C, unlike some languages if you have prior programming experience, you have to tell the computer, unlike Scratch, what type of variable it is. 
+
+And I forgot a key phrase here. In line five, I've started using i. But I haven't told C what data type it is. So I'm going to go in here and say, ah, make it an integer. 
+
+Now I'm going to go ahead and recompile. That fixed that. ./ascii0 Enter, that's kind of cool. Not only is it super fast to ask the computer this question, rather than looking it up on a slide, it printed out one per line, A is 65, B is 66, all the way down-- since I did this 26 times-- to the letters z, which is 90. And, in fact, slightly more intelligent would have been for me not to rely on the computer to add 26. I could have just done 90 as well, so long as I don't make the same mistake twice. I want to go up through z, not just up through y. 
+
+So that's an explicit cast. It turns out that this isn't even necessary. Let me go ahead and rerun this compiler, and rerun Ascii 0. It turns out that C is pretty smart. 
+
+And printf, in particular, is pretty smart. If you just pass an i twice for both placeholders, printf will realize, oh, well I know you gave me an integer-- some number, like 65, or 90, or whatever. But I see that you want me to format that number like a character. And so printf can implicitly cast the int to a char for you as well. So that's not a problem at all. 
+
+But notice, because of this equivalence we can actually do this as well. Let me go ahead and make one other version of this-- Ascii 1.c. And instead of iterating over integers, can really blow your mind by iterating over characters. If a char c gets capital A, I want to go ahead and do this, so long as C is less than or equal to capital Z. And on each iteration I want to increment C, I can now in my printf line here say, percent C is percent i again, comma C. 
+
+And now, I can go the other direction, casting the character explicitly to an integer. So, again, why would you do this? It's a little weird to sort of count in terms of characters. 
+
+But if you understand what's going on underneath the hood, there's really no magic. You're just saying, hey, computer give me a variable called C of type char. Initialize it to capital A. And notice single quotes matter. 
+
+For characters in C, recall from last week, you use single quotes. For strings, for words, phrases, you use double quotes. OK, computer, keep doing this, so long as the character is less than or equal to z. And I know from my Ascii table that all of these Ascii codes are contiguous. 
+
+There's no gaps. So it's just A through Z, separated by one number each. And then I can increment a char, if I really want. At the end of the day, it's just a number. I know this. So I can just presume to add 1 to it. 
+
+And then this time, I print c, and then the integral equivalent. And I don't even need the explicit cast. I can let printf and the computer figure things out, so that now if I run make Ascii1./ascii1, I get the exact same thing as well. 
+
+Useless program, though-- no one is going to actually write software in order to figure out, what was the number that maps to A, or B, or Z? You're just going to Google it, or look it up online, or look it up on a slide, or the like. So where does this actually get useful? 
+
+Well, speaking of that slide, notice there's an actual pattern here between uppercase and lowercase that was not accidental. Notice that capital A is 65. Lowercase a is 97. And how far away is lower case a? 
+
+So 65 is how many steps away from 97? So 97 minus 65 is 32. So capital a is 65. If you add 32 to that, you get lowercase a. And, equivalently, if you subtract 32, you get back to capital A-- same with B to little b, big C to little c. 
+
+All of these gaps are 32 apart. Now, this would seem to allow us to do something like Microsoft Word, or Google Docs feature, where you can select everything and then say, change all to lowercase, or change all to upper case, or change only the first word of a sentence to upper case. We can actually do something like that ourselves. 
+
+Let me go ahead and save a file here called capitalize 0.c. And let's go ahead and whip up a program that does exactly that as follows. So include the CS50 library. And include standard I/O. 
+
+And I know this is coming soon. So I'm going to put it in there already, string.h, so I have access to things like Stirling, and then int main void, as usual. And then I'm going to go ahead and do strings gets get string, just to get a string from the user. And then I'm going to do my sanity check. If string does not equal null, then it's safe to proceed. And what do I want to do? I'm going to iterate from i equals 0, and n up to the string length of s. 
+
+And I'm going to do this so long as i is less than n, and i plus plus. So far, I'm really just borrowing ideas from before. And now I'm going to introduce a branch. 
+
+So think back to Scratch, where we had those forks in the road, and last week in C. I'm going to say this, if the i-th character in s is greater than or equal to lower case a, and-- in Scratch you would literally say and, but in C you say ampersand, ampersand-- and the i-th character in s is less than or equal to lower case z, let's do something interesting. Let's actually print out a character with no newline that is the character in the string, the i-th character in the string. 
+
+But let's go ahead and subtract 32 from it. Else if the character in the string that we're looking is not between little a and little z, go ahead and just printed it out unchanged. So we've introduced this bracketed notation for our strings to get at the i-th character in the string. 
+
+I've added some conditional logic, like Scratch in last week's week one, where I'm just using my fundamental understanding of what's going on underneath the hood. Is the i-th character of s greater than or equal to a? Like, is it 97, or 98, or 99, and so forth? 
+
+But is it also less than or equal to the value of lowercase z? And if so, what does this line mean? 14, this is sort of the germ of the whole idea, capitalize the letter by simply subtracting 32 from it, in this case, because I know, per that chart, how my numbers are represented. So let's go ahead and run this, after compiling capitalize 0.c, and run capitalize 0. 
+
+Let's type in something like Zamyla in all lowercase enter. And now we have Zamyla in all uppercase. Let's type in Rob in all lowercase. Let's try Jason in all lowercase. And we keep getting the forced capitalization. There's a minor bug that I kind of didn't anticipate. Notice my new prompt is ending up on the same line as their names, which feels a little messy. 
+
+So I'm going to go here, and actually at the end of this program print out a newline character. That's all. With printf, you don't need to pass in variables or format code. You can literally just print something like a newline. 
+
+So let's go ahead and make capitalize 0 again, rerun it, Zamyla. And now it's a little prettier. Now, my prompt is on its own new line. So that's all fine and good. So that's a good example. But I don't even necessarily need to hard code the 32. You know what? I could say-- I don't ever remember what the difference is. 
+
+But I know that if I have a lower case letter, I essentially want to subtract off whatever the distance is between little a and big A, because if I assume that all of the other letters are the same, that should get the job done. But rather than do that, you know what? There's another way still. 
+
+If that's capitalize 1.c-- if I were to put that into a separate file. let's do capitalize 2.c as follows. I'm going to really clean this up here. And instead of even having to know or care about those low level implementation details, I'm instead just going to print a character, quote unquote, percent C, and then call another function that exists that takes an argument, which is a character, like this. 
+
+It turns out in C, there's another function call to upper, which as its name suggests takes a character and makes it to its upper case equivalent, and then returns it so that printf can plug it in there. And so to do this, though, I need to introduce one other file. It turns out there's another file that you would only know from class, or a textbook, or an online reference, called C type.h. 
+
+So if I add that up among my header files, and now re-compile this program, capitalize2, ./capitalize2 Enter. Let's type in Zamyla in all lowercase, still works the same. But you know what? It turns out that to upper has some other functionality. 
+
+And let me introduce this command here, sort of awkwardly named, but man for manual. It turns out that most Linux computers, as we are using here-- Linux operating system-- have a command called man, which says, hey, computer, give me the computer's manual. What do you want to look up in that manual? 
+
+I want to look up the function called to upper, Enter. And it's a little cryptic to read sometimes. But notice we're in the Linux programmer's manual. And it's all text. And notice that there's the name of the function up here. It turns out it has a cousin called to lower, which does the opposite. And notice under synopsis, to use this function the man page, so to speak, is telling me that I need to include c type.h. And I knew that from practice. 
+
+Here, it's showing me the two prototypes for the function, so that if I ever want to use this I know what they take as input, and what they return as output. And then if I read the description, I see in more detail what the function does. But more importantly, if I look under return value, it says the value returned is that of the converted letter, or C, the original input, if the conversion was not possible. 
+
+In other words, to upper will try to convert a letter to upper case. And if so, it's going to return it. But if it can't for some reason-- maybe it's already upper case, maybe it's an exclamation point or some other punctuation-- it's just going to return the original C, which means I can make my code better designed as follows. 
+
+I don't need all of these darn lines of code. All of the lines I've just highlighted can be collapsed into just one simple line, which is this-- printf percent c to upper S bracket i. And this would be an example of better design. 
+
+Why implement in 7 or 8 lines of code, whatever it was I just deleted, when you can instead collapse all of that logic and decision making into one single line, 13 now, that relies on a library function-- a function that comes with C, but that does exactly what you want it to do. And, frankly, even if it didn't come with C, you could implement it yourself, as we've seen, with get negative int and get positive int last week as well. 
+
+This code now is much more readable. And, indeed, if we scroll up, look how much more compact this version of my program is. It's a little top heavy now, with all these includes. But that's OK, because now I'm standing on the shoulders of programmers before me. And whoever it was who implemented to upper really did me a favor, much like whoever implemented Stirling really did me a favor some time ago. And so now we have a better design program that implements the exact same logic. 
+
+Speaking of stirling, let me go ahead and do this. Let me go ahead and save this file as stirling.c. And it turns out, we can peel back one other layer pretty simply now. I'm going to go ahead and whip up another program in main here that simply re-implements string length as follows. So here's a line of code that gets me a string from the user. We keep using this again and again. Let me give myself a variable called n of type int that stores a number. 
+
+And let me go ahead and do the following logic. While the n-th character in s does not equal backslash 0, go ahead and increment n. And then print out printf percent i n. I claim that this program here, without calling string length, figures out the length of a string. 
+
+And the magic is entirely encapsulated in line 8 here with what looks like new syntax, this backslash 0 in single quotes. But why is that? Well, consider what's been going on all this time. 
+
+And as an aside before I forget, realize too, that in addition to the man pages that come with a typical Linux system like CS50 IDE, realize that we, the course's staff, have also made a website version of this same idea called reference.cs50.net, which has all of those same man pages, all of that same documentation, as well as a little box at the top that allows you to convert all of the fairly arcane language into less comfortable mode, where we, the teaching staff, have gone through and tried to simplify some of the language to keep things focused on the ideas, and not some of the technicalities. So keep in mind, reference.cs50.net as another resource as well. 
+
+But why does string length work in the way I proposed a moment ago? Here's Zamyla's name again. And here's Zamyla's name boxed in, as I keep doing, to paint a picture of it being, really, just a sequence of characters. But Zamyla does not exist in isolation in a program. 
+
+When you write and run a program, you're using your Mac or your PC as memory, or RAM so to speak. And you can think of your computer as having lots of gigabytes of memory these days. And a gig means billions, so billions of bytes. 
+
+But let's rewind in time. And suppose that we're using a really old computer that only has 32 bytes of memory. I could, on my computer screen, simply draw this out as follows. 
+
+I could simply say that my computer has all of this memory. And this is like a stick of memory, if you recall our picture from last time. And if I just divide this in enough times, I claim that I have 32 bytes of memory on the screen. 
+
+Now, in reality, I can only draw so far on this screen here. So I'm going to go ahead, and just by convention, draw my computer's memory as a grid, not just as one straight line. Specifically, I claim now that this grid, this 8 by 4 grid, just represents all 32 bytes of memory available in my Mac, or available in my PC. And they're wrapping on to two lines, just because it fits more on the screen. But this is the first byte. This is the second byte. This is the third byte. 
+
+And this is the 32nd byte. Or, if we think like a computer scientist, this is byte 0, 1, 2, 3, 31. So you have 0 to 31, if you start counting at 0. 
+
+So if we use a program that calls get string, and we get a string from the human like I did called Zamyla, Z-A-M-Y-L-A, how in the world does the computer keep track of which byte, which chunk of memory, belongs to which string? In other words, if we proceed to type another name into the computer, like this Andi, calling get string a second time, A-N-D-I has to end up in the computer's memory as well. But how? 
+
+Well, it turns out that underneath the hood, what C does when storing strings that the human types in, or that come from some other source, is it delineates the end of them with a special character-- backslash 0, which is just a special way of saying 80 bits in a row. 
+
+So A-- this is the number 97 recall. So some pattern of 8 bits represents decimal number 97. This backslash 0 is literally the number 0, a.k.a. nul, N-U-L, unlike earlier, N-U-L-L, which we talked about. But for now, just know that this backslash 0 is just 80 bits in a row. 
+
+And it's just this line in the sand that says anything to the left belongs to one string, or one data type. And anything to the right belongs to something else. Andi's name, meanwhile, which just visually happens to wrap on to the other line, but that's just an aesthetic detail, similarly is nul terminated. 
+
+It is a string of a A-N-D-I characters, plus a fifth secret character, all 0 bits, that just demarcates the end of Andi's name as well. And if we call get string a third time in the computer to get a string like Maria, M-A-R-I-A, similarly is Maria's name nul terminated with backslash 0. 
+
+This is fundamentally different from how a computer would typically store an integer, or a float, or other data types still, because recall, an integer is usually 32 bits, or 4 bytes, or maybe even 64 bits, or eight bytes. But many primitives in a computer in a programming language have a fixed number of bytes underneath the hood-- maybe 1, maybe 2, maybe 4, maybe 8. 
+
+But strings, by design, have a dynamic number of characters. You don't know in advance, until the human types in Z-A-M-Y-L-A, or M-A-R-I-A, or A-N-D-I. You don't know how many times the user is going to hit the keyboard. Therefore, you don't know how many characters in advance you're going to need. 
+
+And so C just kind of leaves like a secret breadcrumb underneath the hood at the end of the string. After storing Z-A-M-Y-L-A in memory, it also just puts the equivalent of a period. At the end of a sentence, it puts 80 bits, so as to remember where Zamyla begins and ends. 
+
+So what's the connection, then, to this program? This program here, Stirling, is simply a mechanism for getting a string from the user, line 6. Line 7, I declare a variable called n and set it equal to 0. 
+
+And then in line 8, I simply asked the question, while the n-th character does not equal all 0 bits-- in other words, does not equal this special character, backslash 0, which was just that special nul character-- go ahead and just increment n. 
+
+And keep doing it, and keep doing it, and keep doing it. And so even though in the past we've used i, it's perfectly fine semantically to use n, if you're just trying to count this time deliberately, and just want to call it n. So this just keeps asking the question, is the n-th character of s all 0s? If not, look to the next look, look to the next, look to the next, look to the next. 
+
+But as soon as you see backslash 0, this loop-- line 9 through 11-- stops. You break out of the while loop, leaving inside of that variable n a total count of all of the characters in the string you saw, thereby printing it out. So let's try this. 
+
+Let me go ahead and, without using the stirling function, but just using my own homegrown version here called stirling, let me go ahead and run stirling, type in something like Zamyla, which I know in advance is six characters. Let's see if it works. Indeed, it's six. Let's try with Rob, three characters, three characters as well, and so forth. So that's all that's going on underneath the hood. And notice the connections, then, with the first week of class, where we talked about something like abstraction, which is just this layering of ideas, or complexity, on top of basic principles. Here, we're sort of looking underneath the hood of stirling, so to speak, to figure out, how would it be implemented? 
+
+And we could re-implement it ourselves. But we're never again going to re-implement stirling. We're just going to use stirling in order to actually get some strings length. 
+
+But there's no magic underneath the hood. If you know that underneath the hood, a string is just a sequence of characters. And that sequence of characters all can be numerically addressed with bracket 0, bracket 1, bracket 2, and you know that at the end of a string is a special character, you can figure out how to do most anything in a program, because all it boils down to is reading and writing memory. That is, changing and looking at memory, or moving things around in memory, printing things on the screen, and so forth. 
+
+So let's now use this newfound understanding of what strings actually are underneath the hood, and peel back one other layer that up until now we've been ignoring altogether. In particular, any time we've implemented a program, we've had this line of code near the top declaring main. And we've specified int main void. 
+
+And that void inside the parentheses has been saying all this time that main itself does not take any arguments. Any input that main is going to get from the user has to come from some other mechanism, like get int, or get float, or get string, or some other function. But it turns out that when you write a program, you can actually specify that this program shall take inputs from the human at the command line itself. 
+
+In other words, even though we thus far have been running just ./hello hello or similar programs, all of the other programs that we've been using, that we ourselves didn't write, have been taking, it seems, command line arguments-- things like make. You say something like make, and then a second word. Or clang, you say clang, and then a second word, the name of a file. 
+
+Or even RM or CP, as you might have seen or used already to remove or copy files. All of those take so-called command line arguments-- additional words at the terminal prompt. But up until now, we ourselves have not had this luxury of taking input from the user when he or she actually runs the program itself at the command line. 
+
+But we can do that by re-declaring main moving forward, not as having void in parentheses, but these two arguments instead-- the first an integer, and the second something new, something that we're going to call an array, something similar in spirit to what we saw in Scratch as a list, but an array of strings, as we'll soon see. But let's see this by way of example, before we distinguish exactly what that means. 
+
+So if I go into CS50 IDE here, I've gone ahead and declared in a file called argv0.c the following template. And notice the only thing that's different so far is that I've changed void to int argc string argv open bracket, close bracket. And notice for now, there's nothing inside of those brackets. 
+
+There's no number. And there's no i, or n, or any other letter. I'm just using the square brackets for now, for reasons we'll come back to in just a moment. 
+
+And now what I'm going to do is this. If argc equals equals 2-- and recall that equals equals is the equality operator comparing the left and right for equality. It's not the assignment operator, which is the single equal sign, which means copy from the right to the left some value. 
+
+If argc equals equals 2, I want to say, printf, hello, percents, new line, and then plug in-- and here's the new trick-- argv bracket 1, for reasons that we'll come back to in a moment. Else if argc does not equal 2, you know what? Let's just go ahead and, as usual, print out hello world with no substitution. 
+
+So it would seem that if argc, which stands for argument count, equals 2, I'm going to print out hello something or other. Otherwise, by default, I'm going to print hello world. So what does this mean? 
+
+Well, let me go ahead and save this file, and then do make argv0, and then ./argv0, Enter. And it says hello world. Now, why is that? 
+
+Well, it turns out anytime you run a program at the command line, you are filling in what we'll generally call an argument vector. In other words, automatically the computer, the operating system, is going to hand to your program itself a list of all of the words that the human typed at the prompt, in case you the programmer want to do something with that information. And in this case, the only word I've typed at the prompt is ./argv0. 
+
+And so the number of arguments that is being passed to my program is just one. In other words, the argument count, otherwise known as argc here as an integer, is just one. One, of course, does not equal two. And so this is what prints, hello world. 
+
+But let me take this somewhere. Let me say, argv0. And then how about Maria? And then hit Enter. 
+
+And notice what magically happens here. Now, instead of hello world, I have changed the behavior of this program by taking the input not from get string or some other function, but from, apparently, my command itself, what I originally typed in. And I can play this game again by changing it to Stelios, for instance. 
+
+And now I see another name still. And here, I might say Andi. And I might say Zamyla. And we can play this game all day long, just plugging in different values, so long as I provide exactly two words at the prompt, such that argc, my argument count, is 2. 
+
+Do I see that name plugged into printf, per this condition here? So we seem to have now the expressive capability of taking input from another mechanism, from the so-called command line, rather than having to wait until the user runs the program, and then prompt him or her using something like get string. 
+
+So what is this? Argc, again, is just an integer, the number of words-- arguments-- that the user provided at the prompt, at the terminal window, including the program's name. So our ./argv0 is, effectively, the program's name, or how I run the program. 
+
+That counts as a word. So argc would be 1. But when I write Stelios, or Andi, or Zamyla, or Maria, that means the argument count is two. And so now there's two words passed in. 
+
+And notice, we can continue this logic. If I actually say something like Zamyla Chan, a full name, thereby passing three arguments in total, now it says the default again, because, of course, 3 does not equal 2. 
+
+And so in this way, do I have access via argv this new argument that we could technically call anything we want. But by convention, it's argv and argc, respectively. Argv, argument vector, is kind of a synonym for a programming feature in C called an array. 
+
+An array is a list of similar values back, to back, to back, to back. In other words, if one is right here in RAM, the next one is right next to it, and right next to it. They're not all over the place. And that latter scenario, where things are all over the place in memory, can actually be a powerful feature. But we'll come back to that when we talk about fancier data structures. For now, an array is just a chunk of contiguous memory, each of whose elements are back, to back, to back, to back, and generally the same type. 
+
+So if you think about, from a moment ago, what is a string? Well, a string, like Zamyla, Z-A-M-Y-L-A, is, technically, just an array. It's an array of characters. 
+
+And so if we really draw this, as I did earlier, as a chunk of memory, it turns out that each of these characters takes up a byte. And then there's that special sentinel character, the backslash 0, or all eight 0 bits, that demarcates the end of that string. So a string, it turns out, quote unquote string, is just an array of chara-- char being an actual data type. 
+
+And now argv, meanwhile-- let's go back to the program. Argv, even though we see the word string here, is not a string itself. Argv, argument vector, is an array of strings. 
+
+So just as you can have an array of characters, you can have higher level, an array of strings-- so, for instance, when I typed a moment ago ./argv0 argv0, space Z-A-M-Y-L-A, I claimed that argv had two strings in it-- ./argv0, and Z-A-M-Y-L-A. In other words, argc was 2. Why is that? 
+
+Well, effectively, what's going on is that each of these strings is, of course, an array of characters as before, each of whose characters takes up one byte. And don't confuse the actual 0 in the program's name with the 0, which means all 80 bits. And Zamyla, meanwhile, is still also an array of characters. 
+
+So at the end of the day, it really looks like this underneath the hood. But argv, by nature of how main works, allows me to wrap all of this up into, if you will, a bigger array that, if we slightly over simplify what the picture looks like and don't quite draw it to scale up there, this array is only of size 2, the first element of which contains a string, the second element of which contains a string. And, in turn, if you kind of zoom in on each of those strings, what you see underneath the hood is that each string is just an array of characters. 
+
+Now, just as with strings, we were able to get access to the i-th character in a string using that square bracket notation. Similarly, with arrays in general, can we use square bracket notation to get at any number of strings in an array? For instance, let me go ahead and do this. 
+
+Let me go ahead and create argv1.c, which is a little different this time. Instead of checking for argc2, I'm going to instead do this. For int I get 0, I is less than argc, I plus plus, and then print out inside of this, percent s, new line, and then argv bracket i. 
+
+So in other words, I'm not dealing with individual characters at the moment. Argv, as implied by these empty square braces to the right of the name argv, means argv is an array of strings. And argc is just an int. 
+
+This line here, 6, is saying set i equal to 0. Count all the way up to, but not including, argc. And then on each iteration, print out a string. What string? 
+
+The i-th string in argv. So whereas before I was using the square bracket notation to get at the ith character in a string, now I'm using the square bracket notation to get at the ith string in an array. So it's kind of one layer above, conceptually. 
+
+And so what's neat about this program now, if I compile argv1, and then do ./argv1, and then type in something like foo bar baz, which are the three default words that a computer scientist reaches for any time he or she needs some placeholder words, and hit Enter, each of those words, including the program's name, which is in argv at the first location, ends up being printed one at a time. And if I change this, and I say something like argv1 Zamyla Chan, we get all three of those words, which is argv0, argv1, argv2, because in this case argc, the count, is 3. 
+
+But what's neat is if you understand that argv is just an array of strings, and you understand that a string is an array of characters, we can actually kind of use this square bracket notation multiple times to choose a string, and then choose a character within the string, diving in deeper as follows. In this example, let me go ahead and call this argv2.c. And in this example, let me go ahead and do the following-- for int i get 0, i is less than argc, i plus plus, just like before. So in other words-- and now this is getting complicated enough. Then I'm going to say iterate over strings in argv, as a comment to myself. And then I'm going to have a nested for loop, which you probably have done, or considered doing, in Scratch, where I'm going to say int-- I'm not going to use i again, because I don't want to shadow, or sort of overwrite the existing i. 
+
+I'm going to, instead, say j, because that's my go to variable after i, when I'm just trying to count simple numbers. For j gets 0-- and also, n, is going to get the stern length of argv bracket i, so long as j is less than m, j plus plus, do the following. And here's the interesting part. 
+
+Print out a character and a new line, plugging in argv bracket i, bracket j. OK, so let me add some comments here. Iterate over characters in current string, print j-th character in i-th string. So now, let's consider what these comments mean. 
+
+Iterate over the strings in argv-- how many strings are in argv, which is an array? Argc many, so I'm iterating from i equal 0 up to argc. Meanwhile, how many characters are in the i-th string in argv? 
+
+Well, to get that answer, I just call string length on the current string I care about, which is argv bracket i. And I'm going to temporarily store that value in n, just for caching purposes, to remember it for efficiency. And then I'm going initialize j to 0, keep going so long as j is less than n, and on each iteration increment j. 
+
+And then in here, per my comment on line 12, print out a character, followed by a new line, specifically argv bracket i gives me the i-th string in argv-- so the first word, the second word, the third word, whatever. And then j dives in deeper, and gets me the j-th character of that word. And so, in effect, you can treat argv as a multi-dimensional, as a two-dimensional, array, whereby every word kind of looks like this in your mind's eye, and every character is kind of composed in a column, if that helps. 
+
+In reality, when we tease this apart in future weeks, it's going to be a little more sophisticated than that. But you can really think of that, for now, as just this two-dimensional array, whereby one level of it is all of the strings. And then if you dive in deeper, you can get at the individual characters therein by using this notation here. 
+
+So what is the net effect? Let me go ahead and make argv2-- darn it. I made a mistake here. Implicitly declaring the library function stirling. So all this time, it's perhaps appropriate that we're sort of finishing exactly where we started. 
+
+I screwed up, implicitly declaring library function stirling. OK, wait a minute. I remember that, especially since it's right here. I need to include string.h in this version of the program. 
+
+Let me go ahead and include string.h, save that, go ahead and recompile argv2. And now, here we go, make argv2, Enter. And though it's a little cryptic at first glance, notice that, indeed, what is printed is dot argv2. 
+
+But if I type some words after the prompt, like argv2 Zamyla Chan, Enter, also a little cryptic at first glance. But if we scroll back up, ./argv2 Z-A-M-Y-L-A C-H-A-N. So we've iterated over every word. And, in turn, we've iterated over every character within a word. 
+
+Now, after all of this, realize that there's one other detail we've been kind of ignoring this whole time. We just teased apart what main's inputs can be? What about main's output? 
+
+All of this time, we've been just copying and pasting the word int in front of main, though you may see online, sometimes incorrectly in older versions of C and compilers, that they say void, or nothing at all. But, indeed, for the version of C that we're using, C 11, or 2011, realize that it should be int. And it should either be void or argc and argv here. 
+
+But why int main? What is it actually returning? Well, it turns out all of this time, any time you've written a program main is always returning something. But it's been doing so secretly. 
+
+That something is an int, as line 5 suggests. But what int? Well, there's this convention in programming, whereby if nothing has gone wrong and all is well, programs and functions generally return-- somewhat counterintuitively-- 0. 0 generally signifies all is well. So even though you think of it as false in many contexts, it actually generally means a good thing 
+
+Meanwhile, if a program returns 1, or negative 1, or 5, or negative 42, or any non-0 value, that generally signifies that something has gone wrong. In fact, on your own Mac or PC, you might have actually seen an error message, whereby it says something or other, error code negative 42, or error code 23, or something like that. That number is generally just a hint to the programmer, or the company that made the software, what went wrong and why, so that they can look through their documentation or code, and figure out what the error actually means. It's generally not useful to us end users. 
+
+But when main returns 0, all is well. And if you don't specify what main should return, it will just automatically return 0 for you. But returning something else is actually useful. 
+
+In this final program, let me go ahead and call this exit.c, and introduce the last of today's topics, known as an error code. Let me go ahead and include our familiar files up top, do int main. And this time, let's do int argc, string argv, and with my brackets to imply that it's in the array. And then let me just do a sanity check. This time, if argc does not equal 2, then you know what? Forget it. I am going to say that, hey, user, you are missing command line argument backslash n. 
+
+And then that's it. I want to exit. I am going to preemptively, and prematurely really, return something other than the number 1. The go to value for the first error that can happen is 1. If you have some other erroneous situation that might occur, you might say return 2 or return 3, or maybe even negative 1 or negative 2. 
+
+These are just exit codes that are, generally, only useful to the programmer, or the company that's shipping the software. But the fact that it's not 0 is what's important. So if in this program, I want to guarantee that this program only works if the user provides me with an argument count of two, the name of the program, and some other word, I can enforce as much as follows, yell at the user with printf saying, missing command line argument, return 1. That will just immediately quit the program. 
+
+Only if argc equals 2 will we get down here, at which point I'm going to say, hello percent s, backslash n, argv1. In other words, I'm not going after argv 0, which is just the name of the program. I want to print out hello, comma, the second word that the human typed. And in this case on line 13, all is well. 
+
+I know that argc is 2 logically from this program. I'm going to go ahead and return 0. As an aside, keep in mind that this is true in Scratch as well. 
+
+Logically, I could do this and encapsulate these lines of code in this else clause here. But that's sort of unnecessarily indenting my code. And I want to make super clear that no matter what, by default, hello something will get printed, so long as the user cooperates. 
+
+So it's very common to use a condition, just an if, to catch some erroneous situation, and then exit. And then, so long all is well, not have an else, but just have the code outside that if, because it's equivalent in this particular case, logically. So I'm returning 0, just to explicitly signify all is well. 
+
+If I omitted the return 0, it would be automatically assumed for me. But now that I'm returning one in at least this case, I'm going to, for good measure and clarity, return 0 in this case. So now let me go ahead and make exit, which is a perfect segue to just leave. 
+
+But make exit, and let me go ahead and do ./exit, Enter. And the program yelled at me, missing command line argument. OK, let me cooperate. 
+
+Let me instead do ./exit, David, Enter. And now it says, hello David. And you wouldn't normally see this. 
+
+But it turns out that there's a special way in Linux to actually see with what exit code a program exited. Sometimes in a graphical world like Mac OS or Windows, you only see these numbers when an error message pops up on the screen and the programmer shows you that number. But if we want to see what the error message is, we can do it here-- so ./exit, Enter, print missing command line argument. 
+
+If I now do echo $?, which is ridiculously cryptic looking. But $? is the magical incantation that says, hey, computer, tell me what the previous program's exit code was. And I hit Enter. I see 1, because that's what I told my main function to return. 
+
+Meanwhile, if I do ./exit David, and hit Enter, I see, hello David. And if I now do echo $?, I see hello 0. And so this will actually be valuable information in the context of the debugger, not so much that you, the human, would care. But the debugger and other programs we'll use this semester will often look at that number, even though it's sort of hidden away unless you look for it, to determine whether or not a program's execution was correct or incorrect. 
+
+And so that brings us to this, at the end of the day. We started today by looking at debugging, and in turn at the course itself, and then more interestingly, technically underneath the hood at what strings are, which last week we just took for granted, and certainly took them for granted in Scratch. 
+
+We then looked at how we can access individual characters in a string, and then again took a higher level look at things, looking at how well-- if we want to get at individual elements in a list like structure, can't we do that with multiple strings? And we can with command line arguments. But this picture here of just boxes is demonstrative of this general idea of an array, or a list, or a vector. And depending on the context, all of these words mean slightly different things. So in C, we're only going to talk about an array. And an array is a chunk of memory, each of whom's elements are contiguous, back, to back, to back, to back. 
+
+And those elements are, generally, of the same data type, character, character, character, character, or string, string, string, string, or int, int, int, whatever it is we're trying to store. But at the end of the day, this is what it looks like conceptually. You're taking your computer's memory or RAM. And you're carving it out into identically sized boxes, all of which are back, to back, to back, to back in this way. 
+
+And what's nice about this idea, and the fact that we can express values in this way with the first of our data structures in the class, means we can start to solve problems with code that came so intuitively in week 0. You'll recall the phone book example, where we used a divide and conquer, or a binary search algorithm, to sift through a whole bunch of names and numbers. But we assumed, recall, that that phone book was already sorted, that someone else had already figured out-- given a list of names and numbers-- how to alphabetize them. And now that in C we, too, have the ability to lay things out, not physically in a phone book but virtually in a computer's memory, will we be able next week to introduce again this-- the first of our data structures in an array-- but more importantly, actual computer science algorithms implemented in code, with which we can store data in structures like this, and then start to manipulate it, and to actually solve problems with it, and to build on top of that, ultimately, programs in C, in Python, in JavaScript, querying databases with SQL? 
+
+And we'll see that all of these different ideas interlock. But for now, recall that the domain that we introduced today was this thing here, and the world of cryptography. And among the next problems you yourself will solve is the art of cryptography, scrambling and de-scrambling information, and ciphering and deciphering text, and assuming ultimately that you now know what is underneath the hood so that when you see or receive a message like this, you yourself can decipher it. All this, and more next time. 
+
+[VIDEO PLAYBACK] 
+
+-Mover just arrived. I'm going to go visit his college professor. Yep. Hi. It's you. Wait! David. I'm just trying to figure out what happened to you. Please, anything could help. You were his college roommate, weren't you? You were there with him when he finished the CS50 project? 
+
+[MUSIC PLAYING] 
+
+-That was CS50. 
+
+I love this place. 
+
+-Eat up. We're going out of business. 
+
+[END PLAYBACK]
