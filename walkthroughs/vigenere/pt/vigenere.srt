@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Vamos intensificar a nossa
+jogo com a cifra de Vigenère.
+
+3
+00:00:04,030 --> 00:00:06,710
+A cifra é vigenere
+muito semelhante ao César,
+
+4
+00:00:06,710 --> 00:00:11,060
+exceto no Caesar passamos em
+um único inteiro como a nossa chave.
+
+5
+00:00:11,060 --> 00:00:14,100
+Em vigenere vamos
+para passar em uma palavra-chave.
+
+6
+00:00:14,100 --> 00:00:19,400
+Então, se eu queria mudar o
+cifrado este é CS 50 por ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+então isso significa que cada letra
+ohai vai servir como a chave,
+
+8
+00:00:23,260 --> 00:00:27,160
+e eu estou indo para ciclo longo
+a palavra-chave para o meu turno
+
+9
+00:00:27,160 --> 00:00:31,930
+fazendo com que o texto cifrado
+muito mais difícil de descodificar.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> O que significa para
+deslocar pela palavra-chave?
+
+11
+00:00:34,540 --> 00:00:38,610
+Bem, a palavra-chave é uma string
+onde cada letra corresponde
+
+12
+00:00:38,610 --> 00:00:41,080
+alguma deslocação inteiro.
+
+13
+00:00:41,080 --> 00:00:49,310
+Assim, o S corresponde a uma chave de 14,
+h para uma chave de 7, um tem uma chave de 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+de modo que não mudaria nada,
+e então eu tem uma chave de 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Digamos que eu corri vigenere A com o
+texto simples este é CS50 bem,
+
+16
+00:01:00,000 --> 00:01:02,800
+que seria simplesmente dar
+me uma string inalterada.
+
+17
+00:01:02,800 --> 00:01:08,170
+Observe que isso é equivalente a
+executando Caesar com uma chave de zero.
+
+18
+00:01:08,170 --> 00:01:12,070
+Na verdade, vigenere execução
+com um único caractere
+
+19
+00:01:12,070 --> 00:01:17,070
+seria equivalente a executar
+César com o mesmo número inteiro.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Tudo bem, então, uma vez que
+eles são tão semelhantes que eu tinha
+
+21
+00:01:20,400 --> 00:01:24,300
+realmente recomendo que se você
+quer você pode simplesmente copiar o Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+código em seu código vigenere.
+
+23
+00:01:26,932 --> 00:01:28,640
+As coisas vão mudar,
+mas pelo menos você tem
+
+24
+00:01:28,640 --> 00:01:31,110
+alguns espinha dorsal que você pode trabalhar com.
+
+25
+00:01:31,110 --> 00:01:36,410
+Porque os TODOs são os mesmos que queremos
+para obter a chave, obter o texto simples,
+
+26
+00:01:36,410 --> 00:01:40,690
+encipher que texto simples,
+e, em seguida, imprimi-la.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Assim como Caesar a chave vai
+ser passado como a segunda linha de comando
+
+28
+00:01:44,980 --> 00:01:50,540
+argumento contido no índice argv
+1, mas é diferente desta vez
+
+29
+00:01:50,540 --> 00:01:52,560
+porque ele deve ser alfabética.
+
+30
+00:01:52,560 --> 00:01:56,390
+Então, precisamos iterar sobre todos os
+caractere único em que a chave
+
+31
+00:01:56,390 --> 00:02:00,800
+que o usuário passado e garantir
+que cada personagem é alfabética
+
+32
+00:02:00,800 --> 00:02:02,800
+a fim de continuar.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Uma vez que fizemos isso, então nós
+pode obter a seqüência do usuário,
+
+34
+00:02:05,560 --> 00:02:07,560
+assim como fizemos antes.
+
+35
+00:02:07,560 --> 00:02:10,520
+E agora, chegamos ao coração
+do problema para vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+que é como César, como
+descobrir o padrão de cifragem
+
+37
+00:02:14,665 --> 00:02:19,760
+e equação, e cifrar
+todo o texto simples.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Então, você vai notar que o
+equação para a mudança vigenere
+
+39
+00:02:23,280 --> 00:02:25,610
+é muito semelhante ao César.
+
+40
+00:02:25,610 --> 00:02:29,780
+A única diferença é que
+em vez de uma única variável k
+
+41
+00:02:29,780 --> 00:02:37,270
+antes, agora k tem um subscrito,
+indicando a letra j da chave.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Vamos examinar um exemplo.
+
+43
+00:02:39,560 --> 00:02:43,830
+Digamos que você queria passar um segredo
+mensagem sobre a sua paixão, eu gosto de você.
+
+44
+00:02:43,830 --> 00:02:46,325
+Bem, para a sua chave você
+escolher algo que o seu
+
+45
+00:02:46,325 --> 00:02:49,790
+sabe esmagamento sabe que você gosta, pandas.
+
+46
+00:02:49,790 --> 00:02:52,290
+Tudo bem, então como é que vamos mudar isso?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Bem, nós temos o nosso índice de texto simples.
+
+48
+00:02:55,500 --> 00:02:59,160
+Essa é a primeira letra e
+assim é o índice para a nossa chave
+
+49
+00:02:59,160 --> 00:03:02,830
+que está na p, o primeiro
+carta na nossa palavra panda.
+
+50
+00:03:02,830 --> 00:03:08,590
+Então, mudando I p-nos x dá,
+então nós avançar o índice de texto simples.
+
+51
+00:03:08,590 --> 00:03:10,460
+Isso nos leva a um espaço.
+
+52
+00:03:10,460 --> 00:03:13,540
+Agora, o caractere de espaço
+não é alfabética,
+
+53
+00:03:13,540 --> 00:03:16,930
+o que significa que, para que,
+transferências à direita para o texto cifrado,
+
+54
+00:03:16,930 --> 00:03:23,430
+nós colocamos um espaço lá, e nós não
+avançar o índice para a nossa chave.
+
+55
+00:03:23,430 --> 00:03:25,820
+Então, ainda estamos em p neste momento.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Nós avançar para a próxima
+índice em nosso texto simples.
+
+57
+00:03:30,130 --> 00:03:34,030
+E agora, porque isso é
+uma carta, a minúscula l,
+
+58
+00:03:34,030 --> 00:03:37,920
+mudamos que até o
+próximo índice na nossa chave.
+
+59
+00:03:37,920 --> 00:03:42,360
+Qual é um, o qual é um zero
+mudança de modo que só se torna
+
+60
+00:03:42,360 --> 00:03:44,370
+um l em nosso texto cifrado.
+
+61
+00:03:44,370 --> 00:03:51,120
+Então, nós avançamos tanto o texto simples, e
+o índice de chave porque é alfabética.
+
+62
+00:03:51,120 --> 00:03:56,210
+Portanto, depois, continuar essa
+até chegarmos ao e em como.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Tudo bem, então você vai notar neste
+apontam que, em termos de índice de chave,
+
+64
+00:04:01,090 --> 00:04:03,940
+chegamos ao final de
+a palavra panda, então o que
+
+65
+00:04:03,940 --> 00:04:08,750
+acontece quando chegar ao próximo
+letra alfabética no texto original?
+
+66
+00:04:08,750 --> 00:04:12,180
+Bem, tudo o que acontece é que nós
+envolver em torno do início,
+
+67
+00:04:12,180 --> 00:04:14,710
+o primeiro índice da nossa chave.
+
+68
+00:04:14,710 --> 00:04:19,570
+Assim, então mudamos que
+y por p a dar-nos n.
+
+69
+00:04:19,570 --> 00:04:26,860
+E então, continuamos terminar a codificação
+nosso texto simples para obter x lvne Noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> A partir deste exemplo, I
+mostrou que apenas avançar
+
+71
+00:04:29,300 --> 00:04:33,140
+para a próxima letra na palavra-chave
+se o personagem em texto simples
+
+72
+00:04:33,140 --> 00:04:37,480
+é uma carta de modo que o isalpha
+função virá a calhar aqui.
+
+73
+00:04:37,480 --> 00:04:43,030
+E, tal como em Caesar, queremos
+preservar o caso, isupper e islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Então, adicione pouco
+no em seu pseudocódigo.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Então, como vamos descobrir as mudanças-chave?
+
+76
+00:04:48,510 --> 00:04:53,030
+Bem, se você se lembra nossa discussão
+em índices alfabéticos no Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+problema, é muito semelhante.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Onde A corresponde a um ASCII
+valor de 65, mas uma mudança de 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+e, em seguida, a última letra
+no alfabeto, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+corresponde a um desvio de 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Você vai notar que a mudança
+é idêntico ou não
+
+82
+00:05:10,320 --> 00:05:14,880
+a letra é maiúscula ou minúscula.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, então agora que você
+sabe como descobrir
+
+84
+00:05:17,700 --> 00:05:21,470
+o deslocamento numérico que
+corresponde a um único caractere
+
+85
+00:05:21,470 --> 00:05:24,050
+vamos voltar para a nossa equação.
+
+86
+00:05:24,050 --> 00:05:28,180
+Porque nós temos dois diferentes
+subscritos aqui, I e J,
+
+87
+00:05:28,180 --> 00:05:32,130
+isso é um indício de que queremos manter o controle
+tanto a nossa posição no texto original
+
+88
+00:05:32,130 --> 00:05:36,600
+bem como a nossa posição na chave,
+então essas são duas variáveis ​​distintas
+
+89
+00:05:36,600 --> 00:05:39,010
+que queremos manter um porão de.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Agora, a posição no nosso texto simples
+vai aumentar a cada vez,
+
+91
+00:05:42,580 --> 00:05:45,530
+de modo que vai ser um
+pouco mais para a frente
+
+92
+00:05:45,530 --> 00:05:49,750
+ao contrário da posição a palavra-chave,
+que sabemos que tem de envolver em torno de,
+
+93
+00:05:49,750 --> 00:05:52,910
+e às vezes incrementar,
+às vezes, ficar na mesma.
+
+94
+00:05:52,910 --> 00:05:55,430
+Então, como é que vamos implementar
+a funcionalidade
+
+95
+00:05:55,430 --> 00:05:59,820
+para envolver a
+índice para a palavra-chave?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Vou usar o exemplo contagem de fora.
+
+97
+00:06:01,640 --> 00:06:06,100
+Contando off é uma maneira popular
+para dividir as pessoas em grupos.
+
+98
+00:06:06,100 --> 00:06:10,660
+Digamos que eu tinha 5 pessoas e eu queria
+dividi-los em três grupos,
+
+99
+00:06:10,660 --> 00:06:13,640
+bem, então eu ia começar contando off.
+
+100
+00:06:13,640 --> 00:06:16,980
+A primeira pessoa faria
+dizer que eu sou o número equipe de um,
+
+101
+00:06:16,980 --> 00:06:21,030
+a próxima pessoa seria número da equipe
+dois, o número da equipe terceira pessoa
+
+102
+00:06:21,030 --> 00:06:21,910
+três.
+
+103
+00:06:21,910 --> 00:06:25,910
+Agora, eu só quero três grupos, de modo
+a quarta pessoa seria realmente
+
+104
+00:06:25,910 --> 00:06:30,160
+começar no início e dizer:
+bem, eu sou o número um da equipe, bem como,
+
+105
+00:06:30,160 --> 00:06:32,890
+ea próxima pessoa
+seria equipa o número dois.
+
+106
+00:06:32,890 --> 00:06:37,660
+E, a partir daí, eles podem, em seguida,
+separar nos seus grupos.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Então, como eu poderia usar modulo
+para me ajudar a implementar
+
+108
+00:06:41,130 --> 00:06:44,160
+Esta contagem off envolver em torno de função?
+
+109
+00:06:44,160 --> 00:06:50,140
+Bem, a primeira pessoa
+número 1, modificação 3 nos dá 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 nos dá 2,
+e 3 mod 3 nos dá 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> A quarta pessoa, número 4, 3 mod
+nos dá 1, e em seguida 5 mod 3 nos dá 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Então, você vai notar que, apesar de
+o número de pessoas que eu tenho
+
+113
+00:07:05,370 --> 00:07:11,210
+aumenta, e está acima
+3, desde que eu estou modding por 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Eu sempre obter números 0, 1 e 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Eu nunca ficar maior que 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Portanto, mesmo se eu tivesse 10
+as pessoas, então todas aquelas pessoas
+
+117
+00:07:22,630 --> 00:07:27,430
+ainda estaria dentro dos grupos 1, 2, ou 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Então, agora nós sabemos que se nós temos um grupo
+de 5 e mod todos os de 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+então nós nunca vai
+exceder grupos 0, 1, ou 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Então, nós nunca vamos obter um grupo
+número que é igual a 3 ou acima.
+
+121
+00:07:43,430 --> 00:07:46,980
+Assim, mesmo se eu adicionar mais cinco
+pessoas, então todos eles
+
+122
+00:07:46,980 --> 00:07:53,150
+ainda seriam atribuídos a grupos
+0, 1, ou 2, porque eu estou modding por 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Eu nunca vou exceder esse limite.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, então vamos ver se podemos aplicar
+este conceito de utilização de módulo
+
+125
+00:08:00,800 --> 00:08:03,710
+para envolver a
+números de grupo e aplicar
+
+126
+00:08:03,710 --> 00:08:08,000
+-lo para Vigenere onde queremos
+usar modulo para envolver
+
+127
+00:08:08,000 --> 00:08:10,220
+o índice para a palavra-chave.
+
+128
+00:08:10,220 --> 00:08:12,830
+Mesmo que nós estamos incrementando
+o índice sempre
+
+129
+00:08:12,830 --> 00:08:17,260
+quer ter a certeza que nós sempre
+envolver em torno ao início
+
+130
+00:08:17,260 --> 00:08:20,050
+nunca ultrapassando a
+comprimento da corda.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, então eu sei que poderia ser
+um pouco esmagadora.
+
+132
+00:08:23,510 --> 00:08:26,670
+Há muito mais a fazer nesta p set.
+
+133
+00:08:26,670 --> 00:08:30,050
+Então, certifique-se de que você escreve
+uma boa pseudocódigo para si mesmo
+
+134
+00:08:30,050 --> 00:08:32,870
+que compreende e
+que começa o trabalho feito.
+
+135
+00:08:32,870 --> 00:08:35,580
+Experimente e abordar todas as
+linha única forma independente
+
+136
+00:08:35,580 --> 00:08:38,370
+descobrir todos os pequenos
+pequenas peças do puzzle
+
+137
+00:08:38,370 --> 00:08:40,260
+antes de colocá-lo juntos.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Certifique-se de que você pode obter
+a chave da linha de comando
+
+139
+00:08:43,110 --> 00:08:46,780
+e garantir que ele é alfabética,
+obter o texto simples do usuário,
+
+140
+00:08:46,780 --> 00:08:51,010
+e depois na enciphering, certifique-se
+saber como criptografar uma única letra,
+
+141
+00:08:51,010 --> 00:08:56,130
+e, em seguida, avançar para a seqüência inteira
+com toda a linha de contorno funções.
+
+142
+00:08:56,130 --> 00:08:59,610
+Finalmente, você pode imprimir o texto cifrado.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Meu nome é um Zamyla,
+e esta foi vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

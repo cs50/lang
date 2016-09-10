@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Idemo korak do naših
+Igra s vigenèreova šifra.
+
+3
+00:00:04,030 --> 00:00:06,710
+Vigenèreova šifra je
+vrlo sličan caru
+
+4
+00:00:06,710 --> 00:00:11,060
+osim u Cezara smo prolazili u
+jedan cijeli broj kao naš ključ.
+
+5
+00:00:11,060 --> 00:00:14,100
+U vigenere idemo
+proći ključnu riječ.
+
+6
+00:00:14,100 --> 00:00:19,400
+Dakle, ako sam htjela pomaknuti
+šifrirana je to CS 50 od ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+onda to znači da je svako slovo u
+ohai će poslužiti kao ključ,
+
+8
+00:00:23,260 --> 00:00:27,160
+a ja ću ciklusa tijekom
+ključna riječ za moju smjenu
+
+9
+00:00:27,160 --> 00:00:31,930
+što je šifrirana
+puno teže dekodirati.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Što znači da se
+pomaknuti za ključne riječi?
+
+11
+00:00:34,540 --> 00:00:38,610
+Pa, ključna riječ je niz
+gdje je svako slovo odgovara
+
+12
+00:00:38,610 --> 00:00:41,080
+na neki cjelobrojni smjeni.
+
+13
+00:00:41,080 --> 00:00:49,310
+Dakle, o odgovara ključu od 14,
+h tipki 7, A ima tipku 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+tako da se ne bi ništa promijeniti,
+a onda sam ima ključ od 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Recimo trčao sam vigenere A s
+običan tekst ovo je CS50 dobro,
+
+16
+00:01:00,000 --> 00:01:02,800
+to bi jednostavno dati
+mi nepromijenjen niz.
+
+17
+00:01:02,800 --> 00:01:08,170
+Primijetite da je to ekvivalentno
+trčanje cara s ključem nula.
+
+18
+00:01:08,170 --> 00:01:12,070
+U stvari, radi vigenere
+sa bilo jedan znak
+
+19
+00:01:12,070 --> 00:01:17,070
+bi bilo jednako trčanje
+Cezar sa istim cijeli broj.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> U redu, tako da, s obzirom
+oni su toliko slični bih
+
+21
+00:01:20,400 --> 00:01:24,300
+zapravo preporučujemo da, ako vas
+želite možete jednostavno kopirati svoje Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+broj u svoj vigenere koda.
+
+23
+00:01:26,932 --> 00:01:28,640
+Stvari će se promijeniti,
+ali barem imate
+
+24
+00:01:28,640 --> 00:01:31,110
+neki oslonac koji možete raditi.
+
+25
+00:01:31,110 --> 00:01:36,410
+Budući da su todos su isti želimo
+dobiti ključ, dobili običan tekst,
+
+26
+00:01:36,410 --> 00:01:40,690
+šifriranje koji običan tekst,
+a zatim ispisati da je out.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Baš kao i Cezara ključ će
+biti donesen u kao drugi komandne linije
+
+28
+00:01:44,980 --> 00:01:50,540
+Argument koji se nalazi u indeksu argv
+1, ali to je drugačije ovaj put
+
+29
+00:01:50,540 --> 00:01:52,560
+jer to mora biti abecedni.
+
+30
+00:01:52,560 --> 00:01:56,390
+Dakle, moramo ponoviti tijekom svake
+jedan znak u tom ključu
+
+31
+00:01:56,390 --> 00:02:00,800
+da korisnik donesen u, te osigurati
+da je svaki lik je traka
+
+32
+00:02:00,800 --> 00:02:02,800
+kako bi mogao nastaviti.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Nakon što smo to učinili, onda
+mogu dobiti niz od korisnika,
+
+34
+00:02:05,560 --> 00:02:07,560
+kao što smo učinili prije.
+
+35
+00:02:07,560 --> 00:02:10,520
+I sada dolazimo do srca
+problema za vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+koji je baš kao i Cezara, kako
+shvatiti enciphering uzorak
+
+37
+00:02:14,665 --> 00:02:19,760
+i jednadžba, i šifriranje
+cijeli otvoreni tekst.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Dakle, primijetit ćete da je
+jednadžba za vigenere smjene
+
+39
+00:02:23,280 --> 00:02:25,610
+je vrlo sličan onome Caesar.
+
+40
+00:02:25,610 --> 00:02:29,780
+Jedina razlika je u tome što
+umjesto jednog promjenjivog k
+
+41
+00:02:29,780 --> 00:02:37,270
+prije, sada k ima indeks,
+ukazuje j slovo ključa.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Proučimo primjer.
+
+43
+00:02:39,560 --> 00:02:43,830
+Recimo da je želio da prođe tajnu
+Poruka na svoju simpatiju, ja vam se sviđa.
+
+44
+00:02:43,830 --> 00:02:46,325
+Pa, za ključ koju
+odabrati nešto da je vaš
+
+45
+00:02:46,325 --> 00:02:49,790
+znam simpatiju zna da vam se sviđa, pande.
+
+46
+00:02:49,790 --> 00:02:52,290
+U redu, pa kako smo pomak ovo?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Pa, mi imamo cisti indeks.
+
+48
+00:02:55,500 --> 00:02:59,160
+To je u prvom pismu i
+tako da je indeks za naš ključ
+
+49
+00:02:59,160 --> 00:03:02,830
+što je na p, prvi
+pismo u našem panda riječi.
+
+50
+00:03:02,830 --> 00:03:08,590
+Dakle, kreće I po p nam daje x,
+onda smo unaprijed čistim indeks.
+
+51
+00:03:08,590 --> 00:03:10,460
+To nas dobiva na prostoru.
+
+52
+00:03:10,460 --> 00:03:13,540
+Sada je razmak
+je ne abecedni,
+
+53
+00:03:13,540 --> 00:03:16,930
+pa to znači da je, da je samo
+transferi pravo na to šifrirana,
+
+54
+00:03:16,930 --> 00:03:23,430
+smo stavili prostor tamo, a mi ne
+unaprijed indeksa za naš ključ.
+
+55
+00:03:23,430 --> 00:03:25,820
+Dakle, mi smo još uvijek u p u ovom trenutku.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Mi se unaprijed na sljedeći
+Indeks u našem čistim.
+
+57
+00:03:30,130 --> 00:03:34,030
+A sada, jer je to
+pismo je mala slova l,
+
+58
+00:03:34,030 --> 00:03:37,920
+smo pomak da se i
+Sljedeći indeks u našem ključu.
+
+59
+00:03:37,920 --> 00:03:42,360
+Koji je, što je nula
+pomak, tako da samo postaje
+
+60
+00:03:42,360 --> 00:03:44,370
+L u našem šifrirana.
+
+61
+00:03:44,370 --> 00:03:51,120
+Zatim smo prešli oba cisti, a
+ključ indeksa jer je traka.
+
+62
+00:03:51,120 --> 00:03:56,210
+Pa onda smo nastavili da
+dok ne dođemo do e na slično.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> U redu, tako da ćete primijetiti u ovome
+ukazuju da je, što se tiče našeg ključnog indeksa,
+
+64
+00:04:01,090 --> 00:04:03,940
+smo došli do kraja
+panda riječ, pa što
+
+65
+00:04:03,940 --> 00:04:08,750
+događa kad smo dobili na sljedeću
+traka pismo u čistim?
+
+66
+00:04:08,750 --> 00:04:12,180
+Pa, sve što se događa je da
+zaokrenuti na početak,
+
+67
+00:04:12,180 --> 00:04:14,710
+do prvog indeksu našem ključu.
+
+68
+00:04:14,710 --> 00:04:19,570
+Pa, onda smo pomak koji
+y po p da nam n.
+
+69
+00:04:19,570 --> 00:04:26,860
+A onda, mi i dalje dorade kodiranje
+naša čistim kako bi dobili x lvne NOH.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Iz ovog primjera, I
+pokazali da možemo samo napredovati
+
+71
+00:04:29,300 --> 00:04:33,140
+na sljedeće slovo u riječi
+ako je lik u običan tekst
+
+72
+00:04:33,140 --> 00:04:37,480
+je pismo tako da isalpha
+Funkcija će doći u ruci ovdje.
+
+73
+00:04:37,480 --> 00:04:43,030
+I, baš kao u Cezara, želimo
+očuvanje predmeta, isupper i islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Dakle, dodali ovaj malo
+u u svoj pseudokod.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Pa kako ćemo shvatiti ključne pomake?
+
+76
+00:04:48,510 --> 00:04:53,030
+Pa, ako se prisjetimo našu raspravu
+abecednim indeksa u Cezara
+
+77
+00:04:53,030 --> 00:04:55,370
+Problem, to je vrlo slično.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Gdje A odgovara ASCII
+vrijednost od 65, ali je pomak od 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+a onda zadnje slovo
+u abecedi, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+odgovara pomaku od 25 godina.
+
+81
+00:05:06,940 --> 00:05:10,320
+Primijetit ćete da smjeni
+je identičan ili ne
+
+82
+00:05:10,320 --> 00:05:14,880
+pismo je veliko ili malo slovo.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> U redu, tako da sada
+znam kako shvatiti
+
+84
+00:05:17,700 --> 00:05:21,470
+numerički pomak koji
+odgovara jednom karakteru
+
+85
+00:05:21,470 --> 00:05:24,050
+vratimo se u našu jednadžbu.
+
+86
+00:05:24,050 --> 00:05:28,180
+Budući da imamo dvije različite
+Indeksi su ovdje, i i j,
+
+87
+00:05:28,180 --> 00:05:32,130
+To je znak koji želimo pratiti
+i naše pozicije u čistim
+
+88
+00:05:32,130 --> 00:05:36,600
+kao i naš položaj u riječi,
+tako da su to dva odvojena varijable
+
+89
+00:05:36,600 --> 00:05:39,010
+da želimo zadržati držite.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Sada, položaj u našem čistim
+će se povećati svaki put,
+
+91
+00:05:42,580 --> 00:05:45,530
+tako da će to biti
+još malo ravno naprijed
+
+92
+00:05:45,530 --> 00:05:49,750
+za razliku od položaja ključnih riječi,
+što znamo mora zaokrenuti,
+
+93
+00:05:49,750 --> 00:05:52,910
+a ponekad i povećavati,
+ponekad ostaju isti.
+
+94
+00:05:52,910 --> 00:05:55,430
+Dakle, kako ćemo provesti
+funkcionalnost
+
+95
+00:05:55,430 --> 00:05:59,820
+omotati oko
+Indeks za ključnu riječ?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Idem koristiti računati off primjer.
+
+97
+00:06:01,640 --> 00:06:06,100
+Brojanje off je popularan način
+podijeliti ljude u skupine.
+
+98
+00:06:06,100 --> 00:06:10,660
+Recimo imao sam 5 ljudi, a ja sam htjela
+podijeliti ih u tri skupine,
+
+99
+00:06:10,660 --> 00:06:13,640
+i onda bih početi računajući off.
+
+100
+00:06:13,640 --> 00:06:16,980
+Prva osoba koja bi
+kažu da sam tim broj jedan,
+
+101
+00:06:16,980 --> 00:06:21,030
+sljedeća osoba bi se tim broj
+dva, treća osoba broj ekipa
+
+102
+00:06:21,030 --> 00:06:21,910
+tri.
+
+103
+00:06:21,910 --> 00:06:25,910
+Sada samo želim tri grupe tako
+četvrta osoba će zapravo
+
+104
+00:06:25,910 --> 00:06:30,160
+početi na početku i reći:
+dobro, ja sam tim broj jedan, kao,
+
+105
+00:06:30,160 --> 00:06:32,890
+a sljedeća osoba
+bi se tim broj dva.
+
+106
+00:06:32,890 --> 00:06:37,660
+A od tamo, oni mogu onda
+razvrstati u svojim skupinama.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Dakle, kako bih mogao koristiti modulo
+da mi pomogne provedbu
+
+108
+00:06:41,130 --> 00:06:44,160
+to računati off zaokrenuti funkciji?
+
+109
+00:06:44,160 --> 00:06:50,140
+Pa, prva osoba
+broj 1, mod 3 daje nam 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 daje nam 2,
+i 3 mod 3 daje nam 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Četvrta osoba, broj 4, mod 3
+daje nam 1, a zatim 5 mod 3 nam daje 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Dakle, primijetit ćete da, iako
+broj ljudi koji imam
+
+113
+00:07:05,370 --> 00:07:11,210
+povećava, a iznad
+3, jer sam modding od 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Ja uvijek dobiti brojeve 0, 1 i 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Ja nikad ne veći od 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Dakle, čak i ako sam imao 10
+ljudi, onda su svi od tih ljudi
+
+117
+00:07:22,630 --> 00:07:27,430
+će i dalje biti u skupinama 1, 2 ili 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Dakle, sada znamo da ako imamo grupu
+5 a mi mod sve one po 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+onda mi nikad neće
+prelazi grupe 0, 1 ili 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Dakle, mi nikad ne ide kako bi dobili grupu
+broj koji je jednak 3 ili iznad.
+
+121
+00:07:43,430 --> 00:07:46,980
+Dakle, čak i ako dodam još pet
+ljudi, onda su svi od njih
+
+122
+00:07:46,980 --> 00:07:53,150
+i dalje će biti podijeljeni u skupine
+0, 1 ili 2 jer sam modding po 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Ja nikada neću prijeći tu kapu.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> U redu, da vidimo da li možemo primijeniti
+ovaj koncept korištenja modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+omotati oko
+grupe brojeva i primjenjivati
+
+126
+00:08:03,710 --> 00:08:08,000
+to vigenere gdje želimo
+koristiti modulo omotati oko
+
+127
+00:08:08,000 --> 00:08:10,220
+indeks za ključnu riječ.
+
+128
+00:08:10,220 --> 00:08:12,830
+Iako smo incrementing
+indeks mi uvijek
+
+129
+00:08:12,830 --> 00:08:17,260
+želite biti sigurni da ćemo uvijek
+zaokrenuti na samom početku
+
+130
+00:08:17,260 --> 00:08:20,050
+nikad iznad vrijednosti
+Duljina niza.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> U redu, tako da znam da bi moglo biti
+malo neodoljiv.
+
+132
+00:08:23,510 --> 00:08:26,670
+Postoji puno više učiniti u ovom p setu.
+
+133
+00:08:26,670 --> 00:08:30,050
+Dakle, pobrinite se da napisati
+dobar pseudokod za sebe
+
+134
+00:08:30,050 --> 00:08:32,870
+da razumiju i
+koji dobiva posao ispunjavanja.
+
+135
+00:08:32,870 --> 00:08:35,580
+Probajte i adresu svakog
+jedan redak samostalno
+
+136
+00:08:35,580 --> 00:08:38,370
+figuring out sve pomalo
+male komadiće slagalice
+
+137
+00:08:38,370 --> 00:08:40,260
+prije stavljanja zajedno.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Pobrinite se da možete dobiti
+ključ iz naredbenog retka
+
+139
+00:08:43,110 --> 00:08:46,780
+i osigurati da je traka,
+dobili običan tekst od korisnika,
+
+140
+00:08:46,780 --> 00:08:51,010
+a zatim u enciphering, provjerite da li
+znam kako šifriranje jedno slovo,
+
+141
+00:08:51,010 --> 00:08:56,130
+a zatim napredak na cijelom nizu
+sa svim zaokrenuti funkcije.
+
+142
+00:08:56,130 --> 00:08:59,610
+Konačno, možete ispisati šifrirana.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Moje ime je Zamyla,
+i to je bio vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

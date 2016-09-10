@@ -1,0 +1,1140 @@
+1
+00:00:00,000 --> 00:00:00,760
+
+2
+00:00:00,760 --> 00:00:02,270
+>> Amila: Mari kita mengatasi Caesar.
+
+3
+00:00:02,270 --> 00:00:06,110
+Di Caesar, kami memungkinkan pengguna
+untuk mengkodekan pesan rahasia.
+
+4
+00:00:06,110 --> 00:00:09,780
+Jadi mari kita menyelam kanan dan terlihat
+di kami to-dos untuk masalah ini.
+
+5
+00:00:09,780 --> 00:00:12,210
+Jadi pertama, kita mendapatkan kunci dari pengguna.
+
+6
+00:00:12,210 --> 00:00:15,210
+Maka kita mendapatkan plaintext
+bahwa mereka ingin mengkodekan.
+
+7
+00:00:15,210 --> 00:00:21,380
+Setelah itu, kami menulis dlm kode untuk mereka,
+dan akhirnya kami mencetak ciphertext mereka.
+
+8
+00:00:21,380 --> 00:00:23,600
+>> Jadi mari kita mulai dengan sebuah contoh.
+
+9
+00:00:23,600 --> 00:00:26,920
+Katakanlah Anda ingin menyandikan
+Seluruh alfabet dengan kunci dari dua.
+
+10
+00:00:26,920 --> 00:00:31,360
+Nah, seluruh alfabet Anda akan
+hanya bergeser ke huruf.
+
+11
+00:00:31,360 --> 00:00:37,060
+Jadi A akan menyandikan ke C, B ke
+D, C ke E, seterusnya dan sebagainya,
+
+12
+00:00:37,060 --> 00:00:42,470
+sampai Anda mendapatkan ke X, yang mengkode untuk Z
+atau zed, tergantung di mana Anda dari.
+
+13
+00:00:42,470 --> 00:00:47,445
+Kemudian Y maka akan menggeser semua jalan,
+membungkus alfabet untuk mendapatkan A,
+
+14
+00:00:47,445 --> 00:00:53,256
+dan akhirnya surat terakhir dari
+alfabet, Z, zed, akan menyandikan ke B.
+
+15
+00:00:53,256 --> 00:00:54,660
+>> Kau mengerti?
+
+16
+00:00:54,660 --> 00:00:56,380
+Mari kita lihat beberapa contoh.
+
+17
+00:00:56,380 --> 00:01:00,540
+Contoh pertama di sini sangat mirip
+untuk apa yang baru saja kami jelaskan di atas.
+
+18
+00:01:00,540 --> 00:01:05,560
+Jadi jika saya mengkodekan beberapa bagian dari
+alfabet, A sampai L, dengan kunci dari dua,
+
+19
+00:01:05,560 --> 00:01:09,760
+maka saya hanya mendapatkan seluruh saya
+alfabet bergeser dua surat.
+
+20
+00:01:09,760 --> 00:01:12,230
+>> Kemudian, dalam contoh berikutnya,
+kuncinya adalah masih dua,
+
+21
+00:01:12,230 --> 00:01:15,080
+sehingga Anda masih harus tahu
+yang surat yang diharapkan.
+
+22
+00:01:15,080 --> 00:01:16,400
+Tapi di sini itu frase.
+
+23
+00:01:16,400 --> 00:01:18,100
+Ini adalah CS50.
+
+24
+00:01:18,100 --> 00:01:21,090
+Jadi Anda akan melihat bahwa saya
+melestarikan kasus surat saya,
+
+25
+00:01:21,090 --> 00:01:25,600
+sehingga setiap huruf besar juga
+huruf besar di ciphertext.
+
+26
+00:01:25,600 --> 00:01:27,800
+Dan huruf kecil saja
+huruf dalam plaintext
+
+27
+00:01:27,800 --> 00:01:30,640
+juga huruf kecil
+huruf dalam ciphertext.
+
+28
+00:01:30,640 --> 00:01:34,020
+Tapi aku tetap huruf
+dan setiap tanda seru
+
+29
+00:01:34,020 --> 00:01:37,610
+atau tanda baca lainnya yang sama.
+
+30
+00:01:37,610 --> 00:01:40,360
+>> Jadi sekarang kita memiliki arti
+untuk bagaimana program itu bekerja,
+
+31
+00:01:40,360 --> 00:01:43,890
+merasa bebas untuk pergi berjalan lagi
+contoh Anda sendiri, jika Anda inginkan.
+
+32
+00:01:43,890 --> 00:01:47,072
+Mari kita mulai dengan mendapatkan
+kunci dari pengguna.
+
+33
+00:01:47,072 --> 00:01:48,780
+Secara tradisional, dengan
+masalah lain, kami telah
+
+34
+00:01:48,780 --> 00:01:51,450
+terbiasa mendapatkan
+setiap nomor yang kita
+
+35
+00:01:51,450 --> 00:01:54,710
+butuhkan dengan mendorong pengguna
+dengan fungsi getInt.
+
+36
+00:01:54,710 --> 00:01:58,850
+Tapi kali ini kami benar-benar akan
+menggunakan argumen baris perintah
+
+37
+00:01:58,850 --> 00:02:01,760
+dan fungsi baru yang disebut atoi.
+
+38
+00:02:01,760 --> 00:02:05,130
+>> Ketika Anda menjalankan utama
+Program di C, maka
+
+39
+00:02:05,130 --> 00:02:08,500
+Dibutuhkan dua parameters--
+int argc, yang
+
+40
+00:02:08,500 --> 00:02:11,670
+adalah jumlah argumen
+berlalu dalam, dan kemudian
+
+41
+00:02:11,670 --> 00:02:15,920
+argv, array string yang berisi
+daftar semua argumen
+
+42
+00:02:15,920 --> 00:02:16,740
+berlalu.
+
+43
+00:02:16,740 --> 00:02:19,740
+Anda tidak secara eksplisit memiliki
+untuk mendeklarasikan variabel tersebut.
+
+44
+00:02:19,740 --> 00:02:22,700
+Mereka dihitung untuk
+Anda oleh compiler.
+
+45
+00:02:22,700 --> 00:02:28,160
+penggunaan yang benar untuk ini akan menjadi
+untuk argc menjadi dua dalam hal ini,
+
+46
+00:02:28,160 --> 00:02:32,630
+karena pengguna harus lulus dalam
+panggilan untuk program, ./caesar,
+
+47
+00:02:32,630 --> 00:02:35,570
+dan kemudian kunci,
+nomor apa pun yang mereka inginkan.
+
+48
+00:02:35,570 --> 00:02:39,920
+Sehingga berarti bahwa argc harus dua
+agar penggunaan valid Caesar
+
+49
+00:02:39,920 --> 00:02:41,680
+akan dieksekusi.
+
+50
+00:02:41,680 --> 00:02:43,590
+>> Jadi mari kita lihat contoh.
+
+51
+00:02:43,590 --> 00:02:47,760
+Mengatakan saya sudah menulis dan
+disusun sebuah program yang disebut blastoff.
+
+52
+00:02:47,760 --> 00:02:52,670
+Jadi jika aku berlari pada command line
+./blastoff Team Rocket, baik, kemudian,
+
+53
+00:02:52,670 --> 00:02:57,750
+argc akan menjadi tiga karena saya
+disahkan pada tiga argumen yang berbeda.
+
+54
+00:02:57,750 --> 00:02:59,830
+Kemudian argv akan terlihat seperti ini.
+
+55
+00:02:59,830 --> 00:03:03,750
+Ini sebuah array, dan itu akan
+berisi masing-masing tiga senar.
+
+56
+00:03:03,750 --> 00:03:09,640
+./blastoff dalam indeks pertama, tim
+di depan, dan roket di terakhir.
+
+57
+00:03:09,640 --> 00:03:11,610
+>> Mari kita bicara tentang array untuk sebentar.
+
+58
+00:03:11,610 --> 00:03:15,560
+Array adalah struktur data yang terus
+beberapa nilai dari jenis yang sama.
+
+59
+00:03:15,560 --> 00:03:19,980
+Ini dapat berguna ketika kita
+memiliki daftar integer atau string.
+
+60
+00:03:19,980 --> 00:03:23,030
+Hanya ingat mereka memiliki
+menjadi jenis yang sama.
+
+61
+00:03:23,030 --> 00:03:25,310
+Dalam ilmu komputer, kita
+suka menghitung dari nol,
+
+62
+00:03:25,310 --> 00:03:29,260
+jadi ingatlah bahwa array
+juga nol-diindeks.
+
+63
+00:03:29,260 --> 00:03:34,360
+Jadi elemen pertama dari array saya
+akan berada di indeks nol.
+
+64
+00:03:34,360 --> 00:03:37,580
+Jadi dalam hal ini, ketika saya memiliki
+array panjang empat,
+
+65
+00:03:37,580 --> 00:03:41,350
+maka indeks terakhir dari
+elemen terakhir dari array saya
+
+66
+00:03:41,350 --> 00:03:44,970
+sebenarnya akan menjadi
+pada indeks tiga, bukan empat.
+
+67
+00:03:44,970 --> 00:03:48,880
+Karena ingat, kita
+mulai menghitung dari nol.
+
+68
+00:03:48,880 --> 00:03:52,530
+>> Berikut adalah contoh bagaimana Anda
+mungkin membuat sebuah array dari Anda sendiri.
+
+69
+00:03:52,530 --> 00:03:56,440
+Jadi mengatakan saya ingin menyimpan saya
+tiga nama anjing favorit.
+
+70
+00:03:56,440 --> 00:03:59,030
+Maka saya akan membuat sebuah array dari string.
+
+71
+00:03:59,030 --> 00:04:04,450
+Jadi saya akan menyatakan jenis, string, dan
+kemudian menempatkan nama dari array, anjing,
+
+72
+00:04:04,450 --> 00:04:06,450
+dan kemudian di alun-alun tersebut
+kurung menempatkan ukuran
+
+73
+00:04:06,450 --> 00:04:09,260
+dari array-- dalam kasus ini, tiga.
+
+74
+00:04:09,260 --> 00:04:12,690
+>> Jadi entri pertama saya akan
+menjadi anjing di indeks nol,
+
+75
+00:04:12,690 --> 00:04:14,750
+dan itu akan menjadi Milo.
+
+76
+00:04:14,750 --> 00:04:17,850
+Kemudian anjing pada indeks satu
+akan menjadi konyol,
+
+77
+00:04:17,850 --> 00:04:23,060
+Sayang Mochi, dan kemudian yang terakhir
+entri, entri ketiga pada indeks dua,
+
+78
+00:04:23,060 --> 00:04:26,130
+akan menjadi lucu, manis Elphie.
+
+79
+00:04:26,130 --> 00:04:28,610
+Anda akan melihat bahwa format
+untuk mengisi array ini
+
+80
+00:04:28,610 --> 00:04:32,150
+sangat banyak seperti bagaimana Anda mungkin
+mendeklarasikan variabel lain di mana
+
+81
+00:04:32,150 --> 00:04:36,307
+Anda memiliki nama variabel diikuti dengan
+nilai yang Anda ingin disimpan di dalamnya.
+
+82
+00:04:36,307 --> 00:04:38,140
+Satu-satunya perbedaan di
+hal ini adalah bahwa Anda
+
+83
+00:04:38,140 --> 00:04:42,700
+harus ingat untuk menempatkan indeks
+dari nilai dalam kurung persegi.
+
+84
+00:04:42,700 --> 00:04:46,420
+Dan di sana kita harus kami
+tiga anjing favorit.
+
+85
+00:04:46,420 --> 00:04:48,780
+>> Tapi sayangnya, sudah waktunya
+untuk kembali ke Caesar.
+
+86
+00:04:48,780 --> 00:04:52,910
+Ingat bahwa penggunaan yang benar untuk
+pengguna akan melintas di tidak hanya
+
+87
+00:04:52,910 --> 00:04:57,430
+nama program ./caesar, tapi
+juga kunci yang mereka ingin menggeser
+
+88
+00:04:57,430 --> 00:04:58,850
+plaintext mereka dengan.
+
+89
+00:04:58,850 --> 00:05:01,540
+Sehingga berarti bahwa argc harus dua.
+
+90
+00:05:01,540 --> 00:05:07,580
+Mereka harus lulus dalam two-- tidak lebih, tidak
+kurang dari dua argumen baris perintah.
+
+91
+00:05:07,580 --> 00:05:09,050
+>> Sekarang, bagaimana dengan argv?
+
+92
+00:05:09,050 --> 00:05:12,880
+Nah, kita sudah tahu bahwa
+array akan menjadi panjang dua,
+
+93
+00:05:12,880 --> 00:05:15,270
+tapi apa yang terkandung dalam setiap elemen?
+
+94
+00:05:15,270 --> 00:05:19,330
+Nah, elemen pertama
+akan menjadi ./caesar,
+
+95
+00:05:19,330 --> 00:05:24,190
+dan kemudian elemen berikutnya akan
+berisi kunci bahwa pengguna mengetik.
+
+96
+00:05:24,190 --> 00:05:27,480
+Sekarang, jika mereka digunakan dengan benar
+untuk penggunaan Caesar,
+
+97
+00:05:27,480 --> 00:05:29,350
+maka mereka akan mengetikkan nomor.
+
+98
+00:05:29,350 --> 00:05:33,260
+Tapi meskipun karakter
+yang mereka ketik adalah angka,
+
+99
+00:05:33,260 --> 00:05:35,790
+itu tipe data string.
+
+100
+00:05:35,790 --> 00:05:40,390
+>> Jadi bagaimana kita mengkonversi
+String ke integer?
+
+101
+00:05:40,390 --> 00:05:46,680
+Jadi mengatakan bahwa saya memiliki num, string,
+mengandung string 50.
+
+102
+00:05:46,680 --> 00:05:49,000
+Jika saya ingin mengkonversi
+ke integer, maka saya hanya
+
+103
+00:05:49,000 --> 00:05:53,340
+mendeklarasikan variabel baru,
+bilangan bulat i, memanggil atoi.
+
+104
+00:05:53,340 --> 00:06:01,160
+Aku lulus dalam variabel string saya, num, dan
+maka saya kemudian akan berisi nomor 50.
+
+105
+00:06:01,160 --> 00:06:04,350
+Pastikan untuk memeriksa orang
+halaman untuk fungsi atoi
+
+106
+00:06:04,350 --> 00:06:07,990
+untuk memeriksa perpustakaan itu
+di, serta nilai apa
+
+107
+00:06:07,990 --> 00:06:14,550
+akan kembali jika string berlalu
+di tidak mengandung semua nomor.
+
+108
+00:06:14,550 --> 00:06:16,950
+>> Jadi sekarang kita sudah
+kunci, langkah berikutnya
+
+109
+00:06:16,950 --> 00:06:19,430
+adalah untuk mendapatkan plaintext dari pengguna.
+
+110
+00:06:19,430 --> 00:06:21,170
+Sekarang, ini akan
+kurang rumit
+
+111
+00:06:21,170 --> 00:06:23,410
+dari navigasi di sekitar
+argumen baris perintah.
+
+112
+00:06:23,410 --> 00:06:26,190
+Yang harus kita lakukan adalah panggilan
+fungsi GetString
+
+113
+00:06:26,190 --> 00:06:29,660
+untuk meminta pengguna untuk memberikan
+kami string, tapi ingat
+
+114
+00:06:29,660 --> 00:06:34,090
+untuk memeriksa spesifikasi untuk bagaimana kita
+mungkin ingin meminta pengguna untuk itu.
+
+115
+00:06:34,090 --> 00:06:36,420
+>> Sekarang kita sampai pada
+jantung problem-- yang
+
+116
+00:06:36,420 --> 00:06:38,860
+bagaimana menulis dlm kode plaintext.
+
+117
+00:06:38,860 --> 00:06:42,830
+Yah, pertama, mari kita bicara tentang bagaimana
+untuk menulis dlm kode satu karakter pada satu waktu,
+
+118
+00:06:42,830 --> 00:06:47,370
+dan kemudian kita akan membahas bagaimana
+iterate atas seluruh plaintext.
+
+119
+00:06:47,370 --> 00:06:50,440
+Saya telah menulis beberapa pseudocode
+untuk masalah Caesar.
+
+120
+00:06:50,440 --> 00:06:52,310
+Saya mendorong Anda untuk
+menulis sendiri juga.
+
+121
+00:06:52,310 --> 00:06:55,900
+Ini mungkin tidak terlihat sama
+tambang, dan itu OK, tapi selama
+
+122
+00:06:55,900 --> 00:06:58,640
+sebagai ide umum adalah sama.
+
+123
+00:06:58,640 --> 00:07:00,780
+>> Tiga langkah pertama
+kami sudah melakukan.
+
+124
+00:07:00,780 --> 00:07:03,100
+Kami telah mendapat kunci dari
+argumen baris perintah,
+
+125
+00:07:03,100 --> 00:07:05,510
+kami telah berpaling kunci yang
+ke integer, dan kami sudah
+
+126
+00:07:05,510 --> 00:07:09,320
+mendorong pengguna untuk plaintext
+bahwa mereka ingin menulis dlm kode.
+
+127
+00:07:09,320 --> 00:07:12,420
+Jadi potongan besar berikutnya
+adalah bahwa untuk setiap karakter
+
+128
+00:07:12,420 --> 00:07:15,070
+dalam string plaintext,
+jika itu abjad,
+
+129
+00:07:15,070 --> 00:07:17,750
+kami ingin melestarikan
+kasus dan bergeser.
+
+130
+00:07:17,750 --> 00:07:20,900
+Dengan melestarikan kasus, apa yang saya
+maksud adalah bahwa semua huruf
+
+131
+00:07:20,900 --> 00:07:23,580
+surat harus tetap atas
+kasus dan semua huruf kecil
+
+132
+00:07:23,580 --> 00:07:25,640
+harus tetap huruf kecil.
+
+133
+00:07:25,640 --> 00:07:29,110
+Jadi setelah kita menggeser mereka,
+kemudian kami cetak ciphertext.
+
+134
+00:07:29,110 --> 00:07:33,100
+>> Berikut adalah tiga fungsi yang akan
+untuk berguna untuk masalah ini.
+
+135
+00:07:33,100 --> 00:07:38,010
+Ingat di atas ketika saya memberi
+Misalnya untuk memindahkan ini CS50?
+
+136
+00:07:38,010 --> 00:07:41,800
+Ingat bahwa 50 dan
+tanda seru tidak bergeser?
+
+137
+00:07:41,800 --> 00:07:45,680
+Jadi bagaimana kita bisa tahu apakah kita
+perlu menggeser surat atau tidak?
+
+138
+00:07:45,680 --> 00:07:48,650
+Nah, "adalah alpha," jika
+Anda lulus karakter,
+
+139
+00:07:48,650 --> 00:07:54,850
+akan mengembalikan true jika karakter yang
+adalah surat dan palsu sebaliknya.
+
+140
+00:07:54,850 --> 00:07:56,870
+Untuk membantu Anda dengan
+melestarikan kapitalisasi
+
+141
+00:07:56,870 --> 00:07:59,750
+adalah fungsi "yang
+atas "dan" lebih rendah. "
+
+142
+00:07:59,750 --> 00:08:03,350
+>> Kedua fungsi juga mengambil
+di satu karakter sebagai masukan
+
+143
+00:08:03,350 --> 00:08:06,580
+dan kembali Anda Boolean,
+benar atau salah
+
+144
+00:08:06,580 --> 00:08:11,280
+tergantung pada apakah karakter yang
+adalah huruf atau huruf kecil.
+
+145
+00:08:11,280 --> 00:08:14,610
+Karena "adalah atas" dan "adalah
+lebih rendah "adalah fungsi Boolean,
+
+146
+00:08:14,610 --> 00:08:18,660
+yang berarti bahwa mereka kembali Anda Boolean,
+Anda dapat menggunakan ini dalam kondisi Anda.
+
+147
+00:08:18,660 --> 00:08:23,490
+Jadi di sini adalah potongan kode yang hanya
+mencetak surat jika huruf.
+
+148
+00:08:23,490 --> 00:08:27,790
+Jadi saya sudah menyatakan karakter saya
+surat untuk kasus atas zed
+
+149
+00:08:27,790 --> 00:08:33,440
+dan kemudian jika "adalah atas" kembali
+benar, maka saya mencetak surat itu.
+
+150
+00:08:33,440 --> 00:08:38,200
+>> Kembali ke contoh sederhana kami
+pergeseran alfabet dengan kunci dari dua,
+
+151
+00:08:38,200 --> 00:08:41,049
+bagaimana kita benar-benar mendapatkan yang bekerja?
+
+152
+00:08:41,049 --> 00:08:45,770
+Nah, ternyata karakter
+dan bilangan bulat sangat erat.
+
+153
+00:08:45,770 --> 00:08:48,840
+Masing-masing karakter memiliki
+nilai integer terkait
+
+154
+00:08:48,840 --> 00:08:53,260
+dengan itu ditemukan dalam grafik ASCII,
+mana ASCII masing-masing karakter
+
+155
+00:08:53,260 --> 00:08:55,380
+nilai ditampilkan.
+
+156
+00:08:55,380 --> 00:08:58,940
+Jadi kasus atas A berkorespondensi
+ke nilai ASCII dari 65
+
+157
+00:08:58,940 --> 00:09:02,270
+dan huruf kecil untuk
+nilai ASCII dari 97.
+
+158
+00:09:02,270 --> 00:09:04,940
+>> Jangan ragu untuk mencari
+setiap ASCII grafik secara online
+
+159
+00:09:04,940 --> 00:09:07,720
+untuk melihat nilai-nilai ini untuk diri sendiri.
+
+160
+00:09:07,720 --> 00:09:12,096
+Jadi apa artinya ini adalah bahwa kita bisa
+mengambil karakter huruf A,
+
+161
+00:09:12,096 --> 00:09:18,200
+menambahkan integer dua untuk itu, dan kemudian mendapatkan
+karakter atas kasus C sebagai hasilnya.
+
+162
+00:09:18,200 --> 00:09:23,720
+Itu karena 65, ASCII
+Nilai untuk modal A, ditambah 2,
+
+163
+00:09:23,720 --> 00:09:29,960
+memberi kita 67, yang sesuai
+dengan karakter huruf C.
+
+164
+00:09:29,960 --> 00:09:33,480
+>> Sayangnya, hal
+tidak akan cukup begitu sederhana.
+
+165
+00:09:33,480 --> 00:09:36,980
+Kami memiliki persamaan yang
+kita harus mempertimbangkan.
+
+166
+00:09:36,980 --> 00:09:43,590
+Di sini memberitahu kita bahwa ciphertext i
+surat sesuai dengan plaintext engan
+
+167
+00:09:43,590 --> 00:09:48,900
+surat, ditambah KEY- yang
+semua itu, modular 26.
+
+168
+00:09:48,900 --> 00:09:50,810
+Mengapa itu terjadi?
+
+169
+00:09:50,810 --> 00:09:55,430
+Mari kita kembali ke contoh kita dari
+sebelumnya, di mana modal A, ditambah 2,
+
+170
+00:09:55,430 --> 00:09:57,590
+memberi kita modal C.
+
+171
+00:09:57,590 --> 00:10:01,870
+>> Jadi menerapkan persamaan yang
+spesifikasi memberi kita,
+
+172
+00:10:01,870 --> 00:10:06,660
+maka mari kita mengambil modal A
+ditambah 2 dan mod bahwa dengan 26.
+
+173
+00:10:06,660 --> 00:10:10,730
+Jadi modal A, ketika saya memasukkannya ke dalam
+mereka tanda kutip tunggal,
+
+174
+00:10:10,730 --> 00:10:14,010
+memungkinkan saya untuk memperlakukannya sebagai
+integer, sehingga memungkinkan
+
+175
+00:10:14,010 --> 00:10:17,500
+saya untuk dilemparkan ke nilai ASCII, 65.
+
+176
+00:10:17,500 --> 00:10:20,080
+65 ditambah 2 adalah 67.
+
+177
+00:10:20,080 --> 00:10:25,210
+67 mod 26 memberi kita 15,
+tapi itu tidak benar-benar
+
+178
+00:10:25,210 --> 00:10:32,590
+masuk akal karena kita tahu bahwa
+modal C nilai ASCII adalah 67, bukan 15.
+
+179
+00:10:32,590 --> 00:10:35,580
+Jadi bagaimana kita mendamaikan itu?
+
+180
+00:10:35,580 --> 00:10:39,840
+>> Nah, di sini saya ingin mengandaikan
+Gagasan indeks abjad.
+
+181
+00:10:39,840 --> 00:10:44,010
+Jadi kita sudah bicara tentang bagaimana
+masing-masing karakter memiliki nilai ASCII,
+
+182
+00:10:44,010 --> 00:10:48,810
+tapi saya ingin mengatakan, baik, mari kita
+berpikir tentang masing-masing karakter juga memiliki
+
+183
+00:10:48,810 --> 00:10:52,230
+indeks abjad,
+di mana A misalnya,
+
+184
+00:10:52,230 --> 00:10:58,800
+sebagai huruf pertama dari alfabet,
+memiliki indeks abjad dari nol.
+
+185
+00:10:58,800 --> 00:11:02,070
+Jadi sekarang mari kita menerapkan
+persamaan yang sama seperti sebelumnya,
+
+186
+00:11:02,070 --> 00:11:05,040
+tetapi menggunakan indeks abjad.
+
+187
+00:11:05,040 --> 00:11:07,810
+>> Jadi A adalah nol, seperti yang kita telah ditentukan.
+
+188
+00:11:07,810 --> 00:11:15,640
+Jadi kemudian mengambil nol ditambah dua, mod 26,
+itu dua, mod 26, yang memberi kami dua.
+
+189
+00:11:15,640 --> 00:11:18,780
+Dan juga, dalam hal
+indeks abjad,
+
+190
+00:11:18,780 --> 00:11:23,930
+C adalah huruf ketiga dalam
+alfabet, sehingga akan sesuai
+
+191
+00:11:23,930 --> 00:11:26,290
+untuk indeks abjad dari dua.
+
+192
+00:11:26,290 --> 00:11:29,850
+Jadi sepertinya bahwa menggunakan
+indeks alfabet dalam kasus ini
+
+193
+00:11:29,850 --> 00:11:32,840
+benar-benar memberikan kita hasil yang benar.
+
+194
+00:11:32,840 --> 00:11:35,020
+>> Jadi sekarang mari kita periksa untuk
+melihat apakah karya persamaan
+
+195
+00:11:35,020 --> 00:11:37,210
+dengan indeks abjad.
+
+196
+00:11:37,210 --> 00:11:42,540
+Indeks abjad Y adalah 24 sebagai
+kedua huruf terakhir dalam alfabet.
+
+197
+00:11:42,540 --> 00:11:46,520
+Jadi 24 ditambah kami
+kunci dari dua memberi kita 26.
+
+198
+00:11:46,520 --> 00:11:54,750
+26 mod 26 memberi kita 0, yang, beruntung bagi
+kami, adalah indeks abjad untuk A.
+
+199
+00:11:54,750 --> 00:11:59,100
+Jadi mudah-mudahan itu cukup bahwa bukti
+metode indeks alfabet bekerja.
+
+200
+00:11:59,100 --> 00:12:03,180
+Jika tidak, jangan ragu untuk mencoba
+beberapa contoh Anda sendiri.
+
+201
+00:12:03,180 --> 00:12:08,030
+>> Dalam rangka untuk benar membungkus
+alfabet dan menerapkan persamaan Caesar,
+
+202
+00:12:08,030 --> 00:12:11,280
+maka kita tahu bahwa kita perlu
+berurusan dengan indeks abjad.
+
+203
+00:12:11,280 --> 00:12:15,130
+Tapi kita mulai dengan ASCII
+nilai-nilai, dan hanya kemudian
+
+204
+00:12:15,130 --> 00:12:18,530
+kita kemudian dikonversi ke
+indeks alfabet.
+
+205
+00:12:18,530 --> 00:12:23,970
+Dari sana, dalam rangka untuk mencetak, kita perlu
+berurusan dengan nilai-nilai ASCII lagi.
+
+206
+00:12:23,970 --> 00:12:28,350
+Jadi kita perlu mencari cara untuk
+pergi dari ASCII ke abjad
+
+207
+00:12:28,350 --> 00:12:31,080
+dan dari abjad ke ASCII.
+
+208
+00:12:31,080 --> 00:12:34,910
+>> Jadi saya menyerahkan kepada Anda untuk mencari tahu
+pola antara karakter
+
+209
+00:12:34,910 --> 00:12:38,590
+dan abjad yang
+indeks dan nilai ASCII.
+
+210
+00:12:38,590 --> 00:12:41,530
+Sekarang, ingat bahwa meskipun
+tabel ini tepat pada slide
+
+211
+00:12:41,530 --> 00:12:45,630
+menunjukkan huruf besar, kami juga
+harus mempertimbangkan apakah atau tidak
+
+212
+00:12:45,630 --> 00:12:48,915
+pola yang berbeda berlaku
+untuk karakter huruf kecil.
+
+213
+00:12:48,915 --> 00:12:52,070
+
+214
+00:12:52,070 --> 00:12:55,840
+>> Jadi sekarang kita sudah tahu
+bagaimana menggeser satu karakter,
+
+215
+00:12:55,840 --> 00:13:02,200
+maka yang harus kita lakukan adalah skala yang
+untuk pergi di seluruh plaintext.
+
+216
+00:13:02,200 --> 00:13:04,260
+Jadi plaintext adalah string.
+
+217
+00:13:04,260 --> 00:13:08,210
+Beruntung bagi kami, string adalah benar-benar
+hanya sebuah array karakter,
+
+218
+00:13:08,210 --> 00:13:12,150
+sehingga untuk mengakses setiap karakter
+string, yang harus Anda lakukan
+
+219
+00:13:12,150 --> 00:13:14,270
+adalah dengan menggunakan notasi array.
+
+220
+00:13:14,270 --> 00:13:20,270
+Katakanlah saya memiliki variabel jenis
+string disebut "text = 'ini CS50.'"
+
+221
+00:13:20,270 --> 00:13:22,730
+>> Nah, kemudian, untuk
+mengakses masing-masing karakter,
+
+222
+00:13:22,730 --> 00:13:25,880
+semua saya harus lakukan dengan
+teks variabel
+
+223
+00:13:25,880 --> 00:13:31,660
+mengatakan baik, teks pada indeks nol, yang
+sesuai dengan T. modal Teks pada indeks
+
+224
+00:13:31,660 --> 00:13:35,100
+salah satu sesuai dengan kasus h rendah.
+
+225
+00:13:35,100 --> 00:13:38,110
+Fungsi lain yang berguna adalah
+fungsi panjang string.
+
+226
+00:13:38,110 --> 00:13:40,760
+Jadi lewat di string ke
+fungsi yang akan kembali
+
+227
+00:13:40,760 --> 00:13:44,610
+integer, panjang string itu.
+
+228
+00:13:44,610 --> 00:13:47,060
+>> Sekarang kita sudah berbicara tentang
+semua elemen yang berbeda,
+
+229
+00:13:47,060 --> 00:13:48,540
+mari kita menempatkan mereka kembali bersama-sama.
+
+230
+00:13:48,540 --> 00:13:52,210
+Jadi kembali ke salah satu pseudocode saya
+kode atau pseudocode Anda
+
+231
+00:13:52,210 --> 00:13:55,920
+dan pergi melalui dan pastikan bahwa Anda
+tahu bagaimana melakukan setiap hal.
+
+232
+00:13:55,920 --> 00:14:01,520
+Mendapatkan kunci menggunakan argc dan argv,
+memutar kunci ke integer, sebuah
+
+233
+00:14:01,520 --> 00:14:06,840
+untuk i, disuruh untuk plaintext,
+GetString, dan kemudian iterasi
+
+234
+00:14:06,840 --> 00:14:09,590
+lebih dari setiap karakter di
+string plaintext,
+
+235
+00:14:09,590 --> 00:14:14,910
+melestarikan kasus masing-masing karakter
+dan pergeseran karakter yang oleh kunci,
+
+236
+00:14:14,910 --> 00:14:17,520
+memastikan bahwa Anda
+membungkus di sekitar alfabet,
+
+237
+00:14:17,520 --> 00:14:20,850
+akhirnya mencetak ciphertext itu.
+
+238
+00:14:20,850 --> 00:14:25,470
+Nama saya Amila, dan ini adalah Caesar.
+
+239
+00:14:25,470 --> 00:14:28,448
+

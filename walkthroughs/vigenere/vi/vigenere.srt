@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Hãy bước lên chúng tôi
+trò chơi với các thuật toán mã hóa vigenere.
+
+3
+00:00:04,030 --> 00:00:06,710
+Các thuật toán mã hóa vigenere là
+rất giống với Caesar,
+
+4
+00:00:06,710 --> 00:00:11,060
+trừ Caesar chúng tôi thông qua tại
+một số nguyên duy nhất là chính chúng ta.
+
+5
+00:00:11,060 --> 00:00:14,100
+Trong vigenere chúng ta sẽ
+để vượt qua trong một từ khóa.
+
+6
+00:00:14,100 --> 00:00:19,400
+Vì vậy, nếu tôi muốn chuyển các
+bản mã này là CS 50 bởi ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+sau đó có nghĩa rằng mỗi chữ cái trong
+ohai sẽ phục vụ như là chìa khóa,
+
+8
+00:00:23,260 --> 00:00:27,160
+và tôi sẽ đến chu kỳ trên
+từ khóa cho sự thay đổi của tôi
+
+9
+00:00:27,160 --> 00:00:31,930
+làm cho các bản mã
+rất nhiều khó khăn hơn để giải mã.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> không có nghĩa là gì
+chuyển bằng các từ khóa?
+
+11
+00:00:34,540 --> 00:00:38,610
+Vâng, từ khóa là một chuỗi
+nơi mỗi lá thư tương ứng
+
+12
+00:00:38,610 --> 00:00:41,080
+đến một số thay đổi số nguyên.
+
+13
+00:00:41,080 --> 00:00:49,310
+Vì vậy, các o tương ứng với khóa 14,
+h cho một phím số 7, một có một phím 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+do đó sẽ không thay đổi bất cứ điều gì,
+và sau đó tôi có một khóa 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Nói rằng tôi chạy vigenere A với
+văn bản đơn giản này là CS50 tốt,
+
+16
+00:01:00,000 --> 00:01:02,800
+mà chỉ đơn giản là sẽ cung cấp cho
+cho tôi một chuỗi không thay đổi.
+
+17
+00:01:02,800 --> 00:01:08,170
+Chú ý rằng điều này là tương đương với
+chạy Caesar với khóa bằng không.
+
+18
+00:01:08,170 --> 00:01:12,070
+Trong thực tế, chạy vigenere
+với bất cứ ký tự đơn
+
+19
+00:01:12,070 --> 00:01:17,070
+sẽ tương đương với chạy
+Caesar với số nguyên cùng.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Được rồi, như vậy, vì
+họ là như vậy tương tự như tôi muốn
+
+21
+00:01:20,400 --> 00:01:24,300
+thực sự khuyên rằng nếu bạn
+muốn bạn chỉ có thể sao chép Caesar của bạn
+
+22
+00:01:24,300 --> 00:01:26,932
+mã vào mã vigenere của bạn.
+
+23
+00:01:26,932 --> 00:01:28,640
+Mọi thứ sẽ thay đổi,
+nhưng ít nhất bạn có
+
+24
+00:01:28,640 --> 00:01:31,110
+một số xương sống mà bạn có thể làm việc với.
+
+25
+00:01:31,110 --> 00:01:36,410
+Bởi vì Todos đều giống nhau, chúng tôi muốn
+để có được chìa khóa, có văn bản đồng bằng,
+
+26
+00:01:36,410 --> 00:01:40,690
+Mã hóa là văn bản đơn giản,
+và sau đó in ra rằng.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Cũng giống như Caesar phím sẽ
+được thông qua tại như dòng lệnh thứ hai
+
+28
+00:01:44,980 --> 00:01:50,540
+lập luận chứa trong chỉ số argv
+1, nhưng nó khác nhau thời gian này
+
+29
+00:01:50,540 --> 00:01:52,560
+vì nó phải là chữ cái.
+
+30
+00:01:52,560 --> 00:01:56,390
+Vì vậy, chúng ta cần để lặp qua mỗi
+nhân vật duy nhất trong chủ chốt
+
+31
+00:01:56,390 --> 00:02:00,800
+mà người sử dụng đã có, đảm bảo
+mà mỗi nhân vật là chữ cái
+
+32
+00:02:00,800 --> 00:02:02,800
+để tiếp tục.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Một khi chúng ta đã làm điều đó, sau đó chúng tôi
+có thể có được chuỗi từ người sử dụng,
+
+34
+00:02:05,560 --> 00:02:07,560
+cũng như chúng ta đã làm trước.
+
+35
+00:02:07,560 --> 00:02:10,520
+Và bây giờ, chúng tôi đến với trái tim
+của vấn đề cho vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+mà chỉ là như Caesar, làm thế nào để
+tìm ra các mô hình Enciphering
+
+37
+00:02:14,665 --> 00:02:19,760
+và phương trình, và Mã hóa
+toàn bộ bản rõ.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Vì vậy, bạn sẽ nhận thấy rằng
+phương trình cho sự thay đổi vigenere
+
+39
+00:02:23,280 --> 00:02:25,610
+là rất tương tự như Caesar.
+
+40
+00:02:25,610 --> 00:02:29,780
+Sự khác biệt duy nhất là
+thay vì một biến duy nhất k
+
+41
+00:02:29,780 --> 00:02:37,270
+trước, bây giờ k có chỉ số phụ,
+chỉ thư thứ j của khoá.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Hãy xem qua một ví dụ.
+
+43
+00:02:39,560 --> 00:02:43,830
+Giả sử bạn muốn vượt qua một bí mật
+nhắn vào lòng của bạn, tôi thích bạn.
+
+44
+00:02:43,830 --> 00:02:46,325
+Vâng, đối với chính bạn, bạn
+chọn cái gì đó của bạn
+
+45
+00:02:46,325 --> 00:02:49,790
+biết lòng biết rằng bạn thích, gấu trúc.
+
+46
+00:02:49,790 --> 00:02:52,290
+Được rồi, vậy làm thế nào chúng ta thay đổi này?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Vâng, chúng tôi có chỉ số rõ chúng tôi.
+
+48
+00:02:55,500 --> 00:02:59,160
+Đó là ở chữ cái đầu tiên và
+vậy là chỉ số cho khóa của chúng tôi
+
+49
+00:02:59,160 --> 00:03:02,830
+mà là ở p, là người đầu tiên
+lá thư từ gấu trúc của chúng tôi.
+
+50
+00:03:02,830 --> 00:03:08,590
+Vì vậy, việc chuyển đổi tôi bởi p cho chúng ta x,
+sau đó chúng ta tiến chỉ số plaintext.
+
+51
+00:03:08,590 --> 00:03:10,460
+Điều này được chúng tôi đến một không gian.
+
+52
+00:03:10,460 --> 00:03:13,540
+Bây giờ, các nhân vật không gian
+là không tự chữ cái,
+
+53
+00:03:13,540 --> 00:03:16,930
+do đó có nghĩa rằng, đó chỉ
+chuyển quyền qua các bản mã,
+
+54
+00:03:16,930 --> 00:03:23,430
+chúng tôi đặt một không gian ở đó, và chúng tôi không
+thúc đẩy các chỉ số cho chính chúng ta.
+
+55
+00:03:23,430 --> 00:03:25,820
+Vì vậy, chúng tôi vẫn còn ở p vào thời điểm này.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Chúng tôi tiến đến tiếp theo
+chỉ số trong bản rõ của chúng tôi.
+
+57
+00:03:30,130 --> 00:03:34,030
+Và bây giờ, bởi vì đó là
+một bức thư, chữ thường l,
+
+58
+00:03:34,030 --> 00:03:37,920
+chúng tôi thay đổi điều đó bằng các
+chỉ số tiếp theo trong chính chúng ta.
+
+59
+00:03:37,920 --> 00:03:42,360
+Mà là một, đó là một số không
+sự thay đổi như vậy mà chỉ cần trở thành
+
+60
+00:03:42,360 --> 00:03:44,370
+một l trong bản mã của chúng tôi.
+
+61
+00:03:44,370 --> 00:03:51,120
+Sau đó, chúng ta tiến cả bản rõ, và
+các chỉ số quan trọng vì nó là chữ cái.
+
+62
+00:03:51,120 --> 00:03:56,210
+Vì vậy, sau đó chúng tôi tiếp tục mà
+cho đến khi chúng tôi nhận được e trong như thế nào.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Được rồi, do đó, bạn sẽ nhận thấy tại đây
+chỉ rằng, trong điều kiện của chỉ số quan trọng của chúng tôi,
+
+64
+00:04:01,090 --> 00:04:03,940
+chúng tôi đã đạt đến cuối
+từ gấu trúc, vì vậy những gì
+
+65
+00:04:03,940 --> 00:04:08,750
+xảy ra khi chúng tôi nhận được đến tiếp theo
+thư chữ cái trong plaintext?
+
+66
+00:04:08,750 --> 00:04:12,180
+Vâng, tất cả những gì xảy ra là chúng tôi
+quấn xung quanh để bắt đầu,
+
+67
+00:04:12,180 --> 00:04:14,710
+để chỉ số đầu tiên của chính chúng tôi.
+
+68
+00:04:14,710 --> 00:04:19,570
+Vì vậy, sau đó chúng tôi thay đổi đó
+y bởi p để cung cấp cho chúng tôi n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Và sau đó, chúng tôi tiếp tục hoàn chỉnh mã hóa
+bản rõ của chúng tôi để có được x lvne noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Từ ví dụ này, tôi
+cho thấy rằng chúng tôi chỉ tiến
+
+71
+00:04:29,300 --> 00:04:33,140
+để tự tiếp theo trong các từ khóa
+nếu nhân vật trong văn bản gốc
+
+72
+00:04:33,140 --> 00:04:37,480
+là một bức thư như vậy isalpha
+chức năng sẽ có ích ở đây.
+
+73
+00:04:37,480 --> 00:04:43,030
+Và, cũng giống như trong Caesar, chúng tôi muốn
+bảo tồn các trường hợp, isupper và islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Vì vậy, thêm chút này
+trong thành giả của bạn.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Vì vậy, làm thế nào để chúng ta tìm ra những thay đổi quan trọng?
+
+76
+00:04:48,510 --> 00:04:53,030
+Vâng, nếu bạn nhớ lại cuộc thảo luận của chúng tôi
+trên các chỉ số chữ cái trong các Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+vấn đề, nó rất giống.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Trong đó A tương ứng với một ASCII
+giá trị là 65, nhưng một sự thay đổi từ 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+và sau đó là lá thư cuối cùng
+trong bảng chữ cái, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+tương ứng với một sự thay đổi của 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Bạn sẽ nhận thấy rằng sự thay đổi
+là giống nhau hay không
+
+82
+00:05:10,320 --> 00:05:14,880
+bức thư là chữ hoa hay chữ thường.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, vì vậy bây giờ mà bạn
+biết làm thế nào để tìm ra
+
+84
+00:05:17,700 --> 00:05:21,470
+sự thay đổi số mà
+tương ứng với một ký tự đơn
+
+85
+00:05:21,470 --> 00:05:24,050
+chúng ta hãy quay trở lại phương trình của chúng tôi.
+
+86
+00:05:24,050 --> 00:05:28,180
+Bởi vì chúng tôi có hai khác nhau
+subscript đây, i, k,
+
+87
+00:05:28,180 --> 00:05:32,130
+đó là một gợi ý rằng chúng ta muốn theo dõi
+của cả hai vị trí của mình trong plaintext
+
+88
+00:05:32,130 --> 00:05:36,600
+cũng như vị trí của chúng tôi trong các từ khóa,
+vì vậy những người là hai biến riêng biệt
+
+89
+00:05:36,600 --> 00:05:39,010
+rằng chúng ta muốn giữ một tổ chức của.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Bây giờ, các vị trí trong bản rõ của chúng tôi
+sẽ tăng lên mỗi lần,
+
+91
+00:05:42,580 --> 00:05:45,530
+do đó sẽ là một
+chút về phía trước thẳng
+
+92
+00:05:45,530 --> 00:05:49,750
+như trái ngược với các vị trí từ khóa,
+mà chúng ta biết có để bọc xung quanh,
+
+93
+00:05:49,750 --> 00:05:52,910
+và đôi khi tăng,
+đôi khi ở lại cùng.
+
+94
+00:05:52,910 --> 00:05:55,430
+Vì vậy, làm thế nào để chúng ta thực hiện
+các chức năng
+
+95
+00:05:55,430 --> 00:05:59,820
+để bọc xung quanh
+chỉ số cho các từ khóa không?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Tôi sẽ sử dụng cách đếm ví dụ.
+
+97
+00:06:01,640 --> 00:06:06,100
+Đếm ra là một cách phổ biến
+chia thành các nhóm người.
+
+98
+00:06:06,100 --> 00:06:10,660
+Nói rằng tôi có 5 người và tôi muốn
+chia chúng thành ba nhóm,
+
+99
+00:06:10,660 --> 00:06:13,640
+cũng sau đó tôi sẽ bắt đầu bằng cách đếm đi.
+
+100
+00:06:13,640 --> 00:06:16,980
+Người đầu tiên sẽ
+nói tôi là đội bóng số một,
+
+101
+00:06:16,980 --> 00:06:21,030
+người tiếp theo sẽ là số nhóm
+hai, số lượng nhóm người thứ ba
+
+102
+00:06:21,030 --> 00:06:21,910
+số ba.
+
+103
+00:06:21,910 --> 00:06:25,910
+Bây giờ, tôi chỉ muốn ba nhóm để
+người thứ tư sẽ thực sự
+
+104
+00:06:25,910 --> 00:06:30,160
+bắt đầu từ đầu và nói,
+tốt, tôi là đội bóng số một là tốt,
+
+105
+00:06:30,160 --> 00:06:32,890
+và người kế tiếp
+sẽ là đội bóng số hai.
+
+106
+00:06:32,890 --> 00:06:37,660
+Và, từ đó, họ có thể sau đó
+phân chia thành các nhóm của họ.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Vì vậy, làm thế nào tôi có thể sử dụng modulo
+để giúp tôi thực hiện
+
+108
+00:06:41,130 --> 00:06:44,160
+này đếm ra bọc quanh chức năng?
+
+109
+00:06:44,160 --> 00:06:50,140
+Vâng, người đầu tiên
+số 1, mod 3 cho chúng ta 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 cho chúng ta 2,
+và 3 mod 3 cho chúng ta 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Người thứ tư, số 4, mod 3
+cho chúng ta 1, và sau đó 5 mod 3 cho chúng ta 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Vì vậy, bạn sẽ nhận thấy rằng mặc dù
+số lượng người mà tôi có
+
+113
+00:07:05,370 --> 00:07:11,210
+tăng, và ở trên
+3, vì tôi modding của 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Tôi luôn luôn có được con số 0, 1 và 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Tôi không bao giờ có được lớn hơn 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Vì vậy, sau đó, ngay cả khi tôi đã 10
+người, sau đó tất cả những người
+
+117
+00:07:22,630 --> 00:07:27,430
+sẽ vẫn nằm trong nhóm 1, 2, hoặc 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Vì vậy, bây giờ chúng ta biết rằng nếu chúng ta có một nhóm
+5 và chúng tôi mod tất cả những bằng 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+sau đó chúng tôi sẽ không bao giờ đến
+vượt nhóm 0, 1, hoặc 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Vì vậy, chúng ta sẽ không bao giờ có được một nhóm
+số đó bằng 3 hoặc cao hơn.
+
+121
+00:07:43,430 --> 00:07:46,980
+Vì vậy, ngay cả khi tôi thêm năm nữa
+người, sau đó tất cả chúng
+
+122
+00:07:46,980 --> 00:07:53,150
+sẽ vẫn được giao cho các nhóm
+0, 1, hoặc 2, vì tôi đang modding cho 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Tôi sẽ không bao giờ vượt quá giới hạn đó.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, vì vậy hãy xem nếu chúng ta có thể áp dụng
+khái niệm này bằng cách sử dụng modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+để bọc xung quanh
+số nhóm và áp dụng
+
+126
+00:08:03,710 --> 00:08:08,000
+nó để vigenere nơi chúng tôi muốn
+sử dụng modulo để bọc xung quanh
+
+127
+00:08:08,000 --> 00:08:10,220
+các chỉ số cho các từ khóa.
+
+128
+00:08:10,220 --> 00:08:12,830
+Mặc dù chúng tôi đang incrementing
+chỉ số chúng ta luôn luôn
+
+129
+00:08:12,830 --> 00:08:17,260
+muốn chắc chắn rằng chúng tôi luôn
+quấn xung quanh để khi bắt đầu
+
+130
+00:08:17,260 --> 00:08:20,050
+không bao giờ vượt quá
+chiều dài của chuỗi.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, vì vậy tôi biết nó có thể là
+một chút áp đảo.
+
+132
+00:08:23,510 --> 00:08:26,670
+Có rất nhiều hơn để làm trong p thiết lập này.
+
+133
+00:08:26,670 --> 00:08:30,050
+Vì vậy, hãy chắc chắn rằng bạn viết ra
+một giả tốt cho chính mình
+
+134
+00:08:30,050 --> 00:08:32,870
+rằng bạn hiểu và
+mà được công việc làm.
+
+135
+00:08:32,870 --> 00:08:35,580
+Hãy thử và giải quyết tất cả
+dòng duy độc lập
+
+136
+00:08:35,580 --> 00:08:38,370
+tìm ra tất cả các bé
+mảnh nhỏ của câu đố
+
+137
+00:08:38,370 --> 00:08:40,260
+trước khi đưa nó lại với nhau.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Hãy chắc chắn rằng bạn có thể nhận được
+phím từ dòng lệnh
+
+139
+00:08:43,110 --> 00:08:46,780
+và đảm bảo rằng đó là chữ cái,
+nhận được văn bản đồng bằng từ người sử dụng,
+
+140
+00:08:46,780 --> 00:08:51,010
+và sau đó trong Enciphering, chắc chắn bạn
+biết cách Mã hóa thư duy nhất,
+
+141
+00:08:51,010 --> 00:08:56,130
+và sau đó tiến đến toàn bộ chuỗi
+với tất cả các chức năng bọc xung quanh.
+
+142
+00:08:56,130 --> 00:08:59,610
+Cuối cùng, bạn có thể in các bản mã.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Tên tôi là một Zamyla,
+và đây là vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

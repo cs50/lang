@@ -1,0 +1,47 @@
+Zamyla Chan: Let's step up our game with the vigenere cipher. The vigenere cipher is very similar to Caesar, except in Caesar we passed in a single integer as our key. In vigenere we're going to pass in a keyword. So, if I wanted to shift the ciphertext this is CS 50 by ohai, then that means that each letter in ohai is going to serve as the key, and I'm going to cycle over that keyword for my shift making the ciphertext a lot harder to decode. 
+
+What does it mean to shift by the keyword? Well, the keyword is a string where every letter corresponds to some integer shift. So, the o corresponds to a key of 14, h to a key of 7, a has a key of 0, so that wouldn't change anything, and then i has a key of 8. 
+
+Say I ran vigenere A with the plain text this is CS50 well, that would simply give me an unchanged string. Notice that this is equivalent to running Caesar with a key of zero. In fact, running vigenere with any single character would be equivalent to running Caesar with that same integer. 
+
+All right, so, since they are so similar I'd actually recommend that if you want you can just copy your Caesar code into your vigenere code. Things will change, but at least you have some backbone that you can work with. Because the TODOs are the same we want to get the key, get the plain text, encipher that plain text, and then print that out. 
+
+Just like Caesar the key is going to be passed in as the second command line argument contained in argv index 1, but it's different this time because it must be alphabetical. So, we need to iterate over every single character in that key that the user passed in, and ensure that every character is alphabetic in order to continue. 
+
+Once we've done that, then we can get the string from the user, just as we did before. And now, we come to the heart of the problem for vigenere, which is just like Caesar, how to figure out the enciphering pattern and equation, and encipher the entire plaintext. 
+
+So, you'll notice that the equation for the vigenere shift is very similar to the Caesar one. The only difference is that instead of a single variable k before, now k has a subscript, indicating the jth letter of the key. 
+
+Let's walk through an example. Say you wanted to pass a secret message onto your crush, I like you. Well, for your key you choose something that your know crush knows that you like, pandas. All right, so how do we shift this? 
+
+Well, we have our plaintext index. That's at the first letter and so is the index for our key which is at the p, the first letter in our panda word. So, shifting I by p gives us x, then we advance the plaintext index. This gets us to a space. Now, the space character is non alphabetic, so that means that, that just transfers right over to the ciphertext, we put a space there, and we don't advance the index for our key. So, we're still at p at this point. 
+
+We advance to the next index in our plaintext. And now, because that is a letter, the lowercase l, we shift that by the next index in our key. Which is a, which is a zero shift so that just becomes an l in our ciphertext. Then, we advance both the plaintext, and the key index because it's alphabetic. So then we continue that until we get to the e in like. 
+
+All right, so you'll notice at this point that, in terms of our key index, we've reached the end of the panda word, so what happens when we get to the next alphabetic letter in the plaintext? Well, all that happens is we wrap around to the beginning, to the first index of our key. So, then we shift that y by p to give us n. And then, we continue finishing encoding our plaintext to get x lvne noh. 
+
+From this example, I showed that we only advance to the next letter in the keyword if the character in plain text is a letter so the isalpha function will come in handy here. And, just as in Caesar, we want to preserve the case, isupper and islower. So, add this little bit in into your pseudocode. 
+
+So how do we figure out the key shifts? Well, if you recall our discussion on alphabetical indices in the Caesar problem, it's very similar. 
+
+Where A corresponds to an ASCII value of 65 but a shift of 0, and then the last letter in the alphabet, Z, corresponds to a shift of 25. You'll notice that the shift is identical whether or not the letter is upper case or lower case. 
+
+OK, so now that you know how to figure out the numerical shift that corresponds to a single character let's go back to our equation. Because we have two different subscripts here, i and j, that's a hint that we want to keep track of both our position in the plaintext as well as our position in the keyword, so those are two separate variables that we want to keep a hold of. 
+
+Now, the position in our plaintext is going to increase every time, so that's going to be a bit more straight forward as opposed to the position the keyword, which we know has to wrap around, and sometimes increment, sometimes stay the same. So, how do we implement the functionality to wrap around the index for the keyword? 
+
+I'm going to use the count off example. Counting off is a popular way to split people into groups. Say I had 5 people and I wanted to split them up into three groups, well then I would start by counting off. The first person would say I'm team number one, the next person would be team number two, the third person team number three. Now, I only want three groups so the fourth person would actually start at the beginning and say, well, I'm team number one as well, and the next person would be team number two. And, from there, they can then separate into their groups. 
+
+So, how might I use modulo to help me implement this count off wrap around function? Well, the first person number 1, mod 3 gives us 1. 2 mod 3 gives us 2, and 3 mod 3 gives us 0. 
+
+The fourth person, number 4, mod 3 gives us 1, and then 5 mod 3 gives us 2. So, you will notice that even though the number of people that I have increases, and is above 3, since I'm modding by 3 I always get numbers 0, 1, and 2. I never get larger than 3. So then, even if I had 10 people, then all of those people would still be within groups 1, 2, or 0. 
+
+So, now we know that if we have a group of 5 and we mod all of those by 3, then we're never going to exceed groups 0, 1, or 2. So, we're never going to get a group number that's equal to 3 or above. So, even if I add five more people, then all of them would still be assigned to groups 0, 1, or 2 because I'm modding by 3. I'm never going to exceed that cap. 
+
+OK, so let's see if we can apply this concept of using modulo to wrap around the group numbers and apply it to vigenere where we want to use modulo to wrap around the index for the keyword. Even though we're incrementing the index we always want to make sure that we always wrap around to the very beginning never exceeding the length of the string. 
+
+OK, so I know it might be a little bit overwhelming. There's a lot more to do in this p set. So, make sure that you write out a good pseudocode for yourself that you understand and that gets the job done. Try and address every single line independently figuring out all the little small pieces of the puzzle before putting it together. 
+
+Make sure that you can get the key from the command line and ensure that it's alphabetic, get the plain text from the user, and then in enciphering, make sure you know how to encipher a single letter, and then progress to the whole string with all of the wrap around functions. Finally, you can print the ciphertext. 
+
+My name is a Zamyla, and this was vigenere. 

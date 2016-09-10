@@ -1,0 +1,47 @@
+Zamyla Chan: Mari kita langkah terperinci yang permainan dengan cipher Vigenere itu. The Vigenere cipher adalah hampir sama dengan Caesar, kecuali dalam Caesar kami diluluskan pada integer tunggal sebagai utama kami. Dalam Vigenere kita akan lulus dalam kata kunci. Jadi, jika saya mahu beralih tulisan rahsia ini adalah CS 50 oleh ohai, maka itu bermakna bahawa setiap huruf dalam ohai akan menjadi kunci, dan saya akan kitaran lebih kata kunci untuk peralihan saya membuat tulisan rahsia lebih sukar untuk memecahkan kod. 
+
+Apa yang ia bermaksud untuk beralih dengan kata kunci? Well, kata kunci adalah rentetan di mana setiap huruf sepadan kepada beberapa anjakan integer. Jadi, o sepadan dengan kunci 14 tahun, h kepada kekunci 7, yang mempunyai kunci 0, supaya tidak akan mengubah apa-apa, dan kemudian saya mempunyai kunci 8. 
+
+Katakanlah saya berlari Vigenere A dengan teks biasa ini adalah CS50 baik, yang hanya akan memberi saya rentetan tidak berubah. Perhatikan bahawa ini adalah bersamaan dengan berjalan Caesar dengan kunci sifar. Malah, Vigenere berjalan dengan mana-mana aksara tunggal akan bersamaan dengan berjalan Caesar dengan integer yang sama. 
+
+Baiklah, jadi, kerana mereka begitu serupa I'da sebenarnya mencadangkan bahawa jika anda mahu anda hanya boleh menyalin Caesar anda kod ke kod Vigenere anda. Perkara akan berubah, tetapi sekurang-kurangnya anda mempunyai beberapa tulang belakang yang anda boleh bekerja dengan. Kerana Semua adalah sama kita mahu untuk mendapatkan kunci, dapatkan teks biasa, menulis dlm kod yang teks biasa, dan kemudian mencetak yang keluar. 
+
+Sama seperti Caesar kunci akan diluluskan sebagai baris arahan kedua hujah yang terkandung dalam indeks argv 1, tetapi ia berbeza kali ini kerana ia mesti mengikut abjad. Jadi, kita perlu untuk melelar atas setiap aksara tunggal dalam utama yang bahawa pengguna diluluskan pada, dan memastikan bahawa setiap watak adalah abjad untuk terus. 
+
+Apabila kami telah melakukan itu, maka kita boleh mendapatkan rentetan daripada pengguna, seperti yang kita lakukan sebelum ini. Dan kini, kami datang ke jantung daripada masalah untuk Vigenere, yang hanya seperti Caesar, bagaimana untuk memikirkan corak enciphering yang dan persamaan, dan menulis dlm kod keseluruhan plaintext itu. 
+
+Jadi, anda akan notis bahawa persamaan untuk shift Vigenere yang adalah sangat serupa dengan Caesar. Satu-satunya perbezaan adalah bahawa bukannya k pembolehubah tunggal sebelum ini, kini k mempunyai subskrip a, menunjukkan surat-j kunci. 
+
+Mari kita berjalan melalui contoh. Katakanlah anda mahu untuk lulus rahsia mesej ke menghancurkan anda, saya suka anda. Nah, untuk kunci anda, anda memilih sesuatu yang anda tahu menghancurkan tahu bahawa anda suka, panda. Baiklah, jadi bagaimana kita beralih ini? 
+
+Nah, kita mempunyai indeks plaintext kami. Itulah di huruf pertama dan begitu juga dengan indeks utama kami iaitu pada p, yang pertama huruf dalam perkataan panda kami. Jadi, beralih saya oleh p memberikan kita x, maka kita memajukan indeks plaintext. Ini mendapat kita ke ruang. Sekarang, aksara ruang adalah bukan abjad, jadi ini bermakna bahawa, yang hanya pemindahan hak kepada tulisan rahsia, kita supaya ada jarak di sana, dan kita tidak memajukan indeks utama kami. Jadi, kami masih di p pada ketika ini. 
+
+Kita maju ke depan indeks dalam plaintext kami. Dan sekarang, kerana itu adalah surat, huruf kecil l, kita beralih itu oleh indeks seterusnya di utama kami. Yang merupakan, yang sifar anjakan supaya hanya menjadi yang l dalam tulisan rahsia kami. Kemudian, kami memajukan kedua-dua plaintext, dan indeks utama kerana ia adalah abjad. Sebab itu kami terus yang sehingga kita sampai ke e dalam seperti. 
+
+Baiklah, jadi anda akan melihat di ini menunjukkan bahawa, dari segi indeks utama kami, kami telah sampai ke penghujung perkataan panda, jadi apa yang berlaku apabila kita mendapatkan ke depan surat abjad dalam plaintext itu? Well, semua yang berlaku adalah kita membungkus untuk permulaan, kepada indeks pertama utama kami. Oleh itu, maka kita beralih yang y oleh p untuk memberi kita n. Dan kemudian, kami terus menamatkan pengekodan plaintext kami untuk mendapatkan x lvne noh. 
+
+Dari contoh ini, saya menunjukkan bahawa kita hanya memajukan ke huruf seterusnya dalam kata kunci jika watak dalam teks biasa adalah surat supaya isalpha yang fungsi akan sangat berguna di sini. Dan, seperti dalam Caesar, kita mahu memelihara kes, isupper dan islower. Jadi, tambah sedikit ini dalam ke dalam pseudokod anda. 
+
+Jadi bagaimana kita memikirkan perubahan utama? Nah, jika anda masih ingat perbincangan kita pada indeks abjad di Caesar masalah, ia adalah hampir sama. 
+
+Di mana A sepadan dengan ASCII yang nilai 65 tetapi anjakan 0, dan kemudian huruf terakhir dalam abjad, Z, sepadan dengan peralihan 25. Anda akan melihat bahawa peralihan adalah sama sama ada atau tidak surat itu huruf besar atau huruf kecil. 
+
+OK, jadi sekarang anda tahu bagaimana untuk memikirkan peralihan berangka yang sepadan dengan aksara tunggal mari kita kembali kepada persamaan kita. Kerana kita mempunyai dua yang berbeza subskrip sini, i dan j, itulah tanda-tanda yang kita mahu untuk mengesan kedua-dua kedudukan kami dalam plaintext yang serta kedudukan kami dalam kata kunci, jadi mereka adalah dua pembolehubah berasingan yang kita mahu menyimpan memegang. 
+
+Sekarang, kedudukan dalam plaintext kami akan meningkat setiap masa, supaya akan menjadi sedikit lebih lurus ke hadapan yang bertentangan dengan kedudukan kata kunci, yang kita tahu mempunyai untuk membalut di sekeliling, dan kadang-kadang kenaikan, kadang-kadang tetap sama. Jadi, bagaimana kita melaksanakan fungsi yang untuk membalut di sekitar indeks kata kunci? 
+
+Saya akan menggunakan mengira off contoh. Mengira off adalah cara yang popular untuk berpecah orang ke dalam kumpulan. Katakanlah saya mempunyai 5 orang dan saya mahu berpecah mereka kepada tiga kumpulan, baik maka saya akan memulakan dengan mengira off. Orang pertama akan mengatakan saya jumlah pasukan satu, orang yang akan datang akan menjadi nombor pasukan dua, bilangan pasukan orang ketiga tiga. Sekarang, saya hanya mahu tiga kumpulan supaya orang yang keempat akan sebenarnya bermula pada awal dan berkata, baik, saya jumlah pasukan satu juga, dan orang yang akan datang akan menjadi nombor pasukan dua. Dan, dari sana, mereka boleh kemudian memisahkan ke dalam kumpulan mereka. 
+
+Jadi, bagaimana saya boleh menggunakan modulo untuk membantu saya melaksanakan ini mengira off bungkus sekitar fungsi? Well, orang pertama nombor 1, mod 3 memberikan kita 1. 2 mod 3 memberikan kita 2, dan 3 mod 3 memberikan kita 0. 
+
+Orang keempat, nombor 4, 3 mod memberikan kita 1, dan kemudian 5 mod 3 memberikan kita 2. Jadi, anda akan melihat bahawa walaupun bilangan orang yang saya ada meningkat, dan di atas 3, kerana saya modding oleh 3 Saya sentiasa mendapat nombor 0, 1, dan 2. Saya tidak pernah mendapatkan yang lebih besar daripada 3. Sebab itu, walaupun saya mempunyai 10 orang, maka semua orang-orang masih lagi dalam kumpulan 1, 2, atau 0. 
+
+Jadi, sekarang kita tahu bahawa jika kita mempunyai kumpulan 5 dan kita MOD semua orang-orang dengan 3, maka kita tidak akan melebihi kumpulan 0, 1, atau 2. Jadi, kami tidak akan mendapat satu kumpulan nombor itu sama dengan 3 atau lebih. Jadi, walaupun saya menambah lima lagi orang, maka semua daripada mereka masih akan diberikan kepada kumpulan 0, 1, atau 2 kerana saya modding oleh 3. Saya tidak akan melebihi had itu. 
+
+OK, jadi mari kita lihat jika kita boleh memohon konsep ini menggunakan modulo untuk membalut di sekitar nombor kumpulan dan memohon kepada Vigenère mana kita mahu untuk menggunakan modulo untuk membungkus indeks kata kunci. Walaupun kami menokok indeks kita sentiasa ingin memastikan bahawa kita sentiasa membungkus untuk awal-awal lagi tidak melebihi panjang tali. 
+
+OK, jadi saya tahu ia mungkin sedikit hangat. Ada banyak lagi yang perlu dilakukan dalam p set ini. Jadi, pastikan anda menulis yang pseudokod baik untuk diri sendiri bahawa anda memahami dan yang mendapat pekerjaan yang dilakukan. Cuba dan menangani setiap baris bebas memikirkan semua sedikit kepingan kecil teka-teki sebelum meletakkan bersama-sama. 
+
+Pastikan bahawa anda boleh mendapatkan kunci daripada baris arahan dan memastikan bahawa ia adalah abjad, mendapatkan teks biasa daripada pengguna, dan kemudian di enciphering, pastikan anda tahu bagaimana untuk menulis dlm kod satu huruf, dan kemudian maju ke seluruh tali dengan semua bungkus sekitar fungsi. Akhir sekali, anda boleh mencetak tulisan rahsia. 
+
+Nama saya ialah Zamyla, dan ini adalah Vigenere. 

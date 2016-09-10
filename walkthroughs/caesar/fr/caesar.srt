@@ -1,0 +1,1140 @@
+1
+00:00:00,000 --> 00:00:00,760
+
+2
+00:00:00,760 --> 00:00:02,270
+>> AMILA: Abordons César.
+
+3
+00:00:02,270 --> 00:00:06,110
+Dans Caesar, nous permettons à l'utilisateur
+pour coder un message secret.
+
+4
+00:00:06,110 --> 00:00:09,780
+Donc, nous allons plonger à droite et regarder
+à nos à-dos pour ce problème.
+
+5
+00:00:09,780 --> 00:00:12,210
+Alors d'abord, nous obtenons la clé de l'utilisateur.
+
+6
+00:00:12,210 --> 00:00:15,210
+Ensuite, nous obtenons le plaintext
+qu'ils veulent coder.
+
+7
+00:00:15,210 --> 00:00:21,380
+Après cela, nous Chiffrer pour eux,
+et enfin nous imprimons leur cryptogramme.
+
+8
+00:00:21,380 --> 00:00:23,600
+>> Commençons donc par un exemple.
+
+9
+00:00:23,600 --> 00:00:26,920
+Dites que vous vouliez encoder le
+alphabet entier avec une clé de deux.
+
+10
+00:00:26,920 --> 00:00:31,360
+Eh bien, l'ensemble de votre alphabet serait
+juste être déplacé aux lettres.
+
+11
+00:00:31,360 --> 00:00:37,060
+Donc, A serait coder à C, B à
+D, C et E, ainsi de suite et ainsi de suite,
+
+12
+00:00:37,060 --> 00:00:42,470
+jusqu'à ce que vous obtenez à X, qui code à Z
+ou zed, selon l'endroit où vous venez.
+
+13
+00:00:42,470 --> 00:00:47,445
+Alors Y serait alors déplacer tout le chemin,
+enrouler autour de l'alphabet pour se rendre à A,
+
+14
+00:00:47,445 --> 00:00:53,256
+puis enfin la dernière lettre de la
+alphabet, Z, zed, serait encoder B.
+
+15
+00:00:53,256 --> 00:00:54,660
+>> Vous avez obtenu cela?
+
+16
+00:00:54,660 --> 00:00:56,380
+Regardons quelques exemples.
+
+17
+00:00:56,380 --> 00:01:00,540
+Le premier exemple est très semblable
+à ce que nous venons de l'expliquer ci-dessus.
+
+18
+00:01:00,540 --> 00:01:05,560
+Donc, si j'encoder une certaine section de la
+alphabet, A à L, par une clé de deux,
+
+19
+00:01:05,560 --> 00:01:09,760
+alors je viens d'obtenir mon entière
+alphabet déplacé deux lettres.
+
+20
+00:01:09,760 --> 00:01:12,230
+>> Puis, dans mon prochain exemple,
+la clé est encore deux,
+
+21
+00:01:12,230 --> 00:01:15,080
+de sorte que vous devriez toujours savoir
+dont les lettres d'attendre.
+
+22
+00:01:15,080 --> 00:01:16,400
+Mais ici, il est une phrase.
+
+23
+00:01:16,400 --> 00:01:18,100
+Ceci est CS50.
+
+24
+00:01:18,100 --> 00:01:21,090
+Donc, vous remarquerez que je
+préserver le cas de mes lettres,
+
+25
+00:01:21,090 --> 00:01:25,600
+de sorte que toute les lettres majuscules sont également
+les lettres majuscules dans le texte chiffré.
+
+26
+00:01:25,600 --> 00:01:27,800
+Et tout en minuscules
+lettres dans le texte en clair
+
+27
+00:01:27,800 --> 00:01:30,640
+sont également minuscules
+lettres du cryptogramme.
+
+28
+00:01:30,640 --> 00:01:34,020
+Mais je garde les lettres
+et tous les points d'exclamation
+
+29
+00:01:34,020 --> 00:01:37,610
+ou tout autre signe de ponctuation identiques.
+
+30
+00:01:37,610 --> 00:01:40,360
+>> Alors, maintenant que nous avons un sens
+pour le fonctionnement du programme,
+
+31
+00:01:40,360 --> 00:01:43,890
+se sentir libre d'aller courir un peu plus
+des exemples de votre propre, si vous le souhaitez.
+
+32
+00:01:43,890 --> 00:01:47,072
+Commençons par obtenir
+la clé de l'utilisateur.
+
+33
+00:01:47,072 --> 00:01:48,780
+Traditionnellement, avec
+d'autres problèmes, nous avons
+
+34
+00:01:48,780 --> 00:01:51,450
+été habitués à obtenir
+les chiffres qui nous
+
+35
+00:01:51,450 --> 00:01:54,710
+besoin en invitant l'utilisateur
+avec la fonction getint.
+
+36
+00:01:54,710 --> 00:01:58,850
+Mais cette fois, nous allons en fait
+d'utiliser l'argument de ligne de commande
+
+37
+00:01:58,850 --> 00:02:01,760
+et une nouvelle fonction appelée atoi.
+
+38
+00:02:01,760 --> 00:02:05,130
+>> Lorsque vous exécutez la principale
+programme en C, alors il
+
+39
+00:02:05,130 --> 00:02:08,500
+prend en deux parameters--
+int argc, qui
+
+40
+00:02:08,500 --> 00:02:11,670
+est le nombre d'arguments
+passé dans, puis
+
+41
+00:02:11,670 --> 00:02:15,920
+argv, un tableau de chaînes qui contient
+la liste de tous les arguments
+
+42
+00:02:15,920 --> 00:02:16,740
+adopté.
+
+43
+00:02:16,740 --> 00:02:19,740
+Vous ne devez pas explicitement
+de déclarer ces variables.
+
+44
+00:02:19,740 --> 00:02:22,700
+Ils sont calculés pour
+vous par le compilateur.
+
+45
+00:02:22,700 --> 00:02:28,160
+L'utilisation correcte car ce serait
+pour argc d'être deux dans ce cas,
+
+46
+00:02:28,160 --> 00:02:32,630
+parce que l'utilisateur doit passer en
+l'appel au programme, ./caesar,
+
+47
+00:02:32,630 --> 00:02:35,570
+puis sur la touche,
+quel que soit le numéro qu'ils souhaitent.
+
+48
+00:02:35,570 --> 00:02:39,920
+Cela signifie donc que argc doit être deux
+pour qu'une utilisation valable de César
+
+49
+00:02:39,920 --> 00:02:41,680
+être éxecuté.
+
+50
+00:02:41,680 --> 00:02:43,590
+>> Alors regardons un exemple.
+
+51
+00:02:43,590 --> 00:02:47,760
+Dire que je l'ai déjà écrit et
+compilé un programme appelé blastoff.
+
+52
+00:02:47,760 --> 00:02:52,670
+Donc, si je suis tombé dans la ligne de commande
+./blastoff Team Rocket, bien, alors,
+
+53
+00:02:52,670 --> 00:02:57,750
+argc serait trois parce que je
+adoptée en trois arguments distincts.
+
+54
+00:02:57,750 --> 00:02:59,830
+Alors argv ressemblerait à ceci.
+
+55
+00:02:59,830 --> 00:03:03,750
+Il est un tableau, et il serait
+contiennent chacune des trois chaînes.
+
+56
+00:03:03,750 --> 00:03:09,640
+./blastoff dans le premier index, équipe
+dans l'autre, et à la roquette dans la dernière.
+
+57
+00:03:09,640 --> 00:03:11,610
+>> Parlons de tableaux pour une seconde.
+
+58
+00:03:11,610 --> 00:03:15,560
+Les tableaux sont des structures de données qui détiennent
+plusieurs valeurs du même type.
+
+59
+00:03:15,560 --> 00:03:19,980
+Cela peut être utile lorsque nous
+avoir des listes d'entiers ou des chaînes.
+
+60
+00:03:19,980 --> 00:03:23,030
+Rappelez-vous qu'ils ont
+être du même type.
+
+61
+00:03:23,030 --> 00:03:25,310
+En informatique, nous
+amour à compter de zéro,
+
+62
+00:03:25,310 --> 00:03:29,260
+alors rappelez-vous que les tableaux
+sont également zéro indexées.
+
+63
+00:03:29,260 --> 00:03:34,360
+Donc, le premier élément de mon tableau
+va être à l'indice zéro.
+
+64
+00:03:34,360 --> 00:03:37,580
+Donc dans ce cas, quand je dois
+un tableau de longueur quatre,
+
+65
+00:03:37,580 --> 00:03:41,350
+puis le dernier indice de la
+dernier élément de mon tableau
+
+66
+00:03:41,350 --> 00:03:44,970
+est en fait va être
+à l'index de trois, pas quatre.
+
+67
+00:03:44,970 --> 00:03:48,880
+Parce que rappelez-vous, nous
+commencer à compter à zéro.
+
+68
+00:03:48,880 --> 00:03:52,530
+>> Voici un exemple de la façon dont vous
+pourrait créer un tableau de votre propre.
+
+69
+00:03:52,530 --> 00:03:56,440
+Alors dis que je voulais conserver mon
+trois noms de chiens préférés.
+
+70
+00:03:56,440 --> 00:03:59,030
+Ensuite, je voudrais créer un tableau de chaînes.
+
+71
+00:03:59,030 --> 00:04:04,450
+Je voudrais donc déclarer le type, la chaîne, et
+puis mettre le nom du tableau, les chiens,
+
+72
+00:04:04,450 --> 00:04:06,450
+puis dans ceux carré
+crochets mis la taille
+
+73
+00:04:06,450 --> 00:04:09,260
+du array-- dans ce cas, trois.
+
+74
+00:04:09,260 --> 00:04:12,690
+>> Donc, ma première entrée va
+pour être des chiens à l'indice zéro,
+
+75
+00:04:12,690 --> 00:04:14,750
+et que ça va être Milo.
+
+76
+00:04:14,750 --> 00:04:17,850
+chiens Puis à l'index un
+va être maladroit,
+
+77
+00:04:17,850 --> 00:04:23,060
+chérie Mochi, puis le dernier
+entrée, la troisième entrée à l'index deux,
+
+78
+00:04:23,060 --> 00:04:26,130
+va être mignon, doux Elphie.
+
+79
+00:04:26,130 --> 00:04:28,610
+Vous remarquerez que le format
+pour remplir ce tableau
+
+80
+00:04:28,610 --> 00:04:32,150
+est très semblable à la façon dont vous pourriez
+déclarer toute autre variable où
+
+81
+00:04:32,150 --> 00:04:36,307
+vous avez le nom de la variable suivie
+la valeur que vous voulez stockées.
+
+82
+00:04:36,307 --> 00:04:38,140
+La seule différence
+ce cas est que vous
+
+83
+00:04:38,140 --> 00:04:42,700
+se rappeler de mettre l'index
+de la valeur entre crochets.
+
+84
+00:04:42,700 --> 00:04:46,420
+Et là, nous avons notre
+trois chiens préférés.
+
+85
+00:04:46,420 --> 00:04:48,780
+>> Mais hélas, il est temps
+pour revenir à César.
+
+86
+00:04:48,780 --> 00:04:52,910
+Rappelez-vous que l'utilisation correcte de la
+l'utilisateur va se passer, non seulement
+
+87
+00:04:52,910 --> 00:04:57,430
+le nom du ./caesar du programme, mais
+aussi la clé qu'ils veulent changer
+
+88
+00:04:57,430 --> 00:04:58,850
+leur plaintext par.
+
+89
+00:04:58,850 --> 00:05:01,540
+Cela signifie donc que argc doit être deux.
+
+90
+00:05:01,540 --> 00:05:07,580
+Ils doivent passer en two-- ni plus, ni
+moins de deux arguments de ligne de commande.
+
+91
+00:05:07,580 --> 00:05:09,050
+>> Maintenant, qu'en argv?
+
+92
+00:05:09,050 --> 00:05:12,880
+Eh bien, nous savons déjà que le
+tableau va être d'une longueur de deux,
+
+93
+00:05:12,880 --> 00:05:15,270
+mais ce qui est contenu dans chaque élément?
+
+94
+00:05:15,270 --> 00:05:19,330
+Eh bien, le premier élément
+va être ./caesar,
+
+95
+00:05:19,330 --> 00:05:24,190
+puis l'élément suivant va
+contenir la clé que l'utilisateur a tapé dans.
+
+96
+00:05:24,190 --> 00:05:27,480
+Maintenant, s'ils l'ont utilisé correctement
+pour l'utilisation de César,
+
+97
+00:05:27,480 --> 00:05:29,350
+puis ils vont taper un numéro.
+
+98
+00:05:29,350 --> 00:05:33,260
+Mais même si le caractère
+que leur type est un nombre,
+
+99
+00:05:33,260 --> 00:05:35,790
+il est du type de données chaîne.
+
+100
+00:05:35,790 --> 00:05:40,390
+>> Alors, comment pouvons-nous convertissons que
+chaîne en entier?
+
+101
+00:05:40,390 --> 00:05:46,680
+Donc, dire que j'ai num, une chaîne,
+contenant la chaîne 50.
+
+102
+00:05:46,680 --> 00:05:49,000
+Si je veux convertir cette
+à un nombre entier, alors je simplement
+
+103
+00:05:49,000 --> 00:05:53,340
+déclarer une nouvelle variable, un
+entier i, appelant atoi.
+
+104
+00:05:53,340 --> 00:06:01,160
+Je passe dans ma variable de chaîne, num, et
+alors je vais alors contenir le numéro 50.
+
+105
+00:06:01,160 --> 00:06:04,350
+Assurez-vous de vérifier l'homme
+pages pour la fonction atoi
+
+106
+00:06:04,350 --> 00:06:07,990
+pour vérifier quelle bibliothèque il est
+dans, ainsi que ce que l'apprécier
+
+107
+00:06:07,990 --> 00:06:14,550
+sera de retour si la chaîne passée
+en ne contient pas tous les numéros.
+
+108
+00:06:14,550 --> 00:06:16,950
+>> Alors, maintenant que nous avons obtenu
+la clé, l'étape suivante
+
+109
+00:06:16,950 --> 00:06:19,430
+est d'obtenir le texte en clair de l'utilisateur.
+
+110
+00:06:19,430 --> 00:06:21,170
+Maintenant, cela va
+moins compliqué
+
+111
+00:06:21,170 --> 00:06:23,410
+que de naviguer à travers le
+arguments de ligne de commande.
+
+112
+00:06:23,410 --> 00:06:26,190
+Tout ce que nous avons à faire est d'appeler
+la fonction getString
+
+113
+00:06:26,190 --> 00:06:29,660
+pour inviter l'utilisateur à donner
+nous une chaîne, mais rappelez-vous
+
+114
+00:06:29,660 --> 00:06:34,090
+de vérifier les spécifications pour la façon dont nous
+pourrait vouloir demander à l'utilisateur pour cela.
+
+115
+00:06:34,090 --> 00:06:36,420
+>> Maintenant, nous arrivons à la
+fond du problème--
+
+116
+00:06:36,420 --> 00:06:38,860
+comment chiffrer le texte en clair.
+
+117
+00:06:38,860 --> 00:06:42,830
+Eh bien, d'abord, nous allons parler de la façon dont
+pour chiffrer un caractère à la fois,
+
+118
+00:06:42,830 --> 00:06:47,370
+et puis nous allons aborder comment
+itérer sur l'ensemble du texte brut.
+
+119
+00:06:47,370 --> 00:06:50,440
+Je l'ai écrit quelque pseudocode
+pour le problème César.
+
+120
+00:06:50,440 --> 00:06:52,310
+Je vous encourage à
+écrire votre propre bien.
+
+121
+00:06:52,310 --> 00:06:55,900
+Il peut ne pas sembler identique à
+le mien, et c'est OK, mais aussi longtemps
+
+122
+00:06:55,900 --> 00:06:58,640
+que l'idée générale est la même.
+
+123
+00:06:58,640 --> 00:07:00,780
+>> Les trois premières étapes
+nous avons déjà fait.
+
+124
+00:07:00,780 --> 00:07:03,100
+Nous avons obtenu la clé de
+l'argument de ligne de commande,
+
+125
+00:07:03,100 --> 00:07:05,510
+nous avons tourné cette clé
+en un entier, et nous avons
+
+126
+00:07:05,510 --> 00:07:09,320
+invite l'utilisateur pour le texte en clair
+qu'ils veulent chiffrer.
+
+127
+00:07:09,320 --> 00:07:12,420
+Alors la prochaine gros morceau
+est que pour chaque caractère
+
+128
+00:07:12,420 --> 00:07:15,070
+dans la chaîne en clair,
+si elle est alphabétique,
+
+129
+00:07:15,070 --> 00:07:17,750
+nous voulons préserver
+son cas et le déplacer.
+
+130
+00:07:17,750 --> 00:07:20,900
+En cas de préserver, ce que je
+dire est que tous les majuscules
+
+131
+00:07:20,900 --> 00:07:23,580
+les lettres doivent rester supérieure
+cas et toutes les lettres minuscules
+
+132
+00:07:23,580 --> 00:07:25,640
+devrait rester en minuscules.
+
+133
+00:07:25,640 --> 00:07:29,110
+Alors après nous changeons ceux,
+puis nous imprimons le cryptogramme.
+
+134
+00:07:29,110 --> 00:07:33,100
+>> Voici trois fonctions qui vont
+à venir dans maniable pour ce problème.
+
+135
+00:07:33,100 --> 00:07:38,010
+Rappelez-vous au-dessus quand je l'ai
+par exemple pour déplacer c'est CS50?
+
+136
+00:07:38,010 --> 00:07:41,800
+Rappelez-vous que le 50 et le
+exclamation ne se déplace pas?
+
+137
+00:07:41,800 --> 00:07:45,680
+Alors, comment pouvons-nous dire si nous
+besoin de changer une lettre ou non?
+
+138
+00:07:45,680 --> 00:07:48,650
+Eh bien, "est l'alpha," si
+vous passez un caractère,
+
+139
+00:07:48,650 --> 00:07:54,850
+retourne vrai si ce caractère
+est une lettre et false sinon.
+
+140
+00:07:54,850 --> 00:07:56,870
+Pour vous aider à
+capitalisation préservant
+
+141
+00:07:56,870 --> 00:07:59,750
+sont les fonctions "est
+supérieure "et" inférieure ".
+
+142
+00:07:59,750 --> 00:08:03,350
+>> Ces deux fonctions prennent également
+dans un seul caractère en entrée
+
+143
+00:08:03,350 --> 00:08:06,580
+et vous retourne un booléen,
+vrai ou faux
+
+144
+00:08:06,580 --> 00:08:11,280
+selon que ce caractère
+est en majuscules ou minuscules.
+
+145
+00:08:11,280 --> 00:08:14,610
+Parce que "est supérieure" et "est
+inférieur "sont des fonctions booléennes,
+
+146
+00:08:14,610 --> 00:08:18,660
+ce qui signifie qu'ils vous renvoient un booléen,
+vous pouvez utiliser dans vos conditions.
+
+147
+00:08:18,660 --> 00:08:23,490
+Alors, voici un extrait de code qui ne
+imprime une lettre si elle est en majuscules.
+
+148
+00:08:23,490 --> 00:08:27,790
+Donc, je l'ai déclaré mon caractère
+lettre à la boîte supérieure zed
+
+149
+00:08:27,790 --> 00:08:33,440
+et puis si "est supérieure" retours
+vrai, alors j'imprimer cette lettre.
+
+150
+00:08:33,440 --> 00:08:38,200
+>> Pour en revenir à notre exemple simple de
+décaler l'alphabet par une clé de deux,
+
+151
+00:08:38,200 --> 00:08:41,049
+comment pouvons-nous réellement que pour travailler?
+
+152
+00:08:41,049 --> 00:08:45,770
+Eh bien, il se trouve que des caractères
+et les entiers sont très étroitement liés.
+
+153
+00:08:45,770 --> 00:08:48,840
+Chaque personnage a un
+valeur entière associée
+
+154
+00:08:48,840 --> 00:08:53,260
+avec elle a trouvé dans le tableau ASCII,
+où ASCII de chaque caractère
+
+155
+00:08:53,260 --> 00:08:55,380
+valeur est affichée.
+
+156
+00:08:55,380 --> 00:08:58,940
+Donc, un boîtier supérieur correspond A
+à une valeur ASCII 65
+
+157
+00:08:58,940 --> 00:09:02,270
+et minuscule à une
+une valeur ASCII de 97.
+
+158
+00:09:02,270 --> 00:09:04,940
+>> Ne hésitez pas à consulter
+tout graphique ASCII en ligne
+
+159
+00:09:04,940 --> 00:09:07,720
+de voir ces valeurs pour vous-même.
+
+160
+00:09:07,720 --> 00:09:12,096
+Donc, cela signifie que nous pouvons
+prendre le caractère de majuscules A,
+
+161
+00:09:12,096 --> 00:09:18,200
+ajouter le nombre entier de deux à elle, et ensuite obtenir
+le caractère majuscule C en conséquence.
+
+162
+00:09:18,200 --> 00:09:23,720
+En effet, 65 ans, l'ASCII
+valeur pour le capital A, majoré de 2,
+
+163
+00:09:23,720 --> 00:09:29,960
+nous donne 67, ce qui correspond
+au caractère de majuscules C.
+
+164
+00:09:29,960 --> 00:09:33,480
+>> Malheureusement, les choses
+ne sera pas tout à fait être si simple.
+
+165
+00:09:33,480 --> 00:09:36,980
+Nous avons une équation
+nous devons considérer.
+
+166
+00:09:36,980 --> 00:09:43,590
+Ici, il nous dit que le cryptogramme ième
+lettre correspond au texte en clair ième
+
+167
+00:09:43,590 --> 00:09:48,900
+lettre, ainsi que la KEY--
+tout cela, modulaire 26.
+
+168
+00:09:48,900 --> 00:09:50,810
+Pourquoi est-ce le cas?
+
+169
+00:09:50,810 --> 00:09:55,430
+Revenons à notre exemple de
+avant, où le capital A, majoré de 2,
+
+170
+00:09:55,430 --> 00:09:57,590
+nous donne le capital C.
+
+171
+00:09:57,590 --> 00:10:01,870
+>> Donc, l'application de l'équation
+le cahier des charges nous donne,
+
+172
+00:10:01,870 --> 00:10:06,660
+puis nous allons prendre le capital A
+plus 2 et mod que par 26.
+
+173
+00:10:06,660 --> 00:10:10,730
+Donc, le capital A, quand je le mets dans
+ces apostrophes,
+
+174
+00:10:10,730 --> 00:10:14,010
+me permet de traiter comme
+un nombre entier, ce qui permet
+
+175
+00:10:14,010 --> 00:10:17,500
+me jette à sa valeur ASCII, 65.
+
+176
+00:10:17,500 --> 00:10:20,080
+65 ans et plus 2 est 67.
+
+177
+00:10:20,080 --> 00:10:25,210
+67 mod 26 nous donne 15,
+mais qui n'a pas vraiment
+
+178
+00:10:25,210 --> 00:10:32,590
+sens parce que nous savons que la
+C majuscule valeur ASCII est de 67, et non 15.
+
+179
+00:10:32,590 --> 00:10:35,580
+Alors, comment peut-on concilier cela?
+
+180
+00:10:35,580 --> 00:10:39,840
+>> Eh bien, ici, je voudrais poser la
+notion d'un index alphabétique.
+
+181
+00:10:39,840 --> 00:10:44,010
+Donc, nous avons déjà parlé de la façon
+chaque personnage a sa valeur ASCII,
+
+182
+00:10:44,010 --> 00:10:48,810
+mais je voudrais dire, eh bien, nous allons
+penser à chaque caractère ayant aussi
+
+183
+00:10:48,810 --> 00:10:52,230
+un index alphabétique,
+où A par exemple,
+
+184
+00:10:52,230 --> 00:10:58,800
+comme la première lettre de l'alphabet,
+a un index alphabétique de zéro.
+
+185
+00:10:58,800 --> 00:11:02,070
+Alors maintenant, nous allons appliquer la
+même équation que précédemment,
+
+186
+00:11:02,070 --> 00:11:05,040
+mais en utilisant un index alphabétique.
+
+187
+00:11:05,040 --> 00:11:07,810
+>> Donc, A est égal à zéro, que nous avons défini.
+
+188
+00:11:07,810 --> 00:11:15,640
+Alors prenant zéro plus deux, mod 26,
+ça fait deux, mod 26, ce qui nous donne deux.
+
+189
+00:11:15,640 --> 00:11:18,780
+Et ainsi, en termes de
+un index alphabétique,
+
+190
+00:11:18,780 --> 00:11:23,930
+C est la troisième lettre de l'
+alphabet, de sorte que correspondrait
+
+191
+00:11:23,930 --> 00:11:26,290
+à un index alphabétique des deux.
+
+192
+00:11:26,290 --> 00:11:29,850
+Il semble donc que l'utilisation du
+index alphabétique dans ce cas
+
+193
+00:11:29,850 --> 00:11:32,840
+nous donne en fait le résultat correct.
+
+194
+00:11:32,840 --> 00:11:35,020
+>> Alors maintenant, nous allons vérifier à
+voir si les travaux de l'équation
+
+195
+00:11:35,020 --> 00:11:37,210
+avec un index alphabétique.
+
+196
+00:11:37,210 --> 00:11:42,540
+index alphabétique des Y est 24 comme
+deuxième à la dernière lettre de l'alphabet.
+
+197
+00:11:42,540 --> 00:11:46,520
+Alors 24 plus notre
+clé de deux nous donne 26.
+
+198
+00:11:46,520 --> 00:11:54,750
+26 mod 26 nous donne 0, qui, heureusement pour
+nous, est l'index alphabétique pour A.
+
+199
+00:11:54,750 --> 00:11:59,100
+Donc, nous espérons que cela suffit que la preuve
+la méthode index alphabétique fonctionne.
+
+200
+00:11:59,100 --> 00:12:03,180
+Sinon, vous pouvez essayer
+quelques exemples de votre propre.
+
+201
+00:12:03,180 --> 00:12:08,030
+>> Pour envelopper correctement autour de la
+alphabet et appliquer l'équation César,
+
+202
+00:12:08,030 --> 00:12:11,280
+alors nous savons que nous devons
+traiter avec des indices alphabétiques.
+
+203
+00:12:11,280 --> 00:12:15,130
+Mais nous commençons avec ASCII
+les valeurs, et alors seulement
+
+204
+00:12:15,130 --> 00:12:18,530
+ne nous convertissons alors
+l'index alphabétique.
+
+205
+00:12:18,530 --> 00:12:23,970
+De là, afin d'imprimer, nous avons besoin
+de traiter avec les valeurs ASCII à nouveau.
+
+206
+00:12:23,970 --> 00:12:28,350
+Donc, nous avons besoin de comprendre comment
+aller de ASCII alphabétiques
+
+207
+00:12:28,350 --> 00:12:31,080
+et à partir alphabétique en ASCII.
+
+208
+00:12:31,080 --> 00:12:34,910
+>> Donc, je vous laisse le soin de comprendre
+le motif entre un personnage
+
+209
+00:12:34,910 --> 00:12:38,590
+et son alphabétique
+index et sa valeur ASCII.
+
+210
+00:12:38,590 --> 00:12:41,530
+Maintenant, rappelez-vous que même si
+ce droit de table sur la diapositive
+
+211
+00:12:41,530 --> 00:12:45,630
+montre les lettres majuscules, nous avons également
+examiner si ou non
+
+212
+00:12:45,630 --> 00:12:48,915
+un modèle différent applique
+pour les caractères minuscules.
+
+213
+00:12:48,915 --> 00:12:52,070
+
+214
+00:12:52,070 --> 00:12:55,840
+>> Maintenant que nous avons compris
+comment changer un seul caractère,
+
+215
+00:12:55,840 --> 00:13:02,200
+alors tout ce que nous avons à faire est échelle
+jusqu'à aller sur l'ensemble du texte brut.
+
+216
+00:13:02,200 --> 00:13:04,260
+Donc, le texte en clair est une chaîne.
+
+217
+00:13:04,260 --> 00:13:08,210
+Heureusement pour nous, une chaîne est vraiment
+juste un tableau de caractères,
+
+218
+00:13:08,210 --> 00:13:12,150
+ainsi afin d'accéder à tous les caractères
+d'une chaîne, tout ce que vous avez à faire
+
+219
+00:13:12,150 --> 00:13:14,270
+est d'utiliser la notation de tableau.
+
+220
+00:13:14,270 --> 00:13:20,270
+Dire que j'ai une variable de type
+chaîne appelée "text = 'ceci est CS50.'"
+
+221
+00:13:20,270 --> 00:13:22,730
+>> Eh bien, alors, afin de
+accéder à chaque caractère,
+
+222
+00:13:22,730 --> 00:13:25,880
+tout ce que je dois faire avec
+le texte variable est
+
+223
+00:13:25,880 --> 00:13:31,660
+dire ainsi, le texte à l'indice zéro, ce
+correspond à T. capitale texte à l'index
+
+224
+00:13:31,660 --> 00:13:35,100
+l'un correspond au cas inférieure h.
+
+225
+00:13:35,100 --> 00:13:38,110
+Une autre fonction utile est
+la fonction de la longueur de chaîne.
+
+226
+00:13:38,110 --> 00:13:40,760
+Donc, en passant dans une chaîne de
+cette fonction sera de retour
+
+227
+00:13:40,760 --> 00:13:44,610
+un nombre entier, la longueur de cette chaîne.
+
+228
+00:13:44,610 --> 00:13:47,060
+>> Maintenant que nous avons parlé
+tous ces différents éléments,
+
+229
+00:13:47,060 --> 00:13:48,540
+nous allons les remettre ensemble.
+
+230
+00:13:48,540 --> 00:13:52,210
+Donc revenir soit mon pseudocode
+code ou votre pseudo
+
+231
+00:13:52,210 --> 00:13:55,920
+et passer par et assurez-vous que vous
+savoir comment faire chaque chose.
+
+232
+00:13:55,920 --> 00:14:01,520
+Obtenir la clé en utilisant argc et argv,
+tourner la clé dans un nombre entier, un
+
+233
+00:14:01,520 --> 00:14:06,840
+i, invitant à plaintext,
+getString, puis itérer
+
+234
+00:14:06,840 --> 00:14:09,590
+sur tous les caractères de
+la chaîne en clair,
+
+235
+00:14:09,590 --> 00:14:14,910
+en préservant le cas de chaque personnage
+et décaler ce caractère par la clé,
+
+236
+00:14:14,910 --> 00:14:17,520
+veiller à ce que vous êtes
+enroulant autour de l'alphabet,
+
+237
+00:14:17,520 --> 00:14:20,850
+enfin l'impression que cryptogramme.
+
+238
+00:14:20,850 --> 00:14:25,470
+Mon nom est Amila, et ce fut César.
+
+239
+00:14:25,470 --> 00:14:28,448
+

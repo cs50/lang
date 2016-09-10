@@ -1,0 +1,47 @@
+Zamyla Chan: Låt oss öka vår spel med Vigenère chiffer. Den Vigenère chiffer är mycket lik Caesar, utom i Caesar vi passerade en enda heltal som vår nyckel. I Vigenère ska vi att passera i ett sökord. Så om jag ville flytta chiffertext detta är CS 50 genom ohai, då det innebär att varje bokstav i ohai kommer att tjäna som den viktigaste, och jag ska cykla över det sökordet för mitt skift göra chiffertexten mycket svårare att avkoda. 
+
+Vad betyder det att skifta av sökord? Tja, är nyckelordet en sträng där varje bokstav motsvarar till något heltal skift. Så motsvarar o en nyckel 14, h till en nyckel av 7, a har en nyckel av 0, så det skulle inte ändra någonting, och då jag har en nyckel 8. 
+
+Säger jag sprang Vigenère A med klartext detta är CS50 bra, som helt enkelt skulle ge mig en oförändrad sträng. Lägg märke till att detta är ekvivalent med kör Caesar med en nyckel på noll. I själva verket, löpning Vigenère med någon enstaka tecken skulle motsvara löpning Caesar med samma heltal. 
+
+Okej, så, eftersom de är så lika jag skulle faktiskt rekommendera att om du vill du bara kopiera din Caesar kod i din Vigenère kod. Saker kommer att förändras, men åtminstone har du någon ryggrad att du kan arbeta med. Eftersom de todos är desamma vi vill att få nyckeln, få vanlig text, chiffrera att vanlig text, och sedan skriva ut det. 
+
+Precis som Caesar nyckeln kommer att föras in som andra kommandoraden argumentet i argv index 1, men det är annorlunda den här gången eftersom det måste vara alfabetisk. Så måste vi att iterera över varje enstaka tecken i den tangenten att användaren gått in, och se till att att varje tecken är alfabetisk för att kunna fortsätta. 
+
+När vi har gjort det, då vi kan få strängen från användaren, precis som vi gjorde innan. Och nu kommer vi till hjärtat av problemet för Vigenère, vilket är precis som Caesar, hur man räkna ut chiffremönstret och ekvation, och encipher hela klartexten. 
+
+Så kommer du att märka att den ekvation för Vigenère skift är mycket lik den Caesar en. Den enda skillnaden är att i stället för en enda variabel k tidigare har nu k en nedsänkt indikerar den j: e bokstaven i nyckeln. 
+
+Låt oss gå igenom ett exempel. Säg att du ville förmedla en hemlighet meddelande på din krossa, jag gillar dig. Tja, för din nyckel som du välja något som din vet krossa vet att du gillar, pandor. Okej, så hur ska vi flytta denna? 
+
+Tja, har vi vår klartext index. Det är vid den första bokstaven och så är indexet för vår nyckel vilket är vid p, varvid den första brev i vår panda ord. Så skiftande jag med p ger oss x, sedan avancera vi klartext index. Detta får oss till ett utrymme. Nu mellanslag är icke alfabetisk, så det betyder att det bara överföringar rätt över till chiffertexten, vi sätter ett utrymme där, och vi inte avancera indexet för vår nyckel. Så vi är fortfarande på p vid denna tidpunkt. 
+
+Vi går vidare till nästa index i vår klartext. Och nu, eftersom det är ett brev, den gemena l, vi flytta det vid nästa index i vår nyckel. Som är en, som är en nolla skift så att bara blir en li vår chiffer. Sedan vi avancera både klartext, och nyckelindex eftersom det är alfabetisk. Så då fortsätter vi att tills vi kommer till e i liknande. 
+
+Okej, så du kommer att märka på detta påpeka detta, när det gäller vår nyckelindex, Vi har kommit till slutet av panda ord, så vad händer när vi kommer till nästa alfabetisk bokstav i klartext? Tja, är allt som händer vi linda runt till början, till det första indexet i vår nyckel. Så, sedan flytta vi att y med p att ge oss n. Och sedan fortsätter vi avslutar kodning vår klartext att få x lvne noh. 
+
+Från detta exempel jag visade att vi bara framåt till nästa bokstav i sökordet om tecknet i klartext är ett brev så isalpha Funktionen kommer att ha nytta här. Och precis som i Caesar, vill vi bevara fallet isupper och islower. Så, lägg till lite in i din pseudokod. 
+
+Så hur ska vi räkna ut de viktigaste förändringar? Tja, om du minns vår diskussion på alfabetiska index i Caesar problem, det är mycket lika. 
+
+Där A motsvarar en ASCII värde på 65 men en förskjutning av 0, och sedan den sista bokstaven i alfabetet, Z, motsvarar en förskjutning av 25. Du kommer att märka att förskjutningen är identisk med eller utan brevet är versaler eller gemener. 
+
+OK, så nu när du vet hur man kan räkna ut den numeriska skifte som motsvarar ett enda tecken Låt oss gå tillbaka till vår ekvation. Eftersom vi har två olika nedsänkta här, i och j, det är en vink om att vi vill hålla koll både vår position i klartext liksom vår position på sökordet, så de är två separata variabler att vi vill hålla tag i. 
+
+Nu ställning i vår klartext kommer att öka varje gång, så det kommer att vara en lite mer rakt fram i motsats till den position sökordet, som vi vet har att linda runt, och ibland öka, ibland förbli densamma. Så, hur vi genomför funktionaliteten att omsluta Indexet för sökordet? 
+
+Jag kommer att använda räkna av exempel. Räkna ut är ett populärt sätt att dela upp människor i grupper. Säga att jag hade 5 personer och jag ville dela upp dem i tre grupper, ja då skulle jag börja med att räkna ut. Den första personen skulle säga att jag är laget nummer ett, nästa person skulle vara lagnummer två, den tredje personen lagnummer tre. Nu vill jag bara tre grupper så den fjärde personen skulle faktiskt börja från början och säga, ja, jag är laget nummer ett också, och nästa person skulle vara lag nummer två. Och därifrån, de kan då dela upp i sina grupper. 
+
+Så, hur kan jag använda modulo att hjälpa mig att genomföra detta räknas bort wrap runt funktion? Tja, den första personen nummer 1, mod 3 ger oss en. 2 mod 3 ger oss två, och 3 mod 3 ger oss 0. 
+
+Den fjärde personen, nummer 4, mod 3 ger oss en, och sedan 5 mod 3 ger oss två. Så kommer du att märka att även om antalet människor som jag har ökar, och är över 3, eftersom jag modding med 3 Jag får alltid siffrorna 0, 1 och 2. Jag får aldrig större än 3. Alltså, även om jag hade 10 människor, då alla dessa människor skulle fortfarande vara inom grupperna 1, 2, eller 0. 
+
+Så, nu vet vi att om vi har en grupp av 5 och vi mod alla de med 3, då vi kommer aldrig att överstiga grupperna 0, 1 eller 2. Så vi kommer aldrig att få en grupp tal som är lika med 3 eller högre. Så även om jag lägger fem mer människor, då alla av dem skulle fortfarande tilldelas till grupper 0, 1, eller 2 eftersom jag modding av tre. Jag kommer aldrig att överstiga den mössa. 
+
+OK, så låt oss se om vi kan tillämpa detta koncept för att använda modulo att omsluta gruppnummer och tillämpa den till Vigenère där vi vill att använda modulo att linda runt Indexet för sökordet. Även om vi uppräkning index vi alltid vill se till att vi alltid lindas runt till början aldrig överskrider den längden på strängen. 
+
+OK, så jag vet att det kan vara lite överväldigande. Det finns mycket mer att göra i denna p set. Så, se till att du skriver ut en bra pseudokod själv att du förstår och som får jobbet gjort. Försök och ta itu med varje enda rad oberoende av varandra räkna ut alla de små små pusselbitar innan det tillsammans. 
+
+Se till att du kan få nyckeln från kommandoraden och se till att det är alfabetisk, får klartext från användaren, och sedan i krypterings, se till att du vet hur man chiffrera en enda bokstav, och sedan gå vidare till hela strängen med alla wrap runt funktioner. Slutligen, kan du skriva ut chiffertexten. 
+
+Mitt namn är en Zamyla, och detta var Vigenère. 

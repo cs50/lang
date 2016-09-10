@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Olgem lisame
+mängu vigenere salakiri.
+
+3
+00:00:04,030 --> 00:00:06,710
+Vigenere salakiri on
+väga sarnane Caesar,
+
+4
+00:00:06,710 --> 00:00:11,060
+välja arvatud Caesar me möödunud aastal
+üks täisarv meie võti.
+
+5
+00:00:11,060 --> 00:00:14,100
+In vigenere me läheme
+läbida märksõna.
+
+6
+00:00:14,100 --> 00:00:19,400
+Niisiis, kui ma tahtsin nihutada
+krüptotekstiga see on CS 50 poolt ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+siis see tähendab, et iga täht
+ohai läheb olla võti,
+
+8
+00:00:23,260 --> 00:00:27,160
+ja ma lähen tsükli
+märksõna minu vahetuses
+
+9
+00:00:27,160 --> 00:00:31,930
+muutes ciphertext
+palju raskem dekodeerida.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Mis see tähendab, et
+vahetustega poolt märksõna?
+
+11
+00:00:34,540 --> 00:00:38,610
+Noh, märksõna on string
+kus iga täht vastab
+
+12
+00:00:38,610 --> 00:00:41,080
+et mingi täisarvu vahetuses.
+
+13
+00:00:41,080 --> 00:00:49,310
+Niisiis, o vastab võti 14,
+h võtme ja 7 alusel on võti 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+nii et ei muudaks midagi,
+ja siis ma on oluline 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Ütle Jooksin vigenere A, välja
+lihtteksti see on CS50 hästi,
+
+16
+00:01:00,000 --> 00:01:02,800
+et oleks lihtsalt anda
+mulle muutmata string.
+
+17
+00:01:02,800 --> 00:01:08,170
+Pange tähele, et see on samaväärne
+töötab Caesar võtmega null.
+
+18
+00:01:08,170 --> 00:01:12,070
+Tegelikult töötab vigenere
+mis tahes ühe märgi
+
+19
+00:01:12,070 --> 00:01:17,070
+võrduks töötab
+Caesar sama täisarv.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Olgu, nii, sest
+nad on nii sarnased, et ma
+
+21
+00:01:20,400 --> 00:01:24,300
+tegelikult soovitan, et kui sa
+soovid, võid lihtsalt kopeerida Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+kood oma vigenere koodi.
+
+23
+00:01:26,932 --> 00:01:28,640
+Asjad muutuvad,
+aga vähemalt on teil
+
+24
+00:01:28,640 --> 00:01:31,110
+mõned selgroog, et saate töötada.
+
+25
+00:01:31,110 --> 00:01:36,410
+Kuna kõike on samad me tahame
+saada võti, saada lihttekstina
+
+26
+00:01:36,410 --> 00:01:40,690
+šifreerimine et lihttekstina
+ja seejärel printida selle välja.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Just nagu Caesari võti läheb
+edasi nii teise käsurea
+
+28
+00:01:44,980 --> 00:01:50,540
+argument sisalduvad argv indeks
+1, aga see on erinev seekord
+
+29
+00:01:50,540 --> 00:01:52,560
+sest see peab olema tähestikulises.
+
+30
+00:01:52,560 --> 00:01:56,390
+Niisiis, me peame Käi iga
+ühe märgi, et võti
+
+31
+00:01:56,390 --> 00:02:00,800
+et kasutaja sooritanud, ning tagada
+et iga täht on alfabeetiline
+
+32
+00:02:00,800 --> 00:02:02,800
+et jätkata.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Kui oleme teinud, siis me
+saan string kasutaja,
+
+34
+00:02:05,560 --> 00:02:07,560
+nagu me varem.
+
+35
+00:02:07,560 --> 00:02:10,520
+Ja nüüd jõuame südames
+probleemi jaoks vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+mis on nagu Caesar, kuidas
+nuputada enciphering muster
+
+37
+00:02:14,665 --> 00:02:19,760
+ja võrrand ja šifreerimine
+Kogu polegi.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Niisiis, märkad, et
+võrrand vigenere nihe
+
+39
+00:02:23,280 --> 00:02:25,610
+on väga sarnane Caesar üks.
+
+40
+00:02:25,610 --> 00:02:29,780
+Ainus erinevus on see, et
+selle asemel, et ühe muutuja k
+
+41
+00:02:29,780 --> 00:02:37,270
+Enne, nüüd k on indeks,
+näitab nda tähe all.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Vaatame näiteks.
+
+43
+00:02:39,560 --> 00:02:43,830
+Ütle, et tahtis edasi saladus
+sõnum peale oma purustada, sa meeldid mulle.
+
+44
+00:02:43,830 --> 00:02:46,325
+Noh, teie klahvi
+valida midagi, mis oma
+
+45
+00:02:46,325 --> 00:02:49,790
+tean purustada teab, mis sulle meeldib, pandas.
+
+46
+00:02:49,790 --> 00:02:52,290
+Olgu, siis kuidas me nihutada seda?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Noh, on meil polegi indeks.
+
+48
+00:02:55,500 --> 00:02:59,160
+See on esimene täht ja
+nii on indeks meie peamiste
+
+49
+00:02:59,160 --> 00:03:02,830
+mis on p, esimene
+kirjas meie panda sõna.
+
+50
+00:03:02,830 --> 00:03:08,590
+Nii, minnes ma p annab meile x,
+siis me eelnevalt polegi indeks.
+
+51
+00:03:08,590 --> 00:03:10,460
+See paneb meid ruumi.
+
+52
+00:03:10,460 --> 00:03:13,540
+Nüüd tühikuga
+on mittetähestikuliste,
+
+53
+00:03:13,540 --> 00:03:16,930
+et tähendab, et see lihtsalt
+ülekandeid õigus üle ciphertext,
+
+54
+00:03:16,930 --> 00:03:23,430
+paneme ruumi seal, ja me ei tee
+edasi indeks meie võti.
+
+55
+00:03:23,430 --> 00:03:25,820
+Niisiis, me oleme ikka veel p sel hetkel.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Me edasipääsu järgmisse
+indeks meie polegi.
+
+57
+00:03:30,130 --> 00:03:34,030
+Ja nüüd, sest see on
+kirja, väiketähti l,
+
+58
+00:03:34,030 --> 00:03:37,920
+me minema, et mida
+Järgmine indeks meie võti.
+
+59
+00:03:37,920 --> 00:03:42,360
+Milline on, mis on null
+vahetuses nii, et lihtsalt muutub
+
+60
+00:03:42,360 --> 00:03:44,370
+L meie ciphertext.
+
+61
+00:03:44,370 --> 00:03:51,120
+Siis me edasi nii polegi, ja
+võti indeks, sest see on tähestikuline.
+
+62
+00:03:51,120 --> 00:03:56,210
+Nii siis me jätkuvalt, et
+kuni me saada e in jms.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Olgu, nii et märkad selles
+meelde, et nii meie peamine indeks,
+
+64
+00:04:01,090 --> 00:04:03,940
+oleme jõudnud
+Panda sõna, nii et mida
+
+65
+00:04:03,940 --> 00:04:08,750
+juhtub siis, kui me saame järgmise
+alfabeetilise kirja polegi?
+
+66
+00:04:08,750 --> 00:04:12,180
+Noh, kõik, mis juhtub, on meil
+ümbritsev alguses,
+
+67
+00:04:12,180 --> 00:04:14,710
+esimese indeksi meie võti.
+
+68
+00:04:14,710 --> 00:04:19,570
+Nii, siis me minema, et
+y p meile n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Ja siis jätkame viimistlus kodeering
+Meie polegi saada x lvne noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Siit Näiteks mina
+näitas, et meil on ainult eelnevalt
+
+71
+00:04:29,300 --> 00:04:33,140
+Järgmise kirja märksõna
+kui märk lihttekstina
+
+72
+00:04:33,140 --> 00:04:37,480
+on kirjas nii isalpha
+funktsiooni tulevad mugav siin.
+
+73
+00:04:37,480 --> 00:04:43,030
+Ja just nagu Caesar, me tahame
+säilitada juhul, isupper ja islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Niisiis, lisada see natuke
+aastal oma pseudokoodi.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Niisiis, kuidas me aru saada võti vahetuses?
+
+76
+00:04:48,510 --> 00:04:53,030
+Noh, kui te mäletate meie arutelu
+tähestikulises järjekorras indeksid Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+probleem, see on väga sarnased.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Kui vastab ASCII
+väärtus 65 kuid nihet 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+ja siis viimane täht
+tähestiku, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+vastab nihe 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Märkad, et üleminek
+on identne või mitte
+
+82
+00:05:10,320 --> 00:05:14,880
+täht on suurtäht või väiketähti.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, nii et nüüd, et sa
+tea, kuidas aru saada,
+
+84
+00:05:17,700 --> 00:05:21,470
+numbriline nihe, mis
+vastab ühe märgi
+
+85
+00:05:21,470 --> 00:05:24,050
+lähme tagasi meie võrrand.
+
+86
+00:05:24,050 --> 00:05:28,180
+Kuna meil on kaks erinevat
+indeksid siin, i ja j,
+
+87
+00:05:28,180 --> 00:05:32,130
+see on vihje, et me tahame, et jälgida
+Nii meie positsiooni polegi
+
+88
+00:05:32,130 --> 00:05:36,600
+samuti oma positsiooni märksõna,
+Nii et need on kaks eraldi muutujad
+
+89
+00:05:36,600 --> 00:05:39,010
+et me tahame hoida kätte.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Nüüd positsiooni meie polegi
+läheb suureneb iga kord,
+
+91
+00:05:42,580 --> 00:05:45,530
+nii, et see saab olema
+natuke rohkem otse edasi
+
+92
+00:05:45,530 --> 00:05:49,750
+mitte positsiooni märksõna,
+mida me teame on ümbritsev,
+
+93
+00:05:49,750 --> 00:05:52,910
+ja mõnikord juurdekasvu,
+Mõnikord jääb samaks.
+
+94
+00:05:52,910 --> 00:05:55,430
+Niisiis, kuidas me ellu
+funktsionaalsust
+
+95
+00:05:55,430 --> 00:05:59,820
+ümbritsev
+indeks märksõna?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Ma lähen kasutada loota välja näiteks.
+
+97
+00:06:01,640 --> 00:06:06,100
+Arvestan off on populaarne viis
+jagada inimesi gruppidesse.
+
+98
+00:06:06,100 --> 00:06:10,660
+Ütle mul oli 5 inimest ja ma tahtsin
+need tükeldada kolme rühma,
+
+99
+00:06:10,660 --> 00:06:13,640
+hästi, siis ma hakkaks lugedes välja.
+
+100
+00:06:13,640 --> 00:06:16,980
+Esimene inimene
+öelda, et ma olen meeskonna number üks,
+
+101
+00:06:16,980 --> 00:06:21,030
+Järgmise inimene oleks meeskonna number
+kaks, kolmas isik meeskonna number
+
+102
+00:06:21,030 --> 00:06:21,910
+kolm.
+
+103
+00:06:21,910 --> 00:06:25,910
+Nüüd ma tahan ainult kolme rühma nii
+Neljanda inimene tegelikult
+
+104
+00:06:25,910 --> 00:06:30,160
+alustada algusest ja öelda,
+noh, ma olen meeskonna number üks hästi,
+
+105
+00:06:30,160 --> 00:06:32,890
+ja järgmine isik
+oleks meeskonna number kaks.
+
+106
+00:06:32,890 --> 00:06:37,660
+Ja sealt nad saavad siis
+eraldada nende rühmad.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Niisiis, kuidas võiks ma kasutada moodul
+mind aidata ellu
+
+108
+00:06:41,130 --> 00:06:44,160
+See loota välja ümbritsev funktsioon?
+
+109
+00:06:44,160 --> 00:06:50,140
+Noh, esimene inimene
+number 1, mod 3 annab meile 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 annab meile 2,
+ja 3 mod 3 annab meile 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Neljas inimene, number 4, mod 3
+annab meile 1 ja seejärel 5 mod 3 annab meile 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Niisiis, märkad, et kuigi
+inimeste arv, et mul on
+
+113
+00:07:05,370 --> 00:07:11,210
+suurendab ja on eespool
+3, sest ma modereerimine 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Ma alati numbrid 0, 1 ja 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Ma ei saa kunagi suurem kui 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Niisiis, isegi kui mul oli 10
+inimesed, siis on kõik need inimesed,
+
+117
+00:07:22,630 --> 00:07:27,430
+ikkagi rühmades 1, 2 või 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Nii, nüüd me teame, et kui meil on grupp
+5. ja me mod Kõigil neil 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+siis me ei saa kunagi
+ületa rühmade 0, 1 või 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Niisiis, me ei hakka rühm
+arv, mis on võrdne 3 või rohkem.
+
+121
+00:07:43,430 --> 00:07:46,980
+Seega, isegi kui ma lisan veel viis
+inimesed, siis neid kõiki
+
+122
+00:07:46,980 --> 00:07:53,150
+ikkagi gruppidesse
+0, 1 või 2 sest ma modereerimine 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Ma ei saa kunagi ületada, et kork.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, nii et vaatame, kas me saame rakendada
+Selle kontseptsiooni kasutades moodul
+
+125
+00:08:00,800 --> 00:08:03,710
+ümbritsev
+rühmanumbritest ja kohaldada
+
+126
+00:08:03,710 --> 00:08:08,000
+see vigenere, kus me tahame
+kasutada mooduli ümbritsev
+
+127
+00:08:08,000 --> 00:08:10,220
+indeks märksõna.
+
+128
+00:08:10,220 --> 00:08:12,830
+Kuigi me incrementing
+Indeksi me alati
+
+129
+00:08:12,830 --> 00:08:17,260
+soovite veenduda, et me alati
+käib üle algusest
+
+130
+00:08:17,260 --> 00:08:20,050
+ei ületa kunagi
+stringi pikkusena.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, nii et ma tean, et see võiks olla
+natuke suur.
+
+132
+00:08:23,510 --> 00:08:26,670
+Seal on palju rohkem teha selles p komplekti.
+
+133
+00:08:26,670 --> 00:08:30,050
+Seega veenduge, et te kirjutada
+hea pseudokoodi ise
+
+134
+00:08:30,050 --> 00:08:32,870
+et saate aru ja
+et saab tööd teha.
+
+135
+00:08:32,870 --> 00:08:35,580
+Proovige ja lahendada iga
+üherealine iseseisvalt
+
+136
+00:08:35,580 --> 00:08:38,370
+figuring kõik vähe
+väike tükid puzzle
+
+137
+00:08:38,370 --> 00:08:40,260
+enne laskmise seda koos.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Veendu, et saad
+võti käsurealt
+
+139
+00:08:43,110 --> 00:08:46,780
+ja tagada, et see on tähestikuline,
+saada lihttekstina kasutaja,
+
+140
+00:08:46,780 --> 00:08:51,010
+ja siis enciphering, veendumaks, et
+tea, kuidas šifreerimine ühe kirja,
+
+141
+00:08:51,010 --> 00:08:56,130
+ja siis edu kogu string
+koos kõigi ümbritsev funktsioone.
+
+142
+00:08:56,130 --> 00:08:59,610
+Lõpuks saab printida ciphertext.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Minu nimi on Zamyla,
+ja see oli vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

@@ -1,0 +1,47 @@
+Zamyla Chan: Facciamo un passo il nostro gioco con il cifrario Vigenère. La cifra è Vigenere molto simile a Cesare, fatta eccezione per Cesare siamo passati a un singolo intero come la nostra chiave. In Vigenere stiamo andando a passare in una parola chiave. Quindi, se volevo spostare la testo cifrato questo è CS 50 per ohai, allora ciò significa che ogni lettera ohai sta andando a servire come chiave, e ho intenzione di ciclo sopra quella parola chiave per il mio turno rendendo il testo cifrato molto più difficile da decodificare. 
+
+Che cosa vuol dire spostare dalla parola chiave? Bene, la parola chiave è una stringa dove ogni lettera corrisponde a qualche turno intero. Così, la o corrisponde ad una chiave di 14, h ad una chiave di 7, un ha una chiave di 0, in modo che non cambierebbe nulla, e poi mi ha una chiave di 8. 
+
+Di 'Ho corso Vigenere A con il testo normale questo è CS50 bene, che sarebbe semplicemente dare me una stringa immutata. Si noti che questo è equivalente a esecuzione di Cesare con una chiave di zero. Infatti, in esecuzione Vigenere con ogni singolo carattere sarebbe equivalente a esecuzione Cesare con lo stesso numero intero. 
+
+Va bene, quindi, dal momento che essi sono così simili che avevo in realtà raccomandare che se si desidera si può semplicemente copiare il Caesar il codice nel codice Vigenere. Le cose cambieranno, ma almeno hai una spina dorsale che si può lavorare. Perché i TODOs sono gli stessi che vogliamo per ottenere la chiave, ottenere il testo in chiaro, encipher che testo normale, e quindi stampare quello fuori. 
+
+Proprio come Cesare la chiave sta per da passare come seconda linea di comando argomentazione contenuta nell'indice argv 1, ma è diverso questa volta perché deve essere alfabetico. Quindi, abbiamo bisogno di iterare su ogni singolo carattere in quella chiave che l'utente passava, e garantire che ogni personaggio è alfabetico per continuare. 
+
+Una volta che abbiamo fatto questo, allora siamo può ottenere la stringa da parte dell'utente, proprio come abbiamo fatto prima. E ora, veniamo al cuore del problema per Vigenere, che è proprio come Cesare, come capire il modello di cifratura e l'equazione, e encipher l'intero testo in chiaro. 
+
+Quindi, si noterà che il equazione per lo spostamento Vigenere è molto simile a quello Caesar. L'unica differenza è che invece di una singola variabile k prima, ora k ha un pedice, indicazione della lettera j-esimo della chiave. 
+
+Camminiamo con un esempio. Diciamo che si voleva far passare un segreto messaggio sul vostro sbandata, mi piaci. Beh, per la chiave voi scegliere qualcosa che la tua sapere cotta sa che ti piace, panda. Va bene, così come possiamo spostiamo questo? 
+
+Bene, abbiamo il nostro indice di testo in chiaro. Questo è alla prima lettera e così è l'indice per la nostra chiave che è al p, la prima lettera nella nostra parola panda. Così, spostando ho da p noi x dà, poi si avanza l'indice di testo in chiaro. Questo ci porta ad uno spazio. Ora, il carattere di spazio è non alfabetica, in modo che significa che, che appena trasferimenti a destra oltre al testo cifrato, mettiamo uno spazio lì, e noi non facciamo avanzare l'indice per la nostra chiave. Quindi, siamo ancora a p a questo punto. 
+
+Avanziamo alla prossima indice nel nostro testo in chiaro. E ora, perché questo è una lettera, la lettera minuscola l, spostiamo che dal successivo indice nella nostra chiave. Che è, che è uno zero spostamento in modo che diventa solo un l nel nostro testo cifrato. Poi, abbiamo anticipato sia il testo in chiaro, e l'indice chiave perché è alfabetico. Allora continuiamo che fino ad arrivare alla posta in come. 
+
+Va bene, allora si noterà a questo punto che, in termini di nostro indice chiave, abbiamo raggiunto la fine del la parola del panda, così che cosa succede quando arriviamo a quello successivo lettera alfabetica nel testo in chiaro? Ebbene, tutto ciò che accade è che avvolgere intorno al principio, il primo indice della nostra chiave. Così, allora ci spostiamo che y da p per darci n. E poi, continuiamo finendo codifica il nostro testo in chiaro per ottenere x lvne noh. 
+
+Da questo esempio, ho dimostrato che solo l'avanzamento alla lettera successiva nella parola chiave se il personaggio in formato testo è una lettera così il isalpha la funzione sarà utile qui. E, proprio come in Cesare, vogliamo preservare il caso, isupper e islower. Quindi, aggiungere questo po ' in nel vostro pseudocodice. 
+
+Quindi, come possiamo capire i cambiamenti principali? Beh, se vi ricordate la nostra discussione sugli indici alfabetici nel Caesar problema, è molto simile. 
+
+Dove A corrisponde a un ASCII valore di 65, ma uno spostamento di 0, e poi l'ultima lettera in alfabeto, Z, corrisponde ad uno spostamento di 25. Si noterà che il cambiamento è identica o meno la lettera è maiuscola o minuscola. 
+
+OK, ora che si saper capire lo spostamento numerico che corrisponde ad un singolo carattere torniamo alla nostra equazione. Perché abbiamo due diversi indici qui, i e j, questo è un suggerimento che vogliamo tenere traccia sia della nostra posizione nel testo in chiaro nonché la nostra posizione la parola, così quelli sono due variabili distinte che vogliamo mantenere una stretta di. 
+
+Ora, la posizione nel nostro crittografato è destinato ad aumentare ogni volta, in modo che sta per essere un po 'più dritto in avanti rispetto alla posizione della parola chiave, che come sappiamo ha da avvolgere intorno, e talvolta incrementare, a volte rimanere lo stesso. Quindi, come possiamo attuare la funzionalità per avvolgere intorno al indice per la parola chiave? 
+
+Ho intenzione di utilizzare l'esempio contare off. Contando fuori è un modo popolare per dividere le persone in gruppi. Dire che ho avuto 5 persone e volevo li divisi in tre gruppi, Ebbene vorrei iniziare contando fuori. La prima persona sarebbe dire che sono il numero uno della squadra, la prossima persona sarebbe il numero di squadra due, il numero squadra terza persona tre. Ora, voglio solo tre gruppi in modo la quarta persona sarebbe in realtà cominciare dall'inizio e dire, bene, io sono il numero uno della squadra pure, e la prossima persona sarebbe il numero due team. E, da lì, si può quindi separare nei loro gruppi. 
+
+Così, come potrei usare modulo per aiutarmi a implementare questo conteggio fuori avvolgono la funzione? Bene, la prima persona il numero 1, mod 3 ci dà 1. 2 mod 3 ci dà 2, e 3 mod 3 ci dà 0. 
+
+La quarta persona, il numero 4, 3 mod ci dà 1, e poi 5 mod 3 ci dà 2. Quindi, si noterà che anche se il numero di persone che ho aumenta, ed è sopra 3, dal momento che sto modding del 3 Ho sempre trovato i numeri 0, 1 e 2. Non ho mai ottenere maggiore di 3. E allora, anche se ho avuto 10 persone, poi tutte quelle persone sarebbe ancora all'interno dei gruppi 1, 2, o 0. 
+
+Così, ora sappiamo che se abbiamo un gruppo 5 e mod tutti quelli del 3, allora stiamo andando mai superare i gruppi 0, 1 o 2. Quindi, non riusciremo mai a ottenere un gruppo numero che è uguale a 3 o superiore. Quindi, anche se aggiungo altri cinque persone, allora tutti loro sarebbe ancora essere attribuite ai gruppi 0, 1, 2 o perché sono modding del 3. Non sono mai intenzione di superare quella cap. 
+
+OK, vediamo se possiamo applicare questo concetto di utilizzare modulo per avvolgere intorno al numeri di gruppo e applicare a Vigenere dove vogliamo utilizzare modulo per avvolgere l'indice per la parola chiave. Anche se stiamo incrementando l'indice abbiamo sempre vuole fare in modo che abbiamo sempre avvolgere intorno alla fin dall'inizio mai superare il lunghezza della stringa. 
+
+OK, quindi so che potrebbe essere un po 'opprimente. C'è molto di più da fare in questo p set. Quindi, assicurarsi che si scrive un buon pseudocodice per te che si capisce e che ottiene il lavoro fatto. Cercare di affrontare ogni singola linea in modo indipendente capire tutti i piccoli piccoli pezzi del puzzle prima di metterlo insieme. 
+
+Assicurarsi che si può ottenere la chiave dalla riga di comando e garantire che è alfabetico, ottenere il testo in chiaro da parte dell'utente, e poi a cifratura, assicuratevi sapere come cifrare una sola lettera, e poi il progresso per l'intera stringa con tutte le avvolgono funzioni. Infine, è possibile stampare il testo cifrato. 
+
+Il mio nome è un Zamyla, e questo è stato Vigenere. 

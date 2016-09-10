@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Pojďme zintenzivnit naše
+Hra s Vigenère kód.
+
+3
+00:00:04,030 --> 00:00:06,710
+Vigenère kód je
+velmi podobný císaři,
+
+4
+00:00:06,710 --> 00:00:11,060
+s výjimkou Caesar jsme absolvovali v
+jediné číslo jako náš klíč.
+
+5
+00:00:11,060 --> 00:00:14,100
+V Vigenere jdeme
+předat klíčové slovo.
+
+6
+00:00:14,100 --> 00:00:19,400
+Takže, kdybych chtěl posunout
+Ciphertext je to CS 50 podle Ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+pak to znamená, že každé písmeno v
+Ohai bude sloužit jako klíč,
+
+8
+00:00:23,260 --> 00:00:27,160
+a jdu na kole přes
+že klíčové slovo pro mé směny
+
+9
+00:00:27,160 --> 00:00:31,930
+Díky ciphertext
+mnohem těžší dekódovat.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Co to znamená
+posunout o klíčové slovo?
+
+11
+00:00:34,540 --> 00:00:38,610
+No, klíčové slovo je řetězec
+kde každý písmeno odpovídá
+
+12
+00:00:38,610 --> 00:00:41,080
+do jisté celé číslo posunu.
+
+13
+00:00:41,080 --> 00:00:49,310
+Takže, o odpovídá tlačítku 14,
+h na klíč 7, A má klíč 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+takže by se nic nezměnilo,
+a pak jsem má klíč 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Řekněme, že jsem běžel Vigenere A s
+prostý text je to CS50 dobře,
+
+16
+00:01:00,000 --> 00:01:02,800
+že by prostě dát
+me nezměněné řetězec.
+
+17
+00:01:02,800 --> 00:01:08,170
+Všimněte si, že to je ekvivalentní
+běh Caesar s klíčem nula.
+
+18
+00:01:08,170 --> 00:01:12,070
+Ve skutečnosti, běh Vigenere
+s jakýmkoli jedním znakem
+
+19
+00:01:12,070 --> 00:01:17,070
+by byl ekvivalent k běhu
+Caesar se stejným celé číslo.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Dobře, takže, jelikož
+oni jsou tak podobné, že bych
+
+21
+00:01:20,400 --> 00:01:24,300
+ve skutečnosti doporučit, že pokud
+chcete, můžete jen zkopírovat Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+Kód do Vigenere kódu.
+
+23
+00:01:26,932 --> 00:01:28,640
+Věci se mění,
+ale alespoň máte
+
+24
+00:01:28,640 --> 00:01:31,110
+někteří páteř, které můžete pracovat.
+
+25
+00:01:31,110 --> 00:01:36,410
+Vzhledem k tomu, Todos jsou stejné chceme
+získat klíč, ten prostý text,
+
+26
+00:01:36,410 --> 00:01:40,690
+zašifrovat, že prostý text,
+a vytisknout to ven.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Stejně jako Caesar klíč se chystá
+předány v jako druhý příkazového řádku
+
+28
+00:01:44,980 --> 00:01:50,540
+argumentace obsažené v indexu argv
+1, ale je to tentokrát jinak
+
+29
+00:01:50,540 --> 00:01:52,560
+protože musí být abecední.
+
+30
+00:01:52,560 --> 00:01:56,390
+Takže musíme iteraci každý
+Jeden znak v tomto klíči
+
+31
+00:01:56,390 --> 00:02:00,800
+že uživatel prošel v, a zajistit
+že každý znak je abecední
+
+32
+00:02:00,800 --> 00:02:02,800
+s cílem pokračovat.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Poté, co jsme udělali, pak bychom
+může dostat řetězec od uživatele,
+
+34
+00:02:05,560 --> 00:02:07,560
+stejně jako jsme to udělali předtím.
+
+35
+00:02:07,560 --> 00:02:10,520
+A nyní se dostáváme k jádru
+problému pro Vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+což je stejně jako Caesar, jak se
+vymyslet kódovacího vzoru
+
+37
+00:02:14,665 --> 00:02:19,760
+a rovnice, a zašifrovat
+celý holý.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Takže, zjistíte, že
+rovnice pro posun Vigenere
+
+39
+00:02:23,280 --> 00:02:25,610
+je velmi podobný tomu, který Caesar.
+
+40
+00:02:25,610 --> 00:02:29,780
+Jediný rozdíl je, že
+namísto jediné proměnné k
+
+41
+00:02:29,780 --> 00:02:37,270
+dříve, nyní k má dolní index,
+označující JTH písmeno klíče.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Pojďme se projít příklad.
+
+43
+00:02:39,560 --> 00:02:43,830
+Řekněme, že jste chtěl předat tajemství
+Zpráva na svoji lásku, mám tě rád.
+
+44
+00:02:43,830 --> 00:02:46,325
+No, pro váš klíče, který
+vybrat něco, že váš
+
+45
+00:02:46,325 --> 00:02:49,790
+vím tlačenice ví, že se vám líbí, pandy.
+
+46
+00:02:49,790 --> 00:02:52,290
+Dobře, tak jak jsme to posunout?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> No, máme holého textu index.
+
+48
+00:02:55,500 --> 00:02:59,160
+To je na první písmeno a
+takže je index pro náš klíč
+
+49
+00:02:59,160 --> 00:03:02,830
+který je u p, první
+písmeno v naší panda slovo.
+
+50
+00:03:02,830 --> 00:03:08,590
+Takže, přesouvá I podle p us x udává,
+Pak jsme se posunout holého textu index.
+
+51
+00:03:08,590 --> 00:03:10,460
+To nás dostává do prostoru.
+
+52
+00:03:10,460 --> 00:03:13,540
+Nyní je mezera
+je non abecední,
+
+53
+00:03:13,540 --> 00:03:16,930
+tak, že znamená, že, že právě
+převody přímo nad do ciphertext,
+
+54
+00:03:16,930 --> 00:03:23,430
+dáme prostor tam, a my ne
+posunout index pro náš klíč.
+
+55
+00:03:23,430 --> 00:03:25,820
+Takže, jsme pořád na str v tomto bodě.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> My postoupit do další
+index v naší prostého textu.
+
+57
+00:03:30,130 --> 00:03:34,030
+A teď, protože to je
+dopis je malé l,
+
+58
+00:03:34,030 --> 00:03:37,920
+posuneme, že touto
+další index v naší klíče.
+
+59
+00:03:37,920 --> 00:03:42,360
+Který je, který je nulový
+Posun takže prostě stane
+
+60
+00:03:42,360 --> 00:03:44,370
+l v naší ciphertext.
+
+61
+00:03:44,370 --> 00:03:51,120
+Pak jsme postoupit i holý text, a
+klíč index, protože to je abecední.
+
+62
+00:03:51,120 --> 00:03:56,210
+Takže budeme pokračovat, že
+až se dostaneme do e v podobně.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> V pořádku, takže si všimnete na to
+ukazují, že, pokud jde o našeho indexu klíče,
+
+64
+00:04:01,090 --> 00:04:03,940
+jsme došli na konec
+panda slovo, takže to, co
+
+65
+00:04:03,940 --> 00:04:08,750
+se stane, když se dostaneme k druhému
+abecední dopis v holém textu?
+
+66
+00:04:08,750 --> 00:04:12,180
+No, všechno, co se stane, je, že jsme
+zábal kolem na začátek,
+
+67
+00:04:12,180 --> 00:04:14,710
+na první index našeho klíče.
+
+68
+00:04:14,710 --> 00:04:19,570
+Ano, pak posuneme, že
+y o p n dát nám.
+
+69
+00:04:19,570 --> 00:04:26,860
+A pak budeme pokračovat dokončovací kódování
+Naše plaintext dostat x lvne NOH.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Z tohoto příkladu I
+ukázala, že my jen předem
+
+71
+00:04:29,300 --> 00:04:33,140
+na další písmeno v klíčové slovo
+v případě, že postava ve formátu prostého textu
+
+72
+00:04:33,140 --> 00:04:37,480
+je dopis, takže IsAlpha
+funkce přijde vhod zde.
+
+73
+00:04:37,480 --> 00:04:43,030
+A stejně jako v Caesar, chceme
+zachovat případ, isupper a islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Takže, přidejte tento trochu
+V do svého pseudokódu.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Tak jak jsme se zjistit klíčové posuny?
+
+76
+00:04:48,510 --> 00:04:53,030
+No, pokud si vzpomínáte naši diskusi
+Na abecední indexy v Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+Problém, je to velmi podobné.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Kde A odpovídá ASCII
+hodnota 65, ale k posunu 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+a pak poslední písmeno
+v abecedě, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+odpovídá posunu 25 ° C.
+
+81
+00:05:06,940 --> 00:05:10,320
+Všimněte si, že posun
+je totožná též
+
+82
+00:05:10,320 --> 00:05:14,880
+písmeno je velká písmena nebo malá písmena.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, tak teď, když vás
+vědět, jak přijít na to,
+
+84
+00:05:17,700 --> 00:05:21,470
+číselné posun, který
+odpovídá jednomu znaku
+
+85
+00:05:21,470 --> 00:05:24,050
+vraťme se k naší rovnice.
+
+86
+00:05:24,050 --> 00:05:28,180
+Protože máme dva odlišné
+indexy tady, i a j,
+
+87
+00:05:28,180 --> 00:05:32,130
+To je náznak, že chceme sledovat
+jak naší pozice v holém textu
+
+88
+00:05:32,130 --> 00:05:36,600
+stejně jako naši pozici v klíčové slovo,
+tak ty jsou dvě samostatné proměnné
+
+89
+00:05:36,600 --> 00:05:39,010
+že chceme udržet držení.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Nyní se pozice v naší prostý text
+poroste pokaždé,
+
+91
+00:05:42,580 --> 00:05:45,530
+takže to bude být
+trochu víc přímočará
+
+92
+00:05:45,530 --> 00:05:49,750
+v protikladu k pozici klíčového slova,
+kterého známe má zabalit kolem,
+
+93
+00:05:49,750 --> 00:05:52,910
+a někdy i zvyšovat,
+Někdy zůstane stejný.
+
+94
+00:05:52,910 --> 00:05:55,430
+Tak, jak jsme se realizovat
+funkčnost
+
+95
+00:05:55,430 --> 00:05:59,820
+zabalit kolem
+index pro klíčové slovo?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Budu používat započetí příklad.
+
+97
+00:06:01,640 --> 00:06:06,100
+Počítání off je populární způsob,
+rozdělit lidi do skupin.
+
+98
+00:06:06,100 --> 00:06:10,660
+Řekněme, že jsem měl 5 lidí a chtěl jsem
+je rozdělit do tří skupin,
+
+99
+00:06:10,660 --> 00:06:13,640
+no pak bych začít odpočítávat.
+
+100
+00:06:13,640 --> 00:06:16,980
+První osoba by
+říkají, že jsem tým číslo jedna,
+
+101
+00:06:16,980 --> 00:06:21,030
+další osoba bude počet tým
+dva, tým číslo třetí osoba
+
+102
+00:06:21,030 --> 00:06:21,910
+tři.
+
+103
+00:06:21,910 --> 00:06:25,910
+Teď chci jen tři skupin, aby bylo
+čtvrtá osoba by ve skutečnosti
+
+104
+00:06:25,910 --> 00:06:30,160
+začít od začátku a říkají,
+No, já jsem team číslo jedna, stejně,
+
+105
+00:06:30,160 --> 00:06:32,890
+a další osoba
+by tým číslo dvě.
+
+106
+00:06:32,890 --> 00:06:37,660
+A odtud pak mohou
+oddělit do svých skupin.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Tak, jak bych mohl použít modulo
+aby mi pomohl realizovat
+
+108
+00:06:41,130 --> 00:06:44,160
+Tento odpočítat zábal kolem funkci?
+
+109
+00:06:44,160 --> 00:06:50,140
+No, první osoba
+číslo 1, mod 3 nám dává 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 nám dává 2,
+a 3 mod 3 nám dává 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Čtvrtá osoba, číslo 4, mod 3
+nám dává 1 a poté 5 mod 3 nám dává 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Takže, všimnete si, že ačkoliv
+počet lidí, které mám
+
+113
+00:07:05,370 --> 00:07:11,210
+zvyšuje, a je nad
+3, protože jsem modding o 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Vždycky jsem si čísla 0, 1 a 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Nikdy jsem se dostat větší než 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+A tak, i když jsem měl 10
+lidí, pak všechny z těch lidí,
+
+117
+00:07:22,630 --> 00:07:27,430
+by ještě bylo v rámci skupin 1, 2, nebo 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Takže teď víme, že pokud máme skupinu
+5 a my mod všechny ty, o 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+Pak jsme nikdy
+přesáhnout skupiny 0, 1 nebo 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Takže jsme nikdy dostat skupinu
+číslo, které je rovno 3 nebo vyšší.
+
+121
+00:07:43,430 --> 00:07:46,980
+Takže, i když přidám dalších pět
+lidí, pak všechny z nich
+
+122
+00:07:46,980 --> 00:07:53,150
+by se ještě zařazeny do skupin
+0, 1 nebo 2, protože jsem modding o 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Já nikdy překročit tento čepici.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, takže uvidíme, jestli můžeme aplikovat
+Tento koncept použití modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+zabalit kolem
+Čísla skupin a aplikovat
+
+126
+00:08:03,710 --> 00:08:08,000
+to Vigenere kam chceme
+používat modulo obtékání
+
+127
+00:08:08,000 --> 00:08:10,220
+Hodnota indexu pro klíčové slovo.
+
+128
+00:08:10,220 --> 00:08:12,830
+I přesto, že jsme postupně
+index vždy
+
+129
+00:08:12,830 --> 00:08:17,260
+chcete ujistit, že jsme vždy
+zábal kolem samého počátku
+
+130
+00:08:17,260 --> 00:08:20,050
+Nikdy překročení
+délka řetězce.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, takže vím, že by to mohlo být
+trochu ohromující.
+
+132
+00:08:23,510 --> 00:08:26,670
+Je tu mnohem víc dělat v této p sadě.
+
+133
+00:08:26,670 --> 00:08:30,050
+Takže, ujistěte se, že jste vypsat
+dobrý pseudocode pro sebe
+
+134
+00:08:30,050 --> 00:08:32,870
+že chápete a
+že dostane úkol.
+
+135
+00:08:32,870 --> 00:08:35,580
+Pokusit se řešit každý
+jednořádkový nezávisle
+
+136
+00:08:35,580 --> 00:08:38,370
+zjišťuje, vše malý
+malé kousky skládačky
+
+137
+00:08:38,370 --> 00:08:40,260
+Před uvedením dohromady.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Ujistěte se, že můžete získat
+klíče z příkazového řádku
+
+139
+00:08:43,110 --> 00:08:46,780
+a zajistit, že to je abecední,
+ten prostý text od uživatele,
+
+140
+00:08:46,780 --> 00:08:51,010
+a pak v zašifrovat, ujistěte se, že
+umět zašifrovat jedno písmeno,
+
+141
+00:08:51,010 --> 00:08:56,130
+a pak postupují do celého řetězce
+se všemi ovinutí funkcí.
+
+142
+00:08:56,130 --> 00:08:59,610
+A konečně, můžete vytisknout ciphertext.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Mé jméno je Zamyla,
+a to bylo Vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

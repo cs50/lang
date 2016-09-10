@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Facciamo un passo il nostro
+gioco con il cifrario Vigenère.
+
+3
+00:00:04,030 --> 00:00:06,710
+La cifra è Vigenere
+molto simile a Cesare,
+
+4
+00:00:06,710 --> 00:00:11,060
+fatta eccezione per Cesare siamo passati a
+un singolo intero come la nostra chiave.
+
+5
+00:00:11,060 --> 00:00:14,100
+In Vigenere stiamo andando
+a passare in una parola chiave.
+
+6
+00:00:14,100 --> 00:00:19,400
+Quindi, se volevo spostare la
+testo cifrato questo è CS 50 per ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+allora ciò significa che ogni lettera
+ohai sta andando a servire come chiave,
+
+8
+00:00:23,260 --> 00:00:27,160
+e ho intenzione di ciclo sopra
+quella parola chiave per il mio turno
+
+9
+00:00:27,160 --> 00:00:31,930
+rendendo il testo cifrato
+molto più difficile da decodificare.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Che cosa vuol dire
+spostare dalla parola chiave?
+
+11
+00:00:34,540 --> 00:00:38,610
+Bene, la parola chiave è una stringa
+dove ogni lettera corrisponde
+
+12
+00:00:38,610 --> 00:00:41,080
+a qualche turno intero.
+
+13
+00:00:41,080 --> 00:00:49,310
+Così, la o corrisponde ad una chiave di 14,
+h ad una chiave di 7, un ha una chiave di 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+in modo che non cambierebbe nulla,
+e poi mi ha una chiave di 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Di 'Ho corso Vigenere A con il
+testo normale questo è CS50 bene,
+
+16
+00:01:00,000 --> 00:01:02,800
+che sarebbe semplicemente dare
+me una stringa immutata.
+
+17
+00:01:02,800 --> 00:01:08,170
+Si noti che questo è equivalente a
+esecuzione di Cesare con una chiave di zero.
+
+18
+00:01:08,170 --> 00:01:12,070
+Infatti, in esecuzione Vigenere
+con ogni singolo carattere
+
+19
+00:01:12,070 --> 00:01:17,070
+sarebbe equivalente a esecuzione
+Cesare con lo stesso numero intero.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Va bene, quindi, dal momento che
+essi sono così simili che avevo
+
+21
+00:01:20,400 --> 00:01:24,300
+in realtà raccomandare che se si
+desidera si può semplicemente copiare il Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+il codice nel codice Vigenere.
+
+23
+00:01:26,932 --> 00:01:28,640
+Le cose cambieranno,
+ma almeno hai
+
+24
+00:01:28,640 --> 00:01:31,110
+una spina dorsale che si può lavorare.
+
+25
+00:01:31,110 --> 00:01:36,410
+Perché i TODOs sono gli stessi che vogliamo
+per ottenere la chiave, ottenere il testo in chiaro,
+
+26
+00:01:36,410 --> 00:01:40,690
+encipher che testo normale,
+e quindi stampare quello fuori.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Proprio come Cesare la chiave sta per
+da passare come seconda linea di comando
+
+28
+00:01:44,980 --> 00:01:50,540
+argomentazione contenuta nell'indice argv
+1, ma è diverso questa volta
+
+29
+00:01:50,540 --> 00:01:52,560
+perché deve essere alfabetico.
+
+30
+00:01:52,560 --> 00:01:56,390
+Quindi, abbiamo bisogno di iterare su ogni
+singolo carattere in quella chiave
+
+31
+00:01:56,390 --> 00:02:00,800
+che l'utente passava, e garantire
+che ogni personaggio è alfabetico
+
+32
+00:02:00,800 --> 00:02:02,800
+per continuare.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Una volta che abbiamo fatto questo, allora siamo
+può ottenere la stringa da parte dell'utente,
+
+34
+00:02:05,560 --> 00:02:07,560
+proprio come abbiamo fatto prima.
+
+35
+00:02:07,560 --> 00:02:10,520
+E ora, veniamo al cuore
+del problema per Vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+che è proprio come Cesare, come
+capire il modello di cifratura
+
+37
+00:02:14,665 --> 00:02:19,760
+e l'equazione, e encipher
+l'intero testo in chiaro.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Quindi, si noterà che il
+equazione per lo spostamento Vigenere
+
+39
+00:02:23,280 --> 00:02:25,610
+è molto simile a quello Caesar.
+
+40
+00:02:25,610 --> 00:02:29,780
+L'unica differenza è che
+invece di una singola variabile k
+
+41
+00:02:29,780 --> 00:02:37,270
+prima, ora k ha un pedice,
+indicazione della lettera j-esimo della chiave.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Camminiamo con un esempio.
+
+43
+00:02:39,560 --> 00:02:43,830
+Diciamo che si voleva far passare un segreto
+messaggio sul vostro sbandata, mi piaci.
+
+44
+00:02:43,830 --> 00:02:46,325
+Beh, per la chiave voi
+scegliere qualcosa che la tua
+
+45
+00:02:46,325 --> 00:02:49,790
+sapere cotta sa che ti piace, panda.
+
+46
+00:02:49,790 --> 00:02:52,290
+Va bene, così come possiamo spostiamo questo?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Bene, abbiamo il nostro indice di testo in chiaro.
+
+48
+00:02:55,500 --> 00:02:59,160
+Questo è alla prima lettera e
+così è l'indice per la nostra chiave
+
+49
+00:02:59,160 --> 00:03:02,830
+che è al p, la prima
+lettera nella nostra parola panda.
+
+50
+00:03:02,830 --> 00:03:08,590
+Così, spostando ho da p noi x dà,
+poi si avanza l'indice di testo in chiaro.
+
+51
+00:03:08,590 --> 00:03:10,460
+Questo ci porta ad uno spazio.
+
+52
+00:03:10,460 --> 00:03:13,540
+Ora, il carattere di spazio
+è non alfabetica,
+
+53
+00:03:13,540 --> 00:03:16,930
+in modo che significa che, che appena
+trasferimenti a destra oltre al testo cifrato,
+
+54
+00:03:16,930 --> 00:03:23,430
+mettiamo uno spazio lì, e noi non facciamo
+avanzare l'indice per la nostra chiave.
+
+55
+00:03:23,430 --> 00:03:25,820
+Quindi, siamo ancora a p a questo punto.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Avanziamo alla prossima
+indice nel nostro testo in chiaro.
+
+57
+00:03:30,130 --> 00:03:34,030
+E ora, perché questo è
+una lettera, la lettera minuscola l,
+
+58
+00:03:34,030 --> 00:03:37,920
+spostiamo che dal
+successivo indice nella nostra chiave.
+
+59
+00:03:37,920 --> 00:03:42,360
+Che è, che è uno zero
+spostamento in modo che diventa solo
+
+60
+00:03:42,360 --> 00:03:44,370
+un l nel nostro testo cifrato.
+
+61
+00:03:44,370 --> 00:03:51,120
+Poi, abbiamo anticipato sia il testo in chiaro, e
+l'indice chiave perché è alfabetico.
+
+62
+00:03:51,120 --> 00:03:56,210
+Allora continuiamo che
+fino ad arrivare alla posta in come.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Va bene, allora si noterà a questo
+punto che, in termini di nostro indice chiave,
+
+64
+00:04:01,090 --> 00:04:03,940
+abbiamo raggiunto la fine del
+la parola del panda, così che cosa
+
+65
+00:04:03,940 --> 00:04:08,750
+succede quando arriviamo a quello successivo
+lettera alfabetica nel testo in chiaro?
+
+66
+00:04:08,750 --> 00:04:12,180
+Ebbene, tutto ciò che accade è che
+avvolgere intorno al principio,
+
+67
+00:04:12,180 --> 00:04:14,710
+il primo indice della nostra chiave.
+
+68
+00:04:14,710 --> 00:04:19,570
+Così, allora ci spostiamo che
+y da p per darci n.
+
+69
+00:04:19,570 --> 00:04:26,860
+E poi, continuiamo finendo codifica
+il nostro testo in chiaro per ottenere x lvne noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Da questo esempio, ho
+dimostrato che solo l'avanzamento
+
+71
+00:04:29,300 --> 00:04:33,140
+alla lettera successiva nella parola chiave
+se il personaggio in formato testo
+
+72
+00:04:33,140 --> 00:04:37,480
+è una lettera così il isalpha
+la funzione sarà utile qui.
+
+73
+00:04:37,480 --> 00:04:43,030
+E, proprio come in Cesare, vogliamo
+preservare il caso, isupper e islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Quindi, aggiungere questo po '
+in nel vostro pseudocodice.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Quindi, come possiamo capire i cambiamenti principali?
+
+76
+00:04:48,510 --> 00:04:53,030
+Beh, se vi ricordate la nostra discussione
+sugli indici alfabetici nel Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+problema, è molto simile.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Dove A corrisponde a un ASCII
+valore di 65, ma uno spostamento di 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+e poi l'ultima lettera
+in alfabeto, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+corrisponde ad uno spostamento di 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Si noterà che il cambiamento
+è identica o meno
+
+82
+00:05:10,320 --> 00:05:14,880
+la lettera è maiuscola o minuscola.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, ora che si
+saper capire
+
+84
+00:05:17,700 --> 00:05:21,470
+lo spostamento numerico che
+corrisponde ad un singolo carattere
+
+85
+00:05:21,470 --> 00:05:24,050
+torniamo alla nostra equazione.
+
+86
+00:05:24,050 --> 00:05:28,180
+Perché abbiamo due diversi
+indici qui, i e j,
+
+87
+00:05:28,180 --> 00:05:32,130
+questo è un suggerimento che vogliamo tenere traccia
+sia della nostra posizione nel testo in chiaro
+
+88
+00:05:32,130 --> 00:05:36,600
+nonché la nostra posizione la parola,
+così quelli sono due variabili distinte
+
+89
+00:05:36,600 --> 00:05:39,010
+che vogliamo mantenere una stretta di.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Ora, la posizione nel nostro crittografato
+è destinato ad aumentare ogni volta,
+
+91
+00:05:42,580 --> 00:05:45,530
+in modo che sta per essere un
+po 'più dritto in avanti
+
+92
+00:05:45,530 --> 00:05:49,750
+rispetto alla posizione della parola chiave,
+che come sappiamo ha da avvolgere intorno,
+
+93
+00:05:49,750 --> 00:05:52,910
+e talvolta incrementare,
+a volte rimanere lo stesso.
+
+94
+00:05:52,910 --> 00:05:55,430
+Quindi, come possiamo attuare
+la funzionalità
+
+95
+00:05:55,430 --> 00:05:59,820
+per avvolgere intorno al
+indice per la parola chiave?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Ho intenzione di utilizzare l'esempio contare off.
+
+97
+00:06:01,640 --> 00:06:06,100
+Contando fuori è un modo popolare
+per dividere le persone in gruppi.
+
+98
+00:06:06,100 --> 00:06:10,660
+Dire che ho avuto 5 persone e volevo
+li divisi in tre gruppi,
+
+99
+00:06:10,660 --> 00:06:13,640
+Ebbene vorrei iniziare contando fuori.
+
+100
+00:06:13,640 --> 00:06:16,980
+La prima persona sarebbe
+dire che sono il numero uno della squadra,
+
+101
+00:06:16,980 --> 00:06:21,030
+la prossima persona sarebbe il numero di squadra
+due, il numero squadra terza persona
+
+102
+00:06:21,030 --> 00:06:21,910
+tre.
+
+103
+00:06:21,910 --> 00:06:25,910
+Ora, voglio solo tre gruppi in modo
+la quarta persona sarebbe in realtà
+
+104
+00:06:25,910 --> 00:06:30,160
+cominciare dall'inizio e dire,
+bene, io sono il numero uno della squadra pure,
+
+105
+00:06:30,160 --> 00:06:32,890
+e la prossima persona
+sarebbe il numero due team.
+
+106
+00:06:32,890 --> 00:06:37,660
+E, da lì, si può quindi
+separare nei loro gruppi.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Così, come potrei usare modulo
+per aiutarmi a implementare
+
+108
+00:06:41,130 --> 00:06:44,160
+questo conteggio fuori avvolgono la funzione?
+
+109
+00:06:44,160 --> 00:06:50,140
+Bene, la prima persona
+il numero 1, mod 3 ci dà 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 ci dà 2,
+e 3 mod 3 ci dà 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> La quarta persona, il numero 4, 3 mod
+ci dà 1, e poi 5 mod 3 ci dà 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Quindi, si noterà che anche se
+il numero di persone che ho
+
+113
+00:07:05,370 --> 00:07:11,210
+aumenta, ed è sopra
+3, dal momento che sto modding del 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Ho sempre trovato i numeri 0, 1 e 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Non ho mai ottenere maggiore di 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+E allora, anche se ho avuto 10
+persone, poi tutte quelle persone
+
+117
+00:07:22,630 --> 00:07:27,430
+sarebbe ancora all'interno dei gruppi 1, 2, o 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Così, ora sappiamo che se abbiamo un gruppo
+5 e mod tutti quelli del 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+allora stiamo andando mai
+superare i gruppi 0, 1 o 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Quindi, non riusciremo mai a ottenere un gruppo
+numero che è uguale a 3 o superiore.
+
+121
+00:07:43,430 --> 00:07:46,980
+Quindi, anche se aggiungo altri cinque
+persone, allora tutti loro
+
+122
+00:07:46,980 --> 00:07:53,150
+sarebbe ancora essere attribuite ai gruppi
+0, 1, 2 o perché sono modding del 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Non sono mai intenzione di superare quella cap.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, vediamo se possiamo applicare
+questo concetto di utilizzare modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+per avvolgere intorno al
+numeri di gruppo e applicare
+
+126
+00:08:03,710 --> 00:08:08,000
+a Vigenere dove vogliamo
+utilizzare modulo per avvolgere
+
+127
+00:08:08,000 --> 00:08:10,220
+l'indice per la parola chiave.
+
+128
+00:08:10,220 --> 00:08:12,830
+Anche se stiamo incrementando
+l'indice abbiamo sempre
+
+129
+00:08:12,830 --> 00:08:17,260
+vuole fare in modo che abbiamo sempre
+avvolgere intorno alla fin dall'inizio
+
+130
+00:08:17,260 --> 00:08:20,050
+mai superare il
+lunghezza della stringa.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, quindi so che potrebbe essere
+un po 'opprimente.
+
+132
+00:08:23,510 --> 00:08:26,670
+C'è molto di più da fare in questo p set.
+
+133
+00:08:26,670 --> 00:08:30,050
+Quindi, assicurarsi che si scrive
+un buon pseudocodice per te
+
+134
+00:08:30,050 --> 00:08:32,870
+che si capisce e
+che ottiene il lavoro fatto.
+
+135
+00:08:32,870 --> 00:08:35,580
+Cercare di affrontare ogni
+singola linea in modo indipendente
+
+136
+00:08:35,580 --> 00:08:38,370
+capire tutti i piccoli
+piccoli pezzi del puzzle
+
+137
+00:08:38,370 --> 00:08:40,260
+prima di metterlo insieme.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Assicurarsi che si può ottenere
+la chiave dalla riga di comando
+
+139
+00:08:43,110 --> 00:08:46,780
+e garantire che è alfabetico,
+ottenere il testo in chiaro da parte dell'utente,
+
+140
+00:08:46,780 --> 00:08:51,010
+e poi a cifratura, assicuratevi
+sapere come cifrare una sola lettera,
+
+141
+00:08:51,010 --> 00:08:56,130
+e poi il progresso per l'intera stringa
+con tutte le avvolgono funzioni.
+
+142
+00:08:56,130 --> 00:08:59,610
+Infine, è possibile stampare il testo cifrato.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Il mio nome è un Zamyla,
+e questo è stato Vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

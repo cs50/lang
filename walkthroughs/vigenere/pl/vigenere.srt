@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Niech zintensyfikować nasze
+Gra z szyfrem Vigenère.
+
+3
+00:00:04,030 --> 00:00:06,710
+Szyfr vigenère'a jest
+bardzo podobny do Cezara,
+
+4
+00:00:06,710 --> 00:00:11,060
+oprócz Cezara mijaliśmy się
+jedna liczba całkowita, jak nasz klucz.
+
+5
+00:00:11,060 --> 00:00:14,100
+W Vigenère jedziemy
+przejść na jedno ze słów kluczowych.
+
+6
+00:00:14,100 --> 00:00:19,400
+Tak więc, jeśli chcę, aby przesunąć
+szyfrogram jest CS 50 przez Ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+to oznacza, że ​​w każdej litery
+Ohai będzie służyć jako klucz,
+
+8
+00:00:23,260 --> 00:00:27,160
+a ja jadę nad cyklem
+że kluczowe dla mojej zmiany
+
+9
+00:00:27,160 --> 00:00:31,930
+dokonywania szyfrogram
+o wiele trudniej rozszyfrować.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Co to znaczy
+przejście przez hasła?
+
+11
+00:00:34,540 --> 00:00:38,610
+Cóż, słowo jest ciągiem
+gdzie każda litera odpowiada
+
+12
+00:00:38,610 --> 00:00:41,080
+pewne zmiany całkowitej.
+
+13
+00:00:41,080 --> 00:00:49,310
+Tak więc, o odpowiada przyciskowi 14,
+h do klawisza 7, a ma klawisza 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+tak, że nie zmienia nic,
+a potem ma klucz 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Say Pobiegłem Vigenère A z
+zwykły tekst to CS50 dobrze,
+
+16
+00:01:00,000 --> 00:01:02,800
+że po prostu zrezygnować
+mi niezmieniony łańcuch.
+
+17
+00:01:02,800 --> 00:01:08,170
+Należy zauważyć, że jest to równoważne
+uruchomiony Cezara z kluczem od zera.
+
+18
+00:01:08,170 --> 00:01:12,070
+W rzeczywistości działa Vigenère
+z każdym pojedynczym znakiem
+
+19
+00:01:12,070 --> 00:01:17,070
+byłoby równoznaczne z uruchomieniem
+Cesarska z tej samej liczby całkowitej.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> W porządku, więc, ponieważ
+są one tak podobne I dalszy
+
+21
+00:01:20,400 --> 00:01:24,300
+naprawdę polecam, że jeśli
+chcesz, możesz po prostu skopiować Cezara
+
+22
+00:01:24,300 --> 00:01:26,932
+Kod do kodu Vigenère.
+
+23
+00:01:26,932 --> 00:01:28,640
+Wszystko się zmienia,
+ale przynajmniej masz
+
+24
+00:01:28,640 --> 00:01:31,110
+niektóre szkieletowa, że ​​można pracować.
+
+25
+00:01:31,110 --> 00:01:36,410
+Ponieważ TODO są takie same chcemy
+aby dostać klucz, uzyskać zwykły tekst,
+
+26
+00:01:36,410 --> 00:01:40,690
+encipher, że zwykły tekst,
+a następnie wydrukować na zewnątrz.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Podobnie jak Cezar kluczem będzie
+zostać przekazany jako drugiej linii poleceń
+
+28
+00:01:44,980 --> 00:01:50,540
+Argument zawarty w indeksie argv
+1, ale tym razem jest inaczej
+
+29
+00:01:50,540 --> 00:01:52,560
+ponieważ musi być w kolejności alfabetycznej.
+
+30
+00:01:52,560 --> 00:01:56,390
+Tak więc, musimy iteracyjne nad każdym
+pojedynczy znak w tym kluczu
+
+31
+00:01:56,390 --> 00:02:00,800
+że użytkownik przekazany, oraz zapewnienie
+że każda postać jest alfabetyczna
+
+32
+00:02:00,800 --> 00:02:02,800
+aby kontynuować.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Kiedy zrobiliśmy, to wtedy
+można uzyskać ciąg od użytkownika,
+
+34
+00:02:05,560 --> 00:02:07,560
+tak jak przedtem.
+
+35
+00:02:07,560 --> 00:02:10,520
+I teraz dochodzimy do sedna
+problemu dla Vigenère
+
+36
+00:02:10,520 --> 00:02:14,665
+który podobnie jak Cezar, w jaki sposób
+dowiedzieć się wzór szyfrujących
+
+37
+00:02:14,665 --> 00:02:19,760
+a równanie i encipher
+cały tekst jawny.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Tak więc, można zauważyć, że
+Równanie na przesunięcie Vigenère
+
+39
+00:02:23,280 --> 00:02:25,610
+jest bardzo podobny do Cezara.
+
+40
+00:02:25,610 --> 00:02:29,780
+Jedyną różnicą jest to, że
+Zamiast pojedynczej zmiennej k
+
+41
+00:02:29,780 --> 00:02:37,270
+, teraz k ma indeks,
+wskazując j literę klawisza.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Chodźmy na przykładzie.
+
+43
+00:02:39,560 --> 00:02:43,830
+Powiedzmy, że chciał przekazać tajemnicę
+komunikat na swojej sympatii, lubię cię.
+
+44
+00:02:43,830 --> 00:02:46,325
+Cóż, dla klucza,
+wybrać coś, że twój
+
+45
+00:02:46,325 --> 00:02:49,790
+wiem zgniatać wie, że chcesz, pandy.
+
+46
+00:02:49,790 --> 00:02:52,290
+No dobrze, więc w jaki sposób zmiany tego?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Cóż, mamy indeks zwykłego tekstu.
+
+48
+00:02:55,500 --> 00:02:59,160
+To na pierwszą literę i
+tak jest indeksem dla naszego klucza
+
+49
+00:02:59,160 --> 00:03:02,830
+który znajduje się na str pierwsze
+List w naszym panda słowa.
+
+50
+00:03:02,830 --> 00:03:08,590
+Więc, zmieniając I daje nam przez p x,
+następnie przesunąć wskaźnik zwykłego tekstu.
+
+51
+00:03:08,590 --> 00:03:10,460
+To sprowadza nas do przestrzeni.
+
+52
+00:03:10,460 --> 00:03:13,540
+Teraz, spacja
+nie jest alfabetyczna,
+
+53
+00:03:13,540 --> 00:03:16,930
+tak, że oznacza to, że to właśnie
+transfery tuż nad do szyfrogramu,
+
+54
+00:03:16,930 --> 00:03:23,430
+stawiamy spację tam, a my nie
+przesunąć wskaźnik dla naszego klucza.
+
+55
+00:03:23,430 --> 00:03:25,820
+Tak, nadal jesteśmy przy p w tym momencie.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Mamy przejść do następnego
+Indeks w naszym zwykłego tekstu.
+
+57
+00:03:30,130 --> 00:03:34,030
+A teraz, bo to jest
+pismo, mała litera l,
+
+58
+00:03:34,030 --> 00:03:37,920
+przesuwamy, że przez
+następny indeks w naszym kluczem.
+
+59
+00:03:37,920 --> 00:03:42,360
+Która jest, co jest zero
+shift, dzięki czemu staje się po prostu
+
+60
+00:03:42,360 --> 00:03:44,370
+literą L na naszym szyfrogramu.
+
+61
+00:03:44,370 --> 00:03:51,120
+Następnie możemy przejść zarówno jawny, a
+indeks klucza, ponieważ jest alfabetyczna.
+
+62
+00:03:51,120 --> 00:03:56,210
+Tak więc w dalszym ciągu, że
+aż dojdziemy do e w podobne.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> No dobrze, więc można zauważyć, w tym
+wskazują, że w warunkach naszego indeksu klucza,
+
+64
+00:04:01,090 --> 00:04:03,940
+doszliśmy do końca
+słowo panda, więc co
+
+65
+00:04:03,940 --> 00:04:08,750
+się dzieje, gdy mamy do następnego
+alfabetyczne pismo w postaci zwykłego tekstu?
+
+66
+00:04:08,750 --> 00:04:12,180
+Cóż, wszystko, co się dzieje, mamy
+zawinięcia do początku,
+
+67
+00:04:12,180 --> 00:04:14,710
+do pierwszego indeksu z kluczowych.
+
+68
+00:04:14,710 --> 00:04:19,570
+Tak, to, że przesunięcie
+y przez p, aby dać nam n.
+
+69
+00:04:19,570 --> 00:04:26,860
+A potem, nadal wykończeniowych kodowanie
+Nasz tekst jawny, aby uzyskać x lvne nOH.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> W tym przykładzie,
+pokazały, że mamy tylko przejść
+
+71
+00:04:29,300 --> 00:04:33,140
+do następnej litery w słowie kluczowym
+jeśli postać zwykłego tekstu
+
+72
+00:04:33,140 --> 00:04:37,480
+jest literą więc isalpha
+Funkcja ta przyda się tutaj.
+
+73
+00:04:37,480 --> 00:04:43,030
+I, podobnie jak w Cezara, chcemy
+zachowania sprawy, isupper i islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Tak, dodaj trochę
+w do swojego Pseudokod.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Więc w jaki sposób dowiedzieć się, najważniejsze zmiany?
+
+76
+00:04:48,510 --> 00:04:53,030
+Cóż, jeśli przypomnieć sobie naszą dyskusję
+na indeksach alfabetycznych w Cezara
+
+77
+00:04:53,030 --> 00:04:55,370
+Problemem jest to bardzo podobne.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> W którym A odpowiada ASCII
+wartość 65, ale przesunięcie 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+a następnie ostatni list
+w alfabecie, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+odpowiada przesunięciu o 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Zauważysz, że przesunięcie
+są identyczne, czy
+
+82
+00:05:10,320 --> 00:05:14,880
+list jest wielkie litery lub małe litery.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, więc teraz, że
+wiedzieć, jak dowiedzieć się,
+
+84
+00:05:17,700 --> 00:05:21,470
+zmiana liczbowa
+odpowiada pojedynczemu znakowi
+
+85
+00:05:21,470 --> 00:05:24,050
+Wróćmy do naszego równania.
+
+86
+00:05:24,050 --> 00:05:28,180
+Ponieważ mamy dwa różne
+indeksy tutaj, I i J,
+
+87
+00:05:28,180 --> 00:05:32,130
+to wskazówka, że ​​chcemy śledzić
+zarówno naszej pozycji w postaci zwykłego tekstu
+
+88
+00:05:32,130 --> 00:05:36,600
+a także naszej pozycji w kluczowych,
+To są dwa oddzielne zmienne
+
+89
+00:05:36,600 --> 00:05:39,010
+że chcemy zachować luku.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Teraz sytuacja w naszym zwykłego tekstu
+zamierza zwiększyć za każdym razem,
+
+91
+00:05:42,580 --> 00:05:45,530
+więc to będzie
+nieco bardziej prosto do przodu
+
+92
+00:05:45,530 --> 00:05:49,750
+w przeciwieństwie do stanowiska słów kluczowych
+które znamy musi zawijane
+
+93
+00:05:49,750 --> 00:05:52,910
+a czasem zwiększyć,
+czasami pozostają takie same.
+
+94
+00:05:52,910 --> 00:05:55,430
+Tak więc, w jaki sposób zaimplementować
+funkcjonalność
+
+95
+00:05:55,430 --> 00:05:59,820
+owinąć wokół
+Indeks dla słowa kluczowego?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Zamierzam użyć odlicz przykład.
+
+97
+00:06:01,640 --> 00:06:06,100
+Liczenie off jest popularnym sposobem
+podzielić na grupy ludzi.
+
+98
+00:06:06,100 --> 00:06:10,660
+Powiedzieć, że miał 5 osób i chciałem
+je podzielić na trzy grupy,
+
+99
+00:06:10,660 --> 00:06:13,640
+a następnie chciałbym zacząć od liczenia off.
+
+100
+00:06:13,640 --> 00:06:16,980
+Pierwsza osoba
+powiedzieć, że jestem numerem jeden zespół,
+
+101
+00:06:16,980 --> 00:06:21,030
+następna osoba byłaby liczba Zespół
+dwa, numer zespołu trzecia osoba
+
+102
+00:06:21,030 --> 00:06:21,910
+trzy.
+
+103
+00:06:21,910 --> 00:06:25,910
+Teraz chcę tylko trzech grup tak,
+czwarta osoba faktycznie
+
+104
+00:06:25,910 --> 00:06:30,160
+rozpocząć na początku i powiedzieć:
+dobrze, ja jestem numerem jeden zespół, a także,
+
+105
+00:06:30,160 --> 00:06:32,890
+a następna osoba
+Zespół będzie numer dwa.
+
+106
+00:06:32,890 --> 00:06:37,660
+A stamtąd, mogą następnie
+oddzielić w ich grupach.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Tak, jak mogę wykorzystać modulo
+mi pomóc wdrożyć
+
+108
+00:06:41,130 --> 00:06:44,160
+Ten odlicz owinąć wokół funkcji?
+
+109
+00:06:44,160 --> 00:06:50,140
+Cóż, pierwsza osoba
+Numer 1, mod 3 daje nam 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 daje nam 2,
+i 3 mod 3 daje nam 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Czwarta osoba, numer 4, mod 3
+daje nam 1, a następnie 5 mod 3 daje nam 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Tak więc, można zauważyć, że chociaż
+liczba osób, które mam
+
+113
+00:07:05,370 --> 00:07:11,210
+wzrasta, i jest większa
+3, ponieważ jestem modding przez 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Zawsze uzyskać numery 0, 1 i 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+I nigdy nie większy niż 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Tak więc, nawet gdybym miał 10
+ludzi, to wszystkie z tych osób
+
+117
+00:07:22,630 --> 00:07:27,430
+nadal mieścić się w grupach 1, 2 lub 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Więc teraz wiemy, że jeśli mamy grupę
+5 i mod wszystkich tych, przez 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+wtedy nie będziemy
+przekroczyć grupy 0, 1 lub 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Tak więc nigdy nie dostanie grupę
+Numer to równy 3 lub wyżej.
+
+121
+00:07:43,430 --> 00:07:46,980
+Tak więc, nawet jeśli dodać kolejne pięć
+ludzi, to wszystkie z nich
+
+122
+00:07:46,980 --> 00:07:53,150
+Nadal będzie przypisany do grupy
+0, 1 lub 2, bo jestem modding przez 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Nigdy nie zamierzam przekraczać tę czapkę.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, więc zobaczymy, czy możemy zastosować
+Ta koncepcja stosowania modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+owinąć wokół
+Numery grup i zastosować
+
+126
+00:08:03,710 --> 00:08:08,000
+go Vigenère gdzie chcemy
+użyć modulo do zawinięcia
+
+127
+00:08:08,000 --> 00:08:10,220
+indeks dla słowa kluczowego.
+
+128
+00:08:10,220 --> 00:08:12,830
+Nawet jeśli mamy zwiększany
+indeks zawsze
+
+129
+00:08:12,830 --> 00:08:17,260
+Aby upewnić się, że zawsze
+zawinięcia do samego początku
+
+130
+00:08:17,260 --> 00:08:20,050
+Nigdy przekroczenie
+długość łańcucha.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, więc wiem, że to może być
+trochę przytłaczające.
+
+132
+00:08:23,510 --> 00:08:26,670
+Jest wiele do zrobienia w tym zestawie s.
+
+133
+00:08:26,670 --> 00:08:30,050
+Więc upewnij się, że masz pisać
+dobry Pseudokod dla siebie
+
+134
+00:08:30,050 --> 00:08:32,870
+że rozumie i
+który dostaje zadanie.
+
+135
+00:08:32,870 --> 00:08:35,580
+Spróbuj rozwiązać każdy
+Pojedyncza linia niezależnie
+
+136
+00:08:35,580 --> 00:08:38,370
+zastanawianie się wszystkie małe
+małe kawałki układanki
+
+137
+00:08:38,370 --> 00:08:40,260
+przed wprowadzeniem go razem.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Upewnij się, że można dostać
+klucz z wiersza poleceń
+
+139
+00:08:43,110 --> 00:08:46,780
+i upewnić się, że jest to alfabetyczna,
+uzyskać zwykły tekst od użytkownika,
+
+140
+00:08:46,780 --> 00:08:51,010
+a potem w szyfrujących, upewnij się,
+wiedzieć, jak encipher pojedynczą literę,
+
+141
+00:08:51,010 --> 00:08:56,130
+a następnie przejście do całego łańcucha
+ze wszystkimi zawinięcia funkcji.
+
+142
+00:08:56,130 --> 00:08:59,610
+Wreszcie, można wydrukować tekst zaszyfrowany.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Nazywam to Zamyla,
+i był to Vigenère.
+
+144
+00:09:04,050 --> 00:09:07,757
+

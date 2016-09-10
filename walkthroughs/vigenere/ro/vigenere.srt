@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Să intensifice nostru
+joc cu cifrul Vigenere.
+
+3
+00:00:04,030 --> 00:00:06,710
+Cifrul Vigenere este
+foarte similar cu Cezar,
+
+4
+00:00:06,710 --> 00:00:11,060
+cu excepția lui Cezar am trecut în
+un singur număr întreg ca cheia noastră.
+
+5
+00:00:11,060 --> 00:00:14,100
+În Vigenere vom merge
+pentru a trece într-un cuvânt cheie.
+
+6
+00:00:14,100 --> 00:00:19,400
+Așa că, dacă am vrut să transfere
+ciphertext acest lucru este CS 50 de ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+atunci înseamnă că fiecare literă
+ohai va servi drept cheie,
+
+8
+00:00:23,260 --> 00:00:27,160
+și mă duc la un ciclu de peste
+acel cuvânt cheie pentru trecerea mea
+
+9
+00:00:27,160 --> 00:00:31,930
+ceea ce face ciphertext
+mult mai greu de decodat.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Ce înseamnă să
+trecerea de cuvântul cheie?
+
+11
+00:00:34,540 --> 00:00:38,610
+Ei bine, cuvântul cheie este un șir de caractere
+în cazul în care fiecare literă corespunde
+
+12
+00:00:38,610 --> 00:00:41,080
+într-o oarecare schimbare de număr întreg.
+
+13
+00:00:41,080 --> 00:00:49,310
+Așa că, o 'corespunde unei chei de 14,
+h la o cheie de 7, o are o cheie de 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+astfel încât nu s-ar schimba nimic,
+și apoi am are o cheie de 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Spun ca am fugit Vigenere A cu
+text simplu acest lucru este CS50 bine,
+
+16
+00:01:00,000 --> 00:01:02,800
+care ar da pur și simplu
+mi un șir neschimbat.
+
+17
+00:01:02,800 --> 00:01:08,170
+Observați că acest lucru este echivalent cu
+Caesar rulează cu o cheie de la zero.
+
+18
+00:01:08,170 --> 00:01:12,070
+De fapt, Vigenere rulează
+cu orice caracter unic
+
+19
+00:01:12,070 --> 00:01:17,070
+ar fi echivalent cu funcționare
+Cezar cu același număr întreg.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Bine, deci, din moment ce
+ele sunt atât de similare aș
+
+21
+00:01:20,400 --> 00:01:24,300
+de fapt, recomandăm că, dacă
+doriți, puteți copia pur și simplu Cezar tău
+
+22
+00:01:24,300 --> 00:01:26,932
+codul în codul Vigenere.
+
+23
+00:01:26,932 --> 00:01:28,640
+Lucrurile se vor schimba,
+dar cel puțin aveți
+
+24
+00:01:28,640 --> 00:01:31,110
+unele coloana vertebrală pe care le poate lucra cu.
+
+25
+00:01:31,110 --> 00:01:36,410
+Deoarece Todos sunt la fel ne-o dorim
+pentru a obține cheia, pentru a primi textul simplu,
+
+26
+00:01:36,410 --> 00:01:40,690
+cifrare acel text simplu,
+și apoi tipăriți asta.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> La fel ca Caesar cheia va
+să fie trecut în cea de a doua ca linia de comandă
+
+28
+00:01:44,980 --> 00:01:50,540
+Argumentul conținut în indexul argv
+1, dar este diferit de data asta
+
+29
+00:01:50,540 --> 00:01:52,560
+pentru că acesta trebuie să fie în ordine alfabetică.
+
+30
+00:01:52,560 --> 00:01:56,390
+Așa că, trebuie să itera fiecare
+cu un singur caracter în acea cheie
+
+31
+00:01:56,390 --> 00:02:00,800
+că utilizatorul a trecut în, și să se asigure
+că fiecare caracter este alfabetic
+
+32
+00:02:00,800 --> 00:02:02,800
+în scopul de a continua.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Odată ce am făcut asta, atunci noi
+poate obține șirul de la utilizator,
+
+34
+00:02:05,560 --> 00:02:07,560
+la fel cum am făcut înainte.
+
+35
+00:02:07,560 --> 00:02:10,520
+Și acum, am ajuns la inimă
+a problemei pentru Vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+care este la fel ca Cezar, cum să
+dau seama de modelul de cifrare
+
+37
+00:02:14,665 --> 00:02:19,760
+și ecuația, și cifrare
+întreaga plaintext.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Așa că, veți observați că
+Ecuația pentru trecerea Vigenere
+
+39
+00:02:23,280 --> 00:02:25,610
+este foarte similar cu cel Caesar.
+
+40
+00:02:25,610 --> 00:02:29,780
+Singura diferență este că
+în loc de o singură variabilă k
+
+41
+00:02:29,780 --> 00:02:37,270
+înainte, acum k are un subscript,
+indicând litera j cheii.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Hai să mergem printr-un exemplu.
+
+43
+00:02:39,560 --> 00:02:43,830
+Spuneți că ați vrut să treacă un secret
+Mesajul pe pasiune, îmi place de tine.
+
+44
+00:02:43,830 --> 00:02:46,325
+Ei bine, pentru cheia tine
+alege ceva care ta
+
+45
+00:02:46,325 --> 00:02:49,790
+știu zdrobi știe că vă place, ursii panda.
+
+46
+00:02:49,790 --> 00:02:52,290
+Bine, așa cum putem schimba acest lucru?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Ei bine, avem indexul nostru plaintext.
+
+48
+00:02:55,500 --> 00:02:59,160
+Asta e la prima literă și
+astfel încât este indicele pentru cheia noastră
+
+49
+00:02:59,160 --> 00:03:02,830
+care se află la p, primul
+scrisoare în cuvântul nostru panda.
+
+50
+00:03:02,830 --> 00:03:08,590
+Așa că, mutând eu de p-ne x da,
+atunci vom avansa indicele plaintext.
+
+51
+00:03:08,590 --> 00:03:10,460
+Acest lucru ne duce la un spațiu.
+
+52
+00:03:10,460 --> 00:03:13,540
+Acum, caracterul spațiu
+este non alfabetice,
+
+53
+00:03:13,540 --> 00:03:16,930
+astfel încât înseamnă că, pe care tocmai
+transferuri la dreapta peste textul cifrat,
+
+54
+00:03:16,930 --> 00:03:23,430
+am pus un spațiu acolo, iar noi nu facem
+avans indicele pentru cheia noastră.
+
+55
+00:03:23,430 --> 00:03:25,820
+Așa că, suntem încă la p la acest punct.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Noi avansa la următorul
+indexul în plaintext nostru.
+
+57
+00:03:30,130 --> 00:03:34,030
+Și acum, pentru că este
+o scrisoare, litere mici L,
+
+58
+00:03:34,030 --> 00:03:37,920
+trecem că, prin
+următor indicele în cheia noastră.
+
+59
+00:03:37,920 --> 00:03:42,360
+Ceea ce este, ceea ce este un zero
+schimbare, astfel încât devine doar
+
+60
+00:03:42,360 --> 00:03:44,370
+o l în nostru ciphertext.
+
+61
+00:03:44,370 --> 00:03:51,120
+Apoi, vom avansa atât plaintext- și
+indicele cheie, deoarece este în ordine alfabetică.
+
+62
+00:03:51,120 --> 00:03:56,210
+Așa că, atunci vom continua că
+până când vom ajunge la e în place.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Bine, deci vei observa acest
+punct că, în ceea ce privește indicele nostru cheie,
+
+64
+00:04:01,090 --> 00:04:03,940
+am ajuns la sfârșitul anului
+cuvântul panda, astfel încât ceea ce
+
+65
+00:04:03,940 --> 00:04:08,750
+se întâmplă atunci când vom ajunge la următorul
+literă alfabetică în plaintext-?
+
+66
+00:04:08,750 --> 00:04:12,180
+Ei bine, tot ceea ce se întâmplă este noi
+încheie în jurul valorii de la început,
+
+67
+00:04:12,180 --> 00:04:14,710
+la primul index al noastre cheie.
+
+68
+00:04:14,710 --> 00:04:19,570
+Așa că, atunci vom schimba asta
+y de p pentru a ne da n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Și apoi, vom continua finisare de codificare
+plaintext nostru pentru a obține x lvne Noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Din acest exemplu, am
+a arătat că numai în avans
+
+71
+00:04:29,300 --> 00:04:33,140
+la următoarea literă a cuvântului cheie
+în cazul în care caracterul în text simplu
+
+72
+00:04:33,140 --> 00:04:37,480
+este o literă, astfel încât isalpha
+Funcția va veni la îndemână aici.
+
+73
+00:04:37,480 --> 00:04:43,030
+Și, la fel ca și în Cezar, vrem să
+păstra caz, isupper și islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Așa că, adăugați acest pic
+în în pseudocod ta.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Deci, cum ne dăm seama schimbările cheie?
+
+76
+00:04:48,510 --> 00:04:53,030
+Ei bine, dacă îți amintești discuția noastră
+asupra indicilor alfabetică Cezar
+
+77
+00:04:53,030 --> 00:04:55,370
+problemă este foarte asemănătoare.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> În cazul în care A corespunde unei ASCII
+valoarea 65, ci o schimbare de la 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+și apoi ultima literă
+în alfabet, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+corespunde unei deplasări de 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Vei observa că tura
+este identic sau dacă nu
+
+82
+00:05:10,320 --> 00:05:14,880
+scrisoarea este cu majuscule sau minuscule.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, deci acum că
+știu cum să dau seama
+
+84
+00:05:17,700 --> 00:05:21,470
+tura numerică care
+corespunde unui singur caracter
+
+85
+00:05:21,470 --> 00:05:24,050
+Să ne întoarcem la ecuația noastră.
+
+86
+00:05:24,050 --> 00:05:28,180
+Pentru că avem două diferite
+subscript aici, i și j,
+
+87
+00:05:28,180 --> 00:05:32,130
+asta e un indiciu pe care dorim să urmăriți
+atât poziția noastră în plaintext-
+
+88
+00:05:32,130 --> 00:05:36,600
+precum și poziția noastră în cuvântul cheie,
+astfel încât acestea sunt două variabile distincte
+
+89
+00:05:36,600 --> 00:05:39,010
+pe care vrem să păstreze o dețin.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Acum, poziția în plaintext noastră
+va crește de fiecare dată,
+
+91
+00:05:42,580 --> 00:05:45,530
+astfel că va fi un
+pic mai mult drept înainte
+
+92
+00:05:45,530 --> 00:05:49,750
+spre deosebire de poziția cuvântului cheie,
+pe care știm că trebuie să-și încheie în jurul valorii,
+
+93
+00:05:49,750 --> 00:05:52,910
+și, uneori, incrementa,
+uneori rămân aceleași.
+
+94
+00:05:52,910 --> 00:05:55,430
+Deci, cum putem pune în aplicare
+funcționalitatea
+
+95
+00:05:55,430 --> 00:05:59,820
+să-și încheie în jurul valorii de
+index pentru cuvântul cheie?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Am de gând să utilizeze conta off exemplu.
+
+97
+00:06:01,640 --> 00:06:06,100
+Numărare off este un mod popular
+pentru a împărți oamenii în grupuri.
+
+98
+00:06:06,100 --> 00:06:10,660
+Spune că am avut 5 persoane și am vrut să
+împărțiți-le în trei grupuri,
+
+99
+00:06:10,660 --> 00:06:13,640
+bine, atunci aș începe prin numărarea off.
+
+100
+00:06:13,640 --> 00:06:16,980
+Prima persoană care ar
+spun că sunt echipa numărul unu,
+
+101
+00:06:16,980 --> 00:06:21,030
+persoana următoare ar fi numărul de echipa
+doi, numărul de echipa a treia persoană
+
+102
+00:06:21,030 --> 00:06:21,910
+Trei.
+
+103
+00:06:21,910 --> 00:06:25,910
+Acum, eu vreau doar trei grupuri, astfel
+a patra persoană ar efectiv
+
+104
+00:06:25,910 --> 00:06:30,160
+încep de la început și să spunem,
+bine, eu sunt echipa numărul unu la fel de bine,
+
+105
+00:06:30,160 --> 00:06:32,890
+iar următoarea persoană
+ar fi echipa numărul doi.
+
+106
+00:06:32,890 --> 00:06:37,660
+Și, de acolo, ei pot apoi
+separate in grupurile lor.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Asa ca, cum s-ar putea să folosesc modulo
+să mă ajute să pună în aplicare
+
+108
+00:06:41,130 --> 00:06:44,160
+acest off conta folie în jurul funcției?
+
+109
+00:06:44,160 --> 00:06:50,140
+Ei bine, prima persoană
+numărul 1, mod 3 ne dă 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 ne dă 2,
+și 3 mod 3 ne dă 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> A patra persoană, numărul 4, 3 mod
+ne dă 1, și apoi 5 mod 3 ne dă 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Așa că, veți observa că, chiar dacă
+numărul de persoane pe care am
+
+113
+00:07:05,370 --> 00:07:11,210
+crește, și este mai presus
+3, din moment ce eu sunt modding de 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Am întotdeauna numere de 0, 1 și 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+N-am obține mai mult de 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Așa că, atunci, chiar dacă am avut 10
+oameni, atunci toți acei oameni
+
+117
+00:07:22,630 --> 00:07:27,430
+ar fi în continuare în cadrul grupurilor 1, 2, sau 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Deci, acum știm că, dacă avem un grup
+din 5 și noi Mod toți cei de 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+atunci vom merge niciodată la
+depășesc grupele 0, 1 sau 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Așa că, vom intra niciodată un grup
+număr care este egal cu 3 sau mai sus.
+
+121
+00:07:43,430 --> 00:07:46,980
+Deci, chiar dacă am adăuga încă cinci
+oameni, atunci toate acestea
+
+122
+00:07:46,980 --> 00:07:53,150
+ar fi în continuare clasificate în grupele
+0, 1 sau 2 pentru că eu sunt modding de 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Eu nu o să depășească acel capac.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, așa că hai să vedem dacă putem aplica
+acest concept de utilizare a modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+să-și încheie în jurul valorii de
+Numerele de grup și se aplică
+
+126
+00:08:03,710 --> 00:08:08,000
+l la Vigenere unde dorim
+să utilizeze modulo să-și încheie în jurul valorii de
+
+127
+00:08:08,000 --> 00:08:10,220
+indicele pentru cuvântul cheie.
+
+128
+00:08:10,220 --> 00:08:12,830
+Chiar dacă suntem incrementare
+indicele întotdeauna am
+
+129
+00:08:12,830 --> 00:08:17,260
+doriți să vă asigurați că întotdeauna
+în jurul valorii de folie la bun început
+
+130
+00:08:17,260 --> 00:08:20,050
+niciodată să depășească
+lungimea șirului.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, așa că știu că ar putea fi
+un pic copleșitoare.
+
+132
+00:08:23,510 --> 00:08:26,670
+Există o mult mai mult de făcut în acest p set.
+
+133
+00:08:26,670 --> 00:08:30,050
+Așa că, asigurați-vă că ați scrie
+un pseudocod bun pentru tine
+
+134
+00:08:30,050 --> 00:08:32,870
+că înțelegeți și
+care devine treaba.
+
+135
+00:08:32,870 --> 00:08:35,580
+Încercați și adresa fiecare
+o singură linie, în mod independent
+
+136
+00:08:35,580 --> 00:08:38,370
+imaginind toate micile
+bucăți mici de puzzle
+
+137
+00:08:38,370 --> 00:08:40,260
+înainte de a pune împreună.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Asigurați-vă că puteți obține
+cheia din linia de comandă
+
+139
+00:08:43,110 --> 00:08:46,780
+și să se asigure că este în ordine alfabetică,
+obține textul simplu de la utilizator,
+
+140
+00:08:46,780 --> 00:08:51,010
+și apoi în cifrare, asigurați-vă că
+știu cum să cifrare o singură literă,
+
+141
+00:08:51,010 --> 00:08:56,130
+și apoi se trece la întregul șir
+cu toate învelitorii în jurul valorii de funcții.
+
+142
+00:08:56,130 --> 00:08:59,610
+În cele din urmă, puteți imprima ciphertext.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Numele meu este un Zamyla,
+iar acest lucru a fost Vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

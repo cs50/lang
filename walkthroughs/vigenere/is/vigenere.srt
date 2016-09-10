@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Við skulum stíga upp okkar
+leikur með Vigenere dulmál.
+
+3
+00:00:04,030 --> 00:00:06,710
+The Vigenere dulmál er
+mjög svipað keisaranum,
+
+4
+00:00:06,710 --> 00:00:11,060
+nema í keisaranum fórum við í
+einn heiltala sem lykill okkar.
+
+5
+00:00:11,060 --> 00:00:14,100
+Í Vigenere við erum að fara
+að fara í leitarorði.
+
+6
+00:00:14,100 --> 00:00:19,400
+Svo ef ég vildi skipta um
+ciphertext þetta er CS 50 af Ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+þá þýðir það að hvern staf í
+Ohai er að fara að þjóna sem lykill,
+
+8
+00:00:23,260 --> 00:00:27,160
+og ég ætla að hjóla yfir
+sem leitarorð fyrir vakt mína
+
+9
+00:00:27,160 --> 00:00:31,930
+gera ciphertext
+mikið erfiðara að lesa.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Hvað þýðir það að
+skipta um leitarorðið?
+
+11
+00:00:34,540 --> 00:00:38,610
+Jæja, leitarorðið er band
+þar sem hvert bréf samsvarar
+
+12
+00:00:38,610 --> 00:00:41,080
+að einhverju heiltölu vakt.
+
+13
+00:00:41,080 --> 00:00:49,310
+Svo, o samsvarar lykli 14,
+klst á takka 7, a hefur lykil af 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+svo sem myndi ekki breyta neinu,
+og þá hefur ég lykilinn af 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Segja að ég hljóp Vigenere A með
+látlaus texti þetta er CS50 vel,
+
+16
+00:01:00,000 --> 00:01:02,800
+sem myndi einfaldlega gefa
+mér er nær óbreytt band.
+
+17
+00:01:02,800 --> 00:01:08,170
+Takið eftir að þetta er jafngilt
+gangi Caesar með lykli núll.
+
+18
+00:01:08,170 --> 00:01:12,070
+Í raun, gangi Vigenere
+með einum staf
+
+19
+00:01:12,070 --> 00:01:17,070
+væri jafngild gangi
+Caesar með sama heiltölu.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Allt í lagi, svo, síðan
+þeir eru svo svipuð að ég myndi
+
+21
+00:01:20,400 --> 00:01:24,300
+reyndar mæla með því að ef þú
+vilt þú getur bara afritað Caesar þitt
+
+22
+00:01:24,300 --> 00:01:26,932
+númer inn Vigenere kóðann þinn.
+
+23
+00:01:26,932 --> 00:01:28,640
+Það mun breytast,
+en á minnstur þú ert
+
+24
+00:01:28,640 --> 00:01:31,110
+sumir burðarás sem þú getur unnið með.
+
+25
+00:01:31,110 --> 00:01:36,410
+Þar sem todos eru þau sömu og við viljum
+til að fá lykilinn, fá texta,
+
+26
+00:01:36,410 --> 00:01:40,690
+dulrita að texta,
+og þá prenta það út.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Rétt eins og keisaranum lykillinn er að fara að
+verið samþykkt í sem annað skipanalínu
+
+28
+00:01:44,980 --> 00:01:50,540
+rök sem eru í argv skráningu
+1, en það er öðruvísi í þetta sinn
+
+29
+00:01:50,540 --> 00:01:52,560
+vegna þess að það verður að vera í stafrófsröð.
+
+30
+00:01:52,560 --> 00:01:56,390
+Svo þurfum við að iterate yfir hvert
+einn staf í þeirri lykill
+
+31
+00:01:56,390 --> 00:02:00,800
+sem notandinn samþykkt í, og tryggja
+að sérhver persóna er stafrófsröð
+
+32
+00:02:00,800 --> 00:02:02,800
+í því skyni að halda áfram.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Þegar við höfum gert það, þá erum við
+er hægt að fá band frá notanda,
+
+34
+00:02:05,560 --> 00:02:07,560
+bara eins og við gerðum áður.
+
+35
+00:02:07,560 --> 00:02:10,520
+Og nú komum við til hjartans
+á vandamálinu fyrir Vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+sem er bara eins og keisara, hvernig á að
+reikna út enciphering mynstur
+
+37
+00:02:14,665 --> 00:02:19,760
+og jöfnu, og dulrita
+allt kæra.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Svo verður þú taka eftir því að
+Jafna Vigenere vakt
+
+39
+00:02:23,280 --> 00:02:25,610
+er mjög svipað Caesar einn.
+
+40
+00:02:25,610 --> 00:02:29,780
+Eini munurinn er sá að
+stað þess að einn breytu k
+
+41
+00:02:29,780 --> 00:02:37,270
+áður, nú K hefur Niðurskrifað,
+sem gefur til kynna jth bréf á takkann.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Við skulum ganga í gegnum dæmi.
+
+43
+00:02:39,560 --> 00:02:43,830
+Segjum að þú vildir að standast leyndarmál
+Skilaboðin á mylja þína, ég eins og þú.
+
+44
+00:02:43,830 --> 00:02:46,325
+Jæja, fyrir lykil sem þú
+velja eitthvað sem þinn
+
+45
+00:02:46,325 --> 00:02:49,790
+veit hrifin veit að þú vilt, Pandas.
+
+46
+00:02:49,790 --> 00:02:52,290
+Allt í lagi, svo hvernig eigum við að skipta þessu?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Jæja, höfum við kæra vísitölu okkar.
+
+48
+00:02:55,500 --> 00:02:59,160
+Það er á fyrsta staf og
+svo er vísitala fyrir lykill okkar
+
+49
+00:02:59,160 --> 00:03:02,830
+sem er á p, fyrsta
+bréf í panda orð okkar.
+
+50
+00:03:02,830 --> 00:03:08,590
+Svo, breytast I með p gefur okkur x,
+þá erum við að fara á kæra vísitölu.
+
+51
+00:03:08,590 --> 00:03:10,460
+Þetta kemur okkur til pláss.
+
+52
+00:03:10,460 --> 00:03:13,540
+Nú er pláss eðli
+er ekki stafrófsröð,
+
+53
+00:03:13,540 --> 00:03:16,930
+svo þýðir það, að bara
+flytja rétt yfir til ciphertext,
+
+54
+00:03:16,930 --> 00:03:23,430
+við að setja inn bil þar og við gerum ekki
+fara á vísitölu lykill okkar.
+
+55
+00:03:23,430 --> 00:03:25,820
+Svo erum við enn á bls á þessum tímapunkti.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Við að fara á næsta
+Vísitala í kæra okkar.
+
+57
+00:03:30,130 --> 00:03:34,030
+Og nú, því að það er
+bréf, lágstafir l,
+
+58
+00:03:34,030 --> 00:03:37,920
+við skipta að með því
+Næsta vísitölu í lykill okkar.
+
+59
+00:03:37,920 --> 00:03:42,360
+Sem er, sem er núll
+breyting þannig að bara verður
+
+60
+00:03:42,360 --> 00:03:44,370
+L í ciphertext okkar.
+
+61
+00:03:44,370 --> 00:03:51,120
+Þá fara við bæði kæra, og
+lykill vísitölu vegna þess að það er stafrófsröð.
+
+62
+00:03:51,120 --> 00:03:56,210
+Svo þá við halda áfram að
+þar til við komum til e í eins.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Allt í lagi, þannig að þú munt taka á þessu
+benda að í skilmálar af helstu vísitölu okkar,
+
+64
+00:04:01,090 --> 00:04:03,940
+við höfum náð enda
+Panda orð, svo það
+
+65
+00:04:03,940 --> 00:04:08,750
+gerist þegar við fá til the næstur
+Bókstafseinkunn bréf í kæra?
+
+66
+00:04:08,750 --> 00:04:12,180
+Jæja, allt sem gerist er að við
+vefja um í upphafi,
+
+67
+00:04:12,180 --> 00:04:14,710
+að fyrsta vísitölu lykill okkar.
+
+68
+00:04:14,710 --> 00:04:19,570
+Svo þá erum við skipta sem
+Y með p að gefa okkur n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Og þá höldum við áfram að klára kóðun
+kæra okkar til að fá x lvne Noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Úr þessu dæmi, ég
+sýndi að við fyrirfram eingöngu
+
+71
+00:04:29,300 --> 00:04:33,140
+í næsta staf í leitarorði
+ef eðli í texta
+
+72
+00:04:33,140 --> 00:04:37,480
+er bréf þannig að isalpha
+aðgerð mun koma sér vel hér.
+
+73
+00:04:37,480 --> 00:04:43,030
+Og, eins og í keisaranum, við viljum að
+varðveita málið, isupper og islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Svo, bæta þessum smá
+í inn í sauðakóðanum þína.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Svo hvernig gera við að reikna út helstu vaktir?
+
+76
+00:04:48,510 --> 00:04:53,030
+Jæja, ef þú manst umræðu okkar
+á bókstöfum vísitölur í keisaranum
+
+77
+00:04:53,030 --> 00:04:55,370
+Vandamálið er það mjög svipað.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Þar sem A samsvarar ASCII
+gildi 65, en færist 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+og þá síðasti stafur
+í stafrófinu, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+samsvarar færslunni 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Þú munt taka eftir því að vakt
+er eins hvort eða ekki
+
+82
+00:05:10,320 --> 00:05:14,880
+bréf er efri málið eða lágstöfum.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, svo núna þegar þú
+vita hvernig á að reikna út
+
+84
+00:05:17,700 --> 00:05:21,470
+tölulegar breyting sem
+samsvarar einum staf
+
+85
+00:05:21,470 --> 00:05:24,050
+við skulum fara aftur til jöfnu okkar.
+
+86
+00:05:24,050 --> 00:05:28,180
+Þar sem við höfum tvo mismunandi
+hnéletruð hér, i og j,
+
+87
+00:05:28,180 --> 00:05:32,130
+það er vísbending um að við viljum fylgjast með
+bæði stöðu okkar í kæra
+
+88
+00:05:32,130 --> 00:05:36,600
+auk stöðu okkar í leitarorð,
+þannig að þeir eru tveir aðskildir breytur
+
+89
+00:05:36,600 --> 00:05:39,010
+að við viljum halda halda á.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Nú er staðan í kæra okkar
+er að fara að auka í hvert skipti,
+
+91
+00:05:42,580 --> 00:05:45,530
+svo það er að fara til vera a
+aðeins meira beint áfram
+
+92
+00:05:45,530 --> 00:05:49,750
+öfugt við stöðu leitarorðinu,
+sem við vitum er að vefja í kring,
+
+93
+00:05:49,750 --> 00:05:52,910
+og stundum hækka,
+stundum vera sú sama.
+
+94
+00:05:52,910 --> 00:05:55,430
+Svo, hvernig eigum við að framkvæma
+virkni
+
+95
+00:05:55,430 --> 00:05:59,820
+að vefja í kringum
+Vísitala leitarorðið?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Ég ætla að nota telja burt dæmi.
+
+97
+00:06:01,640 --> 00:06:06,100
+Telja burt er vinsæl leið
+að skipta fólki í hópa.
+
+98
+00:06:06,100 --> 00:06:10,660
+Segja að ég átti 5 manns og ég vildi að
+skipta þeim upp í þrjá hópa,
+
+99
+00:06:10,660 --> 00:06:13,640
+og þá myndi ég byrja á því að telja burt.
+
+100
+00:06:13,640 --> 00:06:16,980
+Fyrsta manneskjan myndi
+segir að ég sé lið númer eitt,
+
+101
+00:06:16,980 --> 00:06:21,030
+næsta manneskja væri liðið númer
+tvö, þriðja manneskjan liðið númer
+
+102
+00:06:21,030 --> 00:06:21,910
+þrjú.
+
+103
+00:06:21,910 --> 00:06:25,910
+Nú, ég vil bara þrjá hópa svo
+fjórða maður myndi í raun og veru
+
+104
+00:06:25,910 --> 00:06:30,160
+byrja á byrjun og segja,
+vel, ég er lið númer eitt eins vel,
+
+105
+00:06:30,160 --> 00:06:32,890
+og næsta manneskja
+væri liðið númer tvö.
+
+106
+00:06:32,890 --> 00:06:37,660
+Og þaðan, þeir geta þá
+skilja í hópa þeirra.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Svo, hvernig gæti ég notað modulo
+til að hjálpa mér að innleiða
+
+108
+00:06:41,130 --> 00:06:44,160
+þetta telja burt hula kringum virka?
+
+109
+00:06:44,160 --> 00:06:50,140
+Jæja, sá fyrsti
+númer 1, Mod 3 gefur okkur 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 Mod 3 gefur okkur 2,
+og 3 Mod 3 gefur okkur 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Fjórða manneskja, númer 4, Mod 3
+gefur okkur 1 og þá 5 unga fólkið 3 gefur okkur 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Svo, þú vilja taka eftir því að jafnvel þótt
+fjölda fólks sem ég hef
+
+113
+00:07:05,370 --> 00:07:11,210
+eykst, og er hér að ofan
+3, þar sem ég er modding um 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Ég fæ alltaf tölur 0, 1 og 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Ég hef aldrei fengið stærri en 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Svo, jafnvel ef ég hefði 10
+fólk, þá allt af þeim
+
+117
+00:07:22,630 --> 00:07:27,430
+myndi enn vera innan hópa 1, 2, eða 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Svo nú vitum við að ef við höfum hóp
+af 5 og við unga fólkið alla þá með 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+þá erum við aldrei að fara að
+fara yfir hópa 0, 1, eða 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Svo erum við aldrei að fara að fá hóp
+tala sem er jafnt og 3 eða fyrir ofan.
+
+121
+00:07:43,430 --> 00:07:46,980
+Svo, jafnvel ef ég bæti fimm meira
+fólk, þá allt í þeim
+
+122
+00:07:46,980 --> 00:07:53,150
+myndi enn vera úthlutað til hópa
+0, 1 eða 2 því ég er modding af 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Ég ætla aldrei að fara að fara yfir þessi hettu.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, þannig að við skulum sjá hvort við getum sótt
+þetta hugtak um að nota modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+að vefja í kringum
+hópur tölur og beita
+
+126
+00:08:03,710 --> 00:08:08,000
+það að Vigenere þar sem við viljum
+að nota modulo að vefja í kringum
+
+127
+00:08:08,000 --> 00:08:10,220
+vísitala fyrir leitarorðið.
+
+128
+00:08:10,220 --> 00:08:12,830
+Jafnvel þó að við erum incrementing
+vísitalan við alltaf
+
+129
+00:08:12,830 --> 00:08:17,260
+vilja til að ganga úr skugga um að við alltaf
+vefja um að í upphafi
+
+130
+00:08:17,260 --> 00:08:20,050
+aldrei hærri
+lengd strengsins.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, þannig að ég veit að það gæti verið
+svolítið yfirþyrmandi.
+
+132
+00:08:23,510 --> 00:08:26,670
+There er a einhver fjöldi fleiri til að gera í þessu p sett.
+
+133
+00:08:26,670 --> 00:08:30,050
+Svo, ganga úr skugga um að þú skrifar út
+gott sauðakóðanum fyrir þig
+
+134
+00:08:30,050 --> 00:08:32,870
+að þú skiljir og
+sem fær starf.
+
+135
+00:08:32,870 --> 00:08:35,580
+Prófaðu og takast hvert
+ein lína sjálfstætt
+
+136
+00:08:35,580 --> 00:08:38,370
+vangaveltur út alla litla
+lítil stykki af the ráðgáta
+
+137
+00:08:38,370 --> 00:08:40,260
+áður en að setja það saman.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Gakktu úr skugga um að þú getur fengið
+lykillinn frá skipanalínunni
+
+139
+00:08:43,110 --> 00:08:46,780
+og tryggja að það sé stafrófsröð,
+fá texta frá notanda,
+
+140
+00:08:46,780 --> 00:08:51,010
+og síðan í enciphering, vertu viss um að
+vita hvernig á að dulrita einn staf,
+
+141
+00:08:51,010 --> 00:08:56,130
+og þá þróast í heild band
+með öllum hula kringum virka.
+
+142
+00:08:56,130 --> 00:08:59,610
+Að lokum, getur þú prentað ciphertext.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Mitt nafn er Zamyla,
+og þetta var Vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

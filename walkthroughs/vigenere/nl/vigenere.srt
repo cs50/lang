@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Laten we een stap onze
+spel met de vigenèrecijfer.
+
+3
+00:00:04,030 --> 00:00:06,710
+De vigenèrecijfer is
+zeer vergelijkbaar met Caesar,
+
+4
+00:00:06,710 --> 00:00:11,060
+behalve in Caesar kwamen we in
+een integer onze sleutel.
+
+5
+00:00:11,060 --> 00:00:14,100
+In Vigenere we gaan
+geschiedde in een trefwoord.
+
+6
+00:00:14,100 --> 00:00:19,400
+Dus, als ik wilde het verschuiven
+cijfertekst dit CS 50 door ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+dan is dat betekent dat elke letter in
+ohai gaat om te dienen als de sleutel,
+
+8
+00:00:23,260 --> 00:00:27,160
+en ik ga fietsen over
+dat zoekwoord voor mijn shift
+
+9
+00:00:27,160 --> 00:00:31,930
+waardoor de cijfertekst
+een stuk moeilijker te decoderen.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Wat betekent het om
+verschuiven door het trefwoord?
+
+11
+00:00:34,540 --> 00:00:38,610
+Nou, het sleutelwoord is een string
+waar elke letter overeenkomt
+
+12
+00:00:38,610 --> 00:00:41,080
+wat integer shift.
+
+13
+00:00:41,080 --> 00:00:49,310
+Dus, de o overeenkomt met een sleutel van 14,
+h een sleutel van 7, a een sleutel van 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+dus dat zou niets veranderen,
+en dan moet ik een sleutel van 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Zeg ik liep Vigenere A met de
+platte tekst is dit CS50 goed,
+
+16
+00:01:00,000 --> 00:01:02,800
+dat zou gewoon geven
+me een onveranderd string.
+
+17
+00:01:02,800 --> 00:01:08,170
+Merk op dat dit overeenkomt met
+Caesar lopen met een sleutel nul.
+
+18
+00:01:08,170 --> 00:01:12,070
+In feite, het lopen Vigenere
+met elk willekeurig teken
+
+19
+00:01:12,070 --> 00:01:17,070
+gelijk aan het uitvoeren zou
+Caesar met hetzelfde getal.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Oké, dus, aangezien
+ze zijn zo op elkaar lijken Ik zou
+
+21
+00:01:20,400 --> 00:01:24,300
+eigenlijk aanraden dat als je
+wilt kunt u gewoon uw Caesar kopiëren
+
+22
+00:01:24,300 --> 00:01:26,932
+code in uw Vigenere code.
+
+23
+00:01:26,932 --> 00:01:28,640
+Dingen zullen veranderen,
+maar in ieder geval heb je
+
+24
+00:01:28,640 --> 00:01:31,110
+sommige backbone die je kunt werken.
+
+25
+00:01:31,110 --> 00:01:36,410
+Omdat de TODOS zijn dezelfde die we willen
+om de sleutel te krijgen, krijgen de platte tekst,
+
+26
+00:01:36,410 --> 00:01:40,690
+encipher dat platte tekst,
+en vervolgens afdrukken die uit.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Net als Caesar de sleutel gaat
+worden doorgegeven als de tweede command line
+
+28
+00:01:44,980 --> 00:01:50,540
+argument in argv index
+1, maar het is anders deze keer
+
+29
+00:01:50,540 --> 00:01:52,560
+omdat het moet alfabetisch zijn.
+
+30
+00:01:52,560 --> 00:01:56,390
+Dus, moeten we meer dan herhalen iedere
+enkel teken in die toets
+
+31
+00:01:56,390 --> 00:02:00,800
+dat de gebruiker doorgegeven, en zorgen
+dat elk karakter is alfabetisch
+
+32
+00:02:00,800 --> 00:02:02,800
+om door te gaan.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Zodra we dat gedaan hebt, dan zullen we
+kan de tekenreeks krijgen van de gebruiker,
+
+34
+00:02:05,560 --> 00:02:07,560
+net zoals we voorheen.
+
+35
+00:02:07,560 --> 00:02:10,520
+En nu komen we bij het hart
+het probleem voor Vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+dat is net als Caesar, hoe
+achterhalen van de encryptieapparatuur patroon
+
+37
+00:02:14,665 --> 00:02:19,760
+en vergelijking, en encipher
+het hele plaintext.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Dus, zult u merken dat de
+vergelijking voor de Vigenere shift
+
+39
+00:02:23,280 --> 00:02:25,610
+is zeer vergelijkbaar met de Caesar één.
+
+40
+00:02:25,610 --> 00:02:29,780
+Het enige verschil is dat
+in plaats van een enkele variabele k
+
+41
+00:02:29,780 --> 00:02:37,270
+vóór, nu k heeft een onderschrift,
+met vermelding van de jde letter van de toets.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Laten we eens een voorbeeld.
+
+43
+00:02:39,560 --> 00:02:43,830
+Stel dat je wilde een geheim voorbij
+bericht op je geliefde, ik hou van je.
+
+44
+00:02:43,830 --> 00:02:46,325
+Nou ja, voor uw sleutel u
+kies iets dat je
+
+45
+00:02:46,325 --> 00:02:49,790
+weet te verpletteren weet dat je wilt, panda's.
+
+46
+00:02:49,790 --> 00:02:52,290
+Oké, dus hoe kunnen we deze verschuiving?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Nou, we hebben onze plaintext index.
+
+48
+00:02:55,500 --> 00:02:59,160
+Dat is op de eerste letter en
+zo is de index voor onze key
+
+49
+00:02:59,160 --> 00:03:02,830
+die aan de p, de eerste
+brief in onze panda woord.
+
+50
+00:03:02,830 --> 00:03:08,590
+Dus verschuift I p geeft ons x,
+dan vooraf we het leesbare index.
+
+51
+00:03:08,590 --> 00:03:10,460
+Dit brengt ons naar een ruimte.
+
+52
+00:03:10,460 --> 00:03:13,540
+Nu, de spatie
+is niet alfabetisch,
+
+53
+00:03:13,540 --> 00:03:16,930
+dus dat betekent dat, dat net
+transfers recht over naar de gecodeerde tekst,
+
+54
+00:03:16,930 --> 00:03:23,430
+we een ruimte is er, en dat doen we niet
+vooraf de index voor onze belangrijkste.
+
+55
+00:03:23,430 --> 00:03:25,820
+Dus, we zijn nog steeds op p op dit punt.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> We gaan naar het volgende
+index in onze plaintext.
+
+57
+00:03:30,130 --> 00:03:34,030
+En nu, want dat is
+een brief, de kleine letter l,
+
+58
+00:03:34,030 --> 00:03:37,920
+We verschuiven dat de
+volgende index in onze belangrijkste.
+
+59
+00:03:37,920 --> 00:03:42,360
+Dat een, een nul
+shift zodat alleen wordt
+
+60
+00:03:42,360 --> 00:03:44,370
+een l in onze cijfertekst.
+
+61
+00:03:44,370 --> 00:03:51,120
+Dan, vooruit we zowel de platte tekst, en
+de belangrijkste index, want het is alfabetisch.
+
+62
+00:03:51,120 --> 00:03:56,210
+Dus dan gaan we dat
+totdat we bij de e in dergelijke.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Oké, dus je zult merken in deze
+wijzen dat, wat betreft onze sleutelindex,
+
+64
+00:04:01,090 --> 00:04:03,940
+we hebben het einde van de bereikte
+de panda woord, dus wat
+
+65
+00:04:03,940 --> 00:04:08,750
+gebeurt er als we naar het volgende
+alfabetische brief in de plaintext?
+
+66
+00:04:08,750 --> 00:04:12,180
+Nou ja, alles wat er gebeurt is dat we
+wikkel rond naar het begin,
+
+67
+00:04:12,180 --> 00:04:14,710
+de eerste index van onze belangrijkste.
+
+68
+00:04:14,710 --> 00:04:19,570
+Zo is, dan schuiven we dat
+y door p ons n te geven.
+
+69
+00:04:19,570 --> 00:04:26,860
+En dan gaan we verder afwerken encoding
+onze plaintext naar x lvne noh krijgen.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Dit voorbeeld I
+toonde aan dat we alleen vooruit
+
+71
+00:04:29,300 --> 00:04:33,140
+naar de volgende letter in het trefwoord
+als het personage in platte tekst
+
+72
+00:04:33,140 --> 00:04:37,480
+is een brief zodat de isAlpha
+functie zal van pas komen hier.
+
+73
+00:04:37,480 --> 00:04:43,030
+En, net als in Caesar, willen we
+het behoud van de zaak, isupper en islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Dus, voeg deze beetje
+in in uw pseudocode.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Dus hoe kunnen we achterhalen van de belangrijkste verschuivingen?
+
+76
+00:04:48,510 --> 00:04:53,030
+Nou, als je herinneren aan onze discussie
+op alfabetische indices in de Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+probleem, het is zeer vergelijkbaar.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Waarin A correspondeert met een ASCII
+waarde van 65 maar een verschuiving van 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+en dan de laatste letter
+in het alfabet, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+komt overeen met een verschuiving van 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+U zult merken dat de verschuiving
+identiek of
+
+82
+00:05:10,320 --> 00:05:14,880
+de brief is hoofdletters of kleine letters.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, dus nu dat je
+weten hoe om erachter te komen
+
+84
+00:05:17,700 --> 00:05:21,470
+de numerieke verschuiving die
+correspondeert met één teken
+
+85
+00:05:21,470 --> 00:05:24,050
+Laten we teruggaan naar onze vergelijking.
+
+86
+00:05:24,050 --> 00:05:28,180
+Omdat we twee verschillende
+indices hier, i en j,
+
+87
+00:05:28,180 --> 00:05:32,130
+Dat is een hint dat we willen bijhouden
+van zowel onze positie in de plaintext
+
+88
+00:05:32,130 --> 00:05:36,600
+evenals onze positie in het trefwoord,
+Dus dat zijn twee verschillende variabelen
+
+89
+00:05:36,600 --> 00:05:39,010
+dat we willen een greep van te houden.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Nu is de positie in onze plaintext
+zal elke keer verhogen,
+
+91
+00:05:42,580 --> 00:05:45,530
+zodat gaat om een ​​te zijn
+wat meer rechttoe rechtaan
+
+92
+00:05:45,530 --> 00:05:49,750
+in tegenstelling tot de positie van het zoekwoord,
+waarvan we weten heeft om rond te wikkelen,
+
+93
+00:05:49,750 --> 00:05:52,910
+en soms verhogen,
+soms dezelfde blijven.
+
+94
+00:05:52,910 --> 00:05:55,430
+Dus, hoe kunnen we implementeren
+de functionaliteit
+
+95
+00:05:55,430 --> 00:05:59,820
+te wikkelen rond de
+index voor het zoekwoord?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Ik ga naar het aftellen voorbeeld te gebruiken.
+
+97
+00:06:01,640 --> 00:06:06,100
+Tellen off is een populaire manier
+mensen in groepen verdeeld.
+
+98
+00:06:06,100 --> 00:06:10,660
+Zeggen dat ik had 5 mensen en ik wilde
+splitsen in drie groepen,
+
+99
+00:06:10,660 --> 00:06:13,640
+nou dan zou ik beginnen door het tellen uit.
+
+100
+00:06:13,640 --> 00:06:16,980
+De eerste persoon zou doen
+zeggen dat ik het team nummer een,
+
+101
+00:06:16,980 --> 00:06:21,030
+de volgende persoon zou team getal
+twee, de derde persoon teamnummer
+
+102
+00:06:21,030 --> 00:06:21,910
+drie.
+
+103
+00:06:21,910 --> 00:06:25,910
+Nu, ik wil slechts drie groepen, zodat
+de vierde persoon zou eigenlijk
+
+104
+00:06:25,910 --> 00:06:30,160
+bij het begin beginnen en te zeggen:
+Nou, ik ben het team nummer een als goed,
+
+105
+00:06:30,160 --> 00:06:32,890
+en de volgende persoon
+zouden team nummer twee te zijn.
+
+106
+00:06:32,890 --> 00:06:37,660
+En van daaruit kunnen ze dan
+scheiden in hun groep.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Dus, hoe kan ik gebruik maken van modulo
+om me te helpen uit te voeren
+
+108
+00:06:41,130 --> 00:06:44,160
+Dit aftellen wrap around functie?
+
+109
+00:06:44,160 --> 00:06:50,140
+Nou, de eerste persoon
+nummer 1, mod 3 geeft ons 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 geeft ons 2,
+en 3 mod 3 geeft ons 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> De vierde persoon, nummer 4, mod 3
+geeft ons 1, en vervolgens 5 mod 3 geeft ons 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Dus, zult u merken dat, hoewel
+het aantal mensen die ik heb
+
+113
+00:07:05,370 --> 00:07:11,210
+verhoogt en boven
+3, aangezien ik modding door 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Ik krijg altijd getallen 0, 1 en 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Ik krijg nooit groter dan 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Zo dan, zelfs als ik had 10
+mensen, dan al die mensen
+
+117
+00:07:22,630 --> 00:07:27,430
+zou nog steeds binnen groepen 1, 2, of 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Zo, nu weten we dat als we een groep
+van 5 en we mod al die door 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+dan zijn we nooit te
+overschrijden groepen 0, 1 of 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Dus we nooit naar een groep te krijgen
+nummer dat is gelijk aan 3 of hoger.
+
+121
+00:07:43,430 --> 00:07:46,980
+Dus, zelfs als ik toe te voegen vijf
+mensen, dan allemaal
+
+122
+00:07:46,980 --> 00:07:53,150
+zou nog steeds worden toegewezen aan groepen
+0, 1 of 2, want ik ben het modden van 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Ik ga nooit naar die cap overtreffen.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, dus laten we eens kijken of we kunnen toepassen
+Dit concept van het gebruik modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+te wikkelen rond de
+groepsnummers en toe te passen
+
+126
+00:08:03,710 --> 00:08:08,000
+het aan Vigenère waar we willen
+modulo te gebruiken om rond te wikkelen
+
+127
+00:08:08,000 --> 00:08:10,220
+de index voor het zoekwoord.
+
+128
+00:08:10,220 --> 00:08:12,830
+Hoewel we het verhogen
+de index we altijd
+
+129
+00:08:12,830 --> 00:08:17,260
+willen ervoor zorgen dat we altijd
+wikkel rond naar het allereerste begin
+
+130
+00:08:17,260 --> 00:08:20,050
+nooit meer dan de
+lengte van de snaar.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, dus ik weet dat het zou kunnen zijn
+een beetje overweldigend.
+
+132
+00:08:23,510 --> 00:08:26,670
+Er is veel meer te doen in dit p set.
+
+133
+00:08:26,670 --> 00:08:30,050
+Dus, zorg ervoor dat u uitschrijven
+een goede pseudocode voor jezelf
+
+134
+00:08:30,050 --> 00:08:32,870
+dat u begrijpt en
+dat klaart de klus.
+
+135
+00:08:32,870 --> 00:08:35,580
+Probeer het en pakken elke
+enkele lijn onafhankelijk
+
+136
+00:08:35,580 --> 00:08:38,370
+het uitzoeken van alle kleine
+kleine stukjes van de puzzel
+
+137
+00:08:38,370 --> 00:08:40,260
+voordat het samenstellen van het.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Zorg ervoor dat je kunt krijgen
+de sleutel uit de opdrachtregel
+
+139
+00:08:43,110 --> 00:08:46,780
+en ervoor te zorgen dat het alfabetisch,
+krijgt de gewone tekst van de gebruiker,
+
+140
+00:08:46,780 --> 00:08:51,010
+en vervolgens in encryptieapparatuur, zorg ervoor dat je
+weet hoe je een enkele letter vercijferen,
+
+141
+00:08:51,010 --> 00:08:56,130
+en vervolgens doorstromen naar de hele reeks
+met alle van de wrap around functies.
+
+142
+00:08:56,130 --> 00:08:59,610
+Ten slotte kunt u de cijfertekst af te drukken.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Mijn naam is een Zamyla,
+en dit was Vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

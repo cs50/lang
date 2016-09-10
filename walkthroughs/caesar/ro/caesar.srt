@@ -1,0 +1,1140 @@
+1
+00:00:00,000 --> 00:00:00,760
+
+2
+00:00:00,760 --> 00:00:02,270
+>> Amila: Să abordeze Caesar.
+
+3
+00:00:02,270 --> 00:00:06,110
+În Caesar, permitem utilizatorului
+pentru a codifica un mesaj secret.
+
+4
+00:00:06,110 --> 00:00:09,780
+Așa că hai să se arunca cu capul în dreapta și uite
+la noastre la-DOS pentru această problemă.
+
+5
+00:00:09,780 --> 00:00:12,210
+Așa că în primul rând, vom obține cheia de la utilizator.
+
+6
+00:00:12,210 --> 00:00:15,210
+Apoi vom obține plaintext-
+că ei doresc să codifica.
+
+7
+00:00:15,210 --> 00:00:21,380
+După aceea, l-am cifrare pentru ei,
+și în final vom imprima lor ciphertext.
+
+8
+00:00:21,380 --> 00:00:23,600
+>> Să începem cu un exemplu.
+
+9
+00:00:23,600 --> 00:00:26,920
+Spuneți că ați vrut să codeze
+întregul alfabet, cu o cheie de două.
+
+10
+00:00:26,920 --> 00:00:31,360
+Ei bine, întregul alfabet ar
+pur și simplu să fie mutat la litere.
+
+11
+00:00:31,360 --> 00:00:37,060
+Deci, o s-ar codifica la C, B
+D, C și E, așa mai departe și așa mai departe,
+
+12
+00:00:37,060 --> 00:00:42,470
+până când ajunge la X, care codifică la Z
+sau zed, în funcție de unde ești.
+
+13
+00:00:42,470 --> 00:00:47,445
+Y ar trece apoi tot drumul,
+se înfășoare în jurul alfabetului pentru a ajunge la A,
+
+14
+00:00:47,445 --> 00:00:53,256
+și apoi în cele din urmă ultima literă a
+alfabet, Z, Zed, s-ar codifica B.
+
+15
+00:00:53,256 --> 00:00:54,660
+>> Ai înțeles?
+
+16
+00:00:54,660 --> 00:00:56,380
+Să ne uităm la câteva exemple.
+
+17
+00:00:56,380 --> 00:01:00,540
+Primul exemplu aici este foarte asemănătoare
+la ceea ce tocmai am explicat mai sus.
+
+18
+00:01:00,540 --> 00:01:05,560
+Deci, dacă am codifica unele secțiune din STI
+alfabet, A prin L, printr-o cheie de două,
+
+19
+00:01:05,560 --> 00:01:09,760
+apoi am obține doar întreaga mea
+alfabet mutat două litere.
+
+20
+00:01:09,760 --> 00:01:12,230
+>> Apoi, în următorul meu exemplu,
+cheia este încă două,
+
+21
+00:01:12,230 --> 00:01:15,080
+astfel încât ar trebui să știi încă
+care literele să se aștepte.
+
+22
+00:01:15,080 --> 00:01:16,400
+Dar, aici este o frază.
+
+23
+00:01:16,400 --> 00:01:18,100
+Acest lucru este CS50.
+
+24
+00:01:18,100 --> 00:01:21,090
+Așa că veți observa că am
+păstreze cazul scrisorilor mele,
+
+25
+00:01:21,090 --> 00:01:25,600
+astfel încât orice litere mari sunt, de asemenea,
+litere majuscule în textul cifrat.
+
+26
+00:01:25,600 --> 00:01:27,800
+Și orice literă mică
+litere în plaintext-
+
+27
+00:01:27,800 --> 00:01:30,640
+De asemenea, sunt litere mici
+litere în textul cifrat.
+
+28
+00:01:30,640 --> 00:01:34,020
+Dar, am păstra scrisorile
+și orice alte semne de exclamare
+
+29
+00:01:34,020 --> 00:01:37,610
+sau orice alte semne de punctuație la fel.
+
+30
+00:01:37,610 --> 00:01:40,360
+>> Deci, acum că avem un sens
+pentru modul în care funcționează programul,
+
+31
+00:01:40,360 --> 00:01:43,890
+se simt liber pentru a merge rula unele mai multe
+exemple de propriul dvs., dacă doriți.
+
+32
+00:01:43,890 --> 00:01:47,072
+Să începem cu obținerea
+cheia de la utilizator.
+
+33
+00:01:47,072 --> 00:01:48,780
+În mod tradițional, cu
+alte probleme, ne-am
+
+34
+00:01:48,780 --> 00:01:51,450
+fost obișnuiți să obtinerea
+orice numere pe care le
+
+35
+00:01:51,450 --> 00:01:54,710
+au nevoie de fapt care ia determinat utilizatorul
+cu getint funcția.
+
+36
+00:01:54,710 --> 00:01:58,850
+Dar de data asta vom merge de fapt
+să folosească argumentul liniei de comandă
+
+37
+00:01:58,850 --> 00:02:01,760
+și o nouă funcție numită atoi.
+
+38
+00:02:01,760 --> 00:02:05,130
+>> Când executați principal
+Programul în C, apoi
+
+39
+00:02:05,130 --> 00:02:08,500
+ia în două parameters--
+int argc, care
+
+40
+00:02:08,500 --> 00:02:11,670
+este numărul de argumente
+a trecut în, și apoi
+
+41
+00:02:11,670 --> 00:02:15,920
+argv, o serie de siruri de caractere, care conține
+lista tuturor argumentelor
+
+42
+00:02:15,920 --> 00:02:16,740
+a trecut.
+
+43
+00:02:16,740 --> 00:02:19,740
+Nu aveți în mod explicit
+să declare aceste variabile.
+
+44
+00:02:19,740 --> 00:02:22,700
+Sunt calculate pentru
+tu de compilator.
+
+45
+00:02:22,700 --> 00:02:28,160
+Utilizarea corectă pentru acest lucru ar fi
+pentru argc să fie două în acest caz,
+
+46
+00:02:28,160 --> 00:02:32,630
+deoarece utilizatorul trebuie să treacă în
+apelul la program, ./caesar,
+
+47
+00:02:32,630 --> 00:02:35,570
+și apoi tasta,
+indiferent de numărul pe care doresc.
+
+48
+00:02:35,570 --> 00:02:39,920
+Deci asta înseamnă că argc trebuie să fie de două
+în vederea unei utilizări valabilă a lui Cezar
+
+49
+00:02:39,920 --> 00:02:41,680
+să fie executat.
+
+50
+00:02:41,680 --> 00:02:43,590
+>> Așa că hai să ne uităm la un exemplu.
+
+51
+00:02:43,590 --> 00:02:47,760
+Spune deja am scris și
+compilat un program numit blastoff.
+
+52
+00:02:47,760 --> 00:02:52,670
+Deci, dacă am fugit în linia de comandă
+./blastoff Rocket Team, ei bine, atunci,
+
+53
+00:02:52,670 --> 00:02:57,750
+argc ar fi trei pentru că eu
+a trecut în trei argumente distincte.
+
+54
+00:02:57,750 --> 00:02:59,830
+Apoi argv ar arăta așa.
+
+55
+00:02:59,830 --> 00:03:03,750
+Este o matrice, și ar
+conțin fiecare dintre cele trei șiruri.
+
+56
+00:03:03,750 --> 00:03:09,640
+./blastoff în primul indice, echipa
+în următoarea, și racheta în ultima.
+
+57
+00:03:09,640 --> 00:03:11,610
+>> Hai să vorbim despre tablouri pentru o secundă.
+
+58
+00:03:11,610 --> 00:03:15,560
+Vectorii sunt structuri de date care dețin
+mai multe valori de același tip.
+
+59
+00:03:15,560 --> 00:03:19,980
+Acest lucru poate veni la îndemână atunci când ne
+au liste de întregi sau siruri de caractere.
+
+60
+00:03:19,980 --> 00:03:23,030
+Doar amintiți-vă că au
+să fie de același tip.
+
+61
+00:03:23,030 --> 00:03:25,310
+În informatică, noi
+dragoste de numărare de la zero,
+
+62
+00:03:25,310 --> 00:03:29,260
+astfel încât nu uitați că tablouri
+sunt de asemenea zero indexate.
+
+63
+00:03:29,260 --> 00:03:34,360
+Deci, primul element al matrice mele
+va fi la indexul zero.
+
+64
+00:03:34,360 --> 00:03:37,580
+Deci, în acest caz, atunci când am
+o matrice de lungime de patru,
+
+65
+00:03:37,580 --> 00:03:41,350
+apoi ultimul index al
+ultimul element al meu matrice
+
+66
+00:03:41,350 --> 00:03:44,970
+este, de fapt va fi
+la indexul trei, nu patru.
+
+67
+00:03:44,970 --> 00:03:48,880
+Pentru că amintiți-vă, noi
+începe numărarea de la zero.
+
+68
+00:03:48,880 --> 00:03:52,530
+>> Iată un exemplu de cum
+s-ar putea crea o serie de dumneavoastră.
+
+69
+00:03:52,530 --> 00:03:56,440
+Așa că spun că am vrut să păstrez
+trei nume de câine favorit.
+
+70
+00:03:56,440 --> 00:03:59,030
+Apoi, aș crea o serie de șiruri.
+
+71
+00:03:59,030 --> 00:04:04,450
+Deci, aș declara tipul, șirul, și
+apoi a pus numele de matrice, câini,
+
+72
+00:04:04,450 --> 00:04:06,450
+și apoi în cele pătrat
+paranteze a pus dimensiunea
+
+73
+00:04:06,450 --> 00:04:09,260
+din array-- în acest caz, trei.
+
+74
+00:04:09,260 --> 00:04:12,690
+>> Așa că prima mea intrare se întâmplă
+să fie câini, la indicele de la zero,
+
+75
+00:04:12,690 --> 00:04:14,750
+și că va fi Milo.
+
+76
+00:04:14,750 --> 00:04:17,850
+Apoi, câini, la indexul unu
+va fi Goofy,
+
+77
+00:04:17,850 --> 00:04:23,060
+dragă Mochi, și apoi ultimul
+intrare, a treia intrare la indexul doi,
+
+78
+00:04:23,060 --> 00:04:26,130
+va fi dragut, dulce Elphie.
+
+79
+00:04:26,130 --> 00:04:28,610
+Vei observa că formatul
+Pentru completarea acestei matrice
+
+80
+00:04:28,610 --> 00:04:32,150
+este foarte mult ca modul în care s-ar putea
+să declare orice altă variabilă în cazul în care
+
+81
+00:04:32,150 --> 00:04:36,307
+aveți numele variabilei urmat de
+valoarea pe care doriți să le stocați în ea.
+
+82
+00:04:36,307 --> 00:04:38,140
+Singura diferență în
+acest caz este că
+
+83
+00:04:38,140 --> 00:04:42,700
+trebuie să-și amintească de a pune indicele
+din valoarea între paranteze drepte.
+
+84
+00:04:42,700 --> 00:04:46,420
+Și acolo avem noastră
+trei câini favorit.
+
+85
+00:04:46,420 --> 00:04:48,780
+>> Dar, din păcate, este timpul
+pentru a ajunge înapoi la Cezar.
+
+86
+00:04:48,780 --> 00:04:52,910
+Nu uitați că utilizarea corectă pentru
+utilizator va fi în mod nu numai
+
+87
+00:04:52,910 --> 00:04:57,430
+numele ./caesar programului, dar
+De asemenea, cheia pe care doresc să schimbe
+
+88
+00:04:57,430 --> 00:04:58,850
+plaintext lor de către.
+
+89
+00:04:58,850 --> 00:05:01,540
+Deci asta înseamnă că argc trebuie să fie doi.
+
+90
+00:05:01,540 --> 00:05:07,580
+Ei trebuie să treacă în two-- nici mai mult, nici
+mai puțin de două argumente în linia de comandă.
+
+91
+00:05:07,580 --> 00:05:09,050
+>> Acum, ce zici de argv?
+
+92
+00:05:09,050 --> 00:05:12,880
+Ei bine, știm deja că
+matrice va fi de lungime doi,
+
+93
+00:05:12,880 --> 00:05:15,270
+dar ceea ce se află în fiecare element?
+
+94
+00:05:15,270 --> 00:05:19,330
+Ei bine, primul element
+va fi ./caesar,
+
+95
+00:05:19,330 --> 00:05:24,190
+iar apoi elementul următor va
+conțin cheia pe care utilizatorul tastat.
+
+96
+00:05:24,190 --> 00:05:27,480
+Acum, în cazul în care au folosit-o corect
+pentru utilizarea Cezarului,
+
+97
+00:05:27,480 --> 00:05:29,350
+atunci ei vor introduce într-un număr.
+
+98
+00:05:29,350 --> 00:05:33,260
+Dar, chiar dacă caracterul
+că ei tip este un număr,
+
+99
+00:05:33,260 --> 00:05:35,790
+este de tipul de date șir.
+
+100
+00:05:35,790 --> 00:05:40,390
+>> Deci, cum putem converti că
+string la un număr întreg?
+
+101
+00:05:40,390 --> 00:05:46,680
+Deci, spun că am num, un șir de caractere,
+care conține șirul de 50 de ani.
+
+102
+00:05:46,680 --> 00:05:49,000
+Dacă vreau să convertiți că
+la un număr întreg, atunci pur și simplu
+
+103
+00:05:49,000 --> 00:05:53,340
+declară o nouă variabilă, o
+număr întreg i, de asteptare atoi.
+
+104
+00:05:53,340 --> 00:06:01,160
+Eu trec în variabila mea șir de caractere, num, și
+atunci i se va conține apoi numărul 50.
+
+105
+00:06:01,160 --> 00:06:04,350
+Asigurați-vă că pentru a verifica omul
+pagini pentru funcția atoi
+
+106
+00:06:04,350 --> 00:06:07,990
+pentru a verifica care biblioteca este
+în, precum și ce valoare
+
+107
+00:06:07,990 --> 00:06:14,550
+va reveni în cazul în care șirul trecut
+în nu conține toate numerele.
+
+108
+00:06:14,550 --> 00:06:16,950
+>> Deci, acum că am ajuns
+cheia, următorul pas
+
+109
+00:06:16,950 --> 00:06:19,430
+este de a obtine plaintext- de utilizator.
+
+110
+00:06:19,430 --> 00:06:21,170
+Acum, acest lucru se va
+să fie mai puțin complicată
+
+111
+00:06:21,170 --> 00:06:23,410
+decât navigarea în jurul valorii de
+argumente în linia de comandă.
+
+112
+00:06:23,410 --> 00:06:26,190
+Tot ce trebuie să facem este apel
+funcția getstring
+
+113
+00:06:26,190 --> 00:06:29,660
+pentru a solicita utilizatorului pentru a da
+ne un șir de caractere, dar nu uitați
+
+114
+00:06:29,660 --> 00:06:34,090
+pentru a verifica specificațiile pentru modul în care am
+ar putea dori să solicite utilizatorului pentru acest lucru.
+
+115
+00:06:34,090 --> 00:06:36,420
+>> Acum am ajuns la
+Inima problem--
+
+116
+00:06:36,420 --> 00:06:38,860
+cum să cifrare plaintext-.
+
+117
+00:06:38,860 --> 00:06:42,830
+Ei bine, în primul rând, să vorbim despre modul în care
+la cifrare un caracter la un moment dat,
+
+118
+00:06:42,830 --> 00:06:47,370
+și apoi vom aborda modul în care să
+itera pe întreaga plaintext-.
+
+119
+00:06:47,370 --> 00:06:50,440
+Am scris niște pseudocod
+pentru problema Caesar.
+
+120
+00:06:50,440 --> 00:06:52,310
+Vă încurajez să
+scrie opinia ta.
+
+121
+00:06:52,310 --> 00:06:55,900
+S-ar putea să nu se uite identic cu
+a mea, și asta e în regulă, dar atâta timp
+
+122
+00:06:55,900 --> 00:06:58,640
+ca idee generală este aceeași.
+
+123
+00:06:58,640 --> 00:07:00,780
+>> Primii trei pași
+Deja am făcut.
+
+124
+00:07:00,780 --> 00:07:03,100
+Am primit cheia de la
+argumentul liniei de comandă,
+
+125
+00:07:03,100 --> 00:07:05,510
+ne-am transformat acea cheie
+într-un întreg, și ne-am
+
+126
+00:07:05,510 --> 00:07:09,320
+a determinat utilizatorul pentru plaintext
+că ei doresc să cifrare.
+
+127
+00:07:09,320 --> 00:07:12,420
+Așa că, atunci următoarea bucată mare
+este faptul că pentru fiecare caracter
+
+128
+00:07:12,420 --> 00:07:15,070
+în șirul plaintext,
+dacă este în ordine alfabetică,
+
+129
+00:07:15,070 --> 00:07:17,750
+dorim să păstrăm
+cazul său și-l schimbe.
+
+130
+00:07:17,750 --> 00:07:20,900
+Prin păstrarea caz, ceea ce
+Adică este că toate cazurile de sus
+
+131
+00:07:20,900 --> 00:07:23,580
+scrisori ar trebui să rămână superioară
+caz și toate literele minuscule
+
+132
+00:07:23,580 --> 00:07:25,640
+ar trebui să rămână cu litere mici.
+
+133
+00:07:25,640 --> 00:07:29,110
+Așa că, atunci după ce trecem de aceste,
+apoi vom imprima ciphertext.
+
+134
+00:07:29,110 --> 00:07:33,100
+>> Aici sunt trei funcții care se întâmplă
+să vină la îndemână pentru această problemă.
+
+135
+00:07:33,100 --> 00:07:38,010
+Amintiți-vă în sus de mai sus, când i-am dat
+exemplu pentru deplasarea este CS50?
+
+136
+00:07:38,010 --> 00:07:41,800
+Amintiți-vă că 50, precum și
+semn de exclamare nu schimbare?
+
+137
+00:07:41,800 --> 00:07:45,680
+Deci, cum putem spune dacă ne
+au nevoie pentru a schimba o literă sau nu?
+
+138
+00:07:45,680 --> 00:07:48,650
+Ei bine, "este alfa", în cazul în care
+ai un caracter treci,
+
+139
+00:07:48,650 --> 00:07:54,850
+se va întoarce adevărat dacă acel caracter
+este o literă și false în caz contrar.
+
+140
+00:07:54,850 --> 00:07:56,870
+Pentru a vă ajuta cu
+păstrând capitalizarea
+
+141
+00:07:56,870 --> 00:07:59,750
+sunt funcțiile "este
+superior "și" este mai mic. "
+
+142
+00:07:59,750 --> 00:08:03,350
+>> Aceste două funcții, de asemenea, să ia
+într-un singur caracter ca intrare
+
+143
+00:08:03,350 --> 00:08:06,580
+și returnați un boolean,
+fie adevărat sau fals
+
+144
+00:08:06,580 --> 00:08:11,280
+în funcție de faptul dacă acel caracter
+este majuscule sau minuscule.
+
+145
+00:08:11,280 --> 00:08:14,610
+Deoarece "este superior" și "este
+inferior "sunt funcții booleene,
+
+146
+00:08:14,610 --> 00:08:18,660
+ceea ce înseamnă că ei te întorci Boolean,
+vă puteți utiliza în condițiile dumneavoastră.
+
+147
+00:08:18,660 --> 00:08:23,490
+Deci, aici este un fragment de cod care numai
+imprimă o literă, dacă este cazul în sus.
+
+148
+00:08:23,490 --> 00:08:27,790
+Așa că am declarat caracterul meu
+scrisoare care urmează să fie cazul superior zed
+
+149
+00:08:27,790 --> 00:08:33,440
+și apoi, dacă "este superioară" se întoarce
+adevărat, atunci am imprima acea scrisoare.
+
+150
+00:08:33,440 --> 00:08:38,200
+>> Să ne întoarcem la exemplul nostru simplu de
+deplasarea alfabetului printr-o cheie de două,
+
+151
+00:08:38,200 --> 00:08:41,049
+cum putem obține de fapt, că la locul de muncă?
+
+152
+00:08:41,049 --> 00:08:45,770
+Ei bine, se pare că de caractere
+și numere întregi sunt foarte strâns legate.
+
+153
+00:08:45,770 --> 00:08:48,840
+Fiecare personaj are un
+valoare întreagă asociată
+
+154
+00:08:48,840 --> 00:08:53,260
+cu ea a găsit în diagramă ASCII,
+în cazul în care ASCII fiecărui caracter
+
+155
+00:08:53,260 --> 00:08:55,380
+Este afișată o valoare.
+
+156
+00:08:55,380 --> 00:08:58,940
+Astfel încât un caz superior corespunde A
+la o valoare ASCII de 65 de ani
+
+157
+00:08:58,940 --> 00:09:02,270
+și literele mici de la
+o valoare ASCII 97.
+
+158
+00:09:02,270 --> 00:09:04,940
+>> Simțiți-vă liber să se uite în sus
+orice ASCII diagramă on-line
+
+159
+00:09:04,940 --> 00:09:07,720
+pentru a vedea aceste valori pentru tine.
+
+160
+00:09:07,720 --> 00:09:12,096
+Deci, ce înseamnă acest lucru este că putem
+să ia caracterul de caz superior A,
+
+161
+00:09:12,096 --> 00:09:18,200
+se adaugă un întreg doi să-l, și apoi obține
+caracterul superior caz C, ca rezultat.
+
+162
+00:09:18,200 --> 00:09:23,720
+Asta pentru 65 de ani, ASCII
+Valoarea pentru capitalul A, plus 2,
+
+163
+00:09:23,720 --> 00:09:29,960
+ne dă 67, ceea ce corespunde
+la caracterul superior caz C.
+
+164
+00:09:29,960 --> 00:09:33,480
+>> Din păcate, lucrurile
+nu va fi destul de atât de simplu.
+
+165
+00:09:33,480 --> 00:09:36,980
+Avem o ecuație
+trebuie să ia în considerare.
+
+166
+00:09:36,980 --> 00:09:43,590
+Aici ne spune că i-lea ciphertext
+scrisoare corespunde cu plaintext- i-lea
+
+167
+00:09:43,590 --> 00:09:48,900
+scrisoare, plus key--
+toate acestea, modulare 26.
+
+168
+00:09:48,900 --> 00:09:50,810
+De ce este că acest caz?
+
+169
+00:09:50,810 --> 00:09:55,430
+Să ne întoarcem la exemplul nostru de la
+înainte, în cazul în care capitalul A, plus 2,
+
+170
+00:09:55,430 --> 00:09:57,590
+ne dă de capital C.
+
+171
+00:09:57,590 --> 00:10:01,870
+>> Deci, aplicând ecuația care
+caietul de sarcini ne dă,
+
+172
+00:10:01,870 --> 00:10:06,660
+apoi să ia de capital A
+plus 2 și mod care până la 26.
+
+173
+00:10:06,660 --> 00:10:10,730
+Așa că de capital A, atunci când am pus-o în
+aceste simple ghilimele,
+
+174
+00:10:10,730 --> 00:10:14,010
+îmi permite să-l trateze ca
+un număr întreg, astfel încât permite
+
+175
+00:10:14,010 --> 00:10:17,500
+mi să-l arunce la valoarea sa ASCII, 65 de ani.
+
+176
+00:10:17,500 --> 00:10:20,080
+65 plus 2 este de 67.
+
+177
+00:10:20,080 --> 00:10:25,210
+67 mod 26 ne dă 15,
+dar asta nu prea
+
+178
+00:10:25,210 --> 00:10:32,590
+sens pentru că noi știm că
+Capital C Valoarea ASCII este de 67, nu 15.
+
+179
+00:10:32,590 --> 00:10:35,580
+Deci, cum putem împăca asta?
+
+180
+00:10:35,580 --> 00:10:39,840
+>> Ei bine, aici aș vrea să postulează
+Noțiunea de un index alfabetic.
+
+181
+00:10:39,840 --> 00:10:44,010
+Prin urmare, am discutat deja despre modul în care
+fiecare caracter are valoarea ASCII,
+
+182
+00:10:44,010 --> 00:10:48,810
+dar aș vrea să spun, bine, hai
+gândiți-vă fiecare personaj, de asemenea, având în
+
+183
+00:10:48,810 --> 00:10:52,230
+un index alfabetic,
+unde A, de exemplu,
+
+184
+00:10:52,230 --> 00:10:58,800
+ca prima literă a alfabetului,
+are un indice alfabetic de la zero.
+
+185
+00:10:58,800 --> 00:11:02,070
+Așa că acum să aplicați
+aceeași ecuație ca și mai înainte,
+
+186
+00:11:02,070 --> 00:11:05,040
+dar utilizând un index alfabetic.
+
+187
+00:11:05,040 --> 00:11:07,810
+>> Așa că A este zero, așa cum ne-am definit.
+
+188
+00:11:07,810 --> 00:11:15,640
+Așa că luând apoi la zero, plus două, mod 26,
+care este de două, mod 26, care ne dă două.
+
+189
+00:11:15,640 --> 00:11:18,780
+Și bine, în ceea ce privește
+un index alfabetic,
+
+190
+00:11:18,780 --> 00:11:23,930
+C este a treia literă în
+alfabet, astfel încât să corespundă
+
+191
+00:11:23,930 --> 00:11:26,290
+la un index alfabetic de două.
+
+192
+00:11:26,290 --> 00:11:29,850
+Deci, se pare că utilizarea
+index alfabetic în acest caz
+
+193
+00:11:29,850 --> 00:11:32,840
+de fapt, ne dă rezultatul corect.
+
+194
+00:11:32,840 --> 00:11:35,020
+>> Așa că acum să verificați
+a se vedea dacă funcționează ecuatia
+
+195
+00:11:35,020 --> 00:11:37,210
+cu un index alfabetic.
+
+196
+00:11:37,210 --> 00:11:42,540
+indexul alfabetic Y este 24 sub numele de
+în al doilea rând la ultima literă din alfabet.
+
+197
+00:11:42,540 --> 00:11:46,520
+Așa că, atunci 24 plus nostru
+cheie a doi ne dă 26.
+
+198
+00:11:46,520 --> 00:11:54,750
+26 mod 26 ne oferă 0, care, norocos pentru
+ne, este indexul alfabetic A.
+
+199
+00:11:54,750 --> 00:11:59,100
+Deci sperăm că e suficient ca dovada
+metoda de index alfabetic funcționează.
+
+200
+00:11:59,100 --> 00:12:03,180
+În cazul în care nu, nu ezitați să încercați
+câteva exemple proprii.
+
+201
+00:12:03,180 --> 00:12:08,030
+>> Pentru a se încadra în mod corespunzător în jurul valorii de
+alfabet și se aplică ecuația Cezar,
+
+202
+00:12:08,030 --> 00:12:11,280
+atunci știm că avem nevoie să
+face cu indici alfabetice.
+
+203
+00:12:11,280 --> 00:12:15,130
+Dar noi începem cu ASCII
+valori, și numai atunci
+
+204
+00:12:15,130 --> 00:12:18,530
+putem apoi converti la
+indexul alfabetic.
+
+205
+00:12:18,530 --> 00:12:23,970
+De acolo, pentru a imprima, avem nevoie
+pentru a face față cu valorile ASCII din nou.
+
+206
+00:12:23,970 --> 00:12:28,350
+Așa că trebuie să ne dăm seama cum să
+du-te din ASCII în alfabetic
+
+207
+00:12:28,350 --> 00:12:31,080
+și din alfabetic în ASCII.
+
+208
+00:12:31,080 --> 00:12:34,910
+>> Așa că am să vă las să dau seama
+modelul între un caracter
+
+209
+00:12:34,910 --> 00:12:38,590
+și în ordine alfabetică sale
+indexul și valoarea ASCII.
+
+210
+00:12:38,590 --> 00:12:41,530
+Acum, amintiți-vă că, chiar dacă
+acest drept tabel pe diapozitiv
+
+211
+00:12:41,530 --> 00:12:45,630
+arată literele mari, noi, de asemenea,
+trebuie să ia în considerare dacă este sau nu
+
+212
+00:12:45,630 --> 00:12:48,915
+aplică un model diferit
+pentru inferioare caracterelor.
+
+213
+00:12:48,915 --> 00:12:52,070
+
+214
+00:12:52,070 --> 00:12:55,840
+>> Deci, acum că ne-am dat seama
+cum să se deplaseze un singur caracter,
+
+215
+00:12:55,840 --> 00:13:02,200
+atunci tot ce trebuie să facem este scara care
+până la traversa întreaga plaintext-.
+
+216
+00:13:02,200 --> 00:13:04,260
+Asa ca plaintext- este un șir de caractere.
+
+217
+00:13:04,260 --> 00:13:08,210
+Din fericire pentru noi, un șir de caractere este într-adevăr
+doar o serie de caractere,
+
+218
+00:13:08,210 --> 00:13:12,150
+astfel încât, în scopul de a avea acces la fiecare caracter
+dintr-un șir de caractere, tot ce trebuie să faci
+
+219
+00:13:12,150 --> 00:13:14,270
+este de a folosi notația matrice.
+
+220
+00:13:14,270 --> 00:13:20,270
+Spune că am o variabilă de tip
+șir de caractere numit "text = 'e CS50.'"
+
+221
+00:13:20,270 --> 00:13:22,730
+>> Ei bine, atunci, pentru a
+acces la fiecare caracter,
+
+222
+00:13:22,730 --> 00:13:25,880
+tot ce trebuie să fac cu
+textul este variabila
+
+223
+00:13:25,880 --> 00:13:31,660
+să spun bine, textul de la zero, indicele, că
+corespunde T. de capital text la indexul
+
+224
+00:13:31,660 --> 00:13:35,100
+una corespunde cu litere mici h.
+
+225
+00:13:35,100 --> 00:13:38,110
+O altă funcție utilă este
+funcția de lungime șir.
+
+226
+00:13:38,110 --> 00:13:40,760
+Așa că trece într-un șir de caractere pentru a
+această funcție se va întoarce
+
+227
+00:13:40,760 --> 00:13:44,610
+un număr întreg, lungimea acelui șir.
+
+228
+00:13:44,610 --> 00:13:47,060
+>> Acum, că am vorbit despre
+toate aceste elemente diferite,
+
+229
+00:13:47,060 --> 00:13:48,540
+Să le punem înapoi împreună.
+
+230
+00:13:48,540 --> 00:13:52,210
+Așa că a reveni la fie pseudocod meu
+cod sau pseudocod tau
+
+231
+00:13:52,210 --> 00:13:55,920
+și du-te prin intermediul și asigurați-vă că
+știu cum să facă fiecare lucru.
+
+232
+00:13:55,920 --> 00:14:01,520
+Obtinerea cheii folosind argc și argv,
+rotirea cheii într-un întreg, o
+
+233
+00:14:01,520 --> 00:14:06,840
+la i, fapt care ia determinat pentru plaintext,
+getstring, și apoi iterarea
+
+234
+00:14:06,840 --> 00:14:09,590
+peste fiecare personaj
+șirul plaintext,
+
+235
+00:14:09,590 --> 00:14:14,910
+păstrând cazul fiecărui caracter
+și deplasarea acel caracter de cheie,
+
+236
+00:14:14,910 --> 00:14:17,520
+asigurându-se că sunteți
+în jurul valorii de ambalaj din alfabet,
+
+237
+00:14:17,520 --> 00:14:20,850
+imprimarea în cele din urmă că ciphertext.
+
+238
+00:14:20,850 --> 00:14:25,470
+Numele meu este Amila, iar acest lucru a fost Cezar.
+
+239
+00:14:25,470 --> 00:14:28,448
+

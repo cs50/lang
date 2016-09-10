@@ -1,0 +1,59 @@
+Amila: Pojďme řešit Caesara. V Caesar, necháme uživateli zakódovat tajnou zprávu. Takže pojďme se rovnou dovnitř a hledat u našich TO-DOS tohoto problému. Takže první, dostaneme klíč od uživatele. Pak dostaneme holý text že chtějí kódovat. Za to, že jsme to zašifrovat pro ně, a nakonec jsme tisknout jejich ciphertext. 
+
+Takže začněme s příkladem. Řekněme, že jste chtěli zakódovat Celá abeceda s klíčem dva. Tak by celá vaše abeceda jen se přesunul na dopisy. Tak by se kódovat C, B D, C až E, a tak dále a tak dále, až se dostanete k X, která kóduje od A do Z nebo zed, v závislosti na tom, kde jste od. Pak Y by pak posunout celou cestu, zábal kolem abecedy se dostat do A, a pak konečně poslední písmeno abeceda, Z, zed, bude kódovat do bodu B. 
+
+Je to jasné? Podívejme se na některé příklady. Prvním příkladem je velmi podobná s tím, co jsme právě vysvětleno výše. Takže když jsem zakódovat nějaký úsek abeceda, A až L, klíčem dvou, Pak jsem jen dostat svou celokrajné abeceda posunul dva dopisy. 
+
+Pak, v mém dalším příkladu, klíč je stále dva, takže byste měli ještě vědět který dopisy očekávat. Ale tady je to fráze. To je CS50. Takže si všimnete, že já zachovat případ mých dopisů, takže jakékoliv velká písmena jsou také velká písmena v ciphertext. A jakákoli malá písmena dopisů v holém textu jsou také malá písmena Písmena v ciphertext. Ale pořád písmena a případné vykřičníky nebo jakékoli jiné interpunkce stejné. 
+
+Takže teď, že máme pocit za to, jak program funguje, neváhejte jít běžet něco víc příklady své vlastní, pokud si budete přát. Začněme s dostat klíč od uživatele. Tradičně, s další problémy, máme byli zvyklí na získání jakákoli čísla, která my Potřebujete tím vyzvání uživatele s funkcí getint. Ale tentokrát jsme vlastně děje používat příkazový řádek argumentu a nová funkce nazvaná atoi. 
+
+Při spuštění hlavního Program v C, pak se se ve dvou parameters-- int argc, který je počet argumentů prošel v roce, a poté argv, pole řetězců, které obsahují seznam všech argumentů prošel. Nemusíte mít explicitně deklarovat tyto proměnné. Jsou vypočítány pro jste kompilátorem. Správné využití pro to by bylo Pro argc být dvě v tomto případě, protože uživatel musí předat hovor s programem, ./caesar, a klíč, bez ohledu na počet chtějí. Tak, že znamená, že musí být dva argc K tomu, aby platnou použití Caesar které mají být provedeny. 
+
+Takže pojďme se podívat na příklad. Řekněme, že jsem už napsal a sestavili program s názvem odpálení. Takže když jsem běžel do příkazového řádku ./blastoff Team Rocket, dobře, pak, argc by měly být tři, protože jsem prošel ve třech různých argumentů. Pak argv bude vypadat takto. Je to pole, a to by obsahuje každou ze tří řetězců. ./blastoff v prvním indexu, týmu v příštím, a rakety v poslední. 
+
+Mluvme o polích na chvilku. Pole jsou datové struktury, které drží více hodnot stejného typu. To se může hodit, když jsme k dispozici seznam čísel nebo řetězců. Jen nezapomeňte, že mají být stejného typu. Ve vědě o počítačích, my love počítání od nuly, takže si uvědomit, že pole jsou rovněž nulové indexovaný. Takže první prvek mé pole bude na indexu nula. Takže v tomto případě, když mám pole délky čtyři, pak poslední index Posledním prvkem mého pole je ve skutečnosti bude indexem tři, ne čtyři. Vzhledem k tomu, pamatujte, my začít počítat od nuly. 
+
+Zde je příklad toho, jak jste by mohlo vytvořit pole vlastní. Takže říci, chtěl jsem Store Můj tři nejoblíbenější jména psa. Pak bych vytvořit pole řetězců. Takže bych prohlásit typ, řetězec, a pak dal název pole, psi, a pak v těch náměstí držáky dal velikosti z array-- v tomto případě tři. 
+
+Takže můj první vstup se děje být psi na indexu nula, a že to bude Milo. Pak psi na indexu jednom bude praštěný, miláčku Mochi, a pak poslední entry, třetí vstup na indexu dva, bude roztomilý, sladký Elphie. Všimněte si, že formát pro vyplnění tohoto pole Je velmi podobné, jak byste mohli deklarovat jakoukoli jinou proměnnou kde Máte název proměnné následované hodnota, kterou chcete uložené v něm. Jediný rozdíl v Tento případ je, že vás mít na paměti, dát indexu hodnoty v hranatých závorkách. A tam Máme Tři oblíbené psy. 
+
+Ale běda, je čas vrátit se k císaři. Nezapomeňte, že správné použití pro The Uživatel se bude předáním nejen název programu ./caesar, ale také klíčem, že chtějí posunout Jejich plaintext tím. Tak, že znamená, že argc musí být dva. Musí vyhovět v two-- ne více, ne méně než dva argumenty příkazového řádku. 
+
+A teď, co argv? No, my už víme, že pole bude mít délku dvou, ale to, co je obsaženo v každém prvku? No, první element bude ./caesar, a pak další prvek bude obsahují klíč, který uživatel zadat. Teď, když to správně používány Pro využití Caesar, pak jdou k zadání čísla. Ale i když charakter že typ je číslo, to je datového typu string. 
+
+Jak tedy převést, že řetězec na celé číslo? Takže říct, že mám num, řetězec, obsahující řetězec 50. Pokud chci převést, že na celé číslo, pak jsem prostě deklarovat novou proměnnou, což celé číslo i, volá atoi. I projít ve svém řetězcové proměnné, num, a Pak jsem pak bude obsahovat číslo 50. Ujistěte se muže Stránky pro funkci atoi zkontrolovat, které knihovna je to v, stejně jako to, co se cení vrátí-li předán řetězec v neobsahuje všechna čísla. 
+
+Takže teď, že jsme dostali klíčem, dalším krokem je dostat holý od uživatele. Nyní to bude méně komplikované než navigování kolem příkazového řádku argumenty. Vše, co musíme udělat, je výzva Funkce getString vyzvat uživatele, čímž se získá us řetězec, ale pamatujte, zkontrolovat specifikace, jak chtít vyzvat uživatele za to. 
+
+Nyní se dostáváme k Srdcem problem-- Jak zašifrovat holý text. Tak za prvé, pojďme mluvit o tom, jak zašifrovat jeden znak v době, a pak se budeme zabývat otázkou, jak se iteraci přes celý holý. Napsal jsem nějaké pseudocode za problém Caesar. Povzbuzuji vás, abyste napsat svůj vlastní stejně. To nemusí vypadat totožný s důl, a to je v pořádku, ale dokud jako všeobecný princip je stejný. 
+
+První tři kroky jsme již učinili. Jsme dostali klíče od Argument příkazového řádku, jsme se obrátil ten klíč na celé číslo, a my jsme vyzvání uživatele k zadání holého textu že chtějí zašifrovat. Takže pak další velký kus je to, že pro každý znak V holého textu řetězci, pokud je to abecední, Chceme-li zachovat svého případu a posunout ji. Tím zachovat případ, co jsem znamenat, že všechny velkými písmeny dopisy by měly zůstat Horní pouzdro a malá písmena by měly zůstat malá písmena. Takže poté, co jsme se posunout ty, pak vytisknout ciphertext. 
+
+Zde jsou tři funkce, které jdou přijít vhod tohoto problému. Nezapomeňte, nahoře, když jsem dal Příkladem pro to je posun CS50? Uvědomte si, že 50 a vykřičník nezměnil? Jak tedy můžeme říci, zda jsme je třeba posunout dopis, nebo ne? No, "je alfa," pokud jste to znak projít, vrátí true, pokud je tento znak je písmeno a falešné jinak. Které vám pomohou s zachování kapitalizace jsou funkce "je horní "a" nižší ". 
+
+Tyto dvě funkce také vzít v jeden znak jako vstup a vrátí vám logickou, true nebo false V závislosti na tom, zda tento znak Je velká písmena nebo malá písmena. Vzhledem k tomu, "je horní" a "je nižší "jsou logické funkce, To znamená, že se vrátí vám logickou, můžete použít tyto ve svých podmínkách. Takže zde je úryvek kódu, který pouze vytiskne dopis, jestli je to velká písmena. Tak jsem deklaroval svou postavu Dopis má být verzálka zed a pak, pokud "je horní" se vrací pravda, pak jsem vytisknout ten dopis. 
+
+Vraťme se zpět k našemu jednoduchý příklad posunutí abecedy klíčem dvou, Jak jsme vlastně dostat, že do práce? No, ukázalo se, že znaky a celá čísla jsou velmi úzce souvisí. Každá postava má celočíselná hodnota spojená s tím nalezený v ASCII tabulce, kde ASCII každá postava má Zobrazí se hodnota. Takže an odpovídá velká písmena A na hodnotu ASCII 65 a malá písmena a až Hodnota ASCII 97. 
+
+Nebojte se podívat nahoru jakýkoliv ASCII tabulka on-line vidět tyto hodnoty pro sebe. Takže to, co to znamená, že můžeme mít charakter velká písmena A, přidat číslo dvě na něj, a pak se znak velká písmena C jako výsledek. To proto, že 65 let, ASCII hodnota kapitálové A plus 2, nám dává 67, což odpovídá charakteru velká písmena C. 
+
+Bohužel, věci nebude úplně tak jednoduché. Máme rovnici, která musíme vzít v úvahu. Zde nám říká, že i-té ciphertext písmeno odpovídá i-té holého textu dopis, plus key-- všechno, modulární 26. Proč je to tak? Vraťme se k našemu příkladu z předtím, kde kapitál A, a navíc 2, nám dává kapitálovou C. 
+
+Takže použití rovnice, která specifikace nám dává, Pak se pojďme kapitálu a 2 a mod, že 26 let. Takže kapitál A, když jsem ji v tyto jednoduché uvozovky, mi umožňuje zacházet jako celé číslo, tak, že umožňuje me vrci jeho ASCII hodnota 65. 65 a 2 je 67. 67 mod 26 nám dává 15, ale to není opravdu smysl, protože víme, že kapitál C ASCII hodnota je 67, ne 15. Tak jak jsme se smířit, že? 
+
+No, tady bych chtěl předpokládat Pojem abecedním indexu. Tak už jsme mluvili o tom, jak každá postava má svůj ASCII hodnotu, ale já bych rád řekl, dobře, pojďme přemýšlet o tom, každá postava má rovněž abecední rejstřík, kde A například, jako první písmeno v abecedě, má abecední rejstřík nula. Takže teď pojďme uplatňovat stejné rovnice jako dříve, ale za použití abecední rejstřík. 
+
+Tak je nulová, jak jsme definované. Takže pak brát nula plus dva, MOD 26, To jsou dva, mod 26, což nám dává dvě. A dobře, v rámci abecední rejstřík, C je třetí písmeno ve abeceda, aby odpovídalo do abecedního indexu dva. Zdá se tedy, že využití abecední rejstřík v tomto případě ve skutečnosti nám dává správný výsledek. 
+
+Takže teď pojďme zkontrolovat, zda rovnicí prací abecední rejstřík. abecední rejstřík Y je 24, protože Druhý na poslední písmeno v abecedě. Takže 24 a naše Klíčovým dvou nám dává 26. 26 mod 26 nám dává 0, což, naštěstí pro us, je abecední rejstřík pro A. Takže doufejme, že to stačí, že důkaz abecední rejstřík metoda funguje. Pokud tomu tak není, neváhejte vyzkoušet některé příklady sami. 
+
+Aby bylo možné správně zabalit kolem abecedy a aplikovat Caesar rovnice, pak víme, že musíme vypořádat s abecední indexy. Ale začneme s ASCII hodnot a teprve poté my potom převést do abecední rejstřík. Odtamtud, aby bylo možné tisknout, musíme vypořádat s hodnotami ASCII znovu. Takže musíme vymyslet, jak přejít z ASCII do abecední az abecedním na ASCII. 
+
+Tak Nechám na vás, abyste zjistili vzor mezi charakterem a jeho abecední index a jeho hodnota ASCII. Nyní si uvědomit, že ačkoliv toto právo tabulka na snímku zobrazuje velká písmena, jsme také muset zvážit, zda je či není jiný vzor platí Pro malými písmeny. 
+
+Takže teď, když jsme zjistili Jak posunout jeden znak, pak vše, co musíme udělat, je měřítko, které up jít v celé prostého textu. Takže holý text je řetězec. Naštěstí pro nás, řetězec je opravdu Jen řada postav, tak, aby se přístup každý znak z řetězce, vše, co musíte udělat, je použití pole notaci. Řekněme, že mám proměnnou typu string nazvaný "text = 'Toto je CS50." 
+
+Tak, aby se přistupovat každý znak, vše, co mám dělat s proměnná text říkat dobře, textu na indexu nula, že odpovídá kapitál T. Text na indexu jeden odpovídá malými písmeny h. Další užitečnou funkcí je Funkce délka řetězce. Takže projde v řetězci že funkce vrátí celé číslo, je délka tohoto řetězce. 
+
+Teď, když jsme mluvili o Všechny tyto různé prvky, pojďme dát je zase dohromady. Takže návrat k jedné mé pseudokódu kód nebo Váš pseudocode a projít a ujistit se, že vás vědět, jak se to dělá každý jednotlivý věc. Získání klíč pomocí argc a argv, otočením klíčku do celé číslo, je až i výzvou pro holého textu, getString, a pak iterace přes každý znak v holý text řetězec, zachování případ každého znaku a přesouvá tento znak klíčem, zajištění toho, že jste obal kolem abecedy, Nakonec tiskem dané ciphertext. Jmenuji se Amila, a to byl Caesar. 

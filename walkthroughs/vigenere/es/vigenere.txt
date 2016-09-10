@@ -1,0 +1,47 @@
+Zamyla Chan: Vamos a intensificar nuestros juego con el cifrado Vigenère. El cifrado Vigenère es muy similar al César, excepto en Caesar pasamos en un solo número entero como la llave. En Vigenére vamos para pasar de una palabra clave. Así que, si quería cambiar el texto cifrado es CS 50 por ohai, entonces eso significa que cada letra en ohai va a servir como la clave, y yo voy a lo largo del ciclo esa palabra clave para mi turno hacer que el texto cifrado mucho más difícil de descifrar. 
+
+¿Qué significa para cambiar por la palabra clave? Bueno, la palabra clave es una cadena en el que cada letra corresponde a algún cambio de número entero. Por lo tanto, la o corresponde a una clave de 14, h a una tecla de 7, a tiene una clave de 0, de manera que no cambiaría nada, y luego i tiene una clave de 8. 
+
+Decir que me encontré Vigenére A con el texto plano esto es así CS50, eso sería simplemente dar me una cadena sin cambios. Observe que esto es equivalente a César corriendo con una llave de cero. De hecho, se ejecuta Vigenére con cualquier carácter individual sería equivalente a correr César con el mismo número entero. 
+
+Muy bien, por lo que, desde que son tan similares que había realmente recomiendo que si quieren que usted puede copiar su Caesar código en el código Vigenére. Las cosas cambiarán, pero al menos usted tiene algunos columna vertebral que se puede trabajar con ellos. Debido a que el Todos son los mismos que queremos para obtener la clave, obtener el texto plano, encipher que el texto sin formato, y luego imprimir eso. 
+
+Al igual que César, la clave va a se ha pasado como la segunda línea de comandos argumentación contenida en el índice de argv 1, pero esta vez es diferente porque debe ser alfabético. Por lo tanto, tenemos que iterar sobre cada carácter único en esa tecla que el usuario pasó en, y asegurar que cada carácter es alfabético para continuar. 
+
+Una vez que hemos hecho esto, entonces tenemos puede obtener la cadena del usuario, tal como lo hicimos antes. Y ahora, llegamos al corazón del problema para Vigenére, que es igual que César, cómo averiguar el patrón de cifrado y la ecuación, y encipher todo el texto en claro. 
+
+Por lo tanto, se dará cuenta de que la ecuación para el cambio Vigenére es muy similar a la de César. La única diferencia es que en lugar de una sola variable k antes, ahora k tiene un subíndice, que indica la letra j-ésima de la llave. 
+
+Vamos a caminar a través de un ejemplo. Di que quieres pasar un secreto mensaje en su aplastamiento, me gusta usted. Bueno, para que su clave elegir algo que su saber aplastamiento sabe que le gusta, pandas. Muy bien, así que ¿cómo cambiamos esto? 
+
+Bueno, tenemos nuestro índice de texto plano. Eso es en la primera letra y por lo que es el índice de la llave que se encuentra en la p, la primera letra en nuestra palabra panda. Por lo tanto, el cambio que por p nos da x, a continuación, se avanza el índice de texto plano. Esto nos lleva a un espacio. Ahora, el carácter de espacio no es alfabético, lo que significa que, que acaba transferencias a derecha sobre el texto cifrado, ponemos un espacio allí, y no lo hacemos avanzar en el índice de la llave. Por lo tanto, todavía estamos en p en este punto. 
+
+Se avanza a la siguiente índice en nuestro texto plano. Y ahora, ya que es una carta, la l minúscula, nos desplazamos por la que índice siguiente en la llave. Lo cual es una, que es un cero desplazamiento de manera que solo se convierte un l en nuestro texto cifrado. A continuación, se avanza tanto el texto en claro, y el índice de clave porque es alfabético. Así que luego continuamos hasta llegar a la dirección de similares. 
+
+Muy bien, por lo que se dará cuenta en este señalar que, en términos de nuestro índice de clave, hemos llegado al final de la palabra panda, así que lo que sucede cuando se llega a la siguiente letra del alfabeto en el texto en claro? Bueno, todo lo que sucede es que envolver alrededor de al principio, para el primer índice de la llave. Por lo tanto, a continuación, nos desplazamos que Y por p para darnos n. Y entonces, seguimos terminando codificación nuestro texto plano para conseguir Noh x lvne. 
+
+A partir de este ejemplo, Demostramos que sólo avanzamos a la siguiente letra de la palabra clave si el personaje en texto sin formato es una carta por lo que el isalpha función será muy útil aquí. Y, al igual que en César, queremos preservar el caso, isupper y islower. Por lo tanto, añadir este poco en en su pseudocódigo. 
+
+Entonces, ¿cómo podemos averiguar los cambios clave? Bueno, si usted recuerda nuestra discusión en los índices alfabéticos en el Caesar problema, es muy similar. 
+
+Donde A corresponde a un ASCII valor de 65, pero un cambio de 0, y luego la última letra en el alfabeto, Z, corresponde a un desplazamiento de 25. Se dará cuenta de que el cambio es idéntico o no la letra es mayúscula o minúscula. 
+
+OK, así que ahora que usted saber cómo averiguar el cambio numérico que corresponde a un único carácter Volvamos a nuestra ecuación. Debido a que tenemos dos diferentes subíndices aquí, I y J, eso es un indicio de que queremos hacer un seguimiento tanto de nuestra posición en el texto llano así como nuestra posición en la palabra clave, Así que estos son dos variables independientes que queremos mantener una bodega de. 
+
+Ahora, la posición en la nuestra de texto claro va a aumentar cada vez, por lo que va a ser una poco más hacia adelante recta en oposición a la posición de la palabra clave, que sabemos que tiene que envolver alrededor, y, a veces de incremento, a veces siendo el mismo. Entonces, ¿cómo ponemos en práctica la funcionalidad para envolver alrededor de la Índice de la palabra clave? 
+
+Voy a usar el ejemplo, cuente. Contando es una forma popular para dividir a la gente en grupos. Decir que tenía 5 personas y quería dividirlas en tres grupos, bueno, entonces me gustaría empezar contando fuera. La primera persona lo haría dicen que soy número uno del equipo, la siguiente persona sería el número de equipo dos, el número del equipo tercera persona Tres. Ahora, lo único que quiero tres grupos por lo la cuarta persona haría realidad empezar por el principio y decir, bueno, yo soy número uno del equipo, así, y la siguiente persona sería el equipo número dos. Y, a partir de ahí, se puede entonces separar en sus grupos. 
+
+Entonces, ¿cómo podría yo utilizar módulo que me ayude a implementar Este recuento de reciclamiento de la función? Bueno, la primera persona número 1, mod 3 nos da 1. 2 mod 3 nos da 2, y 3 mod 3 nos da 0. 
+
+La cuarta persona, número 4, 3 mod nos da 1, y luego 5 mod 3 nos da 2. Por lo tanto, se dará cuenta de que a pesar de el número de personas que tengo aumenta, y está por encima 3, ya que estoy modding por 3 Siempre me dan los números 0, 1 y 2. Nunca consigo mayor que 3. Así pues, incluso si tuviera 10 personas, y todas estas personas todavía sería dentro de los grupos 1, 2, o 0. 
+
+Así que, ahora sabemos que si tenemos un grupo de 5 y nos mod todos los de 3, entonces nunca vamos a exceda los grupos 0, 1, o 2. Por lo tanto, nunca vamos a conseguir un grupo número que es igual a 3 o superior. Por lo tanto, incluso si añado otros cinco la gente, entonces todos ellos seguirían estando asignado a los grupos 0, 1, 2 o porque estoy modding por 3. Nunca voy a ser superior a la tapa. 
+
+OK, así que vamos a ver si podemos aplicar este concepto de la utilización de módulo para envolver alrededor de la números de grupo y aplicar a donde queremos Vigenère utilizar para envolver alrededor de módulo el índice de la palabra clave. A pesar de que estamos incrementando el índice que siempre querrá asegurarse de que siempre envolver al principio sin exceder nunca el longitud de la cadena. 
+
+OK, así que sé que podría ser un poco abrumador. Hay mucho más que hacer en este juego p. Por lo tanto, asegúrese de que escriba una buena pseudocódigo para usted que entiende y que hace el trabajo. Tratar de hacer frente a todas las sola línea independiente averiguar todos los pequeños pequeñas piezas del rompecabezas antes de ponerlo juntos. 
+
+Asegúrese de que usted puede conseguir la llave de la línea de comandos y asegúrese de que es alfabético, obtener el texto plano del usuario, y luego en el cifrado, asegúrese saber cómo cifrar una sola letra, y luego progresar a toda la cadena de con toda la envoltura alrededor de funciones. Por último, se puede imprimir el texto cifrado. 
+
+Mi nombre es un Zamyla, y esto fue Vigenére. 

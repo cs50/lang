@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Mari kita langkah terperinci yang
+permainan dengan cipher Vigenere itu.
+
+3
+00:00:04,030 --> 00:00:06,710
+The Vigenere cipher adalah
+hampir sama dengan Caesar,
+
+4
+00:00:06,710 --> 00:00:11,060
+kecuali dalam Caesar kami diluluskan pada
+integer tunggal sebagai utama kami.
+
+5
+00:00:11,060 --> 00:00:14,100
+Dalam Vigenere kita akan
+lulus dalam kata kunci.
+
+6
+00:00:14,100 --> 00:00:19,400
+Jadi, jika saya mahu beralih
+tulisan rahsia ini adalah CS 50 oleh ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+maka itu bermakna bahawa setiap huruf dalam
+ohai akan menjadi kunci,
+
+8
+00:00:23,260 --> 00:00:27,160
+dan saya akan kitaran lebih
+kata kunci untuk peralihan saya
+
+9
+00:00:27,160 --> 00:00:31,930
+membuat tulisan rahsia
+lebih sukar untuk memecahkan kod.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Apa yang ia bermaksud untuk
+beralih dengan kata kunci?
+
+11
+00:00:34,540 --> 00:00:38,610
+Well, kata kunci adalah rentetan
+di mana setiap huruf sepadan
+
+12
+00:00:38,610 --> 00:00:41,080
+kepada beberapa anjakan integer.
+
+13
+00:00:41,080 --> 00:00:49,310
+Jadi, o sepadan dengan kunci 14 tahun,
+h kepada kekunci 7, yang mempunyai kunci 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+supaya tidak akan mengubah apa-apa,
+dan kemudian saya mempunyai kunci 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Katakanlah saya berlari Vigenere A dengan
+teks biasa ini adalah CS50 baik,
+
+16
+00:01:00,000 --> 00:01:02,800
+yang hanya akan memberi
+saya rentetan tidak berubah.
+
+17
+00:01:02,800 --> 00:01:08,170
+Perhatikan bahawa ini adalah bersamaan dengan
+berjalan Caesar dengan kunci sifar.
+
+18
+00:01:08,170 --> 00:01:12,070
+Malah, Vigenere berjalan
+dengan mana-mana aksara tunggal
+
+19
+00:01:12,070 --> 00:01:17,070
+akan bersamaan dengan berjalan
+Caesar dengan integer yang sama.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Baiklah, jadi, kerana
+mereka begitu serupa I'da
+
+21
+00:01:20,400 --> 00:01:24,300
+sebenarnya mencadangkan bahawa jika anda
+mahu anda hanya boleh menyalin Caesar anda
+
+22
+00:01:24,300 --> 00:01:26,932
+kod ke kod Vigenere anda.
+
+23
+00:01:26,932 --> 00:01:28,640
+Perkara akan berubah,
+tetapi sekurang-kurangnya anda mempunyai
+
+24
+00:01:28,640 --> 00:01:31,110
+beberapa tulang belakang yang anda boleh bekerja dengan.
+
+25
+00:01:31,110 --> 00:01:36,410
+Kerana Semua adalah sama kita mahu
+untuk mendapatkan kunci, dapatkan teks biasa,
+
+26
+00:01:36,410 --> 00:01:40,690
+menulis dlm kod yang teks biasa,
+dan kemudian mencetak yang keluar.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Sama seperti Caesar kunci akan
+diluluskan sebagai baris arahan kedua
+
+28
+00:01:44,980 --> 00:01:50,540
+hujah yang terkandung dalam indeks argv
+1, tetapi ia berbeza kali ini
+
+29
+00:01:50,540 --> 00:01:52,560
+kerana ia mesti mengikut abjad.
+
+30
+00:01:52,560 --> 00:01:56,390
+Jadi, kita perlu untuk melelar atas setiap
+aksara tunggal dalam utama yang
+
+31
+00:01:56,390 --> 00:02:00,800
+bahawa pengguna diluluskan pada, dan memastikan
+bahawa setiap watak adalah abjad
+
+32
+00:02:00,800 --> 00:02:02,800
+untuk terus.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Apabila kami telah melakukan itu, maka kita
+boleh mendapatkan rentetan daripada pengguna,
+
+34
+00:02:05,560 --> 00:02:07,560
+seperti yang kita lakukan sebelum ini.
+
+35
+00:02:07,560 --> 00:02:10,520
+Dan kini, kami datang ke jantung
+daripada masalah untuk Vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+yang hanya seperti Caesar, bagaimana untuk
+memikirkan corak enciphering yang
+
+37
+00:02:14,665 --> 00:02:19,760
+dan persamaan, dan menulis dlm kod
+keseluruhan plaintext itu.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Jadi, anda akan notis bahawa
+persamaan untuk shift Vigenere yang
+
+39
+00:02:23,280 --> 00:02:25,610
+adalah sangat serupa dengan Caesar.
+
+40
+00:02:25,610 --> 00:02:29,780
+Satu-satunya perbezaan adalah bahawa
+bukannya k pembolehubah tunggal
+
+41
+00:02:29,780 --> 00:02:37,270
+sebelum ini, kini k mempunyai subskrip a,
+menunjukkan surat-j kunci.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Mari kita berjalan melalui contoh.
+
+43
+00:02:39,560 --> 00:02:43,830
+Katakanlah anda mahu untuk lulus rahsia
+mesej ke menghancurkan anda, saya suka anda.
+
+44
+00:02:43,830 --> 00:02:46,325
+Nah, untuk kunci anda, anda
+memilih sesuatu yang anda
+
+45
+00:02:46,325 --> 00:02:49,790
+tahu menghancurkan tahu bahawa anda suka, panda.
+
+46
+00:02:49,790 --> 00:02:52,290
+Baiklah, jadi bagaimana kita beralih ini?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Nah, kita mempunyai indeks plaintext kami.
+
+48
+00:02:55,500 --> 00:02:59,160
+Itulah di huruf pertama dan
+begitu juga dengan indeks utama kami
+
+49
+00:02:59,160 --> 00:03:02,830
+iaitu pada p, yang pertama
+huruf dalam perkataan panda kami.
+
+50
+00:03:02,830 --> 00:03:08,590
+Jadi, beralih saya oleh p memberikan kita x,
+maka kita memajukan indeks plaintext.
+
+51
+00:03:08,590 --> 00:03:10,460
+Ini mendapat kita ke ruang.
+
+52
+00:03:10,460 --> 00:03:13,540
+Sekarang, aksara ruang
+adalah bukan abjad,
+
+53
+00:03:13,540 --> 00:03:16,930
+jadi ini bermakna bahawa, yang hanya
+pemindahan hak kepada tulisan rahsia,
+
+54
+00:03:16,930 --> 00:03:23,430
+kita supaya ada jarak di sana, dan kita tidak
+memajukan indeks utama kami.
+
+55
+00:03:23,430 --> 00:03:25,820
+Jadi, kami masih di p pada ketika ini.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Kita maju ke depan
+indeks dalam plaintext kami.
+
+57
+00:03:30,130 --> 00:03:34,030
+Dan sekarang, kerana itu adalah
+surat, huruf kecil l,
+
+58
+00:03:34,030 --> 00:03:37,920
+kita beralih itu oleh
+indeks seterusnya di utama kami.
+
+59
+00:03:37,920 --> 00:03:42,360
+Yang merupakan, yang sifar
+anjakan supaya hanya menjadi
+
+60
+00:03:42,360 --> 00:03:44,370
+yang l dalam tulisan rahsia kami.
+
+61
+00:03:44,370 --> 00:03:51,120
+Kemudian, kami memajukan kedua-dua plaintext, dan
+indeks utama kerana ia adalah abjad.
+
+62
+00:03:51,120 --> 00:03:56,210
+Sebab itu kami terus yang
+sehingga kita sampai ke e dalam seperti.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Baiklah, jadi anda akan melihat di ini
+menunjukkan bahawa, dari segi indeks utama kami,
+
+64
+00:04:01,090 --> 00:04:03,940
+kami telah sampai ke penghujung
+perkataan panda, jadi apa
+
+65
+00:04:03,940 --> 00:04:08,750
+yang berlaku apabila kita mendapatkan ke depan
+surat abjad dalam plaintext itu?
+
+66
+00:04:08,750 --> 00:04:12,180
+Well, semua yang berlaku adalah kita
+membungkus untuk permulaan,
+
+67
+00:04:12,180 --> 00:04:14,710
+kepada indeks pertama utama kami.
+
+68
+00:04:14,710 --> 00:04:19,570
+Oleh itu, maka kita beralih yang
+y oleh p untuk memberi kita n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Dan kemudian, kami terus menamatkan pengekodan
+plaintext kami untuk mendapatkan x lvne noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Dari contoh ini, saya
+menunjukkan bahawa kita hanya memajukan
+
+71
+00:04:29,300 --> 00:04:33,140
+ke huruf seterusnya dalam kata kunci
+jika watak dalam teks biasa
+
+72
+00:04:33,140 --> 00:04:37,480
+adalah surat supaya isalpha yang
+fungsi akan sangat berguna di sini.
+
+73
+00:04:37,480 --> 00:04:43,030
+Dan, seperti dalam Caesar, kita mahu
+memelihara kes, isupper dan islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Jadi, tambah sedikit ini
+dalam ke dalam pseudokod anda.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Jadi bagaimana kita memikirkan perubahan utama?
+
+76
+00:04:48,510 --> 00:04:53,030
+Nah, jika anda masih ingat perbincangan kita
+pada indeks abjad di Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+masalah, ia adalah hampir sama.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Di mana A sepadan dengan ASCII yang
+nilai 65 tetapi anjakan 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+dan kemudian huruf terakhir
+dalam abjad, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+sepadan dengan peralihan 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Anda akan melihat bahawa peralihan
+adalah sama sama ada atau tidak
+
+82
+00:05:10,320 --> 00:05:14,880
+surat itu huruf besar atau huruf kecil.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, jadi sekarang anda
+tahu bagaimana untuk memikirkan
+
+84
+00:05:17,700 --> 00:05:21,470
+peralihan berangka yang
+sepadan dengan aksara tunggal
+
+85
+00:05:21,470 --> 00:05:24,050
+mari kita kembali kepada persamaan kita.
+
+86
+00:05:24,050 --> 00:05:28,180
+Kerana kita mempunyai dua yang berbeza
+subskrip sini, i dan j,
+
+87
+00:05:28,180 --> 00:05:32,130
+itulah tanda-tanda yang kita mahu untuk mengesan
+kedua-dua kedudukan kami dalam plaintext yang
+
+88
+00:05:32,130 --> 00:05:36,600
+serta kedudukan kami dalam kata kunci,
+jadi mereka adalah dua pembolehubah berasingan
+
+89
+00:05:36,600 --> 00:05:39,010
+yang kita mahu menyimpan memegang.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Sekarang, kedudukan dalam plaintext kami
+akan meningkat setiap masa,
+
+91
+00:05:42,580 --> 00:05:45,530
+supaya akan menjadi
+sedikit lebih lurus ke hadapan
+
+92
+00:05:45,530 --> 00:05:49,750
+yang bertentangan dengan kedudukan kata kunci,
+yang kita tahu mempunyai untuk membalut di sekeliling,
+
+93
+00:05:49,750 --> 00:05:52,910
+dan kadang-kadang kenaikan,
+kadang-kadang tetap sama.
+
+94
+00:05:52,910 --> 00:05:55,430
+Jadi, bagaimana kita melaksanakan
+fungsi yang
+
+95
+00:05:55,430 --> 00:05:59,820
+untuk membalut di sekitar
+indeks kata kunci?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Saya akan menggunakan mengira off contoh.
+
+97
+00:06:01,640 --> 00:06:06,100
+Mengira off adalah cara yang popular
+untuk berpecah orang ke dalam kumpulan.
+
+98
+00:06:06,100 --> 00:06:10,660
+Katakanlah saya mempunyai 5 orang dan saya mahu
+berpecah mereka kepada tiga kumpulan,
+
+99
+00:06:10,660 --> 00:06:13,640
+baik maka saya akan memulakan dengan mengira off.
+
+100
+00:06:13,640 --> 00:06:16,980
+Orang pertama akan
+mengatakan saya jumlah pasukan satu,
+
+101
+00:06:16,980 --> 00:06:21,030
+orang yang akan datang akan menjadi nombor pasukan
+dua, bilangan pasukan orang ketiga
+
+102
+00:06:21,030 --> 00:06:21,910
+tiga.
+
+103
+00:06:21,910 --> 00:06:25,910
+Sekarang, saya hanya mahu tiga kumpulan supaya
+orang yang keempat akan sebenarnya
+
+104
+00:06:25,910 --> 00:06:30,160
+bermula pada awal dan berkata,
+baik, saya jumlah pasukan satu juga,
+
+105
+00:06:30,160 --> 00:06:32,890
+dan orang yang akan datang
+akan menjadi nombor pasukan dua.
+
+106
+00:06:32,890 --> 00:06:37,660
+Dan, dari sana, mereka boleh kemudian
+memisahkan ke dalam kumpulan mereka.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Jadi, bagaimana saya boleh menggunakan modulo
+untuk membantu saya melaksanakan
+
+108
+00:06:41,130 --> 00:06:44,160
+ini mengira off bungkus sekitar fungsi?
+
+109
+00:06:44,160 --> 00:06:50,140
+Well, orang pertama
+nombor 1, mod 3 memberikan kita 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 memberikan kita 2,
+dan 3 mod 3 memberikan kita 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Orang keempat, nombor 4, 3 mod
+memberikan kita 1, dan kemudian 5 mod 3 memberikan kita 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Jadi, anda akan melihat bahawa walaupun
+bilangan orang yang saya ada
+
+113
+00:07:05,370 --> 00:07:11,210
+meningkat, dan di atas
+3, kerana saya modding oleh 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Saya sentiasa mendapat nombor 0, 1, dan 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Saya tidak pernah mendapatkan yang lebih besar daripada 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Sebab itu, walaupun saya mempunyai 10
+orang, maka semua orang-orang
+
+117
+00:07:22,630 --> 00:07:27,430
+masih lagi dalam kumpulan 1, 2, atau 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Jadi, sekarang kita tahu bahawa jika kita mempunyai kumpulan
+5 dan kita MOD semua orang-orang dengan 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+maka kita tidak akan
+melebihi kumpulan 0, 1, atau 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Jadi, kami tidak akan mendapat satu kumpulan
+nombor itu sama dengan 3 atau lebih.
+
+121
+00:07:43,430 --> 00:07:46,980
+Jadi, walaupun saya menambah lima lagi
+orang, maka semua daripada mereka
+
+122
+00:07:46,980 --> 00:07:53,150
+masih akan diberikan kepada kumpulan
+0, 1, atau 2 kerana saya modding oleh 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Saya tidak akan melebihi had itu.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, jadi mari kita lihat jika kita boleh memohon
+konsep ini menggunakan modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+untuk membalut di sekitar
+nombor kumpulan dan memohon
+
+126
+00:08:03,710 --> 00:08:08,000
+kepada Vigenère mana kita mahu
+untuk menggunakan modulo untuk membungkus
+
+127
+00:08:08,000 --> 00:08:10,220
+indeks kata kunci.
+
+128
+00:08:10,220 --> 00:08:12,830
+Walaupun kami menokok
+indeks kita sentiasa
+
+129
+00:08:12,830 --> 00:08:17,260
+ingin memastikan bahawa kita sentiasa
+membungkus untuk awal-awal lagi
+
+130
+00:08:17,260 --> 00:08:20,050
+tidak melebihi
+panjang tali.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, jadi saya tahu ia mungkin
+sedikit hangat.
+
+132
+00:08:23,510 --> 00:08:26,670
+Ada banyak lagi yang perlu dilakukan dalam p set ini.
+
+133
+00:08:26,670 --> 00:08:30,050
+Jadi, pastikan anda menulis
+yang pseudokod baik untuk diri sendiri
+
+134
+00:08:30,050 --> 00:08:32,870
+bahawa anda memahami dan
+yang mendapat pekerjaan yang dilakukan.
+
+135
+00:08:32,870 --> 00:08:35,580
+Cuba dan menangani setiap
+baris bebas
+
+136
+00:08:35,580 --> 00:08:38,370
+memikirkan semua sedikit
+kepingan kecil teka-teki
+
+137
+00:08:38,370 --> 00:08:40,260
+sebelum meletakkan bersama-sama.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Pastikan bahawa anda boleh mendapatkan
+kunci daripada baris arahan
+
+139
+00:08:43,110 --> 00:08:46,780
+dan memastikan bahawa ia adalah abjad,
+mendapatkan teks biasa daripada pengguna,
+
+140
+00:08:46,780 --> 00:08:51,010
+dan kemudian di enciphering, pastikan anda
+tahu bagaimana untuk menulis dlm kod satu huruf,
+
+141
+00:08:51,010 --> 00:08:56,130
+dan kemudian maju ke seluruh tali
+dengan semua bungkus sekitar fungsi.
+
+142
+00:08:56,130 --> 00:08:59,610
+Akhir sekali, anda boleh mencetak tulisan rahsia.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Nama saya ialah Zamyla,
+dan ini adalah Vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

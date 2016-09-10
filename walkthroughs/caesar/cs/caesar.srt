@@ -1,0 +1,1140 @@
+1
+00:00:00,000 --> 00:00:00,760
+
+2
+00:00:00,760 --> 00:00:02,270
+>> Amila: Pojďme řešit Caesara.
+
+3
+00:00:02,270 --> 00:00:06,110
+V Caesar, necháme uživateli
+zakódovat tajnou zprávu.
+
+4
+00:00:06,110 --> 00:00:09,780
+Takže pojďme se rovnou dovnitř a hledat
+u našich TO-DOS tohoto problému.
+
+5
+00:00:09,780 --> 00:00:12,210
+Takže první, dostaneme klíč od uživatele.
+
+6
+00:00:12,210 --> 00:00:15,210
+Pak dostaneme holý text
+že chtějí kódovat.
+
+7
+00:00:15,210 --> 00:00:21,380
+Za to, že jsme to zašifrovat pro ně,
+a nakonec jsme tisknout jejich ciphertext.
+
+8
+00:00:21,380 --> 00:00:23,600
+>> Takže začněme s příkladem.
+
+9
+00:00:23,600 --> 00:00:26,920
+Řekněme, že jste chtěli zakódovat
+Celá abeceda s klíčem dva.
+
+10
+00:00:26,920 --> 00:00:31,360
+Tak by celá vaše abeceda
+jen se přesunul na dopisy.
+
+11
+00:00:31,360 --> 00:00:37,060
+Tak by se kódovat C, B
+D, C až E, a tak dále a tak dále,
+
+12
+00:00:37,060 --> 00:00:42,470
+až se dostanete k X, která kóduje od A do Z
+nebo zed, v závislosti na tom, kde jste od.
+
+13
+00:00:42,470 --> 00:00:47,445
+Pak Y by pak posunout celou cestu,
+zábal kolem abecedy se dostat do A,
+
+14
+00:00:47,445 --> 00:00:53,256
+a pak konečně poslední písmeno
+abeceda, Z, zed, bude kódovat do bodu B.
+
+15
+00:00:53,256 --> 00:00:54,660
+>> Je to jasné?
+
+16
+00:00:54,660 --> 00:00:56,380
+Podívejme se na některé příklady.
+
+17
+00:00:56,380 --> 00:01:00,540
+Prvním příkladem je velmi podobná
+s tím, co jsme právě vysvětleno výše.
+
+18
+00:01:00,540 --> 00:01:05,560
+Takže když jsem zakódovat nějaký úsek
+abeceda, A až L, klíčem dvou,
+
+19
+00:01:05,560 --> 00:01:09,760
+Pak jsem jen dostat svou celokrajné
+abeceda posunul dva dopisy.
+
+20
+00:01:09,760 --> 00:01:12,230
+>> Pak, v mém dalším příkladu,
+klíč je stále dva,
+
+21
+00:01:12,230 --> 00:01:15,080
+takže byste měli ještě vědět
+který dopisy očekávat.
+
+22
+00:01:15,080 --> 00:01:16,400
+Ale tady je to fráze.
+
+23
+00:01:16,400 --> 00:01:18,100
+To je CS50.
+
+24
+00:01:18,100 --> 00:01:21,090
+Takže si všimnete, že já
+zachovat případ mých dopisů,
+
+25
+00:01:21,090 --> 00:01:25,600
+takže jakékoliv velká písmena jsou také
+velká písmena v ciphertext.
+
+26
+00:01:25,600 --> 00:01:27,800
+A jakákoli malá písmena
+dopisů v holém textu
+
+27
+00:01:27,800 --> 00:01:30,640
+jsou také malá písmena
+Písmena v ciphertext.
+
+28
+00:01:30,640 --> 00:01:34,020
+Ale pořád písmena
+a případné vykřičníky
+
+29
+00:01:34,020 --> 00:01:37,610
+nebo jakékoli jiné interpunkce stejné.
+
+30
+00:01:37,610 --> 00:01:40,360
+>> Takže teď, že máme pocit
+za to, jak program funguje,
+
+31
+00:01:40,360 --> 00:01:43,890
+neváhejte jít běžet něco víc
+příklady své vlastní, pokud si budete přát.
+
+32
+00:01:43,890 --> 00:01:47,072
+Začněme s dostat
+klíč od uživatele.
+
+33
+00:01:47,072 --> 00:01:48,780
+Tradičně, s
+další problémy, máme
+
+34
+00:01:48,780 --> 00:01:51,450
+byli zvyklí na získání
+jakákoli čísla, která my
+
+35
+00:01:51,450 --> 00:01:54,710
+Potřebujete tím vyzvání uživatele
+s funkcí getint.
+
+36
+00:01:54,710 --> 00:01:58,850
+Ale tentokrát jsme vlastně děje
+používat příkazový řádek argumentu
+
+37
+00:01:58,850 --> 00:02:01,760
+a nová funkce nazvaná atoi.
+
+38
+00:02:01,760 --> 00:02:05,130
+>> Při spuštění hlavního
+Program v C, pak se
+
+39
+00:02:05,130 --> 00:02:08,500
+se ve dvou parameters--
+int argc, který
+
+40
+00:02:08,500 --> 00:02:11,670
+je počet argumentů
+prošel v roce, a poté
+
+41
+00:02:11,670 --> 00:02:15,920
+argv, pole řetězců, které obsahují
+seznam všech argumentů
+
+42
+00:02:15,920 --> 00:02:16,740
+prošel.
+
+43
+00:02:16,740 --> 00:02:19,740
+Nemusíte mít explicitně
+deklarovat tyto proměnné.
+
+44
+00:02:19,740 --> 00:02:22,700
+Jsou vypočítány pro
+jste kompilátorem.
+
+45
+00:02:22,700 --> 00:02:28,160
+Správné využití pro to by bylo
+Pro argc být dvě v tomto případě,
+
+46
+00:02:28,160 --> 00:02:32,630
+protože uživatel musí předat
+hovor s programem, ./caesar,
+
+47
+00:02:32,630 --> 00:02:35,570
+a klíč,
+bez ohledu na počet chtějí.
+
+48
+00:02:35,570 --> 00:02:39,920
+Tak, že znamená, že musí být dva argc
+K tomu, aby platnou použití Caesar
+
+49
+00:02:39,920 --> 00:02:41,680
+které mají být provedeny.
+
+50
+00:02:41,680 --> 00:02:43,590
+>> Takže pojďme se podívat na příklad.
+
+51
+00:02:43,590 --> 00:02:47,760
+Řekněme, že jsem už napsal a
+sestavili program s názvem odpálení.
+
+52
+00:02:47,760 --> 00:02:52,670
+Takže když jsem běžel do příkazového řádku
+./blastoff Team Rocket, dobře, pak,
+
+53
+00:02:52,670 --> 00:02:57,750
+argc by měly být tři, protože jsem
+prošel ve třech různých argumentů.
+
+54
+00:02:57,750 --> 00:02:59,830
+Pak argv bude vypadat takto.
+
+55
+00:02:59,830 --> 00:03:03,750
+Je to pole, a to by
+obsahuje každou ze tří řetězců.
+
+56
+00:03:03,750 --> 00:03:09,640
+./blastoff v prvním indexu, týmu
+v příštím, a rakety v poslední.
+
+57
+00:03:09,640 --> 00:03:11,610
+>> Mluvme o polích na chvilku.
+
+58
+00:03:11,610 --> 00:03:15,560
+Pole jsou datové struktury, které drží
+více hodnot stejného typu.
+
+59
+00:03:15,560 --> 00:03:19,980
+To se může hodit, když jsme
+k dispozici seznam čísel nebo řetězců.
+
+60
+00:03:19,980 --> 00:03:23,030
+Jen nezapomeňte, že mají
+být stejného typu.
+
+61
+00:03:23,030 --> 00:03:25,310
+Ve vědě o počítačích, my
+love počítání od nuly,
+
+62
+00:03:25,310 --> 00:03:29,260
+takže si uvědomit, že pole
+jsou rovněž nulové indexovaný.
+
+63
+00:03:29,260 --> 00:03:34,360
+Takže první prvek mé pole
+bude na indexu nula.
+
+64
+00:03:34,360 --> 00:03:37,580
+Takže v tomto případě, když mám
+pole délky čtyři,
+
+65
+00:03:37,580 --> 00:03:41,350
+pak poslední index
+Posledním prvkem mého pole
+
+66
+00:03:41,350 --> 00:03:44,970
+je ve skutečnosti bude
+indexem tři, ne čtyři.
+
+67
+00:03:44,970 --> 00:03:48,880
+Vzhledem k tomu, pamatujte, my
+začít počítat od nuly.
+
+68
+00:03:48,880 --> 00:03:52,530
+>> Zde je příklad toho, jak jste
+by mohlo vytvořit pole vlastní.
+
+69
+00:03:52,530 --> 00:03:56,440
+Takže říci, chtěl jsem Store Můj
+tři nejoblíbenější jména psa.
+
+70
+00:03:56,440 --> 00:03:59,030
+Pak bych vytvořit pole řetězců.
+
+71
+00:03:59,030 --> 00:04:04,450
+Takže bych prohlásit typ, řetězec, a
+pak dal název pole, psi,
+
+72
+00:04:04,450 --> 00:04:06,450
+a pak v těch náměstí
+držáky dal velikosti
+
+73
+00:04:06,450 --> 00:04:09,260
+z array-- v tomto případě tři.
+
+74
+00:04:09,260 --> 00:04:12,690
+>> Takže můj první vstup se děje
+být psi na indexu nula,
+
+75
+00:04:12,690 --> 00:04:14,750
+a že to bude Milo.
+
+76
+00:04:14,750 --> 00:04:17,850
+Pak psi na indexu jednom
+bude praštěný,
+
+77
+00:04:17,850 --> 00:04:23,060
+miláčku Mochi, a pak poslední
+entry, třetí vstup na indexu dva,
+
+78
+00:04:23,060 --> 00:04:26,130
+bude roztomilý, sladký Elphie.
+
+79
+00:04:26,130 --> 00:04:28,610
+Všimněte si, že formát
+pro vyplnění tohoto pole
+
+80
+00:04:28,610 --> 00:04:32,150
+Je velmi podobné, jak byste mohli
+deklarovat jakoukoli jinou proměnnou kde
+
+81
+00:04:32,150 --> 00:04:36,307
+Máte název proměnné následované
+hodnota, kterou chcete uložené v něm.
+
+82
+00:04:36,307 --> 00:04:38,140
+Jediný rozdíl v
+Tento případ je, že vás
+
+83
+00:04:38,140 --> 00:04:42,700
+mít na paměti, dát indexu
+hodnoty v hranatých závorkách.
+
+84
+00:04:42,700 --> 00:04:46,420
+A tam Máme
+Tři oblíbené psy.
+
+85
+00:04:46,420 --> 00:04:48,780
+>> Ale běda, je čas
+vrátit se k císaři.
+
+86
+00:04:48,780 --> 00:04:52,910
+Nezapomeňte, že správné použití pro The
+Uživatel se bude předáním nejen
+
+87
+00:04:52,910 --> 00:04:57,430
+název programu ./caesar, ale
+také klíčem, že chtějí posunout
+
+88
+00:04:57,430 --> 00:04:58,850
+Jejich plaintext tím.
+
+89
+00:04:58,850 --> 00:05:01,540
+Tak, že znamená, že argc musí být dva.
+
+90
+00:05:01,540 --> 00:05:07,580
+Musí vyhovět v two-- ne více, ne
+méně než dva argumenty příkazového řádku.
+
+91
+00:05:07,580 --> 00:05:09,050
+>> A teď, co argv?
+
+92
+00:05:09,050 --> 00:05:12,880
+No, my už víme, že
+pole bude mít délku dvou,
+
+93
+00:05:12,880 --> 00:05:15,270
+ale to, co je obsaženo v každém prvku?
+
+94
+00:05:15,270 --> 00:05:19,330
+No, první element
+bude ./caesar,
+
+95
+00:05:19,330 --> 00:05:24,190
+a pak další prvek bude
+obsahují klíč, který uživatel zadat.
+
+96
+00:05:24,190 --> 00:05:27,480
+Teď, když to správně používány
+Pro využití Caesar,
+
+97
+00:05:27,480 --> 00:05:29,350
+pak jdou k zadání čísla.
+
+98
+00:05:29,350 --> 00:05:33,260
+Ale i když charakter
+že typ je číslo,
+
+99
+00:05:33,260 --> 00:05:35,790
+to je datového typu string.
+
+100
+00:05:35,790 --> 00:05:40,390
+>> Jak tedy převést, že
+řetězec na celé číslo?
+
+101
+00:05:40,390 --> 00:05:46,680
+Takže říct, že mám num, řetězec,
+obsahující řetězec 50.
+
+102
+00:05:46,680 --> 00:05:49,000
+Pokud chci převést, že
+na celé číslo, pak jsem prostě
+
+103
+00:05:49,000 --> 00:05:53,340
+deklarovat novou proměnnou, což
+celé číslo i, volá atoi.
+
+104
+00:05:53,340 --> 00:06:01,160
+I projít ve svém řetězcové proměnné, num, a
+Pak jsem pak bude obsahovat číslo 50.
+
+105
+00:06:01,160 --> 00:06:04,350
+Ujistěte se muže
+Stránky pro funkci atoi
+
+106
+00:06:04,350 --> 00:06:07,990
+zkontrolovat, které knihovna je to
+v, stejně jako to, co se cení
+
+107
+00:06:07,990 --> 00:06:14,550
+vrátí-li předán řetězec
+v neobsahuje všechna čísla.
+
+108
+00:06:14,550 --> 00:06:16,950
+>> Takže teď, že jsme dostali
+klíčem, dalším krokem
+
+109
+00:06:16,950 --> 00:06:19,430
+je dostat holý od uživatele.
+
+110
+00:06:19,430 --> 00:06:21,170
+Nyní to bude
+méně komplikované
+
+111
+00:06:21,170 --> 00:06:23,410
+než navigování kolem
+příkazového řádku argumenty.
+
+112
+00:06:23,410 --> 00:06:26,190
+Vše, co musíme udělat, je výzva
+Funkce getString
+
+113
+00:06:26,190 --> 00:06:29,660
+vyzvat uživatele, čímž se získá
+us řetězec, ale pamatujte,
+
+114
+00:06:29,660 --> 00:06:34,090
+zkontrolovat specifikace, jak
+chtít vyzvat uživatele za to.
+
+115
+00:06:34,090 --> 00:06:36,420
+>> Nyní se dostáváme k
+Srdcem problem--
+
+116
+00:06:36,420 --> 00:06:38,860
+Jak zašifrovat holý text.
+
+117
+00:06:38,860 --> 00:06:42,830
+Tak za prvé, pojďme mluvit o tom, jak
+zašifrovat jeden znak v době,
+
+118
+00:06:42,830 --> 00:06:47,370
+a pak se budeme zabývat otázkou, jak se
+iteraci přes celý holý.
+
+119
+00:06:47,370 --> 00:06:50,440
+Napsal jsem nějaké pseudocode
+za problém Caesar.
+
+120
+00:06:50,440 --> 00:06:52,310
+Povzbuzuji vás, abyste
+napsat svůj vlastní stejně.
+
+121
+00:06:52,310 --> 00:06:55,900
+To nemusí vypadat totožný s
+důl, a to je v pořádku, ale dokud
+
+122
+00:06:55,900 --> 00:06:58,640
+jako všeobecný princip je stejný.
+
+123
+00:06:58,640 --> 00:07:00,780
+>> První tři kroky
+jsme již učinili.
+
+124
+00:07:00,780 --> 00:07:03,100
+Jsme dostali klíče od
+Argument příkazového řádku,
+
+125
+00:07:03,100 --> 00:07:05,510
+jsme se obrátil ten klíč
+na celé číslo, a my jsme
+
+126
+00:07:05,510 --> 00:07:09,320
+vyzvání uživatele k zadání holého textu
+že chtějí zašifrovat.
+
+127
+00:07:09,320 --> 00:07:12,420
+Takže pak další velký kus
+je to, že pro každý znak
+
+128
+00:07:12,420 --> 00:07:15,070
+V holého textu řetězci,
+pokud je to abecední,
+
+129
+00:07:15,070 --> 00:07:17,750
+Chceme-li zachovat
+svého případu a posunout ji.
+
+130
+00:07:17,750 --> 00:07:20,900
+Tím zachovat případ, co jsem
+znamenat, že všechny velkými písmeny
+
+131
+00:07:20,900 --> 00:07:23,580
+dopisy by měly zůstat Horní
+pouzdro a malá písmena
+
+132
+00:07:23,580 --> 00:07:25,640
+by měly zůstat malá písmena.
+
+133
+00:07:25,640 --> 00:07:29,110
+Takže poté, co jsme se posunout ty,
+pak vytisknout ciphertext.
+
+134
+00:07:29,110 --> 00:07:33,100
+>> Zde jsou tři funkce, které jdou
+přijít vhod tohoto problému.
+
+135
+00:07:33,100 --> 00:07:38,010
+Nezapomeňte, nahoře, když jsem dal
+Příkladem pro to je posun CS50?
+
+136
+00:07:38,010 --> 00:07:41,800
+Uvědomte si, že 50 a
+vykřičník nezměnil?
+
+137
+00:07:41,800 --> 00:07:45,680
+Jak tedy můžeme říci, zda jsme
+je třeba posunout dopis, nebo ne?
+
+138
+00:07:45,680 --> 00:07:48,650
+No, "je alfa," pokud
+jste to znak projít,
+
+139
+00:07:48,650 --> 00:07:54,850
+vrátí true, pokud je tento znak
+je písmeno a falešné jinak.
+
+140
+00:07:54,850 --> 00:07:56,870
+Které vám pomohou s
+zachování kapitalizace
+
+141
+00:07:56,870 --> 00:07:59,750
+jsou funkce "je
+horní "a" nižší ".
+
+142
+00:07:59,750 --> 00:08:03,350
+>> Tyto dvě funkce také vzít
+v jeden znak jako vstup
+
+143
+00:08:03,350 --> 00:08:06,580
+a vrátí vám logickou,
+true nebo false
+
+144
+00:08:06,580 --> 00:08:11,280
+V závislosti na tom, zda tento znak
+Je velká písmena nebo malá písmena.
+
+145
+00:08:11,280 --> 00:08:14,610
+Vzhledem k tomu, "je horní" a "je
+nižší "jsou logické funkce,
+
+146
+00:08:14,610 --> 00:08:18,660
+To znamená, že se vrátí vám logickou,
+můžete použít tyto ve svých podmínkách.
+
+147
+00:08:18,660 --> 00:08:23,490
+Takže zde je úryvek kódu, který pouze
+vytiskne dopis, jestli je to velká písmena.
+
+148
+00:08:23,490 --> 00:08:27,790
+Tak jsem deklaroval svou postavu
+Dopis má být verzálka zed
+
+149
+00:08:27,790 --> 00:08:33,440
+a pak, pokud "je horní" se vrací
+pravda, pak jsem vytisknout ten dopis.
+
+150
+00:08:33,440 --> 00:08:38,200
+>> Vraťme se zpět k našemu jednoduchý příklad
+posunutí abecedy klíčem dvou,
+
+151
+00:08:38,200 --> 00:08:41,049
+Jak jsme vlastně dostat, že do práce?
+
+152
+00:08:41,049 --> 00:08:45,770
+No, ukázalo se, že znaky
+a celá čísla jsou velmi úzce souvisí.
+
+153
+00:08:45,770 --> 00:08:48,840
+Každá postava má
+celočíselná hodnota spojená
+
+154
+00:08:48,840 --> 00:08:53,260
+s tím nalezený v ASCII tabulce,
+kde ASCII každá postava má
+
+155
+00:08:53,260 --> 00:08:55,380
+Zobrazí se hodnota.
+
+156
+00:08:55,380 --> 00:08:58,940
+Takže an odpovídá velká písmena A
+na hodnotu ASCII 65
+
+157
+00:08:58,940 --> 00:09:02,270
+a malá písmena a až
+Hodnota ASCII 97.
+
+158
+00:09:02,270 --> 00:09:04,940
+>> Nebojte se podívat nahoru
+jakýkoliv ASCII tabulka on-line
+
+159
+00:09:04,940 --> 00:09:07,720
+vidět tyto hodnoty pro sebe.
+
+160
+00:09:07,720 --> 00:09:12,096
+Takže to, co to znamená, že můžeme
+mít charakter velká písmena A,
+
+161
+00:09:12,096 --> 00:09:18,200
+přidat číslo dvě na něj, a pak se
+znak velká písmena C jako výsledek.
+
+162
+00:09:18,200 --> 00:09:23,720
+To proto, že 65 let, ASCII
+hodnota kapitálové A plus 2,
+
+163
+00:09:23,720 --> 00:09:29,960
+nám dává 67, což odpovídá
+charakteru velká písmena C.
+
+164
+00:09:29,960 --> 00:09:33,480
+>> Bohužel, věci
+nebude úplně tak jednoduché.
+
+165
+00:09:33,480 --> 00:09:36,980
+Máme rovnici, která
+musíme vzít v úvahu.
+
+166
+00:09:36,980 --> 00:09:43,590
+Zde nám říká, že i-té ciphertext
+písmeno odpovídá i-té holého textu
+
+167
+00:09:43,590 --> 00:09:48,900
+dopis, plus key--
+všechno, modulární 26.
+
+168
+00:09:48,900 --> 00:09:50,810
+Proč je to tak?
+
+169
+00:09:50,810 --> 00:09:55,430
+Vraťme se k našemu příkladu z
+předtím, kde kapitál A, a navíc 2,
+
+170
+00:09:55,430 --> 00:09:57,590
+nám dává kapitálovou C.
+
+171
+00:09:57,590 --> 00:10:01,870
+>> Takže použití rovnice, která
+specifikace nám dává,
+
+172
+00:10:01,870 --> 00:10:06,660
+Pak se pojďme kapitálu
+a 2 a mod, že 26 let.
+
+173
+00:10:06,660 --> 00:10:10,730
+Takže kapitál A, když jsem ji v
+tyto jednoduché uvozovky,
+
+174
+00:10:10,730 --> 00:10:14,010
+mi umožňuje zacházet jako
+celé číslo, tak, že umožňuje
+
+175
+00:10:14,010 --> 00:10:17,500
+me vrci jeho ASCII hodnota 65.
+
+176
+00:10:17,500 --> 00:10:20,080
+65 a 2 je 67.
+
+177
+00:10:20,080 --> 00:10:25,210
+67 mod 26 nám dává 15,
+ale to není opravdu
+
+178
+00:10:25,210 --> 00:10:32,590
+smysl, protože víme, že
+kapitál C ASCII hodnota je 67, ne 15.
+
+179
+00:10:32,590 --> 00:10:35,580
+Tak jak jsme se smířit, že?
+
+180
+00:10:35,580 --> 00:10:39,840
+>> No, tady bych chtěl předpokládat
+Pojem abecedním indexu.
+
+181
+00:10:39,840 --> 00:10:44,010
+Tak už jsme mluvili o tom, jak
+každá postava má svůj ASCII hodnotu,
+
+182
+00:10:44,010 --> 00:10:48,810
+ale já bych rád řekl, dobře, pojďme
+přemýšlet o tom, každá postava má rovněž
+
+183
+00:10:48,810 --> 00:10:52,230
+abecední rejstřík,
+kde A například,
+
+184
+00:10:52,230 --> 00:10:58,800
+jako první písmeno v abecedě,
+má abecední rejstřík nula.
+
+185
+00:10:58,800 --> 00:11:02,070
+Takže teď pojďme uplatňovat
+stejné rovnice jako dříve,
+
+186
+00:11:02,070 --> 00:11:05,040
+ale za použití abecední rejstřík.
+
+187
+00:11:05,040 --> 00:11:07,810
+>> Tak je nulová, jak jsme definované.
+
+188
+00:11:07,810 --> 00:11:15,640
+Takže pak brát nula plus dva, MOD 26,
+To jsou dva, mod 26, což nám dává dvě.
+
+189
+00:11:15,640 --> 00:11:18,780
+A dobře, v rámci
+abecední rejstřík,
+
+190
+00:11:18,780 --> 00:11:23,930
+C je třetí písmeno ve
+abeceda, aby odpovídalo
+
+191
+00:11:23,930 --> 00:11:26,290
+do abecedního indexu dva.
+
+192
+00:11:26,290 --> 00:11:29,850
+Zdá se tedy, že využití
+abecední rejstřík v tomto případě
+
+193
+00:11:29,850 --> 00:11:32,840
+ve skutečnosti nám dává správný výsledek.
+
+194
+00:11:32,840 --> 00:11:35,020
+>> Takže teď pojďme zkontrolovat,
+zda rovnicí prací
+
+195
+00:11:35,020 --> 00:11:37,210
+abecední rejstřík.
+
+196
+00:11:37,210 --> 00:11:42,540
+abecední rejstřík Y je 24, protože
+Druhý na poslední písmeno v abecedě.
+
+197
+00:11:42,540 --> 00:11:46,520
+Takže 24 a naše
+Klíčovým dvou nám dává 26.
+
+198
+00:11:46,520 --> 00:11:54,750
+26 mod 26 nám dává 0, což, naštěstí pro
+us, je abecední rejstřík pro A.
+
+199
+00:11:54,750 --> 00:11:59,100
+Takže doufejme, že to stačí, že důkaz
+abecední rejstřík metoda funguje.
+
+200
+00:11:59,100 --> 00:12:03,180
+Pokud tomu tak není, neváhejte vyzkoušet
+některé příklady sami.
+
+201
+00:12:03,180 --> 00:12:08,030
+>> Aby bylo možné správně zabalit kolem
+abecedy a aplikovat Caesar rovnice,
+
+202
+00:12:08,030 --> 00:12:11,280
+pak víme, že musíme
+vypořádat s abecední indexy.
+
+203
+00:12:11,280 --> 00:12:15,130
+Ale začneme s ASCII
+hodnot a teprve poté
+
+204
+00:12:15,130 --> 00:12:18,530
+my potom převést do
+abecední rejstřík.
+
+205
+00:12:18,530 --> 00:12:23,970
+Odtamtud, aby bylo možné tisknout, musíme
+vypořádat s hodnotami ASCII znovu.
+
+206
+00:12:23,970 --> 00:12:28,350
+Takže musíme vymyslet, jak
+přejít z ASCII do abecední
+
+207
+00:12:28,350 --> 00:12:31,080
+az abecedním na ASCII.
+
+208
+00:12:31,080 --> 00:12:34,910
+>> Tak Nechám na vás, abyste zjistili
+vzor mezi charakterem
+
+209
+00:12:34,910 --> 00:12:38,590
+a jeho abecední
+index a jeho hodnota ASCII.
+
+210
+00:12:38,590 --> 00:12:41,530
+Nyní si uvědomit, že ačkoliv
+toto právo tabulka na snímku
+
+211
+00:12:41,530 --> 00:12:45,630
+zobrazuje velká písmena, jsme také
+muset zvážit, zda je či není
+
+212
+00:12:45,630 --> 00:12:48,915
+jiný vzor platí
+Pro malými písmeny.
+
+213
+00:12:48,915 --> 00:12:52,070
+
+214
+00:12:52,070 --> 00:12:55,840
+>> Takže teď, když jsme zjistili
+Jak posunout jeden znak,
+
+215
+00:12:55,840 --> 00:13:02,200
+pak vše, co musíme udělat, je měřítko, které
+up jít v celé prostého textu.
+
+216
+00:13:02,200 --> 00:13:04,260
+Takže holý text je řetězec.
+
+217
+00:13:04,260 --> 00:13:08,210
+Naštěstí pro nás, řetězec je opravdu
+Jen řada postav,
+
+218
+00:13:08,210 --> 00:13:12,150
+tak, aby se přístup každý znak
+z řetězce, vše, co musíte udělat,
+
+219
+00:13:12,150 --> 00:13:14,270
+je použití pole notaci.
+
+220
+00:13:14,270 --> 00:13:20,270
+Řekněme, že mám proměnnou typu
+string nazvaný "text = 'Toto je CS50."
+
+221
+00:13:20,270 --> 00:13:22,730
+>> Tak, aby se
+přistupovat každý znak,
+
+222
+00:13:22,730 --> 00:13:25,880
+vše, co mám dělat s
+proměnná text
+
+223
+00:13:25,880 --> 00:13:31,660
+říkat dobře, textu na indexu nula, že
+odpovídá kapitál T. Text na indexu
+
+224
+00:13:31,660 --> 00:13:35,100
+jeden odpovídá malými písmeny h.
+
+225
+00:13:35,100 --> 00:13:38,110
+Další užitečnou funkcí je
+Funkce délka řetězce.
+
+226
+00:13:38,110 --> 00:13:40,760
+Takže projde v řetězci
+že funkce vrátí
+
+227
+00:13:40,760 --> 00:13:44,610
+celé číslo, je délka tohoto řetězce.
+
+228
+00:13:44,610 --> 00:13:47,060
+>> Teď, když jsme mluvili o
+Všechny tyto různé prvky,
+
+229
+00:13:47,060 --> 00:13:48,540
+pojďme dát je zase dohromady.
+
+230
+00:13:48,540 --> 00:13:52,210
+Takže návrat k jedné mé pseudokódu
+kód nebo Váš pseudocode
+
+231
+00:13:52,210 --> 00:13:55,920
+a projít a ujistit se, že vás
+vědět, jak se to dělá každý jednotlivý věc.
+
+232
+00:13:55,920 --> 00:14:01,520
+Získání klíč pomocí argc a argv,
+otočením klíčku do celé číslo, je
+
+233
+00:14:01,520 --> 00:14:06,840
+až i výzvou pro holého textu,
+getString, a pak iterace
+
+234
+00:14:06,840 --> 00:14:09,590
+přes každý znak v
+holý text řetězec,
+
+235
+00:14:09,590 --> 00:14:14,910
+zachování případ každého znaku
+a přesouvá tento znak klíčem,
+
+236
+00:14:14,910 --> 00:14:17,520
+zajištění toho, že jste
+obal kolem abecedy,
+
+237
+00:14:17,520 --> 00:14:20,850
+Nakonec tiskem dané ciphertext.
+
+238
+00:14:20,850 --> 00:14:25,470
+Jmenuji se Amila, a to byl Caesar.
+
+239
+00:14:25,470 --> 00:14:28,448
+

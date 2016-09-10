@@ -1,0 +1,1140 @@
+1
+00:00:00,000 --> 00:00:00,760
+
+2
+00:00:00,760 --> 00:00:02,270
+>> AMILA: ni pagharap sa isang bagay Caesar Hayaan.
+
+3
+00:00:02,270 --> 00:00:06,110
+Sa Caesar, pinapayagan namin ang gumagamit
+upang i-encode ng isang lihim na mensahe.
+
+4
+00:00:06,110 --> 00:00:09,780
+Kaya sabihin sumisid karapatan sa at tumingin
+sa aming to-dos para sa problemang ito.
+
+5
+00:00:09,780 --> 00:00:12,210
+Kaya una, makuha namin ang susi mula sa user.
+
+6
+00:00:12,210 --> 00:00:15,210
+Pagkatapos namin makuha ang plaintext
+na gusto nilang i-encode.
+
+7
+00:00:15,210 --> 00:00:21,380
+Pagkatapos nito, Encipher namin ito para sa kanila,
+at sa wakas i-print namin ang kanilang ciphertext.
+
+8
+00:00:21,380 --> 00:00:23,600
+>> Kaya sabihin magsimula sa isang halimbawa.
+
+9
+00:00:23,600 --> 00:00:26,920
+Sabihin mo nais na gawing kowd ang
+buong alpabeto na may isang key ng dalawang.
+
+10
+00:00:26,920 --> 00:00:31,360
+Well, ang iyong buong alpabeto gagawin
+lamang shifted sa mga titik.
+
+11
+00:00:31,360 --> 00:00:37,060
+So A ay i-encode sa C, B sa
+D, C to E, iba pa at iba pa,
+
+12
+00:00:37,060 --> 00:00:42,470
+hanggang sa makuha mo sa X, na kung saan encodes hanggang Z
+o zed, depende sa kung saan ikaw ay mula sa.
+
+13
+00:00:42,470 --> 00:00:47,445
+Pagkatapos Y ay pagkatapos shift lahat ng paraan,
+wrapper sa paligid ng alpabeto upang makakuha ng A,
+
+14
+00:00:47,445 --> 00:00:53,256
+at pagkatapos ay sa wakas ang huling titik ng
+alpabeto, Z, zed, Gusto i-encode sa B.
+
+15
+00:00:53,256 --> 00:00:54,660
+>> nakuha mo na?
+
+16
+00:00:54,660 --> 00:00:56,380
+Tingnan natin ang ilang halimbawa.
+
+17
+00:00:56,380 --> 00:01:00,540
+Ang unang halimbawa dito ay halos kapareho
+sa kung ano lang namin ipinaliwanag sa itaas.
+
+18
+00:01:00,540 --> 00:01:05,560
+Kaya kung i-encode ko ang ilang mga seksyon ng
+alpabeto, A sa pamamagitan ng L, sa pamamagitan ng isang susi ng dalawa,
+
+19
+00:01:05,560 --> 00:01:09,760
+pagkatapos ko na lang makuha ang aking buong
+alpabeto shifted dalawang titik.
+
+20
+00:01:09,760 --> 00:01:12,230
+>> Pagkatapos, sa aking mga susunod na halimbawa,
+ang susi ay pa rin dalawa,
+
+21
+00:01:12,230 --> 00:01:15,080
+kaya dapat mo pa rin alam
+kung aling mga titik ang aasahan.
+
+22
+00:01:15,080 --> 00:01:16,400
+Ngunit dito ito ay isang parirala.
+
+23
+00:01:16,400 --> 00:01:18,100
+Ito ay CS50.
+
+24
+00:01:18,100 --> 00:01:21,090
+Kaya mapapansin mo na ako
+mapanatili ang kaso ng aking mga titik,
+
+25
+00:01:21,090 --> 00:01:25,600
+kaya ang anumang mga malaking titik titik ding
+upper case titik sa ciphertext.
+
+26
+00:01:25,600 --> 00:01:27,800
+At anumang lowercase
+mga titik sa plaintext
+
+27
+00:01:27,800 --> 00:01:30,640
+ay din lowercase
+mga titik sa ciphertext.
+
+28
+00:01:30,640 --> 00:01:34,020
+Nguni't hinahampas ko ang mga titik
+at anumang exclamation marks
+
+29
+00:01:34,020 --> 00:01:37,610
+o anumang iba pang bantas pareho.
+
+30
+00:01:37,610 --> 00:01:40,360
+>> Kaya ngayon na kami ay may isang kahulugan
+para sa kung paano gumagana ang programa,
+
+31
+00:01:40,360 --> 00:01:43,890
+huwag mag-atubiling upang pumunta tumakbo ng ilang mga karagdagang
+mga halimbawa ng iyong sarili, kung nais mo.
+
+32
+00:01:43,890 --> 00:01:47,072
+Magsimula tayo sa pagkuha Hayaan
+ang susi mula sa user.
+
+33
+00:01:47,072 --> 00:01:48,780
+Ayon sa kaugalian, na may
+iba pang mga problema, na namin
+
+34
+00:01:48,780 --> 00:01:51,450
+ay bihasa sa pagkuha ng
+anumang mga numero na kami
+
+35
+00:01:51,450 --> 00:01:54,710
+kailangan sa pamamagitan ng pagdikta sa gumagamit
+may pag-andar getint.
+
+36
+00:01:54,710 --> 00:01:58,850
+Ngunit oras na ito ang tunay na kami ay pagpunta
+gamitin ang command line argument
+
+37
+00:01:58,850 --> 00:02:01,760
+at ng isang bagong function na tinatawag na atoi.
+
+38
+00:02:01,760 --> 00:02:05,130
+>> Kapag nagpatakbo ka ng main
+programa sa C, at pagkatapos na ito
+
+39
+00:02:05,130 --> 00:02:08,500
+tumatagal sa dalawang parameters--
+int argc, na kung saan
+
+40
+00:02:08,500 --> 00:02:11,670
+ay ang bilang ng mga argumento
+ipinasa sa, at pagkatapos ay
+
+41
+00:02:11,670 --> 00:02:15,920
+argv, isang array ng mga string na naglalaman ng
+ang listahan ng lahat ng mga argumento
+
+42
+00:02:15,920 --> 00:02:16,740
+lumipas.
+
+43
+00:02:16,740 --> 00:02:19,740
+Hindi mo explicitly kung
+upang ipahayag ang mga variable.
+
+44
+00:02:19,740 --> 00:02:22,700
+Ang mga ito ay computed para
+iyo sa pamamagitan ng tagatala.
+
+45
+00:02:22,700 --> 00:02:28,160
+Tamang paggamit para ito ay magiging
+para argc na dalawang sa kasong ito,
+
+46
+00:02:28,160 --> 00:02:32,630
+dahil ang gumagamit ay may upang pumasa sa
+ang tawag sa programa, ./caesar,
+
+47
+00:02:32,630 --> 00:02:35,570
+at pagkatapos ay ang key,
+anumang bilang gusto nila.
+
+48
+00:02:35,570 --> 00:02:39,920
+Kaya na nangangahulugan na argc ay dapat na dalawang
+sa order para sa isang may-bisang paggamit ng Caesar
+
+49
+00:02:39,920 --> 00:02:41,680
+na pinaandar.
+
+50
+00:02:41,680 --> 00:02:43,590
+>> Kaya tingnan natin ang isang halimbawa.
+
+51
+00:02:43,590 --> 00:02:47,760
+Sabihin na ako na nakasulat at
+compiled ng isang programa na tinatawag na paglipad.
+
+52
+00:02:47,760 --> 00:02:52,670
+Kaya kung ako ang bumangga sa command line
+./blastoff Team Rocket, well, pagkatapos,
+
+53
+00:02:52,670 --> 00:02:57,750
+argc ay magiging tatlong dahil ako
+lumipas sa tatlong natatanging mga argumento.
+
+54
+00:02:57,750 --> 00:02:59,830
+Pagkatapos argv ay ganito ang hitsura.
+
+55
+00:02:59,830 --> 00:03:03,750
+Ito ay isang array, at gagawin ito
+naglalaman bawat isa sa tatlong mga string.
+
+56
+00:03:03,750 --> 00:03:09,640
+./blastoff sa unang index, team
+sa susunod na, at rocket sa huling.
+
+57
+00:03:09,640 --> 00:03:11,610
+>> Pag-usapan natin arrays para sa isang sec Hayaan.
+
+58
+00:03:11,610 --> 00:03:15,560
+Arrays ay data structures na hawak
+maramihang mga halaga ng parehong uri.
+
+59
+00:03:15,560 --> 00:03:19,980
+Ito ay maaaring dumating sa madaling-gamiting kapag kami
+may mga listahan ng mga integers o string.
+
+60
+00:03:19,980 --> 00:03:23,030
+Tandaan lamang mayroon silang
+upang maging ang parehong uri.
+
+61
+00:03:23,030 --> 00:03:25,310
+Sa computer science, kami
+Gustung-gusto pagbibilang mula sa zero,
+
+62
+00:03:25,310 --> 00:03:29,260
+kaya tandaan na arrays
+ding zero-index.
+
+63
+00:03:29,260 --> 00:03:34,360
+Kaya ang unang elemento ng aking array
+ay pagpunta sa maging sa index zero.
+
+64
+00:03:34,360 --> 00:03:37,580
+Kaya sa kasong ito, kapag mayroon akong
+isang array ng haba apat,
+
+65
+00:03:37,580 --> 00:03:41,350
+pagkatapos ay ang huling index ng
+huling elemento ng aking array
+
+66
+00:03:41,350 --> 00:03:44,970
+ay aktwal na pagpunta sa maging
+sa index ng tatlong, hindi apat.
+
+67
+00:03:44,970 --> 00:03:48,880
+Dahil tandaan, kami
+magbilangan sa zero.
+
+68
+00:03:48,880 --> 00:03:52,530
+>> Narito ang isang halimbawa ng kung paano mo
+maaaring lumikha ng isang array ng iyong sariling grupo.
+
+69
+00:03:52,530 --> 00:03:56,440
+Kaya sinasabi ko nais na tindahan ang aking
+tatlong mga paboritong mga pangalan ng aso.
+
+70
+00:03:56,440 --> 00:03:59,030
+Pagkatapos Gusto ko lumikha ng isang array ng mga string.
+
+71
+00:03:59,030 --> 00:04:04,450
+Kaya Gusto kong ipahayag ang uri, string, at
+pagkatapos ay ilagay ang pangalan ng array, aso,
+
+72
+00:04:04,450 --> 00:04:06,450
+at pagkatapos ay sa mga square
+bracket ilagay ang laki
+
+73
+00:04:06,450 --> 00:04:09,260
+ng array sa kasong ito, tatlo.
+
+74
+00:04:09,260 --> 00:04:12,690
+>> Kaya ang aking unang entry ay pagpunta
+upang maging aso sa index zero,
+
+75
+00:04:12,690 --> 00:04:14,750
+at na ay pagpunta sa maging Milo.
+
+76
+00:04:14,750 --> 00:04:17,850
+Pagkatapos aso sa index isa
+ay pagpunta sa maging maloko,
+
+77
+00:04:17,850 --> 00:04:23,060
+darling Mochi, at pagkatapos ay ang huling
+entry, ang ikatlong entry sa index dalawa,
+
+78
+00:04:23,060 --> 00:04:26,130
+ay magiging maganda, matamis Elphie.
+
+79
+00:04:26,130 --> 00:04:28,610
+Mapapansin mo na ang format
+para sa pagpuno sa array na ito
+
+80
+00:04:28,610 --> 00:04:32,150
+ay napaka tulad ng kung paano mo maaaring
+magpahayag ng anumang iba pang mga variable na kung saan ang
+
+81
+00:04:32,150 --> 00:04:36,307
+ikaw ay may ang pangalan ng variable na sinusundan ng
+ang halaga na iyong nais na naka-imbak sa loob nito.
+
+82
+00:04:36,307 --> 00:04:38,140
+Ang tanging pagkakaiba sa
+kasong ito ay na kayo
+
+83
+00:04:38,140 --> 00:04:42,700
+kailangang tandaan upang ilagay ang index
+ng halaga sa mga square bracket.
+
+84
+00:04:42,700 --> 00:04:46,420
+At doon na namin ang aming
+tatlong mga paboritong aso.
+
+85
+00:04:46,420 --> 00:04:48,780
+>> Ngunit sayang, oras na
+upang makabalik sa Caesar.
+
+86
+00:04:48,780 --> 00:04:52,910
+Tandaan na tamang paggamit para sa
+user ay pagpunta sa ay pagpasa sa hindi lamang
+
+87
+00:04:52,910 --> 00:04:57,430
+ang pangalan ng programa ./caesar, ngunit
+din ang susi na gusto nilang i-shift
+
+88
+00:04:57,430 --> 00:04:58,850
+kanilang plaintext sa pamamagitan ng.
+
+89
+00:04:58,850 --> 00:05:01,540
+Kaya na nangangahulugan na argc ay dapat na dalawa.
+
+90
+00:05:01,540 --> 00:05:07,580
+Dapat silang pumasa sa two-- hindi hihigit, walang
+mas mababa sa dalawang argumento command line.
+
+91
+00:05:07,580 --> 00:05:09,050
+>> Ngayon, kung ano ang tungkol argv?
+
+92
+00:05:09,050 --> 00:05:12,880
+Well, namin na malaman na ang
+array ay pagpunta sa maging ng haba dalawa,
+
+93
+00:05:12,880 --> 00:05:15,270
+ngunit kung ano ang nakapaloob sa bawat elemento?
+
+94
+00:05:15,270 --> 00:05:19,330
+Well, ang unang elemento
+ay pagpunta sa maging ./caesar,
+
+95
+00:05:19,330 --> 00:05:24,190
+at pagkatapos ay ang susunod na elemento ay pagpunta sa
+naglalaman ng mga susi na ang gumagamit ay nai-type sa.
+
+96
+00:05:24,190 --> 00:05:27,480
+Ngayon, kung ginamit nila ito nang tama
+para sa paggamit ng Caesar,
+
+97
+00:05:27,480 --> 00:05:29,350
+pagkatapos ay sila ay pagpunta sa i-type sa isang numero.
+
+98
+00:05:29,350 --> 00:05:33,260
+Ngunit kahit na ang character
+na sila ay uri ay isang numero,
+
+99
+00:05:33,260 --> 00:05:35,790
+ito ay ng uri ng data string.
+
+100
+00:05:35,790 --> 00:05:40,390
+>> Kaya paano i-convert namin na
+string sa isang integer?
+
+101
+00:05:40,390 --> 00:05:46,680
+Kaya sabihin ako ng num, isang string,
+na naglalaman ng mga string 50.
+
+102
+00:05:46,680 --> 00:05:49,000
+Kung gusto kong i-convert na
+sa isang integer, at pagkatapos ay ako lang
+
+103
+00:05:49,000 --> 00:05:53,340
+magpahayag ng isang bagong variable, isang
+integer i, pagtawag atoi.
+
+104
+00:05:53,340 --> 00:06:01,160
+Pumasa ko sa aking string variable, num, at
+pagkatapos ay i ay pagkatapos na maglaman ng numero 50.
+
+105
+00:06:01,160 --> 00:06:04,350
+Siguraduhin na tingnan ang tao
+pahina para sa atoi function na
+
+106
+00:06:04,350 --> 00:06:07,990
+upang tingnan kung anong library ito ay
+in, pati na rin ang kung ano ang halaga nito
+
+107
+00:06:07,990 --> 00:06:14,550
+ay babalik kung ang string lumipas
+in ay hindi naglalaman ng lahat ng mga numero.
+
+108
+00:06:14,550 --> 00:06:16,950
+>> Kaya ngayon na namin nakuha
+ang susi, ang susunod na hakbang
+
+109
+00:06:16,950 --> 00:06:19,430
+ay upang makuha ang plaintext mula sa user.
+
+110
+00:06:19,430 --> 00:06:21,170
+Ngayon, ito ay pagpunta sa
+maging mas kumplikado
+
+111
+00:06:21,170 --> 00:06:23,410
+kaysa sa pag-navigate sa paligid ng
+command line argumento.
+
+112
+00:06:23,410 --> 00:06:26,190
+Lahat ng kailangan naming gawin ay tawag
+ang getstring function na
+
+113
+00:06:26,190 --> 00:06:29,660
+upang i-prompt ang user ay upang bigyan
+sa amin ng isang string, ngunit tandaan
+
+114
+00:06:29,660 --> 00:06:34,090
+upang suriin ang mga pagtutukoy para sa kung paano namin
+maaaring nais na i-prompt ang user para sa na.
+
+115
+00:06:34,090 --> 00:06:36,420
+>> Ngayon kami dumating sa ang
+puso ng problem--
+
+116
+00:06:36,420 --> 00:06:38,860
+kung paano Encipher ang plaintext.
+
+117
+00:06:38,860 --> 00:06:42,830
+Well, una, sabihin makipag-usap tungkol sa kung paano
+upang Encipher isang character sa isang pagkakataon,
+
+118
+00:06:42,830 --> 00:06:47,370
+at pagkatapos ay gagamitin namin matugunan kung paano
+umulit sa ibabaw ng buong plaintext.
+
+119
+00:06:47,370 --> 00:06:50,440
+Ko na nakasulat ang ilang pseudocode
+para sa mga problema Caesar.
+
+120
+00:06:50,440 --> 00:06:52,310
+Hinihikayat ko kayo na
+isulat ang iyong sarili pati na rin.
+
+121
+00:06:52,310 --> 00:06:55,900
+Hindi ito maaaring tumingin katulad sa
+akin, at iyon lamang ang OK, ngunit hangga't
+
+122
+00:06:55,900 --> 00:06:58,640
+bilang ang pangkalahatang ideya ay ang parehong.
+
+123
+00:06:58,640 --> 00:07:00,780
+>> Ang unang tatlong mga hakbang
+Kayo ay nakagawa tapos namin.
+
+124
+00:07:00,780 --> 00:07:03,100
+nakuha namin ang susi mula
+sa command line argument,
+
+125
+00:07:03,100 --> 00:07:05,510
+na-on namin na susi
+na ito sa isang integer, at na namin
+
+126
+00:07:05,510 --> 00:07:09,320
+sinenyasan ang user para sa plaintext
+na nais nilang Encipher.
+
+127
+00:07:09,320 --> 00:07:12,420
+Kaya pagkatapos ay ang susunod na malaking tipak
+ay na para sa bawat karakter
+
+128
+00:07:12,420 --> 00:07:15,070
+sa plaintext string,
+kung ito ay pang-abakada,
+
+129
+00:07:15,070 --> 00:07:17,750
+gusto naming mapanatili
+kaso nito at maglipat dito.
+
+130
+00:07:17,750 --> 00:07:20,900
+Sa pamamagitan ng mapanatili kaso, kung ano ang aking
+ibig sabihin ay na ang lahat upper case
+
+131
+00:07:20,900 --> 00:07:23,580
+titik dapat manatili upper
+kaso at lahat ng maliit na mga titik
+
+132
+00:07:23,580 --> 00:07:25,640
+dapat manatili lowercase.
+
+133
+00:07:25,640 --> 00:07:29,110
+Nga, pagkatapos namin maglipat ng mga,
+pagkatapos ay i-print namin ang ciphertext.
+
+134
+00:07:29,110 --> 00:07:33,100
+>> Narito ang tatlong mga pag-andar na pagpunta
+na dumating sa madaling-magamit para sa mga problemang ito.
+
+135
+00:07:33,100 --> 00:07:38,010
+Tandaan up sa itaas kapag ako ay nagbigay ng
+halimbawa para sa paglilipat na ito ay CS50?
+
+136
+00:07:38,010 --> 00:07:41,800
+Tandaan na ang 50 at ang
+exclamation mark ay hindi shift?
+
+137
+00:07:41,800 --> 00:07:45,680
+Kaya kung paano maaari naming sabihin kung kami
+kailangan upang ilipat ang isang sulat o hindi?
+
+138
+00:07:45,680 --> 00:07:48,650
+Well, "ay alpha," kung
+kayo na ipasa ito ng isang character,
+
+139
+00:07:48,650 --> 00:07:54,850
+ay babalik true kung na karakter
+ay isang sulat at maling kung hindi man.
+
+140
+00:07:54,850 --> 00:07:56,870
+Upang makatulong sa iyo na may
+pagpepreserba capitalization
+
+141
+00:07:56,870 --> 00:07:59,750
+ang mga function "ay
+upper "at" ay mas mababa. "
+
+142
+00:07:59,750 --> 00:08:03,350
+>> Ang dalawang mga function ring kumuha
+sa isang solong character bilang input
+
+143
+00:08:03,350 --> 00:08:06,580
+at ibalik mo ang isang Boolean,
+alinman true o false
+
+144
+00:08:06,580 --> 00:08:11,280
+depende sa kung character na
+ay malaking titik o maliit na titik.
+
+145
+00:08:11,280 --> 00:08:14,610
+Dahil "ay itaas" at "ay
+mas mababang "ay Boolean function,
+
+146
+00:08:14,610 --> 00:08:18,660
+ibig sabihin na ikaw ay bumalik sila ng isang Boolean,
+maaari mong gamitin ang mga ito sa iyong kondisyon.
+
+147
+00:08:18,660 --> 00:08:23,490
+Kaya narito ang isang snippet ng code na lamang
+Kopya ng sulat kung ito ay itaas na kaso.
+
+148
+00:08:23,490 --> 00:08:27,790
+Kaya ipinahayag ko ang aking karakter
+sulat na ang mga malaking titik zed
+
+149
+00:08:27,790 --> 00:08:33,440
+at pagkatapos ay kung "ay itaas" returns
+totoo, at pagkatapos i-print ko na sulat.
+
+150
+00:08:33,440 --> 00:08:38,200
+>> Pagbabalik sa aming simpleng halimbawa ng
+paglilipat ng alpabeto sa pamamagitan ng isang susi ng dalawa,
+
+151
+00:08:38,200 --> 00:08:41,049
+paano namin talagang makakuha na sa trabaho?
+
+152
+00:08:41,049 --> 00:08:45,770
+Well, ito ay lumiliko out na mga letra
+at integers ay napaka malapit na nauugnay.
+
+153
+00:08:45,770 --> 00:08:48,840
+Ang bawat karakter ay may isang
+integer halaga na kaugnay
+
+154
+00:08:48,840 --> 00:08:53,260
+may nasusumpungan man sa tsart ASCII,
+kung saan ASCII bawat character
+
+155
+00:08:53,260 --> 00:08:55,380
+halaga ay ipinapakita.
+
+156
+00:08:55,380 --> 00:08:58,940
+Kaya isang malaking titik A ay tumutugon
+sa isang ASCII na halaga ng 65
+
+157
+00:08:58,940 --> 00:09:02,270
+at isang lowercase isang to
+isang ASCII na halaga ng 97.
+
+158
+00:09:02,270 --> 00:09:04,940
+>> Huwag mag-atubiling upang tumingin up
+anumang ASCII chart online
+
+159
+00:09:04,940 --> 00:09:07,720
+upang makita ang mga halagang ito para sa iyong sarili.
+
+160
+00:09:07,720 --> 00:09:12,096
+Kaya kung ano ang ibig sabihin nito ay na maaari naming
+gawin ang mga katangian ng mga malaking titik A,
+
+161
+00:09:12,096 --> 00:09:18,200
+idagdag ang integer dalawang sa mga ito, at pagkatapos ay kumuha
+ang character upper case C bilang isang resulta.
+
+162
+00:09:18,200 --> 00:09:23,720
+Iyon ay dahil sa 65, ang ASCII
+halaga para sa capital A, plus 2,
+
+163
+00:09:23,720 --> 00:09:29,960
+ay nagbibigay sa amin ng 67, na tumutugon
+ang karakter ni upper case C.
+
+164
+00:09:29,960 --> 00:09:33,480
+>> Sa kasamaang palad, ang mga bagay
+Hindi maa-lubos kaya simple.
+
+165
+00:09:33,480 --> 00:09:36,980
+Mayroon kaming isang equation na
+mayroon kaming upang isaalang-alang.
+
+166
+00:09:36,980 --> 00:09:43,590
+Narito ito ay nagsasabi sa amin na ang ith ciphertext
+sulat ay tumutugon sa ith plaintext
+
+167
+00:09:43,590 --> 00:09:48,900
+sulat, kasama ang key--
+lahat ng iyon, modular 26.
+
+168
+00:09:48,900 --> 00:09:50,810
+Bakit na ang kaso?
+
+169
+00:09:50,810 --> 00:09:55,430
+Natin bumalik sa aming halimbawa mula
+bago, kung saan capital A, plus 2,
+
+170
+00:09:55,430 --> 00:09:57,590
+ay nagbibigay sa amin capital C.
+
+171
+00:09:57,590 --> 00:10:01,870
+>> Kaya nag-aaplay ang equation na
+ang pagtutukoy ay nagbibigay sa amin,
+
+172
+00:10:01,870 --> 00:10:06,660
+pagkatapos ay ipaalam sa tumagal ng capital A
+plus 2 at mod na sa pamamagitan ng 26.
+
+173
+00:10:06,660 --> 00:10:10,730
+Kaya capital A, kapag ko bang ilagay ito sa
+mga single quotation marks,
+
+174
+00:10:10,730 --> 00:10:14,010
+ay nagbibigay-daan sa akin upang gamutin ito bilang
+isang integer, kaya na nagpapahintulot sa
+
+175
+00:10:14,010 --> 00:10:17,500
+ako na palabasin sa kanyang ASCII halaga, 65.
+
+176
+00:10:17,500 --> 00:10:20,080
+65 plus 2 ay 67.
+
+177
+00:10:20,080 --> 00:10:25,210
+67 mod 26 ay nagbibigay sa amin 15,
+ngunit na ay hindi tunay
+
+178
+00:10:25,210 --> 00:10:32,590
+magkaroon ng kahulugan dahil alam namin na ang
+capital halaga ng C ASCII ay 67, hindi 15.
+
+179
+00:10:32,590 --> 00:10:35,580
+Kaya paano namin mapagkasundo iyon?
+
+180
+00:10:35,580 --> 00:10:39,840
+>> Well, dito Gusto kong ipagpalagay ang
+kuru-kuro ng isang alpabetikong index.
+
+181
+00:10:39,840 --> 00:10:44,010
+Kaya ko na usapan natin ang tungkol sa kung paano
+bawat karakter ay may ASCII halaga,
+
+182
+00:10:44,010 --> 00:10:48,810
+ngunit gusto kong sabihin, well, sabihin
+isipin ang tungkol sa bawat karakter din sa pagkakaroon ng
+
+183
+00:10:48,810 --> 00:10:52,230
+isang alpabetikong index,
+kung saan ang A halimbawa,
+
+184
+00:10:52,230 --> 00:10:58,800
+bilang ang unang titik ng alpabeto,
+ay may isang alpabetikong index ng zero.
+
+185
+00:10:58,800 --> 00:11:02,070
+Kaya ngayon sabihin ilapat ang
+parehong equation tulad ng dati,
+
+186
+00:11:02,070 --> 00:11:05,040
+ngunit ang paggamit ng isang alpabetikong index.
+
+187
+00:11:05,040 --> 00:11:07,810
+>> So A ay zero, bilang ko na tinukoy namin.
+
+188
+00:11:07,810 --> 00:11:15,640
+Kaya pagkatapos ay ang pagkuha zero plus dalawa, mod 26,
+na dalawa, mod 26, na nagbibigay sa amin dalawa.
+
+189
+00:11:15,640 --> 00:11:18,780
+At na rin, sa mga tuntunin ng
+isang alpabetikong index,
+
+190
+00:11:18,780 --> 00:11:23,930
+C ay ang ikatlong titik sa
+alpabeto, kaya na tumutugma
+
+191
+00:11:23,930 --> 00:11:26,290
+sa isang alpabetikong index ng dalawa.
+
+192
+00:11:26,290 --> 00:11:29,850
+Kaya ito tila na ang paggamit ng
+alpabetikong index sa kasong ito
+
+193
+00:11:29,850 --> 00:11:32,840
+aktwal na nagbibigay sa amin ng tamang resulta.
+
+194
+00:11:32,840 --> 00:11:35,020
+>> Kaya ngayon sabihin suriin upang
+makita kung ang mga gawa equation
+
+195
+00:11:35,020 --> 00:11:37,210
+may isang alpabetikong index.
+
+196
+00:11:37,210 --> 00:11:42,540
+alpabetikong index ni Y ay 24 bilang ang
+pangalawa sa huling titik sa alpabeto.
+
+197
+00:11:42,540 --> 00:11:46,520
+Kaya nga 24 plus ang aming
+key ng dalawang ay nagbibigay sa amin 26.
+
+198
+00:11:46,520 --> 00:11:54,750
+26 mod 26 ay nagbibigay sa amin 0, kung saan, masuwerteng para sa
+sa amin, ay ang alpabetikong index para A.
+
+199
+00:11:54,750 --> 00:11:59,100
+Kaya sana iyon ang sapat na patunay na
+ang alpabetikong index paraan gumagana.
+
+200
+00:11:59,100 --> 00:12:03,180
+Kung hindi, huwag mag-atubiling upang subukan ang
+ilang mga halimbawa ng iyong sariling grupo.
+
+201
+00:12:03,180 --> 00:12:08,030
+>> Upang maayos na wrapper sa paligid ng
+alpabeto at ilapat ang Caesar equation,
+
+202
+00:12:08,030 --> 00:12:11,280
+pagkatapos ay alam namin na kailangan namin upang
+pakikitungo sa alpabetikong indeks.
+
+203
+00:12:11,280 --> 00:12:15,130
+Ngunit simulan namin na may ASCII
+mga halaga, at lamang pagkatapos ay
+
+204
+00:12:15,130 --> 00:12:18,530
+namin pagkatapos ay i-convert sa
+ang alpabetikong index.
+
+205
+00:12:18,530 --> 00:12:23,970
+Mula doon, sa pagkakasunud-sunod upang i-print, kailangan namin
+upang harapin ang mga halaga ASCII muli.
+
+206
+00:12:23,970 --> 00:12:28,350
+Kaya kailangan namin upang malaman kung paano upang
+pumunta mula sa ascii sa abakada
+
+207
+00:12:28,350 --> 00:12:31,080
+at mula sa alpabetikong sa ASCII.
+
+208
+00:12:31,080 --> 00:12:34,910
+>> Kaya mag-iwan ko ito sa iyo upang malaman kung
+ang pattern sa pagitan ng isang character
+
+209
+00:12:34,910 --> 00:12:38,590
+at ang kanyang pang-abakada
+index at ang ASCII halaga.
+
+210
+00:12:38,590 --> 00:12:41,530
+Ngayon, tandaan na kahit na
+talahanayan na ito mismo sa slide
+
+211
+00:12:41,530 --> 00:12:45,630
+ay nagpapakita ng mga malalaking titik, kami din
+kailangang isaalang-alang kung o hindi
+
+212
+00:12:45,630 --> 00:12:48,915
+isang iba't ibang mga pattern nalalapat
+para sa mas mababang mga letra kaso.
+
+213
+00:12:48,915 --> 00:12:52,070
+
+214
+00:12:52,070 --> 00:12:55,840
+>> Kaya ngayon na may korte out namin
+kung paano upang ilipat ang isang solong character,
+
+215
+00:12:55,840 --> 00:13:02,200
+at pagkatapos ang lahat ng mayroon kaming gawin ay scale na
+hanggang sa pumunta sa buong plaintext.
+
+216
+00:13:02,200 --> 00:13:04,260
+Kaya ang plaintext ay isang string.
+
+217
+00:13:04,260 --> 00:13:08,210
+Lucky para sa amin, ang isang string ay talagang
+lamang ng isang array ng mga character,
+
+218
+00:13:08,210 --> 00:13:12,150
+kaya upang ma-access ang bawat karakter
+ng isang string, ang kailangan mo lang gawin
+
+219
+00:13:12,150 --> 00:13:14,270
+ay ang paggamit ng array pagtatanda.
+
+220
+00:13:14,270 --> 00:13:20,270
+Say Mayroon akong isang variable ng uri
+string na tinatawag na "text = 'ito ay CS50.'"
+
+221
+00:13:20,270 --> 00:13:22,730
+>> Well, pagkatapos, upang
+ma-access ang bawat karakter,
+
+222
+00:13:22,730 --> 00:13:25,880
+lahat ng kailangan kong gawin sa
+ang mga variable na teksto ay
+
+223
+00:13:25,880 --> 00:13:31,660
+sabihin na rin, text sa index zero, na
+tumutugon sa capital T. Text sa index
+
+224
+00:13:31,660 --> 00:13:35,100
+isa ay tumutugon sa lower case h.
+
+225
+00:13:35,100 --> 00:13:38,110
+Ang isa pang kapaki-pakinabang na function ay
+ang haba ng string function.
+
+226
+00:13:38,110 --> 00:13:40,760
+Kaya pagpasa sa isang string sa
+na function ay babalik
+
+227
+00:13:40,760 --> 00:13:44,610
+isang integer, ang haba ng na string.
+
+228
+00:13:44,610 --> 00:13:47,060
+>> Ngayon na namin ang uusapang tungkol
+ang lahat ng mga iba't ibang mga elemento,
+
+229
+00:13:47,060 --> 00:13:48,540
+sabihin ilagay ang mga ito pabalik sama-sama.
+
+230
+00:13:48,540 --> 00:13:52,210
+Kaya bumalik sa alinman sa aking pseudocode
+code o ang iyong pseudocode
+
+231
+00:13:52,210 --> 00:13:55,920
+at pumunta sa pamamagitan at siguraduhin na ikaw
+alam kung paano gawin ang bawat solong bagay.
+
+232
+00:13:55,920 --> 00:14:01,520
+Getting ang key gamit argc at argv,
+pag-on ang key na ito sa isang integer, isang
+
+233
+00:14:01,520 --> 00:14:06,840
+upang i, pagdikta para plaintext,
+getstring, at pagkatapos ay iterating
+
+234
+00:14:06,840 --> 00:14:09,590
+sa paglipas ng bawat karakter sa
+plaintext string,
+
+235
+00:14:09,590 --> 00:14:14,910
+pagpepreserba ang kaso ng bawat karakter
+at paglilipat na character sa pamamagitan ng ang susi,
+
+236
+00:14:14,910 --> 00:14:17,520
+pagtiyak na ikaw ay
+pambalot sa paligid ng alpabeto,
+
+237
+00:14:17,520 --> 00:14:20,850
+sa wakas pag-print na ciphertext.
+
+238
+00:14:20,850 --> 00:14:25,470
+Ang pangalan ko ay Amila, at ito ay Caesar.
+
+239
+00:14:25,470 --> 00:14:28,448
+

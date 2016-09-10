@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Nous allons intensifier nos
+jeu avec le chiffre de Vigenère.
+
+3
+00:00:04,030 --> 00:00:06,710
+Le chiffrement de Vigenère est
+très semblable à César,
+
+4
+00:00:06,710 --> 00:00:11,060
+sauf César nous avons passé en
+un seul entier comme notre clé.
+
+5
+00:00:11,060 --> 00:00:14,100
+En vigenere nous allons
+passer dans un mot-clé.
+
+6
+00:00:14,100 --> 00:00:19,400
+Donc, si je voulais changer la
+cryptogramme cela est CS 50 par ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+alors cela signifie que chaque lettre
+ohai va servir de la clé,
+
+8
+00:00:23,260 --> 00:00:27,160
+et je vais faire du vélo sur
+ce mot-clé pour mon quart de travail
+
+9
+00:00:27,160 --> 00:00:31,930
+rendre le texte chiffré
+beaucoup plus difficile à décoder.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Qu'est-ce que cela signifie pour
+passer par le mot-clé?
+
+11
+00:00:34,540 --> 00:00:38,610
+Eh bien, le mot-clé est une chaîne
+où chaque lettre correspond
+
+12
+00:00:38,610 --> 00:00:41,080
+à un certain décalage entier.
+
+13
+00:00:41,080 --> 00:00:49,310
+Ainsi, le joint correspond à une clé de 14,
+h à une clé de 7, a a une clé de 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+de sorte que cela ne changerait rien,
+puis i a une clé de 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Disons que je courais vigenere A avec le
+ce texte brut est CS50 bien,
+
+16
+00:01:00,000 --> 00:01:02,800
+ce serait tout simplement donner
+moi une chaîne inchangée.
+
+17
+00:01:02,800 --> 00:01:08,170
+Notez que ceci est équivalent à
+courir César avec une clé de zéro.
+
+18
+00:01:08,170 --> 00:01:12,070
+En fait, vigenere en cours d'exécution
+avec un seul caractère
+
+19
+00:01:12,070 --> 00:01:17,070
+serait équivalent à la course
+César avec le même nombre entier.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Très bien, alors, depuis
+ils sont si semblables que je ferais
+
+21
+00:01:20,400 --> 00:01:24,300
+recommande effectivement que si vous
+voulez vous pouvez simplement copier votre Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+code dans votre code vigenere.
+
+23
+00:01:26,932 --> 00:01:28,640
+Les choses vont changer,
+mais au moins vous avez
+
+24
+00:01:28,640 --> 00:01:31,110
+une colonne vertébrale que vous pouvez travailler avec.
+
+25
+00:01:31,110 --> 00:01:36,410
+Parce que les TODOs sont les mêmes que nous voulons
+pour obtenir la clé, obtenir le texte brut,
+
+26
+00:01:36,410 --> 00:01:40,690
+encipher que le texte brut,
+puis imprimer cela.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Tout comme César la clé va
+être adoptée en tant que deuxième ligne de commande
+
+28
+00:01:44,980 --> 00:01:50,540
+l'argument contenu dans l'indice de argv
+1, mais il est différent cette fois
+
+29
+00:01:50,540 --> 00:01:52,560
+car il doit être alphabétique.
+
+30
+00:01:52,560 --> 00:01:56,390
+Donc, nous avons besoin d'itérer sur tous les
+caractère unique en ce que la clé
+
+31
+00:01:56,390 --> 00:02:00,800
+que l'utilisateur transmis, et veiller à ce
+que chaque caractère est alphabétique
+
+32
+00:02:00,800 --> 00:02:02,800
+afin de continuer.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Une fois que nous l'avons fait, nous
+peut obtenir la chaîne de l'utilisateur,
+
+34
+00:02:05,560 --> 00:02:07,560
+comme nous l'avons fait auparavant.
+
+35
+00:02:07,560 --> 00:02:10,520
+Et maintenant, nous arrivons au cœur
+du problème pour vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+qui est juste comme César, comment
+comprendre le motif de chiffrement
+
+37
+00:02:14,665 --> 00:02:19,760
+et l'équation, et encipher
+l'ensemble du texte en clair.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Donc, vous remarquerez que la
+équation pour le changement de vigenere
+
+39
+00:02:23,280 --> 00:02:25,610
+est très semblable à celui de César.
+
+40
+00:02:25,610 --> 00:02:29,780
+La seule différence est que
+au lieu d'une seule variable k
+
+41
+00:02:29,780 --> 00:02:37,270
+avant, maintenant k a un indice,
+indiquant la lettre jième de la clé.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Marchons à travers un exemple.
+
+43
+00:02:39,560 --> 00:02:43,830
+Dites que vous avez voulu faire passer un secret
+un message sur votre béguin, je vous aime.
+
+44
+00:02:43,830 --> 00:02:46,325
+Eh bien, pour votre clé vous
+choisir quelque chose que votre
+
+45
+00:02:46,325 --> 00:02:49,790
+savoir crush sait que vous aimez, les pandas.
+
+46
+00:02:49,790 --> 00:02:52,290
+D'accord, alors comment pouvons-nous changeons cela?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Eh bien, nous avons notre indice clair.
+
+48
+00:02:55,500 --> 00:02:59,160
+C'est à la première lettre et
+est donc l'indice pour notre clé
+
+49
+00:02:59,160 --> 00:03:02,830
+qui est à la p, la première
+lettre dans notre mot de panda.
+
+50
+00:03:02,830 --> 00:03:08,590
+Ainsi, le déplacement I par p nous x donne,
+alors nous avançons l'indice clair.
+
+51
+00:03:08,590 --> 00:03:10,460
+Cela nous amène à un espace.
+
+52
+00:03:10,460 --> 00:03:13,540
+Or, le caractère d'espace
+est non alphabétiques,
+
+53
+00:03:13,540 --> 00:03:16,930
+ce qui signifie que, qui vient
+transferts juste au-dessus du cryptogramme,
+
+54
+00:03:16,930 --> 00:03:23,430
+nous mettons un espace là-bas, et nous ne le faisons pas
+faire progresser l'indice pour notre clé.
+
+55
+00:03:23,430 --> 00:03:25,820
+Donc, nous sommes toujours à la p à ce stade.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Nous avançons à la prochaine
+index dans notre clair.
+
+57
+00:03:30,130 --> 00:03:34,030
+Et maintenant, parce que c'est
+une lettre, la lettre minuscule l,
+
+58
+00:03:34,030 --> 00:03:37,920
+nous déplaçons que par le
+index suivant dans notre clé.
+
+59
+00:03:37,920 --> 00:03:42,360
+Ce qui est, ce qui est un zéro
+changement de sorte que devient juste
+
+60
+00:03:42,360 --> 00:03:44,370
+un L dans notre cryptogramme.
+
+61
+00:03:44,370 --> 00:03:51,120
+Ensuite, nous avançons à la fois le texte en clair, et
+l'index de clé parce qu'il est alphabétique.
+
+62
+00:03:51,120 --> 00:03:56,210
+Alors que nous continuons
+jusqu'à ce que nous arrivons à la e de la même.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Très bien, alors vous remarquerez à ce
+souligner que, en termes de notre index de clé,
+
+64
+00:04:01,090 --> 00:04:03,940
+nous avons atteint la fin de
+le mot de panda, de sorte que
+
+65
+00:04:03,940 --> 00:04:08,750
+qui se passe quand nous arrivons à la prochaine
+lettre alphabétique dans le texte en clair?
+
+66
+00:04:08,750 --> 00:04:12,180
+Eh bien, tout ce qui arrive est que nous
+enrouler autour du début,
+
+67
+00:04:12,180 --> 00:04:14,710
+le premier index de notre clé.
+
+68
+00:04:14,710 --> 00:04:19,570
+Donc, nous changeons que
+y par p pour nous donner n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Et puis, nous continuons de finition encodage
+notre plaintext pour obtenir x lvne nô.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> De cet exemple, je
+montré que nous avançons seulement
+
+71
+00:04:29,300 --> 00:04:33,140
+à la lettre suivante dans le mot-clé
+si le caractère en texte clair
+
+72
+00:04:33,140 --> 00:04:37,480
+est une lettre de sorte que le isalpha
+fonction sera utile ici.
+
+73
+00:04:37,480 --> 00:04:43,030
+Et, comme dans César, nous voulons
+préserver le cas, isupper et islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Alors, ajoutez peu
+en dans votre pseudo.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Alors, comment pouvons-nous comprendre les changements clés?
+
+76
+00:04:48,510 --> 00:04:53,030
+Eh bien, si vous vous rappelez notre discussion
+sur les indices alphabétiques dans le Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+problème, il est très similaire.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Où A correspond à un caractère ASCII
+valeur de 65, mais un décalage de 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+puis la dernière lettre
+dans l'alphabet, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+correspond à un décalage de 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Vous remarquerez que le décalage
+est identique ou non
+
+82
+00:05:10,320 --> 00:05:14,880
+la lettre est en majuscules ou en minuscules.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, maintenant que vous
+savoir comment comprendre
+
+84
+00:05:17,700 --> 00:05:21,470
+le décalage numérique qui
+correspond à un seul caractère,
+
+85
+00:05:21,470 --> 00:05:24,050
+Revenons à notre équation.
+
+86
+00:05:24,050 --> 00:05:28,180
+Parce que nous avons deux différents
+ici, les indices i et j,
+
+87
+00:05:28,180 --> 00:05:32,130
+c'est un indice que nous voulons garder une trace
+tant de notre position dans le texte en clair
+
+88
+00:05:32,130 --> 00:05:36,600
+ainsi que notre position dans le mot-clé,
+ce sont donc deux variables distinctes
+
+89
+00:05:36,600 --> 00:05:39,010
+que nous voulons garder une prise de.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Maintenant, la position dans notre plaintext
+va augmenter chaque fois,
+
+91
+00:05:42,580 --> 00:05:45,530
+de sorte que ça va être un
+peu avant plus droite
+
+92
+00:05:45,530 --> 00:05:49,750
+par opposition à la position du mot-clé,
+que nous connaissons doit envelopper,
+
+93
+00:05:49,750 --> 00:05:52,910
+et parfois incrémenter,
+rester parfois le même.
+
+94
+00:05:52,910 --> 00:05:55,430
+Alors, comment pouvons-nous mettre en œuvre
+la fonctionnalité
+
+95
+00:05:55,430 --> 00:05:59,820
+à enrouler autour de la
+index pour le mot-clé?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Je vais utiliser l'exemple compteras.
+
+97
+00:06:01,640 --> 00:06:06,100
+Comptage off est une façon populaire
+de diviser les gens en groupes.
+
+98
+00:06:06,100 --> 00:06:10,660
+Dire que j'avais 5 personnes et je voulais
+les diviser en trois groupes,
+
+99
+00:06:10,660 --> 00:06:13,640
+eh bien je commencerais par comptage off.
+
+100
+00:06:13,640 --> 00:06:16,980
+La première personne serait
+dire que je suis l'équipe numéro un,
+
+101
+00:06:16,980 --> 00:06:21,030
+la personne suivante serait numéro d'équipe
+deux, le nombre d'équipe à la troisième personne
+
+102
+00:06:21,030 --> 00:06:21,910
+Trois.
+
+103
+00:06:21,910 --> 00:06:25,910
+Maintenant, je veux seulement trois groupes de sorte
+la quatrième personne serait effectivement
+
+104
+00:06:25,910 --> 00:06:30,160
+commencer au début et à dire,
+bien, je suis l'équipe numéro un aussi bien,
+
+105
+00:06:30,160 --> 00:06:32,890
+et la personne suivante
+serait l'équipe numéro deux.
+
+106
+00:06:32,890 --> 00:06:37,660
+Et, à partir de là, ils peuvent alors
+séparer dans leurs groupes.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Alors, comment pourrais-je utiliser modulo
+pour me aider à mettre en œuvre
+
+108
+00:06:41,130 --> 00:06:44,160
+ce compte hors enveloppe autour de la fonction?
+
+109
+00:06:44,160 --> 00:06:50,140
+Eh bien, la première personne
+numéro 1, mod 3 nous donne 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 nous donne 2,
+et 3 mod 3 nous donne 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> La quatrième personne, le numéro 4, 3 mod
+nous donne 1, puis 5 mod 3 nous donne 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Donc, vous remarquerez que même si
+le nombre de personnes que je dois
+
+113
+00:07:05,370 --> 00:07:11,210
+augmente, et est au-dessus
+3, depuis que je suis modding par 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Je reçois toujours des nombres 0, 1 et 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Je ne suis jamais plus grand que 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Alors, même si je devais 10
+les gens, puis tous ces gens
+
+117
+00:07:22,630 --> 00:07:27,430
+serait encore au sein des groupes 1, 2 ou 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Donc, maintenant nous savons que si nous avons un groupe
+5 et nous mod tous ceux de 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+alors nous allons jamais
+excéder les groupes 0, 1 ou 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Donc, nous allons jamais obtenir un groupe
+nombre qui est égal à 3 ou plus.
+
+121
+00:07:43,430 --> 00:07:46,980
+Donc, même si j'ajoute cinq autres
+les gens, puis tous d'entre eux
+
+122
+00:07:46,980 --> 00:07:53,150
+seraient encore affectés à des groupes
+0, 1 ou 2 parce que je suis modding par 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Je ne vais jamais dépasser ce plafond.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, donc nous allons voir si nous pouvons appliquer
+ce concept de l'utilisation de modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+à enrouler autour de la
+les numéros de groupe et appliquer
+
+126
+00:08:03,710 --> 00:08:08,000
+à Vigenère où nous voulons
+utiliser modulo pour envelopper
+
+127
+00:08:08,000 --> 00:08:10,220
+l'indice pour le mot-clé.
+
+128
+00:08:10,220 --> 00:08:12,830
+Même si nous incrémenter
+l'indice que nous avons toujours
+
+129
+00:08:12,830 --> 00:08:17,260
+voulez vous assurer que nous avons toujours
+enrouler autour du début
+
+130
+00:08:17,260 --> 00:08:20,050
+ne jamais dépasser la
+longueur de la chaîne.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, donc je sais que ce serait peut-être
+un peu écrasante.
+
+132
+00:08:23,510 --> 00:08:26,670
+Il y a beaucoup plus à faire dans ce p set.
+
+133
+00:08:26,670 --> 00:08:30,050
+Donc, assurez-vous que vous écrivez
+une bonne pseudocode pour vous-même
+
+134
+00:08:30,050 --> 00:08:32,870
+que vous comprenez et
+qui obtient le travail.
+
+135
+00:08:32,870 --> 00:08:35,580
+Essayez de répondre à toutes les
+ligne unique indépendamment
+
+136
+00:08:35,580 --> 00:08:38,370
+déterminer tous les petits
+petites pièces du puzzle
+
+137
+00:08:38,370 --> 00:08:40,260
+avant de le mettre ensemble.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Assurez-vous que vous pouvez obtenir
+la clé de la ligne de commande
+
+139
+00:08:43,110 --> 00:08:46,780
+et veiller à ce qu'il est alphabétique,
+obtenir le texte brut de l'utilisateur,
+
+140
+00:08:46,780 --> 00:08:51,010
+puis en chiffrement, assurez-vous
+savoir comment chiffrer une seule lettre,
+
+141
+00:08:51,010 --> 00:08:56,130
+puis passer à la chaîne entière
+avec l'ensemble de l'enrouler autour de fonctions.
+
+142
+00:08:56,130 --> 00:08:59,610
+Enfin, vous pouvez imprimer le cryptogramme.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Mon nom est un Zamyla,
+et ce fut vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

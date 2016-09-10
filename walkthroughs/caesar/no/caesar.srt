@@ -1,0 +1,1140 @@
+1
+00:00:00,000 --> 00:00:00,760
+
+2
+00:00:00,760 --> 00:00:02,270
+>> Amila: La oss takle Cæsar.
+
+3
+00:00:02,270 --> 00:00:06,110
+I Caesar, tillater vi brukeren
+å kode en hemmelig melding.
+
+4
+00:00:06,110 --> 00:00:09,780
+Så la oss hoppe rett inn og se
+på våre gjøremål for dette problemet.
+
+5
+00:00:09,780 --> 00:00:12,210
+Så først, får vi nøkkelen fra brukeren.
+
+6
+00:00:12,210 --> 00:00:15,210
+Så får vi klarteksten
+at de ønsker å kode.
+
+7
+00:00:15,210 --> 00:00:21,380
+Etter at vi encipher det for dem,
+og til slutt vi skrive ut sine krypterte teksten.
+
+8
+00:00:21,380 --> 00:00:23,600
+>> Så la oss starte med et eksempel.
+
+9
+00:00:23,600 --> 00:00:26,920
+Si du ønsket å kode
+hele alfabet med en nøkkel av to.
+
+10
+00:00:26,920 --> 00:00:31,360
+Vel, ville hele alfabetet
+bare bli flyttet til bokstaver.
+
+11
+00:00:31,360 --> 00:00:37,060
+Så A vil kode til C, B til
+D, C til E, så videre og så videre,
+
+12
+00:00:37,060 --> 00:00:42,470
+til du kommer til X, som koder for Z
+eller zed, avhengig av hvor du er fra.
+
+13
+00:00:42,470 --> 00:00:47,445
+Deretter Y vil deretter skifte hele veien,
+vikle rundt alfabetet for å komme til A,
+
+14
+00:00:47,445 --> 00:00:53,256
+og til slutt den siste bokstaven i
+alfabetet, Z, zed, vil kode til B.
+
+15
+00:00:53,256 --> 00:00:54,660
+>> Du fikk det?
+
+16
+00:00:54,660 --> 00:00:56,380
+La oss se på noen eksempler.
+
+17
+00:00:56,380 --> 00:01:00,540
+Det første eksempelet her er meget lik
+til det vi nettopp har forklart ovenfor.
+
+18
+00:01:00,540 --> 00:01:05,560
+Slik at hvis jeg kode noen del av
+alfabet, A til L, med en nøkkel av to,
+
+19
+00:01:05,560 --> 00:01:09,760
+så jeg bare få min hele
+alfabetet flyttet to bokstaver.
+
+20
+00:01:09,760 --> 00:01:12,230
+>> Så, i mitt neste eksempel
+nøkkelen fortsatt er to,
+
+21
+00:01:12,230 --> 00:01:15,080
+så du bør likevel vite
+hvilke bokstaver du kan forvente.
+
+22
+00:01:15,080 --> 00:01:16,400
+Men her er det en setning.
+
+23
+00:01:16,400 --> 00:01:18,100
+Dette er CS50.
+
+24
+00:01:18,100 --> 00:01:21,090
+Så vil du legge merke til at jeg
+bevare tilfelle av brevene,
+
+25
+00:01:21,090 --> 00:01:25,600
+slik at eventuelle store bokstaver er også
+store bokstaver i krypterte teksten.
+
+26
+00:01:25,600 --> 00:01:27,800
+Og noen små bokstaver
+bokstaver i klartekst
+
+27
+00:01:27,800 --> 00:01:30,640
+er også små bokstaver
+bokstaver i krypterte teksten.
+
+28
+00:01:30,640 --> 00:01:34,020
+Men jeg holder bokstavene
+og eventuelle utropstegn
+
+29
+00:01:34,020 --> 00:01:37,610
+eller hvilken som helst annen tegnsetting den samme.
+
+30
+00:01:37,610 --> 00:01:40,360
+>> Så nå som vi har en følelse
+for hvordan programmet fungerer,
+
+31
+00:01:40,360 --> 00:01:43,890
+gjerne gå kjøre noen mer
+eksempler på egen hånd, hvis du ønsker det.
+
+32
+00:01:43,890 --> 00:01:47,072
+La oss starte med å få
+nøkkelen fra brukeren.
+
+33
+00:01:47,072 --> 00:01:48,780
+Tradisjonelt med
+andre problemer, har vi
+
+34
+00:01:48,780 --> 00:01:51,450
+blitt vant til å få
+noen tall som vi
+
+35
+00:01:51,450 --> 00:01:54,710
+trenger ved å spørre brukeren
+med funksjonen getint.
+
+36
+00:01:54,710 --> 00:01:58,850
+Men denne gangen vi faktisk kommer
+å bruke kommandolinje argument
+
+37
+00:01:58,850 --> 00:02:01,760
+og en ny funksjon som kalles atoi.
+
+38
+00:02:01,760 --> 00:02:05,130
+>> Når du kjører hoved
+program i C, da det
+
+39
+00:02:05,130 --> 00:02:08,500
+tar inn to parameters--
+int argc, som
+
+40
+00:02:08,500 --> 00:02:11,670
+er det antall argumenter
+vedtatt i, og deretter
+
+41
+00:02:11,670 --> 00:02:15,920
+argv, en rekke strenger som inneholder
+listen over alle argumentene
+
+42
+00:02:15,920 --> 00:02:16,740
+passert.
+
+43
+00:02:16,740 --> 00:02:19,740
+Du trenger ikke eksplisitt har
+å erklære disse variablene.
+
+44
+00:02:19,740 --> 00:02:22,700
+De er beregnet for
+du av kompilatoren.
+
+45
+00:02:22,700 --> 00:02:28,160
+Riktig bruk for dette ville være
+for argc å være to i dette tilfellet,
+
+46
+00:02:28,160 --> 00:02:32,630
+fordi brukeren må passere i
+kallet til programmet, ./caesar,
+
+47
+00:02:32,630 --> 00:02:35,570
+og deretter tasten,
+uansett hvor mange de ønsker.
+
+48
+00:02:35,570 --> 00:02:39,920
+Så det betyr at argc må være to
+for at et gyldig bruk av Caesar
+
+49
+00:02:39,920 --> 00:02:41,680
+å bli henrettet.
+
+50
+00:02:41,680 --> 00:02:43,590
+>> Så la oss se på et eksempel.
+
+51
+00:02:43,590 --> 00:02:47,760
+Si jeg har allerede skrevet og
+utarbeidet et program som heter blastoff.
+
+52
+00:02:47,760 --> 00:02:52,670
+Så hvis jeg kjørte i kommandolinjen
+./blastoff team Rocket, vel, da,
+
+53
+00:02:52,670 --> 00:02:57,750
+argc ville være tre fordi jeg
+vedtatt i tre forskjellige argumenter.
+
+54
+00:02:57,750 --> 00:02:59,830
+Deretter argv ville se slik ut.
+
+55
+00:02:59,830 --> 00:03:03,750
+Det er en matrise, og det ville
+inneholder hver av de tre strenger.
+
+56
+00:03:03,750 --> 00:03:09,640
+./blastoff i første indeksen, team
+i den neste, og rocket i det siste.
+
+57
+00:03:09,640 --> 00:03:11,610
+>> La oss snakke om arrays for et sek.
+
+58
+00:03:11,610 --> 00:03:15,560
+Arrays er datastrukturer som holder
+flere verdier av samme type.
+
+59
+00:03:15,560 --> 00:03:19,980
+Dette kan komme godt med når vi
+har lister over heltall eller strenger.
+
+60
+00:03:19,980 --> 00:03:23,030
+Bare husk at de har
+for å være av samme type.
+
+61
+00:03:23,030 --> 00:03:25,310
+I informatikk, vi
+elsker å telle fra null,
+
+62
+00:03:25,310 --> 00:03:29,260
+så husk at arrays
+er også null-indeksert.
+
+63
+00:03:29,260 --> 00:03:34,360
+Så det første elementet i mitt utvalg
+kommer til å være på indeksen null.
+
+64
+00:03:34,360 --> 00:03:37,580
+Så i dette tilfellet, når jeg har
+en oppstilling av fire lengde,
+
+65
+00:03:37,580 --> 00:03:41,350
+da den siste indeksen i
+siste del av mitt utvalg
+
+66
+00:03:41,350 --> 00:03:44,970
+faktisk kommer til å være
+på indeksen tre, ikke fire.
+
+67
+00:03:44,970 --> 00:03:48,880
+Fordi husk, vi
+begynne å telle til null.
+
+68
+00:03:48,880 --> 00:03:52,530
+>> Her er et eksempel på hvordan du
+kan skape en rekke av dine egne.
+
+69
+00:03:52,530 --> 00:03:56,440
+Så sier jeg ønsket å lagre min
+tre favoritt hunden navn.
+
+70
+00:03:56,440 --> 00:03:59,030
+Da ville jeg skape en rekke strenger.
+
+71
+00:03:59,030 --> 00:04:04,450
+Så jeg ville erklære type, streng, og
+deretter sette navnet på tabellen, hunder,
+
+72
+00:04:04,450 --> 00:04:06,450
+og deretter i de square
+parentes sette størrelsen
+
+73
+00:04:06,450 --> 00:04:09,260
+av den array-- i dette tilfelle tre.
+
+74
+00:04:09,260 --> 00:04:12,690
+>> Så min første oppføringen kommer
+å være hunder på indeksen null,
+
+75
+00:04:12,690 --> 00:04:14,750
+og som kommer til å være Milo.
+
+76
+00:04:14,750 --> 00:04:17,850
+Så hunder på indeksen en
+kommer til å være klønete,
+
+77
+00:04:17,850 --> 00:04:23,060
+elskling Mochi, og deretter den siste
+oppføring, den tredje posten på indeksen to,
+
+78
+00:04:23,060 --> 00:04:26,130
+kommer til å være søt, søt Elphie.
+
+79
+00:04:26,130 --> 00:04:28,610
+Du vil merke at formatet
+for å fylle denne matrisen
+
+80
+00:04:28,610 --> 00:04:32,150
+er veldig mye som hvordan du kan
+erklære noen annen variabel der
+
+81
+00:04:32,150 --> 00:04:36,307
+du har variabelnavnet etterfulgt av
+verdien som du vil ha lagret i den.
+
+82
+00:04:36,307 --> 00:04:38,140
+Den eneste forskjellen i
+dette tilfellet er at du
+
+83
+00:04:38,140 --> 00:04:42,700
+må huske å sette indeksen
+av verdien i hakeparentes.
+
+84
+00:04:42,700 --> 00:04:46,420
+Og der har vi vår
+tre favoritt hunder.
+
+85
+00:04:46,420 --> 00:04:48,780
+>> Men akk, det er på tide
+å komme tilbake til Cæsar.
+
+86
+00:04:48,780 --> 00:04:52,910
+Husk at riktig bruk for
+Brukeren skal være bestått i ikke bare
+
+87
+00:04:52,910 --> 00:04:57,430
+navnet på programmet ./caesar, men
+også nøkkelen for at de ønsker å skifte
+
+88
+00:04:57,430 --> 00:04:58,850
+deres klartekst ved.
+
+89
+00:04:58,850 --> 00:05:01,540
+Så det betyr at argc må være to.
+
+90
+00:05:01,540 --> 00:05:07,580
+De må passere i two-- ikke mer, ikke
+mindre enn to kommandolinjeargumenter.
+
+91
+00:05:07,580 --> 00:05:09,050
+>> Nå, hva om argv?
+
+92
+00:05:09,050 --> 00:05:12,880
+Vel, vi vet allerede at
+matrisen kommer til å være av lengde to,
+
+93
+00:05:12,880 --> 00:05:15,270
+men det som finnes i hvert element?
+
+94
+00:05:15,270 --> 00:05:19,330
+Vel, det første elementet
+kommer til å være ./caesar,
+
+95
+00:05:19,330 --> 00:05:24,190
+og deretter den neste element skal
+inneholder nøkkelen som brukeren har skrevet inn.
+
+96
+00:05:24,190 --> 00:05:27,480
+Nå, om de brukte det riktig
+for bruken av Caesar,
+
+97
+00:05:27,480 --> 00:05:29,350
+så de kommer til å taste inn et nummer.
+
+98
+00:05:29,350 --> 00:05:33,260
+Men selv om tegnet
+at de skriver er et tall,
+
+99
+00:05:33,260 --> 00:05:35,790
+det er av datatypen string.
+
+100
+00:05:35,790 --> 00:05:40,390
+>> Så hvordan skal vi konvertere
+streng til et heltall?
+
+101
+00:05:40,390 --> 00:05:46,680
+Så sier jeg har num, en streng,
+inneholder strengen 50.
+
+102
+00:05:46,680 --> 00:05:49,000
+Hvis jeg ønsker å konvertere
+til et heltall, da jeg rett og slett
+
+103
+00:05:49,000 --> 00:05:53,340
+erklære en ny variabel, en
+heltall i, ringer atoi.
+
+104
+00:05:53,340 --> 00:06:01,160
+Jeg passerer i min streng variabel, num, og
+så jeg vil da inneholde nummer 50.
+
+105
+00:06:01,160 --> 00:06:04,350
+Sørg for å sjekke mannen
+sider for atoi funksjon
+
+106
+00:06:04,350 --> 00:06:07,990
+å sjekke hvilke bibliotek det er
+i, samt hvilken verdi det
+
+107
+00:06:07,990 --> 00:06:14,550
+kommer tilbake hvis strengen sendes
+i ikke inneholder alle tall.
+
+108
+00:06:14,550 --> 00:06:16,950
+>> Så nå som vi har fått
+nøkkelen, er neste trinn
+
+109
+00:06:16,950 --> 00:06:19,430
+er for å få den rene teksten fra brukeren.
+
+110
+00:06:19,430 --> 00:06:21,170
+Nå, dette kommer til å
+være mindre komplisert
+
+111
+00:06:21,170 --> 00:06:23,410
+enn å navigere rundt
+kommandolinjeargumenter.
+
+112
+00:06:23,410 --> 00:06:26,190
+Alt vi trenger å gjøre er å ringe
+den getstring funksjon
+
+113
+00:06:26,190 --> 00:06:29,660
+å be brukeren om å gi
+oss en streng, men husk
+
+114
+00:06:29,660 --> 00:06:34,090
+å sjekke spesifikasjonene for hvordan vi
+kan det være lurt å be brukeren om det.
+
+115
+00:06:34,090 --> 00:06:36,420
+>> Nå kommer vi til den
+hjertet av problem--
+
+116
+00:06:36,420 --> 00:06:38,860
+hvordan å encipher klarteksten.
+
+117
+00:06:38,860 --> 00:06:42,830
+Vel, først, la oss snakke om hvordan
+å encipher ett tegn om gangen,
+
+118
+00:06:42,830 --> 00:06:47,370
+og så får vi ta opp hvordan
+iterere over hele teksten.
+
+119
+00:06:47,370 --> 00:06:50,440
+Jeg har skrevet noen pseudo
+for Caesar problem.
+
+120
+00:06:50,440 --> 00:06:52,310
+Jeg oppfordrer deg til
+skrive din egen så vel.
+
+121
+00:06:52,310 --> 00:06:55,900
+Det kanskje ikke ser identisk med
+min, og det er OK, men så lenge
+
+122
+00:06:55,900 --> 00:06:58,640
+som den generelle ideen er den samme.
+
+123
+00:06:58,640 --> 00:07:00,780
+>> De tre første trinnene
+vi allerede har gjort.
+
+124
+00:07:00,780 --> 00:07:03,100
+Vi har fått nøkkelen fra
+kommandolinje argument,
+
+125
+00:07:03,100 --> 00:07:05,510
+vi har slått den tasten
+inn et heltall, og vi har
+
+126
+00:07:05,510 --> 00:07:09,320
+bedt brukeren for ren tekst
+at de ønsker å encipher.
+
+127
+00:07:09,320 --> 00:07:12,420
+Så det neste store blings
+er det for hvert tegn
+
+128
+00:07:12,420 --> 00:07:15,070
+i klartekst streng,
+hvis det er alfabetisk,
+
+129
+00:07:15,070 --> 00:07:17,750
+vi ønsker å bevare
+sin sak og skifte den.
+
+130
+00:07:17,750 --> 00:07:20,900
+Ved å bevare tilfelle, hva jeg
+mener er at alle store bokstaver
+
+131
+00:07:20,900 --> 00:07:23,580
+brevene skal være over
+case og små bokstaver
+
+132
+00:07:23,580 --> 00:07:25,640
+bør forbli små bokstaver.
+
+133
+00:07:25,640 --> 00:07:29,110
+Så etter at vi skiftet disse,
+Da vi skrive ut krypterte teksten.
+
+134
+00:07:29,110 --> 00:07:33,100
+>> Her er tre funksjoner som kommer
+å komme til for dette problemet.
+
+135
+00:07:33,100 --> 00:07:38,010
+Husk opp over når jeg ga
+eksempel for å skifte dette er CS50?
+
+136
+00:07:38,010 --> 00:07:41,800
+Husk at den 50 og den
+utropstegn ikke skifte?
+
+137
+00:07:41,800 --> 00:07:45,680
+Så hvordan kan vi vite om vi
+trenger å skifte et brev eller ikke?
+
+138
+00:07:45,680 --> 00:07:48,650
+Vel, "er alfa", hvis
+du passerer det et tegn,
+
+139
+00:07:48,650 --> 00:07:54,850
+vil returnere true hvis det tegnet
+er et brev og falsk ellers.
+
+140
+00:07:54,850 --> 00:07:56,870
+For å hjelpe deg med
+bevare kapitalisering
+
+141
+00:07:56,870 --> 00:07:59,750
+er funksjonene "er
+øvre "og" lavere ".
+
+142
+00:07:59,750 --> 00:08:03,350
+>> Disse to funksjoner også ta
+i et enkelt tegn som input
+
+143
+00:08:03,350 --> 00:08:06,580
+og returnere deg en boolsk,
+enten sant eller usant
+
+144
+00:08:06,580 --> 00:08:11,280
+avhengig av om det tegnet
+er små eller store bokstaver.
+
+145
+00:08:11,280 --> 00:08:14,610
+Fordi "er øvre" og "er
+lavere "er boolske funksjoner,
+
+146
+00:08:14,610 --> 00:08:18,660
+noe som betyr at de kommer tilbake du en boolsk,
+du kan bruke disse i dine forhold.
+
+147
+00:08:18,660 --> 00:08:23,490
+Så her er en bit med kode som bare
+skriver et brev om det er store bokstaver.
+
+148
+00:08:23,490 --> 00:08:27,790
+Så jeg har erklært min karakter
+brev til å bli den store bokstaver zed
+
+149
+00:08:27,790 --> 00:08:33,440
+og hvis "er øvre" returnerer
+sant, så jeg skriver dette brevet.
+
+150
+00:08:33,440 --> 00:08:38,200
+>> Går tilbake til vårt enkle eksempel på
+skiftende alfabetet ved en nøkkel av to,
+
+151
+00:08:38,200 --> 00:08:41,049
+hvordan kan vi faktisk få det til å fungere?
+
+152
+00:08:41,049 --> 00:08:45,770
+Vel, det viser seg at tegnene
+og heltall er svært nært beslektet.
+
+153
+00:08:45,770 --> 00:08:48,840
+Hver karakter har en
+heltallsverdi forbundet
+
+154
+00:08:48,840 --> 00:08:53,260
+med det som finnes i ASCII diagram,
+hvor hvert tegn ASCII
+
+155
+00:08:53,260 --> 00:08:55,380
+verdien vises.
+
+156
+00:08:55,380 --> 00:08:58,940
+Så en stor bokstav A tilsvarer
+til en ASCII-verdi på 65
+
+157
+00:08:58,940 --> 00:09:02,270
+og en liten bokstav a til
+en ASCII-verdi på 97.
+
+158
+00:09:02,270 --> 00:09:04,940
+>> Føl deg fri til å se opp
+alle ASCII diagram online
+
+159
+00:09:04,940 --> 00:09:07,720
+å se disse verdiene selv.
+
+160
+00:09:07,720 --> 00:09:12,096
+Så hva dette betyr er at vi kan
+ta karakter av store bokstaver A,
+
+161
+00:09:12,096 --> 00:09:18,200
+legge heltallet to til det, og så får
+tegnet øvre hus C som et resultat.
+
+162
+00:09:18,200 --> 00:09:23,720
+Det er fordi 65, ASCII
+verdi for kapital A, pluss to,
+
+163
+00:09:23,720 --> 00:09:29,960
+gir oss 67, som tilsvarer
+til karakteren av store bokstaver C.
+
+164
+00:09:29,960 --> 00:09:33,480
+>> Dessverre, ting
+vil ikke helt være så enkelt.
+
+165
+00:09:33,480 --> 00:09:36,980
+Vi har en ligning som
+vi må vurdere.
+
+166
+00:09:36,980 --> 00:09:43,590
+Her forteller det oss at den it chifferteksten
+bokstav svarer til den i-te rene teksten
+
+167
+00:09:43,590 --> 00:09:48,900
+brev, pluss key--
+alt dette, modulære 26.
+
+168
+00:09:48,900 --> 00:09:50,810
+Hvorfor er det slik?
+
+169
+00:09:50,810 --> 00:09:55,430
+La oss gå tilbake til vårt eksempel fra
+før, der kapital A, pluss to,
+
+170
+00:09:55,430 --> 00:09:57,590
+gir oss kapital C.
+
+171
+00:09:57,590 --> 00:10:01,870
+>> Så å bruke ligningen som
+spesifikasjonen gir oss,
+
+172
+00:10:01,870 --> 00:10:06,660
+så la oss ta kapital A
+pluss to og mod som med 26.
+
+173
+00:10:06,660 --> 00:10:10,730
+Så kapital A, når jeg setter den i
+disse enkle anførselstegn,
+
+174
+00:10:10,730 --> 00:10:14,010
+tillater meg å behandle det som
+et helt tall, slik som lar
+
+175
+00:10:14,010 --> 00:10:17,500
+meg å kaste den til sin ASCII-verdi, 65.
+
+176
+00:10:17,500 --> 00:10:20,080
+65 pluss to er 67.
+
+177
+00:10:20,080 --> 00:10:25,210
+67 mod 26 gir oss 15,
+men det gjør egentlig ikke
+
+178
+00:10:25,210 --> 00:10:32,590
+fornuftig fordi vi vet at
+kapital C ASCII-verdi er 67, ikke 15.
+
+179
+00:10:32,590 --> 00:10:35,580
+Så hvordan skal vi forene det?
+
+180
+00:10:35,580 --> 00:10:39,840
+>> Vel, her jeg ønsker å posit den
+Ideen om en alfabetisk indeks.
+
+181
+00:10:39,840 --> 00:10:44,010
+Så vi har allerede snakket om hvordan
+hver figur har sin ASCII-verdi,
+
+182
+00:10:44,010 --> 00:10:48,810
+men jeg vil gjerne si, vel, la oss
+tenke på hver karakter også ha
+
+183
+00:10:48,810 --> 00:10:52,230
+en alfabetisk indeks,
+hvor A for eksempel,
+
+184
+00:10:52,230 --> 00:10:58,800
+som den første bokstaven i alfabetet,
+har en alfabetisk indeks over null.
+
+185
+00:10:58,800 --> 00:11:02,070
+Så nå kan vi bruke
+samme ligning som før,
+
+186
+00:11:02,070 --> 00:11:05,040
+men ved hjelp av en alfabetisk indeks.
+
+187
+00:11:05,040 --> 00:11:07,810
+>> Så A er null, slik vi har definert.
+
+188
+00:11:07,810 --> 00:11:15,640
+Så da tar null pluss to, mod 26,
+det er to, mod 26, noe som gir oss to.
+
+189
+00:11:15,640 --> 00:11:18,780
+Og vel, i form av
+en alfabetisk indeks,
+
+190
+00:11:18,780 --> 00:11:23,930
+C er den tredje bokstaven i
+alfabetet, så det ville tilsvare
+
+191
+00:11:23,930 --> 00:11:26,290
+til en alfabetisk indeks over to.
+
+192
+00:11:26,290 --> 00:11:29,850
+Så det virker som bruker
+alfabetisk indeks i denne saken
+
+193
+00:11:29,850 --> 00:11:32,840
+faktisk gir oss riktig resultat.
+
+194
+00:11:32,840 --> 00:11:35,020
+>> Så nå la oss sjekke
+se om ligningen verk
+
+195
+00:11:35,020 --> 00:11:37,210
+med en alfabetisk indeks.
+
+196
+00:11:37,210 --> 00:11:42,540
+Ys alfabetisk indeks er 24 som
+nest siste bokstaven i alfabetet.
+
+197
+00:11:42,540 --> 00:11:46,520
+Så da 24 pluss vår
+Nøkkelen til to gir oss 26.
+
+198
+00:11:46,520 --> 00:11:54,750
+26 mod 26 gir oss 0, som, heldig for
+oss, er den alfabetiske indeksen for A.
+
+199
+00:11:54,750 --> 00:11:59,100
+Så forhåpentligvis det er bevis nok på at
+den alfabetiske indeksen metoden fungerer.
+
+200
+00:11:59,100 --> 00:12:03,180
+Hvis ikke, må du gjerne prøve ut
+noen eksempler på egen hånd.
+
+201
+00:12:03,180 --> 00:12:08,030
+>> For å kunne brytes rundt
+alfabet og bruke Caesar ligningen,
+
+202
+00:12:08,030 --> 00:12:11,280
+da vet vi at vi trenger å
+håndtere alfabetiske indekser.
+
+203
+00:12:11,280 --> 00:12:15,130
+Men vi starter med ASCII
+verdier, og bare deretter
+
+204
+00:12:15,130 --> 00:12:18,530
+vi deretter konvertere til
+den alfabetiske indeksen.
+
+205
+00:12:18,530 --> 00:12:23,970
+Derfra for å skrive ut, må vi
+å håndtere de ASCII-verdier igjen.
+
+206
+00:12:23,970 --> 00:12:28,350
+Så vi må finne ut hvordan de skal
+gå fra ASCII til alfabetisk
+
+207
+00:12:28,350 --> 00:12:31,080
+og fra alfabetisk til ASCII.
+
+208
+00:12:31,080 --> 00:12:34,910
+>> Så jeg la det til deg å finne ut
+mønsteret mellom en karakter
+
+209
+00:12:34,910 --> 00:12:38,590
+og dens alfabetisk
+indeks og dens ASCII-verdi.
+
+210
+00:12:38,590 --> 00:12:41,530
+Nå, husk at selv om
+denne tabellen til høyre på lysbildet
+
+211
+00:12:41,530 --> 00:12:45,630
+viser store bokstaver, vi også
+må vurdere hvorvidt
+
+212
+00:12:45,630 --> 00:12:48,915
+et annet mønster gjelder
+for de små bokstaver.
+
+213
+00:12:48,915 --> 00:12:52,070
+
+214
+00:12:52,070 --> 00:12:55,840
+>> Så nå som vi har funnet ut
+hvordan å skifte en enkelt karakter,
+
+215
+00:12:55,840 --> 00:13:02,200
+så alt vi trenger å gjøre er skala som
+opp for å gå på tvers av hele teksten.
+
+216
+00:13:02,200 --> 00:13:04,260
+Så den rene teksten er en streng.
+
+217
+00:13:04,260 --> 00:13:08,210
+Heldig for oss, er en streng virkelig
+bare en rekke tegn,
+
+218
+00:13:08,210 --> 00:13:12,150
+så for å få tilgang til hver karakter
+av en streng, alt du trenger å gjøre
+
+219
+00:13:12,150 --> 00:13:14,270
+er å bruke matrise-notasjon.
+
+220
+00:13:14,270 --> 00:13:20,270
+Si jeg har en variabel av type
+strengen som kalles "text =" dette er CS50. "
+
+221
+00:13:20,270 --> 00:13:22,730
+>> Vel, da, for å
+tilgang til hver karakter,
+
+222
+00:13:22,730 --> 00:13:25,880
+alt jeg har å gjøre med
+variabelen teksten er
+
+223
+00:13:25,880 --> 00:13:31,660
+å si vel, tekst indeks null, som
+tilsvarer kapital T. Tekst på indeksen
+
+224
+00:13:31,660 --> 00:13:35,100
+en tilsvarende små bokstaver timer.
+
+225
+00:13:35,100 --> 00:13:38,110
+En annen nyttig funksjon er
+strenglengden funksjon.
+
+226
+00:13:38,110 --> 00:13:40,760
+Så passerer i en streng for å
+at funksjonen vil returnere
+
+227
+00:13:40,760 --> 00:13:44,610
+et heltall, lengden av strengen.
+
+228
+00:13:44,610 --> 00:13:47,060
+>> Nå som vi har snakket om
+Alle disse forskjellige elementer,
+
+229
+00:13:47,060 --> 00:13:48,540
+la oss sette dem sammen igjen.
+
+230
+00:13:48,540 --> 00:13:52,210
+Så tilbake til enten min pseudo
+kode eller pseudo
+
+231
+00:13:52,210 --> 00:13:55,920
+og gå gjennom og sørg for at du
+vet hvordan du gjør hver eneste ting.
+
+232
+00:13:55,920 --> 00:14:01,520
+Å få nøkkelen ved hjelp av argc og argv,
+dreie nøkkelen i et heltall, en
+
+233
+00:14:01,520 --> 00:14:06,840
+å jeg, spørre for klartekst,
+getstring, og deretter itera
+
+234
+00:14:06,840 --> 00:14:09,590
+over hver karakter i
+klarteksten streng,
+
+235
+00:14:09,590 --> 00:14:14,910
+bevare tilfelle av hvert tegn
+og skiftende som tegnet av nøkkelen,
+
+236
+00:14:14,910 --> 00:14:17,520
+sikre at du er
+innpakning rundt alfabetet,
+
+237
+00:14:17,520 --> 00:14:20,850
+endelig utskrift som krypterte teksten.
+
+238
+00:14:20,850 --> 00:14:25,470
+Mitt navn er Amila, og dette var Cæsar.
+
+239
+00:14:25,470 --> 00:14:28,448
+

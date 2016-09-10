@@ -1,0 +1,1140 @@
+1
+00:00:00,000 --> 00:00:00,760
+
+2
+00:00:00,760 --> 00:00:02,270
+>> AMILA: Le të merret me Cezarin.
+
+3
+00:00:02,270 --> 00:00:06,110
+Në Cezarit, ne të lejojë përdoruesit
+për të shifroj një mesazh të fshehtë.
+
+4
+00:00:06,110 --> 00:00:09,780
+Pra, le të zhyten të drejtë në dhe të kërkoni
+në tonë për-dos për këtë problem.
+
+5
+00:00:09,780 --> 00:00:12,210
+Pra, së pari, ne kemi marrë çelësin nga përdoruesit.
+
+6
+00:00:12,210 --> 00:00:15,210
+Pastaj ne kemi marrë plaintext
+se ata duan për të kodifikuar.
+
+7
+00:00:15,210 --> 00:00:21,380
+Pas kësaj, ne shifroj atë për ta,
+dhe më në fund ne të shtypura koduar tyre.
+
+8
+00:00:21,380 --> 00:00:23,600
+>> Pra, le të fillojmë me një shembull.
+
+9
+00:00:23,600 --> 00:00:26,920
+Thuaj ju të kërkuar për të shifroj
+tërë alfabeti me një çelës të dy.
+
+10
+00:00:26,920 --> 00:00:31,360
+E pra, tërë alfabeti yt do
+vetëm të jetë zhvendosur në letra.
+
+11
+00:00:31,360 --> 00:00:37,060
+Pra A do të shifroj të C, B për
+D, C për E, kështu me radhë e kështu me radhë,
+
+12
+00:00:37,060 --> 00:00:42,470
+deri sa ju të merrni për X, i cili kodon për Z
+ose zed, në varësi se ku ju jeni nga.
+
+13
+00:00:42,470 --> 00:00:47,445
+Pastaj Y më pas do të zhvendoset të gjithë rrugën,
+përfundojë rreth alfabetit për të marrë në A,
+
+14
+00:00:47,445 --> 00:00:53,256
+dhe pastaj në fund letra e fundit e
+Alfabeti, Z, zed, do të shifroj të B.
+
+15
+00:00:53,256 --> 00:00:54,660
+>> Ju mori atë?
+
+16
+00:00:54,660 --> 00:00:56,380
+Le të shikojmë disa shembuj.
+
+17
+00:00:56,380 --> 00:01:00,540
+Shembulli i parë këtu është shumë e ngjashme
+me atë që ne vetëm shpjeguar më lart.
+
+18
+00:01:00,540 --> 00:01:05,560
+Pra, nëse unë të shifroj një pjesë e të
+Alfabeti, A me L, nga një çelës të dy,
+
+19
+00:01:05,560 --> 00:01:09,760
+atëherë unë vetëm të marrë të tërë e mia
+alfabeti zhvendosur dy letra.
+
+20
+00:01:09,760 --> 00:01:12,230
+>> Pastaj, në shembullin tim të ardhshëm,
+çelësi është ende dy,
+
+21
+00:01:12,230 --> 00:01:15,080
+kështu që ju duhet ende të dini
+të cilat letra të presin.
+
+22
+00:01:15,080 --> 00:01:16,400
+Por këtu është një frazë.
+
+23
+00:01:16,400 --> 00:01:18,100
+Kjo është CS50.
+
+24
+00:01:18,100 --> 00:01:21,090
+Pra, ju do të vëreni se unë
+ruajnë rastin e letrave të mia,
+
+25
+00:01:21,090 --> 00:01:25,600
+kështu që çdo letra e sipërme rast edhe
+letra e sipërme rast në ciphertext.
+
+26
+00:01:25,600 --> 00:01:27,800
+Dhe çdo të vogla
+letra në plaintext
+
+27
+00:01:27,800 --> 00:01:30,640
+janë jo kapitale gjithashtu
+letra në ciphertext.
+
+28
+00:01:30,640 --> 00:01:34,020
+Por unë të mbajtur letrat
+dhe çdo shënon çuditëse
+
+29
+00:01:34,020 --> 00:01:37,610
+ose çdo pikësimi tjetër të njëjta.
+
+30
+00:01:37,610 --> 00:01:40,360
+>> Pra, tani që ne kemi një kuptim
+për mënyrën se si punon programi,
+
+31
+00:01:40,360 --> 00:01:43,890
+të ndjehen të lirë për të shkuar të kandiduar disa më shumë
+shembuj të tuaj, nëse ju dëshironi.
+
+32
+00:01:43,890 --> 00:01:47,072
+Le të fillojmë me marrjen
+çelësi nga përdoruesit.
+
+33
+00:01:47,072 --> 00:01:48,780
+Tradicionalisht, me
+probleme të tjera, ne kemi
+
+34
+00:01:48,780 --> 00:01:51,450
+janë mësuar me marrjen e
+çdo numër që ne
+
+35
+00:01:51,450 --> 00:01:54,710
+nevojë duke bërë që përdoruesit
+me funksion të GetInt.
+
+36
+00:01:54,710 --> 00:01:58,850
+Por këtë herë ne jemi të vërtetë do
+për të përdorur argumentin command line
+
+37
+00:01:58,850 --> 00:02:01,760
+dhe një funksion të ri të quajtur atoi.
+
+38
+00:02:01,760 --> 00:02:05,130
+>> Kur ju drejtuar kryesore
+program në C, atëherë ajo
+
+39
+00:02:05,130 --> 00:02:08,500
+merr në dy parameters--
+int argc, e cila
+
+40
+00:02:08,500 --> 00:02:11,670
+është numri i argumenteve
+kaluar ne, dhe pastaj
+
+41
+00:02:11,670 --> 00:02:15,920
+argv, një grup i cili përmban vargjet
+lista e të gjitha argumenteve
+
+42
+00:02:15,920 --> 00:02:16,740
+kaloi.
+
+43
+00:02:16,740 --> 00:02:19,740
+Ju nuk keni eksplicite
+për të deklaruar këto variabla.
+
+44
+00:02:19,740 --> 00:02:22,700
+Ata janë llogaritur për
+ju nga përpiluesit.
+
+45
+00:02:22,700 --> 00:02:28,160
+Përdorimi i saktë për këtë do të jetë
+për argc të jenë të dy në këtë rast,
+
+46
+00:02:28,160 --> 00:02:32,630
+për shkak se përdoruesi ka për të kaluar në
+thirrja për programin, ./caesar,
+
+47
+00:02:32,630 --> 00:02:35,570
+dhe pastaj çelësi,
+çfarëdo numri që ata dëshirojnë.
+
+48
+00:02:35,570 --> 00:02:39,920
+Kështu që do të thotë se argc duhet të jetë dy
+në mënyrë që për një përdorim të vlefshme të Cezarit
+
+49
+00:02:39,920 --> 00:02:41,680
+që do të ekzekutohet.
+
+50
+00:02:41,680 --> 00:02:43,590
+>> Pra, le të shikojmë një shembull.
+
+51
+00:02:43,590 --> 00:02:47,760
+Thonë se unë kam shkruar tashmë dhe
+hartuar një program të quajtur nisje.
+
+52
+00:02:47,760 --> 00:02:52,670
+Pra, nëse unë u zhvillua në command line
+./blastoff Rocket Team, mirë, atëherë,
+
+53
+00:02:52,670 --> 00:02:57,750
+argc do të jetë tre për shkak se unë
+kaluar në tri argumente të ndryshme.
+
+54
+00:02:57,750 --> 00:02:59,830
+Pastaj argv do të duket si ky.
+
+55
+00:02:59,830 --> 00:03:03,750
+Kjo është një grup, dhe kjo do të
+përmbajnë secili prej tre vargjet.
+
+56
+00:03:03,750 --> 00:03:09,640
+./blastoff në treguesin e parë, ekipi
+në tjetër, dhe raketa në të fundit.
+
+57
+00:03:09,640 --> 00:03:11,610
+>> Le të flasim për vargjeve për një sec.
+
+58
+00:03:11,610 --> 00:03:15,560
+Vargjeve janë strukturat e të dhënave që mbajnë
+Vlerat e shumëfishta të të njëjtit lloj.
+
+59
+00:03:15,560 --> 00:03:19,980
+Kjo mund të jetë në dispozicion, kur ne
+kanë listat e integers ose strings.
+
+60
+00:03:19,980 --> 00:03:23,030
+Vetëm mos harroni se ata kanë
+të jenë të njëjta tipi.
+
+61
+00:03:23,030 --> 00:03:25,310
+Në shkenca kompjuterike, ne
+dashuri llogaritur nga zero,
+
+62
+00:03:25,310 --> 00:03:29,260
+kështu që mos harroni se vargjeve
+edhe zero-indeksuar.
+
+63
+00:03:29,260 --> 00:03:34,360
+Pra, elementin e parë të vektorit tim
+do të jetë në indeksin zero.
+
+64
+00:03:34,360 --> 00:03:37,580
+Pra, në këtë rast, kur unë kam
+një grup i gjatësisë katër,
+
+65
+00:03:37,580 --> 00:03:41,350
+atëherë indeksi i fundit
+Elementi i fundit i vektorit tim
+
+66
+00:03:41,350 --> 00:03:44,970
+është në të vërtetë do të jetë
+në indeksin e tre, jo katër.
+
+67
+00:03:44,970 --> 00:03:48,880
+Sepse mos harroni, ne
+fillojë numërimi në zero.
+
+68
+00:03:48,880 --> 00:03:52,530
+>> Ja një shembull se si ju
+mund të krijojë një grup nga mesi juaj.
+
+69
+00:03:52,530 --> 00:03:56,440
+Pra, thonë se unë të kërkuar për të ruajtur tim
+tre qen emra të preferuar.
+
+70
+00:03:56,440 --> 00:03:59,030
+Atëherë unë do të krijojë një rrjet të strings.
+
+71
+00:03:59,030 --> 00:04:04,450
+Kështu që unë do të deklarojë llojin, string, dhe
+pastaj emrin e array, qentë,
+
+72
+00:04:04,450 --> 00:04:06,450
+dhe më pas në ato shesh
+kllapa vënë madhësinë
+
+73
+00:04:06,450 --> 00:04:09,260
+e array-- në këtë rast, tre.
+
+74
+00:04:09,260 --> 00:04:12,690
+>> Pra, hyrja ime e parë do
+të jenë qentë në indeksin zero,
+
+75
+00:04:12,690 --> 00:04:14,750
+dhe kjo do të jetë Milo.
+
+76
+00:04:14,750 --> 00:04:17,850
+Pastaj qentë në indeksin një
+do të jetë budalla,
+
+77
+00:04:17,850 --> 00:04:23,060
+darling Mochi, dhe pastaj e fundit
+hyrje, hyrja e tretë në indeksin dy,
+
+78
+00:04:23,060 --> 00:04:26,130
+do të jetë e bukur, e ëmbël Elphie.
+
+79
+00:04:26,130 --> 00:04:28,610
+Ju do të vëreni se format
+për të plotësuar në këtë grup
+
+80
+00:04:28,610 --> 00:04:32,150
+është shumë i ngjashëm se si ju mund të
+deklarojë ndonjë variabël tjetër ku
+
+81
+00:04:32,150 --> 00:04:36,307
+ju keni emrin e ndryshueshme e ndjekur nga
+vlera që ju doni të ruajtura në të.
+
+82
+00:04:36,307 --> 00:04:38,140
+Dallimi i vetëm në
+ky rast është se ju
+
+83
+00:04:38,140 --> 00:04:42,700
+duhet të mbani mend për të vënë në indeks
+e vlerës në kllapa katrore.
+
+84
+00:04:42,700 --> 00:04:46,420
+Dhe nuk kemi tonë
+tre qentë preferuar.
+
+85
+00:04:46,420 --> 00:04:48,780
+>> Por mjerisht, është koha
+të kthehet Cezarit.
+
+86
+00:04:48,780 --> 00:04:52,910
+Mos harroni se përdorimi korrekt për
+Përdorues do të jetë duke kaluar jo vetëm
+
+87
+00:04:52,910 --> 00:04:57,430
+emri i ./caesar programit, por
+edhe çelësi që ata duan për të zhvendosur
+
+88
+00:04:57,430 --> 00:04:58,850
+plaintext i tyre nga.
+
+89
+00:04:58,850 --> 00:05:01,540
+Kështu që do të thotë se argc duhet të jetë dy.
+
+90
+00:05:01,540 --> 00:05:07,580
+Ata duhet të kalojë në two-- jo më shumë, jo më
+më pak se dy argumente command line.
+
+91
+00:05:07,580 --> 00:05:09,050
+>> Tani, ajo që për argv?
+
+92
+00:05:09,050 --> 00:05:12,880
+E pra, ne tashmë e dimë se
+grup do të jetë me gjatësi dy,
+
+93
+00:05:12,880 --> 00:05:15,270
+por ajo që është të përfshira në çdo element?
+
+94
+00:05:15,270 --> 00:05:19,330
+E pra, elementi i parë
+do të jetë ./caesar,
+
+95
+00:05:19,330 --> 00:05:24,190
+dhe pastaj elementi tjetër do të
+përmbajnë çelësin që përdoruesi shtypur në.
+
+96
+00:05:24,190 --> 00:05:27,480
+Tani, në qoftë se ata kanë përdorur atë siç duhet
+për përdorimin e Cezarit,
+
+97
+00:05:27,480 --> 00:05:29,350
+atëherë ata do të shkruani në një numër.
+
+98
+00:05:29,350 --> 00:05:33,260
+Por edhe pse personazhi
+se tipit është një numër,
+
+99
+00:05:33,260 --> 00:05:35,790
+kjo është e tipit të dhënave string.
+
+100
+00:05:35,790 --> 00:05:40,390
+>> Deri sa nuk kemi kthyer atë
+string për një numër të plotë?
+
+101
+00:05:40,390 --> 00:05:46,680
+Pra, thonë se unë kam num, një varg,
+përmban vargun 50.
+
+102
+00:05:46,680 --> 00:05:49,000
+Nëse unë dua të kthyer që
+për një numër të plotë, atëherë unë thjesht
+
+103
+00:05:49,000 --> 00:05:53,340
+deklarojë një ndryshore të re, një
+Integer i, duke e quajtur atoi.
+
+104
+00:05:53,340 --> 00:06:01,160
+I kalojnë në variabël string tim, num, dhe
+atëherë unë do të përmbajë numrin 50.
+
+105
+00:06:01,160 --> 00:06:04,350
+Sigurohuni që të kontrolloni njeriun
+faqet për funksionin atoi
+
+106
+00:06:04,350 --> 00:06:07,990
+për të kontrolluar të cilat biblioteka është e
+në, si dhe atë që e vlerësojmë atë
+
+107
+00:06:07,990 --> 00:06:14,550
+do të kthehet nëse vargu kaluar
+në nuk përmban të gjitha numrat.
+
+108
+00:06:14,550 --> 00:06:16,950
+>> Pra, tani që ne kemi marrë
+çelësi, hapi tjetër
+
+109
+00:06:16,950 --> 00:06:19,430
+është për të marrë plaintext nga përdoruesit.
+
+110
+00:06:19,430 --> 00:06:21,170
+Tani, kjo do të
+të jetë më pak e komplikuar
+
+111
+00:06:21,170 --> 00:06:23,410
+se lundrimit rreth
+argumente command line.
+
+112
+00:06:23,410 --> 00:06:26,190
+Të gjithë ne duhet të bëni është thirrje
+funksioni getString
+
+113
+00:06:26,190 --> 00:06:29,660
+të menjëhershëm të përdoruesit për të dhënë
+ne një varg, por mos harroni
+
+114
+00:06:29,660 --> 00:06:34,090
+për të kontrolluar specifikimet për mënyrën se si ne
+mund të dëshironi të menjëhershëm të përdoruesit për këtë.
+
+115
+00:06:34,090 --> 00:06:36,420
+>> Tani kemi ardhur të
+Zemra e problem--
+
+116
+00:06:36,420 --> 00:06:38,860
+Si për të shifroj plaintext.
+
+117
+00:06:38,860 --> 00:06:42,830
+E pra, së pari, le të flasim rreth asaj se si
+për shifroj një karakter në një kohë,
+
+118
+00:06:42,830 --> 00:06:47,370
+dhe pastaj ne do të trajtojë si të
+iterate mbi të gjithë plaintext.
+
+119
+00:06:47,370 --> 00:06:50,440
+Unë kam shkruar disa pseudokod
+për problemin e Cezarit.
+
+120
+00:06:50,440 --> 00:06:52,310
+Unë ju inkurajoj që të
+të shkruani tuaj si.
+
+121
+00:06:52,310 --> 00:06:55,900
+Kjo nuk mund të duket identike me
+imja, dhe kjo është në rregull, por për aq kohë
+
+122
+00:06:55,900 --> 00:06:58,640
+si ide përgjithshme është e njëjtë.
+
+123
+00:06:58,640 --> 00:07:00,780
+>> Tre Hapat e parë
+ne kemi bërë tashmë.
+
+124
+00:07:00,780 --> 00:07:03,100
+Ne kemi marrë çelësin nga
+argumenti command line,
+
+125
+00:07:03,100 --> 00:07:05,510
+ne kemi kthyer atë çelës
+në një numër të plotë, dhe ne kemi
+
+126
+00:07:05,510 --> 00:07:09,320
+nxitur përdoruesit për plaintext
+se ata duan të shifroj.
+
+127
+00:07:09,320 --> 00:07:12,420
+Pra, atëherë copë tjetër i madh
+është se për çdo karakter
+
+128
+00:07:12,420 --> 00:07:15,070
+në vargun plaintext,
+nëse është e alfabetik,
+
+129
+00:07:15,070 --> 00:07:17,750
+ne duam të ruajmë
+Rasti i saj dhe të ndryshojë atë.
+
+130
+00:07:17,750 --> 00:07:20,900
+Duke ruajtur kështu, atë që kam
+do të thotë është se të gjitha rastet e sipërme
+
+131
+00:07:20,900 --> 00:07:23,580
+Letrat duhet të mbetet Epërme
+rast dhe të gjithë shkronja te vogla
+
+132
+00:07:23,580 --> 00:07:25,640
+duhet të mbeten të vogla.
+
+133
+00:07:25,640 --> 00:07:29,110
+Pra, atëherë, pasi ne ndryshim ata,
+pastaj ne të shtypura të koduar.
+
+134
+00:07:29,110 --> 00:07:33,100
+>> Këtu janë tri funksione që janë në vazhdim e sipër
+për të të jetë në dispozicion për këtë problem.
+
+135
+00:07:33,100 --> 00:07:38,010
+Mos harroni lart kur i dha
+Shembull për këtë është zhvendosur CS50?
+
+136
+00:07:38,010 --> 00:07:41,800
+Mos harroni se 50 dhe
+pikëçuditëse nuk ka ndryshim?
+
+137
+00:07:41,800 --> 00:07:45,680
+Pra, si mund të them nëse ne
+duhet të zhvendoset një letër apo jo?
+
+138
+00:07:45,680 --> 00:07:48,650
+E pra, "është alfa," nëse
+ju të kalojë atë një karakter,
+
+139
+00:07:48,650 --> 00:07:54,850
+do të kthehet e vërtetë në qoftë se karakteri
+është një letër dhe të rreme ndryshe.
+
+140
+00:07:54,850 --> 00:07:56,870
+Për t'ju ndihmuar me
+ruajtjen e kapitalizimit
+
+141
+00:07:56,870 --> 00:07:59,750
+janë funksionet "është
+sipërme "dhe" është më i ulët ".
+
+142
+00:07:59,750 --> 00:08:03,350
+>> Këto dy funksione të marrë
+në një karakter të vetëm si të dhëna
+
+143
+00:08:03,350 --> 00:08:06,580
+dhe ju kthehet një Boolean,
+ose vërtetë apo e rreme
+
+144
+00:08:06,580 --> 00:08:11,280
+varësi të faktit nëse atë karakter
+është rasti e sipërme apo të poshtme.
+
+145
+00:08:11,280 --> 00:08:14,610
+Sepse "është sipërme" dhe "është
+më të ulët "janë funksione Boolean,
+
+146
+00:08:14,610 --> 00:08:18,660
+që do të thotë se ata të kthehen një Boolean,
+ju mund të përdorni këto në kushtet tuaja.
+
+147
+00:08:18,660 --> 00:08:23,490
+Kështu që këtu është një copë e kodit që vetëm
+printon një letër në qoftë se është rasti e sipërme.
+
+148
+00:08:23,490 --> 00:08:27,790
+Kështu që unë kam shpallur karakterin tim
+letër të rastit sipërme zed
+
+149
+00:08:27,790 --> 00:08:33,440
+dhe pastaj në qoftë se "është e sipërme" kthehet
+e vërtetë, atëherë unë të shtypura atë letër.
+
+150
+00:08:33,440 --> 00:08:38,200
+>> Duke iu rikthyer shembullit tonë të thjeshtë të
+zhvendosur alfabetin me një çelës të dy,
+
+151
+00:08:38,200 --> 00:08:41,049
+si nuk kemi të vërtetë të merrni atë për të punuar?
+
+152
+00:08:41,049 --> 00:08:45,770
+E pra, ajo rezulton se personazhet
+dhe integers janë të lidhura shumë ngushtë.
+
+153
+00:08:45,770 --> 00:08:48,840
+Secili karakter ka një
+vlerë e plotë lidhur
+
+154
+00:08:48,840 --> 00:08:53,260
+me atë të gjetur në tabelë ASCII,
+ku ASCII çdo karakter
+
+155
+00:08:53,260 --> 00:08:55,380
+Vlera shfaqet.
+
+156
+00:08:55,380 --> 00:08:58,940
+Kështu një rast sipërme A korrespondon
+një vlerë ASCII 65
+
+157
+00:08:58,940 --> 00:09:02,270
+dhe një vogle a të
+një vlerë ASCII e 97.
+
+158
+00:09:02,270 --> 00:09:04,940
+>> Ndjehen të lirë për të parë deri
+çdo tabelë ASCII internet
+
+159
+00:09:04,940 --> 00:09:07,720
+për të parë këto vlera për veten tuaj.
+
+160
+00:09:07,720 --> 00:09:12,096
+Pra, çfarë kjo do të thotë është se ne mund të
+të marrë karakterin e rastit sipërme A,
+
+161
+00:09:12,096 --> 00:09:18,200
+shtoni integer dy për të, dhe pastaj të marrë
+karakteri sipërme rasti C, si rezultat i kësaj.
+
+162
+00:09:18,200 --> 00:09:23,720
+Kjo është për shkak se 65 vjet, do ASCII
+Vlera për kapital A, plus 2,
+
+163
+00:09:23,720 --> 00:09:29,960
+na jep 67, që i korrespondon
+për karakterin e sipërme rast C.
+
+164
+00:09:29,960 --> 00:09:33,480
+>> Për fat të keq, gjërat e
+nuk do të mjaft të jetë aq e thjeshtë.
+
+165
+00:09:33,480 --> 00:09:36,980
+Ne kemi një ekuacion që
+ne duhet të marrin në konsideratë.
+
+166
+00:09:36,980 --> 00:09:43,590
+Këtu na tregon se të ciphertext ith
+Letra korrespondon me plaintext ith
+
+167
+00:09:43,590 --> 00:09:48,900
+letër, plus key--
+të gjithë se, modulare 26.
+
+168
+00:09:48,900 --> 00:09:50,810
+Pse është kështu?
+
+169
+00:09:50,810 --> 00:09:55,430
+Le të kthehemi në shembullin tonë nga
+më parë, ku kapitali A, plus 2,
+
+170
+00:09:55,430 --> 00:09:57,590
+na jep kapitalit C.
+
+171
+00:09:57,590 --> 00:10:01,870
+>> Pra, duke zbatuar ekuacionin se
+specifikimi na jep,
+
+172
+00:10:01,870 --> 00:10:06,660
+atëherë le të marrin kapital A
+plus 2 dhe mod që nga 26.
+
+173
+00:10:06,660 --> 00:10:10,730
+Pra kapitali A, kur kam vënë atë në
+ato shenja të vetme citat,
+
+174
+00:10:10,730 --> 00:10:14,010
+lejon mua për të trajtuar atë si
+një numër i plotë, kështu që lejon
+
+175
+00:10:14,010 --> 00:10:17,500
+mua për të hedhur atë për vlerën e saj ASCII, 65 vjeç.
+
+176
+00:10:17,500 --> 00:10:20,080
+65 plus 2 është 67.
+
+177
+00:10:20,080 --> 00:10:25,210
+67 mod 26 na jep 15,
+por kjo nuk ka të vërtetë
+
+178
+00:10:25,210 --> 00:10:32,590
+kuptim sepse ne e dimë se
+Kapitali C vlera ASCII është 67, e jo 15.
+
+179
+00:10:32,590 --> 00:10:35,580
+Deri sa nuk kemi pajtohen se?
+
+180
+00:10:35,580 --> 00:10:39,840
+>> E pra, këtu unë do të doja të parashtroj
+Nocioni i një indeks alfabetik.
+
+181
+00:10:39,840 --> 00:10:44,010
+Pra, ne kemi folur tashmë për mënyrën se si
+çdo karakter ka vlerën e saj ASCII,
+
+182
+00:10:44,010 --> 00:10:48,810
+por unë do të doja të them, mirë, le të
+mendoni për çdo karakter të paturit
+
+183
+00:10:48,810 --> 00:10:52,230
+një indeks alfabetik,
+ku A për shembull,
+
+184
+00:10:52,230 --> 00:10:58,800
+si shkronjës së parë të alfabetit,
+ka një indeks alfabetik zero.
+
+185
+00:10:58,800 --> 00:11:02,070
+Pra, tani le të zbatohet
+njëjti ekuacion si më parë,
+
+186
+00:11:02,070 --> 00:11:05,040
+por duke përdorur një indeks alfabetik.
+
+187
+00:11:05,040 --> 00:11:07,810
+>> Pra A është zero, siç e kemi përcaktuar.
+
+188
+00:11:07,810 --> 00:11:15,640
+Kështu, pra, duke marrë zero plus dy, mod 26,
+kjo është dy, mod 26, i cili na jep dy.
+
+189
+00:11:15,640 --> 00:11:18,780
+Dhe dhe, në kushtet e
+një indeks alfabetik,
+
+190
+00:11:18,780 --> 00:11:23,930
+C është letra e tretë në
+alfabeti, kështu që do të korrespondojnë
+
+191
+00:11:23,930 --> 00:11:26,290
+me një indeks alfabetik të dy.
+
+192
+00:11:26,290 --> 00:11:29,850
+Pra, duket se duke përdorur
+Indeksi alfabetik në këtë rast
+
+193
+00:11:29,850 --> 00:11:32,840
+në fakt na jep rezultat të saktë.
+
+194
+00:11:32,840 --> 00:11:35,020
+>> Pra, tani le të kontrolloni për të
+të parë nëse veprat ekuacionit
+
+195
+00:11:35,020 --> 00:11:37,210
+me një indeks alfabetik.
+
+196
+00:11:37,210 --> 00:11:42,540
+Indeksi alfabetik Y është 24 si
+e dytë të letrës së fundit në alfabetin.
+
+197
+00:11:42,540 --> 00:11:46,520
+Kështu, pra 24 plus tonë
+Çelësi i dy na jep 26.
+
+198
+00:11:46,520 --> 00:11:54,750
+26 mod 26 na jep 0, e cila, për fat
+ne, është indeksi alfabetik për A.
+
+199
+00:11:54,750 --> 00:11:59,100
+Pra, shpresojmë se kjo është provë e mjaftueshme që
+metoda alfabetik indeksi punon.
+
+200
+00:11:59,100 --> 00:12:03,180
+Nëse jo, të ndjehen të lirë për të provoni
+disa shembuj të tuaj.
+
+201
+00:12:03,180 --> 00:12:08,030
+>> Në mënyrë për të përfunduar si duhet rreth
+alfabeti dhe të zbatojë ekuacionin Cezarit,
+
+202
+00:12:08,030 --> 00:12:11,280
+atëherë ne e dimë se kemi nevojë të
+merren me indekseve alfabetike.
+
+203
+00:12:11,280 --> 00:12:15,130
+Por ne fillim me ASCII
+vlerat, dhe vetëm atëherë
+
+204
+00:12:15,130 --> 00:12:18,530
+nuk kemi më pas konvertohet në
+indeksi alfabetik.
+
+205
+00:12:18,530 --> 00:12:23,970
+Nga atje, në mënyrë që të shtypura, ne kemi nevojë
+për t'u marrë me vlerat ASCII përsëri.
+
+206
+00:12:23,970 --> 00:12:28,350
+Pra, ne duhet të kuptoj se si për të
+shkojnë nga ASCII për alfabetik
+
+207
+00:12:28,350 --> 00:12:31,080
+dhe nga alfabetike të ASCII.
+
+208
+00:12:31,080 --> 00:12:34,910
+>> Kështu që unë po e lë për ju që të kuptoj se
+model mes një karakter
+
+209
+00:12:34,910 --> 00:12:38,590
+dhe alfabetik saj
+indeksi dhe vlera e saj ASCII.
+
+210
+00:12:38,590 --> 00:12:41,530
+Tani, mos harroni se edhe pse
+kjo e drejtë Tabela në rrëshqitje
+
+211
+00:12:41,530 --> 00:12:45,630
+tregon shkronja kapitale, ne gjithashtu
+duhet të marrin në konsideratë nëse janë apo jo
+
+212
+00:12:45,630 --> 00:12:48,915
+zbatohet një model të ndryshëm
+për personazhet vogla.
+
+213
+00:12:48,915 --> 00:12:52,070
+
+214
+00:12:52,070 --> 00:12:55,840
+>> Pra, tani që ne kemi realizuar artistikisht
+Si për të zhvendosur një karakter të vetëm,
+
+215
+00:12:55,840 --> 00:13:02,200
+atëherë të gjithë ne duhet të bëni është shkallë që
+për të shkuar në të gjithë plaintext.
+
+216
+00:13:02,200 --> 00:13:04,260
+Pra plaintext është një string.
+
+217
+00:13:04,260 --> 00:13:08,210
+Me fat për ne, një varg është me të vërtetë
+vetëm një grup të karaktereve,
+
+218
+00:13:08,210 --> 00:13:12,150
+kështu që në mënyrë për të hyrë në çdo karakter
+nga një varg, të gjithë ju duhet të bëni
+
+219
+00:13:12,150 --> 00:13:14,270
+është që të përdorin array simbol.
+
+220
+00:13:14,270 --> 00:13:20,270
+Thonë se unë kam një variabël të tipit
+string quajtur "text =" kjo është CS50. ''
+
+221
+00:13:20,270 --> 00:13:22,730
+>> E pra, atëherë, në mënyrë që të
+hyni në çdo karakter,
+
+222
+00:13:22,730 --> 00:13:25,880
+të gjitha unë duhet të bëni me
+teksti variabël është
+
+223
+00:13:25,880 --> 00:13:31,660
+do të thotë mirë, teksti në indeksin zero, që
+korrespondon me T. kryeqyteti Tekst në indeksin
+
+224
+00:13:31,660 --> 00:13:35,100
+një korrespondon h poshtme e rastit.
+
+225
+00:13:35,100 --> 00:13:38,110
+Një tjetër funksion i dobishëm është
+funksioni gjatësia string.
+
+226
+00:13:38,110 --> 00:13:40,760
+Pra, duke kaluar në një varg të
+se funksioni do të kthehet
+
+227
+00:13:40,760 --> 00:13:44,610
+një numër i plotë, gjatësia e atë varg.
+
+228
+00:13:44,610 --> 00:13:47,060
+>> Tani që ne kemi biseduar rreth
+të gjitha këto elemente të ndryshme,
+
+229
+00:13:47,060 --> 00:13:48,540
+le të vënë ato përsëri së bashku.
+
+230
+00:13:48,540 --> 00:13:52,210
+Pra, kthehen në të dyja pseudokod tim
+Kodi ose pseudocode tuaj
+
+231
+00:13:52,210 --> 00:13:55,920
+dhe të kalojnë nëpër të dhe të sigurohemi që ju
+e di se si për të bërë çdo gjë të vetme.
+
+232
+00:13:55,920 --> 00:14:01,520
+Getting çelësin përdorur argc dhe argv,
+duke e kthyer çelësin në një numër të plotë, një
+
+233
+00:14:01,520 --> 00:14:06,840
+të i, duke nxitur për plaintext,
+getString, dhe pastaj iterating
+
+234
+00:14:06,840 --> 00:14:09,590
+mbi çdo karakter në
+string plaintext,
+
+235
+00:14:09,590 --> 00:14:14,910
+ruajtjen rastin e çdo karakter
+dhe zhvendosur atë karakter me kyç,
+
+236
+00:14:14,910 --> 00:14:17,520
+duke siguruar që ju jeni të
+mbështjellës rreth alfabetit,
+
+237
+00:14:17,520 --> 00:14:20,850
+në fund shtypjes se koduar.
+
+238
+00:14:20,850 --> 00:14:25,470
+Emri im është Amila, dhe kjo ishte Cezari.
+
+239
+00:14:25,470 --> 00:14:28,448
+

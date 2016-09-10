@@ -1,0 +1,47 @@
+Zamyla Chan: Ni pliigu nian ludo kun la Vigenère. La Vigenère estas tre simila al Cezaro, krom Cezaro ni pasigis en sola entjero kiel nia ŝlosilo. En Vigenère ni iras Iam en ŝlosilvorto. Do, se mi volis ŝanĝi la ĉifrita teksto ĉi estas CS 50 de Ohai, tiam tio signifas ke ĉiu litero en Ohai tuj servi kiel la ŝlosilo, kaj mi tuj ciklo super ke ŝlosilvorto por mia movo farante la ĉifrita teksto multe pli malfacile deĉifri. 
+
+Kion tio signifas ŝanĝi la ŝlosilvorto? Nu, la ŝlosilvorto estas ĉeno kie ĉiu litero respondas por iu entjero movo. Do, la o respondas al ŝlosila de 14, h por ŝlosila de 7, havas ŝlosilon de 0, por ke ne ŝanĝus ion, kaj tiam mi havas ŝlosilon de 8. 
+
+Diru mi kuris Vigenère A kun la platteksta tiu estas CS50 bone, kiu simple doni mi neŝanĝita ŝnuro. Rimarki ke tiu estas ekvivalento al kurante Cezaro kun ŝlosilo de nulo. Fakte, kurante Vigenère kun unuopa signo samvalorus al kurado Cezaro kun tiu sama entjero. 
+
+Bone, do, ekde Ili estas tiel similaj, ke mi devus fakte rekomendas ke se vi volas vi povas simple kopii vian Cezaro kodon en Vigenère kodon. Aferoj ŝanĝiĝos, sed almenaŭ vi havas iuj spinon ke vi povas labori kun. Ĉar la farendaj estas samaj ni volas akiri la ŝlosilon, akiri la simpla teksto, encipher ke simpla teksto, kaj tiam presi ke eksteren. 
+
+Samkiel Cezaro la ŝlosilo tuj esti pasita en la dua komandlinio argumento enhavita en argv indekso 1, sed ĝi estas malsama ĉi tiu tempo ĉar ĝi devas esti alfabeta. Do, ni devas persisti super ĉiu sola karaktero en tiu ŝlosilo ke la uzanto pasis, kaj certigi ke ĉiu karaktero estas alfabeta por daŭrigi. 
+
+Iam ni faris tion, tiam ni povas atingi la ĉenon de la uzanto, kiel ni faris antaŭe. Nun ni venas al la koro de la problemo por Vigenère, kiu estas ĝuste kiel Cezaro, kiel eltrovi la enciphering padrono kaj ekvacio kaj encipher la tutan tekston. 
+
+Do, vi rimarkos ke la ekvacio por la Vigenère ŝanĝo Estas tre simila al la cezaro oni. La sola diferenco estas ke anstataŭ sola variablo k antaŭe, nun k havas suba indico, indikante la jth letero de la ŝlosilo. 
+
+Ni marŝas tra ekzemplo. Diru vi volis pasi sekreta mesaĝo al via enamiĝita, mi ŝatas vin. Nu, por via ŝlosilo vin elekti ion ke via scias enamiĝon scias ke vi ŝatas, pandas. Bone, do kiel ni ŝanĝi tiun? 
+
+Nu, ni havas nian tekston indekso. Jen ĉe la unua litero kaj tia estas la indekso por nia ŝlosilo kiuj estas ĉe la p, la unua letero en nia panda vorto. Do, sxangxigxantaj mi per p donas ni x, tiam ni antaŭas la tekston indekso. Tio ricevas al ni spaco. Nun la spaceto estas ne alfabeta, por ke signifas, ke, kiu ĵus translokigoj rajton super la ĉifrita teksto, ni metis spacon tie, kaj ni ne avanci la indekson nia ŝlosilo. Do, ni estas ankoraŭ ĉe p en ĉi tiu punkto. 
+
+Ni avancis al la venonta indekso en nia teksto. Kaj nun, ĉar tio estas leteron, la minuskla l, ni ŝanĝi ke per la sekva indekso en nia ŝlosilo. Kiu estas, kiu estas nulo movo tiel ke nur iĝas l en nia ĉifrita teksto. Do ni antaŭeniras ambaŭ la tekston, kaj la ŝlosilo indekso ĉar ĝi estas alfabeta. Tial ni daŭrigas ke ĝis ni atingos la e same. 
+
+Bone, do vi rimarkos en ĉi tiu atentigi ke, laŭ nia ŝlosilo indekso, ni atingis la finon de la panda vorto, do kio okazas kiam ni atingos la sekva alfabeta leteron en la teksto? Nu, ĉio kio okazas estas ni envolver ĉirkaŭ la komenco, la unua indico de nia ŝlosilo. Do, tiam ni ŝanĝi ke y per p por doni al ni n. Kaj tiam, ni daŭrigas finante kodoprezento nian tekston akiri x lvne Noh. 
+
+El tiu ekzemplo, mi montris, ke ni nur avancis al la sekva letero en la ŝlosilvorto se la karaktero en plata teksto estas litero por la isalpha funkcio eniros oportunan tie. Kaj, same kiel en Cezaro, ni volas konservi la kazon, isupper kaj islower. Do, aldonu ĉi iomete en en vian _pseudocode_. 
+
+Do kiel ni eltrovi la ŝlosilon ŝanĝoj? Nu, se vi memoras nian diskuton sur alfabeta indeksoj en la Cezaro problemo, estas tre similaj. 
+
+Kie A respondas al ASCII valoro de 65 sed movo de 0, kaj tiam la lasta litero en la alfabeto, Z, respondas al movo de 25. Vi rimarkos ke la ŝanĝo estas identa ĉu la litero estas majuskla aŭ minuskla. 
+
+Bone, do nun, ke vi scipovas diveni la nombra ŝanĝo ke respondas al sola karaktero ni revenu al nia ekvacio. Ĉar ni havas du malsamajn subaj tie, i kaj j, jen sugesto ke ni volas konservi trako de ambaŭ nia pozicio en la teksto krom nia pozicio en la ŝlosilvorto, do tiuj estas du apartaj variabloj ke ni volas konservi trafis. 
+
+Nun, la pozicio en nia teksto tuj pliigos ĉiun fojon, tiel ke tuj esti iom pli rekte antaŭen kontraste al la pozicio la ŝlosilvorto, kion ni scias devas envolver ĉirkaŭe, kaj kelkfoje pliigo, foje resti la sama. Do, kiel ni implemento la funcionalidad volvi ĉirkaŭ la indekso por la ŝlosilvorto? 
+
+Mi tuj uzos la kalkulu ekzemple. Kalkulante estas populara maniero disfendi personoj en grupoj. Diru mi havis 5 personoj kaj mi volis fendi ilin en tri grupoj: bone tiam mi komencus nombrante for. La unua persono volus diri mi estas teamo numero unu, la sekva persono estus teamo nombro du, la tria persono teamo nombro tri. Nun, mi nur volas tri grupoj tiel la kvara persono farus reale komencu ĉe la komenco kaj diru, bone, mi estas teamo numero unu tiel, kaj la sekva persono estus teamo numero du. Kaj, de tie, ili povas tiam apartigi en siaj grupoj. 
+
+Do, kiel povus mi uzas module helpi min efektivigi tiu kalkulu wrap ĉirkaŭ funkcio? Nu, la unua persono numero 1, mod 3 al ni 1. 2 mod 3 donas al ni 2, kaj 3 mod 3 donas ni 0. 
+
+La kvara persono, numero 4, mod 3 donas al ni la 1 kaj tiam 5 mod 3 donas al ni 2. Do, vi rimarkos ke kvankam la nombro de personoj, ke mi havas pliigas, kaj estas supre 3, ĉar mi modding de 3 Mi ĉiam ricevas nombrojn 0, 1, kaj 2. Mi neniam pli granda ol 3. Tial, eĉ se mi havis 10 homoj, tiam ĉiu el tiuj personoj daŭre estus ene grupoj 1, 2, aŭ 0. 
+
+Do, nun ni scias ke se ni havas grupon 5 Kaj ni mod ĉiuj tiuj per 3, tiam ni neniam iranta superi grupoj 0, 1, aŭ 2. Do, ni neniam ricevos grupo numeron tio egala al 3 aŭ supre. Do, eĉ se mi aldonos kvin pli homoj, tiam ĉiu el ili ankoraŭ esti atribuita al grupoj 0, 1, aŭ 2 ĉar mi modding per 3. Mi neniam tuj superos ke ĉapo. 
+
+Bone, do ni vidu se ni povas apliki tiu koncepto de uzanta module volvi ĉirkaŭ la grupo nombroj kaj apliki al Vigenère kie ni volas uzi module envolver ĉirkaŭe indekson por la ŝlosilvorto. Kvankam ni pliigante la indekso ni ĉiam volas certigi ke ni ĉiam envolver ĉirkaŭ la komenco neniam superante la longo de la kordo. 
+
+Bone, do mi scias li havu iom superfortanta. Ekzistas multe pli fari en tiu p aro. Do, certigi ke vi skribas el bonan _pseudocode_ mem ke vi komprenos kaj kiu alvenas la laboron farita. Provu trakti ĉiun sola linio sendepende elŝeligi cxiuj infanoj malgrandaj pecoj de la puzlo antaŭ meti ĝin kune. 
+
+Certiĝu ke vi povas akiri la ŝlosilo de la komandlinio kaj certigi ke ĝi estas alfabeta, akiri la simpla teksto de la uzanto, kaj tiam en enciphering, certigu vin scipovas encipher sola litero, kaj tiam progresi al la tuta ĉeno kun ĉiuj wrap ĉirkaŭ funkcioj. Fine, vi povas presi la ĉifrita teksto. 
+
+Mia nomo estas Zamyla, kaj tio Vigenère. 

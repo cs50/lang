@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Lassen Sie uns auf Schritt unsere
+Spiel mit der Vigenère-Chiffre.
+
+3
+00:00:04,030 --> 00:00:06,710
+Die Vigenère ist
+sehr ähnlich wie Caesar,
+
+4
+00:00:06,710 --> 00:00:11,060
+außer in Caesar kamen wir in
+eine einzelne ganze Zahl als unser Schlüssel.
+
+5
+00:00:11,060 --> 00:00:14,100
+In Vigenere werden wir
+in einem Stichwort zu übergeben.
+
+6
+00:00:14,100 --> 00:00:19,400
+Also, wenn ich wollte, die zu verschieben
+Geheimtext ist dies CS 50 von ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+dann bedeutet das, dass jeder Brief in
+ohai wird als Schlüssel dienen,
+
+8
+00:00:23,260 --> 00:00:27,160
+und ich werde Zyklus über
+dass Schlüsselwort für meine Schicht
+
+9
+00:00:27,160 --> 00:00:31,930
+so dass die chiffrierten Text
+viel schwieriger zu entschlüsseln.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Was bedeutet es,
+Verschiebung durch das Schlüsselwort?
+
+11
+00:00:34,540 --> 00:00:38,610
+Nun, das ist das Schlüsselwort eine Zeichenkette
+wo jeder Buchstabe entspricht
+
+12
+00:00:38,610 --> 00:00:41,080
+bis zu einem gewissen ganzzahligen Verschiebung.
+
+13
+00:00:41,080 --> 00:00:49,310
+Also, die o zu einem Schlüssel von 14 entspricht,
+h zu einem Schlüssel von 7, a hat einen Schlüssel von 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+so dass würde nichts ändern,
+und dann hat i einen Schlüssel von 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Sagen wir, ich Vigenere A mit der lief
+Klartext dieses CS50 gut ist,
+
+16
+00:01:00,000 --> 00:01:02,800
+das wäre einfach geben
+mir eine unveränderte Zeichenfolge.
+
+17
+00:01:02,800 --> 00:01:08,170
+Beachten Sie, dass dies äquivalent zu
+Caesar mit einem Schlüssel von Null läuft.
+
+18
+00:01:08,170 --> 00:01:12,070
+In der Tat läuft Vigenere
+mit jedem einzelnen Zeichen
+
+19
+00:01:12,070 --> 00:01:17,070
+wäre gleichbedeutend mit Lauf
+Caesar mit dem gleichen integer.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Also gut, ja, da
+sie sind so ähnlich, ich würde
+
+21
+00:01:20,400 --> 00:01:24,300
+wenn Sie tatsächlich empfehlen,
+möchten, können Sie Ihre Caesar einfach kopieren
+
+22
+00:01:24,300 --> 00:01:26,932
+Code in Ihre Vigenere-Code.
+
+23
+00:01:26,932 --> 00:01:28,640
+Dinge werden sich verändern,
+aber zumindest haben Sie
+
+24
+00:01:28,640 --> 00:01:31,110
+einige Rückgrat, die Sie mit arbeiten können.
+
+25
+00:01:31,110 --> 00:01:36,410
+Da die TODOs sind die gleichen wir wollen
+den Schlüssel zu bekommen, den Klartext zu erhalten,
+
+26
+00:01:36,410 --> 00:01:40,690
+chiffrieren, dass Klartext,
+und dann drucken, dass aus.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Genau wie Caesar der Schlüssel wird sich
+übergeben als zweite Kommandozeile
+
+28
+00:01:44,980 --> 00:01:50,540
+Argument in argv Index enthaltenen
+1, aber es ist dieses Mal anders
+
+29
+00:01:50,540 --> 00:01:52,560
+denn es muss alphabetisch sein.
+
+30
+00:01:52,560 --> 00:01:56,390
+Also müssen wir jeden iterieren
+einzelnes Zeichen in diesem Schlüssel
+
+31
+00:01:56,390 --> 00:02:00,800
+dass der Benutzer übergeben, und sicherzustellen,
+dass jeder Charakter ist alphabetisch
+
+32
+00:02:00,800 --> 00:02:02,800
+um fortzufahren.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Sobald wir das getan haben, wir dann
+erhalten die Zeichenfolge der Benutzer,
+
+34
+00:02:05,560 --> 00:02:07,560
+genauso wie wir vorher.
+
+35
+00:02:07,560 --> 00:02:10,520
+Und jetzt kommen wir zum Herzen
+des Problems für Vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+Das ist genau wie Caesar, wie man
+herauszufinden, die Chiffrierung Muster aus
+
+37
+00:02:14,665 --> 00:02:19,760
+und Gleichung, und chiffrieren
+der gesamte Klartext.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Also, werden Sie feststellen, dass die
+Gleichung für die Vigenere Verschiebung
+
+39
+00:02:23,280 --> 00:02:25,610
+ist sehr ähnlich zu dem einen Caesar.
+
+40
+00:02:25,610 --> 00:02:29,780
+Der einzige Unterschied ist, dass
+anstelle einer einzelnen Variable k
+
+41
+00:02:29,780 --> 00:02:37,270
+vor, jetzt hat k einen Index,
+Angabe der j-ten Buchstaben des Schlüssels.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Lassen Sie uns ein Beispiel zu Fuß.
+
+43
+00:02:39,560 --> 00:02:43,830
+Angenommen, Sie wollten ein Geheimnis zu passieren
+Nachricht auf Ihrer Crush, Ich mag dich.
+
+44
+00:02:43,830 --> 00:02:46,325
+Nun, für Ihre Schlüssel, den Sie
+Wählen Sie etwas, das Ihre
+
+45
+00:02:46,325 --> 00:02:49,790
+wissen Crush weiß, dass Sie mögen, Pandas.
+
+46
+00:02:49,790 --> 00:02:52,290
+In Ordnung, so wie Sie verschieben wir das?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Nun, wir haben unsere Klartext-Index.
+
+48
+00:02:55,500 --> 00:02:59,160
+Das ist auf den ersten Buchstaben und
+so ist der Index für unser Schlüssel
+
+49
+00:02:59,160 --> 00:03:02,830
+der an der p, der erste
+Schreiben Sie in unserem Panda Wort.
+
+50
+00:03:02,830 --> 00:03:08,590
+Also, ich Verschiebung von p uns gibt x,
+dann treiben wir den Klartext-Index.
+
+51
+00:03:08,590 --> 00:03:10,460
+Dies bringt uns in einen Raum.
+
+52
+00:03:10,460 --> 00:03:13,540
+Nun, das Leerzeichen
+ist nicht alphabetisch,
+
+53
+00:03:13,540 --> 00:03:16,930
+das bedeutet, so dass, dass nur
+Transfers direkt über in die chiffrierten Text,
+
+54
+00:03:16,930 --> 00:03:23,430
+wir setzen dort einen Raum, und wir tun es nicht
+den Index für unsere Schlüssel vorantreiben.
+
+55
+00:03:23,430 --> 00:03:25,820
+Also, wir sind immer noch auf p an dieser Stelle.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Wir zum nächsten
+Index in unserem Klartext.
+
+57
+00:03:30,130 --> 00:03:34,030
+Und jetzt, denn das ist,
+ein Brief, der kleine l,
+
+58
+00:03:34,030 --> 00:03:37,920
+verschieben wir, dass durch die
+nächsten Index in unseren Schlüssel.
+
+59
+00:03:37,920 --> 00:03:42,360
+Und das ist eine, die eine Null ist
+Verschiebung, so dass wird nur
+
+60
+00:03:42,360 --> 00:03:44,370
+ein l in unserer chiffrierten Text.
+
+61
+00:03:44,370 --> 00:03:51,120
+Dann treiben wir sowohl den Klartext, und
+der Schlüsselindex, weil es alphabetisch.
+
+62
+00:03:51,120 --> 00:03:56,210
+Also dann fahren wir fort, dass
+bis wir an die e in wie zu bekommen.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Na gut, so dass Sie auf diese auffallen wird,
+zeigen, dass in Bezug auf unsere Schlüsselindex,
+
+64
+00:04:01,090 --> 00:04:03,940
+wir haben das Ende erreicht
+der Panda Wort, so was
+
+65
+00:04:03,940 --> 00:04:08,750
+passiert, wenn wir auf die nächste erhalten
+alphabetischen Buchstaben im Klartext?
+
+66
+00:04:08,750 --> 00:04:12,180
+Nun, alles, was passiert ist, wir
+Verpackung um zu Beginn,
+
+67
+00:04:12,180 --> 00:04:14,710
+an den ersten Index der Schlüssel.
+
+68
+00:04:14,710 --> 00:04:19,570
+Also, dann verschieben wir, dass
+y durch p, um uns n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Und dann setzen wir Codierung Finishing
+unsere Klartext x lvne noh zu bekommen.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Aus diesem Beispiel I
+nur gezeigt, dass wir voran
+
+71
+00:04:29,300 --> 00:04:33,140
+zum nächsten Buchstaben im Schlüsselwort
+wenn das Zeichen im Klartext
+
+72
+00:04:33,140 --> 00:04:37,480
+ist ein Brief, so der isalpha
+Funktion ist praktisch, hier.
+
+73
+00:04:37,480 --> 00:04:43,030
+Und genau wie in Caesar, wollen wir
+bewahren den Fall, isupper und islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Also, fügen Sie diese wenig
+in in die Pseudo-Code.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Wie stellst wir die wichtigsten Veränderungen aus?
+
+76
+00:04:48,510 --> 00:04:53,030
+Nun, wenn Sie sich erinnern, unsere Diskussion
+auf alphabetischen Indizes im Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+Problem, es ist sehr ähnlich.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Wobei A entspricht einem ASCII
+Wert von 65, aber eine Verschiebung von 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+und dann der letzte Buchstabe
+im Alphabet, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+entspricht einer Verschiebung von 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Sie werden feststellen, dass die Verschiebung
+identisch ist, ob oder nicht
+
+82
+00:05:10,320 --> 00:05:14,880
+der Brief ist in Groß- oder Kleinschreibung.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, also jetzt, dass Sie
+wissen, wie um herauszufinden,
+
+84
+00:05:17,700 --> 00:05:21,470
+die numerische Verschiebung,
+entspricht einem einzelnen Zeichen
+
+85
+00:05:21,470 --> 00:05:24,050
+Lassen Sie uns zu unserer Gleichung zurückgehen.
+
+86
+00:05:24,050 --> 00:05:28,180
+Weil wir zwei verschiedene
+Subskripte hier, i und j,
+
+87
+00:05:28,180 --> 00:05:32,130
+das ist ein Hinweis, dass wir wollen, den Überblick zu behalten
+sowohl unsere Position im Klartext
+
+88
+00:05:32,130 --> 00:05:36,600
+sowie unsere Position im Schlüsselwort,
+so dass diejenigen, sind zwei getrennte Variablen
+
+89
+00:05:36,600 --> 00:05:39,010
+dass wir wollen, einen Halt zu halten.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Nun wird die Position in unserem Klartext
+wird jedes Mal zu erhöhen,
+
+91
+00:05:42,580 --> 00:05:45,530
+so dass wird eine sein
+etwas mehr geradeaus
+
+92
+00:05:45,530 --> 00:05:49,750
+wie das Schlüsselwort in die Position gegenüber,
+wir wissen es herum wickeln,
+
+93
+00:05:49,750 --> 00:05:52,910
+und manchmal inkrementieren,
+manchmal gleich bleiben.
+
+94
+00:05:52,910 --> 00:05:55,430
+So, wie wir implementieren
+die Funktionalität
+
+95
+00:05:55,430 --> 00:05:59,820
+zu wickeln um die
+Index für das Schlüsselwort?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Ich werde das abzählen Beispiel zu verwenden.
+
+97
+00:06:01,640 --> 00:06:06,100
+Abzählen ist ein beliebter Weg,
+Menschen in Gruppen aufgeteilt.
+
+98
+00:06:06,100 --> 00:06:10,660
+Sagen hatte ich 5 Personen, und ich wollte
+spalten sie in drei Gruppen,
+
+99
+00:06:10,660 --> 00:06:13,640
+gut, dann würde ich durch Abzählen starten.
+
+100
+00:06:13,640 --> 00:06:16,980
+Die erste Person, würde
+sagen, ich bin Team die Nummer eins,
+
+101
+00:06:16,980 --> 00:06:21,030
+die nächste Person würde Team Zahl sein
+zwei, die dritte Person Teamnummer
+
+102
+00:06:21,030 --> 00:06:21,910
+drei.
+
+103
+00:06:21,910 --> 00:06:25,910
+Nun, ich möchte nur drei Gruppen so
+die vierte Person würde tatsächlich
+
+104
+00:06:25,910 --> 00:06:30,160
+beginnen am Anfang und sagen,
+gut, ich bin Team Nummer eins als auch,
+
+105
+00:06:30,160 --> 00:06:32,890
+und die nächste Person
+wäre Team Nummer zwei.
+
+106
+00:06:32,890 --> 00:06:37,660
+Und von dort können sie dann
+trennen sich in ihren Gruppen.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Also, wie kann ich Modulo verwenden
+mir zu helfen, implementieren
+
+108
+00:06:41,130 --> 00:06:44,160
+diese Wrap-around-Funktion abzählen?
+
+109
+00:06:44,160 --> 00:06:50,140
+Nun, die erste Person,
+Nummer 1, mod 3 gibt uns 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 gibt uns 2,
+und 3 mod 3 gibt uns 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Die vierte Person, Nummer 4, mod 3
+gibt uns 1 und dann 5 mod 3 gibt uns 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Also, werden Sie feststellen, dass, obwohl
+die Zahl der Menschen, die ich habe
+
+113
+00:07:05,370 --> 00:07:11,210
+zunimmt, und oberhalb
+3, da ich Modden von 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Ich bekomme immer Zahlen 0, 1 und 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Ich habe nie mehr als 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Also, auch wenn ich hatte 10
+Menschen, dann werden alle von den Menschen,
+
+117
+00:07:22,630 --> 00:07:27,430
+wäre immer noch Gruppen innerhalb von 1, 2 oder 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> So, jetzt wissen wir, dass, wenn wir haben eine Gruppe
+von 3 von 5 und wir alle die mod,
+
+119
+00:07:33,560 --> 00:07:38,180
+dann sind wir nie gehen
+überschreiten Gruppen 0, 1 oder 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Also, wir gehen nie eine Gruppe zu erhalten
+Zahl, die 3 oder höher gleich ist.
+
+121
+00:07:43,430 --> 00:07:46,980
+Also, auch wenn ich hinzufügen, fünf mehr
+Menschen, dann von ihnen alle
+
+122
+00:07:46,980 --> 00:07:53,150
+würde immer noch zu Gruppen zugeordnet werden,
+0, 1 oder 2, weil ich Modden von 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Ich werde nie die Caps nicht übersteigen.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, lassen Sie uns so sehen, ob wir anwenden können
+Dieses Konzept der Verwendung von Modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+zu wickeln um die
+Gruppennummern und anwenden
+
+126
+00:08:03,710 --> 00:08:08,000
+es VIGENERE wo wir wollen
+zu verwenden Modulo herum wickeln
+
+127
+00:08:08,000 --> 00:08:10,220
+der Index für das Schlüsselwort.
+
+128
+00:08:10,220 --> 00:08:12,830
+Auch wenn wir Inkrementieren
+der Index wir immer
+
+129
+00:08:12,830 --> 00:08:17,260
+sicherstellen möchten, dass wir immer
+Wrap-around an den Anfang
+
+130
+00:08:17,260 --> 00:08:20,050
+nie mehr als die
+Länge der Zeichenfolge.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, also weiß ich, es könnte sein,
+ein wenig überwältigend.
+
+132
+00:08:23,510 --> 00:08:26,670
+Es gibt viel mehr in diesem p Satz zu tun.
+
+133
+00:08:26,670 --> 00:08:30,050
+Also, stellen Sie sicher, dass Sie schreiben
+eine gute Pseudo-Code für sich selbst
+
+134
+00:08:30,050 --> 00:08:32,870
+dass Sie verstehen, und
+dass bekommt den Job zu erledigen.
+
+135
+00:08:32,870 --> 00:08:35,580
+Versuchen Sie, und adressieren alle
+einzelne Zeile unabhängig
+
+136
+00:08:35,580 --> 00:08:38,370
+herauszufinden, all die kleinen
+kleine Teile des Puzzles
+
+137
+00:08:38,370 --> 00:08:40,260
+bevor es zusammenzusetzen.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Stellen Sie sicher, dass Sie bekommen können
+der Schlüssel von der Kommandozeile
+
+139
+00:08:43,110 --> 00:08:46,780
+und stellen Sie sicher, dass es alphabetisch,
+Holen Sie sich die Klartext vom Benutzer,
+
+140
+00:08:46,780 --> 00:08:51,010
+und dann in die Chiffrierung, stellen Sie sicher, dass Sie
+wissen, wie man einen einzelnen Buchstaben zu chiffrieren,
+
+141
+00:08:51,010 --> 00:08:56,130
+und dann den nächsten Schritt auf die gesamte Zeichenfolge
+mit allen der Wrap-around-Funktionen.
+
+142
+00:08:56,130 --> 00:08:59,610
+Schließlich können Sie die verschlüsselten Text drucken.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Mein Name ist ein Zamyla,
+und dies war Vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

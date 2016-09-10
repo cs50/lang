@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Ni pliigu nian
+ludo kun la Vigenère.
+
+3
+00:00:04,030 --> 00:00:06,710
+La Vigenère estas
+tre simila al Cezaro,
+
+4
+00:00:06,710 --> 00:00:11,060
+krom Cezaro ni pasigis en
+sola entjero kiel nia ŝlosilo.
+
+5
+00:00:11,060 --> 00:00:14,100
+En Vigenère ni iras
+Iam en ŝlosilvorto.
+
+6
+00:00:14,100 --> 00:00:19,400
+Do, se mi volis ŝanĝi la
+ĉifrita teksto ĉi estas CS 50 de Ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+tiam tio signifas ke ĉiu litero en
+Ohai tuj servi kiel la ŝlosilo,
+
+8
+00:00:23,260 --> 00:00:27,160
+kaj mi tuj ciklo super
+ke ŝlosilvorto por mia movo
+
+9
+00:00:27,160 --> 00:00:31,930
+farante la ĉifrita teksto
+multe pli malfacile deĉifri.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Kion tio signifas
+ŝanĝi la ŝlosilvorto?
+
+11
+00:00:34,540 --> 00:00:38,610
+Nu, la ŝlosilvorto estas ĉeno
+kie ĉiu litero respondas
+
+12
+00:00:38,610 --> 00:00:41,080
+por iu entjero movo.
+
+13
+00:00:41,080 --> 00:00:49,310
+Do, la o respondas al ŝlosila de 14,
+h por ŝlosila de 7, havas ŝlosilon de 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+por ke ne ŝanĝus ion,
+kaj tiam mi havas ŝlosilon de 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Diru mi kuris Vigenère A kun la
+platteksta tiu estas CS50 bone,
+
+16
+00:01:00,000 --> 00:01:02,800
+kiu simple doni
+mi neŝanĝita ŝnuro.
+
+17
+00:01:02,800 --> 00:01:08,170
+Rimarki ke tiu estas ekvivalento al
+kurante Cezaro kun ŝlosilo de nulo.
+
+18
+00:01:08,170 --> 00:01:12,070
+Fakte, kurante Vigenère
+kun unuopa signo
+
+19
+00:01:12,070 --> 00:01:17,070
+samvalorus al kurado
+Cezaro kun tiu sama entjero.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Bone, do, ekde
+Ili estas tiel similaj, ke mi devus
+
+21
+00:01:20,400 --> 00:01:24,300
+fakte rekomendas ke se vi
+volas vi povas simple kopii vian Cezaro
+
+22
+00:01:24,300 --> 00:01:26,932
+kodon en Vigenère kodon.
+
+23
+00:01:26,932 --> 00:01:28,640
+Aferoj ŝanĝiĝos,
+sed almenaŭ vi havas
+
+24
+00:01:28,640 --> 00:01:31,110
+iuj spinon ke vi povas labori kun.
+
+25
+00:01:31,110 --> 00:01:36,410
+Ĉar la farendaj estas samaj ni volas
+akiri la ŝlosilon, akiri la simpla teksto,
+
+26
+00:01:36,410 --> 00:01:40,690
+encipher ke simpla teksto,
+kaj tiam presi ke eksteren.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Samkiel Cezaro la ŝlosilo tuj
+esti pasita en la dua komandlinio
+
+28
+00:01:44,980 --> 00:01:50,540
+argumento enhavita en argv indekso
+1, sed ĝi estas malsama ĉi tiu tempo
+
+29
+00:01:50,540 --> 00:01:52,560
+ĉar ĝi devas esti alfabeta.
+
+30
+00:01:52,560 --> 00:01:56,390
+Do, ni devas persisti super ĉiu
+sola karaktero en tiu ŝlosilo
+
+31
+00:01:56,390 --> 00:02:00,800
+ke la uzanto pasis, kaj certigi
+ke ĉiu karaktero estas alfabeta
+
+32
+00:02:00,800 --> 00:02:02,800
+por daŭrigi.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Iam ni faris tion, tiam ni
+povas atingi la ĉenon de la uzanto,
+
+34
+00:02:05,560 --> 00:02:07,560
+kiel ni faris antaŭe.
+
+35
+00:02:07,560 --> 00:02:10,520
+Nun ni venas al la koro
+de la problemo por Vigenère,
+
+36
+00:02:10,520 --> 00:02:14,665
+kiu estas ĝuste kiel Cezaro, kiel
+eltrovi la enciphering padrono
+
+37
+00:02:14,665 --> 00:02:19,760
+kaj ekvacio kaj encipher
+la tutan tekston.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Do, vi rimarkos ke la
+ekvacio por la Vigenère ŝanĝo
+
+39
+00:02:23,280 --> 00:02:25,610
+Estas tre simila al la cezaro oni.
+
+40
+00:02:25,610 --> 00:02:29,780
+La sola diferenco estas ke
+anstataŭ sola variablo k
+
+41
+00:02:29,780 --> 00:02:37,270
+antaŭe, nun k havas suba indico,
+indikante la jth letero de la ŝlosilo.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Ni marŝas tra ekzemplo.
+
+43
+00:02:39,560 --> 00:02:43,830
+Diru vi volis pasi sekreta
+mesaĝo al via enamiĝita, mi ŝatas vin.
+
+44
+00:02:43,830 --> 00:02:46,325
+Nu, por via ŝlosilo vin
+elekti ion ke via
+
+45
+00:02:46,325 --> 00:02:49,790
+scias enamiĝon scias ke vi ŝatas, pandas.
+
+46
+00:02:49,790 --> 00:02:52,290
+Bone, do kiel ni ŝanĝi tiun?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Nu, ni havas nian tekston indekso.
+
+48
+00:02:55,500 --> 00:02:59,160
+Jen ĉe la unua litero kaj
+tia estas la indekso por nia ŝlosilo
+
+49
+00:02:59,160 --> 00:03:02,830
+kiuj estas ĉe la p, la unua
+letero en nia panda vorto.
+
+50
+00:03:02,830 --> 00:03:08,590
+Do, sxangxigxantaj mi per p donas ni x,
+tiam ni antaŭas la tekston indekso.
+
+51
+00:03:08,590 --> 00:03:10,460
+Tio ricevas al ni spaco.
+
+52
+00:03:10,460 --> 00:03:13,540
+Nun la spaceto
+estas ne alfabeta,
+
+53
+00:03:13,540 --> 00:03:16,930
+por ke signifas, ke, kiu ĵus
+translokigoj rajton super la ĉifrita teksto,
+
+54
+00:03:16,930 --> 00:03:23,430
+ni metis spacon tie, kaj ni ne
+avanci la indekson nia ŝlosilo.
+
+55
+00:03:23,430 --> 00:03:25,820
+Do, ni estas ankoraŭ ĉe p en ĉi tiu punkto.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Ni avancis al la venonta
+indekso en nia teksto.
+
+57
+00:03:30,130 --> 00:03:34,030
+Kaj nun, ĉar tio estas
+leteron, la minuskla l,
+
+58
+00:03:34,030 --> 00:03:37,920
+ni ŝanĝi ke per la
+sekva indekso en nia ŝlosilo.
+
+59
+00:03:37,920 --> 00:03:42,360
+Kiu estas, kiu estas nulo
+movo tiel ke nur iĝas
+
+60
+00:03:42,360 --> 00:03:44,370
+l en nia ĉifrita teksto.
+
+61
+00:03:44,370 --> 00:03:51,120
+Do ni antaŭeniras ambaŭ la tekston, kaj
+la ŝlosilo indekso ĉar ĝi estas alfabeta.
+
+62
+00:03:51,120 --> 00:03:56,210
+Tial ni daŭrigas ke
+ĝis ni atingos la e same.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Bone, do vi rimarkos en ĉi tiu
+atentigi ke, laŭ nia ŝlosilo indekso,
+
+64
+00:04:01,090 --> 00:04:03,940
+ni atingis la finon de
+la panda vorto, do kio
+
+65
+00:04:03,940 --> 00:04:08,750
+okazas kiam ni atingos la sekva
+alfabeta leteron en la teksto?
+
+66
+00:04:08,750 --> 00:04:12,180
+Nu, ĉio kio okazas estas ni
+envolver ĉirkaŭ la komenco,
+
+67
+00:04:12,180 --> 00:04:14,710
+la unua indico de nia ŝlosilo.
+
+68
+00:04:14,710 --> 00:04:19,570
+Do, tiam ni ŝanĝi ke
+y per p por doni al ni n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Kaj tiam, ni daŭrigas finante kodoprezento
+nian tekston akiri x lvne Noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> El tiu ekzemplo, mi
+montris, ke ni nur avancis
+
+71
+00:04:29,300 --> 00:04:33,140
+al la sekva letero en la ŝlosilvorto
+se la karaktero en plata teksto
+
+72
+00:04:33,140 --> 00:04:37,480
+estas litero por la isalpha
+funkcio eniros oportunan tie.
+
+73
+00:04:37,480 --> 00:04:43,030
+Kaj, same kiel en Cezaro, ni volas
+konservi la kazon, isupper kaj islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Do, aldonu ĉi iomete
+en en vian _pseudocode_.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Do kiel ni eltrovi la ŝlosilon ŝanĝoj?
+
+76
+00:04:48,510 --> 00:04:53,030
+Nu, se vi memoras nian diskuton
+sur alfabeta indeksoj en la Cezaro
+
+77
+00:04:53,030 --> 00:04:55,370
+problemo, estas tre similaj.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Kie A respondas al ASCII
+valoro de 65 sed movo de 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+kaj tiam la lasta litero
+en la alfabeto, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+respondas al movo de 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Vi rimarkos ke la ŝanĝo
+estas identa ĉu
+
+82
+00:05:10,320 --> 00:05:14,880
+la litero estas majuskla aŭ minuskla.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> Bone, do nun, ke vi
+scipovas diveni
+
+84
+00:05:17,700 --> 00:05:21,470
+la nombra ŝanĝo ke
+respondas al sola karaktero
+
+85
+00:05:21,470 --> 00:05:24,050
+ni revenu al nia ekvacio.
+
+86
+00:05:24,050 --> 00:05:28,180
+Ĉar ni havas du malsamajn
+subaj tie, i kaj j,
+
+87
+00:05:28,180 --> 00:05:32,130
+jen sugesto ke ni volas konservi trako
+de ambaŭ nia pozicio en la teksto
+
+88
+00:05:32,130 --> 00:05:36,600
+krom nia pozicio en la ŝlosilvorto,
+do tiuj estas du apartaj variabloj
+
+89
+00:05:36,600 --> 00:05:39,010
+ke ni volas konservi trafis.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Nun, la pozicio en nia teksto
+tuj pliigos ĉiun fojon,
+
+91
+00:05:42,580 --> 00:05:45,530
+tiel ke tuj esti
+iom pli rekte antaŭen
+
+92
+00:05:45,530 --> 00:05:49,750
+kontraste al la pozicio la ŝlosilvorto,
+kion ni scias devas envolver ĉirkaŭe,
+
+93
+00:05:49,750 --> 00:05:52,910
+kaj kelkfoje pliigo,
+foje resti la sama.
+
+94
+00:05:52,910 --> 00:05:55,430
+Do, kiel ni implemento
+la funcionalidad
+
+95
+00:05:55,430 --> 00:05:59,820
+volvi ĉirkaŭ la
+indekso por la ŝlosilvorto?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Mi tuj uzos la kalkulu ekzemple.
+
+97
+00:06:01,640 --> 00:06:06,100
+Kalkulante estas populara maniero
+disfendi personoj en grupoj.
+
+98
+00:06:06,100 --> 00:06:10,660
+Diru mi havis 5 personoj kaj mi volis
+fendi ilin en tri grupoj:
+
+99
+00:06:10,660 --> 00:06:13,640
+bone tiam mi komencus nombrante for.
+
+100
+00:06:13,640 --> 00:06:16,980
+La unua persono volus
+diri mi estas teamo numero unu,
+
+101
+00:06:16,980 --> 00:06:21,030
+la sekva persono estus teamo nombro
+du, la tria persono teamo nombro
+
+102
+00:06:21,030 --> 00:06:21,910
+tri.
+
+103
+00:06:21,910 --> 00:06:25,910
+Nun, mi nur volas tri grupoj tiel
+la kvara persono farus reale
+
+104
+00:06:25,910 --> 00:06:30,160
+komencu ĉe la komenco kaj diru,
+bone, mi estas teamo numero unu tiel,
+
+105
+00:06:30,160 --> 00:06:32,890
+kaj la sekva persono
+estus teamo numero du.
+
+106
+00:06:32,890 --> 00:06:37,660
+Kaj, de tie, ili povas tiam
+apartigi en siaj grupoj.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Do, kiel povus mi uzas module
+helpi min efektivigi
+
+108
+00:06:41,130 --> 00:06:44,160
+tiu kalkulu wrap ĉirkaŭ funkcio?
+
+109
+00:06:44,160 --> 00:06:50,140
+Nu, la unua persono
+numero 1, mod 3 al ni 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 donas al ni 2,
+kaj 3 mod 3 donas ni 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> La kvara persono, numero 4, mod 3
+donas al ni la 1 kaj tiam 5 mod 3 donas al ni 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Do, vi rimarkos ke kvankam
+la nombro de personoj, ke mi havas
+
+113
+00:07:05,370 --> 00:07:11,210
+pliigas, kaj estas supre
+3, ĉar mi modding de 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Mi ĉiam ricevas nombrojn 0, 1, kaj 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Mi neniam pli granda ol 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Tial, eĉ se mi havis 10
+homoj, tiam ĉiu el tiuj personoj
+
+117
+00:07:22,630 --> 00:07:27,430
+daŭre estus ene grupoj 1, 2, aŭ 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Do, nun ni scias ke se ni havas grupon
+5 Kaj ni mod ĉiuj tiuj per 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+tiam ni neniam iranta
+superi grupoj 0, 1, aŭ 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Do, ni neniam ricevos grupo
+numeron tio egala al 3 aŭ supre.
+
+121
+00:07:43,430 --> 00:07:46,980
+Do, eĉ se mi aldonos kvin pli
+homoj, tiam ĉiu el ili
+
+122
+00:07:46,980 --> 00:07:53,150
+ankoraŭ esti atribuita al grupoj
+0, 1, aŭ 2 ĉar mi modding per 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Mi neniam tuj superos ke ĉapo.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> Bone, do ni vidu se ni povas apliki
+tiu koncepto de uzanta module
+
+125
+00:08:00,800 --> 00:08:03,710
+volvi ĉirkaŭ la
+grupo nombroj kaj apliki
+
+126
+00:08:03,710 --> 00:08:08,000
+al Vigenère kie ni volas
+uzi module envolver ĉirkaŭe
+
+127
+00:08:08,000 --> 00:08:10,220
+indekson por la ŝlosilvorto.
+
+128
+00:08:10,220 --> 00:08:12,830
+Kvankam ni pliigante
+la indekso ni ĉiam
+
+129
+00:08:12,830 --> 00:08:17,260
+volas certigi ke ni ĉiam
+envolver ĉirkaŭ la komenco
+
+130
+00:08:17,260 --> 00:08:20,050
+neniam superante la
+longo de la kordo.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> Bone, do mi scias li havu
+iom superfortanta.
+
+132
+00:08:23,510 --> 00:08:26,670
+Ekzistas multe pli fari en tiu p aro.
+
+133
+00:08:26,670 --> 00:08:30,050
+Do, certigi ke vi skribas el
+bonan _pseudocode_ mem
+
+134
+00:08:30,050 --> 00:08:32,870
+ke vi komprenos kaj
+kiu alvenas la laboron farita.
+
+135
+00:08:32,870 --> 00:08:35,580
+Provu trakti ĉiun
+sola linio sendepende
+
+136
+00:08:35,580 --> 00:08:38,370
+elŝeligi cxiuj infanoj
+malgrandaj pecoj de la puzlo
+
+137
+00:08:38,370 --> 00:08:40,260
+antaŭ meti ĝin kune.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Certiĝu ke vi povas akiri
+la ŝlosilo de la komandlinio
+
+139
+00:08:43,110 --> 00:08:46,780
+kaj certigi ke ĝi estas alfabeta,
+akiri la simpla teksto de la uzanto,
+
+140
+00:08:46,780 --> 00:08:51,010
+kaj tiam en enciphering, certigu vin
+scipovas encipher sola litero,
+
+141
+00:08:51,010 --> 00:08:56,130
+kaj tiam progresi al la tuta ĉeno
+kun ĉiuj wrap ĉirkaŭ funkcioj.
+
+142
+00:08:56,130 --> 00:08:59,610
+Fine, vi povas presi la ĉifrita teksto.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Mia nomo estas Zamyla,
+kaj tio Vigenère.
+
+144
+00:09:04,050 --> 00:09:07,757
+

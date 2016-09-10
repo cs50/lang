@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Ng hakbang up Hayaan ang aming
+laro sa Vigenere cipher.
+
+3
+00:00:04,030 --> 00:00:06,710
+Ang Vigenere cipher ay
+halos kapareho sa Caesar,
+
+4
+00:00:06,710 --> 00:00:11,060
+maliban sa Caesar ipinasa namin sa
+isang solong integer bilang aming key.
+
+5
+00:00:11,060 --> 00:00:14,100
+Sa Vigenere kami ay pagpunta
+upang pumasa sa isang keyword.
+
+6
+00:00:14,100 --> 00:00:19,400
+Kaya, kung nais ko upang ilipat ang
+ciphertext na ito ay CS 50 sa pamamagitan ng ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+pagkatapos na nangangahulugan na ang bawat titik sa
+ohai ay pagpunta upang maglingkod bilang ang susi,
+
+8
+00:00:23,260 --> 00:00:27,160
+at pupuntahan ko upang umikot sa ibabaw
+na keyword para sa aking shift
+
+9
+00:00:27,160 --> 00:00:31,930
+paggawa ng ciphertext
+isang pulutong mas mahirap i-decode.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Ano ang ibig sabihin ng pag-
+shift sa pamamagitan ng keyword?
+
+11
+00:00:34,540 --> 00:00:38,610
+Well, ang keyword ay isang string
+kung saan ang bawat titik ay tumutugon
+
+12
+00:00:38,610 --> 00:00:41,080
+sa ilang shift integer.
+
+13
+00:00:41,080 --> 00:00:49,310
+Kaya, ang o ay tumutugon sa isang susi na 14,
+h sa isang key ng 7, isang may isang key ng 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+sa gayon ay hindi baguhin ang anumang bagay,
+at pagkatapos ay i ay may isang key ng 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Sinasabi ko tumakbo Vigenere A sa
+plain text na ito ay CS50 mabuti,
+
+16
+00:01:00,000 --> 00:01:02,800
+na lang bigyan
+sa akin ng isang hindi nabago string.
+
+17
+00:01:02,800 --> 00:01:08,170
+Pansinin na ito ay katumbas ng
+tumatakbo Caesar na may isang key ng zero.
+
+18
+00:01:08,170 --> 00:01:12,070
+Sa katunayan, tumatakbo Vigenere
+sa anumang solong character
+
+19
+00:01:12,070 --> 00:01:17,070
+ay katumbas ng tumatakbo
+Caesar sa na parehong integer.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> O sige, kaya, dahil
+ang mga ito ay kaya katulad gusto ko
+
+21
+00:01:20,400 --> 00:01:24,300
+talagang pinapayo na kung ikaw
+nais maaari mo lamang kopyahin ang iyong mga Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+code sa iyong Vigenere code.
+
+23
+00:01:26,932 --> 00:01:28,640
+Mga bagay ay magbabago,
+ngunit hindi bababa sa ikaw ay may
+
+24
+00:01:28,640 --> 00:01:31,110
+ilang backbone na maaari mong magtrabaho sa.
+
+25
+00:01:31,110 --> 00:01:36,410
+Dahil ang TODOs ay pareho ang gusto namin
+upang makuha ang key, makuha ang plain text,
+
+26
+00:01:36,410 --> 00:01:40,690
+ensayper na plain text,
+at pagkatapos ay i-print na out.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Katulad ng Caesar ang susi ay pagpunta sa
+maipasa sa bilang ang pangalawang command line
+
+28
+00:01:44,980 --> 00:01:50,540
+argument na nakapaloob sa argv index
+1, ngunit ito ay naiiba oras na ito
+
+29
+00:01:50,540 --> 00:01:52,560
+dahil ito ay dapat alphabetical.
+
+30
+00:01:52,560 --> 00:01:56,390
+Kaya, kailangan namin upang umulit sa paglipas ng bawat
+solong character sa key na
+
+31
+00:01:56,390 --> 00:02:00,800
+na ang gumagamit ay ipinasa sa, at masiguro
+na ang bawat karakter ay pang-abakada
+
+32
+00:02:00,800 --> 00:02:02,800
+upang magpatuloy.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Sa sandaling tapos na kami na, pagkatapos namin
+maaaring makuha ang string mula sa gumagamit,
+
+34
+00:02:05,560 --> 00:02:07,560
+tulad ng ginawa namin bago.
+
+35
+00:02:07,560 --> 00:02:10,520
+At ngayon, dumating kami sa gitna
+ng problema para sa Vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+na kung saan ay tulad ng Caesar, kung paano
+malaman ang mga enciphering pattern
+
+37
+00:02:14,665 --> 00:02:19,760
+at equation, at ensayper
+ang buong plaintext.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Kaya, mapapansin mo na ang
+equation para sa Vigenere shift
+
+39
+00:02:23,280 --> 00:02:25,610
+ay halos kapareho sa Caesar isa.
+
+40
+00:02:25,610 --> 00:02:29,780
+Ang pagkakaiba lamang ay na
+sa halip ng isang solong variable k
+
+41
+00:02:29,780 --> 00:02:37,270
+bago, ngayon k ay may subscript,
+na nagpapahiwatig ng JTH titik ng key.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Ni maglakad sa pamamagitan ng isang halimbawa.
+
+43
+00:02:39,560 --> 00:02:43,830
+Say gusto mong pumasa sa isang lihim na
+mensahe papunta sa iyong crush, gusto ko sa iyo.
+
+44
+00:02:43,830 --> 00:02:46,325
+Well, para sa iyong mga susi mo
+pumili ng isang bagay na ang iyong
+
+45
+00:02:46,325 --> 00:02:49,790
+alam crush alam na gusto mo, pandas.
+
+46
+00:02:49,790 --> 00:02:52,290
+O sige, kaya paano shift namin ito?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Well, mayroon kaming ang aming plaintext index.
+
+48
+00:02:55,500 --> 00:02:59,160
+Iyan ay sa ang unang titik at
+sa gayon ay ang index para sa aming mga key
+
+49
+00:02:59,160 --> 00:03:02,830
+kung saan ay sa p, ang unang
+sulat sa aming panda salita.
+
+50
+00:03:02,830 --> 00:03:08,590
+Kaya, paglilipat ko sa pamamagitan ng p ay nagbibigay sa amin x,
+pagkatapos namin isulong ang plaintext index.
+
+51
+00:03:08,590 --> 00:03:10,460
+Ito ay makakakuha ng sa amin sa isang space.
+
+52
+00:03:10,460 --> 00:03:13,540
+Ngayon, ang puwang na karakter
+ay non-abakada,
+
+53
+00:03:13,540 --> 00:03:16,930
+kaya na nangangahulugan na, na lamang
+transfers karapatan sa paglipas ng sa ciphertext,
+
+54
+00:03:16,930 --> 00:03:23,430
+inilalagay namin ang isang puwang doon, at ginagawa namin hindi
+isulong ang index para sa aming mga key.
+
+55
+00:03:23,430 --> 00:03:25,820
+Kaya, kami ay pa rin sa p sa puntong ito.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> advance namin sa susunod na
+index sa aming plaintext.
+
+57
+00:03:30,130 --> 00:03:34,030
+At ngayon, dahil na ay
+isang sulat, ang lowercase l,
+
+58
+00:03:34,030 --> 00:03:37,920
+shift namin na sa pamamagitan ng
+susunod na index sa aming key.
+
+59
+00:03:37,920 --> 00:03:42,360
+Alin ang isang, na kung saan ay isang zero
+shift upang ang lamang nagiging
+
+60
+00:03:42,360 --> 00:03:44,370
+isang l sa aming ciphertext.
+
+61
+00:03:44,370 --> 00:03:51,120
+Pagkatapos, mag-advance namin pareho ang plaintext, at
+ang susi index dahil ito ay pang-abakada.
+
+62
+00:03:51,120 --> 00:03:56,210
+Kaya nga kami ay patuloy na
+hanggang sa makuha namin sa e sa gusto.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> O sige, kaya mapapansin mo na ito sa
+ituro na, sa mga tuntunin ng aming mga key index,
+
+64
+00:04:01,090 --> 00:04:03,940
+naabot namin na ang pinakadulo ng
+ang panda salita, kaya kung ano ang
+
+65
+00:04:03,940 --> 00:04:08,750
+ang mangyayari kapag makuha namin sa susunod na
+alphabetic titik sa plaintext?
+
+66
+00:04:08,750 --> 00:04:12,180
+Well, ang lahat ng mangyayari namin
+wrapper sa paligid sa simula,
+
+67
+00:04:12,180 --> 00:04:14,710
+sa unang index ng aming key.
+
+68
+00:04:14,710 --> 00:04:19,570
+Kaya, pagkatapos namin shift na
+y sa pamamagitan ng p upang bigyan kami ng n.
+
+69
+00:04:19,570 --> 00:04:26,860
+At pagkatapos, patuloy naming pagtatapos encoding
+aming plaintext upang makakuha x lvne noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Mula sa halimbawa na ito, ako
+nagpakita na lamang naming isulong
+
+71
+00:04:29,300 --> 00:04:33,140
+sa susunod na titik sa keyword
+kung ang character sa plain text
+
+72
+00:04:33,140 --> 00:04:37,480
+ay isang sulat kaya ang isalpha
+function na ay darating sa madaling-gamiting dito.
+
+73
+00:04:37,480 --> 00:04:43,030
+At, tulad ng sa Caesar, nais naming
+mapanatili ang kaso, isupper at islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Kaya, idagdag ang maliit na piraso
+in sa iyong pseudocode.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Kaya paano namin isinasali ang susi shifts?
+
+76
+00:04:48,510 --> 00:04:53,030
+Well, kung ang pagpapabalik sa iyo ang aming discussion
+sa alpabetikong indeks sa Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+problema, ito ay halos katulad na.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Saan A ay tumutugon sa isang ascii
+halaga ng 65 ngunit isang shift ng 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+at pagkatapos ay ang huling sulat
+sa alpabeto, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+ay kumakatawan sa isang shift ng 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Mapapansin mo na ang shift
+ay kapareho kung o hindi
+
+82
+00:05:10,320 --> 00:05:14,880
+ang sulat ay malaking titik o maliit na titik.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, kaya ngayon na kayo
+malaman kung paano upang malaman kung
+
+84
+00:05:17,700 --> 00:05:21,470
+ang numerical shift na
+ay kumakatawan sa isang solong character
+
+85
+00:05:21,470 --> 00:05:24,050
+sabihin bumalik sa aming equation.
+
+86
+00:05:24,050 --> 00:05:28,180
+Dahil mayroon kaming dalawang magkaibang
+subscripts dito, i at j,
+
+87
+00:05:28,180 --> 00:05:32,130
+iyan ay isang pahiwatig na gusto naming subaybayan
+ng parehong aming posisyon sa plaintext
+
+88
+00:05:32,130 --> 00:05:36,600
+pati na rin ang aming posisyon sa keyword,
+kaya ang mga ito ay dalawang magkahiwalay na mga variable
+
+89
+00:05:36,600 --> 00:05:39,010
+na gusto naming panatilihin ang isang hold ng.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Ngayon, ang posisyon sa aming plaintext
+ay pagpunta sa taasan ang bawat oras,
+
+91
+00:05:42,580 --> 00:05:45,530
+kaya na ay pagpunta sa maging isang
+bit mas tuwid forward
+
+92
+00:05:45,530 --> 00:05:49,750
+na taliwas sa mga posisyon ng keyword,
+kung saan alam namin ay may sa wrapper sa paligid,
+
+93
+00:05:49,750 --> 00:05:52,910
+at kung minsan dagdagan,
+minsan mananatiling pareho.
+
+94
+00:05:52,910 --> 00:05:55,430
+Kaya, paano namin ipatupad
+ang pag-andar
+
+95
+00:05:55,430 --> 00:05:59,820
+sa wrapper sa paligid ng
+index para sa mga keyword?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Ako pagpunta sa gamitin ang count off halimbawa.
+
+97
+00:06:01,640 --> 00:06:06,100
+Nagbibilang off ay isang popular na paraan
+upang hatiin ang mga tao sa mga grupo.
+
+98
+00:06:06,100 --> 00:06:10,660
+Sinasabi ko ay 5 tao at nais kong
+split up ang mga ito sa tatlong grupo,
+
+99
+00:06:10,660 --> 00:06:13,640
+kung sa gayon Gusto ko simulan sa pamamagitan ng pagbibilang off.
+
+100
+00:06:13,640 --> 00:06:16,980
+Ang unang tao gagawin
+sabihin Ako team numero ng isa,
+
+101
+00:06:16,980 --> 00:06:21,030
+sa susunod na tao ay magiging number team
+dalawa, ikatlong tao team number
+
+102
+00:06:21,030 --> 00:06:21,910
+tatlo.
+
+103
+00:06:21,910 --> 00:06:25,910
+Ngayon, gusto ko lang tatlong grupo kaya
+ang ika-apat na tao gagawin talaga
+
+104
+00:06:25,910 --> 00:06:30,160
+magsimula sa simula at sabihin,
+well, ako team number one pati na rin,
+
+105
+00:06:30,160 --> 00:06:32,890
+at ang susunod na tao
+ay magiging team bilang dalawang.
+
+106
+00:06:32,890 --> 00:06:37,660
+At, mula doon, maaari nilang pagkatapos ay
+hiwalay sa kanilang mga grupo.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Kaya, kung paano maaari ko bang gamitin modulo
+upang makatulong sa akin ipatupad
+
+108
+00:06:41,130 --> 00:06:44,160
+ito count off pambalot sa paligid function?
+
+109
+00:06:44,160 --> 00:06:50,140
+Well, ang unang tao
+numero 1, mod 3 ay nagbibigay sa amin 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 ay nagbibigay sa amin 2,
+at 3 mod 3 ay nagbibigay sa amin 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Ang ika-apat na tao, numero 4, mod 3
+ay nagbibigay sa amin 1, at pagkatapos ay 5 mod 3 ay nagbibigay sa amin 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Kaya, na mapapansin mo na kahit na
+ang bilang ng mga tao na mayroon akong
+
+113
+00:07:05,370 --> 00:07:11,210
+nagdaragdag, at ito ay sa itaas
+3, dahil ako modding sa pamamagitan ng 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Ako palaging makakuha ng mga numero ng 0, 1, at 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Hindi ako makakuha ng mas malaki kaysa sa 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Kaya nga, kahit na kung ako ay nagkaroon ng 10
+mga tao, at pagkatapos ang lahat ng mga tao
+
+117
+00:07:22,630 --> 00:07:27,430
+ay pa rin sa loob ng mga grupo 1, 2, o 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Kaya, ngayon alam namin na kung kami ay may isang grupo
+5 at mod namin ang lahat ng mga sa pamamagitan ng 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+pagkatapos ay hindi kailanman kami ay pagpunta sa
+lumampas grupo 0, 1, o 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Kaya, kami ay hindi kailanman pagpunta upang makakuha ng isang grupo
+number na katumbas ng 3 o sa itaas.
+
+121
+00:07:43,430 --> 00:07:46,980
+Kaya, kahit na kung ako magdadagdag ng limang higit pang mga
+mga tao, at pagkatapos ang lahat ng mga ito
+
+122
+00:07:46,980 --> 00:07:53,150
+Gusto pa rin italaga sa grupo
+0, 1, o 2 dahil ako modding sa pamamagitan ng 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+hindi ako pagpunta sa lumampas na cap.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, kaya sabihin makita kung maaari naming mag-aplay
+ito konsepto ng paggamit ng modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+sa wrapper sa paligid ng
+numero ng grupo at mag-aplay
+
+126
+00:08:03,710 --> 00:08:08,000
+ito sa Vigenere kung saan nais namin
+gamitin modulo sa wrapper sa paligid
+
+127
+00:08:08,000 --> 00:08:10,220
+ang index para sa mga keyword.
+
+128
+00:08:10,220 --> 00:08:12,830
+Kahit na kami ay incrementing
+ang index lagi naming
+
+129
+00:08:12,830 --> 00:08:17,260
+gusto mong siguraduhin na lagi naming
+wrapper sa paligid sa pinakadulo simula
+
+130
+00:08:17,260 --> 00:08:20,050
+hindi lalampas sa
+haba ng string.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, kaya alam ko ito ay maaaring maging
+isang maliit na bit napakalaki.
+
+132
+00:08:23,510 --> 00:08:26,670
+May isang pulutong ng higit na gawin sa ganitong p set.
+
+133
+00:08:26,670 --> 00:08:30,050
+Kaya, siguraduhin na isulat mo out
+isang magandang pseudocode para sa iyong sarili
+
+134
+00:08:30,050 --> 00:08:32,870
+na nauunawaan mo at
+na makakakuha ng trabaho tapos na.
+
+135
+00:08:32,870 --> 00:08:35,580
+Subukan at matugunan ang bawat
+solong linya nang nakapag-iisa
+
+136
+00:08:35,580 --> 00:08:38,370
+figuring out lahat ng mga maliit
+maliit na piraso ng puzzle
+
+137
+00:08:38,370 --> 00:08:40,260
+bago ilagay ito nang magkasama.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Tiyakin na maaari kang makakuha ng
+ang susi mula sa command line
+
+139
+00:08:43,110 --> 00:08:46,780
+at tiyakin na ito ay pang-abakada,
+makuha ang plain text mula sa gumagamit,
+
+140
+00:08:46,780 --> 00:08:51,010
+at pagkatapos ay sa enciphering, siguraduhin na ikaw
+alam kung paano Encipher isang solong titik,
+
+141
+00:08:51,010 --> 00:08:56,130
+at pagkatapos ay pagsulong sa buong string
+sa lahat ng mga pambalot sa paligid function.
+
+142
+00:08:56,130 --> 00:08:59,610
+Sa wakas, maaari mong i-print ang ciphertext.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Ang pangalan ko ay isang Zamyla,
+at ito ay Vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

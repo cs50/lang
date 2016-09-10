@@ -1,0 +1,47 @@
+Zamyla Chan: Lad os intensivere vores spil med vigenere cipher. Den vigenere cipher er meget lig Cæsar, undtagen i Cæsar vi passerede i et enkelt heltal som vores nøgle. I vigenere vil vi at passere i et søgeord. Så hvis jeg ønskede at flytte ciphertekst dette er CS 50 af ohai, så det betyder, at hvert bogstav i ohai vil tjene som nøglen, og jeg har tænkt mig at cykle i at nøgleordet for min vagt gør ciphertext meget sværere at afkode. 
+
+Hvad betyder det at skift af søgeord? Nå, nøgleordet er en streng hvor hvert bogstav svarer til nogle heltal skift. Så o svarer til en nøgle på 14, h til en nøgle på 7, a har en nøgle på 0, så der ikke ville ændre noget, og så jeg har en nøgle på 8. 
+
+Sig jeg løb vigenere A med almindelig tekst dette er CS50 godt, det ville blot give mig et uændret streng. Bemærk at dette er ækvivalent med kører Cæsar med en nøgle på nul. Faktisk kører vigenere med et enkelt tegn ville svare til løb Cæsar med det samme heltal. 
+
+Okay, så, da de er så ens jeg havde faktisk anbefaler, at hvis du ønsker du kan bare kopiere din Cæsar kode på din vigenere kode. Tingene vil ændre sig, men i det mindste du har nogle rygrad, som du kan arbejde med. Fordi todos er de samme vi ønsker at få nøglen, får den almindelig tekst, encipher at almindelig tekst, og derefter udskrive det ud. 
+
+Ligesom Cæsar nøglen vil være bestået som den anden kommandolinjen argument, der er indeholdt i argv indeks 1, men det er anderledes denne gang fordi det skal være alfabetisk. Så vi er nødt til at gentage over hver enkelt tegn i denne nøgle at brugeren gik i, og sikre at hver karakter er alfabetisk for at fortsætte. 
+
+Når vi har gjort det, så vi kan få strengen fra brugeren, lige som vi gjorde før. Og nu kommer vi til hjertet af problemet for vigenere, der er ligesom Cæsar, hvordan finde ud af chiffrerings- mønster og ligning, og encipher hele klartekst. 
+
+Så vil du bemærke, at ligning for vigenere skift er meget lig den Cæsar én. Den eneste forskel er, at i stedet for en enkelt variabel k før, nu k har en sænket, angiver den j'te skrivelse af nøglen. 
+
+Lad os gennemgå et eksempel. Sig du ønskede at videregive en hemmelighed besked på din crush, jeg kan lide dig. Tja, for din nøgle dig vælge noget, at din vide crush ved, at du kan lide, pandaer. Okay, så hvordan kan vi flytte dette? 
+
+Nå, vi har vores klartekst indeks. Det er på det første bogstav og så er indekset for vores nøgle hvilket er på p, den første brev i vores panda ord. Så skiftende I ved p giver os x, derefter forvejen Vi plaintext indeks. Dette får os til et rum. Nu, mellemrumstegnet er ikke alfabetisk, så det betyder, at der bare overførsler lige over til den ciphertext, vi sætte en plads der, og vi gør ikke fremme indekset for vores nøgle. Så vi er stadig på p på dette punkt. 
+
+Vi videre til næste indeks i vores klartekst. Og nu, fordi det er et brev, det lille l, vi skifter at ved næste indeks i vores nøgle. Som er en, der er et nul skift så bare bliver en l i vores ciphertext. Derefter, vi forhånd både klartekst, og nøgleindekset, fordi det er alfabetisk. Så fortsætter vi, at indtil vi kommer til e i lignende. 
+
+Okay, så du vil bemærke på dette peger, at der i forhold til vores centrale indeks, vi har nået slutningen af panda ord, så hvad sker, når vi kommer til den næste alfabetisk bogstav i klartekst? Nå, alt det der sker, er vi wrap rundt til begyndelsen, til det første indeks for vores nøgle. Så, så vi skifter, at y ved p at give os n. Og så fortsætter vi med efterbehandling kodning vores klartekst at få x lvne noh. 
+
+Fra dette eksempel, jeg viste, at vi kun avancere til det næste bogstav i nøgleordet hvis karakter i klartekst er et brev, så isalpha funktion vil komme i handy her. Og ligesom i Cæsar, ønsker vi at bevare tilfældet, isupper og islower. Så tilføj denne lille smule i ind i din pseudokode. 
+
+Så hvordan kan vi finde ud af de centrale skift? Tja, hvis du husker vores diskussion på alfabetiske indekser i Cæsar problem, det er meget ens. 
+
+Hvor A svarer til en ASCII værdi på 65, men et skift på 0, og derefter det sidste bogstav i alfabetet, Z, svarer til en forskydning af 25. Du vil opdage, at skiftet er identisk eller ej brevet er store eller små bogstaver. 
+
+OK, så nu, at du vide, hvordan man finde ud af den numeriske skift, svarer til et enkelt tegn lad os gå tilbage til vores ligning. Fordi vi har to forskellige sænket her, i og j, det er en antydning, at vi ønsker at holde styr af både vores position i klartekst samt vores position i søgeordet, så dem er to separate variabler at vi ønsker at holde et hold af. 
+
+Nu er positionen i vores klartekst vil stige hver gang, så det kommer til at være en lidt mere ligetil i modsætning til den position søgeordet, som vi ved har at indhyllingsafstand, og undertiden tilvækst, sommetider forblive den samme. Så hvordan kan vi gennemfører funktionaliteten at vikle rundt om indeks for søgeordet? 
+
+Jeg har tænkt mig at bruge tælle eksempel. Tælle off er en populær måde at opdele folk i grupper. Sige, at jeg havde 5 personer og jeg ønskede at dele dem op i tre grupper, ja så ville jeg starte med at tælle fra. Den første person ville sige jeg er hold nummer et, den næste person vil være hold nummer to, hold nummer den tredje person tre. Nu, jeg ønsker kun tre grupper, så den fjerde person ville faktisk starte ved begyndelsen og sige, godt, jeg er hold nummer et så godt, og den næste person ville være hold nummer to. Og derfra, kan de så separere i deres grupper. 
+
+Så hvordan kan jeg bruge modulo at hjælpe mig gennemføre dette tælle indhyllingsafstand funktion? Nå, den første person nummer 1, mod 3 giver os en. 2 mod 3 giver os to, og 3 mod 3 giver os 0. 
+
+Den fjerde person, nummer 4, mod 3 giver os en, og derefter 5 mod 3 giver os to. Så vil du bemærke, at selv om antallet af mennesker, som jeg har stiger, og er over 3, da jeg modding med 3 Jeg får altid tal 0, 1, og 2. Jeg får aldrig større end 3. Altsaa, selvom jeg havde 10 mennesker, så alle disse mennesker ville stadig være inden for grupper 1, 2, eller 0. 
+
+Så nu ved vi, at hvis vi har en gruppe af 5 og vi Mod alle dem med 3, så vi vil aldrig overstige grupper 0, 1 eller 2. Så vi aldrig kommer til at få en gruppe nummer, der er lig med 3 eller derover. Så selv om jeg tilføje fem mere mennesker, så alle dem ville stadig kan henføres under gruppe 0, 1, eller 2, fordi jeg modding med 3. Jeg kommer aldrig til at overskride denne hætte. 
+
+OK, så lad os se om vi kan anvende dette koncept for at bruge modulo at vikle rundt om gruppenumre og anvende det at vigenere hvor vi ønsker at bruge modulo at ombrydes omkring indekset for søgeordet. Selvom vi forøgelse indekset vi altid ønsker at sikre, at vi altid wrap rundt til begyndelsen aldrig overstiger den længden af ​​strengen. 
+
+OK, så jeg ved, det kan være en lille smule overvældende. Der er meget mere at gøre i denne p sæt. Så sørg for, at du skriver ud en god pseudokode for dig selv at du forstår og der får opgaven. Prøv og løse alle enkelt linje uafhængigt at finde ud af alle de små små stykker af puslespillet før du sætter det sammen. 
+
+Sørg for, at du kan få nøglen fra kommandolinjen og sikre, at det er alfabetiske, få almindelig tekst fra brugeren, og derefter i kryptografering, skal du sørge vide, hvordan man kryptere et enkelt bogstav, og derefter videre til det hele strengen med al den wrap omkring funktioner. Endelig kan du udskrive ciphertext. 
+
+Mit navn er et Zamyla, og dette var vigenere. 

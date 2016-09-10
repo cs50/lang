@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Nézzük fokozzuk
+játék a Vigenère titkosítást.
+
+3
+00:00:04,030 --> 00:00:06,710
+A Vigenère kódoló algoritmus
+nagyon hasonlít a Caesar,
+
+4
+00:00:06,710 --> 00:00:11,060
+kivéve Caesar elhaladtunk a
+Egyetlen integer kulcsfontosságú.
+
+5
+00:00:11,060 --> 00:00:14,100
+Ebben Vigenère megyünk
+át egy kulcsszót.
+
+6
+00:00:14,100 --> 00:00:19,400
+Tehát, ha akartam, hogy eltolja a
+rejtjelezett ez CS 50. Ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+akkor ez azt jelenti, hogy minden egyes levél
+Ohai fog szolgálni, mint a legfontosabb,
+
+8
+00:00:23,260 --> 00:00:27,160
+és megyek ciklusra
+hogy a kulcsszó az én műszak
+
+9
+00:00:27,160 --> 00:00:31,930
+így a rejtjelezett
+sokkal nehezebb dekódolni.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Mit jelent az, hogy
+váltás a kulcsszó?
+
+11
+00:00:34,540 --> 00:00:38,610
+Nos, a kulcsszó egy húr
+ahol minden betű felel meg
+
+12
+00:00:38,610 --> 00:00:41,080
+Egyes egész műszak.
+
+13
+00:00:41,080 --> 00:00:49,310
+Tehát, az O megfelel egy kulcsfontosságú 14,
+H egy gombhoz 7, egy kulcsfontosságú 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+így ez nem változtat semmin,
+és akkor én kulcsfontosságú 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Mondjuk én futott Vigenère A a
+sima szöveg ez CS50 jól,
+
+16
+00:01:00,000 --> 00:01:02,800
+amely egyszerűen csak ad
+me változatlan húr.
+
+17
+00:01:02,800 --> 00:01:08,170
+Figyeljük meg, hogy ez egyenértékű a
+futó Caesar kulccsal nulla.
+
+18
+00:01:08,170 --> 00:01:12,070
+Sőt, futás Vigenère
+minden egyes karakter
+
+19
+00:01:12,070 --> 00:01:17,070
+egyenértékű lenne azzal a működési
+Caesar, hogy ugyanaz a szám.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Rendben, szóval, mivel
+annyira hasonlít lennék
+
+21
+00:01:20,400 --> 00:01:24,300
+valójában azt javasolják, hogy ha
+szeretnénk, akkor csak másolja a Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+kódot a Vigenère kódot.
+
+23
+00:01:26,932 --> 00:01:28,640
+A dolgok változnak,
+de legalább van
+
+24
+00:01:28,640 --> 00:01:31,110
+néhány gerinc, hogy tud dolgozni.
+
+25
+00:01:31,110 --> 00:01:36,410
+Mivel a Todos ugyanazok akarunk
+hogy a kulcs, hogy a sima szöveg,
+
+26
+00:01:36,410 --> 00:01:40,690
+sifríroz, hogy a sima szöveg,
+majd nyomtassa ki, hogy.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Csakúgy, mint Caesar a kulcs fog
+telt el, mint a második parancssori
+
+28
+00:01:44,980 --> 00:01:50,540
+szereplő érvelést argv index
+1, de ezúttal másként
+
+29
+00:01:50,540 --> 00:01:52,560
+mert kell lennie alfabetikus.
+
+30
+00:01:52,560 --> 00:01:56,390
+Tehát, meg kell végighaladni minden
+egyetlen karaktert, hogy a legfontosabb
+
+31
+00:01:56,390 --> 00:02:00,800
+hogy a felhasználói telt el, és biztosítja,
+hogy minden karakter alfabetikus
+
+32
+00:02:00,800 --> 00:02:02,800
+annak érdekében, hogy továbbra is.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Amint ezzel megvagy, akkor
+kaphat a húr a felhasználó,
+
+34
+00:02:05,560 --> 00:02:07,560
+Csak, mint azelőtt.
+
+35
+00:02:07,560 --> 00:02:10,520
+És most jön a szív
+A probléma Vigenère,
+
+36
+00:02:10,520 --> 00:02:14,665
+ami olyan, mint Caesar, hogyan
+kitalálni a minta A titkosítás
+
+37
+00:02:14,665 --> 00:02:19,760
+és egyenlet, és sifríroz
+A teljes nyílt szöveg.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Tehát, észre fogod venni, hogy a
+egyenlete Vigenère műszak
+
+39
+00:02:23,280 --> 00:02:25,610
+nagyon hasonlít a Caesar egy.
+
+40
+00:02:25,610 --> 00:02:29,780
+Az egyetlen különbség az, hogy
+helyett egy változó K
+
+41
+00:02:29,780 --> 00:02:37,270
+előtt, most k felirat,
+jelezve a j-edik levél a kulcsot.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Nézzünk egy példát.
+
+43
+00:02:39,560 --> 00:02:43,830
+Tegyük fel akart átadni egy titkos
+Üzenet ra összetörni, kedvellek.
+
+44
+00:02:43,830 --> 00:02:46,325
+Nos, a kulcsot,
+választani valamit, hogy a
+
+45
+00:02:46,325 --> 00:02:49,790
+tudják összetörni tudja, hogy tetszik, pandák.
+
+46
+00:02:49,790 --> 00:02:52,290
+Rendben, tehát hogyan tolódik ez?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Nos, megvan a titkosítatlan index.
+
+48
+00:02:55,500 --> 00:02:59,160
+Ez az első levelet, és
+így az index számára kulcsfontosságú
+
+49
+00:02:59,160 --> 00:03:02,830
+amely a P, az első
+levél a panda szó.
+
+50
+00:03:02,830 --> 00:03:08,590
+Tehát, a változó I p ad nekünk x,
+akkor előre az egyszerű szöveges index.
+
+51
+00:03:08,590 --> 00:03:10,460
+Ez lesz számunkra, hogy a hely.
+
+52
+00:03:10,460 --> 00:03:13,540
+Most, a szóköz
+ez nem betű,
+
+53
+00:03:13,540 --> 00:03:16,930
+így ez azt jelenti, hogy, hogy csak
+transzferek jobbról a rejtjelezett,
+
+54
+00:03:16,930 --> 00:03:23,430
+teszünk egy hely van, és mi nem
+előre az index a gombot.
+
+55
+00:03:23,430 --> 00:03:25,820
+Tehát, még mindig o ezen a ponton.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Mi előre a következő
+index a titkosítatlan.
+
+57
+00:03:30,130 --> 00:03:34,030
+És most, mivel ez
+írni, a kisbetűs l,
+
+58
+00:03:34,030 --> 00:03:37,920
+csúsztatjuk, hogy a
+következő index a gombot.
+
+59
+00:03:37,920 --> 00:03:42,360
+Ami egy, ami egy nulla
+váltás, hogy csak lesz
+
+60
+00:03:42,360 --> 00:03:44,370
+Egy l mi rejtjelezett.
+
+61
+00:03:44,370 --> 00:03:51,120
+Ezután haladunk mind a nyílt szöveg, és
+kulcsindexet mert alfabetikus.
+
+62
+00:03:51,120 --> 00:03:56,210
+Tehát akkor is, hogy
+amíg eljutunk az e hasonlóképen.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Rendben, észre fogod venni, ezen
+pont, hogy tekintve a kulcs index,
+
+64
+00:04:01,090 --> 00:04:03,940
+elértük a végét
+A panda szó, akkor mi
+
+65
+00:04:03,940 --> 00:04:08,750
+történik, amikor eljutunk a következő
+alfabetikus levelet a titkosítatlan?
+
+66
+00:04:08,750 --> 00:04:12,180
+Nos, csak annyi történik, mi
+tekerje körbe a kezdet,
+
+67
+00:04:12,180 --> 00:04:14,710
+Az első index a kulcsot.
+
+68
+00:04:14,710 --> 00:04:19,570
+Tehát, akkor váltani, hogy
+y p, hogy nekünk n.
+
+69
+00:04:19,570 --> 00:04:26,860
+És akkor, mi továbbra befejező kódolás
+a nyílt szöveg, hogy x lvne noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Ebből a példából, I
+megmutatta, hogy csak előre
+
+71
+00:04:29,300 --> 00:04:33,140
+A következő betű a kulcsszó
+Ha a karakter szöveges formában
+
+72
+00:04:33,140 --> 00:04:37,480
+egy levél, a isalpha
+funkció jól jöhet ide.
+
+73
+00:04:37,480 --> 00:04:43,030
+És ugyanúgy, mint a Caesar, szeretnénk
+megőrzése esetén, isupper és islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Tehát hozzá ez a kis
+a be pszeudokód.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Szóval hogyan lehet kitalálni a kulcsot műszakban?
+
+76
+00:04:48,510 --> 00:04:53,030
+Nos, ha felidézzük vita
+A betűrendes mutatót a Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+probléma, ez nagyon hasonlít.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Ha A megfelel egy ASCII
+értéke 65, de egy műszak 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+majd az utolsó levél
+az ábécé, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+megfelel egy műszak 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Észre fogod venni, hogy a váltás
+azonos-e vagy sem
+
+82
+00:05:10,320 --> 00:05:14,880
+A levél nagybetűs vagy kisbetűs.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, így most, hogy
+tudja, hogyan kell kitalálni
+
+84
+00:05:17,700 --> 00:05:21,470
+A numerikus váltás
+felel meg egyetlen karakter
+
+85
+00:05:21,470 --> 00:05:24,050
+menjünk vissza a egyenletet.
+
+86
+00:05:24,050 --> 00:05:28,180
+Mert van két különböző
+indexek itt, i és j,
+
+87
+00:05:28,180 --> 00:05:32,130
+ez egy utalás arra, hogy szeretnénk nyomon követni
+Mindkét helyünket a titkosítatlan
+
+88
+00:05:32,130 --> 00:05:36,600
+valamint a pozícióját a kulcsszó,
+így ezek két különböző változók
+
+89
+00:05:36,600 --> 00:05:39,010
+hogy meg akarjuk tartani a hold.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Most a helyzet a titkosítatlan
+növekedni fog minden alkalommal,
+
+91
+00:05:42,580 --> 00:05:45,530
+így lesz egy
+kicsit egyenesen előre
+
+92
+00:05:45,530 --> 00:05:49,750
+szemben a pozíció a kulcsszó,
+amelyről tudjuk, hogy kell körbegörgetésének
+
+93
+00:05:49,750 --> 00:05:52,910
+és néha növedék
+néha ugyanaz marad.
+
+94
+00:05:52,910 --> 00:05:55,430
+Tehát, hogyan hajtsák végre
+a funkcionalitás
+
+95
+00:05:55,430 --> 00:05:59,820
+tekerje körül a
+index a kulcsszó?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Megyek ki a megszámlálhassa példa.
+
+97
+00:06:01,640 --> 00:06:06,100
+Időzítésének egy népszerű módja
+megosztani az embereket csoportokba.
+
+98
+00:06:06,100 --> 00:06:10,660
+Mondjuk én már 5 ember, és azt akarta, hogy
+szétszedés három csoportra,
+
+99
+00:06:10,660 --> 00:06:13,640
+nos, akkor azt először időzítésének.
+
+100
+00:06:13,640 --> 00:06:16,980
+Az első ember tenné
+mondjuk én csapat első számú,
+
+101
+00:06:16,980 --> 00:06:21,030
+A következő személy lenne csapat számát
+két, a harmadik személy csapat számát
+
+102
+00:06:21,030 --> 00:06:21,910
+három.
+
+103
+00:06:21,910 --> 00:06:25,910
+Most csak azt akarom, három csoport
+A negyedik személy ténylegesen
+
+104
+00:06:25,910 --> 00:06:30,160
+Kezdjük az elején, és azt mondják,
+nos, én csapat elsőszámú is,
+
+105
+00:06:30,160 --> 00:06:32,890
+és a következő személy
+lenne csapat kettes számú.
+
+106
+00:06:32,890 --> 00:06:37,660
+És onnan, akkor majd
+válnak szét a csoportok között.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Tehát, hogyan lehet azt használni modulo
+hogy segítsen nekem végre
+
+108
+00:06:41,130 --> 00:06:44,160
+ez megszámlálhassa kerületi funkció?
+
+109
+00:06:44,160 --> 00:06:50,140
+Nos, az első ember,
+1-es szám, mod 3 ad 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 ad 2,
+és 3 mod 3 ad nekünk 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> A negyedik személy, 4-es számú, mod 3
+ad 1, majd 5 mod 3 ad 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Tehát, akkor veszi észre, hogy bár
+az embereknek a száma, hogy már
+
+113
+00:07:05,370 --> 00:07:11,210
+növeli, és ez a fenti
+3, mivel én modding 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Én mindig a 0, 1 és 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Soha nem kap nagyobb, mint 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Tehát akkor is, ha nem volt 10
+emberek, akkor azoknak az embereknek
+
+117
+00:07:22,630 --> 00:07:27,430
+még mindig a csoportokon belül az 1, 2, vagy 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Tehát, most már tudjuk, hogy ha van egy csoport
+Az 5 és mi mod az összes ilyen a 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+akkor mi nem is fog
+haladja meg a csoportok 0, 1, vagy 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Tehát, mi nem is fog egy csoportba
+szám, amely egyenlő 3 vagy annál magasabb.
+
+121
+00:07:43,430 --> 00:07:46,980
+Tehát, ha hozzáteszem még öt
+ember, akkor mindegyik
+
+122
+00:07:46,980 --> 00:07:53,150
+még mindig hozzárendelhető csoportok
+0, 1, vagy 2, mert én modding 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Én soha nem fog meg fogja haladni a sapkát.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, lássuk, ha tudjuk alkalmazni
+ez a fogalom használata modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+tekerje körül a
+csoport számok és alkalmazni
+
+126
+00:08:03,710 --> 00:08:08,000
+hogy Vigenère hol akarunk
+használni modulo körülveszi
+
+127
+00:08:08,000 --> 00:08:10,220
+Az index a kulcsszó.
+
+128
+00:08:10,220 --> 00:08:12,830
+Annak ellenére, hogy mi megnő
+Az index mindig
+
+129
+00:08:12,830 --> 00:08:17,260
+szeretnénk, hogy győződjön meg arról, hogy mindig
+tekerje körbe a kezdetektől
+
+130
+00:08:17,260 --> 00:08:20,050
+sem haladja meg a
+karakterlánc hossza.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, így tudom, hogy lehet,
+egy kicsit nyomasztó.
+
+132
+00:08:23,510 --> 00:08:26,670
+Van egy sokkal több a teendő ebben az o set.
+
+133
+00:08:26,670 --> 00:08:30,050
+Tehát, ügyeljen arra, hogy írjon ki
+Jó pszeudokód magad
+
+134
+00:08:30,050 --> 00:08:32,870
+hogy érti és
+hogy megkapja a munkát.
+
+135
+00:08:32,870 --> 00:08:35,580
+Próbáld ki, és kezelni minden
+egyvonalas függetlenül
+
+136
+00:08:35,580 --> 00:08:38,370
+kitalálni a kis
+kis darab a puzzle
+
+137
+00:08:38,370 --> 00:08:40,260
+mielőtt azt össze.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Győződjön meg arról, hogy lehet kapni
+A kulcs a parancssorból
+
+139
+00:08:43,110 --> 00:08:46,780
+és biztosítja, hogy ez az alfabetikus,
+hogy a sima szöveg a felhasználó,
+
+140
+00:08:46,780 --> 00:08:51,010
+majd A titkosítás, győződjön meg róla,
+tudja, hogyan kell sifríroz egyetlen betű,
+
+141
+00:08:51,010 --> 00:08:56,130
+majd tovább a teljes szöveg
+minden a kerületi funkciókat.
+
+142
+00:08:56,130 --> 00:08:59,610
+Végül, akkor nyomtassa ki a rejtjelezett.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> A nevem egy Zamyla,
+és ez volt Vigenère.
+
+144
+00:09:04,050 --> 00:09:07,757
+

@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Lad os intensivere vores
+spil med vigenere cipher.
+
+3
+00:00:04,030 --> 00:00:06,710
+Den vigenere cipher er
+meget lig Cæsar,
+
+4
+00:00:06,710 --> 00:00:11,060
+undtagen i Cæsar vi passerede i
+et enkelt heltal som vores nøgle.
+
+5
+00:00:11,060 --> 00:00:14,100
+I vigenere vil vi
+at passere i et søgeord.
+
+6
+00:00:14,100 --> 00:00:19,400
+Så hvis jeg ønskede at flytte
+ciphertekst dette er CS 50 af ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+så det betyder, at hvert bogstav i
+ohai vil tjene som nøglen,
+
+8
+00:00:23,260 --> 00:00:27,160
+og jeg har tænkt mig at cykle i
+at nøgleordet for min vagt
+
+9
+00:00:27,160 --> 00:00:31,930
+gør ciphertext
+meget sværere at afkode.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Hvad betyder det at
+skift af søgeord?
+
+11
+00:00:34,540 --> 00:00:38,610
+Nå, nøgleordet er en streng
+hvor hvert bogstav svarer
+
+12
+00:00:38,610 --> 00:00:41,080
+til nogle heltal skift.
+
+13
+00:00:41,080 --> 00:00:49,310
+Så o svarer til en nøgle på 14,
+h til en nøgle på 7, a har en nøgle på 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+så der ikke ville ændre noget,
+og så jeg har en nøgle på 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Sig jeg løb vigenere A med
+almindelig tekst dette er CS50 godt,
+
+16
+00:01:00,000 --> 00:01:02,800
+det ville blot give
+mig et uændret streng.
+
+17
+00:01:02,800 --> 00:01:08,170
+Bemærk at dette er ækvivalent med
+kører Cæsar med en nøgle på nul.
+
+18
+00:01:08,170 --> 00:01:12,070
+Faktisk kører vigenere
+med et enkelt tegn
+
+19
+00:01:12,070 --> 00:01:17,070
+ville svare til løb
+Cæsar med det samme heltal.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Okay, så, da
+de er så ens jeg havde
+
+21
+00:01:20,400 --> 00:01:24,300
+faktisk anbefaler, at hvis du
+ønsker du kan bare kopiere din Cæsar
+
+22
+00:01:24,300 --> 00:01:26,932
+kode på din vigenere kode.
+
+23
+00:01:26,932 --> 00:01:28,640
+Tingene vil ændre sig,
+men i det mindste du har
+
+24
+00:01:28,640 --> 00:01:31,110
+nogle rygrad, som du kan arbejde med.
+
+25
+00:01:31,110 --> 00:01:36,410
+Fordi todos er de samme vi ønsker
+at få nøglen, får den almindelig tekst,
+
+26
+00:01:36,410 --> 00:01:40,690
+encipher at almindelig tekst,
+og derefter udskrive det ud.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Ligesom Cæsar nøglen vil
+være bestået som den anden kommandolinjen
+
+28
+00:01:44,980 --> 00:01:50,540
+argument, der er indeholdt i argv indeks
+1, men det er anderledes denne gang
+
+29
+00:01:50,540 --> 00:01:52,560
+fordi det skal være alfabetisk.
+
+30
+00:01:52,560 --> 00:01:56,390
+Så vi er nødt til at gentage over hver
+enkelt tegn i denne nøgle
+
+31
+00:01:56,390 --> 00:02:00,800
+at brugeren gik i, og sikre
+at hver karakter er alfabetisk
+
+32
+00:02:00,800 --> 00:02:02,800
+for at fortsætte.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Når vi har gjort det, så vi
+kan få strengen fra brugeren,
+
+34
+00:02:05,560 --> 00:02:07,560
+lige som vi gjorde før.
+
+35
+00:02:07,560 --> 00:02:10,520
+Og nu kommer vi til hjertet
+af problemet for vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+der er ligesom Cæsar, hvordan
+finde ud af chiffrerings- mønster
+
+37
+00:02:14,665 --> 00:02:19,760
+og ligning, og encipher
+hele klartekst.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Så vil du bemærke, at
+ligning for vigenere skift
+
+39
+00:02:23,280 --> 00:02:25,610
+er meget lig den Cæsar én.
+
+40
+00:02:25,610 --> 00:02:29,780
+Den eneste forskel er, at
+i stedet for en enkelt variabel k
+
+41
+00:02:29,780 --> 00:02:37,270
+før, nu k har en sænket,
+angiver den j'te skrivelse af nøglen.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Lad os gennemgå et eksempel.
+
+43
+00:02:39,560 --> 00:02:43,830
+Sig du ønskede at videregive en hemmelighed
+besked på din crush, jeg kan lide dig.
+
+44
+00:02:43,830 --> 00:02:46,325
+Tja, for din nøgle dig
+vælge noget, at din
+
+45
+00:02:46,325 --> 00:02:49,790
+vide crush ved, at du kan lide, pandaer.
+
+46
+00:02:49,790 --> 00:02:52,290
+Okay, så hvordan kan vi flytte dette?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Nå, vi har vores klartekst indeks.
+
+48
+00:02:55,500 --> 00:02:59,160
+Det er på det første bogstav og
+så er indekset for vores nøgle
+
+49
+00:02:59,160 --> 00:03:02,830
+hvilket er på p, den første
+brev i vores panda ord.
+
+50
+00:03:02,830 --> 00:03:08,590
+Så skiftende I ved p giver os x,
+derefter forvejen Vi plaintext indeks.
+
+51
+00:03:08,590 --> 00:03:10,460
+Dette får os til et rum.
+
+52
+00:03:10,460 --> 00:03:13,540
+Nu, mellemrumstegnet
+er ikke alfabetisk,
+
+53
+00:03:13,540 --> 00:03:16,930
+så det betyder, at der bare
+overførsler lige over til den ciphertext,
+
+54
+00:03:16,930 --> 00:03:23,430
+vi sætte en plads der, og vi gør ikke
+fremme indekset for vores nøgle.
+
+55
+00:03:23,430 --> 00:03:25,820
+Så vi er stadig på p på dette punkt.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Vi videre til næste
+indeks i vores klartekst.
+
+57
+00:03:30,130 --> 00:03:34,030
+Og nu, fordi det er
+et brev, det lille l,
+
+58
+00:03:34,030 --> 00:03:37,920
+vi skifter at ved
+næste indeks i vores nøgle.
+
+59
+00:03:37,920 --> 00:03:42,360
+Som er en, der er et nul
+skift så bare bliver
+
+60
+00:03:42,360 --> 00:03:44,370
+en l i vores ciphertext.
+
+61
+00:03:44,370 --> 00:03:51,120
+Derefter, vi forhånd både klartekst, og
+nøgleindekset, fordi det er alfabetisk.
+
+62
+00:03:51,120 --> 00:03:56,210
+Så fortsætter vi, at
+indtil vi kommer til e i lignende.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Okay, så du vil bemærke på dette
+peger, at der i forhold til vores centrale indeks,
+
+64
+00:04:01,090 --> 00:04:03,940
+vi har nået slutningen af
+panda ord, så hvad
+
+65
+00:04:03,940 --> 00:04:08,750
+sker, når vi kommer til den næste
+alfabetisk bogstav i klartekst?
+
+66
+00:04:08,750 --> 00:04:12,180
+Nå, alt det der sker, er vi
+wrap rundt til begyndelsen,
+
+67
+00:04:12,180 --> 00:04:14,710
+til det første indeks for vores nøgle.
+
+68
+00:04:14,710 --> 00:04:19,570
+Så, så vi skifter, at
+y ved p at give os n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Og så fortsætter vi med efterbehandling kodning
+vores klartekst at få x lvne noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Fra dette eksempel, jeg
+viste, at vi kun avancere
+
+71
+00:04:29,300 --> 00:04:33,140
+til det næste bogstav i nøgleordet
+hvis karakter i klartekst
+
+72
+00:04:33,140 --> 00:04:37,480
+er et brev, så isalpha
+funktion vil komme i handy her.
+
+73
+00:04:37,480 --> 00:04:43,030
+Og ligesom i Cæsar, ønsker vi at
+bevare tilfældet, isupper og islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Så tilføj denne lille smule
+i ind i din pseudokode.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Så hvordan kan vi finde ud af de centrale skift?
+
+76
+00:04:48,510 --> 00:04:53,030
+Tja, hvis du husker vores diskussion
+på alfabetiske indekser i Cæsar
+
+77
+00:04:53,030 --> 00:04:55,370
+problem, det er meget ens.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Hvor A svarer til en ASCII
+værdi på 65, men et skift på 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+og derefter det sidste bogstav
+i alfabetet, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+svarer til en forskydning af 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Du vil opdage, at skiftet
+er identisk eller ej
+
+82
+00:05:10,320 --> 00:05:14,880
+brevet er store eller små bogstaver.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, så nu, at du
+vide, hvordan man finde ud af
+
+84
+00:05:17,700 --> 00:05:21,470
+den numeriske skift,
+svarer til et enkelt tegn
+
+85
+00:05:21,470 --> 00:05:24,050
+lad os gå tilbage til vores ligning.
+
+86
+00:05:24,050 --> 00:05:28,180
+Fordi vi har to forskellige
+sænket her, i og j,
+
+87
+00:05:28,180 --> 00:05:32,130
+det er en antydning, at vi ønsker at holde styr
+af både vores position i klartekst
+
+88
+00:05:32,130 --> 00:05:36,600
+samt vores position i søgeordet,
+så dem er to separate variabler
+
+89
+00:05:36,600 --> 00:05:39,010
+at vi ønsker at holde et hold af.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Nu er positionen i vores klartekst
+vil stige hver gang,
+
+91
+00:05:42,580 --> 00:05:45,530
+så det kommer til at være en
+lidt mere ligetil
+
+92
+00:05:45,530 --> 00:05:49,750
+i modsætning til den position søgeordet,
+som vi ved har at indhyllingsafstand,
+
+93
+00:05:49,750 --> 00:05:52,910
+og undertiden tilvækst,
+sommetider forblive den samme.
+
+94
+00:05:52,910 --> 00:05:55,430
+Så hvordan kan vi gennemfører
+funktionaliteten
+
+95
+00:05:55,430 --> 00:05:59,820
+at vikle rundt om
+indeks for søgeordet?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Jeg har tænkt mig at bruge tælle eksempel.
+
+97
+00:06:01,640 --> 00:06:06,100
+Tælle off er en populær måde
+at opdele folk i grupper.
+
+98
+00:06:06,100 --> 00:06:10,660
+Sige, at jeg havde 5 personer og jeg ønskede at
+dele dem op i tre grupper,
+
+99
+00:06:10,660 --> 00:06:13,640
+ja så ville jeg starte med at tælle fra.
+
+100
+00:06:13,640 --> 00:06:16,980
+Den første person ville
+sige jeg er hold nummer et,
+
+101
+00:06:16,980 --> 00:06:21,030
+den næste person vil være hold nummer
+to, hold nummer den tredje person
+
+102
+00:06:21,030 --> 00:06:21,910
+tre.
+
+103
+00:06:21,910 --> 00:06:25,910
+Nu, jeg ønsker kun tre grupper, så
+den fjerde person ville faktisk
+
+104
+00:06:25,910 --> 00:06:30,160
+starte ved begyndelsen og sige,
+godt, jeg er hold nummer et så godt,
+
+105
+00:06:30,160 --> 00:06:32,890
+og den næste person
+ville være hold nummer to.
+
+106
+00:06:32,890 --> 00:06:37,660
+Og derfra, kan de så
+separere i deres grupper.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Så hvordan kan jeg bruge modulo
+at hjælpe mig gennemføre
+
+108
+00:06:41,130 --> 00:06:44,160
+dette tælle indhyllingsafstand funktion?
+
+109
+00:06:44,160 --> 00:06:50,140
+Nå, den første person
+nummer 1, mod 3 giver os en.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 giver os to,
+og 3 mod 3 giver os 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Den fjerde person, nummer 4, mod 3
+giver os en, og derefter 5 mod 3 giver os to.
+
+112
+00:07:02,140 --> 00:07:05,370
+Så vil du bemærke, at selv om
+antallet af mennesker, som jeg har
+
+113
+00:07:05,370 --> 00:07:11,210
+stiger, og er over
+3, da jeg modding med 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Jeg får altid tal 0, 1, og 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Jeg får aldrig større end 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Altsaa, selvom jeg havde 10
+mennesker, så alle disse mennesker
+
+117
+00:07:22,630 --> 00:07:27,430
+ville stadig være inden for grupper 1, 2, eller 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Så nu ved vi, at hvis vi har en gruppe
+af 5 og vi Mod alle dem med 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+så vi vil aldrig
+overstige grupper 0, 1 eller 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Så vi aldrig kommer til at få en gruppe
+nummer, der er lig med 3 eller derover.
+
+121
+00:07:43,430 --> 00:07:46,980
+Så selv om jeg tilføje fem mere
+mennesker, så alle dem
+
+122
+00:07:46,980 --> 00:07:53,150
+ville stadig kan henføres under gruppe
+0, 1, eller 2, fordi jeg modding med 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Jeg kommer aldrig til at overskride denne hætte.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, så lad os se om vi kan anvende
+dette koncept for at bruge modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+at vikle rundt om
+gruppenumre og anvende
+
+126
+00:08:03,710 --> 00:08:08,000
+det at vigenere hvor vi ønsker
+at bruge modulo at ombrydes omkring
+
+127
+00:08:08,000 --> 00:08:10,220
+indekset for søgeordet.
+
+128
+00:08:10,220 --> 00:08:12,830
+Selvom vi forøgelse
+indekset vi altid
+
+129
+00:08:12,830 --> 00:08:17,260
+ønsker at sikre, at vi altid
+wrap rundt til begyndelsen
+
+130
+00:08:17,260 --> 00:08:20,050
+aldrig overstiger den
+længden af ​​strengen.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, så jeg ved, det kan være
+en lille smule overvældende.
+
+132
+00:08:23,510 --> 00:08:26,670
+Der er meget mere at gøre i denne p sæt.
+
+133
+00:08:26,670 --> 00:08:30,050
+Så sørg for, at du skriver ud
+en god pseudokode for dig selv
+
+134
+00:08:30,050 --> 00:08:32,870
+at du forstår og
+der får opgaven.
+
+135
+00:08:32,870 --> 00:08:35,580
+Prøv og løse alle
+enkelt linje uafhængigt
+
+136
+00:08:35,580 --> 00:08:38,370
+at finde ud af alle de små
+små stykker af puslespillet
+
+137
+00:08:38,370 --> 00:08:40,260
+før du sætter det sammen.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Sørg for, at du kan få
+nøglen fra kommandolinjen
+
+139
+00:08:43,110 --> 00:08:46,780
+og sikre, at det er alfabetiske,
+få almindelig tekst fra brugeren,
+
+140
+00:08:46,780 --> 00:08:51,010
+og derefter i kryptografering, skal du sørge
+vide, hvordan man kryptere et enkelt bogstav,
+
+141
+00:08:51,010 --> 00:08:56,130
+og derefter videre til det hele strengen
+med al den wrap omkring funktioner.
+
+142
+00:08:56,130 --> 00:08:59,610
+Endelig kan du udskrive ciphertext.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Mit navn er et Zamyla,
+og dette var vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

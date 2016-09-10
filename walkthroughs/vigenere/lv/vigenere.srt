@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Pieņemsim pastiprināt mūsu
+spēle ar vigenere izrēķināt.
+
+3
+00:00:04,030 --> 00:00:06,710
+Vigenere izrēķināt ir
+ļoti līdzīgs ķeizaram,
+
+4
+00:00:06,710 --> 00:00:11,060
+izņemot Cēzars mēs pagājis
+viens vesels skaitlis kā mūsu atslēgu.
+
+5
+00:00:11,060 --> 00:00:14,100
+In vigenere mēs ejam
+iziet ar atslēgvārdu.
+
+6
+00:00:14,100 --> 00:00:19,400
+Tātad, ja es gribēju, lai novirzīt
+ciphertext tas ir CS 50 ar ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+tad tas nozīmē, ka katru vēstuli
+ohai gatavojas kalpot par atslēgu,
+
+8
+00:00:23,260 --> 00:00:27,160
+un es esmu gatavojas, lai riņķotu pa
+ka atslēgvārds manā maiņā
+
+9
+00:00:27,160 --> 00:00:31,930
+padarot ciphertext
+daudz grūtāk atšifrēt.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Ko tas nozīmē
+novirzīt ar atslēgvārdu?
+
+11
+00:00:34,540 --> 00:00:38,610
+Nu, atslēgvārds ir virkne
+kur katrs burts atbilst
+
+12
+00:00:38,610 --> 00:00:41,080
+zināmā skaitlim maiņā.
+
+13
+00:00:41,080 --> 00:00:49,310
+Tātad, o atbilst atslēgu 14,
+h uz atslēgu 7. A ir atslēga 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+tā ka tas neko nemainīs,
+un tad es ir atslēga 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Say I ilga vigenere A ar
+teksta tas ir CS50 labi,
+
+16
+00:01:00,000 --> 00:01:02,800
+kas vienkārši dotu
+me nemainīta virkne.
+
+17
+00:01:02,800 --> 00:01:08,170
+Ievērojiet, ka tas ir līdzvērtīgs
+darbojas Cēzaru ar atslēgu nulles.
+
+18
+00:01:08,170 --> 00:01:12,070
+Patiesībā, darbojas vigenere
+ar jebkuru vienu rakstzīmi
+
+19
+00:01:12,070 --> 00:01:17,070
+būtu līdzvērtīgi darbojas
+Caesar ar šo pašu skaitlim.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Labi, tāpēc, jo
+tie ir tik līdzīgi, ka man
+
+21
+00:01:20,400 --> 00:01:24,300
+tiešām iesaku, ja jums
+gribu jūs varat vienkārši iekopēt Cēzaru
+
+22
+00:01:24,300 --> 00:01:26,932
+kodu savā vigenere kodu.
+
+23
+00:01:26,932 --> 00:01:28,640
+Lietas mainīsies,
+bet vismaz jums ir
+
+24
+00:01:28,640 --> 00:01:31,110
+daži mugurkauls, ka jūs varat strādāt.
+
+25
+00:01:31,110 --> 00:01:36,410
+Jo Todos ir vienādi, mēs gribam
+lai saņemtu atslēgu, saņemt teksta,
+
+26
+00:01:36,410 --> 00:01:40,690
+šifrēt ka teksta,
+un pēc tam izdrukāt ka out.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Tāpat kā Cēzars atslēga gatavojas
+tikt pieņemts, jo otrajā komandrindas
+
+28
+00:01:44,980 --> 00:01:50,540
+arguments ietverts argv indeksā
+1, bet tas ir atšķirīgs šoreiz
+
+29
+00:01:50,540 --> 00:01:52,560
+tāpēc, ka tas ir alfabēta.
+
+30
+00:01:52,560 --> 00:01:56,390
+Tātad, mums ir nepieciešams atkārtot pār katru
+vienu rakstzīmi šajā atslēgā
+
+31
+00:01:56,390 --> 00:02:00,800
+ka lietotājs pieņemts, un nodrošināt
+ka katrs raksturs ir alfabēta
+
+32
+00:02:00,800 --> 00:02:02,800
+lai turpinātu.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Kad mēs esam darījuši, tad mēs
+var saņemt virkni no lietotāja,
+
+34
+00:02:05,560 --> 00:02:07,560
+tāpat kā mēs to darījām agrāk.
+
+35
+00:02:07,560 --> 00:02:10,520
+Un tagad mēs nonākam pie sirds
+Problēmas par vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+kas ir tāpat kā Cēzars, kā
+izdomāt šifrēšanas modeli
+
+37
+00:02:14,665 --> 00:02:19,760
+un vienādojums, un šifrēt
+visa teksta,.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Tātad, jūs pamanīsiet, ka
+vienādojums par vigenere maiņā
+
+39
+00:02:23,280 --> 00:02:25,610
+ir ļoti līdzīgs Cēzara vienu.
+
+40
+00:02:25,610 --> 00:02:29,780
+Vienīgā atšķirība ir tā, ka
+nevis viena mainīga k
+
+41
+00:02:29,780 --> 00:02:37,270
+pirms, tagad k ir apakšraksts,
+norādot JTH burta taustiņu.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Apskatīsim piemēru.
+
+43
+00:02:39,560 --> 00:02:43,830
+Say jums gribēja iet noslēpumu
+ziņa uz savu simpātiju, es tāpat kā jūs.
+
+44
+00:02:43,830 --> 00:02:46,325
+Nu, jūsu atslēgu jūs
+izvēlēties kaut ko, ka jūsu
+
+45
+00:02:46,325 --> 00:02:49,790
+zina simpātiju zina, ka jums patīk, pandas.
+
+46
+00:02:49,790 --> 00:02:52,290
+Labi, tā kā mēs maiņās šo?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> Nu, mums ir mūsu teksta, indekss.
+
+48
+00:02:55,500 --> 00:02:59,160
+Tas ir pie pirmo burtu un
+tā ir indekss mūsu atslēgu
+
+49
+00:02:59,160 --> 00:03:02,830
+kas ir pie p, pirmais
+burts mūsu panda vārdu.
+
+50
+00:03:02,830 --> 00:03:08,590
+Tātad, novirzot I ar p dod mums x,
+tad mēs virzīt teksta, indeksu.
+
+51
+00:03:08,590 --> 00:03:10,460
+Tas izpaužas mūs atstarpi.
+
+52
+00:03:10,460 --> 00:03:13,540
+Tagad telpa raksturs
+ir ne burtu,
+
+53
+00:03:13,540 --> 00:03:16,930
+lai tas nozīmē, ka, ka tikai
+pārskaitījumi tiesības vairāk nekā uz ciphertext,
+
+54
+00:03:16,930 --> 00:03:23,430
+mēs ieliekam atstarpi tur, un mums nav
+virzīt indeksu mūsu atslēgu.
+
+55
+00:03:23,430 --> 00:03:25,820
+Tātad, mēs joprojām esam pie p šajā brīdī.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Mēs pārietu uz nākamo
+indekss mūsu teksta,.
+
+57
+00:03:30,130 --> 00:03:34,030
+Un tagad, jo tas ir
+vēstule, tad mazie l,
+
+58
+00:03:34,030 --> 00:03:37,920
+mēs novirzīt ka ​​ar
+nākamais indekss mūsu taustiņu.
+
+59
+00:03:37,920 --> 00:03:42,360
+Kurš ir, kurš ir nulle
+maiņu, lai vienkārši kļūst
+
+60
+00:03:42,360 --> 00:03:44,370
+l mūsu ciphertext.
+
+61
+00:03:44,370 --> 00:03:51,120
+Tad mēs iepriekš gan teksta, un
+galvenais rādītājs, jo tas ir alfabēta.
+
+62
+00:03:51,120 --> 00:03:56,210
+Tātad mēs turpinām ka
+kamēr mēs uz e līdzīgos.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Labi, lai jūs pamanīsiet pie šī
+norāda, ka, runājot par mūsu galveno indeksu,
+
+64
+00:04:01,090 --> 00:04:03,940
+mēs esam sasnieguši
+panda vārdu, lai to, ko
+
+65
+00:04:03,940 --> 00:04:08,750
+notiek, kad mēs nokļūt uz nākamo
+alfabētiskais burts teksta,?
+
+66
+00:04:08,750 --> 00:04:12,180
+Nu, viss, kas notiek, ir mums
+wrap ap sākumā,
+
+67
+00:04:12,180 --> 00:04:14,710
+uz pirmo indeksu mūsu atslēgu.
+
+68
+00:04:14,710 --> 00:04:19,570
+Tātad, tad mēs pāriet ka
+y ar p, lai dotu mums n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Un tad mēs turpinām apdares kodējumu
+mūsu teksta, lai iegūtu x lvne Noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Šajā piemērā, es
+parādīja, ka mēs tikai virzīt
+
+71
+00:04:29,300 --> 00:04:33,140
+uz nākamo vēstuli atslēgvārdu
+ja raksturs vienkāršā tekstā
+
+72
+00:04:33,140 --> 00:04:37,480
+ir burts tāpēc isalpha
+funkcija noderēs šeit.
+
+73
+00:04:37,480 --> 00:04:43,030
+Un, tāpat kā Cēzars, mēs vēlamies
+saglabāt lietas, isupper un islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Tātad, pievienot šo mazliet
+jo jūsu pseudocode.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Tātad, kā mēs izdomāt galvenos maiņās?
+
+76
+00:04:48,510 --> 00:04:53,030
+Nu, ja jūs atceraties mūsu diskusija
+par alfabēta indeksiem Cēzars
+
+77
+00:04:53,030 --> 00:04:55,370
+problēma, tas ir ļoti līdzīgs.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Ja atbilst ASCII
+vērtība 65, bet pāreja no 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+un pēc tam pēdējais burts
+alfabēts, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+atbilst maiņā 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Jūs pamanīsiet, ka pāreja
+ir identisks vai nav
+
+82
+00:05:10,320 --> 00:05:14,880
+vēstule ir lielie burti vai mazo burtu.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> Labi, tāpēc tagad, ka jums
+zina, kā izdomāt
+
+84
+00:05:17,700 --> 00:05:21,470
+skaitliskā pāreja ka
+atbilst vienam rakstura
+
+85
+00:05:21,470 --> 00:05:24,050
+iesim atpakaļ uz mūsu vienādojumu.
+
+86
+00:05:24,050 --> 00:05:28,180
+Tāpēc, ka mums ir divas dažādas
+Indeksi šeit, i un j,
+
+87
+00:05:28,180 --> 00:05:32,130
+tas ir mājiens, ka mēs vēlamies, lai izsekotu
+Gan mūsu pozīciju teksta,
+
+88
+00:05:32,130 --> 00:05:36,600
+kā arī mūsu pozīciju atslēgvārdu,
+tāpēc tie ir divi atsevišķi mainīgie
+
+89
+00:05:36,600 --> 00:05:39,010
+ka mēs vēlamies, lai saglabātu kravas.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Tagad stāvoklis mūsu teksta,
+gatavojas palielināt katru reizi,
+
+91
+00:05:42,580 --> 00:05:45,530
+lai notiek būt
+nedaudz vairāk taisni uz priekšu
+
+92
+00:05:45,530 --> 00:05:49,750
+atšķirībā no pozīcijā atslēgvārdu,
+ko mēs zinām, ir wrap ap,
+
+93
+00:05:49,750 --> 00:05:52,910
+un dažreiz pieauguma,
+dažreiz paliek tāds pats.
+
+94
+00:05:52,910 --> 00:05:55,430
+Tātad, kā mēs ieviest
+funkcionalitāte
+
+95
+00:05:55,430 --> 00:05:59,820
+wrap ap
+indekss atslēgvārdu?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Es esmu gatavojas izmantot skaitīt off piemēru.
+
+97
+00:06:01,640 --> 00:06:06,100
+Skaitīšanas off ir populārs veids
+sadalīt cilvēkus grupās.
+
+98
+00:06:06,100 --> 00:06:10,660
+Teikt, man bija 5 cilvēki, un es gribēju
+sadalīt tās trīs grupās,
+
+99
+00:06:10,660 --> 00:06:13,640
+Nu tad es varētu sākt, skaitot off.
+
+100
+00:06:13,640 --> 00:06:16,980
+Pirmā persona būtu
+teikt, es esmu komandas numur viens,
+
+101
+00:06:16,980 --> 00:06:21,030
+nākamajai personai būtu komanda numurs
+divas, trešā persona komanda numurs
+
+102
+00:06:21,030 --> 00:06:21,910
+trīs.
+
+103
+00:06:21,910 --> 00:06:25,910
+Tagad, es tikai gribu trīs grupām, lai
+ceturtā persona faktiski
+
+104
+00:06:25,910 --> 00:06:30,160
+sākas un teikt,
+labi, es esmu komandas numur viens, kā arī,
+
+105
+00:06:30,160 --> 00:06:32,890
+un nākamais cilvēks
+būtu komandas numurs divi.
+
+106
+00:06:32,890 --> 00:06:37,660
+Un, no turienes, viņi var pēc tam
+atsevišķi savās grupās.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Tātad, kā es varētu izmantot modulo
+lai palīdzētu man īstenot
+
+108
+00:06:41,130 --> 00:06:44,160
+šis skaits off aptīšanas funkcijas?
+
+109
+00:06:44,160 --> 00:06:50,140
+Nu, pirmais cilvēks
+numurs 1, mod 3 dod mums 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 dod mums 2,
+un 3 mod 3 dod mums 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Ceturtais cilvēks, skaitlis 4, mod 3
+dod mums 1, un pēc tam 5 mod 3 dod mums 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Tātad, jūs ievērosiet, ka pat tad, ja
+to cilvēku skaits, kas man ir
+
+113
+00:07:05,370 --> 00:07:11,210
+palielinās, un ir virs
+3, jo es esmu modding ar 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Es vienmēr saņemt numurus 0, 1 un 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+Es nekad lielāks par 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Tātad, pat tad, ja man bija 10
+cilvēki, tad visus no tiem cilvēkiem
+
+117
+00:07:22,630 --> 00:07:27,430
+joprojām būtu robežās 2 vai 0 grupas 1,.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Tātad, tagad mēs zinām, ka, ja mums ir grupa
+5 un mēs mod visiem tiem par 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+tad mēs nekad
+pārsniegt grupas, 0, 1, vai 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Tātad, mēs nekad gatavojas saņemt grupu
+numurs, kas ir vienāda ar 3 vai iepriekš.
+
+121
+00:07:43,430 --> 00:07:46,980
+Tātad, pat tad, ja es varu pievienot vēl piecus
+cilvēki, tad visus no tiem
+
+122
+00:07:46,980 --> 00:07:53,150
+joprojām būtu piešķirts grupām
+0, 1, vai 2, jo es modding ar 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+Es nekad gatavojas pārsniegt šo vāciņu.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> Labi, tāpēc pieņemsim redzēt, ja mēs varam piemērot
+šis jēdziens izmantojot modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+wrap ap
+grupu numurus un piemērot
+
+126
+00:08:03,710 --> 00:08:08,000
+to vigenere kur mēs gribam
+izmantot modulo wrap ap
+
+127
+00:08:08,000 --> 00:08:10,220
+indekss par atslēgvārdu.
+
+128
+00:08:10,220 --> 00:08:12,830
+Pat ja mēs palielināšanai
+indekss mēs vienmēr
+
+129
+00:08:12,830 --> 00:08:17,260
+vēlaties pārliecināties, ka mēs vienmēr
+wrap ap paša sākuma
+
+130
+00:08:17,260 --> 00:08:20,050
+nekad pārsniedzot
+garums string.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> Labi, tāpēc es zinu, tas varētu būt
+mazliet milzīgs.
+
+132
+00:08:23,510 --> 00:08:26,670
+Tur ir daudz vairāk darīt šajā p komplektu.
+
+133
+00:08:26,670 --> 00:08:30,050
+Tātad, pārliecinieties, ka jūs rakstīt out
+labs pseudocode sev
+
+134
+00:08:30,050 --> 00:08:32,870
+ka jūs saprotat un
+kas izpaužas darba darīts.
+
+135
+00:08:32,870 --> 00:08:35,580
+Izmēģiniet un risināt katru
+single line patstāvīgi
+
+136
+00:08:35,580 --> 00:08:38,370
+norādītas visas maz
+mazos gabaliņos puzzle
+
+137
+00:08:38,370 --> 00:08:40,260
+Pirms liekot to kopā.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Pārliecinieties, ka jūs varat iegūt
+galvenais no komandrindas
+
+139
+00:08:43,110 --> 00:08:46,780
+un nodrošināt, ka tā ir burtu,
+saņemt teksta no lietotāja,
+
+140
+00:08:46,780 --> 00:08:51,010
+un tad šifrēšanas, pārliecinieties, ka jūs
+zina, kā šifrēt vienu burtu,
+
+141
+00:08:51,010 --> 00:08:56,130
+un pēc tam pāriet uz visu string
+ar visu aptīšanas funkcijas.
+
+142
+00:08:56,130 --> 00:08:59,610
+Beidzot, jūs varat izdrukāt ciphertext.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Mans vārds ir Zamyla,
+un tas bija vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+

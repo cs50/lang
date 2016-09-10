@@ -1,0 +1,47 @@
+Zamyla Chan: Vamos intensificar a nossa jogo com a cifra de Vigenère. A cifra é vigenere muito semelhante ao César, exceto no Caesar passamos em um único inteiro como a nossa chave. Em vigenere vamos para passar em uma palavra-chave. Então, se eu queria mudar o cifrado este é CS 50 por ohai, então isso significa que cada letra ohai vai servir como a chave, e eu estou indo para ciclo longo a palavra-chave para o meu turno fazendo com que o texto cifrado muito mais difícil de descodificar. 
+
+O que significa para deslocar pela palavra-chave? Bem, a palavra-chave é uma string onde cada letra corresponde alguma deslocação inteiro. Assim, o S corresponde a uma chave de 14, h para uma chave de 7, um tem uma chave de 0, de modo que não mudaria nada, e então eu tem uma chave de 8. 
+
+Digamos que eu corri vigenere A com o texto simples este é CS50 bem, que seria simplesmente dar me uma string inalterada. Observe que isso é equivalente a executando Caesar com uma chave de zero. Na verdade, vigenere execução com um único caractere seria equivalente a executar César com o mesmo número inteiro. 
+
+Tudo bem, então, uma vez que eles são tão semelhantes que eu tinha realmente recomendo que se você quer você pode simplesmente copiar o Caesar código em seu código vigenere. As coisas vão mudar, mas pelo menos você tem alguns espinha dorsal que você pode trabalhar com. Porque os TODOs são os mesmos que queremos para obter a chave, obter o texto simples, encipher que texto simples, e, em seguida, imprimi-la. 
+
+Assim como Caesar a chave vai ser passado como a segunda linha de comando argumento contido no índice argv 1, mas é diferente desta vez porque ele deve ser alfabética. Então, precisamos iterar sobre todos os caractere único em que a chave que o usuário passado e garantir que cada personagem é alfabética a fim de continuar. 
+
+Uma vez que fizemos isso, então nós pode obter a seqüência do usuário, assim como fizemos antes. E agora, chegamos ao coração do problema para vigenere, que é como César, como descobrir o padrão de cifragem e equação, e cifrar todo o texto simples. 
+
+Então, você vai notar que o equação para a mudança vigenere é muito semelhante ao César. A única diferença é que em vez de uma única variável k antes, agora k tem um subscrito, indicando a letra j da chave. 
+
+Vamos examinar um exemplo. Digamos que você queria passar um segredo mensagem sobre a sua paixão, eu gosto de você. Bem, para a sua chave você escolher algo que o seu sabe esmagamento sabe que você gosta, pandas. Tudo bem, então como é que vamos mudar isso? 
+
+Bem, nós temos o nosso índice de texto simples. Essa é a primeira letra e assim é o índice para a nossa chave que está na p, o primeiro carta na nossa palavra panda. Então, mudando I p-nos x dá, então nós avançar o índice de texto simples. Isso nos leva a um espaço. Agora, o caractere de espaço não é alfabética, o que significa que, para que, transferências à direita para o texto cifrado, nós colocamos um espaço lá, e nós não avançar o índice para a nossa chave. Então, ainda estamos em p neste momento. 
+
+Nós avançar para a próxima índice em nosso texto simples. E agora, porque isso é uma carta, a minúscula l, mudamos que até o próximo índice na nossa chave. Qual é um, o qual é um zero mudança de modo que só se torna um l em nosso texto cifrado. Então, nós avançamos tanto o texto simples, e o índice de chave porque é alfabética. Portanto, depois, continuar essa até chegarmos ao e em como. 
+
+Tudo bem, então você vai notar neste apontam que, em termos de índice de chave, chegamos ao final de a palavra panda, então o que acontece quando chegar ao próximo letra alfabética no texto original? Bem, tudo o que acontece é que nós envolver em torno do início, o primeiro índice da nossa chave. Assim, então mudamos que y por p a dar-nos n. E então, continuamos terminar a codificação nosso texto simples para obter x lvne Noh. 
+
+A partir deste exemplo, I mostrou que apenas avançar para a próxima letra na palavra-chave se o personagem em texto simples é uma carta de modo que o isalpha função virá a calhar aqui. E, tal como em Caesar, queremos preservar o caso, isupper e islower. Então, adicione pouco no em seu pseudocódigo. 
+
+Então, como vamos descobrir as mudanças-chave? Bem, se você se lembra nossa discussão em índices alfabéticos no Caesar problema, é muito semelhante. 
+
+Onde A corresponde a um ASCII valor de 65, mas uma mudança de 0, e, em seguida, a última letra no alfabeto, Z, corresponde a um desvio de 25. Você vai notar que a mudança é idêntico ou não a letra é maiúscula ou minúscula. 
+
+OK, então agora que você sabe como descobrir o deslocamento numérico que corresponde a um único caractere vamos voltar para a nossa equação. Porque nós temos dois diferentes subscritos aqui, I e J, isso é um indício de que queremos manter o controle tanto a nossa posição no texto original bem como a nossa posição na chave, então essas são duas variáveis ​​distintas que queremos manter um porão de. 
+
+Agora, a posição no nosso texto simples vai aumentar a cada vez, de modo que vai ser um pouco mais para a frente ao contrário da posição a palavra-chave, que sabemos que tem de envolver em torno de, e às vezes incrementar, às vezes, ficar na mesma. Então, como é que vamos implementar a funcionalidade para envolver a índice para a palavra-chave? 
+
+Vou usar o exemplo contagem de fora. Contando off é uma maneira popular para dividir as pessoas em grupos. Digamos que eu tinha 5 pessoas e eu queria dividi-los em três grupos, bem, então eu ia começar contando off. A primeira pessoa faria dizer que eu sou o número equipe de um, a próxima pessoa seria número da equipe dois, o número da equipe terceira pessoa três. Agora, eu só quero três grupos, de modo a quarta pessoa seria realmente começar no início e dizer: bem, eu sou o número um da equipe, bem como, ea próxima pessoa seria equipa o número dois. E, a partir daí, eles podem, em seguida, separar nos seus grupos. 
+
+Então, como eu poderia usar modulo para me ajudar a implementar Esta contagem off envolver em torno de função? Bem, a primeira pessoa número 1, modificação 3 nos dá 1. 2 mod 3 nos dá 2, e 3 mod 3 nos dá 0. 
+
+A quarta pessoa, número 4, 3 mod nos dá 1, e em seguida 5 mod 3 nos dá 2. Então, você vai notar que, apesar de o número de pessoas que eu tenho aumenta, e está acima 3, desde que eu estou modding por 3 Eu sempre obter números 0, 1 e 2. Eu nunca ficar maior que 3. Portanto, mesmo se eu tivesse 10 as pessoas, então todas aquelas pessoas ainda estaria dentro dos grupos 1, 2, ou 0. 
+
+Então, agora nós sabemos que se nós temos um grupo de 5 e mod todos os de 3, então nós nunca vai exceder grupos 0, 1, ou 2. Então, nós nunca vamos obter um grupo número que é igual a 3 ou acima. Assim, mesmo se eu adicionar mais cinco pessoas, então todos eles ainda seriam atribuídos a grupos 0, 1, ou 2, porque eu estou modding por 3. Eu nunca vou exceder esse limite. 
+
+OK, então vamos ver se podemos aplicar este conceito de utilização de módulo para envolver a números de grupo e aplicar -lo para Vigenere onde queremos usar modulo para envolver o índice para a palavra-chave. Mesmo que nós estamos incrementando o índice sempre quer ter a certeza que nós sempre envolver em torno ao início nunca ultrapassando a comprimento da corda. 
+
+OK, então eu sei que poderia ser um pouco esmagadora. Há muito mais a fazer nesta p set. Então, certifique-se de que você escreve uma boa pseudocódigo para si mesmo que compreende e que começa o trabalho feito. Experimente e abordar todas as linha única forma independente descobrir todos os pequenos pequenas peças do puzzle antes de colocá-lo juntos. 
+
+Certifique-se de que você pode obter a chave da linha de comando e garantir que ele é alfabética, obter o texto simples do usuário, e depois na enciphering, certifique-se saber como criptografar uma única letra, e, em seguida, avançar para a seqüência inteira com toda a linha de contorno funções. Finalmente, você pode imprimir o texto cifrado. 
+
+Meu nome é um Zamyla, e esta foi vigenere. 

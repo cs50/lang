@@ -1,0 +1,683 @@
+1
+00:00:00,000 --> 00:00:00,930
+
+2
+00:00:00,930 --> 00:00:04,030
+>> Zamyla Chan: Oletetaan tehostettava
+pelin vigenere cipher.
+
+3
+00:00:04,030 --> 00:00:06,710
+Vigenere salakirjoitus on
+hyvin samankaltainen Caesar,
+
+4
+00:00:06,710 --> 00:00:11,060
+paitsi Caesar hyväksymämme
+yhden kokonaisluvun keskeisiä.
+
+5
+00:00:11,060 --> 00:00:14,100
+Vuonna vigenere aiomme
+kulkea avainsanan.
+
+6
+00:00:14,100 --> 00:00:19,400
+Joten, jos halusin siirtää
+salakieli tämä on CS 50 by Ohai,
+
+7
+00:00:19,400 --> 00:00:23,260
+niin se tarkoittaa, että jokainen kirjain
+ohai tulee olla avain,
+
+8
+00:00:23,260 --> 00:00:27,160
+ja aion syklin yli
+avainsanan minun shift
+
+9
+00:00:27,160 --> 00:00:31,930
+jolloin salatekstisen
+paljon vaikeampi purkaa.
+
+10
+00:00:31,930 --> 00:00:34,540
+>> Mitä tarkoittaa se, että
+siirtyvän avainsanan?
+
+11
+00:00:34,540 --> 00:00:38,610
+No, avainsana on merkkijono
+jossa jokainen kirjain vastaa
+
+12
+00:00:38,610 --> 00:00:41,080
+Joidenkin kokonaisluku muutos.
+
+13
+00:00:41,080 --> 00:00:49,310
+Joten, O vastaa avaimen 14,
+h avaimen 7, joka on on avaimen 0,
+
+14
+00:00:49,310 --> 00:00:54,670
+jotta ei muuttaisi mitään,
+ja sitten i on avain 8.
+
+15
+00:00:54,670 --> 00:01:00,000
+>> Sano Juoksin vigenere kanssa
+plain text tämä on CS50 hyvin,
+
+16
+00:01:00,000 --> 00:01:02,800
+joka yksinkertaisesti antaa
+minulle ennallaan merkkijono.
+
+17
+00:01:02,800 --> 00:01:08,170
+Huomaa, että tämä on sama kuin
+käynnissä Caesar avaimella nolla.
+
+18
+00:01:08,170 --> 00:01:12,070
+Itse asiassa, käynnissä vigenere
+yhdenkään yksittäisen merkin
+
+19
+00:01:12,070 --> 00:01:17,070
+vastaisi käynnissä
+Caesar sillä samalla kokonaisluku.
+
+20
+00:01:17,070 --> 00:01:20,400
+>> Selvä, niin, koska
+ne ovat niin samanlaisia ​​olin
+
+21
+00:01:20,400 --> 00:01:24,300
+todella suositeltavaa, jos
+haluavat voit vain kopioida Caesar
+
+22
+00:01:24,300 --> 00:01:26,932
+koodi vigenere koodia.
+
+23
+00:01:26,932 --> 00:01:28,640
+Asiat muuttuvat,
+mutta ainakin olet
+
+24
+00:01:28,640 --> 00:01:31,110
+Joissakin selkäranka että voit työskennellä.
+
+25
+00:01:31,110 --> 00:01:36,410
+Koska todos ovat samat haluamme
+saada avain, saavat pelkkää tekstiä,
+
+26
+00:01:36,410 --> 00:01:40,690
+salauskäsky että pelkkää tekstiä,
+ja sitten tulostaa, että ulos.
+
+27
+00:01:40,690 --> 00:01:44,980
+>> Aivan kuten Caesar avain on menossa
+välitetään sisään toisena komentoriviltä
+
+28
+00:01:44,980 --> 00:01:50,540
+argumentti sisältyvät argv indeksiin
+1, mutta se on erilainen tällä kertaa
+
+29
+00:01:50,540 --> 00:01:52,560
+koska se on aakkosjärjestyksessä.
+
+30
+00:01:52,560 --> 00:01:56,390
+Joten, meidän täytyy kerrata yli jokaisen
+yksittäisen merkin, että avain
+
+31
+00:01:56,390 --> 00:02:00,800
+että käyttäjä kului, ja varmistaa
+että jokainen merkki on aakkosellinen
+
+32
+00:02:00,800 --> 00:02:02,800
+jotta voidaan jatkaa.
+
+33
+00:02:02,800 --> 00:02:05,560
+>> Kun olemme tehneet sen, silloin me
+voi saada merkkijonon käyttäjä,
+
+34
+00:02:05,560 --> 00:02:07,560
+aivan kuten aikaisemminkin.
+
+35
+00:02:07,560 --> 00:02:10,520
+Ja nyt tulemme sydämeen
+Ongelman varten vigenere,
+
+36
+00:02:10,520 --> 00:02:14,665
+joka on aivan kuten Caesar, miten
+selvittää salakoodaus malli
+
+37
+00:02:14,665 --> 00:02:19,760
+ja yhtälö, ja salauskäsky
+koko selväkielisenä.
+
+38
+00:02:19,760 --> 00:02:23,280
+>> Joten, huomaat, että
+yhtälö vigenere shift
+
+39
+00:02:23,280 --> 00:02:25,610
+on hyvin samanlainen kuin Caesar yhteen.
+
+40
+00:02:25,610 --> 00:02:29,780
+Ainoa ero on, että
+sen sijaan, että yksi ainoa muuttuja k
+
+41
+00:02:29,780 --> 00:02:37,270
+ennen, nyt k on alaindeksi,
+ilmaisee nnen kirjaimen näppäintä.
+
+42
+00:02:37,270 --> 00:02:39,560
+>> Käydään läpi esimerkki.
+
+43
+00:02:39,560 --> 00:02:43,830
+Sano halusi siirtää salainen
+viestin päälle murskata, pidän teitä.
+
+44
+00:02:43,830 --> 00:02:46,325
+No, sinun avain
+valita jotain, että
+
+45
+00:02:46,325 --> 00:02:49,790
+tietävät murskata tietää, että haluat, pandoja.
+
+46
+00:02:49,790 --> 00:02:52,290
+Selvä, niin miten me siirtää tämän?
+
+47
+00:02:52,290 --> 00:02:55,500
+>> No, meillä on selväkielisenä indeksiin.
+
+48
+00:02:55,500 --> 00:02:59,160
+Se on ensimmäinen kirjain ja
+joten on indeksi keskeisten
+
+49
+00:02:59,160 --> 00:03:02,830
+joka on p, ensimmäinen
+kirjain meidän panda sana.
+
+50
+00:03:02,830 --> 00:03:08,590
+Joten, siirtämällä I p antaa meille x,
+Sitten me etukäteen selväkielisenä indeksin.
+
+51
+00:03:08,590 --> 00:03:10,460
+Tämä saa meidät tilaan.
+
+52
+00:03:10,460 --> 00:03:13,540
+Nyt välilyönti
+on ei aakkosellinen,
+
+53
+00:03:13,540 --> 00:03:16,930
+niin se tarkoittaa, että se vain
+siirrot oikeus siirrettiin salakieli,
+
+54
+00:03:16,930 --> 00:03:23,430
+laitamme tilaa siellä, emmekä
+edetä indeksin keskeisiä.
+
+55
+00:03:23,430 --> 00:03:25,820
+Joten, ollaan vielä p tässä vaiheessa.
+
+56
+00:03:25,820 --> 00:03:30,130
+>> Me siirtyä seuraavaan
+indeksi meidän selväkielisenä.
+
+57
+00:03:30,130 --> 00:03:34,030
+Ja nyt, koska se on
+kirjeen, Pienten kirjainten l,
+
+58
+00:03:34,030 --> 00:03:37,920
+siirrämme että vuoteen
+seuraava indeksi meidän avain.
+
+59
+00:03:37,920 --> 00:03:42,360
+Joka on, joka on nolla
+shift jotta tulee vain
+
+60
+00:03:42,360 --> 00:03:44,370
+L meidän salakieli.
+
+61
+00:03:44,370 --> 00:03:51,120
+Sitten me etukäteen molemmat selväkielisenä, ja
+avain indeksi, koska se on aakkosellinen.
+
+62
+00:03:51,120 --> 00:03:56,210
+Niin olemme edelleen, että
+kunnes saamme e samanlaisissa.
+
+63
+00:03:56,210 --> 00:04:01,090
+>> Selvä, joten huomaat tässä
+kohta, että kannalta keskeisten indeksin,
+
+64
+00:04:01,090 --> 00:04:03,940
+olemme päättynyt
+panda sana, niin mitä
+
+65
+00:04:03,940 --> 00:04:08,750
+tapahtuu, kun saamme seuraavaan
+aakkosellinen kirjain selkokielisen?
+
+66
+00:04:08,750 --> 00:04:12,180
+No, kaikki mitä tapahtuu on meidän
+kietoa alkuun,
+
+67
+00:04:12,180 --> 00:04:14,710
+ensimmäiseen indeksi keskeisiä.
+
+68
+00:04:14,710 --> 00:04:19,570
+Joten, niin siirrämme että
+y p antaa meille n.
+
+69
+00:04:19,570 --> 00:04:26,860
+Ja sitten, jatkamme viimeistely koodaus
+Meidän plaintext saada x lvne noh.
+
+70
+00:04:26,860 --> 00:04:29,300
+>> Tästä esimerkki, I
+osoittivat, että me vain etukäteen
+
+71
+00:04:29,300 --> 00:04:33,140
+seuraavaan kirjeen avainsanan
+jos merkki tekstimuodossa
+
+72
+00:04:33,140 --> 00:04:37,480
+on kirjeen niin isalpha
+toiminto tulee kätevä täällä.
+
+73
+00:04:37,480 --> 00:04:43,030
+Ja aivan kuten Caesar, haluamme
+säilyttämiseksi tapauksessa isupper ja islower.
+
+74
+00:04:43,030 --> 00:04:46,100
+Joten, lisää tämä hieman
+in omalle pseudokoodilla.
+
+75
+00:04:46,100 --> 00:04:48,510
+>> Miten siis selvittää avain vuorossa?
+
+76
+00:04:48,510 --> 00:04:53,030
+No, jos muistaa keskusteluamme
+on aakkosellinen indeksien Caesar
+
+77
+00:04:53,030 --> 00:04:55,370
+ongelma, se on hyvin samankaltainen.
+
+78
+00:04:55,370 --> 00:05:01,130
+>> Jossa A vastaa ASCII
+arvo 65, mutta muutos 0,
+
+79
+00:05:01,130 --> 00:05:03,550
+ja sitten viimeinen kirjain
+aakkosissa, Z,
+
+80
+00:05:03,550 --> 00:05:06,940
+vastaa siirtymää 25.
+
+81
+00:05:06,940 --> 00:05:10,320
+Huomaat, että siirtyminen
+on sama riippumatta siitä,
+
+82
+00:05:10,320 --> 00:05:14,880
+kirjain on isoja tai pieniä kirjaimia.
+
+83
+00:05:14,880 --> 00:05:17,700
+>> OK, joten nyt kun
+osata selvittää
+
+84
+00:05:17,700 --> 00:05:21,470
+numeerinen muutos, joka
+vastaa yhden merkin
+
+85
+00:05:21,470 --> 00:05:24,050
+mennään takaisin meidän yhtälö.
+
+86
+00:05:24,050 --> 00:05:28,180
+Koska meillä on kaksi erilaista
+alaindeksit täällä, i ja j,
+
+87
+00:05:28,180 --> 00:05:32,130
+se vihje, jota haluamme seurata
+Molempien asemaamme selväkielisenä
+
+88
+00:05:32,130 --> 00:05:36,600
+sekä asemaamme avainsanan,
+joten nämä ovat kaksi eri muuttujaa
+
+89
+00:05:36,600 --> 00:05:39,010
+että haluamme pitää kiinni.
+
+90
+00:05:39,010 --> 00:05:42,580
+>> Nyt asema meidän selväkielisenä
+tulee lisääntymään joka kerta,
+
+91
+00:05:42,580 --> 00:05:45,530
+niin että tulee olemaan
+hieman suoraan eteenpäin
+
+92
+00:05:45,530 --> 00:05:49,750
+toisin kuin asentoon avainsanan,
+jonka tiedämme on kietoa,
+
+93
+00:05:49,750 --> 00:05:52,910
+ja joskus kasvattaa,
+joskus pysyvät samoina.
+
+94
+00:05:52,910 --> 00:05:55,430
+Joten, miten toteutamme
+toiminnallisuutta
+
+95
+00:05:55,430 --> 00:05:59,820
+kietoa
+indeksi avainsanan?
+
+96
+00:05:59,820 --> 00:06:01,640
+>> Aion käyttää laskea pois esimerkki.
+
+97
+00:06:01,640 --> 00:06:06,100
+Counting pois on suosittu tapa
+jakaa ihmiset ryhmiin.
+
+98
+00:06:06,100 --> 00:06:10,660
+Sanoa oli 5 henkilöä ja halusin
+jakaa ne kolmeen ryhmään,
+
+99
+00:06:10,660 --> 00:06:13,640
+no sitten alkaisi laskemalla pois.
+
+100
+00:06:13,640 --> 00:06:16,980
+Ensimmäinen henkilö olisi
+sanoa, olen joukkue ykkönen,
+
+101
+00:06:16,980 --> 00:06:21,030
+seuraava henkilö olisi joukkuenumero
+kaksi, kolmas henkilö joukkuenumero
+
+102
+00:06:21,030 --> 00:06:21,910
+kolme.
+
+103
+00:06:21,910 --> 00:06:25,910
+Nyt haluan vain kolme ryhmää niin
+Neljännen henkilö olisi todella
+
+104
+00:06:25,910 --> 00:06:30,160
+aloittaa alusta ja sanoa,
+hyvin, olen joukkue ykkönen samoin,
+
+105
+00:06:30,160 --> 00:06:32,890
+ja seuraava henkilö
+Olisi joukkue numero kaksi.
+
+106
+00:06:32,890 --> 00:06:37,660
+Ja sieltä, he voivat sitten
+erotella niiden ryhmiin.
+
+107
+00:06:37,660 --> 00:06:41,130
+>> Joten, miten voisi käytän modulo
+auttaa minua toteuttamaan
+
+108
+00:06:41,130 --> 00:06:44,160
+Tämän laskea pois kietoa funktio?
+
+109
+00:06:44,160 --> 00:06:50,140
+No, ensimmäinen henkilö
+numero 1, mod 3 antaa meille 1.
+
+110
+00:06:50,140 --> 00:06:54,690
+2 mod 3 antaa meille 2,
+ja 3 mod 3 antaa meille 0.
+
+111
+00:06:54,690 --> 00:07:02,140
+>> Neljäs henkilö, numero 4, mod 3
+antaa meille 1, ja sen jälkeen 5 mod 3 antaa meille 2.
+
+112
+00:07:02,140 --> 00:07:05,370
+Joten, huomaat että vaikka
+joukko ihmisiä, jotka minulla on
+
+113
+00:07:05,370 --> 00:07:11,210
+lisää, ja on yli
+3, koska olen modding 3
+
+114
+00:07:11,210 --> 00:07:15,250
+Olen aina numerot 0, 1, ja 2.
+
+115
+00:07:15,250 --> 00:07:19,040
+En koskaan suurempi kuin 3.
+
+116
+00:07:19,040 --> 00:07:22,630
+Niin, vaikka olen ollut 10
+ihmisiä, niin kaikki nämä ihmiset
+
+117
+00:07:22,630 --> 00:07:27,430
+olisi silti ryhmissä 1, 2, tai 0.
+
+118
+00:07:27,430 --> 00:07:33,560
+>> Joten nyt me tiedämme, että jos meillä on ryhmä
+5 ja me mod kaikki nämä 3,
+
+119
+00:07:33,560 --> 00:07:38,180
+Sitten emme koskaan
+ylittävät ryhmät 0, 1, tai 2.
+
+120
+00:07:38,180 --> 00:07:43,430
+Joten, emme koskaan saa ryhmään
+määrä, joka on yhtä suuri kuin 3 tai enemmän.
+
+121
+00:07:43,430 --> 00:07:46,980
+Joten, vaikka voin lisätä viisi
+ihmisiä, niin ne kaikki
+
+122
+00:07:46,980 --> 00:07:53,150
+olisi silti luokitellaan ryhmiin
+0, 1, tai 2 koska olen modding 3.
+
+123
+00:07:53,150 --> 00:07:56,510
+En koskaan ylittää tämän korkki.
+
+124
+00:07:56,510 --> 00:08:00,800
+>> OK, joten katsotaanpa voimme soveltaa
+tämä käsite käyttäen modulo
+
+125
+00:08:00,800 --> 00:08:03,710
+kietoa
+ryhmä numeroita ja soveltaa
+
+126
+00:08:03,710 --> 00:08:08,000
+se vigenere missä haluamme
+käyttää modulo kietoa
+
+127
+00:08:08,000 --> 00:08:10,220
+indeksin avainsanan.
+
+128
+00:08:10,220 --> 00:08:12,830
+Vaikka olemme monesko
+indeksi aina
+
+129
+00:08:12,830 --> 00:08:17,260
+haluavat varmistaa, että aina
+kietoa sen alusta alkaen
+
+130
+00:08:17,260 --> 00:08:20,050
+koskaan ylittää
+langan pituutta.
+
+131
+00:08:20,050 --> 00:08:23,510
+>> OK, joten tiedän se voisi olla
+hieman ylivoimainen.
+
+132
+00:08:23,510 --> 00:08:26,670
+Siellä on paljon enemmän tekemistä tämän p asetettu.
+
+133
+00:08:26,670 --> 00:08:30,050
+Joten varmista, että kirjoitat ulos
+hyvä pseudokoodi itse
+
+134
+00:08:30,050 --> 00:08:32,870
+että ymmärrät ja
+että saa työtä tehdä.
+
+135
+00:08:32,870 --> 00:08:35,580
+Kokeile ja käsitellä kaikkia
+yhdellä rivillä itsenäisesti
+
+136
+00:08:35,580 --> 00:08:38,370
+mietitään kaikki pikku
+pieni palapelin palaset
+
+137
+00:08:38,370 --> 00:08:40,260
+ennen sen yhdessä.
+
+138
+00:08:40,260 --> 00:08:43,110
+>> Varmista, että saat
+avain komentoriviltä
+
+139
+00:08:43,110 --> 00:08:46,780
+ja varmistaa, että se on aakkosellinen,
+saat vain teksti käyttäjä,
+
+140
+00:08:46,780 --> 00:08:51,010
+ja sitten salakoodaus, varmista
+osaavat encipher yhdestä kirjaimesta,
+
+141
+00:08:51,010 --> 00:08:56,130
+ja sitten edetä koko merkkijonon
+kaikkien Ulottumamitan toimintoja.
+
+142
+00:08:56,130 --> 00:08:59,610
+Lopuksi voit tulostaa salakieli.
+
+143
+00:08:59,610 --> 00:09:04,050
+>> Nimeni on Zamyla,
+ja tämä oli vigenere.
+
+144
+00:09:04,050 --> 00:09:07,757
+
